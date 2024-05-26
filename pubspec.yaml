@@ -1,0 +1,39 @@
+name: maplibre
+description: "Unofficial MapLibre bindings for Flutter"
+version: 0.1.0
+repository: https://github.com/josxha/flutter_maplibre
+issue_tracker: https://github.com/josxha/flutter_maplibre/issues
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  web: ^0.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.1.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.github.josxha.maplibre
+        pluginClass: MaplibrePlugin
+      ios:
+        pluginClass: MaplibrePlugin
+      linux:
+        pluginClass: MaplibrePlugin
+      macos:
+        pluginClass: MaplibrePlugin
+      windows:
+        pluginClass: MaplibrePluginCApi
+      web:
+        pluginClass: MaplibreWeb
+        fileName: maplibre_web.dart
