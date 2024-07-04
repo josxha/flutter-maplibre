@@ -14,7 +14,7 @@ class MethodChannelMaplibre extends MapLibrePlatform {
 
   @override
   Widget buildWidget({
-    required Map<String, dynamic> creationParams,
+    required Map<String, Object?> creationParams,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
@@ -24,6 +24,7 @@ class MethodChannelMaplibre extends MapLibrePlatform {
         onPlatformViewCreated: onPlatformViewCreated,
         gestureRecognizers: gestureRecognizers,
         creationParams: creationParams,
+        creationParamsCodec: const StandardMessageCodec(),
       );
     } else if (Platform.isIOS) {
       return UiKitView(
@@ -31,6 +32,7 @@ class MethodChannelMaplibre extends MapLibrePlatform {
         onPlatformViewCreated: onPlatformViewCreated,
         gestureRecognizers: gestureRecognizers,
         creationParams: creationParams,
+        creationParamsCodec: const StandardMessageCodec(),
       );
     }
     throw UnsupportedError('Unsupported Platform');

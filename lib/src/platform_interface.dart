@@ -27,7 +27,7 @@ abstract class MapLibrePlatform extends PlatformInterface {
   }
 
   Widget buildWidget({
-    required Map<String, dynamic> creationParams,
+    required Map<String, Object?> creationParams,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   });
