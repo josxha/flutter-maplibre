@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:maplibre/src/native/maplibre_method_channel.dart';
+import 'package:maplibre/src/native/method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class MapLibrePlatform extends PlatformInterface {
@@ -23,9 +26,11 @@ abstract class MapLibrePlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
+  Widget buildWidget({
+    required Map<String, dynamic> creationParams,
+    required PlatformViewCreatedCallback onPlatformViewCreated,
+    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
+  });
 
-  Widget buildWidget();
+  Future<void> initPlatform(int id);
 }

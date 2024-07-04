@@ -5,9 +5,12 @@
 
 import 'dart:ui_web';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:maplibre/src/maplibre_platform_interface.dart';
+import 'package:maplibre/src/platform_interface.dart';
 import 'package:web/web.dart' as web;
 
 typedef OnPlatformViewCreated = void Function(int viewId);
@@ -23,15 +26,12 @@ class MapLibreWeb extends MapLibrePlatform {
     MapLibrePlatform.instance = MapLibreWeb();
   }
 
-  /// Returns a [String] containing the version of the platform.
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = web.window.navigator.userAgent;
-    return version;
-  }
-
-  @override
-  Widget buildWidget() {
+  Widget buildWidget({
+    required Map<String, dynamic> creationParams,
+    required PlatformViewCreatedCallback onPlatformViewCreated,
+    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
+  }) {
     _registerViewFactory(hashCode);
     return HtmlElementView(viewType: 'plugins.flutter.io/maplibre_$hashCode');
   }
@@ -48,5 +48,10 @@ class MapLibreWeb extends MapLibrePlatform {
           ..style.width = '100%';
       },
     );
+  }
+
+  @override
+  Future<void> initPlatform(int id) async {
+    // TODO implement initPlatform
   }
 }
