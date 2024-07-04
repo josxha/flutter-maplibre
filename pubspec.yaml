@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
+  plugin_platform_interface: ^2.1.8
   web: ^0.5.1
 
 dev_dependencies:
@@ -35,5 +36,5 @@ flutter:
       windows:
         pluginClass: MaplibrePluginCApi
       web:
-        pluginClass: MaplibreWeb
-        fileName: maplibre_web.dart
+        pluginClass: MapLibreWeb
+        fileName: src/web/maplibre_web.dart

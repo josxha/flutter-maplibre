@@ -1,15 +1,9 @@
-# maplibre
+# MapLibre for Flutter
 
-A new Flutter project.
+This package provides unofficial Flutter bindings for MapLibre libraries.
 
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is used for web
+- [maplibre-native](https://github.com/maplibre/maplibre-native) (previously
+  named maplibre-gl) is used for android, iOS,
+  windows, macOS and Linux
 

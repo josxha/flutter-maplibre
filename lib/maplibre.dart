@@ -1,8 +1,10 @@
 
-import 'maplibre_platform_interface.dart';
+import 'package:maplibre/src/maplibre_platform_interface.dart';
+
+export 'src/maplibre_map.dart';
 
 class Maplibre {
   Future<String?> getPlatformVersion() {
-    return MaplibrePlatform.instance.getPlatformVersion();
+    return MapLibrePlatform.instance.getPlatformVersion();
   }
 }

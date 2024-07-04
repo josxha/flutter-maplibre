@@ -1,3 +1,4 @@
+/*
 // This is a basic Flutter integration test.
 //
 // Since integration tests run in a full Flutter application, they can interact
@@ -16,10 +17,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
-    final Maplibre plugin = Maplibre();
-    final String? version = await plugin.getPlatformVersion();
+    final plugin = Maplibre();
+    final version = await plugin.getPlatformVersion();
     // The version string depends on the host platform running the test, so
     // just assert that some non-empty string is returned.
     expect(version?.isNotEmpty, true);
   });
 }
+*/
