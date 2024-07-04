@@ -67,6 +67,15 @@ class _MapLibreMapState extends State<MapLibreMap> {
     _controllerCompleter.complete(controller);
     widget.onMapCreated?.call(controller);
   }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+    if (_controllerCompleter.isCompleted) {
+      final controller = await _controllerCompleter.future;
+      controller.dispose();
+    }
+  }
 }
 
 typedef OnStyleLoadedCallback = void Function();

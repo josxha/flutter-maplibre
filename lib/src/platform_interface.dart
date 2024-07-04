@@ -33,4 +33,9 @@ abstract class MapLibrePlatform extends PlatformInterface {
   });
 
   Future<void> initPlatform(int id);
+
+  @mustCallSuper
+  void dispose() {
+    // TODO clear all callbacks to avoid cyclic refs
+  }
 }
