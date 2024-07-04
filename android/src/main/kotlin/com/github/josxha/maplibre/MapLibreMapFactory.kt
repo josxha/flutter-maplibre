@@ -1,4 +1,4 @@
-package org.maplibre.maplibregl
+package com.github.josxha.maplibre
 
 import android.content.Context
 import android.view.View
@@ -7,6 +7,7 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import org.maplibre.android.camera.CameraPosition
+import com.github.josxha.maplibre.MapLibreMapBuilder
 
 import com.github.josxha.maplibre.LifecycleProvider
 
@@ -65,36 +66,5 @@ object Convert {
 
     fun toString(value: Any?): String {
         return value as? String ?: ""
-    }
-}
-
-class MapLibreMapBuilder {
-    fun setInitialCameraPosition(position: CameraPosition) {
-        // Set initial camera position
-    }
-
-    fun setDragEnabled(enabled: Boolean) {
-        // Set drag enabled
-    }
-
-    fun setStyleString(style: String) {
-        // Set style string
-    }
-
-    fun build(
-        id: Int,
-        context: Context?,
-        messenger: BinaryMessenger,
-        lifecycleProvider: LifecycleProvider
-    ): PlatformView {
-        // Build and return the PlatformView
-        return object : PlatformView {
-            override fun getView(): View {
-                // Replace with actual view creation logic
-                return View(context)
-            }
-
-            override fun dispose() {}
-        }
     }
 }
