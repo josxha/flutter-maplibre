@@ -18,7 +18,7 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
         binding
             .platformViewRegistry
             .registerViewFactory(
-                "maplibre",
+                "plugins.flutter.io/maplibre",
                 MapLibreMapFactory(
                     object : LifecycleProvider {
                         override fun getLifecycle(): Lifecycle? = lifecycle

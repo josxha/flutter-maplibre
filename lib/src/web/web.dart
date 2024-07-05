@@ -11,13 +11,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/src/platform_interface.dart';
-import 'package:maplibre/src/web/interop/interops.dart' as interop;
+import 'package:maplibre/src/web/interop.dart' as interop;
 import 'package:web/web.dart' as web;
 import 'package:web/web.dart';
 
 typedef OnPlatformViewCreated = void Function(int viewId);
 
-/// A web implementation of the MaplibrePlatform of the Maplibre plugin.
+/// A web implementation of the MapLibrePlatform of the MapLibre plugin.
 class MapLibreWeb extends MapLibrePlatform {
   /// Constructs a MapLibreWeb
   MapLibreWeb();
@@ -42,7 +42,6 @@ class MapLibreWeb extends MapLibrePlatform {
       'plugins.flutter.io/maplibre_$id',
       (int viewId) {
         _htmlElement = web.HTMLDivElement()
-          ..id = 'maplibre$viewId'
           ..style.position = 'absolute'
           ..style.top = '0'
           ..style.bottom = '0'

@@ -7,10 +7,10 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [MapLibrePlatform] that uses method channels.
-class MethodChannelMaplibre extends MapLibrePlatform {
+class MethodChannelMapLibre extends MapLibrePlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('maplibre');
+  final methodChannel = const MethodChannel('plugins.flutter.io/maplibre');
 
   @override
   Widget buildWidget({
@@ -20,7 +20,7 @@ class MethodChannelMaplibre extends MapLibrePlatform {
   }) {
     if (Platform.isAndroid) {
       return AndroidView(
-        viewType: 'maplibre',
+        viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: onPlatformViewCreated,
         gestureRecognizers: gestureRecognizers,
         creationParams: creationParams,
@@ -28,7 +28,7 @@ class MethodChannelMaplibre extends MapLibrePlatform {
       );
     } else if (Platform.isIOS) {
       return UiKitView(
-        viewType: 'maplibre',
+        viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: onPlatformViewCreated,
         gestureRecognizers: gestureRecognizers,
         creationParams: creationParams,

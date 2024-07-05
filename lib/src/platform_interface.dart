@@ -6,16 +6,16 @@ import 'package:maplibre/src/native/method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class MapLibrePlatform extends PlatformInterface {
-  /// Constructs a MaplibrePlatform.
+  /// Constructs a MapLibrePlatform.
   MapLibrePlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static MapLibrePlatform _instance = MethodChannelMaplibre();
+  static MapLibrePlatform _instance = MethodChannelMapLibre();
 
   /// The default instance of [MapLibrePlatform] to use.
   ///
-  /// Defaults to [MethodChannelMaplibre].
+  /// Defaults to [MethodChannelMapLibre].
   static MapLibrePlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
