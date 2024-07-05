@@ -16,34 +16,33 @@ import org.maplibre.android.maps.Style
 class MapLibreMapController(
     private val viewId: Int,
     private val context: Context,
-    private val dragEnabled: Boolean,
     private val options: MapLibreMapOptions,
     private val styleStringInitial: String,
     private val lifecycleProvider: LifecycleProvider
 ) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback {
-    private var mapViewContainer = FrameLayout(context)
+    private val mapViewContainer = FrameLayout(context)
     private lateinit var mapLibreMap: MapLibreMap
     private var mapView: MapView
     private var style: Style? = null
 
     init {
-        // MapLibre.getInstance needs to be called before MapView gets created
-        MapLibre.getInstance(context)
+        MapLibre.getInstance(context) // needs to be called before MapView gets created
         mapView = MapView(context, options)
         lifecycleProvider.getLifecycle()?.addObserver(this)
         mapView.getMapAsync(this)
         mapViewContainer.addView(mapView)
     }
 
-    override fun getView(): View? {
+    override fun getView(): View {
         return mapViewContainer;
     }
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
 
-        mapLibreMap.setStyle(Style.Builder().fromUri(styleStringInitial)) { style ->
-            this.style = style
+        val style = Style.Builder().fromUri(styleStringInitial)
+        mapLibreMap.setStyle(style) { loadedStyle ->
+            this.style = loadedStyle
         }
     }
 

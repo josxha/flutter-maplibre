@@ -5,31 +5,21 @@ import androidx.lifecycle.LifecycleOwner
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 
 /** MaplibrePlugin */
-class MapLibrePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
-
-    /** The MethodChannel that will handle the communication between Flutter and native Android */
-    private lateinit var channel: MethodChannel
+class MapLibrePlugin : FlutterPlugin, ActivityAware {
 
     private var lifecycle: Lifecycle? = null
 
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(binding.binaryMessenger, "maplibre")
-        channel.setMethodCallHandler(this)
         flutterAssets = binding.flutterAssets
         binding
             .platformViewRegistry
             .registerViewFactory(
                 "maplibre",
                 MapLibreMapFactory(
-                    binding.binaryMessenger,
                     object : LifecycleProvider {
                         override fun getLifecycle(): Lifecycle? = lifecycle
                     }
@@ -37,12 +27,12 @@ class MapLibrePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             )
     }
 
-    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel.setMethodCallHandler(null)
-    }
-
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
+    }
+
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -55,14 +45,6 @@ class MapLibrePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onDetachedFromActivityForConfigChanges() {
         onDetachedFromActivity()
-    }
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        if (call.method == "getPlatformVersion") {
-            result.success("Android ${android.os.Build.VERSION.RELEASE}")
-        } else {
-            result.notImplemented()
-        }
     }
 }
 
