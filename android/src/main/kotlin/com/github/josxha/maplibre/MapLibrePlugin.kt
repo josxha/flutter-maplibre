@@ -9,13 +9,11 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import com.github.josxha.maplibre.MapLibreMapFactory
-import com.github.josxha.maplibre.LifecycleProvider
 
 /** MaplibrePlugin */
-class MaplibrePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+class MapLibrePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
-    /// The MethodChannel that will handle the communication between Flutter and native Android
+    /** The MethodChannel that will handle the communication between Flutter and native Android */
     private lateinit var channel: MethodChannel
 
     private var lifecycle: Lifecycle? = null

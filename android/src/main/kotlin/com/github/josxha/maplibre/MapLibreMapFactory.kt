@@ -16,7 +16,7 @@ class MapLibreMapFactory(
     private val lifecycleProvider: LifecycleProvider
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
-    override fun create(context: Context?, id: Int, args: Any?): PlatformView {
+    override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val params = args as? Map<String, Any>
             ?: throw IllegalArgumentException("Args must be a Map")
         val builder = MapLibreMapBuilder()
@@ -26,21 +26,12 @@ class MapLibreMapFactory(
             builder,
             context
         )
-        if (params.containsKey("initialCameraPosition")) {
-            val position =
-                Convert.toCameraPosition(params["initialCameraPosition"] as Map<String, Any>)
-            builder.setInitialCameraPosition(position)
-        }
-        if (params.containsKey("dragEnabled")) {
-            val dragEnabled = Convert.toBoolean(params["dragEnabled"])
-            builder.setDragEnabled(dragEnabled)
-        }
         if (params.containsKey("styleString")) {
             val styleString = Convert.toString(params["styleString"])
             builder.setStyleString(styleString)
         }
 
-        return builder.build(id, context, messenger, lifecycleProvider)
+        return builder.build(viewId, context, messenger, lifecycleProvider)
     }
 }
 

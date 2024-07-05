@@ -32,7 +32,7 @@ flutter:
     platforms:
       android:
         package: com.github.josxha.maplibre
-        pluginClass: MaplibrePlugin
+        pluginClass: MapLibrePlugin
       ios:
         pluginClass: MaplibrePlugin
       linux:
