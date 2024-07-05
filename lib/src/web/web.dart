@@ -11,7 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/src/platform_interface.dart';
+import 'package:maplibre/src/web/interop/interops.dart' as interop;
 import 'package:web/web.dart' as web;
+import 'package:web/web.dart';
 
 typedef OnPlatformViewCreated = void Function(int viewId);
 
@@ -20,6 +22,8 @@ class MapLibreWeb extends MapLibrePlatform {
   /// Constructs a MapLibreWeb
   MapLibreWeb();
 
+  late Map<String, Object?> _creationParams;
+  late interop.Map _map;
   late web.HTMLDivElement _htmlElement;
 
   static void registerWith(Registrar registrar) {
@@ -33,17 +37,19 @@ class MapLibreWeb extends MapLibrePlatform {
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
     final id = hashCode;
+    _creationParams = creationParams;
     platformViewRegistry.registerViewFactory(
       'plugins.flutter.io/maplibre_$id',
       (int viewId) {
-        final htmlElement = web.HTMLDivElement()
+        _htmlElement = web.HTMLDivElement()
+          ..id = 'maplibre$viewId'
           ..style.position = 'absolute'
           ..style.top = '0'
           ..style.bottom = '0'
           ..style.height = '100%'
           ..style.width = '100%';
         onPlatformViewCreated(viewId);
-        return htmlElement;
+        return _htmlElement;
       },
     );
     return HtmlElementView(viewType: 'plugins.flutter.io/maplibre_$id');
@@ -51,6 +57,12 @@ class MapLibreWeb extends MapLibrePlatform {
 
   @override
   Future<void> initPlatform(int id) async {
-    // TODO implement initPlatform
+    _map = interop.Map(
+      interop.MapOptions(
+        container: _htmlElement,
+        style: _creationParams['style']! as String,
+      ),
+    );
+    document.body?.appendChild(_htmlElement);
   }
 }
