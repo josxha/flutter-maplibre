@@ -43,4 +43,4 @@ flutter:
         pluginClass: MaplibrePluginCApi
       web:
         pluginClass: MapLibreWeb
-        fileName: src/web/maplibre_web.dart
+        fileName: src/web/web.dart

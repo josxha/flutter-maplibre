@@ -32,22 +32,21 @@ class MapLibreWeb extends MapLibrePlatform {
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
-    _registerViewFactory(hashCode);
-    return HtmlElementView(viewType: 'plugins.flutter.io/maplibre_$hashCode');
-  }
-
-  void _registerViewFactory(int identifier) {
+    final id = hashCode;
     platformViewRegistry.registerViewFactory(
-      'plugins.flutter.io/maplibre_$identifier',
+      'plugins.flutter.io/maplibre_$id',
       (int viewId) {
-        return _htmlElement = web.HTMLDivElement()
+        final htmlElement = web.HTMLDivElement()
           ..style.position = 'absolute'
           ..style.top = '0'
           ..style.bottom = '0'
           ..style.height = '100%'
           ..style.width = '100%';
+        onPlatformViewCreated(viewId);
+        return htmlElement;
       },
     );
+    return HtmlElementView(viewType: 'plugins.flutter.io/maplibre_$id');
   }
 
   @override
