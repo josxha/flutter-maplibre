@@ -12,8 +12,13 @@ extension type Map._(JSObject _) implements JSObject {
 
 @anonymous
 extension type MapOptions._(JSObject _) implements JSObject {
-  external factory MapOptions({JSObject container, String style});
+  external factory MapOptions({
+    JSObject container,
+    String style,
+    double zoom,
+  });
 
   external JSObject container;
   external String style;
+  external double zoom;
 }

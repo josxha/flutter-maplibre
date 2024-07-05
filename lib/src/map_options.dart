@@ -7,8 +7,10 @@ part 'map_options.g.dart';
 @immutable
 @freezed
 class MapLibreMapOptions with _$MapLibreMapOptions {
+
   const factory MapLibreMapOptions({
     @Default('https://demotiles.maplibre.org/style.json') String style,
+    @Default(0) double zoom,
   }) = _MapLibreMapOptions;
 
   factory MapLibreMapOptions.fromJson(Map<String, Object?> json) =>

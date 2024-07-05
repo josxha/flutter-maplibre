@@ -21,6 +21,7 @@ MapLibreMapOptions _$MapLibreMapOptionsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MapLibreMapOptions {
   String get style => throw _privateConstructorUsedError;
+  double get zoom => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $MapLibreMapOptionsCopyWith<$Res> {
           MapLibreMapOptions value, $Res Function(MapLibreMapOptions) then) =
       _$MapLibreMapOptionsCopyWithImpl<$Res, MapLibreMapOptions>;
   @useResult
-  $Res call({String style});
+  $Res call({String style, double zoom});
 }
 
 /// @nodoc
@@ -51,12 +52,17 @@ class _$MapLibreMapOptionsCopyWithImpl<$Res, $Val extends MapLibreMapOptions>
   @override
   $Res call({
     Object? style = null,
+    Object? zoom = null,
   }) {
     return _then(_value.copyWith(
       style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as String,
+      zoom: null == zoom
+          ? _value.zoom
+          : zoom // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -69,7 +75,7 @@ abstract class _$$MapLibreMapOptionsImplCopyWith<$Res>
       __$$MapLibreMapOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String style});
+  $Res call({String style, double zoom});
 }
 
 /// @nodoc
@@ -84,12 +90,17 @@ class __$$MapLibreMapOptionsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? style = null,
+    Object? zoom = null,
   }) {
     return _then(_$MapLibreMapOptionsImpl(
       style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as String,
+      zoom: null == zoom
+          ? _value.zoom
+          : zoom // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -98,7 +109,8 @@ class __$$MapLibreMapOptionsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MapLibreMapOptionsImpl implements _MapLibreMapOptions {
   const _$MapLibreMapOptionsImpl(
-      {this.style = 'https://demotiles.maplibre.org/style.json'});
+      {this.style = 'https://demotiles.maplibre.org/style.json',
+      this.zoom = 0});
 
   factory _$MapLibreMapOptionsImpl.fromJson(Map<String, dynamic> json) =>
       _$$MapLibreMapOptionsImplFromJson(json);
@@ -106,10 +118,13 @@ class _$MapLibreMapOptionsImpl implements _MapLibreMapOptions {
   @override
   @JsonKey()
   final String style;
+  @override
+  @JsonKey()
+  final double zoom;
 
   @override
   String toString() {
-    return 'MapLibreMapOptions(style: $style)';
+    return 'MapLibreMapOptions(style: $style, zoom: $zoom)';
   }
 
   @override
@@ -117,12 +132,13 @@ class _$MapLibreMapOptionsImpl implements _MapLibreMapOptions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MapLibreMapOptionsImpl &&
-            (identical(other.style, style) || other.style == style));
+            (identical(other.style, style) || other.style == style) &&
+            (identical(other.zoom, zoom) || other.zoom == zoom));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, style);
+  int get hashCode => Object.hash(runtimeType, style, zoom);
 
   @JsonKey(ignore: true)
   @override
@@ -140,7 +156,7 @@ class _$MapLibreMapOptionsImpl implements _MapLibreMapOptions {
 }
 
 abstract class _MapLibreMapOptions implements MapLibreMapOptions {
-  const factory _MapLibreMapOptions({final String style}) =
+  const factory _MapLibreMapOptions({final String style, final double zoom}) =
       _$MapLibreMapOptionsImpl;
 
   factory _MapLibreMapOptions.fromJson(Map<String, dynamic> json) =
@@ -148,6 +164,8 @@ abstract class _MapLibreMapOptions implements MapLibreMapOptions {
 
   @override
   String get style;
+  @override
+  double get zoom;
   @override
   @JsonKey(ignore: true)
   _$$MapLibreMapOptionsImplCopyWith<_$MapLibreMapOptionsImpl> get copyWith =>

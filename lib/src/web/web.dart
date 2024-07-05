@@ -59,6 +59,7 @@ class MapLibreWeb extends MapLibrePlatform {
       interop.MapOptions(
         container: _htmlElement,
         style: _options.style,
+        zoom: _options.zoom,
       ),
     );
     document.body?.appendChild(_htmlElement);
