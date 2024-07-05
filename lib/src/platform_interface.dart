@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -11,11 +12,11 @@ abstract class MapLibrePlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static MapLibrePlatform _instance = MethodChannelMapLibre();
+  static MapLibrePlatform _instance = MapLibreNative();
 
   /// The default instance of [MapLibrePlatform] to use.
   ///
-  /// Defaults to [MethodChannelMapLibre].
+  /// Defaults to [MapLibreNative].
   static MapLibrePlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
@@ -27,7 +28,7 @@ abstract class MapLibrePlatform extends PlatformInterface {
   }
 
   Widget buildWidget({
-    required Map<String, Object?> creationParams,
+    required MapLibreMapOptions options,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   });

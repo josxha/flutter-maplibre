@@ -4,20 +4,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [MapLibrePlatform] that uses method channels.
-class MethodChannelMapLibre extends MapLibrePlatform {
-  /// The method channel used to interact with the native platform.
-  @visibleForTesting
-  final methodChannel = const MethodChannel('plugins.flutter.io/maplibre');
-
+class MapLibreNative extends MapLibrePlatform {
   @override
   Widget buildWidget({
-    required Map<String, Object?> creationParams,
+    required MapLibreMapOptions options,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
+    final creationParams = options.toJson();
     if (Platform.isAndroid) {
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',

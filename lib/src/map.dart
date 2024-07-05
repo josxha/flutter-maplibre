@@ -46,7 +46,7 @@ class _MapLibreMapState extends State<MapLibreMap> {
   @override
   Widget build(BuildContext context) {
     return MapLibrePlatform.instance.buildWidget(
-      creationParams: widget.options.toJson(),
+      options: widget.options,
       onPlatformViewCreated: onPlatformViewCreated,
     );
   }
