@@ -17,8 +17,14 @@ class MapLibreMapBuilder {
             .attributionEnabled(true)
             .logoEnabled(false)
             .textureMode(true)
-        val controller = MapLibreMapController(context, options, "")
-        controller.init(lifecycleProvider)
+        val controller = MapLibreMapController(
+            viewId,
+            context,
+            dragEnabled = false,
+            options,
+            "https://demotiles.maplibre.org/style.json",
+            lifecycleProvider,
+        )
         return controller
     }
 
