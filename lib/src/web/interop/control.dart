@@ -43,6 +43,7 @@ extension type PositionOptions._(JSObject _) implements JSObject {
     int timeout,
   });
 }
+
 @JS()
 extension type AttributionControl._(IControl _) implements IControl {
   external AttributionControl([AttributionControlOptions? options]);
@@ -54,5 +55,18 @@ extension type AttributionControlOptions._(JSObject _) implements JSObject {
   external factory AttributionControlOptions({
     bool? compact,
     String? customAttribution,
+  });
+}
+
+@JS()
+extension type FullscreenControl._(IControl _) implements IControl {
+  external FullscreenControl([FullscreenControlOptions? options]);
+}
+
+@anonymous
+@JS()
+extension type FullscreenControlOptions._(JSObject _) implements JSObject {
+  external factory FullscreenControlOptions({
+    String? container,
   });
 }

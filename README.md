@@ -37,6 +37,7 @@ provide the following improvements:
 | TerrainControl        | ❌   | ❌       | ❌   |
 | AttributionControl    | ❌   | ❌       | ❌   |
 | GeolocateControl      | ❌   | ❌       | ❌   |
+| FullscreenControl     | ✅   | ❌       | ❌   |
 | LogoControl           | ❌   | ❌       | ❌   |
 | NavigationControl     | ❌   | ❌       | ❌   |
 | Annotation Symbol     | ❌   | ❌       | ❌   |

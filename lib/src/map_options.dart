@@ -90,3 +90,8 @@ class AttributionControl extends MapControl {
   final bool compact;
   final String customAttribution;
 }
+
+@immutable
+class FullscreenControl extends MapControl {
+  const FullscreenControl();
+}

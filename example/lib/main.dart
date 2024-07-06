@@ -40,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
           controls: const [
             ScaleControl(),
             GeolocateControl(),
+            FullscreenControl()
           ],
         ),
         onMapCreated: (controller) {

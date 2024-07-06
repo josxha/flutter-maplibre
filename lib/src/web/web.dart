@@ -91,6 +91,9 @@ class MapLibreWeb extends MapLibrePlatform {
               customAttribution: control.customAttribution,
             ),
           ),
+        final FullscreenControl control => interop.FullscreenControl(
+            interop.FullscreenControlOptions(),
+          ),
       };
       _map.addControl(controlInterop);
     }
