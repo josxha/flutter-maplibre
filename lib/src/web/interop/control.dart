@@ -43,3 +43,16 @@ extension type PositionOptions._(JSObject _) implements JSObject {
     int timeout,
   });
 }
+@JS()
+extension type AttributionControl._(IControl _) implements IControl {
+  external AttributionControl([AttributionControlOptions? options]);
+}
+
+@anonymous
+@JS()
+extension type AttributionControlOptions._(JSObject _) implements JSObject {
+  external factory AttributionControlOptions({
+    bool? compact,
+    String? customAttribution,
+  });
+}

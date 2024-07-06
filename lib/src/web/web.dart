@@ -85,6 +85,12 @@ class MapLibreWeb extends MapLibrePlatform {
               ),
             ),
           ),
+        final AttributionControl control => interop.AttributionControl(
+            interop.AttributionControlOptions(
+              compact: control.compact,
+              customAttribution: control.customAttribution,
+            ),
+          ),
       };
       _map.addControl(controlInterop);
     }

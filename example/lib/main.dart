@@ -35,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: MapLibreMap(
         options: MapOptions(
-          zoom: 6,
-          center: Position(9, 47),
+          zoom: 4,
+          center: Position(9, 48),
           controls: const [
             ScaleControl(),
             GeolocateControl(),

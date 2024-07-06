@@ -78,3 +78,15 @@ class PositionOptions {
 class FitBoundsOptions {
   const FitBoundsOptions();
 }
+
+@immutable
+class AttributionControl extends MapControl {
+  const AttributionControl({
+    this.compact = true,
+    this.customAttribution =
+        '<a href="https://maplibre.org/" target="_blank">MapLibre</a>',
+  });
+
+  final bool compact;
+  final String customAttribution;
+}
