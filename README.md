@@ -7,7 +7,54 @@ This package provides unofficial Flutter bindings for MapLibre libraries.
   named maplibre-gl) is used for android, iOS,
   windows, macOS and Linux
 
-## Run code generation
+### What is the difference to [maplibre_gl](https://pub.dev/packages/maplibre_gl)?
+
+Both, `maplibre_gl` and `maplibre` try to solve the same purpose to create bindings between the
+platform specific MapLibre SDK and Flutter. `maplibre_gl` is a fork of `mapbox_gl` and already some
+years around. `maplibre` on the other hand is a brand new and fresh implementation. It tries to
+provide the following improvements:
+
+1. A WebAssembly compatible web implementation using the new JavaScript interop from `package:web`
+   and `js_interop`.
+2. Zero cost JavaScript interop using [extension types](https://dart.dev/language/extension-types)
+   that got delivered in [Dart 3.3](https://medium.com/dartlang/dart-3-3-325bf2bf6c13).
+3. More type safety and reducing the amount of platform custom code using code generation.
+4. No legacy code or workarounds in the code base (with the risk of not yet including necessary
+   fixes).
+5. Using Kotlin instead of Java to benefit from null safety.
+6. Keep all platforms in one package to simplify the release cycle.
+7. Use geo types from dart_turf so that users can do calculations without mapping to other classes.
+
+### State of implementation
+
+| Feature               | web | android | iOS |
+|-----------------------|-----|---------|-----|
+| Map                   | ✅   | ✅       | ❌   |
+| MapController         | ❌   | ❌       | ❌   |
+| ScaleControl          | ✅   | ❌       | ❌   |
+| TerrainControl        | ❌   | ❌       | ❌   |
+| AttributionControl    | ❌   | ❌       | ❌   |
+| GeolocateControl      | ❌   | ❌       | ❌   |
+| LogoControl           | ❌   | ❌       | ❌   |
+| NavigationControl     | ❌   | ❌       | ❌   |
+| Annotation Symbol     | ❌   | ❌       | ❌   |
+| Annotation LineString | ❌   | ❌       | ❌   |
+| Annotation Circle     | ❌   | ❌       | ❌   |
+| Annotation Fill       | ❌   | ❌       | ❌   |
+| Annotation Tap Event  | ❌   | ❌       | ❌   |
+| Offline               | ❌   | ❌       | ❌   |
+
+Support for windows, macOS and linux is currently not possible because of the lack of platform
+views of these platforms.
+- Windows: https://github.com/flutter/flutter/issues/31713
+- MacOS: https://github.com/flutter/flutter/issues/41722
+- Linux: https://github.com/flutter/flutter/issues/41724
+
+## Development & Contributing
+
+If you need a feature or experience a bug you want to fix contributions are always welcome.
+
+### Run code generation
 
 ```bash
 dart run build_runner build
