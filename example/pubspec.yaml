@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  geotypes: ^0.0.2
   maplibre:
     path: ../
-  turf: ^0.0.10
 
 dev_dependencies:
   very_good_analysis: ^6.0.0

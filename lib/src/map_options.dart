@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:turf/helpers.dart';
+import 'package:geotypes/geotypes.dart';
 
 @immutable
 class MapLibreMapOptions {

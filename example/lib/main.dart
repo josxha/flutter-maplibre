@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geotypes/geotypes.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:turf/helpers.dart';
 
 void main() {
   runApp(const MyApp());
