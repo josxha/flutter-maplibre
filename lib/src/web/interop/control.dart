@@ -70,3 +70,16 @@ extension type FullscreenControlOptions._(JSObject _) implements JSObject {
     String? container,
   });
 }
+
+@JS()
+extension type LogoControl._(IControl _) implements IControl {
+  external LogoControl([LogoControlOptions? options]);
+}
+
+@anonymous
+@JS()
+extension type LogoControlOptions._(JSObject _) implements JSObject {
+  external factory LogoControlOptions({
+    bool? compact,
+  });
+}

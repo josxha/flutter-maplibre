@@ -95,3 +95,10 @@ class AttributionControl extends MapControl {
 class FullscreenControl extends MapControl {
   const FullscreenControl();
 }
+
+@immutable
+class LogoControl extends MapControl {
+  const LogoControl({this.compact = false});
+
+  final bool compact;
+}

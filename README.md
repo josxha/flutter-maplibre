@@ -38,13 +38,13 @@ provide the following improvements:
 | AttributionControl    | ❌   | ❌       | ❌   |
 | GeolocateControl      | ❌   | ❌       | ❌   |
 | FullscreenControl     | ✅   | ❌       | ❌   |
-| LogoControl           | ❌   | ❌       | ❌   |
+| LogoControl           | ✅   | ❌       | ❌   |
 | NavigationControl     | ❌   | ❌       | ❌   |
 | Annotation Symbol     | ❌   | ❌       | ❌   |
 | Annotation LineString | ❌   | ❌       | ❌   |
 | Annotation Circle     | ❌   | ❌       | ❌   |
 | Annotation Fill       | ❌   | ❌       | ❌   |
-| Annotation Tap Event  | ❌   | ❌       | ❌   |
+| Annotation Tap Events | ❌   | ❌       | ❌   |
 | Offline               | ❌   | ❌       | ❌   |
 
 Support for windows, macOS and linux is currently not possible because of the lack of platform
