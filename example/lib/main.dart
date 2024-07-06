@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           center: Position(9, 47),
           controls: const [
             ScaleControl(),
+            GeolocateControl(),
           ],
         ),
         onMapCreated: (controller) {

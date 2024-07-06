@@ -60,20 +60,31 @@ class MapLibreWeb extends MapLibrePlatform {
         container: _htmlElement,
         style: _options.style,
         zoom: _options.zoom,
-        center: interop.LngLat(
-          lng: _options.center.lng,
-          lat: _options.center.lat,
-        ),
+        center: _options.center == null
+            ? null
+            : interop.LngLat(
+                lng: _options.center!.lng,
+                lat: _options.center!.lat,
+              ),
       ),
     );
     for (final control in _options.controls) {
       final controlInterop = switch (control) {
         final ScaleControl control => interop.ScaleControl(
-          interop.ScaleControlOptions(
-            maxWidth: control.maxWidth,
-            unit: control.unit.name,
+            interop.ScaleControlOptions(
+              maxWidth: control.maxWidth,
+              unit: control.unit.name,
+            ),
           ),
-        ),
+        final GeolocateControl control => interop.GeolocateControl(
+            interop.GeolocateControlOptions(
+              positionOptions: interop.PositionOptions(
+                enableHighAccuracy: control.positionOptions.enableHighAccuracy,
+                maximumAge: control.positionOptions.maximumAge.inMilliseconds,
+                timeout: control.positionOptions.timeout.inMilliseconds,
+              ),
+            ),
+          ),
       };
       _map.addControl(controlInterop);
     }

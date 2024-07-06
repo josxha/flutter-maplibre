@@ -1,6 +1,6 @@
 part of 'interop.dart';
 
-@JS('Map')
+@JS()
 extension type Map._(JSObject _) implements JSObject {
   external Map(MapOptions options);
 
@@ -28,4 +28,15 @@ extension type LngLat._(JSObject _) implements JSObject {
 
   external num lng;
   external num lat;
+}
+
+@anonymous
+@JS()
+extension type FitBoundsOptions._(JSObject _) implements JSObject {
+  external factory FitBoundsOptions({
+    bool? linear,
+    // TODO  Offset? offset,
+    num? maxZoom,
+    // TODO All parameters from FlyToOptions
+  });
 }

@@ -23,7 +23,9 @@ provide the following improvements:
    fixes).
 5. Using Kotlin instead of Java to benefit from null safety.
 6. Keep all platforms in one package to simplify the release cycle.
-7. Use geo types from dart_turf so that users can do calculations without mapping to other classes.
+7. Use [geotypes](https://pub.dev/packages/geotypes) from [dart_turf](https://pub.dev/packages/turf)
+   which are completely GeoJSON compatible
+   ([RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) compliant).
 
 ### State of implementation
 
@@ -46,6 +48,7 @@ provide the following improvements:
 
 Support for windows, macOS and linux is currently not possible because of the lack of platform
 views of these platforms.
+
 - Windows: https://github.com/flutter/flutter/issues/31713
 - MacOS: https://github.com/flutter/flutter/issues/41722
 - Linux: https://github.com/flutter/flutter/issues/41724

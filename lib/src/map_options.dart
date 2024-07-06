@@ -3,22 +3,23 @@ import 'package:geotypes/geotypes.dart';
 
 @immutable
 class MapOptions {
-  MapOptions({
+  const MapOptions({
     this.style = 'https://demotiles.maplibre.org/style.json',
     this.zoom = 0,
-    Position? center,
+    this.center,
     this.controls = const [],
-  }) : center = center ?? Position(9, 47);
+  });
 
   final String style;
   final double zoom;
-  final Position center;
+  final Position? center;
   final List<MapControl> controls;
 
   Map<String, Object?> toJson() => <String, Object?>{
         'style': style,
         'zoom': zoom,
-        'center': {'lng': center.lng, 'lat': center.lat},
+        'center':
+            center == null ? null : {'lng': center!.lng, 'lat': center!.lat},
       };
 }
 
@@ -42,3 +43,38 @@ class ScaleControl extends MapControl {
 }
 
 enum Unit { imperial, metric, nautical }
+
+@immutable
+class GeolocateControl extends MapControl {
+  const GeolocateControl({
+    this.positionOptions = const PositionOptions(),
+    this.fitBoundsOptions,
+    this.trackUserLocation = false,
+    this.showAccuracyCircle = true,
+    this.showUserLocation = true,
+  });
+
+  final PositionOptions positionOptions;
+  final FitBoundsOptions? fitBoundsOptions;
+  final bool trackUserLocation;
+  final bool showAccuracyCircle;
+  final bool showUserLocation;
+}
+
+@immutable
+class PositionOptions {
+  const PositionOptions({
+    this.enableHighAccuracy = false,
+    this.timeout = const Duration(seconds: 6),
+    this.maximumAge = Duration.zero,
+  });
+
+  final bool enableHighAccuracy;
+  final Duration timeout;
+  final Duration maximumAge;
+}
+
+@immutable
+class FitBoundsOptions {
+  const FitBoundsOptions();
+}
