@@ -104,6 +104,9 @@ class MapLibreWeb extends MapLibrePlatform {
               visualizePitch: control.visualizePitch,
             ),
           ),
+        final TerrainControl control => interop.TerrainControl(
+            interop.TerrainControlOptions(source: control.source),
+          ),
       };
       _map.addControl(controlInterop);
     }

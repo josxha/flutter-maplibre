@@ -98,3 +98,16 @@ extension type NavigationControlOptions._(JSObject _) implements JSObject {
     bool? visualizePitch,
   });
 }
+
+@JS()
+extension type TerrainControl._(IControl _) implements IControl {
+  external TerrainControl([TerrainControlOptions? options]);
+}
+
+@anonymous
+@JS()
+extension type TerrainControlOptions._(JSObject _) implements JSObject {
+  external factory TerrainControlOptions({
+    String source,
+  });
+}

@@ -124,3 +124,10 @@ class NavigationControl extends MapControl {
   /// If `true` the pitch is visualized by rotating X-axis of compass.
   final bool visualizePitch;
 }
+
+@immutable
+class TerrainControl extends MapControl {
+  const TerrainControl({required this.source});
+
+  final String source;
+}
