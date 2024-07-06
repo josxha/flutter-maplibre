@@ -3,5 +3,5 @@ library maplibre_gl;
 
 import 'dart:js_interop';
 
-part 'control.dart';
+part 'controls.dart';
 part 'map.dart';
