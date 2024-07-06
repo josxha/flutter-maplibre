@@ -83,3 +83,18 @@ extension type LogoControlOptions._(JSObject _) implements JSObject {
     bool? compact,
   });
 }
+
+@JS()
+extension type NavigationControl._(IControl _) implements IControl {
+  external NavigationControl([NavigationControlOptions? options]);
+}
+
+@anonymous
+@JS()
+extension type NavigationControlOptions._(JSObject _) implements JSObject {
+  external factory NavigationControlOptions({
+    bool? showCompass,
+    bool? showZoom,
+    bool? visualizePitch,
+  });
+}

@@ -97,6 +97,13 @@ class MapLibreWeb extends MapLibrePlatform {
         final LogoControl control => interop.LogoControl(
             interop.LogoControlOptions(compact: control.compact),
           ),
+        final NavigationControl control => interop.NavigationControl(
+            interop.NavigationControlOptions(
+              showCompass: control.showCompass,
+              showZoom: control.showZoom,
+              visualizePitch: control.visualizePitch,
+            ),
+          ),
       };
       _map.addControl(controlInterop);
     }

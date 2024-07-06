@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
             GeolocateControl(),
             FullscreenControl(),
             LogoControl(),
+            NavigationControl(visualizePitch: true),
           ],
         ),
         onMapCreated: (controller) {

@@ -98,7 +98,29 @@ class FullscreenControl extends MapControl {
 
 @immutable
 class LogoControl extends MapControl {
-  const LogoControl({this.compact = false});
+  const LogoControl({this.compact});
 
-  final bool compact;
+  /// If `true`, force a compact logo. If `false`, force the full logo.
+  ///
+  /// The default is a responsive logo that collapses when the map is less
+  /// than 640 pixels wide.
+  final bool? compact;
+}
+
+@immutable
+class NavigationControl extends MapControl {
+  const NavigationControl({
+    this.showCompass = true,
+    this.showZoom = true,
+    this.visualizePitch = false,
+  });
+
+  /// If `true` the compass button is included.
+  final bool showCompass;
+
+  /// If `true` the zoom-in and zoom-out buttons are included.
+  final bool showZoom;
+
+  /// If `true` the pitch is visualized by rotating X-axis of compass.
+  final bool visualizePitch;
 }
