@@ -8,6 +8,8 @@ extension type Map._(JSObject _) implements JSObject {
   external Map(MapOptions options);
 
   external MapOptions options;
+
+  external void addControl(ScaleControl scaleControl);
 }
 
 @anonymous
@@ -37,3 +39,4 @@ extension type LngLat._(JSObject _) implements JSObject {
   external num lng;
   external num lat;
 }
+
