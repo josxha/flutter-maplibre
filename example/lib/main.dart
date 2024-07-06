@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:turf/helpers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('MapLibre Demo')),
       body: MapLibreMap(
-        options: const MapLibreMapOptions(),
+        options: MapLibreMapOptions(
+          zoom: 6,
+          center: Position(9,47),
+        ),
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');
         },

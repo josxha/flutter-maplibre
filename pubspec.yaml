@@ -16,6 +16,7 @@ dependencies:
   freezed_annotation: ^2.4.2
   json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
+  turf: ^0.0.10
   web: ^0.5.1
 
 dev_dependencies:

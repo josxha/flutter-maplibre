@@ -1,18 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'map_options.freezed.dart';
-
-part 'map_options.g.dart';
+import 'package:turf/helpers.dart';
 
 @immutable
-@freezed
-class MapLibreMapOptions with _$MapLibreMapOptions {
+class MapLibreMapOptions {
+  MapLibreMapOptions({
+    this.style = 'https://demotiles.maplibre.org/style.json',
+    this.zoom = 0,
+    Position? center,
+  }) : center = center ?? Position(9, 47);
 
-  const factory MapLibreMapOptions({
-    @Default('https://demotiles.maplibre.org/style.json') String style,
-    @Default(0) double zoom,
-  }) = _MapLibreMapOptions;
+  final String style;
+  final double zoom;
+  final Position center;
 
-  factory MapLibreMapOptions.fromJson(Map<String, Object?> json) =>
-      _$MapLibreMapOptionsFromJson(json);
+  Map<String, Object?> toJson() => <String, Object?>{
+        'style': style,
+        'zoom': zoom,
+        'center': {'lng': center.lng, 'lat': center.lat},
+      };
 }

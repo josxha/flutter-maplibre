@@ -60,6 +60,10 @@ class MapLibreWeb extends MapLibrePlatform {
         container: _htmlElement,
         style: _options.style,
         zoom: _options.zoom,
+        center: interop.LngLat(
+          lng: _options.center.lng,
+          lat: _options.center.lat,
+        ),
       ),
     );
     document.body?.appendChild(_htmlElement);
