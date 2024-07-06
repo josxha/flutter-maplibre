@@ -34,12 +34,12 @@ provide the following improvements:
 | Map                   | ✅   | ✅       | ❌   |
 | MapController         | ❌   | ❌       | ❌   |
 | ScaleControl          | ✅   | ❌       | ❌   |
-| TerrainControl        | ❌   | ❌       | ❌   |
-| AttributionControl    | ❌   | ❌       | ❌   |
-| GeolocateControl      | ❌   | ❌       | ❌   |
+| TerrainControl        | ✅   | ❌       | ❌   |
+| AttributionControl    | ✅   | ❌       | ❌   |
+| GeolocateControl      | ✅   | ❌       | ❌   |
 | FullscreenControl     | ✅   | ❌       | ❌   |
 | LogoControl           | ✅   | ❌       | ❌   |
-| NavigationControl     | ❌   | ❌       | ❌   |
+| NavigationControl     | ✅   | ❌       | ❌   |
 | Annotation Symbol     | ❌   | ❌       | ❌   |
 | Annotation LineString | ❌   | ❌       | ❌   |
 | Annotation Circle     | ❌   | ❌       | ❌   |
