@@ -11,6 +11,7 @@ extension type Map._(JSObject _) implements JSObject {
 }
 
 @anonymous
+@JS()
 extension type MapOptions._(JSObject _) implements JSObject {
   external factory MapOptions({
     JSObject container,
