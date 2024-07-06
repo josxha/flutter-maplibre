@@ -12,7 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform_interface.dart';
-import 'package:maplibre/src/web/interop.dart' as interop;
+import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:web/web.dart' as web;
 import 'package:web/web.dart';
 
@@ -21,7 +21,7 @@ class MapLibreWeb extends MapLibrePlatform {
   /// Constructs a MapLibreWeb
   MapLibreWeb();
 
-  late MapLibreMapOptions _options;
+  late MapOptions _options;
   late interop.Map _map;
   late web.HTMLDivElement _htmlElement;
 
@@ -31,7 +31,7 @@ class MapLibreWeb extends MapLibrePlatform {
 
   @override
   Widget buildWidget({
-    required MapLibreMapOptions options,
+    required MapOptions options,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
@@ -66,6 +66,18 @@ class MapLibreWeb extends MapLibrePlatform {
         ),
       ),
     );
+    for (final control in _options.controls) {
+      final controlInterop = switch (control) {
+        final ScaleControl control => interop.ScaleControl(
+          interop.ScaleControlOptions(
+            maxWidth: control.maxWidth,
+            unit: control.unit.name,
+          ),
+        ),
+      };
+      _map.addControl(controlInterop);
+    }
+
     document.body?.appendChild(_htmlElement);
   }
 }

@@ -30,11 +30,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MapLibre Demo')),
+      appBar: AppBar(
+        title: const Text('MapLibre Demo'),
+      ),
       body: MapLibreMap(
-        options: MapLibreMapOptions(
+        options: MapOptions(
           zoom: 6,
-          center: Position(9,47),
+          center: Position(9, 47),
+          controls: const [
+            ScaleControl(),
+          ],
         ),
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');

@@ -1,15 +1,10 @@
-@JS('maplibregl')
-library maplibre_gl;
-
-import 'dart:js_interop';
+part of 'interop.dart';
 
 @JS('Map')
 extension type Map._(JSObject _) implements JSObject {
   external Map(MapOptions options);
 
-  external MapOptions options;
-
-  external void addControl(ScaleControl scaleControl);
+  external void addControl(IControl control);
 }
 
 @anonymous
@@ -21,11 +16,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
     double zoom = 0,
     LngLat? center,
   });
-
-  external JSObject container;
-  external String style;
-  external double zoom;
-  external LngLat? center;
 }
 
 @anonymous
@@ -39,4 +29,3 @@ extension type LngLat._(JSObject _) implements JSObject {
   external num lng;
   external num lat;
 }
-

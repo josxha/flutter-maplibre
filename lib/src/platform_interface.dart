@@ -28,7 +28,7 @@ abstract class MapLibrePlatform extends PlatformInterface {
   }
 
   Widget buildWidget({
-    required MapLibreMapOptions options,
+    required MapOptions options,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   });

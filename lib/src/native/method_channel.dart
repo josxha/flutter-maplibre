@@ -11,7 +11,7 @@ import 'package:maplibre/src/platform_interface.dart';
 class MapLibreNative extends MapLibrePlatform {
   @override
   Widget buildWidget({
-    required MapLibreMapOptions options,
+    required MapOptions options,
     required PlatformViewCreatedCallback onPlatformViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {

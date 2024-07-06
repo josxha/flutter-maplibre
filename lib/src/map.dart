@@ -16,7 +16,7 @@ class MapLibreMap extends StatefulWidget {
     super.key,
   });
 
-  final MapLibreMapOptions options;
+  final MapOptions options;
 
   /// Which gestures should be consumed by the map.
   ///
@@ -41,7 +41,7 @@ class MapLibreMap extends StatefulWidget {
 }
 
 class _MapLibreMapState extends State<MapLibreMap> {
-  final _controllerCompleter = Completer<MapLibreMapController>();
+  final _controllerCompleter = Completer<MapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _MapLibreMapState extends State<MapLibreMap> {
   }
 
   Future<void> onPlatformViewCreated(int id) async {
-    final controller = MapLibreMapController(
+    final controller = MapController(
       maplibrePlatform: MapLibrePlatform.instance,
       onStyleLoadedCallback: () {
         if (_controllerCompleter.isCompleted) {
@@ -79,4 +79,4 @@ class _MapLibreMapState extends State<MapLibreMap> {
 }
 
 typedef OnStyleLoadedCallback = void Function();
-typedef MapCreatedCallback = void Function(MapLibreMapController controller);
+typedef MapCreatedCallback = void Function(MapController controller);
