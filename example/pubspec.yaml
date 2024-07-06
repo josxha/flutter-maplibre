@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   maplibre:
     path: ../
-  turf: ^0.0.10
+  geotypes: ^0.0.2
 
 dev_dependencies:
   very_good_analysis: ^6.0.0
