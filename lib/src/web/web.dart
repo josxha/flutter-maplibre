@@ -111,6 +111,20 @@ class MapLibreWeb extends MapLibrePlatform {
       _map.addControl(controlInterop);
     }
 
+    final marker = interop.Marker(
+      interop.MarkerOptions(
+        //color: '#FFF',
+        draggable: true,
+      )
+    )
+        .setLngLat(
+          interop.LngLat(
+            lng: _options.center!.lng,
+            lat: _options.center!.lat,
+          ),
+        )
+        .addTo(_map);
+
     document.body?.appendChild(_htmlElement);
   }
 }
