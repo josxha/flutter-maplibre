@@ -21,9 +21,10 @@ provide the following improvements:
 3. More type safety and reducing the amount of platform custom code using code generation.
 4. No legacy code or workarounds in the code base (with the risk of not yet including necessary
    fixes).
-5. Using Kotlin instead of Java to benefit from null safety.
-6. Keep all platforms in one package to simplify the release cycle.
-7. Use [geotypes](https://pub.dev/packages/geotypes) from [dart_turf](https://pub.dev/packages/turf)
+5. Get rid of code where the licensing is not clear. For example some files mention have a `Copyright 2018 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.` header but the LICENSE file doesn't mention it.
+6. Using Kotlin instead of Java to benefit from null safety and reduce potential NullPointerExceptions.
+7. Keep all platforms in one package to simplify the release cycle.
+8. Use [geotypes](https://pub.dev/packages/geotypes) from [dart_turf](https://pub.dev/packages/turf)
    which are completely GeoJSON compatible
    ([RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) compliant).
 
