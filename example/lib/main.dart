@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geotypes/geotypes.dart';
 import 'package:maplibre/maplibre.dart';
 
 void main() {
@@ -27,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late MapController _controller;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');
+          _controller = controller;
         },
-        onStyleLoadedCallback: () {
+        onStyleLoadedCallback: () async {
           debugPrint('[MapLibreMap] onStyleLoadedCallback');
+          await _controller.addMarker(point: Position(9, 48));
         },
       ),
     );

@@ -39,4 +39,10 @@ abstract class MapLibrePlatform extends PlatformInterface {
   void dispose() {
     // TODO clear all callbacks to avoid cyclic refs
   }
+
+  Future<void> addMarker({
+    required Position point,
+    required Color? color,
+    required bool draggable,
+  });
 }

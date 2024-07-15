@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:geotypes/geotypes.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 class MapController extends ChangeNotifier {
@@ -15,4 +16,14 @@ class MapController extends ChangeNotifier {
     super.dispose();
     _maplibrePlatform.dispose();
   }
+
+  Future<void> addMarker({
+    required Position point,
+    Color? color,
+    bool draggable = false,
+  }) async => _maplibrePlatform.addMarker(
+    point: point,
+    color: color,
+    draggable: draggable,
+  );
 }
