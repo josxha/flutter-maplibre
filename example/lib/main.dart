@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         onStyleLoadedCallback: () async {
           debugPrint('[MapLibreMap] onStyleLoadedCallback');
-          await _controller.addMarker(point: Position(9, 48));
+          final marker = await _controller.addMarker(Marker(point: Position(9, 48)),);
         },
       ),
     );
