@@ -115,20 +115,17 @@ class MapLibreWeb extends MapLibrePlatform {
   }
 
   @override
-  Future<void> addMarker({
-    required Position point,
-    required Color? color,
-    required bool draggable,
-  }) async {
+  Future<Marker> addMarker(Marker marker) async {
     final lngLat = interop.LngLat(
-      lng: point.lng,
-      lat: point.lat,
+      lng: marker.point.lng,
+      lat: marker.point.lat,
     );
-    final marker = interop.Marker(
+    final jsMarker = interop.Marker(
       interop.MarkerOptions(
-        color: color == null ? null : '#${color.value.toRadixString(16)}',
-        draggable: draggable,
+        color: marker.color == null ? null : '#${marker.color!.value.toRadixString(16)}',
+        draggable: marker.draggable,
       ),
     ).setLngLat(lngLat).addTo(_map);
+    return marker;
   }
 }

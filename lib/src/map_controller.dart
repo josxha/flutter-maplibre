@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:geotypes/geotypes.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 class MapController extends ChangeNotifier {
   MapController({
     required MapLibrePlatform maplibrePlatform,
     required this.onStyleLoadedCallback,
-  }) : _maplibrePlatform = maplibrePlatform;
+  }) : _maplibrePlatform = maplibrePlatform {
+    onStyleLoadedCallback?.call();
+  }
 
   final MapLibrePlatform _maplibrePlatform;
-  final void Function()? onStyleLoadedCallback;
+  final VoidCallback? onStyleLoadedCallback;
 
   @override
   void dispose() {
@@ -17,13 +19,6 @@ class MapController extends ChangeNotifier {
     _maplibrePlatform.dispose();
   }
 
-  Future<void> addMarker({
-    required Position point,
-    Color? color,
-    bool draggable = false,
-  }) async => _maplibrePlatform.addMarker(
-    point: point,
-    color: color,
-    draggable: draggable,
-  );
+  Future<Future<Marker>> addMarker(Marker marker) async =>
+      _maplibrePlatform.addMarker(marker);
 }

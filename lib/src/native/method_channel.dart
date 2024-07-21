@@ -42,11 +42,7 @@ class MapLibreNative extends MapLibrePlatform {
   }
 
   @override
-  Future<void> addMarker({
-    required Position point,
-    required Color? color,
-    required bool draggable,
-  }) {
+  Future<Marker> addMarker(Marker marker) async {
     // TODO: implement addMarker
     throw UnimplementedError();
   }
