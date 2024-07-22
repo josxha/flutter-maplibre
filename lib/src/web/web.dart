@@ -3,6 +3,7 @@
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
 
+import 'dart:convert';
 import 'dart:ui_web';
 
 import 'package:flutter/foundation.dart';
@@ -69,7 +70,7 @@ class MapLibreWeb extends MapLibrePlatform {
       ),
     );
     for (final control in _options.controls) {
-      final controlInterop = switch (control) {
+      final jsControl = switch (control) {
         final ScaleControl control => interop.ScaleControl(
             interop.ScaleControlOptions(
               maxWidth: control.maxWidth,
@@ -108,7 +109,7 @@ class MapLibreWeb extends MapLibrePlatform {
             interop.TerrainControlOptions(source: control.source),
           ),
       };
-      _map.addControl(controlInterop);
+      _map.addControl(jsControl);
     }
 
     document.body?.appendChild(_htmlElement);
@@ -122,10 +123,29 @@ class MapLibreWeb extends MapLibrePlatform {
     );
     final jsMarker = interop.Marker(
       interop.MarkerOptions(
-        color: marker.color == null ? null : '#${marker.color!.value.toRadixString(16)}',
+        color: marker.color == null
+            ? null
+            : '#${marker.color!.value.toRadixString(16)}',
         draggable: marker.draggable,
       ),
     ).setLngLat(lngLat).addTo(_map);
     return marker;
+  }
+
+  @override
+  Future<void> addGeoJson(Map<String, Object?> geoJson) async {
+    final data = jsonEncode({
+      'type': 'Feature',
+      'properties': <String, Object>{},
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [9, 48],
+      },
+    });
+
+    _map.addSource(
+      'test123',
+      interop.SourceSpecification(type: 'geojson', data: data),
+    );
   }
 }

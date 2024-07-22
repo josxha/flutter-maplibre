@@ -5,6 +5,8 @@ extension type Map._(JSObject _) implements JSObject {
   external Map(MapOptions options);
 
   external void addControl(IControl control);
+
+  external void addSource(String id, SourceSpecification source);
 }
 
 @anonymous
@@ -38,5 +40,14 @@ extension type FitBoundsOptions._(JSObject _) implements JSObject {
     // TODO  Offset? offset,
     num? maxZoom,
     // TODO All parameters from FlyToOptions
+  });
+}
+
+@anonymous
+@JS()
+extension type SourceSpecification._(JSObject _) implements JSObject {
+  external factory SourceSpecification({
+    required String type,
+    required String data,
   });
 }

@@ -52,7 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         onStyleLoadedCallback: () async {
           debugPrint('[MapLibreMap] onStyleLoadedCallback');
-          final marker = await _controller.addMarker(Marker(point: Position(9, 48)),);
+          // final marker = await _controller.addMarker(Marker(point: Position(9, 48)),);
+          await Future.delayed(
+            const Duration(seconds: 2),
+            () async {
+              await _controller.addGeoJson({});
+            },
+          );
         },
       ),
     );
