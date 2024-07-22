@@ -46,4 +46,10 @@ class MapLibreNative extends MapLibrePlatform {
     // TODO: implement addMarker
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> addGeoJson(Map<String, Object?> geoJson) {
+    // TODO: implement addGeoJson
+    throw UnimplementedError();
+  }
 }
