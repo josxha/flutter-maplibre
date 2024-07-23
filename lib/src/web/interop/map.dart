@@ -7,6 +7,8 @@ extension type Map._(JSObject _) implements JSObject {
   external void addControl(IControl control);
 
   external void addSource(String id, SourceSpecification source);
+
+  external void addLayer(AddLayerObject layer, [String? beforeId]);
 }
 
 @anonymous
@@ -46,8 +48,23 @@ extension type FitBoundsOptions._(JSObject _) implements JSObject {
 @anonymous
 @JS()
 extension type SourceSpecification._(JSObject _) implements JSObject {
-  external factory SourceSpecification({
+  external factory SourceSpecification({required String type});
+
+  external factory SourceSpecification.geoJson({
+    String type = 'geojson',
+    required JSAny data,
+    num? maxzoom,
+    String? attribution,
+    num? buffer,
+  });
+}
+
+@anonymous
+@JS()
+extension type AddLayerObject._(JSObject _) implements JSObject {
+  external factory AddLayerObject({
+    required String id,
     required String type,
-    required String data,
+    required String source,
   });
 }
