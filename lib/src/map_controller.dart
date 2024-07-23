@@ -22,6 +22,15 @@ class MapController extends ChangeNotifier {
   Future<Future<Marker>> addMarker(Marker marker) async =>
       _maplibrePlatform.addMarker(marker);
 
-  Future<void> addGeoJson(Map<String, Object?> geoJson) async =>
-      _maplibrePlatform.addGeoJson(geoJson);
+  Future<void> addGeoJson({
+    required String id,
+    required Map<String, Object?> geoJson,
+  }) async {
+    await _maplibrePlatform.addGeoJsonSource(id: id, geoJson: geoJson);
+    await _maplibrePlatform.addLayer(
+      id: id,
+      type: 'line',
+      source: id,
+    );
+  }
 }
