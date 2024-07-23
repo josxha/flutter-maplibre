@@ -28,8 +28,18 @@ class MapController extends ChangeNotifier {
   }) async {
     await _maplibrePlatform.addGeoJsonSource(id: id, geoJson: geoJson);
     await _maplibrePlatform.addLayer(
-      id: id,
+      id: '$id-fill',
+      type: 'fill',
+      source: id,
+    );
+    await _maplibrePlatform.addLayer(
+      id: '$id-line',
       type: 'line',
+      source: id,
+    );
+    await _maplibrePlatform.addLayer(
+      id: '$id-symbol',
+      type: 'symbol',
       source: id,
     );
   }
