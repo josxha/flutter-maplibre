@@ -48,8 +48,21 @@ class MapLibreNative extends MapLibrePlatform {
   }
 
   @override
-  Future<void> addGeoJson(Map<String, Object?> geoJson) {
-    // TODO: implement addGeoJson
+  Future<void> addGeoJsonSource({
+    required String id,
+    required Map<String, Object?> geoJson,
+  }) {
+    // TODO: implement addGeoJsonSource
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addLayer({
+    required String id,
+    required String type,
+    required String source,
+  }) {
+    // TODO: implement addLayer
     throw UnimplementedError();
   }
 }

@@ -42,5 +42,14 @@ abstract class MapLibrePlatform extends PlatformInterface {
 
   Future<Marker> addMarker(Marker marker);
 
-  Future<void> addGeoJson(Map<String, Object?> geoJson);
+  Future<void> addGeoJsonSource({
+    required String id,
+    required Map<String, Object?> geoJson,
+  });
+
+  Future<void> addLayer({
+    required String id,
+    required String type,
+    required String source,
+  });
 }

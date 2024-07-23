@@ -51,7 +51,7 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   external factory SourceSpecification({required String type});
 
   external factory SourceSpecification.geoJson({
-    String type = 'geojson',
+    required String type,
     required JSAny data,
     num? maxzoom,
     String? attribution,
