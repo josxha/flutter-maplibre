@@ -20,15 +20,9 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(title: const Text('MapLibre Demo')),
       body: MapLibreMap(
         options: MapOptions(
-          zoom: 4,
           center: Position(9, 48),
-          controls: const [
-            ScaleControl(),
-            GeolocateControl(),
-            FullscreenControl(),
-            LogoControl(),
-            NavigationControl(visualizePitch: true),
-          ],
+          onTap: (Position point) =>
+              debugPrint('onTap: ${point.lng}, ${point.lat}'),
         ),
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');
