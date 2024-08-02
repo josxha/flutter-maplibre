@@ -9,7 +9,7 @@ import 'package:maplibre/src/platform_interface.dart';
 @immutable
 class MapLibreMap extends StatefulWidget {
   const MapLibreMap({
-    required this.options,
+    this.options = const MapOptions(),
     this.gestureRecognizers,
     this.onMapCreated,
     this.onStyleLoadedCallback,
