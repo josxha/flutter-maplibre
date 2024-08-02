@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:maplibre_example/annotations.dart';
+import 'package:maplibre_example/callbacks.dart';
 import 'package:maplibre_example/controls.dart';
-import 'package:maplibre_example/test.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         ControlsPage.location: (context) => const ControlsPage(),
         AnnotationsPage.location: (context) => const AnnotationsPage(),
-        TestPage.location: (context) => const TestPage(),
+        CallbacksPage.location: (context) => const CallbacksPage(),
       },
     );
   }
