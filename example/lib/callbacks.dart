@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+class CallbacksPage extends StatefulWidget {
+  const CallbacksPage({super.key});
 
-  static const location = '/test';
+  static const location = '/callbacks';
 
   @override
-  State<TestPage> createState() => _TestPageState();
+  State<CallbacksPage> createState() => _CallbacksPageState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _CallbacksPageState extends State<CallbacksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
