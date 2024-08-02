@@ -8,14 +8,18 @@ class MapOptions {
     this.zoom = 0,
     this.center,
     this.controls = const [],
-    this.onTap,
+    this.onClick,
+    this.onDoubleClick,
+    this.onSecondaryClick,
   });
 
   final String style;
   final double zoom;
   final Position? center;
   final List<MapControl> controls;
-  final OnTapCallback? onTap;
+  final OnClickCallback? onClick;
+  final OnClickCallback? onDoubleClick;
+  final OnClickCallback? onSecondaryClick;
 
   Map<String, Object?> toJson() => <String, Object?>{
         'style': style,
@@ -208,4 +212,4 @@ class TerrainControl extends MapControl {
   final String source;
 }
 
-typedef OnTapCallback = void Function(Position point);
+typedef OnClickCallback = void Function(Position point);
