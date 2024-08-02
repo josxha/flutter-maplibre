@@ -21,8 +21,12 @@ class _CallbacksPageState extends State<CallbacksPage> {
       body: MapLibreMap(
         options: MapOptions(
           center: Position(9, 48),
-          onTap: (Position point) =>
+          onClick: (Position point) =>
               debugPrint('onTap: ${point.lng}, ${point.lat}'),
+          onDoubleClick: (point) =>
+              debugPrint('onDoubleClick: ${point.lng}, ${point.lat}'),
+          onSecondaryClick: (point) =>
+              debugPrint('onSecondaryClick: ${point.lng}, ${point.lat}'),
         ),
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');

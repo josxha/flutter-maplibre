@@ -63,8 +63,9 @@ is orientated on MapLibre GL JS and the flutter-maplibre-gl map controller.
 | Annotation Fill                                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Annotation Tap Events                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Offline                                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| click event                                    | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| long click event                               | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| click callback                                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| long click callback                            | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| secondary click callback                       | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.animateCamera()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.moveCamera()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.addGeoJsonSource()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |

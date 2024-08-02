@@ -112,10 +112,30 @@ class MapLibreWeb extends MapLibrePlatform {
       _map.addControl(jsControl);
     }
     // add callbacks
-    void clickCallback(interop.MapMouseEvent event) {
-      _options.onTap?.call(event.lngLat.toPosition());
+    if (_options.onClick case final OnClickCallback callback) {
+      _map.on(
+        interop.MapEventType.click,
+        (interop.MapMouseEvent event) {
+          callback(event.lngLat.toPosition());
+        }.toJS,
+      );
     }
-    _map.on('click', clickCallback.toJS);
+    if (_options.onDoubleClick case final OnClickCallback callback) {
+      _map.on(
+        interop.MapEventType.dblclick,
+        (interop.MapMouseEvent event) {
+          callback(event.lngLat.toPosition());
+        }.toJS,
+      );
+    }
+    if (_options.onSecondaryClick case final OnClickCallback callback) {
+      _map.on(
+        interop.MapEventType.contextmenu,
+        (interop.MapMouseEvent event) {
+          callback(event.lngLat.toPosition());
+        }.toJS,
+      );
+    }
     document.body?.appendChild(_htmlElement);
   }
 
