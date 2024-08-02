@@ -68,6 +68,7 @@ class MapLibreWeb extends MapLibrePlatform {
               ),
       ),
     );
+    // add controls
     for (final control in _options.controls) {
       final jsControl = switch (control) {
         final ScaleControl control => interop.ScaleControl(
@@ -110,7 +111,11 @@ class MapLibreWeb extends MapLibrePlatform {
       };
       _map.addControl(jsControl);
     }
-
+    // add callbacks
+    void clickCallback(interop.MapMouseEvent event) {
+      _options.onTap?.call(event.lngLat.toPosition());
+    }
+    _map.on('click', clickCallback.toJS);
     document.body?.appendChild(_htmlElement);
   }
 

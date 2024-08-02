@@ -6,6 +6,9 @@ extension type Map._(JSObject _) implements JSObject {
 
   external void addControl(IControl control);
 
+  /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1383
+  external void on(String type, JSExportedDartFunction listener);
+
   external void addSource(String id, SourceSpecification source);
 
   external void addLayer(AddLayerObject layer, [String? beforeId]);
@@ -32,6 +35,8 @@ extension type LngLat._(JSObject _) implements JSObject {
 
   external num lng;
   external num lat;
+
+  Position toPosition() => Position(lng, lat);
 }
 
 @anonymous
