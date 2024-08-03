@@ -14,6 +14,8 @@ class CallbacksPage extends StatefulWidget {
 }
 
 class _CallbacksPageState extends State<CallbacksPage> {
+  late final MapController _controller;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,14 +23,22 @@ class _CallbacksPageState extends State<CallbacksPage> {
       body: MapLibreMap(
         options: MapOptions(
           center: Position(9, 48),
-          onClick: (Position point) =>
-              debugPrint('onTap: ${point.lng}, ${point.lat}'),
+          onClick: (Position point) async {
+            try {
+              final offset = await _controller.toScreenLocation(point);
+              debugPrint('onTap: ${point.lng}, ${point.lat}, offset: $offset');
+            } catch (error, stack) {
+              debugPrint(error.toString());
+              debugPrintStack(stackTrace: stack);
+            }
+          },
           onDoubleClick: (point) =>
               debugPrint('onDoubleClick: ${point.lng}, ${point.lat}'),
           onSecondaryClick: (point) =>
               debugPrint('onSecondaryClick: ${point.lng}, ${point.lat}'),
         ),
         onMapCreated: (controller) {
+          _controller = controller;
           debugPrint('[MapLibreMap] onMapCreated');
         },
         onStyleLoadedCallback: () async {

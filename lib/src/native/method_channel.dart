@@ -65,4 +65,16 @@ class MapLibreNative extends MapLibrePlatform {
     // TODO: implement addLayer
     throw UnimplementedError();
   }
+
+  @override
+  Future<Position> toLngLat(Offset screenLocation) {
+    // TODO: implement toLngLat
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Offset> toScreenLocation(Position lngLat) {
+    // TODO: implement toScreenLocation
+    throw UnimplementedError();
+  }
 }

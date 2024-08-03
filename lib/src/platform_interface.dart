@@ -52,4 +52,8 @@ abstract class MapLibrePlatform extends PlatformInterface {
     required String type,
     required String source,
   });
+
+  Future<Offset> toScreenLocation(Position lngLat);
+
+  Future<Position> toLngLat(Offset screenLocation);
 }

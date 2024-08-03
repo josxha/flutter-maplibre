@@ -12,6 +12,8 @@ extension type Map._(JSObject _) implements JSObject {
   external void addSource(String id, SourceSpecification source);
 
   external void addLayer(AddLayerObject layer, [String? beforeId]);
+
+  external Point project(LngLat lngLat);
 }
 
 @anonymous
