@@ -43,4 +43,12 @@ class MapController extends ChangeNotifier {
       source: id,
     );
   }
+
+  Future<Offset> toScreenLocation(Position lngLat) async {
+    return _maplibrePlatform.toScreenLocation(lngLat);
+  }
+
+  Future<Position> toLngLat(Offset screenLocation) async {
+    return _maplibrePlatform.toLngLat(screenLocation);
+  }
 }

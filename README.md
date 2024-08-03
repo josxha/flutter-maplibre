@@ -45,6 +45,7 @@ provide the following improvements:
 
 This is a broad orientation about what functionality could be added. The list
 is orientated on MapLibre GL JS and the flutter-maplibre-gl map controller.
+Some controller methods will be changed to provide a different annotation API.
 
 | Feature                                        | web | android | iOS | windows | macOS | linux |
 |------------------------------------------------|-----|---------|-----|---------|-------|-------|
@@ -58,7 +59,7 @@ is orientated on MapLibre GL JS and the flutter-maplibre-gl map controller.
 | LogoControl                                    | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | NavigationControl                              | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Annotation Symbol                              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation LineString                          | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Annotation LineString                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Annotation Circle                              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Annotation Fill                                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Annotation Tap Events                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |

@@ -180,4 +180,18 @@ class MapLibreWeb extends MapLibrePlatform {
       interop.AddLayerObject(id: id, type: type, source: source),
     );
   }
+
+  @override
+  Future<Position> toLngLat(Offset screenLocation) {
+    // TODO: implement toLngLat
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Offset> toScreenLocation(Position lngLat) async {
+    final screenPosition = _map.project(
+      interop.LngLat(lng: lngLat.lng, lat: lngLat.lat),
+    );
+    return Offset(screenPosition.x.toDouble(), screenPosition.y.toDouble());
+  }
 }
