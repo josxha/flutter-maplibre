@@ -3,6 +3,7 @@ description: "Unofficial MapLibre bindings for Flutter"
 version: 0.1.0
 repository: https://github.com/josxha/flutter_maplibre
 issue_tracker: https://github.com/josxha/flutter_maplibre/issues
+publish_to: none
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -17,7 +18,7 @@ dependencies:
   geotypes: ^0.0.2
   json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
-  web: ^0.5.1
+  web: ^1.0.0
 
 dev_dependencies:
   build_runner: ^2.4.11
@@ -25,7 +26,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.5.2
   json_serializable: ^6.8.0
-  pigeon: ^21.1.0
+  pigeon: ^22.0.0
   very_good_analysis: ^6.0.0
 
 flutter:

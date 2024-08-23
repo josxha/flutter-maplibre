@@ -45,6 +45,7 @@ class MapController extends ChangeNotifier {
   }
 
   Future<Offset> toScreenLocation(Position lngLat) async {
+    // TODO throws an exception "Field '_controller' has not been initialized."
     return _maplibrePlatform.toScreenLocation(lngLat);
   }
 
