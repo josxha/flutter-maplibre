@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MapLibre Demo',
-      initialRoute: CallbacksPage.location,
+      initialRoute: ControlsPage.location,
       routes: {
         ControlsPage.location: (context) => const ControlsPage(),
         AnnotationsPage.location: (context) => const AnnotationsPage(),

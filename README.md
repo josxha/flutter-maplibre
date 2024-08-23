@@ -30,7 +30,7 @@ provide the following improvements:
    including necessary
    fixes).
 5. Get rid of code where the licensing is not clear. For example some files
-   mention have
+   have
    a `Copyright 2018 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.`
    header but the LICENSE file doesn't mention it.
 6. Using Kotlin instead of Java to benefit from null safety and reduce potential
