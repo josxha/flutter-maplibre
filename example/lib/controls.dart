@@ -7,7 +7,7 @@ import 'package:maplibre/maplibre.dart';
 class ControlsPage extends StatefulWidget {
   const ControlsPage({super.key});
 
-  static const location = '/';
+  static const location = '/controls';
 
   @override
   State<ControlsPage> createState() => _ControlsPageState();
@@ -17,7 +17,7 @@ class _ControlsPageState extends State<ControlsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MapLibre Demo')),
+      appBar: AppBar(title: const Text('Controls')),
       body: MapLibreMap(
         options: MapOptions(
           zoom: 4,
