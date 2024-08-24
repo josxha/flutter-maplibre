@@ -25,7 +25,7 @@ provide the following improvements:
    that got delivered
    in [Dart 3.3](https://medium.com/dartlang/dart-3-3-325bf2bf6c13).
 3. More type safety and reducing the amount of platform custom code using code
-   generation.
+   generation with [pigeon](https://pub.dev/packages/pigeon).
 4. No legacy code or workarounds in the code base (with the risk of not yet
    including necessary
    fixes).
@@ -35,11 +35,14 @@ provide the following improvements:
    header but the LICENSE file doesn't mention it.
 6. Using Kotlin instead of Java to benefit from null safety and reduce potential
    NullPointerExceptions.
-7. Keep all platforms in one package to simplify the release cycle.
-8. Use [geotypes](https://pub.dev/packages/geotypes)
-   from [dart_turf](https://pub.dev/packages/turf)
-   which are completely GeoJSON compatible
-   ([RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) compliant).
+7. Keep all platforms in one package to simplify the release cycle. Having
+   multiple packages is a potential cause of bugs (e.g.
+   https://github.com/maplibre/flutter-maplibre-gl/pull/476)
+8. Use [geotypes](https://pub.dev/packages/geotypes) which are
+   GeoJSON compatible
+   ([RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) compliant). This
+   makes it compatible with all the functionality
+   from [dart_turf](https://pub.dev/packages/turf).
 
 ### State of implementation
 
@@ -47,104 +50,30 @@ This is a broad orientation about what functionality could be added. The list
 is orientated on MapLibre GL JS and the flutter-maplibre-gl map controller.
 Some controller methods will be changed to provide a different annotation API.
 
-| Feature                                        | web | android | iOS | windows | macOS | linux |
-|------------------------------------------------|-----|---------|-----|---------|-------|-------|
-| Map                                            | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| MapController                                  | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| ScaleControl                                   | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| TerrainControl                                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| AttributionControl                             | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| GeolocateControl                               | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| FullscreenControl                              | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| LogoControl                                    | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| NavigationControl                              | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation Symbol                              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation LineString                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation Circle                              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation Fill                                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Annotation Tap Events                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Offline                                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| click callback                                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| long click callback                            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| secondary click callback                       | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.jumpTo()                            | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.flyTo()                             | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addGeoJsonSource()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setGeoJsonSource()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setGeoJsonFeature()                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSymbolLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLineLayer()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setLayerProperties()                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addFillLayer()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addFillExtrusionLayer()             | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addCircleLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addRasterLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addHillshadeLayer()                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addHeatmapLayer()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateMyLocationTrackingMode()      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.matchMapLanguageWithDeviceDefault() | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateContentInsets()               | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setMapLanguage()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSymbol()                         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSymbols()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateSymbol()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getSymbolLatLng()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeSymbol()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeSymbols()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.clearSymbols()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLine()                           | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLines()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateLine()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getLineLatLngs()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeLine()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeLines()                       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.clearLines()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addCircle()                         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addCircles()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateCircle()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getCircleLatLng()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeCircle()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeCircles()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.clearCircles()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addFill()                           | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addFills()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateFill()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.clearFills()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeFill()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeFills()                       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.queryRenderedFeatures()             | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.queryRenderedFeaturesInRect()       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.querySourceFeatures()               | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.querySourceFeatures()               | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.invalidateAmbientCache()            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.requestMyLocationLatLng()           | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getVisibleRegion()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addImage()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addImage()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setSymbolIconAllowOverlap()         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setSymbolIconIgnorePlacement()      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setSymbolTextAllowOverlap()         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setSymbolTextIgnorePlacement()      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addImageSource()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.updateImageSource()                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeImageSource()                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeSource()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addImageLayer()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addImageLayerBelow()                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLayerBelow()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.removeLayer()                       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setFilter()                         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getFilter()                         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toScreenLocation()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toScreenLocationBatch()             | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toLatLng()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getMetersPerPixelAtLatitude()       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSource()                         | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setCameraBounds()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLayer()                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setLayerVisibility()                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getLayerIds()                       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getSourceIds()                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Feature                                  | web | android | iOS | windows | macOS | linux |
+|------------------------------------------|-----|---------|-----|---------|-------|-------|
+| Map                                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
+| MapController                            | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
+| Web ScaleControl                         | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Web TerrainControl                       | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Web AttributionControl                   | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Web GeolocateControl                     | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Web FullscreenControl                    | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Web LogoControl                          | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| NavigationControl                        | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Offline                                  | ➖   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| click callback                           | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| long click callback                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| secondary click callback                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.jumpTo()                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
+| controller.flyTo()                       | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
+| controller.addSource()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.addLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.setMyLocationTrackingMode()   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.setMapLanguage()              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.toScreenLocation()            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.toLatLng()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.getMetersPerPixelAtLatitude() | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 
 Support for windows, macOS and linux is currently not possible because of the
 lack of platform views of these platforms.
