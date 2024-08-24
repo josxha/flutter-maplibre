@@ -53,8 +53,8 @@ class ScaleControl extends MapControl {
 /// The unit type for length to use for the [ScaleControl]
 enum Unit { imperial, metric, nautical }
 
-/// A `GeolocateControl` control provides a button that uses the browser's geolocation
-/// API to locate the user on the map.
+/// A `GeolocateControl` control provides a button that uses the browser's
+/// geolocation API to locate the user on the map.
 ///
 /// Not all browsers support geolocation, and some users may disable the
 /// feature. Geolocation support for modern browsers including Chrome requires
@@ -71,8 +71,11 @@ enum Unit { imperial, metric, nautical }
 /// `true` the control acts as a toggle button that when active the user's
 /// location is actively monitored for changes. In this mode the
 /// `GeolocateControl` has three interaction states:
-/// * active - the map's camera automatically updates as the user's location changes, keeping the location dot in the center. Initial state and upon clicking the `GeolocateControl` button.
-/// * passive - the user's location dot automatically updates, but the map's camera does not. Occurs upon the user initiating a map movement.
+/// * active - the map's camera automatically updates as the user's location
+///   changes, keeping the location dot in the center. Initial state and upon
+///   clicking the `GeolocateControl` button.
+/// * passive - the user's location dot automatically updates, but the map's
+///   camera does not. Occurs upon the user initiating a map movement.
 /// * disabled - occurs if Geolocation is not available, disabled or denied.
 ///
 /// These interaction states can't be controlled programmatically, rather they
@@ -150,7 +153,8 @@ class AttributionControl extends MapControl {
   /// * **Attribution should not be collapsed if it can comfortably fit on
   ///   the map. `compact` should only be used to modify default attribution
   ///   when map size makes it impossible to fit default attribution and when
-  ///   the automatic compact resizing for default settings are not sufficient.**
+  ///   the automatic compact resizing for default settings are not
+  ///   sufficient.**
   final bool compact;
 
   /// Attributions to show in addition to any other attributions.
