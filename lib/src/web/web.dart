@@ -241,4 +241,10 @@ class MapLibreWeb extends MapLibrePlatform {
           pitch: pitch,
         ),
       );
+
+  @override
+  void dispose() {
+    super.dispose();
+    _map.remove();
+  }
 }
