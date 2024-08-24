@@ -33,7 +33,7 @@ class _ControlsPageState extends State<ControlsPage> {
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');
         },
-        onStyleLoadedCallback: () async {
+        onStyleLoaded: () async {
           debugPrint('[MapLibreMap] onStyleLoadedCallback');
         },
       ),
