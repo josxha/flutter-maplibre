@@ -20,24 +20,17 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MapLibre Demo')),
+      appBar: AppBar(title: const Text('Annotations')),
       body: MapLibreMap(
         options: MapOptions(
-          zoom: 4,
+          zoom: 7,
           center: Position(9, 48),
-          controls: const [
-            ScaleControl(),
-            GeolocateControl(),
-            FullscreenControl(),
-            LogoControl(),
-            NavigationControl(visualizePitch: true),
-          ],
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoadedCallback: () async {
-          // final marker = await _controller.addMarker(Marker(point: Position(9, 48)),);
+          final _ = await _controller.addMarker(Marker(point: Position(9, 48)),);
           // TODO remove delay
-          await Future<void>.delayed(const Duration(seconds: 5));
+          await Future<void>.delayed(const Duration(seconds: 2));
           final geojsonRaw =
           await rootBundle.loadString('/geojson/lake-constance.geojson');
           final geojson = jsonDecode(geojsonRaw) as Map<String, Object?>;

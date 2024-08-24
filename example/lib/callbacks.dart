@@ -18,7 +18,7 @@ class _CallbacksPageState extends State<CallbacksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MapLibre Demo')),
+      appBar: AppBar(title: const Text('Callbacks')),
       body: MapLibreMap(
         options: MapOptions(
           center: Position(9, 48),

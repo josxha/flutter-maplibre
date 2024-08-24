@@ -19,7 +19,7 @@ class MapController extends ChangeNotifier {
     _maplibrePlatform.dispose();
   }
 
-  Future<Future<Marker>> addMarker(Marker marker) async =>
+  Future<Marker> addMarker(Marker marker) async =>
       _maplibrePlatform.addMarker(marker);
 
   Future<void> addGeoJson({
