@@ -36,7 +36,8 @@ class MessageData {
 abstract interface class ExampleHostApi {
   String getHostLanguage();
 
-  // These annotations create more idiomatic naming of methods in Objc and Swift.
+  // These annotations create more idiomatic naming of methods in Objc and
+  // Swift.
   @ObjCSelector('addNumber:toNumber:')
   @SwiftFunction('add(_:to:)')
   int add(int a, int b);
