@@ -20,6 +20,8 @@ extension type Map._(Camera _) implements Camera {
   external HTMLCanvasElement getCanvas();
 
   external void resize();
+
+  external void remove();
 }
 
 @anonymous
