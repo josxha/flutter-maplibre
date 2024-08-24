@@ -40,7 +40,7 @@ class MapLibreWeb extends MapLibrePlatform {
     _options = options;
     platformViewRegistry.registerViewFactory(
       'plugins.flutter.io/maplibre_$id',
-      (int viewId) {
+          (int viewId) {
         _htmlElement = HTMLDivElement()
           ..style.position = 'absolute'
           ..style.top = '0'
@@ -63,52 +63,57 @@ class MapLibreWeb extends MapLibrePlatform {
         zoom: _options.zoom,
         center: _options.center == null
             ? null
-            : interop.LngLat(
-                lng: _options.center!.lng,
-                lat: _options.center!.lat,
-              ),
+            : interop.LngLat.fromPosition(_options.center!),
       ),
     );
     // add controls
     for (final control in _options.controls) {
       final jsControl = switch (control) {
-        final ScaleControl control => interop.ScaleControl(
-            interop.ScaleControlOptions(
-              maxWidth: control.maxWidth,
-              unit: control.unit.name,
-            ),
-          ),
-        final GeolocateControl control => interop.GeolocateControl(
-            interop.GeolocateControlOptions(
-              positionOptions: interop.PositionOptions(
-                enableHighAccuracy: control.positionOptions.enableHighAccuracy,
-                maximumAge: control.positionOptions.maximumAge.inMilliseconds,
-                timeout: control.positionOptions.timeout.inMilliseconds,
+        final ScaleControl control =>
+            interop.ScaleControl(
+              interop.ScaleControlOptions(
+                maxWidth: control.maxWidth,
+                unit: control.unit.name,
               ),
             ),
-          ),
-        final AttributionControl control => interop.AttributionControl(
-            interop.AttributionControlOptions(
-              compact: control.compact,
-              customAttribution: control.customAttribution,
+        final GeolocateControl control =>
+            interop.GeolocateControl(
+              interop.GeolocateControlOptions(
+                positionOptions: interop.PositionOptions(
+                  enableHighAccuracy: control.positionOptions
+                      .enableHighAccuracy,
+                  maximumAge: control.positionOptions.maximumAge.inMilliseconds,
+                  timeout: control.positionOptions.timeout.inMilliseconds,
+                ),
+              ),
             ),
-          ),
-        final FullscreenControl _ => interop.FullscreenControl(
-            interop.FullscreenControlOptions(),
-          ),
-        final LogoControl control => interop.LogoControl(
-            interop.LogoControlOptions(compact: control.compact),
-          ),
-        final NavigationControl control => interop.NavigationControl(
-            interop.NavigationControlOptions(
-              showCompass: control.showCompass,
-              showZoom: control.showZoom,
-              visualizePitch: control.visualizePitch,
+        final AttributionControl control =>
+            interop.AttributionControl(
+              interop.AttributionControlOptions(
+                compact: control.compact,
+                customAttribution: control.customAttribution,
+              ),
             ),
-          ),
-        final TerrainControl control => interop.TerrainControl(
-            interop.TerrainControlOptions(source: control.source),
-          ),
+        final FullscreenControl _ =>
+            interop.FullscreenControl(
+              interop.FullscreenControlOptions(),
+            ),
+        final LogoControl control =>
+            interop.LogoControl(
+              interop.LogoControlOptions(compact: control.compact),
+            ),
+        final NavigationControl control =>
+            interop.NavigationControl(
+              interop.NavigationControlOptions(
+                showCompass: control.showCompass,
+                showZoom: control.showZoom,
+                visualizePitch: control.visualizePitch,
+              ),
+            ),
+        final TerrainControl control =>
+            interop.TerrainControl(
+              interop.TerrainControlOptions(source: control.source),
+            ),
       };
       _map.addControl(jsControl);
     }
@@ -116,7 +121,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.click,
-        (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -124,7 +129,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onDoubleClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.dblclick,
-        (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -132,7 +137,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onSecondaryClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.contextmenu,
-        (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -200,8 +205,40 @@ class MapLibreWeb extends MapLibrePlatform {
   void _resizeMap() {
     final jsContainer = _map.getContainer();
     final jsCanvas = _map.getCanvas();
-    final widthMismatch = jsCanvas.clientWidth != jsContainer.clientWidth;
-    final heightMismatch = jsCanvas.clientHeight != jsContainer.clientHeight;
-    if (widthMismatch || heightMismatch) _map.resize();
+    if (jsCanvas.clientWidth == jsContainer.clientWidth) return;
+    if (jsCanvas.clientHeight == jsContainer.clientHeight) return;
+    _map.resize();
   }
+
+  @override
+  Future<void> jumpTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) async =>
+      _map.jumpTo(
+        interop.JumpToOptions(
+          center: interop.LngLat.fromPosition(center),
+          zoom: zoom,
+          bearing: bearing,
+          pitch: pitch,
+        ),
+      );
+
+  @override
+  Future<void> flyTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) async =>
+      _map.flyTo(
+        interop.FlyToOptions(
+          center: interop.LngLat.fromPosition(center),
+          zoom: zoom,
+          bearing: bearing,
+          pitch: pitch,
+        ),
+      );
 }

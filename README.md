@@ -65,10 +65,10 @@ Some controller methods will be changed to provide a different annotation API.
 | Annotation Tap Events                          | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Offline                                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | click callback                                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| long click callback                            | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| long click callback                            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | secondary click callback                       | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.animateCamera()                     | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.moveCamera()                        | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.jumpTo()                            | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| controller.flyTo()                             | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.addGeoJsonSource()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.setGeoJsonSource()                  | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | controller.setGeoJsonFeature()                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |

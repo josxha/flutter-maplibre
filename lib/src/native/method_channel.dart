@@ -77,4 +77,26 @@ class MapLibreNative extends MapLibrePlatform {
     // TODO: implement toScreenLocation
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> jumpTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) {
+    // TODO: implement jumpTo
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> flyTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) {
+    // TODO: implement flyTo
+    throw UnimplementedError();
+  }
 }

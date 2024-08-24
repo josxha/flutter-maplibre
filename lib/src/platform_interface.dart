@@ -56,4 +56,18 @@ abstract class MapLibrePlatform extends PlatformInterface {
   Future<Offset> toScreenLocation(Position lngLat);
 
   Future<Position> toLngLat(Offset screenLocation);
+
+  Future<void> jumpTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  });
+
+  Future<void> flyTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  });
 }

@@ -1,7 +1,7 @@
 part of 'interop.dart';
 
 @JS()
-extension type Map._(JSObject _) implements JSObject {
+extension type Map._(Camera _) implements Camera {
   external Map(MapOptions options);
 
   external void addControl(IControl control);
@@ -40,6 +40,8 @@ extension type LngLat._(JSObject _) implements JSObject {
     required num lng,
     required num lat,
   });
+
+  factory LngLat.fromPosition(Position p) => LngLat(lng: p.lng, lat: p.lat);
 
   external num lng;
   external num lat;

@@ -52,4 +52,30 @@ class MapController extends ChangeNotifier {
   Future<Position> toLngLat(Offset screenLocation) async {
     return _maplibrePlatform.toLngLat(screenLocation);
   }
+
+  Future<void> jumpTo({
+    required Position center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) async =>
+      _maplibrePlatform.jumpTo(
+        center: center,
+        zoom: zoom,
+        bearing: bearing,
+        pitch: pitch,
+      );
+
+  Future<void> flyTo({
+    required Position center,
+    required double zoom,
+    required double bearing,
+    required double pitch,
+  }) async =>
+      _maplibrePlatform.flyTo(
+        center: center,
+        zoom: zoom,
+        bearing: bearing,
+        pitch: pitch,
+      );
 }
