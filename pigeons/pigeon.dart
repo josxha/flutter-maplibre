@@ -21,6 +21,16 @@ import 'package:pigeon/pigeon.dart';
     swiftOptions: SwiftOptions(),
   ),
 )
+@ConfigurePigeon(
+  PigeonOptions(
+    dartOut: 'lib/src/native/pigeon.g.dart',
+    dartOptions: DartOptions(),
+    dartPackageName: 'maplibre',
+    // macos
+    swiftOut: 'macos/Classes/Pigeon.g.swift',
+    swiftOptions: SwiftOptions(),
+  ),
+)
 @HostApi()
 abstract interface class MapLibrePigeon {
   @async
