@@ -43,40 +43,23 @@ class FlutterError (
   val details: Any? = null
 ) : Throwable()
 
-enum class Code(val raw: Int) {
-  ONE(0),
-  TWO(1);
-
-  companion object {
-    fun ofRaw(raw: Int): Code? {
-      return values().firstOrNull { it.raw == raw }
-    }
-  }
-}
-
 /** Generated class from Pigeon that represents data sent in messages. */
-data class MessageData (
-  val name: String? = null,
-  val description: String? = null,
-  val code: Code,
-  val data: Map<String?, String?>
+data class LngLat (
+  val lng: Double,
+  val lat: Double
 )
  {
   companion object {
-    fun fromList(pigeonVar_list: List<Any?>): MessageData {
-      val name = pigeonVar_list[0] as String?
-      val description = pigeonVar_list[1] as String?
-      val code = pigeonVar_list[2] as Code
-      val data = pigeonVar_list[3] as Map<String?, String?>
-      return MessageData(name, description, code, data)
+    fun fromList(pigeonVar_list: List<Any?>): LngLat {
+      val lng = pigeonVar_list[0] as Double
+      val lat = pigeonVar_list[1] as Double
+      return LngLat(lng, lat)
     }
   }
   fun toList(): List<Any?> {
     return listOf(
-      name,
-      description,
-      code,
-      data,
+      lng,
+      lat,
     )
   }
 }
@@ -84,13 +67,8 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
       129.toByte() -> {
-        return (readValue(buffer) as Long?)?.let {
-          Code.ofRaw(it.toInt())
-        }
-      }
-      130.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MessageData.fromList(it)
+          LngLat.fromList(it)
         }
       }
       else -> super.readValueOfType(type, buffer)
@@ -98,12 +76,8 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
     when (value) {
-      is Code -> {
+      is LngLat -> {
         stream.write(129)
-        writeValue(stream, value.raw)
-      }
-      is MessageData -> {
-        stream.write(130)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -113,66 +87,56 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
 
 
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
-interface ExampleHostApi {
-  fun getHostLanguage(): String
-  fun add(a: Long, b: Long): Long
-  fun sendMessage(message: MessageData, callback: (Result<Boolean>) -> Unit)
+interface MapLibrePigeon {
+  fun jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
 
   companion object {
-    /** The codec used by ExampleHostApi. */
+    /** The codec used by MapLibrePigeon. */
     val codec: MessageCodec<Any?> by lazy {
       PigeonPigeonCodec
     }
-    /** Sets up an instance of `ExampleHostApi` to handle messages through the `binaryMessenger`. */
+    /** Sets up an instance of `MapLibrePigeon` to handle messages through the `binaryMessenger`. */
     @JvmOverloads
-    fun setUp(binaryMessenger: BinaryMessenger, api: ExampleHostApi?, messageChannelSuffix: String = "") {
+    fun setUp(binaryMessenger: BinaryMessenger, api: MapLibrePigeon?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.getHostLanguage$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { _, reply ->
-            val wrapped: List<Any?> = try {
-              listOf(api.getHostLanguage())
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.add$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
-            val aArg = args[0] as Long
-            val bArg = args[1] as Long
-            val wrapped: List<Any?> = try {
-              listOf(api.add(aArg, bArg))
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.sendMessage$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val messageArg = args[0] as MessageData
-            api.sendMessage(messageArg) { result: Result<Boolean> ->
+            val centerArg = args[0] as LngLat
+            val zoomArg = args[1] as Double?
+            val bearingArg = args[2] as Double?
+            val pitchArg = args[3] as Double?
+            api.jumpTo(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
               } else {
-                val data = result.getOrNull()
-                reply.reply(wrapResult(data))
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val centerArg = args[0] as LngLat
+            val zoomArg = args[1] as Double?
+            val bearingArg = args[2] as Double?
+            val pitchArg = args[3] as Double?
+            api.flyTo(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
               }
             }
           }

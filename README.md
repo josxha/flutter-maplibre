@@ -162,5 +162,5 @@ always welcome.
 
 ```bash
 dart run build_runner build
-dart run pigeon --input pigeons/messages.dart 
+dart run pigeon --input pigeons/pigeon.dart 
 ```

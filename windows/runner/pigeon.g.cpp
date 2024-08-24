@@ -28,90 +28,44 @@ FlutterError CreateConnectionError(const std::string channel_name) {
         EncodableValue(""));
 }
 
-// MessageData
+// LngLat
 
-MessageData::MessageData(
-  const Code& code,
-  const EncodableMap& data)
- : code_(code),
-    data_(data) {}
+LngLat::LngLat(
+  double lng,
+  double lat)
+ : lng_(lng),
+    lat_(lat) {}
 
-MessageData::MessageData(
-  const std::string* name,
-  const std::string* description,
-  const Code& code,
-  const EncodableMap& data)
- : name_(name ? std::optional<std::string>(*name) : std::nullopt),
-    description_(description ? std::optional<std::string>(*description) : std::nullopt),
-    code_(code),
-    data_(data) {}
-
-const std::string* MessageData::name() const {
-  return name_ ? &(*name_) : nullptr;
+double LngLat::lng() const {
+  return lng_;
 }
 
-void MessageData::set_name(const std::string_view* value_arg) {
-  name_ = value_arg ? std::optional<std::string>(*value_arg) : std::nullopt;
-}
-
-void MessageData::set_name(std::string_view value_arg) {
-  name_ = value_arg;
+void LngLat::set_lng(double value_arg) {
+  lng_ = value_arg;
 }
 
 
-const std::string* MessageData::description() const {
-  return description_ ? &(*description_) : nullptr;
+double LngLat::lat() const {
+  return lat_;
 }
 
-void MessageData::set_description(const std::string_view* value_arg) {
-  description_ = value_arg ? std::optional<std::string>(*value_arg) : std::nullopt;
-}
-
-void MessageData::set_description(std::string_view value_arg) {
-  description_ = value_arg;
+void LngLat::set_lat(double value_arg) {
+  lat_ = value_arg;
 }
 
 
-const Code& MessageData::code() const {
-  return code_;
-}
-
-void MessageData::set_code(const Code& value_arg) {
-  code_ = value_arg;
-}
-
-
-const EncodableMap& MessageData::data() const {
-  return data_;
-}
-
-void MessageData::set_data(const EncodableMap& value_arg) {
-  data_ = value_arg;
-}
-
-
-EncodableList MessageData::ToEncodableList() const {
+EncodableList LngLat::ToEncodableList() const {
   EncodableList list;
-  list.reserve(4);
-  list.push_back(name_ ? EncodableValue(*name_) : EncodableValue());
-  list.push_back(description_ ? EncodableValue(*description_) : EncodableValue());
-  list.push_back(CustomEncodableValue(code_));
-  list.push_back(EncodableValue(data_));
+  list.reserve(2);
+  list.push_back(EncodableValue(lng_));
+  list.push_back(EncodableValue(lat_));
   return list;
 }
 
-MessageData MessageData::FromEncodableList(const EncodableList& list) {
-  MessageData decoded(
-    std::any_cast<const Code&>(std::get<CustomEncodableValue>(list[2])),
-    std::get<EncodableMap>(list[3]));
-  auto& encodable_name = list[0];
-  if (!encodable_name.IsNull()) {
-    decoded.set_name(std::get<std::string>(encodable_name));
-  }
-  auto& encodable_description = list[1];
-  if (!encodable_description.IsNull()) {
-    decoded.set_description(std::get<std::string>(encodable_description));
-  }
+LngLat LngLat::FromEncodableList(const EncodableList& list) {
+  LngLat decoded(
+    std::get<double>(list[0]),
+    std::get<double>(list[1]));
   return decoded;
 }
 
@@ -123,12 +77,7 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
   flutter::ByteStreamReader* stream) const {
   switch (type) {
     case 129: {
-        const auto& encodable_enum_arg = ReadValue(stream);
-        const int64_t enum_arg_value = encodable_enum_arg.IsNull() ? 0 : encodable_enum_arg.LongValue();
-        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<Code>(enum_arg_value));
-      }
-    case 130: {
-        return CustomEncodableValue(MessageData::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
       return flutter::StandardCodecSerializer::ReadValueOfType(type, stream);
@@ -139,111 +88,92 @@ void PigeonInternalCodecSerializer::WriteValue(
   const EncodableValue& value,
   flutter::ByteStreamWriter* stream) const {
   if (const CustomEncodableValue* custom_value = std::get_if<CustomEncodableValue>(&value)) {
-    if (custom_value->type() == typeid(Code)) {
+    if (custom_value->type() == typeid(LngLat)) {
       stream->WriteByte(129);
-      WriteValue(EncodableValue(static_cast<int>(std::any_cast<Code>(*custom_value))), stream);
-      return;
-    }
-    if (custom_value->type() == typeid(MessageData)) {
-      stream->WriteByte(130);
-      WriteValue(EncodableValue(std::any_cast<MessageData>(*custom_value).ToEncodableList()), stream);
+      WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
   }
   flutter::StandardCodecSerializer::WriteValue(value, stream);
 }
 
-/// The codec used by ExampleHostApi.
-const flutter::StandardMessageCodec& ExampleHostApi::GetCodec() {
+/// The codec used by MapLibrePigeon.
+const flutter::StandardMessageCodec& MapLibrePigeon::GetCodec() {
   return flutter::StandardMessageCodec::GetInstance(&PigeonInternalCodecSerializer::GetInstance());
 }
 
-// Sets up an instance of `ExampleHostApi` to handle messages through the `binary_messenger`.
-void ExampleHostApi::SetUp(
+// Sets up an instance of `MapLibrePigeon` to handle messages through the `binary_messenger`.
+void MapLibrePigeon::SetUp(
   flutter::BinaryMessenger* binary_messenger,
-  ExampleHostApi* api) {
-  ExampleHostApi::SetUp(binary_messenger, api, "");
+  MapLibrePigeon* api) {
+  MapLibrePigeon::SetUp(binary_messenger, api, "");
 }
 
-void ExampleHostApi::SetUp(
+void MapLibrePigeon::SetUp(
   flutter::BinaryMessenger* binary_messenger,
-  ExampleHostApi* api,
+  MapLibrePigeon* api,
   const std::string& message_channel_suffix) {
   const std::string prepended_suffix = message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "";
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.getHostLanguage" + prepended_suffix, &GetCodec());
-    if (api != nullptr) {
-      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
-        try {
-          ErrorOr<std::string> output = api->GetHostLanguage();
-          if (output.has_error()) {
-            reply(WrapError(output.error()));
-            return;
-          }
-          EncodableList wrapped;
-          wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
-          reply(EncodableValue(std::move(wrapped)));
-        } catch (const std::exception& exception) {
-          reply(WrapError(exception.what()));
-        }
-      });
-    } else {
-      channel.SetMessageHandler(nullptr);
-    }
-  }
-  {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.add" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
           const auto& args = std::get<EncodableList>(message);
-          const auto& encodable_a_arg = args.at(0);
-          if (encodable_a_arg.IsNull()) {
-            reply(WrapError("a_arg unexpectedly null."));
+          const auto& encodable_center_arg = args.at(0);
+          if (encodable_center_arg.IsNull()) {
+            reply(WrapError("center_arg unexpectedly null."));
             return;
           }
-          const int64_t a_arg = encodable_a_arg.LongValue();
-          const auto& encodable_b_arg = args.at(1);
-          if (encodable_b_arg.IsNull()) {
-            reply(WrapError("b_arg unexpectedly null."));
-            return;
-          }
-          const int64_t b_arg = encodable_b_arg.LongValue();
-          ErrorOr<int64_t> output = api->Add(a_arg, b_arg);
-          if (output.has_error()) {
-            reply(WrapError(output.error()));
-            return;
-          }
-          EncodableList wrapped;
-          wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
-          reply(EncodableValue(std::move(wrapped)));
-        } catch (const std::exception& exception) {
-          reply(WrapError(exception.what()));
-        }
-      });
-    } else {
-      channel.SetMessageHandler(nullptr);
-    }
-  }
-  {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.ExampleHostApi.sendMessage" + prepended_suffix, &GetCodec());
-    if (api != nullptr) {
-      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
-        try {
-          const auto& args = std::get<EncodableList>(message);
-          const auto& encodable_message_arg = args.at(0);
-          if (encodable_message_arg.IsNull()) {
-            reply(WrapError("message_arg unexpectedly null."));
-            return;
-          }
-          const auto& message_arg = std::any_cast<const MessageData&>(std::get<CustomEncodableValue>(encodable_message_arg));
-          api->SendMessage(message_arg, [reply](ErrorOr<bool>&& output) {
-            if (output.has_error()) {
-              reply(WrapError(output.error()));
+          const auto& center_arg = std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg));
+          const auto& encodable_zoom_arg = args.at(1);
+          const auto* zoom_arg = std::get_if<double>(&encodable_zoom_arg);
+          const auto& encodable_bearing_arg = args.at(2);
+          const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
+          const auto& encodable_pitch_arg = args.at(3);
+          const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
+          api->JumpTo(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
               return;
             }
             EncodableList wrapped;
-            wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_center_arg = args.at(0);
+          if (encodable_center_arg.IsNull()) {
+            reply(WrapError("center_arg unexpectedly null."));
+            return;
+          }
+          const auto& center_arg = std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg));
+          const auto& encodable_zoom_arg = args.at(1);
+          const auto* zoom_arg = std::get_if<double>(&encodable_zoom_arg);
+          const auto& encodable_bearing_arg = args.at(2);
+          const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
+          const auto& encodable_pitch_arg = args.at(3);
+          const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
+          api->FlyTo(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
             reply(EncodableValue(std::move(wrapped)));
           });
         } catch (const std::exception& exception) {
@@ -256,7 +186,7 @@ void ExampleHostApi::SetUp(
   }
 }
 
-EncodableValue ExampleHostApi::WrapError(std::string_view error_message) {
+EncodableValue MapLibrePigeon::WrapError(std::string_view error_message) {
   return EncodableValue(EncodableList{
     EncodableValue(std::string(error_message)),
     EncodableValue("Error"),
@@ -264,7 +194,7 @@ EncodableValue ExampleHostApi::WrapError(std::string_view error_message) {
   });
 }
 
-EncodableValue ExampleHostApi::WrapError(const FlutterError& error) {
+EncodableValue MapLibrePigeon::WrapError(const FlutterError& error) {
   return EncodableValue(EncodableList{
     EncodableValue(error.code()),
     EncodableValue(error.message()),

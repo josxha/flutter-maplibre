@@ -5,10 +5,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/native/extensions.dart';
+import 'package:maplibre/src/native/pigeon.g.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [MapLibrePlatform] that uses method channels.
 class MapLibreNative extends MapLibrePlatform {
+  final _pigeon = MapLibrePigeon();
+
   @override
   Widget buildWidget({
     required MapOptions options,
@@ -84,10 +88,13 @@ class MapLibreNative extends MapLibrePlatform {
     double? zoom,
     double? bearing,
     double? pitch,
-  }) {
-    // TODO: implement jumpTo
-    throw UnimplementedError();
-  }
+  }) =>
+      _pigeon.jumpTo(
+        center: center.toLngLat(),
+        zoom: zoom,
+        bearing: bearing,
+        pitch: pitch,
+      );
 
   @override
   Future<void> flyTo({
@@ -95,8 +102,11 @@ class MapLibreNative extends MapLibrePlatform {
     double? zoom,
     double? bearing,
     double? pitch,
-  }) {
-    // TODO: implement flyTo
-    throw UnimplementedError();
-  }
+  }) =>
+      _pigeon.flyTo(
+        center: center.toLngLat(),
+        zoom: zoom,
+        bearing: bearing,
+        pitch: pitch,
+      );
 }

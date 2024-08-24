@@ -22,7 +22,8 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
                 MapLibreMapFactory(
                     object : LifecycleProvider {
                         override fun getLifecycle(): Lifecycle? = lifecycle
-                    }
+                    },
+                    binaryMessenger = binding.binaryMessenger
                 )
             )
     }

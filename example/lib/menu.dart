@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations.dart';
 import 'package:maplibre_example/callbacks.dart';
 import 'package:maplibre_example/controller.dart';
-import 'package:maplibre_example/controls.dart';
+import 'package:maplibre_example/web_controls.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -28,9 +28,9 @@ class MenuPage extends StatelessWidget {
             location: CallbacksPage.location,
           ),
           ItemCard(
-            label: 'Controls',
+            label: 'Web Controls',
             iconData: Icons.toggle_off,
-            location: ControlsPage.location,
+            location: WebControlsPage.location,
           ),
           ItemCard(
             label: 'Controller',

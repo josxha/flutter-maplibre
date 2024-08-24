@@ -64,40 +64,27 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 
-enum Code: Int {
-  case one = 0
-  case two = 1
-}
-
 /// Generated class from Pigeon that represents data sent in messages.
-struct MessageData {
-  var name: String? = nil
-  var description: String? = nil
-  var code: Code
-  var data: [String?: String?]
+struct LngLat {
+  var lng: Double
+  var lat: Double
 
 
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
-  static func fromList(_ pigeonVar_list: [Any?]) -> MessageData? {
-    let name: String? = nilOrValue(pigeonVar_list[0])
-    let description: String? = nilOrValue(pigeonVar_list[1])
-    let code = pigeonVar_list[2] as! Code
-    let data = pigeonVar_list[3] as! [String?: String?]
+  static func fromList(_ pigeonVar_list: [Any?]) -> LngLat? {
+    let lng = pigeonVar_list[0] as! Double
+    let lat = pigeonVar_list[1] as! Double
 
-    return MessageData(
-      name: name,
-      description: description,
-      code: code,
-      data: data
+    return LngLat(
+      lng: lng,
+      lat: lat
     )
   }
   func toList() -> [Any?] {
     return [
-      name,
-      description,
-      code,
-      data,
+      lng,
+      lat,
     ]
   }
 }
@@ -106,13 +93,7 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      let enumResultAsInt: Int? = nilOrValue(self.readValue() as? Int)
-      if let enumResultAsInt = enumResultAsInt {
-        return Code(rawValue: enumResultAsInt)
-      }
-      return nil
-    case 130:
-      return MessageData.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
     }
@@ -121,11 +102,8 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
 
 private class PigeonPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? Code {
+    if let value = value as? LngLat {
       super.writeByte(129)
-      super.writeValue(value.rawValue)
-    } else if let value = value as? MessageData {
-      super.writeByte(130)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -149,63 +127,56 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 
 
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
-protocol ExampleHostApi {
-  func getHostLanguage() throws -> String
-  func add(_ a: Int64, to b: Int64) throws -> Int64
-  func sendMessage(message: MessageData, completion: @escaping (Result<Bool, Error>) -> Void)
+protocol MapLibrePigeon {
+  func jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
-class ExampleHostApiSetup {
+class MapLibrePigeonSetup {
   static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
-  /// Sets up an instance of `ExampleHostApi` to handle messages through the `binaryMessenger`.
-  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: ExampleHostApi?, messageChannelSuffix: String = "") {
+  /// Sets up an instance of `MapLibrePigeon` to handle messages through the `binaryMessenger`.
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibrePigeon?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
-    let getHostLanguageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.ExampleHostApi.getHostLanguage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      getHostLanguageChannel.setMessageHandler { _, reply in
-        do {
-          let result = try api.getHostLanguage()
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getHostLanguageChannel.setMessageHandler(nil)
-    }
-    let addChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.ExampleHostApi.add\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      addChannel.setMessageHandler { message, reply in
+      jumpToChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
-        let aArg = args[0] is Int64 ? args[0] as! Int64 : Int64(args[0] as! Int32)
-        let bArg = args[1] is Int64 ? args[1] as! Int64 : Int64(args[1] as! Int32)
-        do {
-          let result = try api.add(aArg, to: bArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      addChannel.setMessageHandler(nil)
-    }
-    let sendMessageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.ExampleHostApi.sendMessage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      sendMessageChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let messageArg = args[0] as! MessageData
-        api.sendMessage(message: messageArg) { result in
+        let centerArg = args[0] as! LngLat
+        let zoomArg: Double? = nilOrValue(args[1])
+        let bearingArg: Double? = nilOrValue(args[2])
+        let pitchArg: Double? = nilOrValue(args[3])
+        api.jumpTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
           switch result {
-          case .success(let res):
-            reply(wrapResult(res))
+          case .success:
+            reply(wrapResult(nil))
           case .failure(let error):
             reply(wrapError(error))
           }
         }
       }
     } else {
-      sendMessageChannel.setMessageHandler(nil)
+      jumpToChannel.setMessageHandler(nil)
+    }
+    let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      flyToChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let centerArg = args[0] as! LngLat
+        let zoomArg: Double? = nilOrValue(args[1])
+        let bearingArg: Double? = nilOrValue(args[2])
+        let pitchArg: Double? = nilOrValue(args[3])
+        api.flyTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      flyToChannel.setMessageHandler(nil)
     }
   }
 }
