@@ -48,7 +48,7 @@ template<class T> class ErrorOr {
   const FlutterError& error() const { return std::get<FlutterError>(v_); };
 
  private:
-  friend class ExampleHostApi;
+  friend class MapLibrePigeon;
   ErrorOr() = default;
   T TakeValue() && { return std::get<T>(std::move(v_)); }
 
@@ -56,51 +56,29 @@ template<class T> class ErrorOr {
 };
 
 
-enum class Code {
-  kOne = 0,
-  kTwo = 1
-};
-
 
 // Generated class from Pigeon that represents data sent in messages.
-class MessageData {
+class LngLat {
  public:
-  // Constructs an object setting all non-nullable fields.
-  explicit MessageData(
-    const Code& code,
-    const flutter::EncodableMap& data);
-
   // Constructs an object setting all fields.
-  explicit MessageData(
-    const std::string* name,
-    const std::string* description,
-    const Code& code,
-    const flutter::EncodableMap& data);
+  explicit LngLat(
+    double lng,
+    double lat);
 
-  const std::string* name() const;
-  void set_name(const std::string_view* value_arg);
-  void set_name(std::string_view value_arg);
+  double lng() const;
+  void set_lng(double value_arg);
 
-  const std::string* description() const;
-  void set_description(const std::string_view* value_arg);
-  void set_description(std::string_view value_arg);
-
-  const Code& code() const;
-  void set_code(const Code& value_arg);
-
-  const flutter::EncodableMap& data() const;
-  void set_data(const flutter::EncodableMap& value_arg);
+  double lat() const;
+  void set_lat(double value_arg);
 
 
  private:
-  static MessageData FromEncodableList(const flutter::EncodableList& list);
+  static LngLat FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class ExampleHostApi;
+  friend class MapLibrePigeon;
   friend class PigeonInternalCodecSerializer;
-  std::optional<std::string> name_;
-  std::optional<std::string> description_;
-  Code code_;
-  flutter::EncodableMap data_;
+  double lng_;
+  double lat_;
 
 };
 
@@ -125,34 +103,39 @@ class PigeonInternalCodecSerializer : public flutter::StandardCodecSerializer {
 };
 
 // Generated interface from Pigeon that represents a handler of messages from Flutter.
-class ExampleHostApi {
+class MapLibrePigeon {
  public:
-  ExampleHostApi(const ExampleHostApi&) = delete;
-  ExampleHostApi& operator=(const ExampleHostApi&) = delete;
-  virtual ~ExampleHostApi() {}
-  virtual ErrorOr<std::string> GetHostLanguage() = 0;
-  virtual ErrorOr<int64_t> Add(
-    int64_t a,
-    int64_t b) = 0;
-  virtual void SendMessage(
-    const MessageData& message,
-    std::function<void(ErrorOr<bool> reply)> result) = 0;
+  MapLibrePigeon(const MapLibrePigeon&) = delete;
+  MapLibrePigeon& operator=(const MapLibrePigeon&) = delete;
+  virtual ~MapLibrePigeon() {}
+  virtual void JumpTo(
+    const LngLat& center,
+    const double* zoom,
+    const double* bearing,
+    const double* pitch,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  virtual void FlyTo(
+    const LngLat& center,
+    const double* zoom,
+    const double* bearing,
+    const double* pitch,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
 
-  // The codec used by ExampleHostApi.
+  // The codec used by MapLibrePigeon.
   static const flutter::StandardMessageCodec& GetCodec();
-  // Sets up an instance of `ExampleHostApi` to handle messages through the `binary_messenger`.
+  // Sets up an instance of `MapLibrePigeon` to handle messages through the `binary_messenger`.
   static void SetUp(
     flutter::BinaryMessenger* binary_messenger,
-    ExampleHostApi* api);
+    MapLibrePigeon* api);
   static void SetUp(
     flutter::BinaryMessenger* binary_messenger,
-    ExampleHostApi* api,
+    MapLibrePigeon* api,
     const std::string& message_channel_suffix);
   static flutter::EncodableValue WrapError(std::string_view error_message);
   static flutter::EncodableValue WrapError(const FlutterError& error);
 
  protected:
-  ExampleHostApi() = default;
+  MapLibrePigeon() = default;
 
 };
 }  // namespace pigeon_maplibre

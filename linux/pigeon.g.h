@@ -9,137 +9,57 @@
 G_BEGIN_DECLS
 
 /**
- * MaplibreCode:
- * MAPLIBRE_CODE_ONE:
- * MAPLIBRE_CODE_TWO:
- *
- */
-typedef enum {
-  MAPLIBRE_CODE_ONE = 0,
-  MAPLIBRE_CODE_TWO = 1
-} MaplibreCode;
-
-/**
- * MaplibreMessageData:
+ * MaplibreLngLat:
  *
  */
 
-G_DECLARE_FINAL_TYPE(MaplibreMessageData, maplibre_message_data, MAPLIBRE, MESSAGE_DATA, GObject)
+G_DECLARE_FINAL_TYPE(MaplibreLngLat, maplibre_lng_lat, MAPLIBRE, LNG_LAT, GObject)
 
 /**
- * maplibre_message_data_new:
- * name: field in this object.
- * description: field in this object.
- * code: field in this object.
- * data: field in this object.
+ * maplibre_lng_lat_new:
+ * lng: field in this object.
+ * lat: field in this object.
  *
- * Creates a new #MessageData object.
+ * Creates a new #LngLat object.
  *
- * Returns: a new #MaplibreMessageData
+ * Returns: a new #MaplibreLngLat
  */
-MaplibreMessageData* maplibre_message_data_new(const gchar* name, const gchar* description, MaplibreCode code, FlValue* data);
+MaplibreLngLat* maplibre_lng_lat_new(double lng, double lat);
 
 /**
- * maplibre_message_data_get_name
- * @object: a #MaplibreMessageData.
+ * maplibre_lng_lat_get_lng
+ * @object: a #MaplibreLngLat.
  *
- * Gets the value of the name field of @object.
+ * Gets the value of the lng field of @object.
  *
  * Returns: the field value.
  */
-const gchar* maplibre_message_data_get_name(MaplibreMessageData* object);
+double maplibre_lng_lat_get_lng(MaplibreLngLat* object);
 
 /**
- * maplibre_message_data_get_description
- * @object: a #MaplibreMessageData.
+ * maplibre_lng_lat_get_lat
+ * @object: a #MaplibreLngLat.
  *
- * Gets the value of the description field of @object.
+ * Gets the value of the lat field of @object.
  *
  * Returns: the field value.
  */
-const gchar* maplibre_message_data_get_description(MaplibreMessageData* object);
+double maplibre_lng_lat_get_lat(MaplibreLngLat* object);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeonResponseHandle, maplibre_map_libre_pigeon_response_handle, MAPLIBRE, MAP_LIBRE_PIGEON_RESPONSE_HANDLE, GObject)
 
 /**
- * maplibre_message_data_get_code
- * @object: a #MaplibreMessageData.
+ * MaplibreMapLibrePigeonVTable:
  *
- * Gets the value of the code field of @object.
- *
- * Returns: the field value.
- */
-MaplibreCode maplibre_message_data_get_code(MaplibreMessageData* object);
-
-/**
- * maplibre_message_data_get_data
- * @object: a #MaplibreMessageData.
- *
- * Gets the value of the data field of @object.
- *
- * Returns: the field value.
- */
-FlValue* maplibre_message_data_get_data(MaplibreMessageData* object);
-
-G_DECLARE_FINAL_TYPE(MaplibreExampleHostApiResponseHandle, maplibre_example_host_api_response_handle, MAPLIBRE, EXAMPLE_HOST_API_RESPONSE_HANDLE, GObject)
-
-G_DECLARE_FINAL_TYPE(MaplibreExampleHostApiGetHostLanguageResponse, maplibre_example_host_api_get_host_language_response, MAPLIBRE, EXAMPLE_HOST_API_GET_HOST_LANGUAGE_RESPONSE, GObject)
-
-/**
- * maplibre_example_host_api_get_host_language_response_new:
- *
- * Creates a new response to ExampleHostApi.getHostLanguage.
- *
- * Returns: a new #MaplibreExampleHostApiGetHostLanguageResponse
- */
-MaplibreExampleHostApiGetHostLanguageResponse* maplibre_example_host_api_get_host_language_response_new(const gchar* return_value);
-
-/**
- * maplibre_example_host_api_get_host_language_response_new_error:
- * @code: error code.
- * @message: error message.
- * @details: (allow-none): error details or %NULL.
- *
- * Creates a new error response to ExampleHostApi.getHostLanguage.
- *
- * Returns: a new #MaplibreExampleHostApiGetHostLanguageResponse
- */
-MaplibreExampleHostApiGetHostLanguageResponse* maplibre_example_host_api_get_host_language_response_new_error(const gchar* code, const gchar* message, FlValue* details);
-
-G_DECLARE_FINAL_TYPE(MaplibreExampleHostApiAddResponse, maplibre_example_host_api_add_response, MAPLIBRE, EXAMPLE_HOST_API_ADD_RESPONSE, GObject)
-
-/**
- * maplibre_example_host_api_add_response_new:
- *
- * Creates a new response to ExampleHostApi.add.
- *
- * Returns: a new #MaplibreExampleHostApiAddResponse
- */
-MaplibreExampleHostApiAddResponse* maplibre_example_host_api_add_response_new(int64_t return_value);
-
-/**
- * maplibre_example_host_api_add_response_new_error:
- * @code: error code.
- * @message: error message.
- * @details: (allow-none): error details or %NULL.
- *
- * Creates a new error response to ExampleHostApi.add.
- *
- * Returns: a new #MaplibreExampleHostApiAddResponse
- */
-MaplibreExampleHostApiAddResponse* maplibre_example_host_api_add_response_new_error(const gchar* code, const gchar* message, FlValue* details);
-
-/**
- * MaplibreExampleHostApiVTable:
- *
- * Table of functions exposed by ExampleHostApi to be implemented by the API provider.
+ * Table of functions exposed by MapLibrePigeon to be implemented by the API provider.
  */
 typedef struct {
-  MaplibreExampleHostApiGetHostLanguageResponse* (*get_host_language)(gpointer user_data);
-  MaplibreExampleHostApiAddResponse* (*add)(int64_t a, int64_t b, gpointer user_data);
-  void (*send_message)(MaplibreMessageData* message, MaplibreExampleHostApiResponseHandle* response_handle, gpointer user_data);
-} MaplibreExampleHostApiVTable;
+  void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
+  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
+} MaplibreMapLibrePigeonVTable;
 
 /**
- * maplibre_example_host_api_set_method_handlers:
+ * maplibre_map_libre_pigeon_set_method_handlers:
  *
  * @messenger: an #FlBinaryMessenger.
  * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
@@ -147,39 +67,57 @@ typedef struct {
  * @user_data: (closure): user data to pass to the functions in @vtable.
  * @user_data_free_func: (allow-none): a function which gets called to free @user_data, or %NULL.
  *
- * Connects the method handlers in the ExampleHostApi API.
+ * Connects the method handlers in the MapLibrePigeon API.
  */
-void maplibre_example_host_api_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreExampleHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func);
+void maplibre_map_libre_pigeon_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreMapLibrePigeonVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func);
 
 /**
- * maplibre_example_host_api_clear_method_handlers:
+ * maplibre_map_libre_pigeon_clear_method_handlers:
  *
  * @messenger: an #FlBinaryMessenger.
  * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
  *
- * Clears the method handlers in the ExampleHostApi API.
+ * Clears the method handlers in the MapLibrePigeon API.
  */
-void maplibre_example_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
+void maplibre_map_libre_pigeon_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
 
 /**
- * maplibre_example_host_api_respond_send_message:
- * @response_handle: a #MaplibreExampleHostApiResponseHandle.
- * @return_value: location to write the value returned by this method.
+ * maplibre_map_libre_pigeon_respond_jump_to:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
  *
- * Responds to ExampleHostApi.sendMessage. 
+ * Responds to MapLibrePigeon.jumpTo. 
  */
-void maplibre_example_host_api_respond_send_message(MaplibreExampleHostApiResponseHandle* response_handle, gboolean return_value);
+void maplibre_map_libre_pigeon_respond_jump_to(MaplibreMapLibrePigeonResponseHandle* response_handle);
 
 /**
- * maplibre_example_host_api_respond_error_send_message:
- * @response_handle: a #MaplibreExampleHostApiResponseHandle.
+ * maplibre_map_libre_pigeon_respond_error_jump_to:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
  * @code: error code.
  * @message: error message.
  * @details: (allow-none): error details or %NULL.
  *
- * Responds with an error to ExampleHostApi.sendMessage. 
+ * Responds with an error to MapLibrePigeon.jumpTo. 
  */
-void maplibre_example_host_api_respond_error_send_message(MaplibreExampleHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+void maplibre_map_libre_pigeon_respond_error_jump_to(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_pigeon_respond_fly_to:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ *
+ * Responds to MapLibrePigeon.flyTo. 
+ */
+void maplibre_map_libre_pigeon_respond_fly_to(MaplibreMapLibrePigeonResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_pigeon_respond_error_fly_to:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibrePigeon.flyTo. 
+ */
+void maplibre_map_libre_pigeon_respond_error_fly_to(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_END_DECLS
 

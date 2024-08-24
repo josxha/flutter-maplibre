@@ -2,7 +2,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/pigeon.g.dart',
+    dartOut: 'lib/src/native/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     // linux
@@ -21,27 +21,29 @@ import 'package:pigeon/pigeon.dart';
     swiftOptions: SwiftOptions(),
   ),
 )
-enum Code { one, two }
-
-class MessageData {
-  MessageData({required this.code, required this.data});
-
-  String? name;
-  String? description;
-  Code code;
-  Map<String?, String?> data;
-}
-
 @HostApi()
-abstract interface class ExampleHostApi {
-  String getHostLanguage();
-
-  // These annotations create more idiomatic naming of methods in Objc and
-  // Swift.
-  @ObjCSelector('addNumber:toNumber:')
-  @SwiftFunction('add(_:to:)')
-  int add(int a, int b);
+abstract interface class MapLibrePigeon {
+  @async
+  void jumpTo({
+    required LngLat center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  });
 
   @async
-  bool sendMessage(MessageData message);
+  void flyTo({
+    required LngLat center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  });
+}
+
+
+class LngLat {
+  const LngLat({required this.lng, required this.lat});
+
+  final double lng;
+  final double lat;
 }
