@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations.dart';
 import 'package:maplibre_example/callbacks.dart';
+import 'package:maplibre_example/controller.dart';
 import 'package:maplibre_example/controls.dart';
 
 class MenuPage extends StatelessWidget {
@@ -30,6 +31,11 @@ class MenuPage extends StatelessWidget {
             label: 'Controls',
             iconData: Icons.toggle_off,
             location: ControlsPage.location,
+          ),
+          ItemCard(
+            label: 'Controller',
+            iconData: Icons.api,
+            location: ControllerPage.location,
           ),
         ],
       ),
