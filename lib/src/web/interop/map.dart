@@ -14,6 +14,12 @@ extension type Map._(JSObject _) implements JSObject {
   external void addLayer(AddLayerObject layer, [String? beforeId]);
 
   external Point project(LngLat lngLat);
+
+  external HTMLElement getContainer();
+
+  external HTMLCanvasElement getCanvas();
+
+  external void resize();
 }
 
 @anonymous

@@ -3,6 +3,7 @@
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
 
+import 'dart:async';
 import 'dart:js_interop';
 import 'dart:ui_web';
 
@@ -137,6 +138,7 @@ class MapLibreWeb extends MapLibrePlatform {
       );
     }
     document.body?.appendChild(_htmlElement);
+    _resizeMap();
   }
 
   @override
@@ -193,5 +195,13 @@ class MapLibreWeb extends MapLibrePlatform {
       interop.LngLat(lng: lngLat.lng, lat: lngLat.lat),
     );
     return Offset(screenPosition.x.toDouble(), screenPosition.y.toDouble());
+  }
+
+  void _resizeMap() {
+    final jsContainer = _map.getContainer();
+    final jsCanvas = _map.getCanvas();
+    final widthMismatch = jsCanvas.clientWidth != jsContainer.clientWidth;
+    final heightMismatch = jsCanvas.clientHeight != jsContainer.clientHeight;
+    if (widthMismatch || heightMismatch) _map.resize();
   }
 }
