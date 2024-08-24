@@ -32,7 +32,7 @@ class _CallbacksPageState extends State<CallbacksPage> {
         onMapCreated: (controller) {
           debugPrint('[MapLibreMap] onMapCreated');
         },
-        onStyleLoadedCallback: () async {
+        onStyleLoaded: () async {
           debugPrint('[MapLibreMap] onStyleLoadedCallback');
         },
       ),

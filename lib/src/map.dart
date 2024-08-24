@@ -12,7 +12,7 @@ class MapLibreMap extends StatefulWidget {
     this.options = const MapOptions(),
     this.gestureRecognizers,
     this.onMapCreated,
-    this.onStyleLoadedCallback,
+    this.onStyleLoaded,
     super.key,
   });
 
@@ -37,7 +37,7 @@ class MapLibreMap extends StatefulWidget {
   /// managers have been enabled.
   /// Please note: you should only add annotations (e.g. symbols or circles)
   /// after this callback has been called.
-  final OnStyleLoadedCallback? onStyleLoadedCallback;
+  final OnStyleLoadedCallback? onStyleLoaded;
 
   @override
   State<MapLibreMap> createState() => _MapLibreMapState();
@@ -59,7 +59,7 @@ class _MapLibreMapState extends State<MapLibreMap> {
       maplibrePlatform: MapLibrePlatform.instance,
       onStyleLoadedCallback: () async {
         final _ = await _controllerCompleter.future;
-        widget.onStyleLoadedCallback?.call();
+        widget.onStyleLoaded?.call();
       },
     );
     await MapLibrePlatform.instance.initPlatform(id);
