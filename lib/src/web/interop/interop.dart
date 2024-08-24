@@ -4,6 +4,7 @@ library maplibre_gl;
 import 'dart:js_interop';
 
 import 'package:maplibre/maplibre.dart';
+import 'package:web/helpers.dart';
 
 part 'annotations.dart';
 part 'controls.dart';
