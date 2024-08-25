@@ -4,6 +4,7 @@ import LngLat
 import MapLibrePigeon
 import ScreenLocation
 import android.content.Context
+import android.graphics.PointF
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -86,11 +87,12 @@ class MapLibreMapController(
         lat: Double,
         callback: (Result<ScreenLocation>) -> Unit
     ) {
-        val screenLocation = mapLibreMap.;
-        callback(Result.success(screenLocation))
+        val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng));
+        callback(Result.success(ScreenLocation(location.x.toDouble(), location.y.toDouble())))
     }
 
     override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
-        TODO("Not yet implemented")
+        val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()));
+        callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 }
