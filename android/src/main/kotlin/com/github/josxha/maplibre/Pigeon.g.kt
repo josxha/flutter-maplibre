@@ -63,12 +63,38 @@ data class LngLat (
     )
   }
 }
+
+/** Generated class from Pigeon that represents data sent in messages. */
+data class ScreenLocation (
+  val x: Double,
+  val y: Double
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): ScreenLocation {
+      val x = pigeonVar_list[0] as Double
+      val y = pigeonVar_list[1] as Double
+      return ScreenLocation(x, y)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      x,
+      y,
+    )
+  }
+}
 private object PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
       129.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLat.fromList(it)
+        }
+      }
+      130.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          ScreenLocation.fromList(it)
         }
       }
       else -> super.readValueOfType(type, buffer)
@@ -78,6 +104,10 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
     when (value) {
       is LngLat -> {
         stream.write(129)
+        writeValue(stream, value.toList())
+      }
+      is ScreenLocation -> {
+        stream.write(130)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -90,6 +120,8 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
 interface MapLibrePigeon {
   fun jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   fun flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
+  fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit)
 
   companion object {
     /** The codec used by MapLibrePigeon. */
@@ -137,6 +169,48 @@ interface MapLibrePigeon {
                 reply.reply(wrapError(error))
               } else {
                 reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val lngArg = args[0] as Double
+            val latArg = args[1] as Double
+            api.toScreenLocation(lngArg, latArg) { result: Result<ScreenLocation> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val xArg = args[0] as Double
+            val yArg = args[1] as Double
+            api.toLngLat(xArg, yArg) { result: Result<LngLat> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
               }
             }
           }

@@ -83,6 +83,32 @@ class LngLat {
 };
 
 
+// Generated class from Pigeon that represents data sent in messages.
+class ScreenLocation {
+ public:
+  // Constructs an object setting all fields.
+  explicit ScreenLocation(
+    double x,
+    double y);
+
+  double x() const;
+  void set_x(double value_arg);
+
+  double y() const;
+  void set_y(double value_arg);
+
+
+ private:
+  static ScreenLocation FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapLibrePigeon;
+  friend class PigeonInternalCodecSerializer;
+  double x_;
+  double y_;
+
+};
+
+
 class PigeonInternalCodecSerializer : public flutter::StandardCodecSerializer {
  public:
   PigeonInternalCodecSerializer();
@@ -120,6 +146,14 @@ class MapLibrePigeon {
     const double* bearing,
     const double* pitch,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  virtual void ToScreenLocation(
+    double lng,
+    double lat,
+    std::function<void(ErrorOr<ScreenLocation> reply)> result) = 0;
+  virtual void ToLngLat(
+    double x,
+    double y,
+    std::function<void(ErrorOr<LngLat> reply)> result) = 0;
 
   // The codec used by MapLibrePigeon.
   static const flutter::StandardMessageCodec& GetCodec();

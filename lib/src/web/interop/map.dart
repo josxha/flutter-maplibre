@@ -15,6 +15,8 @@ extension type Map._(Camera _) implements Camera {
 
   external Point project(LngLat lngLat);
 
+  external LngLat unproject(Point point);
+
   external HTMLElement getContainer();
 
   external HTMLCanvasElement getCanvas();

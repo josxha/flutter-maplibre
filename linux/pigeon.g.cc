@@ -55,6 +55,58 @@ static MaplibreLngLat* maplibre_lng_lat_new_from_list(FlValue* values) {
   return maplibre_lng_lat_new(lng, lat);
 }
 
+struct _MaplibreScreenLocation {
+  GObject parent_instance;
+
+  double x;
+  double y;
+};
+
+G_DEFINE_TYPE(MaplibreScreenLocation, maplibre_screen_location, G_TYPE_OBJECT)
+
+static void maplibre_screen_location_dispose(GObject* object) {
+  G_OBJECT_CLASS(maplibre_screen_location_parent_class)->dispose(object);
+}
+
+static void maplibre_screen_location_init(MaplibreScreenLocation* self) {
+}
+
+static void maplibre_screen_location_class_init(MaplibreScreenLocationClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_screen_location_dispose;
+}
+
+MaplibreScreenLocation* maplibre_screen_location_new(double x, double y) {
+  MaplibreScreenLocation* self = MAPLIBRE_SCREEN_LOCATION(g_object_new(maplibre_screen_location_get_type(), nullptr));
+  self->x = x;
+  self->y = y;
+  return self;
+}
+
+double maplibre_screen_location_get_x(MaplibreScreenLocation* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_SCREEN_LOCATION(self), 0.0);
+  return self->x;
+}
+
+double maplibre_screen_location_get_y(MaplibreScreenLocation* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_SCREEN_LOCATION(self), 0.0);
+  return self->y;
+}
+
+static FlValue* maplibre_screen_location_to_list(MaplibreScreenLocation* self) {
+  FlValue* values = fl_value_new_list();
+  fl_value_append_take(values, fl_value_new_float(self->x));
+  fl_value_append_take(values, fl_value_new_float(self->y));
+  return values;
+}
+
+static MaplibreScreenLocation* maplibre_screen_location_new_from_list(FlValue* values) {
+  FlValue* value0 = fl_value_get_list_value(values, 0);
+  double x = fl_value_get_float(value0);
+  FlValue* value1 = fl_value_get_list_value(values, 1);
+  double y = fl_value_get_float(value1);
+  return maplibre_screen_location_new(x, y);
+}
+
 G_DECLARE_FINAL_TYPE(MaplibreMessageCodec, maplibre_message_codec, MAPLIBRE, MESSAGE_CODEC, FlStandardMessageCodec)
 
 struct _MaplibreMessageCodec {
@@ -71,11 +123,20 @@ static gboolean maplibre_message_codec_write_maplibre_lng_lat(FlStandardMessageC
   return fl_standard_message_codec_write_value(codec, buffer, values, error);
 }
 
+static gboolean maplibre_message_codec_write_maplibre_screen_location(FlStandardMessageCodec* codec, GByteArray* buffer, MaplibreScreenLocation* value, GError** error) {
+  uint8_t type = 130;
+  g_byte_array_append(buffer, &type, sizeof(uint8_t));
+  g_autoptr(FlValue) values = maplibre_screen_location_to_list(value);
+  return fl_standard_message_codec_write_value(codec, buffer, values, error);
+}
+
 static gboolean maplibre_message_codec_write_value(FlStandardMessageCodec* codec, GByteArray* buffer, FlValue* value, GError** error) {
   if (fl_value_get_type(value) == FL_VALUE_TYPE_CUSTOM) {
     switch (fl_value_get_custom_type(value)) {
       case 129:
         return maplibre_message_codec_write_maplibre_lng_lat(codec, buffer, MAPLIBRE_LNG_LAT(fl_value_get_custom_value_object(value)), error);
+      case 130:
+        return maplibre_message_codec_write_maplibre_screen_location(codec, buffer, MAPLIBRE_SCREEN_LOCATION(fl_value_get_custom_value_object(value)), error);
     }
   }
 
@@ -97,10 +158,27 @@ static FlValue* maplibre_message_codec_read_maplibre_lng_lat(FlStandardMessageCo
   return fl_value_new_custom_object(129, G_OBJECT(value));
 }
 
+static FlValue* maplibre_message_codec_read_maplibre_screen_location(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, GError** error) {
+  g_autoptr(FlValue) values = fl_standard_message_codec_read_value(codec, buffer, offset, error);
+  if (values == nullptr) {
+    return nullptr;
+  }
+
+  g_autoptr(MaplibreScreenLocation) value = maplibre_screen_location_new_from_list(values);
+  if (value == nullptr) {
+    g_set_error(error, FL_MESSAGE_CODEC_ERROR, FL_MESSAGE_CODEC_ERROR_FAILED, "Invalid data received for MessageData");
+    return nullptr;
+  }
+
+  return fl_value_new_custom_object(130, G_OBJECT(value));
+}
+
 static FlValue* maplibre_message_codec_read_value_of_type(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, int type, GError** error) {
   switch (type) {
     case 129:
       return maplibre_message_codec_read_maplibre_lng_lat(codec, buffer, offset, error);
+    case 130:
+      return maplibre_message_codec_read_maplibre_screen_location(codec, buffer, offset, error);
     default:
       return FL_STANDARD_MESSAGE_CODEC_CLASS(maplibre_message_codec_parent_class)->read_value_of_type(codec, buffer, offset, type, error);
   }
@@ -227,6 +305,84 @@ static MaplibreMapLibrePigeonFlyToResponse* maplibre_map_libre_pigeon_fly_to_res
   return self;
 }
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeonToScreenLocationResponse, maplibre_map_libre_pigeon_to_screen_location_response, MAPLIBRE, MAP_LIBRE_PIGEON_TO_SCREEN_LOCATION_RESPONSE, GObject)
+
+struct _MaplibreMapLibrePigeonToScreenLocationResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibrePigeonToScreenLocationResponse, maplibre_map_libre_pigeon_to_screen_location_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_pigeon_to_screen_location_response_dispose(GObject* object) {
+  MaplibreMapLibrePigeonToScreenLocationResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_SCREEN_LOCATION_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_pigeon_to_screen_location_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_pigeon_to_screen_location_response_init(MaplibreMapLibrePigeonToScreenLocationResponse* self) {
+}
+
+static void maplibre_map_libre_pigeon_to_screen_location_response_class_init(MaplibreMapLibrePigeonToScreenLocationResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_pigeon_to_screen_location_response_dispose;
+}
+
+static MaplibreMapLibrePigeonToScreenLocationResponse* maplibre_map_libre_pigeon_to_screen_location_response_new(MaplibreScreenLocation* return_value) {
+  MaplibreMapLibrePigeonToScreenLocationResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_SCREEN_LOCATION_RESPONSE(g_object_new(maplibre_map_libre_pigeon_to_screen_location_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_custom_object(130, G_OBJECT(return_value)));
+  return self;
+}
+
+static MaplibreMapLibrePigeonToScreenLocationResponse* maplibre_map_libre_pigeon_to_screen_location_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibrePigeonToScreenLocationResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_SCREEN_LOCATION_RESPONSE(g_object_new(maplibre_map_libre_pigeon_to_screen_location_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeonToLngLatResponse, maplibre_map_libre_pigeon_to_lng_lat_response, MAPLIBRE, MAP_LIBRE_PIGEON_TO_LNG_LAT_RESPONSE, GObject)
+
+struct _MaplibreMapLibrePigeonToLngLatResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibrePigeonToLngLatResponse, maplibre_map_libre_pigeon_to_lng_lat_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_pigeon_to_lng_lat_response_dispose(GObject* object) {
+  MaplibreMapLibrePigeonToLngLatResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_LNG_LAT_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_pigeon_to_lng_lat_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_pigeon_to_lng_lat_response_init(MaplibreMapLibrePigeonToLngLatResponse* self) {
+}
+
+static void maplibre_map_libre_pigeon_to_lng_lat_response_class_init(MaplibreMapLibrePigeonToLngLatResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_pigeon_to_lng_lat_response_dispose;
+}
+
+static MaplibreMapLibrePigeonToLngLatResponse* maplibre_map_libre_pigeon_to_lng_lat_response_new(MaplibreLngLat* return_value) {
+  MaplibreMapLibrePigeonToLngLatResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_LNG_LAT_RESPONSE(g_object_new(maplibre_map_libre_pigeon_to_lng_lat_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_custom_object(129, G_OBJECT(return_value)));
+  return self;
+}
+
+static MaplibreMapLibrePigeonToLngLatResponse* maplibre_map_libre_pigeon_to_lng_lat_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibrePigeonToLngLatResponse* self = MAPLIBRE_MAP_LIBRE_PIGEON_TO_LNG_LAT_RESPONSE(g_object_new(maplibre_map_libre_pigeon_to_lng_lat_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeon, maplibre_map_libre_pigeon, MAPLIBRE, MAP_LIBRE_PIGEON, GObject)
 
 struct _MaplibreMapLibrePigeon {
@@ -331,6 +487,36 @@ static void maplibre_map_libre_pigeon_fly_to_cb(FlBasicMessageChannel* channel, 
   self->vtable->fly_to(center, zoom, bearing, pitch, handle, self->user_data);
 }
 
+static void maplibre_map_libre_pigeon_to_screen_location_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreMapLibrePigeon* self = MAPLIBRE_MAP_LIBRE_PIGEON(user_data);
+
+  if (self->vtable == nullptr || self->vtable->to_screen_location == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  double lng = fl_value_get_float(value0);
+  FlValue* value1 = fl_value_get_list_value(message_, 1);
+  double lat = fl_value_get_float(value1);
+  g_autoptr(MaplibreMapLibrePigeonResponseHandle) handle = maplibre_map_libre_pigeon_response_handle_new(channel, response_handle);
+  self->vtable->to_screen_location(lng, lat, handle, self->user_data);
+}
+
+static void maplibre_map_libre_pigeon_to_lng_lat_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreMapLibrePigeon* self = MAPLIBRE_MAP_LIBRE_PIGEON(user_data);
+
+  if (self->vtable == nullptr || self->vtable->to_lng_lat == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  double x = fl_value_get_float(value0);
+  FlValue* value1 = fl_value_get_list_value(message_, 1);
+  double y = fl_value_get_float(value1);
+  g_autoptr(MaplibreMapLibrePigeonResponseHandle) handle = maplibre_map_libre_pigeon_response_handle_new(channel, response_handle);
+  self->vtable->to_lng_lat(x, y, handle, self->user_data);
+}
+
 void maplibre_map_libre_pigeon_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreMapLibrePigeonVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func) {
   g_autofree gchar* dot_suffix = suffix != nullptr ? g_strdup_printf(".%s", suffix) : g_strdup("");
   g_autoptr(MaplibreMapLibrePigeon) api_data = maplibre_map_libre_pigeon_new(vtable, user_data, user_data_free_func);
@@ -342,6 +528,12 @@ void maplibre_map_libre_pigeon_set_method_handlers(FlBinaryMessenger* messenger,
   g_autofree gchar* fly_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) fly_to_channel = fl_basic_message_channel_new(messenger, fly_to_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(fly_to_channel, maplibre_map_libre_pigeon_fly_to_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* to_screen_location_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) to_screen_location_channel = fl_basic_message_channel_new(messenger, to_screen_location_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(to_screen_location_channel, maplibre_map_libre_pigeon_to_screen_location_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* to_lng_lat_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) to_lng_lat_channel = fl_basic_message_channel_new(messenger, to_lng_lat_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(to_lng_lat_channel, maplibre_map_libre_pigeon_to_lng_lat_cb, g_object_ref(api_data), g_object_unref);
 }
 
 void maplibre_map_libre_pigeon_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix) {
@@ -354,6 +546,12 @@ void maplibre_map_libre_pigeon_clear_method_handlers(FlBinaryMessenger* messenge
   g_autofree gchar* fly_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) fly_to_channel = fl_basic_message_channel_new(messenger, fly_to_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(fly_to_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* to_screen_location_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) to_screen_location_channel = fl_basic_message_channel_new(messenger, to_screen_location_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(to_screen_location_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* to_lng_lat_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) to_lng_lat_channel = fl_basic_message_channel_new(messenger, to_lng_lat_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(to_lng_lat_channel, nullptr, nullptr, nullptr);
 }
 
 void maplibre_map_libre_pigeon_respond_jump_to(MaplibreMapLibrePigeonResponseHandle* response_handle) {
@@ -385,5 +583,37 @@ void maplibre_map_libre_pigeon_respond_error_fly_to(MaplibreMapLibrePigeonRespon
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
     g_warning("Failed to send response to %s.%s: %s", "MapLibrePigeon", "flyTo", error->message);
+  }
+}
+
+void maplibre_map_libre_pigeon_respond_to_screen_location(MaplibreMapLibrePigeonResponseHandle* response_handle, MaplibreScreenLocation* return_value) {
+  g_autoptr(MaplibreMapLibrePigeonToScreenLocationResponse) response = maplibre_map_libre_pigeon_to_screen_location_response_new(return_value);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibrePigeon", "toScreenLocation", error->message);
+  }
+}
+
+void maplibre_map_libre_pigeon_respond_error_to_screen_location(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibrePigeonToScreenLocationResponse) response = maplibre_map_libre_pigeon_to_screen_location_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibrePigeon", "toScreenLocation", error->message);
+  }
+}
+
+void maplibre_map_libre_pigeon_respond_to_lng_lat(MaplibreMapLibrePigeonResponseHandle* response_handle, MaplibreLngLat* return_value) {
+  g_autoptr(MaplibreMapLibrePigeonToLngLatResponse) response = maplibre_map_libre_pigeon_to_lng_lat_response_new(return_value);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibrePigeon", "toLngLat", error->message);
+  }
+}
+
+void maplibre_map_libre_pigeon_respond_error_to_lng_lat(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibrePigeonToLngLatResponse) response = maplibre_map_libre_pigeon_to_lng_lat_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibrePigeon", "toLngLat", error->message);
   }
 }

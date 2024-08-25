@@ -189,9 +189,11 @@ class MapLibreWeb extends MapLibrePlatform {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) {
-    // TODO: implement toLngLat
-    throw UnimplementedError();
+  Future<Position> toLngLat(Offset screenLocation) async {
+    final lngLat = _map.unproject(
+      interop.Point(screenLocation.dx, screenLocation.dy),
+    );
+    return lngLat.toPosition();
   }
 
   @override

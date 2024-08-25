@@ -89,11 +89,38 @@ struct LngLat {
   }
 }
 
+/// Generated class from Pigeon that represents data sent in messages.
+struct ScreenLocation {
+  var x: Double
+  var y: Double
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> ScreenLocation? {
+    let x = pigeonVar_list[0] as! Double
+    let y = pigeonVar_list[1] as! Double
+
+    return ScreenLocation(
+      x: x,
+      y: y
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      x,
+      y,
+    ]
+  }
+}
+
 private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
       return LngLat.fromList(self.readValue() as! [Any?])
+    case 130:
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
     }
@@ -104,6 +131,9 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
     if let value = value as? LngLat {
       super.writeByte(129)
+      super.writeValue(value.toList())
+    } else if let value = value as? ScreenLocation {
+      super.writeByte(130)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -130,6 +160,8 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 protocol MapLibrePigeon {
   func jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   func flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
+  func toLngLat(x: Double, y: Double, completion: @escaping (Result<LngLat, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -177,6 +209,42 @@ class MapLibrePigeonSetup {
       }
     } else {
       flyToChannel.setMessageHandler(nil)
+    }
+    let toScreenLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      toScreenLocationChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let lngArg = args[0] as! Double
+        let latArg = args[1] as! Double
+        api.toScreenLocation(lng: lngArg, lat: latArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      toScreenLocationChannel.setMessageHandler(nil)
+    }
+    let toLngLatChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      toLngLatChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let xArg = args[0] as! Double
+        let yArg = args[1] as! Double
+        api.toLngLat(x: xArg, y: yArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      toLngLatChannel.setMessageHandler(nil)
     }
   }
 }

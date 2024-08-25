@@ -46,6 +46,44 @@ double maplibre_lng_lat_get_lng(MaplibreLngLat* object);
  */
 double maplibre_lng_lat_get_lat(MaplibreLngLat* object);
 
+/**
+ * MaplibreScreenLocation:
+ *
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreScreenLocation, maplibre_screen_location, MAPLIBRE, SCREEN_LOCATION, GObject)
+
+/**
+ * maplibre_screen_location_new:
+ * x: field in this object.
+ * y: field in this object.
+ *
+ * Creates a new #ScreenLocation object.
+ *
+ * Returns: a new #MaplibreScreenLocation
+ */
+MaplibreScreenLocation* maplibre_screen_location_new(double x, double y);
+
+/**
+ * maplibre_screen_location_get_x
+ * @object: a #MaplibreScreenLocation.
+ *
+ * Gets the value of the x field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_screen_location_get_x(MaplibreScreenLocation* object);
+
+/**
+ * maplibre_screen_location_get_y
+ * @object: a #MaplibreScreenLocation.
+ *
+ * Gets the value of the y field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_screen_location_get_y(MaplibreScreenLocation* object);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeonResponseHandle, maplibre_map_libre_pigeon_response_handle, MAPLIBRE, MAP_LIBRE_PIGEON_RESPONSE_HANDLE, GObject)
 
 /**
@@ -56,6 +94,8 @@ G_DECLARE_FINAL_TYPE(MaplibreMapLibrePigeonResponseHandle, maplibre_map_libre_pi
 typedef struct {
   void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
   void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
+  void (*to_screen_location)(double lng, double lat, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
+  void (*to_lng_lat)(double x, double y, MaplibreMapLibrePigeonResponseHandle* response_handle, gpointer user_data);
 } MaplibreMapLibrePigeonVTable;
 
 /**
@@ -118,6 +158,46 @@ void maplibre_map_libre_pigeon_respond_fly_to(MaplibreMapLibrePigeonResponseHand
  * Responds with an error to MapLibrePigeon.flyTo. 
  */
 void maplibre_map_libre_pigeon_respond_error_fly_to(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_pigeon_respond_to_screen_location:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibrePigeon.toScreenLocation. 
+ */
+void maplibre_map_libre_pigeon_respond_to_screen_location(MaplibreMapLibrePigeonResponseHandle* response_handle, MaplibreScreenLocation* return_value);
+
+/**
+ * maplibre_map_libre_pigeon_respond_error_to_screen_location:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibrePigeon.toScreenLocation. 
+ */
+void maplibre_map_libre_pigeon_respond_error_to_screen_location(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_pigeon_respond_to_lng_lat:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibrePigeon.toLngLat. 
+ */
+void maplibre_map_libre_pigeon_respond_to_lng_lat(MaplibreMapLibrePigeonResponseHandle* response_handle, MaplibreLngLat* return_value);
+
+/**
+ * maplibre_map_libre_pigeon_respond_error_to_lng_lat:
+ * @response_handle: a #MaplibreMapLibrePigeonResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibrePigeon.toLngLat. 
+ */
+void maplibre_map_libre_pigeon_respond_error_to_lng_lat(MaplibreMapLibrePigeonResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_END_DECLS
 
