@@ -94,3 +94,10 @@ dart run build_runner build
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```
+
+### Test with WebAssembly
+```bash
+cd example
+flutter build web --wasm
+dhttpd '--headers=Cross-Origin-Embedder-Policy=credentialless;Cross-Origin-Opener-Policy=same-origin' --path=build/web
+```
