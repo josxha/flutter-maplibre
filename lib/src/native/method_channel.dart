@@ -71,15 +71,18 @@ class MapLibreNative extends MapLibrePlatform {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) {
-    // TODO: implement toLngLat
-    throw UnimplementedError();
+  Future<Position> toLngLat(Offset screenLocation) async {
+    final lngLat = await _pigeon.toLngLat(screenLocation.dx, screenLocation.dy);
+    return lngLat.toPosition();
   }
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) {
-    // TODO: implement toScreenLocation
-    throw UnimplementedError();
+  Future<Offset> toScreenLocation(Position lngLat) async {
+    final screenLocation = await _pigeon.toScreenLocation(
+      lngLat.lng.toDouble(),
+      lngLat.lat.toDouble(),
+    );
+    return Offset(screenLocation.x, screenLocation.y);
   }
 
   @override

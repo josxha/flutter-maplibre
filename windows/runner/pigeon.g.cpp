@@ -69,6 +69,47 @@ LngLat LngLat::FromEncodableList(const EncodableList& list) {
   return decoded;
 }
 
+// ScreenLocation
+
+ScreenLocation::ScreenLocation(
+  double x,
+  double y)
+ : x_(x),
+    y_(y) {}
+
+double ScreenLocation::x() const {
+  return x_;
+}
+
+void ScreenLocation::set_x(double value_arg) {
+  x_ = value_arg;
+}
+
+
+double ScreenLocation::y() const {
+  return y_;
+}
+
+void ScreenLocation::set_y(double value_arg) {
+  y_ = value_arg;
+}
+
+
+EncodableList ScreenLocation::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(2);
+  list.push_back(EncodableValue(x_));
+  list.push_back(EncodableValue(y_));
+  return list;
+}
+
+ScreenLocation ScreenLocation::FromEncodableList(const EncodableList& list) {
+  ScreenLocation decoded(
+    std::get<double>(list[0]),
+    std::get<double>(list[1]));
+  return decoded;
+}
+
 
 PigeonInternalCodecSerializer::PigeonInternalCodecSerializer() {}
 
@@ -78,6 +119,9 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
   switch (type) {
     case 129: {
         return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 130: {
+        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
       return flutter::StandardCodecSerializer::ReadValueOfType(type, stream);
@@ -91,6 +135,11 @@ void PigeonInternalCodecSerializer::WriteValue(
     if (custom_value->type() == typeid(LngLat)) {
       stream->WriteByte(129);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(ScreenLocation)) {
+      stream->WriteByte(130);
+      WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
   }
@@ -174,6 +223,76 @@ void MapLibrePigeon::SetUp(
             }
             EncodableList wrapped;
             wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_lng_arg = args.at(0);
+          if (encodable_lng_arg.IsNull()) {
+            reply(WrapError("lng_arg unexpectedly null."));
+            return;
+          }
+          const auto& lng_arg = std::get<double>(encodable_lng_arg);
+          const auto& encodable_lat_arg = args.at(1);
+          if (encodable_lat_arg.IsNull()) {
+            reply(WrapError("lat_arg unexpectedly null."));
+            return;
+          }
+          const auto& lat_arg = std::get<double>(encodable_lat_arg);
+          api->ToScreenLocation(lng_arg, lat_arg, [reply](ErrorOr<ScreenLocation>&& output) {
+            if (output.has_error()) {
+              reply(WrapError(output.error()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(CustomEncodableValue(std::move(output).TakeValue()));
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_x_arg = args.at(0);
+          if (encodable_x_arg.IsNull()) {
+            reply(WrapError("x_arg unexpectedly null."));
+            return;
+          }
+          const auto& x_arg = std::get<double>(encodable_x_arg);
+          const auto& encodable_y_arg = args.at(1);
+          if (encodable_y_arg.IsNull()) {
+            reply(WrapError("y_arg unexpectedly null."));
+            return;
+          }
+          const auto& y_arg = std::get<double>(encodable_y_arg);
+          api->ToLngLat(x_arg, y_arg, [reply](ErrorOr<LngLat>&& output) {
+            if (output.has_error()) {
+              reply(WrapError(output.error()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(CustomEncodableValue(std::move(output).TakeValue()));
             reply(EncodableValue(std::move(wrapped)));
           });
         } catch (const std::exception& exception) {

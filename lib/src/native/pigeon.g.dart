@@ -41,6 +41,32 @@ class LngLat {
   }
 }
 
+class ScreenLocation {
+  ScreenLocation({
+    required this.x,
+    required this.y,
+  });
+
+  double x;
+
+  double y;
+
+  Object encode() {
+    return <Object?>[
+      x,
+      y,
+    ];
+  }
+
+  static ScreenLocation decode(Object result) {
+    result as List<Object?>;
+    return ScreenLocation(
+      x: result[0]! as double,
+      y: result[1]! as double,
+    );
+  }
+}
+
 
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
@@ -52,6 +78,9 @@ class _PigeonCodec extends StandardMessageCodec {
     }    else if (value is LngLat) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
+    }    else if (value is ScreenLocation) {
+      buffer.putUint8(130);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -62,6 +91,8 @@ class _PigeonCodec extends StandardMessageCodec {
     switch (type) {
       case 129: 
         return LngLat.decode(readValue(buffer)!);
+      case 130: 
+        return ScreenLocation.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -122,6 +153,60 @@ class MapLibrePigeon {
       );
     } else {
       return;
+    }
+  }
+
+  Future<ScreenLocation> toScreenLocation(double lng, double lat) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[lng, lat]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as ScreenLocation?)!;
+    }
+  }
+
+  Future<LngLat> toLngLat(double x, double y) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[x, y]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as LngLat?)!;
     }
   }
 }

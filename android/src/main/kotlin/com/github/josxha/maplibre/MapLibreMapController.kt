@@ -2,6 +2,7 @@ package com.github.josxha.maplibre
 
 import LngLat
 import MapLibrePigeon
+import ScreenLocation
 import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
@@ -78,5 +79,18 @@ class MapLibreMapController(
         val latLng = LatLng(center.lat, center.lng);
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, zoom ?: 0.0)
         mapLibreMap.animateCamera(cameraUpdate)
+    }
+
+    override fun toScreenLocation(
+        lng: Double,
+        lat: Double,
+        callback: (Result<ScreenLocation>) -> Unit
+    ) {
+        val screenLocation = mapLibreMap.;
+        callback(Result.success(screenLocation))
+    }
+
+    override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
+        TODO("Not yet implemented")
     }
 }
