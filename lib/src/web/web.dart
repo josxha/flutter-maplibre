@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform_interface.dart';
+import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:web/web.dart';
 
@@ -42,9 +43,8 @@ class MapLibreWeb extends MapLibrePlatform {
       'plugins.flutter.io/maplibre_$id',
           (int viewId) {
         _htmlElement = HTMLDivElement()
-          ..style.position = 'absolute'
-          ..style.top = '0'
-          ..style.bottom = '0'
+          ..style.padding = '0'
+          ..style.margin = '0'
           ..style.height = '100%'
           ..style.width = '100%';
         onPlatformViewCreated(viewId);
@@ -61,9 +61,7 @@ class MapLibreWeb extends MapLibrePlatform {
         container: _htmlElement,
         style: _options.style,
         zoom: _options.zoom,
-        center: _options.center == null
-            ? null
-            : interop.LngLat.fromPosition(_options.center!),
+        center: _options.center?.toLngLat(),
       ),
     );
     // add controls
@@ -221,7 +219,7 @@ class MapLibreWeb extends MapLibrePlatform {
   }) async =>
       _map.jumpTo(
         interop.JumpToOptions(
-          center: interop.LngLat.fromPosition(center),
+          center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
           pitch: pitch,
@@ -237,7 +235,7 @@ class MapLibreWeb extends MapLibrePlatform {
   }) async =>
       _map.flyTo(
         interop.FlyToOptions(
-          center: interop.LngLat.fromPosition(center),
+          center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
           pitch: pitch,
