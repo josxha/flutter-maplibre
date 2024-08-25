@@ -4,6 +4,7 @@ import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/menu_page.dart';
+import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
 void main() {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         AnnotationsPage.location: (context) => const AnnotationsPage(),
         CallbacksPage.location: (context) => const CallbacksPage(),
         ControllerPage.location: (context) => const ControllerPage(),
+        TwoMapsPage.location: (context) => const TwoMapsPage(),
       },
     );
   }
