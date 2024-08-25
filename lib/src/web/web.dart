@@ -41,7 +41,7 @@ class MapLibreWeb extends MapLibrePlatform {
     _options = options;
     platformViewRegistry.registerViewFactory(
       'plugins.flutter.io/maplibre_$id',
-          (int viewId) {
+      (int viewId) {
         _htmlElement = HTMLDivElement()
           ..style.padding = '0'
           ..style.margin = '0'
@@ -67,51 +67,43 @@ class MapLibreWeb extends MapLibrePlatform {
     // add controls
     for (final control in _options.controls) {
       final jsControl = switch (control) {
-        final ScaleControl control =>
-            interop.ScaleControl(
-              interop.ScaleControlOptions(
-                maxWidth: control.maxWidth,
-                unit: control.unit.name,
+        final ScaleControl control => interop.ScaleControl(
+            interop.ScaleControlOptions(
+              maxWidth: control.maxWidth,
+              unit: control.unit.name,
+            ),
+          ),
+        final GeolocateControl control => interop.GeolocateControl(
+            interop.GeolocateControlOptions(
+              positionOptions: interop.PositionOptions(
+                enableHighAccuracy: control.positionOptions.enableHighAccuracy,
+                maximumAge: control.positionOptions.maximumAge.inMilliseconds,
+                timeout: control.positionOptions.timeout.inMilliseconds,
               ),
             ),
-        final GeolocateControl control =>
-            interop.GeolocateControl(
-              interop.GeolocateControlOptions(
-                positionOptions: interop.PositionOptions(
-                  enableHighAccuracy: control.positionOptions
-                      .enableHighAccuracy,
-                  maximumAge: control.positionOptions.maximumAge.inMilliseconds,
-                  timeout: control.positionOptions.timeout.inMilliseconds,
-                ),
-              ),
+          ),
+        final AttributionControl control => interop.AttributionControl(
+            interop.AttributionControlOptions(
+              compact: control.compact,
+              customAttribution: control.customAttribution,
             ),
-        final AttributionControl control =>
-            interop.AttributionControl(
-              interop.AttributionControlOptions(
-                compact: control.compact,
-                customAttribution: control.customAttribution,
-              ),
+          ),
+        final FullscreenControl _ => interop.FullscreenControl(
+            interop.FullscreenControlOptions(),
+          ),
+        final LogoControl control => interop.LogoControl(
+            interop.LogoControlOptions(compact: control.compact),
+          ),
+        final NavigationControl control => interop.NavigationControl(
+            interop.NavigationControlOptions(
+              showCompass: control.showCompass,
+              showZoom: control.showZoom,
+              visualizePitch: control.visualizePitch,
             ),
-        final FullscreenControl _ =>
-            interop.FullscreenControl(
-              interop.FullscreenControlOptions(),
-            ),
-        final LogoControl control =>
-            interop.LogoControl(
-              interop.LogoControlOptions(compact: control.compact),
-            ),
-        final NavigationControl control =>
-            interop.NavigationControl(
-              interop.NavigationControlOptions(
-                showCompass: control.showCompass,
-                showZoom: control.showZoom,
-                visualizePitch: control.visualizePitch,
-              ),
-            ),
-        final TerrainControl control =>
-            interop.TerrainControl(
-              interop.TerrainControlOptions(source: control.source),
-            ),
+          ),
+        final TerrainControl control => interop.TerrainControl(
+            interop.TerrainControlOptions(source: control.source),
+          ),
       };
       _map.addControl(jsControl);
     }
@@ -119,7 +111,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.click,
-            (interop.MapMouseEvent event) {
+        (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -127,7 +119,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onDoubleClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.dblclick,
-            (interop.MapMouseEvent event) {
+        (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -135,7 +127,7 @@ class MapLibreWeb extends MapLibrePlatform {
     if (_options.onSecondaryClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.contextmenu,
-            (interop.MapMouseEvent event) {
+        (interop.MapMouseEvent event) {
           callback(event.lngLat.toPosition());
         }.toJS,
       );
@@ -196,17 +188,16 @@ class MapLibreWeb extends MapLibrePlatform {
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenPosition = _map.project(
-      interop.LngLat(lng: lngLat.lng, lat: lngLat.lat),
-    );
+    final screenPosition = _map.project(lngLat.toLngLat());
     return Offset(screenPosition.x.toDouble(), screenPosition.y.toDouble());
   }
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
     final jsCanvas = _map.getCanvas();
-    if (jsCanvas.clientWidth == jsContainer.clientWidth) return;
-    if (jsCanvas.clientHeight == jsContainer.clientHeight) return;
+    final matchWidth = jsCanvas.clientWidth == jsContainer.clientWidth;
+    final matchHeight = jsCanvas.clientHeight == jsContainer.clientHeight;
+    if (matchWidth && matchHeight) return;
     _map.resize();
   }
 
