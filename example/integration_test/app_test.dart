@@ -7,10 +7,12 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('integration tests', () {
-    testWidgets('show map',
-            (tester) async {
-          await tester.pumpWidget(const App());
-          await tester.pumpAndSettle();
-        });
+    testWidgets(
+      'show map',
+      (tester) async {
+        await tester.pumpWidget(const App());
+        await tester.pumpAndSettle();
+      },
+    );
   });
 }
