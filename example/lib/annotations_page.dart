@@ -23,10 +23,7 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Annotations')),
       body: MapLibreMap(
-        options: MapOptions(
-          zoom: 7,
-          center: Position(9, 48),
-        ),
+        options: MapOptions(zoom: 7, center: Position(9, 48)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
           final _ = await _controller.addMarker(

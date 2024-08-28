@@ -41,7 +41,7 @@ class MapLibreNative extends MapLibrePlatform {
   }
 
   @override
-  Future<void> initPlatform(int id) async {
+  Future<void> initPlatform(int viewId) async {
     // TODO implement initPlatform
   }
 

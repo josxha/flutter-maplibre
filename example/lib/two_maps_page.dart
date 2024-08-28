@@ -14,8 +14,6 @@ class TwoMapsPage extends StatefulWidget {
 }
 
 class _TwoMapsPageState extends State<TwoMapsPage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

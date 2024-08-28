@@ -33,7 +33,7 @@ abstract class MapLibrePlatform extends PlatformInterface {
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   });
 
-  Future<void> initPlatform(int id);
+  Future<void> initPlatform(int viewId);
 
   @mustCallSuper
   void dispose() {
