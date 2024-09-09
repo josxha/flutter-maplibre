@@ -27,15 +27,3 @@ abstract interface class MapController {
     required double pitch,
   });
 }
-
-abstract class MapControllerInternal implements MapController {
-  const MapControllerInternal(this.mapWidget);
-
-  final MapLibreMap mapWidget;
-
-  MapOptions get options => mapWidget.options;
-
-  Widget buildWidget();
-
-  void dispose();
-}

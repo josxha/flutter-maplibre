@@ -38,26 +38,9 @@ class MapLibreMap extends StatefulWidget {
   final VoidCallback? onStyleLoaded;
 
   @override
-  State<MapLibreMap> createState() => _MapLibreMapState();
-}
-
-class _MapLibreMapState extends State<MapLibreMap> {
-  late final MapControllerInternal _controller;
-
-  @override
-  void initState() {
-    _controller = MapLibrePlatform.instance.createMapController(widget);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) => _controller.buildWidget();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  State<MapLibreMap> createState() =>
+      // ignore: no_logic_in_create_state
+      PlatformInterface.instance.createWidgetState();
 }
 
 typedef MapCreatedCallback = void Function(MapController controller);

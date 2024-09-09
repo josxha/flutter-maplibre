@@ -10,7 +10,7 @@ import 'package:maplibre/src/native/pigeon.g.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [MapLibrePlatform] that uses method channels.
-final class PlatformMethodChannel extends MapLibrePlatform {
+final class PlatformNative extends PlatformInterface {
   final _pigeon = MapLibrePigeon();
 
   @override
@@ -114,8 +114,8 @@ final class PlatformMethodChannel extends MapLibrePlatform {
       );
 
   @override
-  MapControllerInternal createMapController(MapLibreMap widget) {
-    // TODO: implement createMapController
+  State<MapLibreMap> createWidgetState() {
+    // TODO: implement createWidgetState
     throw UnimplementedError();
   }
 }
