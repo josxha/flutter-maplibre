@@ -26,4 +26,10 @@ abstract interface class MapController {
     required double bearing,
     required double pitch,
   });
+
+  Future<void> addLayer({
+    required String id,
+    required String type,
+    required String source,
+  });
 }

@@ -14,6 +14,7 @@ class ControllerPage extends StatefulWidget {
 }
 
 class _ControllerPageState extends State<ControllerPage> {
+  final _mapKey = GlobalKey(debugLabel: 'mapKey');
   MapController? _controller;
 
   @override
@@ -31,13 +32,6 @@ class _ControllerPageState extends State<ControllerPage> {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    debugPrint('_controller: $_controller');
-                  },
-                  child: const Text('Check controller'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    debugPrint('_controller: $_controller');
                     _controller?.jumpTo(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
@@ -47,7 +41,6 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    debugPrint('_controller: $_controller');
                     _controller?.flyTo(
                       center: Position(-18.6874, 64.9445),
                       zoom: 5,
@@ -62,6 +55,7 @@ class _ControllerPageState extends State<ControllerPage> {
           ),
           Expanded(
             child: MapLibreMap(
+              key: _mapKey,
               options: MapOptions(
                 center: Position(9, 48),
               ),
@@ -78,11 +72,5 @@ class _ControllerPageState extends State<ControllerPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    debugPrint('ControllerPage.dispose');
-    super.dispose();
   }
 }

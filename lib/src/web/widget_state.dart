@@ -17,6 +17,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   void initState() {
+    debugPrint('MapLibreMapStateWeb.initState()');
     platformViewRegistry.registerViewFactory(
       _viewName,
       (int viewId) {
@@ -35,7 +36,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ),
         );
 
+        document.body?.appendChild(_htmlElement);
         widget.onMapCreated?.call(this);
+        _resizeMap();
 
         // add controls
         for (final control in options.controls) {
@@ -107,8 +110,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             }.toJS,
           );
         }
-        document.body?.appendChild(_htmlElement);
-        _resizeMap();
 
         return _htmlElement;
       },
@@ -131,6 +132,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   void dispose() {
+    debugPrint('MapLibreMapStateWeb.dispose()');
     _map.remove();
     _htmlElement.remove();
     super.dispose();
