@@ -14,10 +14,11 @@ class ControllerPage extends StatefulWidget {
 }
 
 class _ControllerPageState extends State<ControllerPage> {
-  late final MapController _controller;
+  MapController? _controller;
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('build _controller: $_controller');
     return Scaffold(
       appBar: AppBar(title: const Text('Controller')),
       body: Column(
@@ -29,19 +30,31 @@ class _ControllerPageState extends State<ControllerPage> {
               runSpacing: 8,
               children: [
                 OutlinedButton(
-                  onPressed: () => _controller.jumpTo(
-                    center: Position(172.4714, -42.4862),
-                    zoom: 4,
-                  ),
+                  onPressed: () {
+                    debugPrint('_controller: $_controller');
+                  },
+                  child: const Text('Check controller'),
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    debugPrint('_controller: $_controller');
+                    _controller?.jumpTo(
+                      center: Position(172.4714, -42.4862),
+                      zoom: 4,
+                    );
+                  },
                   child: const Text('Move to New Zealand'),
                 ),
                 OutlinedButton(
-                  onPressed: () => _controller.flyTo(
-                    center: Position(-18.6874, 64.9445),
-                    zoom: 5,
-                    bearing: -50,
-                    pitch: 60,
-                  ),
+                  onPressed: () {
+                    debugPrint('_controller: $_controller');
+                    _controller?.flyTo(
+                      center: Position(-18.6874, 64.9445),
+                      zoom: 5,
+                      bearing: -50,
+                      pitch: 60,
+                    );
+                  },
                   child: const Text('Animate to Iceland'),
                 ),
               ],
@@ -55,6 +68,7 @@ class _ControllerPageState extends State<ControllerPage> {
               onMapCreated: (controller) {
                 debugPrint('[MapLibreMap] onMapCreated');
                 _controller = controller;
+                debugPrint('_controller: $_controller');
               },
               onStyleLoaded: () async {
                 debugPrint('[MapLibreMap] onStyleLoadedCallback');
@@ -64,5 +78,11 @@ class _ControllerPageState extends State<ControllerPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    debugPrint('ControllerPage.dispose');
+    super.dispose();
   }
 }

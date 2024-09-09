@@ -1,45 +1,14 @@
-// In order to *not* need this ignore, consider extracting the "web" version
-// of your plugin as a separate package, instead of inlining it in the same
-// package as the core of your plugin.
-// ignore: avoid_web_libraries_in_flutter
-
-import 'dart:async';
 import 'dart:js_interop';
 import 'dart:ui_web';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform_interface.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:web/web.dart';
 
-/// A web implementation of the MapLibrePlatform of the MapLibre plugin.
-class MapLibreWeb extends MapLibrePlatform {
-  /// Constructs a MapLibreWeb
-  MapLibreWeb();
-
-  late MapOptions _options;
-  late interop.Map _map;
-  late HTMLDivElement _htmlElement;
-
-  static const _viewName = 'plugins.flutter.io/maplibre';
-
-  static void registerWith(Registrar registrar) {
-    MapLibrePlatform.instance = MapLibreWeb();
-  }
-
-  @override
-  Widget buildWidget({
-    required MapOptions options,
-    required PlatformViewCreatedCallback onPlatformViewCreated,
-    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
-  }) {
-    _options = options;
+class MapControllerWeb extends MapControllerInternal {
+  MapControllerWeb(super.mapWidget) {
     platformViewRegistry.registerViewFactory(
       _viewName,
       (int viewId) {
@@ -48,25 +17,38 @@ class MapLibreWeb extends MapLibrePlatform {
           ..style.margin = '0'
           ..style.height = '100%'
           ..style.width = '100%';
+        initPlatform(viewId);
         onPlatformViewCreated(viewId);
         return _htmlElement;
       },
     );
-    return const HtmlElementView(viewType: _viewName);
   }
+
+  late HTMLDivElement _htmlElement;
+  late interop.Map _map;
+  static const _viewName = 'plugins.flutter.io/maplibre';
+
+  @override
+  void dispose() {
+    _map.remove();
+    _htmlElement.remove();
+  }
+
+  @override
+  Widget buildWidget() => const HtmlElementView(viewType: _viewName);
 
   @override
   Future<void> initPlatform(int viewId) async {
     _map = interop.Map(
       interop.MapOptions(
         container: _htmlElement,
-        style: _options.style,
-        zoom: _options.zoom,
-        center: _options.center?.toLngLat(),
+        style: options.style,
+        zoom: options.zoom,
+        center: options.center?.toLngLat(),
       ),
     );
     // add controls
-    for (final control in _options.controls) {
+    for (final control in options.controls) {
       final jsControl = switch (control) {
         final ScaleControl control => interop.ScaleControl(
             interop.ScaleControlOptions(
@@ -109,7 +91,7 @@ class MapLibreWeb extends MapLibrePlatform {
       _map.addControl(jsControl);
     }
     // add callbacks
-    if (_options.onClick case final OnClickCallback callback) {
+    if (options.onClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.click,
         (interop.MapMouseEvent event) {
@@ -117,7 +99,7 @@ class MapLibreWeb extends MapLibrePlatform {
         }.toJS,
       );
     }
-    if (_options.onDoubleClick case final OnClickCallback callback) {
+    if (options.onDoubleClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.dblclick,
         (interop.MapMouseEvent event) {
@@ -125,7 +107,7 @@ class MapLibreWeb extends MapLibrePlatform {
         }.toJS,
       );
     }
-    if (_options.onSecondaryClick case final OnClickCallback callback) {
+    if (options.onSecondaryClick case final OnClickCallback callback) {
       _map.on(
         interop.MapEventType.contextmenu,
         (interop.MapMouseEvent event) {
@@ -235,8 +217,10 @@ class MapLibreWeb extends MapLibrePlatform {
       );
 
   @override
-  void dispose() {
-    super.dispose();
-    _map.remove();
-  }
+  Future<void> addGeoJson({
+    required String id,
+    required Map<String, Object?> geoJson,
+  }) async {}
+
+  void onPlatformViewCreated(int viewId) {}
 }

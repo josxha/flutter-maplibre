@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -37,45 +35,29 @@ class MapLibreMap extends StatefulWidget {
   /// managers have been enabled.
   /// Please note: you should only add annotations (e.g. symbols or circles)
   /// after this callback has been called.
-  final OnStyleLoadedCallback? onStyleLoaded;
+  final VoidCallback? onStyleLoaded;
 
   @override
   State<MapLibreMap> createState() => _MapLibreMapState();
 }
 
 class _MapLibreMapState extends State<MapLibreMap> {
-  Completer<MapController>? _controllerCompleter;
+  late final MapControllerInternal _controller;
 
   @override
-  Widget build(BuildContext context) {
-    return MapLibrePlatform.instance.buildWidget(
-      options: widget.options,
-      onPlatformViewCreated: onPlatformViewCreated,
-    );
+  void initState() {
+    _controller = MapLibrePlatform.instance.createMapController(widget);
+    super.initState();
   }
 
-  Future<void> onPlatformViewCreated(int viewId) async {
-    _controllerCompleter = Completer<MapController>();
-    final controller = MapController(
-      maplibrePlatform: MapLibrePlatform.instance,
-      onStyleLoadedCallback: () async {
-        final _ = await _controllerCompleter?.future;
-        widget.onStyleLoaded?.call();
-      },
-    );
-    await MapLibrePlatform.instance.initPlatform(viewId);
-    _controllerCompleter?.complete(controller);
-    widget.onMapCreated?.call(controller);
-  }
+  @override
+  Widget build(BuildContext context) => _controller.buildWidget();
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
-    _controllerCompleter?.future.then((controller) {
-      controller.dispose();
-    });
   }
 }
 
-typedef OnStyleLoadedCallback = void Function();
 typedef MapCreatedCallback = void Function(MapController controller);
