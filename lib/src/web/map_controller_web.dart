@@ -19,6 +19,7 @@ class MapControllerWeb extends MapControllerInternal {
           ..style.width = '100%';
         initPlatform(viewId);
         onPlatformViewCreated(viewId);
+        mapWidget.onMapCreated?.call(this);
         return _htmlElement;
       },
     );
