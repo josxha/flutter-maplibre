@@ -7,11 +7,11 @@ abstract base class PlatformInterface {
   /// Constructs a MapLibrePlatform.
   const PlatformInterface();
 
-  /// The default instance of [MapLibrePlatform] to use.
+  /// The default instance of [PlatformInterface] to use.
   ///
-  /// Defaults to [MapLibreNative].
+  /// Defaults to [PlatformNative].
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [MapLibrePlatform] when
+  /// platform-specific class that extends [PlatformInterface] when
   /// they register themselves.
   static PlatformInterface instance = PlatformNative();
 

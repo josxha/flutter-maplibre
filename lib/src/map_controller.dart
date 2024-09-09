@@ -9,6 +9,11 @@ abstract interface class MapController {
     required Map<String, Object?> geoJson,
   });
 
+  Future<void> addGeoJsonSource({
+    required String id,
+    required Map<String, Object?> geoJson,
+  });
+
   Future<Offset> toScreenLocation(Position lngLat);
 
   Future<Position> toLngLat(Offset screenLocation);
