@@ -19,7 +19,6 @@ class _ControllerPageState extends State<ControllerPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build _controller: $_controller');
     return Scaffold(
       appBar: AppBar(title: const Text('Controller')),
       body: Column(
@@ -60,9 +59,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 center: Position(9, 48),
               ),
               onMapCreated: (controller) {
-                debugPrint('[MapLibreMap] onMapCreated');
                 _controller = controller;
-                debugPrint('_controller: $_controller');
               },
               onStyleLoaded: () async {
                 debugPrint('[MapLibreMap] onStyleLoadedCallback');

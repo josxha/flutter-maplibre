@@ -9,7 +9,9 @@ import 'package:web/web.dart';
 
 final class MapLibreMapStateWeb extends State<MapLibreMap>
     implements MapController {
-  static const _viewName = 'plugins.flutter.io/maplibre';
+
+  static int _counter = 0;
+  final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
   late interop.Map _map;
 
@@ -17,10 +19,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   void initState() {
-    debugPrint('MapLibreMapStateWeb.initState()');
     platformViewRegistry.registerViewFactory(
       _viewName,
-      (int viewId) {
+      (int viewId, [dynamic params]) {
         _htmlElement = HTMLDivElement()
           ..style.padding = '0'
           ..style.margin = '0'
@@ -118,8 +119,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Widget build(BuildContext context) =>
-      const HtmlElementView(viewType: _viewName);
+  Widget build(BuildContext context) => HtmlElementView(viewType: _viewName);
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
@@ -132,7 +132,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   void dispose() {
-    debugPrint('MapLibreMapStateWeb.dispose()');
     _map.remove();
     _htmlElement.remove();
     super.dispose();
