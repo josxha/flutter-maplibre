@@ -52,28 +52,22 @@ Some controller methods will be changed to provide a different annotation API.
 
 | Feature                                  | web | android | iOS | windows | macOS | linux |
 |------------------------------------------|-----|---------|-----|---------|-------|-------|
-| Map                                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| MapController                            | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| Web ScaleControl                         | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web TerrainControl                       | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web AttributionControl                   | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web GeolocateControl                     | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web FullscreenControl                    | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web LogoControl                          | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| NavigationControl                        | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Offline                                  | ➖   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| click callback                           | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| long click callback                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| secondary click callback                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.jumpTo()                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| controller.flyTo()                       | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSource()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setMyLocationTrackingMode()   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setMapLanguage()              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toScreenLocation()            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toLatLng()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getMetersPerPixelAtLatitude() | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Map                                      | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| MapController                            | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| maplibre-gl-js Web Controls              | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Offline                                  | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| click callback                           | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| long click callback                      | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| secondary click callback                 | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.jumpTo()                      | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| controller.flyTo()                       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| controller.addSource()                   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.addLayer()                    | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.setMyLocationTrackingMode()   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.setMapLanguage()              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.toScreenLocation()            | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.toLatLng()                    | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.getMetersPerPixelAtLatitude() | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 
 Support for windows, macOS and linux is currently not possible because of the
 lack of platform views of these platforms.
@@ -96,8 +90,14 @@ cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```
 
 ### Test with WebAssembly
+
 ```bash
+flutter pub global activate dhttpd # only once
 cd example
 flutter build web --wasm
 dhttpd '--headers=Cross-Origin-Embedder-Policy=credentialless;Cross-Origin-Opener-Policy=same-origin' --path=build/web
 ```
+
+or follow
+the [flutter documentation](https://docs.flutter.dev/platform-integration/web/wasm#serving-wasm-locally)
+about WebAssembly builds.
