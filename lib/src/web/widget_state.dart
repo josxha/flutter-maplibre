@@ -9,7 +9,6 @@ import 'package:web/web.dart';
 
 final class MapLibreMapStateWeb extends State<MapLibreMap>
     implements MapController {
-
   static int _counter = 0;
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
@@ -87,6 +86,20 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           _map.addControl(jsControl);
         }
         // add callbacks
+        _map.on(
+          interop.MapEventType.load,
+          () {
+            ;
+          }.toJS,
+        );
+        if (widget.onStyleLoaded case final VoidCallback callback) {
+          _map.on(
+            interop.MapEventType.load,
+            (interop.MapMouseEvent event) {
+              callback();
+            }.toJS,
+          );
+        }
         if (options.onClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.click,
