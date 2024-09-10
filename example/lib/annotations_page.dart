@@ -39,7 +39,11 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
             geojsonRaw,
           );
           await _controller.addGeoJson(id: 'LakeConstance', geoJson: geojson);
-          //await _controller.addLayer(id: 'LakeConstance', type: 'geojson', source: 'LakeConstance');
+          await _controller.addLayer(
+            id: 'LakeConstance',
+            type: 'fill',
+            source: 'LakeConstance',
+          );
         },
       ),
     );
