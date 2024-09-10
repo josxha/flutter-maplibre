@@ -38,7 +38,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    throw UnsupportedError('Unsupported Platform');
+    throw UnsupportedError('[MapLibreMap] Unsupported Platform');
   }
 
   @override

@@ -68,3 +68,7 @@ object FlutterLifecycleAdapter {
         }
     }
 }
+
+interface LifecycleProvider {
+    fun getLifecycle(): Lifecycle?
+}
