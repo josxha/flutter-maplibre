@@ -16,7 +16,7 @@ class AnnotationsPage extends StatefulWidget {
 }
 
 class _AnnotationsPageState extends State<AnnotationsPage> {
-  late MapController map;
+  late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
       appBar: AppBar(title: const Text('Annotations')),
       body: MapLibreMap(
         options: MapOptions(zoom: 7, center: Position(9, 48)),
-        onMapCreated: (controller) => map = controller,
+        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
-          final _ = await map.addMarker(
+          final _ = await _controller.addMarker(
             Marker(point: Position(9, 48)),
           );
           // TODO remove delay
@@ -38,7 +38,8 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
             (message) => jsonDecode(geojsonRaw) as Map<String, Object?>,
             geojsonRaw,
           );
-          await map.addGeoJson(id: 'LakeConstance', geoJson: geojson);
+          await _controller.addGeoJson(id: 'LakeConstance', geoJson: geojson);
+          //await _controller.addLayer(id: 'LakeConstance', type: 'geojson', source: 'LakeConstance');
         },
       ),
     );

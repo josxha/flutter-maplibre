@@ -14,7 +14,7 @@ class ControllerPage extends StatefulWidget {
 }
 
 class _ControllerPageState extends State<ControllerPage> {
-  late MapController _controller;
+  late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {

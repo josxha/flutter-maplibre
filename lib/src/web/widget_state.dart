@@ -86,12 +86,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           _map.addControl(jsControl);
         }
         // add callbacks
-        _map.on(
-          interop.MapEventType.load,
-          () {
-            ;
-          }.toJS,
-        );
         if (widget.onStyleLoaded case final VoidCallback callback) {
           _map.on(
             interop.MapEventType.load,
@@ -168,20 +162,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> addGeoJsonSource({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) async {
-    _map.addSource(
-      id,
-      interop.SourceSpecification.geoJson(
-        type: 'geojson',
-        data: geoJson.jsify()!,
-      ),
-    );
-  }
-
-  @override
   Future<void> addLayer({
     required String id,
     required String type,
@@ -242,5 +222,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Future<void> addGeoJson({
     required String id,
     required Map<String, Object?> geoJson,
-  }) async {}
+  }) async =>
+      _map.addSource(
+        id,
+        interop.SourceSpecification.geoJson(
+          type: 'geojson',
+          data: geoJson.jsify()!,
+        ),
+      );
 }

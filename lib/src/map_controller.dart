@@ -9,11 +9,7 @@ abstract interface class MapController {
     required Map<String, Object?> geoJson,
   });
 
-  Future<void> addGeoJsonSource({
-    required String id,
-    required Map<String, Object?> geoJson,
-  });
-
+  /// Convert a latitude/longitude coordinate to a screen pixel.
   Future<Offset> toScreenLocation(Position lngLat);
 
   Future<Position> toLngLat(Offset screenLocation);

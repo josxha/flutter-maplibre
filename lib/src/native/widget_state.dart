@@ -48,15 +48,6 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  Future<void> addGeoJsonSource({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) {
-    // TODO: implement addGeoJsonSource
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> addLayer({
     required String id,
     required String type,
