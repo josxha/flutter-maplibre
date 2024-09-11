@@ -8,6 +8,7 @@ extension type Marker._(IControl _) implements IControl {
 
   /// Set the location of the [Marker].
   external Marker setLngLat(LngLat lngLat);
+
   /// Add the marker to a MapLibre map.
   external Marker addTo(Map map);
 }
