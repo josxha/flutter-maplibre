@@ -61,12 +61,12 @@ Some controller methods will be changed to provide a different annotation API.
 | secondary click callback                 | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | controller.jumpTo()                      | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | controller.flyTo()                       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| controller.addSource()                   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| controller.addLayer()                    | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.addSource()                   | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| controller.addLayer()                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | controller.setMyLocationTrackingMode()   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | controller.setMapLanguage()              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| controller.toScreenLocation()            | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| controller.toLatLng()                    | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| controller.toScreenLocation()            | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| controller.toLatLng()                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | controller.getMetersPerPixelAtLatitude() | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 
 Support for windows, macOS and linux is currently not possible because of the

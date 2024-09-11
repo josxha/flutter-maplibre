@@ -15,7 +15,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   late HTMLDivElement _htmlElement;
   late interop.Map _map;
 
-  MapOptions get options => widget.options;
+  MapOptions get _options => widget.options;
 
   @override
   void initState() {
@@ -31,11 +31,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map = interop.Map(
           interop.MapOptions(
             container: _htmlElement,
-            style: options.style,
-            zoom: options.zoom,
-            center: options.center?.toLngLat(),
-            bearing: options.bearing,
-            pitch: options.tilt,
+            style: _options.style,
+            zoom: _options.zoom,
+            center: _options.center?.toLngLat(),
+            bearing: _options.bearing,
+            pitch: _options.tilt,
           ),
         );
 
@@ -46,7 +46,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _resizeMap();
 
         // add controls
-        for (final control in options.controls) {
+        for (final control in _options.controls) {
           final jsControl = switch (control) {
             final ScaleControl control => interop.ScaleControl(
                 interop.ScaleControlOptions(
@@ -99,7 +99,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             }.toJS,
           );
         }
-        if (options.onClick case final OnClickCallback callback) {
+        if (_options.onClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.click,
             (interop.MapMouseEvent event) {
@@ -107,7 +107,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             }.toJS,
           );
         }
-        if (options.onDoubleClick case final OnClickCallback callback) {
+        if (_options.onDoubleClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.dblclick,
             (interop.MapMouseEvent event) {
@@ -115,7 +115,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             }.toJS,
           );
         }
-        if (options.onSecondaryClick case final OnClickCallback callback) {
+        if (_options.onSecondaryClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.contextmenu,
             (interop.MapMouseEvent event) {
