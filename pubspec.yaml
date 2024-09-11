@@ -1,6 +1,6 @@
 name: maplibre
 description: "Unofficial MapLibre bindings for Flutter"
-version: 0.1.0
+version: 0.0.1
 repository: https://github.com/josxha/flutter_maplibre
 issue_tracker: https://github.com/josxha/flutter_maplibre/issues
 publish_to: none
@@ -40,5 +40,5 @@ flutter:
       windows:
         pluginClass: MaplibrePluginCApi
       web:
-        pluginClass: MapLibreWeb
-        fileName: src/web/web.dart
+        pluginClass: PlatformWeb
+        fileName: src/web/platform_web.dart

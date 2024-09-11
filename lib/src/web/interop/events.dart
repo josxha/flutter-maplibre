@@ -24,4 +24,7 @@ abstract class MapEventType {
   /// Note: Under normal conditions, this event will be preceded by two click
   /// events.
   static const dblclick = 'dblclick';
+
+  /// Fired when the style has been loaded.
+  static const load = 'load';
 }

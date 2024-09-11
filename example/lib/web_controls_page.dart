@@ -30,12 +30,6 @@ class _WebControlsPageState extends State<WebControlsPage> {
             NavigationControl(visualizePitch: true),
           ],
         ),
-        onMapCreated: (controller) {
-          debugPrint('[MapLibreMap] onMapCreated');
-        },
-        onStyleLoaded: () async {
-          debugPrint('[MapLibreMap] onStyleLoadedCallback');
-        },
       ),
     );
   }

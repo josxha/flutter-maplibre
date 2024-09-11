@@ -1,62 +1,54 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart';
-import 'package:maplibre/src/platform_interface.dart';
 
-/// An implementation of [MapLibrePlatform] that uses method channels.
-class MapLibreNative extends MapLibrePlatform {
-  final _pigeon = MapLibrePigeon();
+final class MapLibreMapStateNative extends State<MapLibreMap>
+    implements MapController {
+  late final  MapLibrePigeon _pigeon;
+
+  MapOptions get options => widget.options;
 
   @override
-  Widget buildWidget({
-    required MapOptions options,
-    required PlatformViewCreatedCallback onPlatformViewCreated,
-    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
-  }) {
+  void initState() {
+    // TODO
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final creationParams = options.toJson();
     if (Platform.isAndroid) {
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: onPlatformViewCreated,
-        gestureRecognizers: gestureRecognizers,
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: widget.gestureRecognizers,
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
       );
     } else if (Platform.isIOS) {
       return UiKitView(
         viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: onPlatformViewCreated,
-        gestureRecognizers: gestureRecognizers,
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: widget.gestureRecognizers,
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    throw UnsupportedError('Unsupported Platform');
+    throw UnsupportedError('[MapLibreMap] Unsupported Platform');
   }
 
-  @override
-  Future<void> initPlatform(int id) async {
-    // TODO implement initPlatform
+  void _onPlatformViewCreated(int viewId) {
+    _pigeon = MapLibrePigeon(messageChannelSuffix: viewId.toString());
+    widget.onMapCreated?.call(this);
   }
 
   @override
   Future<Marker> addMarker(Marker marker) async {
     // TODO: implement addMarker
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> addGeoJsonSource({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) {
-    // TODO: implement addGeoJsonSource
     throw UnimplementedError();
   }
 
@@ -112,4 +104,13 @@ class MapLibreNative extends MapLibrePlatform {
         bearing: bearing,
         pitch: pitch,
       );
+
+  @override
+  Future<void> addGeoJson({
+    required String id,
+    required Map<String, Object?> geoJson,
+  }) {
+    // TODO: implement addGeoJson
+    throw UnimplementedError();
+  }
 }
