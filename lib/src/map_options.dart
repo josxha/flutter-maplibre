@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:geotypes/geotypes.dart';
+import 'package:maplibre/maplibre.dart';
 
+/// The [MapOptions] class is used to set default values for the [MapLibreMap]
+/// widget.
 @immutable
 class MapOptions {
+  /// Default constructor for the [MapOptions].
   const MapOptions({
     this.style = 'https://demotiles.maplibre.org/style.json',
     this.zoom = 0,
@@ -16,24 +19,50 @@ class MapOptions {
     this.onLongClick,
   });
 
+  /// The style URL that should get used. If not set, the default MapLibre style
+  /// is used (https://demotiles.maplibre.org/style.json).
   final String style;
+
+  /// The initial zoom level.
   final double zoom;
+
+  /// The initial tilt level. Minimum is 0 and maximum  is 60.
   final double tilt;
+
+  /// The initial bearing of the map. Defaults to 0 (north on top).
+  /// 360 is exactly one loop.
   final double bearing;
+
+  /// The initial center on the map.
   final Position? center;
+
+  /// A list of user interface control buttons that should get used.
+  ///
+  /// Only supported on web.
   final List<MapControl> controls;
+
+  /// A callback that fires when the user clicks on the map.
   final OnClickCallback? onClick;
 
-  /// Only supported on web
+  /// A callback that fires when the user clicks twice on the map.
+  ///
+  /// Only supported on web.
   final OnClickCallback? onDoubleClick;
 
-  /// Only supported on web
+  /// A callback that fires when the user clicks on the map with the secondary
+  /// button (e.g. by default the right mouse button).
+  ///
+  /// Only supported on web.
   final OnClickCallback? onSecondaryClick;
 
-  /// Not supported on web
+  /// A callback that fires when the user performs a long click or tap on map.
+  ///
+  /// Not supported on web.
   final OnClickCallback? onLongClick;
 }
 
+/// The base [MapControl] class that is the parent of all web-only user
+/// interface buttons.
 @immutable
 sealed class MapControl {
   const MapControl();
@@ -43,6 +72,7 @@ sealed class MapControl {
 /// corresponding distance on the ground.
 @immutable
 class ScaleControl extends MapControl {
+  /// Default constructor for the [ScaleControl].
   const ScaleControl({
     this.maxWidth = 100,
     this.unit = Unit.metric,
@@ -56,7 +86,16 @@ class ScaleControl extends MapControl {
 }
 
 /// The unit type for length to use for the [ScaleControl]
-enum Unit { imperial, metric, nautical }
+enum Unit {
+  /// Use the imperial system with units like inch, foot, yard or mile.
+  imperial,
+
+  /// Use the metric system with units like mm, cm, m or km.
+  metric,
+
+  /// use the nautical system with units like sm.
+  nautical
+}
 
 /// A `GeolocateControl` control provides a button that uses the browser's
 /// geolocation API to locate the user on the map.
@@ -87,6 +126,7 @@ enum Unit { imperial, metric, nautical }
 /// are set based on user interactions.
 @immutable
 class GeolocateControl extends MapControl {
+  /// Default constructor for the [GeolocateControl].
   const GeolocateControl({
     this.positionOptions = const PositionOptions(),
     this.fitBoundsOptions,
@@ -120,8 +160,10 @@ class GeolocateControl extends MapControl {
   final bool showUserLocation;
 }
 
+/// Options for the [GeolocateControl].
 @immutable
 class PositionOptions {
+  /// Default constructor for the [PositionOptions].
   // TODO add fields
   const PositionOptions({
     this.enableHighAccuracy = false,
@@ -129,13 +171,20 @@ class PositionOptions {
     this.maximumAge = Duration.zero,
   });
 
+  /// Set to true if the displayed user location should have an high accuracy.
   final bool enableHighAccuracy;
+
+  /// The timeout [Duration] after which the location fetching fails.
   final Duration timeout;
+
+  /// The maximum [Duration] between user location updates.
   final Duration maximumAge;
 }
 
+/// Options to specify the map bounds.
 @immutable
 class FitBoundsOptions {
+  /// Default constructor for the [FitBoundsOptions].
   // TODO add fields
   const FitBoundsOptions();
 }
@@ -144,6 +193,7 @@ class FitBoundsOptions {
 /// By default, the attribution control is expanded (regardless of map width).
 @immutable
 class AttributionControl extends MapControl {
+  /// Default constructor for the [AttributionControl].
   const AttributionControl({
     this.compact = true,
     this.customAttribution =
@@ -177,12 +227,14 @@ class AttributionControl extends MapControl {
 ///    fullscreen mode.
 @immutable
 class FullscreenControl extends MapControl {
+  /// Default constructor for the [FullscreenControl].
   const FullscreenControl();
 }
 
 /// A `LogoControl` is a control that adds the watermark.
 @immutable
 class LogoControl extends MapControl {
+  /// Default constructor for the [LogoControl].
   const LogoControl({this.compact});
 
   /// If `true`, force a compact logo. If `false`, force the full logo.
@@ -195,6 +247,7 @@ class LogoControl extends MapControl {
 /// A `NavigationControl` control contains zoom buttons and a compass.
 @immutable
 class NavigationControl extends MapControl {
+  /// Default constructor for the [NavigationControl].
   const NavigationControl({
     this.showCompass = true,
     this.showZoom = true,
@@ -215,10 +268,12 @@ class NavigationControl extends MapControl {
 /// and off.
 @immutable
 class TerrainControl extends MapControl {
+  /// Default constructor for the [TerrainControl].
   const TerrainControl({required this.source});
 
   /// The source from the style
   final String source;
 }
 
+/// Callback that is used for map interactions like [MapOptions.onClick].
 typedef OnClickCallback = void Function(Position point);

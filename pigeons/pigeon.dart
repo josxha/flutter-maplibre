@@ -23,6 +23,7 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
+  /// Move the viewport of the map to a new location without any animation.
   @async
   void jumpTo({
     required LngLat center,
@@ -31,6 +32,7 @@ abstract interface class MapLibreHostApi {
     double? pitch,
   });
 
+  /// Animate the viewport of the map to a new location.
   @async
   void flyTo({
     required LngLat center,
@@ -39,18 +41,23 @@ abstract interface class MapLibreHostApi {
     double? pitch,
   });
 
+  /// Convert a coordinate to a location on the screen.
   @async
   ScreenLocation toScreenLocation(double lng, double lat);
 
+  /// Convert a screen location to a coordinate.
   @async
   LngLat toLngLat(double x, double y);
 
+  /// Add a fill layer to the map style.
   @async
   void addFillLayer({required String id, required String sourceId});
 
+  /// Add a circle layer to the map style.
   @async
   void addCircleLayer({required String id, required String sourceId});
 
+  /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({
     required String id,
@@ -60,19 +67,27 @@ abstract interface class MapLibreHostApi {
 
 @FlutterApi()
 abstract interface class MapLibreFlutterApi {
+  /// Get the map options from dart.
   MapOptions getOptions();
 
+  /// Callback for when the style has been loaded.
   void onStyleLoaded();
 
+  /// Callback when the user clicks on the map.
   void onClick(LngLat point);
 
+  /// Callback when the user performs a secondary click on the map
+  /// (e.g. by default a click with the right mouse button).
   void onSecondaryClick(LngLat point);
 
+  /// Callback when the user performs a double click on the map.
   void onDoubleClick(LngLat point);
 
+  /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 }
 
+/// The map options define initial values for the MapLibre map.
 class MapOptions {
   const MapOptions({
     required this.style,
@@ -84,25 +99,46 @@ class MapOptions {
     required this.listensOnLongClick,
   });
 
+  /// The URL of the used map style.
   final String style;
+
+  /// The initial zoom level of the map.
   final double zoom;
+
+  /// The initial tilt of the map.
   final double tilt;
+
+  /// The initial bearing of the map.
   final double bearing;
+
+  /// The initial center coordinates of the map.
   final LngLat? center;
+
+  /// If the native map should listen to click events.
   final bool listensOnClick;
+
+  /// If the native map should listen to long click events.
   final bool listensOnLongClick;
 }
 
+/// A longitude/latitude coordinate object
 class LngLat {
   const LngLat({required this.lng, required this.lat});
 
+  /// The longitude
   final double lng;
+
+  /// The latitude
   final double lat;
 }
 
+/// A pixel location / location on the device screen
 class ScreenLocation {
   const ScreenLocation({required this.x, required this.y});
 
+  /// The x coordinate
   final double x;
+
+  /// The y coordinate
   final double y;
 }

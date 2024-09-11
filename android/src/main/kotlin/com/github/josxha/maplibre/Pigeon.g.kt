@@ -46,14 +46,25 @@ class FlutterError (
   val details: Any? = null
 ) : Throwable()
 
-/** Generated class from Pigeon that represents data sent in messages. */
+/**
+ * The map options define initial values for the MapLibre map.
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
 data class MapOptions (
+  /** The URL of the used map style. */
   val style: String,
+  /** The initial zoom level of the map. */
   val zoom: Double,
+  /** The initial tilt of the map. */
   val tilt: Double,
+  /** The initial bearing of the map. */
   val bearing: Double,
+  /** The initial center coordinates of the map. */
   val center: LngLat? = null,
+  /** If the native map should listen to click events. */
   val listensOnClick: Boolean,
+  /** If the native map should listen to long click events. */
   val listensOnLongClick: Boolean
 )
  {
@@ -82,9 +93,15 @@ data class MapOptions (
   }
 }
 
-/** Generated class from Pigeon that represents data sent in messages. */
+/**
+ * A longitude/latitude coordinate object
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
 data class LngLat (
+  /** The longitude */
   val lng: Double,
+  /** The latitude */
   val lat: Double
 )
  {
@@ -103,9 +120,15 @@ data class LngLat (
   }
 }
 
-/** Generated class from Pigeon that represents data sent in messages. */
+/**
+ * A pixel location / location on the device screen
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
 data class ScreenLocation (
+  /** The x coordinate */
   val x: Double,
+  /** The y coordinate */
   val y: Double
 )
  {
@@ -166,12 +189,19 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MapLibreHostApi {
+  /** Move the viewport of the map to a new location without any animation. */
   fun jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  /** Animate the viewport of the map to a new location. */
   fun flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  /** Convert a coordinate to a location on the screen. */
   fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
+  /** Convert a screen location to a coordinate. */
   fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit)
+  /** Add a fill layer to the map style. */
   fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
+  /** Add a circle layer to the map style. */
   fun addCircleLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
+  /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
 
   companion object {
@@ -340,6 +370,7 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       PigeonPigeonCodec()
     }
   }
+  /** Get the map options from dart. */
   fun getOptions(callback: (Result<MapOptions>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
@@ -360,6 +391,7 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
+  /** Callback for when the style has been loaded. */
   fun onStyleLoaded(callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
@@ -377,6 +409,7 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
+  /** Callback when the user clicks on the map. */
   fun onClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
@@ -394,6 +427,10 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
+  /**
+   * Callback when the user performs a secondary click on the map
+   * (e.g. by default a click with the right mouse button).
+   */
   fun onSecondaryClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
@@ -411,6 +448,7 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
+  /** Callback when the user performs a double click on the map. */
   fun onDoubleClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
@@ -428,6 +466,7 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
+  /** Callback when the user performs a long lasting click on the map. */
   fun onLongClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
