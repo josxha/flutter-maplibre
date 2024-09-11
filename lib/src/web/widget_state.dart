@@ -38,7 +38,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         );
 
         document.body?.appendChild(_htmlElement);
-        widget.onMapCreated?.call(this);
+        // Invoke the onMapCreated callback async to avoid getting it called
+        // during the widget build.
+        Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
 
         // add controls

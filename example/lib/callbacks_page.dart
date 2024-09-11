@@ -29,7 +29,7 @@ class _CallbacksPageState extends State<CallbacksPage> {
           onLongClick: (point) =>
               _print('onLongClick: ${point.lng}, ${point.lat}'),
         ),
-        // TODO: onMapCreated: (controller) => _print('onMapCreated'),
+        onMapCreated: (controller) => _print('onMapCreated'),
         onStyleLoaded: () => _print('onStyleLoadedCallback'),
       ),
     );

@@ -19,8 +19,14 @@ class MapOptions {
   final Position? center;
   final List<MapControl> controls;
   final OnClickCallback? onClick;
+
+  /// Only supported on web
   final OnClickCallback? onDoubleClick;
+
+  /// Only supported on web
   final OnClickCallback? onSecondaryClick;
+
+  /// Not supported on web
   final OnClickCallback? onLongClick;
 
   Map<String, Object?> toJson() => <String, Object?>{
