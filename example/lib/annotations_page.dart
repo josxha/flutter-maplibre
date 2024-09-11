@@ -29,18 +29,14 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
               Marker(point: Position(9, 48)),
             );
           }
-          debugPrint('#2');
-          final geojson =
-              await rootBundle.loadString('assets/geojson/lake-constance.geojson');
-          debugPrint('#3');
+          final geojson = await rootBundle
+              .loadString('assets/geojson/lake-constance.geojson');
           await _controller.addSource(
             GeoJsonSource(id: 'LakeConstance', data: geojson),
           );
-          debugPrint('#4');
           await _controller.addLayer(
             const FillLayer(id: 'LakeConstance', sourceId: 'LakeConstance'),
           );
-          debugPrint('#5');
         },
       ),
     );
