@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 
+/// The [MapController] can be used to control, update and manipulate a
+/// rendered [MapLibreMap].
 abstract interface class MapController {
   /// Convert a latitude/longitude coordinate to a screen location.
   Future<Offset> toScreenLocation(Position lngLat);
@@ -24,6 +26,9 @@ abstract interface class MapController {
     required double tilt,
   });
 
+  /// Add a [Marker] to the map.
+  ///
+  /// Only supported on web.
   Future<Marker> addMarker(Marker marker);
 
   /// Add a new source to the map.

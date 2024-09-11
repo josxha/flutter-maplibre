@@ -4,8 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
+/// The [MapLibreMap] widget that can be inserted into the flutter widget tree.
 @immutable
 class MapLibreMap extends StatefulWidget {
+  /// Default constructor to create a new [MapLibreMap] widget with its
+  /// properties.
   const MapLibreMap({
     this.options = const MapOptions(),
     this.gestureRecognizers,
@@ -14,6 +17,7 @@ class MapLibreMap extends StatefulWidget {
     super.key,
   });
 
+  /// Use the [options] field to customize the map and set default values.
   final MapOptions options;
 
   /// Which gestures should be consumed by the map.
@@ -43,4 +47,6 @@ class MapLibreMap extends StatefulWidget {
       PlatformInterface.instance.createWidgetState();
 }
 
+/// Callback that fires once the native MapLibre map has been created for a
+/// [MapLibreMap] widget. It provides the [MapController] to the user.
 typedef MapCreatedCallback = void Function(MapController controller);

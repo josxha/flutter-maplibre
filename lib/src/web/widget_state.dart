@@ -8,6 +8,7 @@ import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';
 import 'package:web/web.dart';
 
+/// The web specific implementation of the [MapLibreMap] widget.
 final class MapLibreMapStateWeb extends State<MapLibreMap>
     implements MapController {
   static int _counter = 0;

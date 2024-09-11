@@ -68,14 +68,23 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 
+/// The map options define initial values for the MapLibre map.
+///
 /// Generated class from Pigeon that represents data sent in messages.
 struct MapOptions {
+  /// The URL of the used map style.
   var style: String
+  /// The initial zoom level of the map.
   var zoom: Double
+  /// The initial tilt of the map.
   var tilt: Double
+  /// The initial bearing of the map.
   var bearing: Double
+  /// The initial center coordinates of the map.
   var center: LngLat? = nil
+  /// If the native map should listen to click events.
   var listensOnClick: Bool
+  /// If the native map should listen to long click events.
   var listensOnLongClick: Bool
 
 
@@ -113,9 +122,13 @@ struct MapOptions {
   }
 }
 
+/// A longitude/latitude coordinate object
+///
 /// Generated class from Pigeon that represents data sent in messages.
 struct LngLat {
+  /// The longitude
   var lng: Double
+  /// The latitude
   var lat: Double
 
 
@@ -138,9 +151,13 @@ struct LngLat {
   }
 }
 
+/// A pixel location / location on the device screen
+///
 /// Generated class from Pigeon that represents data sent in messages.
 struct ScreenLocation {
+  /// The x coordinate
   var x: Double
+  /// The y coordinate
   var y: Double
 
 
@@ -212,12 +229,19 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
+  /// Move the viewport of the map to a new location without any animation.
   func jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Animate the viewport of the map to a new location.
   func flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Convert a coordinate to a location on the screen.
   func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
+  /// Convert a screen location to a coordinate.
   func toLngLat(x: Double, y: Double, completion: @escaping (Result<LngLat, Error>) -> Void)
+  /// Add a fill layer to the map style.
   func addFillLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a circle layer to the map style.
   func addCircleLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
@@ -227,6 +251,7 @@ class MapLibreHostApiSetup {
   /// Sets up an instance of `MapLibreHostApi` to handle messages through the `binaryMessenger`.
   static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
+    /// Move the viewport of the map to a new location without any animation.
     let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       jumpToChannel.setMessageHandler { message, reply in
@@ -247,6 +272,7 @@ class MapLibreHostApiSetup {
     } else {
       jumpToChannel.setMessageHandler(nil)
     }
+    /// Animate the viewport of the map to a new location.
     let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       flyToChannel.setMessageHandler { message, reply in
@@ -267,6 +293,7 @@ class MapLibreHostApiSetup {
     } else {
       flyToChannel.setMessageHandler(nil)
     }
+    /// Convert a coordinate to a location on the screen.
     let toScreenLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       toScreenLocationChannel.setMessageHandler { message, reply in
@@ -285,6 +312,7 @@ class MapLibreHostApiSetup {
     } else {
       toScreenLocationChannel.setMessageHandler(nil)
     }
+    /// Convert a screen location to a coordinate.
     let toLngLatChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       toLngLatChannel.setMessageHandler { message, reply in
@@ -303,6 +331,7 @@ class MapLibreHostApiSetup {
     } else {
       toLngLatChannel.setMessageHandler(nil)
     }
+    /// Add a fill layer to the map style.
     let addFillLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addFillLayerChannel.setMessageHandler { message, reply in
@@ -321,6 +350,7 @@ class MapLibreHostApiSetup {
     } else {
       addFillLayerChannel.setMessageHandler(nil)
     }
+    /// Add a circle layer to the map style.
     let addCircleLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addCircleLayerChannel.setMessageHandler { message, reply in
@@ -339,6 +369,7 @@ class MapLibreHostApiSetup {
     } else {
       addCircleLayerChannel.setMessageHandler(nil)
     }
+    /// Add a GeoJSON source to the map style.
     let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addGeoJsonSourceChannel.setMessageHandler { message, reply in
@@ -361,11 +392,18 @@ class MapLibreHostApiSetup {
 }
 /// Generated protocol from Pigeon that represents Flutter messages that can be called from Swift.
 protocol MapLibreFlutterApiProtocol {
+  /// Get the map options from dart.
   func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void)
+  /// Callback for when the style has been loaded.
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user clicks on the map.
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user performs a secondary click on the map
+  /// (e.g. by default a click with the right mouse button).
   func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user performs a double click on the map.
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
 }
 class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
@@ -378,6 +416,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   var codec: PigeonPigeonCodec {
     return PigeonPigeonCodec.shared
   }
+  /// Get the map options from dart.
   func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
@@ -399,6 +438,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
+  /// Callback for when the style has been loaded.
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
@@ -417,6 +457,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
+  /// Callback when the user clicks on the map.
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
@@ -435,6 +476,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
+  /// Callback when the user performs a secondary click on the map
+  /// (e.g. by default a click with the right mouse button).
   func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
@@ -453,6 +496,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
+  /// Callback when the user performs a double click on the map.
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
@@ -471,6 +515,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
+  /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)

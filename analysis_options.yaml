@@ -7,5 +7,4 @@ analyzer:
 linter:
   rules:
     lines_longer_than_80_chars: false
-    public_member_api_docs: false
     flutter_style_todos: false
