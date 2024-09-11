@@ -11,6 +11,7 @@ class MapOptions {
     this.onClick,
     this.onDoubleClick,
     this.onSecondaryClick,
+    this.onLongClick,
   });
 
   final String style;
@@ -20,6 +21,7 @@ class MapOptions {
   final OnClickCallback? onClick;
   final OnClickCallback? onDoubleClick;
   final OnClickCallback? onSecondaryClick;
+  final OnClickCallback? onLongClick;
 
   Map<String, Object?> toJson() => <String, Object?>{
         'style': style,

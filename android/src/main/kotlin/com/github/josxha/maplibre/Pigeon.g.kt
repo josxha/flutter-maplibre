@@ -31,6 +31,9 @@ private fun wrapError(exception: Throwable): List<Any?> {
   }
 }
 
+private fun createConnectionError(channelName: String): FlutterError {
+  return FlutterError("channel-error",  "Unable to establish connection on channel: '$channelName'.", "")}
+
 /**
  * Error class for passing custom error details to Flutter via a thrown PlatformException.
  * @property code The error code.
@@ -117,26 +120,26 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 
 
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
-interface MapLibrePigeon {
+interface MapLibreHostApi {
   fun jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   fun flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
   fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit)
   fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
   fun addCircleLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
-  fun addGeoJsonSource(id: String, data: Map<String, Any?>, callback: (Result<Unit>) -> Unit)
+  fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
 
   companion object {
-    /** The codec used by MapLibrePigeon. */
+    /** The codec used by MapLibreHostApi. */
     val codec: MessageCodec<Any?> by lazy {
       PigeonPigeonCodec()
     }
-    /** Sets up an instance of `MapLibrePigeon` to handle messages through the `binaryMessenger`. */
+    /** Sets up an instance of `MapLibreHostApi` to handle messages through the `binaryMessenger`. */
     @JvmOverloads
-    fun setUp(binaryMessenger: BinaryMessenger, api: MapLibrePigeon?, messageChannelSuffix: String = "") {
+    fun setUp(binaryMessenger: BinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -158,7 +161,7 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -180,7 +183,7 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -201,7 +204,7 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -222,7 +225,7 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addFillLayer$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -242,7 +245,7 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addCircleLayer$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -262,12 +265,12 @@ interface MapLibrePigeon {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addGeoJsonSource$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val idArg = args[0] as String
-            val dataArg = args[1] as Map<String, Any?>
+            val dataArg = args[1] as String
             api.addGeoJsonSource(idArg, dataArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
@@ -281,6 +284,83 @@ interface MapLibrePigeon {
           channel.setMessageHandler(null)
         }
       }
+    }
+  }
+}
+/** Generated class from Pigeon that represents Flutter messages that can be called from Kotlin. */
+class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private val messageChannelSuffix: String = "") {
+  companion object {
+    /** The codec used by MapLibreFlutterApi. */
+    val codec: MessageCodec<Any?> by lazy {
+      PigeonPigeonCodec()
+    }
+  }
+  fun onClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(pointArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+  fun onSecondaryClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(pointArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+  fun onDoubleClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(pointArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+  fun onLongClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(pointArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
     }
   }
 }

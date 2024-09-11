@@ -1,7 +1,8 @@
 package com.github.josxha.maplibre
 
 import LngLat
-import MapLibrePigeon
+import MapLibreFlutterApi
+import MapLibreHostApi
 import ScreenLocation
 import android.content.Context
 import android.graphics.PointF
@@ -30,10 +31,12 @@ class MapLibreMapController(
     private val styleStringInitial: String,
     private val lifecycleProvider: LifecycleProvider,
     private val binaryMessenger: BinaryMessenger
-) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibrePigeon {
+) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibreHostApi,
+    MapLibreMap.OnMapClickListener, MapLibreMap.OnMapLongClickListener {
     private val mapViewContainer = FrameLayout(context)
     private lateinit var mapLibreMap: MapLibreMap
     private var mapView: MapView
+    private lateinit var flutterApi: MapLibreFlutterApi
     private var style: Style? = null
 
     init {
@@ -50,8 +53,11 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        MapLibrePigeon.setUp(binaryMessenger, this, viewId.toString())
-
+        val channelSuffix = viewId.toString();
+        MapLibreHostApi.setUp(binaryMessenger, this, channelSuffix)
+        this.flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
+        this.mapLibreMap.addOnMapClickListener(this)
+        this.mapLibreMap.addOnMapLongClickListener(this)
         val style = Style.Builder().fromUri(styleStringInitial)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
@@ -116,10 +122,20 @@ class MapLibreMapController(
 
     override fun addGeoJsonSource(
         id: String,
-        data: Map<String, Any?>,
+        data: String,
         callback: (Result<Unit>) -> Unit
     ) {
-        mapLibreMap.style?.addSource(GeoJsonSource(id))
+        mapLibreMap.style?.addSource(GeoJsonSource(id, data))
         callback(Result.success(Unit))
+    }
+
+    override fun onMapClick(point: LatLng): Boolean {
+        flutterApi.onClick(LngLat(point.longitude, point.latitude)) {  }
+        return true
+    }
+
+    override fun onMapLongClick(point: LatLng): Boolean {
+        flutterApi.onLongClick(LngLat(point.longitude, point.latitude)) {  }
+        return true
     }
 }

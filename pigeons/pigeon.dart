@@ -21,8 +21,10 @@ import 'package:pigeon/pigeon.dart';
     swiftOptions: SwiftOptions(),
   ),
 )
+
+
 @HostApi()
-abstract interface class MapLibrePigeon {
+abstract interface class MapLibreHostApi {
   @async
   void jumpTo({
     required LngLat center,
@@ -54,8 +56,19 @@ abstract interface class MapLibrePigeon {
   @async
   void addGeoJsonSource({
     required String id,
-    required Map<String, Object?> data,
+    required String data,
   });
+}
+
+@FlutterApi()
+abstract interface class MapLibreFlutterApi {
+  void onClick(LngLat point);
+
+  void onSecondaryClick(LngLat point);
+
+  void onDoubleClick(LngLat point);
+
+  void onLongClick(LngLat point);
 }
 
 class LngLat {

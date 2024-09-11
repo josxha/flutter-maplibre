@@ -55,6 +55,10 @@ private func wrapError(_ error: Any) -> [Any?] {
   ]
 }
 
+private func createConnectionError(withChannelName channelName: String) -> PigeonError {
+  return PigeonError(code: "channel-error", message: "Unable to establish connection on channel: '\(channelName)'.", details: "")
+}
+
 private func isNullish(_ value: Any?) -> Bool {
   return value is NSNull || value == nil
 }
@@ -157,23 +161,23 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 
 
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
-protocol MapLibrePigeon {
+protocol MapLibreHostApi {
   func jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   func flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
   func toLngLat(x: Double, y: Double, completion: @escaping (Result<LngLat, Error>) -> Void)
   func addFillLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
   func addCircleLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
-  func addGeoJsonSource(id: String, data: [String: Any?], completion: @escaping (Result<Void, Error>) -> Void)
+  func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
-class MapLibrePigeonSetup {
+class MapLibreHostApiSetup {
   static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
-  /// Sets up an instance of `MapLibrePigeon` to handle messages through the `binaryMessenger`.
-  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibrePigeon?, messageChannelSuffix: String = "") {
+  /// Sets up an instance of `MapLibreHostApi` to handle messages through the `binaryMessenger`.
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
-    let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       jumpToChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -193,7 +197,7 @@ class MapLibrePigeonSetup {
     } else {
       jumpToChannel.setMessageHandler(nil)
     }
-    let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       flyToChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -213,7 +217,7 @@ class MapLibrePigeonSetup {
     } else {
       flyToChannel.setMessageHandler(nil)
     }
-    let toScreenLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let toScreenLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       toScreenLocationChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -231,7 +235,7 @@ class MapLibrePigeonSetup {
     } else {
       toScreenLocationChannel.setMessageHandler(nil)
     }
-    let toLngLatChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let toLngLatChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       toLngLatChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -249,7 +253,7 @@ class MapLibrePigeonSetup {
     } else {
       toLngLatChannel.setMessageHandler(nil)
     }
-    let addFillLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.addFillLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let addFillLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addFillLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -267,7 +271,7 @@ class MapLibrePigeonSetup {
     } else {
       addFillLayerChannel.setMessageHandler(nil)
     }
-    let addCircleLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.addCircleLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let addCircleLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addCircleLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -285,12 +289,12 @@ class MapLibrePigeonSetup {
     } else {
       addCircleLayerChannel.setMessageHandler(nil)
     }
-    let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibrePigeon.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addGeoJsonSourceChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let idArg = args[0] as! String
-        let dataArg = args[1] as! [String: Any?]
+        let dataArg = args[1] as! String
         api.addGeoJsonSource(id: idArg, data: dataArg) { result in
           switch result {
           case .success:
@@ -302,6 +306,96 @@ class MapLibrePigeonSetup {
       }
     } else {
       addGeoJsonSourceChannel.setMessageHandler(nil)
+    }
+  }
+}
+/// Generated protocol from Pigeon that represents Flutter messages that can be called from Swift.
+protocol MapLibreFlutterApiProtocol {
+  func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+}
+class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
+  private let binaryMessenger: FlutterBinaryMessenger
+  private let messageChannelSuffix: String
+  init(binaryMessenger: FlutterBinaryMessenger, messageChannelSuffix: String = "") {
+    self.binaryMessenger = binaryMessenger
+    self.messageChannelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
+  }
+  var codec: PigeonPigeonCodec {
+    return PigeonPigeonCodec.shared
+  }
+  func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
     }
   }
 }

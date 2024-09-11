@@ -26,6 +26,8 @@ class _CallbacksPageState extends State<CallbacksPage> {
               _print('onDoubleClick: ${point.lng}, ${point.lat}'),
           onSecondaryClick: (point) =>
               _print('onSecondaryClick: ${point.lng}, ${point.lat}'),
+          onLongClick: (point) =>
+              _print('onLongClick: ${point.lng}, ${point.lat}'),
         ),
         // TODO: onMapCreated: (controller) => _print('onMapCreated'),
         onStyleLoaded: () => _print('onStyleLoadedCallback'),

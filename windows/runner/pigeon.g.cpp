@@ -146,25 +146,25 @@ void PigeonInternalCodecSerializer::WriteValue(
   flutter::StandardCodecSerializer::WriteValue(value, stream);
 }
 
-/// The codec used by MapLibrePigeon.
-const flutter::StandardMessageCodec& MapLibrePigeon::GetCodec() {
+/// The codec used by MapLibreHostApi.
+const flutter::StandardMessageCodec& MapLibreHostApi::GetCodec() {
   return flutter::StandardMessageCodec::GetInstance(&PigeonInternalCodecSerializer::GetInstance());
 }
 
-// Sets up an instance of `MapLibrePigeon` to handle messages through the `binary_messenger`.
-void MapLibrePigeon::SetUp(
+// Sets up an instance of `MapLibreHostApi` to handle messages through the `binary_messenger`.
+void MapLibreHostApi::SetUp(
   flutter::BinaryMessenger* binary_messenger,
-  MapLibrePigeon* api) {
-  MapLibrePigeon::SetUp(binary_messenger, api, "");
+  MapLibreHostApi* api) {
+  MapLibreHostApi::SetUp(binary_messenger, api, "");
 }
 
-void MapLibrePigeon::SetUp(
+void MapLibreHostApi::SetUp(
   flutter::BinaryMessenger* binary_messenger,
-  MapLibrePigeon* api,
+  MapLibreHostApi* api,
   const std::string& message_channel_suffix) {
   const std::string prepended_suffix = message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "";
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.jumpTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -199,7 +199,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.flyTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -234,7 +234,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toScreenLocation" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -269,7 +269,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.toLngLat" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -304,7 +304,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addFillLayer" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -339,7 +339,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addCircleLayer" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -374,7 +374,7 @@ void MapLibrePigeon::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibrePigeon.addGeoJsonSource" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -390,7 +390,7 @@ void MapLibrePigeon::SetUp(
             reply(WrapError("data_arg unexpectedly null."));
             return;
           }
-          const auto& data_arg = std::get<EncodableMap>(encodable_data_arg);
+          const auto& data_arg = std::get<std::string>(encodable_data_arg);
           api->AddGeoJsonSource(id_arg, data_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
@@ -410,7 +410,7 @@ void MapLibrePigeon::SetUp(
   }
 }
 
-EncodableValue MapLibrePigeon::WrapError(std::string_view error_message) {
+EncodableValue MapLibreHostApi::WrapError(std::string_view error_message) {
   return EncodableValue(EncodableList{
     EncodableValue(std::string(error_message)),
     EncodableValue("Error"),
@@ -418,11 +418,126 @@ EncodableValue MapLibrePigeon::WrapError(std::string_view error_message) {
   });
 }
 
-EncodableValue MapLibrePigeon::WrapError(const FlutterError& error) {
+EncodableValue MapLibreHostApi::WrapError(const FlutterError& error) {
   return EncodableValue(EncodableList{
     EncodableValue(error.code()),
     EncodableValue(error.message()),
     error.details()
+  });
+}
+
+// Generated class from Pigeon that represents Flutter messages that can be called from C++.
+MapLibreFlutterApi::MapLibreFlutterApi(flutter::BinaryMessenger* binary_messenger)
+ : binary_messenger_(binary_messenger),
+    message_channel_suffix_("") {}
+
+MapLibreFlutterApi::MapLibreFlutterApi(
+  flutter::BinaryMessenger* binary_messenger,
+  const std::string& message_channel_suffix)
+ : binary_messenger_(binary_messenger),
+    message_channel_suffix_(message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "") {}
+
+const flutter::StandardMessageCodec& MapLibreFlutterApi::GetCodec() {
+  return flutter::StandardMessageCodec::GetInstance(&PigeonInternalCodecSerializer::GetInstance());
+}
+
+void MapLibreFlutterApi::OnClick(
+  const LngLat& point_arg,
+  std::function<void(void)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
+    CustomEncodableValue(point_arg),
+  });
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        on_success();
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
+  });
+}
+
+void MapLibreFlutterApi::OnSecondaryClick(
+  const LngLat& point_arg,
+  std::function<void(void)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
+    CustomEncodableValue(point_arg),
+  });
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        on_success();
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
+  });
+}
+
+void MapLibreFlutterApi::OnDoubleClick(
+  const LngLat& point_arg,
+  std::function<void(void)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
+    CustomEncodableValue(point_arg),
+  });
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        on_success();
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
+  });
+}
+
+void MapLibreFlutterApi::OnLongClick(
+  const LngLat& point_arg,
+  std::function<void(void)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
+    CustomEncodableValue(point_arg),
+  });
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        on_success();
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
   });
 }
 

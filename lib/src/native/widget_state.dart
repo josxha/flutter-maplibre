@@ -7,8 +7,8 @@ import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart';
 
 final class MapLibreMapStateNative extends State<MapLibreMap>
-    implements MapController {
-  late final MapLibrePigeon _pigeon;
+    implements MapController, MapLibreFlutterApi {
+  late final MapLibreHostApi _hostApi;
 
   MapOptions get options => widget.options;
 
@@ -36,7 +36,10 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   void _onPlatformViewCreated(int viewId) {
-    _pigeon = MapLibrePigeon(messageChannelSuffix: viewId.toString());
+    final channelSuffix = viewId.toString();
+    _hostApi = MapLibreHostApi(messageChannelSuffix: channelSuffix);
+    MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
+
     widget.onMapCreated?.call(this);
   }
 
@@ -47,13 +50,14 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
-    final lngLat = await _pigeon.toLngLat(screenLocation.dx, screenLocation.dy);
+    final lngLat =
+        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
     return lngLat.toPosition();
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenLocation = await _pigeon.toScreenLocation(
+    final screenLocation = await _hostApi.toScreenLocation(
       lngLat.lng.toDouble(),
       lngLat.lat.toDouble(),
     );
@@ -67,7 +71,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? bearing,
     double? pitch,
   }) =>
-      _pigeon.jumpTo(
+      _hostApi.jumpTo(
         center: center.toLngLat(),
         zoom: zoom,
         bearing: bearing,
@@ -81,7 +85,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? bearing,
     double? pitch,
   }) =>
-      _pigeon.flyTo(
+      _hostApi.flyTo(
         center: center.toLngLat(),
         zoom: zoom,
         bearing: bearing,
@@ -92,15 +96,9 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   Future<void> addLayer(Layer layer) async {
     await switch (layer) {
       FillLayer() =>
-          _pigeon.addFillLayer(
-            id: layer.id,
-            sourceId: layer.sourceId,
-          ),
+        _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),
       CircleLayer() =>
-          _pigeon.addCircleLayer(
-            id: layer.id,
-            sourceId: layer.sourceId,
-          ),
+        _hostApi.addCircleLayer(id: layer.id, sourceId: layer.sourceId),
     };
   }
 
@@ -108,10 +106,23 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   Future<void> addSource(Source source) async {
     await switch (source) {
       GeoJsonSource() =>
-          _pigeon.addGeoJsonSource(
-            id: source.id,
-            data: source.data,
-          ),
+        _hostApi.addGeoJsonSource(id: source.id, data: source.data),
     };
   }
+
+  @override
+  void onDoubleClick(LngLat point) =>
+      options.onDoubleClick?.call(Position(point.lng, point.lat));
+
+  @override
+  void onSecondaryClick(LngLat point) =>
+      options.onSecondaryClick?.call(Position(point.lng, point.lat));
+
+  @override
+  void onClick(LngLat point) =>
+      options.onClick?.call(Position(point.lng, point.lat));
+
+  @override
+  void onLongClick(LngLat point) =>
+      options.onLongClick?.call(Position(point.lng, point.lat));
 }

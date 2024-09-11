@@ -48,7 +48,8 @@ template<class T> class ErrorOr {
   const FlutterError& error() const { return std::get<FlutterError>(v_); };
 
  private:
-  friend class MapLibrePigeon;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
   ErrorOr() = default;
   T TakeValue() && { return std::get<T>(std::move(v_)); }
 
@@ -75,7 +76,8 @@ class LngLat {
  private:
   static LngLat FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapLibrePigeon;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   double lng_;
   double lat_;
@@ -101,7 +103,8 @@ class ScreenLocation {
  private:
   static ScreenLocation FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapLibrePigeon;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   double x_;
   double y_;
@@ -129,11 +132,11 @@ class PigeonInternalCodecSerializer : public flutter::StandardCodecSerializer {
 };
 
 // Generated interface from Pigeon that represents a handler of messages from Flutter.
-class MapLibrePigeon {
+class MapLibreHostApi {
  public:
-  MapLibrePigeon(const MapLibrePigeon&) = delete;
-  MapLibrePigeon& operator=(const MapLibrePigeon&) = delete;
-  virtual ~MapLibrePigeon() {}
+  MapLibreHostApi(const MapLibreHostApi&) = delete;
+  MapLibreHostApi& operator=(const MapLibreHostApi&) = delete;
+  virtual ~MapLibreHostApi() {}
   virtual void JumpTo(
     const LngLat& center,
     const double* zoom,
@@ -164,25 +167,55 @@ class MapLibrePigeon {
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   virtual void AddGeoJsonSource(
     const std::string& id,
-    const flutter::EncodableMap& data,
+    const std::string& data,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
 
-  // The codec used by MapLibrePigeon.
+  // The codec used by MapLibreHostApi.
   static const flutter::StandardMessageCodec& GetCodec();
-  // Sets up an instance of `MapLibrePigeon` to handle messages through the `binary_messenger`.
+  // Sets up an instance of `MapLibreHostApi` to handle messages through the `binary_messenger`.
   static void SetUp(
     flutter::BinaryMessenger* binary_messenger,
-    MapLibrePigeon* api);
+    MapLibreHostApi* api);
   static void SetUp(
     flutter::BinaryMessenger* binary_messenger,
-    MapLibrePigeon* api,
+    MapLibreHostApi* api,
     const std::string& message_channel_suffix);
   static flutter::EncodableValue WrapError(std::string_view error_message);
   static flutter::EncodableValue WrapError(const FlutterError& error);
 
  protected:
-  MapLibrePigeon() = default;
+  MapLibreHostApi() = default;
 
 };
+// Generated class from Pigeon that represents Flutter messages that can be called from C++.
+class MapLibreFlutterApi {
+ public:
+  MapLibreFlutterApi(flutter::BinaryMessenger* binary_messenger);
+  MapLibreFlutterApi(
+    flutter::BinaryMessenger* binary_messenger,
+    const std::string& message_channel_suffix);
+  static const flutter::StandardMessageCodec& GetCodec();
+  void OnClick(
+    const LngLat& point,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+  void OnSecondaryClick(
+    const LngLat& point,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+  void OnDoubleClick(
+    const LngLat& point,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+  void OnLongClick(
+    const LngLat& point,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+
+ private:
+  flutter::BinaryMessenger* binary_messenger_;
+  std::string message_channel_suffix_;
+};
+
 }  // namespace pigeon_maplibre
 #endif  // PIGEON_PIGEON_G_H_

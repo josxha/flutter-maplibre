@@ -1,9 +1,13 @@
 name: maplibre
 description: "Unofficial MapLibre bindings for Flutter"
 version: 0.0.1
-repository: https://github.com/josxha/flutter_maplibre
-issue_tracker: https://github.com/josxha/flutter_maplibre/issues
+repository: https://github.com/josxha/flutter-maplibre
+issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 publish_to: none
+
+platforms:
+  android:
+  web:
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
