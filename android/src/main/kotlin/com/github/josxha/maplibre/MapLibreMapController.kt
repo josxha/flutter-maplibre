@@ -61,6 +61,7 @@ class MapLibreMapController(
         val style = Style.Builder().fromUri(styleStringInitial)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
+            flutterApi.onStyleLoaded {  }
         }
     }
 

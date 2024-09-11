@@ -311,6 +311,7 @@ class MapLibreHostApiSetup {
 }
 /// Generated protocol from Pigeon that represents Flutter messages that can be called from Swift.
 protocol MapLibreFlutterApiProtocol {
+  func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void)
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
@@ -325,6 +326,24 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   var codec: PigeonPigeonCodec {
     return PigeonPigeonCodec.shared
+  }
+  func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage(nil) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
   }
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"

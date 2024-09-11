@@ -195,6 +195,9 @@ class MapLibreFlutterApi {
     flutter::BinaryMessenger* binary_messenger,
     const std::string& message_channel_suffix);
   static const flutter::StandardMessageCodec& GetCodec();
+  void OnStyleLoaded(
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
   void OnClick(
     const LngLat& point,
     std::function<void(void)>&& on_success,

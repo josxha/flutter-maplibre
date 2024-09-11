@@ -111,6 +111,9 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
+  void onStyleLoaded() => widget.onStyleLoaded?.call();
+
+  @override
   void onDoubleClick(LngLat point) =>
       options.onDoubleClick?.call(Position(point.lng, point.lat));
 

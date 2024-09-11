@@ -290,6 +290,8 @@ class MapLibreHostApi {
 abstract class MapLibreFlutterApi {
   static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
 
+  void onStyleLoaded();
+
   void onClick(LngLat point);
 
   void onSecondaryClick(LngLat point);
@@ -300,6 +302,25 @@ abstract class MapLibreFlutterApi {
 
   static void setUp(MapLibreFlutterApi? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
     messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+    {
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          try {
+            api.onStyleLoaded();
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
     {
       final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
           'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick$messageChannelSuffix', pigeonChannelCodec,

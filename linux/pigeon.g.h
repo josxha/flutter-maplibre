@@ -259,6 +259,48 @@ void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHos
  */
 void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnStyleLoadedResponse, maplibre_map_libre_flutter_api_on_style_loaded_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_STYLE_LOADED_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onStyleLoaded is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_style_loaded_response_is_error(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_code(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_message(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_details(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnClickResponse, maplibre_map_libre_flutter_api_on_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_CLICK_RESPONSE, GObject)
 
 /**
@@ -444,6 +486,28 @@ G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApi, maplibre_map_libre_flutter_api,
  * Returns: a new #MaplibreMapLibreFlutterApi
  */
 MaplibreMapLibreFlutterApi* maplibre_map_libre_flutter_api_new(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ */
+void maplibre_map_libre_flutter_api_on_style_loaded(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_style_loaded() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnStyleLoadedResponse* maplibre_map_libre_flutter_api_on_style_loaded_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
  * maplibre_map_libre_flutter_api_on_click:

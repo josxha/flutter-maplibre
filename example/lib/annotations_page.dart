@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
@@ -23,16 +24,14 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
         options: MapOptions(zoom: 7, center: Position(9, 48)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
-          debugPrint('#0');
-          final _ = await _controller.addMarker(
-            Marker(point: Position(9, 48)),
-          );
-          debugPrint('#1');
-          // TODO remove delay
-          await Future<void>.delayed(const Duration(seconds: 2));
+          if (kIsWeb) {
+            final _ = await _controller.addMarker(
+              Marker(point: Position(9, 48)),
+            );
+          }
           debugPrint('#2');
           final geojson =
-              await rootBundle.loadString('/geojson/lake-constance.geojson');
+              await rootBundle.loadString('assets/geojson/lake-constance.geojson');
           debugPrint('#3');
           await _controller.addSource(
             GeoJsonSource(id: 'LakeConstance', data: geojson),

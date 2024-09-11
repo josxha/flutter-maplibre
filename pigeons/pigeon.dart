@@ -21,8 +21,6 @@ import 'package:pigeon/pigeon.dart';
     swiftOptions: SwiftOptions(),
   ),
 )
-
-
 @HostApi()
 abstract interface class MapLibreHostApi {
   @async
@@ -62,6 +60,8 @@ abstract interface class MapLibreHostApi {
 
 @FlutterApi()
 abstract interface class MapLibreFlutterApi {
+  void onStyleLoaded();
+
   void onClick(LngLat point);
 
   void onSecondaryClick(LngLat point);
