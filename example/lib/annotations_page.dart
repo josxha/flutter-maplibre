@@ -24,7 +24,8 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
-          if (kIsWeb) { // This kind of Marker is only supported on web
+          if (kIsWeb) {
+            // This kind of Marker is only supported on web
             final _ = await _controller.addMarker(
               Marker(point: Position(9.17, 47.68)),
             );

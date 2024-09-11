@@ -42,19 +42,19 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
-    style: options.style,
-    bearing: options.bearing,
-    zoom: options.zoom,
-    tilt: options.tilt,
-    center: options.center == null
-        ? null
-        : pigeon.LngLat(
-      lng: options.center!.lng.toDouble(),
-      lat: options.center!.lat.toDouble(),
-    ),
-    listensOnClick: options.onClick != null,
-    listensOnLongClick: options.onLongClick != null,
-  );
+        style: options.style,
+        bearing: options.bearing,
+        zoom: options.zoom,
+        tilt: options.tilt,
+        center: options.center == null
+            ? null
+            : pigeon.LngLat(
+                lng: options.center!.lng.toDouble(),
+                lat: options.center!.lat.toDouble(),
+              ),
+        listensOnClick: options.onClick != null,
+        listensOnLongClick: options.onLongClick != null,
+      );
 
   @override
   Future<Marker> addMarker(Marker marker) async {
