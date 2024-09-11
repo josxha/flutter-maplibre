@@ -4,7 +4,7 @@ This package provides unofficial Flutter bindings for MapLibre libraries.
 
 - [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is used for web
 - [maplibre-native](https://github.com/maplibre/maplibre-native) (previously
-  named maplibre-gl) is used for android, iOS,
+  named maplibre-gl) is used for android and in the future for iOS,
   windows, macOS and Linux
 
 ### What is the difference to [maplibre_gl](https://pub.dev/packages/maplibre_gl)?
@@ -84,7 +84,6 @@ always welcome.
 ### Run code generation
 
 ```bash
-dart run build_runner build
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```

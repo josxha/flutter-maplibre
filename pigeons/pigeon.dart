@@ -22,7 +22,7 @@ import 'package:pigeon/pigeon.dart';
   ),
 )
 @HostApi()
-abstract interface class MapLibrePigeon {
+abstract interface class MapLibreHostApi {
   @async
   void jumpTo({
     required LngLat center,
@@ -44,6 +44,53 @@ abstract interface class MapLibrePigeon {
 
   @async
   LngLat toLngLat(double x, double y);
+
+  @async
+  void addFillLayer({required String id, required String sourceId});
+
+  @async
+  void addCircleLayer({required String id, required String sourceId});
+
+  @async
+  void addGeoJsonSource({
+    required String id,
+    required String data,
+  });
+}
+
+@FlutterApi()
+abstract interface class MapLibreFlutterApi {
+  MapOptions getOptions();
+
+  void onStyleLoaded();
+
+  void onClick(LngLat point);
+
+  void onSecondaryClick(LngLat point);
+
+  void onDoubleClick(LngLat point);
+
+  void onLongClick(LngLat point);
+}
+
+class MapOptions {
+  const MapOptions({
+    required this.style,
+    required this.zoom,
+    required this.center,
+    required this.tilt,
+    required this.bearing,
+    required this.listensOnClick,
+    required this.listensOnLongClick,
+  });
+
+  final String style;
+  final double zoom;
+  final double tilt;
+  final double bearing;
+  final LngLat? center;
+  final bool listensOnClick;
+  final bool listensOnLongClick;
 }
 
 class LngLat {
