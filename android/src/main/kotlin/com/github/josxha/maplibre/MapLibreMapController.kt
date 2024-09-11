@@ -23,7 +23,6 @@ import org.maplibre.android.style.layers.CircleLayer
 import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.sources.GeoJsonSource
 
-
 class MapLibreMapController(
     private val viewId: Int,
     private val context: Context,
@@ -61,7 +60,7 @@ class MapLibreMapController(
         val style = Style.Builder().fromUri(styleStringInitial)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
-            flutterApi.onStyleLoaded {  }
+            flutterApi.onStyleLoaded { }
         }
     }
 
@@ -131,12 +130,12 @@ class MapLibreMapController(
     }
 
     override fun onMapClick(point: LatLng): Boolean {
-        flutterApi.onClick(LngLat(point.longitude, point.latitude)) {  }
+        flutterApi.onClick(LngLat(point.longitude, point.latitude)) { }
         return true
     }
 
     override fun onMapLongClick(point: LatLng): Boolean {
-        flutterApi.onLongClick(LngLat(point.longitude, point.latitude)) {  }
+        flutterApi.onLongClick(LngLat(point.longitude, point.latitude)) { }
         return true
     }
 }
