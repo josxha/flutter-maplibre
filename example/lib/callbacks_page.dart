@@ -20,14 +20,16 @@ class _CallbacksPageState extends State<CallbacksPage> {
       appBar: AppBar(title: const Text('Callbacks')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(9, 48),
+          center: Position(9.17, 47.68),
           onClick: (point) => _print('onTap: ${point.lng}, ${point.lat}'),
           onDoubleClick: (point) =>
               _print('onDoubleClick: ${point.lng}, ${point.lat}'),
           onSecondaryClick: (point) =>
               _print('onSecondaryClick: ${point.lng}, ${point.lat}'),
+          onLongClick: (point) =>
+              _print('onLongClick: ${point.lng}, ${point.lat}'),
         ),
-        // TODO: onMapCreated: (controller) => _print('onMapCreated'),
+        onMapCreated: (controller) => _print('onMapCreated'),
         onStyleLoaded: () => _print('onStyleLoadedCallback'),
       ),
     );

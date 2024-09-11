@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
+import 'package:maplibre/src/web/interop/json.dart';
 import 'package:web/web.dart';
 
 final class MapLibreMapStateWeb extends State<MapLibreMap>
@@ -33,11 +34,15 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             style: options.style,
             zoom: options.zoom,
             center: options.center?.toLngLat(),
+            bearing: options.bearing,
+            pitch: options.tilt,
           ),
         );
 
         document.body?.appendChild(_htmlElement);
-        widget.onMapCreated?.call(this);
+        // Invoke the onMapCreated callback async to avoid getting it called
+        // during the widget build.
+        Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
 
         // add controls
@@ -162,17 +167,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> addLayer({
-    required String id,
-    required String type,
-    required String source,
-  }) async {
-    _map.addLayer(
-      interop.AddLayerObject(id: id, type: type, source: source),
-    );
-  }
-
-  @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final lngLat = _map.unproject(
       interop.Point(screenLocation.dx, screenLocation.dy),
@@ -191,14 +185,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) async =>
       _map.jumpTo(
         interop.JumpToOptions(
           center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
-          pitch: pitch,
+          pitch: tilt,
         ),
       );
 
@@ -207,27 +201,48 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) async =>
       _map.flyTo(
         interop.FlyToOptions(
           center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
-          pitch: pitch,
+          pitch: tilt,
         ),
       );
 
   @override
-  Future<void> addGeoJson({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) async =>
-      _map.addSource(
-        id,
-        interop.SourceSpecification.geoJson(
-          type: 'geojson',
-          data: geoJson.jsify()!,
-        ),
-      );
+  Future<void> addSource(Source source) async {
+    switch (source) {
+      case GeoJsonSource():
+        final data = parse(source.data);
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+        );
+    }
+  }
+
+  @override
+  Future<void> addLayer(Layer layer) async {
+    switch (layer) {
+      case FillLayer():
+        _map.addLayer(
+          interop.AddLayerObject(
+            id: layer.id,
+            type: 'fill',
+            source: layer.sourceId,
+          ),
+        );
+      case CircleLayer():
+        _map.addLayer(
+          interop.AddLayerObject(
+            id: layer.id,
+            type: 'circle',
+            source: layer.sourceId,
+          ),
+        );
+    }
+  }
 }

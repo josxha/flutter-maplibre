@@ -26,7 +26,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller1),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9, 48)),
+              options: MapOptions(center: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller1 = controller);
@@ -37,7 +37,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller2),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9, 48)),
+              options: MapOptions(center: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller2 = controller);
@@ -79,7 +79,7 @@ class _ButtonsWidget extends StatelessWidget {
                 center: Position(-18.6874, 64.9445),
                 zoom: 5,
                 bearing: -50,
-                pitch: 60,
+                tilt: 60,
               );
             },
             child: const Text('Animate to Iceland'),

@@ -34,6 +34,8 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required JSObject container,
     double zoom = 0,
     LngLat? center,
+    double bearing = 0,
+    double pitch = 0,
   });
 }
 
