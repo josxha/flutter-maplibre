@@ -47,7 +47,7 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        MapLibrePigeon.setUp(binaryMessenger, this)
+        MapLibrePigeon.setUp(binaryMessenger, this, viewId.toString())
 
         val style = Style.Builder().fromUri(styleStringInitial)
         mapLibreMap.setStyle(style) { loadedStyle ->

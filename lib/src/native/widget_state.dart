@@ -8,7 +8,7 @@ import 'package:maplibre/src/native/pigeon.g.dart';
 
 final class MapLibreMapStateNative extends State<MapLibreMap>
     implements MapController {
-  final _pigeon = MapLibrePigeon();
+  late final  MapLibrePigeon _pigeon;
 
   MapOptions get options => widget.options;
 
@@ -24,7 +24,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     if (Platform.isAndroid) {
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: (int viewId) => widget.onMapCreated?.call(this),
+        onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
@@ -32,13 +32,18 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     } else if (Platform.isIOS) {
       return UiKitView(
         viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: (int viewId) => widget.onMapCreated?.call(this),
+        onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
         creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
     throw UnsupportedError('[MapLibreMap] Unsupported Platform');
+  }
+
+  void _onPlatformViewCreated(int viewId) {
+    _pigeon = MapLibrePigeon(messageChannelSuffix: viewId.toString());
+    widget.onMapCreated?.call(this);
   }
 
   @override
