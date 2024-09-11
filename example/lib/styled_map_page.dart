@@ -19,7 +19,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
   /// Protomaps offers free usage for non commercial projects and affordable
   /// pricing for commercial projects. Alternatively, you can host a tile
   /// server yourself. https://protomaps.com/
-  static const _styleUrl = 'https://api.protomaps.com/tiles/v3.json?key=a6f9aebb3965458c';
+  static const _styleUrl = 'https://api.protomaps.com/styles/v2/light.json?key=a6f9aebb3965458c';
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ class _StyledMapPageState extends State<StyledMapPage> {
       appBar: AppBar(title: const Text('Styled Map')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(9, 48),
+          center: Position(9.17, 47.68),
+          zoom: 8,
           style: _styleUrl
         ),
       ),
