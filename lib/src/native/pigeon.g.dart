@@ -25,6 +25,57 @@ List<Object?> wrapResponse({Object? result, PlatformException? error, bool empty
   return <Object?>[error.code, error.message, error.details];
 }
 
+class MapOptions {
+  MapOptions({
+    required this.style,
+    required this.zoom,
+    required this.tilt,
+    required this.bearing,
+    this.center,
+    required this.listensOnClick,
+    required this.listensOnLongClick,
+  });
+
+  String style;
+
+  double zoom;
+
+  double tilt;
+
+  double bearing;
+
+  LngLat? center;
+
+  bool listensOnClick;
+
+  bool listensOnLongClick;
+
+  Object encode() {
+    return <Object?>[
+      style,
+      zoom,
+      tilt,
+      bearing,
+      center,
+      listensOnClick,
+      listensOnLongClick,
+    ];
+  }
+
+  static MapOptions decode(Object result) {
+    result as List<Object?>;
+    return MapOptions(
+      style: result[0]! as String,
+      zoom: result[1]! as double,
+      tilt: result[2]! as double,
+      bearing: result[3]! as double,
+      center: result[4] as LngLat?,
+      listensOnClick: result[5]! as bool,
+      listensOnLongClick: result[6]! as bool,
+    );
+  }
+}
+
 class LngLat {
   LngLat({
     required this.lng,
@@ -85,11 +136,14 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    }    else if (value is LngLat) {
+    }    else if (value is MapOptions) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
-    }    else if (value is ScreenLocation) {
+    }    else if (value is LngLat) {
       buffer.putUint8(130);
+      writeValue(buffer, value.encode());
+    }    else if (value is ScreenLocation) {
+      buffer.putUint8(131);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -100,8 +154,10 @@ class _PigeonCodec extends StandardMessageCodec {
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
       case 129: 
-        return LngLat.decode(readValue(buffer)!);
+        return MapOptions.decode(readValue(buffer)!);
       case 130: 
+        return LngLat.decode(readValue(buffer)!);
+      case 131: 
         return ScreenLocation.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -290,6 +346,8 @@ class MapLibreHostApi {
 abstract class MapLibreFlutterApi {
   static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
 
+  MapOptions getOptions();
+
   void onStyleLoaded();
 
   void onClick(LngLat point);
@@ -302,6 +360,25 @@ abstract class MapLibreFlutterApi {
 
   static void setUp(MapLibreFlutterApi? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
     messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+    {
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          try {
+            final MapOptions output = api.getOptions();
+            return wrapResponse(result: output);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
     {
       final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
           'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded$messageChannelSuffix', pigeonChannelCodec,

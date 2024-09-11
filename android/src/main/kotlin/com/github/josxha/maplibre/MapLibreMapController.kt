@@ -3,6 +3,7 @@ package com.github.josxha.maplibre
 import LngLat
 import MapLibreFlutterApi
 import MapLibreHostApi
+import MapOptions
 import ScreenLocation
 import android.content.Context
 import android.graphics.PointF
@@ -12,6 +13,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
+import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.maps.MapLibreMap
@@ -24,26 +26,50 @@ import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.sources.GeoJsonSource
 
 class MapLibreMapController(
-    private val viewId: Int,
+    viewId: Int,
     private val context: Context,
-    private val options: MapLibreMapOptions,
-    private val styleStringInitial: String,
     private val lifecycleProvider: LifecycleProvider,
-    private val binaryMessenger: BinaryMessenger
+    binaryMessenger: BinaryMessenger
 ) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibreHostApi,
     MapLibreMap.OnMapClickListener, MapLibreMap.OnMapLongClickListener {
     private val mapViewContainer = FrameLayout(context)
     private lateinit var mapLibreMap: MapLibreMap
-    private var mapView: MapView
-    private lateinit var flutterApi: MapLibreFlutterApi
+    private lateinit var mapView: MapView
+    private val flutterApi: MapLibreFlutterApi
+    private lateinit var initialOptions: MapOptions
     private var style: Style? = null
 
     init {
-        MapLibre.getInstance(context) // needs to be called before MapView gets created
-        mapView = MapView(context, options)
-        lifecycleProvider.getLifecycle()?.addObserver(this)
-        mapView.getMapAsync(this)
-        mapViewContainer.addView(mapView)
+        val channelSuffix = viewId.toString();
+        MapLibreHostApi.setUp(binaryMessenger, this, channelSuffix)
+        flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
+        flutterApi.getOptions { result: Result<MapOptions> ->
+            initialOptions = result.getOrThrow()
+            val cameraBuilder = CameraPosition.Builder()
+                .zoom(initialOptions.zoom)
+                .bearing(initialOptions.bearing)
+                .tilt(initialOptions.tilt)
+            if (initialOptions.center != null)
+                cameraBuilder.target(
+                    LatLng(
+                        initialOptions.center!!.lat,
+                        initialOptions.center!!.lng
+                    )
+                )
+
+            val options = MapLibreMapOptions.createFromAttributes(context)
+                .attributionEnabled(true)
+                .logoEnabled(true)
+                .textureMode(true)
+                .compassEnabled(true)
+                .camera(cameraBuilder.build())
+
+            MapLibre.getInstance(context) // needs to be called before MapView gets created
+            mapView = MapView(context, options)
+            lifecycleProvider.getLifecycle()?.addObserver(this)
+            mapView.getMapAsync(this)
+            mapViewContainer.addView(mapView)
+        }
     }
 
     override fun getView(): View {
@@ -52,12 +78,9 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        val channelSuffix = viewId.toString();
-        MapLibreHostApi.setUp(binaryMessenger, this, channelSuffix)
-        this.flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
         this.mapLibreMap.addOnMapClickListener(this)
         this.mapLibreMap.addOnMapLongClickListener(this)
-        val style = Style.Builder().fromUri(styleStringInitial)
+        val style = Style.Builder().fromUri(initialOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
             flutterApi.onStyleLoaded { }

@@ -4,23 +4,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/extensions.dart';
-import 'package:maplibre/src/native/pigeon.g.dart';
+import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 final class MapLibreMapStateNative extends State<MapLibreMap>
-    implements MapController, MapLibreFlutterApi {
-  late final MapLibreHostApi _hostApi;
+    implements MapController, pigeon.MapLibreFlutterApi {
+  late final pigeon.MapLibreHostApi _hostApi;
 
   MapOptions get options => widget.options;
 
   @override
   Widget build(BuildContext context) {
-    final creationParams = options.toJson();
     if (Platform.isAndroid) {
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
-        creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
       );
     } else if (Platform.isIOS) {
@@ -28,7 +26,6 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
-        creationParams: creationParams,
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
@@ -37,11 +34,27 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   void _onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
-    _hostApi = MapLibreHostApi(messageChannelSuffix: channelSuffix);
-    MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
+    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
+    pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
 
     widget.onMapCreated?.call(this);
   }
+
+  @override
+  pigeon.MapOptions getOptions() => pigeon.MapOptions(
+    style: options.style,
+    bearing: options.bearing,
+    zoom: options.zoom,
+    tilt: options.tilt,
+    center: options.center == null
+        ? null
+        : pigeon.LngLat(
+      lng: options.center!.lng.toDouble(),
+      lat: options.center!.lat.toDouble(),
+    ),
+    listensOnClick: options.onClick != null,
+    listensOnLongClick: options.onLongClick != null,
+  );
 
   @override
   Future<Marker> addMarker(Marker marker) async {
@@ -114,18 +127,18 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onStyleLoaded() => widget.onStyleLoaded?.call();
 
   @override
-  void onDoubleClick(LngLat point) =>
+  void onDoubleClick(pigeon.LngLat point) =>
       options.onDoubleClick?.call(Position(point.lng, point.lat));
 
   @override
-  void onSecondaryClick(LngLat point) =>
+  void onSecondaryClick(pigeon.LngLat point) =>
       options.onSecondaryClick?.call(Position(point.lng, point.lat));
 
   @override
-  void onClick(LngLat point) =>
+  void onClick(pigeon.LngLat point) =>
       options.onClick?.call(Position(point.lng, point.lat));
 
   @override
-  void onLongClick(LngLat point) =>
+  void onLongClick(pigeon.LngLat point) =>
       options.onLongClick?.call(Position(point.lng, point.lat));
 }

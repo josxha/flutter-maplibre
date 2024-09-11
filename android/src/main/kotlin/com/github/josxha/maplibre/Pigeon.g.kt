@@ -47,6 +47,42 @@ class FlutterError (
 ) : Throwable()
 
 /** Generated class from Pigeon that represents data sent in messages. */
+data class MapOptions (
+  val style: String,
+  val zoom: Double,
+  val tilt: Double,
+  val bearing: Double,
+  val center: LngLat? = null,
+  val listensOnClick: Boolean,
+  val listensOnLongClick: Boolean
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): MapOptions {
+      val style = pigeonVar_list[0] as String
+      val zoom = pigeonVar_list[1] as Double
+      val tilt = pigeonVar_list[2] as Double
+      val bearing = pigeonVar_list[3] as Double
+      val center = pigeonVar_list[4] as LngLat?
+      val listensOnClick = pigeonVar_list[5] as Boolean
+      val listensOnLongClick = pigeonVar_list[6] as Boolean
+      return MapOptions(style, zoom, tilt, bearing, center, listensOnClick, listensOnLongClick)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      style,
+      zoom,
+      tilt,
+      bearing,
+      center,
+      listensOnClick,
+      listensOnLongClick,
+    )
+  }
+}
+
+/** Generated class from Pigeon that represents data sent in messages. */
 data class LngLat (
   val lng: Double,
   val lat: Double
@@ -92,10 +128,15 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
     return when (type) {
       129.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          LngLat.fromList(it)
+          MapOptions.fromList(it)
         }
       }
       130.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          LngLat.fromList(it)
+        }
+      }
+      131.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           ScreenLocation.fromList(it)
         }
@@ -105,12 +146,16 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
     when (value) {
-      is LngLat -> {
+      is MapOptions -> {
         stream.write(129)
         writeValue(stream, value.toList())
       }
-      is ScreenLocation -> {
+      is LngLat -> {
         stream.write(130)
+        writeValue(stream, value.toList())
+      }
+      is ScreenLocation -> {
+        stream.write(131)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -293,6 +338,26 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     /** The codec used by MapLibreFlutterApi. */
     val codec: MessageCodec<Any?> by lazy {
       PigeonPigeonCodec()
+    }
+  }
+  fun getOptions(callback: (Result<MapOptions>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(null) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else if (it[0] == null) {
+          callback(Result.failure(FlutterError("null-error", "Flutter api returned null value for non-null return value.", "")))
+        } else {
+          val output = it[0] as MapOptions
+          callback(Result.success(output))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
     }
   }
   fun onStyleLoaded(callback: (Result<Unit>) -> Unit)

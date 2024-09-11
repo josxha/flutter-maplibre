@@ -59,6 +59,73 @@ template<class T> class ErrorOr {
 
 
 // Generated class from Pigeon that represents data sent in messages.
+class MapOptions {
+ public:
+  // Constructs an object setting all non-nullable fields.
+  explicit MapOptions(
+    const std::string& style,
+    double zoom,
+    double tilt,
+    double bearing,
+    bool listens_on_click,
+    bool listens_on_long_click);
+
+  // Constructs an object setting all fields.
+  explicit MapOptions(
+    const std::string& style,
+    double zoom,
+    double tilt,
+    double bearing,
+    const LngLat* center,
+    bool listens_on_click,
+    bool listens_on_long_click);
+
+  ~MapOptions() = default;
+  MapOptions(const MapOptions& other);
+  MapOptions& operator=(const MapOptions& other);
+  MapOptions(MapOptions&& other) = default;
+  MapOptions& operator=(MapOptions&& other) noexcept = default;
+  const std::string& style() const;
+  void set_style(std::string_view value_arg);
+
+  double zoom() const;
+  void set_zoom(double value_arg);
+
+  double tilt() const;
+  void set_tilt(double value_arg);
+
+  double bearing() const;
+  void set_bearing(double value_arg);
+
+  const LngLat* center() const;
+  void set_center(const LngLat* value_arg);
+  void set_center(const LngLat& value_arg);
+
+  bool listens_on_click() const;
+  void set_listens_on_click(bool value_arg);
+
+  bool listens_on_long_click() const;
+  void set_listens_on_long_click(bool value_arg);
+
+
+ private:
+  static MapOptions FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PigeonInternalCodecSerializer;
+  std::string style_;
+  double zoom_;
+  double tilt_;
+  double bearing_;
+  std::unique_ptr<LngLat> center_;
+  bool listens_on_click_;
+  bool listens_on_long_click_;
+
+};
+
+
+// Generated class from Pigeon that represents data sent in messages.
 class LngLat {
  public:
   // Constructs an object setting all fields.
@@ -76,6 +143,7 @@ class LngLat {
  private:
   static LngLat FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
+  friend class MapOptions;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
@@ -195,6 +263,9 @@ class MapLibreFlutterApi {
     flutter::BinaryMessenger* binary_messenger,
     const std::string& message_channel_suffix);
   static const flutter::StandardMessageCodec& GetCodec();
+  void GetOptions(
+    std::function<void(const MapOptions&)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
   void OnStyleLoaded(
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);

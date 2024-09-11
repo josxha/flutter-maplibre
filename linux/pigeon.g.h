@@ -9,6 +9,99 @@
 G_BEGIN_DECLS
 
 /**
+ * MaplibreMapOptions:
+ *
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPTIONS, GObject)
+
+/**
+ * maplibre_map_options_new:
+ * style: field in this object.
+ * zoom: field in this object.
+ * tilt: field in this object.
+ * bearing: field in this object.
+ * center: field in this object.
+ * listens_on_click: field in this object.
+ * listens_on_long_click: field in this object.
+ *
+ * Creates a new #MapOptions object.
+ *
+ * Returns: a new #MaplibreMapOptions
+ */
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, gboolean listens_on_click, gboolean listens_on_long_click);
+
+/**
+ * maplibre_map_options_get_style
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the style field of @object.
+ *
+ * Returns: the field value.
+ */
+const gchar* maplibre_map_options_get_style(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the zoom field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the tilt field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_tilt(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_bearing
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the bearing field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_bearing(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_center
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the center field of @object.
+ *
+ * Returns: the field value.
+ */
+MaplibreLngLat* maplibre_map_options_get_center(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_listens_on_click
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the listensOnClick field of @object.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_listens_on_long_click
+ * @object: a #MaplibreMapOptions.
+ *
+ * Gets the value of the listensOnLongClick field of @object.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_options_get_listens_on_long_click(MaplibreMapOptions* object);
+
+/**
  * MaplibreLngLat:
  *
  */
@@ -259,6 +352,58 @@ void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHos
  */
 void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.getOptions is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_get_options_response_is_error(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_get_options_response_get_error_code(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_get_options_response_get_error_message(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_get_options_response_get_error_details(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_return_value:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the return value for this response.
+ *
+ * Returns: a return value.
+ */
+MaplibreMapOptions* maplibre_map_libre_flutter_api_get_options_response_get_return_value(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnStyleLoadedResponse, maplibre_map_libre_flutter_api_on_style_loaded_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_STYLE_LOADED_RESPONSE, GObject)
 
 /**
@@ -486,6 +631,28 @@ G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApi, maplibre_map_libre_flutter_api,
  * Returns: a new #MaplibreMapLibreFlutterApi
  */
 MaplibreMapLibreFlutterApi* maplibre_map_libre_flutter_api_new(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ */
+void maplibre_map_libre_flutter_api_get_options(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_get_options() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiGetOptionsResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiGetOptionsResponse* maplibre_map_libre_flutter_api_get_options_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
  * maplibre_map_libre_flutter_api_on_style_loaded:

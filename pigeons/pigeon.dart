@@ -60,6 +60,8 @@ abstract interface class MapLibreHostApi {
 
 @FlutterApi()
 abstract interface class MapLibreFlutterApi {
+  MapOptions getOptions();
+
   void onStyleLoaded();
 
   void onClick(LngLat point);
@@ -69,6 +71,26 @@ abstract interface class MapLibreFlutterApi {
   void onDoubleClick(LngLat point);
 
   void onLongClick(LngLat point);
+}
+
+class MapOptions {
+  const MapOptions({
+    required this.style,
+    required this.zoom,
+    required this.center,
+    required this.tilt,
+    required this.bearing,
+    required this.listensOnClick,
+    required this.listensOnLongClick,
+  });
+
+  final String style;
+  final double zoom;
+  final double tilt;
+  final double bearing;
+  final LngLat? center;
+  final bool listensOnClick;
+  final bool listensOnLongClick;
 }
 
 class LngLat {

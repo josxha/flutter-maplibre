@@ -32,15 +32,6 @@ class MapOptions {
 
   /// Not supported on web
   final OnClickCallback? onLongClick;
-
-  Map<String, Object?> toJson() => <String, Object?>{
-        'style': style,
-        if (center != null) 'centerLng': center!.lng,
-        if (center != null) 'centerLat': center!.lat,
-        'zoom': zoom,
-        'tilt': tilt,
-        'bearing': bearing,
-      };
 }
 
 @immutable

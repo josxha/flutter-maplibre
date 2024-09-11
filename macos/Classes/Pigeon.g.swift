@@ -69,6 +69,51 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
 }
 
 /// Generated class from Pigeon that represents data sent in messages.
+struct MapOptions {
+  var style: String
+  var zoom: Double
+  var tilt: Double
+  var bearing: Double
+  var center: LngLat? = nil
+  var listensOnClick: Bool
+  var listensOnLongClick: Bool
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> MapOptions? {
+    let style = pigeonVar_list[0] as! String
+    let zoom = pigeonVar_list[1] as! Double
+    let tilt = pigeonVar_list[2] as! Double
+    let bearing = pigeonVar_list[3] as! Double
+    let center: LngLat? = nilOrValue(pigeonVar_list[4])
+    let listensOnClick = pigeonVar_list[5] as! Bool
+    let listensOnLongClick = pigeonVar_list[6] as! Bool
+
+    return MapOptions(
+      style: style,
+      zoom: zoom,
+      tilt: tilt,
+      bearing: bearing,
+      center: center,
+      listensOnClick: listensOnClick,
+      listensOnLongClick: listensOnLongClick
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      style,
+      zoom,
+      tilt,
+      bearing,
+      center,
+      listensOnClick,
+      listensOnLongClick,
+    ]
+  }
+}
+
+/// Generated class from Pigeon that represents data sent in messages.
 struct LngLat {
   var lng: Double
   var lat: Double
@@ -122,8 +167,10 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      return MapOptions.fromList(self.readValue() as! [Any?])
     case 130:
+      return LngLat.fromList(self.readValue() as! [Any?])
+    case 131:
       return ScreenLocation.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -133,11 +180,14 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
 
 private class PigeonPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? LngLat {
+    if let value = value as? MapOptions {
       super.writeByte(129)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? LngLat {
       super.writeByte(130)
+      super.writeValue(value.toList())
+    } else if let value = value as? ScreenLocation {
+      super.writeByte(131)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -311,6 +361,7 @@ class MapLibreHostApiSetup {
 }
 /// Generated protocol from Pigeon that represents Flutter messages that can be called from Swift.
 protocol MapLibreFlutterApiProtocol {
+  func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void)
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void)
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
@@ -326,6 +377,27 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   var codec: PigeonPigeonCodec {
     return PigeonPigeonCodec.shared
+  }
+  func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage(nil) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else if listResponse[0] == nil {
+        completion(.failure(PigeonError(code: "null-error", message: "Flutter api returned null value for non-null return value.", details: "")))
+      } else {
+        let result = listResponse[0] as! MapOptions
+        completion(.success(result))
+      }
+    }
   }
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"

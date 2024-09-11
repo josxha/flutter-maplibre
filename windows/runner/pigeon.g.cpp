@@ -28,6 +28,153 @@ FlutterError CreateConnectionError(const std::string channel_name) {
       EncodableValue(""));
 }
 
+// MapOptions
+
+MapOptions::MapOptions(
+  const std::string& style,
+  double zoom,
+  double tilt,
+  double bearing,
+  bool listens_on_click,
+  bool listens_on_long_click)
+ : style_(style),
+    zoom_(zoom),
+    tilt_(tilt),
+    bearing_(bearing),
+    listens_on_click_(listens_on_click),
+    listens_on_long_click_(listens_on_long_click) {}
+
+MapOptions::MapOptions(
+  const std::string& style,
+  double zoom,
+  double tilt,
+  double bearing,
+  const LngLat* center,
+  bool listens_on_click,
+  bool listens_on_long_click)
+ : style_(style),
+    zoom_(zoom),
+    tilt_(tilt),
+    bearing_(bearing),
+    center_(center ? std::make_unique<LngLat>(*center) : nullptr),
+    listens_on_click_(listens_on_click),
+    listens_on_long_click_(listens_on_long_click) {}
+
+MapOptions::MapOptions(const MapOptions& other)
+ : style_(other.style_),
+    zoom_(other.zoom_),
+    tilt_(other.tilt_),
+    bearing_(other.bearing_),
+    center_(other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr),
+    listens_on_click_(other.listens_on_click_),
+    listens_on_long_click_(other.listens_on_long_click_) {}
+
+MapOptions& MapOptions::operator=(const MapOptions& other) {
+  style_ = other.style_;
+  zoom_ = other.zoom_;
+  tilt_ = other.tilt_;
+  bearing_ = other.bearing_;
+  center_ = other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr;
+  listens_on_click_ = other.listens_on_click_;
+  listens_on_long_click_ = other.listens_on_long_click_;
+  return *this;
+}
+
+const std::string& MapOptions::style() const {
+  return style_;
+}
+
+void MapOptions::set_style(std::string_view value_arg) {
+  style_ = value_arg;
+}
+
+
+double MapOptions::zoom() const {
+  return zoom_;
+}
+
+void MapOptions::set_zoom(double value_arg) {
+  zoom_ = value_arg;
+}
+
+
+double MapOptions::tilt() const {
+  return tilt_;
+}
+
+void MapOptions::set_tilt(double value_arg) {
+  tilt_ = value_arg;
+}
+
+
+double MapOptions::bearing() const {
+  return bearing_;
+}
+
+void MapOptions::set_bearing(double value_arg) {
+  bearing_ = value_arg;
+}
+
+
+const LngLat* MapOptions::center() const {
+  return center_.get();
+}
+
+void MapOptions::set_center(const LngLat* value_arg) {
+  center_ = value_arg ? std::make_unique<LngLat>(*value_arg) : nullptr;
+}
+
+void MapOptions::set_center(const LngLat& value_arg) {
+  center_ = std::make_unique<LngLat>(value_arg);
+}
+
+
+bool MapOptions::listens_on_click() const {
+  return listens_on_click_;
+}
+
+void MapOptions::set_listens_on_click(bool value_arg) {
+  listens_on_click_ = value_arg;
+}
+
+
+bool MapOptions::listens_on_long_click() const {
+  return listens_on_long_click_;
+}
+
+void MapOptions::set_listens_on_long_click(bool value_arg) {
+  listens_on_long_click_ = value_arg;
+}
+
+
+EncodableList MapOptions::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(7);
+  list.push_back(EncodableValue(style_));
+  list.push_back(EncodableValue(zoom_));
+  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(bearing_));
+  list.push_back(center_ ? CustomEncodableValue(*center_) : EncodableValue());
+  list.push_back(EncodableValue(listens_on_click_));
+  list.push_back(EncodableValue(listens_on_long_click_));
+  return list;
+}
+
+MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
+  MapOptions decoded(
+    std::get<std::string>(list[0]),
+    std::get<double>(list[1]),
+    std::get<double>(list[2]),
+    std::get<double>(list[3]),
+    std::get<bool>(list[5]),
+    std::get<bool>(list[6]));
+  auto& encodable_center = list[4];
+  if (!encodable_center.IsNull()) {
+    decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
+  }
+  return decoded;
+}
+
 // LngLat
 
 LngLat::LngLat(
@@ -118,9 +265,12 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
   flutter::ByteStreamReader* stream) const {
   switch (type) {
     case 129: {
-        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 130: {
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 131: {
         return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -132,13 +282,18 @@ void PigeonInternalCodecSerializer::WriteValue(
   const EncodableValue& value,
   flutter::ByteStreamWriter* stream) const {
   if (const CustomEncodableValue* custom_value = std::get_if<CustomEncodableValue>(&value)) {
-    if (custom_value->type() == typeid(LngLat)) {
+    if (custom_value->type() == typeid(MapOptions)) {
       stream->WriteByte(129);
+      WriteValue(EncodableValue(std::any_cast<MapOptions>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(LngLat)) {
+      stream->WriteByte(130);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(ScreenLocation)) {
-      stream->WriteByte(130);
+      stream->WriteByte(131);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
@@ -439,6 +594,29 @@ MapLibreFlutterApi::MapLibreFlutterApi(
 
 const flutter::StandardMessageCodec& MapLibreFlutterApi::GetCodec() {
   return flutter::StandardMessageCodec::GetInstance(&PigeonInternalCodecSerializer::GetInstance());
+}
+
+void MapLibreFlutterApi::GetOptions(
+  std::function<void(const MapOptions&)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue();
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        const auto& return_value = std::any_cast<const MapOptions&>(std::get<CustomEncodableValue>(list_return_value->at(0)));
+        on_success(return_value);
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
+  });
 }
 
 void MapLibreFlutterApi::OnStyleLoaded(

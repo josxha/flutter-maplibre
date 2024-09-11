@@ -83,24 +83,9 @@ class MapLibreMapFactory(
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
-        val params = args as Map<*, *>
-        val camera = CameraPosition.Builder()
-            .zoom(params["zoom"] as Double)
-            .bearing(params["bearing"] as Double)
-            .tilt(params["tilt"] as Double)
-            .target(LatLng(params["centerLat"] as Double, params["centerLng"] as Double))
-            .build()
-        val options = MapLibreMapOptions.createFromAttributes(context)
-            .attributionEnabled(true)
-            .logoEnabled(true)
-            .textureMode(true)
-            .compassEnabled(true)
-            .camera(camera)
         return MapLibreMapController(
             viewId,
             context,
-            options,
-            params["style"] as String,
             lifecycleProvider,
             binaryMessenger,
         )
