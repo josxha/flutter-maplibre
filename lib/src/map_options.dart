@@ -7,6 +7,8 @@ class MapOptions {
     this.style = 'https://demotiles.maplibre.org/style.json',
     this.zoom = 0,
     this.center,
+    this.tilt = 0,
+    this.bearing = 0,
     this.controls = const [],
     this.onClick,
     this.onDoubleClick,
@@ -16,6 +18,8 @@ class MapOptions {
 
   final String style;
   final double zoom;
+  final double tilt;
+  final double bearing;
   final Position? center;
   final List<MapControl> controls;
   final OnClickCallback? onClick;
@@ -31,9 +35,11 @@ class MapOptions {
 
   Map<String, Object?> toJson() => <String, Object?>{
         'style': style,
+        if (center != null) 'centerLng': center!.lng,
+        if (center != null) 'centerLat': center!.lat,
         'zoom': zoom,
-        'center':
-            center == null ? null : {'lng': center!.lng, 'lat': center!.lat},
+        'tilt': tilt,
+        'bearing': bearing,
       };
 }
 

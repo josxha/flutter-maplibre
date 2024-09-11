@@ -69,13 +69,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) =>
       _hostApi.jumpTo(
         center: center.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch,
+        pitch: tilt,
       );
 
   @override
@@ -83,13 +83,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) =>
       _hostApi.flyTo(
         center: center.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch,
+        pitch: tilt,
       );
 
   @override

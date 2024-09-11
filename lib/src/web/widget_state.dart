@@ -34,6 +34,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             style: options.style,
             zoom: options.zoom,
             center: options.center?.toLngLat(),
+            bearing: options.bearing,
+            pitch: options.tilt,
           ),
         );
 
@@ -183,14 +185,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) async =>
       _map.jumpTo(
         interop.JumpToOptions(
           center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
-          pitch: pitch,
+          pitch: tilt,
         ),
       );
 
@@ -199,14 +201,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   }) async =>
       _map.flyTo(
         interop.FlyToOptions(
           center: center.toLngLat(),
           zoom: zoom,
           bearing: bearing,
-          pitch: pitch,
+          pitch: tilt,
         ),
       );
 

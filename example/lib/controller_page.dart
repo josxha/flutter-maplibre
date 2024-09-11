@@ -43,7 +43,7 @@ class _ControllerPageState extends State<ControllerPage> {
                       center: Position(-18.6874, 64.9445),
                       zoom: 5,
                       bearing: -50,
-                      pitch: 60,
+                      tilt: 60,
                     );
                   },
                   child: const Text('Animate to Iceland'),

@@ -10,6 +10,8 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
+import org.maplibre.android.camera.CameraPosition
+import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.maps.MapLibreMapOptions
 
 /** MapLibrePlugin */
@@ -82,17 +84,23 @@ class MapLibreMapFactory(
 
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val params = args as Map<*, *>
-
+        val camera = CameraPosition.Builder()
+            .zoom(params["zoom"] as Double)
+            .bearing(params["bearing"] as Double)
+            .tilt(params["tilt"] as Double)
+            .target(LatLng(params["centerLat"] as Double, params["centerLng"] as Double))
+            .build()
         val options = MapLibreMapOptions.createFromAttributes(context)
             .attributionEnabled(true)
             .logoEnabled(true)
             .textureMode(true)
             .compassEnabled(true)
+            .camera(camera)
         return MapLibreMapController(
             viewId,
             context,
             options,
-            "https://demotiles.maplibre.org/style.json",
+            params["style"] as String,
             lifecycleProvider,
             binaryMessenger,
         )

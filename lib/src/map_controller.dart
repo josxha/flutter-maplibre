@@ -13,7 +13,7 @@ abstract interface class MapController {
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
+    double? tilt,
   });
 
   /// Animate the map camera to a new location.
@@ -21,7 +21,7 @@ abstract interface class MapController {
     required Position center,
     required double zoom,
     required double bearing,
-    required double pitch,
+    required double tilt,
   });
 
   Future<Marker> addMarker(Marker marker);
