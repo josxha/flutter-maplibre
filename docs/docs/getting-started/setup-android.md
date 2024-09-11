@@ -35,24 +35,6 @@ buildscript {
 }
 ```
 
-## Minimum SDK version
-
-If you are using a flutter version below 3.22, you need to set the minimum SDK
-version to 21 or higher in `android/app/build.gradle`.
-
-```gradle title="android/app/build.gradle"
-    defaultConfig {
-        minSdk = 21 // previously flutter.minSdkVersion
-        // ...
-    }
-```
-
-If you are using the old apply script method in gradle, `minSdk` is named
-`minSdkVersion`.
-
-Starting from flutter 3.22, the minimum SDK version is set to 21 by default
-and you can keep `flutter.minSdkVersion`.
-
 ## Use the location feature
 
 If you want to show the user's location on the map you need to add
@@ -68,5 +50,6 @@ application manifest `android/app/src/main/AndroidManifest.xml`.
 ```
 
 Starting from Android API level 23 you also need to request it at runtime. This
-plugin does not handle this for you. Our example app uses the
-[flutter plugin "location"](https://pub.dev/packages/location) for this.
+plugin does not handle this for you. You can either use the flutter package
+[location](https://pub.dev/packages/location)
+or [permission_handler](https://pub.dev/packages/permission_handler) for this.

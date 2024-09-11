@@ -22,5 +22,12 @@ your `web/index.html` file:
 ```
 
 `^4.3` ensures that your app will always use the latest version of
-[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) v4 but not suddenly
+[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 4 but not
+suddenly
 use an incompatible version.
+
+If you want to always use the latest version use `latest` or use the full
+version number like `4.3.0` if you want to use a specific version.
+
+You can read about changes in maplibre-gl-js in
+the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGELOG.md).

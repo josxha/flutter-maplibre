@@ -19,7 +19,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class MapScreenState extends State<MapScreen> {
-  MapLibreMapController? _mapController;
+  MapController? _mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,7 @@ class MapScreenState extends State<MapScreen> {
           // wait for the onStyleLoadedCallback.
           _mapController = controller;
         },
-        initialCameraPosition: const CameraPosition(target: LatLng(0.0, 0.0)),
-        onStyleLoadedCallback: () {
+        onStyleLoaded: () {
           debugPrint('Map loaded 😎');
         },
       ),
@@ -43,3 +42,6 @@ class MapScreenState extends State<MapScreen> {
 The result should look something like this:
 
 ![First map](../img/first_map.jpg)
+
+If the map style isn't specified, the default MapLibre style is used. Use the 
+style of a tile provider or create and use your own map style.

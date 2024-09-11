@@ -1,13 +1,14 @@
 # Documentation
 
-The documentation website is built using [Docusaurus](https://docusaurus.io/), 
+The documentation website is built using [Docusaurus](https://docusaurus.io/),
 a static website generator.
-See the hosted documentation at [TODO insert url]()
+See the hosted documentation
+at [josxha.github.io/flutter-maplibre](https://josxha.github.io/flutter-maplibre)
 
 ## Run locally
 
-To run the website locally, you need to have Node.js and yarn installed. 
-You can Node.js from [here](https://nodejs.org/) and install yarn by running 
+To run the website locally, you need to have Node.js and yarn installed.
+You can Node.js from [here](https://nodejs.org/) and install yarn by running
 `npm install -g yarn`.
 
 Run the following commands to fetch the dependencies:
@@ -22,7 +23,7 @@ Then, run the following command to start the development server:
 yarn start
 ```
 
-This command starts a local development server. Most changes are reflected live 
+This command starts a local development server. Most changes are reflected live
 without having to restart the server.
 
 ### Create new docs version
@@ -42,7 +43,8 @@ gets added to the `versions.json` file.
 yarn build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+This command generates static content into the `build` directory and can be
+served using any static contents hosting service.
 
 ### Deployment
 

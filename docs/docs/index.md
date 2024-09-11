@@ -4,12 +4,9 @@ sidebar_position: 1
 
 # Overview
 
-This is the official documentation for Flutter MapLibre GL. 
+This is the documentation for the unofficial MapLibre Flutter package. 
 
-flutter-maplibre is a fork from flutter-mapbox-gl and provides a bindings to 
-MapLibre SDKs for iOS, Android and Web.
+flutter-maplibre provides bindings to MapLibre Native and MapLibre-GL-JS.
 
 - [Getting started](getting-started/add-dependency)
 - [Map Styles](map-styles)
-- [Features](category/features)
-- [FAQ](faq)

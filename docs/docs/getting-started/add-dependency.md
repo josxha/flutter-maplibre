@@ -15,7 +15,7 @@ or add it directly as a dependency to your `pubspec.yaml` file and run
 
 ```yaml title="pubspec.yaml"
 dependencies:
-  maplibre: ^0.20.0 # use the latest version found on pub.dev
+  maplibre: ^0.0.1 # use the latest version found on pub.dev
 ```
 
 You can find the latest version of the package on
