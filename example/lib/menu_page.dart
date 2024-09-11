@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
@@ -28,11 +29,12 @@ class MenuPage extends StatelessWidget {
             iconData: Icons.back_hand,
             location: CallbacksPage.location,
           ),
-          ItemCard(
-            label: 'Web Controls',
-            iconData: Icons.toggle_off,
-            location: WebControlsPage.location,
-          ),
+          if (kIsWeb)
+            ItemCard(
+              label: 'Web Controls',
+              iconData: Icons.toggle_off,
+              location: WebControlsPage.location,
+            ),
           ItemCard(
             label: 'Controller',
             iconData: Icons.api,
