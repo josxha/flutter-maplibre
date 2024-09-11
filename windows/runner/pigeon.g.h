@@ -58,6 +58,8 @@ template<class T> class ErrorOr {
 
 
 
+// The map options define initial values for the MapLibre map.
+//
 // Generated class from Pigeon that represents data sent in messages.
 class MapOptions {
  public:
@@ -85,25 +87,32 @@ class MapOptions {
   MapOptions& operator=(const MapOptions& other);
   MapOptions(MapOptions&& other) = default;
   MapOptions& operator=(MapOptions&& other) noexcept = default;
+  // The URL of the used map style.
   const std::string& style() const;
   void set_style(std::string_view value_arg);
 
+  // The initial zoom level of the map.
   double zoom() const;
   void set_zoom(double value_arg);
 
+  // The initial tilt of the map.
   double tilt() const;
   void set_tilt(double value_arg);
 
+  // The initial bearing of the map.
   double bearing() const;
   void set_bearing(double value_arg);
 
+  // The initial center coordinates of the map.
   const LngLat* center() const;
   void set_center(const LngLat* value_arg);
   void set_center(const LngLat& value_arg);
 
+  // If the native map should listen to click events.
   bool listens_on_click() const;
   void set_listens_on_click(bool value_arg);
 
+  // If the native map should listen to long click events.
   bool listens_on_long_click() const;
   void set_listens_on_long_click(bool value_arg);
 
@@ -125,6 +134,8 @@ class MapOptions {
 };
 
 
+// A longitude/latitude coordinate object
+//
 // Generated class from Pigeon that represents data sent in messages.
 class LngLat {
  public:
@@ -133,9 +144,11 @@ class LngLat {
     double lng,
     double lat);
 
+  // The longitude
   double lng() const;
   void set_lng(double value_arg);
 
+  // The latitude
   double lat() const;
   void set_lat(double value_arg);
 
@@ -153,6 +166,8 @@ class LngLat {
 };
 
 
+// A pixel location / location on the device screen
+//
 // Generated class from Pigeon that represents data sent in messages.
 class ScreenLocation {
  public:
@@ -161,9 +176,11 @@ class ScreenLocation {
     double x,
     double y);
 
+  // The x coordinate
   double x() const;
   void set_x(double value_arg);
 
+  // The y coordinate
   double y() const;
   void set_y(double value_arg);
 
@@ -205,34 +222,41 @@ class MapLibreHostApi {
   MapLibreHostApi(const MapLibreHostApi&) = delete;
   MapLibreHostApi& operator=(const MapLibreHostApi&) = delete;
   virtual ~MapLibreHostApi() {}
+  // Move the viewport of the map to a new location without any animation.
   virtual void JumpTo(
     const LngLat& center,
     const double* zoom,
     const double* bearing,
     const double* pitch,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Animate the viewport of the map to a new location.
   virtual void FlyTo(
     const LngLat& center,
     const double* zoom,
     const double* bearing,
     const double* pitch,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Convert a coordinate to a location on the screen.
   virtual void ToScreenLocation(
     double lng,
     double lat,
     std::function<void(ErrorOr<ScreenLocation> reply)> result) = 0;
+  // Convert a screen location to a coordinate.
   virtual void ToLngLat(
     double x,
     double y,
     std::function<void(ErrorOr<LngLat> reply)> result) = 0;
+  // Add a fill layer to the map style.
   virtual void AddFillLayer(
     const std::string& id,
     const std::string& source_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a circle layer to the map style.
   virtual void AddCircleLayer(
     const std::string& id,
     const std::string& source_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(
     const std::string& id,
     const std::string& data,
@@ -263,24 +287,31 @@ class MapLibreFlutterApi {
     flutter::BinaryMessenger* binary_messenger,
     const std::string& message_channel_suffix);
   static const flutter::StandardMessageCodec& GetCodec();
+  // Get the map options from dart.
   void GetOptions(
     std::function<void(const MapOptions&)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback for when the style has been loaded.
   void OnStyleLoaded(
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the user clicks on the map.
   void OnClick(
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the user performs a secondary click on the map
+  // (e.g. by default a click with the right mouse button).
   void OnSecondaryClick(
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the user performs a double click on the map.
   void OnDoubleClick(
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the user performs a long lasting click on the map.
   void OnLongClick(
     const LngLat& point,
     std::function<void(void)>&& on_success,

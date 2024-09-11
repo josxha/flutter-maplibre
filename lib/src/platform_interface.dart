@@ -15,5 +15,6 @@ abstract base class PlatformInterface {
   /// they register themselves.
   static PlatformInterface instance = PlatformNative();
 
+  /// Return a platform specific [State<MapLibreMap>] object.
   State<MapLibreMap> createWidgetState();
 }

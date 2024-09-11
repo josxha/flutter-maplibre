@@ -11,6 +11,7 @@ G_BEGIN_DECLS
 /**
  * MaplibreMapOptions:
  *
+ * The map options define initial values for the MapLibre map.
  */
 
 G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPTIONS, GObject)
@@ -35,7 +36,7 @@ MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, do
  * maplibre_map_options_get_style
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the style field of @object.
+ * The URL of the used map style.
  *
  * Returns: the field value.
  */
@@ -45,7 +46,7 @@ const gchar* maplibre_map_options_get_style(MaplibreMapOptions* object);
  * maplibre_map_options_get_zoom
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the zoom field of @object.
+ * The initial zoom level of the map.
  *
  * Returns: the field value.
  */
@@ -55,7 +56,7 @@ double maplibre_map_options_get_zoom(MaplibreMapOptions* object);
  * maplibre_map_options_get_tilt
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the tilt field of @object.
+ * The initial tilt of the map.
  *
  * Returns: the field value.
  */
@@ -65,7 +66,7 @@ double maplibre_map_options_get_tilt(MaplibreMapOptions* object);
  * maplibre_map_options_get_bearing
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the bearing field of @object.
+ * The initial bearing of the map.
  *
  * Returns: the field value.
  */
@@ -75,7 +76,7 @@ double maplibre_map_options_get_bearing(MaplibreMapOptions* object);
  * maplibre_map_options_get_center
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the center field of @object.
+ * The initial center coordinates of the map.
  *
  * Returns: the field value.
  */
@@ -85,7 +86,7 @@ MaplibreLngLat* maplibre_map_options_get_center(MaplibreMapOptions* object);
  * maplibre_map_options_get_listens_on_click
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the listensOnClick field of @object.
+ * If the native map should listen to click events.
  *
  * Returns: the field value.
  */
@@ -95,7 +96,7 @@ gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* object);
  * maplibre_map_options_get_listens_on_long_click
  * @object: a #MaplibreMapOptions.
  *
- * Gets the value of the listensOnLongClick field of @object.
+ * If the native map should listen to long click events.
  *
  * Returns: the field value.
  */
@@ -104,6 +105,7 @@ gboolean maplibre_map_options_get_listens_on_long_click(MaplibreMapOptions* obje
 /**
  * MaplibreLngLat:
  *
+ * A longitude/latitude coordinate object
  */
 
 G_DECLARE_FINAL_TYPE(MaplibreLngLat, maplibre_lng_lat, MAPLIBRE, LNG_LAT, GObject)
@@ -123,7 +125,7 @@ MaplibreLngLat* maplibre_lng_lat_new(double lng, double lat);
  * maplibre_lng_lat_get_lng
  * @object: a #MaplibreLngLat.
  *
- * Gets the value of the lng field of @object.
+ * The longitude
  *
  * Returns: the field value.
  */
@@ -133,7 +135,7 @@ double maplibre_lng_lat_get_lng(MaplibreLngLat* object);
  * maplibre_lng_lat_get_lat
  * @object: a #MaplibreLngLat.
  *
- * Gets the value of the lat field of @object.
+ * The latitude
  *
  * Returns: the field value.
  */
@@ -142,6 +144,7 @@ double maplibre_lng_lat_get_lat(MaplibreLngLat* object);
 /**
  * MaplibreScreenLocation:
  *
+ * A pixel location / location on the device screen
  */
 
 G_DECLARE_FINAL_TYPE(MaplibreScreenLocation, maplibre_screen_location, MAPLIBRE, SCREEN_LOCATION, GObject)
@@ -161,7 +164,7 @@ MaplibreScreenLocation* maplibre_screen_location_new(double x, double y);
  * maplibre_screen_location_get_x
  * @object: a #MaplibreScreenLocation.
  *
- * Gets the value of the x field of @object.
+ * The x coordinate
  *
  * Returns: the field value.
  */
@@ -171,7 +174,7 @@ double maplibre_screen_location_get_x(MaplibreScreenLocation* object);
  * maplibre_screen_location_get_y
  * @object: a #MaplibreScreenLocation.
  *
- * Gets the value of the y field of @object.
+ * The y coordinate
  *
  * Returns: the field value.
  */
@@ -639,6 +642,7 @@ MaplibreMapLibreFlutterApi* maplibre_map_libre_flutter_api_new(FlBinaryMessenger
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Get the map options from dart.
  */
 void maplibre_map_libre_flutter_api_get_options(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
@@ -661,6 +665,7 @@ MaplibreMapLibreFlutterApiGetOptionsResponse* maplibre_map_libre_flutter_api_get
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Callback for when the style has been loaded.
  */
 void maplibre_map_libre_flutter_api_on_style_loaded(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
@@ -684,6 +689,7 @@ MaplibreMapLibreFlutterApiOnStyleLoadedResponse* maplibre_map_libre_flutter_api_
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Callback when the user clicks on the map.
  */
 void maplibre_map_libre_flutter_api_on_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
@@ -707,6 +713,8 @@ MaplibreMapLibreFlutterApiOnClickResponse* maplibre_map_libre_flutter_api_on_cli
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Callback when the user performs a secondary click on the map
+ * (e.g. by default a click with the right mouse button).
  */
 void maplibre_map_libre_flutter_api_on_secondary_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
@@ -730,6 +738,7 @@ MaplibreMapLibreFlutterApiOnSecondaryClickResponse* maplibre_map_libre_flutter_a
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Callback when the user performs a double click on the map.
  */
 void maplibre_map_libre_flutter_api_on_double_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
@@ -753,6 +762,7 @@ MaplibreMapLibreFlutterApiOnDoubleClickResponse* maplibre_map_libre_flutter_api_
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
+ * Callback when the user performs a long lasting click on the map.
  */
 void maplibre_map_libre_flutter_api_on_long_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 

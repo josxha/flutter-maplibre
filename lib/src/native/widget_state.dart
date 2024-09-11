@@ -6,6 +6,8 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
+/// The implementation that gets used for state of the [MapLibreMap] widget on
+/// non-web platforms like android or ios.
 final class MapLibreMapStateNative extends State<MapLibreMap>
     implements MapController, pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
