@@ -21,12 +21,12 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Annotations')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 7, center: Position(9, 48)),
+        options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
           if (kIsWeb) { // This kind of Marker is only supported on web
             final _ = await _controller.addMarker(
-              Marker(point: Position(9, 48)),
+              Marker(point: Position(9.17, 47.68)),
             );
           }
           final geojson = await rootBundle

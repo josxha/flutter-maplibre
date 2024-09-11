@@ -54,7 +54,7 @@ class _ControllerPageState extends State<ControllerPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                center: Position(9, 48),
+                center: Position(9.17, 47.68),
               ),
               onMapCreated: (controller) => _controller = controller,
               onStyleLoaded: () async {
