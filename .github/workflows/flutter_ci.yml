@@ -30,6 +30,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           cache: true
+      - name: "Get flutter dependencies"
+        run: dart pub get
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
   build-android:
@@ -53,6 +55,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
+      - name: "Get flutter dependencies"
+        run: dart pub get
       - name: Build example APK
         run: flutter build apk
       - name: Upload apk as artifact
@@ -80,6 +84,8 @@ jobs:
 #      - uses: maxim-lobanov/setup-cocoapods@v1
 #        with:
 #          podfile-path: example/ios/Podfile.lock
+#      - name: "Get flutter dependencies"
+#        run: dart pub get
 #      - name: Build iOS package
 #        run: flutter build ios --simulator
 #      - name: Upload Runner.app as artifact
@@ -104,5 +110,7 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Get flutter dependencies"
+        run: dart pub get
       - name: Build web
         run: flutter build web
