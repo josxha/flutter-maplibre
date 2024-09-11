@@ -84,7 +84,6 @@ always welcome.
 ### Run code generation
 
 ```bash
-dart run build_runner build
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```
