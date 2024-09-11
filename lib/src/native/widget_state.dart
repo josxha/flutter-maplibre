@@ -10,7 +10,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     implements MapController, pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
 
-  MapOptions get options => widget.options;
+  MapOptions get _options => widget.options;
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +42,18 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
-        style: options.style,
-        bearing: options.bearing,
-        zoom: options.zoom,
-        tilt: options.tilt,
-        center: options.center == null
+        style: _options.style,
+        bearing: _options.bearing,
+        zoom: _options.zoom,
+        tilt: _options.tilt,
+        center: _options.center == null
             ? null
             : pigeon.LngLat(
-                lng: options.center!.lng.toDouble(),
-                lat: options.center!.lat.toDouble(),
+                lng: _options.center!.lng.toDouble(),
+                lat: _options.center!.lat.toDouble(),
               ),
-        listensOnClick: options.onClick != null,
-        listensOnLongClick: options.onLongClick != null,
+        listensOnClick: _options.onClick != null,
+        listensOnLongClick: _options.onLongClick != null,
       );
 
   @override
@@ -128,17 +128,17 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   void onDoubleClick(pigeon.LngLat point) =>
-      options.onDoubleClick?.call(Position(point.lng, point.lat));
+      _options.onDoubleClick?.call(Position(point.lng, point.lat));
 
   @override
   void onSecondaryClick(pigeon.LngLat point) =>
-      options.onSecondaryClick?.call(Position(point.lng, point.lat));
+      _options.onSecondaryClick?.call(Position(point.lng, point.lat));
 
   @override
   void onClick(pigeon.LngLat point) =>
-      options.onClick?.call(Position(point.lng, point.lat));
+      _options.onClick?.call(Position(point.lng, point.lat));
 
   @override
   void onLongClick(pigeon.LngLat point) =>
-      options.onLongClick?.call(Position(point.lng, point.lat));
+      _options.onLongClick?.call(Position(point.lng, point.lat));
 }
