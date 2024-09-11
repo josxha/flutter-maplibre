@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
+import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
@@ -19,6 +20,11 @@ class MenuPage extends StatelessWidget {
         maxCrossAxisExtent: 200,
         childAspectRatio: 1.5,
         children: const [
+          ItemCard(
+            label: 'Styled Map',
+            iconData: Icons.map,
+            location: StyledMapPage.location,
+          ),
           ItemCard(
             label: 'Annotations',
             iconData: Icons.location_on,

@@ -4,6 +4,7 @@ import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/menu_page.dart';
+import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(colorSchemeSeed: Colors.blue),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
+        StyledMapPage.location: (context) => const StyledMapPage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
         AnnotationsPage.location: (context) => const AnnotationsPage(),
         CallbacksPage.location: (context) => const CallbacksPage(),
