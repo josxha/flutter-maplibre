@@ -18,6 +18,9 @@ import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
 import org.maplibre.android.maps.Style
+import org.maplibre.android.style.layers.CircleLayer
+import org.maplibre.android.style.layers.FillLayer
+import org.maplibre.android.style.sources.GeoJsonSource
 
 
 class MapLibreMapController(
@@ -80,6 +83,7 @@ class MapLibreMapController(
         val latLng = LatLng(center.lat, center.lng);
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, zoom ?: 0.0)
         mapLibreMap.animateCamera(cameraUpdate)
+        callback(Result.success(Unit));
     }
 
     override fun toScreenLocation(
@@ -92,7 +96,30 @@ class MapLibreMapController(
     }
 
     override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
-        val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()));
+        val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()))
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
+    }
+
+    override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.addLayer(FillLayer(id, sourceId))
+        callback(Result.success(Unit))
+    }
+
+    override fun addCircleLayer(
+        id: String,
+        sourceId: String,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        mapLibreMap.style?.addLayer(CircleLayer(id, sourceId))
+        callback(Result.success(Unit))
+    }
+
+    override fun addGeoJsonSource(
+        id: String,
+        data: Map<String, Any?>,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        mapLibreMap.style?.addSource(GeoJsonSource(id))
+        callback(Result.success(Unit))
     }
 }

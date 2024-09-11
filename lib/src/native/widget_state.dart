@@ -8,15 +8,9 @@ import 'package:maplibre/src/native/pigeon.g.dart';
 
 final class MapLibreMapStateNative extends State<MapLibreMap>
     implements MapController {
-  late final  MapLibrePigeon _pigeon;
+  late final MapLibrePigeon _pigeon;
 
   MapOptions get options => widget.options;
-
-  @override
-  void initState() {
-    // TODO
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +42,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<Marker> addMarker(Marker marker) async {
-    // TODO: implement addMarker
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> addLayer({
-    required String id,
-    required String type,
-    required String source,
-  }) {
-    // TODO: implement addLayer
-    throw UnimplementedError();
+    throw UnimplementedError('addMarker() is only supported on web.');
   }
 
   @override
@@ -106,11 +89,29 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<void> addGeoJson({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) {
-    // TODO: implement addGeoJson
-    throw UnimplementedError();
+  Future<void> addLayer(Layer layer) async {
+    await switch (layer) {
+      FillLayer() =>
+          _pigeon.addFillLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+          ),
+      CircleLayer() =>
+          _pigeon.addCircleLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+          ),
+    };
+  }
+
+  @override
+  Future<void> addSource(Source source) async {
+    await switch (source) {
+      GeoJsonSource() =>
+          _pigeon.addGeoJsonSource(
+            id: source.id,
+            data: source.data,
+          ),
+    };
   }
 }

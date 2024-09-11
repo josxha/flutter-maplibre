@@ -44,6 +44,18 @@ abstract interface class MapLibrePigeon {
 
   @async
   LngLat toLngLat(double x, double y);
+
+  @async
+  void addFillLayer({required String id, required String sourceId});
+
+  @async
+  void addCircleLayer({required String id, required String sourceId});
+
+  @async
+  void addGeoJsonSource({
+    required String id,
+    required Map<String, Object?> data,
+  });
 }
 
 class LngLat {
