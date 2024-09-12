@@ -70,10 +70,10 @@ const config: Config = {
                     label: 'Docs',
                 },
                 {
-                    href: '/docs/faq',
-                    sidebarId: 'docsSidebar',
+                    href: '/compare-packages',
+                    sidebarId: 'comparePackages',
                     position: 'left',
-                    label: 'FAQ',
+                    label: 'Compare Packages',
                 },
                 {
                     type: 'docsVersionDropdown',
@@ -90,7 +90,7 @@ const config: Config = {
                     label: 'Demo App',
                 },
                 {
-                    href: 'https://github.com/maplibre/flutter-maplibre',
+                    href: 'https://github.com/josxha/flutter-maplibre',
                     position: 'right',
                     label: 'GitHub',
                 },
@@ -138,7 +138,7 @@ const config: Config = {
                         },
                         {
                             label: 'GitHub Discussions',
-                            href: 'https://github.com/maplibre/flutter-maplibre/discussions',
+                            href: 'https://github.com/josxha/flutter-maplibre/discussions',
                         },
                     ],
                 },
@@ -147,7 +147,7 @@ const config: Config = {
                     items: [
                         {
                             label: 'GitHub',
-                            href: 'https://github.com/maplibre/flutter-maplibre',
+                            href: 'https://github.com/josxha/flutter-maplibre',
                         },
                         {
                             label: 'pub.dev',

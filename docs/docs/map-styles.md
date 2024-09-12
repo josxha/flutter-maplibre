@@ -4,16 +4,16 @@ sidebar_position: 3
 
 # Map Styles
 
-Custom map styles can be used by setting the `style` parameter of the map 
+Custom map styles can be used by setting the `style` parameter of the map
 options like so:
 
 ```dart
 Widget build() {
-   return MapLibreMap(
+  return MapLibreMap(
       options: MapOptions(
-         style: 'https://demotiles.maplibre.org/style.json',
+        style: 'https://demotiles.maplibre.org/style.json',
       )
-   );
+  );
 }
 ```
 
@@ -35,3 +35,18 @@ For example:
 ```url
 https://tiles.example.com/{z}/{x}/{y}.vector.pbf?api_key={your_key}
 ```
+
+## Use existing styles
+
+Every tile provider provides map styles that you can use. Note, that the style
+needs to be compatible with the tile naming scheme. For example OpenMapTiles
+styles used by MapTiler are not compatible with Protomaps tiles.
+
+## Create a custom style
+
+Map styles are defined in JSON. MapLibre offers a style editor
+called [Maputnik](https://maplibre.org/maputnik)
+that allows to customize existing styles or create a new style from scratch.
+Other tile providers like MapBox have own editors you can use.
+
+![Maputnik Editor](/img/Maputnik.jpg)

@@ -17,8 +17,8 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         maplibre supports the highly customizable
-        Mapbox Vector Tiles (mvt) standard. You can customize the map style,
-        add markers, and much more.
+        Mapbox Vector Tiles (mvt) standard. You can either use an existing style
+        or create your own custom map style.
       </>
     ),
   },
@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Reliable and fast, maplibre is built on top of the MapLibre GL JS
-        for Web and MapLibre Native for iOS and Android to achieve native speed.
+        for Web and MapLibre Native for other platforms to achieve native speed.
       </>
     ),
   },
