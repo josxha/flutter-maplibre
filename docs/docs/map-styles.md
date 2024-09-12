@@ -49,4 +49,4 @@ called [Maputnik](https://maplibre.org/maputnik)
 that allows to customize existing styles or create a new style from scratch.
 Other tile providers like MapBox have own editors you can use.
 
-![Maputnik Editor](/img/Maputnik.jpg)
+![Maputnik Editor](/img/maputnik.jpg)
