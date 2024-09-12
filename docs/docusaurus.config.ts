@@ -110,10 +110,6 @@ const config: Config = {
                             to: '/docs/category/features',
                         },
                         {
-                            label: 'Frequent Questions',
-                            to: '/docs/faq',
-                        },
-                        {
                             label: 'API Reference',
                             href: 'https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html',
                         },
