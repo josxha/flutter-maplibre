@@ -114,11 +114,3 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web
-#      - name: Deploy to GitHub Pages
-#        if: github.repository_owner == 'josxha'
-#        uses: peaceiris/actions-gh-pages@v4
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_dir: example/build/web
-#          destination_dir: demo
-#          keep_files: true

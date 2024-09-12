@@ -8,10 +8,10 @@ const config: Config = {
     favicon: 'img/favicon-32x32.png',
 
     // Set the production url of your site here
-    url: 'https://josxha.github.io',
+    url: 'https://flutter-maplibre.pages.dev',
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/flutter-maplibre/',
+    baseUrl: '/',
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
@@ -79,7 +79,7 @@ const config: Config = {
                     label: 'API',
                 },
                 {
-                    href: "https://flutter-maplibre.pages.dev/",
+                    href: "pathname:///demo",
                     position: 'right',
                     label: 'Demo App',
                 },
@@ -145,12 +145,12 @@ const config: Config = {
                         },
                         {
                             label: 'Demo App',
-                            href: 'https://flutter-maplibre.pages.dev/',
+                            href: 'pathname:///demo',
                         },
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} MapLibre contributors`,
+            copyright: `Copyright © ${new Date().getFullYear()} josxha`,
         },
         prism: {
             theme: prismThemes.github,
