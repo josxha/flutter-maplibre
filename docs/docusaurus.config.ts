@@ -150,7 +150,7 @@ const config: Config = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} MapLibre contributors`,
+            copyright: `Copyright © ${new Date().getFullYear()} josxha`,
         },
         prism: {
             theme: prismThemes.github,
