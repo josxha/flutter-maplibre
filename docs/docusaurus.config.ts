@@ -70,12 +70,6 @@ const config: Config = {
                     label: 'Docs',
                 },
                 {
-                    href: '/compare-packages',
-                    sidebarId: 'comparePackages',
-                    position: 'left',
-                    label: 'Compare Packages',
-                },
-                {
                     type: 'docsVersionDropdown',
                     position: 'right',
                 },
