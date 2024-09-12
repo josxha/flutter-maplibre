@@ -13,19 +13,17 @@ concurrency:
 
 jobs:
   build:
-#    defaults:
-#      run:
-#        working-directory: docs
+    defaults:
+      run:
+        working-directory: docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Chance directory so that yarn.lock gets found
-        run: cd docs
       - name: Set up Node.js
         uses: actions/setup-node@v4
-        with:
-          cache: yarn
+#        with:
+#          cache: yarn
       - name: Install dependencies
         run: yarn install --immutable
       - name: Build
