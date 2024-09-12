@@ -79,7 +79,7 @@ const config: Config = {
                     label: 'API',
                 },
                 {
-                    href: "https://flutter-maplibre.pages.dev/",
+                    href: "/demo",
                     position: 'right',
                     label: 'Demo App',
                 },
@@ -145,7 +145,7 @@ const config: Config = {
                         },
                         {
                             label: 'Demo App',
-                            href: 'https://flutter-maplibre.pages.dev/',
+                            href: '/demo',
                         },
                     ],
                 },
