@@ -9,26 +9,45 @@
 [![stars](https://badgen.net/github/stars/josxha/flutter-maplibre?label=stars&color=green&icon=github)](https://github.com/josxha/flutter-maplibre/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/josxha/flutter-maplibre)](https://github.com/josxha/flutter-maplibre/issues)
 
-This package provides unofficial Flutter bindings for MapLibre libraries.
+This package provides unofficial Flutter bindings for MapLibre SDKs.
 
 - [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is used for web
 - [maplibre-native](https://github.com/maplibre/maplibre-native) (previously
   named maplibre-gl) is used for android and in the future for iOS,
   windows, macOS and Linux
 
-### Get started
+MapLibre is a permissive and open source solution for the MVT 
+(Mapbox Vector Tile) standard. By binding to native SDKs the package 
+accomplishes performant rendering while supporting a lot of complex 
+functionality.
 
-Check out the docs to learn how to get started. 
-https://josxha.github.io/flutter-maplibre/docs/get-started
+## Resources
+
+### Demo Application
+
+Check out the [hosted demo application](https://flutter-maplibre.pages.dev/demo)
+or dive into
+the [example app code](https://github.com/josxha/flutter-maplibre/tree/main/example/lib).
+
+### Get started & Documentation
+
+Visit the docs to learn how to get started with maplibre in your
+project: [Get Started](https://flutter-maplibre.pages.dev/docs/get-started)
+
+If you want to know more about the classes and properties of the package, have
+a look at
+the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html).
 
 ### State of implementation
 
-See https://josxha.github.io/flutter-maplibre/docs/features/supported-features
+This package is still a young package and in an early stage.
+While it offers a modern implementation, it currently lacks some
+functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/features/supported-features)
 
 ## Development & Contributing
 
 If you need a feature or experience a bug you want to fix contributions are
-always welcome.
+welcome.
 
 ### Run code generation
 
