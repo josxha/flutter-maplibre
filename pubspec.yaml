@@ -3,8 +3,8 @@ description: "Permissive and performant mapping library that supports Mapbox Vec
 version: 0.0.1
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
-homepage: https://github.io/josxha/flutter-maplibre
-documentation: https://github.io/josxha/flutter-maplibre/docs
+homepage: https://flutter-maplibre.pages.dev
+documentation: https://flutter-maplibre.pages.dev/docs
 
 platforms:
   android:

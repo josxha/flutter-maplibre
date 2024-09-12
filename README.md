@@ -45,7 +45,7 @@ the [example app code](https://github.com/josxha/flutter-maplibre/tree/main/exam
 ### Get started & Documentation
 
 Visit the docs to learn how to get started with maplibre in your
-project: [Get Started](https://flutter-maplibre.pages.dev/docs/get-started)
+project: [Get Started](https://flutter-maplibre.pages.dev/docs/category/getting-started)
 
 If you want to know more about the classes and properties of the package, have
 a look at
