@@ -5,7 +5,6 @@ repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://github.io/josxha/flutter-maplibre
 documentation: https://github.io/josxha/flutter-maplibre/docs
-publish_to: none
 
 platforms:
   android:
