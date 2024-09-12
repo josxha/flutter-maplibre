@@ -21,6 +21,6 @@ jobs:
         # with:
         #  cache: yarn
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --non-interactive
+        run: yarn install --immutable --non-interactive
       - name: Build
         run: yarn build
