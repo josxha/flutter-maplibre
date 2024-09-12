@@ -21,7 +21,6 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   geotypes: ^0.0.2
-  plugin_platform_interface: ^2.1.8
   web: ^1.0.0
 
 dev_dependencies:
