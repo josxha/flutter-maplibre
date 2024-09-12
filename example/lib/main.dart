@@ -3,6 +3,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
+import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(colorSchemeSeed: Colors.blue),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
+        KioskPage.location: (context) => const KioskPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
         AnnotationsPage.location: (context) => const AnnotationsPage(),
