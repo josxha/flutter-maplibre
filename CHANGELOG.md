@@ -1,3 +1,7 @@
-## 0.1.0
+## 0.0.1
 
-* TODO: Describe initial release.
+### New features
+
+- Initial release
+- Implement map for android and web
+- Add docs
