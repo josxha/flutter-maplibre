@@ -44,7 +44,7 @@ Check out the [hosted demo application](https://flutter-maplibre.pages.dev/demo)
 or dive into
 the [example app code](https://github.com/josxha/flutter-maplibre/tree/main/example/lib).
 
-### Get started & Documentation
+### Get Started & Documentation
 
 Visit the docs to learn how to get started with maplibre in your
 project: [Get Started](https://flutter-maplibre.pages.dev/docs/category/getting-started)
@@ -53,7 +53,7 @@ If you want to know more about the classes and properties of the package, have
 a look at
 the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html).
 
-### State of implementation
+### State of Implementation
 
 This package is still a young package and in an early stage.
 While it offers a modern implementation, it currently lacks some
@@ -64,14 +64,17 @@ functionality. [See our documentation to learn more.](https://flutter-maplibre.p
 If you need a feature or experience a bug you want to fix contributions are
 welcome.
 
-### Run code generation
+#### Run Code Generation
 
 ```bash
+flutter pub global activate pigeon # only once
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```
 
-### Test with WebAssembly
+#### Test with WebAssembly
+
+This package supports WebAssembly builds! 🥳
 
 ```bash
 flutter pub global activate dhttpd # only once
@@ -82,4 +85,4 @@ dhttpd '--headers=Cross-Origin-Embedder-Policy=credentialless;Cross-Origin-Opene
 
 or follow
 the [flutter documentation](https://docs.flutter.dev/platform-integration/web/wasm#serving-wasm-locally)
-about WebAssembly builds.
+about Flutter WASM builds.

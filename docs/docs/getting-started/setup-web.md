@@ -12,9 +12,7 @@ your `web/index.html` file:
 <html>
 <head>
     <!-- other html -->
-
     <!-- highlight-start -->
-    <!-- MapLibre -->
     <script src='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.js'></script>
     <link href='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.css'
           rel='stylesheet'/>

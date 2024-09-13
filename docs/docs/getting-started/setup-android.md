@@ -10,7 +10,7 @@ Ensure that you are using Kotlin version
 **1.9.0** or newer. You can check the most recent Kotlin version on
 [kotlinlang.org](https://kotlinlang.org/docs/releases.html#release-details).
 
-#### (new) Gradle with a declarative plugins block
+### (new) Gradle with a declarative plugins block
 
 Open `android/settings.gradle` and set the Kotlin version like this:
 
@@ -25,7 +25,7 @@ plugins {
 In case you can't find the `plugins {}` block your app still uses the old apply
 script method.
 
-#### (old) In a legacy apply script gradle file:
+### (old) In a legacy apply script gradle file
 
 Open `android/app/build.gradle` and set the Kotlin version like this:
 
@@ -52,15 +52,13 @@ android {
     defaultConfig {
         // ...
         // highlight-next-line
-        minSdk = 23
+        minSdk = 23 // previously flutter.minSdkVersion
         // ...
     }
 }
 ```
 
 ## Set the permissions
-
-
 
 If you want to show the user's location on the map you need to add
 the `ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION` permission in the
@@ -69,8 +67,10 @@ application manifest `android/app/src/main/AndroidManifest.xml`.
 ```xml title="android/app/src/main/AndroidManifest.xml"
 
 <manifest>
+    // highlight-start
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    // highlight-end
 </manifest>
 ```
 
