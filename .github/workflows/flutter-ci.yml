@@ -35,7 +35,7 @@ jobs:
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
 #  integration-test-ios:
-#    name: "Integration test iOS"
+#    name: "Integration Tests on iOS"
 #    runs-on: macOS-latest
 #    defaults:
 #      run:
@@ -55,6 +55,7 @@ jobs:
 #        env:
 #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
+    name: "Integration Tests on Android"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -70,6 +71,11 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: Run integration tests
@@ -102,10 +108,10 @@ jobs:
     defaults:
       run:
         working-directory: example
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: [ '3.22.3', '' ]
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.22.3', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -163,10 +169,10 @@ jobs:
     defaults:
       run:
         working-directory: example
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: [ '3.22.3', '' ]
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.22.3', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
