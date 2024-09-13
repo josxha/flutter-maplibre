@@ -59,7 +59,6 @@ jobs:
     strategy:
       matrix:
         api-level: [ 21, 35 ]
-      fail-fast: true
     steps:
       - uses: actions/checkout@v4
       - name: Setup Flutter SDK
