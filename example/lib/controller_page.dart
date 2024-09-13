@@ -72,9 +72,6 @@ class _ControllerPageState extends State<ControllerPage> {
                 center: Position(9.17, 47.68),
               ),
               onMapCreated: (controller) => _controller = controller,
-              onStyleLoaded: () async {
-                debugPrint('[MapLibreMap] onStyleLoadedCallback');
-              },
             ),
           ),
         ],
