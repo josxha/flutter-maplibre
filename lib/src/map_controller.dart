@@ -24,7 +24,9 @@ abstract interface class MapController {
     double? zoom,
     double? bearing,
     double? tilt,
-    Duration duration = const Duration(seconds: 2),
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
   });
 
   /// Add a [Marker] to the map.

@@ -68,9 +68,7 @@ class _ControllerPageState extends State<ControllerPage> {
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(
-                center: Position(9.17, 47.68),
-              ),
+              options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

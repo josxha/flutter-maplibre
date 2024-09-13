@@ -99,14 +99,16 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? tilt,
-    Duration duration = const Duration(seconds: 2),
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
   }) =>
       _hostApi.flyTo(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
         pitch: tilt,
-        durationMs: duration.inMilliseconds,
+        durationMs: nativeDuration.inMilliseconds,
       );
 
   @override
