@@ -55,10 +55,10 @@ jobs:
 #        env:
 #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [ 35 ]
+        api-level: [ 21, 35 ]
       fail-fast: true
     steps:
       - uses: actions/checkout@v4
