@@ -35,6 +35,25 @@ buildscript {
 }
 ```
 
+## Adjust the minSdk version of Android
+
+The `maplibre` package on Flutter
+uses [platform views](https://docs.flutter.dev/platform-integration/android/platform-views)
+to display the native map. This requires an Android SDK version of at least 23.
+
+Open your `android/app/build.gradle` file and ensure that it is set to 23 or 
+higher.
+
+```gradle title="android/app/build.gradle"
+android {
+    defaultConfig {
+        // ...
+        minSdk = 23
+        // ...
+    }
+}
+```
+
 ## Use the location feature
 
 If you want to show the user's location on the map you need to add
