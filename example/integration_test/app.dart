@@ -22,6 +22,7 @@ class _AppState extends State<App> {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreMap(
+          options: MapOptions(center: Position(0, 0)),
           onMapCreated: (controller) {
             debugPrint('onMapCreated');
             _controller = controller;

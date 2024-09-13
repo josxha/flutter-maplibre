@@ -47,7 +47,7 @@ jobs:
 #          model: 'iPhone 15'
 #      - uses: subosito/flutter-action@v2
 #        with:
-#          channel: 'stable'
+#          cache: true
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded --coverage
 #      - name: "Run Codecov"
@@ -70,7 +70,7 @@ jobs:
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          cache: true
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -88,6 +88,33 @@ jobs:
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  integration-test-web:
+    name: "Integration Tests on Web"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Start chromedriver"
+        run: |
+          sudo chromedriver --enable
+          chromedriver --port 4444 &
+      - name: "Run integration tests"
+        run: |
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/smoke_test.dart \
+            -d web-server \
+            --release \
+            --browser-name=chrome
   score:
     name: "Package score"
     runs-on: ubuntu-latest

@@ -17,6 +17,7 @@ Open `android/settings.gradle` and set the Kotlin version like this:
 ```gradle title="android/settings.gradle"
 plugins {
     // ...
+    // highlight-next-line
     id "org.jetbrains.kotlin.android" version "1.9.0" apply false
 }
 ```
@@ -30,6 +31,7 @@ Open `android/app/build.gradle` and set the Kotlin version like this:
 
 ```gradle title="android/app/build.gradle"
 buildscript {
+    // highlight-next-line
     ext.kotlin_version = '1.9.0'
     // ...
 }
@@ -39,7 +41,8 @@ buildscript {
 
 The `maplibre` package on Flutter
 uses [platform views](https://docs.flutter.dev/platform-integration/android/platform-views)
-to display the native map. This requires an Android SDK version of at least 23.
+to display the native map. This requires an Android SDK version of at least 23 
+(Android 6.0).
 
 Open your `android/app/build.gradle` file and ensure that it is set to 23 or 
 higher.
@@ -48,13 +51,16 @@ higher.
 android {
     defaultConfig {
         // ...
+        // highlight-next-line
         minSdk = 23
         // ...
     }
 }
 ```
 
-## Use the location feature
+## Set the permissions
+
+
 
 If you want to show the user's location on the map you need to add
 the `ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION` permission in the
