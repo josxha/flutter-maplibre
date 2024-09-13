@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_single_quotes, require_trailing_commas
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
@@ -30,27 +31,35 @@ class _ControllerPageState extends State<ControllerPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('jumpTo: start');
+                    debugPrint('jumpTo start');
                     await _controller.jumpTo(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
                       tilt: 0,
                       bearing: 0,
                     );
-                    debugPrint('jumpTo: end');
+                    debugPrint('jumpTo end');
                   },
                   child: const Text('Jump to New Zealand'),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('flyTo: start');
-                    await _controller.flyTo(
-                      center: Position(-18.6874, 64.9445),
-                      zoom: 5,
-                      bearing: -50,
-                      tilt: 60,
-                    );
-                    debugPrint('flyTo: end');
+                    debugPrint('flyTo start');
+                    try {
+                      await _controller.flyTo(
+                        center: Position(-18.6874, 64.9445),
+                        zoom: 5,
+                        bearing: -50,
+                        tilt: 60,
+                      );
+                      debugPrint('flyTo end');
+                    } catch (error) {
+                      final e = error as PlatformException;
+                      debugPrint(
+                        'flyTo cancelled: code: '
+                        '"${e.code}", message: "${e.message}"',
+                      );
+                    }
                   },
                   child: const Text('Fly to Iceland'),
                 ),

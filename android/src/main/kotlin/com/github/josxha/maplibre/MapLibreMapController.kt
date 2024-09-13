@@ -24,6 +24,7 @@ import org.maplibre.android.maps.Style
 import org.maplibre.android.style.layers.CircleLayer
 import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.sources.GeoJsonSource
+import kotlin.coroutines.cancellation.CancellationException
 
 class MapLibreMapController(
     viewId: Int,
@@ -125,7 +126,7 @@ class MapLibreMapController(
             durationMs.toInt(),
             object : MapLibreMap.CancelableCallback {
                 override fun onCancel() =
-                    callback(Result.failure(Exception("Animation cancelled.")))
+                    callback(Result.failure(CancellationException("Animation cancelled.")))
 
                 override fun onFinish() = callback(Result.success(Unit))
             })
