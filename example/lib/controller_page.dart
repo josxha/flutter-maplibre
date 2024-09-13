@@ -30,27 +30,29 @@ class _ControllerPageState extends State<ControllerPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    print('jumpTo 1');
+                    debugPrint('jumpTo: start');
                     await _controller.jumpTo(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
+                      tilt: 0,
+                      bearing: 0,
                     );
-                    print('jumpTo 2');
+                    debugPrint('jumpTo: end');
                   },
-                  child: const Text('Move to New Zealand'),
+                  child: const Text('Jump to New Zealand'),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    print('flyTo 1');
+                    debugPrint('flyTo: start');
                     await _controller.flyTo(
                       center: Position(-18.6874, 64.9445),
                       zoom: 5,
                       bearing: -50,
                       tilt: 60,
                     );
-                    print('flyTo 2');
+                    debugPrint('flyTo: end');
                   },
-                  child: const Text('Animate to Iceland'),
+                  child: const Text('Fly to Iceland'),
                 ),
               ],
             ),

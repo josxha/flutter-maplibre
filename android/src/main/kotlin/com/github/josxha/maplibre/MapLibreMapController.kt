@@ -100,7 +100,7 @@ class MapLibreMapController(
         if (center != null) camera.target(LatLng(center.lat, center.lng))
         if (zoom != null) camera.zoom(zoom)
         if (pitch != null) camera.tilt(pitch)
-        if (bearing != null) camera.zoom(bearing)
+        if (bearing != null) camera.bearing(bearing)
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
         mapLibreMap.moveCamera(cameraUpdate)
         callback(Result.success(Unit));
@@ -118,7 +118,7 @@ class MapLibreMapController(
         if (center != null) camera.target(LatLng(center.lat, center.lng))
         if (zoom != null) camera.zoom(zoom)
         if (pitch != null) camera.tilt(pitch)
-        if (bearing != null) camera.zoom(bearing)
+        if (bearing != null) camera.bearing(bearing)
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
         mapLibreMap.animateCamera(
             cameraUpdate,
