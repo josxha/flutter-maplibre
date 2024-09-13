@@ -57,6 +57,7 @@ jobs:
   integration-test-android:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         api-level: [ 21, 34 ]
     timeout-minutes: 30
