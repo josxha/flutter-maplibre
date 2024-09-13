@@ -72,9 +72,7 @@ class MapLibreMapController(
         }
     }
 
-    override fun getView(): View {
-        return mapViewContainer;
-    }
+    override fun getView(): View = mapViewContainer
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
@@ -88,31 +86,49 @@ class MapLibreMapController(
     }
 
     override fun dispose() {
+        // free any resources
     }
 
     override fun jumpTo(
-        center: LngLat,
+        center: LngLat?,
         zoom: Double?,
         bearing: Double?,
         pitch: Double?,
         callback: (Result<Unit>) -> Unit
     ) {
-        val latLng = LatLng(center.lat, center.lng);
-        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, zoom ?: 0.0)
+        val camera = CameraPosition.Builder()
+        if (center != null) camera.target(LatLng(center.lat, center.lng))
+        if (zoom != null) camera.zoom(zoom)
+        if (pitch != null) camera.tilt(pitch)
+        if (bearing != null) camera.zoom(bearing)
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
         mapLibreMap.moveCamera(cameraUpdate)
+        callback(Result.success(Unit));
     }
 
     override fun flyTo(
-        center: LngLat,
+        center: LngLat?,
         zoom: Double?,
         bearing: Double?,
         pitch: Double?,
+        durationMs: Long,
         callback: (Result<Unit>) -> Unit
     ) {
-        val latLng = LatLng(center.lat, center.lng);
-        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, zoom ?: 0.0)
-        mapLibreMap.animateCamera(cameraUpdate)
-        callback(Result.success(Unit));
+        val camera = CameraPosition.Builder()
+        if (center != null) camera.target(LatLng(center.lat, center.lng))
+        if (zoom != null) camera.zoom(zoom)
+        if (pitch != null) camera.tilt(pitch)
+        if (bearing != null) camera.zoom(bearing)
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
+        mapLibreMap.animateCamera(
+            cameraUpdate,
+            durationMs.toInt(),
+            object : MapLibreMap.CancelableCallback {
+                override fun onCancel() =
+                    callback(Result.failure(Exception("Animation cancelled.")))
+
+                override fun onFinish() = callback(Result.success(Unit))
+            })
     }
 
     override fun toScreenLocation(
