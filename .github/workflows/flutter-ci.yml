@@ -50,7 +50,7 @@ jobs:
 #          channel: 'stable'
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded --coverage
-#      - name: Run Codecov
+#      - name: "Run Codecov"
 #        uses: codecov/codecov-action@v4
 #        env:
 #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -75,6 +75,10 @@ jobs:
           arch: x86_64
           profile: Nexus 6
           script: flutter test integration_test --verbose
+      - name: "Run Codecov"
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   score:
     name: "Package score"
     runs-on: ubuntu-latest
