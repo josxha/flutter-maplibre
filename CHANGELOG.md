@@ -1,3 +1,7 @@
+## unreleased
+
+- fix `controller.jumpTo()` never returns
+
 ## 0.0.1+1
 
 - fix urls to website

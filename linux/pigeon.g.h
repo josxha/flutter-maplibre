@@ -189,7 +189,7 @@ G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiResponseHandle, maplibre_map_libre_h
  */
 typedef struct {
   void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_lng_lat)(double x, double y, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_fill_layer)(const gchar* id, const gchar* source_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
