@@ -29,19 +29,23 @@ class _ControllerPageState extends State<ControllerPage> {
               runSpacing: 8,
               children: [
                 OutlinedButton(
-                  onPressed: () => _controller.jumpTo(
-                    center: Position(172.4714, -42.4862),
-                    zoom: 4,
-                  ),
+                  onPressed: () {
+                    _controller.jumpTo(
+                      center: Position(172.4714, -42.4862),
+                      zoom: 4,
+                    );
+                  },
                   child: const Text('Move to New Zealand'),
                 ),
                 OutlinedButton(
-                  onPressed: () => _controller.flyTo(
-                    center: Position(-18.6874, 64.9445),
-                    zoom: 5,
-                    bearing: -50,
-                    pitch: 60,
-                  ),
+                  onPressed: () {
+                    _controller.flyTo(
+                      center: Position(-18.6874, 64.9445),
+                      zoom: 5,
+                      bearing: -50,
+                      tilt: 60,
+                    );
+                  },
                   child: const Text('Animate to Iceland'),
                 ),
               ],
@@ -50,12 +54,9 @@ class _ControllerPageState extends State<ControllerPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                center: Position(9, 48),
+                center: Position(9.17, 47.68),
               ),
-              onMapCreated: (controller) {
-                debugPrint('[MapLibreMap] onMapCreated');
-                _controller = controller;
-              },
+              onMapCreated: (controller) => _controller = controller,
               onStyleLoaded: () async {
                 debugPrint('[MapLibreMap] onStyleLoadedCallback');
               },

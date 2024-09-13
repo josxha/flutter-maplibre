@@ -1,81 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform_interface.dart';
 
-class MapController extends ChangeNotifier {
-  MapController({
-    required MapLibrePlatform maplibrePlatform,
-    required this.onStyleLoadedCallback,
-  }) : _maplibrePlatform = maplibrePlatform {
-    onStyleLoadedCallback?.call();
-  }
+/// The [MapController] can be used to control, update and manipulate a
+/// rendered [MapLibreMap].
+abstract interface class MapController {
+  /// Convert a latitude/longitude coordinate to a screen location.
+  Future<Offset> toScreenLocation(Position lngLat);
 
-  final MapLibrePlatform _maplibrePlatform;
-  final VoidCallback? onStyleLoadedCallback;
+  /// Get the latitude/longitude coordinate for a screen location.
+  Future<Position> toLngLat(Offset screenLocation);
 
-  @override
-  void dispose() {
-    super.dispose();
-    _maplibrePlatform.dispose();
-  }
-
-  Future<Marker> addMarker(Marker marker) async =>
-      _maplibrePlatform.addMarker(marker);
-
-  Future<void> addGeoJson({
-    required String id,
-    required Map<String, Object?> geoJson,
-  }) async {
-    await _maplibrePlatform.addGeoJsonSource(id: id, geoJson: geoJson);
-    await _maplibrePlatform.addLayer(
-      id: '$id-fill',
-      type: 'fill',
-      source: id,
-    );
-    await _maplibrePlatform.addLayer(
-      id: '$id-line',
-      type: 'line',
-      source: id,
-    );
-    await _maplibrePlatform.addLayer(
-      id: '$id-symbol',
-      type: 'symbol',
-      source: id,
-    );
-  }
-
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    // TODO throws an exception "Field '_controller' has not been initialized."
-    return _maplibrePlatform.toScreenLocation(lngLat);
-  }
-
-  Future<Position> toLngLat(Offset screenLocation) async {
-    return _maplibrePlatform.toLngLat(screenLocation);
-  }
-
+  /// Instantly move the map camera to a new location.
   Future<void> jumpTo({
     required Position center,
     double? zoom,
     double? bearing,
-    double? pitch,
-  }) async =>
-      _maplibrePlatform.jumpTo(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
-      );
+    double? tilt,
+  });
 
+  /// Animate the map camera to a new location.
   Future<void> flyTo({
     required Position center,
     required double zoom,
     required double bearing,
-    required double pitch,
-  }) async =>
-      _maplibrePlatform.flyTo(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
-      );
+    required double tilt,
+  });
+
+  /// Add a [Marker] to the map.
+  ///
+  /// Only supported on web.
+  Future<Marker> addMarker(Marker marker);
+
+  /// Add a new source to the map.
+  Future<void> addSource(Source source);
+
+  /// Add a new layer to the map. The source must be added before adding it to
+  /// the map.
+  Future<void> addLayer(Layer layer);
 }

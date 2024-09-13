@@ -1,7 +1,9 @@
 part of 'interop.dart';
 
+/// A mouse event on the map.
 @JS()
 extension type MapMouseEvent._(JSObject _) implements JSObject {
+  /// Create a new [MapMouseEvent].
   external MapMouseEvent();
 
   external Map target;
@@ -9,6 +11,7 @@ extension type MapMouseEvent._(JSObject _) implements JSObject {
   external JSObject originalEvent;
 }
 
+/// Abstract class for type safe event types.
 abstract class MapEventType {
   /// Fired when a pointing device (usually a mouse) is pressed and released at
   /// the same point on the map.
@@ -24,4 +27,7 @@ abstract class MapEventType {
   /// Note: Under normal conditions, this event will be preceded by two click
   /// events.
   static const dblclick = 'dblclick';
+
+  /// Fired when the style has been loaded.
+  static const load = 'load';
 }

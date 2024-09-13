@@ -14,28 +14,31 @@ class CallbacksPage extends StatefulWidget {
 }
 
 class _CallbacksPageState extends State<CallbacksPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Callbacks')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(9, 48),
-          onClick: (point) =>
-              debugPrint('onTap: ${point.lng}, ${point.lat}'),
+          center: Position(9.17, 47.68),
+          onClick: (point) => _print('onTap: ${point.lng}, ${point.lat}'),
           onDoubleClick: (point) =>
-              debugPrint('onDoubleClick: ${point.lng}, ${point.lat}'),
+              _print('onDoubleClick: ${point.lng}, ${point.lat}'),
           onSecondaryClick: (point) =>
-              debugPrint('onSecondaryClick: ${point.lng}, ${point.lat}'),
+              _print('onSecondaryClick: ${point.lng}, ${point.lat}'),
+          onLongClick: (point) =>
+              _print('onLongClick: ${point.lng}, ${point.lat}'),
         ),
-        onMapCreated: (controller) {
-          debugPrint('[MapLibreMap] onMapCreated');
-        },
-        onStyleLoaded: () async {
-          debugPrint('[MapLibreMap] onStyleLoadedCallback');
-        },
+        onMapCreated: (controller) => _print('onMapCreated'),
+        onStyleLoaded: () => _print('onStyleLoadedCallback'),
       ),
     );
+  }
+
+  void _print(String message) {
+    debugPrint('[MapLibreMap] $message');
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 }

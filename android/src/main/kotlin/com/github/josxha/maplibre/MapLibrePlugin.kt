@@ -1,12 +1,20 @@
 package com.github.josxha.maplibre
 
+import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.common.StandardMessageCodec
+import io.flutter.plugin.platform.PlatformView
+import io.flutter.plugin.platform.PlatformViewFactory
+import org.maplibre.android.camera.CameraPosition
+import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.maps.MapLibreMapOptions
 
-/** MaplibrePlugin */
+/** MapLibrePlugin */
 class MapLibrePlugin : FlutterPlugin, ActivityAware {
 
     private var lifecycle: Lifecycle? = null
@@ -67,4 +75,23 @@ object FlutterLifecycleAdapter {
             null
         }
     }
+}
+
+class MapLibreMapFactory(
+    private val lifecycleProvider: LifecycleProvider,
+    private val binaryMessenger: BinaryMessenger
+) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+
+    override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
+        return MapLibreMapController(
+            viewId,
+            context,
+            lifecycleProvider,
+            binaryMessenger,
+        )
+    }
+}
+
+interface LifecycleProvider {
+    fun getLifecycle(): Lifecycle?
 }

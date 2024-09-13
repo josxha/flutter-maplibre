@@ -1,13 +1,20 @@
 name: maplibre
-description: "Unofficial MapLibre bindings for Flutter"
-version: 0.1.0
-repository: https://github.com/josxha/flutter_maplibre
-issue_tracker: https://github.com/josxha/flutter_maplibre/issues
-publish_to: none
+description: "Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs"
+version: 0.0.1+1
+repository: https://github.com/josxha/flutter-maplibre
+issue_tracker: https://github.com/josxha/flutter-maplibre/issues
+homepage: https://flutter-maplibre.pages.dev
+documentation: https://flutter-maplibre.pages.dev/docs
+
+topics: [ map, maplibre, mvt ]
+
+platforms:
+  android:
+  web:
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
-  flutter: '>=3.3.0'
+  flutter: '>=3.22.0'
 
 dependencies:
   flutter:
@@ -15,7 +22,6 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   geotypes: ^0.0.2
-  plugin_platform_interface: ^2.1.8
   web: ^1.0.0
 
 dev_dependencies:
@@ -40,5 +46,5 @@ flutter:
       windows:
         pluginClass: MaplibrePluginCApi
       web:
-        pluginClass: MapLibreWeb
-        fileName: src/web/web.dart
+        pluginClass: PlatformWeb
+        fileName: src/web/platform_web.dart

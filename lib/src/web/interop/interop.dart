@@ -12,9 +12,11 @@ part 'controls.dart';
 part 'events.dart';
 part 'map.dart';
 
+/// A simple x/y [Point] class for JavaScript.
 @anonymous
 @JS()
 extension type Point._(JSObject _) implements JSObject {
+  /// Create a new JS [Point].
   external factory Point(num x, num y);
 
   external num x;

@@ -21,7 +21,7 @@ class _WebControlsPageState extends State<WebControlsPage> {
       body: MapLibreMap(
         options: MapOptions(
           zoom: 4,
-          center: Position(9, 48),
+          center: Position(9.17, 47.68),
           controls: const [
             ScaleControl(),
             GeolocateControl(),
@@ -30,12 +30,6 @@ class _WebControlsPageState extends State<WebControlsPage> {
             NavigationControl(visualizePitch: true),
           ],
         ),
-        onMapCreated: (controller) {
-          debugPrint('[MapLibreMap] onMapCreated');
-        },
-        onStyleLoaded: () async {
-          debugPrint('[MapLibreMap] onStyleLoadedCallback');
-        },
       ),
     );
   }

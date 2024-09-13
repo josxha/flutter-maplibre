@@ -1,96 +1,83 @@
 # MapLibre for Flutter
 
-This package provides unofficial Flutter bindings for MapLibre libraries.
+[![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
+[![likes](https://img.shields.io/pub/likes/maplibre?logo=flutter)](https://pub.dev/packages/maplibre)
+[![Pub Points](https://img.shields.io/pub/points/maplibre)](https://pub.dev/packages/maplibre/score)
+[![Pub Popularity](https://img.shields.io/pub/popularity/maplibre)](https://pub.dev/packages/maplibre)
+
+[![GitHub last commit](https://img.shields.io/github/last-commit/josxha/flutter-maplibre)](https://github.com/josxha/flutter-maplibre)
+[![stars](https://badgen.net/github/stars/josxha/flutter-maplibre?label=stars&color=green&icon=github)](https://github.com/josxha/flutter-maplibre/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/josxha/flutter-maplibre)](https://github.com/josxha/flutter-maplibre/issues)
+
+This package provides unofficial Flutter bindings for MapLibre SDKs.
 
 - [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is used for web
 - [maplibre-native](https://github.com/maplibre/maplibre-native) (previously
-  named maplibre-gl) is used for android, iOS,
+  named maplibre-gl) is used for android and in the future for iOS,
   windows, macOS and Linux
 
-### What is the difference to [maplibre_gl](https://pub.dev/packages/maplibre_gl)?
+MapLibre is a permissive and open source solution for the MVT 
+(Mapbox Vector Tile) standard. By binding to native SDKs the package 
+accomplishes performant rendering while supporting a lot of complex 
+functionality.
 
-Both, `maplibre_gl` and `maplibre` try to solve the same purpose to create
-bindings between the
-platform specific MapLibre SDK and Flutter. `maplibre_gl` is a fork
-of `mapbox_gl` and already some
-years around. `maplibre` on the other hand is a brand new and fresh
-implementation. It tries to
-provide the following improvements:
+<table>
+<thead>
+<th>Use custom styles for your map</th>
+<th>Tilt or rotate your map</th>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" /></td>
+<td><img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" /></td>
+</tr>
+</tbody>
+</table>
 
-1. A WebAssembly compatible web implementation using the new JavaScript interop
-   from `package:web`
-   and `js_interop`.
-2. Zero cost JavaScript interop
-   using [extension types](https://dart.dev/language/extension-types)
-   that got delivered
-   in [Dart 3.3](https://medium.com/dartlang/dart-3-3-325bf2bf6c13).
-3. More type safety and reducing the amount of platform custom code using code
-   generation with [pigeon](https://pub.dev/packages/pigeon).
-4. No legacy code or workarounds in the code base (with the risk of not yet
-   including necessary
-   fixes).
-5. Get rid of code where the licensing is not clear. For example some files
-   have
-   a `Copyright 2018 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.`
-   header but the LICENSE file doesn't mention it.
-6. Using Kotlin instead of Java to benefit from null safety and reduce potential
-   NullPointerExceptions.
-7. Keep all platforms in one package to simplify the release cycle. Having
-   multiple packages is a potential cause of bugs (e.g.
-   https://github.com/maplibre/flutter-maplibre-gl/pull/476)
-8. Use [geotypes](https://pub.dev/packages/geotypes) which are
-   GeoJSON compatible
-   ([RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) compliant). This
-   makes it compatible with all the functionality
-   from [dart_turf](https://pub.dev/packages/turf).
+## Resources
+
+### Demo Application
+
+Check out the [hosted demo application](https://flutter-maplibre.pages.dev/demo)
+or dive into
+the [example app code](https://github.com/josxha/flutter-maplibre/tree/main/example/lib).
+
+### Get started & Documentation
+
+Visit the docs to learn how to get started with maplibre in your
+project: [Get Started](https://flutter-maplibre.pages.dev/docs/category/getting-started)
+
+If you want to know more about the classes and properties of the package, have
+a look at
+the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html).
 
 ### State of implementation
 
-This is a broad orientation about what functionality could be added. The list
-is orientated on MapLibre GL JS and the flutter-maplibre-gl map controller.
-Some controller methods will be changed to provide a different annotation API.
-
-| Feature                                  | web | android | iOS | windows | macOS | linux |
-|------------------------------------------|-----|---------|-----|---------|-------|-------|
-| Map                                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| MapController                            | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| Web ScaleControl                         | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web TerrainControl                       | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web AttributionControl                   | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web GeolocateControl                     | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web FullscreenControl                    | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Web LogoControl                          | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| NavigationControl                        | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Offline                                  | ➖   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| click callback                           | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| long click callback                      | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| secondary click callback                 | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.jumpTo()                      | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| controller.flyTo()                       | ✅   | ✅       | ❌   | ❌       | ❌     | ❌     |
-| controller.addSource()                   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.addLayer()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setMyLocationTrackingMode()   | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.setMapLanguage()              | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toScreenLocation()            | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.toLatLng()                    | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| controller.getMetersPerPixelAtLatitude() | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-
-Support for windows, macOS and linux is currently not possible because of the
-lack of platform views of these platforms.
-
-- Windows: https://github.com/flutter/flutter/issues/31713
-- MacOS: https://github.com/flutter/flutter/issues/41722
-- Linux: https://github.com/flutter/flutter/issues/41724
+This package is still a young package and in an early stage.
+While it offers a modern implementation, it currently lacks some
+functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/features/supported-features)
 
 ## Development & Contributing
 
 If you need a feature or experience a bug you want to fix contributions are
-always welcome.
+welcome.
 
 ### Run code generation
 
 ```bash
-dart run build_runner build
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
 ```
+
+### Test with WebAssembly
+
+```bash
+flutter pub global activate dhttpd # only once
+cd example
+flutter build web --wasm
+dhttpd '--headers=Cross-Origin-Embedder-Policy=credentialless;Cross-Origin-Opener-Policy=same-origin' --path=build/web
+```
+
+or follow
+the [flutter documentation](https://docs.flutter.dev/platform-integration/web/wasm#serving-wasm-locally)
+about WebAssembly builds.
