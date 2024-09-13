@@ -34,7 +34,7 @@ jobs:
         run: dart pub get
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
-#  integration_test_ios:
+#  integration-test-ios:
 #    name: "Integration test iOS"
 #    runs-on: macOS-latest
 #    defaults:
@@ -54,6 +54,27 @@ jobs:
 #        uses: codecov/codecov-action@v4
 #        env:
 #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  integration-test-android:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api-level: [ 35 ]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          profile: Nexus 6
+          script: flutter test integration_test --verbose
   score:
     name: "Package score"
     runs-on: ubuntu-latest
