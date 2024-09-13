@@ -7,13 +7,18 @@ import 'app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('integration tests', () {
+  group('controller', () {
     testWidgets(
-      'show map',
+      'render map',
       (tester) async {
-        await tester.pumpWidget(const App());
+        late final MapController ctrl;
+        final app = App(
+          onMapCreated: (controller) => ctrl = controller,
+        );
+        await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         expect(tester.allWidgets.any((w) => w is MapLibreMap), true);
+        await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
       },
     );
   });

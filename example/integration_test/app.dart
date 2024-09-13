@@ -5,16 +5,15 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
+class App extends StatelessWidget {
+  const App({
+    super.key,
+    this.onMapCreated,
+    this.onStyleLoaded,
+  });
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  // ignore: unused_field
-  late final MapController _controller;
+  final MapCreatedCallback? onMapCreated;
+  final VoidCallback? onStyleLoaded;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +22,8 @@ class _AppState extends State<App> {
       home: Scaffold(
         body: MapLibreMap(
           options: MapOptions(center: Position(0, 0)),
-          onMapCreated: (controller) {
-            debugPrint('onMapCreated');
-            _controller = controller;
-          },
-          onStyleLoaded: () {
-            debugPrint('onStyleLoaded');
-          },
+          onMapCreated: onMapCreated,
+          onStyleLoaded: onStyleLoaded,
         ),
       ),
     );
