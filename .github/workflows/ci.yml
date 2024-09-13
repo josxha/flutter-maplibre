@@ -1,4 +1,4 @@
-name: Flutter CI
+name: CI
 
 on:
   push:
@@ -88,8 +88,9 @@ jobs:
         run: dart pub global activate coverde
       - name: "Convert converage data"
         run: |
-          coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --filters \.g\.dart
-          coverde value -i coverage/filtered.lcov.info > MELOS_ROOT_PATH/coverage/result.txt
+          coverde filter --input coverage/lcov.info --output coverage/filtered.lcov.info --filters \.g\.dart
+          cd ..
+          coverde value -i coverage/filtered.lcov.info > coverage/result.txt
       - name: "Run Codecov"
         uses: codecov/codecov-action@v4
         env:
