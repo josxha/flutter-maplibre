@@ -111,8 +111,7 @@ jobs:
         run: flutter pub get
       - name: "Start chromedriver"
         run: |
-          sudo chromedriver --enable
-          chromedriver --port 4444 &
+          sudo chromedriver --enable --port 4444 &
       - name: "Run integration tests"
         run: |
           flutter drive \
