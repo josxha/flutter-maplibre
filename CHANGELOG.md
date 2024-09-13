@@ -1,6 +1,8 @@
 ## unreleased
 
-- fix `controller.jumpTo()` never returns
+- add `duration` parameter to `flyTo()`
+- fix `jumpTo()` never returns
+
 
 ## 0.0.1+1
 
