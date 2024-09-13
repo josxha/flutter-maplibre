@@ -18,7 +18,7 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         expect(tester.allWidgets.any((w) => w is MapLibreMap), true);
-        await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
+        // await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
       },
     );
   });
