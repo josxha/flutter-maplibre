@@ -1,0 +1,204 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+# Ensure that new pushes/updates cancel running jobs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: "Check formatting"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: Lint analysis
+        run: dart format --set-exit-if-changed .
+  lint:
+    name: "Static code analysis"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Lint analysis
+        run: dart analyze --fatal-warnings --fatal-infos
+#  integration-test-ios:
+#    name: "Integration Tests on iOS"
+#    runs-on: macOS-latest
+#    defaults:
+#      run:
+#        working-directory: example
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: futureware-tech/simulator-action@v3
+#        with:
+#          model: 'iPhone 15'
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          cache: true
+#      - run: flutter pub get
+#      - run: flutter test integration_test --no-pub -r expanded
+  integration-test-android:
+    name: "Integration Tests on Android"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [ 23 ] # TODO add 34
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          emulator-boot-timeout: 1800 # 30 minutes
+          script: cd example && flutter test integration_test -r expanded --timeout=none
+  integration-test-web:
+    name: "Integration Tests on Web"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Start chromedriver"
+        run: |
+          sudo chromedriver --enable --port=4444 &
+      - name: "Run integration tests"
+        run: |
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/smoke_test.dart \
+            -d web-server \
+            --release \
+            --browser-name=chrome
+  score:
+    name: "Package score"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: Install pana
+        run: dart pub global activate pana
+      - name: Check package score
+        run: pana --exit-code-threshold 0 --no-dartdoc .
+  build-android:
+    name: "Build Android APK"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.22.3', '' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build example APK
+        run: flutter build apk
+      - name: Upload apk as artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ matrix.sdk == '' }}
+        with:
+          name: maplibre-flutter-demo.apk
+          path: example/build/app/outputs/flutter-apk/app-release.apk
+#  build-iOS:
+#    name: Build iOS package
+#    runs-on: macos-latest
+#    timeout-minutes: 30
+#    defaults:
+#      run:
+#        working-directory: example
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        sdk: [ '3.22.3', '' ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: ${{ matrix.sdk }}
+#          cache: true
+#      - uses: maxim-lobanov/setup-cocoapods@v1
+#        with:
+#          podfile-path: example/ios/Podfile.lock
+#      - name: "Get Flutter dependencies"
+#        run: dart pub get
+#      - name: Build iOS package
+#        run: flutter build ios --simulator
+#      - name: Upload Runner.app as artifact
+#        if: ${{ matrix.sdk == '' }}
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: maplibre-flutter-demo.app
+#          path: example/build/ios/iphonesimulator
+  build-web:
+    name: "Build web"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.22.3', '' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build web
+        run: flutter build web

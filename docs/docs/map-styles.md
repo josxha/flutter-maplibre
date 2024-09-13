@@ -4,6 +4,10 @@ sidebar_position: 3
 
 # Map Styles
 
+By default, the default MapLibre style gets used which shows only countries.
+To change this use the style of a tile provider or create and use your own map
+style.
+
 Custom map styles can be used by setting the `style` parameter of the map
 options like so:
 
@@ -33,7 +37,7 @@ to the url as a query parameter.
 For example:
 
 ```url
-https://tiles.example.com/{z}/{x}/{y}.vector.pbf?api_key={your_key}
+https://tiles.example.com/{z}/{x}/{y}.pbf?api_key={your_key}
 ```
 
 ## Use existing styles
@@ -41,6 +45,11 @@ https://tiles.example.com/{z}/{x}/{y}.vector.pbf?api_key={your_key}
 Every tile provider provides map styles that you can use. Note, that the style
 needs to be compatible with the tile naming scheme. For example OpenMapTiles
 styles used by MapTiler are not compatible with Protomaps tiles.
+
+Have a look
+at [Awesome MapLibre](https://github.com/maplibre/awesome-maplibre#maptile-providers)
+to get an overview over available tile
+providers that support the MVT standard.
 
 ## Create a custom style
 
