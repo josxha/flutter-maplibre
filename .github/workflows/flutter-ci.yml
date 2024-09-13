@@ -30,10 +30,44 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           cache: true
-      - name: "Get flutter dependencies"
+      - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
+  integration_test_ios:
+    name: "Integration test iOS"
+    runs-on: macOS-latest
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - uses: futureware-tech/simulator-action@v3
+        with:
+          model: 'iPhone 15'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter test integration_test --no-pub -r expanded --coverage
+      - name: Run Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  score:
+    name: "Package score"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: Install pana
+        run: dart pub global activate pana
+      - name: Check package score for all
+        run: melos run package_score --no-select
   build-android:
     name: "Build Android APK"
     runs-on: ubuntu-latest
@@ -55,7 +89,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
-      - name: "Get flutter dependencies"
+      - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
         run: flutter build apk
@@ -84,7 +118,7 @@ jobs:
 #      - uses: maxim-lobanov/setup-cocoapods@v1
 #        with:
 #          podfile-path: example/ios/Podfile.lock
-#      - name: "Get flutter dependencies"
+#      - name: "Get Flutter dependencies"
 #        run: dart pub get
 #      - name: Build iOS package
 #        run: flutter build ios --simulator
@@ -110,7 +144,7 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Get flutter dependencies"
+      - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build web
         run: flutter build web
