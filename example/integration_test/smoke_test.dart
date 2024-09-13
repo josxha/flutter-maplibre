@@ -11,6 +11,7 @@ void main() {
     testWidgets(
       'render map',
       (tester) async {
+        // ignore: unused_local_variable
         late final MapController ctrl;
         final app = App(
           onMapCreated: (controller) => ctrl = controller,
