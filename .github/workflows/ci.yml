@@ -49,11 +49,7 @@ jobs:
 #        with:
 #          cache: true
 #      - run: flutter pub get
-#      - run: flutter test integration_test --no-pub -r expanded --coverage
-#      - name: "Run Codecov"
-#        uses: codecov/codecov-action@v4
-#        env:
-#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#      - run: flutter test integration_test --no-pub -r expanded
   integration-test-android:
     name: "Integration Tests on Android"
     runs-on: ubuntu-latest
@@ -84,18 +80,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           emulator-boot-timeout: 1800 # 30 minutes
-          model: Nexus 6
-          script: cd example && flutter test integration_test -r expanded --coverage --timeout=none
-      - name: "Install coverde"
-        run: dart pub global activate coverde
-      - name: "Convert converage data"
-        run: |
-          coverde filter --input coverage/lcov.info --output coverage/filtered.lcov.info --filters \.g\.dart
-          coverde value -i coverage/filtered.lcov.info > coverage/result.txt
-      - name: "Run Codecov"
-        uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          script: cd example && flutter test integration_test -r expanded --timeout=none
   integration-test-web:
     name: "Integration Tests on Web"
     runs-on: ubuntu-latest
