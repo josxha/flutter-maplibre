@@ -89,7 +89,6 @@ jobs:
       - name: "Convert converage data"
         run: |
           coverde filter --input coverage/lcov.info --output coverage/filtered.lcov.info --filters \.g\.dart
-          cd ..
           coverde value -i coverage/filtered.lcov.info > coverage/result.txt
       - name: "Run Codecov"
         uses: codecov/codecov-action@v4
