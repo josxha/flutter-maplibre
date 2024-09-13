@@ -12,11 +12,11 @@ your `web/index.html` file:
 <html>
 <head>
     <!-- other html -->
-
-    <!-- MapLibre -->
+    <!-- highlight-start -->
     <script src='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.js'></script>
     <link href='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.css'
           rel='stylesheet'/>
+    <!-- highlight-end -->
 </head>
 </html>
 ```

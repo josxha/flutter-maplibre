@@ -15,10 +15,11 @@ or add it directly as a dependency to your `pubspec.yaml` file and run
 
 ```yaml title="pubspec.yaml"
 dependencies:
+  # highlight-next-line
   maplibre: ^0.0.1 # use the latest version found on pub.dev
 ```
 
 You can find the latest version of the package on
-[pub.dev](https://pub.dev/packages/maplibre) or here:
+[pub.dev](https://pub.dev/packages/maplibre) or here: 
 
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
