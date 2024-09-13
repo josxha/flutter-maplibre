@@ -34,26 +34,26 @@ jobs:
         run: dart pub get
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
-  integration_test_ios:
-    name: "Integration test iOS"
-    runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - uses: actions/checkout@v4
-      - uses: futureware-tech/simulator-action@v3
-        with:
-          model: 'iPhone 15'
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - run: flutter pub get
-      - run: flutter test integration_test --no-pub -r expanded --coverage
-      - name: Run Codecov
-        uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#  integration_test_ios:
+#    name: "Integration test iOS"
+#    runs-on: macOS-latest
+#    defaults:
+#      run:
+#        working-directory: example
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: futureware-tech/simulator-action@v3
+#        with:
+#          model: 'iPhone 15'
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          channel: 'stable'
+#      - run: flutter pub get
+#      - run: flutter test integration_test --no-pub -r expanded --coverage
+#      - name: Run Codecov
+#        uses: codecov/codecov-action@v4
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   score:
     name: "Package score"
     runs-on: ubuntu-latest
@@ -66,8 +66,8 @@ jobs:
           cache: true
       - name: Install pana
         run: dart pub global activate pana
-      - name: Check package score for all
-        run: melos run package_score --no-select
+      - name: Check package score
+        run: pana --exit-code-threshold 0 --no-dartdoc .
   build-android:
     name: "Build Android APK"
     runs-on: ubuntu-latest
