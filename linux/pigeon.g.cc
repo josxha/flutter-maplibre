@@ -739,8 +739,10 @@ static void maplibre_map_libre_host_api_fly_to_cb(FlBasicMessageChannel* channel
     pitch_value = fl_value_get_float(value3);
     pitch = &pitch_value;
   }
+  FlValue* value4 = fl_value_get_list_value(message_, 4);
+  int64_t duration_ms = fl_value_get_int(value4);
   g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
-  self->vtable->fly_to(center, zoom, bearing, pitch, handle, self->user_data);
+  self->vtable->fly_to(center, zoom, bearing, pitch, duration_ms, handle, self->user_data);
 }
 
 static void maplibre_map_libre_host_api_to_screen_location_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {

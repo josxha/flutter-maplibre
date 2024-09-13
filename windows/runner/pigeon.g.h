@@ -224,17 +224,18 @@ class MapLibreHostApi {
   virtual ~MapLibreHostApi() {}
   // Move the viewport of the map to a new location without any animation.
   virtual void JumpTo(
-    const LngLat& center,
+    const LngLat* center,
     const double* zoom,
     const double* bearing,
     const double* pitch,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Animate the viewport of the map to a new location.
   virtual void FlyTo(
-    const LngLat& center,
+    const LngLat* center,
     const double* zoom,
     const double* bearing,
     const double* pitch,
+    int64_t duration_ms,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Convert a coordinate to a location on the screen.
   virtual void ToScreenLocation(

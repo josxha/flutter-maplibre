@@ -183,14 +183,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> jumpTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
   }) async =>
       _map.jumpTo(
         interop.JumpToOptions(
-          center: center.toLngLat(),
+          center: center?.toLngLat(),
           zoom: zoom,
           bearing: bearing,
           pitch: tilt,
@@ -199,17 +199,19 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> flyTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
+    Duration duration = const Duration(seconds: 2),
   }) async =>
       _map.flyTo(
         interop.FlyToOptions(
-          center: center.toLngLat(),
+          center: center?.toLngLat(),
           zoom: zoom,
           bearing: bearing,
           pitch: tilt,
+          maxDuration: duration.inMilliseconds,
         ),
       );
 
