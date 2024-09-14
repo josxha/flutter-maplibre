@@ -32,7 +32,6 @@ void main() {
         expect(camera.tilt, 1);
       },
     );
-    ;
     testWidgets(
       'flyTo',
       (tester) async {
