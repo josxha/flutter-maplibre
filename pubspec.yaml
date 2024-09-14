@@ -8,6 +8,9 @@ documentation: https://flutter-maplibre.pages.dev/docs
 
 topics: [ map, maplibre, mvt ]
 
+funding:
+  - https://www.paypal.com/paypalme/joschaeckert
+
 platforms:
   android:
   web:
