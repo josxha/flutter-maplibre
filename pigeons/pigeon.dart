@@ -26,19 +26,20 @@ abstract interface class MapLibreHostApi {
   /// Move the viewport of the map to a new location without any animation.
   @async
   void jumpTo({
-    required LngLat center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required LngLat? center,
+    required double? zoom,
+    required double? bearing,
+    required double? pitch,
   });
 
   /// Animate the viewport of the map to a new location.
   @async
   void flyTo({
-    required LngLat center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required LngLat? center,
+    required double? zoom,
+    required double? bearing,
+    required double? pitch,
+    required int durationMs,
   });
 
   /// Convert a coordinate to a location on the screen.

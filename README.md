@@ -69,6 +69,7 @@ welcome.
 flutter pub global activate pigeon # only once
 dart run pigeon --input pigeons/pigeon.dart 
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
+dart format .
 ```
 
 #### Test with WebAssembly

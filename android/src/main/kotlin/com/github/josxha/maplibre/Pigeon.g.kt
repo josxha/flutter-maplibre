@@ -190,9 +190,9 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MapLibreHostApi {
   /** Move the viewport of the map to a new location without any animation. */
-  fun jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   /** Animate the viewport of the map to a new location. */
-  fun flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /** Convert a coordinate to a location on the screen. */
   fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
   /** Convert a screen location to a coordinate. */
@@ -218,7 +218,7 @@ interface MapLibreHostApi {
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
-            val centerArg = args[0] as LngLat
+            val centerArg = args[0] as LngLat?
             val zoomArg = args[1] as Double?
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
@@ -240,11 +240,12 @@ interface MapLibreHostApi {
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
-            val centerArg = args[0] as LngLat
+            val centerArg = args[0] as LngLat?
             val zoomArg = args[1] as Double?
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
-            api.flyTo(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
+            val durationMsArg = args[4] as Long
+            api.flyTo(centerArg, zoomArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
