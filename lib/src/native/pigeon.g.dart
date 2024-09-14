@@ -196,10 +196,10 @@ class MapLibreHostApi {
 
   /// Move the viewport of the map to a new location without any animation.
   Future<void> jumpTo({
-    required LngLat center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required LngLat? center,
+    required double? zoom,
+    required double? bearing,
+    required double? pitch,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$pigeonVar_messageChannelSuffix';
@@ -226,10 +226,11 @@ class MapLibreHostApi {
 
   /// Animate the viewport of the map to a new location.
   Future<void> flyTo({
-    required LngLat center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required LngLat? center,
+    required double? zoom,
+    required double? bearing,
+    required double? pitch,
+    required int durationMs,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$pigeonVar_messageChannelSuffix';
@@ -240,7 +241,8 @@ class MapLibreHostApi {
       binaryMessenger: pigeonVar_binaryMessenger,
     );
     final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
-        .send(<Object?>[center, zoom, bearing, pitch]) as List<Object?>?;
+            .send(<Object?>[center, zoom, bearing, pitch, durationMs])
+        as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {

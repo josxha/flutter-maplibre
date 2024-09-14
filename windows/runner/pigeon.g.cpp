@@ -325,11 +325,7 @@ void MapLibreHostApi::SetUp(
         try {
           const auto& args = std::get<EncodableList>(message);
           const auto& encodable_center_arg = args.at(0);
-          if (encodable_center_arg.IsNull()) {
-            reply(WrapError("center_arg unexpectedly null."));
-            return;
-          }
-          const auto& center_arg = std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg));
+          const auto* center_arg = encodable_center_arg.IsNull() ? nullptr : &(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg)));
           const auto& encodable_zoom_arg = args.at(1);
           const auto* zoom_arg = std::get_if<double>(&encodable_zoom_arg);
           const auto& encodable_bearing_arg = args.at(2);
@@ -360,18 +356,20 @@ void MapLibreHostApi::SetUp(
         try {
           const auto& args = std::get<EncodableList>(message);
           const auto& encodable_center_arg = args.at(0);
-          if (encodable_center_arg.IsNull()) {
-            reply(WrapError("center_arg unexpectedly null."));
-            return;
-          }
-          const auto& center_arg = std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg));
+          const auto* center_arg = encodable_center_arg.IsNull() ? nullptr : &(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center_arg)));
           const auto& encodable_zoom_arg = args.at(1);
           const auto* zoom_arg = std::get_if<double>(&encodable_zoom_arg);
           const auto& encodable_bearing_arg = args.at(2);
           const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
           const auto& encodable_pitch_arg = args.at(3);
           const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
-          api->FlyTo(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
+          const auto& encodable_duration_ms_arg = args.at(4);
+          if (encodable_duration_ms_arg.IsNull()) {
+            reply(WrapError("duration_ms_arg unexpectedly null."));
+            return;
+          }
+          const int64_t duration_ms_arg = encodable_duration_ms_arg.LongValue();
+          api->FlyTo(center_arg, zoom_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;

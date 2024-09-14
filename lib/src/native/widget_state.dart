@@ -81,13 +81,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> jumpTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
   }) =>
       _hostApi.jumpTo(
-        center: center.toLngLat(),
+        center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
         pitch: tilt,
@@ -95,16 +95,20 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> flyTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
   }) =>
       _hostApi.flyTo(
-        center: center.toLngLat(),
+        center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
         pitch: tilt,
+        durationMs: nativeDuration.inMilliseconds,
       );
 
   @override

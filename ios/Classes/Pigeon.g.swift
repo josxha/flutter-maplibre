@@ -230,9 +230,9 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
   /// Move the viewport of the map to a new location without any animation.
-  func jumpTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Animate the viewport of the map to a new location.
-  func flyTo(center: LngLat, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Convert a coordinate to a location on the screen.
   func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
   /// Convert a screen location to a coordinate.
@@ -256,7 +256,7 @@ class MapLibreHostApiSetup {
     if let api = api {
       jumpToChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
-        let centerArg = args[0] as! LngLat
+        let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
@@ -277,11 +277,12 @@ class MapLibreHostApiSetup {
     if let api = api {
       flyToChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
-        let centerArg = args[0] as! LngLat
+        let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
-        api.flyTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
+        let durationMsArg = args[4] as! Int64
+        api.flyTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))

@@ -12,7 +12,7 @@ abstract interface class MapController {
 
   /// Instantly move the map camera to a new location.
   Future<void> jumpTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
@@ -20,10 +20,13 @@ abstract interface class MapController {
 
   /// Animate the map camera to a new location.
   Future<void> flyTo({
-    required Position center,
-    required double zoom,
-    required double bearing,
-    required double tilt,
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
   });
 
   /// Add a [Marker] to the map.
