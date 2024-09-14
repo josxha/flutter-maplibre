@@ -41,10 +41,10 @@ buildscript {
 
 The `maplibre` package on Flutter
 uses [platform views](https://docs.flutter.dev/platform-integration/android/platform-views)
-to display the native map. This requires an Android SDK version of at least 23 
+to display the native map. This requires an Android SDK version of at least 23
 (Android 6.0).
 
-Open your `android/app/build.gradle` file and ensure that it is set to 23 or 
+Open your `android/app/build.gradle` file and ensure that it is set to 23 or
 higher.
 
 ```gradle title="android/app/build.gradle"
@@ -61,15 +61,17 @@ android {
 ## Set the permissions
 
 If you want to show the user's location on the map you need to add
-the `ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION` permission in the
-application manifest `android/app/src/main/AndroidManifest.xml`.
+the permissions in the application 
+manifest`android/app/src/main/AndroidManifest.xml`.
 
 ```xml title="android/app/src/main/AndroidManifest.xml"
 
 <manifest>
     // highlight-start
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Always include this permission -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     // highlight-end
 </manifest>
 ```
