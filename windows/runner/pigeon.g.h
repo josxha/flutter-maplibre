@@ -134,7 +134,7 @@ class MapOptions {
 };
 
 
-// A longitude/latitude coordinate object
+// A longitude/latitude coordinate object.
 //
 // Generated class from Pigeon that represents data sent in messages.
 class LngLat {
@@ -157,6 +157,7 @@ class LngLat {
   static LngLat FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
   friend class MapOptions;
+  friend class MapCamera;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
@@ -166,7 +167,7 @@ class LngLat {
 };
 
 
-// A pixel location / location on the device screen
+// A pixel location / location on the device screen.
 //
 // Generated class from Pigeon that represents data sent in messages.
 class ScreenLocation {
@@ -193,6 +194,50 @@ class ScreenLocation {
   friend class PigeonInternalCodecSerializer;
   double x_;
   double y_;
+
+};
+
+
+// The current position of the map camera.
+//
+// Generated class from Pigeon that represents data sent in messages.
+class MapCamera {
+ public:
+  // Constructs an object setting all fields.
+  explicit MapCamera(
+    const LngLat& center,
+    double zoom,
+    double tilt,
+    double bearing);
+
+  ~MapCamera() = default;
+  MapCamera(const MapCamera& other);
+  MapCamera& operator=(const MapCamera& other);
+  MapCamera(MapCamera&& other) = default;
+  MapCamera& operator=(MapCamera&& other) noexcept = default;
+  const LngLat& center() const;
+  void set_center(const LngLat& value_arg);
+
+  double zoom() const;
+  void set_zoom(double value_arg);
+
+  double tilt() const;
+  void set_tilt(double value_arg);
+
+  double bearing() const;
+  void set_bearing(double value_arg);
+
+
+ private:
+  static MapCamera FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PigeonInternalCodecSerializer;
+  std::unique_ptr<LngLat> center_;
+  double zoom_;
+  double tilt_;
+  double bearing_;
 
 };
 
@@ -237,6 +282,9 @@ class MapLibreHostApi {
     const double* pitch,
     int64_t duration_ms,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Get the current camera position with the map center, zoom level, camera
+  // tilt and map rotation.
+  virtual void GetCamera(std::function<void(ErrorOr<MapCamera> reply)> result) = 0;
   // Convert a coordinate to a location on the screen.
   virtual void ToScreenLocation(
     double lng,

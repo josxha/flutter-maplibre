@@ -94,7 +94,7 @@ data class MapOptions (
 }
 
 /**
- * A longitude/latitude coordinate object
+ * A longitude/latitude coordinate object.
  *
  * Generated class from Pigeon that represents data sent in messages.
  */
@@ -121,7 +121,7 @@ data class LngLat (
 }
 
 /**
- * A pixel location / location on the device screen
+ * A pixel location / location on the device screen.
  *
  * Generated class from Pigeon that represents data sent in messages.
  */
@@ -146,6 +146,37 @@ data class ScreenLocation (
     )
   }
 }
+
+/**
+ * The current position of the map camera.
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
+data class MapCamera (
+  val center: LngLat,
+  val zoom: Double,
+  val tilt: Double,
+  val bearing: Double
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): MapCamera {
+      val center = pigeonVar_list[0] as LngLat
+      val zoom = pigeonVar_list[1] as Double
+      val tilt = pigeonVar_list[2] as Double
+      val bearing = pigeonVar_list[3] as Double
+      return MapCamera(center, zoom, tilt, bearing)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      center,
+      zoom,
+      tilt,
+      bearing,
+    )
+  }
+}
 private open class PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
@@ -162,6 +193,11 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
       131.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           ScreenLocation.fromList(it)
+        }
+      }
+      132.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
         }
       }
       else -> super.readValueOfType(type, buffer)
@@ -181,6 +217,10 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(131)
         writeValue(stream, value.toList())
       }
+      is MapCamera -> {
+        stream.write(132)
+        writeValue(stream, value.toList())
+      }
       else -> super.writeValue(stream, value)
     }
   }
@@ -193,6 +233,11 @@ interface MapLibreHostApi {
   fun jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   /** Animate the viewport of the map to a new location. */
   fun flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
+  /**
+   * Get the current camera position with the map center, zoom level, camera
+   * tilt and map rotation.
+   */
+  fun getCamera(callback: (Result<MapCamera>) -> Unit)
   /** Convert a coordinate to a location on the screen. */
   fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
   /** Convert a screen location to a coordinate. */
@@ -251,6 +296,24 @@ interface MapLibreHostApi {
                 reply.reply(wrapError(error))
               } else {
                 reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.getCamera{ result: Result<MapCamera> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
               }
             }
           }

@@ -1,6 +1,7 @@
 package com.github.josxha.maplibre
 
 import LngLat
+import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
@@ -144,6 +145,14 @@ class MapLibreMapController(
     override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
         val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()))
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
+    }
+
+    override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
+        val position = mapLibreMap.cameraPosition
+        val target = mapLibreMap.cameraPosition.target!!
+        val center = LngLat(target.longitude, target.latitude)
+        val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
+        callback(Result.success(camera))
     }
 
     override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {

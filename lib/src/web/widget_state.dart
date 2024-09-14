@@ -251,4 +251,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         );
     }
   }
+
+  @override
+  Future<MapCamera> getCamera() async => MapCamera(
+        center: _map.getCenter().toPosition(),
+        zoom: _map.getZoom().toDouble(),
+        tilt: _map.getPitch().toDouble(),
+        bearing: _map.getBearing().toDouble(),
+      );
 }

@@ -15,8 +15,7 @@ PlatformException _createConnectionError(String channelName) {
   );
 }
 
-List<Object?> wrapResponse(
-    {Object? result, PlatformException? error, bool empty = false}) {
+List<Object?> wrapResponse({Object? result, PlatformException? error, bool empty = false}) {
   if (empty) {
     return <Object?>[];
   }
@@ -85,7 +84,7 @@ class MapOptions {
   }
 }
 
-/// A longitude/latitude coordinate object
+/// A longitude/latitude coordinate object.
 class LngLat {
   LngLat({
     required this.lng,
@@ -114,7 +113,7 @@ class LngLat {
   }
 }
 
-/// A pixel location / location on the device screen
+/// A pixel location / location on the device screen.
 class ScreenLocation {
   ScreenLocation({
     required this.x,
@@ -143,6 +142,44 @@ class ScreenLocation {
   }
 }
 
+/// The current position of the map camera.
+class MapCamera {
+  MapCamera({
+    required this.center,
+    required this.zoom,
+    required this.tilt,
+    required this.bearing,
+  });
+
+  LngLat center;
+
+  double zoom;
+
+  double tilt;
+
+  double bearing;
+
+  Object encode() {
+    return <Object?>[
+      center,
+      zoom,
+      tilt,
+      bearing,
+    ];
+  }
+
+  static MapCamera decode(Object result) {
+    result as List<Object?>;
+    return MapCamera(
+      center: result[0]! as LngLat,
+      zoom: result[1]! as double,
+      tilt: result[2]! as double,
+      bearing: result[3]! as double,
+    );
+  }
+}
+
+
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
   @override
@@ -150,14 +187,17 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    } else if (value is MapOptions) {
+    }    else if (value is MapOptions) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+    }    else if (value is LngLat) {
       buffer.putUint8(130);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    }    else if (value is ScreenLocation) {
       buffer.putUint8(131);
+      writeValue(buffer, value.encode());
+    }    else if (value is MapCamera) {
+      buffer.putUint8(132);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -167,12 +207,14 @@ class _PigeonCodec extends StandardMessageCodec {
   @override
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
-      case 129:
+      case 129: 
         return MapOptions.decode(readValue(buffer)!);
-      case 130:
+      case 130: 
         return LngLat.decode(readValue(buffer)!);
-      case 131:
+      case 131: 
         return ScreenLocation.decode(readValue(buffer)!);
+      case 132: 
+        return MapCamera.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -183,11 +225,9 @@ class MapLibreHostApi {
   /// Constructor for [MapLibreHostApi].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
   /// BinaryMessenger will be used which routes to the host platform.
-  MapLibreHostApi(
-      {BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
+  MapLibreHostApi({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
       : pigeonVar_binaryMessenger = binaryMessenger,
-        pigeonVar_messageChannelSuffix =
-            messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+        pigeonVar_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
   final BinaryMessenger? pigeonVar_binaryMessenger;
 
   static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
@@ -195,22 +235,15 @@ class MapLibreHostApi {
   final String pigeonVar_messageChannelSuffix;
 
   /// Move the viewport of the map to a new location without any animation.
-  Future<void> jumpTo({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-  }) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+  Future<void> jumpTo({required LngLat? center, required double? zoom, required double? bearing, required double? pitch,}) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
-        .send(<Object?>[center, zoom, bearing, pitch]) as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[center, zoom, bearing, pitch]) as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {
@@ -225,24 +258,15 @@ class MapLibreHostApi {
   }
 
   /// Animate the viewport of the map to a new location.
-  Future<void> flyTo({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-    required int durationMs,
-  }) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+  Future<void> flyTo({required LngLat? center, required double? zoom, required double? bearing, required double? pitch, required int durationMs,}) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
-            .send(<Object?>[center, zoom, bearing, pitch, durationMs])
-        as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[center, zoom, bearing, pitch, durationMs]) as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {
@@ -256,12 +280,39 @@ class MapLibreHostApi {
     }
   }
 
+  /// Get the current camera position with the map center, zoom level, camera
+  /// tilt and map rotation.
+  Future<MapCamera> getCamera() async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as MapCamera?)!;
+    }
+  }
+
   /// Convert a coordinate to a location on the screen.
   Future<ScreenLocation> toScreenLocation(double lng, double lat) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -288,10 +339,8 @@ class MapLibreHostApi {
 
   /// Convert a screen location to a coordinate.
   Future<LngLat> toLngLat(double x, double y) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.toLngLat$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -317,12 +366,9 @@ class MapLibreHostApi {
   }
 
   /// Add a fill layer to the map style.
-  Future<void> addFillLayer(
-      {required String id, required String sourceId}) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+  Future<void> addFillLayer({required String id, required String sourceId}) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -343,12 +389,9 @@ class MapLibreHostApi {
   }
 
   /// Add a circle layer to the map style.
-  Future<void> addCircleLayer(
-      {required String id, required String sourceId}) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+  Future<void> addCircleLayer({required String id, required String sourceId}) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -369,12 +412,9 @@ class MapLibreHostApi {
   }
 
   /// Add a GeoJSON source to the map style.
-  Future<void> addGeoJsonSource(
-      {required String id, required String data}) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
+  Future<void> addGeoJsonSource({required String id, required String data}) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -417,19 +457,11 @@ abstract class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  static void setUp(
-    MapLibreFlutterApi? api, {
-    BinaryMessenger? binaryMessenger,
-    String messageChannelSuffix = '',
-  }) {
-    messageChannelSuffix =
-        messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+  static void setUp(MapLibreFlutterApi? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
+    messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
@@ -440,19 +472,15 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(result: output);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }
     }
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
@@ -463,26 +491,22 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }
     }
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick was null.');
+          'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final LngLat? arg_point = (args[0] as LngLat?);
           assert(arg_point != null,
@@ -492,26 +516,22 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }
     }
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick was null.');
+          'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final LngLat? arg_point = (args[0] as LngLat?);
           assert(arg_point != null,
@@ -521,26 +541,22 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }
     }
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick was null.');
+          'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final LngLat? arg_point = (args[0] as LngLat?);
           assert(arg_point != null,
@@ -550,26 +566,22 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }
     }
     {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick$messageChannelSuffix',
-          pigeonChannelCodec,
+      final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick was null.');
+          'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final LngLat? arg_point = (args[0] as LngLat?);
           assert(arg_point != null,
@@ -579,9 +591,8 @@ abstract class MapLibreFlutterApi {
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
           }
         });
       }

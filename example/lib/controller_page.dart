@@ -63,6 +63,32 @@ class _ControllerPageState extends State<ControllerPage> {
                   },
                   child: const Text('Fly to Iceland'),
                 ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final camera = await _controller.getCamera();
+                    debugPrint(camera.toString());
+                    if (context.mounted) {
+                      await showDialog<void>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('MapCenter'),
+                          content: Text('''
+center: Position(lng: ${camera.center.lng}, lat: ${camera.center.lat})
+zoom: ${camera.zoom}
+bearing: ${camera.bearing}
+tilt: ${camera.tilt}'''),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Get MapCamera'),
+                ),
               ],
             ),
           ),

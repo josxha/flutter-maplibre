@@ -147,4 +147,15 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   void onLongClick(pigeon.LngLat point) =>
       _options.onLongClick?.call(Position(point.lng, point.lat));
+
+  @override
+  Future<MapCamera> getCamera() async {
+    final camera = await _hostApi.getCamera();
+    return MapCamera(
+      center: camera.center.toPosition(),
+      zoom: camera.zoom,
+      tilt: camera.tilt,
+      bearing: camera.bearing,
+    );
+  }
 }

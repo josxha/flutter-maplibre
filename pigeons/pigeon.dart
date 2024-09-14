@@ -42,6 +42,11 @@ abstract interface class MapLibreHostApi {
     required int durationMs,
   });
 
+  /// Get the current camera position with the map center, zoom level, camera
+  /// tilt and map rotation.
+  @async
+  MapCamera getCamera();
+
   /// Convert a coordinate to a location on the screen.
   @async
   ScreenLocation toScreenLocation(double lng, double lat);
@@ -122,7 +127,7 @@ class MapOptions {
   final bool listensOnLongClick;
 }
 
-/// A longitude/latitude coordinate object
+/// A longitude/latitude coordinate object.
 class LngLat {
   const LngLat({required this.lng, required this.lat});
 
@@ -133,7 +138,7 @@ class LngLat {
   final double lat;
 }
 
-/// A pixel location / location on the device screen
+/// A pixel location / location on the device screen.
 class ScreenLocation {
   const ScreenLocation({required this.x, required this.y});
 
@@ -142,4 +147,19 @@ class ScreenLocation {
 
   /// The y coordinate
   final double y;
+}
+
+/// The current position of the map camera.
+class MapCamera {
+  const MapCamera({
+    required this.center,
+    required this.zoom,
+    required this.tilt,
+    required this.bearing,
+  });
+
+  final LngLat center;
+  final double zoom;
+  final double tilt;
+  final double bearing;
 }

@@ -40,4 +40,7 @@ abstract interface class MapController {
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.
   Future<void> addLayer(Layer layer);
+
+  /// Get the current camera position on the map.
+  Future<MapCamera> getCamera();
 }

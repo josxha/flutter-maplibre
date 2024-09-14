@@ -257,6 +257,87 @@ ScreenLocation ScreenLocation::FromEncodableList(const EncodableList& list) {
   return decoded;
 }
 
+// MapCamera
+
+MapCamera::MapCamera(
+  const LngLat& center,
+  double zoom,
+  double tilt,
+  double bearing)
+ : center_(std::make_unique<LngLat>(center)),
+    zoom_(zoom),
+    tilt_(tilt),
+    bearing_(bearing) {}
+
+MapCamera::MapCamera(const MapCamera& other)
+ : center_(std::make_unique<LngLat>(*other.center_)),
+    zoom_(other.zoom_),
+    tilt_(other.tilt_),
+    bearing_(other.bearing_) {}
+
+MapCamera& MapCamera::operator=(const MapCamera& other) {
+  center_ = std::make_unique<LngLat>(*other.center_);
+  zoom_ = other.zoom_;
+  tilt_ = other.tilt_;
+  bearing_ = other.bearing_;
+  return *this;
+}
+
+const LngLat& MapCamera::center() const {
+  return *center_;
+}
+
+void MapCamera::set_center(const LngLat& value_arg) {
+  center_ = std::make_unique<LngLat>(value_arg);
+}
+
+
+double MapCamera::zoom() const {
+  return zoom_;
+}
+
+void MapCamera::set_zoom(double value_arg) {
+  zoom_ = value_arg;
+}
+
+
+double MapCamera::tilt() const {
+  return tilt_;
+}
+
+void MapCamera::set_tilt(double value_arg) {
+  tilt_ = value_arg;
+}
+
+
+double MapCamera::bearing() const {
+  return bearing_;
+}
+
+void MapCamera::set_bearing(double value_arg) {
+  bearing_ = value_arg;
+}
+
+
+EncodableList MapCamera::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(4);
+  list.push_back(CustomEncodableValue(*center_));
+  list.push_back(EncodableValue(zoom_));
+  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(bearing_));
+  return list;
+}
+
+MapCamera MapCamera::FromEncodableList(const EncodableList& list) {
+  MapCamera decoded(
+    std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(list[0])),
+    std::get<double>(list[1]),
+    std::get<double>(list[2]),
+    std::get<double>(list[3]));
+  return decoded;
+}
+
 
 PigeonInternalCodecSerializer::PigeonInternalCodecSerializer() {}
 
@@ -272,6 +353,9 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
       }
     case 131: {
         return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 132: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
       return flutter::StandardCodecSerializer::ReadValueOfType(type, stream);
@@ -295,6 +379,11 @@ void PigeonInternalCodecSerializer::WriteValue(
     if (custom_value->type() == typeid(ScreenLocation)) {
       stream->WriteByte(131);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(MapCamera)) {
+      stream->WriteByte(132);
+      WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
   }
@@ -376,6 +465,28 @@ void MapLibreHostApi::SetUp(
             }
             EncodableList wrapped;
             wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          api->GetCamera([reply](ErrorOr<MapCamera>&& output) {
+            if (output.has_error()) {
+              reply(WrapError(output.error()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(CustomEncodableValue(std::move(output).TakeValue()));
             reply(EncodableValue(std::move(wrapped)));
           });
         } catch (const std::exception& exception) {
