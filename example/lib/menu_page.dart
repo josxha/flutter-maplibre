@@ -27,11 +27,6 @@ class MenuPage extends StatelessWidget {
             location: StyledMapPage.location,
           ),
           ItemCard(
-            label: 'Kiosk Mode',
-            iconData: Icons.movie,
-            location: KioskPage.location,
-          ),
-          ItemCard(
             label: 'Annotations',
             iconData: Icons.location_on,
             location: AnnotationsPage.location,

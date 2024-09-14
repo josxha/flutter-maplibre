@@ -73,7 +73,8 @@ class _ControllerPageState extends State<ControllerPage> {
                         builder: (context) => AlertDialog(
                           title: const Text('MapCenter'),
                           content: Text('''
-center: Position(lng: ${camera.center.lng}, lat: ${camera.center.lat})
+center.lng: ${camera.center.lng}
+center.lat: ${camera.center.lat}
 zoom: ${camera.zoom}
 bearing: ${camera.bearing}
 tilt: ${camera.tilt}'''),
