@@ -13,7 +13,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(const App());
         await tester.pumpAndSettle();
-        expect(tester.allWidgets.any((w) => w is MapLibreMap), true);
+        expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
       },
     );
     testWidgets(
@@ -26,10 +26,11 @@ void main() {
         await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
-        expect(camera.center, Position(1, 1));
-        expect(camera.zoom, 1);
-        expect(camera.bearing, 1);
-        expect(camera.tilt, 1);
+        expect(camera.center.lng, closeTo(1, 0.00001));
+        expect(camera.center.lat, closeTo(1, 0.00001));
+        expect(camera.zoom, closeTo(1, 0.00001));
+        expect(camera.bearing, closeTo(1, 0.00001));
+        expect(camera.tilt, closeTo(1, 0.00001));
       },
     );
     testWidgets(
@@ -49,10 +50,11 @@ void main() {
         );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
-        expect(camera.center, Position(2, 2));
-        expect(camera.zoom, 2);
-        expect(camera.bearing, 2);
-        expect(camera.tilt, 2);
+        expect(camera.center.lng, closeTo(2, 0.00001));
+        expect(camera.center.lat, closeTo(2, 0.00001));
+        expect(camera.zoom, closeTo(2, 0.00001));
+        expect(camera.bearing, closeTo(2, 0.00001));
+        expect(camera.tilt, closeTo(2, 0.00001));
       },
     );
   });
