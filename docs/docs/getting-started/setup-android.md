@@ -61,7 +61,7 @@ android {
 ## Set the permissions
 
 If you want to show the user's location on the map you need to add
-the permissions in the application 
+the permissions in the application
 manifest`android/app/src/main/AndroidManifest.xml`.
 
 ```xml title="android/app/src/main/AndroidManifest.xml"
