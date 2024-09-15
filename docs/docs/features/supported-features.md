@@ -59,4 +59,4 @@ lack of platform views of these platforms.
 | setMapLanguage               | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | toScreenLocation             | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | toLatLng                     | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| getMetersPerPixelAtLatitude  | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| getMetersPerPixelAtLatitude  | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |

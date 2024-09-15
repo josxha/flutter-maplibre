@@ -9,3 +9,4 @@ export 'src/map_camera.dart';
 export 'src/map_controller.dart';
 export 'src/map_options.dart';
 export 'src/sources.dart';
+export 'src/utils.dart';

@@ -88,7 +88,28 @@ tilt: ${camera.tilt}'''),
                       );
                     }
                   },
-                  child: const Text('Get MapCamera'),
+                  child: const Text('Current MapCamera'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final camera = await _controller.getCamera();
+                    final lat = camera.center.lat.toDouble();
+                    final meters =
+                        await _controller.getMetersPerPixelAtLatitude(lat);
+                    debugPrint('latitude: $lat: $meters m/px');
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'latitude: $lat: $meters m/px',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text('meter/pixel at center'),
                 ),
               ],
             ),

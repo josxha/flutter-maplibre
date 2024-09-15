@@ -158,4 +158,8 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       bearing: camera.bearing,
     );
   }
+
+  @override
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      _hostApi.getMetersPerPixelAtLatitude(latitude);
 }

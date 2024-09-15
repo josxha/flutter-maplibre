@@ -78,8 +78,12 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        this.mapLibreMap.addOnMapClickListener(this)
-        this.mapLibreMap.addOnMapLongClickListener(this)
+        if (initialOptions.listensOnClick) {
+            this.mapLibreMap.addOnMapClickListener(this)
+        }
+        if (initialOptions.listensOnLongClick) {
+            this.mapLibreMap.addOnMapLongClickListener(this)
+        }
         val style = Style.Builder().fromUri(initialOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
@@ -177,6 +181,9 @@ class MapLibreMapController(
         mapLibreMap.style?.addSource(GeoJsonSource(id, data))
         callback(Result.success(Unit))
     }
+
+    override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
+        mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
 
     override fun onMapClick(point: LatLng): Boolean {
         flutterApi.onClick(LngLat(point.longitude, point.latitude)) { }

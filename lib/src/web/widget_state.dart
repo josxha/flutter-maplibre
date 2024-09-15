@@ -1,4 +1,5 @@
 import 'dart:js_interop';
+import 'dart:math';
 import 'dart:ui_web';
 
 import 'package:flutter/widgets.dart';
@@ -22,7 +23,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   void initState() {
     platformViewRegistry.registerViewFactory(
       _viewName,
-      (int viewId, [dynamic params]) {
+          (int viewId, [dynamic params]) {
         _htmlElement = HTMLDivElement()
           ..style.padding = '0'
           ..style.margin = '0'
@@ -49,45 +50,52 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         // add controls
         for (final control in _options.controls) {
           final jsControl = switch (control) {
-            final ScaleControl control => interop.ScaleControl(
-                interop.ScaleControlOptions(
-                  maxWidth: control.maxWidth,
-                  unit: control.unit.name,
-                ),
-              ),
-            final GeolocateControl control => interop.GeolocateControl(
-                interop.GeolocateControlOptions(
-                  positionOptions: interop.PositionOptions(
-                    enableHighAccuracy:
-                        control.positionOptions.enableHighAccuracy,
-                    maximumAge:
-                        control.positionOptions.maximumAge.inMilliseconds,
-                    timeout: control.positionOptions.timeout.inMilliseconds,
+            final ScaleControl control =>
+                interop.ScaleControl(
+                  interop.ScaleControlOptions(
+                    maxWidth: control.maxWidth,
+                    unit: control.unit.name,
                   ),
                 ),
-              ),
-            final AttributionControl control => interop.AttributionControl(
-                interop.AttributionControlOptions(
-                  compact: control.compact,
-                  customAttribution: control.customAttribution,
+            final GeolocateControl control =>
+                interop.GeolocateControl(
+                  interop.GeolocateControlOptions(
+                    positionOptions: interop.PositionOptions(
+                      enableHighAccuracy:
+                      control.positionOptions.enableHighAccuracy,
+                      maximumAge:
+                      control.positionOptions.maximumAge.inMilliseconds,
+                      timeout: control.positionOptions.timeout.inMilliseconds,
+                    ),
+                  ),
                 ),
-              ),
-            final FullscreenControl _ => interop.FullscreenControl(
-                interop.FullscreenControlOptions(),
-              ),
-            final LogoControl control => interop.LogoControl(
-                interop.LogoControlOptions(compact: control.compact),
-              ),
-            final NavigationControl control => interop.NavigationControl(
-                interop.NavigationControlOptions(
-                  showCompass: control.showCompass,
-                  showZoom: control.showZoom,
-                  visualizePitch: control.visualizePitch,
+            final AttributionControl control =>
+                interop.AttributionControl(
+                  interop.AttributionControlOptions(
+                    compact: control.compact,
+                    customAttribution: control.customAttribution,
+                  ),
                 ),
-              ),
-            final TerrainControl control => interop.TerrainControl(
-                interop.TerrainControlOptions(source: control.source),
-              ),
+            final FullscreenControl _ =>
+                interop.FullscreenControl(
+                  interop.FullscreenControlOptions(),
+                ),
+            final LogoControl control =>
+                interop.LogoControl(
+                  interop.LogoControlOptions(compact: control.compact),
+                ),
+            final NavigationControl control =>
+                interop.NavigationControl(
+                  interop.NavigationControlOptions(
+                    showCompass: control.showCompass,
+                    showZoom: control.showZoom,
+                    visualizePitch: control.visualizePitch,
+                  ),
+                ),
+            final TerrainControl control =>
+                interop.TerrainControl(
+                  interop.TerrainControlOptions(source: control.source),
+                ),
           };
           _map.addControl(jsControl);
         }
@@ -95,7 +103,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (widget.onStyleLoaded case final VoidCallback callback) {
           _map.on(
             interop.MapEventType.load,
-            (interop.MapMouseEvent event) {
+                (interop.MapMouseEvent event) {
               callback();
             }.toJS,
           );
@@ -103,7 +111,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.click,
-            (interop.MapMouseEvent event) {
+                (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
@@ -111,7 +119,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onDoubleClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.dblclick,
-            (interop.MapMouseEvent event) {
+                (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
@@ -119,7 +127,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onSecondaryClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.contextmenu,
-            (interop.MapMouseEvent event) {
+                (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
@@ -253,10 +261,20 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async => MapCamera(
+  Future<MapCamera> getCamera() async =>
+      MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
         tilt: _map.getPitch().toDouble(),
         bearing: _map.getBearing().toDouble(),
       );
+
+  @override
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final zoom = _map.getZoom();
+    // https://wiki.openstreetmap.org/wiki/Zoom_levels
+    return circumferenceOfEarth *
+        cos(latitude * radian2degree) /
+        pow(2, zoom + 9);
+  }
 }

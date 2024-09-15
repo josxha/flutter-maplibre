@@ -69,6 +69,10 @@ abstract interface class MapLibreHostApi {
     required String id,
     required String data,
   });
+
+  /// Returns the distance spanned by one pixel at the specified latitude and
+  /// current zoom level.
+  double getMetersPerPixelAtLatitude(double latitude);
 }
 
 @FlutterApi()

@@ -98,5 +98,18 @@ void main() {
         );
       },
     );
+    testWidgets(
+      'getMetersPerPixelAtLatitude',
+      (tester) async {
+        late final MapController ctrl;
+        final app = App(onMapCreated: (controller) => ctrl = controller);
+        await tester.pumpWidget(app);
+        await tester.pumpAndSettle();
+        await expectLater(
+          ctrl.getMetersPerPixelAtLatitude(23),
+          closeTo(12345, 0.00001), // TODO adjust value
+        );
+      },
+    );
   });
 }
