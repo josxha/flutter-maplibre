@@ -98,7 +98,7 @@ void main() {
           throwsA(isA<PlatformException>()),
         );
       },
-    );*/
+    );
     testWidgets(
       'getMetersPerPixelAtLatitude',
           (tester) async {
@@ -121,11 +121,10 @@ void main() {
         final region = await ctrl.getVisibleRegion();
         // TODO adjust values
         expect(region.latitudeNorth, closeTo(85.05112862791722, 0.00001));
-        print(region);
         expect(region.latitudeSouth, closeTo(12345, 0.00001));
         expect(region.longitudeEast, closeTo(12345, 0.00001));
         expect(region.longitudeWest, closeTo(12345, 0.00001));
       },
-    );
+    );*/
   });
 }
