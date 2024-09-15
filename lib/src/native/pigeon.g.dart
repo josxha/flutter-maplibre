@@ -180,6 +180,43 @@ class MapCamera {
   }
 }
 
+/// LatLng bound object
+class LngLatBounds {
+  LngLatBounds({
+    required this.longitudeWest,
+    required this.longitudeEast,
+    required this.latitudeSouth,
+    required this.latitudeNorth,
+  });
+
+  double longitudeWest;
+
+  double longitudeEast;
+
+  double latitudeSouth;
+
+  double latitudeNorth;
+
+  Object encode() {
+    return <Object?>[
+      longitudeWest,
+      longitudeEast,
+      latitudeSouth,
+      latitudeNorth,
+    ];
+  }
+
+  static LngLatBounds decode(Object result) {
+    result as List<Object?>;
+    return LngLatBounds(
+      longitudeWest: result[0]! as double,
+      longitudeEast: result[1]! as double,
+      latitudeSouth: result[2]! as double,
+      latitudeNorth: result[3]! as double,
+    );
+  }
+}
+
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
   @override
@@ -199,6 +236,9 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is MapCamera) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(133);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -215,6 +255,8 @@ class _PigeonCodec extends StandardMessageCodec {
         return ScreenLocation.decode(readValue(buffer)!);
       case 132:
         return MapCamera.decode(readValue(buffer)!);
+      case 133:
+        return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -326,6 +368,36 @@ class MapLibreHostApi {
       );
     } else {
       return (pigeonVar_replyList[0] as MapCamera?)!;
+    }
+  }
+
+  /// Get the visible region of the current map camera.
+  Future<LngLatBounds> getVisibleRegion() async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.getVisibleRegion$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as LngLatBounds?)!;
     }
   }
 

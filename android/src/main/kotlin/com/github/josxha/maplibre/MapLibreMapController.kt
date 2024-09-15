@@ -1,6 +1,7 @@
-package com.github.josxha.maplibre
+package com.githb.josxha.maplibre
 
 import LngLat
+import LngLatBounds
 import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
@@ -157,6 +158,17 @@ class MapLibreMapController(
         val center = LngLat(target.longitude, target.latitude)
         val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
         callback(Result.success(camera))
+    }
+
+    override fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit) {
+        val bounds = mapLibreMap.projection.visibleRegion.latLngBounds
+        val lngLatBounds = LngLatBounds(
+            bounds.longitudeWest,
+            bounds.longitudeEast,
+            bounds.latitudeSouth,
+            bounds.latitudeNorth
+        )
+        callback(Result.success(lngLatBounds))
     }
 
     override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {

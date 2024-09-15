@@ -305,4 +305,15 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         cos(latitude * radian2degree) /
         pow(2, zoom + 9);
   }
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async {
+    final bounds = _map.getBounds();
+    return LngLatBounds(
+      longitudeWest: bounds.getWest().toDouble(),
+      longitudeEast: bounds.getEast().toDouble(),
+      latitudeSouth: bounds.getSouth().toDouble(),
+      latitudeNorth: bounds.getNorth().toDouble(),
+    );
+  }
 }

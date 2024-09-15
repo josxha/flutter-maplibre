@@ -51,4 +51,7 @@ abstract interface class MapController {
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
   Future<double> getMetersPerPixelAtLatitude(double latitude);
+
+  /// The smallest bounding box that includes the visible region.
+  Future<LngLatBounds> getVisibleRegion();
 }

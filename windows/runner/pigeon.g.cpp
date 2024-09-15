@@ -338,6 +338,73 @@ MapCamera MapCamera::FromEncodableList(const EncodableList& list) {
   return decoded;
 }
 
+// LngLatBounds
+
+LngLatBounds::LngLatBounds(
+  double longitude_west,
+  double longitude_east,
+  double latitude_south,
+  double latitude_north)
+ : longitude_west_(longitude_west),
+    longitude_east_(longitude_east),
+    latitude_south_(latitude_south),
+    latitude_north_(latitude_north) {}
+
+double LngLatBounds::longitude_west() const {
+  return longitude_west_;
+}
+
+void LngLatBounds::set_longitude_west(double value_arg) {
+  longitude_west_ = value_arg;
+}
+
+
+double LngLatBounds::longitude_east() const {
+  return longitude_east_;
+}
+
+void LngLatBounds::set_longitude_east(double value_arg) {
+  longitude_east_ = value_arg;
+}
+
+
+double LngLatBounds::latitude_south() const {
+  return latitude_south_;
+}
+
+void LngLatBounds::set_latitude_south(double value_arg) {
+  latitude_south_ = value_arg;
+}
+
+
+double LngLatBounds::latitude_north() const {
+  return latitude_north_;
+}
+
+void LngLatBounds::set_latitude_north(double value_arg) {
+  latitude_north_ = value_arg;
+}
+
+
+EncodableList LngLatBounds::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(4);
+  list.push_back(EncodableValue(longitude_west_));
+  list.push_back(EncodableValue(longitude_east_));
+  list.push_back(EncodableValue(latitude_south_));
+  list.push_back(EncodableValue(latitude_north_));
+  return list;
+}
+
+LngLatBounds LngLatBounds::FromEncodableList(const EncodableList& list) {
+  LngLatBounds decoded(
+    std::get<double>(list[0]),
+    std::get<double>(list[1]),
+    std::get<double>(list[2]),
+    std::get<double>(list[3]));
+  return decoded;
+}
+
 
 PigeonInternalCodecSerializer::PigeonInternalCodecSerializer() {}
 
@@ -356,6 +423,9 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
       }
     case 132: {
         return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 133: {
+        return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
       return flutter::StandardCodecSerializer::ReadValueOfType(type, stream);
@@ -384,6 +454,11 @@ void PigeonInternalCodecSerializer::WriteValue(
     if (custom_value->type() == typeid(MapCamera)) {
       stream->WriteByte(132);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(LngLatBounds)) {
+      stream->WriteByte(133);
+      WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }
   }
@@ -481,6 +556,28 @@ void MapLibreHostApi::SetUp(
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
           api->GetCamera([reply](ErrorOr<MapCamera>&& output) {
+            if (output.has_error()) {
+              reply(WrapError(output.error()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(CustomEncodableValue(std::move(output).TakeValue()));
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.getVisibleRegion" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          api->GetVisibleRegion([reply](ErrorOr<LngLatBounds>&& output) {
             if (output.has_error()) {
               reply(WrapError(output.error()));
               return;

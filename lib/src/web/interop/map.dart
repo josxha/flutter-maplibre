@@ -57,6 +57,11 @@ extension type Map._(Camera _) implements Camera {
 
   /// Returns the map's current pitch (tilt).
   external num getPitch();
+
+  /// Returns the map's geographical bounds. When the bearing or pitch is
+  /// non-zero, the visible region is not an axis-aligned rectangle, and the
+  /// result is the smallest bounds that encompasses the visible region.
+  external LngLatBounds getBounds();
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [Map].
@@ -92,6 +97,23 @@ extension type LngLat._(JSObject _) implements JSObject {
 
   /// Convert the JS [LngLat] object to a dart [Position] object.
   Position toPosition() => Position(lng, lat);
+}
+
+/// A [LngLatBounds] object represents a geographical bounding box,
+/// defined by its southwest and northeast points in longitude and latitude.
+@JS()
+extension type LngLatBounds._(JSObject _) implements JSObject {
+  /// Returns the west edge of the bounding box.
+  external num getWest();
+
+  /// Returns the south edge of the bounding box.
+  external num getSouth();
+
+  /// Returns the east edge of the bounding box.
+  external num getEast();
+
+  /// Returns the north edge of the bounding box.
+  external num getNorth();
 }
 
 /// Options to specify the map bounds.

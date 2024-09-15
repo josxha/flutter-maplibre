@@ -242,6 +242,45 @@ class MapCamera {
 };
 
 
+// LatLng bound object
+//
+// Generated class from Pigeon that represents data sent in messages.
+class LngLatBounds {
+ public:
+  // Constructs an object setting all fields.
+  explicit LngLatBounds(
+    double longitude_west,
+    double longitude_east,
+    double latitude_south,
+    double latitude_north);
+
+  double longitude_west() const;
+  void set_longitude_west(double value_arg);
+
+  double longitude_east() const;
+  void set_longitude_east(double value_arg);
+
+  double latitude_south() const;
+  void set_latitude_south(double value_arg);
+
+  double latitude_north() const;
+  void set_latitude_north(double value_arg);
+
+
+ private:
+  static LngLatBounds FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PigeonInternalCodecSerializer;
+  double longitude_west_;
+  double longitude_east_;
+  double latitude_south_;
+  double latitude_north_;
+
+};
+
+
 class PigeonInternalCodecSerializer : public flutter::StandardCodecSerializer {
  public:
   PigeonInternalCodecSerializer();
@@ -285,6 +324,8 @@ class MapLibreHostApi {
   // Get the current camera position with the map center, zoom level, camera
   // tilt and map rotation.
   virtual void GetCamera(std::function<void(ErrorOr<MapCamera> reply)> result) = 0;
+  // Get the visible region of the current map camera.
+  virtual void GetVisibleRegion(std::function<void(ErrorOr<LngLatBounds> reply)> result) = 0;
   // Convert a coordinate to a location on the screen.
   virtual void ToScreenLocation(
     double lng,

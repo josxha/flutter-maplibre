@@ -162,4 +162,15 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
       _hostApi.getMetersPerPixelAtLatitude(latitude);
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async {
+    final bounds = await _hostApi.getVisibleRegion();
+    return LngLatBounds(
+      longitudeWest: bounds.longitudeWest,
+      longitudeEast: bounds.longitudeEast,
+      latitudeSouth: bounds.latitudeSouth,
+      latitudeNorth: bounds.latitudeNorth,
+    );
+  }
 }

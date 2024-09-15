@@ -49,14 +49,15 @@ lack of platform views of these platforms.
 
 ### Map Controller
 
-| Feature                      | web | android | iOS | windows | macOS | linux |
-|------------------------------|-----|---------|-----|---------|-------|-------|
-| jumpTo                       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| flyTo                        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| addSource                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| addLayer                     | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| setMyLocationTrackingMode    | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| setMapLanguage               | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| toScreenLocation             | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| toLatLng                     | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| getMetersPerPixelAtLatitude  | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Feature                     | web | android | iOS | windows | macOS | linux |
+|-----------------------------|-----|---------|-----|---------|-------|-------|
+| jumpTo                      | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| flyTo                       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| addSource                   | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| addLayer                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| setMyLocationTrackingMode   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| setMapLanguage              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| toScreenLocation            | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| toLatLng                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| getMetersPerPixelAtLatitude | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| getVisibleRegion            | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |

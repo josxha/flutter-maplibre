@@ -215,6 +215,41 @@ struct MapCamera {
   }
 }
 
+/// LatLng bound object
+///
+/// Generated class from Pigeon that represents data sent in messages.
+struct LngLatBounds {
+  var longitudeWest: Double
+  var longitudeEast: Double
+  var latitudeSouth: Double
+  var latitudeNorth: Double
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> LngLatBounds? {
+    let longitudeWest = pigeonVar_list[0] as! Double
+    let longitudeEast = pigeonVar_list[1] as! Double
+    let latitudeSouth = pigeonVar_list[2] as! Double
+    let latitudeNorth = pigeonVar_list[3] as! Double
+
+    return LngLatBounds(
+      longitudeWest: longitudeWest,
+      longitudeEast: longitudeEast,
+      latitudeSouth: latitudeSouth,
+      latitudeNorth: latitudeNorth
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      longitudeWest,
+      longitudeEast,
+      latitudeSouth,
+      latitudeNorth,
+    ]
+  }
+}
+
 private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
@@ -226,6 +261,8 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
       return ScreenLocation.fromList(self.readValue() as! [Any?])
     case 132:
       return MapCamera.fromList(self.readValue() as! [Any?])
+    case 133:
+      return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
     }
@@ -245,6 +282,9 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
       super.writeValue(value.toList())
     } else if let value = value as? MapCamera {
       super.writeByte(132)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(133)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -276,6 +316,8 @@ protocol MapLibreHostApi {
   /// Get the current camera position with the map center, zoom level, camera
   /// tilt and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
+  /// Get the visible region of the current map camera.
+  func getVisibleRegion(completion: @escaping (Result<LngLatBounds, Error>) -> Void)
   /// Convert a coordinate to a location on the screen.
   func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
   /// Convert a screen location to a coordinate.
@@ -356,6 +398,22 @@ class MapLibreHostApiSetup {
       }
     } else {
       getCameraChannel.setMessageHandler(nil)
+    }
+    /// Get the visible region of the current map camera.
+    let getVisibleRegionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.getVisibleRegion\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getVisibleRegionChannel.setMessageHandler { _, reply in
+        api.getVisibleRegion { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      getVisibleRegionChannel.setMessageHandler(nil)
     }
     /// Convert a coordinate to a location on the screen.
     let toScreenLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)

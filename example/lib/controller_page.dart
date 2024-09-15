@@ -109,7 +109,21 @@ tilt: ${camera.tilt}'''),
                         );
                     }
                   },
-                  child: const Text('meter/pixel at center'),
+                  child: const Text('Meter/Pixel at center'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final region = await _controller.getVisibleRegion();
+                    debugPrint(region.toString());
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(content: Text(region.toString())),
+                        );
+                    }
+                  },
+                  child: const Text('Visible region'),
                 ),
               ],
             ),

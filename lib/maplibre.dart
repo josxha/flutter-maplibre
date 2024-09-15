@@ -3,6 +3,7 @@
 export 'package:geotypes/geotypes.dart';
 
 export 'src/annotations.dart';
+export 'src/common.dart';
 export 'src/layers.dart';
 export 'src/map.dart';
 export 'src/map_camera.dart';

@@ -241,6 +241,67 @@ double maplibre_map_camera_get_tilt(MaplibreMapCamera* object);
  */
 double maplibre_map_camera_get_bearing(MaplibreMapCamera* object);
 
+/**
+ * MaplibreLngLatBounds:
+ *
+ * LatLng bound object
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreLngLatBounds, maplibre_lng_lat_bounds, MAPLIBRE, LNG_LAT_BOUNDS, GObject)
+
+/**
+ * maplibre_lng_lat_bounds_new:
+ * longitude_west: field in this object.
+ * longitude_east: field in this object.
+ * latitude_south: field in this object.
+ * latitude_north: field in this object.
+ *
+ * Creates a new #LngLatBounds object.
+ *
+ * Returns: a new #MaplibreLngLatBounds
+ */
+MaplibreLngLatBounds* maplibre_lng_lat_bounds_new(double longitude_west, double longitude_east, double latitude_south, double latitude_north);
+
+/**
+ * maplibre_lng_lat_bounds_get_longitude_west
+ * @object: a #MaplibreLngLatBounds.
+ *
+ * Gets the value of the longitudeWest field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_lng_lat_bounds_get_longitude_west(MaplibreLngLatBounds* object);
+
+/**
+ * maplibre_lng_lat_bounds_get_longitude_east
+ * @object: a #MaplibreLngLatBounds.
+ *
+ * Gets the value of the longitudeEast field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_lng_lat_bounds_get_longitude_east(MaplibreLngLatBounds* object);
+
+/**
+ * maplibre_lng_lat_bounds_get_latitude_south
+ * @object: a #MaplibreLngLatBounds.
+ *
+ * Gets the value of the latitudeSouth field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_lng_lat_bounds_get_latitude_south(MaplibreLngLatBounds* object);
+
+/**
+ * maplibre_lng_lat_bounds_get_latitude_north
+ * @object: a #MaplibreLngLatBounds.
+ *
+ * Gets the value of the latitudeNorth field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_lng_lat_bounds_get_latitude_north(MaplibreLngLatBounds* object);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiResponseHandle, maplibre_map_libre_host_api_response_handle, MAPLIBRE, MAP_LIBRE_HOST_API_RESPONSE_HANDLE, GObject)
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse, maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response, MAPLIBRE, MAP_LIBRE_HOST_API_GET_METERS_PER_PIXEL_AT_LATITUDE_RESPONSE, GObject)
@@ -275,6 +336,7 @@ typedef struct {
   void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_camera)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_lng_lat)(double x, double y, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_fill_layer)(const gchar* id, const gchar* source_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
@@ -363,6 +425,26 @@ void maplibre_map_libre_host_api_respond_get_camera(MaplibreMapLibreHostApiRespo
  * Responds with an error to MapLibreHostApi.getCamera. 
  */
 void maplibre_map_libre_host_api_respond_error_get_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_get_visible_region:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.getVisibleRegion. 
+ */
+void maplibre_map_libre_host_api_respond_get_visible_region(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreLngLatBounds* return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_get_visible_region:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.getVisibleRegion. 
+ */
+void maplibre_map_libre_host_api_respond_error_get_visible_region(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_map_libre_host_api_respond_to_screen_location:

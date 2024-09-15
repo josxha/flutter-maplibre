@@ -47,6 +47,10 @@ abstract interface class MapLibreHostApi {
   @async
   MapCamera getCamera();
 
+  /// Get the visible region of the current map camera.
+  @async
+  LngLatBounds getVisibleRegion();
+
   /// Convert a coordinate to a location on the screen.
   @async
   ScreenLocation toScreenLocation(double lng, double lat);
@@ -166,4 +170,19 @@ class MapCamera {
   final double zoom;
   final double tilt;
   final double bearing;
+}
+
+/// LatLng bound object
+class LngLatBounds {
+  const LngLatBounds({
+    required this.longitudeWest,
+    required this.longitudeEast,
+    required this.latitudeSouth,
+    required this.latitudeNorth,
+  });
+
+  final double longitudeWest;
+  final double longitudeEast;
+  final double latitudeSouth;
+  final double latitudeNorth;
 }

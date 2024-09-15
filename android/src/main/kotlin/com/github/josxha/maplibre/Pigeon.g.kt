@@ -177,6 +177,37 @@ data class MapCamera (
     )
   }
 }
+
+/**
+ * LatLng bound object
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
+data class LngLatBounds (
+  val longitudeWest: Double,
+  val longitudeEast: Double,
+  val latitudeSouth: Double,
+  val latitudeNorth: Double
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): LngLatBounds {
+      val longitudeWest = pigeonVar_list[0] as Double
+      val longitudeEast = pigeonVar_list[1] as Double
+      val latitudeSouth = pigeonVar_list[2] as Double
+      val latitudeNorth = pigeonVar_list[3] as Double
+      return LngLatBounds(longitudeWest, longitudeEast, latitudeSouth, latitudeNorth)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      longitudeWest,
+      longitudeEast,
+      latitudeSouth,
+      latitudeNorth,
+    )
+  }
+}
 private open class PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
@@ -200,6 +231,11 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
           MapCamera.fromList(it)
         }
       }
+      133.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          LngLatBounds.fromList(it)
+        }
+      }
       else -> super.readValueOfType(type, buffer)
     }
   }
@@ -221,6 +257,10 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(132)
         writeValue(stream, value.toList())
       }
+      is LngLatBounds -> {
+        stream.write(133)
+        writeValue(stream, value.toList())
+      }
       else -> super.writeValue(stream, value)
     }
   }
@@ -238,6 +278,8 @@ interface MapLibreHostApi {
    * tilt and map rotation.
    */
   fun getCamera(callback: (Result<MapCamera>) -> Unit)
+  /** Get the visible region of the current map camera. */
+  fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit)
   /** Convert a coordinate to a location on the screen. */
   fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
   /** Convert a screen location to a coordinate. */
@@ -313,6 +355,24 @@ interface MapLibreHostApi {
         if (api != null) {
           channel.setMessageHandler { _, reply ->
             api.getCamera{ result: Result<MapCamera> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.getVisibleRegion$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.getVisibleRegion{ result: Result<LngLatBounds> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
