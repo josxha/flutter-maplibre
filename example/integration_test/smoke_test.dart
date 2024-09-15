@@ -10,7 +10,7 @@ void main() {
   group('controller', () {
     testWidgets(
       'render map',
-          (tester) async {
+      (tester) async {
         await tester.pumpWidget(const App());
         await tester.pumpAndSettle();
         expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
@@ -18,7 +18,7 @@ void main() {
     );
     testWidgets(
       'getCamera',
-          (tester) async {
+      (tester) async {
         late final MapController ctrl;
         final app = App(
           onMapCreated: (controller) => ctrl = controller,
@@ -38,7 +38,7 @@ void main() {
     );
     testWidgets(
       'jumpTo',
-          (tester) async {
+      (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
@@ -55,7 +55,7 @@ void main() {
     );
     testWidgets(
       'flyTo',
-          (tester) async {
+      (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
