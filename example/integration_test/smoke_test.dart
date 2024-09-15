@@ -92,7 +92,7 @@ void main() {
             zoom: 2,
             tilt: 2,
             webSpeed: 0.1,
-            nativeDuration: const Duration(seconds: 10),
+            nativeDuration: const Duration(days: 1),
           ),
           throwsA(isA<PlatformException>()),
         );

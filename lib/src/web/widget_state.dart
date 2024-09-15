@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:js_interop';
 import 'dart:math';
 import 'dart:ui_web';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/web/extensions.dart';
@@ -16,6 +18,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
   late interop.Map _map;
+  Completer<interop.MapLibreEvent>? _moveCompleter;
 
   MapOptions get _options => widget.options;
 
@@ -23,7 +26,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   void initState() {
     platformViewRegistry.registerViewFactory(
       _viewName,
-          (int viewId, [dynamic params]) {
+      (int viewId, [dynamic params]) {
         _htmlElement = HTMLDivElement()
           ..style.padding = '0'
           ..style.margin = '0'
@@ -50,52 +53,45 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         // add controls
         for (final control in _options.controls) {
           final jsControl = switch (control) {
-            final ScaleControl control =>
-                interop.ScaleControl(
-                  interop.ScaleControlOptions(
-                    maxWidth: control.maxWidth,
-                    unit: control.unit.name,
+            final ScaleControl control => interop.ScaleControl(
+                interop.ScaleControlOptions(
+                  maxWidth: control.maxWidth,
+                  unit: control.unit.name,
+                ),
+              ),
+            final GeolocateControl control => interop.GeolocateControl(
+                interop.GeolocateControlOptions(
+                  positionOptions: interop.PositionOptions(
+                    enableHighAccuracy:
+                        control.positionOptions.enableHighAccuracy,
+                    maximumAge:
+                        control.positionOptions.maximumAge.inMilliseconds,
+                    timeout: control.positionOptions.timeout.inMilliseconds,
                   ),
                 ),
-            final GeolocateControl control =>
-                interop.GeolocateControl(
-                  interop.GeolocateControlOptions(
-                    positionOptions: interop.PositionOptions(
-                      enableHighAccuracy:
-                      control.positionOptions.enableHighAccuracy,
-                      maximumAge:
-                      control.positionOptions.maximumAge.inMilliseconds,
-                      timeout: control.positionOptions.timeout.inMilliseconds,
-                    ),
-                  ),
+              ),
+            final AttributionControl control => interop.AttributionControl(
+                interop.AttributionControlOptions(
+                  compact: control.compact,
+                  customAttribution: control.customAttribution,
                 ),
-            final AttributionControl control =>
-                interop.AttributionControl(
-                  interop.AttributionControlOptions(
-                    compact: control.compact,
-                    customAttribution: control.customAttribution,
-                  ),
+              ),
+            final FullscreenControl _ => interop.FullscreenControl(
+                interop.FullscreenControlOptions(),
+              ),
+            final LogoControl control => interop.LogoControl(
+                interop.LogoControlOptions(compact: control.compact),
+              ),
+            final NavigationControl control => interop.NavigationControl(
+                interop.NavigationControlOptions(
+                  showCompass: control.showCompass,
+                  showZoom: control.showZoom,
+                  visualizePitch: control.visualizePitch,
                 ),
-            final FullscreenControl _ =>
-                interop.FullscreenControl(
-                  interop.FullscreenControlOptions(),
-                ),
-            final LogoControl control =>
-                interop.LogoControl(
-                  interop.LogoControlOptions(compact: control.compact),
-                ),
-            final NavigationControl control =>
-                interop.NavigationControl(
-                  interop.NavigationControlOptions(
-                    showCompass: control.showCompass,
-                    showZoom: control.showZoom,
-                    visualizePitch: control.visualizePitch,
-                  ),
-                ),
-            final TerrainControl control =>
-                interop.TerrainControl(
-                  interop.TerrainControlOptions(source: control.source),
-                ),
+              ),
+            final TerrainControl control => interop.TerrainControl(
+                interop.TerrainControlOptions(source: control.source),
+              ),
           };
           _map.addControl(jsControl);
         }
@@ -103,7 +99,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (widget.onStyleLoaded case final VoidCallback callback) {
           _map.on(
             interop.MapEventType.load,
-                (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
               callback();
             }.toJS,
           );
@@ -111,7 +107,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.click,
-                (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
@@ -119,7 +115,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onDoubleClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.dblclick,
-                (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
@@ -127,11 +123,18 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         if (_options.onSecondaryClick case final OnClickCallback callback) {
           _map.on(
             interop.MapEventType.contextmenu,
-                (interop.MapMouseEvent event) {
+            (interop.MapMouseEvent event) {
               callback(event.lngLat.toPosition());
             }.toJS,
           );
         }
+        _map.on(
+          interop.MapEventType.moveEnd,
+          (interop.MapLibreEvent event) {
+            if (_moveCompleter?.isCompleted ?? true) return;
+            _moveCompleter?.complete(event);
+          }.toJS,
+        );
 
         return _htmlElement;
       },
@@ -214,17 +217,43 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
-  }) async =>
-      _map.flyTo(
-        interop.FlyToOptions(
-          center: center?.toLngLat(),
-          zoom: zoom,
-          bearing: bearing,
-          pitch: tilt,
-          speed: webSpeed,
-          maxDuration: maxDuration?.inMilliseconds,
-        ),
-      );
+  }) async {
+    final destination = center?.toLngLat();
+    _map.flyTo(
+      interop.FlyToOptions(
+        center: destination,
+        zoom: zoom,
+        bearing: bearing,
+        pitch: tilt,
+        speed: webSpeed,
+        maxDuration: maxDuration?.inMilliseconds,
+      ),
+    );
+    final completer = _moveCompleter = Completer<interop.MapLibreEvent>();
+    final _ = await completer.future;
+    _moveCompleter = null;
+
+    // check if the targeted values were reached or if the flight was cancelled
+    final newCenter = _map.getCenter();
+    bool reachedCenter;
+    if (destination == null) {
+      reachedCenter = true;
+    } else {
+      final reachedLng = (destination.lng - newCenter.lng).abs() < 0.0000001;
+      final reachedLat = (destination.lat - newCenter.lat).abs() < 0.0000001;
+      reachedCenter = reachedLat && reachedLng;
+    }
+    final reachedZoom = zoom == null || zoom == _map.getZoom();
+    final reachedBearing = bearing == null || bearing == _map.getBearing();
+    final reachedTilt = tilt == null || tilt == _map.getPitch();
+
+    if (reachedCenter && reachedZoom && reachedBearing && reachedTilt) return;
+
+    throw PlatformException(
+      code: 'CancellationException',
+      message: 'Animation cancelled.',
+    );
+  }
 
   @override
   Future<void> addSource(Source source) async {
@@ -261,8 +290,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async =>
-      MapCamera(
+  Future<MapCamera> getCamera() async => MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
         tilt: _map.getPitch().toDouble(),

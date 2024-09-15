@@ -1,12 +1,20 @@
 part of 'interop.dart';
 
+/// The base event for MapLibre
+@JS()
+extension type MapLibreEvent<T extends JSObject>._(JSObject _)
+    implements JSObject {
+  external Map target;
+  external JSString type;
+  external T? originalEvent;
+}
+
 /// A mouse event on the map.
 @JS()
-extension type MapMouseEvent._(JSObject _) implements JSObject {
+extension type MapMouseEvent._(MapLibreEvent _) implements MapLibreEvent {
   /// Create a new [MapMouseEvent].
   external MapMouseEvent();
 
-  external Map target;
   external LngLat lngLat;
   external JSObject originalEvent;
 }
@@ -30,4 +38,7 @@ abstract class MapEventType {
 
   /// Fired when the style has been loaded.
   static const load = 'load';
+
+  /// Fired once the map stops moving.
+  static const moveEnd = 'moveend';
 }
