@@ -111,5 +111,20 @@ void main() {
         );
       },
     );
+    testWidgets(
+      'getVisibleRegion',
+      (tester) async {
+        late final MapController ctrl;
+        final app = App(onMapCreated: (controller) => ctrl = controller);
+        await tester.pumpWidget(app);
+        await tester.pumpAndSettle();
+        final region = await ctrl.getVisibleRegion();
+        // TODO adjust values
+        expect(region.latitudeNorth, closeTo(12345, 0.00001));
+        expect(region.latitudeSouth, closeTo(12345, 0.00001));
+        expect(region.longitudeEast, closeTo(12345, 0.00001));
+        expect(region.longitudeWest, closeTo(12345, 0.00001));
+      },
+    );
   });
 }
