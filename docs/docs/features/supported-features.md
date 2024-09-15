@@ -4,9 +4,8 @@ sidebar_position: 1
 
 # Supported Features
 
-This is a broad orientation about what functionality could be added. The list
-is orientated on MapLibre GL JS and the flutter-maplibre-gl map 
- me controller methods will be changed to provide a different annotation API.
+This side provides a broad orientation about what functionality could and what 
+functionality is already added.
 
 ### Legend
 
