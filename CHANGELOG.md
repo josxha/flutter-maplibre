@@ -1,6 +1,13 @@
 ## unreleased
 
+### Features
+
 - add `duration` parameter to `flyTo()`
+- `flyTo()` returns after the animation completes or throws an exception if it
+  has been cancelled
+
+### Bug fixes
+
 - fix `jumpTo()` never returns
 
 ## 0.0.1+1

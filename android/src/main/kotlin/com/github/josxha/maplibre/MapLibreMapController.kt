@@ -1,4 +1,4 @@
-package com.githb.josxha.maplibre
+package com.github.josxha.maplibre
 
 import LngLat
 import LngLatBounds
