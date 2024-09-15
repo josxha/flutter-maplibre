@@ -44,6 +44,16 @@ uses [platform views](https://docs.flutter.dev/platform-integration/android/plat
 to display the native map. This requires an Android SDK version of at least 23
 (Android 6.0).
 
+:::tip
+
+The app compiles with a minSdk version of down to 21. However, the MapLibre map
+won't be visible on these Android versions. You can check for the SDK version
+with [device_info_plus](https://pub.dev/packages/device_info_plus)
+and render an alternative map as a workaround or limit the supported Android
+versions to Android 6.0 and onwards like demonstrated here.
+
+:::
+
 Open your `android/app/build.gradle` file and ensure that it is set to 23 or
 higher.
 
