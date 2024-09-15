@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -11,7 +10,7 @@ void main() {
   group('controller', () {
     testWidgets(
       'render map',
-      (tester) async {
+          (tester) async {
         await tester.pumpWidget(const App());
         await tester.pumpAndSettle();
         expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
@@ -19,7 +18,7 @@ void main() {
     );
     testWidgets(
       'getCamera',
-      (tester) async {
+          (tester) async {
         late final MapController ctrl;
         final app = App(
           onMapCreated: (controller) => ctrl = controller,
@@ -39,7 +38,7 @@ void main() {
     );
     testWidgets(
       'jumpTo',
-      (tester) async {
+          (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
@@ -56,7 +55,7 @@ void main() {
     );
     testWidgets(
       'flyTo',
-      (tester) async {
+          (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
@@ -102,27 +101,27 @@ void main() {
     );*/
     testWidgets(
       'getMetersPerPixelAtLatitude',
-      (tester) async {
+          (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await expectLater(
-          ctrl.getMetersPerPixelAtLatitude(23),
-          closeTo(12345, 0.00001), // TODO adjust value
-        );
+        final meters = await ctrl.getMetersPerPixelAtLatitude(23);
+        // TODO adjust value
+        expect(meters, closeTo(12345, 0.00001));
       },
     );
     testWidgets(
       'getVisibleRegion',
-      (tester) async {
+          (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         final region = await ctrl.getVisibleRegion();
         // TODO adjust values
-        expect(region.latitudeNorth, closeTo(12345, 0.00001));
+        expect(region.latitudeNorth, closeTo(85.05112862791722, 0.00001));
+        print(region);
         expect(region.latitudeSouth, closeTo(12345, 0.00001));
         expect(region.longitudeEast, closeTo(12345, 0.00001));
         expect(region.longitudeWest, closeTo(12345, 0.00001));
