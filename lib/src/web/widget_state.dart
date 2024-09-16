@@ -316,4 +316,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       latitudeNorth: bounds.getNorth().toDouble(),
     );
   }
+
+  @override
+  Future<bool> enableUserLocation({RenderMode mode = RenderMode.normal}) {
+    // TODO: implement, maybe it requires a custom solution to get feature parity with maplibre native
+    throw UnimplementedError();
+  }
 }

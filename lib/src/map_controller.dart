@@ -54,4 +54,33 @@ abstract interface class MapController {
 
   /// The smallest bounding box that includes the visible region.
   Future<LngLatBounds> getVisibleRegion();
+
+  /// Render the user location on the map.
+  ///
+  /// mode Defines how the bearing should get determined.
+  ///
+  /// Returns true when it succeeds.
+  Future<bool> enableUserLocation({
+    RenderMode mode = RenderMode.normal,
+  });
+}
+
+/// Render mode of the user location on the map.
+enum RenderMode {
+  /// Show user location, ignore bearing.
+  ///
+  /// This is the only supported mode on web.
+  normal,
+
+  /// Tracking the user location with bearing considered from the compass
+  /// engine of the device.
+  ///
+  /// Not supported on web.
+  compass,
+
+  /// Tracking the user location with bearing considered from the movement of
+  /// the user.
+  ///
+  /// Not supported on web.
+  gps;
 }

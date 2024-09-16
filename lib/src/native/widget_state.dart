@@ -173,4 +173,16 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       latitudeNorth: bounds.latitudeNorth,
     );
   }
+
+  @override
+  Future<bool> enableUserLocation({
+    RenderMode mode = RenderMode.normal,
+  }) async =>
+      _hostApi.enableUserLocation(
+        mode: switch (mode) {
+          RenderMode.normal => pigeon.RenderMode.normal,
+          RenderMode.compass => pigeon.RenderMode.compass,
+          RenderMode.gps => pigeon.RenderMode.gps,
+        },
+      );
 }

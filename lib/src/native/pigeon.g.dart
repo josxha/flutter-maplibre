@@ -26,6 +26,20 @@ List<Object?> wrapResponse(
   return <Object?>[error.code, error.message, error.details];
 }
 
+/// Render mode of the user location on the map.
+enum RenderMode {
+  /// Show user location, ignore bearing.
+  normal,
+
+  /// Tracking the user location with bearing considered from the compass
+  /// engine of the device.
+  compass,
+
+  /// Tracking the user location with bearing considered from the movement of
+  /// the user.
+  gps,
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   MapOptions({
@@ -224,20 +238,23 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    } else if (value is MapOptions) {
+    } else if (value is RenderMode) {
       buffer.putUint8(129);
-      writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+      writeValue(buffer, value.index);
+    } else if (value is MapOptions) {
       buffer.putUint8(130);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    } else if (value is LngLat) {
       buffer.putUint8(131);
       writeValue(buffer, value.encode());
-    } else if (value is MapCamera) {
+    } else if (value is ScreenLocation) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is MapCamera) {
       buffer.putUint8(133);
+      writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(134);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -248,14 +265,17 @@ class _PigeonCodec extends StandardMessageCodec {
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
       case 129:
-        return MapOptions.decode(readValue(buffer)!);
+        final int? value = readValue(buffer) as int?;
+        return value == null ? null : RenderMode.values[value];
       case 130:
-        return LngLat.decode(readValue(buffer)!);
+        return MapOptions.decode(readValue(buffer)!);
       case 131:
-        return ScreenLocation.decode(readValue(buffer)!);
+        return LngLat.decode(readValue(buffer)!);
       case 132:
-        return MapCamera.decode(readValue(buffer)!);
+        return ScreenLocation.decode(readValue(buffer)!);
       case 133:
+        return MapCamera.decode(readValue(buffer)!);
+      case 134:
         return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -567,6 +587,38 @@ class MapLibreHostApi {
       );
     } else {
       return (pigeonVar_replyList[0] as double?)!;
+    }
+  }
+
+  /// Render the user location on the map.
+  ///
+  /// Returns true when it succeeds.
+  Future<bool> enableUserLocation({required RenderMode mode}) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.enableUserLocation$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[mode]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as bool?)!;
     }
   }
 }

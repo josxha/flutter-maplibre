@@ -57,6 +57,18 @@ template<class T> class ErrorOr {
 };
 
 
+// Render mode of the user location on the map.
+enum class RenderMode {
+  // Show user location, ignore bearing.
+  kNormal = 0,
+  // Tracking the user location with bearing considered from the compass
+  // engine of the device.
+  kCompass = 1,
+  // Tracking the user location with bearing considered from the movement of
+  // the user.
+  kGps = 2
+};
+
 
 // The map options define initial values for the MapLibre map.
 //
@@ -354,6 +366,12 @@ class MapLibreHostApi {
   // Returns the distance spanned by one pixel at the specified latitude and
   // current zoom level.
   virtual ErrorOr<double> GetMetersPerPixelAtLatitude(double latitude) = 0;
+  // Render the user location on the map.
+  //
+  // Returns true when it succeeds.
+  virtual void EnableUserLocation(
+    const RenderMode& mode,
+    std::function<void(ErrorOr<bool> reply)> result) = 0;
 
   // The codec used by MapLibreHostApi.
   static const flutter::StandardMessageCodec& GetCodec();

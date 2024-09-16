@@ -68,6 +68,18 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 
+/// Render mode of the user location on the map.
+enum RenderMode: Int {
+  /// Show user location, ignore bearing.
+  case normal = 0
+  /// Tracking the user location with bearing considered from the compass
+  /// engine of the device.
+  case compass = 1
+  /// Tracking the user location with bearing considered from the movement of
+  /// the user.
+  case gps = 2
+}
+
 /// The map options define initial values for the MapLibre map.
 ///
 /// Generated class from Pigeon that represents data sent in messages.
@@ -254,14 +266,20 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      return MapOptions.fromList(self.readValue() as! [Any?])
+      let enumResultAsInt: Int? = nilOrValue(self.readValue() as! Int?)
+      if let enumResultAsInt = enumResultAsInt {
+        return RenderMode(rawValue: enumResultAsInt)
+      }
+      return nil
     case 130:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      return MapOptions.fromList(self.readValue() as! [Any?])
     case 131:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     case 132:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
     case 133:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 134:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -271,20 +289,23 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
 
 private class PigeonPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? MapOptions {
+    if let value = value as? RenderMode {
       super.writeByte(129)
-      super.writeValue(value.toList())
-    } else if let value = value as? LngLat {
+      super.writeValue(value.rawValue)
+    } else if let value = value as? MapOptions {
       super.writeByte(130)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? LngLat {
       super.writeByte(131)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? ScreenLocation {
       super.writeByte(132)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? MapCamera {
       super.writeByte(133)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(134)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -331,6 +352,10 @@ protocol MapLibreHostApi {
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   func getMetersPerPixelAtLatitude(latitude: Double) throws -> Double
+  /// Render the user location on the map.
+  ///
+  /// Returns true when it succeeds.
+  func enableUserLocation(mode: RenderMode, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -526,6 +551,26 @@ class MapLibreHostApiSetup {
       }
     } else {
       getMetersPerPixelAtLatitudeChannel.setMessageHandler(nil)
+    }
+    /// Render the user location on the map.
+    ///
+    /// Returns true when it succeeds.
+    let enableUserLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.enableUserLocation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      enableUserLocationChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let modeArg = args[0] as! RenderMode
+        api.enableUserLocation(mode: modeArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      enableUserLocationChannel.setMessageHandler(nil)
     }
   }
 }

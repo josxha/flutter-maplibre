@@ -77,6 +77,12 @@ abstract interface class MapLibreHostApi {
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   double getMetersPerPixelAtLatitude(double latitude);
+
+  /// Render the user location on the map.
+  ///
+  /// Returns true when it succeeds.
+  @async
+  bool enableUserLocation({required RenderMode mode});
 }
 
 @FlutterApi()
@@ -185,4 +191,18 @@ class LngLatBounds {
   final double longitudeEast;
   final double latitudeSouth;
   final double latitudeNorth;
+}
+
+/// Render mode of the user location on the map.
+enum RenderMode {
+  /// Show user location, ignore bearing.
+  normal,
+
+  /// Tracking the user location with bearing considered from the compass
+  /// engine of the device.
+  compass,
+
+  /// Tracking the user location with bearing considered from the movement of
+  /// the user.
+  gps;
 }

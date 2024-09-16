@@ -46,6 +46,28 @@ class FlutterError (
   val details: Any? = null
 ) : Throwable()
 
+/** Render mode of the user location on the map. */
+enum class RenderMode(val raw: Int) {
+  /** Show user location, ignore bearing. */
+  NORMAL(0),
+  /**
+   * Tracking the user location with bearing considered from the compass
+   * engine of the device.
+   */
+  COMPASS(1),
+  /**
+   * Tracking the user location with bearing considered from the movement of
+   * the user.
+   */
+  GPS(2);
+
+  companion object {
+    fun ofRaw(raw: Int): RenderMode? {
+      return values().firstOrNull { it.raw == raw }
+    }
+  }
+}
+
 /**
  * The map options define initial values for the MapLibre map.
  *
@@ -212,26 +234,31 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
       129.toByte() -> {
-        return (readValue(buffer) as? List<Any?>)?.let {
-          MapOptions.fromList(it)
+        return (readValue(buffer) as Long?)?.let {
+          RenderMode.ofRaw(it.toInt())
         }
       }
       130.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          LngLat.fromList(it)
+          MapOptions.fromList(it)
         }
       }
       131.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          ScreenLocation.fromList(it)
+          LngLat.fromList(it)
         }
       }
       132.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapCamera.fromList(it)
+          ScreenLocation.fromList(it)
         }
       }
       133.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
+        }
+      }
+      134.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLatBounds.fromList(it)
         }
@@ -241,24 +268,28 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
     when (value) {
-      is MapOptions -> {
+      is RenderMode -> {
         stream.write(129)
-        writeValue(stream, value.toList())
+        writeValue(stream, value.raw)
       }
-      is LngLat -> {
+      is MapOptions -> {
         stream.write(130)
         writeValue(stream, value.toList())
       }
-      is ScreenLocation -> {
+      is LngLat -> {
         stream.write(131)
         writeValue(stream, value.toList())
       }
-      is MapCamera -> {
+      is ScreenLocation -> {
         stream.write(132)
         writeValue(stream, value.toList())
       }
-      is LngLatBounds -> {
+      is MapCamera -> {
         stream.write(133)
+        writeValue(stream, value.toList())
+      }
+      is LngLatBounds -> {
+        stream.write(134)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -295,6 +326,12 @@ interface MapLibreHostApi {
    * current zoom level.
    */
   fun getMetersPerPixelAtLatitude(latitude: Double): Double
+  /**
+   * Render the user location on the map.
+   *
+   * Returns true when it succeeds.
+   */
+  fun enableUserLocation(mode: RenderMode, callback: (Result<Boolean>) -> Unit)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -500,6 +537,26 @@ interface MapLibreHostApi {
               wrapError(exception)
             }
             reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.enableUserLocation$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val modeArg = args[0] as RenderMode
+            api.enableUserLocation(modeArg) { result: Result<Boolean> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
+              }
+            }
           }
         } else {
           channel.setMessageHandler(null)

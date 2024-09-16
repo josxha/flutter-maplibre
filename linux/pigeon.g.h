@@ -9,6 +9,25 @@
 G_BEGIN_DECLS
 
 /**
+ * MaplibreRenderMode:
+ * MAPLIBRE_RENDER_MODE_NORMAL:
+ * Show user location, ignore bearing.
+ * MAPLIBRE_RENDER_MODE_COMPASS:
+ * Tracking the user location with bearing considered from the compass
+ * engine of the device.
+ * MAPLIBRE_RENDER_MODE_GPS:
+ * Tracking the user location with bearing considered from the movement of
+ * the user.
+ *
+ * Render mode of the user location on the map.
+ */
+typedef enum {
+  MAPLIBRE_RENDER_MODE_NORMAL = 0,
+  MAPLIBRE_RENDER_MODE_COMPASS = 1,
+  MAPLIBRE_RENDER_MODE_GPS = 2
+} MaplibreRenderMode;
+
+/**
  * MaplibreMapOptions:
  *
  * The map options define initial values for the MapLibre map.
@@ -343,6 +362,7 @@ typedef struct {
   void (*add_circle_layer)(const gchar* id, const gchar* source_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* (*get_meters_per_pixel_at_latitude)(double latitude, gpointer user_data);
+  void (*enable_user_location)(MaplibreRenderMode mode, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
 } MaplibreMapLibreHostApiVTable;
 
 /**
@@ -542,6 +562,26 @@ void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHos
  * Responds with an error to MapLibreHostApi.addGeoJsonSource. 
  */
 void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_enable_user_location:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.enableUserLocation. 
+ */
+void maplibre_map_libre_host_api_respond_enable_user_location(MaplibreMapLibreHostApiResponseHandle* response_handle, gboolean return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_enable_user_location:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.enableUserLocation. 
+ */
+void maplibre_map_libre_host_api_respond_error_enable_user_location(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
 

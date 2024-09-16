@@ -7,6 +7,7 @@ import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
 import ScreenLocation
+import UserLocationOptions
 import android.content.Context
 import android.graphics.PointF
 import android.view.View
@@ -196,6 +197,13 @@ class MapLibreMapController(
 
     override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
         mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
+
+    override fun enableUserLocation(
+        options: UserLocationOptions,
+        callback: (Result<Boolean>) -> Unit
+    ) {
+        mapLibreMap.locationComponent.
+    }
 
     override fun onMapClick(point: LatLng): Boolean {
         flutterApi.onClick(LngLat(point.longitude, point.latitude)) { }
