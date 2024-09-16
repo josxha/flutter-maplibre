@@ -65,12 +65,22 @@ welcome.
 
 #### Run Code Generation
 
+We use code generation from [pigeon](https://pub.dev/packages/pigeon). 
+If you change the file [pigeons/pigeon.dart](pigeons/pigeon.dart) you'll have
+to run the code generator.
+Use the generator script (or run the commands yourself) to generate the code.
+
+On unix systems (macos, linux):
 ```bash
-flutter pub global activate pigeon # only once
-dart run pigeon --input pigeons/pigeon.dart 
-cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
-dart format .
+./pigeon/run.sh
 ```
+
+On windows systems:
+
+```powershell
+.\pigeon\run.sh
+```
+
 
 #### Test with WebAssembly
 

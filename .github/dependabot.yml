@@ -1,28 +1,21 @@
 version: 2
 enable-beta-ecosystems: true
 updates:
-  - package-ecosystem: "pub"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    ignore:
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
-  - package-ecosystem: "pub"
-    directory: "/example"
-    schedule:
-      interval: "daily"
-    ignore:
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directories:
+      - "/"
+      - "/example"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
   - package-ecosystem: "npm"
     directory: "/docs"
     schedule:
@@ -31,3 +24,9 @@ updates:
     groups:
       dependencies:
         patterns: [ "*" ]
+  - package-ecosystem: "gradle"
+    directories:
+      - "/android"
+      - "/example/android"
+    schedule:
+      interval: "daily"

@@ -63,6 +63,68 @@ class _ControllerPageState extends State<ControllerPage> {
                   },
                   child: const Text('Fly to Iceland'),
                 ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final camera = await _controller.getCamera();
+                    debugPrint(camera.toString());
+                    if (context.mounted) {
+                      await showDialog<void>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('MapCenter'),
+                          content: Text('''
+center.lng: ${camera.center.lng}
+center.lat: ${camera.center.lat}
+zoom: ${camera.zoom}
+bearing: ${camera.bearing}
+tilt: ${camera.tilt}'''),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Current MapCamera'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final camera = await _controller.getCamera();
+                    final lat = camera.center.lat.toDouble();
+                    final meters =
+                        await _controller.getMetersPerPixelAtLatitude(lat);
+                    debugPrint('latitude: $lat: $meters m/px');
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'latitude: $lat: $meters m/px',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text('Meter/Pixel at center'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final region = await _controller.getVisibleRegion();
+                    debugPrint(region.toString());
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(content: Text(region.toString())),
+                        );
+                    }
+                  },
+                  child: const Text('Visible region'),
+                ),
               ],
             ),
           ),

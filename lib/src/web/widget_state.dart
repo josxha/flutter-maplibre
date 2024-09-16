@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:js_interop';
+import 'dart:math';
 import 'dart:ui_web';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/web/extensions.dart';
@@ -15,6 +18,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
   late interop.Map _map;
+  Completer<interop.MapLibreEvent>? _moveCompleter;
 
   MapOptions get _options => widget.options;
 
@@ -124,6 +128,13 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             }.toJS,
           );
         }
+        _map.on(
+          interop.MapEventType.moveEnd,
+          (interop.MapLibreEvent event) {
+            if (_moveCompleter?.isCompleted ?? true) return;
+            _moveCompleter?.complete(event);
+          }.toJS,
+        );
 
         return _htmlElement;
       },
@@ -206,17 +217,43 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
-  }) async =>
-      _map.flyTo(
-        interop.FlyToOptions(
-          center: center?.toLngLat(),
-          zoom: zoom,
-          bearing: bearing,
-          pitch: tilt,
-          speed: webSpeed,
-          maxDuration: maxDuration?.inMilliseconds,
-        ),
-      );
+  }) async {
+    final destination = center?.toLngLat();
+    _map.flyTo(
+      interop.FlyToOptions(
+        center: destination,
+        zoom: zoom,
+        bearing: bearing,
+        pitch: tilt,
+        speed: webSpeed,
+        maxDuration: maxDuration?.inMilliseconds,
+      ),
+    );
+    final completer = _moveCompleter = Completer<interop.MapLibreEvent>();
+    final _ = await completer.future;
+    _moveCompleter = null;
+
+    // check if the targeted values were reached or if the flight was cancelled
+    final newCenter = _map.getCenter();
+    bool reachedCenter;
+    if (destination == null) {
+      reachedCenter = true;
+    } else {
+      final reachedLng = (destination.lng - newCenter.lng).abs() < 0.0000001;
+      final reachedLat = (destination.lat - newCenter.lat).abs() < 0.0000001;
+      reachedCenter = reachedLat && reachedLng;
+    }
+    final reachedZoom = zoom == null || zoom == _map.getZoom();
+    final reachedBearing = bearing == null || bearing == _map.getBearing();
+    final reachedTilt = tilt == null || tilt == _map.getPitch();
+
+    if (reachedCenter && reachedZoom && reachedBearing && reachedTilt) return;
+
+    throw PlatformException(
+      code: 'CancellationException',
+      message: 'Animation cancelled.',
+    );
+  }
 
   @override
   Future<void> addSource(Source source) async {
@@ -250,5 +287,33 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ),
         );
     }
+  }
+
+  @override
+  Future<MapCamera> getCamera() async => MapCamera(
+        center: _map.getCenter().toPosition(),
+        zoom: _map.getZoom().toDouble(),
+        tilt: _map.getPitch().toDouble(),
+        bearing: _map.getBearing().toDouble(),
+      );
+
+  @override
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final zoom = _map.getZoom();
+    // https://wiki.openstreetmap.org/wiki/Zoom_levels
+    return circumferenceOfEarth *
+        cos(latitude * radian2degree) /
+        pow(2, zoom + 9);
+  }
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async {
+    final bounds = _map.getBounds();
+    return LngLatBounds(
+      longitudeWest: bounds.getWest().toDouble(),
+      longitudeEast: bounds.getEast().toDouble(),
+      latitudeSouth: bounds.getSouth().toDouble(),
+      latitudeNorth: bounds.getNorth().toDouble(),
+    );
   }
 }

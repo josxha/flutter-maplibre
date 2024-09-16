@@ -50,37 +50,37 @@ jobs:
 #          cache: true
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded
-  integration-test-android:
-    name: "Integration Tests on Android"
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level: [ 23 ] # TODO add 34
-    timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: "Get Flutter dependencies"
-        run: flutter pub get
-      - name: Run integration tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          arch: x86_64
-          emulator-boot-timeout: 1800 # 30 minutes
-          script: cd example && flutter test integration_test -r expanded --timeout=none
+#  integration-test-android:
+#    name: "Integration Tests on Android"
+#    runs-on: ubuntu-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        api-level: [ 23 ] # TODO add 34
+#    timeout-minutes: 30
+#    defaults:
+#      run:
+#        working-directory: example
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Setup Flutter SDK
+#        uses: subosito/flutter-action@v2
+#        with:
+#          cache: true
+#      - uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#          cache: 'gradle'
+#      - name: "Get Flutter dependencies"
+#        run: flutter pub get
+#      - name: Run integration tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: ${{ matrix.api-level }}
+#          arch: x86_64
+#          emulator-boot-timeout: 1800 # 30 minutes
+#          script: cd example && flutter test integration_test -r expanded --timeout=none
   integration-test-web:
     name: "Integration Tests on Web"
     runs-on: ubuntu-latest

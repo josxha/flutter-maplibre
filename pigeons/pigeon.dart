@@ -42,6 +42,15 @@ abstract interface class MapLibreHostApi {
     required int durationMs,
   });
 
+  /// Get the current camera position with the map center, zoom level, camera
+  /// tilt and map rotation.
+  @async
+  MapCamera getCamera();
+
+  /// Get the visible region of the current map camera.
+  @async
+  LngLatBounds getVisibleRegion();
+
   /// Convert a coordinate to a location on the screen.
   @async
   ScreenLocation toScreenLocation(double lng, double lat);
@@ -64,6 +73,10 @@ abstract interface class MapLibreHostApi {
     required String id,
     required String data,
   });
+
+  /// Returns the distance spanned by one pixel at the specified latitude and
+  /// current zoom level.
+  double getMetersPerPixelAtLatitude(double latitude);
 }
 
 @FlutterApi()
@@ -122,7 +135,7 @@ class MapOptions {
   final bool listensOnLongClick;
 }
 
-/// A longitude/latitude coordinate object
+/// A longitude/latitude coordinate object.
 class LngLat {
   const LngLat({required this.lng, required this.lat});
 
@@ -133,7 +146,7 @@ class LngLat {
   final double lat;
 }
 
-/// A pixel location / location on the device screen
+/// A pixel location / location on the device screen.
 class ScreenLocation {
   const ScreenLocation({required this.x, required this.y});
 
@@ -142,4 +155,34 @@ class ScreenLocation {
 
   /// The y coordinate
   final double y;
+}
+
+/// The current position of the map camera.
+class MapCamera {
+  const MapCamera({
+    required this.center,
+    required this.zoom,
+    required this.tilt,
+    required this.bearing,
+  });
+
+  final LngLat center;
+  final double zoom;
+  final double tilt;
+  final double bearing;
+}
+
+/// LatLng bound object
+class LngLatBounds {
+  const LngLatBounds({
+    required this.longitudeWest,
+    required this.longitudeEast,
+    required this.latitudeSouth,
+    required this.latitudeNorth,
+  });
+
+  final double longitudeWest;
+  final double longitudeEast;
+  final double latitudeSouth;
+  final double latitudeNorth;
 }
