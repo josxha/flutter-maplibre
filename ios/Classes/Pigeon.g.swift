@@ -326,6 +326,8 @@ protocol MapLibreHostApi {
   func addFillLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a circle layer to the map style.
   func addCircleLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a background layer to the map style.
+  func addBackgroundLayer(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Returns the distance spanned by one pixel at the specified latitude and
@@ -490,6 +492,24 @@ class MapLibreHostApiSetup {
       }
     } else {
       addCircleLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a background layer to the map style.
+    let addBackgroundLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addBackgroundLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        api.addBackgroundLayer(id: idArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addBackgroundLayerChannel.setMessageHandler(nil)
     }
     /// Add a GeoJSON source to the map style.
     let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)

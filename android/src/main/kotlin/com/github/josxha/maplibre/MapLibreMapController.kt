@@ -23,6 +23,7 @@ import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
 import org.maplibre.android.maps.Style
+import org.maplibre.android.style.layers.BackgroundLayer
 import org.maplibre.android.style.layers.CircleLayer
 import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.sources.GeoJsonSource
@@ -182,6 +183,11 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         mapLibreMap.style?.addLayer(CircleLayer(id, sourceId))
+        callback(Result.success(Unit))
+    }
+
+    override fun addBackgroundLayer(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.addLayer(BackgroundLayer(id))
         callback(Result.success(Unit))
     }
 

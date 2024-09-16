@@ -21,7 +21,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       // Platform Views are rendered into a texture. Flutter draws the
       // platform views (via the texture). Flutter content is rendered
       // directly into a Surface.
-        // + good performance for Android Views
+      // + good performance for Android Views
       // + best performance for Flutter rendering.
       // + all transformations work correctly.
       // - quick scrolling (e.g. a web view) will be janky
@@ -131,8 +131,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),
       CircleLayer() =>
         _hostApi.addCircleLayer(id: layer.id, sourceId: layer.sourceId),
-      // TODO: Handle this case.
-      BackgroundLayer() => throw UnimplementedError(),
+      BackgroundLayer() => _hostApi.addBackgroundLayer(id: layer.id),
       // TODO: Handle this case.
       FillExtrusionLayer() => throw UnimplementedError(),
       // TODO: Handle this case.

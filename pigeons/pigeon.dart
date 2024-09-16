@@ -67,6 +67,14 @@ abstract interface class MapLibreHostApi {
   @async
   void addCircleLayer({required String id, required String sourceId});
 
+  /// Add a background layer to the map style.
+  @async
+  void addBackgroundLayer({
+    required String id,
+    Map<String, Object?> layout,
+    Map<String, Object?> paint,
+  });
+
   /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({

@@ -346,6 +346,10 @@ class MapLibreHostApi {
     const std::string& id,
     const std::string& source_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a background layer to the map style.
+  virtual void AddBackgroundLayer(
+    const std::string& id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(
     const std::string& id,

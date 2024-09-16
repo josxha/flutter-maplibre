@@ -288,6 +288,8 @@ interface MapLibreHostApi {
   fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
   /** Add a circle layer to the map style. */
   fun addCircleLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit)
+  /** Add a background layer to the map style. */
+  fun addBackgroundLayer(id: String, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
   /**
@@ -456,6 +458,25 @@ interface MapLibreHostApi {
             val idArg = args[0] as String
             val sourceIdArg = args[1] as String
             api.addCircleLayer(idArg, sourceIdArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            api.addBackgroundLayer(idArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
