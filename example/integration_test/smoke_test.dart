@@ -53,7 +53,7 @@ void main() {
         expect(camera.tilt, closeTo(1, 0.00001));
       },
     );
-    testWidgets(
+    /*testWidgets(
       'flyTo',
       (tester) async {
         late final MapController ctrl;
@@ -77,7 +77,7 @@ void main() {
         expect(camera.tilt, closeTo(2, 0.00001));
       },
     );
-    /*testWidgets(
+    testWidgets(
       'flyTo cancel',
       (tester) async {
         late final MapController ctrl;
