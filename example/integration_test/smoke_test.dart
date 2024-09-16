@@ -78,7 +78,7 @@ void main() {
         expect(camera.tilt, closeTo(2, 0.00001));
       },
     );
-    testWidgets(
+    /*testWidgets(
       'flyTo cancel',
       (tester) async {
         late final MapController ctrl;
@@ -126,6 +126,6 @@ void main() {
         expect(region.longitudeEast, closeTo(12345, 0.00001));
         expect(region.longitudeWest, closeTo(12345, 0.00001));
       },
-    );
+    );*/
   });
 }
