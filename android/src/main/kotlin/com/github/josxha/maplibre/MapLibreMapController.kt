@@ -6,6 +6,7 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import RenderMode
 import ScreenLocation
 import UserLocationOptions
 import android.content.Context
@@ -199,10 +200,10 @@ class MapLibreMapController(
         mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
 
     override fun enableUserLocation(
-        options: UserLocationOptions,
+        mode: RenderMode,
         callback: (Result<Boolean>) -> Unit
     ) {
-        mapLibreMap.locationComponent.
+        mapLibreMap.locationComponent.renderMode = org.maplibre.android.location.modes.RenderMode
     }
 
     override fun onMapClick(point: LatLng): Boolean {
