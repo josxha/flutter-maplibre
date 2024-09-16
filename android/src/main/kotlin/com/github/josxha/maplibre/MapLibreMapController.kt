@@ -1,6 +1,8 @@
 package com.github.josxha.maplibre
 
 import LngLat
+import LngLatBounds
+import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
@@ -77,8 +79,12 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        this.mapLibreMap.addOnMapClickListener(this)
-        this.mapLibreMap.addOnMapLongClickListener(this)
+        if (initialOptions.listensOnClick) {
+            this.mapLibreMap.addOnMapClickListener(this)
+        }
+        if (initialOptions.listensOnLongClick) {
+            this.mapLibreMap.addOnMapLongClickListener(this)
+        }
         val style = Style.Builder().fromUri(initialOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
@@ -146,6 +152,25 @@ class MapLibreMapController(
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
+    override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
+        val position = mapLibreMap.cameraPosition
+        val target = mapLibreMap.cameraPosition.target!!
+        val center = LngLat(target.longitude, target.latitude)
+        val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
+        callback(Result.success(camera))
+    }
+
+    override fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit) {
+        val bounds = mapLibreMap.projection.visibleRegion.latLngBounds
+        val lngLatBounds = LngLatBounds(
+            bounds.longitudeWest,
+            bounds.longitudeEast,
+            bounds.latitudeSouth,
+            bounds.latitudeNorth
+        )
+        callback(Result.success(lngLatBounds))
+    }
+
     override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {
         mapLibreMap.style?.addLayer(FillLayer(id, sourceId))
         callback(Result.success(Unit))
@@ -168,6 +193,9 @@ class MapLibreMapController(
         mapLibreMap.style?.addSource(GeoJsonSource(id, data))
         callback(Result.success(Unit))
     }
+
+    override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
+        mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
 
     override fun onMapClick(point: LatLng): Boolean {
         flutterApi.onClick(LngLat(point.longitude, point.latitude)) { }

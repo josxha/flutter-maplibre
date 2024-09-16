@@ -35,7 +35,11 @@ you're interested in making contributions:
 4. If there are any changes that developers should be aware of, please update
    the [CHANGELOG.md](https://github.com/josxha/flutter-maplibre/blob/main/CHANGELOG.md)
    file together with your pull request.
-5. If you have a pull request that isn't complete yet and want to get
+5. If you change the [./pigeons/pigeon.dart](./pigeons/pigeon.dart) file, you'll
+   have to run the [pigeon](https://pub.dev/packages/pigeon) code generation.
+   You can use [./pigeons/run_code_gen.sh](./pigeons/run_code_gen.sh)
+   or [./pigeons/run_code_gen.ps1](./pigeons/run_code_gen.ps1).
+6. If you have a pull request that isn't complete yet and want to get
    feedback, consider
    to [open a draft pull request](https://github.com/josxha/flutter-maplibre/pulls).
    This helps others to get
@@ -43,7 +47,7 @@ you're interested in making contributions:
    open issues. Give a quick summary about your changes listing any related
    issues that exist. Screenshots and videos are or course welcome, too.
    Use a [conventional](https://www.conventionalcommits.org/) title if you like.
-6. When your contribution is ready to review, disable the draft state of your
+7. When your contribution is ready to review, disable the draft state of your
    pull request and update the summary by editing your initial pull request
    message. This summary will go into the commit details of the squashed commit.
 

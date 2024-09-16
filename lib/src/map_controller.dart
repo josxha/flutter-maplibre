@@ -40,4 +40,18 @@ abstract interface class MapController {
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.
   Future<void> addLayer(Layer layer);
+
+  /// Get the current camera position on the map.
+  Future<MapCamera> getCamera();
+
+  /// Returns the distance spanned by one pixel at the specified latitude and
+  /// current zoom level.
+  ///
+  /// The distance between pixels decreases as the latitude approaches the
+  /// poles. This relationship parallels the relationship between longitudinal
+  /// coordinates at different latitudes.
+  Future<double> getMetersPerPixelAtLatitude(double latitude);
+
+  /// The smallest bounding box that includes the visible region.
+  Future<LngLatBounds> getVisibleRegion();
 }
