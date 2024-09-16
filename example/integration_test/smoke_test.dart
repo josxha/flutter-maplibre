@@ -102,7 +102,7 @@ void main() {
     );
     testWidgets(
       'getMetersPerPixelAtLatitude',
-          (tester) async {
+      (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
@@ -114,7 +114,7 @@ void main() {
     );
     testWidgets(
       'getVisibleRegion',
-          (tester) async {
+      (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
