@@ -8,6 +8,8 @@ final class CircleLayer extends LayerWithSource {
   const CircleLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

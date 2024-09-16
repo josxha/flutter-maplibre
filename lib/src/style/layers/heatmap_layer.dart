@@ -8,6 +8,8 @@ final class HeatmapLayer extends LayerWithSource {
   const HeatmapLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

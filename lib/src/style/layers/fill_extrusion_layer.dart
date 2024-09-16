@@ -8,6 +8,8 @@ final class FillExtrusionLayer extends LayerWithSource {
   const FillExtrusionLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

@@ -1,10 +1,10 @@
 part of 'interop.dart';
 
 /// The JavaScript MapLibre Map object.
-@JS()
-extension type Map._(Camera _) implements Camera {
+@JS('Map')
+extension type JsMap._(Camera _) implements Camera {
   /// Create a new MapLibre map.
-  external Map(MapOptions options);
+  external JsMap(MapOptions options);
 
   /// Add a web-only control button to the map.
   external void addControl(IControl control);
@@ -64,7 +64,7 @@ extension type Map._(Camera _) implements Camera {
   external LngLatBounds getBounds();
 }
 
-/// Anonymous MapOptions for the MapLibre JavaScript [Map].
+/// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
 @anonymous
 @JS()
 extension type MapOptions._(JSObject _) implements JSObject {
@@ -180,5 +180,7 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required String id,
     required String type,
     required String? source,
+    required JSAny layout,
+    required JSAny paint,
   });
 }

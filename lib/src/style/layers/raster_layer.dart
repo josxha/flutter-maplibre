@@ -8,6 +8,8 @@ final class RasterLayer extends LayerWithSource {
   const RasterLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

@@ -8,7 +8,9 @@ final class LineLayer extends LayerWithSource {
   const LineLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
-  // TODO add properties
+// TODO add properties
 }

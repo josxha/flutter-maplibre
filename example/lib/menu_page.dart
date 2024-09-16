@@ -26,9 +26,9 @@ class MenuPage extends StatelessWidget {
             location: StyledMapPage.location,
           ),
           ItemCard(
-            label: 'Annotations',
+            label: 'GeoJSON',
             iconData: Icons.location_on,
-            location: AnnotationsPage.location,
+            location: GeoJsonPage.location,
           ),
           ItemCard(
             label: 'Callbacks',

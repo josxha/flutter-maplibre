@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         KioskPage.location: (context) => const KioskPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
-        AnnotationsPage.location: (context) => const AnnotationsPage(),
+        GeoJsonPage.location: (context) => const GeoJsonPage(),
         CallbacksPage.location: (context) => const CallbacksPage(),
         ControllerPage.location: (context) => const ControllerPage(),
         TwoMapsPage.location: (context) => const TwoMapsPage(),

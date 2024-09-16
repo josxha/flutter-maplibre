@@ -8,6 +8,8 @@ final class HillshadeLayer extends LayerWithSource {
   const HillshadeLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

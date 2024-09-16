@@ -17,7 +17,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   static int _counter = 0;
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
-  late interop.Map _map;
+  late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _moveCompleter;
 
   MapOptions get _options => widget.options;
@@ -33,7 +33,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ..style.height = '100%'
           ..style.width = '100%';
 
-        _map = interop.Map(
+        _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
             style: _options.style,
@@ -304,6 +304,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'fill',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case CircleLayer():
@@ -312,6 +314,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'circle',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case BackgroundLayer():
@@ -320,6 +324,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'background',
             source: null,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case FillExtrusionLayer():
@@ -328,6 +334,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'fill-extrusion',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case HeatmapLayer():
@@ -336,6 +344,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'heatmap',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case HillshadeLayer():
@@ -344,6 +354,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'hillshade',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case LineLayer():
@@ -352,6 +364,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'line',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case RasterLayer():
@@ -360,6 +374,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'raster',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
       case SymbolLayer():
@@ -368,6 +384,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             id: layer.id,
             type: 'symbol',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
         );
     }

@@ -8,6 +8,8 @@ final class BackgroundLayer extends Layer {
     this.visible = true,
     this.color = const Color(0x00000000),
     this.opacity = 1,
+    super.layout,
+    super.paint,
   });
 
   /// Whether this layer is displayed.

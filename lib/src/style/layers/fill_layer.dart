@@ -8,6 +8,8 @@ final class FillLayer extends LayerWithSource {
   const FillLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
   // TODO add properties
 }

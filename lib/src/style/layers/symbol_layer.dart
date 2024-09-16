@@ -8,6 +8,8 @@ final class SymbolLayer extends LayerWithSource {
   const SymbolLayer({
     required super.id,
     required super.sourceId,
+    super.layout,
+    super.paint,
   });
 
   // TODO add properties

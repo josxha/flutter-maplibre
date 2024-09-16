@@ -16,12 +16,12 @@ part 'symbol_layer.dart';
 sealed class Layer {
   const Layer({
     required this.id,
+    this.layout = const {},
+    this.paint = const {},
     this.metadata,
     this.minZoom,
     this.maxZoom,
-    this.paint,
     this.filter,
-    this.layout,
   });
 
   /// Unique layer name.
@@ -51,10 +51,10 @@ sealed class Layer {
   final Object? filter;
 
   /// Layout properties for the layer.
-  final Object? layout;
+  final Map<String, Object?> layout;
 
   /// Default paint properties for this layer.
-  final Object? paint;
+  final Map<String, Object?> paint;
 }
 
 /// A [Layer] that pulls its data from a [Source]. Basically every layer
@@ -64,12 +64,12 @@ sealed class LayerWithSource extends Layer {
   const LayerWithSource({
     required super.id,
     required this.sourceId,
+    super.paint = const {},
+    super.layout = const {},
     super.metadata,
     super.minZoom,
     super.maxZoom,
-    super.paint,
     super.filter,
-    super.layout,
   });
 
   /// Name of a source description to be used for this layer. Required for all
