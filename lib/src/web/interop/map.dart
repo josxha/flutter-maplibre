@@ -79,43 +79,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
   });
 }
 
-/// A coordinate object
-@anonymous
-@JS()
-extension type LngLat._(JSObject _) implements JSObject {
-  /// Create a new [LngLat] coordinates object.
-  external factory LngLat({
-    required num lng,
-    required num lat,
-  });
-
-  /// Create a new JS [LngLat] object from a [Position].
-  factory LngLat.fromPosition(Position p) => LngLat(lng: p.lng, lat: p.lat);
-
-  external num lng;
-  external num lat;
-
-  /// Convert the JS [LngLat] object to a dart [Position] object.
-  Position toPosition() => Position(lng, lat);
-}
-
-/// A [LngLatBounds] object represents a geographical bounding box,
-/// defined by its southwest and northeast points in longitude and latitude.
-@JS()
-extension type LngLatBounds._(JSObject _) implements JSObject {
-  /// Returns the west edge of the bounding box.
-  external num getWest();
-
-  /// Returns the south edge of the bounding box.
-  external num getSouth();
-
-  /// Returns the east edge of the bounding box.
-  external num getEast();
-
-  /// Returns the north edge of the bounding box.
-  external num getNorth();
-}
-
 /// Options to specify the map bounds.
 @anonymous
 @JS()
