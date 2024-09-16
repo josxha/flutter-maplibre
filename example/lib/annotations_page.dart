@@ -31,12 +31,18 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
             );
           }
           final geojson = await rootBundle
-              .loadString('assets/geojson/lake-constance.geojson');
+              .loadString('assets/geojson/lake-constance.json');
           await _controller.addSource(
             GeoJsonSource(id: 'LakeConstance', data: geojson),
           );
           await _controller.addLayer(
-            const FillLayer(id: 'LakeConstance', sourceId: 'LakeConstance'),
+            const FillLayer(id: 'geojson-fill', sourceId: 'LakeConstance'),
+          );
+          await _controller.addLayer(
+            const LineLayer(id: 'geojson-line', sourceId: 'LakeConstance'),
+          );
+          await _controller.addLayer(
+            const SymbolLayer(id: 'geojson-symbol', sourceId: 'LakeConstance'),
           );
         },
       ),

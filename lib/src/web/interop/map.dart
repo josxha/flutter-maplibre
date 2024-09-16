@@ -16,7 +16,7 @@ extension type Map._(Camera _) implements Camera {
   external void addSource(String id, SourceSpecification source);
 
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2412
-  external void addLayer(AddLayerObject layer, [String? beforeId]);
+  external void addLayer(LayerSpecification layer, [String? beforeId]);
 
   /// Convert a coordinate to a screen location.
   ///
@@ -121,7 +121,7 @@ extension type LngLatBounds._(JSObject _) implements JSObject {
 @JS()
 extension type FitBoundsOptions._(JSObject _) implements JSObject {
   /// Create a new JS [FitBoundsOptions] object.
-  external factory FitBoundsOptions({
+  external FitBoundsOptions({
     bool? linear,
     // TODO  Offset? offset,
     num? maxZoom,
@@ -134,7 +134,7 @@ extension type FitBoundsOptions._(JSObject _) implements JSObject {
 @JS()
 extension type SourceSpecification._(JSObject _) implements JSObject {
   /// The default constructor for a [SourceSpecification].
-  external factory SourceSpecification({required String type});
+  external SourceSpecification({required String type});
 
   /// Create a new GeoJSON source.
   external factory SourceSpecification.geoJson({
@@ -144,16 +144,41 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
     String? attribution,
     num? buffer,
   });
+
+  /// Create a new raster DEM source.
+  external factory SourceSpecification.rasterDem({
+    required String type,
+  });
+
+  /// Create a new raster source.
+  external factory SourceSpecification.raster({
+    required String type,
+  });
+
+  /// Create a new vector source.
+  external factory SourceSpecification.vector({
+    required String type,
+  });
+
+  /// Create a new image source.
+  external factory SourceSpecification.image({
+    required String type,
+  });
+
+  /// Create a new video source.
+  external factory SourceSpecification.video({
+    required String type,
+  });
 }
 
 /// The specifications of map layers.
 @anonymous
 @JS()
-extension type AddLayerObject._(JSObject _) implements JSObject {
-  /// The default constructor for a [AddLayerObject].
-  external factory AddLayerObject({
+extension type LayerSpecification._(JSObject _) implements JSObject {
+  /// The default constructor for a [LayerSpecification].
+  external LayerSpecification({
     required String id,
     required String type,
-    required String source,
+    required String? source,
   });
 }

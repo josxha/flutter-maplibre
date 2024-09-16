@@ -262,27 +262,45 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         final data = parse(source.data);
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+          interop.SourceSpecification.geoJson(
+            type: 'geojson',
+            data: data,
+          ),
         );
       case RasterDemSource():
-        // TODO: Handle this case.
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.rasterDem(type: 'raster-dem'),
+        );
       case RasterSource():
-        // TODO: Handle this case.
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.raster(type: 'raster'),
+        );
       case VectorSource():
-        // TODO: Handle this case.
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.vector(type: 'vector'),
+        );
       case ImageSource():
-        // TODO: Handle this case.
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.image(type: 'image'),
+        );
       case VideoSource():
-        // TODO: Handle this case.
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.video(type: 'video'),
+        );
     }
   }
 
   @override
-  Future<void> addLayer(Layer layer) async {
+  Future<void> addLayer(Layer layer, {String? beforeId}) async {
     switch (layer) {
       case FillLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'fill',
             source: layer.sourceId,
@@ -290,33 +308,68 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         );
       case CircleLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'circle',
             source: layer.sourceId,
           ),
         );
       case BackgroundLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'background',
+            source: null,
+          ),
+        );
       case FillExtrusionLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'fill-extrusion',
+            source: layer.sourceId,
+          ),
+        );
       case HeatmapLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'heatmap',
+            source: layer.sourceId,
+          ),
+        );
       case HillshadeLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'hillshade',
+            source: layer.sourceId,
+          ),
+        );
       case LineLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'line',
+            source: layer.sourceId,
+          ),
+        );
       case RasterLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'raster',
+            source: layer.sourceId,
+          ),
+        );
       case SymbolLayer():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'symbol',
+            source: layer.sourceId,
+          ),
+        );
     }
   }
 

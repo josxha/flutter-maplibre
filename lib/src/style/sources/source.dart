@@ -11,7 +11,10 @@ part 'video_source.dart';
 ///
 /// https://maplibre.org/maplibre-style-spec/sources
 sealed class Source {
-  const Source();
+  const Source({required this.id});
+
+  /// The id of the source.
+  final String id;
 }
 
 /// Influences the y direction of the tile coordinates.

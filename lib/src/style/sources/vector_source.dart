@@ -9,6 +9,7 @@ part of 'source.dart';
 final class VectorSource extends Source {
   /// The default constructor for a [VectorSource] object.
   const VectorSource({
+    required super.id,
     this.url,
     this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
@@ -17,6 +18,7 @@ final class VectorSource extends Source {
     this.maxZoom = 2,
     this.attribution,
     this.volatile = false,
+    this.sourceLayer,
   });
 
   /// A URL to a TileJSON resource. Supported protocols are `http:` and
@@ -59,4 +61,8 @@ final class VectorSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+
+  /// Layer to use from a vector tile source. Required for vector tile sources;
+  /// prohibited for all other source types, including GeoJSON sources.
+  final String? sourceLayer;
 }

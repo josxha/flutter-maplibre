@@ -3,10 +3,11 @@ part of 'layer.dart';
 /// A layer that contains circles.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
-final class HeatmapLayer extends Layer {
+final class HeatmapLayer extends LayerWithSource {
   /// Default constructor for a [HeatmapLayer] instance.
   const HeatmapLayer({
     required super.id,
+    required super.sourceId,
   });
 
   // TODO add properties

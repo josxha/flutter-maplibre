@@ -8,13 +8,10 @@ part of 'source.dart';
 final class ImageSource extends Source {
   /// The default constructor for a [ImageSource] object.
   const ImageSource({
-    required this.id,
+    required super.id,
     required this.url,
     required this.coordinates,
   });
-
-  /// The id of the [ImageSource].
-  final String id;
 
   /// URL that points to an image.
   final String url;

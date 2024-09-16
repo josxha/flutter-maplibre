@@ -39,7 +39,12 @@ abstract interface class MapController {
 
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.
-  Future<void> addLayer(Layer layer);
+  ///
+  /// `beforeId` The ID of an existing layer to insert the new layer before,
+  /// resulting in the new layer appearing visually beneath the existing layer.
+  /// If this argument is not specified, the layer will be appended to the end
+  /// of the layers array and appear visually above all other layers.
+  Future<void> addLayer(Layer layer, {String? beforeId});
 
   /// Get the current camera position on the map.
   Future<MapCamera> getCamera();

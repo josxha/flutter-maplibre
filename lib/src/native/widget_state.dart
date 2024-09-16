@@ -17,6 +17,19 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
+      // Texture Layer (or Texture Layer Hybrid Composition)
+      // Platform Views are rendered into a texture. Flutter draws the
+      // platform views (via the texture). Flutter content is rendered
+      // directly into a Surface.
+        // + good performance for Android Views
+      // + best performance for Flutter rendering.
+      // + all transformations work correctly.
+      // - quick scrolling (e.g. a web view) will be janky
+      // - SurfaceViews are problematic in this mode and will be moved into a
+      //   virtual display (breaking a11y)
+      // - Text magnifier will break unless Flutter is rendered into a
+      //   TextureView.
+      // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: _onPlatformViewCreated,
@@ -112,7 +125,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<void> addLayer(Layer layer) async {
+  Future<void> addLayer(Layer layer, {String? beforeId}) async {
     await switch (layer) {
       FillLayer() =>
         _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),

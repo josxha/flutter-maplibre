@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:maplibre/maplibre.dart';
+
 part 'background_layer.dart';
 part 'circle_layer.dart';
 part 'fill_extrusion_layer.dart';
@@ -15,8 +17,6 @@ sealed class Layer {
   const Layer({
     required this.id,
     this.metadata,
-    this.source,
-    this.sourceLayer,
     this.minZoom,
     this.maxZoom,
     this.paint,
@@ -31,14 +31,6 @@ sealed class Layer {
   /// rendering. Properties should be prefixed to avoid collisions,
   /// like 'maplibre:'.
   final Map<String, Object?>? metadata;
-
-  /// Name of a source description to be used for this layer. Required for all
-  /// layer types except background.
-  final String? source;
-
-  /// Layer to use from a vector tile source. Required for vector tile sources;
-  /// prohibited for all other source types, including GeoJSON sources.
-  final String? sourceLayer;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
@@ -63,4 +55,24 @@ sealed class Layer {
 
   /// Default paint properties for this layer.
   final Object? paint;
+}
+
+/// A [Layer] that pulls its data from a [Source]. Basically every layer
+/// except [BackgroundLayer].
+sealed class LayerWithSource extends Layer {
+  /// const constructor for [LayerWithSource].
+  const LayerWithSource({
+    required super.id,
+    required this.sourceId,
+    super.metadata,
+    super.minZoom,
+    super.maxZoom,
+    super.paint,
+    super.filter,
+    super.layout,
+  });
+
+  /// Name of a source description to be used for this layer. Required for all
+  /// layer types except background.
+  final String sourceId;
 }

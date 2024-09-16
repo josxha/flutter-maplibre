@@ -8,14 +8,11 @@ part of 'source.dart';
 final class GeoJsonSource extends Source {
   /// The default constructor for a [GeoJsonSource] object.
   const GeoJsonSource({
-    required this.id,
+    required super.id,
     required this.data,
     this.maxZoom = 18,
     this.attribution,
   });
-
-  /// The id of the [GeoJsonSource].
-  final String id;
 
   /// A URL to a GeoJSON file, or GeoJSON string.
   final String data;

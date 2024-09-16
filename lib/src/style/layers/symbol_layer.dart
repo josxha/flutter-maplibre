@@ -3,15 +3,12 @@ part of 'layer.dart';
 /// A layer that contains markers.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#symbol
-final class SymbolLayer extends Layer {
+final class SymbolLayer extends LayerWithSource {
   /// Default constructor for a [SymbolLayer] instance.
   const SymbolLayer({
     required super.id,
-    required this.sourceId,
+    required super.sourceId,
   });
-
-  /// The id of the source that should get used.
-  final String sourceId;
 
   // TODO add properties
 }

@@ -19,13 +19,10 @@ part of 'source.dart';
 final class VideoSource extends Source {
   /// The default constructor for a [VideoSource] object.
   const VideoSource({
-    required this.id,
+    required super.id,
     required this.urls,
     required this.coordinates,
   });
-
-  /// The id of the [VideoSource].
-  final String id;
 
   /// URLs to video content in order of preferred format.
   final List<String> urls;

@@ -7,6 +7,7 @@ part of 'source.dart';
 final class RasterDemSource extends Source {
   /// The default constructor for a [RasterDemSource] object.
   const RasterDemSource({
+    required super.id,
     this.url,
     this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
