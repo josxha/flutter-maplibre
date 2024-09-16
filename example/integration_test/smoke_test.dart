@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -53,7 +54,7 @@ void main() {
         expect(camera.tilt, closeTo(1, 0.00001));
       },
     );
-    /*testWidgets(
+    testWidgets(
       'flyTo',
       (tester) async {
         late final MapController ctrl;
@@ -125,6 +126,6 @@ void main() {
         expect(region.longitudeEast, closeTo(12345, 0.00001));
         expect(region.longitudeWest, closeTo(12345, 0.00001));
       },
-    );*/
+    );
   });
 }
