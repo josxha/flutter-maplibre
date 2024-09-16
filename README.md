@@ -68,19 +68,8 @@ welcome.
 We use code generation from [pigeon](https://pub.dev/packages/pigeon). 
 If you change the file [pigeons/pigeon.dart](pigeons/pigeon.dart) you'll have
 to run the code generator.
-Use the generator script (or run the commands yourself) to generate the code.
-
-On unix systems (macos, linux):
-```bash
-./pigeon/run.sh
-```
-
-On windows systems:
-
-```powershell
-.\pigeon\run.sh
-```
-
+Use the generator script in the [./pigeons](./pigeons) directory (or run the 
+commands manually) to generate the necessary code.
 
 #### Test with WebAssembly
 
