@@ -2,7 +2,7 @@ part of 'interop.dart';
 
 /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Marker/
 @JS()
-extension type Marker._(IControl _) implements IControl {
+extension type Marker._(JSObject _) implements JSObject {
   /// Create a new JS [Marker] object.
   external Marker([MarkerOptions? options]);
 
