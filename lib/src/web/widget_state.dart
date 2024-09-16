@@ -264,6 +264,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           source.id,
           interop.SourceSpecification.geoJson(type: 'geojson', data: data),
         );
+      case RasterDemSource():
+        // TODO: Handle this case.
+      case RasterSource():
+        // TODO: Handle this case.
+      case VectorSource():
+        // TODO: Handle this case.
+      case ImageSource():
+        // TODO: Handle this case.
+      case VideoSource():
+        // TODO: Handle this case.
     }
   }
 
@@ -286,6 +296,27 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             source: layer.sourceId,
           ),
         );
+      case BackgroundLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case FillExtrusionLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case HeatmapLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case HillshadeLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case LineLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case RasterLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case SymbolLayer():
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 

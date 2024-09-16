@@ -118,6 +118,20 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),
       CircleLayer() =>
         _hostApi.addCircleLayer(id: layer.id, sourceId: layer.sourceId),
+      // TODO: Handle this case.
+      BackgroundLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      FillExtrusionLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      HeatmapLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      HillshadeLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      LineLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      RasterLayer() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      SymbolLayer() => throw UnimplementedError(),
     };
   }
 
@@ -126,6 +140,16 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     await switch (source) {
       GeoJsonSource() =>
         _hostApi.addGeoJsonSource(id: source.id, data: source.data),
+      // TODO: Handle this case.
+      RasterDemSource() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      RasterSource() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      VectorSource() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      ImageSource() => throw UnimplementedError(),
+      // TODO: Handle this case.
+      VideoSource() => throw UnimplementedError(),
     };
   }
 
