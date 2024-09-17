@@ -1,6 +1,8 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/styled_map_page.dart';
 
 @immutable
 class LayersFillExtrusionPage extends StatefulWidget {
@@ -13,8 +15,7 @@ class LayersFillExtrusionPage extends StatefulWidget {
       _LayersFillExtrusionPageState();
 }
 
-const _layerId = 'showcaseLayer';
-const _sourceId = 'hills';
+const _sourceId = 'floorplan';
 
 class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
   late final MapController _controller;
@@ -25,8 +26,11 @@ class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
       appBar: AppBar(title: const Text('Fill Extrusion Layer')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(11.39085, 47.27574),
-          zoom: 10,
+          center: Position(-87.61694, 41.86625),
+          zoom: 15.99,
+          tilt: 40,
+          bearing: 20,
+          style: StyledMapPage.styleUrl,
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
@@ -35,20 +39,34 @@ class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
   }
 
   Future<void> _onStyleLoaded() async {
-    final geojsonPolygon =
-        await rootBundle.loadString('assets/geojson/lake-constance.json');
     await _controller.addSource(
-      GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
-    );
-    await _controller.addLayer(
-      const FillLayer(
-        id: 'geojson-fill',
-        sourceId: 'LakeConstance',
-        paint: {'fill-color': '#429ef5'},
+      const GeoJsonSource(
+        id: _sourceId,
+        data:
+            'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
+    await _controller.addLayer(_fillExtrusionLayer);
   }
 }
 
-// TODO fill extrusion layer
-// TODO line layer
+const _fillExtrusionLayer = FillExtrusionLayer(
+  id: 'room-extrusion',
+  sourceId: _sourceId,
+  paint: {
+    // See the MapLibre Style Specification for details on data expressions.
+    // https://maplibre.org/maplibre-style-spec/expressions/
+
+    // Get the fill-extrusion-color from the source 'color' property.
+    'fill-extrusion-color': ['get', 'color'],
+
+    // Get fill-extrusion-height from the source 'height' property.
+    'fill-extrusion-height': ['get', 'height'],
+
+    // Get fill-extrusion-base from the source 'base_height' property.
+    'fill-extrusion-base': ['get', 'base_height'],
+
+    // Make extrusions slightly opaque for see through indoor walls.
+    'fill-extrusion-opacity': 0.5
+  },
+);
