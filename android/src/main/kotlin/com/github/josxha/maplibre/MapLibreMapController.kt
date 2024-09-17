@@ -11,10 +11,10 @@ import ScreenLocation
 import TileScheme
 import android.content.Context
 import android.graphics.PointF
-import android.net.Uri
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
+import com.google.gson.Gson
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
@@ -27,6 +27,7 @@ import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
 import org.maplibre.android.maps.Style
+import org.maplibre.android.style.expressions.Expression
 import org.maplibre.android.style.layers.BackgroundLayer
 import org.maplibre.android.style.layers.CircleLayer
 import org.maplibre.android.style.layers.FillExtrusionLayer
@@ -34,6 +35,7 @@ import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.layers.HeatmapLayer
 import org.maplibre.android.style.layers.HillshadeLayer
 import org.maplibre.android.style.layers.LineLayer
+import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
@@ -42,11 +44,10 @@ import org.maplibre.android.style.sources.GeoJsonSource
 import org.maplibre.android.style.sources.ImageSource
 import org.maplibre.android.style.sources.RasterDemSource
 import org.maplibre.android.style.sources.RasterSource
-import org.maplibre.android.style.sources.TileSet
 import org.maplibre.android.style.sources.VectorSource
 import java.net.URI
-import java.net.URL
 import kotlin.coroutines.cancellation.CancellationException
+
 
 class MapLibreMapController(
     viewId: Int,
@@ -172,6 +173,23 @@ class MapLibreMapController(
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
+    private val gson = Gson()
+    private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> {
+        return entries.map { entry ->
+            // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+            when (entry.value) {
+                is ArrayList<*> -> {
+                    val value = entry.value as ArrayList<*>
+                    val json = gson.toJsonTree(value)
+                    val expression = Expression.Converter.convert(json)
+                    PaintPropertyValue(entry.key, expression)
+                }
+
+                else -> PaintPropertyValue(entry.key, entry.value)
+            }
+        }.toTypedArray()
+    }
+
     override fun addFillLayer(
         id: String,
         sourceId: String,
@@ -181,10 +199,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = FillLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -202,10 +217,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = CircleLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -222,10 +234,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = BackgroundLayer(id)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -243,10 +252,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = FillExtrusionLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -264,10 +270,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = HeatmapLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -285,10 +288,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = HillshadeLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -306,10 +306,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = LineLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -327,10 +324,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = RasterLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -348,10 +342,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = SymbolLayer(id, sourceId)
-        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
-        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
-        layer.setProperties(*properties.toTypedArray())
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
