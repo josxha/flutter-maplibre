@@ -55,7 +55,7 @@ class _GeoJsonPageState extends State<GeoJsonPage> {
             const LineLayer(
               id: 'geojson-line',
               sourceId: 'Path',
-              paint: {'line-color': '#F00'},
+              paint: {'line-color': '#F00', 'line-width': 3},
             ),
           );
 
