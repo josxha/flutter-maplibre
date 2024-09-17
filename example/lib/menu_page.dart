@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
+import 'package:maplibre_example/layers_circle_page.dart';
+import 'package:maplibre_example/layers_fill_extrusion_page.dart';
+import 'package:maplibre_example/layers_fill_page.dart';
+import 'package:maplibre_example/layers_heatmap_page.dart';
+import 'package:maplibre_example/layers_hillshade_page.dart';
+import 'package:maplibre_example/layers_line_page.dart';
+import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
@@ -16,40 +23,87 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('MapLibre Demo')),
-      body: GridView.extent(
-        maxCrossAxisExtent: 200,
-        childAspectRatio: 1.5,
-        children: const [
-          ItemCard(
-            label: 'Styled Map',
-            iconData: Icons.map,
-            location: StyledMapPage.location,
+      body: CustomScrollView(
+        slivers: [
+          const SliverToBoxAdapter(child: SectionTitle('General')),
+          SliverGrid.extent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1.5,
+            children: const [
+              ItemCard(
+                label: 'Styled Map',
+                iconData: Icons.map,
+                location: StyledMapPage.location,
+              ),
+              ItemCard(
+                label: 'Annotations',
+                iconData: Icons.location_on,
+                location: AnnotationsPage.location,
+              ),
+              ItemCard(
+                label: 'Callbacks',
+                iconData: Icons.back_hand,
+                location: CallbacksPage.location,
+              ),
+              if (kIsWeb)
+                ItemCard(
+                  label: 'Web Controls',
+                  iconData: Icons.toggle_off,
+                  location: WebControlsPage.location,
+                ),
+              ItemCard(
+                label: 'Controller',
+                iconData: Icons.api,
+                location: ControllerPage.location,
+              ),
+              ItemCard(
+                label: 'Two Maps',
+                iconData: Icons.looks_two,
+                location: TwoMapsPage.location,
+              ),
+            ],
           ),
-          ItemCard(
-            label: 'Annotations',
-            iconData: Icons.location_on,
-            location: AnnotationsPage.location,
-          ),
-          ItemCard(
-            label: 'Callbacks',
-            iconData: Icons.back_hand,
-            location: CallbacksPage.location,
-          ),
-          if (kIsWeb)
-            ItemCard(
-              label: 'Web Controls',
-              iconData: Icons.toggle_off,
-              location: WebControlsPage.location,
-            ),
-          ItemCard(
-            label: 'Controller',
-            iconData: Icons.api,
-            location: ControllerPage.location,
-          ),
-          ItemCard(
-            label: 'Two Maps',
-            iconData: Icons.looks_two,
-            location: TwoMapsPage.location,
+          const SliverToBoxAdapter(child: SectionTitle('Map Layers')),
+          SliverGrid.extent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1.5,
+            children: const [
+              ItemCard(
+                label: 'Circle',
+                iconData: Icons.circle,
+                location: LayersCirclePage.location,
+              ),
+              ItemCard(
+                label: 'Fill',
+                iconData: Icons.format_shapes,
+                location: LayersFillPage.location,
+              ),
+              ItemCard(
+                label: 'Fill Extrusion',
+                iconData: Icons.house,
+                location: LayersFillExtrusionPage.location,
+              ),
+              ItemCard(
+                label: 'Heatmap',
+                iconData: Icons.thermostat,
+                location: LayersHeatmapPage.location,
+              ),
+              ItemCard(
+                label: 'Hillshade',
+                iconData: Icons.landscape,
+                location: LayersHillshadePage.location,
+              ),
+              ItemCard(
+                label: 'Line',
+                iconData: Icons.polyline,
+                location: LayersLinePage.location,
+              ),
+              ItemCard(
+                label: 'Raster',
+                iconData: Icons.grid_on,
+                location: LayersRasterPage.location,
+              ),
+            ],
           ),
         ],
       ),
@@ -81,5 +135,16 @@ class ItemCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  const SectionTitle(this.label, {super.key});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(title: Text(label, style: const TextStyle(fontSize: 18)));
   }
 }

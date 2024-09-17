@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';

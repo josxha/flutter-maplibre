@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';

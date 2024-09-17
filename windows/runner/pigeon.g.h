@@ -57,6 +57,25 @@ template<class T> class ErrorOr {
 };
 
 
+// Influences the y direction of the tile coordinates.
+enum class TileScheme {
+  // Slippy map tilenames scheme.
+  kXyz = 0,
+  // OSGeo spec scheme.
+  kTms = 1
+};
+
+// The encoding used by this source. Mapbox Terrain RGB is used by default.
+enum class RasterDemEncoding {
+  // Terrarium format PNG tiles.
+  kTerrarium = 0,
+  // Mapbox Terrain RGB tiles.
+  kMapbox = 1,
+  // Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
+  // parameters.
+  kCustom = 2
+};
+
 
 // The map options define initial values for the MapLibre map.
 //
@@ -340,16 +359,134 @@ class MapLibreHostApi {
   virtual void AddFillLayer(
     const std::string& id,
     const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a circle layer to the map style.
   virtual void AddCircleLayer(
     const std::string& id,
     const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a background layer to the map style.
+  virtual void AddBackgroundLayer(
+    const std::string& id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a fill extrusion layer to the map style.
+  virtual void AddFillExtrusionLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a heatmap layer to the map style.
+  virtual void AddHeatmapLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a hillshade layer to the map style.
+  virtual void AddHillshadeLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a line layer to the map style.
+  virtual void AddLineLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a raster layer to the map style.
+  virtual void AddRasterLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a symbol layer to the map style.
+  virtual void AddSymbolLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Removes the layer with the given ID from the map's style.
+  virtual void RemoveLayer(
+    const std::string& id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Removes the source with the given ID from the map's style.
+  virtual void RemoveSource(
+    const std::string& id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(
     const std::string& id,
     const std::string& data,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a image source to the map style.
+  virtual void AddImageSource(
+    const std::string& id,
+    const std::string& url,
+    const flutter::EncodableList& coordinates,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a raster source to the map style.
+  virtual void AddRasterSource(
+    const std::string& id,
+    const std::string* url,
+    const flutter::EncodableList* tiles,
+    const flutter::EncodableList& bounds,
+    double min_zoom,
+    double max_zoom,
+    int64_t tile_size,
+    const TileScheme& scheme,
+    const std::string* attribution,
+    bool volatile,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a raster DEM source to the map style.
+  virtual void AddRasterDemSource(
+    const std::string& id,
+    const std::string* url,
+    const flutter::EncodableList* tiles,
+    const flutter::EncodableList& bounds,
+    double min_zoom,
+    double max_zoom,
+    int64_t tile_size,
+    const std::string* attribution,
+    const RasterDemEncoding& encoding,
+    bool volatile,
+    double red_factor,
+    double blue_factor,
+    double green_factor,
+    double base_shift,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a vector source to the map style.
+  virtual void AddVectorSource(
+    const std::string& id,
+    const std::string* url,
+    const flutter::EncodableList* tiles,
+    const flutter::EncodableList& bounds,
+    const TileScheme& scheme,
+    double min_zoom,
+    double max_zoom,
+    const std::string* attribution,
+    bool volatile,
+    const std::string* source_layer,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Returns the distance spanned by one pixel at the specified latitude and
   // current zoom level.

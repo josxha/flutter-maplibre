@@ -6,27 +6,49 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import RasterDemEncoding
 import ScreenLocation
+import TileScheme
 import android.content.Context
 import android.graphics.PointF
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
+import com.google.gson.Gson
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.geometry.LatLngQuad
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
 import org.maplibre.android.maps.Style
+import org.maplibre.android.style.expressions.Expression
+import org.maplibre.android.style.layers.BackgroundLayer
 import org.maplibre.android.style.layers.CircleLayer
+import org.maplibre.android.style.layers.FillExtrusionLayer
 import org.maplibre.android.style.layers.FillLayer
+import org.maplibre.android.style.layers.HeatmapLayer
+import org.maplibre.android.style.layers.HillshadeLayer
+import org.maplibre.android.style.layers.LineLayer
+import org.maplibre.android.style.layers.PaintPropertyValue
+import org.maplibre.android.style.layers.PropertyValue
+import org.maplibre.android.style.layers.RasterLayer
+import org.maplibre.android.style.layers.SymbolLayer
+import org.maplibre.android.style.sources.GeoJsonOptions
 import org.maplibre.android.style.sources.GeoJsonSource
+import org.maplibre.android.style.sources.ImageSource
+import org.maplibre.android.style.sources.RasterDemSource
+import org.maplibre.android.style.sources.RasterSource
+import org.maplibre.android.style.sources.TileSet
+import org.maplibre.android.style.sources.VectorSource
+import java.net.URI
 import kotlin.coroutines.cancellation.CancellationException
+
 
 class MapLibreMapController(
     viewId: Int,
@@ -152,6 +174,195 @@ class MapLibreMapController(
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
+    private val gson = Gson()
+    private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> {
+        return entries.map { entry ->
+            // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+            when (entry.value) {
+                is ArrayList<*> -> {
+                    val value = entry.value as ArrayList<*>
+                    val json = gson.toJsonTree(value)
+                    val expression = Expression.Converter.convert(json)
+                    PaintPropertyValue(entry.key, expression)
+                }
+
+                else -> PaintPropertyValue(entry.key, entry.value)
+            }
+        }.toTypedArray()
+    }
+
+    override fun addFillLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = FillLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addCircleLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = CircleLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addBackgroundLayer(
+        id: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = BackgroundLayer(id)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addFillExtrusionLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = FillExtrusionLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addHeatmapLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = HeatmapLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addHillshadeLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = HillshadeLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addLineLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = LineLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addRasterLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = RasterLayer(id, sourceId)
+//        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addSymbolLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = SymbolLayer(id, sourceId)
+        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun removeLayer(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.removeLayer(id)
+        callback(Result.success(Unit))
+
+    }
+
+    override fun removeSource(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.removeSource(id)
+        callback(Result.success(Unit))
+    }
+
     override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
         val position = mapLibreMap.cameraPosition
         val target = mapLibreMap.cameraPosition.target!!
@@ -171,26 +382,107 @@ class MapLibreMapController(
         callback(Result.success(lngLatBounds))
     }
 
-    override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {
-        mapLibreMap.style?.addLayer(FillLayer(id, sourceId))
-        callback(Result.success(Unit))
-    }
-
-    override fun addCircleLayer(
-        id: String,
-        sourceId: String,
-        callback: (Result<Unit>) -> Unit
-    ) {
-        mapLibreMap.style?.addLayer(CircleLayer(id, sourceId))
-        callback(Result.success(Unit))
-    }
-
     override fun addGeoJsonSource(
         id: String,
         data: String,
         callback: (Result<Unit>) -> Unit
     ) {
-        mapLibreMap.style?.addSource(GeoJsonSource(id, data))
+        val options = GeoJsonOptions()
+        val source = if (data.first() == '{') {
+            GeoJsonSource(id, data, options)
+        } else {
+            GeoJsonSource(id, URI(data), options)
+        }
+        mapLibreMap.style?.addSource(source)
+        callback(Result.success(Unit))
+    }
+
+    override fun addImageSource(
+        id: String,
+        url: String,
+        coordinates: List<LngLat>,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val quad = LatLngQuad(
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng)
+        )
+        val source = ImageSource(id, quad, URI(url))
+        mapLibreMap.style?.addSource(source)
+        callback(Result.success(Unit))
+    }
+
+    override fun addRasterSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        minZoom: Double,
+        maxZoom: Double,
+        tileSize: Long,
+        scheme: TileScheme,
+        attribution: String?,
+        volatile: Boolean,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val source = if (url == null) {
+            // TODO improve this
+            val tileSet = TileSet("{}", tiles!!.first())
+            tileSet.maxZoom = maxZoom.toFloat()
+            tileSet.minZoom = minZoom.toFloat()
+            RasterSource(id, tileSet, tileSize.toInt())
+        } else {
+            RasterSource(id, url, tileSize.toInt())
+        }
+        source.isVolatile = volatile
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(source)
+        callback(Result.success(Unit))
+    }
+
+    override fun addRasterDemSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        minZoom: Double,
+        maxZoom: Double,
+        tileSize: Long,
+        attribution: String?,
+        encoding: RasterDemEncoding,
+        volatile: Boolean,
+        redFactor: Double,
+        blueFactor: Double,
+        greenFactor: Double,
+        baseShift: Double,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val source = RasterDemSource(id, url, tileSize.toInt())
+        source.isVolatile = volatile
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(source)
+        callback(Result.success(Unit))
+    }
+
+    override fun addVectorSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        scheme: TileScheme,
+        minZoom: Double,
+        maxZoom: Double,
+        attribution: String?,
+        volatile: Boolean,
+        sourceLayer: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val source = VectorSource(id, url)
+        source.isVolatile = volatile
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 

@@ -17,6 +17,19 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
+      // Texture Layer (or Texture Layer Hybrid Composition)
+      // Platform Views are rendered into a texture. Flutter draws the
+      // platform views (via the texture). Flutter content is rendered
+      // directly into a Surface.
+      // + good performance for Android Views
+      // + best performance for Flutter rendering.
+      // + all transformations work correctly.
+      // - quick scrolling (e.g. a web view) will be janky
+      // - SurfaceViews are problematic in this mode and will be moved into a
+      //   virtual display (breaking a11y)
+      // - Text magnifier will break unless Flutter is rendered into a
+      //   TextureView.
+      // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
       return AndroidView(
         viewType: 'plugins.flutter.io/maplibre',
         onPlatformViewCreated: _onPlatformViewCreated,
@@ -112,12 +125,70 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<void> addLayer(Layer layer) async {
+  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     await switch (layer) {
-      FillLayer() =>
-        _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),
-      CircleLayer() =>
-        _hostApi.addCircleLayer(id: layer.id, sourceId: layer.sourceId),
+      FillLayer() => _hostApi.addFillLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      CircleLayer() => _hostApi.addCircleLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      BackgroundLayer() => _hostApi.addBackgroundLayer(
+          id: layer.id,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      HeatmapLayer() => _hostApi.addHeatmapLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      HillshadeLayer() => _hostApi.addHillshadeLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      LineLayer() => _hostApi.addLineLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      RasterLayer() => _hostApi.addRasterLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      SymbolLayer() => _hostApi.addSymbolLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
     };
   }
 
@@ -126,6 +197,80 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     await switch (source) {
       GeoJsonSource() =>
         _hostApi.addGeoJsonSource(id: source.id, data: source.data),
+      RasterDemSource() => switch (source.encoding) {
+          final RasterDemCustomEncoding encoding => _hostApi.addRasterDemSource(
+              id: source.id,
+              attribution: source.attribution,
+              bounds: source.bounds,
+              volatile: source.volatile,
+              url: source.url,
+              tiles: source.tiles,
+              minZoom: source.minZoom,
+              maxZoom: source.maxZoom,
+              tileSize: source.tileSize,
+              encoding: pigeon.RasterDemEncoding.custom,
+              greenFactor: encoding.greenFactor,
+              blueFactor: encoding.blueFactor,
+              redFactor: encoding.redFactor,
+              baseShift: encoding.baseShift,
+            ),
+          _ => _hostApi.addRasterDemSource(
+              id: source.id,
+              attribution: source.attribution,
+              bounds: source.bounds,
+              volatile: source.volatile,
+              url: source.url,
+              tiles: source.tiles,
+              minZoom: source.minZoom,
+              maxZoom: source.maxZoom,
+              tileSize: source.tileSize,
+              encoding: switch (source.encoding) {
+                RasterDemTerrariumEncoding() =>
+                  pigeon.RasterDemEncoding.terrarium,
+                RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
+                RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
+              },
+            ),
+        },
+      RasterSource() => _hostApi.addRasterSource(
+          id: source.id,
+          bounds: source.bounds,
+          url: source.url,
+          tiles: source.tiles,
+          minZoom: source.minZoom,
+          maxZoom: source.maxZoom,
+          attribution: source.attribution,
+          tileSize: source.tileSize,
+          volatile: source.volatile,
+          scheme: switch (source.scheme) {
+            TileScheme.xyz => pigeon.TileScheme.xyz,
+            TileScheme.tms => pigeon.TileScheme.tms,
+          },
+        ),
+      VectorSource() => _hostApi.addVectorSource(
+          id: source.id,
+          bounds: source.bounds,
+          attribution: source.attribution,
+          maxZoom: source.maxZoom,
+          minZoom: source.minZoom,
+          scheme: switch (source.scheme) {
+            TileScheme.xyz => pigeon.TileScheme.xyz,
+            TileScheme.tms => pigeon.TileScheme.tms,
+          },
+          sourceLayer: source.sourceLayer,
+          tiles: source.tiles,
+          url: source.url,
+          volatile: source.volatile,
+        ),
+      ImageSource() => _hostApi.addImageSource(
+          id: source.id,
+          url: source.url,
+          coordinates: source.coordinates
+              .map((e) => e.toLngLat())
+              .toList(growable: false),
+        ),
+      VideoSource() =>
+        throw UnimplementedError('Video source is only supported on web.'),
     };
   }
 
@@ -173,4 +318,10 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       latitudeNorth: bounds.latitudeNorth,
     );
   }
+
+  @override
+  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
+
+  @override
+  Future<void> removeSource(String id) => _hostApi.removeSource(id);
 }
