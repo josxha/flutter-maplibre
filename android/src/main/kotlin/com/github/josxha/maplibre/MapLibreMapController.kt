@@ -31,6 +31,8 @@ import org.maplibre.android.style.layers.HeatmapLayer
 import org.maplibre.android.style.layers.HillshadeLayer
 import org.maplibre.android.style.layers.LineLayer
 import org.maplibre.android.style.layers.PropertyValue
+import org.maplibre.android.style.layers.RasterLayer
+import org.maplibre.android.style.layers.SymbolLayer
 import org.maplibre.android.style.sources.GeoJsonSource
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -312,7 +314,17 @@ class MapLibreMapController(
         belowLayerId: String?,
         callback: (Result<Unit>) -> Unit
     ) {
-        TODO("Not yet implemented")
+        val layer = RasterLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
     }
 
     override fun addSymbolLayer(
@@ -323,7 +335,17 @@ class MapLibreMapController(
         belowLayerId: String?,
         callback: (Result<Unit>) -> Unit
     ) {
-        TODO("Not yet implemented")
+        val layer = SymbolLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
     }
 
     override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
