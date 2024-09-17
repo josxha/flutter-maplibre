@@ -340,15 +340,72 @@ class MapLibreHostApi {
   virtual void AddFillLayer(
     const std::string& id,
     const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a circle layer to the map style.
   virtual void AddCircleLayer(
     const std::string& id,
     const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a background layer to the map style.
   virtual void AddBackgroundLayer(
     const std::string& id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a fill extrusion layer to the map style.
+  virtual void AddFillExtrusionLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a heatmap layer to the map style.
+  virtual void AddHeatmapLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a hillshade layer to the map style.
+  virtual void AddHillshadeLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a line layer to the map style.
+  virtual void AddLineLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a raster layer to the map style.
+  virtual void AddRasterLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Add a symbol layer to the map style.
+  virtual void AddSymbolLayer(
+    const std::string& id,
+    const std::string& source_id,
+    const flutter::EncodableMap& layout,
+    const flutter::EncodableMap& paint,
+    const std::string* below_layer_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(

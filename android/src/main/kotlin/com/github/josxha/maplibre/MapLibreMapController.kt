@@ -25,7 +25,12 @@ import org.maplibre.android.maps.OnMapReadyCallback
 import org.maplibre.android.maps.Style
 import org.maplibre.android.style.layers.BackgroundLayer
 import org.maplibre.android.style.layers.CircleLayer
+import org.maplibre.android.style.layers.FillExtrusionLayer
 import org.maplibre.android.style.layers.FillLayer
+import org.maplibre.android.style.layers.HeatmapLayer
+import org.maplibre.android.style.layers.HillshadeLayer
+import org.maplibre.android.style.layers.LineLayer
+import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.sources.GeoJsonSource
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -153,6 +158,174 @@ class MapLibreMapController(
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
+    override fun addFillLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = FillLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addCircleLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = CircleLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addBackgroundLayer(
+        id: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = BackgroundLayer(id)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addFillExtrusionLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = FillExtrusionLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addHeatmapLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = HeatmapLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addHillshadeLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = HillshadeLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addLineLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val layer = LineLayer(id, sourceId)
+        var properties = paint.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        properties = layout.map { entry -> PropertyValue(entry.key, entry.value) }
+        layer.setProperties(*properties.toTypedArray())
+        if (belowLayerId == null) {
+            mapLibreMap.style?.addLayer(layer)
+        } else {
+            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
+        }
+        callback(Result.success(Unit))
+    }
+
+    override fun addRasterLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun addSymbolLayer(
+        id: String,
+        sourceId: String,
+        layout: Map<String, Any>,
+        paint: Map<String, Any>,
+        belowLayerId: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
     override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
         val position = mapLibreMap.cameraPosition
         val target = mapLibreMap.cameraPosition.target!!
@@ -170,25 +343,6 @@ class MapLibreMapController(
             bounds.latitudeNorth
         )
         callback(Result.success(lngLatBounds))
-    }
-
-    override fun addFillLayer(id: String, sourceId: String, callback: (Result<Unit>) -> Unit) {
-        mapLibreMap.style?.addLayer(FillLayer(id, sourceId))
-        callback(Result.success(Unit))
-    }
-
-    override fun addCircleLayer(
-        id: String,
-        sourceId: String,
-        callback: (Result<Unit>) -> Unit
-    ) {
-        mapLibreMap.style?.addLayer(CircleLayer(id, sourceId))
-        callback(Result.success(Unit))
-    }
-
-    override fun addBackgroundLayer(id: String, callback: (Result<Unit>) -> Unit) {
-        mapLibreMap.style?.addLayer(BackgroundLayer(id))
-        callback(Result.success(Unit))
     }
 
     override fun addGeoJsonSource(

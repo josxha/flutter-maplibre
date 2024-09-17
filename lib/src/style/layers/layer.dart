@@ -51,10 +51,10 @@ sealed class Layer {
   final Object? filter;
 
   /// Layout properties for the layer.
-  final Map<String, Object?> layout;
+  final Map<String, Object> layout;
 
   /// Default paint properties for this layer.
-  final Map<String, Object?> paint;
+  final Map<String, Object> paint;
 }
 
 /// A [Layer] that pulls its data from a [Source]. Basically every layer

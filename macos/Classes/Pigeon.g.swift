@@ -323,11 +323,23 @@ protocol MapLibreHostApi {
   /// Convert a screen location to a coordinate.
   func toLngLat(x: Double, y: Double, completion: @escaping (Result<LngLat, Error>) -> Void)
   /// Add a fill layer to the map style.
-  func addFillLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
+  func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a circle layer to the map style.
-  func addCircleLayer(id: String, sourceId: String, completion: @escaping (Result<Void, Error>) -> Void)
+  func addCircleLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a background layer to the map style.
-  func addBackgroundLayer(id: String, completion: @escaping (Result<Void, Error>) -> Void)
+  func addBackgroundLayer(id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a fill extrusion layer to the map style.
+  func addFillExtrusionLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a heatmap layer to the map style.
+  func addHeatmapLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a hillshade layer to the map style.
+  func addHillshadeLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a line layer to the map style.
+  func addLineLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a raster layer to the map style.
+  func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a symbol layer to the map style.
+  func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Returns the distance spanned by one pixel at the specified latitude and
@@ -462,7 +474,10 @@ class MapLibreHostApiSetup {
         let args = message as! [Any?]
         let idArg = args[0] as! String
         let sourceIdArg = args[1] as! String
-        api.addFillLayer(id: idArg, sourceId: sourceIdArg) { result in
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addFillLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -481,7 +496,10 @@ class MapLibreHostApiSetup {
         let args = message as! [Any?]
         let idArg = args[0] as! String
         let sourceIdArg = args[1] as! String
-        api.addCircleLayer(id: idArg, sourceId: sourceIdArg) { result in
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addCircleLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -499,7 +517,10 @@ class MapLibreHostApiSetup {
       addBackgroundLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let idArg = args[0] as! String
-        api.addBackgroundLayer(id: idArg) { result in
+        let layoutArg = args[1] as! [String: Any]
+        let paintArg = args[2] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[3])
+        api.addBackgroundLayer(id: idArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -510,6 +531,138 @@ class MapLibreHostApiSetup {
       }
     } else {
       addBackgroundLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a fill extrusion layer to the map style.
+    let addFillExtrusionLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addFillExtrusionLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addFillExtrusionLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addFillExtrusionLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a heatmap layer to the map style.
+    let addHeatmapLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addHeatmapLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addHeatmapLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addHeatmapLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a hillshade layer to the map style.
+    let addHillshadeLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addHillshadeLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addHillshadeLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addHillshadeLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a line layer to the map style.
+    let addLineLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addLineLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addLineLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addLineLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a raster layer to the map style.
+    let addRasterLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addRasterLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addRasterLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addRasterLayerChannel.setMessageHandler(nil)
+    }
+    /// Add a symbol layer to the map style.
+    let addSymbolLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addSymbolLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let sourceIdArg = args[1] as! String
+        let layoutArg = args[2] as! [String: Any]
+        let paintArg = args[3] as! [String: Any]
+        let belowLayerIdArg: String? = nilOrValue(args[4])
+        api.addSymbolLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addSymbolLayerChannel.setMessageHandler(nil)
     }
     /// Add a GeoJSON source to the map style.
     let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)

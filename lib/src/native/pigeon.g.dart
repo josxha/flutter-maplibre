@@ -462,8 +462,13 @@ class MapLibreHostApi {
   }
 
   /// Add a fill layer to the map style.
-  Future<void> addFillLayer(
-      {required String id, required String sourceId}) async {
+  Future<void> addFillLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -472,8 +477,9 @@ class MapLibreHostApi {
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[id, sourceId]) as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {
@@ -488,8 +494,13 @@ class MapLibreHostApi {
   }
 
   /// Add a circle layer to the map style.
-  Future<void> addCircleLayer(
-      {required String id, required String sourceId}) async {
+  Future<void> addCircleLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -498,8 +509,9 @@ class MapLibreHostApi {
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[id, sourceId]) as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {
@@ -514,7 +526,12 @@ class MapLibreHostApi {
   }
 
   /// Add a background layer to the map style.
-  Future<void> addBackgroundLayer({required String id}) async {
+  Future<void> addBackgroundLayer({
+    required String id,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -523,8 +540,200 @@ class MapLibreHostApi {
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[id]) as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+        .send(<Object?>[id, layout, paint, belowLayerId]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a fill extrusion layer to the map style.
+  Future<void> addFillExtrusionLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a heatmap layer to the map style.
+  Future<void> addHeatmapLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a hillshade layer to the map style.
+  Future<void> addHillshadeLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a line layer to the map style.
+  Future<void> addLineLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a raster layer to the map style.
+  Future<void> addRasterLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add a symbol layer to the map style.
+  Future<void> addSymbolLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+            .send(<Object?>[id, sourceId, layout, paint, belowLayerId])
+        as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {

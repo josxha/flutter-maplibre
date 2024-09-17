@@ -61,18 +61,91 @@ abstract interface class MapLibreHostApi {
 
   /// Add a fill layer to the map style.
   @async
-  void addFillLayer({required String id, required String sourceId});
+  void addFillLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
 
   /// Add a circle layer to the map style.
   @async
-  void addCircleLayer({required String id, required String sourceId});
+  void addCircleLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
 
   /// Add a background layer to the map style.
   @async
   void addBackgroundLayer({
     required String id,
-    Map<String, Object?> layout,
-    Map<String, Object?> paint,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a fill extrusion layer to the map style.
+  @async
+  void addFillExtrusionLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a heatmap layer to the map style.
+  @async
+  void addHeatmapLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a hillshade layer to the map style.
+  @async
+  void addHillshadeLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a line layer to the map style.
+  @async
+  void addLineLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a raster layer to the map style.
+  @async
+  void addRasterLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a symbol layer to the map style.
+  @async
+  void addSymbolLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
   });
 
   /// Add a GeoJSON source to the map style.

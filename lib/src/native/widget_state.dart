@@ -125,25 +125,70 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<void> addLayer(Layer layer, {String? beforeId}) async {
+  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     await switch (layer) {
-      FillLayer() =>
-        _hostApi.addFillLayer(id: layer.id, sourceId: layer.sourceId),
-      CircleLayer() =>
-        _hostApi.addCircleLayer(id: layer.id, sourceId: layer.sourceId),
-      BackgroundLayer() => _hostApi.addBackgroundLayer(id: layer.id),
-      // TODO: Handle this case.
-      FillExtrusionLayer() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      HeatmapLayer() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      HillshadeLayer() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      LineLayer() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      RasterLayer() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      SymbolLayer() => throw UnimplementedError(),
+      FillLayer() => _hostApi.addFillLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      CircleLayer() => _hostApi.addCircleLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      BackgroundLayer() => _hostApi.addBackgroundLayer(
+          id: layer.id,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      HeatmapLayer() => _hostApi.addHeatmapLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      HillshadeLayer() => _hostApi.addHillshadeLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      LineLayer() => _hostApi.addLineLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      RasterLayer() => _hostApi.addRasterLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      SymbolLayer() => _hostApi.addSymbolLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
     };
   }
 

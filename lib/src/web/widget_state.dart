@@ -296,7 +296,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> addLayer(Layer layer, {String? beforeId}) async {
+  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     switch (layer) {
       case FillLayer():
         _map.addLayer(
@@ -307,7 +307,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case CircleLayer():
         _map.addLayer(
@@ -318,7 +318,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case BackgroundLayer():
         _map.addLayer(
@@ -329,7 +329,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case FillExtrusionLayer():
         _map.addLayer(
@@ -340,7 +340,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case HeatmapLayer():
         _map.addLayer(
@@ -351,7 +351,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case HillshadeLayer():
         _map.addLayer(
@@ -362,7 +362,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case LineLayer():
         _map.addLayer(
@@ -373,7 +373,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case RasterLayer():
         _map.addLayer(
@@ -384,7 +384,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
       case SymbolLayer():
         _map.addLayer(
@@ -395,7 +395,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
           ),
-          beforeId,
+          belowLayerId,
         );
     }
   }
