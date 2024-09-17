@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -24,11 +22,7 @@ class _LayersHillshadePageState extends State<LayersHillshadePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Hillshade Layer')),
       body: MapLibreMap(
-        options: MapOptions(
-          center: Position(11.39085, 47.27574),
-          zoom: 10,
-          onClick: (point) => debugPrint('${point.lng}, ${point.lat}'),
-        ),
+        options: MapOptions(center: Position(11.39085, 47.27574), zoom: 10),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
@@ -45,10 +39,6 @@ class _LayersHillshadePageState extends State<LayersHillshadePage> {
     await _controller.addLayer(_hillshadeLayer);
   }
 }
-
-// TODO fill layer
-// TODO fill extrusion layer
-// TODO line layer
 
 const _hillshadeLayer = HillshadeLayer(
   id: _layerId,

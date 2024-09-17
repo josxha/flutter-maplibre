@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
-import 'package:maplibre_example/geojson_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
+import 'package:maplibre_example/layers_fill_extrusion_page.dart';
+import 'package:maplibre_example/layers_fill_page.dart';
 import 'package:maplibre_example/layers_heatmap_page.dart';
 import 'package:maplibre_example/layers_hillshade_page.dart';
+import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -33,9 +36,9 @@ class MenuPage extends StatelessWidget {
                 location: StyledMapPage.location,
               ),
               ItemCard(
-                label: 'GeoJSON',
+                label: 'Annotations',
                 iconData: Icons.location_on,
-                location: GeoJsonPage.location,
+                location: AnnotationsPage.location,
               ),
               ItemCard(
                 label: 'Callbacks',
@@ -71,6 +74,16 @@ class MenuPage extends StatelessWidget {
                 location: LayersCirclePage.location,
               ),
               ItemCard(
+                label: 'Fill',
+                iconData: Icons.format_shapes,
+                location: LayersFillPage.location,
+              ),
+              ItemCard(
+                label: 'Fill Extrusion',
+                iconData: Icons.house,
+                location: LayersFillExtrusionPage.location,
+              ),
+              ItemCard(
                 label: 'Heatmap',
                 iconData: Icons.thermostat,
                 location: LayersHeatmapPage.location,
@@ -79,6 +92,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Hillshade',
                 iconData: Icons.landscape,
                 location: LayersHillshadePage.location,
+              ),
+              ItemCard(
+                label: 'Line',
+                iconData: Icons.polyline,
+                location: LayersLinePage.location,
               ),
               ItemCard(
                 label: 'Raster',
