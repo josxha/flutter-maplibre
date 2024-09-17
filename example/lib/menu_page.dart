@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/geojson_page.dart';
+import 'package:maplibre_example/layers_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
@@ -29,6 +30,11 @@ class MenuPage extends StatelessWidget {
             label: 'GeoJSON',
             iconData: Icons.location_on,
             location: GeoJsonPage.location,
+          ),
+          ItemCard(
+            label: 'Layers',
+            iconData: Icons.layers,
+            location: LayersPage.location,
           ),
           ItemCard(
             label: 'Callbacks',

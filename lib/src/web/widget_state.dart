@@ -259,7 +259,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Future<void> addSource(Source source) async {
     switch (source) {
       case GeoJsonSource():
-        final data = parse(source.data);
+        JSAny data;
+        if (source.data[0] == '{') {
+          data = parse(source.data);
+        } else {
+          data = source.data.jsify()!;
+        }
         _map.addSource(
           source.id,
           interop.SourceSpecification.geoJson(
