@@ -280,7 +280,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       case RasterSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.raster(type: 'raster'),
+          interop.SourceSpecification.raster(
+            type: 'raster',
+            attribution: source.attribution,
+            tileSize: source.tileSize,
+            tiles: source.tiles.jsify(),
+          ),
         );
       case VectorSource():
         _map.addSource(

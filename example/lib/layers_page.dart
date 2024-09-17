@@ -15,14 +15,16 @@ class LayersPage extends StatefulWidget {
 
 const _layerId = 'showcaseLayer';
 const _sourceEarthquakesId = 'earthquakes';
+const _sourceOpenStreetMapId = 'openStreetMap';
 
 class _LayersPageState extends State<LayersPage> {
+  bool _someLayerActive = false;
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Controller')),
+      appBar: AppBar(title: const Text('Map Layers')),
       body: Column(
         children: [
           Padding(
@@ -33,7 +35,10 @@ class _LayersPageState extends State<LayersPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    await _controller.removeLayer(_layerId);
+                    if (_someLayerActive) {
+                      await _controller.removeLayer(_layerId);
+                    }
+                    _someLayerActive = true;
                     await _controller.addLayer(_heatmapLayer);
                     await _controller.flyTo(
                       center: Position(-120, 50),
@@ -44,7 +49,10 @@ class _LayersPageState extends State<LayersPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    await _controller.removeLayer(_layerId);
+                    if (_someLayerActive) {
+                      await _controller.removeLayer(_layerId);
+                    }
+                    _someLayerActive = true;
                     await _controller.addLayer(_circleLayer);
                     await _controller.flyTo(
                       center: Position(-152.9959, 59.8150),
@@ -52,6 +60,21 @@ class _LayersPageState extends State<LayersPage> {
                     );
                   },
                   child: const Text('Circle'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    if (_someLayerActive) {
+                      await _controller.removeLayer(_layerId);
+                    }
+                    _someLayerActive = true;
+                    // TODO raster layer not working
+                    await _controller.addLayer(_rasterLayer);
+                    await _controller.flyTo(
+                      center: Position(-102, 39),
+                      zoom: 4,
+                    );
+                  },
+                  child: const Text('Raster'),
                 ),
               ],
             ),
@@ -72,19 +95,27 @@ class _LayersPageState extends State<LayersPage> {
   }
 
   Future<void> _onStyleLoaded() async {
-    const sourceEarthquakes = GeoJsonSource(
+    const earthquakes = GeoJsonSource(
       id: _sourceEarthquakesId,
       data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
-    await _controller.addSource(sourceEarthquakes);
+    const openStreetMap = RasterSource(
+      id: _sourceOpenStreetMapId,
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      maxZoom: 20,
+      tileSize: 256,
+      attribution:
+          '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    );
+    await _controller.addSource(earthquakes);
+    await _controller.addSource(openStreetMap);
   }
 }
 
 // TODO fill layer
 // TODO fill extrusion layer
 // TODO line layer
-// TODO raster layer
 // TODO hillshade layer
 
 const _heatmapLayer = HeatmapLayer(
@@ -216,4 +247,9 @@ const _circleLayer = CircleLayer(
       1
     ]
   },
+);
+
+const _rasterLayer = RasterLayer(
+  id: _layerId,
+  sourceId: _sourceOpenStreetMapId,
 );

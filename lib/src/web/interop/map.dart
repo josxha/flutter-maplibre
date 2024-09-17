@@ -159,6 +159,9 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   /// Create a new raster source.
   external factory SourceSpecification.raster({
     required String type,
+    required JSAny? tiles,
+    required int tileSize,
+    required String? attribution,
   });
 
   /// Create a new vector source.
