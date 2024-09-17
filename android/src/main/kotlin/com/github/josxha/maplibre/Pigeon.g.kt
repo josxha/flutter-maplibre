@@ -353,6 +353,10 @@ interface MapLibreHostApi {
   fun addRasterLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a symbol layer to the map style. */
   fun addSymbolLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  /** Removes the layer with the given ID from the map's style. */
+  fun removeLayer(id: String, callback: (Result<Unit>) -> Unit)
+  /** Removes the source with the given ID from the map's style. */
+  fun removeSource(id: String, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
   /** Add a image source to the map style. */
@@ -695,6 +699,44 @@ interface MapLibreHostApi {
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
             api.addSymbolLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeLayer$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            api.removeLayer(idArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            api.removeSource(idArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

@@ -148,6 +148,14 @@ abstract interface class MapLibreHostApi {
     String? belowLayerId,
   });
 
+  /// Removes the layer with the given ID from the map's style.
+  @async
+  void removeLayer(String id);
+
+  /// Removes the source with the given ID from the map's style.
+  @async
+  void removeSource(String id);
+
   /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({

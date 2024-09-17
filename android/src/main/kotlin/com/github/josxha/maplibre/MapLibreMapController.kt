@@ -359,6 +359,17 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
+    override fun removeLayer(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.removeLayer(id)
+        callback(Result.success(Unit))
+
+    }
+
+    override fun removeSource(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.removeSource(id)
+        callback(Result.success(Unit))
+    }
+
     override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
         val position = mapLibreMap.cameraPosition
         val target = mapLibreMap.cameraPosition.target!!

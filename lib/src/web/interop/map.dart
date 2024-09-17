@@ -62,6 +62,12 @@ extension type JsMap._(Camera _) implements Camera {
   /// non-zero, the visible region is not an axis-aligned rectangle, and the
   /// result is the smallest bounds that encompasses the visible region.
   external LngLatBounds getBounds();
+
+  /// Removes the layer with the given ID from the map's style.
+  external void removeLayer(String id);
+
+  /// Removes the source with the given ID from the map's style.
+  external void removeSource(String id);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

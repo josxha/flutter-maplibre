@@ -33,6 +33,7 @@ class _LayersPageState extends State<LayersPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
+                    await _controller.removeLayer(_layerId);
                     await _controller.addLayer(_heatmapLayer);
                     await _controller.flyTo(
                       center: Position(-120, 50),
@@ -43,6 +44,7 @@ class _LayersPageState extends State<LayersPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
+                    await _controller.removeLayer(_layerId);
                     await _controller.addLayer(_circleLayer);
                     await _controller.flyTo(
                       center: Position(-152.9959, 59.8150),

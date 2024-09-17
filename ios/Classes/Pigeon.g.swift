@@ -377,6 +377,10 @@ protocol MapLibreHostApi {
   func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a symbol layer to the map style.
   func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Removes the layer with the given ID from the map's style.
+  func removeLayer(id: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Removes the source with the given ID from the map's style.
+  func removeSource(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a image source to the map style.
@@ -708,6 +712,42 @@ class MapLibreHostApiSetup {
       }
     } else {
       addSymbolLayerChannel.setMessageHandler(nil)
+    }
+    /// Removes the layer with the given ID from the map's style.
+    let removeLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeLayerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        api.removeLayer(id: idArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      removeLayerChannel.setMessageHandler(nil)
+    }
+    /// Removes the source with the given ID from the map's style.
+    let removeSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        api.removeSource(id: idArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      removeSourceChannel.setMessageHandler(nil)
     }
     /// Add a GeoJSON source to the map style.
     let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)

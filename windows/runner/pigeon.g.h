@@ -426,6 +426,14 @@ class MapLibreHostApi {
     const flutter::EncodableMap& paint,
     const std::string* below_layer_id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Removes the layer with the given ID from the map's style.
+  virtual void RemoveLayer(
+    const std::string& id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Removes the source with the given ID from the map's style.
+  virtual void RemoveSource(
+    const std::string& id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(
     const std::string& id,

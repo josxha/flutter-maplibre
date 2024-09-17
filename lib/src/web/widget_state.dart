@@ -432,4 +432,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       latitudeNorth: bounds.getNorth().toDouble(),
     );
   }
+
+  @override
+  Future<void> removeLayer(String id) async => _map.removeLayer(id);
+
+  @override
+  Future<void> removeSource(String id) async => _map.removeSource(id);
 }

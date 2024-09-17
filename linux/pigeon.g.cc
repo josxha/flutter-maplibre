@@ -1177,6 +1177,84 @@ static MaplibreMapLibreHostApiAddSymbolLayerResponse* maplibre_map_libre_host_ap
   return self;
 }
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiRemoveLayerResponse, maplibre_map_libre_host_api_remove_layer_response, MAPLIBRE, MAP_LIBRE_HOST_API_REMOVE_LAYER_RESPONSE, GObject)
+
+struct _MaplibreMapLibreHostApiRemoveLayerResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibreHostApiRemoveLayerResponse, maplibre_map_libre_host_api_remove_layer_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_host_api_remove_layer_response_dispose(GObject* object) {
+  MaplibreMapLibreHostApiRemoveLayerResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_LAYER_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_host_api_remove_layer_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_host_api_remove_layer_response_init(MaplibreMapLibreHostApiRemoveLayerResponse* self) {
+}
+
+static void maplibre_map_libre_host_api_remove_layer_response_class_init(MaplibreMapLibreHostApiRemoveLayerResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_remove_layer_response_dispose;
+}
+
+static MaplibreMapLibreHostApiRemoveLayerResponse* maplibre_map_libre_host_api_remove_layer_response_new() {
+  MaplibreMapLibreHostApiRemoveLayerResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_LAYER_RESPONSE(g_object_new(maplibre_map_libre_host_api_remove_layer_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreMapLibreHostApiRemoveLayerResponse* maplibre_map_libre_host_api_remove_layer_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibreHostApiRemoveLayerResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_LAYER_RESPONSE(g_object_new(maplibre_map_libre_host_api_remove_layer_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiRemoveSourceResponse, maplibre_map_libre_host_api_remove_source_response, MAPLIBRE, MAP_LIBRE_HOST_API_REMOVE_SOURCE_RESPONSE, GObject)
+
+struct _MaplibreMapLibreHostApiRemoveSourceResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibreHostApiRemoveSourceResponse, maplibre_map_libre_host_api_remove_source_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_host_api_remove_source_response_dispose(GObject* object) {
+  MaplibreMapLibreHostApiRemoveSourceResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_SOURCE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_host_api_remove_source_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_host_api_remove_source_response_init(MaplibreMapLibreHostApiRemoveSourceResponse* self) {
+}
+
+static void maplibre_map_libre_host_api_remove_source_response_class_init(MaplibreMapLibreHostApiRemoveSourceResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_remove_source_response_dispose;
+}
+
+static MaplibreMapLibreHostApiRemoveSourceResponse* maplibre_map_libre_host_api_remove_source_response_new() {
+  MaplibreMapLibreHostApiRemoveSourceResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_SOURCE_RESPONSE(g_object_new(maplibre_map_libre_host_api_remove_source_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreMapLibreHostApiRemoveSourceResponse* maplibre_map_libre_host_api_remove_source_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibreHostApiRemoveSourceResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_REMOVE_SOURCE_RESPONSE(g_object_new(maplibre_map_libre_host_api_remove_source_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiAddGeoJsonSourceResponse, maplibre_map_libre_host_api_add_geo_json_source_response, MAPLIBRE, MAP_LIBRE_HOST_API_ADD_GEO_JSON_SOURCE_RESPONSE, GObject)
 
 struct _MaplibreMapLibreHostApiAddGeoJsonSourceResponse {
@@ -1754,6 +1832,32 @@ static void maplibre_map_libre_host_api_add_symbol_layer_cb(FlBasicMessageChanne
   self->vtable->add_symbol_layer(id, source_id, layout, paint, below_layer_id, handle, self->user_data);
 }
 
+static void maplibre_map_libre_host_api_remove_layer_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->remove_layer == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  const gchar* id = fl_value_get_string(value0);
+  g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
+  self->vtable->remove_layer(id, handle, self->user_data);
+}
+
+static void maplibre_map_libre_host_api_remove_source_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->remove_source == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  const gchar* id = fl_value_get_string(value0);
+  g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
+  self->vtable->remove_source(id, handle, self->user_data);
+}
+
 static void maplibre_map_libre_host_api_add_geo_json_source_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
   MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
 
@@ -1958,6 +2062,12 @@ void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenge
   g_autofree gchar* add_symbol_layer_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) add_symbol_layer_channel = fl_basic_message_channel_new(messenger, add_symbol_layer_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(add_symbol_layer_channel, maplibre_map_libre_host_api_add_symbol_layer_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* remove_layer_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.removeLayer%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) remove_layer_channel = fl_basic_message_channel_new(messenger, remove_layer_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(remove_layer_channel, maplibre_map_libre_host_api_remove_layer_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* remove_source_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.removeSource%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) remove_source_channel = fl_basic_message_channel_new(messenger, remove_source_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(remove_source_channel, maplibre_map_libre_host_api_remove_source_cb, g_object_ref(api_data), g_object_unref);
   g_autofree gchar* add_geo_json_source_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) add_geo_json_source_channel = fl_basic_message_channel_new(messenger, add_geo_json_source_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(add_geo_json_source_channel, maplibre_map_libre_host_api_add_geo_json_source_cb, g_object_ref(api_data), g_object_unref);
@@ -2027,6 +2137,12 @@ void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messen
   g_autofree gchar* add_symbol_layer_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) add_symbol_layer_channel = fl_basic_message_channel_new(messenger, add_symbol_layer_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(add_symbol_layer_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* remove_layer_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.removeLayer%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) remove_layer_channel = fl_basic_message_channel_new(messenger, remove_layer_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(remove_layer_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* remove_source_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.removeSource%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) remove_source_channel = fl_basic_message_channel_new(messenger, remove_source_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(remove_source_channel, nullptr, nullptr, nullptr);
   g_autofree gchar* add_geo_json_source_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) add_geo_json_source_channel = fl_basic_message_channel_new(messenger, add_geo_json_source_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(add_geo_json_source_channel, nullptr, nullptr, nullptr);
@@ -2284,6 +2400,38 @@ void maplibre_map_libre_host_api_respond_error_add_symbol_layer(MaplibreMapLibre
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
     g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "addSymbolLayer", error->message);
+  }
+}
+
+void maplibre_map_libre_host_api_respond_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreMapLibreHostApiRemoveLayerResponse) response = maplibre_map_libre_host_api_remove_layer_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "removeLayer", error->message);
+  }
+}
+
+void maplibre_map_libre_host_api_respond_error_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibreHostApiRemoveLayerResponse) response = maplibre_map_libre_host_api_remove_layer_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "removeLayer", error->message);
+  }
+}
+
+void maplibre_map_libre_host_api_respond_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreMapLibreHostApiRemoveSourceResponse) response = maplibre_map_libre_host_api_remove_source_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "removeSource", error->message);
+  }
+}
+
+void maplibre_map_libre_host_api_respond_error_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibreHostApiRemoveSourceResponse) response = maplibre_map_libre_host_api_remove_source_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "removeSource", error->message);
   }
 }
 

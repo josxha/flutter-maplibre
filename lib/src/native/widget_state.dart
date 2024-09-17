@@ -318,4 +318,10 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       latitudeNorth: bounds.latitudeNorth,
     );
   }
+
+  @override
+  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
+
+  @override
+  Future<void> removeSource(String id) => _hostApi.removeSource(id);
 }

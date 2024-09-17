@@ -380,6 +380,8 @@ typedef struct {
   void (*add_line_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_raster_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_symbol_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_layer)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_source)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_image_source)(const gchar* id, const gchar* url, FlValue* coordinates, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_raster_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, MaplibreTileScheme scheme, const gchar* attribution, gboolean volatile, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
@@ -699,6 +701,44 @@ void maplibre_map_libre_host_api_respond_add_symbol_layer(MaplibreMapLibreHostAp
  * Responds with an error to MapLibreHostApi.addSymbolLayer. 
  */
 void maplibre_map_libre_host_api_respond_error_add_symbol_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_map_libre_host_api_respond_add_geo_json_source:

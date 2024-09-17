@@ -46,6 +46,12 @@ abstract interface class MapController {
   /// of the layers array and appear visually above all other layers.
   Future<void> addLayer(Layer layer, {String? belowLayerId});
 
+  /// Removes the layer with the given ID from the map's style.
+  Future<void> removeLayer(String id);
+
+  /// Removes the source with the given ID from the map's style.
+  Future<void> removeSource(String id);
+
   /// Get the current camera position on the map.
   Future<MapCamera> getCamera();
 
