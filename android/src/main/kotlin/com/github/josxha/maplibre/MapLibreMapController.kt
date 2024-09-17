@@ -394,7 +394,12 @@ class MapLibreMapController(
         data: String,
         callback: (Result<Unit>) -> Unit
     ) {
-        mapLibreMap.style?.addSource(GeoJsonSource(id, data))
+        if (data.first() == '{') {
+            mapLibreMap.style?.addSource(GeoJsonSource(id, data))
+        } else {
+            val uri = URI(data)
+            mapLibreMap.style?.addSource(GeoJsonSource(id, uri))
+        }
         callback(Result.success(Unit))
     }
 
