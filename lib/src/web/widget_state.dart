@@ -275,7 +275,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       case RasterDemSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.rasterDem(type: 'raster-dem'),
+          interop.SourceSpecification.rasterDem(
+            type: 'raster-dem',
+            tileSize: source.tileSize,
+            attribution: source.attribution,
+            url: source.url,
+          ),
         );
       case RasterSource():
         _map.addSource(

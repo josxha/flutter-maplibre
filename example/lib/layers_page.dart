@@ -16,6 +16,7 @@ class LayersPage extends StatefulWidget {
 const _layerId = 'showcaseLayer';
 const _sourceEarthquakesId = 'earthquakes';
 const _sourceOpenStreetMapId = 'openStreetMap';
+const _sourceHillshadeId = 'hillshade';
 
 class _LayersPageState extends State<LayersPage> {
   bool _someLayerActive = false;
@@ -67,7 +68,6 @@ class _LayersPageState extends State<LayersPage> {
                       await _controller.removeLayer(_layerId);
                     }
                     _someLayerActive = true;
-                    // TODO raster layer not working
                     await _controller.addLayer(_rasterLayer);
                     await _controller.flyTo(
                       center: Position(-102, 39),
@@ -75,6 +75,20 @@ class _LayersPageState extends State<LayersPage> {
                     );
                   },
                   child: const Text('Raster'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    if (_someLayerActive) {
+                      await _controller.removeLayer(_layerId);
+                    }
+                    _someLayerActive = true;
+                    await _controller.addLayer(_hillshadeLayer);
+                    await _controller.jumpTo(
+                      center: Position(11.39085, 47.27574),
+                      zoom: 10,
+                    );
+                  },
+                  child: const Text('Hillshade'),
                 ),
               ],
             ),
@@ -100,6 +114,7 @@ class _LayersPageState extends State<LayersPage> {
       data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
+    await _controller.addSource(earthquakes);
     const openStreetMap = RasterSource(
       id: _sourceOpenStreetMapId,
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
@@ -108,8 +123,13 @@ class _LayersPageState extends State<LayersPage> {
       attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
-    await _controller.addSource(earthquakes);
     await _controller.addSource(openStreetMap);
+    const hillshade = RasterDemSource(
+      id: _sourceHillshadeId,
+      url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
+      tileSize: 256,
+    );
+    await _controller.addSource(hillshade);
   }
 }
 
@@ -252,4 +272,10 @@ const _circleLayer = CircleLayer(
 const _rasterLayer = RasterLayer(
   id: _layerId,
   sourceId: _sourceOpenStreetMapId,
+);
+
+const _hillshadeLayer = HillshadeLayer(
+  id: _layerId,
+  sourceId: _sourceHillshadeId,
+  paint: {'hillshade-shadow-color': '#473B24'},
 );

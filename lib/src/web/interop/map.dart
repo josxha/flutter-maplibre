@@ -154,6 +154,9 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   /// Create a new raster DEM source.
   external factory SourceSpecification.rasterDem({
     required String type,
+    required String? url,
+    required int tileSize,
+    required String? attribution,
   });
 
   /// Create a new raster source.
