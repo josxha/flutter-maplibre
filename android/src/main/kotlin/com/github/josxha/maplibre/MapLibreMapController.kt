@@ -6,7 +6,9 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import RasterDemEncoding
 import ScreenLocation
+import TileScheme
 import android.content.Context
 import android.graphics.PointF
 import android.view.View
@@ -34,6 +36,9 @@ import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
 import org.maplibre.android.style.sources.GeoJsonSource
+import org.maplibre.android.style.sources.RasterDemSource
+import org.maplibre.android.style.sources.RasterSource
+import org.maplibre.android.style.sources.VectorSource
 import kotlin.coroutines.cancellation.CancellationException
 
 class MapLibreMapController(
@@ -373,6 +378,73 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         mapLibreMap.style?.addSource(GeoJsonSource(id, data))
+        callback(Result.success(Unit))
+    }
+
+    override fun addImageSource(
+        id: String,
+        url: String,
+        coordinates: List<LngLat>,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun addRasterSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        minZoom: Double,
+        maxZoom: Double,
+        tileSize: Long,
+        scheme: TileScheme,
+        attribution: String?,
+        volatile: Boolean,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(RasterSource(id, url))
+        callback(Result.success(Unit))
+    }
+
+    override fun addRasterDemSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        minZoom: Double,
+        maxZoom: Double,
+        tileSize: Long,
+        attribution: String?,
+        encoding: RasterDemEncoding,
+        volatile: Boolean,
+        redFactor: Double,
+        blueFactor: Double,
+        greenFactor: Double,
+        baseShift: Double,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(RasterDemSource(id, url))
+        callback(Result.success(Unit))
+    }
+
+    override fun addVectorSource(
+        id: String,
+        url: String?,
+        tiles: List<String>?,
+        bounds: List<Double>,
+        scheme: TileScheme,
+        minZoom: Double,
+        maxZoom: Double,
+        attribution: String?,
+        volatile: Boolean,
+        sourceLayer: String?,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        // TODO apply other properties
+        mapLibreMap.style?.addSource(VectorSource(id, url))
         callback(Result.success(Unit))
     }
 

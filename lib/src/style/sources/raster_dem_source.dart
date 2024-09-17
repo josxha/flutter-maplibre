@@ -50,7 +50,7 @@ final class RasterDemSource extends Source {
   /// configurable for raster layers.
   ///
   /// Defaults to 512.
-  final double tileSize;
+  final int tileSize;
 
   /// Contains an attribution to be displayed when the map is shown to a user.
   final String? attribution;
@@ -72,7 +72,7 @@ sealed class RasterDemEncoding {
 /// Terrarium format PNG tiles.
 /// See https://aws.amazon.com/es/public-datasets/terrain/ for more info.
 final class RasterDemTerrariumEncoding extends RasterDemEncoding {
-  /// Create a [RasterDemCustomEncoding].
+  /// Create a [RasterDemTerrariumEncoding].
   const RasterDemTerrariumEncoding();
 }
 

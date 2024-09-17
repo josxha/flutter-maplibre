@@ -49,7 +49,7 @@ final class RasterSource extends Source {
   /// configurable for raster layers.
   ///
   /// Defaults to 512.
-  final double tileSize;
+  final int tileSize;
 
   /// Influences the y direction of the tile coordinates. The global-mercator
   /// (aka Spherical Mercator) profile is assumed.

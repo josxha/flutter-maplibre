@@ -46,6 +46,39 @@ class FlutterError (
   val details: Any? = null
 ) : Throwable()
 
+/** Influences the y direction of the tile coordinates. */
+enum class TileScheme(val raw: Int) {
+  /** Slippy map tilenames scheme. */
+  XYZ(0),
+  /** OSGeo spec scheme. */
+  TMS(1);
+
+  companion object {
+    fun ofRaw(raw: Int): TileScheme? {
+      return values().firstOrNull { it.raw == raw }
+    }
+  }
+}
+
+/** The encoding used by this source. Mapbox Terrain RGB is used by default. */
+enum class RasterDemEncoding(val raw: Int) {
+  /** Terrarium format PNG tiles. */
+  TERRARIUM(0),
+  /** Mapbox Terrain RGB tiles. */
+  MAPBOX(1),
+  /**
+   * Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
+   * parameters.
+   */
+  CUSTOM(2);
+
+  companion object {
+    fun ofRaw(raw: Int): RasterDemEncoding? {
+      return values().firstOrNull { it.raw == raw }
+    }
+  }
+}
+
 /**
  * The map options define initial values for the MapLibre map.
  *
@@ -212,26 +245,36 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
       129.toByte() -> {
-        return (readValue(buffer) as? List<Any?>)?.let {
-          MapOptions.fromList(it)
+        return (readValue(buffer) as Long?)?.let {
+          TileScheme.ofRaw(it.toInt())
         }
       }
       130.toByte() -> {
-        return (readValue(buffer) as? List<Any?>)?.let {
-          LngLat.fromList(it)
+        return (readValue(buffer) as Long?)?.let {
+          RasterDemEncoding.ofRaw(it.toInt())
         }
       }
       131.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          ScreenLocation.fromList(it)
+          MapOptions.fromList(it)
         }
       }
       132.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapCamera.fromList(it)
+          LngLat.fromList(it)
         }
       }
       133.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          ScreenLocation.fromList(it)
+        }
+      }
+      134.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
+        }
+      }
+      135.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLatBounds.fromList(it)
         }
@@ -241,24 +284,32 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
     when (value) {
-      is MapOptions -> {
+      is TileScheme -> {
         stream.write(129)
-        writeValue(stream, value.toList())
+        writeValue(stream, value.raw)
       }
-      is LngLat -> {
+      is RasterDemEncoding -> {
         stream.write(130)
-        writeValue(stream, value.toList())
+        writeValue(stream, value.raw)
       }
-      is ScreenLocation -> {
+      is MapOptions -> {
         stream.write(131)
         writeValue(stream, value.toList())
       }
-      is MapCamera -> {
+      is LngLat -> {
         stream.write(132)
         writeValue(stream, value.toList())
       }
-      is LngLatBounds -> {
+      is ScreenLocation -> {
         stream.write(133)
+        writeValue(stream, value.toList())
+      }
+      is MapCamera -> {
+        stream.write(134)
+        writeValue(stream, value.toList())
+      }
+      is LngLatBounds -> {
+        stream.write(135)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -304,6 +355,14 @@ interface MapLibreHostApi {
   fun addSymbolLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
+  /** Add a image source to the map style. */
+  fun addImageSource(id: String, url: String, coordinates: List<LngLat>, callback: (Result<Unit>) -> Unit)
+  /** Add a raster source to the map style. */
+  fun addRasterSource(id: String, url: String?, tiles: List<String>?, bounds: List<Double>, minZoom: Double, maxZoom: Double, tileSize: Long, scheme: TileScheme, attribution: String?, volatile: Boolean, callback: (Result<Unit>) -> Unit)
+  /** Add a raster DEM source to the map style. */
+  fun addRasterDemSource(id: String, url: String?, tiles: List<String>?, bounds: List<Double>, minZoom: Double, maxZoom: Double, tileSize: Long, attribution: String?, encoding: RasterDemEncoding, volatile: Boolean, redFactor: Double, blueFactor: Double, greenFactor: Double, baseShift: Double, callback: (Result<Unit>) -> Unit)
+  /** Add a vector source to the map style. */
+  fun addVectorSource(id: String, url: String?, tiles: List<String>?, bounds: List<Double>, scheme: TileScheme, minZoom: Double, maxZoom: Double, attribution: String?, volatile: Boolean, sourceLayer: String?, callback: (Result<Unit>) -> Unit)
   /**
    * Returns the distance spanned by one pixel at the specified latitude and
    * current zoom level.
@@ -656,6 +715,115 @@ interface MapLibreHostApi {
             val idArg = args[0] as String
             val dataArg = args[1] as String
             api.addGeoJsonSource(idArg, dataArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImageSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val urlArg = args[1] as String
+            val coordinatesArg = args[2] as List<LngLat>
+            api.addImageSource(idArg, urlArg, coordinatesArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val urlArg = args[1] as String?
+            val tilesArg = args[2] as List<String>?
+            val boundsArg = args[3] as List<Double>
+            val minZoomArg = args[4] as Double
+            val maxZoomArg = args[5] as Double
+            val tileSizeArg = args[6] as Long
+            val schemeArg = args[7] as TileScheme
+            val attributionArg = args[8] as String?
+            val volatileArg = args[9] as Boolean
+            api.addRasterSource(idArg, urlArg, tilesArg, boundsArg, minZoomArg, maxZoomArg, tileSizeArg, schemeArg, attributionArg, volatileArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterDemSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val urlArg = args[1] as String?
+            val tilesArg = args[2] as List<String>?
+            val boundsArg = args[3] as List<Double>
+            val minZoomArg = args[4] as Double
+            val maxZoomArg = args[5] as Double
+            val tileSizeArg = args[6] as Long
+            val attributionArg = args[7] as String?
+            val encodingArg = args[8] as RasterDemEncoding
+            val volatileArg = args[9] as Boolean
+            val redFactorArg = args[10] as Double
+            val blueFactorArg = args[11] as Double
+            val greenFactorArg = args[12] as Double
+            val baseShiftArg = args[13] as Double
+            api.addRasterDemSource(idArg, urlArg, tilesArg, boundsArg, minZoomArg, maxZoomArg, tileSizeArg, attributionArg, encodingArg, volatileArg, redFactorArg, blueFactorArg, greenFactorArg, baseShiftArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addVectorSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val urlArg = args[1] as String?
+            val tilesArg = args[2] as List<String>?
+            val boundsArg = args[3] as List<Double>
+            val schemeArg = args[4] as TileScheme
+            val minZoomArg = args[5] as Double
+            val maxZoomArg = args[6] as Double
+            val attributionArg = args[7] as String?
+            val volatileArg = args[8] as Boolean
+            val sourceLayerArg = args[9] as String?
+            api.addVectorSource(idArg, urlArg, tilesArg, boundsArg, schemeArg, minZoomArg, maxZoomArg, attributionArg, volatileArg, sourceLayerArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

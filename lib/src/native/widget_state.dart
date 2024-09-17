@@ -197,16 +197,80 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     await switch (source) {
       GeoJsonSource() =>
         _hostApi.addGeoJsonSource(id: source.id, data: source.data),
-      // TODO: Handle this case.
-      RasterDemSource() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      RasterSource() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      VectorSource() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      ImageSource() => throw UnimplementedError(),
-      // TODO: Handle this case.
-      VideoSource() => throw UnimplementedError(),
+      RasterDemSource() => switch (source.encoding) {
+          final RasterDemCustomEncoding encoding => _hostApi.addRasterDemSource(
+              id: source.id,
+              attribution: source.attribution,
+              bounds: source.bounds,
+              volatile: source.volatile,
+              url: source.url,
+              tiles: source.tiles,
+              minZoom: source.minZoom,
+              maxZoom: source.maxZoom,
+              tileSize: source.tileSize,
+              encoding: pigeon.RasterDemEncoding.custom,
+              greenFactor: encoding.greenFactor,
+              blueFactor: encoding.blueFactor,
+              redFactor: encoding.redFactor,
+              baseShift: encoding.baseShift,
+            ),
+          _ => _hostApi.addRasterDemSource(
+              id: source.id,
+              attribution: source.attribution,
+              bounds: source.bounds,
+              volatile: source.volatile,
+              url: source.url,
+              tiles: source.tiles,
+              minZoom: source.minZoom,
+              maxZoom: source.maxZoom,
+              tileSize: source.tileSize,
+              encoding: switch (source.encoding) {
+                RasterDemTerrariumEncoding() =>
+                  pigeon.RasterDemEncoding.terrarium,
+                RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
+                RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
+              },
+            ),
+        },
+      RasterSource() => _hostApi.addRasterSource(
+          id: source.id,
+          bounds: source.bounds,
+          url: source.url,
+          tiles: source.tiles,
+          minZoom: source.minZoom,
+          maxZoom: source.maxZoom,
+          attribution: source.attribution,
+          tileSize: source.tileSize,
+          volatile: source.volatile,
+          scheme: switch (source.scheme) {
+            TileScheme.xyz => pigeon.TileScheme.xyz,
+            TileScheme.tms => pigeon.TileScheme.tms,
+          },
+        ),
+      VectorSource() => _hostApi.addVectorSource(
+          id: source.id,
+          bounds: source.bounds,
+          attribution: source.attribution,
+          maxZoom: source.maxZoom,
+          minZoom: source.minZoom,
+          scheme: switch (source.scheme) {
+            TileScheme.xyz => pigeon.TileScheme.xyz,
+            TileScheme.tms => pigeon.TileScheme.tms,
+          },
+          sourceLayer: source.sourceLayer,
+          tiles: source.tiles,
+          url: source.url,
+          volatile: source.volatile,
+        ),
+      ImageSource() => _hostApi.addImageSource(
+          id: source.id,
+          url: source.url,
+          coordinates: source.coordinates
+              .map((e) => e.toLngLat())
+              .toList(growable: false),
+        ),
+      VideoSource() =>
+        throw UnimplementedError('Video source is only supported on web.'),
     };
   }
 

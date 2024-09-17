@@ -68,6 +68,25 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 
+/// Influences the y direction of the tile coordinates.
+enum TileScheme: Int {
+  /// Slippy map tilenames scheme.
+  case xyz = 0
+  /// OSGeo spec scheme.
+  case tms = 1
+}
+
+/// The encoding used by this source. Mapbox Terrain RGB is used by default.
+enum RasterDemEncoding: Int {
+  /// Terrarium format PNG tiles.
+  case terrarium = 0
+  /// Mapbox Terrain RGB tiles.
+  case mapbox = 1
+  /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
+  /// parameters.
+  case custom = 2
+}
+
 /// The map options define initial values for the MapLibre map.
 ///
 /// Generated class from Pigeon that represents data sent in messages.
@@ -254,14 +273,26 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      return MapOptions.fromList(self.readValue() as! [Any?])
+      let enumResultAsInt: Int? = nilOrValue(self.readValue() as! Int?)
+      if let enumResultAsInt = enumResultAsInt {
+        return TileScheme(rawValue: enumResultAsInt)
+      }
+      return nil
     case 130:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      let enumResultAsInt: Int? = nilOrValue(self.readValue() as! Int?)
+      if let enumResultAsInt = enumResultAsInt {
+        return RasterDemEncoding(rawValue: enumResultAsInt)
+      }
+      return nil
     case 131:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return MapOptions.fromList(self.readValue() as! [Any?])
     case 132:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     case 133:
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
+    case 134:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 135:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -271,20 +302,26 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
 
 private class PigeonPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? MapOptions {
+    if let value = value as? TileScheme {
       super.writeByte(129)
-      super.writeValue(value.toList())
-    } else if let value = value as? LngLat {
+      super.writeValue(value.rawValue)
+    } else if let value = value as? RasterDemEncoding {
       super.writeByte(130)
-      super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+      super.writeValue(value.rawValue)
+    } else if let value = value as? MapOptions {
       super.writeByte(131)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? LngLat {
       super.writeByte(132)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? ScreenLocation {
       super.writeByte(133)
+      super.writeValue(value.toList())
+    } else if let value = value as? MapCamera {
+      super.writeByte(134)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(135)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -342,6 +379,14 @@ protocol MapLibreHostApi {
   func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a image source to the map style.
+  func addImageSource(id: String, url: String, coordinates: [LngLat], completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a raster source to the map style.
+  func addRasterSource(id: String, url: String?, tiles: [String]?, bounds: [Double], minZoom: Double, maxZoom: Double, tileSize: Int64, scheme: TileScheme, attribution: String?, volatile: Bool, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a raster DEM source to the map style.
+  func addRasterDemSource(id: String, url: String?, tiles: [String]?, bounds: [Double], minZoom: Double, maxZoom: Double, tileSize: Int64, attribution: String?, encoding: RasterDemEncoding, volatile: Bool, redFactor: Double, blueFactor: Double, greenFactor: Double, baseShift: Double, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add a vector source to the map style.
+  func addVectorSource(id: String, url: String?, tiles: [String]?, bounds: [Double], scheme: TileScheme, minZoom: Double, maxZoom: Double, attribution: String?, volatile: Bool, sourceLayer: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   func getMetersPerPixelAtLatitude(latitude: Double) throws -> Double
@@ -682,6 +727,111 @@ class MapLibreHostApiSetup {
       }
     } else {
       addGeoJsonSourceChannel.setMessageHandler(nil)
+    }
+    /// Add a image source to the map style.
+    let addImageSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImageSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addImageSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let urlArg = args[1] as! String
+        let coordinatesArg = args[2] as! [LngLat]
+        api.addImageSource(id: idArg, url: urlArg, coordinates: coordinatesArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addImageSourceChannel.setMessageHandler(nil)
+    }
+    /// Add a raster source to the map style.
+    let addRasterSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addRasterSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let urlArg: String? = nilOrValue(args[1])
+        let tilesArg: [String]? = nilOrValue(args[2])
+        let boundsArg = args[3] as! [Double]
+        let minZoomArg = args[4] as! Double
+        let maxZoomArg = args[5] as! Double
+        let tileSizeArg = args[6] as! Int64
+        let schemeArg = args[7] as! TileScheme
+        let attributionArg: String? = nilOrValue(args[8])
+        let volatileArg = args[9] as! Bool
+        api.addRasterSource(id: idArg, url: urlArg, tiles: tilesArg, bounds: boundsArg, minZoom: minZoomArg, maxZoom: maxZoomArg, tileSize: tileSizeArg, scheme: schemeArg, attribution: attributionArg, volatile: volatileArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addRasterSourceChannel.setMessageHandler(nil)
+    }
+    /// Add a raster DEM source to the map style.
+    let addRasterDemSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterDemSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addRasterDemSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let urlArg: String? = nilOrValue(args[1])
+        let tilesArg: [String]? = nilOrValue(args[2])
+        let boundsArg = args[3] as! [Double]
+        let minZoomArg = args[4] as! Double
+        let maxZoomArg = args[5] as! Double
+        let tileSizeArg = args[6] as! Int64
+        let attributionArg: String? = nilOrValue(args[7])
+        let encodingArg = args[8] as! RasterDemEncoding
+        let volatileArg = args[9] as! Bool
+        let redFactorArg = args[10] as! Double
+        let blueFactorArg = args[11] as! Double
+        let greenFactorArg = args[12] as! Double
+        let baseShiftArg = args[13] as! Double
+        api.addRasterDemSource(id: idArg, url: urlArg, tiles: tilesArg, bounds: boundsArg, minZoom: minZoomArg, maxZoom: maxZoomArg, tileSize: tileSizeArg, attribution: attributionArg, encoding: encodingArg, volatile: volatileArg, redFactor: redFactorArg, blueFactor: blueFactorArg, greenFactor: greenFactorArg, baseShift: baseShiftArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addRasterDemSourceChannel.setMessageHandler(nil)
+    }
+    /// Add a vector source to the map style.
+    let addVectorSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addVectorSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addVectorSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let urlArg: String? = nilOrValue(args[1])
+        let tilesArg: [String]? = nilOrValue(args[2])
+        let boundsArg = args[3] as! [Double]
+        let schemeArg = args[4] as! TileScheme
+        let minZoomArg = args[5] as! Double
+        let maxZoomArg = args[6] as! Double
+        let attributionArg: String? = nilOrValue(args[7])
+        let volatileArg = args[8] as! Bool
+        let sourceLayerArg: String? = nilOrValue(args[9])
+        api.addVectorSource(id: idArg, url: urlArg, tiles: tilesArg, bounds: boundsArg, scheme: schemeArg, minZoom: minZoomArg, maxZoom: maxZoomArg, attribution: attributionArg, volatile: volatileArg, sourceLayer: sourceLayerArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addVectorSourceChannel.setMessageHandler(nil)
     }
     /// Returns the distance spanned by one pixel at the specified latitude and
     /// current zoom level.
