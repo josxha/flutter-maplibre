@@ -37,6 +37,7 @@ import org.maplibre.android.style.layers.LineLayer
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
+import org.maplibre.android.style.sources.GeoJsonOptions
 import org.maplibre.android.style.sources.GeoJsonSource
 import org.maplibre.android.style.sources.ImageSource
 import org.maplibre.android.style.sources.RasterDemSource
@@ -394,12 +395,13 @@ class MapLibreMapController(
         data: String,
         callback: (Result<Unit>) -> Unit
     ) {
-        if (data.first() == '{') {
-            mapLibreMap.style?.addSource(GeoJsonSource(id, data))
+        val options = GeoJsonOptions()
+        val source = if (data.first() == '{') {
+            GeoJsonSource(id, data, options)
         } else {
-            val uri = URI(data)
-            mapLibreMap.style?.addSource(GeoJsonSource(id, uri))
+            GeoJsonSource(id, URI(data), options)
         }
+        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 
