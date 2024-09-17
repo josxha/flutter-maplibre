@@ -44,6 +44,7 @@ import org.maplibre.android.style.sources.GeoJsonSource
 import org.maplibre.android.style.sources.ImageSource
 import org.maplibre.android.style.sources.RasterDemSource
 import org.maplibre.android.style.sources.RasterSource
+import org.maplibre.android.style.sources.TileSet
 import org.maplibre.android.style.sources.VectorSource
 import java.net.URI
 import kotlin.coroutines.cancellation.CancellationException
@@ -324,7 +325,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit
     ) {
         val layer = RasterLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+//        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -426,7 +427,15 @@ class MapLibreMapController(
         volatile: Boolean,
         callback: (Result<Unit>) -> Unit
     ) {
-        val source = RasterSource(id, url, tileSize.toInt())
+        val source = if (url == null) {
+            // TODO improve this
+            val tileSet = TileSet("{}", tiles!!.first())
+            tileSet.maxZoom = maxZoom.toFloat()
+            tileSet.minZoom = minZoom.toFloat()
+            RasterSource(id, tileSet, tileSize.toInt())
+        } else {
+            RasterSource(id, url, tileSize.toInt())
+        }
         source.isVolatile = volatile
         // TODO apply other properties
         mapLibreMap.style?.addSource(source)

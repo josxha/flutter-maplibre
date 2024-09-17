@@ -27,7 +27,7 @@ class _LayersRasterPageState extends State<LayersRasterPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Raster Layer')),
       body: MapLibreMap(
-        options: MapOptions(center: Position(-120, 50), zoom: 2),
+        options: MapOptions(center: Position(9, 48), zoom: 7),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
