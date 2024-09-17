@@ -2,18 +2,19 @@
 
 ### Features
 
-- add `duration` parameter to `flyTo()`
+- Add `duration` parameter to `flyTo()`.
 - `flyTo()` returns after the animation completes or throws an exception if it
-  has been cancelled
+  has been cancelled.
+- Add sources and layers to the map programmatically.
 
 ### Bug fixes
 
-- fix `jumpTo()` never returns
+- Fix `jumpTo()` never returns
 
 ## 0.0.1+1
 
-- fix urls to website and embedded screenshots
-- remove unused `plugin_platform_interface` dependency
+- Fix urls to website and embedded screenshots
+- Remove unused `plugin_platform_interface` dependency
 
 ## 0.0.1
 
