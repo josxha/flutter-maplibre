@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
@@ -27,17 +26,9 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
           if (kIsWeb) {
             // This kind of Marker is only supported on web
             final _ = await _controller.addMarker(
-              Marker(point: Position(9.17, 47.68)),
+              Marker(point: Position(9, 47)),
             );
           }
-          final geojson = await rootBundle
-              .loadString('assets/geojson/lake-constance.geojson');
-          await _controller.addSource(
-            GeoJsonSource(id: 'LakeConstance', data: geojson),
-          );
-          await _controller.addLayer(
-            const FillLayer(id: 'LakeConstance', sourceId: 'LakeConstance'),
-          );
         },
       ),
     );

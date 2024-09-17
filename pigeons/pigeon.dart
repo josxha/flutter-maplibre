@@ -61,17 +61,163 @@ abstract interface class MapLibreHostApi {
 
   /// Add a fill layer to the map style.
   @async
-  void addFillLayer({required String id, required String sourceId});
+  void addFillLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
 
   /// Add a circle layer to the map style.
   @async
-  void addCircleLayer({required String id, required String sourceId});
+  void addCircleLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a background layer to the map style.
+  @async
+  void addBackgroundLayer({
+    required String id,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a fill extrusion layer to the map style.
+  @async
+  void addFillExtrusionLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a heatmap layer to the map style.
+  @async
+  void addHeatmapLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a hillshade layer to the map style.
+  @async
+  void addHillshadeLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a line layer to the map style.
+  @async
+  void addLineLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a raster layer to the map style.
+  @async
+  void addRasterLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Add a symbol layer to the map style.
+  @async
+  void addSymbolLayer({
+    required String id,
+    required String sourceId,
+    required Map<String, Object> layout,
+    required Map<String, Object> paint,
+    String? belowLayerId,
+  });
+
+  /// Removes the layer with the given ID from the map's style.
+  @async
+  void removeLayer(String id);
+
+  /// Removes the source with the given ID from the map's style.
+  @async
+  void removeSource(String id);
 
   /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({
     required String id,
     required String data,
+  });
+
+  /// Add a image source to the map style.
+  @async
+  void addImageSource({
+    required String id,
+    required String url,
+    required List<LngLat> coordinates,
+  });
+
+  /// Add a raster source to the map style.
+  @async
+  void addRasterSource({
+    required String id,
+    required String? url,
+    required List<String>? tiles,
+    required List<double> bounds,
+    required double minZoom,
+    required double maxZoom,
+    required int tileSize,
+    required TileScheme scheme,
+    required String? attribution,
+    required bool volatile,
+  });
+
+  /// Add a raster DEM source to the map style.
+  @async
+  void addRasterDemSource({
+    required String id,
+    required String? url,
+    required List<String>? tiles,
+    required List<double> bounds,
+    required double minZoom,
+    required double maxZoom,
+    required int tileSize,
+    required String? attribution,
+    required RasterDemEncoding encoding,
+    required bool volatile,
+    double redFactor = 1,
+    double blueFactor = 1,
+    double greenFactor = 1,
+    double baseShift = 0,
+  });
+
+  /// Add a vector source to the map style.
+  @async
+  void addVectorSource({
+    required String id,
+    required String? url,
+    required List<String>? tiles,
+    required List<double> bounds,
+    required TileScheme scheme,
+    required double minZoom,
+    required double maxZoom,
+    required String? attribution,
+    required bool volatile,
+    required String? sourceLayer,
   });
 
   /// Returns the distance spanned by one pixel at the specified latitude and
@@ -185,4 +331,26 @@ class LngLatBounds {
   final double longitudeEast;
   final double latitudeSouth;
   final double latitudeNorth;
+}
+
+/// Influences the y direction of the tile coordinates.
+enum TileScheme {
+  /// Slippy map tilenames scheme.
+  xyz,
+
+  /// OSGeo spec scheme.
+  tms;
+}
+
+/// The encoding used by this source. Mapbox Terrain RGB is used by default.
+enum RasterDemEncoding {
+  /// Terrarium format PNG tiles.
+  terrarium,
+
+  /// Mapbox Terrain RGB tiles.
+  mapbox,
+
+  /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
+  /// parameters.
+  custom;
 }

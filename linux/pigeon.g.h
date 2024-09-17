@@ -9,6 +9,38 @@
 G_BEGIN_DECLS
 
 /**
+ * MaplibreTileScheme:
+ * MAPLIBRE_TILE_SCHEME_XYZ:
+ * Slippy map tilenames scheme.
+ * MAPLIBRE_TILE_SCHEME_TMS:
+ * OSGeo spec scheme.
+ *
+ * Influences the y direction of the tile coordinates.
+ */
+typedef enum {
+  MAPLIBRE_TILE_SCHEME_XYZ = 0,
+  MAPLIBRE_TILE_SCHEME_TMS = 1
+} MaplibreTileScheme;
+
+/**
+ * MaplibreRasterDemEncoding:
+ * MAPLIBRE_RASTER_DEM_ENCODING_TERRARIUM:
+ * Terrarium format PNG tiles.
+ * MAPLIBRE_RASTER_DEM_ENCODING_MAPBOX:
+ * Mapbox Terrain RGB tiles.
+ * MAPLIBRE_RASTER_DEM_ENCODING_CUSTOM:
+ * Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
+ * parameters.
+ *
+ * The encoding used by this source. Mapbox Terrain RGB is used by default.
+ */
+typedef enum {
+  MAPLIBRE_RASTER_DEM_ENCODING_TERRARIUM = 0,
+  MAPLIBRE_RASTER_DEM_ENCODING_MAPBOX = 1,
+  MAPLIBRE_RASTER_DEM_ENCODING_CUSTOM = 2
+} MaplibreRasterDemEncoding;
+
+/**
  * MaplibreMapOptions:
  *
  * The map options define initial values for the MapLibre map.
@@ -339,9 +371,22 @@ typedef struct {
   void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_lng_lat)(double x, double y, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*add_fill_layer)(const gchar* id, const gchar* source_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*add_circle_layer)(const gchar* id, const gchar* source_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_fill_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_circle_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_background_layer)(const gchar* id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_fill_extrusion_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_heatmap_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_hillshade_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_line_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_symbol_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_layer)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_source)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_image_source)(const gchar* id, const gchar* url, FlValue* coordinates, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, MaplibreTileScheme scheme, const gchar* attribution, gboolean volatile, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_dem_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, const gchar* attribution, MaplibreRasterDemEncoding encoding, gboolean volatile, double red_factor, double blue_factor, double green_factor, double base_shift, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_vector_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, MaplibreTileScheme scheme, double min_zoom, double max_zoom, const gchar* attribution, gboolean volatile, const gchar* source_layer, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* (*get_meters_per_pixel_at_latitude)(double latitude, gpointer user_data);
 } MaplibreMapLibreHostApiVTable;
 
@@ -525,6 +570,177 @@ void maplibre_map_libre_host_api_respond_add_circle_layer(MaplibreMapLibreHostAp
 void maplibre_map_libre_host_api_respond_error_add_circle_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
+ * maplibre_map_libre_host_api_respond_add_background_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addBackgroundLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_background_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_background_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addBackgroundLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_background_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_fill_extrusion_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addFillExtrusionLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_fill_extrusion_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_fill_extrusion_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addFillExtrusionLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_fill_extrusion_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_heatmap_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addHeatmapLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_heatmap_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_heatmap_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addHeatmapLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_heatmap_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_hillshade_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addHillshadeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_hillshade_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_hillshade_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addHillshadeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_hillshade_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_line_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addLineLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_line_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_line_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addLineLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_line_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_symbol_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addSymbolLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_symbol_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_symbol_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addSymbolLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_symbol_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
  * maplibre_map_libre_host_api_respond_add_geo_json_source:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  *
@@ -542,6 +758,82 @@ void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHos
  * Responds with an error to MapLibreHostApi.addGeoJsonSource. 
  */
 void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_image_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addImageSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_image_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_image_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addImageSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_image_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_dem_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterDemSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_dem_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_dem_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterDemSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_dem_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_vector_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addVectorSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_vector_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_vector_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addVectorSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_vector_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
 

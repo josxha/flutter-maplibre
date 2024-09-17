@@ -17,7 +17,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   static int _counter = 0;
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
-  late interop.Map _map;
+  late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _moveCompleter;
 
   MapOptions get _options => widget.options;
@@ -33,7 +33,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ..style.height = '100%'
           ..style.width = '100%';
 
-        _map = interop.Map(
+        _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
             style: _options.style,
@@ -259,32 +259,158 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Future<void> addSource(Source source) async {
     switch (source) {
       case GeoJsonSource():
-        final data = parse(source.data);
+        JSAny data;
+        if (source.data[0] == '{') {
+          data = parse(source.data);
+        } else {
+          data = source.data.jsify()!;
+        }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+          interop.SourceSpecification.geoJson(
+            type: 'geojson',
+            data: data,
+          ),
+        );
+      case RasterDemSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.rasterDem(
+            type: 'raster-dem',
+            tileSize: source.tileSize,
+            attribution: source.attribution,
+            url: source.url,
+          ),
+        );
+      case RasterSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.raster(
+            type: 'raster',
+            attribution: source.attribution,
+            tileSize: source.tileSize,
+            tiles: source.tiles.jsify(),
+          ),
+        );
+      case VectorSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.vector(type: 'vector'),
+        );
+      case ImageSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.image(type: 'image'),
+        );
+      case VideoSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.video(type: 'video'),
         );
     }
   }
 
   @override
-  Future<void> addLayer(Layer layer) async {
+  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     switch (layer) {
       case FillLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'fill',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
+          belowLayerId,
         );
       case CircleLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'circle',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
+          belowLayerId,
+        );
+      case BackgroundLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'background',
+            source: null,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case FillExtrusionLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'fill-extrusion',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case HeatmapLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'heatmap',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case HillshadeLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'hillshade',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case LineLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'line',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case RasterLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'raster',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case SymbolLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'symbol',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
         );
     }
   }
@@ -316,4 +442,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       latitudeNorth: bounds.getNorth().toDouble(),
     );
   }
+
+  @override
+  Future<void> removeLayer(String id) async => _map.removeLayer(id);
+
+  @override
+  Future<void> removeSource(String id) async => _map.removeSource(id);
 }

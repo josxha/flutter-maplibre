@@ -10,7 +10,7 @@ extension type Marker._(JSObject _) implements JSObject {
   external Marker setLngLat(LngLat lngLat);
 
   /// Add the marker to a MapLibre map.
-  external Marker addTo(Map map);
+  external Marker addTo(JsMap map);
 }
 
 /// The anonymous option class for a [Marker].

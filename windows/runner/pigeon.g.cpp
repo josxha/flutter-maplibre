@@ -413,18 +413,28 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
   flutter::ByteStreamReader* stream) const {
   switch (type) {
     case 129: {
-        return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        const auto& encodable_enum_arg = ReadValue(stream);
+        const int64_t enum_arg_value = encodable_enum_arg.IsNull() ? 0 : encodable_enum_arg.LongValue();
+        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<TileScheme>(enum_arg_value));
       }
     case 130: {
-        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        const auto& encodable_enum_arg = ReadValue(stream);
+        const int64_t enum_arg_value = encodable_enum_arg.IsNull() ? 0 : encodable_enum_arg.LongValue();
+        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<RasterDemEncoding>(enum_arg_value));
       }
     case 131: {
-        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 132: {
-        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 133: {
+        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 134: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 135: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -436,28 +446,38 @@ void PigeonInternalCodecSerializer::WriteValue(
   const EncodableValue& value,
   flutter::ByteStreamWriter* stream) const {
   if (const CustomEncodableValue* custom_value = std::get_if<CustomEncodableValue>(&value)) {
-    if (custom_value->type() == typeid(MapOptions)) {
+    if (custom_value->type() == typeid(TileScheme)) {
       stream->WriteByte(129);
+      WriteValue(EncodableValue(static_cast<int>(std::any_cast<TileScheme>(*custom_value))), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(RasterDemEncoding)) {
+      stream->WriteByte(130);
+      WriteValue(EncodableValue(static_cast<int>(std::any_cast<RasterDemEncoding>(*custom_value))), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(MapOptions)) {
+      stream->WriteByte(131);
       WriteValue(EncodableValue(std::any_cast<MapOptions>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLat)) {
-      stream->WriteByte(130);
+      stream->WriteByte(132);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(ScreenLocation)) {
-      stream->WriteByte(131);
+      stream->WriteByte(133);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(MapCamera)) {
-      stream->WriteByte(132);
+      stream->WriteByte(134);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLatBounds)) {
-      stream->WriteByte(133);
+      stream->WriteByte(135);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }
@@ -682,7 +702,21 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
-          api->AddFillLayer(id_arg, source_id_arg, [reply](std::optional<FlutterError>&& output) {
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddFillLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
@@ -717,7 +751,416 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
-          api->AddCircleLayer(id_arg, source_id_arg, [reply](std::optional<FlutterError>&& output) {
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddCircleLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_layout_arg = args.at(1);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(2);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(3);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddBackgroundLayer(id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddFillExtrusionLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddHeatmapLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddHillshadeLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddLineLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddRasterLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_source_id_arg = args.at(1);
+          if (encodable_source_id_arg.IsNull()) {
+            reply(WrapError("source_id_arg unexpectedly null."));
+            return;
+          }
+          const auto& source_id_arg = std::get<std::string>(encodable_source_id_arg);
+          const auto& encodable_layout_arg = args.at(2);
+          if (encodable_layout_arg.IsNull()) {
+            reply(WrapError("layout_arg unexpectedly null."));
+            return;
+          }
+          const auto& layout_arg = std::get<EncodableMap>(encodable_layout_arg);
+          const auto& encodable_paint_arg = args.at(3);
+          if (encodable_paint_arg.IsNull()) {
+            reply(WrapError("paint_arg unexpectedly null."));
+            return;
+          }
+          const auto& paint_arg = std::get<EncodableMap>(encodable_paint_arg);
+          const auto& encodable_below_layer_id_arg = args.at(4);
+          const auto* below_layer_id_arg = std::get_if<std::string>(&encodable_below_layer_id_arg);
+          api->AddSymbolLayer(id_arg, source_id_arg, layout_arg, paint_arg, below_layer_id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeLayer" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          api->RemoveLayer(id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeSource" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          api->RemoveSource(id_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
@@ -753,6 +1196,280 @@ void MapLibreHostApi::SetUp(
           }
           const auto& data_arg = std::get<std::string>(encodable_data_arg);
           api->AddGeoJsonSource(id_arg, data_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImageSource" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_url_arg = args.at(1);
+          if (encodable_url_arg.IsNull()) {
+            reply(WrapError("url_arg unexpectedly null."));
+            return;
+          }
+          const auto& url_arg = std::get<std::string>(encodable_url_arg);
+          const auto& encodable_coordinates_arg = args.at(2);
+          if (encodable_coordinates_arg.IsNull()) {
+            reply(WrapError("coordinates_arg unexpectedly null."));
+            return;
+          }
+          const auto& coordinates_arg = std::get<EncodableList>(encodable_coordinates_arg);
+          api->AddImageSource(id_arg, url_arg, coordinates_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterSource" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_url_arg = args.at(1);
+          const auto* url_arg = std::get_if<std::string>(&encodable_url_arg);
+          const auto& encodable_tiles_arg = args.at(2);
+          const auto* tiles_arg = std::get_if<EncodableList>(&encodable_tiles_arg);
+          const auto& encodable_bounds_arg = args.at(3);
+          if (encodable_bounds_arg.IsNull()) {
+            reply(WrapError("bounds_arg unexpectedly null."));
+            return;
+          }
+          const auto& bounds_arg = std::get<EncodableList>(encodable_bounds_arg);
+          const auto& encodable_min_zoom_arg = args.at(4);
+          if (encodable_min_zoom_arg.IsNull()) {
+            reply(WrapError("min_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& min_zoom_arg = std::get<double>(encodable_min_zoom_arg);
+          const auto& encodable_max_zoom_arg = args.at(5);
+          if (encodable_max_zoom_arg.IsNull()) {
+            reply(WrapError("max_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& max_zoom_arg = std::get<double>(encodable_max_zoom_arg);
+          const auto& encodable_tile_size_arg = args.at(6);
+          if (encodable_tile_size_arg.IsNull()) {
+            reply(WrapError("tile_size_arg unexpectedly null."));
+            return;
+          }
+          const int64_t tile_size_arg = encodable_tile_size_arg.LongValue();
+          const auto& encodable_scheme_arg = args.at(7);
+          if (encodable_scheme_arg.IsNull()) {
+            reply(WrapError("scheme_arg unexpectedly null."));
+            return;
+          }
+          const auto& scheme_arg = std::any_cast<const TileScheme&>(std::get<CustomEncodableValue>(encodable_scheme_arg));
+          const auto& encodable_attribution_arg = args.at(8);
+          const auto* attribution_arg = std::get_if<std::string>(&encodable_attribution_arg);
+          const auto& encodable_volatile_arg = args.at(9);
+          if (encodable_volatile_arg.IsNull()) {
+            reply(WrapError("volatile_arg unexpectedly null."));
+            return;
+          }
+          const auto& volatile_arg = std::get<bool>(encodable_volatile_arg);
+          api->AddRasterSource(id_arg, url_arg, tiles_arg, bounds_arg, min_zoom_arg, max_zoom_arg, tile_size_arg, scheme_arg, attribution_arg, volatile_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterDemSource" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_url_arg = args.at(1);
+          const auto* url_arg = std::get_if<std::string>(&encodable_url_arg);
+          const auto& encodable_tiles_arg = args.at(2);
+          const auto* tiles_arg = std::get_if<EncodableList>(&encodable_tiles_arg);
+          const auto& encodable_bounds_arg = args.at(3);
+          if (encodable_bounds_arg.IsNull()) {
+            reply(WrapError("bounds_arg unexpectedly null."));
+            return;
+          }
+          const auto& bounds_arg = std::get<EncodableList>(encodable_bounds_arg);
+          const auto& encodable_min_zoom_arg = args.at(4);
+          if (encodable_min_zoom_arg.IsNull()) {
+            reply(WrapError("min_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& min_zoom_arg = std::get<double>(encodable_min_zoom_arg);
+          const auto& encodable_max_zoom_arg = args.at(5);
+          if (encodable_max_zoom_arg.IsNull()) {
+            reply(WrapError("max_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& max_zoom_arg = std::get<double>(encodable_max_zoom_arg);
+          const auto& encodable_tile_size_arg = args.at(6);
+          if (encodable_tile_size_arg.IsNull()) {
+            reply(WrapError("tile_size_arg unexpectedly null."));
+            return;
+          }
+          const int64_t tile_size_arg = encodable_tile_size_arg.LongValue();
+          const auto& encodable_attribution_arg = args.at(7);
+          const auto* attribution_arg = std::get_if<std::string>(&encodable_attribution_arg);
+          const auto& encodable_encoding_arg = args.at(8);
+          if (encodable_encoding_arg.IsNull()) {
+            reply(WrapError("encoding_arg unexpectedly null."));
+            return;
+          }
+          const auto& encoding_arg = std::any_cast<const RasterDemEncoding&>(std::get<CustomEncodableValue>(encodable_encoding_arg));
+          const auto& encodable_volatile_arg = args.at(9);
+          if (encodable_volatile_arg.IsNull()) {
+            reply(WrapError("volatile_arg unexpectedly null."));
+            return;
+          }
+          const auto& volatile_arg = std::get<bool>(encodable_volatile_arg);
+          const auto& encodable_red_factor_arg = args.at(10);
+          if (encodable_red_factor_arg.IsNull()) {
+            reply(WrapError("red_factor_arg unexpectedly null."));
+            return;
+          }
+          const auto& red_factor_arg = std::get<double>(encodable_red_factor_arg);
+          const auto& encodable_blue_factor_arg = args.at(11);
+          if (encodable_blue_factor_arg.IsNull()) {
+            reply(WrapError("blue_factor_arg unexpectedly null."));
+            return;
+          }
+          const auto& blue_factor_arg = std::get<double>(encodable_blue_factor_arg);
+          const auto& encodable_green_factor_arg = args.at(12);
+          if (encodable_green_factor_arg.IsNull()) {
+            reply(WrapError("green_factor_arg unexpectedly null."));
+            return;
+          }
+          const auto& green_factor_arg = std::get<double>(encodable_green_factor_arg);
+          const auto& encodable_base_shift_arg = args.at(13);
+          if (encodable_base_shift_arg.IsNull()) {
+            reply(WrapError("base_shift_arg unexpectedly null."));
+            return;
+          }
+          const auto& base_shift_arg = std::get<double>(encodable_base_shift_arg);
+          api->AddRasterDemSource(id_arg, url_arg, tiles_arg, bounds_arg, min_zoom_arg, max_zoom_arg, tile_size_arg, attribution_arg, encoding_arg, volatile_arg, red_factor_arg, blue_factor_arg, green_factor_arg, base_shift_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addVectorSource" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_url_arg = args.at(1);
+          const auto* url_arg = std::get_if<std::string>(&encodable_url_arg);
+          const auto& encodable_tiles_arg = args.at(2);
+          const auto* tiles_arg = std::get_if<EncodableList>(&encodable_tiles_arg);
+          const auto& encodable_bounds_arg = args.at(3);
+          if (encodable_bounds_arg.IsNull()) {
+            reply(WrapError("bounds_arg unexpectedly null."));
+            return;
+          }
+          const auto& bounds_arg = std::get<EncodableList>(encodable_bounds_arg);
+          const auto& encodable_scheme_arg = args.at(4);
+          if (encodable_scheme_arg.IsNull()) {
+            reply(WrapError("scheme_arg unexpectedly null."));
+            return;
+          }
+          const auto& scheme_arg = std::any_cast<const TileScheme&>(std::get<CustomEncodableValue>(encodable_scheme_arg));
+          const auto& encodable_min_zoom_arg = args.at(5);
+          if (encodable_min_zoom_arg.IsNull()) {
+            reply(WrapError("min_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& min_zoom_arg = std::get<double>(encodable_min_zoom_arg);
+          const auto& encodable_max_zoom_arg = args.at(6);
+          if (encodable_max_zoom_arg.IsNull()) {
+            reply(WrapError("max_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& max_zoom_arg = std::get<double>(encodable_max_zoom_arg);
+          const auto& encodable_attribution_arg = args.at(7);
+          const auto* attribution_arg = std::get_if<std::string>(&encodable_attribution_arg);
+          const auto& encodable_volatile_arg = args.at(8);
+          if (encodable_volatile_arg.IsNull()) {
+            reply(WrapError("volatile_arg unexpectedly null."));
+            return;
+          }
+          const auto& volatile_arg = std::get<bool>(encodable_volatile_arg);
+          const auto& encodable_source_layer_arg = args.at(9);
+          const auto* source_layer_arg = std::get_if<std::string>(&encodable_source_layer_arg);
+          api->AddVectorSource(id_arg, url_arg, tiles_arg, bounds_arg, scheme_arg, min_zoom_arg, max_zoom_arg, attribution_arg, volatile_arg, source_layer_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;

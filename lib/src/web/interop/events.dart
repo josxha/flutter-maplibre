@@ -4,7 +4,7 @@ part of 'interop.dart';
 @JS()
 extension type MapLibreEvent<T extends JSObject>._(JSObject _)
     implements JSObject {
-  external Map target;
+  external JsMap target;
   external JSString type;
   external T? originalEvent;
 }
