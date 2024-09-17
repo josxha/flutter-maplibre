@@ -11,6 +11,7 @@ import ScreenLocation
 import TileScheme
 import android.content.Context
 import android.graphics.PointF
+import android.net.Uri
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -20,6 +21,7 @@ import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.geometry.LatLngQuad
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
@@ -36,9 +38,13 @@ import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
 import org.maplibre.android.style.sources.GeoJsonSource
+import org.maplibre.android.style.sources.ImageSource
 import org.maplibre.android.style.sources.RasterDemSource
 import org.maplibre.android.style.sources.RasterSource
+import org.maplibre.android.style.sources.TileSet
 import org.maplibre.android.style.sources.VectorSource
+import java.net.URI
+import java.net.URL
 import kotlin.coroutines.cancellation.CancellationException
 
 class MapLibreMapController(
@@ -387,7 +393,15 @@ class MapLibreMapController(
         coordinates: List<LngLat>,
         callback: (Result<Unit>) -> Unit
     ) {
-        TODO("Not yet implemented")
+        val quad = LatLngQuad(
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng),
+            LatLng(coordinates[0].lat, coordinates[0].lng)
+        )
+        val source = ImageSource(id, quad, URI(url))
+        mapLibreMap.style?.addSource(source)
+        callback(Result.success(Unit))
     }
 
     override fun addRasterSource(
@@ -403,8 +417,10 @@ class MapLibreMapController(
         volatile: Boolean,
         callback: (Result<Unit>) -> Unit
     ) {
+        val source = RasterSource(id, url, tileSize.toInt())
+        source.isVolatile = volatile
         // TODO apply other properties
-        mapLibreMap.style?.addSource(RasterSource(id, url))
+        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 
@@ -425,8 +441,10 @@ class MapLibreMapController(
         baseShift: Double,
         callback: (Result<Unit>) -> Unit
     ) {
+        val source = RasterDemSource(id, url, tileSize.toInt())
+        source.isVolatile = volatile
         // TODO apply other properties
-        mapLibreMap.style?.addSource(RasterDemSource(id, url))
+        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 
@@ -443,8 +461,10 @@ class MapLibreMapController(
         sourceLayer: String?,
         callback: (Result<Unit>) -> Unit
     ) {
+        val source = VectorSource(id, url)
+        source.isVolatile = volatile
         // TODO apply other properties
-        mapLibreMap.style?.addSource(VectorSource(id, url))
+        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 
