@@ -33,7 +33,7 @@ lack of platform views of these platforms.
 | UI Controls for web | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
 | Offline             | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Events              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Snapshotter         | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Snapshotter         | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Annotations         | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 
 ### Gestures and other Callbacks
