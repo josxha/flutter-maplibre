@@ -833,7 +833,7 @@ class MapLibreHostApi {
 
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
-  Future<dynamic> loadImage(String url) async {
+  Future<Uint8List> loadImage(String url) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -858,12 +858,12 @@ class MapLibreHostApi {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as dynamic?)!;
+      return (pigeonVar_replyList[0] as Uint8List?)!;
     }
   }
 
   /// Add an image to the map.
-  Future<void> addImage(String id, dynamic data) async {
+  Future<void> addImage(String id, Uint8List bytes) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -873,7 +873,7 @@ class MapLibreHostApi {
       binaryMessenger: pigeonVar_binaryMessenger,
     );
     final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[id, data]) as List<Object?>?;
+        await pigeonVar_channel.send(<Object?>[id, bytes]) as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {

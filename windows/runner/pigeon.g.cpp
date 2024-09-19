@@ -1178,6 +1178,99 @@ void MapLibreHostApi::SetUp(
     }
   }
   {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_url_arg = args.at(0);
+          if (encodable_url_arg.IsNull()) {
+            reply(WrapError("url_arg unexpectedly null."));
+            return;
+          }
+          const auto& url_arg = std::get<std::string>(encodable_url_arg);
+          api->LoadImage(url_arg, [reply](ErrorOr<std::vector<uint8_t>>&& output) {
+            if (output.has_error()) {
+              reply(WrapError(output.error()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          const auto& encodable_bytes_arg = args.at(1);
+          if (encodable_bytes_arg.IsNull()) {
+            reply(WrapError("bytes_arg unexpectedly null."));
+            return;
+          }
+          const auto& bytes_arg = std::get<std::vector<uint8_t>>(encodable_bytes_arg);
+          api->AddImage(id_arg, bytes_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeImage" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_id_arg = args.at(0);
+          if (encodable_id_arg.IsNull()) {
+            reply(WrapError("id_arg unexpectedly null."));
+            return;
+          }
+          const auto& id_arg = std::get<std::string>(encodable_id_arg);
+          api->RemoveImage(id_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
     BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {

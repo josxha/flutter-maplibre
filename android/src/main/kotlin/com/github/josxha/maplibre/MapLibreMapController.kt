@@ -366,18 +366,19 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun loadImage(url: String, callback: (Result<Any>) -> Unit) {
+    override fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit) {
         try {
-            val url = URL("http://....")
-            val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-            callback(Result.success(image))
+            val bytes = URL(url).openConnection().getInputStream().readBytes()
+            callback(Result.success(bytes))
         } catch (e: IOException) {
             println(e)
+            callback(Result.failure(e))
         }
     }
 
-    override fun addImage(id: String, data: Any, callback: (Result<Unit>) -> Unit) {
-        mapLibreMap.style?.addImage(id, data)
+    override fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit) {
+        val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
+        mapLibreMap.style?.addImage(id, bitmap)
         callback(Result.success(Unit))
     }
 

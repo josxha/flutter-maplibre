@@ -159,11 +159,11 @@ abstract interface class MapLibreHostApi {
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
   @async
-  dynamic loadImage(String url);
+  Uint8List loadImage(String url);
 
   /// Add an image to the map.
   @async
-  void addImage(String id, dynamic data);
+  void addImage(String id, Uint8List bytes);
 
   /// Removes an image from the map
   @async

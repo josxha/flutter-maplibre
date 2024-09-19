@@ -383,9 +383,9 @@ protocol MapLibreHostApi {
   func removeSource(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
-  func loadImage(url: String, completion: @escaping (Result<dynamic, Error>) -> Void)
+  func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
   /// Add an image to the map.
-  func addImage(id: String, data: dynamic, completion: @escaping (Result<Void, Error>) -> Void)
+  func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void)
   /// Removes an image from the map
   func removeImage(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
@@ -781,8 +781,8 @@ class MapLibreHostApiSetup {
       addImageChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let idArg = args[0] as! String
-        let dataArg = args[1] as! dynamic
-        api.addImage(id: idArg, data: dataArg) { result in
+        let bytesArg = args[1] as! FlutterStandardTypedData
+        api.addImage(id: idArg, bytes: bytesArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:maplibre/maplibre.dart';
 
 @immutable
@@ -25,10 +26,11 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
           // load the image data
-          final image = await _controller.loadImage(LayersSymbolPage.imageUrl);
+          // final image = await _controller.loadImage(LayersSymbolPage.imageUrl);
+          final response = await http.get(Uri.parse(LayersSymbolPage.imageUrl));
 
           // add the image to the map
-          await _controller.addImage('marker', image);
+          await _controller.addImage('marker', response.bodyBytes);
 
           // add some points as GeoJSON source to the map
           await _controller.addSource(

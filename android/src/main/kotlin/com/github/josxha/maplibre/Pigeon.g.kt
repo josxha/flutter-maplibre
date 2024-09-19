@@ -361,9 +361,9 @@ interface MapLibreHostApi {
    * Loads an image to the map. An image needs to be loaded before it can
    * get used.
    */
-  fun loadImage(url: String, callback: (Result<dynamic>) -> Unit)
+  fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
   /** Add an image to the map. */
-  fun addImage(id: String, data: dynamic, callback: (Result<Unit>) -> Unit)
+  fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
   /** Removes an image from the map */
   fun removeImage(id: String, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
@@ -764,7 +764,7 @@ interface MapLibreHostApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val urlArg = args[0] as String
-            api.loadImage(urlArg) { result: Result<dynamic> ->
+            api.loadImage(urlArg) { result: Result<ByteArray> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
@@ -784,8 +784,8 @@ interface MapLibreHostApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val idArg = args[0] as String
-            val dataArg = args[1] as dynamic
-            api.addImage(idArg, dataArg) { result: Result<Unit> ->
+            val bytesArg = args[1] as ByteArray
+            api.addImage(idArg, bytesArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
