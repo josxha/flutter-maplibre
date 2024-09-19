@@ -156,6 +156,19 @@ abstract interface class MapLibreHostApi {
   @async
   void removeSource(String id);
 
+  /// Loads an image to the map. An image needs to be loaded before it can
+  /// get used.
+  @async
+  dynamic loadImage(String url);
+
+  /// Add an image to the map.
+  @async
+  void addImage(String id, dynamic data);
+
+  /// Removes an image from the map
+  @async
+  void removeImage(String id);
+
   /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({

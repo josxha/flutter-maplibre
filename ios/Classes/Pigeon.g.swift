@@ -381,6 +381,13 @@ protocol MapLibreHostApi {
   func removeLayer(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Removes the source with the given ID from the map's style.
   func removeSource(id: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Loads an image to the map. An image needs to be loaded before it can
+  /// get used.
+  func loadImage(url: String, completion: @escaping (Result<dynamic, Error>) -> Void)
+  /// Add an image to the map.
+  func addImage(id: String, data: dynamic, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Removes an image from the map
+  func removeImage(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a image source to the map style.
@@ -748,6 +755,62 @@ class MapLibreHostApiSetup {
       }
     } else {
       removeSourceChannel.setMessageHandler(nil)
+    }
+    /// Loads an image to the map. An image needs to be loaded before it can
+    /// get used.
+    let loadImageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      loadImageChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let urlArg = args[0] as! String
+        api.loadImage(url: urlArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      loadImageChannel.setMessageHandler(nil)
+    }
+    /// Add an image to the map.
+    let addImageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addImageChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let dataArg = args[1] as! dynamic
+        api.addImage(id: idArg, data: dataArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addImageChannel.setMessageHandler(nil)
+    }
+    /// Removes an image from the map
+    let removeImageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeImage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeImageChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        api.removeImage(id: idArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      removeImageChannel.setMessageHandler(nil)
     }
     /// Add a GeoJSON source to the map style.
     let addGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
