@@ -26,11 +26,11 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
           // load the image data
-          // final image = await _controller.loadImage(LayersSymbolPage.imageUrl);
           final response = await http.get(Uri.parse(LayersSymbolPage.imageUrl));
+          final bytes = response.bodyBytes;
 
           // add the image to the map
-          await _controller.addImage('marker', response.bodyBytes);
+          await _controller.addImage('marker', bytes);
 
           // add some points as GeoJSON source to the map
           await _controller.addSource(
@@ -48,7 +48,7 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
               layout: {
                 // see https://maplibre.org/maplibre-style-spec/layers/#symbol
                 'icon-image': 'marker',
-                'icon-size': 0.08,
+                'icon-size': 0.2, // 0.08
                 'icon-allow-overlap': true,
                 'icon-anchor': 'bottom',
               },

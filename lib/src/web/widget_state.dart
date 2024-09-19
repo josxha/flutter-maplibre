@@ -465,14 +465,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<ImageBitmap> loadImage(String url) async {
-    final response = await _map.loadImage(url).toDart;
-    return response.data;
+  Future<void> addImage(String id, Uint8List bytes) async {
+    _map.addImage(id, bytes);
   }
-
-  @override
-  Future<void> addImage(String id, dynamic data) async =>
-      _map.addImage(id, data as JSAny);
 
   @override
   Future<void> removeImage(String id) async => _map.removeImage(id);

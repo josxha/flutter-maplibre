@@ -69,13 +69,8 @@ extension type JsMap._(Camera _) implements Camera {
   /// Removes the source with the given ID from the map's style.
   external void removeSource(String id);
 
-  /// Load an image to the map from an URL.
-  external JSPromise<GetResourceResponse<ImageBitmap>> loadImage(
-    String url,
-  );
-
   /// Add an image to the map.
-  external void addImage(String id, JSAny data);
+  external void addImage(String id, Uint8List data);
 
   /// Remove an image from the map by its id.
   external void removeImage(String id);
