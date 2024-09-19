@@ -68,6 +68,17 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Removes the source with the given ID from the map's style.
   external void removeSource(String id);
+
+  /// Load an image to the map from an URL.
+  external JSPromise<GetResourceResponse<ImageBitmap>> loadImage(
+    String url,
+  );
+
+  /// Add an image to the map.
+  external void addImage(String id, JSAny data);
+
+  /// Remove an image from the map by its id.
+  external void removeImage(String id);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -133,16 +144,21 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   /// Create a new vector source.
   external factory SourceSpecification.vector({
     required String type,
+    required String? url,
   });
 
   /// Create a new image source.
   external factory SourceSpecification.image({
     required String type,
+    required String url,
+    required JSAny coordinates,
   });
 
   /// Create a new video source.
   external factory SourceSpecification.video({
     required String type,
+    required JSAny urls,
+    required JSAny coordinates,
   });
 }
 
@@ -158,4 +174,11 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required JSAny layout,
     required JSAny paint,
   });
+}
+
+/// The GetResourceResponse used by [JsMap.loadImage].
+@JS()
+extension type GetResourceResponse<T extends JSObject>._(JSObject _)
+    implements JSObject {
+  external T data;
 }

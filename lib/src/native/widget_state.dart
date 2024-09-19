@@ -324,4 +324,22 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> removeSource(String id) => _hostApi.removeSource(id);
+
+  @override
+  Future<void> addImage(String id, dynamic data) {
+    // TODO: implement addImage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<dynamic> loadImage(String url) {
+    // TODO: implement loadImage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeImage(String id) {
+    // TODO: implement removeImage
+    throw UnimplementedError();
+  }
 }
