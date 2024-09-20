@@ -48,7 +48,7 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
               layout: {
                 // see https://maplibre.org/maplibre-style-spec/layers/#symbol
                 'icon-image': 'marker',
-                'icon-size': 0.2, // 0.08
+                'icon-size': 0.08,
                 'icon-allow-overlap': true,
                 'icon-anchor': 'bottom',
               },
