@@ -10,3 +10,5 @@ flutter-maplibre provides bindings to MapLibre Native and MapLibre-GL-JS.
 
 - [Getting started](getting-started/add-dependency)
 - [Map Styles](map-styles)
+- [Map Layers](layers)
+- [Map Events](map-events)
