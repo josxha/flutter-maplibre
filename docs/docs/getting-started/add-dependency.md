@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Add Dependency
 
+## Use the package from pub.dev
+
 Add `maplibre` to your project by running this command:
 
 ```bash
