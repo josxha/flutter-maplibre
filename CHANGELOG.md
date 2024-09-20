@@ -2,6 +2,7 @@
 
 ### Features
 
+- Add event system to the map.
 - Add and remove sources to the active map style programmatically.
 - Add and remove layers to the active map style programmatically.
 - Add `duration` parameter to `flyTo()`.
