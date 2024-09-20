@@ -115,8 +115,12 @@ class MapLibreMapController(
                 true
             }
         }
-        this.mapView.addOnCameraDidChangeListener {
-            flutterApi.onMovementStopped {}
+        this.mapLibreMap.addOnCameraMoveListener {
+            val position = mapLibreMap.cameraPosition
+            val target = mapLibreMap.cameraPosition.target!!
+            val center = LngLat(target.longitude, target.latitude)
+            val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
+            flutterApi.onCameraMoved(camera) {}
         }
         val style = Style.Builder().fromUri(initialOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->

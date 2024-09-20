@@ -970,8 +970,8 @@ protocol MapLibreFlutterApiProtocol {
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
-  /// Callback when the map movement ends.
-  func onMovementStopped(completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the map camera changes.
+  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
 }
 class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   private let binaryMessenger: FlutterBinaryMessenger
@@ -1101,11 +1101,11 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
-  /// Callback when the map movement ends.
-  func onMovementStopped(completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMovementStopped\(messageChannelSuffix)"
+  /// Callback when the map camera changes.
+  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage(nil) { response in
+    channel.sendMessage([cameraArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return

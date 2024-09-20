@@ -21,10 +21,13 @@ final class MapEventMapCreated extends MapEvent {
   final MapController mapController;
 }
 
-/// Emitted when the map movement comes to an end.
-final class MapEventMovementStopped extends MapEvent {
-  /// Create a new [MapEventMovementStopped] object.
-  const MapEventMovementStopped();
+/// Emitted when the map camera changes.
+final class MapEventCameraMoved extends MapEvent {
+  /// Create a new [MapEventCameraMoved] object.
+  const MapEventCameraMoved({required this.camera});
+
+  /// The new [MapCamera].
+  final MapCamera camera;
 }
 
 /// Emitted when the user interacts with the map in any way. Use this class if

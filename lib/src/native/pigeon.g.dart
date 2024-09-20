@@ -1170,8 +1170,8 @@ abstract class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  /// Callback when the map movement ends.
-  void onMovementStopped();
+  /// Callback when the map camera changes.
+  void onCameraMoved(MapCamera camera);
 
   static void setUp(
     MapLibreFlutterApi? api, {
@@ -1346,15 +1346,21 @@ abstract class MapLibreFlutterApi {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMovementStopped$messageChannelSuffix',
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved$messageChannelSuffix',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         pigeonVar_channel.setMessageHandler(null);
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final MapCamera? arg_camera = (args[0] as MapCamera?);
+          assert(arg_camera != null,
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved was null, expected non-null MapCamera.');
           try {
-            api.onMovementStopped();
+            api.onCameraMoved(arg_camera!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

@@ -282,8 +282,14 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  void onMovementStopped() {
-    widget.onEvent?.call(const MapEventMovementStopped());
+  void onCameraMoved(pigeon.MapCamera camera) {
+    final mapCamera = MapCamera(
+      center: camera.center.toPosition(),
+      zoom: camera.zoom,
+      tilt: camera.tilt,
+      bearing: camera.bearing,
+    );
+    widget.onEvent?.call(MapEventCameraMoved(camera: mapCamera));
   }
 
   @override

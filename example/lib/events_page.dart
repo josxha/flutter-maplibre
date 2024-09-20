@@ -12,13 +12,25 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  String _lastEventMessage = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Events')),
-      body: MapLibreMap(
-        options: MapOptions(center: Position(9.17, 47.68)),
-        onEvent: _onEvent,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(_lastEventMessage, textAlign: TextAlign.center),
+          ),
+          Expanded(
+            child: MapLibreMap(
+              options: MapOptions(center: Position(9.17, 47.68)),
+              onEvent: _onEvent,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -26,29 +38,28 @@ class _EventsPageState extends State<EventsPage> {
   void _onEvent(MapEvent event) => switch (event) {
         MapEventMapCreated() => _print('map created'),
         MapEventStyleLoaded() => _print('style loaded'),
-        MapEventMovementStopped() => _print('movement stopped'),
-        MapEventClicked() =>
-          _print('clicked: ${_positionToString(event.point)}'),
+        MapEventCameraMoved() => _print(
+            'camera moved: center ${_formatPosition(event.camera.center)}, '
+            'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
+            'tilt ${event.camera.tilt.toStringAsFixed(2)}, '
+            'bearing ${event.camera.bearing.toStringAsFixed(2)}',
+          ),
+        MapEventClicked() => _print('clicked: ${_formatPosition(event.point)}'),
         MapEventDoubleClicked() =>
-          _print('double clicked: ${_positionToString(event.point)}'),
+          _print('double clicked: ${_formatPosition(event.point)}'),
         MapEventLongClicked() =>
-          _print('long clicked: ${_positionToString(event.point)}'),
+          _print('long clicked: ${_formatPosition(event.point)}'),
         MapEventSecondaryClicked() =>
-          _print('secondary clicked: ${_positionToString(event.point)}'),
+          _print('secondary clicked: ${_formatPosition(event.point)}'),
       };
 
   void _print(String message) {
     debugPrint('[MapLibreMap] $message');
-    ScaffoldMessenger.of(context)
-      ..clearSnackBars()
-      ..showSnackBar(
-        SnackBar(content: Text(message), duration: const Duration(seconds: 1)),
-        snackBarAnimationStyle: AnimationStyle(
-          duration: const Duration(milliseconds: 100),
-        ),
-      );
+    setState(() {
+      _lastEventMessage = message;
+    });
   }
 
-  String _positionToString(Position point) =>
+  String _formatPosition(Position point) =>
       '${point.lng.toStringAsFixed(6)}, ${point.lat.toStringAsFixed(6)}';
 }
