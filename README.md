@@ -26,7 +26,7 @@ functionality.
   <tbody>
     <tr>
       <td style="text-align: center;">
-        <strong>Use custom vector map styles</strong>
+        <strong>Use custom vector styles</strong>
         <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
       </td>
       <td style="text-align: center;">
