@@ -22,7 +22,7 @@ MapLibre is a permissive and open source solution for the MVT
 accomplishes performant rendering while supporting a lot of complex
 functionality.
 
-<table>
+<table style="align-content: center">
 <tbody>
 <tr>
   <td>
