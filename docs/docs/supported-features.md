@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 4
 ---
 
 # Supported Features
@@ -32,7 +32,7 @@ lack of platform views of these platforms.
 | MapController        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | UI Controls for web  | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
 | Offline              | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Events               | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Events               | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Snapshotter          | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Annotations          | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Circle Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |

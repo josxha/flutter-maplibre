@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Add Dependency
 
+## Use the package from pub.dev
+
 Add `maplibre` to your project by running this command:
 
 ```bash
@@ -42,9 +44,10 @@ list.
 
 ```yaml title="pubspec.yaml"
 dependencies:
-  # highlight-next-line
+  # highlight-start
   maplibre:
     git:
       url: https://github.com/josxha/flutter-maplibre
       ref: main # or a specific commit hash 
+  # highlight-end
 ```

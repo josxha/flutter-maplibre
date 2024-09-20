@@ -44,7 +44,7 @@ class MapScreenState extends State<MapScreen> {
 
 The result should look something like this:
 
-![First map](../img/first_map.jpg)
+![First map](/img/first_map.jpg)
 
 If the map style isn't specified, the default MapLibre style is used. Use the 
 style of a tile provider or create and use your own map style.

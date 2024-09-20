@@ -17,22 +17,66 @@ This package provides unofficial Flutter bindings for MapLibre SDKs.
   named maplibre-gl) is used for android and in the future for iOS,
   windows, macOS and Linux
 
-MapLibre is a permissive and open source solution for the MVT 
-(Mapbox Vector Tile) standard. By binding to native SDKs the package 
-accomplishes performant rendering while supporting a lot of complex 
+MapLibre is a permissive and open source solution for the MVT
+(Mapbox Vector Tile) standard. By binding to native SDKs the package
+accomplishes performant rendering while supporting a lot of complex
 functionality.
 
 <table>
-<thead>
-<th>Use custom styles for your map</th>
-<th>Tilt or rotate your map</th>
-</thead>
-<tbody>
-<tr>
-<td><img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" /></td>
-<td><img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" /></td>
-</tr>
-</tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Use custom vector styles</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Tilt or rotate the map</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Use raster tiles</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/raster_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add circles</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add 3D building outlines</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/fill_extrusion_layer.jpg" alt="Fill Extrusion Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add polygons</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/fill_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add heatmaps</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/heatmap_layer.jpg" alt="Fill Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Render elevation</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/hillshade_layer.jpg" alt="Fill Extrusion Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add lines</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/line_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add markers</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/symbol_layer.jpg" alt="Symbol Layer" />
+      </td>
+      <td style="text-align: center;">
+      </td>
+      <td style="text-align: center;">
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Resources
@@ -56,7 +100,7 @@ the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-l
 
 This package is still a young package and in an early stage.
 While it offers a modern implementation, it currently lacks some
-functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/features/supported-features)
+functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/supported-features)
 
 ## Development & Contributing
 
@@ -65,10 +109,10 @@ welcome.
 
 #### Run Code Generation
 
-We use code generation from [pigeon](https://pub.dev/packages/pigeon). 
+We use code generation from [pigeon](https://pub.dev/packages/pigeon).
 If you change the file [pigeons/pigeon.dart](pigeons/pigeon.dart) you'll have
 to run the code generator.
-Use the generator script in the [./pigeons](./pigeons) directory (or run the 
+Use the generator script in the [./pigeons](./pigeons) directory (or run the
 commands manually) to generate the necessary code.
 
 #### Test with WebAssembly

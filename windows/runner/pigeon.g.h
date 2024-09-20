@@ -560,6 +560,11 @@ class MapLibreFlutterApi {
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the map camera changes.
+  void OnCameraMoved(
+    const MapCamera& camera,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
 
  private:
   flutter::BinaryMessenger* binary_messenger_;

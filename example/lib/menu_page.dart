@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
+import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/layers_fill_page.dart';
@@ -45,6 +46,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Callbacks',
                 iconData: Icons.back_hand,
                 location: CallbacksPage.location,
+              ),
+              ItemCard(
+                label: 'Events',
+                iconData: Icons.notifications,
+                location: EventsPage.location,
               ),
               if (kIsWeb)
                 ItemCard(

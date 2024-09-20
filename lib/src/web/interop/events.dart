@@ -39,6 +39,10 @@ abstract class MapEventType {
   /// Fired when the style has been loaded.
   static const load = 'load';
 
+  /// Fired repeatedly during an animated transition from one camera position
+  /// to another caused either by flyTo() or user interaction.
+  static const move = 'move';
+
   /// Fired once the map stops moving.
   static const moveEnd = 'moveend';
 }
