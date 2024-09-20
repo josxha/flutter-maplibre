@@ -68,6 +68,12 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Removes the source with the given ID from the map's style.
   external void removeSource(String id);
+
+  /// Add an image to the map.
+  external void addImage(String id, ImageSpecification data);
+
+  /// Remove an image from the map by its id.
+  external void removeImage(String id);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -133,16 +139,21 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   /// Create a new vector source.
   external factory SourceSpecification.vector({
     required String type,
+    required String? url,
   });
 
   /// Create a new image source.
   external factory SourceSpecification.image({
     required String type,
+    required String url,
+    required JSAny coordinates,
   });
 
   /// Create a new video source.
   external factory SourceSpecification.video({
     required String type,
+    required JSAny urls,
+    required JSAny coordinates,
   });
 }
 
@@ -157,5 +168,17 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required String? source,
     required JSAny layout,
     required JSAny paint,
+  });
+}
+
+/// Image data used by [JsMap.addImage].
+@anonymous
+@JS()
+extension type ImageSpecification._(JSObject _) implements JSObject {
+  /// Create a new [ImageSpecification] object.
+  external ImageSpecification({
+    required int width,
+    required int height,
+    required JSUint8Array data,
   });
 }

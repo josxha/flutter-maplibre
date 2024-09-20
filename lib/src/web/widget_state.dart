@@ -295,17 +295,38 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       case VectorSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.vector(type: 'vector'),
+          interop.SourceSpecification.vector(
+            type: 'vector',
+            url: source.url,
+          ),
         );
       case ImageSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.image(type: 'image'),
+          interop.SourceSpecification.image(
+            type: 'image',
+            url: source.url,
+            coordinates: source.coordinates
+                .map(
+                  (e) => [e.lng, e.lat],
+                )
+                .toList(growable: false)
+                .jsify()!,
+          ),
         );
       case VideoSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.video(type: 'video'),
+          interop.SourceSpecification.video(
+            type: 'video',
+            urls: source.urls.jsify()!,
+            coordinates: source.coordinates
+                .map(
+                  (e) => [e.lng, e.lat],
+                )
+                .toList(growable: false)
+                .jsify()!,
+          ),
         );
     }
   }
@@ -442,6 +463,23 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       latitudeNorth: bounds.getNorth().toDouble(),
     );
   }
+
+  @override
+  Future<void> addImage(String id, Uint8List bytes) async {
+    final image = await decodeImageFromList(bytes);
+    final byteData = await image.toByteData();
+    _map.addImage(
+      id,
+      interop.ImageSpecification(
+        width: image.width,
+        height: image.height,
+        data: byteData!.buffer.asUint8List().toJS,
+      ),
+    );
+  }
+
+  @override
+  Future<void> removeImage(String id) async => _map.removeImage(id);
 
   @override
   Future<void> removeLayer(String id) async => _map.removeLayer(id);

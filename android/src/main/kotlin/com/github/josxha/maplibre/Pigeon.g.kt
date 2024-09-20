@@ -357,6 +357,15 @@ interface MapLibreHostApi {
   fun removeLayer(id: String, callback: (Result<Unit>) -> Unit)
   /** Removes the source with the given ID from the map's style. */
   fun removeSource(id: String, callback: (Result<Unit>) -> Unit)
+  /**
+   * Loads an image to the map. An image needs to be loaded before it can
+   * get used.
+   */
+  fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
+  /** Add an image to the map. */
+  fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
+  /** Removes an image from the map */
+  fun removeImage(id: String, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
   /** Add a image source to the map style. */
@@ -737,6 +746,65 @@ interface MapLibreHostApi {
             val args = message as List<Any?>
             val idArg = args[0] as String
             api.removeSource(idArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val urlArg = args[0] as String
+            api.loadImage(urlArg) { result: Result<ByteArray> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val bytesArg = args[1] as ByteArray
+            api.addImage(idArg, bytesArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.removeImage$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            api.removeImage(idArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
