@@ -13,9 +13,13 @@ class MapOptions {
     this.tilt = 0,
     this.bearing = 0,
     this.controls = const [],
+    @Deprecated('Use the onEvent() callback instead.')
     this.onClick,
+    @Deprecated('Use the onEvent() callback instead.')
     this.onDoubleClick,
+    @Deprecated('Use the onEvent() callback instead.')
     this.onSecondaryClick,
+    @Deprecated('Use the onEvent() callback instead.')
     this.onLongClick,
   });
 
