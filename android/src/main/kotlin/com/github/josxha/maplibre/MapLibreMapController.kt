@@ -10,6 +10,7 @@ import RasterDemEncoding
 import ScreenLocation
 import TileScheme
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.PointF
 import android.view.View
 import android.widget.FrameLayout
@@ -46,7 +47,9 @@ import org.maplibre.android.style.sources.RasterDemSource
 import org.maplibre.android.style.sources.RasterSource
 import org.maplibre.android.style.sources.TileSet
 import org.maplibre.android.style.sources.VectorSource
+import java.io.IOException
 import java.net.URI
+import java.net.URL
 import kotlin.coroutines.cancellation.CancellationException
 
 
@@ -360,6 +363,27 @@ class MapLibreMapController(
 
     override fun removeSource(id: String, callback: (Result<Unit>) -> Unit) {
         mapLibreMap.style?.removeSource(id)
+        callback(Result.success(Unit))
+    }
+
+    override fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit) {
+        try {
+            val bytes = URL(url).openConnection().getInputStream().readBytes()
+            callback(Result.success(bytes))
+        } catch (e: IOException) {
+            println(e)
+            callback(Result.failure(e))
+        }
+    }
+
+    override fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit) {
+        val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
+        mapLibreMap.style?.addImage(id, bitmap)
+        callback(Result.success(Unit))
+    }
+
+    override fun removeImage(id: String, callback: (Result<Unit>) -> Unit) {
+        mapLibreMap.style?.removeImage(id)
         callback(Result.success(Unit))
     }
 

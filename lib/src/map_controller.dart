@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -65,4 +67,10 @@ abstract interface class MapController {
 
   /// The smallest bounding box that includes the visible region.
   Future<LngLatBounds> getVisibleRegion();
+
+  /// Add an image to the map.
+  Future<void> addImage(String id, Uint8List bytes);
+
+  /// Removes an image from the map
+  Future<void> removeImage(String id);
 }

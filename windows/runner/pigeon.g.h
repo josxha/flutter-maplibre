@@ -434,6 +434,20 @@ class MapLibreHostApi {
   virtual void RemoveSource(
     const std::string& id,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Loads an image to the map. An image needs to be loaded before it can
+  // get used.
+  virtual void LoadImage(
+    const std::string& url,
+    std::function<void(ErrorOr<std::vector<uint8_t>> reply)> result) = 0;
+  // Add an image to the map.
+  virtual void AddImage(
+    const std::string& id,
+    const std::vector<uint8_t>& bytes,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Removes an image from the map
+  virtual void RemoveImage(
+    const std::string& id,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a GeoJSON source to the map style.
   virtual void AddGeoJsonSource(
     const std::string& id,

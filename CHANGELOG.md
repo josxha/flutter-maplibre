@@ -2,10 +2,11 @@
 
 ### Features
 
+- Add sources and layers to the map programmatically.
+- Remove sources and layers from the map programmatically.
 - Add `duration` parameter to `flyTo()`.
 - `flyTo()` returns after the animation completes or throws an exception if it
   has been cancelled.
-- Add sources and layers to the map programmatically.
 
 ### Bug fixes
 

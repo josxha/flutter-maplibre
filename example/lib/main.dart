@@ -10,6 +10,7 @@ import 'package:maplibre_example/layers_heatmap_page.dart';
 import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
+import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         MenuPage.location: (context) => const MenuPage(),
         KioskPage.location: (context) => const KioskPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
+        LayersSymbolPage.location: (context) => const LayersSymbolPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersHeatmapPage.location: (context) => const LayersHeatmapPage(),
         LayersHillshadePage.location: (context) => const LayersHillshadePage(),
