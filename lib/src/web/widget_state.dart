@@ -47,6 +47,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         document.body?.appendChild(_htmlElement);
         // Invoke the onMapCreated callback async to avoid getting it called
         // during the widget build.
+        Future.delayed(
+          Duration.zero,
+          () => widget.onEvent?.call(MapEventMapCreated(mapController: this)),
+        );
         Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
 
@@ -96,41 +100,41 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           _map.addControl(jsControl);
         }
         // add callbacks
-        if (widget.onStyleLoaded case final VoidCallback callback) {
-          _map.on(
-            interop.MapEventType.load,
-            (interop.MapMouseEvent event) {
-              callback();
-            }.toJS,
-          );
-        }
-        if (_options.onClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.click,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
-        if (_options.onDoubleClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.dblclick,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
-        if (_options.onSecondaryClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.contextmenu,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
+        _map.on(
+          interop.MapEventType.load,
+          (interop.MapMouseEvent event) {
+            widget.onStyleLoaded?.call();
+            widget.onEvent?.call(const MapEventStyleLoaded());
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.click,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventClicked(point: point));
+            _options.onClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.dblclick,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventDoubleClicked(point: point));
+            _options.onDoubleClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.contextmenu,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventSecondaryClicked(point: point));
+            _options.onSecondaryClick?.call(point);
+          }.toJS,
+        );
         _map.on(
           interop.MapEventType.moveEnd,
           (interop.MapLibreEvent event) {
+            widget.onEvent?.call(const MapEventMovementStopped());
             if (_moveCompleter?.isCompleted ?? true) return;
             _moveCompleter?.complete(event);
           }.toJS,

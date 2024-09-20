@@ -26,3 +26,39 @@ final class MapEventMovementStopped extends MapEvent {
   /// Create a new [MapEventMovementStopped] object.
   const MapEventMovementStopped();
 }
+
+/// Emitted when the user interacts with the map in any way. Use this class if
+/// you don't care about the type of gesture.
+sealed class MapEventUserInput extends MapEvent {
+  /// Create a new [MapEventUserInput] object.
+  const MapEventUserInput({required this.point});
+
+  /// The [Position] of where the user clicked at.
+  final Position point;
+}
+
+/// Emitted when the user clicks on the map.
+final class MapEventClicked extends MapEventUserInput {
+  /// Create a new [MapEventClicked] object.
+  const MapEventClicked({required super.point});
+}
+
+/// Emitted when the user clicks twice in a short amount of time on the map.
+final class MapEventDoubleClicked extends MapEventUserInput {
+  /// Create a new [MapEventDoubleClicked] object.
+  const MapEventDoubleClicked({required super.point});
+}
+
+/// Emitted when the user clicks with the secondary button on the map. This
+/// would be classically the right mouse button.
+final class MapEventSecondaryClicked extends MapEventUserInput {
+  /// Create a new [MapEventSecondaryClicked] object.
+  const MapEventSecondaryClicked({required super.point});
+}
+
+/// Emitted when the user clicks on the map and holds button down at the same
+/// location for some time.
+final class MapEventLongClicked extends MapEventUserInput {
+  /// Create a new [MapEventLongClicked] object.
+  const MapEventLongClicked({required super.point});
+}

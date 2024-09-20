@@ -52,6 +52,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
 
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
   }
 
@@ -67,8 +68,9 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
                 lng: _options.center!.lng.toDouble(),
                 lat: _options.center!.lat.toDouble(),
               ),
-        listensOnClick: _options.onClick != null,
-        listensOnLongClick: _options.onLongClick != null,
+        listensOnClick: _options.onClick != null || widget.onEvent != null,
+        listensOnLongClick:
+            _options.onLongClick != null || widget.onEvent != null,
       );
 
   @override
@@ -275,23 +277,42 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  void onStyleLoaded() => widget.onStyleLoaded?.call();
+  void onStyleLoaded() {
+    widget.onEvent?.call(const MapEventStyleLoaded());
+    widget.onStyleLoaded?.call();
+  }
 
   @override
-  void onDoubleClick(pigeon.LngLat point) =>
-      _options.onDoubleClick?.call(Position(point.lng, point.lat));
+  void onDoubleClick(pigeon.LngLat point) {
+    widget.onEvent?.call(
+      MapEventClicked(point: Position(point.lng, point.lat)),
+    );
+    _options.onDoubleClick?.call(Position(point.lng, point.lat));
+  }
 
   @override
-  void onSecondaryClick(pigeon.LngLat point) =>
-      _options.onSecondaryClick?.call(Position(point.lng, point.lat));
+  void onSecondaryClick(pigeon.LngLat point) {
+    widget.onEvent?.call(
+      MapEventClicked(point: Position(point.lng, point.lat)),
+    );
+    _options.onSecondaryClick?.call(Position(point.lng, point.lat));
+  }
 
   @override
-  void onClick(pigeon.LngLat point) =>
-      _options.onClick?.call(Position(point.lng, point.lat));
+  void onClick(pigeon.LngLat point) {
+    widget.onEvent?.call(
+      MapEventClicked(point: Position(point.lng, point.lat)),
+    );
+    _options.onClick?.call(Position(point.lng, point.lat));
+  }
 
   @override
-  void onLongClick(pigeon.LngLat point) =>
-      _options.onLongClick?.call(Position(point.lng, point.lat));
+  void onLongClick(pigeon.LngLat point) {
+    widget.onEvent?.call(
+      MapEventClicked(point: Position(point.lng, point.lat)),
+    );
+    _options.onLongClick?.call(Position(point.lng, point.lat));
+  }
 
   @override
   Future<MapCamera> getCamera() async {
