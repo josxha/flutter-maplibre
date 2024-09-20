@@ -18,12 +18,12 @@ class _EventsPageState extends State<EventsPage> {
       appBar: AppBar(title: const Text('Events')),
       body: MapLibreMap(
         options: MapOptions(center: Position(9.17, 47.68)),
-        onEvent: _onMapEvent,
+        onEvent: _onEvent,
       ),
     );
   }
 
-  void _onMapEvent(MapEvent event) => switch (event) {
+  void _onEvent(MapEvent event) => switch (event) {
         MapEventMapCreated() => _print('map created'),
         MapEventStyleLoaded() => _print('style loaded'),
         MapEventMovementStopped() => _print('movement stopped'),

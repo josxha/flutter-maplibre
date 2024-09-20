@@ -32,7 +32,7 @@ lack of platform views of these platforms.
 | MapController        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | UI Controls for web  | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
 | Offline              | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Events               | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Events               | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Snapshotter          | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Annotations          | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Circle Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
