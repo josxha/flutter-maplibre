@@ -1159,6 +1159,48 @@ const gchar* maplibre_map_libre_flutter_api_on_long_click_response_get_error_mes
  */
 FlValue* maplibre_map_libre_flutter_api_on_long_click_response_get_error_details(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnMovementStoppedResponse, maplibre_map_libre_flutter_api_on_movement_stopped_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_MOVEMENT_STOPPED_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnMovementStoppedResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onMovementStopped is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_movement_stopped_response_is_error(MaplibreMapLibreFlutterApiOnMovementStoppedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnMovementStoppedResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_code(MaplibreMapLibreFlutterApiOnMovementStoppedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnMovementStoppedResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_message(MaplibreMapLibreFlutterApiOnMovementStoppedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnMovementStoppedResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_movement_stopped_response_get_error_details(MaplibreMapLibreFlutterApiOnMovementStoppedResponse* response);
+
 /**
  * MaplibreMapLibreFlutterApi:
  *
@@ -1319,6 +1361,29 @@ void maplibre_map_libre_flutter_api_on_long_click(MaplibreMapLibreFlutterApi* ap
  * Returns: a #MaplibreMapLibreFlutterApiOnLongClickResponse or %NULL on error.
  */
 MaplibreMapLibreFlutterApiOnLongClickResponse* maplibre_map_libre_flutter_api_on_long_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map movement ends.
+ */
+void maplibre_map_libre_flutter_api_on_movement_stopped(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_movement_stopped_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_movement_stopped() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnMovementStoppedResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnMovementStoppedResponse* maplibre_map_libre_flutter_api_on_movement_stopped_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 G_END_DECLS
 

@@ -58,8 +58,7 @@ class MapLibreMapController(
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
     binaryMessenger: BinaryMessenger
-) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibreHostApi,
-    MapLibreMap.OnMapClickListener, MapLibreMap.OnMapLongClickListener {
+) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibreHostApi {
     private val mapViewContainer = FrameLayout(context)
     private lateinit var mapLibreMap: MapLibreMap
     private lateinit var mapView: MapView
@@ -105,10 +104,19 @@ class MapLibreMapController(
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
         if (initialOptions.listensOnClick) {
-            this.mapLibreMap.addOnMapClickListener(this)
+            this.mapLibreMap.addOnMapClickListener { latLng ->
+                flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }
+                true
+            }
         }
         if (initialOptions.listensOnLongClick) {
-            this.mapLibreMap.addOnMapLongClickListener(this)
+            this.mapLibreMap.addOnMapLongClickListener { latLng ->
+                flutterApi.onLongClick(LngLat(latLng.longitude, latLng.latitude)) { }
+                true
+            }
+        }
+        this.mapLibreMap.addOnCameraMoveListener {
+            flutterApi.onMovementStopped {}
         }
         val style = Style.Builder().fromUri(initialOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
@@ -512,14 +520,4 @@ class MapLibreMapController(
 
     override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
         mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
-
-    override fun onMapClick(point: LatLng): Boolean {
-        flutterApi.onClick(LngLat(point.longitude, point.latitude)) { }
-        return true
-    }
-
-    override fun onMapLongClick(point: LatLng): Boolean {
-        flutterApi.onLongClick(LngLat(point.longitude, point.latitude)) { }
-        return true
-    }
 }
