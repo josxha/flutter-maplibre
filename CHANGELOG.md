@@ -2,8 +2,8 @@
 
 ### Features
 
-- Add sources and layers to the map programmatically.
-- Remove sources and layers from the map programmatically.
+- Add and remove sources to the active map style programmatically.
+- Add and remove layers to the active map style programmatically.
 - Add `duration` parameter to `flyTo()`.
 - `flyTo()` returns after the animation completes or throws an exception if it
   has been cancelled.
