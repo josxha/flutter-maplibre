@@ -22,19 +22,19 @@ MapLibre is a permissive and open source solution for the MVT
 accomplishes performant rendering while supporting a lot of complex
 functionality.
 
-<table style="align-content: center">
-<tbody>
-<tr>
-  <td>
-    <strong>Use custom styles for your map</strong>
-    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
-  </td>
-  <td>
-    <strong>Tilt or rotate your map</strong>
-    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" />
-  </td>
-</tr>
-</tbody>
+<table>
+  <tbody>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Use custom styles for your map</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Tilt or rotate your map</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" />
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Resources
