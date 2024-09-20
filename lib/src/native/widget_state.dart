@@ -290,36 +290,28 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   void onDoubleClick(pigeon.LngLat point) {
     final position = point.toPosition();
-    widget.onEvent?.call(
-      MapEventClicked(point: position),
-    );
+    widget.onEvent?.call(MapEventClicked(point: position));
     _options.onDoubleClick?.call(position);
   }
 
   @override
   void onSecondaryClick(pigeon.LngLat point) {
     final position = point.toPosition();
-    widget.onEvent?.call(
-      MapEventClicked(point: position),
-    );
+    widget.onEvent?.call(MapEventClicked(point: position));
     _options.onSecondaryClick?.call(position);
   }
 
   @override
   void onClick(pigeon.LngLat point) {
     final position = point.toPosition();
-    widget.onEvent?.call(
-      MapEventClicked(point: position),
-    );
+    widget.onEvent?.call(MapEventClicked(point: position));
     _options.onClick?.call(position);
   }
 
   @override
   void onLongClick(pigeon.LngLat point) {
     final position = point.toPosition();
-    widget.onEvent?.call(
-      MapEventLongClicked(point: position),
-    );
+    widget.onEvent?.call(MapEventLongClicked(point: position));
     _options.onLongClick?.call(position);
   }
 
