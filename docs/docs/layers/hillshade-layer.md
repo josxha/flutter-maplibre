@@ -17,7 +17,7 @@ Check out
 the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_hillshade_page.dart)
 to learn more.
 
-## Hillshade Style
+## Style
 
 Use the `paint` property to style your `HillshadeLayer` to change the style of the
 map.
@@ -26,6 +26,6 @@ See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers/#hillshade)
 for all available properties.
 
-## Hillshade Layout
+## Layout
 
 Use the `layout` property to change how the layer behave on the map.

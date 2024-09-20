@@ -16,7 +16,7 @@ Check out
 the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_heatmap_page.dart)
 to learn more.
 
-## Heatmap Style
+## Style
 
 Use the `paint` property to style your `HeatmapLayer` to change the style of the
 map.
@@ -25,7 +25,7 @@ See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers/#heatmap)
 for all available properties.
 
-## Heatmap Layout
+## Layout
 
 Use the `layout` property to change how the
 heatmaps behave on the map.

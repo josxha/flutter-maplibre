@@ -16,7 +16,7 @@ Check out
 the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_raster_page.dart)
 to learn more.
 
-## Raster Style
+## Style
 
 Use the `paint` property to style your `RasterLayer` to change the style of the
 map.
@@ -25,7 +25,7 @@ See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers/#raster)
 for all available properties.
 
-## Raster Layout
+## Layout
 
 Use the `layout` property to change how the rasters
 behave on the map.
