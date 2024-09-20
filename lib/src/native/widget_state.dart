@@ -309,7 +309,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   @override
   void onLongClick(pigeon.LngLat point) {
     widget.onEvent?.call(
-      MapEventClicked(point: Position(point.lng, point.lat)),
+      MapEventLongClicked(point: Position(point.lng, point.lat)),
     );
     _options.onLongClick?.call(Position(point.lng, point.lat));
   }
