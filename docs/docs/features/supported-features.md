@@ -26,15 +26,23 @@ lack of platform views of these platforms.
 
 ### General Functionality
 
-| Feature             | web | android | iOS | windows | macOS | linux |
-|---------------------|-----|---------|-----|---------|-------|-------|
-| Map                 | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| MapController       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| UI Controls for web | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Offline             | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Events              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Snapshotter         | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Annotations         | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Feature              | web | android | iOS | windows | macOS | linux |
+|----------------------|-----|---------|-----|---------|-------|-------|
+| Map                  | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| MapController        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| UI Controls for web  | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
+| Offline              | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Events               | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Snapshotter          | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Annotations          | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Circle Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Fill Layer           | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Fill Extrusion Layer | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Heatmap Layer        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Hillshade Layer      | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Line Layer           | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Raster Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Symbol Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 
 ### Gestures and other Callbacks
 
@@ -55,7 +63,8 @@ lack of platform views of these platforms.
 | flyTo                       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | addSource                   | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | addLayer                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| setMyLocationTrackingMode   | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| showUserLocation            | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| trackUserLocation           | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | setMapLanguage              | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | toScreenLocation            | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | toLatLng                    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
