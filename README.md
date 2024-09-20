@@ -69,7 +69,7 @@ functionality.
     <tr>
       <td style="text-align: center;">
         <strong>Add markers</strong>
-        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/heatmap_layer.jpg" alt="Symbol Layer" />
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/symbol_layer.jpg" alt="Symbol Layer" />
       </td>
       <td style="text-align: center;">
       </td>
