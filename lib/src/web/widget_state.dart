@@ -135,7 +135,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           }.toJS,
         );
         _map.on(
-          interop.MapEventType.moveEnd,
+          interop.MapEventType.move,
           (interop.MapLibreEvent event) {
             final camera = MapCamera(
               center: _map.getCenter().toPosition(),
