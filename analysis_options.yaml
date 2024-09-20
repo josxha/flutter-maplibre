@@ -9,3 +9,4 @@ linter:
     lines_longer_than_80_chars: false
     flutter_style_todos: false
     cascade_invocations: false
+    deprecated_member_use_from_same_package: false

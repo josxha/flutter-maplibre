@@ -115,7 +115,7 @@ class MapLibreMapController(
                 true
             }
         }
-        this.mapLibreMap.addOnCameraMoveListener {
+        this.mapLibreMap.addOnCameraDidChangeListener {
             flutterApi.onMovementStopped {}
         }
         val style = Style.Builder().fromUri(initialOptions.style)
