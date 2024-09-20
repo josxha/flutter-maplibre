@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: 'Add Polygons to the map.'
+description: 'Add Raster Tiles on the map.'
 ---
 
 # Raster Layer

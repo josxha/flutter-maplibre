@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: 'Add Polygons to the map.'
+description: 'Add Markers to the map.'
 ---
 
 # Symbol Layer

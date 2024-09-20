@@ -58,13 +58,13 @@ const config: Config = {
             },
             items: [
                 {
-                    href: '/docs/getting-started/add-dependency',
+                    href: '/docs/getting-started/add-dependency/',
                     sidebarId: 'docsSidebar',
                     position: 'left',
                     label: 'Getting Started',
                 },
                 {
-                    href: '/docs',
+                    href: '/docs/',
                     sidebarId: 'docsSidebar',
                     position: 'left',
                     label: 'Docs',
