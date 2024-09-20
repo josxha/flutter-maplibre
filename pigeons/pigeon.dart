@@ -258,6 +258,9 @@ abstract interface class MapLibreFlutterApi {
 
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
+
+  /// Callback when the map camera changes.
+  void onCameraMoved(MapCamera camera);
 }
 
 /// The map options define initial values for the MapLibre map.

@@ -14,6 +14,7 @@ class MapLibreMap extends StatefulWidget {
     this.gestureRecognizers,
     this.onMapCreated,
     this.onStyleLoaded,
+    this.onEvent,
     super.key,
   });
 
@@ -41,6 +42,9 @@ class MapLibreMap extends StatefulWidget {
   /// after this callback has been called.
   final VoidCallback? onStyleLoaded;
 
+  /// Use this callback to handle emitted map events.
+  final MapEventCallback? onEvent;
+
   @override
   State<MapLibreMap> createState() =>
       // ignore: no_logic_in_create_state
@@ -50,3 +54,6 @@ class MapLibreMap extends StatefulWidget {
 /// Callback that fires once the native MapLibre map has been created for a
 /// [MapLibreMap] widget. It provides the [MapController] to the user.
 typedef MapCreatedCallback = void Function(MapController controller);
+
+/// Callback that fires every time a [MapEvent] gets emitted by the map.
+typedef MapEventCallback = void Function(MapEvent event);

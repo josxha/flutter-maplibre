@@ -13,10 +13,10 @@ class MapOptions {
     this.tilt = 0,
     this.bearing = 0,
     this.controls = const [],
-    this.onClick,
-    this.onDoubleClick,
-    this.onSecondaryClick,
-    this.onLongClick,
+    @Deprecated('Use the onEvent() callback instead.') this.onClick,
+    @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
+    @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
+    @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
   });
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -42,22 +42,26 @@ class MapOptions {
   final List<MapControl> controls;
 
   /// A callback that fires when the user clicks on the map.
+  @Deprecated('Use the onEvent() callback instead.')
   final OnClickCallback? onClick;
 
   /// A callback that fires when the user clicks twice on the map.
   ///
   /// Only supported on web.
+  @Deprecated('Use the onEvent() callback instead.')
   final OnClickCallback? onDoubleClick;
 
   /// A callback that fires when the user clicks on the map with the secondary
   /// button (e.g. by default the right mouse button).
   ///
   /// Only supported on web.
+  @Deprecated('Use the onEvent() callback instead.')
   final OnClickCallback? onSecondaryClick;
 
   /// A callback that fires when the user performs a long click or tap on map.
   ///
   /// Not supported on web.
+  @Deprecated('Use the onEvent() callback instead.')
   final OnClickCallback? onLongClick;
 }
 
@@ -276,4 +280,5 @@ class TerrainControl extends MapControl {
 }
 
 /// Callback that is used for map interactions like [MapOptions.onClick].
+@Deprecated('Use the onEvent() callback instead.')
 typedef OnClickCallback = void Function(Position point);

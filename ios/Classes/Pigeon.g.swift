@@ -970,6 +970,8 @@ protocol MapLibreFlutterApiProtocol {
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the map camera changes.
+  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
 }
 class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   private let binaryMessenger: FlutterBinaryMessenger
@@ -1085,6 +1087,25 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  /// Callback when the map camera changes.
+  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([cameraArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
