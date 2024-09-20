@@ -42,23 +42,27 @@ class MapOptions {
   final List<MapControl> controls;
 
   /// A callback that fires when the user clicks on the map.
-  @Deprecated('Use the onEvent() callback instead.') final OnClickCallback? onClick;
+  @Deprecated('Use the onEvent() callback instead.')
+  final OnClickCallback? onClick;
 
   /// A callback that fires when the user clicks twice on the map.
   ///
   /// Only supported on web.
-  @Deprecated('Use the onEvent() callback instead.') final OnClickCallback? onDoubleClick;
+  @Deprecated('Use the onEvent() callback instead.')
+  final OnClickCallback? onDoubleClick;
 
   /// A callback that fires when the user clicks on the map with the secondary
   /// button (e.g. by default the right mouse button).
   ///
   /// Only supported on web.
-  @Deprecated('Use the onEvent() callback instead.') final OnClickCallback? onSecondaryClick;
+  @Deprecated('Use the onEvent() callback instead.')
+  final OnClickCallback? onSecondaryClick;
 
   /// A callback that fires when the user performs a long click or tap on map.
   ///
   /// Not supported on web.
-  @Deprecated('Use the onEvent() callback instead.') final OnClickCallback? onLongClick;
+  @Deprecated('Use the onEvent() callback instead.')
+  final OnClickCallback? onLongClick;
 }
 
 /// The base [MapControl] class that is the parent of all web-only user
