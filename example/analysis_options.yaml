@@ -3,4 +3,3 @@ include: ../analysis_options.yaml
 linter:
   rules:
     public_member_api_docs: false
-    deprecated_member_use_from_same_package: true
