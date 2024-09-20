@@ -70,7 +70,7 @@ extension type JsMap._(Camera _) implements Camera {
   external void removeSource(String id);
 
   /// Add an image to the map.
-  external void addImage(String id, Uint8List data);
+  external void addImage(String id, ImageSpecification data);
 
   /// Remove an image from the map by its id.
   external void removeImage(String id);
@@ -171,9 +171,14 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   });
 }
 
-/// The GetResourceResponse used by [JsMap.loadImage].
+/// Image data used by [JsMap.addImage].
+@anonymous
 @JS()
-extension type GetResourceResponse<T extends JSObject>._(JSObject _)
-    implements JSObject {
-  external T data;
+extension type ImageSpecification._(JSObject _) implements JSObject {
+  /// Create a new [ImageSpecification] object.
+  external ImageSpecification({
+    required int width,
+    required int height,
+    required JSUint8Array data,
+  });
 }

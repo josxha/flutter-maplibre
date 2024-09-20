@@ -466,7 +466,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    _map.addImage(id, bytes);
+    final image = await decodeImageFromList(bytes);
+    final byteData = await image.toByteData();
+    _map.addImage(
+      id,
+      interop.ImageSpecification(
+        width: image.width,
+        height: image.height,
+        data: byteData!.buffer.asUint8List().toJS,
+      ),
+    );
   }
 
   @override

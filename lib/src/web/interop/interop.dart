@@ -2,7 +2,6 @@
 library maplibre_gl;
 
 import 'dart:js_interop';
-import 'dart:typed_data';
 
 import 'package:maplibre/maplibre.dart';
 import 'package:web/web.dart';
