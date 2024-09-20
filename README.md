@@ -100,7 +100,7 @@ the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-l
 
 This package is still a young package and in an early stage.
 While it offers a modern implementation, it currently lacks some
-functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/features/supported-features)
+functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/supported-features)
 
 ## Development & Contributing
 
