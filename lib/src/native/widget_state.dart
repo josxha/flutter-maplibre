@@ -68,9 +68,8 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
                 lng: _options.center!.lng.toDouble(),
                 lat: _options.center!.lat.toDouble(),
               ),
-        listensOnClick: _options.onClick != null || widget.onEvent != null,
-        listensOnLongClick:
-            _options.onLongClick != null || widget.onEvent != null,
+        listensOnClick: widget.onEvent != null,
+        listensOnLongClick: widget.onEvent != null,
       );
 
   @override
@@ -291,6 +290,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onDoubleClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventClicked(point: position));
+    // ignore: deprecated_member_use_from_same_package
     _options.onDoubleClick?.call(position);
   }
 
@@ -298,6 +298,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onSecondaryClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventClicked(point: position));
+    // ignore: deprecated_member_use_from_same_package
     _options.onSecondaryClick?.call(position);
   }
 
@@ -305,6 +306,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventClicked(point: position));
+    // ignore: deprecated_member_use_from_same_package
     _options.onClick?.call(position);
   }
 
@@ -312,6 +314,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onLongClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventLongClicked(point: position));
+    // ignore: deprecated_member_use_from_same_package
     _options.onLongClick?.call(position);
   }
 
