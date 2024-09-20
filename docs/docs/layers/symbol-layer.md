@@ -8,7 +8,7 @@ description: 'Add Markers to the map.'
 The `SymbolLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Symbol Layer](/img/layers/symbol_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/symbol)
+[![Symbol Layer](/img/layers/symbol_layer.jpg)](/demo/#/layers/symbol)
 
 ## Basic Usage
 

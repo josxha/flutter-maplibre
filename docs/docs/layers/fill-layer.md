@@ -8,7 +8,7 @@ description: 'Add Polygons to the map.'
 The `FillLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Fill Layer](/img/layers/fill_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/fill)
+[![Fill Layer](/img/layers/fill_layer.jpg)](/demo/#/layers/fill)
 
 ## Basic Usage
 

@@ -8,7 +8,7 @@ description: 'Add Heatmaps to the map.'
 The `HeatmapLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Heatmap Layer](/img/layers/heatmap_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/heatmap)
+[![Heatmap Layer](/img/layers/heatmap_layer.jpg)](/demo/#/layers/heatmap)
 
 ## Basic Usage
 

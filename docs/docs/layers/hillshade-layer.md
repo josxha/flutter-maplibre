@@ -9,7 +9,7 @@ The `HillshadeLayer` is either used by the map style or can be added to the map
 programmatically to use DEM tiles. Those tiles are used to render elevation on 
 the map.
 
-[![Hillshade Layer](/img/layers/hillshade_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/hillshade)
+[![Hillshade Layer](/img/layers/hillshade_layer.jpg)](/demo/#/layers/hillshade)
 
 ## Basic Usage
 

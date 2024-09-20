@@ -8,7 +8,7 @@ description: 'Add Circles to the map.'
 The `CircleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Circle Layer](/img/layers/circle_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/circle)
+[![Circle Layer](/img/layers/circle_layer.jpg)](/demo/#/layers/circle)
 
 ## Basic Usage
 

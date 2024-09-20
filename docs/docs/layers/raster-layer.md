@@ -8,7 +8,7 @@ description: 'Add Raster Tiles on the map.'
 The `RasterLayer` is either used by the map style or can be added to the map
 programmatically to render raster tiles on your map.
 
-[![Raster Layer](/img/layers/raster_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/raster)
+[![Raster Layer](/img/layers/raster_layer.jpg)](/demo/#/layers/raster)
 
 ## Basic Usage
 

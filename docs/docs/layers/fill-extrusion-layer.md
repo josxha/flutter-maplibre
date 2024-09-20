@@ -8,7 +8,7 @@ description: 'Add 3D building outlines to the map.'
 The `FillExtrusionLayer` is either used by the map style or can be added to the
 map programmatically to symbolize data on the map.
 
-[![Fill Extrusion Layer](/img/layers/fill_extrusion_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/fill-extrusion)
+[![Fill Extrusion Layer](/img/layers/fill_extrusion_layer.jpg)](/demo/#/layers/fill-extrusion)
 
 ## Basic Usage
 

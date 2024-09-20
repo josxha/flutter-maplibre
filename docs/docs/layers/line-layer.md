@@ -8,7 +8,7 @@ description: 'Add Lines to the map.'
 The `LineLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Line Layer](/img/layers/line_layer.jpg)](https://flutter-maplibre.pages.dev/demo/#/layers/line)
+[![Line Layer](/img/layers/line_layer.jpg)](/demo/#/layers/line)
 
 ## Basic Usage
 
