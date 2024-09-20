@@ -26,12 +26,54 @@ functionality.
   <tbody>
     <tr>
       <td style="text-align: center;">
-        <strong>Use custom styles for your map</strong>
+        <strong>Use custom vector map styles</strong>
         <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
       </td>
       <td style="text-align: center;">
-        <strong>Tilt or rotate your map</strong>
+        <strong>Tilt or rotate the map</strong>
         <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Use raster tiles</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/raster_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add circles</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add 3D building outlines</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/fill_extrusion_layer.jpg" alt="Fill Extrusion Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add polygons</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/fill_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add heatmaps</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/heatmap_layer.jpg" alt="Fill Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Render elevation</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/hillshade_layer.jpg" alt="Fill Extrusion Layer" />
+      </td>
+      <td style="text-align: center;">
+        <strong>Add lines</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/line_layer.jpg" alt="Fill Layer" />
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <strong>Add markers</strong>
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/heatmap_layer.jpg" alt="Symbol Layer" />
+      </td>
+      <td style="text-align: center;">
+      </td>
+      <td style="text-align: center;">
       </td>
     </tr>
   </tbody>
