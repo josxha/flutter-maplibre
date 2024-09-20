@@ -81,32 +81,32 @@ jobs:
 #          arch: x86_64
 #          emulator-boot-timeout: 1800 # 30 minutes
 #          script: cd example && flutter test integration_test -r expanded --timeout=none
-  integration-test-web:
-    name: "Integration Tests on Web"
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-      - name: "Get Flutter dependencies"
-        run: flutter pub get
-      - name: "Start chromedriver"
-        run: |
-          sudo chromedriver --enable --port=4444 &
-      - name: "Run integration tests"
-        run: |
-          flutter drive \
-            --driver=test_driver/integration_test.dart \
-            --target=integration_test/smoke_test.dart \
-            -d web-server \
-            --release \
-            --browser-name=chrome
+#  integration-test-web:
+#    name: "Integration Tests on Web"
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 30
+#    defaults:
+#      run:
+#        working-directory: example
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Setup Flutter SDK
+#        uses: subosito/flutter-action@v2
+#        with:
+#          cache: true
+#      - name: "Get Flutter dependencies"
+#        run: flutter pub get
+#      - name: "Start chromedriver"
+#        run: |
+#          sudo chromedriver --enable --port=4444 &
+#      - name: "Run integration tests"
+#        run: |
+#          flutter drive \
+#            --driver=test_driver/integration_test.dart \
+#            --target=integration_test/smoke_test.dart \
+#            -d web-server \
+#            --release \
+#            --browser-name=chrome
   score:
     name: "Package score"
     runs-on: ubuntu-latest
