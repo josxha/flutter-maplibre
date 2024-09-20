@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
+import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_fill_extrusion_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
         MenuPage.location: (context) => const MenuPage(),
         KioskPage.location: (context) => const KioskPage(),
+        EventsPage.location: (context) => const EventsPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         LayersSymbolPage.location: (context) => const LayersSymbolPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),

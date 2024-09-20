@@ -10,7 +10,7 @@
 
 ### Bug fixes
 
-- Fix `jumpTo()` never returns
+- Fix `jumpTo()` never returns on Android.
 
 ## 0.0.1+1
 
