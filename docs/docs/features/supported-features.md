@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Supported Features
 
-This side provides a broad orientation about what functionality could and what 
+This side provides a broad orientation about what functionality could and what
 functionality is already added.
 
 ### Legend
