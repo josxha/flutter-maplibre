@@ -30,6 +30,20 @@ class LngLatBounds {
       'latitudeSouth: $latitudeSouth, '
       'latitudeNorth: $latitudeNorth)';
 
+  /// Create a new [LngLatBounds] object by changing no, some or all values.
+  LngLatBounds copyWith({
+    double? longitudeWest,
+    double? longitudeEast,
+    double? latitudeSouth,
+    double? latitudeNorth,
+  }) =>
+      LngLatBounds(
+        longitudeWest: longitudeWest ?? this.longitudeWest,
+        longitudeEast: longitudeEast ?? this.longitudeEast,
+        latitudeSouth: latitudeSouth ?? this.latitudeSouth,
+        latitudeNorth: latitudeNorth ?? this.latitudeNorth,
+      );
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

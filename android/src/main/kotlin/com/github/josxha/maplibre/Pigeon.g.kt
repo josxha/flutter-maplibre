@@ -95,6 +95,16 @@ data class MapOptions (
   val bearing: Double,
   /** The initial center coordinates of the map. */
   val center: LngLat? = null,
+  /** The maximum bounding box of the map camera. */
+  val maxBounds: LngLatBounds? = null,
+  /** The minimum zoom level of the map. */
+  val minZoom: Double,
+  /** The maximum zoom level of the map. */
+  val maxZoom: Double,
+  /** The minimum pitch / tilt of the map. */
+  val minTilt: Double,
+  /** The maximum pitch / tilt of the map. */
+  val maxTilt: Double,
   /** If the native map should listen to click events. */
   val listensOnClick: Boolean,
   /** If the native map should listen to long click events. */
@@ -108,9 +118,14 @@ data class MapOptions (
       val tilt = pigeonVar_list[2] as Double
       val bearing = pigeonVar_list[3] as Double
       val center = pigeonVar_list[4] as LngLat?
-      val listensOnClick = pigeonVar_list[5] as Boolean
-      val listensOnLongClick = pigeonVar_list[6] as Boolean
-      return MapOptions(style, zoom, tilt, bearing, center, listensOnClick, listensOnLongClick)
+      val maxBounds = pigeonVar_list[5] as LngLatBounds?
+      val minZoom = pigeonVar_list[6] as Double
+      val maxZoom = pigeonVar_list[7] as Double
+      val minTilt = pigeonVar_list[8] as Double
+      val maxTilt = pigeonVar_list[9] as Double
+      val listensOnClick = pigeonVar_list[10] as Boolean
+      val listensOnLongClick = pigeonVar_list[11] as Boolean
+      return MapOptions(style, zoom, tilt, bearing, center, maxBounds, minZoom, maxZoom, minTilt, maxTilt, listensOnClick, listensOnLongClick)
     }
   }
   fun toList(): List<Any?> {
@@ -120,6 +135,11 @@ data class MapOptions (
       tilt,
       bearing,
       center,
+      maxBounds,
+      minZoom,
+      maxZoom,
+      minTilt,
+      maxTilt,
       listensOnClick,
       listensOnLongClick,
     )
@@ -381,6 +401,8 @@ interface MapLibreHostApi {
    * current zoom level.
    */
   fun getMetersPerPixelAtLatitude(latitude: Double): Double
+  /** Update the map options. */
+  fun updateOptions(options: MapOptions, callback: (Result<Unit>) -> Unit)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -958,6 +980,25 @@ interface MapLibreHostApi {
               wrapError(exception)
             }
             reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val optionsArg = args[0] as MapOptions
+            api.updateOptions(optionsArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
           }
         } else {
           channel.setMessageHandler(null)

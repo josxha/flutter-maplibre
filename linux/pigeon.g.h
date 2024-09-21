@@ -55,6 +55,11 @@ G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPT
  * tilt: field in this object.
  * bearing: field in this object.
  * center: field in this object.
+ * max_bounds: field in this object.
+ * min_zoom: field in this object.
+ * max_zoom: field in this object.
+ * min_tilt: field in this object.
+ * max_tilt: field in this object.
  * listens_on_click: field in this object.
  * listens_on_long_click: field in this object.
  *
@@ -62,7 +67,7 @@ G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPT
  *
  * Returns: a new #MaplibreMapOptions
  */
-MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, gboolean listens_on_click, gboolean listens_on_long_click);
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_tilt, double max_tilt, gboolean listens_on_click, gboolean listens_on_long_click);
 
 /**
  * maplibre_map_options_get_style
@@ -113,6 +118,56 @@ double maplibre_map_options_get_bearing(MaplibreMapOptions* object);
  * Returns: the field value.
  */
 MaplibreLngLat* maplibre_map_options_get_center(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_bounds
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum bounding box of the map camera.
+ *
+ * Returns: the field value.
+ */
+MaplibreLngLatBounds* maplibre_map_options_get_max_bounds(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_min_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * The minimum zoom level of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_min_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum zoom level of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_max_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_min_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * The minimum pitch / tilt of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_min_tilt(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum pitch / tilt of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_max_tilt(MaplibreMapOptions* object);
 
 /**
  * maplibre_map_options_get_listens_on_click
@@ -391,6 +446,7 @@ typedef struct {
   void (*add_raster_dem_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, const gchar* attribution, MaplibreRasterDemEncoding encoding, gboolean volatile, double red_factor, double blue_factor, double green_factor, double base_shift, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_vector_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, MaplibreTileScheme scheme, double min_zoom, double max_zoom, const gchar* attribution, gboolean volatile, const gchar* source_layer, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* (*get_meters_per_pixel_at_latitude)(double latitude, gpointer user_data);
+  void (*update_options)(MaplibreMapOptions* options, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
 } MaplibreMapLibreHostApiVTable;
 
 /**
@@ -896,6 +952,25 @@ void maplibre_map_libre_host_api_respond_add_vector_source(MaplibreMapLibreHostA
  * Responds with an error to MapLibreHostApi.addVectorSource. 
  */
 void maplibre_map_libre_host_api_respond_error_add_vector_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_update_options:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.updateOptions. 
+ */
+void maplibre_map_libre_host_api_respond_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_update_options:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.updateOptions. 
+ */
+void maplibre_map_libre_host_api_respond_error_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
 

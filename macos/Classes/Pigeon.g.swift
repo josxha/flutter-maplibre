@@ -101,6 +101,16 @@ struct MapOptions {
   var bearing: Double
   /// The initial center coordinates of the map.
   var center: LngLat? = nil
+  /// The maximum bounding box of the map camera.
+  var maxBounds: LngLatBounds? = nil
+  /// The minimum zoom level of the map.
+  var minZoom: Double
+  /// The maximum zoom level of the map.
+  var maxZoom: Double
+  /// The minimum pitch / tilt of the map.
+  var minTilt: Double
+  /// The maximum pitch / tilt of the map.
+  var maxTilt: Double
   /// If the native map should listen to click events.
   var listensOnClick: Bool
   /// If the native map should listen to long click events.
@@ -115,8 +125,13 @@ struct MapOptions {
     let tilt = pigeonVar_list[2] as! Double
     let bearing = pigeonVar_list[3] as! Double
     let center: LngLat? = nilOrValue(pigeonVar_list[4])
-    let listensOnClick = pigeonVar_list[5] as! Bool
-    let listensOnLongClick = pigeonVar_list[6] as! Bool
+    let maxBounds: LngLatBounds? = nilOrValue(pigeonVar_list[5])
+    let minZoom = pigeonVar_list[6] as! Double
+    let maxZoom = pigeonVar_list[7] as! Double
+    let minTilt = pigeonVar_list[8] as! Double
+    let maxTilt = pigeonVar_list[9] as! Double
+    let listensOnClick = pigeonVar_list[10] as! Bool
+    let listensOnLongClick = pigeonVar_list[11] as! Bool
 
     return MapOptions(
       style: style,
@@ -124,6 +139,11 @@ struct MapOptions {
       tilt: tilt,
       bearing: bearing,
       center: center,
+      maxBounds: maxBounds,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+      minTilt: minTilt,
+      maxTilt: maxTilt,
       listensOnClick: listensOnClick,
       listensOnLongClick: listensOnLongClick
     )
@@ -135,6 +155,11 @@ struct MapOptions {
       tilt,
       bearing,
       center,
+      maxBounds,
+      minZoom,
+      maxZoom,
+      minTilt,
+      maxTilt,
       listensOnClick,
       listensOnLongClick,
     ]
@@ -401,6 +426,8 @@ protocol MapLibreHostApi {
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   func getMetersPerPixelAtLatitude(latitude: Double) throws -> Double
+  /// Update the map options.
+  func updateOptions(options: MapOptions, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -952,6 +979,24 @@ class MapLibreHostApiSetup {
       }
     } else {
       getMetersPerPixelAtLatitudeChannel.setMessageHandler(nil)
+    }
+    /// Update the map options.
+    let updateOptionsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      updateOptionsChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let optionsArg = args[0] as! MapOptions
+        api.updateOptions(options: optionsArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      updateOptionsChannel.setMessageHandler(nil)
     }
   }
 }

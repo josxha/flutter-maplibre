@@ -74,6 +74,21 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Remove an image from the map by its id.
   external void removeImage(String id);
+
+  /// Update the min zoom level.
+  external void setMinZoom(double? minZoom);
+
+  /// Update the max zoom level.
+  external void setMaxZoom(double? maxZoom);
+
+  /// Update the min camera tilt.
+  external void setMinPitch(double? minPitch);
+
+  /// Update the max camera tilt.
+  external void setMaxPitch(double? maxPitch);
+
+  /// Update the maximum bounding box of the map camera.
+  external void setMaxBounds(LngLatBounds? maxBounds);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

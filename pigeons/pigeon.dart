@@ -236,6 +236,10 @@ abstract interface class MapLibreHostApi {
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   double getMetersPerPixelAtLatitude(double latitude);
+
+  /// Update the map options.
+  @async
+  void updateOptions(MapOptions options);
 }
 
 @FlutterApi()
@@ -271,6 +275,11 @@ class MapOptions {
     required this.center,
     required this.tilt,
     required this.bearing,
+    required this.maxBounds,
+    required this.minZoom,
+    required this.maxZoom,
+    required this.minTilt,
+    required this.maxTilt,
     required this.listensOnClick,
     required this.listensOnLongClick,
   });
@@ -289,6 +298,21 @@ class MapOptions {
 
   /// The initial center coordinates of the map.
   final LngLat? center;
+
+  /// The maximum bounding box of the map camera.
+  final LngLatBounds? maxBounds;
+
+  /// The minimum zoom level of the map.
+  final double minZoom;
+
+  /// The maximum zoom level of the map.
+  final double maxZoom;
+
+  /// The minimum pitch / tilt of the map.
+  final double minTilt;
+
+  /// The maximum pitch / tilt of the map.
+  final double maxTilt;
 
   /// If the native map should listen to click events.
   final bool listensOnClick;

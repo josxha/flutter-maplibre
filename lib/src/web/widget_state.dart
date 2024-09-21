@@ -54,6 +54,13 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
 
+        // set options
+        _map.setMinZoom(_options.minZoom);
+        _map.setMaxZoom(_options.maxZoom);
+        _map.setMinPitch(_options.minTilt);
+        _map.setMaxPitch(_options.maxTilt);
+        _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+
         // add controls
         for (final control in _options.controls) {
           final jsControl = switch (control) {
@@ -99,6 +106,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           };
           _map.addControl(jsControl);
         }
+
         // add callbacks
         _map.on(
           interop.MapEventType.load,
@@ -172,6 +180,26 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     _map.remove();
     _htmlElement.remove();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    if (_options.minZoom != oldWidget.options.minZoom) {
+      _map.setMinZoom(_options.minZoom);
+    }
+    if (_options.maxZoom != oldWidget.options.maxZoom) {
+      _map.setMaxZoom(_options.maxZoom);
+    }
+    if (_options.minTilt != oldWidget.options.minTilt) {
+      _map.setMinPitch(_options.minTilt);
+    }
+    if (_options.maxTilt != oldWidget.options.maxTilt) {
+      _map.setMaxPitch(_options.maxTilt);
+    }
+    if (_options.maxBounds != oldWidget.options.maxBounds) {
+      _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
