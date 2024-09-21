@@ -35,12 +35,20 @@ MapOptions::MapOptions(
   double zoom,
   double tilt,
   double bearing,
+  double min_zoom,
+  double max_zoom,
+  double min_tilt,
+  double max_tilt,
   bool listens_on_click,
   bool listens_on_long_click)
  : style_(style),
     zoom_(zoom),
     tilt_(tilt),
     bearing_(bearing),
+    min_zoom_(min_zoom),
+    max_zoom_(max_zoom),
+    min_tilt_(min_tilt),
+    max_tilt_(max_tilt),
     listens_on_click_(listens_on_click),
     listens_on_long_click_(listens_on_long_click) {}
 
@@ -50,6 +58,11 @@ MapOptions::MapOptions(
   double tilt,
   double bearing,
   const LngLat* center,
+  const LngLatBounds* max_bounds,
+  double min_zoom,
+  double max_zoom,
+  double min_tilt,
+  double max_tilt,
   bool listens_on_click,
   bool listens_on_long_click)
  : style_(style),
@@ -57,6 +70,11 @@ MapOptions::MapOptions(
     tilt_(tilt),
     bearing_(bearing),
     center_(center ? std::make_unique<LngLat>(*center) : nullptr),
+    max_bounds_(max_bounds ? std::make_unique<LngLatBounds>(*max_bounds) : nullptr),
+    min_zoom_(min_zoom),
+    max_zoom_(max_zoom),
+    min_tilt_(min_tilt),
+    max_tilt_(max_tilt),
     listens_on_click_(listens_on_click),
     listens_on_long_click_(listens_on_long_click) {}
 
@@ -66,6 +84,11 @@ MapOptions::MapOptions(const MapOptions& other)
     tilt_(other.tilt_),
     bearing_(other.bearing_),
     center_(other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr),
+    max_bounds_(other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr),
+    min_zoom_(other.min_zoom_),
+    max_zoom_(other.max_zoom_),
+    min_tilt_(other.min_tilt_),
+    max_tilt_(other.max_tilt_),
     listens_on_click_(other.listens_on_click_),
     listens_on_long_click_(other.listens_on_long_click_) {}
 
@@ -75,6 +98,11 @@ MapOptions& MapOptions::operator=(const MapOptions& other) {
   tilt_ = other.tilt_;
   bearing_ = other.bearing_;
   center_ = other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr;
+  max_bounds_ = other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr;
+  min_zoom_ = other.min_zoom_;
+  max_zoom_ = other.max_zoom_;
+  min_tilt_ = other.min_tilt_;
+  max_tilt_ = other.max_tilt_;
   listens_on_click_ = other.listens_on_click_;
   listens_on_long_click_ = other.listens_on_long_click_;
   return *this;
@@ -129,6 +157,55 @@ void MapOptions::set_center(const LngLat& value_arg) {
 }
 
 
+const LngLatBounds* MapOptions::max_bounds() const {
+  return max_bounds_.get();
+}
+
+void MapOptions::set_max_bounds(const LngLatBounds* value_arg) {
+  max_bounds_ = value_arg ? std::make_unique<LngLatBounds>(*value_arg) : nullptr;
+}
+
+void MapOptions::set_max_bounds(const LngLatBounds& value_arg) {
+  max_bounds_ = std::make_unique<LngLatBounds>(value_arg);
+}
+
+
+double MapOptions::min_zoom() const {
+  return min_zoom_;
+}
+
+void MapOptions::set_min_zoom(double value_arg) {
+  min_zoom_ = value_arg;
+}
+
+
+double MapOptions::max_zoom() const {
+  return max_zoom_;
+}
+
+void MapOptions::set_max_zoom(double value_arg) {
+  max_zoom_ = value_arg;
+}
+
+
+double MapOptions::min_tilt() const {
+  return min_tilt_;
+}
+
+void MapOptions::set_min_tilt(double value_arg) {
+  min_tilt_ = value_arg;
+}
+
+
+double MapOptions::max_tilt() const {
+  return max_tilt_;
+}
+
+void MapOptions::set_max_tilt(double value_arg) {
+  max_tilt_ = value_arg;
+}
+
+
 bool MapOptions::listens_on_click() const {
   return listens_on_click_;
 }
@@ -149,12 +226,17 @@ void MapOptions::set_listens_on_long_click(bool value_arg) {
 
 EncodableList MapOptions::ToEncodableList() const {
   EncodableList list;
-  list.reserve(7);
+  list.reserve(12);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
   list.push_back(EncodableValue(tilt_));
   list.push_back(EncodableValue(bearing_));
   list.push_back(center_ ? CustomEncodableValue(*center_) : EncodableValue());
+  list.push_back(max_bounds_ ? CustomEncodableValue(*max_bounds_) : EncodableValue());
+  list.push_back(EncodableValue(min_zoom_));
+  list.push_back(EncodableValue(max_zoom_));
+  list.push_back(EncodableValue(min_tilt_));
+  list.push_back(EncodableValue(max_tilt_));
   list.push_back(EncodableValue(listens_on_click_));
   list.push_back(EncodableValue(listens_on_long_click_));
   return list;
@@ -166,11 +248,19 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
     std::get<double>(list[1]),
     std::get<double>(list[2]),
     std::get<double>(list[3]),
-    std::get<bool>(list[5]),
-    std::get<bool>(list[6]));
+    std::get<double>(list[6]),
+    std::get<double>(list[7]),
+    std::get<double>(list[8]),
+    std::get<double>(list[9]),
+    std::get<bool>(list[10]),
+    std::get<bool>(list[11]));
   auto& encodable_center = list[4];
   if (!encodable_center.IsNull()) {
     decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
+  }
+  auto& encodable_max_bounds = list[5];
+  if (!encodable_max_bounds.IsNull()) {
+    decoded.set_max_bounds(std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_max_bounds)));
   }
   return decoded;
 }
@@ -1599,6 +1689,35 @@ void MapLibreHostApi::SetUp(
           EncodableList wrapped;
           wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
           reply(EncodableValue(std::move(wrapped)));
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_options_arg = args.at(0);
+          if (encodable_options_arg.IsNull()) {
+            reply(WrapError("options_arg unexpectedly null."));
+            return;
+          }
+          const auto& options_arg = std::any_cast<const MapOptions&>(std::get<CustomEncodableValue>(encodable_options_arg));
+          api->UpdateOptions(options_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
         } catch (const std::exception& exception) {
           reply(WrapError(exception.what()));
         }

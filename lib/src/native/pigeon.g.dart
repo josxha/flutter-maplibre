@@ -56,6 +56,11 @@ class MapOptions {
     required this.tilt,
     required this.bearing,
     this.center,
+    this.maxBounds,
+    required this.minZoom,
+    required this.maxZoom,
+    required this.minTilt,
+    required this.maxTilt,
     required this.listensOnClick,
     required this.listensOnLongClick,
   });
@@ -75,6 +80,21 @@ class MapOptions {
   /// The initial center coordinates of the map.
   LngLat? center;
 
+  /// The maximum bounding box of the map camera.
+  LngLatBounds? maxBounds;
+
+  /// The minimum zoom level of the map.
+  double minZoom;
+
+  /// The maximum zoom level of the map.
+  double maxZoom;
+
+  /// The minimum pitch / tilt of the map.
+  double minTilt;
+
+  /// The maximum pitch / tilt of the map.
+  double maxTilt;
+
   /// If the native map should listen to click events.
   bool listensOnClick;
 
@@ -88,6 +108,11 @@ class MapOptions {
       tilt,
       bearing,
       center,
+      maxBounds,
+      minZoom,
+      maxZoom,
+      minTilt,
+      maxTilt,
       listensOnClick,
       listensOnLongClick,
     ];
@@ -101,8 +126,13 @@ class MapOptions {
       tilt: result[2]! as double,
       bearing: result[3]! as double,
       center: result[4] as LngLat?,
-      listensOnClick: result[5]! as bool,
-      listensOnLongClick: result[6]! as bool,
+      maxBounds: result[5] as LngLatBounds?,
+      minZoom: result[6]! as double,
+      maxZoom: result[7]! as double,
+      minTilt: result[8]! as double,
+      maxTilt: result[9]! as double,
+      listensOnClick: result[10]! as bool,
+      listensOnLongClick: result[11]! as bool,
     );
   }
 }
@@ -1144,6 +1174,31 @@ class MapLibreHostApi {
       );
     } else {
       return (pigeonVar_replyList[0] as double?)!;
+    }
+  }
+
+  /// Update the map options.
+  Future<void> updateOptions(MapOptions options) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[options]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
     }
   }
 }

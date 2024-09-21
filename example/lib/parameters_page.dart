@@ -91,7 +91,7 @@ class _ParametersPageState extends State<ParametersPage> {
                 maxZoom: _maxZoom,
                 minTilt: _minTilt,
                 maxTilt: _maxTilt,
-                bounds: _lngLatBounds,
+                maxBounds: _lngLatBounds,
               ),
             ),
           ),

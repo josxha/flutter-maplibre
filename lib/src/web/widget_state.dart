@@ -59,7 +59,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.setMaxZoom(_options.maxZoom);
         _map.setMinPitch(_options.minTilt);
         _map.setMaxPitch(_options.maxTilt);
-        _map.setMaxBounds(_options.bounds?.toJsLngLatBounds());
+        _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
 
         // add controls
         for (final control in _options.controls) {
@@ -196,8 +196,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.maxTilt != oldWidget.options.maxTilt) {
       _map.setMaxPitch(_options.maxTilt);
     }
-    if (_options.bounds != oldWidget.options.bounds) {
-      _map.setMaxBounds(_options.bounds?.toJsLngLatBounds());
+    if (_options.maxBounds != oldWidget.options.maxBounds) {
+      _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
     }
     super.didUpdateWidget(oldWidget);
   }

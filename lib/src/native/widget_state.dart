@@ -57,6 +57,12 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    _hostApi.updateOptions(getOptions());
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
         style: _options.style,
         bearing: _options.bearing,
@@ -68,6 +74,11 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
                 lng: _options.center!.lng.toDouble(),
                 lat: _options.center!.lat.toDouble(),
               ),
+        minZoom: _options.minZoom,
+        maxZoom: _options.maxZoom,
+        minTilt: _options.minTilt,
+        maxTilt: _options.maxTilt,
+        maxBounds: _options.maxBounds?.toLngLatBounds(),
         listensOnClick: widget.onEvent != null,
         listensOnLongClick: widget.onEvent != null,
       );
