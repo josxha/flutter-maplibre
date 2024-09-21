@@ -107,7 +107,7 @@ const config: Config = {
                         },
                         {
                             label: 'Docs',
-                            to: '/docs/supported-features',
+                            to: '/docs/',
                         },
                         {
                             label: 'API Reference',
