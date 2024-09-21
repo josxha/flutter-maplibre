@@ -175,6 +175,23 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    if (_options.minZoom != oldWidget.options.minZoom) {
+      _map.setMinZoom(_options.minZoom);
+    }
+    if (_options.maxZoom != oldWidget.options.maxZoom) {
+      _map.setMaxZoom(_options.maxZoom);
+    }
+    if (_options.minTilt != oldWidget.options.minTilt) {
+      _map.setMinPitch(_options.minTilt);
+    }
+    if (_options.maxTilt != oldWidget.options.maxTilt) {
+      _map.setMaxPitch(_options.maxTilt);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Future<Marker> addMarker(Marker marker) async {
     final lngLat = interop.LngLat(
       lng: marker.point.lng,

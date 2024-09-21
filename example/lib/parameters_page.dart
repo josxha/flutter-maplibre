@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -33,7 +31,7 @@ class _ParametersPageState extends State<ParametersPage> {
                   label: 'Zoom',
                   start: _minZoom,
                   end: _maxZoom,
-                  max: 24,
+                  max: 22,
                   onChanged: (range) => setState(() {
                     _minZoom = range.start;
                     _maxZoom = range.end;
@@ -76,6 +74,7 @@ class _SliderWidget extends StatelessWidget {
     required this.end,
     required this.max,
     required this.label,
+    // ignore: unused_element
     this.min = 0,
   });
 
@@ -100,6 +99,10 @@ class _SliderWidget extends StatelessWidget {
               max: max,
               divisions: (max - min).toInt() + 1,
               onChanged: onChanged,
+              labels: RangeLabels(
+                start.round().toString(),
+                end.round().toString(),
+              ),
             ),
           ),
         ],
