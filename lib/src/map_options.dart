@@ -21,6 +21,7 @@ class MapOptions {
     @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
     @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
     @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
+    this.bounds,
   });
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -56,6 +57,10 @@ class MapOptions {
 
   /// The maximum camera tilt (pitch). Allowed values are 0-85. Defaults to 60.
   final double maxTilt;
+
+  /// The maximum bounding box of the map camera. No constraints are in place
+  /// if set to `null`.
+  final LngLatBounds? bounds;
 
   /// A callback that fires when the user clicks on the map.
   @Deprecated('Use the onEvent() callback instead.')

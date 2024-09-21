@@ -54,6 +54,13 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
 
+        // set options
+        _map.setMinZoom(_options.minZoom);
+        _map.setMaxZoom(_options.maxZoom);
+        _map.setMinPitch(_options.minTilt);
+        _map.setMaxPitch(_options.maxTilt);
+        _map.setMaxBounds(_options.bounds?.toJsLngLatBounds());
+
         // add controls
         for (final control in _options.controls) {
           final jsControl = switch (control) {
@@ -99,6 +106,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           };
           _map.addControl(jsControl);
         }
+
         // add callbacks
         _map.on(
           interop.MapEventType.load,
@@ -187,6 +195,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     if (_options.maxTilt != oldWidget.options.maxTilt) {
       _map.setMaxPitch(_options.maxTilt);
+    }
+    if (_options.bounds != oldWidget.options.bounds) {
+      _map.setMaxBounds(_options.bounds?.toJsLngLatBounds());
     }
     super.didUpdateWidget(oldWidget);
   }

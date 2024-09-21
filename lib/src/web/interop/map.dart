@@ -86,6 +86,9 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Update the max camera tilt.
   external void setMaxPitch(double? maxPitch);
+
+  /// Update the maximum bounding box of the map camera.
+  external void setMaxBounds(LngLatBounds? maxBounds);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

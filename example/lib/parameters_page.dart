@@ -16,6 +16,12 @@ class _ParametersPageState extends State<ParametersPage> {
   double _maxZoom = 22;
   double _minTilt = 0;
   double _maxTilt = 60;
+  LngLatBounds _lngLatBounds = const LngLatBounds(
+    longitudeWest: -180,
+    longitudeEast: 179,
+    latitudeSouth: -90,
+    latitudeNorth: 90,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,32 @@ class _ParametersPageState extends State<ParametersPage> {
                     _maxTilt = range.end;
                   }),
                 ),
+                _SliderWidget(
+                  label: 'Longitude',
+                  start: _lngLatBounds.longitudeWest,
+                  end: _lngLatBounds.longitudeEast,
+                  min: -180,
+                  max: 179,
+                  onChanged: (range) => setState(() {
+                    _lngLatBounds = _lngLatBounds.copyWith(
+                      longitudeWest: range.start,
+                      longitudeEast: range.end,
+                    );
+                  }),
+                ),
+                _SliderWidget(
+                  label: 'Latitude',
+                  start: _lngLatBounds.latitudeSouth,
+                  end: _lngLatBounds.latitudeNorth,
+                  min: -90,
+                  max: 90,
+                  onChanged: (range) => setState(() {
+                    _lngLatBounds = _lngLatBounds.copyWith(
+                      latitudeSouth: range.start,
+                      latitudeNorth: range.end,
+                    );
+                  }),
+                ),
               ],
             ),
           ),
@@ -54,10 +86,12 @@ class _ParametersPageState extends State<ParametersPage> {
             child: MapLibreMap(
               options: MapOptions(
                 center: Position(0, 0),
+                zoom: 3,
                 minZoom: _minZoom,
                 maxZoom: _maxZoom,
                 minTilt: _minTilt,
                 maxTilt: _maxTilt,
+                bounds: _lngLatBounds,
               ),
             ),
           ),
