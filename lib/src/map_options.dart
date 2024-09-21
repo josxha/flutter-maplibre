@@ -13,6 +13,10 @@ class MapOptions {
     this.tilt = 0,
     this.bearing = 0,
     this.controls = const [],
+    this.minZoom = 0,
+    this.maxZoom = 22,
+    this.minTilt = 0,
+    this.maxTilt = 60,
     @Deprecated('Use the onEvent() callback instead.') this.onClick,
     @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
     @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
@@ -40,6 +44,18 @@ class MapOptions {
   ///
   /// Only supported on web.
   final List<MapControl> controls;
+
+  /// The minimum zoom level. Allowed values are 0-24. Defaults to 0.
+  final double minZoom;
+
+  /// The maximum zoom level. Allowed values are 0-24. Defaults to 22.
+  final double maxZoom;
+
+  /// The minimum camera tilt (pitch). Allowed values are 0-85. Defaults to 0.
+  final double minTilt;
+
+  /// The maximum camera tilt (pitch). Allowed values are 0-85. Defaults to 60.
+  final double maxTilt;
 
   /// A callback that fires when the user clicks on the map.
   @Deprecated('Use the onEvent() callback instead.')
