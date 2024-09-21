@@ -32,28 +32,28 @@ jobs:
         with:
           name: maplibre-flutter-demo.apk
           path: example/build/app/outputs/flutter-apk/app-release.apk
-  build-iOS:
-    name: Build iOS package
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: ${{ env.FLUTTER_CHANNEL }}
-          cache: true
-      - uses: maxim-lobanov/setup-cocoapods@v1
-        with:
-          podfile-path: example/ios/Podfile.lock
-      - name: Build iOS package
-        run: flutter build ios --simulator
-      - name: Upload Runner.app as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: maplibre-flutter-demo.app
-          path: example/build/ios/iphonesimulator
+#  build-iOS:
+#    name: Build iOS package
+#    runs-on: macos-latest
+#    defaults:
+#      run:
+#        working-directory: example
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          channel: ${{ env.FLUTTER_CHANNEL }}
+#          cache: true
+#      - uses: maxim-lobanov/setup-cocoapods@v1
+#        with:
+#          podfile-path: example/ios/Podfile.lock
+#      - name: Build iOS package
+#        run: flutter build ios --simulator
+#      - name: Upload Runner.app as artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: maplibre-flutter-demo.app
+#          path: example/build/ios/iphonesimulator
   build-web:
     name: "Build web"
     runs-on: ubuntu-latest

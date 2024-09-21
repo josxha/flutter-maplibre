@@ -2,7 +2,7 @@ part of 'interop.dart';
 
 /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Marker/
 @JS()
-extension type Marker._(IControl _) implements IControl {
+extension type Marker._(JSObject _) implements JSObject {
   /// Create a new JS [Marker] object.
   external Marker([MarkerOptions? options]);
 
@@ -10,7 +10,7 @@ extension type Marker._(IControl _) implements IControl {
   external Marker setLngLat(LngLat lngLat);
 
   /// Add the marker to a MapLibre map.
-  external Marker addTo(Map map);
+  external Marker addTo(JsMap map);
 }
 
 /// The anonymous option class for a [Marker].

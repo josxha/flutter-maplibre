@@ -7,8 +7,9 @@ sidebar_position: 4
 Import the maplibre package and use the `MapLibreMap` widget to display a
 map.
 
-```dart
+```dart title="map_screen.dart"
 import 'package:flutter/material.dart';
+// highlight-next-line
 import 'package:maplibre/maplibre.dart';
 
 class MapScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // highlight-start
       body: MapLibreMap(
         onMapCreated: (controller) {
           // Don't add additional annotations here,
@@ -34,6 +36,7 @@ class MapScreenState extends State<MapScreen> {
           debugPrint('Map loaded 😎');
         },
       ),
+      // highlight-end
     );
   }
 }
@@ -41,7 +44,7 @@ class MapScreenState extends State<MapScreen> {
 
 The result should look something like this:
 
-![First map](../img/first_map.jpg)
+![First map](/img/first_map.jpg)
 
 If the map style isn't specified, the default MapLibre style is used. Use the 
 style of a tile provider or create and use your own map style.

@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:js_interop';
+import 'dart:math';
 import 'dart:ui_web';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/web/extensions.dart';
@@ -14,7 +17,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   static int _counter = 0;
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
-  late interop.Map _map;
+  late interop.JsMap _map;
+  Completer<interop.MapLibreEvent>? _moveCompleter;
 
   MapOptions get _options => widget.options;
 
@@ -29,7 +33,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ..style.height = '100%'
           ..style.width = '100%';
 
-        _map = interop.Map(
+        _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
             style: _options.style,
@@ -43,8 +47,19 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         document.body?.appendChild(_htmlElement);
         // Invoke the onMapCreated callback async to avoid getting it called
         // during the widget build.
+        Future.delayed(
+          Duration.zero,
+          () => widget.onEvent?.call(MapEventMapCreated(mapController: this)),
+        );
         Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
         _resizeMap();
+
+        // set options
+        _map.setMinZoom(_options.minZoom);
+        _map.setMaxZoom(_options.maxZoom);
+        _map.setMinPitch(_options.minTilt);
+        _map.setMaxPitch(_options.maxTilt);
+        _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
 
         // add controls
         for (final control in _options.controls) {
@@ -91,39 +106,56 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           };
           _map.addControl(jsControl);
         }
+
         // add callbacks
-        if (widget.onStyleLoaded case final VoidCallback callback) {
-          _map.on(
-            interop.MapEventType.load,
-            (interop.MapMouseEvent event) {
-              callback();
-            }.toJS,
-          );
-        }
-        if (_options.onClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.click,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
-        if (_options.onDoubleClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.dblclick,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
-        if (_options.onSecondaryClick case final OnClickCallback callback) {
-          _map.on(
-            interop.MapEventType.contextmenu,
-            (interop.MapMouseEvent event) {
-              callback(event.lngLat.toPosition());
-            }.toJS,
-          );
-        }
+        _map.on(
+          interop.MapEventType.load,
+          (interop.MapMouseEvent event) {
+            widget.onStyleLoaded?.call();
+            widget.onEvent?.call(const MapEventStyleLoaded());
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.click,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventClicked(point: point));
+            // ignore: deprecated_member_use_from_same_package
+            _options.onClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.dblclick,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventDoubleClicked(point: point));
+            // ignore: deprecated_member_use_from_same_package
+            _options.onDoubleClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.contextmenu,
+          (interop.MapMouseEvent event) {
+            final point = event.lngLat.toPosition();
+            widget.onEvent?.call(MapEventSecondaryClicked(point: point));
+            // ignore: deprecated_member_use_from_same_package
+            _options.onSecondaryClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.move,
+          (interop.MapLibreEvent event) {
+            final camera = MapCamera(
+              center: _map.getCenter().toPosition(),
+              zoom: _map.getZoom().toDouble(),
+              tilt: _map.getPitch().toDouble(),
+              bearing: _map.getBearing().toDouble(),
+            );
+            widget.onEvent?.call(MapEventCameraMoved(camera: camera));
+            if (_moveCompleter?.isCompleted ?? true) return;
+            _moveCompleter?.complete(event);
+          }.toJS,
+        );
 
         return _htmlElement;
       },
@@ -148,6 +180,26 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     _map.remove();
     _htmlElement.remove();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    if (_options.minZoom != oldWidget.options.minZoom) {
+      _map.setMinZoom(_options.minZoom);
+    }
+    if (_options.maxZoom != oldWidget.options.maxZoom) {
+      _map.setMaxZoom(_options.maxZoom);
+    }
+    if (_options.minTilt != oldWidget.options.minTilt) {
+      _map.setMinPitch(_options.minTilt);
+    }
+    if (_options.maxTilt != oldWidget.options.maxTilt) {
+      _map.setMaxPitch(_options.maxTilt);
+    }
+    if (_options.maxBounds != oldWidget.options.maxBounds) {
+      _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -183,14 +235,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> jumpTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
   }) async =>
       _map.jumpTo(
         interop.JumpToOptions(
-          center: center.toLngLat(),
+          center: center?.toLngLat(),
           zoom: zoom,
           bearing: bearing,
           pitch: tilt,
@@ -199,51 +251,280 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> flyTo({
-    required Position center,
+    Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
-  }) async =>
-      _map.flyTo(
-        interop.FlyToOptions(
-          center: center.toLngLat(),
-          zoom: zoom,
-          bearing: bearing,
-          pitch: tilt,
-        ),
-      );
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
+  }) async {
+    final destination = center?.toLngLat();
+    _map.flyTo(
+      interop.FlyToOptions(
+        center: destination,
+        zoom: zoom,
+        bearing: bearing,
+        pitch: tilt,
+        speed: webSpeed,
+        maxDuration: maxDuration?.inMilliseconds,
+      ),
+    );
+    final completer = _moveCompleter = Completer<interop.MapLibreEvent>();
+    final _ = await completer.future;
+    _moveCompleter = null;
+
+    // check if the targeted values were reached or if the flight was cancelled
+    final newCenter = _map.getCenter();
+    bool reachedCenter;
+    if (destination == null) {
+      reachedCenter = true;
+    } else {
+      final reachedLng = (destination.lng - newCenter.lng).abs() < 0.0000001;
+      final reachedLat = (destination.lat - newCenter.lat).abs() < 0.0000001;
+      reachedCenter = reachedLat && reachedLng;
+    }
+    final reachedZoom = zoom == null || zoom == _map.getZoom();
+    final reachedBearing = bearing == null || bearing == _map.getBearing();
+    final reachedTilt = tilt == null || tilt == _map.getPitch();
+
+    if (reachedCenter && reachedZoom && reachedBearing && reachedTilt) return;
+
+    throw PlatformException(
+      code: 'CancellationException',
+      message: 'Animation cancelled.',
+    );
+  }
 
   @override
   Future<void> addSource(Source source) async {
     switch (source) {
       case GeoJsonSource():
-        final data = parse(source.data);
+        JSAny data;
+        if (source.data[0] == '{') {
+          data = parse(source.data);
+        } else {
+          data = source.data.jsify()!;
+        }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+          interop.SourceSpecification.geoJson(
+            type: 'geojson',
+            data: data,
+          ),
+        );
+      case RasterDemSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.rasterDem(
+            type: 'raster-dem',
+            tileSize: source.tileSize,
+            attribution: source.attribution,
+            url: source.url,
+          ),
+        );
+      case RasterSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.raster(
+            type: 'raster',
+            attribution: source.attribution,
+            tileSize: source.tileSize,
+            tiles: source.tiles.jsify(),
+          ),
+        );
+      case VectorSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.vector(
+            type: 'vector',
+            url: source.url,
+          ),
+        );
+      case ImageSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.image(
+            type: 'image',
+            url: source.url,
+            coordinates: source.coordinates
+                .map(
+                  (e) => [e.lng, e.lat],
+                )
+                .toList(growable: false)
+                .jsify()!,
+          ),
+        );
+      case VideoSource():
+        _map.addSource(
+          source.id,
+          interop.SourceSpecification.video(
+            type: 'video',
+            urls: source.urls.jsify()!,
+            coordinates: source.coordinates
+                .map(
+                  (e) => [e.lng, e.lat],
+                )
+                .toList(growable: false)
+                .jsify()!,
+          ),
         );
     }
   }
 
   @override
-  Future<void> addLayer(Layer layer) async {
+  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     switch (layer) {
       case FillLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'fill',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
+          belowLayerId,
         );
       case CircleLayer():
         _map.addLayer(
-          interop.AddLayerObject(
+          interop.LayerSpecification(
             id: layer.id,
             type: 'circle',
             source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
           ),
+          belowLayerId,
+        );
+      case BackgroundLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'background',
+            source: null,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case FillExtrusionLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'fill-extrusion',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case HeatmapLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'heatmap',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case HillshadeLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'hillshade',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case LineLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'line',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case RasterLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'raster',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
+        );
+      case SymbolLayer():
+        _map.addLayer(
+          interop.LayerSpecification(
+            id: layer.id,
+            type: 'symbol',
+            source: layer.sourceId,
+            layout: layer.layout.jsify()!,
+            paint: layer.paint.jsify()!,
+          ),
+          belowLayerId,
         );
     }
   }
+
+  @override
+  Future<MapCamera> getCamera() async => MapCamera(
+        center: _map.getCenter().toPosition(),
+        zoom: _map.getZoom().toDouble(),
+        tilt: _map.getPitch().toDouble(),
+        bearing: _map.getBearing().toDouble(),
+      );
+
+  @override
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final zoom = _map.getZoom();
+    // https://wiki.openstreetmap.org/wiki/Zoom_levels
+    return circumferenceOfEarth *
+        cos(latitude * radian2degree) /
+        pow(2, zoom + 9);
+  }
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async {
+    final bounds = _map.getBounds();
+    return LngLatBounds(
+      longitudeWest: bounds.getWest().toDouble(),
+      longitudeEast: bounds.getEast().toDouble(),
+      latitudeSouth: bounds.getSouth().toDouble(),
+      latitudeNorth: bounds.getNorth().toDouble(),
+    );
+  }
+
+  @override
+  Future<void> addImage(String id, Uint8List bytes) async {
+    final image = await decodeImageFromList(bytes);
+    final byteData = await image.toByteData();
+    _map.addImage(
+      id,
+      interop.ImageSpecification(
+        width: image.width,
+        height: image.height,
+        data: byteData!.buffer.asUint8List().toJS,
+      ),
+    );
+  }
+
+  @override
+  Future<void> removeImage(String id) async => _map.removeImage(id);
+
+  @override
+  Future<void> removeLayer(String id) async => _map.removeLayer(id);
+
+  @override
+  Future<void> removeSource(String id) async => _map.removeSource(id);
 }
