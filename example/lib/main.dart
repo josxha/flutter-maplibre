@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/annotations_page.dart';
-import 'package:maplibre_example/callbacks_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
@@ -13,6 +12,7 @@ import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/menu_page.dart';
+import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         LayersLinePage.location: (context) => const LayersLinePage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
         AnnotationsPage.location: (context) => const AnnotationsPage(),
-        CallbacksPage.location: (context) => const CallbacksPage(),
+        ParametersPage.location: (context) => const ParametersPage(),
         ControllerPage.location: (context) => const ControllerPage(),
         TwoMapsPage.location: (context) => const TwoMapsPage(),
       },

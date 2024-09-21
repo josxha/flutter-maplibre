@@ -88,6 +88,10 @@ class MapOptions {
     double zoom,
     double tilt,
     double bearing,
+    double min_zoom,
+    double max_zoom,
+    double min_tilt,
+    double max_tilt,
     bool listens_on_click,
     bool listens_on_long_click);
 
@@ -98,6 +102,11 @@ class MapOptions {
     double tilt,
     double bearing,
     const LngLat* center,
+    const LngLatBounds* max_bounds,
+    double min_zoom,
+    double max_zoom,
+    double min_tilt,
+    double max_tilt,
     bool listens_on_click,
     bool listens_on_long_click);
 
@@ -127,6 +136,27 @@ class MapOptions {
   void set_center(const LngLat* value_arg);
   void set_center(const LngLat& value_arg);
 
+  // The maximum bounding box of the map camera.
+  const LngLatBounds* max_bounds() const;
+  void set_max_bounds(const LngLatBounds* value_arg);
+  void set_max_bounds(const LngLatBounds& value_arg);
+
+  // The minimum zoom level of the map.
+  double min_zoom() const;
+  void set_min_zoom(double value_arg);
+
+  // The maximum zoom level of the map.
+  double max_zoom() const;
+  void set_max_zoom(double value_arg);
+
+  // The minimum pitch / tilt of the map.
+  double min_tilt() const;
+  void set_min_tilt(double value_arg);
+
+  // The maximum pitch / tilt of the map.
+  double max_tilt() const;
+  void set_max_tilt(double value_arg);
+
   // If the native map should listen to click events.
   bool listens_on_click() const;
   void set_listens_on_click(bool value_arg);
@@ -147,6 +177,11 @@ class MapOptions {
   double tilt_;
   double bearing_;
   std::unique_ptr<LngLat> center_;
+  std::unique_ptr<LngLatBounds> max_bounds_;
+  double min_zoom_;
+  double max_zoom_;
+  double min_tilt_;
+  double max_tilt_;
   bool listens_on_click_;
   bool listens_on_long_click_;
 
@@ -289,6 +324,7 @@ class LngLatBounds {
  private:
   static LngLatBounds FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
+  friend class MapOptions;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
@@ -505,6 +541,10 @@ class MapLibreHostApi {
   // Returns the distance spanned by one pixel at the specified latitude and
   // current zoom level.
   virtual ErrorOr<double> GetMetersPerPixelAtLatitude(double latitude) = 0;
+  // Update the map options.
+  virtual void UpdateOptions(
+    const MapOptions& options,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
 
   // The codec used by MapLibreHostApi.
   static const flutter::StandardMessageCodec& GetCodec();

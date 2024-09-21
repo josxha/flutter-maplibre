@@ -22,6 +22,7 @@ import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.geometry.LatLngBounds
 import org.maplibre.android.geometry.LatLngQuad
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMapOptions
@@ -63,7 +64,7 @@ class MapLibreMapController(
     private lateinit var mapLibreMap: MapLibreMap
     private lateinit var mapView: MapView
     private val flutterApi: MapLibreFlutterApi
-    private lateinit var initialOptions: MapOptions
+    private lateinit var mapOptions: MapOptions
     private var style: Style? = null
 
     init {
@@ -71,24 +72,27 @@ class MapLibreMapController(
         MapLibreHostApi.setUp(binaryMessenger, this, channelSuffix)
         flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
         flutterApi.getOptions { result: Result<MapOptions> ->
-            initialOptions = result.getOrThrow()
+            mapOptions = result.getOrThrow()
             val cameraBuilder = CameraPosition.Builder()
-                .zoom(initialOptions.zoom)
-                .bearing(initialOptions.bearing)
-                .tilt(initialOptions.tilt)
-            if (initialOptions.center != null)
+                .zoom(mapOptions.zoom)
+                .bearing(mapOptions.bearing)
+                .tilt(mapOptions.tilt)
+            if (mapOptions.center != null)
                 cameraBuilder.target(
                     LatLng(
-                        initialOptions.center!!.lat,
-                        initialOptions.center!!.lng
+                        mapOptions.center!!.lat,
+                        mapOptions.center!!.lng
                     )
                 )
-
             val options = MapLibreMapOptions.createFromAttributes(context)
                 .attributionEnabled(true)
                 .logoEnabled(true)
                 .textureMode(true)
                 .compassEnabled(true)
+                .minZoomPreference(mapOptions.minZoom)
+                .maxZoomPreference(mapOptions.maxZoom)
+                .minPitchPreference(mapOptions.minTilt)
+                .maxPitchPreference(mapOptions.maxTilt)
                 .camera(cameraBuilder.build())
 
             MapLibre.getInstance(context) // needs to be called before MapView gets created
@@ -103,13 +107,13 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        if (initialOptions.listensOnClick) {
+        if (mapOptions.listensOnClick) {
             this.mapLibreMap.addOnMapClickListener { latLng ->
                 flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }
                 true
             }
         }
-        if (initialOptions.listensOnLongClick) {
+        if (mapOptions.listensOnLongClick) {
             this.mapLibreMap.addOnMapLongClickListener { latLng ->
                 flutterApi.onLongClick(LngLat(latLng.longitude, latLng.latitude)) { }
                 true
@@ -122,7 +126,7 @@ class MapLibreMapController(
             val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
             flutterApi.onCameraMoved(camera) {}
         }
-        val style = Style.Builder().fromUri(initialOptions.style)
+        val style = Style.Builder().fromUri(mapOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
             flutterApi.onStyleLoaded { }
@@ -524,4 +528,36 @@ class MapLibreMapController(
 
     override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
         mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
+
+    override fun updateOptions(options: MapOptions, callback: (Result<Unit>) -> Unit) {
+        if (mapOptions.minZoom != options.minZoom)
+            mapLibreMap.setMinZoomPreference(options.minZoom)
+        if (mapOptions.maxZoom != options.maxZoom)
+            mapLibreMap.setMaxZoomPreference(options.maxZoom)
+        if (mapOptions.minTilt != options.minTilt)
+            mapLibreMap.setMinPitchPreference(options.minTilt)
+        if (mapOptions.maxTilt != options.maxTilt)
+            mapLibreMap.setMaxPitchPreference(options.maxTilt)
+
+        // map bounds
+        val oldBounds = mapOptions.maxBounds
+        val newBounds = options.maxBounds
+        if (oldBounds != null && newBounds == null) {
+            // remove map bounds
+            mapLibreMap.setLatLngBoundsForCameraTarget(null)
+        } else if (oldBounds == null && newBounds != null) {
+            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest)
+            mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
+        } else if (newBounds != null &&
+            // can get improved when https://github.com/flutter/flutter/issues/118087 is implemented
+            (oldBounds?.latitudeNorth != newBounds.latitudeNorth
+            || oldBounds.latitudeSouth != newBounds.latitudeSouth
+            || oldBounds.longitudeEast != newBounds.longitudeEast
+            || oldBounds.longitudeWest != newBounds.longitudeWest)) {
+            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest)
+            mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
+        }
+    }
 }
