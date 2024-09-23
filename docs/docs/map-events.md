@@ -73,9 +73,9 @@ void _onEvent(event) {
 |                          | mouseout    |                                   |     |         |       |       |
 |                          | mouseover   |                                   |     |         |       |       |
 |                          | mouseup     |                                   |     |         |       |       |
-|                          | move        | OnCameraIsChangingListener        |     |         |       |       |
-|                          | movestart   | OnCameraWillChangeListener        |     |         |       |       |
-| MapEventMovementStopped  | moveend     | OnCameraDidChangeListener         |     |         |       |       |
+| onCameraMoved            | move        | OnCameraMoveListener              |     |         |       |       |
+|                          | movestart   |                                   |     |         |       |       |
+| MapEventMovementStopped  | moveend     |                                   |     |         |       |       |
 |                          | pitch       |                                   |     |         |       |       |
 |                          | pitchstart  |                                   |     |         |       |       |
 |                          | pitchend    |                                   |     |         |       |       |
