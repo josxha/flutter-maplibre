@@ -587,11 +587,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.dragPan.disable();
     }
     if (gestures.zoom) {
-      // TODO keyboard
-      _map.touchZoomRotate.enableZoom();
+      // TODO keyboard, touchZoomRotate
       _map.doubleClickZoom.enable();
     } else {
-      _map.touchZoomRotate.disableZoom();
       _map.doubleClickZoom.disable();
     }
     if (gestures.pitch) {

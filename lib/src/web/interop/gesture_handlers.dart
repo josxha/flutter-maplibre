@@ -68,10 +68,4 @@ extension type TwoFingersTouchZoomRotateHandler._(JSObject _)
 
   /// Disable the rotation.
   external void disableRotation();
-
-  /// Enable the zoom.
-  external void enableZoom();
-
-  /// Disable the zoom.
-  external void disableZoom();
 }
