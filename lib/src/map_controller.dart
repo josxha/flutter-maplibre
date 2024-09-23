@@ -48,6 +48,9 @@ abstract interface class MapController {
   /// of the layers array and appear visually above all other layers.
   Future<void> addLayer(Layer layer, {String? belowLayerId});
 
+  /// Update the data of a GeoJSON source.
+  Future<void> updateGeoJsonSource({required String id, required String data});
+
   /// Removes the layer with the given ID from the map's style.
   Future<void> removeLayer(String id);
 

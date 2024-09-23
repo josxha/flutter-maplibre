@@ -441,6 +441,7 @@ typedef struct {
   void (*add_image)(const gchar* id, const uint8_t* bytes, size_t bytes_length, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*remove_image)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*update_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_image_source)(const gchar* id, const gchar* url, FlValue* coordinates, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_raster_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, MaplibreTileScheme scheme, const gchar* attribution, gboolean volatile, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_raster_dem_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, const gchar* attribution, MaplibreRasterDemEncoding encoding, gboolean volatile, double red_factor, double blue_factor, double green_factor, double base_shift, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
@@ -876,6 +877,25 @@ void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHos
  * Responds with an error to MapLibreHostApi.addGeoJsonSource. 
  */
 void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_update_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.updateGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_update_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_update_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.updateGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_update_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_map_libre_host_api_respond_add_image_source:

@@ -89,6 +89,9 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Update the maximum bounding box of the map camera.
   external void setMaxBounds(LngLatBounds? maxBounds);
+
+  /// Get a Source by its id.
+  external SourceSpecification getSource(String id);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -170,6 +173,9 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
     required JSAny urls,
     required JSAny coordinates,
   });
+
+  /// Used to update the data of a GeoJSON source.
+  external void setData(JSAny data);
 }
 
 /// The specifications of map layers.

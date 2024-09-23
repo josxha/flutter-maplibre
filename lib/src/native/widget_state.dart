@@ -373,4 +373,11 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> removeImage(String id) => _hostApi.removeImage(id);
+
+  @override
+  Future<void> updateGeoJsonSource({
+    required String id,
+    required String data,
+  }) =>
+      _hostApi.updateGeoJsonSource(id: id, data: data);
 }

@@ -388,6 +388,8 @@ interface MapLibreHostApi {
   fun removeImage(id: String, callback: (Result<Unit>) -> Unit)
   /** Add a GeoJSON source to the map style. */
   fun addGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
+  /** Update the data of a GeoJSON source. */
+  fun updateGeoJsonSource(id: String, data: String, callback: (Result<Unit>) -> Unit)
   /** Add a image source to the map style. */
   fun addImageSource(id: String, url: String, coordinates: List<LngLat>, callback: (Result<Unit>) -> Unit)
   /** Add a raster source to the map style. */
@@ -847,6 +849,26 @@ interface MapLibreHostApi {
             val idArg = args[0] as String
             val dataArg = args[1] as String
             api.addGeoJsonSource(idArg, dataArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateGeoJsonSource$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val idArg = args[0] as String
+            val dataArg = args[1] as String
+            api.updateGeoJsonSource(idArg, dataArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
