@@ -489,6 +489,11 @@ class MapLibreHostApi {
     const std::string& id,
     const std::string& data,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Update the data of a GeoJSON source.
+  virtual void UpdateGeoJsonSource(
+    const std::string& id,
+    const std::string& data,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Add a image source to the map style.
   virtual void AddImageSource(
     const std::string& id,

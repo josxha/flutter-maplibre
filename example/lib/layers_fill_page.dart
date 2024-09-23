@@ -42,6 +42,3 @@ class _LayersFillPageState extends State<LayersFillPage> {
     );
   }
 }
-
-// TODO fill extrusion layer
-// TODO line layer

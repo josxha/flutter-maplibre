@@ -527,4 +527,13 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   Future<void> removeSource(String id) async => _map.removeSource(id);
+
+  @override
+  Future<void> updateGeoJsonSource({
+    required String id,
+    required String data,
+  }) async {
+    final source = _map.getSource(id);
+    source.setData(parse(data));
+  }
 }

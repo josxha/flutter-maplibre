@@ -415,6 +415,8 @@ protocol MapLibreHostApi {
   func removeImage(id: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a GeoJSON source to the map style.
   func addGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Update the data of a GeoJSON source.
+  func updateGeoJsonSource(id: String, data: String, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a image source to the map style.
   func addImageSource(id: String, url: String, coordinates: [LngLat], completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a raster source to the map style.
@@ -857,6 +859,25 @@ class MapLibreHostApiSetup {
       }
     } else {
       addGeoJsonSourceChannel.setMessageHandler(nil)
+    }
+    /// Update the data of a GeoJSON source.
+    let updateGeoJsonSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateGeoJsonSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      updateGeoJsonSourceChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let idArg = args[0] as! String
+        let dataArg = args[1] as! String
+        api.updateGeoJsonSource(id: idArg, data: dataArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      updateGeoJsonSourceChannel.setMessageHandler(nil)
     }
     /// Add a image source to the map style.
     let addImageSourceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImageSource\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
