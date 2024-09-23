@@ -61,6 +61,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.setMinPitch(_options.minTilt);
         _map.setMaxPitch(_options.maxTilt);
         _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+        _updateGestures(_options.gestures);
 
         // add controls
         for (final control in _options.controls) {
@@ -227,6 +228,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     if (_options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    }
+    if (_options.gestures != oldWidget.options.gestures) {
+      _updateGestures(_options.gestures);
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -567,5 +571,43 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }) async {
     final source = _map.getSource(id);
     source.setData(parse(data));
+  }
+
+  void _updateGestures(MapGestures gestures) {
+    if (gestures.doubleClickZoom) {
+      _map.doubleClickZoom.enable();
+    } else {
+      _map.doubleClickZoom.disable();
+    }
+    if (gestures.dragPan) {
+      _map.dragPan.enable();
+    } else {
+      _map.dragPan.disable();
+    }
+    if (gestures.dragRotate) {
+      _map.dragRotate.enable();
+    } else {
+      _map.dragRotate.disable();
+    }
+    if (gestures.keyboard) {
+      _map.keyboard.enable();
+    } else {
+      _map.keyboard.disable();
+    }
+    if (gestures.scrollZoom) {
+      _map.scrollZoom.enable();
+    } else {
+      _map.scrollZoom.disable();
+    }
+    if (gestures.touchPitch) {
+      _map.touchPitch.enable();
+    } else {
+      _map.touchPitch.disable();
+    }
+    if (gestures.touchZoomRotate) {
+      _map.touchZoomRotate.enable();
+    } else {
+      _map.touchZoomRotate.disable();
+    }
   }
 }

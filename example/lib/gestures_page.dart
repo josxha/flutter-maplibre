@@ -12,7 +12,9 @@ class GesturesPage extends StatefulWidget {
 }
 
 class _GesturesPageState extends State<GesturesPage> {
-  final _selections = List.generate(Gestures.values.length, (_) => true);
+  final _selections = Map.fromEntries(
+    Gestures.values.map((e) => MapEntry(e, false)),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +27,18 @@ class _GesturesPageState extends State<GesturesPage> {
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: [
-                ToggleButtons(
-                  isSelected: _selections,
-                  onPressed: (index) => setState(() {
-                    _selections[index] = !_selections[index];
-                  }),
-                  children: Gestures.values
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(e.name),
-                        ),
-                      )
-                      .toList(growable: false),
-                ),
-              ],
+              children: Gestures.values
+                  .map(
+                    (e) =>
+                    ChoiceChip(
+                      label: Text(e.name),
+                      selected: _selections[e]!,
+                      onSelected: (value) => setState(() {
+                        _selections[e] = !_selections[e]!;
+                      }),
+                    ),
+              )
+                  .toList(growable: false),
             ),
           ),
           Expanded(
@@ -49,14 +47,13 @@ class _GesturesPageState extends State<GesturesPage> {
                 center: Position(9.17, 47.68),
                 zoom: 3,
                 gestures: MapGestures(
-                  doubleClickZoom: _selections[0],
-                  dragPan: _selections[1],
-                  dragRotate: _selections[2],
-                  keyboard: _selections[3],
-                  pitchWithRotate: _selections[4],
-                  scrollZoom: _selections[5],
-                  touchPitch: _selections[6],
-                  touchZoomRotate: _selections[7],
+                  doubleClickZoom: _selections[Gestures.doubleClickZoom]!,
+                  dragPan: _selections[Gestures.dragPan]!,
+                  dragRotate: _selections[Gestures.dragRotate]!,
+                  keyboard: _selections[Gestures.keyboard]!,
+                  scrollZoom: _selections[Gestures.scrollZoom]!,
+                  touchPitch: _selections[Gestures.touchPitch]!,
+                  touchZoomRotate: _selections[Gestures.touchZoomRotate]!,
                 ),
               ),
             ),
@@ -72,7 +69,6 @@ enum Gestures {
   dragPan,
   dragRotate,
   keyboard,
-  pitchWithRotate,
   scrollZoom,
   touchPitch,
   touchZoomRotate;
