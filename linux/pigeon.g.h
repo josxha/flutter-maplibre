@@ -41,6 +41,155 @@ typedef enum {
 } MaplibreRasterDemEncoding;
 
 /**
+ * MaplibreMapOptions:
+ *
+ * The map options define initial values for the MapLibre map.
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPTIONS, GObject)
+
+/**
+ * maplibre_map_options_new:
+ * style: field in this object.
+ * zoom: field in this object.
+ * tilt: field in this object.
+ * bearing: field in this object.
+ * center: field in this object.
+ * max_bounds: field in this object.
+ * min_zoom: field in this object.
+ * max_zoom: field in this object.
+ * min_tilt: field in this object.
+ * max_tilt: field in this object.
+ * listens_on_click: field in this object.
+ * listens_on_long_click: field in this object.
+ *
+ * Creates a new #MapOptions object.
+ *
+ * Returns: a new #MaplibreMapOptions
+ */
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_tilt, double max_tilt, gboolean listens_on_click, gboolean listens_on_long_click);
+
+/**
+ * maplibre_map_options_get_style
+ * @object: a #MaplibreMapOptions.
+ *
+ * The URL of the used map style.
+ *
+ * Returns: the field value.
+ */
+const gchar* maplibre_map_options_get_style(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * The initial zoom level of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * The initial tilt of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_tilt(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_bearing
+ * @object: a #MaplibreMapOptions.
+ *
+ * The initial bearing of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_bearing(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_center
+ * @object: a #MaplibreMapOptions.
+ *
+ * The initial center coordinates of the map.
+ *
+ * Returns: the field value.
+ */
+MaplibreLngLat* maplibre_map_options_get_center(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_bounds
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum bounding box of the map camera.
+ *
+ * Returns: the field value.
+ */
+MaplibreLngLatBounds* maplibre_map_options_get_max_bounds(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_min_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * The minimum zoom level of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_min_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_zoom
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum zoom level of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_max_zoom(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_min_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * The minimum pitch / tilt of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_min_tilt(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_max_tilt
+ * @object: a #MaplibreMapOptions.
+ *
+ * The maximum pitch / tilt of the map.
+ *
+ * Returns: the field value.
+ */
+double maplibre_map_options_get_max_tilt(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_listens_on_click
+ * @object: a #MaplibreMapOptions.
+ *
+ * If the native map should listen to click events.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_listens_on_long_click
+ * @object: a #MaplibreMapOptions.
+ *
+ * If the native map should listen to long click events.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_options_get_listens_on_long_click(MaplibreMapOptions* object);
+
+/**
  * MaplibreLngLat:
  *
  * A longitude/latitude coordinate object.
@@ -239,6 +388,1228 @@ double maplibre_lng_lat_bounds_get_latitude_south(MaplibreLngLatBounds* object);
  * Returns: the field value.
  */
 double maplibre_lng_lat_bounds_get_latitude_north(MaplibreLngLatBounds* object);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiResponseHandle, maplibre_map_libre_host_api_response_handle, MAPLIBRE, MAP_LIBRE_HOST_API_RESPONSE_HANDLE, GObject)
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse, maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response, MAPLIBRE, MAP_LIBRE_HOST_API_GET_METERS_PER_PIXEL_AT_LATITUDE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response_new:
+ *
+ * Creates a new response to MapLibreHostApi.getMetersPerPixelAtLatitude.
+ *
+ * Returns: a new #MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse
+ */
+MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response_new(double return_value);
+
+/**
+ * maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response_new_error:
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Creates a new error response to MapLibreHostApi.getMetersPerPixelAtLatitude.
+ *
+ * Returns: a new #MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse
+ */
+MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* maplibre_map_libre_host_api_get_meters_per_pixel_at_latitude_response_new_error(const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * MaplibreMapLibreHostApiVTable:
+ *
+ * Table of functions exposed by MapLibreHostApi to be implemented by the API provider.
+ */
+typedef struct {
+  void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*get_camera)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*to_lng_lat)(double x, double y, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_fill_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_circle_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_background_layer)(const gchar* id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_fill_extrusion_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_heatmap_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_hillshade_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_line_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_symbol_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_layer)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_source)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*load_image)(const gchar* url, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_image)(const gchar* id, const uint8_t* bytes, size_t bytes_length, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*remove_image)(const gchar* id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*update_geo_json_source)(const gchar* id, const gchar* data, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_image_source)(const gchar* id, const gchar* url, FlValue* coordinates, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, MaplibreTileScheme scheme, const gchar* attribution, gboolean volatile, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_raster_dem_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, double min_zoom, double max_zoom, int64_t tile_size, const gchar* attribution, MaplibreRasterDemEncoding encoding, gboolean volatile, double red_factor, double blue_factor, double green_factor, double base_shift, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*add_vector_source)(const gchar* id, const gchar* url, FlValue* tiles, FlValue* bounds, MaplibreTileScheme scheme, double min_zoom, double max_zoom, const gchar* attribution, gboolean volatile, const gchar* source_layer, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* (*get_meters_per_pixel_at_latitude)(double latitude, gpointer user_data);
+  void (*update_options)(MaplibreMapOptions* options, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+} MaplibreMapLibreHostApiVTable;
+
+/**
+ * maplibre_map_libre_host_api_set_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ * @vtable: implementations of the methods in this API.
+ * @user_data: (closure): user data to pass to the functions in @vtable.
+ * @user_data_free_func: (allow-none): a function which gets called to free @user_data, or %NULL.
+ *
+ * Connects the method handlers in the MapLibreHostApi API.
+ */
+void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreMapLibreHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func);
+
+/**
+ * maplibre_map_libre_host_api_clear_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ *
+ * Clears the method handlers in the MapLibreHostApi API.
+ */
+void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_map_libre_host_api_respond_jump_to:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.jumpTo. 
+ */
+void maplibre_map_libre_host_api_respond_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_jump_to:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.jumpTo. 
+ */
+void maplibre_map_libre_host_api_respond_error_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_fly_to:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.flyTo. 
+ */
+void maplibre_map_libre_host_api_respond_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_fly_to:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.flyTo. 
+ */
+void maplibre_map_libre_host_api_respond_error_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_get_camera:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.getCamera. 
+ */
+void maplibre_map_libre_host_api_respond_get_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreMapCamera* return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_get_camera:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.getCamera. 
+ */
+void maplibre_map_libre_host_api_respond_error_get_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_get_visible_region:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.getVisibleRegion. 
+ */
+void maplibre_map_libre_host_api_respond_get_visible_region(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreLngLatBounds* return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_get_visible_region:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.getVisibleRegion. 
+ */
+void maplibre_map_libre_host_api_respond_error_get_visible_region(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_to_screen_location:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.toScreenLocation. 
+ */
+void maplibre_map_libre_host_api_respond_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreScreenLocation* return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_to_screen_location:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.toScreenLocation. 
+ */
+void maplibre_map_libre_host_api_respond_error_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_to_lng_lat:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to MapLibreHostApi.toLngLat. 
+ */
+void maplibre_map_libre_host_api_respond_to_lng_lat(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreLngLat* return_value);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_to_lng_lat:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.toLngLat. 
+ */
+void maplibre_map_libre_host_api_respond_error_to_lng_lat(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_fill_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addFillLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_fill_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_fill_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addFillLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_fill_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_circle_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addCircleLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_circle_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_circle_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addCircleLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_circle_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_background_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addBackgroundLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_background_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_background_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addBackgroundLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_background_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_fill_extrusion_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addFillExtrusionLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_fill_extrusion_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_fill_extrusion_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addFillExtrusionLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_fill_extrusion_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_heatmap_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addHeatmapLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_heatmap_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_heatmap_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addHeatmapLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_heatmap_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_hillshade_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addHillshadeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_hillshade_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_hillshade_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addHillshadeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_hillshade_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_line_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addLineLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_line_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_line_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addLineLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_line_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_symbol_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addSymbolLayer. 
+ */
+void maplibre_map_libre_host_api_respond_add_symbol_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_symbol_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addSymbolLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_symbol_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_layer:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeLayer. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_layer(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_load_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ * @return_value_length: (allow-none): location to write length of @return_value or %NULL to ignore.
+ *
+ * Responds to MapLibreHostApi.loadImage. 
+ */
+void maplibre_map_libre_host_api_respond_load_image(MaplibreMapLibreHostApiResponseHandle* response_handle, const uint8_t* return_value, size_t return_value_length);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_load_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.loadImage. 
+ */
+void maplibre_map_libre_host_api_respond_error_load_image(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addImage. 
+ */
+void maplibre_map_libre_host_api_respond_add_image(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addImage. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_image(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_remove_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.removeImage. 
+ */
+void maplibre_map_libre_host_api_respond_remove_image(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_remove_image:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.removeImage. 
+ */
+void maplibre_map_libre_host_api_respond_error_remove_image(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_update_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.updateGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_update_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_update_geo_json_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.updateGeoJsonSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_update_geo_json_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_image_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addImageSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_image_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_image_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addImageSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_image_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_raster_dem_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addRasterDemSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_raster_dem_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_raster_dem_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addRasterDemSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_raster_dem_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_add_vector_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.addVectorSource. 
+ */
+void maplibre_map_libre_host_api_respond_add_vector_source(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_add_vector_source:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.addVectorSource. 
+ */
+void maplibre_map_libre_host_api_respond_error_add_vector_source(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_update_options:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.updateOptions. 
+ */
+void maplibre_map_libre_host_api_respond_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_update_options:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.updateOptions. 
+ */
+void maplibre_map_libre_host_api_respond_error_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.getOptions is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_get_options_response_is_error(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_get_options_response_get_error_code(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_get_options_response_get_error_message(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_get_options_response_get_error_details(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_response_get_return_value:
+ * @response: a #MaplibreMapLibreFlutterApiGetOptionsResponse.
+ *
+ * Get the return value for this response.
+ *
+ * Returns: a return value.
+ */
+MaplibreMapOptions* maplibre_map_libre_flutter_api_get_options_response_get_return_value(MaplibreMapLibreFlutterApiGetOptionsResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnStyleLoadedResponse, maplibre_map_libre_flutter_api_on_style_loaded_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_STYLE_LOADED_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onStyleLoaded is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_style_loaded_response_is_error(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_code(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_message(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_style_loaded_response_get_error_details(MaplibreMapLibreFlutterApiOnStyleLoadedResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnClickResponse, maplibre_map_libre_flutter_api_on_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_CLICK_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_click_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnClickResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onClick is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_click_response_is_error(MaplibreMapLibreFlutterApiOnClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_click_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnClickResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_click_response_get_error_code(MaplibreMapLibreFlutterApiOnClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_click_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnClickResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_click_response_get_error_message(MaplibreMapLibreFlutterApiOnClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_click_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnClickResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_click_response_get_error_details(MaplibreMapLibreFlutterApiOnClickResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnIdleResponse, maplibre_map_libre_flutter_api_on_idle_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_IDLE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onIdle is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_idle_response_is_error(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_idle_response_get_error_code(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_idle_response_get_error_message(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_idle_response_get_error_details(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnCameraIdleResponse, maplibre_map_libre_flutter_api_on_camera_idle_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_CAMERA_IDLE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onCameraIdle is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_camera_idle_response_is_error(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_code(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_message(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_details(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnSecondaryClickResponse, maplibre_map_libre_flutter_api_on_secondary_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_SECONDARY_CLICK_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnSecondaryClickResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onSecondaryClick is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_secondary_click_response_is_error(MaplibreMapLibreFlutterApiOnSecondaryClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnSecondaryClickResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_code(MaplibreMapLibreFlutterApiOnSecondaryClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnSecondaryClickResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_message(MaplibreMapLibreFlutterApiOnSecondaryClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnSecondaryClickResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_secondary_click_response_get_error_details(MaplibreMapLibreFlutterApiOnSecondaryClickResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnDoubleClickResponse, maplibre_map_libre_flutter_api_on_double_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_DOUBLE_CLICK_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnDoubleClickResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onDoubleClick is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_double_click_response_is_error(MaplibreMapLibreFlutterApiOnDoubleClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnDoubleClickResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_double_click_response_get_error_code(MaplibreMapLibreFlutterApiOnDoubleClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnDoubleClickResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_double_click_response_get_error_message(MaplibreMapLibreFlutterApiOnDoubleClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnDoubleClickResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_double_click_response_get_error_details(MaplibreMapLibreFlutterApiOnDoubleClickResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnLongClickResponse, maplibre_map_libre_flutter_api_on_long_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_LONG_CLICK_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongClickResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onLongClick is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_long_click_response_is_error(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongClickResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_long_click_response_get_error_code(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongClickResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_long_click_response_get_error_message(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongClickResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_long_click_response_get_error_details(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnCameraMovedResponse, maplibre_map_libre_flutter_api_on_camera_moved_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_CAMERA_MOVED_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraMovedResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onCameraMoved is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_camera_moved_response_is_error(MaplibreMapLibreFlutterApiOnCameraMovedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraMovedResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_code(MaplibreMapLibreFlutterApiOnCameraMovedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraMovedResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_message(MaplibreMapLibreFlutterApiOnCameraMovedResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraMovedResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_camera_moved_response_get_error_details(MaplibreMapLibreFlutterApiOnCameraMovedResponse* response);
+
+/**
+ * MaplibreMapLibreFlutterApi:
+ *
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApi, maplibre_map_libre_flutter_api, MAPLIBRE, MAP_LIBRE_FLUTTER_API, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_new:
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ *
+ * Creates a new object to access the MapLibreFlutterApi API.
+ *
+ * Returns: a new #MaplibreMapLibreFlutterApi
+ */
+MaplibreMapLibreFlutterApi* maplibre_map_libre_flutter_api_new(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Get the map options from dart.
+ */
+void maplibre_map_libre_flutter_api_get_options(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_get_options_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_get_options() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiGetOptionsResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiGetOptionsResponse* maplibre_map_libre_flutter_api_get_options_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback for when the style has been loaded.
+ */
+void maplibre_map_libre_flutter_api_on_style_loaded(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_style_loaded_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_style_loaded() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnStyleLoadedResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnStyleLoadedResponse* maplibre_map_libre_flutter_api_on_style_loaded_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_click:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @point: parameter for this method.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the user clicks on the map.
+ */
+void maplibre_map_libre_flutter_api_on_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_click_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_click() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnClickResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnClickResponse* maplibre_map_libre_flutter_api_on_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map idles.
+ */
+void maplibre_map_libre_flutter_api_on_idle(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_idle() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnIdleResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnIdleResponse* maplibre_map_libre_flutter_api_on_idle_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map camera idles.
+ */
+void maplibre_map_libre_flutter_api_on_camera_idle(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_camera_idle() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnCameraIdleResponse* maplibre_map_libre_flutter_api_on_camera_idle_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @point: parameter for this method.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the user performs a secondary click on the map
+ * (e.g. by default a click with the right mouse button).
+ */
+void maplibre_map_libre_flutter_api_on_secondary_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_secondary_click_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_secondary_click() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnSecondaryClickResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnSecondaryClickResponse* maplibre_map_libre_flutter_api_on_secondary_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @point: parameter for this method.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the user performs a double click on the map.
+ */
+void maplibre_map_libre_flutter_api_on_double_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_double_click_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_double_click() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnDoubleClickResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnDoubleClickResponse* maplibre_map_libre_flutter_api_on_double_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @point: parameter for this method.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the user performs a long lasting click on the map.
+ */
+void maplibre_map_libre_flutter_api_on_long_click(MaplibreMapLibreFlutterApi* api, MaplibreLngLat* point, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_long_click_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_long_click() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnLongClickResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnLongClickResponse* maplibre_map_libre_flutter_api_on_long_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @camera: parameter for this method.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map camera changes.
+ */
+void maplibre_map_libre_flutter_api_on_camera_moved(MaplibreMapLibreFlutterApi* api, MaplibreMapCamera* camera, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_moved_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_camera_moved() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnCameraMovedResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnCameraMovedResponse* maplibre_map_libre_flutter_api_on_camera_moved_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 G_END_DECLS
 
