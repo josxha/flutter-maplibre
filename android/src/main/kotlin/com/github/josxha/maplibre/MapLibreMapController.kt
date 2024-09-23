@@ -437,6 +437,20 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
+    override fun updateGeoJsonSource(
+        id: String,
+        data: String,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val source = mapLibreMap.style?.getSourceAs<GeoJsonSource>(id)
+        if (source == null) {
+            callback(Result.failure(Exception("LAYER_NOT_FOUND")))
+            return
+        }
+        source.setGeoJson(data)
+        callback(Result.success(Unit))
+    }
+
     override fun addImageSource(
         id: String,
         url: String,

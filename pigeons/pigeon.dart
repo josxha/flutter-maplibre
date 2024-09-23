@@ -176,6 +176,13 @@ abstract interface class MapLibreHostApi {
     required String data,
   });
 
+  /// Update the data of a GeoJSON source.
+  @async
+  void updateGeoJsonSource({
+    required String id,
+    required String data,
+  });
+
   /// Add a image source to the map style.
   @async
   void addImageSource({
