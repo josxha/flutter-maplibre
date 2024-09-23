@@ -590,16 +590,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     if (gestures.zoom) {
       _map.touchZoomRotate.enableZoom();
-      _map.keyboard.enableZoom();
+      _map.doubleClickZoom.enable();
     } else {
       _map.touchZoomRotate.disableZoom();
-      _map.keyboard.disableZoom();
+      _map.doubleClickZoom.disable();
     }
     if (gestures.pitch) {
-      // TODO mouse rotation
+      // TODO drag rotation
       _map.touchPitch.enable();
     } else {
-      // TODO mouse rotation
+      // TODO drag rotation
       _map.touchPitch.disable();
     }
   }
