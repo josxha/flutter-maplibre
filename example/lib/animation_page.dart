@@ -42,9 +42,12 @@ class _AnimationPageState extends State<AnimationPage> {
       jsonDecode(geojsonLine) as Map<String, Object?>,
     );
     final lineString = geojson.features.first.geometry! as LineString;
+    // TODO: setting the id is currently required as geotypes would set it to null, Feature.id documented at https://datatracker.ietf.org/doc/html/rfc7946#section-3.2
+    geojson.features.first.id = 1;
     final allCoords = lineString.coordinates;
 
-    lineString.coordinates = List.empty();
+    // a LineString on MapLibre Native must have at least 2 Points
+    lineString.coordinates = allCoords.sublist(0,2);
     await _controller.addSource(
       GeoJsonSource(id: _sourceId, data: jsonEncode(geojson.toJson())),
     );
@@ -57,12 +60,14 @@ class _AnimationPageState extends State<AnimationPage> {
     );
 
     var index = 1;
-    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (index > allCoords.length) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+      index++;
+      if (index > allCoords.length -1) {
+        debugPrint('line animation completed');
         timer.cancel();
         return;
       }
-      lineString.coordinates = allCoords.sublist(0, index++);
+      lineString.coordinates = allCoords.sublist(0, index);
       _controller.updateGeoJsonSource(
         id: _sourceId,
         data: jsonEncode(geojson.toJson()),
