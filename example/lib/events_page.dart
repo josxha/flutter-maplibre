@@ -24,10 +24,12 @@ class _EventsPageState extends State<EventsPage> {
             options: MapOptions(center: Position(9.17, 47.68)),
             onEvent: _onEvent,
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            alignment: Alignment.bottomLeft,
-            child: Text(_eventMessages.join('\n')),
+          IgnorePointer(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              alignment: Alignment.bottomLeft,
+              child: Text(_eventMessages.join('\n')),
+            ),
           ),
         ],
       ),
@@ -51,6 +53,7 @@ class _EventsPageState extends State<EventsPage> {
         MapEventSecondaryClicked() =>
           _print('secondary clicked: ${_formatPosition(event.point)}'),
         MapEventIdle() => _print('idle'),
+        MapEventCameraIdle() => _print('camera idle'),
       };
 
   void _print(String message) {

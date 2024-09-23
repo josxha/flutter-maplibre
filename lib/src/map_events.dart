@@ -74,3 +74,12 @@ final class MapEventIdle extends MapEvent {
   /// Create a new [MapEventIdle] object.
   const MapEventIdle();
 }
+
+/// Emitted when the map camera enters an idle state.
+///
+/// No changes to the map camera though gestures or camera transitions are
+/// in progress.
+final class MapEventCameraIdle extends MapEvent {
+  /// Create a new [MapEventCameraIdle] object.
+  const MapEventCameraIdle();
+}

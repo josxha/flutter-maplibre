@@ -307,6 +307,9 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void onIdle() => widget.onEvent?.call(const MapEventIdle());
 
   @override
+  void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
+
+  @override
   void onDoubleClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventClicked(point: position));

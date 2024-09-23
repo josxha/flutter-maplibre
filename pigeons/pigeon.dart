@@ -263,6 +263,9 @@ abstract interface class MapLibreFlutterApi {
   /// Callback when the map idles.
   void onIdle();
 
+  /// Callback when the map camera idles.
+  void onCameraIdle();
+
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
   void onSecondaryClick(LngLat point);

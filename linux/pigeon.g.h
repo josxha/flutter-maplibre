@@ -1170,6 +1170,48 @@ const gchar* maplibre_map_libre_flutter_api_on_idle_response_get_error_message(M
  */
 FlValue* maplibre_map_libre_flutter_api_on_idle_response_get_error_details(MaplibreMapLibreFlutterApiOnIdleResponse* response);
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnCameraIdleResponse, maplibre_map_libre_flutter_api_on_camera_idle_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_CAMERA_IDLE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onCameraIdle is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_camera_idle_response_is_error(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_code(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_message(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_camera_idle_response_get_error_details(MaplibreMapLibreFlutterApiOnCameraIdleResponse* response);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnSecondaryClickResponse, maplibre_map_libre_flutter_api_on_secondary_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_SECONDARY_CLICK_RESPONSE, GObject)
 
 /**
@@ -1448,6 +1490,29 @@ void maplibre_map_libre_flutter_api_on_idle(MaplibreMapLibreFlutterApi* api, GCa
  * Returns: a #MaplibreMapLibreFlutterApiOnIdleResponse or %NULL on error.
  */
 MaplibreMapLibreFlutterApiOnIdleResponse* maplibre_map_libre_flutter_api_on_idle_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map camera idles.
+ */
+void maplibre_map_libre_flutter_api_on_camera_idle(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_camera_idle_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_camera_idle() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnCameraIdleResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnCameraIdleResponse* maplibre_map_libre_flutter_api_on_camera_idle_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
  * maplibre_map_libre_flutter_api_on_secondary_click:

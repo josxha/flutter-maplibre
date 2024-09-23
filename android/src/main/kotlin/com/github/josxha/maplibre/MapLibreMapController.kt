@@ -126,6 +126,7 @@ class MapLibreMapController(
             val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
             flutterApi.onCameraMoved(camera) {}
         }
+        this.mapLibreMap.addOnCameraIdleListener { flutterApi.onCameraIdle { } }
         this.mapView.addOnDidBecomeIdleListener { flutterApi.onIdle { } }
         val style = Style.Builder().fromUri(mapOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->

@@ -163,6 +163,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.on(
           interop.MapEventType.moveEnd,
           (interop.MapLibreEvent event) {
+            widget.onEvent?.call(const MapEventCameraIdle());
             if (_moveCompleter?.isCompleted ?? true) return;
             _moveCompleter?.complete(event);
           }.toJS,

@@ -74,8 +74,7 @@ void _onEvent(event) {
 |                          | mouseover   |                                   |     |         |       |       |
 |                          | mouseup     |                                   |     |         |       |       |
 | onCameraMoved            | move        | OnCameraMoveListener              |     |         |       |       |
-|                          | movestart   |                                   |     |         |       |       |
-|                          | moveend     |                                   |     |         |       |       |
+| MapEventCameraIdle       | moveend     | OnCameraMoveCanceledListener      |     |         |       |       |
 |                          | pitch       |                                   |     |         |       |       |
 |                          | rotate      |                                   |     |         |       |       |
 |                          | touchcancel |                                   |     |         |       |       |
