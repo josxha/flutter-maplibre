@@ -79,6 +79,22 @@ enum class RasterDemEncoding(val raw: Int) {
   }
 }
 
+/** The reason the camera is changing. */
+enum class CameraChangeReason(val raw: Int) {
+  /** Developer animation. */
+  DEVELOPER_ANIMATION(0),
+  /** API animation. */
+  API_ANIMATION(1),
+  /** API gesture */
+  API_GESTURE(2);
+
+  companion object {
+    fun ofRaw(raw: Int): CameraChangeReason? {
+      return values().firstOrNull { it.raw == raw }
+    }
+  }
+}
+
 /**
  * The map options define initial values for the MapLibre map.
  *
@@ -275,26 +291,31 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         }
       }
       131.toByte() -> {
-        return (readValue(buffer) as? List<Any?>)?.let {
-          MapOptions.fromList(it)
+        return (readValue(buffer) as Long?)?.let {
+          CameraChangeReason.ofRaw(it.toInt())
         }
       }
       132.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          LngLat.fromList(it)
+          MapOptions.fromList(it)
         }
       }
       133.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          ScreenLocation.fromList(it)
+          LngLat.fromList(it)
         }
       }
       134.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapCamera.fromList(it)
+          ScreenLocation.fromList(it)
         }
       }
       135.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
+        }
+      }
+      136.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLatBounds.fromList(it)
         }
@@ -312,24 +333,28 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(130)
         writeValue(stream, value.raw)
       }
-      is MapOptions -> {
+      is CameraChangeReason -> {
         stream.write(131)
-        writeValue(stream, value.toList())
+        writeValue(stream, value.raw)
       }
-      is LngLat -> {
+      is MapOptions -> {
         stream.write(132)
         writeValue(stream, value.toList())
       }
-      is ScreenLocation -> {
+      is LngLat -> {
         stream.write(133)
         writeValue(stream, value.toList())
       }
-      is MapCamera -> {
+      is ScreenLocation -> {
         stream.write(134)
         writeValue(stream, value.toList())
       }
-      is LngLatBounds -> {
+      is MapCamera -> {
         stream.write(135)
+        writeValue(stream, value.toList())
+      }
+      is LngLatBounds -> {
+        stream.write(136)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -1188,12 +1213,30 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     }
   }
   /** Callback when the map camera changes. */
-  fun onCameraMoved(cameraArg: MapCamera, callback: (Result<Unit>) -> Unit)
+  fun onMoveCamera(cameraArg: MapCamera, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved$separatedMessageChannelSuffix"
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(cameraArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+  /** Callback when the map camera starts changing. */
+  fun onStartMoveCamera(reasonArg: CameraChangeReason, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(reasonArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))

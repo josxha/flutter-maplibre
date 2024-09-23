@@ -59,27 +59,12 @@ void _onEvent(event) {
 |--------------------------|-------------|-----------------------------------|-----|---------|-------|-------|
 | MapEventMapCreated       |             |                                   |     |         |       |       |
 | MapEventStyleLoaded      | load        | (OnDidFinishLoadingStyleListener) |     |         |       |       |
-| MapEventClicked          | click       |                                   |     |         |       |       |
+| MapEventClicked          | click       | OnMapClickListener                |     |         |       |       |
 | MapEventDoubleClicked    | dblclick    |                                   |     |         |       |       |
 | MapEventSecondaryClicked | contextmenu |                                   |     |         |       |       |
-| MapEventLongClicked      |             |                                   |     |         |       |       |
-|                          | drag        |                                   |     |         |       |       |
-|                          | dragstart   |                                   |     |         |       |       |
-|                          | dragend     |                                   |     |         |       |       |
-|                          | error       |                                   |     |         |       |       |
+| MapEventLongClicked      |             | OnMapLongClickListener            |     |         |       |       |
 | MapEventIdle             | idle        | OnDidBecomeIdleListener           |     |         |       |       |
 |                          | mousedown   |                                   |     |         |       |       |
-|                          | mousemove   |                                   |     |         |       |       |
-|                          | mouseout    |                                   |     |         |       |       |
-|                          | mouseover   |                                   |     |         |       |       |
-|                          | mouseup     |                                   |     |         |       |       |
-| onCameraMoved            | move        | OnCameraMoveListener              |     |         |       |       |
+| MapEventStartMoveCamera  |             | OnCameraMoveStartedListener       |     |         |       |       |
+| MapEventMoveCamera       | move        | OnCameraMoveListener              |     |         |       |       |
 | MapEventCameraIdle       | moveend     | OnCameraMoveCanceledListener      |     |         |       |       |
-|                          | pitch       |                                   |     |         |       |       |
-|                          | rotate      |                                   |     |         |       |       |
-|                          | touchcancel |                                   |     |         |       |       |
-|                          | touchmove   |                                   |     |         |       |       |
-|                          | touchstart  |                                   |     |         |       |       |
-|                          | wheel       |                                   |     |         |       |       |
-|                          | zoom        |                                   |     |         |       |       |
-|                          | zoomend     |                                   |     |         |       |       |

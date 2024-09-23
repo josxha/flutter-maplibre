@@ -277,7 +277,10 @@ abstract interface class MapLibreFlutterApi {
   void onLongClick(LngLat point);
 
   /// Callback when the map camera changes.
-  void onCameraMoved(MapCamera camera);
+  void onMoveCamera(MapCamera camera);
+
+  /// Callback when the map camera starts changing.
+  void onStartMoveCamera(CameraChangeReason reason);
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -406,4 +409,16 @@ enum RasterDemEncoding {
   /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
   /// parameters.
   custom;
+}
+
+/// The reason the camera is changing.
+enum CameraChangeReason {
+  /// Developer animation.
+  developerAnimation,
+
+  /// API animation.
+  apiAnimation,
+
+  /// API gesture
+  apiGesture;
 }

@@ -76,6 +76,16 @@ enum class RasterDemEncoding {
   kCustom = 2
 };
 
+// The reason the camera is changing.
+enum class CameraChangeReason {
+  // Developer animation.
+  kDeveloperAnimation = 0,
+  // API animation.
+  kApiAnimation = 1,
+  // API gesture
+  kApiGesture = 2
+};
+
 
 // The map options define initial values for the MapLibre map.
 //
@@ -614,8 +624,13 @@ class MapLibreFlutterApi {
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
   // Callback when the map camera changes.
-  void OnCameraMoved(
+  void OnMoveCamera(
     const MapCamera& camera,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the map camera starts changing.
+  void OnStartMoveCamera(
+    const CameraChangeReason& reason,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
 

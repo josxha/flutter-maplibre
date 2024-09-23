@@ -513,18 +513,23 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
         return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<RasterDemEncoding>(enum_arg_value));
       }
     case 131: {
-        return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        const auto& encodable_enum_arg = ReadValue(stream);
+        const int64_t enum_arg_value = encodable_enum_arg.IsNull() ? 0 : encodable_enum_arg.LongValue();
+        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<CameraChangeReason>(enum_arg_value));
       }
     case 132: {
-        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 133: {
-        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 134: {
-        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 135: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 136: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -546,28 +551,33 @@ void PigeonInternalCodecSerializer::WriteValue(
       WriteValue(EncodableValue(static_cast<int>(std::any_cast<RasterDemEncoding>(*custom_value))), stream);
       return;
     }
-    if (custom_value->type() == typeid(MapOptions)) {
+    if (custom_value->type() == typeid(CameraChangeReason)) {
       stream->WriteByte(131);
+      WriteValue(EncodableValue(static_cast<int>(std::any_cast<CameraChangeReason>(*custom_value))), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(MapOptions)) {
+      stream->WriteByte(132);
       WriteValue(EncodableValue(std::any_cast<MapOptions>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLat)) {
-      stream->WriteByte(132);
+      stream->WriteByte(133);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(ScreenLocation)) {
-      stream->WriteByte(133);
+      stream->WriteByte(134);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(MapCamera)) {
-      stream->WriteByte(134);
+      stream->WriteByte(135);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLatBounds)) {
-      stream->WriteByte(135);
+      stream->WriteByte(136);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }
@@ -1983,14 +1993,39 @@ void MapLibreFlutterApi::OnLongClick(
   });
 }
 
-void MapLibreFlutterApi::OnCameraMoved(
+void MapLibreFlutterApi::OnMoveCamera(
   const MapCamera& camera_arg,
   std::function<void(void)>&& on_success,
   std::function<void(const FlutterError&)>&& on_error) {
-  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved" + message_channel_suffix_;
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera" + message_channel_suffix_;
   BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
   EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
     CustomEncodableValue(camera_arg),
+  });
+  channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
+    std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);
+    const auto& encodable_return_value = *response;
+    const auto* list_return_value = std::get_if<EncodableList>(&encodable_return_value);
+    if (list_return_value) {
+      if (list_return_value->size() > 1) {
+        on_error(FlutterError(std::get<std::string>(list_return_value->at(0)), std::get<std::string>(list_return_value->at(1)), list_return_value->at(2)));
+      } else {
+        on_success();
+      }
+    } else {
+      on_error(CreateConnectionError(channel_name));
+    } 
+  });
+}
+
+void MapLibreFlutterApi::OnStartMoveCamera(
+  const CameraChangeReason& reason_arg,
+  std::function<void(void)>&& on_success,
+  std::function<void(const FlutterError&)>&& on_error) {
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera" + message_channel_suffix_;
+  BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
+  EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
+    CustomEncodableValue(reason_arg),
   });
   channel.Send(encoded_api_arguments, [channel_name, on_success = std::move(on_success), on_error = std::move(on_error)](const uint8_t* reply, size_t reply_size) {
     std::unique_ptr<EncodableValue> response = GetCodec().DecodeMessage(reply, reply_size);

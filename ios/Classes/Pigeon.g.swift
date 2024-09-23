@@ -87,6 +87,16 @@ enum RasterDemEncoding: Int {
   case custom = 2
 }
 
+/// The reason the camera is changing.
+enum CameraChangeReason: Int {
+  /// Developer animation.
+  case developerAnimation = 0
+  /// API animation.
+  case apiAnimation = 1
+  /// API gesture
+  case apiGesture = 2
+}
+
 /// The map options define initial values for the MapLibre map.
 ///
 /// Generated class from Pigeon that represents data sent in messages.
@@ -310,14 +320,20 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
       }
       return nil
     case 131:
-      return MapOptions.fromList(self.readValue() as! [Any?])
+      let enumResultAsInt: Int? = nilOrValue(self.readValue() as! Int?)
+      if let enumResultAsInt = enumResultAsInt {
+        return CameraChangeReason(rawValue: enumResultAsInt)
+      }
+      return nil
     case 132:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      return MapOptions.fromList(self.readValue() as! [Any?])
     case 133:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     case 134:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
     case 135:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 136:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -333,20 +349,23 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
     } else if let value = value as? RasterDemEncoding {
       super.writeByte(130)
       super.writeValue(value.rawValue)
-    } else if let value = value as? MapOptions {
+    } else if let value = value as? CameraChangeReason {
       super.writeByte(131)
-      super.writeValue(value.toList())
-    } else if let value = value as? LngLat {
+      super.writeValue(value.rawValue)
+    } else if let value = value as? MapOptions {
       super.writeByte(132)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? LngLat {
       super.writeByte(133)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? ScreenLocation {
       super.writeByte(134)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? MapCamera {
       super.writeByte(135)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(136)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -1041,7 +1060,9 @@ protocol MapLibreFlutterApiProtocol {
   /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera changes.
-  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the map camera starts changing.
+  func onStartMoveCamera(reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void)
 }
 class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   private let binaryMessenger: FlutterBinaryMessenger
@@ -1210,10 +1231,29 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the map camera changes.
-  func onCameraMoved(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved\(messageChannelSuffix)"
+  func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([cameraArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  /// Callback when the map camera starts changing.
+  func onStartMoveCamera(reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([reasonArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
