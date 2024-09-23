@@ -12,24 +12,22 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  String _lastEventMessage = '';
+  final _eventMessages = <String>[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Events')),
-      body: Column(
+      body: Stack(
         children: [
-          Container(
-            constraints: const BoxConstraints(minHeight: 60),
-            padding: const EdgeInsets.all(8),
-            child: Text(_lastEventMessage, textAlign: TextAlign.center),
+          MapLibreMap(
+            options: MapOptions(center: Position(9.17, 47.68)),
+            onEvent: _onEvent,
           ),
-          Expanded(
-            child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68)),
-              onEvent: _onEvent,
-            ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.bottomLeft,
+            child: Text(_eventMessages.join('\n')),
           ),
         ],
       ),
@@ -58,10 +56,11 @@ class _EventsPageState extends State<EventsPage> {
   void _print(String message) {
     debugPrint('[MapLibreMap] $message');
     setState(() {
-      _lastEventMessage = message;
+      _eventMessages.add(message);
+      if (_eventMessages.length > 10) _eventMessages.removeAt(0);
     });
   }
 
   String _formatPosition(Position point) =>
-      '${point.lng.toStringAsFixed(6)}, ${point.lat.toStringAsFixed(6)}';
+      '${point.lng.toStringAsFixed(3)}, ${point.lat.toStringAsFixed(3)}';
 }
