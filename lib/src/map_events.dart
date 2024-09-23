@@ -22,12 +22,33 @@ final class MapEventMapCreated extends MapEvent {
 }
 
 /// Emitted when the map camera changes.
-final class MapEventCameraMoved extends MapEvent {
-  /// Create a new [MapEventCameraMoved] object.
-  const MapEventCameraMoved({required this.camera});
+final class MapEventMoveCamera extends MapEvent {
+  /// Create a new [MapEventMoveCamera] object.
+  const MapEventMoveCamera({required this.camera});
 
   /// The new [MapCamera].
   final MapCamera camera;
+}
+
+/// Emitted when the map camera changes.
+final class MapEventStartMoveCamera extends MapEvent {
+  /// Create a new [MapEventStartMoveCamera] object.
+  const MapEventStartMoveCamera({required this.reason});
+
+  /// The reason the camera is changed.
+  final CameraChangeReason reason;
+}
+
+/// The reason the camera is changing.
+enum CameraChangeReason {
+  /// The developer programmatically caused the change of the camera.
+  developerAnimation,
+
+  /// The camera change is caused by the SDK.
+  apiAnimation,
+
+  /// The user caused the camera change by a gesture input.
+  apiGesture;
 }
 
 /// Emitted when the user interacts with the map in any way. Use this class if
@@ -41,27 +62,45 @@ sealed class MapEventUserInput extends MapEvent {
 }
 
 /// Emitted when the user clicks on the map.
-final class MapEventClicked extends MapEventUserInput {
-  /// Create a new [MapEventClicked] object.
-  const MapEventClicked({required super.point});
+final class MapEventClick extends MapEventUserInput {
+  /// Create a new [MapEventClick] object.
+  const MapEventClick({required super.point});
 }
 
 /// Emitted when the user clicks twice in a short amount of time on the map.
-final class MapEventDoubleClicked extends MapEventUserInput {
-  /// Create a new [MapEventDoubleClicked] object.
-  const MapEventDoubleClicked({required super.point});
+final class MapEventDoubleClick extends MapEventUserInput {
+  /// Create a new [MapEventDoubleClick] object.
+  const MapEventDoubleClick({required super.point});
 }
 
 /// Emitted when the user clicks with the secondary button on the map. This
 /// would be classically the right mouse button.
-final class MapEventSecondaryClicked extends MapEventUserInput {
-  /// Create a new [MapEventSecondaryClicked] object.
-  const MapEventSecondaryClicked({required super.point});
+final class MapEventSecondaryClick extends MapEventUserInput {
+  /// Create a new [MapEventSecondaryClick] object.
+  const MapEventSecondaryClick({required super.point});
 }
 
 /// Emitted when the user clicks on the map and holds button down at the same
 /// location for some time.
-final class MapEventLongClicked extends MapEventUserInput {
-  /// Create a new [MapEventLongClicked] object.
-  const MapEventLongClicked({required super.point});
+final class MapEventLongClick extends MapEventUserInput {
+  /// Create a new [MapEventLongClick] object.
+  const MapEventLongClick({required super.point});
+}
+
+/// Emitted when the map enters an idle state.
+///
+/// No camera transitions are in progress, all currently requested tiles have
+/// loaded and all fade/transition animations have completed.
+final class MapEventIdle extends MapEvent {
+  /// Create a new [MapEventIdle] object.
+  const MapEventIdle();
+}
+
+/// Emitted when the map camera enters an idle state.
+///
+/// No changes to the map camera though gestures or camera transitions are
+/// in progress.
+final class MapEventCameraIdle extends MapEvent {
+  /// Create a new [MapEventCameraIdle] object.
+  const MapEventCameraIdle();
 }
