@@ -47,7 +47,7 @@ class _AnimationPageState extends State<AnimationPage> {
     final allCoords = lineString.coordinates;
 
     // a LineString on MapLibre Native must have at least 2 Points
-    lineString.coordinates = allCoords.sublist(0,2);
+    lineString.coordinates = allCoords.sublist(0, 2);
     await _controller.addSource(
       GeoJsonSource(id: _sourceId, data: jsonEncode(geojson.toJson())),
     );
@@ -62,7 +62,7 @@ class _AnimationPageState extends State<AnimationPage> {
     var index = 1;
     _timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
       index++;
-      if (index > allCoords.length -1) {
+      if (index > allCoords.length - 1) {
         debugPrint('line animation completed');
         timer.cancel();
         return;
