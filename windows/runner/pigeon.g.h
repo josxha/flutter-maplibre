@@ -36,27 +36,6 @@ class FlutterError {
   flutter::EncodableValue details_;
 };
 
-template<class T> class ErrorOr {
- public:
-  ErrorOr(const T& rhs) : v_(rhs) {}
-  ErrorOr(const T&& rhs) : v_(std::move(rhs)) {}
-  ErrorOr(const FlutterError& rhs) : v_(rhs) {}
-  ErrorOr(const FlutterError&& rhs) : v_(std::move(rhs)) {}
-
-  bool has_error() const { return std::holds_alternative<FlutterError>(v_); }
-  const T& value() const { return std::get<T>(v_); };
-  const FlutterError& error() const { return std::get<FlutterError>(v_); };
-
- private:
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
-  ErrorOr() = default;
-  T TakeValue() && { return std::get<T>(std::move(v_)); }
-
-  std::variant<T, FlutterError> v_;
-};
-
-
 // Influences the y direction of the tile coordinates.
 enum class TileScheme {
   // Slippy map tilenames scheme.
@@ -74,117 +53,6 @@ enum class RasterDemEncoding {
   // Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
   // parameters.
   kCustom = 2
-};
-
-
-// The map options define initial values for the MapLibre map.
-//
-// Generated class from Pigeon that represents data sent in messages.
-class MapOptions {
- public:
-  // Constructs an object setting all non-nullable fields.
-  explicit MapOptions(
-    const std::string& style,
-    double zoom,
-    double tilt,
-    double bearing,
-    double min_zoom,
-    double max_zoom,
-    double min_tilt,
-    double max_tilt,
-    bool listens_on_click,
-    bool listens_on_long_click);
-
-  // Constructs an object setting all fields.
-  explicit MapOptions(
-    const std::string& style,
-    double zoom,
-    double tilt,
-    double bearing,
-    const LngLat* center,
-    const LngLatBounds* max_bounds,
-    double min_zoom,
-    double max_zoom,
-    double min_tilt,
-    double max_tilt,
-    bool listens_on_click,
-    bool listens_on_long_click);
-
-  ~MapOptions() = default;
-  MapOptions(const MapOptions& other);
-  MapOptions& operator=(const MapOptions& other);
-  MapOptions(MapOptions&& other) = default;
-  MapOptions& operator=(MapOptions&& other) noexcept = default;
-  // The URL of the used map style.
-  const std::string& style() const;
-  void set_style(std::string_view value_arg);
-
-  // The initial zoom level of the map.
-  double zoom() const;
-  void set_zoom(double value_arg);
-
-  // The initial tilt of the map.
-  double tilt() const;
-  void set_tilt(double value_arg);
-
-  // The initial bearing of the map.
-  double bearing() const;
-  void set_bearing(double value_arg);
-
-  // The initial center coordinates of the map.
-  const LngLat* center() const;
-  void set_center(const LngLat* value_arg);
-  void set_center(const LngLat& value_arg);
-
-  // The maximum bounding box of the map camera.
-  const LngLatBounds* max_bounds() const;
-  void set_max_bounds(const LngLatBounds* value_arg);
-  void set_max_bounds(const LngLatBounds& value_arg);
-
-  // The minimum zoom level of the map.
-  double min_zoom() const;
-  void set_min_zoom(double value_arg);
-
-  // The maximum zoom level of the map.
-  double max_zoom() const;
-  void set_max_zoom(double value_arg);
-
-  // The minimum pitch / tilt of the map.
-  double min_tilt() const;
-  void set_min_tilt(double value_arg);
-
-  // The maximum pitch / tilt of the map.
-  double max_tilt() const;
-  void set_max_tilt(double value_arg);
-
-  // If the native map should listen to click events.
-  bool listens_on_click() const;
-  void set_listens_on_click(bool value_arg);
-
-  // If the native map should listen to long click events.
-  bool listens_on_long_click() const;
-  void set_listens_on_long_click(bool value_arg);
-
-
- private:
-  static MapOptions FromEncodableList(const flutter::EncodableList& list);
-  flutter::EncodableList ToEncodableList() const;
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
-  friend class PigeonInternalCodecSerializer;
-  std::string style_;
-  double zoom_;
-  double tilt_;
-  double bearing_;
-  std::unique_ptr<LngLat> center_;
-  std::unique_ptr<LngLatBounds> max_bounds_;
-  double min_zoom_;
-  double max_zoom_;
-  double min_tilt_;
-  double max_tilt_;
-  bool listens_on_click_;
-  bool listens_on_long_click_;
-
 };
 
 
@@ -210,10 +78,7 @@ class LngLat {
  private:
   static LngLat FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapOptions;
   friend class MapCamera;
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   double lng_;
   double lat_;
@@ -243,8 +108,6 @@ class ScreenLocation {
  private:
   static ScreenLocation FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   double x_;
   double y_;
@@ -285,8 +148,6 @@ class MapCamera {
  private:
   static MapCamera FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   std::unique_ptr<LngLat> center_;
   double zoom_;
@@ -324,9 +185,6 @@ class LngLatBounds {
  private:
   static LngLatBounds FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
-  friend class MapOptions;
-  friend class MapLibreHostApi;
-  friend class MapLibreFlutterApi;
   friend class PigeonInternalCodecSerializer;
   double longitude_west_;
   double longitude_east_;
@@ -353,275 +211,6 @@ class PigeonInternalCodecSerializer : public flutter::StandardCodecSerializer {
     uint8_t type,
     flutter::ByteStreamReader* stream) const override;
 
-};
-
-// Generated interface from Pigeon that represents a handler of messages from Flutter.
-class MapLibreHostApi {
- public:
-  MapLibreHostApi(const MapLibreHostApi&) = delete;
-  MapLibreHostApi& operator=(const MapLibreHostApi&) = delete;
-  virtual ~MapLibreHostApi() {}
-  // Move the viewport of the map to a new location without any animation.
-  virtual void JumpTo(
-    const LngLat* center,
-    const double* zoom,
-    const double* bearing,
-    const double* pitch,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Animate the viewport of the map to a new location.
-  virtual void FlyTo(
-    const LngLat* center,
-    const double* zoom,
-    const double* bearing,
-    const double* pitch,
-    int64_t duration_ms,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Get the current camera position with the map center, zoom level, camera
-  // tilt and map rotation.
-  virtual void GetCamera(std::function<void(ErrorOr<MapCamera> reply)> result) = 0;
-  // Get the visible region of the current map camera.
-  virtual void GetVisibleRegion(std::function<void(ErrorOr<LngLatBounds> reply)> result) = 0;
-  // Convert a coordinate to a location on the screen.
-  virtual void ToScreenLocation(
-    double lng,
-    double lat,
-    std::function<void(ErrorOr<ScreenLocation> reply)> result) = 0;
-  // Convert a screen location to a coordinate.
-  virtual void ToLngLat(
-    double x,
-    double y,
-    std::function<void(ErrorOr<LngLat> reply)> result) = 0;
-  // Add a fill layer to the map style.
-  virtual void AddFillLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a circle layer to the map style.
-  virtual void AddCircleLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a background layer to the map style.
-  virtual void AddBackgroundLayer(
-    const std::string& id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a fill extrusion layer to the map style.
-  virtual void AddFillExtrusionLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a heatmap layer to the map style.
-  virtual void AddHeatmapLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a hillshade layer to the map style.
-  virtual void AddHillshadeLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a line layer to the map style.
-  virtual void AddLineLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a raster layer to the map style.
-  virtual void AddRasterLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a symbol layer to the map style.
-  virtual void AddSymbolLayer(
-    const std::string& id,
-    const std::string& source_id,
-    const flutter::EncodableMap& layout,
-    const flutter::EncodableMap& paint,
-    const std::string* below_layer_id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Removes the layer with the given ID from the map's style.
-  virtual void RemoveLayer(
-    const std::string& id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Removes the source with the given ID from the map's style.
-  virtual void RemoveSource(
-    const std::string& id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Loads an image to the map. An image needs to be loaded before it can
-  // get used.
-  virtual void LoadImage(
-    const std::string& url,
-    std::function<void(ErrorOr<std::vector<uint8_t>> reply)> result) = 0;
-  // Add an image to the map.
-  virtual void AddImage(
-    const std::string& id,
-    const std::vector<uint8_t>& bytes,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Removes an image from the map
-  virtual void RemoveImage(
-    const std::string& id,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a GeoJSON source to the map style.
-  virtual void AddGeoJsonSource(
-    const std::string& id,
-    const std::string& data,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Update the data of a GeoJSON source.
-  virtual void UpdateGeoJsonSource(
-    const std::string& id,
-    const std::string& data,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a image source to the map style.
-  virtual void AddImageSource(
-    const std::string& id,
-    const std::string& url,
-    const flutter::EncodableList& coordinates,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a raster source to the map style.
-  virtual void AddRasterSource(
-    const std::string& id,
-    const std::string* url,
-    const flutter::EncodableList* tiles,
-    const flutter::EncodableList& bounds,
-    double min_zoom,
-    double max_zoom,
-    int64_t tile_size,
-    const TileScheme& scheme,
-    const std::string* attribution,
-    bool volatile,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a raster DEM source to the map style.
-  virtual void AddRasterDemSource(
-    const std::string& id,
-    const std::string* url,
-    const flutter::EncodableList* tiles,
-    const flutter::EncodableList& bounds,
-    double min_zoom,
-    double max_zoom,
-    int64_t tile_size,
-    const std::string* attribution,
-    const RasterDemEncoding& encoding,
-    bool volatile,
-    double red_factor,
-    double blue_factor,
-    double green_factor,
-    double base_shift,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Add a vector source to the map style.
-  virtual void AddVectorSource(
-    const std::string& id,
-    const std::string* url,
-    const flutter::EncodableList* tiles,
-    const flutter::EncodableList& bounds,
-    const TileScheme& scheme,
-    double min_zoom,
-    double max_zoom,
-    const std::string* attribution,
-    bool volatile,
-    const std::string* source_layer,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Returns the distance spanned by one pixel at the specified latitude and
-  // current zoom level.
-  virtual ErrorOr<double> GetMetersPerPixelAtLatitude(double latitude) = 0;
-  // Update the map options.
-  virtual void UpdateOptions(
-    const MapOptions& options,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-
-  // The codec used by MapLibreHostApi.
-  static const flutter::StandardMessageCodec& GetCodec();
-  // Sets up an instance of `MapLibreHostApi` to handle messages through the `binary_messenger`.
-  static void SetUp(
-    flutter::BinaryMessenger* binary_messenger,
-    MapLibreHostApi* api);
-  static void SetUp(
-    flutter::BinaryMessenger* binary_messenger,
-    MapLibreHostApi* api,
-    const std::string& message_channel_suffix);
-  static flutter::EncodableValue WrapError(std::string_view error_message);
-  static flutter::EncodableValue WrapError(const FlutterError& error);
-
- protected:
-  MapLibreHostApi() = default;
-
-};
-// Generated class from Pigeon that represents Flutter messages that can be called from C++.
-class MapLibreFlutterApi {
- public:
-  MapLibreFlutterApi(flutter::BinaryMessenger* binary_messenger);
-  MapLibreFlutterApi(
-    flutter::BinaryMessenger* binary_messenger,
-    const std::string& message_channel_suffix);
-  static const flutter::StandardMessageCodec& GetCodec();
-  // Get the map options from dart.
-  void GetOptions(
-    std::function<void(const MapOptions&)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback for when the style has been loaded.
-  void OnStyleLoaded(
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user clicks on the map.
-  void OnClick(
-    const LngLat& point,
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the map idles.
-  void OnIdle(
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the map camera idles.
-  void OnCameraIdle(
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user performs a secondary click on the map
-  // (e.g. by default a click with the right mouse button).
-  void OnSecondaryClick(
-    const LngLat& point,
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user performs a double click on the map.
-  void OnDoubleClick(
-    const LngLat& point,
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user performs a long lasting click on the map.
-  void OnLongClick(
-    const LngLat& point,
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the map camera changes.
-  void OnCameraMoved(
-    const MapCamera& camera,
-    std::function<void(void)>&& on_success,
-    std::function<void(const FlutterError&)>&& on_error);
-
- private:
-  flutter::BinaryMessenger* binary_messenger_;
-  std::string message_channel_suffix_;
 };
 
 }  // namespace pigeon_maplibre
