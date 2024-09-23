@@ -575,20 +575,19 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   void _updateGestures(MapGestures gestures) {
     if (gestures.rotate) {
+      // TODO keyboard
       _map.touchZoomRotate.disableRotation();
-      _map.keyboard.disableRotation();
     } else {
       _map.touchZoomRotate.enableRotation();
-      _map.keyboard.enableRotation();
     }
     if (gestures.pan) {
-      // TODO keyboard pan
+      // TODO keyboard
       _map.dragPan.enable();
     } else {
-      // TODO keyboard pan
       _map.dragPan.disable();
     }
     if (gestures.zoom) {
+      // TODO keyboard
       _map.touchZoomRotate.enableZoom();
       _map.doubleClickZoom.enable();
     } else {
@@ -596,10 +595,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.doubleClickZoom.disable();
     }
     if (gestures.pitch) {
-      // TODO drag rotation
+      // TODO drag rotation, keyboard
       _map.touchPitch.enable();
     } else {
-      // TODO drag rotation
       _map.touchPitch.disable();
     }
   }

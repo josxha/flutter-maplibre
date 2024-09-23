@@ -34,12 +34,6 @@ extension type KeyboardHandler._(JSObject _) implements JSObject {
 
   /// Enable the gesture.
   external void enable();
-
-  /// Enable the rotation.
-  external void enableRotation();
-
-  /// Disable the rotation.
-  external void disableRotation();
 }
 
 /// https://maplibre.org/maplibre-gl-js/docs/API/classes/ScrollZoomHandler/
