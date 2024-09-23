@@ -12,22 +12,23 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  String _lastEventMessage = '';
+  final _eventMessages = <String>[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Events')),
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(_lastEventMessage, textAlign: TextAlign.center),
+          MapLibreMap(
+            options: MapOptions(center: Position(9.17, 47.68)),
+            onEvent: _onEvent,
           ),
-          Expanded(
-            child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68)),
-              onEvent: _onEvent,
+          IgnorePointer(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              alignment: Alignment.bottomLeft,
+              child: Text(_eventMessages.join('\n')),
             ),
           ),
         ],
@@ -38,28 +39,33 @@ class _EventsPageState extends State<EventsPage> {
   void _onEvent(MapEvent event) => switch (event) {
         MapEventMapCreated() => _print('map created'),
         MapEventStyleLoaded() => _print('style loaded'),
-        MapEventCameraMoved() => _print(
-            'camera moved: center ${_formatPosition(event.camera.center)}, '
+        MapEventMoveCamera() => _print(
+            'move camera: center ${_formatPosition(event.camera.center)}, '
             'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
             'tilt ${event.camera.tilt.toStringAsFixed(2)}, '
             'bearing ${event.camera.bearing.toStringAsFixed(2)}',
           ),
-        MapEventClicked() => _print('clicked: ${_formatPosition(event.point)}'),
-        MapEventDoubleClicked() =>
+        MapEventStartMoveCamera() =>
+          _print('start move camera, reason: ${event.reason.name}'),
+        MapEventClick() => _print('clicked: ${_formatPosition(event.point)}'),
+        MapEventDoubleClick() =>
           _print('double clicked: ${_formatPosition(event.point)}'),
-        MapEventLongClicked() =>
+        MapEventLongClick() =>
           _print('long clicked: ${_formatPosition(event.point)}'),
-        MapEventSecondaryClicked() =>
+        MapEventSecondaryClick() =>
           _print('secondary clicked: ${_formatPosition(event.point)}'),
+        MapEventIdle() => _print('idle'),
+        MapEventCameraIdle() => _print('camera idle'),
       };
 
   void _print(String message) {
     debugPrint('[MapLibreMap] $message');
     setState(() {
-      _lastEventMessage = message;
+      _eventMessages.add(message);
+      if (_eventMessages.length > 10) _eventMessages.removeAt(0);
     });
   }
 
   String _formatPosition(Position point) =>
-      '${point.lng.toStringAsFixed(6)}, ${point.lat.toStringAsFixed(6)}';
+      '${point.lng.toStringAsFixed(3)}, ${point.lat.toStringAsFixed(3)}';
 }
