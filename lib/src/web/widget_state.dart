@@ -574,40 +574,33 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   void _updateGestures(MapGestures gestures) {
-    if (gestures.doubleClickZoom) {
-      _map.doubleClickZoom.enable();
+    if (gestures.rotate) {
+      _map.touchZoomRotate.disableRotation();
+      _map.keyboard.disableRotation();
     } else {
-      _map.doubleClickZoom.disable();
+      _map.touchZoomRotate.enableRotation();
+      _map.keyboard.enableRotation();
     }
-    if (gestures.dragPan) {
+    if (gestures.pan) {
+      // TODO keyboard pan
       _map.dragPan.enable();
     } else {
+      // TODO keyboard pan
       _map.dragPan.disable();
     }
-    if (gestures.dragRotate) {
-      _map.dragRotate.enable();
+    if (gestures.zoom) {
+      _map.touchZoomRotate.enableZoom();
+      _map.keyboard.enableZoom();
     } else {
-      _map.dragRotate.disable();
+      _map.touchZoomRotate.disableZoom();
+      _map.keyboard.disableZoom();
     }
-    if (gestures.keyboard) {
-      _map.keyboard.enable();
-    } else {
-      _map.keyboard.disable();
-    }
-    if (gestures.scrollZoom) {
-      _map.scrollZoom.enable();
-    } else {
-      _map.scrollZoom.disable();
-    }
-    if (gestures.touchPitch) {
+    if (gestures.pitch) {
+      // TODO mouse rotation
       _map.touchPitch.enable();
     } else {
+      // TODO mouse rotation
       _map.touchPitch.disable();
-    }
-    if (gestures.touchZoomRotate) {
-      _map.touchZoomRotate.enable();
-    } else {
-      _map.touchZoomRotate.disable();
     }
   }
 }

@@ -81,6 +81,12 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         maxBounds: _options.maxBounds?.toLngLatBounds(),
         listensOnClick: widget.onEvent != null,
         listensOnLongClick: widget.onEvent != null,
+        gestures: pigeon.MapGestures(
+          rotate: _options.gestures.rotate,
+          pan: _options.gestures.pan,
+          zoom: _options.gestures.zoom,
+          tilt: _options.gestures.pitch,
+        ),
       );
 
   @override

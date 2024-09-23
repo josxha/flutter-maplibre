@@ -29,15 +29,14 @@ class _GesturesPageState extends State<GesturesPage> {
               runSpacing: 8,
               children: Gestures.values
                   .map(
-                    (e) =>
-                    ChoiceChip(
+                    (e) => ChoiceChip(
                       label: Text(e.name),
                       selected: _selections[e]!,
                       onSelected: (value) => setState(() {
                         _selections[e] = !_selections[e]!;
                       }),
                     ),
-              )
+                  )
                   .toList(growable: false),
             ),
           ),
@@ -47,13 +46,10 @@ class _GesturesPageState extends State<GesturesPage> {
                 center: Position(9.17, 47.68),
                 zoom: 3,
                 gestures: MapGestures(
-                  doubleClickZoom: _selections[Gestures.doubleClickZoom]!,
-                  dragPan: _selections[Gestures.dragPan]!,
-                  dragRotate: _selections[Gestures.dragRotate]!,
-                  keyboard: _selections[Gestures.keyboard]!,
-                  scrollZoom: _selections[Gestures.scrollZoom]!,
-                  touchPitch: _selections[Gestures.touchPitch]!,
-                  touchZoomRotate: _selections[Gestures.touchZoomRotate]!,
+                  rotate: _selections[Gestures.rotate]!,
+                  pan: _selections[Gestures.pan]!,
+                  zoom: _selections[Gestures.zoom]!,
+                  pitch: _selections[Gestures.tilt]!,
                 ),
               ),
             ),
@@ -65,11 +61,8 @@ class _GesturesPageState extends State<GesturesPage> {
 }
 
 enum Gestures {
-  doubleClickZoom,
-  dragPan,
-  dragRotate,
-  keyboard,
-  scrollZoom,
-  touchPitch,
-  touchZoomRotate;
+  rotate,
+  pan,
+  zoom,
+  tilt;
 }

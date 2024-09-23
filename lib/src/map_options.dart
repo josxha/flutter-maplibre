@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/map_gestures.dart';
 
 /// The [MapOptions] class is used to set default values for the [MapLibreMap]
 /// widget.
@@ -231,7 +230,7 @@ class AttributionControl extends MapControl {
   const AttributionControl({
     this.compact = true,
     this.customAttribution =
-    '<a href="https://maplibre.org/" target="_blank">MapLibre</a>',
+        '<a href="https://maplibre.org/" target="_blank">MapLibre</a>',
   });
 
   /// If `true`, the attribution control will always collapse when moving the

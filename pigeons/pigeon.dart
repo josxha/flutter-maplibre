@@ -298,6 +298,7 @@ class MapOptions {
     required this.maxTilt,
     required this.listensOnClick,
     required this.listensOnLongClick,
+    required this.gestures,
   });
 
   /// The URL of the used map style.
@@ -335,6 +336,32 @@ class MapOptions {
 
   /// If the native map should listen to long click events.
   final bool listensOnLongClick;
+
+  /// The map gestures.
+  final MapGestures gestures;
+}
+
+/// Map gestures
+class MapGestures {
+  /// Create a new [MapGestures] object by setting all gestures.
+  const MapGestures({
+    required this.rotate,
+    required this.pan,
+    required this.zoom,
+    required this.tilt,
+  });
+
+  /// Rotate the map bearing.
+  final bool rotate;
+
+  /// Move the center of the map around.
+  final bool pan;
+
+  /// Zoom the map in and out.
+  final bool zoom;
+
+  /// Tilt (pitch) the map camera.
+  final bool tilt;
 }
 
 /// A longitude/latitude coordinate object.
