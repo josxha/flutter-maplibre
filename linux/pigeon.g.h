@@ -1128,6 +1128,48 @@ const gchar* maplibre_map_libre_flutter_api_on_click_response_get_error_message(
  */
 FlValue* maplibre_map_libre_flutter_api_on_click_response_get_error_details(MaplibreMapLibreFlutterApiOnClickResponse* response);
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnIdleResponse, maplibre_map_libre_flutter_api_on_idle_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_IDLE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Checks if a response to MapLibreFlutterApi.onIdle is an error.
+ *
+ * Returns: a %TRUE if this response is an error.
+ */
+gboolean maplibre_map_libre_flutter_api_on_idle_response_is_error(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error code for this response.
+ *
+ * Returns: an error code or %NULL if not an error.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_idle_response_get_error_code(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error message for this response.
+ *
+ * Returns: an error message.
+ */
+const gchar* maplibre_map_libre_flutter_api_on_idle_response_get_error_message(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnIdleResponse.
+ *
+ * Get the error details for this response.
+ *
+ * Returns: (allow-none): an error details or %NULL.
+ */
+FlValue* maplibre_map_libre_flutter_api_on_idle_response_get_error_details(MaplibreMapLibreFlutterApiOnIdleResponse* response);
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnSecondaryClickResponse, maplibre_map_libre_flutter_api_on_secondary_click_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_SECONDARY_CLICK_RESPONSE, GObject)
 
 /**
@@ -1383,6 +1425,29 @@ void maplibre_map_libre_flutter_api_on_click(MaplibreMapLibreFlutterApi* api, Ma
  * Returns: a #MaplibreMapLibreFlutterApiOnClickResponse or %NULL on error.
  */
 MaplibreMapLibreFlutterApiOnClickResponse* maplibre_map_libre_flutter_api_on_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @cancellable: (allow-none): a #GCancellable or %NULL.
+ * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
+ * @user_data: (closure): user data to pass to @callback.
+ *
+ * Callback when the map idles.
+ */
+void maplibre_map_libre_flutter_api_on_idle(MaplibreMapLibreFlutterApi* api, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+
+/**
+ * maplibre_map_libre_flutter_api_on_idle_finish:
+ * @api: a #MaplibreMapLibreFlutterApi.
+ * @result: a #GAsyncResult.
+ * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
+ *
+ * Completes a maplibre_map_libre_flutter_api_on_idle() call.
+ *
+ * Returns: a #MaplibreMapLibreFlutterApiOnIdleResponse or %NULL on error.
+ */
+MaplibreMapLibreFlutterApiOnIdleResponse* maplibre_map_libre_flutter_api_on_idle_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
  * maplibre_map_libre_flutter_api_on_secondary_click:

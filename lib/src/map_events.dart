@@ -65,3 +65,12 @@ final class MapEventLongClicked extends MapEventUserInput {
   /// Create a new [MapEventLongClicked] object.
   const MapEventLongClicked({required super.point});
 }
+
+/// Emitted when the map enters an idle state.
+///
+/// No camera transitions are in progress, all currently requested tiles have
+/// loaded and all fade/transition animations have completed.
+final class MapEventIdle extends MapEvent {
+  /// Create a new [MapEventIdle] object.
+  const MapEventIdle();
+}

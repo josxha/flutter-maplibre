@@ -45,4 +45,11 @@ abstract class MapEventType {
 
   /// Fired once the map stops moving.
   static const moveEnd = 'moveend';
+
+  /// Fired after the last frame rendered before the map enters an "idle" state:
+  //
+  // No camera transitions are in progress
+  // All currently requested tiles have loaded
+  // All fade/transition animations have completed
+  static const idle = 'idle';
 }

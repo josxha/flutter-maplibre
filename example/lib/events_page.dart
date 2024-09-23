@@ -20,7 +20,8 @@ class _EventsPageState extends State<EventsPage> {
       appBar: AppBar(title: const Text('Events')),
       body: Column(
         children: [
-          Padding(
+          Container(
+            constraints: const BoxConstraints(minHeight: 60),
             padding: const EdgeInsets.all(8),
             child: Text(_lastEventMessage, textAlign: TextAlign.center),
           ),
@@ -51,6 +52,7 @@ class _EventsPageState extends State<EventsPage> {
           _print('long clicked: ${_formatPosition(event.point)}'),
         MapEventSecondaryClicked() =>
           _print('secondary clicked: ${_formatPosition(event.point)}'),
+        MapEventIdle() => _print('idle'),
       };
 
   void _print(String message) {

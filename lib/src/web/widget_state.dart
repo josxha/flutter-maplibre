@@ -143,6 +143,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           }.toJS,
         );
         _map.on(
+          interop.MapEventType.idle,
+          (interop.MapMouseEvent event) {
+            widget.onEvent?.call(const MapEventIdle());
+          }.toJS,
+        );
+        _map.on(
           interop.MapEventType.move,
           (interop.MapLibreEvent event) {
             final camera = MapCamera(

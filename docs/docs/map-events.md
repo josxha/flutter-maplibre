@@ -67,7 +67,7 @@ void _onEvent(event) {
 |                          | dragstart   |                                   |     |         |       |       |
 |                          | dragend     |                                   |     |         |       |       |
 |                          | error       |                                   |     |         |       |       |
-|                          | idle        | OnDidBecomeIdleListener           |     |         |       |       |
+| MapEventIdle             | idle        | OnDidBecomeIdleListener           |     |         |       |       |
 |                          | mousedown   |                                   |     |         |       |       |
 |                          | mousemove   |                                   |     |         |       |       |
 |                          | mouseout    |                                   |     |         |       |       |
@@ -75,14 +75,12 @@ void _onEvent(event) {
 |                          | mouseup     |                                   |     |         |       |       |
 | onCameraMoved            | move        | OnCameraMoveListener              |     |         |       |       |
 |                          | movestart   |                                   |     |         |       |       |
-| MapEventMovementStopped  | moveend     |                                   |     |         |       |       |
+|                          | moveend     |                                   |     |         |       |       |
 |                          | pitch       |                                   |     |         |       |       |
 |                          | pitchstart  |                                   |     |         |       |       |
 |                          | pitchend    |                                   |     |         |       |       |
-|                          | pitchend    |                                   |     |         |       |       |
 |                          | rotate      |                                   |     |         |       |       |
 |                          | rotatestart |                                   |     |         |       |       |
-|                          | rotateend   |                                   |     |         |       |       |
 |                          | rotateend   |                                   |     |         |       |       |
 |                          | touchcancel |                                   |     |         |       |       |
 |                          | touchend    |                                   |     |         |       |       |

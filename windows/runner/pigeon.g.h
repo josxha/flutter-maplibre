@@ -589,6 +589,10 @@ class MapLibreFlutterApi {
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the map idles.
+  void OnIdle(
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
   // Callback when the user performs a secondary click on the map
   // (e.g. by default a click with the right mouse button).
   void OnSecondaryClick(

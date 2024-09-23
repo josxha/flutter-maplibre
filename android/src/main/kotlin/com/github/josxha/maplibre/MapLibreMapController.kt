@@ -126,6 +126,7 @@ class MapLibreMapController(
             val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
             flutterApi.onCameraMoved(camera) {}
         }
+        this.mapView.addOnDidBecomeIdleListener { flutterApi.onIdle { } }
         val style = Style.Builder().fromUri(mapOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
@@ -560,17 +561,22 @@ class MapLibreMapController(
             // remove map bounds
             mapLibreMap.setLatLngBoundsForCameraTarget(null)
         } else if (oldBounds == null && newBounds != null) {
-            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest)
+            val bounds = LatLngBounds.from(
+                newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest
+            )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         } else if (newBounds != null &&
             // can get improved when https://github.com/flutter/flutter/issues/118087 is implemented
             (oldBounds?.latitudeNorth != newBounds.latitudeNorth
-            || oldBounds.latitudeSouth != newBounds.latitudeSouth
-            || oldBounds.longitudeEast != newBounds.longitudeEast
-            || oldBounds.longitudeWest != newBounds.longitudeWest)) {
-            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest)
+                    || oldBounds.latitudeSouth != newBounds.latitudeSouth
+                    || oldBounds.longitudeEast != newBounds.longitudeEast
+                    || oldBounds.longitudeWest != newBounds.longitudeWest)
+        ) {
+            val bounds = LatLngBounds.from(
+                newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest
+            )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         }
     }

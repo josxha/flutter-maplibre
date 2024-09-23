@@ -1029,6 +1029,8 @@ protocol MapLibreFlutterApiProtocol {
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user clicks on the map.
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the map idles.
+  func onIdle(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
   func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
@@ -1095,6 +1097,25 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  /// Callback when the map idles.
+  func onIdle(completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onIdle\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
