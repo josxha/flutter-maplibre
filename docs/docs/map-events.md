@@ -77,16 +77,10 @@ void _onEvent(event) {
 |                          | movestart   |                                   |     |         |       |       |
 |                          | moveend     |                                   |     |         |       |       |
 |                          | pitch       |                                   |     |         |       |       |
-|                          | pitchstart  |                                   |     |         |       |       |
-|                          | pitchend    |                                   |     |         |       |       |
 |                          | rotate      |                                   |     |         |       |       |
-|                          | rotatestart |                                   |     |         |       |       |
-|                          | rotateend   |                                   |     |         |       |       |
 |                          | touchcancel |                                   |     |         |       |       |
-|                          | touchend    |                                   |     |         |       |       |
 |                          | touchmove   |                                   |     |         |       |       |
 |                          | touchstart  |                                   |     |         |       |       |
 |                          | wheel       |                                   |     |         |       |       |
 |                          | zoom        |                                   |     |         |       |       |
-|                          | zoomstart   |                                   |     |         |       |       |
 |                          | zoomend     |                                   |     |         |       |       |

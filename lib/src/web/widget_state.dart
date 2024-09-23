@@ -158,6 +158,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
               bearing: _map.getBearing().toDouble(),
             );
             widget.onEvent?.call(MapEventCameraMoved(camera: camera));
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.moveEnd,
+          (interop.MapLibreEvent event) {
             if (_moveCompleter?.isCompleted ?? true) return;
             _moveCompleter?.complete(event);
           }.toJS,
