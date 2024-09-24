@@ -40,7 +40,7 @@ abstract interface class MapController {
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
   });
 
   /// Animate the map camera to a new location.
@@ -48,7 +48,7 @@ abstract interface class MapController {
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
