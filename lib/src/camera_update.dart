@@ -45,7 +45,7 @@ class CameraUpdateValues extends CameraUpdate {
   final double? pitch;
 }
 
-/// A [CameraUpdate] .
+/// A [CameraUpdate] with bounds the camera should be inside.
 @immutable
 class CameraUpdateInsideBounds extends CameraUpdate {
   /// Create a new [CameraUpdateInsideBounds] instance.
