@@ -574,29 +574,41 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   void _updateGestures(MapGestures gestures) {
-    if (gestures.rotate) {
-      // TODO keyboard
-      _map.touchZoomRotate.disableRotation();
-    } else {
-      _map.touchZoomRotate.enableRotation();
-    }
     if (gestures.pan) {
-      // TODO keyboard
       _map.dragPan.enable();
     } else {
       _map.dragPan.disable();
     }
     if (gestures.zoom) {
-      // TODO keyboard, touchZoomRotate
+      _map.touchZoomRotate.enable();
       _map.doubleClickZoom.enable();
+      _map.scrollZoom.enable();
+      _map.boxZoom.enable();
     } else {
+      _map.touchZoomRotate.disable(); // this disables rotation as well
       _map.doubleClickZoom.disable();
+      _map.scrollZoom.disable();
+      _map.boxZoom.disable();
+    }
+    if (gestures.rotate) { // has to be after doubleClickZoom.enable()
+      _map.dragRotate.enable();
+      _map.touchZoomRotate.disableRotation();
+    } else {
+      _map.touchZoomRotate.enableRotation();
+      _map.dragRotate.disable();
     }
     if (gestures.pitch) {
-      // TODO drag rotation, keyboard
+      // TODO dragRotate allows to pitch too but has no option to disable pitch.
       _map.touchPitch.enable();
     } else {
       _map.touchPitch.disable();
+    }
+    // It's not possible to disable just some gestures for the KeyboardHandler.
+    // That's why we disable it completely if not all gestures are enabled.
+    if (gestures.allEnabled) {
+      _map.keyboard.enable();
+    } else {
+      _map.keyboard.disable();
     }
   }
 }

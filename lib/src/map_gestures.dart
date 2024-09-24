@@ -41,6 +41,9 @@ class MapGestures {
   /// Tilt (pitch) the map camera.
   final bool pitch;
 
+  /// Returns true if all gestures are active
+  bool get allEnabled => rotate && pan && zoom && pitch;
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

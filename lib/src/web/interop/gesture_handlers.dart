@@ -45,6 +45,15 @@ extension type ScrollZoomHandler._(JSObject _) implements JSObject {
   external void enable();
 }
 
+/// https://maplibre.org/maplibre-gl-js/docs/API/classes/BoxZoomHandler/
+extension type BoxZoomHandler._(JSObject _) implements JSObject {
+  /// Disable the gesture.
+  external void disable();
+
+  /// Enable the gesture.
+  external void enable();
+}
+
 /// https://maplibre.org/maplibre-gl-js/docs/API/classes/TwoFingersTouchPitchHandler/
 extension type TwoFingersTouchPitchHandler._(JSObject _) implements JSObject {
   /// Disable the gesture.
