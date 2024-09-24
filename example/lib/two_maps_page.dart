@@ -77,7 +77,7 @@ class _ButtonsWidget extends StatelessWidget {
                 center: Position(-18.6874, 64.9445),
                 zoom: 5,
                 bearing: -50,
-                tilt: 60,
+                pitch: 60,
               );
             },
             child: const Text('Animate to Iceland'),

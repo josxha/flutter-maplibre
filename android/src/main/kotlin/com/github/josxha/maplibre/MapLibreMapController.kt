@@ -80,7 +80,7 @@ class MapLibreMapController(
             val cameraBuilder = CameraPosition.Builder()
                 .zoom(mapOptions.zoom)
                 .bearing(mapOptions.bearing)
-                .tilt(mapOptions.tilt)
+                .tilt(mapOptions.pitch)
             if (mapOptions.center != null)
                 cameraBuilder.target(
                     LatLng(
@@ -95,8 +95,8 @@ class MapLibreMapController(
                 .compassEnabled(true)
                 .minZoomPreference(mapOptions.minZoom)
                 .maxZoomPreference(mapOptions.maxZoom)
-                .minPitchPreference(mapOptions.minTilt)
-                .maxPitchPreference(mapOptions.maxTilt)
+                .minPitchPreference(mapOptions.minPitch)
+                .maxPitchPreference(mapOptions.maxPitch)
                 .camera(cameraBuilder.build())
 
             MapLibre.getInstance(context) // needs to be called before MapView gets created
@@ -563,10 +563,10 @@ class MapLibreMapController(
             mapLibreMap.setMinZoomPreference(options.minZoom)
         if (mapOptions.maxZoom != options.maxZoom)
             mapLibreMap.setMaxZoomPreference(options.maxZoom)
-        if (mapOptions.minTilt != options.minTilt)
-            mapLibreMap.setMinPitchPreference(options.minTilt)
-        if (mapOptions.maxTilt != options.maxTilt)
-            mapLibreMap.setMaxPitchPreference(options.maxTilt)
+        if (mapOptions.minPitch != options.minPitch)
+            mapLibreMap.setMinPitchPreference(options.minPitch)
+        if (mapOptions.maxPitch != options.maxPitch)
+            mapLibreMap.setMaxPitchPreference(options.maxPitch)
 
         // map bounds
         val oldBounds = mapOptions.maxBounds

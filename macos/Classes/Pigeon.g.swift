@@ -105,8 +105,8 @@ struct MapOptions {
   var style: String
   /// The initial zoom level of the map.
   var zoom: Double
-  /// The initial tilt of the map.
-  var tilt: Double
+  /// The initial pitch / tilt of the map.
+  var pitch: Double
   /// The initial bearing of the map.
   var bearing: Double
   /// The initial center coordinates of the map.
@@ -118,9 +118,9 @@ struct MapOptions {
   /// The maximum zoom level of the map.
   var maxZoom: Double
   /// The minimum pitch / tilt of the map.
-  var minTilt: Double
+  var minPitch: Double
   /// The maximum pitch / tilt of the map.
-  var maxTilt: Double
+  var maxPitch: Double
   /// If the native map should listen to click events.
   var listensOnClick: Bool
   /// If the native map should listen to long click events.
@@ -134,14 +134,14 @@ struct MapOptions {
   static func fromList(_ pigeonVar_list: [Any?]) -> MapOptions? {
     let style = pigeonVar_list[0] as! String
     let zoom = pigeonVar_list[1] as! Double
-    let tilt = pigeonVar_list[2] as! Double
+    let pitch = pigeonVar_list[2] as! Double
     let bearing = pigeonVar_list[3] as! Double
     let center: LngLat? = nilOrValue(pigeonVar_list[4])
     let maxBounds: LngLatBounds? = nilOrValue(pigeonVar_list[5])
     let minZoom = pigeonVar_list[6] as! Double
     let maxZoom = pigeonVar_list[7] as! Double
-    let minTilt = pigeonVar_list[8] as! Double
-    let maxTilt = pigeonVar_list[9] as! Double
+    let minPitch = pigeonVar_list[8] as! Double
+    let maxPitch = pigeonVar_list[9] as! Double
     let listensOnClick = pigeonVar_list[10] as! Bool
     let listensOnLongClick = pigeonVar_list[11] as! Bool
     let gestures = pigeonVar_list[12] as! MapGestures
@@ -149,14 +149,14 @@ struct MapOptions {
     return MapOptions(
       style: style,
       zoom: zoom,
-      tilt: tilt,
+      pitch: pitch,
       bearing: bearing,
       center: center,
       maxBounds: maxBounds,
       minZoom: minZoom,
       maxZoom: maxZoom,
-      minTilt: minTilt,
-      maxTilt: maxTilt,
+      minPitch: minPitch,
+      maxPitch: maxPitch,
       listensOnClick: listensOnClick,
       listensOnLongClick: listensOnLongClick,
       gestures: gestures
@@ -166,14 +166,14 @@ struct MapOptions {
     return [
       style,
       zoom,
-      tilt,
+      pitch,
       bearing,
       center,
       maxBounds,
       minZoom,
       maxZoom,
-      minTilt,
-      maxTilt,
+      minPitch,
+      maxPitch,
       listensOnClick,
       listensOnLongClick,
       gestures,
@@ -284,7 +284,7 @@ struct ScreenLocation {
 struct MapCamera {
   var center: LngLat
   var zoom: Double
-  var tilt: Double
+  var pitch: Double
   var bearing: Double
 
 
@@ -293,13 +293,13 @@ struct MapCamera {
   static func fromList(_ pigeonVar_list: [Any?]) -> MapCamera? {
     let center = pigeonVar_list[0] as! LngLat
     let zoom = pigeonVar_list[1] as! Double
-    let tilt = pigeonVar_list[2] as! Double
+    let pitch = pigeonVar_list[2] as! Double
     let bearing = pigeonVar_list[3] as! Double
 
     return MapCamera(
       center: center,
       zoom: zoom,
-      tilt: tilt,
+      pitch: pitch,
       bearing: bearing
     )
   }
@@ -307,7 +307,7 @@ struct MapCamera {
     return [
       center,
       zoom,
-      tilt,
+      pitch,
       bearing,
     ]
   }
@@ -444,7 +444,7 @@ protocol MapLibreHostApi {
   /// Animate the viewport of the map to a new location.
   func flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
-  /// tilt and map rotation.
+  /// pitch and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
   /// Get the visible region of the current map camera.
   func getVisibleRegion(completion: @escaping (Result<LngLatBounds, Error>) -> Void)
@@ -550,7 +550,7 @@ class MapLibreHostApiSetup {
       flyToChannel.setMessageHandler(nil)
     }
     /// Get the current camera position with the map center, zoom level, camera
-    /// tilt and map rotation.
+    /// pitch and map rotation.
     let getCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       getCameraChannel.setMessageHandler { _, reply in

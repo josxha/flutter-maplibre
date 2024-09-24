@@ -30,7 +30,7 @@ functionality.
         <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-map.jpg" alt="Custom styled map" />
       </td>
       <td style="text-align: center;">
-        <strong>Tilt or rotate the map</strong>
+        <strong>Pitch or rotate the map</strong>
         <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/d8e2c7daf15221f716a2ebbd63e57a317cb089ab/docs/static/img/showcase-tilt.jpg" alt="Tilted and rotated map" />
       </td>
       <td style="text-align: center;">

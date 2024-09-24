@@ -51,7 +51,7 @@ class _KioskPageState extends State<KioskPage> {
       center: location.center,
       zoom: location.zoom,
       bearing: location.bearing,
-      tilt: location.tilt,
+      pitch: location.pitch,
     );
     index++;
     if (index >= _locations.length) index = 0;
@@ -65,10 +65,10 @@ class _KioskPageState extends State<KioskPage> {
 }
 
 class _Location {
-  const _Location(this.center, this.zoom, this.bearing, this.tilt);
+  const _Location(this.center, this.zoom, this.bearing, this.pitch);
 
   final Position center;
   final double zoom;
   final double bearing;
-  final double tilt;
+  final double pitch;
 }

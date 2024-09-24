@@ -8,14 +8,14 @@ struct _MaplibreMapOptions {
 
   gchar* style;
   double zoom;
-  double tilt;
+  double pitch;
   double bearing;
   MaplibreLngLat* center;
   MaplibreLngLatBounds* max_bounds;
   double min_zoom;
   double max_zoom;
-  double min_tilt;
-  double max_tilt;
+  double min_pitch;
+  double max_pitch;
   gboolean listens_on_click;
   gboolean listens_on_long_click;
   MaplibreMapGestures* gestures;
@@ -39,11 +39,11 @@ static void maplibre_map_options_class_init(MaplibreMapOptionsClass* klass) {
   G_OBJECT_CLASS(klass)->dispose = maplibre_map_options_dispose;
 }
 
-MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_tilt, double max_tilt, gboolean listens_on_click, gboolean listens_on_long_click, MaplibreMapGestures* gestures) {
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, gboolean listens_on_click, gboolean listens_on_long_click, MaplibreMapGestures* gestures) {
   MaplibreMapOptions* self = MAPLIBRE_MAP_OPTIONS(g_object_new(maplibre_map_options_get_type(), nullptr));
   self->style = g_strdup(style);
   self->zoom = zoom;
-  self->tilt = tilt;
+  self->pitch = pitch;
   self->bearing = bearing;
   if (center != nullptr) {
     self->center = MAPLIBRE_LNG_LAT(g_object_ref(center));
@@ -59,8 +59,8 @@ MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, do
   }
   self->min_zoom = min_zoom;
   self->max_zoom = max_zoom;
-  self->min_tilt = min_tilt;
-  self->max_tilt = max_tilt;
+  self->min_pitch = min_pitch;
+  self->max_pitch = max_pitch;
   self->listens_on_click = listens_on_click;
   self->listens_on_long_click = listens_on_long_click;
   self->gestures = MAPLIBRE_MAP_GESTURES(g_object_ref(gestures));
@@ -77,9 +77,9 @@ double maplibre_map_options_get_zoom(MaplibreMapOptions* self) {
   return self->zoom;
 }
 
-double maplibre_map_options_get_tilt(MaplibreMapOptions* self) {
+double maplibre_map_options_get_pitch(MaplibreMapOptions* self) {
   g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), 0.0);
-  return self->tilt;
+  return self->pitch;
 }
 
 double maplibre_map_options_get_bearing(MaplibreMapOptions* self) {
@@ -107,14 +107,14 @@ double maplibre_map_options_get_max_zoom(MaplibreMapOptions* self) {
   return self->max_zoom;
 }
 
-double maplibre_map_options_get_min_tilt(MaplibreMapOptions* self) {
+double maplibre_map_options_get_min_pitch(MaplibreMapOptions* self) {
   g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), 0.0);
-  return self->min_tilt;
+  return self->min_pitch;
 }
 
-double maplibre_map_options_get_max_tilt(MaplibreMapOptions* self) {
+double maplibre_map_options_get_max_pitch(MaplibreMapOptions* self) {
   g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), 0.0);
-  return self->max_tilt;
+  return self->max_pitch;
 }
 
 gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* self) {
@@ -136,14 +136,14 @@ static FlValue* maplibre_map_options_to_list(MaplibreMapOptions* self) {
   FlValue* values = fl_value_new_list();
   fl_value_append_take(values, fl_value_new_string(self->style));
   fl_value_append_take(values, fl_value_new_float(self->zoom));
-  fl_value_append_take(values, fl_value_new_float(self->tilt));
+  fl_value_append_take(values, fl_value_new_float(self->pitch));
   fl_value_append_take(values, fl_value_new_float(self->bearing));
   fl_value_append_take(values, self->center != nullptr ? fl_value_new_custom_object(134, G_OBJECT(self->center)) : fl_value_new_null());
   fl_value_append_take(values, self->max_bounds != nullptr ? fl_value_new_custom_object(137, G_OBJECT(self->max_bounds)) : fl_value_new_null());
   fl_value_append_take(values, fl_value_new_float(self->min_zoom));
   fl_value_append_take(values, fl_value_new_float(self->max_zoom));
-  fl_value_append_take(values, fl_value_new_float(self->min_tilt));
-  fl_value_append_take(values, fl_value_new_float(self->max_tilt));
+  fl_value_append_take(values, fl_value_new_float(self->min_pitch));
+  fl_value_append_take(values, fl_value_new_float(self->max_pitch));
   fl_value_append_take(values, fl_value_new_bool(self->listens_on_click));
   fl_value_append_take(values, fl_value_new_bool(self->listens_on_long_click));
   fl_value_append_take(values, fl_value_new_custom_object(133, G_OBJECT(self->gestures)));
@@ -156,7 +156,7 @@ static MaplibreMapOptions* maplibre_map_options_new_from_list(FlValue* values) {
   FlValue* value1 = fl_value_get_list_value(values, 1);
   double zoom = fl_value_get_float(value1);
   FlValue* value2 = fl_value_get_list_value(values, 2);
-  double tilt = fl_value_get_float(value2);
+  double pitch = fl_value_get_float(value2);
   FlValue* value3 = fl_value_get_list_value(values, 3);
   double bearing = fl_value_get_float(value3);
   FlValue* value4 = fl_value_get_list_value(values, 4);
@@ -174,16 +174,16 @@ static MaplibreMapOptions* maplibre_map_options_new_from_list(FlValue* values) {
   FlValue* value7 = fl_value_get_list_value(values, 7);
   double max_zoom = fl_value_get_float(value7);
   FlValue* value8 = fl_value_get_list_value(values, 8);
-  double min_tilt = fl_value_get_float(value8);
+  double min_pitch = fl_value_get_float(value8);
   FlValue* value9 = fl_value_get_list_value(values, 9);
-  double max_tilt = fl_value_get_float(value9);
+  double max_pitch = fl_value_get_float(value9);
   FlValue* value10 = fl_value_get_list_value(values, 10);
   gboolean listens_on_click = fl_value_get_bool(value10);
   FlValue* value11 = fl_value_get_list_value(values, 11);
   gboolean listens_on_long_click = fl_value_get_bool(value11);
   FlValue* value12 = fl_value_get_list_value(values, 12);
   MaplibreMapGestures* gestures = MAPLIBRE_MAP_GESTURES(fl_value_get_custom_value_object(value12));
-  return maplibre_map_options_new(style, zoom, tilt, bearing, center, max_bounds, min_zoom, max_zoom, min_tilt, max_tilt, listens_on_click, listens_on_long_click, gestures);
+  return maplibre_map_options_new(style, zoom, pitch, bearing, center, max_bounds, min_zoom, max_zoom, min_pitch, max_pitch, listens_on_click, listens_on_long_click, gestures);
 }
 
 struct _MaplibreMapGestures {
@@ -367,7 +367,7 @@ struct _MaplibreMapCamera {
 
   MaplibreLngLat* center;
   double zoom;
-  double tilt;
+  double pitch;
   double bearing;
 };
 
@@ -386,11 +386,11 @@ static void maplibre_map_camera_class_init(MaplibreMapCameraClass* klass) {
   G_OBJECT_CLASS(klass)->dispose = maplibre_map_camera_dispose;
 }
 
-MaplibreMapCamera* maplibre_map_camera_new(MaplibreLngLat* center, double zoom, double tilt, double bearing) {
+MaplibreMapCamera* maplibre_map_camera_new(MaplibreLngLat* center, double zoom, double pitch, double bearing) {
   MaplibreMapCamera* self = MAPLIBRE_MAP_CAMERA(g_object_new(maplibre_map_camera_get_type(), nullptr));
   self->center = MAPLIBRE_LNG_LAT(g_object_ref(center));
   self->zoom = zoom;
-  self->tilt = tilt;
+  self->pitch = pitch;
   self->bearing = bearing;
   return self;
 }
@@ -405,9 +405,9 @@ double maplibre_map_camera_get_zoom(MaplibreMapCamera* self) {
   return self->zoom;
 }
 
-double maplibre_map_camera_get_tilt(MaplibreMapCamera* self) {
+double maplibre_map_camera_get_pitch(MaplibreMapCamera* self) {
   g_return_val_if_fail(MAPLIBRE_IS_MAP_CAMERA(self), 0.0);
-  return self->tilt;
+  return self->pitch;
 }
 
 double maplibre_map_camera_get_bearing(MaplibreMapCamera* self) {
@@ -419,7 +419,7 @@ static FlValue* maplibre_map_camera_to_list(MaplibreMapCamera* self) {
   FlValue* values = fl_value_new_list();
   fl_value_append_take(values, fl_value_new_custom_object(134, G_OBJECT(self->center)));
   fl_value_append_take(values, fl_value_new_float(self->zoom));
-  fl_value_append_take(values, fl_value_new_float(self->tilt));
+  fl_value_append_take(values, fl_value_new_float(self->pitch));
   fl_value_append_take(values, fl_value_new_float(self->bearing));
   return values;
 }
@@ -430,10 +430,10 @@ static MaplibreMapCamera* maplibre_map_camera_new_from_list(FlValue* values) {
   FlValue* value1 = fl_value_get_list_value(values, 1);
   double zoom = fl_value_get_float(value1);
   FlValue* value2 = fl_value_get_list_value(values, 2);
-  double tilt = fl_value_get_float(value2);
+  double pitch = fl_value_get_float(value2);
   FlValue* value3 = fl_value_get_list_value(values, 3);
   double bearing = fl_value_get_float(value3);
-  return maplibre_map_camera_new(center, zoom, tilt, bearing);
+  return maplibre_map_camera_new(center, zoom, pitch, bearing);
 }
 
 struct _MaplibreLngLatBounds {
