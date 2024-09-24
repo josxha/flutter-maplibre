@@ -111,27 +111,25 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  Future<void> jumpTo({
+  @Deprecated('Renamed to moveCamera') Future<void> jumpTo({
     Position? center,
     double? zoom,
     double? bearing,
-    @Deprecated('Renamed to pitch') double? tilt,
-    double? pitch,
+    double? tilt,
   }) =>
       moveCamera(
         center: center,
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch ?? tilt,
+        pitch: tilt,
       );
 
   @override
-  Future<void> flyTo({
+  @Deprecated('Renamed to animateCamera') Future<void> flyTo({
     Position? center,
     double? zoom,
     double? bearing,
-    double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
+    double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -140,7 +138,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         center: center,
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt ?? pitch,
+        pitch: tilt,
         nativeDuration: nativeDuration,
         webSpeed: webSpeed,
         webMaxDuration: webMaxDuration,
