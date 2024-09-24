@@ -41,7 +41,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             zoom: _options.zoom,
             center: _options.center?.toLngLat(),
             bearing: _options.bearing,
-            pitch: _options.tilt,
+            pitch: _options.pitch,
           ),
         );
 
@@ -58,9 +58,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         // set options
         _map.setMinZoom(_options.minZoom);
         _map.setMaxZoom(_options.maxZoom);
-        _map.setMinPitch(_options.minTilt);
-        _map.setMaxPitch(_options.maxTilt);
+        _map.setMinPitch(_options.minPitch);
+        _map.setMaxPitch(_options.maxPitch);
         _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+        _updateGestures(_options.gestures);
 
         // add controls
         for (final control in _options.controls) {
@@ -170,7 +171,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             final camera = MapCamera(
               center: _map.getCenter().toPosition(),
               zoom: _map.getZoom().toDouble(),
-              tilt: _map.getPitch().toDouble(),
+              pitch: _map.getPitch().toDouble(),
               bearing: _map.getBearing().toDouble(),
             );
             widget.onEvent?.call(MapEventMoveCamera(camera: camera));
@@ -219,14 +220,17 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.maxZoom != oldWidget.options.maxZoom) {
       _map.setMaxZoom(_options.maxZoom);
     }
-    if (_options.minTilt != oldWidget.options.minTilt) {
-      _map.setMinPitch(_options.minTilt);
+    if (_options.minPitch != oldWidget.options.minPitch) {
+      _map.setMinPitch(_options.minPitch);
     }
-    if (_options.maxTilt != oldWidget.options.maxTilt) {
-      _map.setMaxPitch(_options.maxTilt);
+    if (_options.maxPitch != oldWidget.options.maxPitch) {
+      _map.setMaxPitch(_options.maxPitch);
     }
     if (_options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    }
+    if (_options.gestures != oldWidget.options.gestures) {
+      _updateGestures(_options.gestures);
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -267,13 +271,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
   }) =>
       moveCamera(
         center: center,
         zoom: zoom,
         bearing: bearing,
-        tilt: tilt,
+        pitch: tilt,
       );
 
   @override
@@ -281,7 +286,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -290,7 +296,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: center,
         zoom: zoom,
         bearing: bearing,
-        tilt: tilt,
+        pitch: pitch,
         nativeDuration: nativeDuration,
         webSpeed: webSpeed,
         webMaxDuration: webMaxDuration,
@@ -301,7 +307,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
   }) async {
     _nextGestureCausedByController = true;
     _map.jumpTo(
@@ -309,7 +315,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch,
       ),
     );
   }
@@ -319,7 +325,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -331,7 +337,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: destination,
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
       ),
@@ -352,9 +358,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     final reachedZoom = zoom == null || zoom == _map.getZoom();
     final reachedBearing = bearing == null || bearing == _map.getBearing();
-    final reachedTilt = tilt == null || tilt == _map.getPitch();
+    final reachedPitch = pitch == null || pitch == _map.getPitch();
 
-    if (reachedCenter && reachedZoom && reachedBearing && reachedTilt) return;
+    if (reachedCenter && reachedZoom && reachedBearing && reachedPitch) return;
 
     throw PlatformException(
       code: 'CancellationException',
@@ -547,7 +553,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Future<MapCamera> getCamera() async => MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
-        tilt: _map.getPitch().toDouble(),
+        pitch: _map.getPitch().toDouble(),
         bearing: _map.getBearing().toDouble(),
       );
 
@@ -601,5 +607,44 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }) async {
     final source = _map.getSource(id);
     source.setData(parse(data));
+  }
+
+  void _updateGestures(MapGestures gestures) {
+    if (gestures.pan) {
+      _map.dragPan.enable();
+    } else {
+      _map.dragPan.disable();
+    }
+    if (gestures.zoom) {
+      _map.touchZoomRotate.enable();
+      _map.doubleClickZoom.enable();
+      _map.scrollZoom.enable();
+      _map.boxZoom.enable();
+    } else {
+      _map.touchZoomRotate.disable(); // this disables rotation as well
+      _map.doubleClickZoom.disable();
+      _map.scrollZoom.disable();
+      _map.boxZoom.disable();
+    }
+    if (gestures.rotate) {
+      _map.dragRotate.enable();
+      _map.touchZoomRotate.disableRotation();
+    } else {
+      _map.touchZoomRotate.enableRotation();
+      _map.dragRotate.disable();
+    }
+    if (gestures.pitch) {
+      // TODO dragRotate allows to pitch too but has no option to disable pitch.
+      _map.touchPitch.enable();
+    } else {
+      _map.touchPitch.disable();
+    }
+    // It's not possible to disable just some gestures for the KeyboardHandler.
+    // That's why we disable it completely if not all gestures are enabled.
+    if (gestures.allEnabled) {
+      _map.keyboard.enable();
+    } else {
+      _map.keyboard.disable();
+    }
   }
 }

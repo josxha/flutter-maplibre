@@ -96,29 +96,31 @@ class MapOptions {
   explicit MapOptions(
     const std::string& style,
     double zoom,
-    double tilt,
+    double pitch,
     double bearing,
     double min_zoom,
     double max_zoom,
-    double min_tilt,
-    double max_tilt,
+    double min_pitch,
+    double max_pitch,
     bool listens_on_click,
-    bool listens_on_long_click);
+    bool listens_on_long_click,
+    const MapGestures& gestures);
 
   // Constructs an object setting all fields.
   explicit MapOptions(
     const std::string& style,
     double zoom,
-    double tilt,
+    double pitch,
     double bearing,
     const LngLat* center,
     const LngLatBounds* max_bounds,
     double min_zoom,
     double max_zoom,
-    double min_tilt,
-    double max_tilt,
+    double min_pitch,
+    double max_pitch,
     bool listens_on_click,
-    bool listens_on_long_click);
+    bool listens_on_long_click,
+    const MapGestures& gestures);
 
   ~MapOptions() = default;
   MapOptions(const MapOptions& other);
@@ -133,9 +135,9 @@ class MapOptions {
   double zoom() const;
   void set_zoom(double value_arg);
 
-  // The initial tilt of the map.
-  double tilt() const;
-  void set_tilt(double value_arg);
+  // The initial pitch / tilt of the map.
+  double pitch() const;
+  void set_pitch(double value_arg);
 
   // The initial bearing of the map.
   double bearing() const;
@@ -160,12 +162,12 @@ class MapOptions {
   void set_max_zoom(double value_arg);
 
   // The minimum pitch / tilt of the map.
-  double min_tilt() const;
-  void set_min_tilt(double value_arg);
+  double min_pitch() const;
+  void set_min_pitch(double value_arg);
 
   // The maximum pitch / tilt of the map.
-  double max_tilt() const;
-  void set_max_tilt(double value_arg);
+  double max_pitch() const;
+  void set_max_pitch(double value_arg);
 
   // If the native map should listen to click events.
   bool listens_on_click() const;
@@ -174,6 +176,10 @@ class MapOptions {
   // If the native map should listen to long click events.
   bool listens_on_long_click() const;
   void set_listens_on_long_click(bool value_arg);
+
+  // The map gestures.
+  const MapGestures& gestures() const;
+  void set_gestures(const MapGestures& value_arg);
 
 
  private:
@@ -184,16 +190,61 @@ class MapOptions {
   friend class PigeonInternalCodecSerializer;
   std::string style_;
   double zoom_;
-  double tilt_;
+  double pitch_;
   double bearing_;
   std::unique_ptr<LngLat> center_;
   std::unique_ptr<LngLatBounds> max_bounds_;
   double min_zoom_;
   double max_zoom_;
-  double min_tilt_;
-  double max_tilt_;
+  double min_pitch_;
+  double max_pitch_;
   bool listens_on_click_;
   bool listens_on_long_click_;
+  std::unique_ptr<MapGestures> gestures_;
+
+};
+
+
+// Map gestures
+//
+// Generated class from Pigeon that represents data sent in messages.
+class MapGestures {
+ public:
+  // Constructs an object setting all fields.
+  explicit MapGestures(
+    bool rotate,
+    bool pan,
+    bool zoom,
+    bool tilt);
+
+  // Rotate the map bearing.
+  bool rotate() const;
+  void set_rotate(bool value_arg);
+
+  // Move the center of the map around.
+  bool pan() const;
+  void set_pan(bool value_arg);
+
+  // Zoom the map in and out.
+  bool zoom() const;
+  void set_zoom(bool value_arg);
+
+  // Tilt (pitch) the map camera.
+  bool tilt() const;
+  void set_tilt(bool value_arg);
+
+
+ private:
+  static MapGestures FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapOptions;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PigeonInternalCodecSerializer;
+  bool rotate_;
+  bool pan_;
+  bool zoom_;
+  bool tilt_;
 
 };
 
@@ -271,7 +322,7 @@ class MapCamera {
   explicit MapCamera(
     const LngLat& center,
     double zoom,
-    double tilt,
+    double pitch,
     double bearing);
 
   ~MapCamera() = default;
@@ -285,8 +336,8 @@ class MapCamera {
   double zoom() const;
   void set_zoom(double value_arg);
 
-  double tilt() const;
-  void set_tilt(double value_arg);
+  double pitch() const;
+  void set_pitch(double value_arg);
 
   double bearing() const;
   void set_bearing(double value_arg);
@@ -300,7 +351,7 @@ class MapCamera {
   friend class PigeonInternalCodecSerializer;
   std::unique_ptr<LngLat> center_;
   double zoom_;
-  double tilt_;
+  double pitch_;
   double bearing_;
 
 };
@@ -387,7 +438,7 @@ class MapLibreHostApi {
     int64_t duration_ms,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Get the current camera position with the map center, zoom level, camera
-  // tilt and map rotation.
+  // pitch and map rotation.
   virtual void GetCamera(std::function<void(ErrorOr<MapCamera> reply)> result) = 0;
   // Get the visible region of the current map camera.
   virtual void GetVisibleRegion(std::function<void(ErrorOr<LngLatBounds> reply)> result) = 0;

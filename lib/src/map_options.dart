@@ -10,19 +10,21 @@ class MapOptions {
     this.style = 'https://demotiles.maplibre.org/style.json',
     this.zoom = 0,
     this.center,
-    this.tilt = 0,
+    @Deprecated('Renamed to pitch') double? tilt,
+    double pitch = 0,
     this.bearing = 0,
     this.controls = const [],
     this.minZoom = 0,
     this.maxZoom = 22,
-    this.minTilt = 0,
-    this.maxTilt = 60,
+    this.minPitch = 0,
+    this.maxPitch = 60,
     @Deprecated('Use the onEvent() callback instead.') this.onClick,
     @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
     @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
     @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
     this.maxBounds,
-  });
+    this.gestures = const MapGestures.all(),
+  }) : pitch = tilt ?? pitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
@@ -31,8 +33,13 @@ class MapOptions {
   /// The initial zoom level.
   final double zoom;
 
-  /// The initial tilt level. Minimum is 0 and maximum  is 60.
-  final double tilt;
+  /// The initial pitch level. Minimum is 0 and maximum is 85 on web and 60 on
+  /// other platforms.
+  final double pitch;
+
+  /// Initial pitch level
+  @Deprecated('Renamed to pitch')
+  double get tilt => pitch;
 
   /// The initial bearing of the map. Defaults to 0 (north on top).
   /// 360 is exactly one loop.
@@ -52,19 +59,22 @@ class MapOptions {
   /// The maximum zoom level. Allowed values are 0-24. Defaults to 22.
   final double maxZoom;
 
-  /// The minimum camera tilt (pitch). Allowed values on web are 0-85. Allowed
+  /// The minimum camera pitch / tilt. Allowed values on web are 0-85. Allowed
   /// values on other platforms are 0-60, bigger values will get ignored.
   ///
   /// Defaults to 0.
-  final double minTilt;
+  final double minPitch;
 
-  /// The maximum camera tilt (pitch). Allowed values on web are 0-85. Allowed
-  //   /// values on other platforms are 0-60, bigger values will get ignored.
-  final double maxTilt;
+  /// The maximum camera pitch / tilt. Allowed values on web are 0-85. Allowed
+  /// values on other platforms are 0-60, bigger values will get ignored.
+  final double maxPitch;
 
   /// The maximum bounding box of the map camera. No constraints are in place
   /// if set to `null`.
   final LngLatBounds? maxBounds;
+
+  /// Enable and disable some or all map gestures.
+  final MapGestures gestures;
 
   /// A callback that fires when the user clicks on the map.
   @Deprecated('Use the onEvent() callback instead.')

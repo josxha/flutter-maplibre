@@ -69,22 +69,23 @@ G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPT
  * maplibre_map_options_new:
  * style: field in this object.
  * zoom: field in this object.
- * tilt: field in this object.
+ * pitch: field in this object.
  * bearing: field in this object.
  * center: field in this object.
  * max_bounds: field in this object.
  * min_zoom: field in this object.
  * max_zoom: field in this object.
- * min_tilt: field in this object.
- * max_tilt: field in this object.
+ * min_pitch: field in this object.
+ * max_pitch: field in this object.
  * listens_on_click: field in this object.
  * listens_on_long_click: field in this object.
+ * gestures: field in this object.
  *
  * Creates a new #MapOptions object.
  *
  * Returns: a new #MaplibreMapOptions
  */
-MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double tilt, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_tilt, double max_tilt, gboolean listens_on_click, gboolean listens_on_long_click);
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, gboolean listens_on_click, gboolean listens_on_long_click, MaplibreMapGestures* gestures);
 
 /**
  * maplibre_map_options_get_style
@@ -107,14 +108,14 @@ const gchar* maplibre_map_options_get_style(MaplibreMapOptions* object);
 double maplibre_map_options_get_zoom(MaplibreMapOptions* object);
 
 /**
- * maplibre_map_options_get_tilt
+ * maplibre_map_options_get_pitch
  * @object: a #MaplibreMapOptions.
  *
- * The initial tilt of the map.
+ * The initial pitch / tilt of the map.
  *
  * Returns: the field value.
  */
-double maplibre_map_options_get_tilt(MaplibreMapOptions* object);
+double maplibre_map_options_get_pitch(MaplibreMapOptions* object);
 
 /**
  * maplibre_map_options_get_bearing
@@ -167,24 +168,24 @@ double maplibre_map_options_get_min_zoom(MaplibreMapOptions* object);
 double maplibre_map_options_get_max_zoom(MaplibreMapOptions* object);
 
 /**
- * maplibre_map_options_get_min_tilt
+ * maplibre_map_options_get_min_pitch
  * @object: a #MaplibreMapOptions.
  *
  * The minimum pitch / tilt of the map.
  *
  * Returns: the field value.
  */
-double maplibre_map_options_get_min_tilt(MaplibreMapOptions* object);
+double maplibre_map_options_get_min_pitch(MaplibreMapOptions* object);
 
 /**
- * maplibre_map_options_get_max_tilt
+ * maplibre_map_options_get_max_pitch
  * @object: a #MaplibreMapOptions.
  *
  * The maximum pitch / tilt of the map.
  *
  * Returns: the field value.
  */
-double maplibre_map_options_get_max_tilt(MaplibreMapOptions* object);
+double maplibre_map_options_get_max_pitch(MaplibreMapOptions* object);
 
 /**
  * maplibre_map_options_get_listens_on_click
@@ -205,6 +206,77 @@ gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* object);
  * Returns: the field value.
  */
 gboolean maplibre_map_options_get_listens_on_long_click(MaplibreMapOptions* object);
+
+/**
+ * maplibre_map_options_get_gestures
+ * @object: a #MaplibreMapOptions.
+ *
+ * The map gestures.
+ *
+ * Returns: the field value.
+ */
+MaplibreMapGestures* maplibre_map_options_get_gestures(MaplibreMapOptions* object);
+
+/**
+ * MaplibreMapGestures:
+ *
+ * Map gestures
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreMapGestures, maplibre_map_gestures, MAPLIBRE, MAP_GESTURES, GObject)
+
+/**
+ * maplibre_map_gestures_new:
+ * rotate: field in this object.
+ * pan: field in this object.
+ * zoom: field in this object.
+ * tilt: field in this object.
+ *
+ * Creates a new #MapGestures object.
+ *
+ * Returns: a new #MaplibreMapGestures
+ */
+MaplibreMapGestures* maplibre_map_gestures_new(gboolean rotate, gboolean pan, gboolean zoom, gboolean tilt);
+
+/**
+ * maplibre_map_gestures_get_rotate
+ * @object: a #MaplibreMapGestures.
+ *
+ * Rotate the map bearing.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_gestures_get_rotate(MaplibreMapGestures* object);
+
+/**
+ * maplibre_map_gestures_get_pan
+ * @object: a #MaplibreMapGestures.
+ *
+ * Move the center of the map around.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_gestures_get_pan(MaplibreMapGestures* object);
+
+/**
+ * maplibre_map_gestures_get_zoom
+ * @object: a #MaplibreMapGestures.
+ *
+ * Zoom the map in and out.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_gestures_get_zoom(MaplibreMapGestures* object);
+
+/**
+ * maplibre_map_gestures_get_tilt
+ * @object: a #MaplibreMapGestures.
+ *
+ * Tilt (pitch) the map camera.
+ *
+ * Returns: the field value.
+ */
+gboolean maplibre_map_gestures_get_tilt(MaplibreMapGestures* object);
 
 /**
  * MaplibreLngLat:
@@ -296,14 +368,14 @@ G_DECLARE_FINAL_TYPE(MaplibreMapCamera, maplibre_map_camera, MAPLIBRE, MAP_CAMER
  * maplibre_map_camera_new:
  * center: field in this object.
  * zoom: field in this object.
- * tilt: field in this object.
+ * pitch: field in this object.
  * bearing: field in this object.
  *
  * Creates a new #MapCamera object.
  *
  * Returns: a new #MaplibreMapCamera
  */
-MaplibreMapCamera* maplibre_map_camera_new(MaplibreLngLat* center, double zoom, double tilt, double bearing);
+MaplibreMapCamera* maplibre_map_camera_new(MaplibreLngLat* center, double zoom, double pitch, double bearing);
 
 /**
  * maplibre_map_camera_get_center
@@ -326,14 +398,14 @@ MaplibreLngLat* maplibre_map_camera_get_center(MaplibreMapCamera* object);
 double maplibre_map_camera_get_zoom(MaplibreMapCamera* object);
 
 /**
- * maplibre_map_camera_get_tilt
+ * maplibre_map_camera_get_pitch
  * @object: a #MaplibreMapCamera.
  *
- * Gets the value of the tilt field of @object.
+ * Gets the value of the pitch field of @object.
  *
  * Returns: the field value.
  */
-double maplibre_map_camera_get_tilt(MaplibreMapCamera* object);
+double maplibre_map_camera_get_pitch(MaplibreMapCamera* object);
 
 /**
  * maplibre_map_camera_get_bearing

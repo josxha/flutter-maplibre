@@ -67,7 +67,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         style: _options.style,
         bearing: _options.bearing,
         zoom: _options.zoom,
-        tilt: _options.tilt,
+        pitch: _options.pitch,
         center: _options.center == null
             ? null
             : pigeon.LngLat(
@@ -76,11 +76,17 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
               ),
         minZoom: _options.minZoom,
         maxZoom: _options.maxZoom,
-        minTilt: _options.minTilt,
-        maxTilt: _options.maxTilt,
+        minPitch: _options.minPitch,
+        maxPitch: _options.maxPitch,
         maxBounds: _options.maxBounds?.toLngLatBounds(),
         listensOnClick: widget.onEvent != null,
         listensOnLongClick: widget.onEvent != null,
+        gestures: pigeon.MapGestures(
+          rotate: _options.gestures.rotate,
+          pan: _options.gestures.pan,
+          zoom: _options.gestures.zoom,
+          tilt: _options.gestures.pitch,
+        ),
       );
 
   @override
@@ -109,13 +115,14 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    @Deprecated('Renamed to pitch') double? tilt,
+    double? pitch,
   }) =>
       moveCamera(
         center: center,
         zoom: zoom,
         bearing: bearing,
-        tilt: tilt,
+        pitch: pitch ?? tilt,
       );
 
   @override
@@ -123,7 +130,8 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -132,7 +140,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         center: center,
         zoom: zoom,
         bearing: bearing,
-        tilt: tilt,
+        pitch: tilt ?? pitch,
         nativeDuration: nativeDuration,
         webSpeed: webSpeed,
         webMaxDuration: webMaxDuration,
@@ -143,13 +151,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
   }) =>
       _hostApi.moveCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch,
       );
 
   @override
@@ -157,7 +165,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -166,7 +174,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch,
         durationMs: nativeDuration.inMilliseconds,
       );
 
@@ -331,7 +339,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     final mapCamera = MapCamera(
       center: camera.center.toPosition(),
       zoom: camera.zoom,
-      tilt: camera.tilt,
+      pitch: camera.pitch,
       bearing: camera.bearing,
     );
     widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
@@ -392,7 +400,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     return MapCamera(
       center: camera.center.toPosition(),
       zoom: camera.zoom,
-      tilt: camera.tilt,
+      pitch: camera.pitch,
       bearing: camera.bearing,
     );
   }

@@ -33,78 +33,84 @@ FlutterError CreateConnectionError(const std::string channel_name) {
 MapOptions::MapOptions(
   const std::string& style,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing,
   double min_zoom,
   double max_zoom,
-  double min_tilt,
-  double max_tilt,
+  double min_pitch,
+  double max_pitch,
   bool listens_on_click,
-  bool listens_on_long_click)
+  bool listens_on_long_click,
+  const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing),
     min_zoom_(min_zoom),
     max_zoom_(max_zoom),
-    min_tilt_(min_tilt),
-    max_tilt_(max_tilt),
+    min_pitch_(min_pitch),
+    max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click) {}
+    listens_on_long_click_(listens_on_long_click),
+    gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(
   const std::string& style,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing,
   const LngLat* center,
   const LngLatBounds* max_bounds,
   double min_zoom,
   double max_zoom,
-  double min_tilt,
-  double max_tilt,
+  double min_pitch,
+  double max_pitch,
   bool listens_on_click,
-  bool listens_on_long_click)
+  bool listens_on_long_click,
+  const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing),
     center_(center ? std::make_unique<LngLat>(*center) : nullptr),
     max_bounds_(max_bounds ? std::make_unique<LngLatBounds>(*max_bounds) : nullptr),
     min_zoom_(min_zoom),
     max_zoom_(max_zoom),
-    min_tilt_(min_tilt),
-    max_tilt_(max_tilt),
+    min_pitch_(min_pitch),
+    max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click) {}
+    listens_on_long_click_(listens_on_long_click),
+    gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(const MapOptions& other)
  : style_(other.style_),
     zoom_(other.zoom_),
-    tilt_(other.tilt_),
+    pitch_(other.pitch_),
     bearing_(other.bearing_),
     center_(other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr),
     max_bounds_(other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr),
     min_zoom_(other.min_zoom_),
     max_zoom_(other.max_zoom_),
-    min_tilt_(other.min_tilt_),
-    max_tilt_(other.max_tilt_),
+    min_pitch_(other.min_pitch_),
+    max_pitch_(other.max_pitch_),
     listens_on_click_(other.listens_on_click_),
-    listens_on_long_click_(other.listens_on_long_click_) {}
+    listens_on_long_click_(other.listens_on_long_click_),
+    gestures_(std::make_unique<MapGestures>(*other.gestures_)) {}
 
 MapOptions& MapOptions::operator=(const MapOptions& other) {
   style_ = other.style_;
   zoom_ = other.zoom_;
-  tilt_ = other.tilt_;
+  pitch_ = other.pitch_;
   bearing_ = other.bearing_;
   center_ = other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr;
   max_bounds_ = other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr;
   min_zoom_ = other.min_zoom_;
   max_zoom_ = other.max_zoom_;
-  min_tilt_ = other.min_tilt_;
-  max_tilt_ = other.max_tilt_;
+  min_pitch_ = other.min_pitch_;
+  max_pitch_ = other.max_pitch_;
   listens_on_click_ = other.listens_on_click_;
   listens_on_long_click_ = other.listens_on_long_click_;
+  gestures_ = std::make_unique<MapGestures>(*other.gestures_);
   return *this;
 }
 
@@ -126,12 +132,12 @@ void MapOptions::set_zoom(double value_arg) {
 }
 
 
-double MapOptions::tilt() const {
-  return tilt_;
+double MapOptions::pitch() const {
+  return pitch_;
 }
 
-void MapOptions::set_tilt(double value_arg) {
-  tilt_ = value_arg;
+void MapOptions::set_pitch(double value_arg) {
+  pitch_ = value_arg;
 }
 
 
@@ -188,21 +194,21 @@ void MapOptions::set_max_zoom(double value_arg) {
 }
 
 
-double MapOptions::min_tilt() const {
-  return min_tilt_;
+double MapOptions::min_pitch() const {
+  return min_pitch_;
 }
 
-void MapOptions::set_min_tilt(double value_arg) {
-  min_tilt_ = value_arg;
+void MapOptions::set_min_pitch(double value_arg) {
+  min_pitch_ = value_arg;
 }
 
 
-double MapOptions::max_tilt() const {
-  return max_tilt_;
+double MapOptions::max_pitch() const {
+  return max_pitch_;
 }
 
-void MapOptions::set_max_tilt(double value_arg) {
-  max_tilt_ = value_arg;
+void MapOptions::set_max_pitch(double value_arg) {
+  max_pitch_ = value_arg;
 }
 
 
@@ -224,21 +230,31 @@ void MapOptions::set_listens_on_long_click(bool value_arg) {
 }
 
 
+const MapGestures& MapOptions::gestures() const {
+  return *gestures_;
+}
+
+void MapOptions::set_gestures(const MapGestures& value_arg) {
+  gestures_ = std::make_unique<MapGestures>(value_arg);
+}
+
+
 EncodableList MapOptions::ToEncodableList() const {
   EncodableList list;
-  list.reserve(12);
+  list.reserve(13);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
-  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(pitch_));
   list.push_back(EncodableValue(bearing_));
   list.push_back(center_ ? CustomEncodableValue(*center_) : EncodableValue());
   list.push_back(max_bounds_ ? CustomEncodableValue(*max_bounds_) : EncodableValue());
   list.push_back(EncodableValue(min_zoom_));
   list.push_back(EncodableValue(max_zoom_));
-  list.push_back(EncodableValue(min_tilt_));
-  list.push_back(EncodableValue(max_tilt_));
+  list.push_back(EncodableValue(min_pitch_));
+  list.push_back(EncodableValue(max_pitch_));
   list.push_back(EncodableValue(listens_on_click_));
   list.push_back(EncodableValue(listens_on_long_click_));
+  list.push_back(CustomEncodableValue(*gestures_));
   return list;
 }
 
@@ -253,7 +269,8 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
     std::get<double>(list[8]),
     std::get<double>(list[9]),
     std::get<bool>(list[10]),
-    std::get<bool>(list[11]));
+    std::get<bool>(list[11]),
+    std::any_cast<const MapGestures&>(std::get<CustomEncodableValue>(list[12])));
   auto& encodable_center = list[4];
   if (!encodable_center.IsNull()) {
     decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
@@ -262,6 +279,73 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
   if (!encodable_max_bounds.IsNull()) {
     decoded.set_max_bounds(std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_max_bounds)));
   }
+  return decoded;
+}
+
+// MapGestures
+
+MapGestures::MapGestures(
+  bool rotate,
+  bool pan,
+  bool zoom,
+  bool tilt)
+ : rotate_(rotate),
+    pan_(pan),
+    zoom_(zoom),
+    tilt_(tilt) {}
+
+bool MapGestures::rotate() const {
+  return rotate_;
+}
+
+void MapGestures::set_rotate(bool value_arg) {
+  rotate_ = value_arg;
+}
+
+
+bool MapGestures::pan() const {
+  return pan_;
+}
+
+void MapGestures::set_pan(bool value_arg) {
+  pan_ = value_arg;
+}
+
+
+bool MapGestures::zoom() const {
+  return zoom_;
+}
+
+void MapGestures::set_zoom(bool value_arg) {
+  zoom_ = value_arg;
+}
+
+
+bool MapGestures::tilt() const {
+  return tilt_;
+}
+
+void MapGestures::set_tilt(bool value_arg) {
+  tilt_ = value_arg;
+}
+
+
+EncodableList MapGestures::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(4);
+  list.push_back(EncodableValue(rotate_));
+  list.push_back(EncodableValue(pan_));
+  list.push_back(EncodableValue(zoom_));
+  list.push_back(EncodableValue(tilt_));
+  return list;
+}
+
+MapGestures MapGestures::FromEncodableList(const EncodableList& list) {
+  MapGestures decoded(
+    std::get<bool>(list[0]),
+    std::get<bool>(list[1]),
+    std::get<bool>(list[2]),
+    std::get<bool>(list[3]));
   return decoded;
 }
 
@@ -352,23 +436,23 @@ ScreenLocation ScreenLocation::FromEncodableList(const EncodableList& list) {
 MapCamera::MapCamera(
   const LngLat& center,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing)
  : center_(std::make_unique<LngLat>(center)),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing) {}
 
 MapCamera::MapCamera(const MapCamera& other)
  : center_(std::make_unique<LngLat>(*other.center_)),
     zoom_(other.zoom_),
-    tilt_(other.tilt_),
+    pitch_(other.pitch_),
     bearing_(other.bearing_) {}
 
 MapCamera& MapCamera::operator=(const MapCamera& other) {
   center_ = std::make_unique<LngLat>(*other.center_);
   zoom_ = other.zoom_;
-  tilt_ = other.tilt_;
+  pitch_ = other.pitch_;
   bearing_ = other.bearing_;
   return *this;
 }
@@ -391,12 +475,12 @@ void MapCamera::set_zoom(double value_arg) {
 }
 
 
-double MapCamera::tilt() const {
-  return tilt_;
+double MapCamera::pitch() const {
+  return pitch_;
 }
 
-void MapCamera::set_tilt(double value_arg) {
-  tilt_ = value_arg;
+void MapCamera::set_pitch(double value_arg) {
+  pitch_ = value_arg;
 }
 
 
@@ -414,7 +498,7 @@ EncodableList MapCamera::ToEncodableList() const {
   list.reserve(4);
   list.push_back(CustomEncodableValue(*center_));
   list.push_back(EncodableValue(zoom_));
-  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(pitch_));
   list.push_back(EncodableValue(bearing_));
   return list;
 }
@@ -521,15 +605,18 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
         return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 133: {
-        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(MapGestures::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 134: {
-        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 135: {
-        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 136: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 137: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -561,23 +648,28 @@ void PigeonInternalCodecSerializer::WriteValue(
       WriteValue(EncodableValue(std::any_cast<MapOptions>(*custom_value).ToEncodableList()), stream);
       return;
     }
-    if (custom_value->type() == typeid(LngLat)) {
+    if (custom_value->type() == typeid(MapGestures)) {
       stream->WriteByte(133);
+      WriteValue(EncodableValue(std::any_cast<MapGestures>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(LngLat)) {
+      stream->WriteByte(134);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(ScreenLocation)) {
-      stream->WriteByte(134);
+      stream->WriteByte(135);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(MapCamera)) {
-      stream->WriteByte(135);
+      stream->WriteByte(136);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLatBounds)) {
-      stream->WriteByte(136);
+      stream->WriteByte(137);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }

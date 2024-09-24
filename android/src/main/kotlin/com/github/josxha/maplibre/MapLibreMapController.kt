@@ -1,5 +1,6 @@
 package com.github.josxha.maplibre
 
+import CameraChangeReason
 import LngLat
 import LngLatBounds
 import MapCamera
@@ -71,7 +72,7 @@ class MapLibreMapController(
     private var style: Style? = null
 
     init {
-        val channelSuffix = viewId.toString();
+        val channelSuffix = viewId.toString()
         MapLibreHostApi.setUp(binaryMessenger, this, channelSuffix)
         flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
         flutterApi.getOptions { result: Result<MapOptions> ->
@@ -79,7 +80,7 @@ class MapLibreMapController(
             val cameraBuilder = CameraPosition.Builder()
                 .zoom(mapOptions.zoom)
                 .bearing(mapOptions.bearing)
-                .tilt(mapOptions.tilt)
+                .tilt(mapOptions.pitch)
             if (mapOptions.center != null)
                 cameraBuilder.target(
                     LatLng(
@@ -94,8 +95,8 @@ class MapLibreMapController(
                 .compassEnabled(true)
                 .minZoomPreference(mapOptions.minZoom)
                 .maxZoomPreference(mapOptions.maxZoom)
-                .minPitchPreference(mapOptions.minTilt)
-                .maxPitchPreference(mapOptions.maxTilt)
+                .minPitchPreference(mapOptions.minPitch)
+                .maxPitchPreference(mapOptions.maxPitch)
                 .camera(cameraBuilder.build())
 
             MapLibre.getInstance(context) // needs to be called before MapView gets created
@@ -165,7 +166,7 @@ class MapLibreMapController(
         if (bearing != null) camera.bearing(bearing)
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
         mapLibreMap.moveCamera(cameraUpdate)
-        callback(Result.success(Unit));
+        callback(Result.success(Unit))
     }
 
     override fun flyTo(
@@ -198,7 +199,7 @@ class MapLibreMapController(
         lat: Double,
         callback: (Result<ScreenLocation>) -> Unit
     ) {
-        val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng));
+        val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng))
         callback(Result.success(ScreenLocation(location.x.toDouble(), location.y.toDouble())))
     }
 
@@ -562,10 +563,10 @@ class MapLibreMapController(
             mapLibreMap.setMinZoomPreference(options.minZoom)
         if (mapOptions.maxZoom != options.maxZoom)
             mapLibreMap.setMaxZoomPreference(options.maxZoom)
-        if (mapOptions.minTilt != options.minTilt)
-            mapLibreMap.setMinPitchPreference(options.minTilt)
-        if (mapOptions.maxTilt != options.maxTilt)
-            mapLibreMap.setMaxPitchPreference(options.maxTilt)
+        if (mapOptions.minPitch != options.minPitch)
+            mapLibreMap.setMinPitchPreference(options.minPitch)
+        if (mapOptions.maxPitch != options.maxPitch)
+            mapLibreMap.setMaxPitchPreference(options.maxPitch)
 
         // map bounds
         val oldBounds = mapOptions.maxBounds
@@ -591,6 +592,23 @@ class MapLibreMapController(
                 newBounds.latitudeSouth, newBounds.longitudeWest
             )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
+        }
+
+        // gestures
+        if (options.gestures.rotate != mapOptions.gestures.rotate) {
+            mapLibreMap.uiSettings.isRotateGesturesEnabled = options.gestures.rotate
+        }
+        if (options.gestures.pan != mapOptions.gestures.pan) {
+            mapLibreMap.uiSettings.isRotateGesturesEnabled = options.gestures.pan
+        }
+        if (options.gestures.zoom != mapOptions.gestures.zoom) {
+            mapLibreMap.uiSettings.isZoomGesturesEnabled = options.gestures.zoom
+            mapLibreMap.uiSettings.isDoubleTapGesturesEnabled = options.gestures.zoom
+            mapLibreMap.uiSettings.isScrollGesturesEnabled = options.gestures.zoom
+            mapLibreMap.uiSettings.isQuickZoomGesturesEnabled = options.gestures.zoom
+        }
+        if (options.gestures.tilt != mapOptions.gestures.tilt) {
+            mapLibreMap.uiSettings.isTiltGesturesEnabled = options.gestures.tilt
         }
     }
 }

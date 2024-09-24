@@ -18,7 +18,8 @@ abstract interface class MapController {
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
   });
 
   /// Animate the map camera to a new location.
@@ -27,7 +28,8 @@ abstract interface class MapController {
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,

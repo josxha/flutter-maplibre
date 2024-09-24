@@ -33,7 +33,7 @@ class _ControllerPageState extends State<ControllerPage> {
                     await _controller.moveCamera(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
-                      tilt: 0,
+                      pitch: 0,
                       bearing: 0,
                     );
                     debugPrint('jumpTo end');
@@ -48,7 +48,7 @@ class _ControllerPageState extends State<ControllerPage> {
                         center: Position(-18.6874, 64.9445),
                         zoom: 5,
                         bearing: -50,
-                        tilt: 60,
+                        pitch: 60,
                       );
                       debugPrint('flyTo end');
                     } catch (error) {
@@ -75,7 +75,7 @@ center.lng: ${camera.center.lng}
 center.lat: ${camera.center.lat}
 zoom: ${camera.zoom}
 bearing: ${camera.bearing}
-tilt: ${camera.tilt}'''),
+pitch: ${camera.pitch}'''),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(),

@@ -65,16 +65,17 @@ class MapOptions {
   MapOptions({
     required this.style,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
     this.center,
     this.maxBounds,
     required this.minZoom,
     required this.maxZoom,
-    required this.minTilt,
-    required this.maxTilt,
+    required this.minPitch,
+    required this.maxPitch,
     required this.listensOnClick,
     required this.listensOnLongClick,
+    required this.gestures,
   });
 
   /// The URL of the used map style.
@@ -83,8 +84,8 @@ class MapOptions {
   /// The initial zoom level of the map.
   double zoom;
 
-  /// The initial tilt of the map.
-  double tilt;
+  /// The initial pitch / tilt of the map.
+  double pitch;
 
   /// The initial bearing of the map.
   double bearing;
@@ -102,10 +103,10 @@ class MapOptions {
   double maxZoom;
 
   /// The minimum pitch / tilt of the map.
-  double minTilt;
+  double minPitch;
 
   /// The maximum pitch / tilt of the map.
-  double maxTilt;
+  double maxPitch;
 
   /// If the native map should listen to click events.
   bool listensOnClick;
@@ -113,20 +114,24 @@ class MapOptions {
   /// If the native map should listen to long click events.
   bool listensOnLongClick;
 
+  /// The map gestures.
+  MapGestures gestures;
+
   Object encode() {
     return <Object?>[
       style,
       zoom,
-      tilt,
+      pitch,
       bearing,
       center,
       maxBounds,
       minZoom,
       maxZoom,
-      minTilt,
-      maxTilt,
+      minPitch,
+      maxPitch,
       listensOnClick,
       listensOnLongClick,
+      gestures,
     ];
   }
 
@@ -135,16 +140,58 @@ class MapOptions {
     return MapOptions(
       style: result[0]! as String,
       zoom: result[1]! as double,
-      tilt: result[2]! as double,
+      pitch: result[2]! as double,
       bearing: result[3]! as double,
       center: result[4] as LngLat?,
       maxBounds: result[5] as LngLatBounds?,
       minZoom: result[6]! as double,
       maxZoom: result[7]! as double,
-      minTilt: result[8]! as double,
-      maxTilt: result[9]! as double,
+      minPitch: result[8]! as double,
+      maxPitch: result[9]! as double,
       listensOnClick: result[10]! as bool,
       listensOnLongClick: result[11]! as bool,
+      gestures: result[12]! as MapGestures,
+    );
+  }
+}
+
+/// Map gestures
+class MapGestures {
+  MapGestures({
+    required this.rotate,
+    required this.pan,
+    required this.zoom,
+    required this.tilt,
+  });
+
+  /// Rotate the map bearing.
+  bool rotate;
+
+  /// Move the center of the map around.
+  bool pan;
+
+  /// Zoom the map in and out.
+  bool zoom;
+
+  /// Tilt (pitch) the map camera.
+  bool tilt;
+
+  Object encode() {
+    return <Object?>[
+      rotate,
+      pan,
+      zoom,
+      tilt,
+    ];
+  }
+
+  static MapGestures decode(Object result) {
+    result as List<Object?>;
+    return MapGestures(
+      rotate: result[0]! as bool,
+      pan: result[1]! as bool,
+      zoom: result[2]! as bool,
+      tilt: result[3]! as bool,
     );
   }
 }
@@ -212,7 +259,7 @@ class MapCamera {
   MapCamera({
     required this.center,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
   });
 
@@ -220,7 +267,7 @@ class MapCamera {
 
   double zoom;
 
-  double tilt;
+  double pitch;
 
   double bearing;
 
@@ -228,7 +275,7 @@ class MapCamera {
     return <Object?>[
       center,
       zoom,
-      tilt,
+      pitch,
       bearing,
     ];
   }
@@ -238,7 +285,7 @@ class MapCamera {
     return MapCamera(
       center: result[0]! as LngLat,
       zoom: result[1]! as double,
-      tilt: result[2]! as double,
+      pitch: result[2]! as double,
       bearing: result[3]! as double,
     );
   }
@@ -300,17 +347,20 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is MapOptions) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+    } else if (value is MapGestures) {
       buffer.putUint8(133);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    } else if (value is LngLat) {
       buffer.putUint8(134);
       writeValue(buffer, value.encode());
-    } else if (value is MapCamera) {
+    } else if (value is ScreenLocation) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is MapCamera) {
       buffer.putUint8(136);
+      writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(137);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -332,12 +382,14 @@ class _PigeonCodec extends StandardMessageCodec {
       case 132:
         return MapOptions.decode(readValue(buffer)!);
       case 133:
-        return LngLat.decode(readValue(buffer)!);
+        return MapGestures.decode(readValue(buffer)!);
       case 134:
-        return ScreenLocation.decode(readValue(buffer)!);
+        return LngLat.decode(readValue(buffer)!);
       case 135:
-        return MapCamera.decode(readValue(buffer)!);
+        return ScreenLocation.decode(readValue(buffer)!);
       case 136:
+        return MapCamera.decode(readValue(buffer)!);
+      case 137:
         return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -423,7 +475,7 @@ class MapLibreHostApi {
   }
 
   /// Get the current camera position with the map center, zoom level, camera
-  /// tilt and map rotation.
+  /// pitch and map rotation.
   Future<MapCamera> getCamera() async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera$pigeonVar_messageChannelSuffix';

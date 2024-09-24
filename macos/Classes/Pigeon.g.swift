@@ -105,8 +105,8 @@ struct MapOptions {
   var style: String
   /// The initial zoom level of the map.
   var zoom: Double
-  /// The initial tilt of the map.
-  var tilt: Double
+  /// The initial pitch / tilt of the map.
+  var pitch: Double
   /// The initial bearing of the map.
   var bearing: Double
   /// The initial center coordinates of the map.
@@ -118,13 +118,15 @@ struct MapOptions {
   /// The maximum zoom level of the map.
   var maxZoom: Double
   /// The minimum pitch / tilt of the map.
-  var minTilt: Double
+  var minPitch: Double
   /// The maximum pitch / tilt of the map.
-  var maxTilt: Double
+  var maxPitch: Double
   /// If the native map should listen to click events.
   var listensOnClick: Bool
   /// If the native map should listen to long click events.
   var listensOnLongClick: Bool
+  /// The map gestures.
+  var gestures: MapGestures
 
 
 
@@ -132,46 +134,88 @@ struct MapOptions {
   static func fromList(_ pigeonVar_list: [Any?]) -> MapOptions? {
     let style = pigeonVar_list[0] as! String
     let zoom = pigeonVar_list[1] as! Double
-    let tilt = pigeonVar_list[2] as! Double
+    let pitch = pigeonVar_list[2] as! Double
     let bearing = pigeonVar_list[3] as! Double
     let center: LngLat? = nilOrValue(pigeonVar_list[4])
     let maxBounds: LngLatBounds? = nilOrValue(pigeonVar_list[5])
     let minZoom = pigeonVar_list[6] as! Double
     let maxZoom = pigeonVar_list[7] as! Double
-    let minTilt = pigeonVar_list[8] as! Double
-    let maxTilt = pigeonVar_list[9] as! Double
+    let minPitch = pigeonVar_list[8] as! Double
+    let maxPitch = pigeonVar_list[9] as! Double
     let listensOnClick = pigeonVar_list[10] as! Bool
     let listensOnLongClick = pigeonVar_list[11] as! Bool
+    let gestures = pigeonVar_list[12] as! MapGestures
 
     return MapOptions(
       style: style,
       zoom: zoom,
-      tilt: tilt,
+      pitch: pitch,
       bearing: bearing,
       center: center,
       maxBounds: maxBounds,
       minZoom: minZoom,
       maxZoom: maxZoom,
-      minTilt: minTilt,
-      maxTilt: maxTilt,
+      minPitch: minPitch,
+      maxPitch: maxPitch,
       listensOnClick: listensOnClick,
-      listensOnLongClick: listensOnLongClick
+      listensOnLongClick: listensOnLongClick,
+      gestures: gestures
     )
   }
   func toList() -> [Any?] {
     return [
       style,
       zoom,
-      tilt,
+      pitch,
       bearing,
       center,
       maxBounds,
       minZoom,
       maxZoom,
-      minTilt,
-      maxTilt,
+      minPitch,
+      maxPitch,
       listensOnClick,
       listensOnLongClick,
+      gestures,
+    ]
+  }
+}
+
+/// Map gestures
+///
+/// Generated class from Pigeon that represents data sent in messages.
+struct MapGestures {
+  /// Rotate the map bearing.
+  var rotate: Bool
+  /// Move the center of the map around.
+  var pan: Bool
+  /// Zoom the map in and out.
+  var zoom: Bool
+  /// Tilt (pitch) the map camera.
+  var tilt: Bool
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> MapGestures? {
+    let rotate = pigeonVar_list[0] as! Bool
+    let pan = pigeonVar_list[1] as! Bool
+    let zoom = pigeonVar_list[2] as! Bool
+    let tilt = pigeonVar_list[3] as! Bool
+
+    return MapGestures(
+      rotate: rotate,
+      pan: pan,
+      zoom: zoom,
+      tilt: tilt
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      rotate,
+      pan,
+      zoom,
+      tilt,
     ]
   }
 }
@@ -240,7 +284,7 @@ struct ScreenLocation {
 struct MapCamera {
   var center: LngLat
   var zoom: Double
-  var tilt: Double
+  var pitch: Double
   var bearing: Double
 
 
@@ -249,13 +293,13 @@ struct MapCamera {
   static func fromList(_ pigeonVar_list: [Any?]) -> MapCamera? {
     let center = pigeonVar_list[0] as! LngLat
     let zoom = pigeonVar_list[1] as! Double
-    let tilt = pigeonVar_list[2] as! Double
+    let pitch = pigeonVar_list[2] as! Double
     let bearing = pigeonVar_list[3] as! Double
 
     return MapCamera(
       center: center,
       zoom: zoom,
-      tilt: tilt,
+      pitch: pitch,
       bearing: bearing
     )
   }
@@ -263,7 +307,7 @@ struct MapCamera {
     return [
       center,
       zoom,
-      tilt,
+      pitch,
       bearing,
     ]
   }
@@ -328,12 +372,14 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
     case 132:
       return MapOptions.fromList(self.readValue() as! [Any?])
     case 133:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      return MapGestures.fromList(self.readValue() as! [Any?])
     case 134:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     case 135:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
     case 136:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 137:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -355,17 +401,20 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
     } else if let value = value as? MapOptions {
       super.writeByte(132)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLat {
+    } else if let value = value as? MapGestures {
       super.writeByte(133)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? LngLat {
       super.writeByte(134)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? ScreenLocation {
       super.writeByte(135)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? MapCamera {
       super.writeByte(136)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(137)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -395,7 +444,7 @@ protocol MapLibreHostApi {
   /// Animate the viewport of the map to a new location.
   func animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
-  /// tilt and map rotation.
+  /// pitch and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
   /// Get the visible region of the current map camera.
   func getVisibleRegion(completion: @escaping (Result<LngLatBounds, Error>) -> Void)
@@ -501,7 +550,7 @@ class MapLibreHostApiSetup {
       animateCameraChannel.setMessageHandler(nil)
     }
     /// Get the current camera position with the map center, zoom level, camera
-    /// tilt and map rotation.
+    /// pitch and map rotation.
     let getCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       getCameraChannel.setMessageHandler { _, reply in

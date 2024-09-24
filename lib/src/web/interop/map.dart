@@ -55,7 +55,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// east is up.
   external num getBearing();
 
-  /// Returns the map's current pitch (tilt).
+  /// Returns the map's current pitch / tilt.
   external num getPitch();
 
   /// Returns the map's geographical bounds. When the bearing or pitch is
@@ -81,10 +81,10 @@ extension type JsMap._(Camera _) implements Camera {
   /// Update the max zoom level.
   external void setMaxZoom(double? maxZoom);
 
-  /// Update the min camera tilt.
+  /// Update the min camera pitch / tilt.
   external void setMinPitch(double? minPitch);
 
-  /// Update the max camera tilt.
+  /// Update the max camera pitch / tilt.
   external void setMaxPitch(double? maxPitch);
 
   /// Update the maximum bounding box of the map camera.
@@ -92,6 +92,20 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Get a Source by its id.
   external SourceSpecification getSource(String id);
+
+  external DoubleClickZoomHandler doubleClickZoom;
+  external DragPanHandler dragPan;
+  external DragRotateHandler dragRotate;
+  external KeyboardHandler keyboard;
+  external ScrollZoomHandler scrollZoom;
+
+  /// Shift and drag to draw a box to zoom in
+  external BoxZoomHandler boxZoom;
+
+  /// Pitch with rotate
+  external bool pitchWithRotate;
+  external TwoFingersTouchPitchHandler touchPitch;
+  external TwoFingersTouchZoomRotateHandler touchZoomRotate;
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
