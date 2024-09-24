@@ -125,6 +125,8 @@ struct MapOptions {
   var listensOnClick: Bool
   /// If the native map should listen to long click events.
   var listensOnLongClick: Bool
+  /// The map gestures.
+  var gestures: MapGestures
 
 
 
@@ -142,6 +144,7 @@ struct MapOptions {
     let maxPitch = pigeonVar_list[9] as! Double
     let listensOnClick = pigeonVar_list[10] as! Bool
     let listensOnLongClick = pigeonVar_list[11] as! Bool
+    let gestures = pigeonVar_list[12] as! MapGestures
 
     return MapOptions(
       style: style,
@@ -155,7 +158,8 @@ struct MapOptions {
       minPitch: minPitch,
       maxPitch: maxPitch,
       listensOnClick: listensOnClick,
-      listensOnLongClick: listensOnLongClick
+      listensOnLongClick: listensOnLongClick,
+      gestures: gestures
     )
   }
   func toList() -> [Any?] {
@@ -172,6 +176,46 @@ struct MapOptions {
       maxPitch,
       listensOnClick,
       listensOnLongClick,
+      gestures,
+    ]
+  }
+}
+
+/// Map gestures
+///
+/// Generated class from Pigeon that represents data sent in messages.
+struct MapGestures {
+  /// Rotate the map bearing.
+  var rotate: Bool
+  /// Move the center of the map around.
+  var pan: Bool
+  /// Zoom the map in and out.
+  var zoom: Bool
+  /// Tilt (pitch) the map camera.
+  var tilt: Bool
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> MapGestures? {
+    let rotate = pigeonVar_list[0] as! Bool
+    let pan = pigeonVar_list[1] as! Bool
+    let zoom = pigeonVar_list[2] as! Bool
+    let tilt = pigeonVar_list[3] as! Bool
+
+    return MapGestures(
+      rotate: rotate,
+      pan: pan,
+      zoom: zoom,
+      tilt: tilt
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      rotate,
+      pan,
+      zoom,
+      tilt,
     ]
   }
 }
@@ -328,12 +372,14 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
     case 132:
       return MapOptions.fromList(self.readValue() as! [Any?])
     case 133:
-      return LngLat.fromList(self.readValue() as! [Any?])
+      return MapGestures.fromList(self.readValue() as! [Any?])
     case 134:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return LngLat.fromList(self.readValue() as! [Any?])
     case 135:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return ScreenLocation.fromList(self.readValue() as! [Any?])
     case 136:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 137:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -355,17 +401,20 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
     } else if let value = value as? MapOptions {
       super.writeByte(132)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLat {
+    } else if let value = value as? MapGestures {
       super.writeByte(133)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? LngLat {
       super.writeByte(134)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? ScreenLocation {
       super.writeByte(135)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? MapCamera {
       super.writeByte(136)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(137)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)

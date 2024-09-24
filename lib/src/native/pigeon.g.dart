@@ -75,6 +75,7 @@ class MapOptions {
     required this.maxPitch,
     required this.listensOnClick,
     required this.listensOnLongClick,
+    required this.gestures,
   });
 
   /// The URL of the used map style.
@@ -113,6 +114,9 @@ class MapOptions {
   /// If the native map should listen to long click events.
   bool listensOnLongClick;
 
+  /// The map gestures.
+  MapGestures gestures;
+
   Object encode() {
     return <Object?>[
       style,
@@ -127,6 +131,7 @@ class MapOptions {
       maxPitch,
       listensOnClick,
       listensOnLongClick,
+      gestures,
     ];
   }
 
@@ -145,6 +150,48 @@ class MapOptions {
       maxPitch: result[9]! as double,
       listensOnClick: result[10]! as bool,
       listensOnLongClick: result[11]! as bool,
+      gestures: result[12]! as MapGestures,
+    );
+  }
+}
+
+/// Map gestures
+class MapGestures {
+  MapGestures({
+    required this.rotate,
+    required this.pan,
+    required this.zoom,
+    required this.tilt,
+  });
+
+  /// Rotate the map bearing.
+  bool rotate;
+
+  /// Move the center of the map around.
+  bool pan;
+
+  /// Zoom the map in and out.
+  bool zoom;
+
+  /// Tilt (pitch) the map camera.
+  bool tilt;
+
+  Object encode() {
+    return <Object?>[
+      rotate,
+      pan,
+      zoom,
+      tilt,
+    ];
+  }
+
+  static MapGestures decode(Object result) {
+    result as List<Object?>;
+    return MapGestures(
+      rotate: result[0]! as bool,
+      pan: result[1]! as bool,
+      zoom: result[2]! as bool,
+      tilt: result[3]! as bool,
     );
   }
 }
@@ -300,17 +347,20 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is MapOptions) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+    } else if (value is MapGestures) {
       buffer.putUint8(133);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    } else if (value is LngLat) {
       buffer.putUint8(134);
       writeValue(buffer, value.encode());
-    } else if (value is MapCamera) {
+    } else if (value is ScreenLocation) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is MapCamera) {
       buffer.putUint8(136);
+      writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(137);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -332,12 +382,14 @@ class _PigeonCodec extends StandardMessageCodec {
       case 132:
         return MapOptions.decode(readValue(buffer)!);
       case 133:
-        return LngLat.decode(readValue(buffer)!);
+        return MapGestures.decode(readValue(buffer)!);
       case 134:
-        return ScreenLocation.decode(readValue(buffer)!);
+        return LngLat.decode(readValue(buffer)!);
       case 135:
-        return MapCamera.decode(readValue(buffer)!);
+        return ScreenLocation.decode(readValue(buffer)!);
       case 136:
+        return MapCamera.decode(readValue(buffer)!);
+      case 137:
         return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);

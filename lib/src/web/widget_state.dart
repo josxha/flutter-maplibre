@@ -61,6 +61,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.setMinPitch(_options.minPitch);
         _map.setMaxPitch(_options.maxPitch);
         _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+        _updateGestures(_options.gestures);
 
         // add controls
         for (final control in _options.controls) {
@@ -227,6 +228,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     if (_options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    }
+    if (_options.gestures != oldWidget.options.gestures) {
+      _updateGestures(_options.gestures);
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -569,5 +573,44 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }) async {
     final source = _map.getSource(id);
     source.setData(parse(data));
+  }
+
+  void _updateGestures(MapGestures gestures) {
+    if (gestures.pan) {
+      _map.dragPan.enable();
+    } else {
+      _map.dragPan.disable();
+    }
+    if (gestures.zoom) {
+      _map.touchZoomRotate.enable();
+      _map.doubleClickZoom.enable();
+      _map.scrollZoom.enable();
+      _map.boxZoom.enable();
+    } else {
+      _map.touchZoomRotate.disable(); // this disables rotation as well
+      _map.doubleClickZoom.disable();
+      _map.scrollZoom.disable();
+      _map.boxZoom.disable();
+    }
+    if (gestures.rotate) {
+      _map.dragRotate.enable();
+      _map.touchZoomRotate.disableRotation();
+    } else {
+      _map.touchZoomRotate.enableRotation();
+      _map.dragRotate.disable();
+    }
+    if (gestures.pitch) {
+      // TODO dragRotate allows to pitch too but has no option to disable pitch.
+      _map.touchPitch.enable();
+    } else {
+      _map.touchPitch.disable();
+    }
+    // It's not possible to disable just some gestures for the KeyboardHandler.
+    // That's why we disable it completely if not all gestures are enabled.
+    if (gestures.allEnabled) {
+      _map.keyboard.enable();
+    } else {
+      _map.keyboard.disable();
+    }
   }
 }

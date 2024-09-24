@@ -40,7 +40,8 @@ MapOptions::MapOptions(
   double min_pitch,
   double max_pitch,
   bool listens_on_click,
-  bool listens_on_long_click)
+  bool listens_on_long_click,
+  const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
     pitch_(pitch),
@@ -50,7 +51,8 @@ MapOptions::MapOptions(
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click) {}
+    listens_on_long_click_(listens_on_long_click),
+    gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(
   const std::string& style,
@@ -64,7 +66,8 @@ MapOptions::MapOptions(
   double min_pitch,
   double max_pitch,
   bool listens_on_click,
-  bool listens_on_long_click)
+  bool listens_on_long_click,
+  const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
     pitch_(pitch),
@@ -76,7 +79,8 @@ MapOptions::MapOptions(
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click) {}
+    listens_on_long_click_(listens_on_long_click),
+    gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(const MapOptions& other)
  : style_(other.style_),
@@ -90,7 +94,8 @@ MapOptions::MapOptions(const MapOptions& other)
     min_pitch_(other.min_pitch_),
     max_pitch_(other.max_pitch_),
     listens_on_click_(other.listens_on_click_),
-    listens_on_long_click_(other.listens_on_long_click_) {}
+    listens_on_long_click_(other.listens_on_long_click_),
+    gestures_(std::make_unique<MapGestures>(*other.gestures_)) {}
 
 MapOptions& MapOptions::operator=(const MapOptions& other) {
   style_ = other.style_;
@@ -105,6 +110,7 @@ MapOptions& MapOptions::operator=(const MapOptions& other) {
   max_pitch_ = other.max_pitch_;
   listens_on_click_ = other.listens_on_click_;
   listens_on_long_click_ = other.listens_on_long_click_;
+  gestures_ = std::make_unique<MapGestures>(*other.gestures_);
   return *this;
 }
 
@@ -224,9 +230,18 @@ void MapOptions::set_listens_on_long_click(bool value_arg) {
 }
 
 
+const MapGestures& MapOptions::gestures() const {
+  return *gestures_;
+}
+
+void MapOptions::set_gestures(const MapGestures& value_arg) {
+  gestures_ = std::make_unique<MapGestures>(value_arg);
+}
+
+
 EncodableList MapOptions::ToEncodableList() const {
   EncodableList list;
-  list.reserve(12);
+  list.reserve(13);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
   list.push_back(EncodableValue(pitch_));
@@ -239,6 +254,7 @@ EncodableList MapOptions::ToEncodableList() const {
   list.push_back(EncodableValue(max_pitch_));
   list.push_back(EncodableValue(listens_on_click_));
   list.push_back(EncodableValue(listens_on_long_click_));
+  list.push_back(CustomEncodableValue(*gestures_));
   return list;
 }
 
@@ -253,7 +269,8 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
     std::get<double>(list[8]),
     std::get<double>(list[9]),
     std::get<bool>(list[10]),
-    std::get<bool>(list[11]));
+    std::get<bool>(list[11]),
+    std::any_cast<const MapGestures&>(std::get<CustomEncodableValue>(list[12])));
   auto& encodable_center = list[4];
   if (!encodable_center.IsNull()) {
     decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
@@ -262,6 +279,73 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
   if (!encodable_max_bounds.IsNull()) {
     decoded.set_max_bounds(std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_max_bounds)));
   }
+  return decoded;
+}
+
+// MapGestures
+
+MapGestures::MapGestures(
+  bool rotate,
+  bool pan,
+  bool zoom,
+  bool tilt)
+ : rotate_(rotate),
+    pan_(pan),
+    zoom_(zoom),
+    tilt_(tilt) {}
+
+bool MapGestures::rotate() const {
+  return rotate_;
+}
+
+void MapGestures::set_rotate(bool value_arg) {
+  rotate_ = value_arg;
+}
+
+
+bool MapGestures::pan() const {
+  return pan_;
+}
+
+void MapGestures::set_pan(bool value_arg) {
+  pan_ = value_arg;
+}
+
+
+bool MapGestures::zoom() const {
+  return zoom_;
+}
+
+void MapGestures::set_zoom(bool value_arg) {
+  zoom_ = value_arg;
+}
+
+
+bool MapGestures::tilt() const {
+  return tilt_;
+}
+
+void MapGestures::set_tilt(bool value_arg) {
+  tilt_ = value_arg;
+}
+
+
+EncodableList MapGestures::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(4);
+  list.push_back(EncodableValue(rotate_));
+  list.push_back(EncodableValue(pan_));
+  list.push_back(EncodableValue(zoom_));
+  list.push_back(EncodableValue(tilt_));
+  return list;
+}
+
+MapGestures MapGestures::FromEncodableList(const EncodableList& list) {
+  MapGestures decoded(
+    std::get<bool>(list[0]),
+    std::get<bool>(list[1]),
+    std::get<bool>(list[2]),
+    std::get<bool>(list[3]));
   return decoded;
 }
 
@@ -521,15 +605,18 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
         return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 133: {
-        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(MapGestures::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 134: {
-        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 135: {
-        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 136: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 137: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -561,23 +648,28 @@ void PigeonInternalCodecSerializer::WriteValue(
       WriteValue(EncodableValue(std::any_cast<MapOptions>(*custom_value).ToEncodableList()), stream);
       return;
     }
-    if (custom_value->type() == typeid(LngLat)) {
+    if (custom_value->type() == typeid(MapGestures)) {
       stream->WriteByte(133);
+      WriteValue(EncodableValue(std::any_cast<MapGestures>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(LngLat)) {
+      stream->WriteByte(134);
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(ScreenLocation)) {
-      stream->WriteByte(134);
+      stream->WriteByte(135);
       WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(MapCamera)) {
-      stream->WriteByte(135);
+      stream->WriteByte(136);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLatBounds)) {
-      stream->WriteByte(136);
+      stream->WriteByte(137);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }

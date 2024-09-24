@@ -23,6 +23,7 @@ class MapOptions {
     @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
     @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
     this.maxBounds,
+    this.gestures = const MapGestures.all(),
   }) : pitch = tilt ?? pitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -71,6 +72,9 @@ class MapOptions {
   /// The maximum bounding box of the map camera. No constraints are in place
   /// if set to `null`.
   final LngLatBounds? maxBounds;
+
+  /// Enable and disable some or all map gestures.
+  final MapGestures gestures;
 
   /// A callback that fires when the user clicks on the map.
   @Deprecated('Use the onEvent() callback instead.')

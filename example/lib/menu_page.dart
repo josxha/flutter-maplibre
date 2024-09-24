@@ -4,6 +4,7 @@ import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
+import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/layers_fill_page.dart';
@@ -47,6 +48,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Parameters',
                 iconData: Icons.build,
                 location: ParametersPage.location,
+              ),
+              ItemCard(
+                label: 'Gestures',
+                iconData: Icons.back_hand,
+                location: GesturesPage.location,
               ),
               ItemCard(
                 label: 'Events',

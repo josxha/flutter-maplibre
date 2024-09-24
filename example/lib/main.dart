@@ -3,6 +3,7 @@ import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/annotations_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
+import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_fill_extrusion_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         MenuPage.location: (context) => const MenuPage(),
         KioskPage.location: (context) => const KioskPage(),
         AnimationPage.location: (context) => const AnimationPage(),
+        GesturesPage.location: (context) => const GesturesPage(),
         EventsPage.location: (context) => const EventsPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         LayersSymbolPage.location: (context) => const LayersSymbolPage(),
