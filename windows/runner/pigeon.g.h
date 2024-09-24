@@ -103,7 +103,8 @@ class MapOptions {
     double min_tilt,
     double max_tilt,
     bool listens_on_click,
-    bool listens_on_long_click);
+    bool listens_on_long_click,
+    const MapGestures& gestures);
 
   // Constructs an object setting all fields.
   explicit MapOptions(
@@ -118,7 +119,8 @@ class MapOptions {
     double min_tilt,
     double max_tilt,
     bool listens_on_click,
-    bool listens_on_long_click);
+    bool listens_on_long_click,
+    const MapGestures& gestures);
 
   ~MapOptions() = default;
   MapOptions(const MapOptions& other);
@@ -175,6 +177,10 @@ class MapOptions {
   bool listens_on_long_click() const;
   void set_listens_on_long_click(bool value_arg);
 
+  // The map gestures.
+  const MapGestures& gestures() const;
+  void set_gestures(const MapGestures& value_arg);
+
 
  private:
   static MapOptions FromEncodableList(const flutter::EncodableList& list);
@@ -194,6 +200,51 @@ class MapOptions {
   double max_tilt_;
   bool listens_on_click_;
   bool listens_on_long_click_;
+  std::unique_ptr<MapGestures> gestures_;
+
+};
+
+
+// Map gestures
+//
+// Generated class from Pigeon that represents data sent in messages.
+class MapGestures {
+ public:
+  // Constructs an object setting all fields.
+  explicit MapGestures(
+    bool rotate,
+    bool pan,
+    bool zoom,
+    bool tilt);
+
+  // Rotate the map bearing.
+  bool rotate() const;
+  void set_rotate(bool value_arg);
+
+  // Move the center of the map around.
+  bool pan() const;
+  void set_pan(bool value_arg);
+
+  // Zoom the map in and out.
+  bool zoom() const;
+  void set_zoom(bool value_arg);
+
+  // Tilt (pitch) the map camera.
+  bool tilt() const;
+  void set_tilt(bool value_arg);
+
+
+ private:
+  static MapGestures FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapOptions;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PigeonInternalCodecSerializer;
+  bool rotate_;
+  bool pan_;
+  bool zoom_;
+  bool tilt_;
 
 };
 

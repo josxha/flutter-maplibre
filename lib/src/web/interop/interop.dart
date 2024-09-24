@@ -9,8 +9,9 @@ import 'package:web/web.dart';
 part 'camera.dart';
 part 'controls.dart';
 part 'events.dart';
-part 'marker.dart';
+part 'gesture_handlers.dart';
 part 'map.dart';
+part 'marker.dart';
 
 /// A simple x/y [Point] class for JavaScript.
 @anonymous
