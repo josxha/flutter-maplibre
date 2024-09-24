@@ -4,7 +4,7 @@ import 'package:maplibre/maplibre.dart';
 /// Update the camera. Used in [MapController.moveCamera] and
 /// [MapController.animateCamera].
 @immutable
-class CameraUpdate {
+sealed class CameraUpdate {
   /// Create a new [CameraUpdate] instance.
   const CameraUpdate._();
 
@@ -23,7 +23,7 @@ class CameraUpdate {
 
 /// A [CameraUpdate] with optional target values.
 @immutable
-class CameraUpdateValues extends CameraUpdate {
+final class CameraUpdateValues extends CameraUpdate {
   /// Create a new [CameraUpdateValues] instance.
   const CameraUpdateValues._({
     this.center,
@@ -47,7 +47,7 @@ class CameraUpdateValues extends CameraUpdate {
 
 /// A [CameraUpdate] with bounds the camera should be inside.
 @immutable
-class CameraUpdateInsideBounds extends CameraUpdate {
+final class CameraUpdateInsideBounds extends CameraUpdate {
   /// Create a new [CameraUpdateInsideBounds] instance.
   const CameraUpdateInsideBounds._({required this.bounds}) : super._();
 

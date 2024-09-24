@@ -275,10 +275,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
   }) =>
       moveCamera(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: tilt,
+        update: CameraUpdate.values(
+          center: center,
+          zoom: zoom,
+          bearing: bearing,
+          pitch: tilt,
+        ),
       );
 
   @override
@@ -293,51 +295,52 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration? webMaxDuration,
   }) =>
       animateCamera(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        update: CameraUpdate.values(
+          center: center,
+          zoom: zoom,
+          bearing: bearing,
+          pitch: tilt,
+        ),
         nativeDuration: nativeDuration,
         webSpeed: webSpeed,
         webMaxDuration: webMaxDuration,
       );
 
   @override
-  Future<void> moveCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-  }) async {
+  Future<void> moveCamera({required CameraUpdate update}) async {
     _nextGestureCausedByController = true;
-    _map.jumpTo(
-      interop.JumpToOptions(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
-      ),
-    );
+    switch (update) {
+      case CameraUpdateValues():
+        _map.jumpTo(
+          interop.JumpToOptions(
+            center: update.center?.toLngLat(),
+            zoom: update.zoom,
+            bearing: update.bearing,
+            pitch: update.pitch,
+          ),
+        );
+      case CameraUpdateInsideBounds():
+      // TODO: Handle this case.
+    }
   }
 
   @override
   Future<void> animateCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required CameraUpdate update,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    final destination = center?.toLngLat();
+    if (update is! CameraUpdateValues) return; // TODO: handle other cases
+
+    final destination = update.center?.toLngLat();
     _nextGestureCausedByController = true;
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        zoom: update.zoom,
+        bearing: update.bearing,
+        pitch: update.pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
       ),
@@ -356,9 +359,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       final reachedLat = (destination.lat - newCenter.lat).abs() < 0.0000001;
       reachedCenter = reachedLat && reachedLng;
     }
-    final reachedZoom = zoom == null || zoom == _map.getZoom();
-    final reachedBearing = bearing == null || bearing == _map.getBearing();
-    final reachedPitch = pitch == null || pitch == _map.getPitch();
+    final reachedZoom = update.zoom == null || update.zoom == _map.getZoom();
+    final reachedBearing =
+        update.bearing == null || update.bearing == _map.getBearing();
+    final reachedPitch =
+        update.pitch == null || update.pitch == _map.getPitch();
 
     if (reachedCenter && reachedZoom && reachedBearing && reachedPitch) return;
 

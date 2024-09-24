@@ -119,10 +119,12 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? tilt,
   }) =>
       moveCamera(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: tilt,
+        update: CameraUpdate.values(
+          center: center,
+          zoom: zoom,
+          bearing: bearing,
+          pitch: tilt,
+        ),
       );
 
   @override
@@ -137,46 +139,44 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Duration? webMaxDuration,
   }) =>
       animateCamera(
-        center: center,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: tilt,
+        update: CameraUpdate.values(
+          center: center,
+          zoom: zoom,
+          bearing: bearing,
+          pitch: tilt,
+        ),
         nativeDuration: nativeDuration,
         webSpeed: webSpeed,
         webMaxDuration: webMaxDuration,
       );
 
   @override
-  Future<void> moveCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-  }) =>
-      _hostApi.moveCamera(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
-      );
+  Future<void> moveCamera({required CameraUpdate update}) async {
+    if (update is! CameraUpdateValues) return; // TODO: handle other cases
+    await _hostApi.moveCamera(
+      center: update.center?.toLngLat(),
+      zoom: update.zoom,
+      bearing: update.bearing,
+      pitch: update.pitch,
+    );
+  }
 
   @override
   Future<void> animateCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required CameraUpdate update,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
-  }) =>
-      _hostApi.animateCamera(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
-        durationMs: nativeDuration.inMilliseconds,
-      );
+  }) async {
+    if (update is! CameraUpdateValues) return; // TODO: handle other cases
+    await _hostApi.animateCamera(
+      center: update.center?.toLngLat(),
+      zoom: update.zoom,
+      bearing: update.bearing,
+      pitch: update.pitch,
+      durationMs: nativeDuration.inMilliseconds,
+    );
+  }
 
   @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {

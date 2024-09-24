@@ -27,10 +27,12 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.moveCamera(
-          center: Position(1, 1),
-          bearing: 1,
-          zoom: 1,
-          pitch: 1,
+          update: CameraUpdate.values(
+            center: Position(1, 1),
+            bearing: 1,
+            zoom: 1,
+            pitch: 1,
+          ),
         );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
@@ -49,10 +51,12 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.moveCamera(
-          center: Position(1, 2),
-          bearing: 1,
-          zoom: 1,
-          pitch: 1,
+          update: CameraUpdate.values(
+            center: Position(1, 2),
+            bearing: 1,
+            zoom: 1,
+            pitch: 1,
+          ),
         );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
@@ -71,10 +75,12 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.animateCamera(
-          center: Position(2, 1),
-          bearing: 2,
-          zoom: 2,
-          pitch: 2,
+          update: CameraUpdate.values(
+            center: Position(2, 1),
+            bearing: 2,
+            zoom: 2,
+            pitch: 2,
+          ),
           webSpeed: 100,
           nativeDuration: Duration.zero,
         );

@@ -3,6 +3,7 @@
 export 'package:geotypes/geotypes.dart';
 
 export 'src/annotations.dart';
+export 'src/camera_update.dart';
 export 'src/lng_lat_bounds.dart';
 export 'src/map.dart';
 export 'src/map_camera.dart';

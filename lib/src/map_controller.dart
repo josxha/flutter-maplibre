@@ -34,19 +34,11 @@ abstract interface class MapController {
   });
 
   /// Instantly move the map camera to a new location.
-  Future<void> moveCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-  });
+  Future<void> moveCamera({required CameraUpdate update});
 
   /// Animate the map camera to a new location.
   Future<void> animateCamera({
-    Position? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
+    required CameraUpdate update,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
