@@ -41,7 +41,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             zoom: _options.zoom,
             center: _options.center?.toLngLat(),
             bearing: _options.bearing,
-            pitch: _options.tilt,
+            pitch: _options.pitch,
           ),
         );
 
@@ -58,8 +58,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         // set options
         _map.setMinZoom(_options.minZoom);
         _map.setMaxZoom(_options.maxZoom);
-        _map.setMinPitch(_options.minTilt);
-        _map.setMaxPitch(_options.maxTilt);
+        _map.setMinPitch(_options.minPitch);
+        _map.setMaxPitch(_options.maxPitch);
         _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
         _updateGestures(_options.gestures);
 
@@ -171,7 +171,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             final camera = MapCamera(
               center: _map.getCenter().toPosition(),
               zoom: _map.getZoom().toDouble(),
-              tilt: _map.getPitch().toDouble(),
+              pitch: _map.getPitch().toDouble(),
               bearing: _map.getBearing().toDouble(),
             );
             widget.onEvent?.call(MapEventMoveCamera(camera: camera));
@@ -220,11 +220,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.maxZoom != oldWidget.options.maxZoom) {
       _map.setMaxZoom(_options.maxZoom);
     }
-    if (_options.minTilt != oldWidget.options.minTilt) {
-      _map.setMinPitch(_options.minTilt);
+    if (_options.minPitch != oldWidget.options.minPitch) {
+      _map.setMinPitch(_options.minPitch);
     }
-    if (_options.maxTilt != oldWidget.options.maxTilt) {
-      _map.setMaxPitch(_options.maxTilt);
+    if (_options.maxPitch != oldWidget.options.maxPitch) {
+      _map.setMaxPitch(_options.maxPitch);
     }
     if (_options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
@@ -271,7 +271,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
   }) async {
     _nextGestureCausedByController = true;
     _map.jumpTo(
@@ -279,7 +280,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch ?? tilt,
       ),
     );
   }
@@ -289,7 +290,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    double? tilt,
+    double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
@@ -301,7 +303,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: destination,
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        pitch: pitch ?? tilt,
         speed: webSpeed,
         maxDuration: maxDuration?.inMilliseconds,
       ),
@@ -322,9 +324,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     }
     final reachedZoom = zoom == null || zoom == _map.getZoom();
     final reachedBearing = bearing == null || bearing == _map.getBearing();
-    final reachedTilt = tilt == null || tilt == _map.getPitch();
+    final reachedPitch = pitch == null || pitch == _map.getPitch();
 
-    if (reachedCenter && reachedZoom && reachedBearing && reachedTilt) return;
+    if (reachedCenter && reachedZoom && reachedBearing && reachedPitch) return;
 
     throw PlatformException(
       code: 'CancellationException',
@@ -517,7 +519,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Future<MapCamera> getCamera() async => MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
-        tilt: _map.getPitch().toDouble(),
+        pitch: _map.getPitch().toDouble(),
         bearing: _map.getBearing().toDouble(),
       );
 

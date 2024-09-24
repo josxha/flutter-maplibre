@@ -105,8 +105,8 @@ data class MapOptions (
   val style: String,
   /** The initial zoom level of the map. */
   val zoom: Double,
-  /** The initial tilt of the map. */
-  val tilt: Double,
+  /** The initial pitch / tilt of the map. */
+  val pitch: Double,
   /** The initial bearing of the map. */
   val bearing: Double,
   /** The initial center coordinates of the map. */
@@ -118,9 +118,9 @@ data class MapOptions (
   /** The maximum zoom level of the map. */
   val maxZoom: Double,
   /** The minimum pitch / tilt of the map. */
-  val minTilt: Double,
+  val minPitch: Double,
   /** The maximum pitch / tilt of the map. */
-  val maxTilt: Double,
+  val maxPitch: Double,
   /** If the native map should listen to click events. */
   val listensOnClick: Boolean,
   /** If the native map should listen to long click events. */
@@ -133,32 +133,32 @@ data class MapOptions (
     fun fromList(pigeonVar_list: List<Any?>): MapOptions {
       val style = pigeonVar_list[0] as String
       val zoom = pigeonVar_list[1] as Double
-      val tilt = pigeonVar_list[2] as Double
+      val pitch = pigeonVar_list[2] as Double
       val bearing = pigeonVar_list[3] as Double
       val center = pigeonVar_list[4] as LngLat?
       val maxBounds = pigeonVar_list[5] as LngLatBounds?
       val minZoom = pigeonVar_list[6] as Double
       val maxZoom = pigeonVar_list[7] as Double
-      val minTilt = pigeonVar_list[8] as Double
-      val maxTilt = pigeonVar_list[9] as Double
+      val minPitch = pigeonVar_list[8] as Double
+      val maxPitch = pigeonVar_list[9] as Double
       val listensOnClick = pigeonVar_list[10] as Boolean
       val listensOnLongClick = pigeonVar_list[11] as Boolean
       val gestures = pigeonVar_list[12] as MapGestures
-      return MapOptions(style, zoom, tilt, bearing, center, maxBounds, minZoom, maxZoom, minTilt, maxTilt, listensOnClick, listensOnLongClick, gestures)
+      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, listensOnClick, listensOnLongClick, gestures)
     }
   }
   fun toList(): List<Any?> {
     return listOf(
       style,
       zoom,
-      tilt,
+      pitch,
       bearing,
       center,
       maxBounds,
       minZoom,
       maxZoom,
-      minTilt,
-      maxTilt,
+      minPitch,
+      maxPitch,
       listensOnClick,
       listensOnLongClick,
       gestures,
@@ -263,7 +263,7 @@ data class ScreenLocation (
 data class MapCamera (
   val center: LngLat,
   val zoom: Double,
-  val tilt: Double,
+  val pitch: Double,
   val bearing: Double
 )
  {
@@ -271,16 +271,16 @@ data class MapCamera (
     fun fromList(pigeonVar_list: List<Any?>): MapCamera {
       val center = pigeonVar_list[0] as LngLat
       val zoom = pigeonVar_list[1] as Double
-      val tilt = pigeonVar_list[2] as Double
+      val pitch = pigeonVar_list[2] as Double
       val bearing = pigeonVar_list[3] as Double
-      return MapCamera(center, zoom, tilt, bearing)
+      return MapCamera(center, zoom, pitch, bearing)
     }
   }
   fun toList(): List<Any?> {
     return listOf(
       center,
       zoom,
-      tilt,
+      pitch,
       bearing,
     )
   }
@@ -419,7 +419,7 @@ interface MapLibreHostApi {
   fun flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /**
    * Get the current camera position with the map center, zoom level, camera
-   * tilt and map rotation.
+   * pitch and map rotation.
    */
   fun getCamera(callback: (Result<MapCamera>) -> Unit)
   /** Get the visible region of the current map camera. */
