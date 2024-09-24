@@ -84,7 +84,7 @@ class MapOptions {
   /// The initial zoom level of the map.
   double zoom;
 
-  /// The initial pitch of the map.
+  /// The initial pitch / tilt of the map.
   double pitch;
 
   /// The initial bearing of the map.

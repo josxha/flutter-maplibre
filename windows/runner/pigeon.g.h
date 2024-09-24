@@ -135,7 +135,7 @@ class MapOptions {
   double zoom() const;
   void set_zoom(double value_arg);
 
-  // The initial pitch of the map.
+  // The initial pitch / tilt of the map.
   double pitch() const;
   void set_pitch(double value_arg);
 
