@@ -13,6 +13,7 @@ abstract interface class MapController {
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Instantly move the map camera to a new location.
+  @Deprecated('Use moveCamera() instead')
   Future<void> jumpTo({
     Position? center,
     double? zoom,
@@ -21,6 +22,7 @@ abstract interface class MapController {
   });
 
   /// Animate the map camera to a new location.
+  @Deprecated('Use animateCamera() instead')
   Future<void> flyTo({
     Position? center,
     double? zoom,
@@ -28,7 +30,26 @@ abstract interface class MapController {
     double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
+  });
+
+  /// Instantly move the map camera to a new location.
+  Future<void> moveCamera({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+  });
+
+  /// Animate the map camera to a new location.
+  Future<void> animateCamera({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
   });
 
   /// Add a [Marker] to the map.

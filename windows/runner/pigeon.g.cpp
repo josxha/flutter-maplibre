@@ -603,7 +603,7 @@ void MapLibreHostApi::SetUp(
   const std::string& message_channel_suffix) {
   const std::string prepended_suffix = message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "";
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -616,7 +616,7 @@ void MapLibreHostApi::SetUp(
           const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
           const auto& encodable_pitch_arg = args.at(3);
           const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
-          api->JumpTo(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
+          api->MoveCamera(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
@@ -634,7 +634,7 @@ void MapLibreHostApi::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -653,7 +653,7 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const int64_t duration_ms_arg = encodable_duration_ms_arg.LongValue();
-          api->FlyTo(center_arg, zoom_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
+          api->AnimateCamera(center_arg, zoom_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;

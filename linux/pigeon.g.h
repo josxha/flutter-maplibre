@@ -437,8 +437,8 @@ MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* maplibre_map_libre_h
  * Table of functions exposed by MapLibreHostApi to be implemented by the API provider.
  */
 typedef struct {
-  void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*move_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*animate_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_camera)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
@@ -491,42 +491,42 @@ void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenge
 void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
 
 /**
- * maplibre_map_libre_host_api_respond_jump_to:
+ * maplibre_map_libre_host_api_respond_move_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  *
- * Responds to MapLibreHostApi.jumpTo. 
+ * Responds to MapLibreHostApi.moveCamera. 
  */
-void maplibre_map_libre_host_api_respond_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+void maplibre_map_libre_host_api_respond_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle);
 
 /**
- * maplibre_map_libre_host_api_respond_error_jump_to:
+ * maplibre_map_libre_host_api_respond_error_move_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  * @code: error code.
  * @message: error message.
  * @details: (allow-none): error details or %NULL.
  *
- * Responds with an error to MapLibreHostApi.jumpTo. 
+ * Responds with an error to MapLibreHostApi.moveCamera. 
  */
-void maplibre_map_libre_host_api_respond_error_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+void maplibre_map_libre_host_api_respond_error_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
- * maplibre_map_libre_host_api_respond_fly_to:
+ * maplibre_map_libre_host_api_respond_animate_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  *
- * Responds to MapLibreHostApi.flyTo. 
+ * Responds to MapLibreHostApi.animateCamera. 
  */
-void maplibre_map_libre_host_api_respond_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+void maplibre_map_libre_host_api_respond_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle);
 
 /**
- * maplibre_map_libre_host_api_respond_error_fly_to:
+ * maplibre_map_libre_host_api_respond_error_animate_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  * @code: error code.
  * @message: error message.
  * @details: (allow-none): error details or %NULL.
  *
- * Responds with an error to MapLibreHostApi.flyTo. 
+ * Responds with an error to MapLibreHostApi.animateCamera. 
  */
-void maplibre_map_libre_host_api_respond_error_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+void maplibre_map_libre_host_api_respond_error_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_map_libre_host_api_respond_get_camera:

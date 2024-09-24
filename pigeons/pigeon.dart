@@ -25,7 +25,7 @@ import 'package:pigeon/pigeon.dart';
 abstract interface class MapLibreHostApi {
   /// Move the viewport of the map to a new location without any animation.
   @async
-  void jumpTo({
+  void moveCamera({
     required LngLat? center,
     required double? zoom,
     required double? bearing,
@@ -34,7 +34,7 @@ abstract interface class MapLibreHostApi {
 
   /// Animate the viewport of the map to a new location.
   @async
-  void flyTo({
+  void animateCamera({
     required LngLat? center,
     required double? zoom,
     required double? bearing,

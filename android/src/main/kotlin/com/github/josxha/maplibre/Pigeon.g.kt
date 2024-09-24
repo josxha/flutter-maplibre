@@ -366,9 +366,9 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MapLibreHostApi {
   /** Move the viewport of the map to a new location without any animation. */
-  fun jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun moveCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   /** Animate the viewport of the map to a new location. */
-  fun flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
+  fun animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /**
    * Get the current camera position with the map center, zoom level, camera
    * tilt and map rotation.
@@ -441,7 +441,7 @@ interface MapLibreHostApi {
     fun setUp(binaryMessenger: BinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -449,7 +449,7 @@ interface MapLibreHostApi {
             val zoomArg = args[1] as Double?
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
-            api.jumpTo(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
+            api.moveCamera(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
@@ -463,7 +463,7 @@ interface MapLibreHostApi {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -472,7 +472,7 @@ interface MapLibreHostApi {
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
             val durationMsArg = args[4] as Long
-            api.flyTo(centerArg, zoomArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
+            api.animateCamera(centerArg, zoomArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

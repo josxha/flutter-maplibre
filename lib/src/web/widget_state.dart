@@ -268,6 +268,40 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? tilt,
+  }) =>
+      moveCamera(
+        center: center,
+        zoom: zoom,
+        bearing: bearing,
+        tilt: tilt,
+      );
+
+  @override
+  Future<void> flyTo({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+  }) =>
+      animateCamera(
+        center: center,
+        zoom: zoom,
+        bearing: bearing,
+        tilt: tilt,
+        nativeDuration: nativeDuration,
+        webSpeed: webSpeed,
+        webMaxDuration: webMaxDuration,
+      );
+
+  @override
+  Future<void> moveCamera({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
   }) async {
     _nextGestureCausedByController = true;
     _map.jumpTo(
@@ -281,14 +315,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) async {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
@@ -299,7 +333,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         bearing: bearing,
         pitch: tilt,
         speed: webSpeed,
-        maxDuration: maxDuration?.inMilliseconds,
+        maxDuration: webMaxDuration?.inMilliseconds,
       ),
     );
     final completer = _moveCompleter = Completer<interop.MapLibreEvent>();

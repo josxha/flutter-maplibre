@@ -372,14 +372,14 @@ class MapLibreHostApi {
   MapLibreHostApi& operator=(const MapLibreHostApi&) = delete;
   virtual ~MapLibreHostApi() {}
   // Move the viewport of the map to a new location without any animation.
-  virtual void JumpTo(
+  virtual void MoveCamera(
     const LngLat* center,
     const double* zoom,
     const double* bearing,
     const double* pitch,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Animate the viewport of the map to a new location.
-  virtual void FlyTo(
+  virtual void AnimateCamera(
     const LngLat* center,
     const double* zoom,
     const double* bearing,

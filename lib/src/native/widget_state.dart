@@ -111,11 +111,11 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? bearing,
     double? tilt,
   }) =>
-      _hostApi.jumpTo(
-        center: center?.toLngLat(),
+      moveCamera(
+        center: center,
         zoom: zoom,
         bearing: bearing,
-        pitch: tilt,
+        tilt: tilt,
       );
 
   @override
@@ -126,9 +126,43 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) =>
-      _hostApi.flyTo(
+      animateCamera(
+        center: center,
+        zoom: zoom,
+        bearing: bearing,
+        tilt: tilt,
+        nativeDuration: nativeDuration,
+        webSpeed: webSpeed,
+        webMaxDuration: webMaxDuration,
+      );
+
+  @override
+  Future<void> moveCamera({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+  }) =>
+      _hostApi.moveCamera(
+        center: center?.toLngLat(),
+        zoom: zoom,
+        bearing: bearing,
+        pitch: tilt,
+      );
+
+  @override
+  Future<void> animateCamera({
+    Position? center,
+    double? zoom,
+    double? bearing,
+    double? tilt,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+  }) =>
+      _hostApi.animateCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,

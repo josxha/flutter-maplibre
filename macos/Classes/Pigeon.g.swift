@@ -391,9 +391,9 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
   /// Move the viewport of the map to a new location without any animation.
-  func jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func moveCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Animate the viewport of the map to a new location.
-  func flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  func animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
   /// tilt and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
@@ -458,15 +458,15 @@ class MapLibreHostApiSetup {
   static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
     /// Move the viewport of the map to a new location without any animation.
-    let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let moveCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      jumpToChannel.setMessageHandler { message, reply in
+      moveCameraChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
-        api.jumpTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
+        api.moveCamera(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -476,19 +476,19 @@ class MapLibreHostApiSetup {
         }
       }
     } else {
-      jumpToChannel.setMessageHandler(nil)
+      moveCameraChannel.setMessageHandler(nil)
     }
     /// Animate the viewport of the map to a new location.
-    let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let animateCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      flyToChannel.setMessageHandler { message, reply in
+      animateCameraChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
         let durationMsArg = args[4] as! Int64
-        api.flyTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
+        api.animateCamera(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -498,7 +498,7 @@ class MapLibreHostApiSetup {
         }
       }
     } else {
-      flyToChannel.setMessageHandler(nil)
+      animateCameraChannel.setMessageHandler(nil)
     }
     /// Get the current camera position with the map center, zoom level, camera
     /// tilt and map rotation.

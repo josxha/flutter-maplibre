@@ -26,7 +26,12 @@ void main() {
         );
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
+        await ctrl.moveCamera(
+          center: Position(1, 1),
+          bearing: 1,
+          zoom: 1,
+          tilt: 1,
+        );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
@@ -37,13 +42,18 @@ void main() {
       },
     );
     testWidgets(
-      'jumpTo',
+      'moveCamera',
       (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(center: Position(1, 2), bearing: 1, zoom: 1, tilt: 1);
+        await ctrl.moveCamera(
+          center: Position(1, 2),
+          bearing: 1,
+          zoom: 1,
+          tilt: 1,
+        );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
@@ -54,13 +64,13 @@ void main() {
       },
     );
     testWidgets(
-      'flyTo',
+      'animateCamera',
       (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.flyTo(
+        await ctrl.animateCamera(
           center: Position(2, 1),
           bearing: 2,
           zoom: 2,
@@ -78,13 +88,13 @@ void main() {
       },
     );
     /*testWidgets(
-      'flyTo cancel',
+      'animateCamera cancel',
       (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        final future = ctrl.flyTo(
+        final future = ctrl.animateCamera(
           center: Position(2, 2),
           bearing: 2,
           zoom: 2,

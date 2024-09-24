@@ -64,7 +64,7 @@ class _ButtonsWidget extends StatelessWidget {
         children: [
           OutlinedButton(
             onPressed: () {
-              controller?.jumpTo(
+              controller?.moveCamera(
                 center: Position(172.4714, -42.4862),
                 zoom: 4,
               );
@@ -73,7 +73,7 @@ class _ButtonsWidget extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              controller?.flyTo(
+              controller?.animateCamera(
                 center: Position(-18.6874, 64.9445),
                 zoom: 5,
                 bearing: -50,

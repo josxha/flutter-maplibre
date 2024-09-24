@@ -665,38 +665,38 @@ static MaplibreMapLibreHostApiResponseHandle* maplibre_map_libre_host_api_respon
   return self;
 }
 
-G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiJumpToResponse, maplibre_map_libre_host_api_jump_to_response, MAPLIBRE, MAP_LIBRE_HOST_API_JUMP_TO_RESPONSE, GObject)
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiMoveCameraResponse, maplibre_map_libre_host_api_move_camera_response, MAPLIBRE, MAP_LIBRE_HOST_API_MOVE_CAMERA_RESPONSE, GObject)
 
-struct _MaplibreMapLibreHostApiJumpToResponse {
+struct _MaplibreMapLibreHostApiMoveCameraResponse {
   GObject parent_instance;
 
   FlValue* value;
 };
 
-G_DEFINE_TYPE(MaplibreMapLibreHostApiJumpToResponse, maplibre_map_libre_host_api_jump_to_response, G_TYPE_OBJECT)
+G_DEFINE_TYPE(MaplibreMapLibreHostApiMoveCameraResponse, maplibre_map_libre_host_api_move_camera_response, G_TYPE_OBJECT)
 
-static void maplibre_map_libre_host_api_jump_to_response_dispose(GObject* object) {
-  MaplibreMapLibreHostApiJumpToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_JUMP_TO_RESPONSE(object);
+static void maplibre_map_libre_host_api_move_camera_response_dispose(GObject* object) {
+  MaplibreMapLibreHostApiMoveCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_MOVE_CAMERA_RESPONSE(object);
   g_clear_pointer(&self->value, fl_value_unref);
-  G_OBJECT_CLASS(maplibre_map_libre_host_api_jump_to_response_parent_class)->dispose(object);
+  G_OBJECT_CLASS(maplibre_map_libre_host_api_move_camera_response_parent_class)->dispose(object);
 }
 
-static void maplibre_map_libre_host_api_jump_to_response_init(MaplibreMapLibreHostApiJumpToResponse* self) {
+static void maplibre_map_libre_host_api_move_camera_response_init(MaplibreMapLibreHostApiMoveCameraResponse* self) {
 }
 
-static void maplibre_map_libre_host_api_jump_to_response_class_init(MaplibreMapLibreHostApiJumpToResponseClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_jump_to_response_dispose;
+static void maplibre_map_libre_host_api_move_camera_response_class_init(MaplibreMapLibreHostApiMoveCameraResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_move_camera_response_dispose;
 }
 
-static MaplibreMapLibreHostApiJumpToResponse* maplibre_map_libre_host_api_jump_to_response_new() {
-  MaplibreMapLibreHostApiJumpToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_JUMP_TO_RESPONSE(g_object_new(maplibre_map_libre_host_api_jump_to_response_get_type(), nullptr));
+static MaplibreMapLibreHostApiMoveCameraResponse* maplibre_map_libre_host_api_move_camera_response_new() {
+  MaplibreMapLibreHostApiMoveCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_MOVE_CAMERA_RESPONSE(g_object_new(maplibre_map_libre_host_api_move_camera_response_get_type(), nullptr));
   self->value = fl_value_new_list();
   fl_value_append_take(self->value, fl_value_new_null());
   return self;
 }
 
-static MaplibreMapLibreHostApiJumpToResponse* maplibre_map_libre_host_api_jump_to_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
-  MaplibreMapLibreHostApiJumpToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_JUMP_TO_RESPONSE(g_object_new(maplibre_map_libre_host_api_jump_to_response_get_type(), nullptr));
+static MaplibreMapLibreHostApiMoveCameraResponse* maplibre_map_libre_host_api_move_camera_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibreHostApiMoveCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_MOVE_CAMERA_RESPONSE(g_object_new(maplibre_map_libre_host_api_move_camera_response_get_type(), nullptr));
   self->value = fl_value_new_list();
   fl_value_append_take(self->value, fl_value_new_string(code));
   fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
@@ -704,38 +704,38 @@ static MaplibreMapLibreHostApiJumpToResponse* maplibre_map_libre_host_api_jump_t
   return self;
 }
 
-G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiFlyToResponse, maplibre_map_libre_host_api_fly_to_response, MAPLIBRE, MAP_LIBRE_HOST_API_FLY_TO_RESPONSE, GObject)
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiAnimateCameraResponse, maplibre_map_libre_host_api_animate_camera_response, MAPLIBRE, MAP_LIBRE_HOST_API_ANIMATE_CAMERA_RESPONSE, GObject)
 
-struct _MaplibreMapLibreHostApiFlyToResponse {
+struct _MaplibreMapLibreHostApiAnimateCameraResponse {
   GObject parent_instance;
 
   FlValue* value;
 };
 
-G_DEFINE_TYPE(MaplibreMapLibreHostApiFlyToResponse, maplibre_map_libre_host_api_fly_to_response, G_TYPE_OBJECT)
+G_DEFINE_TYPE(MaplibreMapLibreHostApiAnimateCameraResponse, maplibre_map_libre_host_api_animate_camera_response, G_TYPE_OBJECT)
 
-static void maplibre_map_libre_host_api_fly_to_response_dispose(GObject* object) {
-  MaplibreMapLibreHostApiFlyToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FLY_TO_RESPONSE(object);
+static void maplibre_map_libre_host_api_animate_camera_response_dispose(GObject* object) {
+  MaplibreMapLibreHostApiAnimateCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_ANIMATE_CAMERA_RESPONSE(object);
   g_clear_pointer(&self->value, fl_value_unref);
-  G_OBJECT_CLASS(maplibre_map_libre_host_api_fly_to_response_parent_class)->dispose(object);
+  G_OBJECT_CLASS(maplibre_map_libre_host_api_animate_camera_response_parent_class)->dispose(object);
 }
 
-static void maplibre_map_libre_host_api_fly_to_response_init(MaplibreMapLibreHostApiFlyToResponse* self) {
+static void maplibre_map_libre_host_api_animate_camera_response_init(MaplibreMapLibreHostApiAnimateCameraResponse* self) {
 }
 
-static void maplibre_map_libre_host_api_fly_to_response_class_init(MaplibreMapLibreHostApiFlyToResponseClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_fly_to_response_dispose;
+static void maplibre_map_libre_host_api_animate_camera_response_class_init(MaplibreMapLibreHostApiAnimateCameraResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_animate_camera_response_dispose;
 }
 
-static MaplibreMapLibreHostApiFlyToResponse* maplibre_map_libre_host_api_fly_to_response_new() {
-  MaplibreMapLibreHostApiFlyToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FLY_TO_RESPONSE(g_object_new(maplibre_map_libre_host_api_fly_to_response_get_type(), nullptr));
+static MaplibreMapLibreHostApiAnimateCameraResponse* maplibre_map_libre_host_api_animate_camera_response_new() {
+  MaplibreMapLibreHostApiAnimateCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_ANIMATE_CAMERA_RESPONSE(g_object_new(maplibre_map_libre_host_api_animate_camera_response_get_type(), nullptr));
   self->value = fl_value_new_list();
   fl_value_append_take(self->value, fl_value_new_null());
   return self;
 }
 
-static MaplibreMapLibreHostApiFlyToResponse* maplibre_map_libre_host_api_fly_to_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
-  MaplibreMapLibreHostApiFlyToResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FLY_TO_RESPONSE(g_object_new(maplibre_map_libre_host_api_fly_to_response_get_type(), nullptr));
+static MaplibreMapLibreHostApiAnimateCameraResponse* maplibre_map_libre_host_api_animate_camera_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibreHostApiAnimateCameraResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_ANIMATE_CAMERA_RESPONSE(g_object_new(maplibre_map_libre_host_api_animate_camera_response_get_type(), nullptr));
   self->value = fl_value_new_list();
   fl_value_append_take(self->value, fl_value_new_string(code));
   fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
@@ -1791,10 +1791,10 @@ static MaplibreMapLibreHostApi* maplibre_map_libre_host_api_new(const MaplibreMa
   return self;
 }
 
-static void maplibre_map_libre_host_api_jump_to_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+static void maplibre_map_libre_host_api_move_camera_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
   MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
 
-  if (self->vtable == nullptr || self->vtable->jump_to == nullptr) {
+  if (self->vtable == nullptr || self->vtable->move_camera == nullptr) {
     return;
   }
 
@@ -1822,13 +1822,13 @@ static void maplibre_map_libre_host_api_jump_to_cb(FlBasicMessageChannel* channe
     pitch = &pitch_value;
   }
   g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
-  self->vtable->jump_to(center, zoom, bearing, pitch, handle, self->user_data);
+  self->vtable->move_camera(center, zoom, bearing, pitch, handle, self->user_data);
 }
 
-static void maplibre_map_libre_host_api_fly_to_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+static void maplibre_map_libre_host_api_animate_camera_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
   MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
 
-  if (self->vtable == nullptr || self->vtable->fly_to == nullptr) {
+  if (self->vtable == nullptr || self->vtable->animate_camera == nullptr) {
     return;
   }
 
@@ -1858,7 +1858,7 @@ static void maplibre_map_libre_host_api_fly_to_cb(FlBasicMessageChannel* channel
   FlValue* value4 = fl_value_get_list_value(message_, 4);
   int64_t duration_ms = fl_value_get_int(value4);
   g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
-  self->vtable->fly_to(center, zoom, bearing, pitch, duration_ms, handle, self->user_data);
+  self->vtable->animate_camera(center, zoom, bearing, pitch, duration_ms, handle, self->user_data);
 }
 
 static void maplibre_map_libre_host_api_get_camera_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
@@ -2355,12 +2355,12 @@ void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenge
   g_autoptr(MaplibreMapLibreHostApi) api_data = maplibre_map_libre_host_api_new(vtable, user_data, user_data_free_func);
 
   g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
-  g_autofree gchar* jump_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) jump_to_channel = fl_basic_message_channel_new(messenger, jump_to_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(jump_to_channel, maplibre_map_libre_host_api_jump_to_cb, g_object_ref(api_data), g_object_unref);
-  g_autofree gchar* fly_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) fly_to_channel = fl_basic_message_channel_new(messenger, fly_to_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(fly_to_channel, maplibre_map_libre_host_api_fly_to_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* move_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) move_camera_channel = fl_basic_message_channel_new(messenger, move_camera_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(move_camera_channel, maplibre_map_libre_host_api_move_camera_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* animate_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) animate_camera_channel = fl_basic_message_channel_new(messenger, animate_camera_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(animate_camera_channel, maplibre_map_libre_host_api_animate_camera_cb, g_object_ref(api_data), g_object_unref);
   g_autofree gchar* get_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) get_camera_channel = fl_basic_message_channel_new(messenger, get_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(get_camera_channel, maplibre_map_libre_host_api_get_camera_cb, g_object_ref(api_data), g_object_unref);
@@ -2445,12 +2445,12 @@ void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messen
   g_autofree gchar* dot_suffix = suffix != nullptr ? g_strdup_printf(".%s", suffix) : g_strdup("");
 
   g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
-  g_autofree gchar* jump_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) jump_to_channel = fl_basic_message_channel_new(messenger, jump_to_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(jump_to_channel, nullptr, nullptr, nullptr);
-  g_autofree gchar* fly_to_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) fly_to_channel = fl_basic_message_channel_new(messenger, fly_to_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(fly_to_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* move_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) move_camera_channel = fl_basic_message_channel_new(messenger, move_camera_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(move_camera_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* animate_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) animate_camera_channel = fl_basic_message_channel_new(messenger, animate_camera_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(animate_camera_channel, nullptr, nullptr, nullptr);
   g_autofree gchar* get_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) get_camera_channel = fl_basic_message_channel_new(messenger, get_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(get_camera_channel, nullptr, nullptr, nullptr);
@@ -2531,35 +2531,35 @@ void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messen
   fl_basic_message_channel_set_message_handler(update_options_channel, nullptr, nullptr, nullptr);
 }
 
-void maplibre_map_libre_host_api_respond_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle) {
-  g_autoptr(MaplibreMapLibreHostApiJumpToResponse) response = maplibre_map_libre_host_api_jump_to_response_new();
+void maplibre_map_libre_host_api_respond_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreMapLibreHostApiMoveCameraResponse) response = maplibre_map_libre_host_api_move_camera_response_new();
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "jumpTo", error->message);
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "moveCamera", error->message);
   }
 }
 
-void maplibre_map_libre_host_api_respond_error_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
-  g_autoptr(MaplibreMapLibreHostApiJumpToResponse) response = maplibre_map_libre_host_api_jump_to_response_new_error(code, message, details);
+void maplibre_map_libre_host_api_respond_error_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibreHostApiMoveCameraResponse) response = maplibre_map_libre_host_api_move_camera_response_new_error(code, message, details);
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "jumpTo", error->message);
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "moveCamera", error->message);
   }
 }
 
-void maplibre_map_libre_host_api_respond_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle) {
-  g_autoptr(MaplibreMapLibreHostApiFlyToResponse) response = maplibre_map_libre_host_api_fly_to_response_new();
+void maplibre_map_libre_host_api_respond_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreMapLibreHostApiAnimateCameraResponse) response = maplibre_map_libre_host_api_animate_camera_response_new();
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "flyTo", error->message);
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "animateCamera", error->message);
   }
 }
 
-void maplibre_map_libre_host_api_respond_error_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
-  g_autoptr(MaplibreMapLibreHostApiFlyToResponse) response = maplibre_map_libre_host_api_fly_to_response_new_error(code, message, details);
+void maplibre_map_libre_host_api_respond_error_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibreHostApiAnimateCameraResponse) response = maplibre_map_libre_host_api_animate_camera_response_new_error(code, message, details);
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "flyTo", error->message);
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "animateCamera", error->message);
   }
 }
 

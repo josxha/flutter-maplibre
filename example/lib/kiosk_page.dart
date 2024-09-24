@@ -47,7 +47,7 @@ class _KioskPageState extends State<KioskPage> {
 
   void _onTimer(Timer timer) {
     final location = _locations[index];
-    _controller.flyTo(
+    _controller.animateCamera(
       center: location.center,
       zoom: location.zoom,
       bearing: location.bearing,

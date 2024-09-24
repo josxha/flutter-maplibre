@@ -361,14 +361,14 @@ class MapLibreHostApi {
   final String pigeonVar_messageChannelSuffix;
 
   /// Move the viewport of the map to a new location without any animation.
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     required LngLat? center,
     required double? zoom,
     required double? bearing,
     required double? pitch,
   }) async {
     final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$pigeonVar_messageChannelSuffix';
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
         BasicMessageChannel<Object?>(
       pigeonVar_channelName,
@@ -391,7 +391,7 @@ class MapLibreHostApi {
   }
 
   /// Animate the viewport of the map to a new location.
-  Future<void> flyTo({
+  Future<void> animateCamera({
     required LngLat? center,
     required double? zoom,
     required double? bearing,
@@ -399,7 +399,7 @@ class MapLibreHostApi {
     required int durationMs,
   }) async {
     final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$pigeonVar_messageChannelSuffix';
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
         BasicMessageChannel<Object?>(
       pigeonVar_channelName,
