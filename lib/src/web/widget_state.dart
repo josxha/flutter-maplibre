@@ -19,6 +19,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _moveCompleter;
+  bool _nextGestureCausedByController = false;
 
   MapOptions get _options => widget.options;
 
@@ -119,7 +120,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.click,
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventClicked(point: point));
+            widget.onEvent?.call(MapEventClick(point: point));
             // ignore: deprecated_member_use_from_same_package
             _options.onClick?.call(point);
           }.toJS,
@@ -128,7 +129,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.dblclick,
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventDoubleClicked(point: point));
+            widget.onEvent?.call(MapEventDoubleClick(point: point));
             // ignore: deprecated_member_use_from_same_package
             _options.onDoubleClick?.call(point);
           }.toJS,
@@ -137,9 +138,30 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.contextmenu,
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventSecondaryClicked(point: point));
+            widget.onEvent?.call(MapEventSecondaryClick(point: point));
             // ignore: deprecated_member_use_from_same_package
             _options.onSecondaryClick?.call(point);
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.idle,
+          (interop.MapMouseEvent event) {
+            widget.onEvent?.call(const MapEventIdle());
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.moveStart,
+          (interop.MapLibreEvent event) {
+            final CameraChangeReason reason;
+            if (_nextGestureCausedByController) {
+              _nextGestureCausedByController = false;
+              reason = CameraChangeReason.developerAnimation;
+            } else if (event.originalEvent != null) {
+              reason = CameraChangeReason.apiGesture;
+            } else {
+              reason = CameraChangeReason.apiAnimation;
+            }
+            widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
           }.toJS,
         );
         _map.on(
@@ -151,9 +173,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
               pitch: _map.getPitch().toDouble(),
               bearing: _map.getBearing().toDouble(),
             );
-            widget.onEvent?.call(MapEventCameraMoved(camera: camera));
-            if (_moveCompleter?.isCompleted ?? true) return;
-            _moveCompleter?.complete(event);
+            widget.onEvent?.call(MapEventMoveCamera(camera: camera));
+          }.toJS,
+        );
+        _map.on(
+          interop.MapEventType.moveEnd,
+          (interop.MapLibreEvent event) {
+            widget.onEvent?.call(const MapEventCameraIdle());
+            if (!(_moveCompleter?.isCompleted ?? true)) {
+              _moveCompleter?.complete(event);
+            }
           }.toJS,
         );
 
@@ -239,15 +268,17 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
-  }) async =>
-      _map.jumpTo(
-        interop.JumpToOptions(
-          center: center?.toLngLat(),
-          zoom: zoom,
-          bearing: bearing,
-          pitch: pitch,
-        ),
-      );
+  }) async {
+    _nextGestureCausedByController = true;
+    _map.jumpTo(
+      interop.JumpToOptions(
+        center: center?.toLngLat(),
+        zoom: zoom,
+        bearing: bearing,
+        pitch: pitch,
+      ),
+    );
+  }
 
   @override
   Future<void> flyTo({
@@ -260,6 +291,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration? maxDuration,
   }) async {
     final destination = center?.toLngLat();
+    _nextGestureCausedByController = true;
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,

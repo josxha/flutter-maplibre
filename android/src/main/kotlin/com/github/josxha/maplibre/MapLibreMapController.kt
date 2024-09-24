@@ -25,6 +25,9 @@ import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.geometry.LatLngBounds
 import org.maplibre.android.geometry.LatLngQuad
 import org.maplibre.android.maps.MapLibreMap
+import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_ANIMATION
+import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_GESTURE
+import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION
 import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
@@ -124,7 +127,18 @@ class MapLibreMapController(
             val target = mapLibreMap.cameraPosition.target!!
             val center = LngLat(target.longitude, target.latitude)
             val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
-            flutterApi.onCameraMoved(camera) {}
+            flutterApi.onMoveCamera(camera) {}
+        }
+        this.mapLibreMap.addOnCameraIdleListener { flutterApi.onCameraIdle { } }
+        this.mapView.addOnDidBecomeIdleListener { flutterApi.onIdle { } }
+        this.mapLibreMap.addOnCameraMoveStartedListener { reason ->
+            val changeReason = when (reason) {
+                REASON_API_ANIMATION -> CameraChangeReason.API_ANIMATION
+                REASON_API_GESTURE -> CameraChangeReason.API_GESTURE
+                REASON_DEVELOPER_ANIMATION -> CameraChangeReason.DEVELOPER_ANIMATION
+                else -> null
+            }
+            if (changeReason != null) flutterApi.onStartMoveCamera(changeReason) { }
         }
         val style = Style.Builder().fromUri(mapOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
@@ -560,17 +574,22 @@ class MapLibreMapController(
             // remove map bounds
             mapLibreMap.setLatLngBoundsForCameraTarget(null)
         } else if (oldBounds == null && newBounds != null) {
-            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest)
+            val bounds = LatLngBounds.from(
+                newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest
+            )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         } else if (newBounds != null &&
             // can get improved when https://github.com/flutter/flutter/issues/118087 is implemented
             (oldBounds?.latitudeNorth != newBounds.latitudeNorth
-            || oldBounds.latitudeSouth != newBounds.latitudeSouth
-            || oldBounds.longitudeEast != newBounds.longitudeEast
-            || oldBounds.longitudeWest != newBounds.longitudeWest)) {
-            val bounds = LatLngBounds.from(newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest)
+                    || oldBounds.latitudeSouth != newBounds.latitudeSouth
+                    || oldBounds.longitudeEast != newBounds.longitudeEast
+                    || oldBounds.longitudeWest != newBounds.longitudeWest)
+        ) {
+            val bounds = LatLngBounds.from(
+                newBounds.latitudeNorth, newBounds.longitudeEast,
+                newBounds.latitudeSouth, newBounds.longitudeWest
+            )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         }
     }

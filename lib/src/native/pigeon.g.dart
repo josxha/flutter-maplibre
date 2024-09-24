@@ -48,6 +48,18 @@ enum RasterDemEncoding {
   custom,
 }
 
+/// The reason the camera is changing.
+enum CameraChangeReason {
+  /// Developer animation.
+  developerAnimation,
+
+  /// API animation.
+  apiAnimation,
+
+  /// API gesture
+  apiGesture,
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   MapOptions({
@@ -282,20 +294,23 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is RasterDemEncoding) {
       buffer.putUint8(130);
       writeValue(buffer, value.index);
-    } else if (value is MapOptions) {
+    } else if (value is CameraChangeReason) {
       buffer.putUint8(131);
-      writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+      writeValue(buffer, value.index);
+    } else if (value is MapOptions) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    } else if (value is LngLat) {
       buffer.putUint8(133);
       writeValue(buffer, value.encode());
-    } else if (value is MapCamera) {
+    } else if (value is ScreenLocation) {
       buffer.putUint8(134);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is MapCamera) {
       buffer.putUint8(135);
+      writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(136);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -312,14 +327,17 @@ class _PigeonCodec extends StandardMessageCodec {
         final int? value = readValue(buffer) as int?;
         return value == null ? null : RasterDemEncoding.values[value];
       case 131:
-        return MapOptions.decode(readValue(buffer)!);
+        final int? value = readValue(buffer) as int?;
+        return value == null ? null : CameraChangeReason.values[value];
       case 132:
-        return LngLat.decode(readValue(buffer)!);
+        return MapOptions.decode(readValue(buffer)!);
       case 133:
-        return ScreenLocation.decode(readValue(buffer)!);
+        return LngLat.decode(readValue(buffer)!);
       case 134:
-        return MapCamera.decode(readValue(buffer)!);
+        return ScreenLocation.decode(readValue(buffer)!);
       case 135:
+        return MapCamera.decode(readValue(buffer)!);
+      case 136:
         return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -1241,6 +1259,12 @@ abstract class MapLibreFlutterApi {
   /// Callback when the user clicks on the map.
   void onClick(LngLat point);
 
+  /// Callback when the map idles.
+  void onIdle();
+
+  /// Callback when the map camera idles.
+  void onCameraIdle();
+
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
   void onSecondaryClick(LngLat point);
@@ -1252,7 +1276,10 @@ abstract class MapLibreFlutterApi {
   void onLongClick(LngLat point);
 
   /// Callback when the map camera changes.
-  void onCameraMoved(MapCamera camera);
+  void onMoveCamera(MapCamera camera);
+
+  /// Callback when the map camera starts changing.
+  void onStartMoveCamera(CameraChangeReason reason);
 
   static void setUp(
     MapLibreFlutterApi? api, {
@@ -1326,6 +1353,52 @@ abstract class MapLibreFlutterApi {
               'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick was null, expected non-null LngLat.');
           try {
             api.onClick(arg_point!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onIdle$messageChannelSuffix',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          try {
+            api.onIdle();
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraIdle$messageChannelSuffix',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          try {
+            api.onCameraIdle();
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -1427,7 +1500,7 @@ abstract class MapLibreFlutterApi {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved$messageChannelSuffix',
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera$messageChannelSuffix',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -1435,13 +1508,43 @@ abstract class MapLibreFlutterApi {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved was null.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final MapCamera? arg_camera = (args[0] as MapCamera?);
           assert(arg_camera != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraMoved was null, expected non-null MapCamera.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera was null, expected non-null MapCamera.');
           try {
-            api.onCameraMoved(arg_camera!);
+            api.onMoveCamera(arg_camera!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera$messageChannelSuffix',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final CameraChangeReason? arg_reason =
+              (args[0] as CameraChangeReason?);
+          assert(arg_reason != null,
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera was null, expected non-null CameraChangeReason.');
+          try {
+            api.onStartMoveCamera(arg_reason!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

@@ -260,6 +260,12 @@ abstract interface class MapLibreFlutterApi {
   /// Callback when the user clicks on the map.
   void onClick(LngLat point);
 
+  /// Callback when the map idles.
+  void onIdle();
+
+  /// Callback when the map camera idles.
+  void onCameraIdle();
+
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
   void onSecondaryClick(LngLat point);
@@ -271,7 +277,10 @@ abstract interface class MapLibreFlutterApi {
   void onLongClick(LngLat point);
 
   /// Callback when the map camera changes.
-  void onCameraMoved(MapCamera camera);
+  void onMoveCamera(MapCamera camera);
+
+  /// Callback when the map camera starts changing.
+  void onStartMoveCamera(CameraChangeReason reason);
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -400,4 +409,16 @@ enum RasterDemEncoding {
   /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
   /// parameters.
   custom;
+}
+
+/// The reason the camera is changing.
+enum CameraChangeReason {
+  /// Developer animation.
+  developerAnimation,
+
+  /// API animation.
+  apiAnimation,
+
+  /// API gesture
+  apiGesture;
 }
