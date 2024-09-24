@@ -26,14 +26,14 @@ void main() {
         );
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, tilt: 1);
+        await ctrl.jumpTo(center: Position(1, 1), bearing: 1, zoom: 1, pitch: 1);
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
         expect(camera.center.lat, closeTo(1, 0.00001));
         expect(camera.zoom, closeTo(1, 0.00001));
         expect(camera.bearing, closeTo(1, 0.00001));
-        expect(camera.tilt, closeTo(1, 0.00001));
+        expect(camera.pitch, closeTo(1, 0.00001));
       },
     );
     testWidgets(
@@ -43,14 +43,14 @@ void main() {
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(center: Position(1, 2), bearing: 1, zoom: 1, tilt: 1);
+        await ctrl.jumpTo(center: Position(1, 2), bearing: 1, zoom: 1, pitch: 1);
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
         expect(camera.center.lat, closeTo(2, 0.00001));
         expect(camera.zoom, closeTo(1, 0.00001));
         expect(camera.bearing, closeTo(1, 0.00001));
-        expect(camera.tilt, closeTo(1, 0.00001));
+        expect(camera.pitch, closeTo(1, 0.00001));
       },
     );
     testWidgets(
@@ -64,7 +64,7 @@ void main() {
           center: Position(2, 1),
           bearing: 2,
           zoom: 2,
-          tilt: 2,
+          pitch: 2,
           webSpeed: 100,
           nativeDuration: Duration.zero,
         );
@@ -74,7 +74,7 @@ void main() {
         expect(camera.center.lat, closeTo(1, 0.00001));
         expect(camera.zoom, closeTo(2, 0.00001));
         expect(camera.bearing, closeTo(2, 0.00001));
-        expect(camera.tilt, closeTo(2, 0.00001));
+        expect(camera.pitch, closeTo(2, 0.00001));
       },
     );
     /*testWidgets(
@@ -88,7 +88,7 @@ void main() {
           center: Position(2, 2),
           bearing: 2,
           zoom: 2,
-          tilt: 2,
+          pitch: 2,
           webSpeed: 0.1,
           nativeDuration: const Duration(days: 1),
         );

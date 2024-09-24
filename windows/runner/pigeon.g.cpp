@@ -33,76 +33,76 @@ FlutterError CreateConnectionError(const std::string channel_name) {
 MapOptions::MapOptions(
   const std::string& style,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing,
   double min_zoom,
   double max_zoom,
-  double min_tilt,
-  double max_tilt,
+  double min_pitch,
+  double max_pitch,
   bool listens_on_click,
   bool listens_on_long_click)
  : style_(style),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing),
     min_zoom_(min_zoom),
     max_zoom_(max_zoom),
-    min_tilt_(min_tilt),
-    max_tilt_(max_tilt),
+    min_pitch_(min_pitch),
+    max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
     listens_on_long_click_(listens_on_long_click) {}
 
 MapOptions::MapOptions(
   const std::string& style,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing,
   const LngLat* center,
   const LngLatBounds* max_bounds,
   double min_zoom,
   double max_zoom,
-  double min_tilt,
-  double max_tilt,
+  double min_pitch,
+  double max_pitch,
   bool listens_on_click,
   bool listens_on_long_click)
  : style_(style),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing),
     center_(center ? std::make_unique<LngLat>(*center) : nullptr),
     max_bounds_(max_bounds ? std::make_unique<LngLatBounds>(*max_bounds) : nullptr),
     min_zoom_(min_zoom),
     max_zoom_(max_zoom),
-    min_tilt_(min_tilt),
-    max_tilt_(max_tilt),
+    min_pitch_(min_pitch),
+    max_pitch_(max_pitch),
     listens_on_click_(listens_on_click),
     listens_on_long_click_(listens_on_long_click) {}
 
 MapOptions::MapOptions(const MapOptions& other)
  : style_(other.style_),
     zoom_(other.zoom_),
-    tilt_(other.tilt_),
+    pitch_(other.pitch_),
     bearing_(other.bearing_),
     center_(other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr),
     max_bounds_(other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr),
     min_zoom_(other.min_zoom_),
     max_zoom_(other.max_zoom_),
-    min_tilt_(other.min_tilt_),
-    max_tilt_(other.max_tilt_),
+    min_pitch_(other.min_pitch_),
+    max_pitch_(other.max_pitch_),
     listens_on_click_(other.listens_on_click_),
     listens_on_long_click_(other.listens_on_long_click_) {}
 
 MapOptions& MapOptions::operator=(const MapOptions& other) {
   style_ = other.style_;
   zoom_ = other.zoom_;
-  tilt_ = other.tilt_;
+  pitch_ = other.pitch_;
   bearing_ = other.bearing_;
   center_ = other.center_ ? std::make_unique<LngLat>(*other.center_) : nullptr;
   max_bounds_ = other.max_bounds_ ? std::make_unique<LngLatBounds>(*other.max_bounds_) : nullptr;
   min_zoom_ = other.min_zoom_;
   max_zoom_ = other.max_zoom_;
-  min_tilt_ = other.min_tilt_;
-  max_tilt_ = other.max_tilt_;
+  min_pitch_ = other.min_pitch_;
+  max_pitch_ = other.max_pitch_;
   listens_on_click_ = other.listens_on_click_;
   listens_on_long_click_ = other.listens_on_long_click_;
   return *this;
@@ -126,12 +126,12 @@ void MapOptions::set_zoom(double value_arg) {
 }
 
 
-double MapOptions::tilt() const {
-  return tilt_;
+double MapOptions::pitch() const {
+  return pitch_;
 }
 
-void MapOptions::set_tilt(double value_arg) {
-  tilt_ = value_arg;
+void MapOptions::set_pitch(double value_arg) {
+  pitch_ = value_arg;
 }
 
 
@@ -188,21 +188,21 @@ void MapOptions::set_max_zoom(double value_arg) {
 }
 
 
-double MapOptions::min_tilt() const {
-  return min_tilt_;
+double MapOptions::min_pitch() const {
+  return min_pitch_;
 }
 
-void MapOptions::set_min_tilt(double value_arg) {
-  min_tilt_ = value_arg;
+void MapOptions::set_min_pitch(double value_arg) {
+  min_pitch_ = value_arg;
 }
 
 
-double MapOptions::max_tilt() const {
-  return max_tilt_;
+double MapOptions::max_pitch() const {
+  return max_pitch_;
 }
 
-void MapOptions::set_max_tilt(double value_arg) {
-  max_tilt_ = value_arg;
+void MapOptions::set_max_pitch(double value_arg) {
+  max_pitch_ = value_arg;
 }
 
 
@@ -229,14 +229,14 @@ EncodableList MapOptions::ToEncodableList() const {
   list.reserve(12);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
-  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(pitch_));
   list.push_back(EncodableValue(bearing_));
   list.push_back(center_ ? CustomEncodableValue(*center_) : EncodableValue());
   list.push_back(max_bounds_ ? CustomEncodableValue(*max_bounds_) : EncodableValue());
   list.push_back(EncodableValue(min_zoom_));
   list.push_back(EncodableValue(max_zoom_));
-  list.push_back(EncodableValue(min_tilt_));
-  list.push_back(EncodableValue(max_tilt_));
+  list.push_back(EncodableValue(min_pitch_));
+  list.push_back(EncodableValue(max_pitch_));
   list.push_back(EncodableValue(listens_on_click_));
   list.push_back(EncodableValue(listens_on_long_click_));
   return list;
@@ -352,23 +352,23 @@ ScreenLocation ScreenLocation::FromEncodableList(const EncodableList& list) {
 MapCamera::MapCamera(
   const LngLat& center,
   double zoom,
-  double tilt,
+  double pitch,
   double bearing)
  : center_(std::make_unique<LngLat>(center)),
     zoom_(zoom),
-    tilt_(tilt),
+    pitch_(pitch),
     bearing_(bearing) {}
 
 MapCamera::MapCamera(const MapCamera& other)
  : center_(std::make_unique<LngLat>(*other.center_)),
     zoom_(other.zoom_),
-    tilt_(other.tilt_),
+    pitch_(other.pitch_),
     bearing_(other.bearing_) {}
 
 MapCamera& MapCamera::operator=(const MapCamera& other) {
   center_ = std::make_unique<LngLat>(*other.center_);
   zoom_ = other.zoom_;
-  tilt_ = other.tilt_;
+  pitch_ = other.pitch_;
   bearing_ = other.bearing_;
   return *this;
 }
@@ -391,12 +391,12 @@ void MapCamera::set_zoom(double value_arg) {
 }
 
 
-double MapCamera::tilt() const {
-  return tilt_;
+double MapCamera::pitch() const {
+  return pitch_;
 }
 
-void MapCamera::set_tilt(double value_arg) {
-  tilt_ = value_arg;
+void MapCamera::set_pitch(double value_arg) {
+  pitch_ = value_arg;
 }
 
 
@@ -414,7 +414,7 @@ EncodableList MapCamera::ToEncodableList() const {
   list.reserve(4);
   list.push_back(CustomEncodableValue(*center_));
   list.push_back(EncodableValue(zoom_));
-  list.push_back(EncodableValue(tilt_));
+  list.push_back(EncodableValue(pitch_));
   list.push_back(EncodableValue(bearing_));
   return list;
 }

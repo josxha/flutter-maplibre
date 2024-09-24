@@ -14,8 +14,8 @@ class ParametersPage extends StatefulWidget {
 class _ParametersPageState extends State<ParametersPage> {
   double _minZoom = 0;
   double _maxZoom = 22;
-  double _minTilt = 0;
-  double _maxTilt = 60;
+  double _minPitch = 0;
+  double _maxPitch = 60;
   LngLatBounds _lngLatBounds = const LngLatBounds(
     longitudeWest: -180,
     longitudeEast: 179,
@@ -44,13 +44,13 @@ class _ParametersPageState extends State<ParametersPage> {
                   }),
                 ),
                 _SliderWidget(
-                  label: 'Tilt',
-                  start: _minTilt,
-                  end: _maxTilt,
+                  label: 'Pitch',
+                  start: _minPitch,
+                  end: _maxPitch,
                   max: 85,
                   onChanged: (range) => setState(() {
-                    _minTilt = range.start;
-                    _maxTilt = range.end;
+                    _minPitch = range.start;
+                    _maxPitch = range.end;
                   }),
                 ),
                 _SliderWidget(
@@ -89,8 +89,8 @@ class _ParametersPageState extends State<ParametersPage> {
                 zoom: 3,
                 minZoom: _minZoom,
                 maxZoom: _maxZoom,
-                minTilt: _minTilt,
-                maxTilt: _maxTilt,
+                minPitch: _minPitch,
+                maxPitch: _maxPitch,
                 maxBounds: _lngLatBounds,
               ),
             ),

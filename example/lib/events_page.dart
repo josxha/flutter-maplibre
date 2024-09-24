@@ -41,7 +41,7 @@ class _EventsPageState extends State<EventsPage> {
         MapEventCameraMoved() => _print(
             'camera moved: center ${_formatPosition(event.camera.center)}, '
             'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
-            'tilt ${event.camera.tilt.toStringAsFixed(2)}, '
+            'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
             'bearing ${event.camera.bearing.toStringAsFixed(2)}',
           ),
         MapEventClicked() => _print('clicked: ${_formatPosition(event.point)}'),

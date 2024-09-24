@@ -43,7 +43,7 @@ abstract interface class MapLibreHostApi {
   });
 
   /// Get the current camera position with the map center, zoom level, camera
-  /// tilt and map rotation.
+  /// pitch and map rotation.
   @async
   MapCamera getCamera();
 
@@ -280,13 +280,13 @@ class MapOptions {
     required this.style,
     required this.zoom,
     required this.center,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
     required this.maxBounds,
     required this.minZoom,
     required this.maxZoom,
-    required this.minTilt,
-    required this.maxTilt,
+    required this.minPitch,
+    required this.maxPitch,
     required this.listensOnClick,
     required this.listensOnLongClick,
   });
@@ -297,8 +297,8 @@ class MapOptions {
   /// The initial zoom level of the map.
   final double zoom;
 
-  /// The initial tilt of the map.
-  final double tilt;
+  /// The initial pitch / tilt of the map.
+  final double pitch;
 
   /// The initial bearing of the map.
   final double bearing;
@@ -316,10 +316,10 @@ class MapOptions {
   final double maxZoom;
 
   /// The minimum pitch / tilt of the map.
-  final double minTilt;
+  final double minPitch;
 
   /// The maximum pitch / tilt of the map.
-  final double maxTilt;
+  final double maxPitch;
 
   /// If the native map should listen to click events.
   final bool listensOnClick;
@@ -355,13 +355,13 @@ class MapCamera {
   const MapCamera({
     required this.center,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
   });
 
   final LngLat center;
   final double zoom;
-  final double tilt;
+  final double pitch;
   final double bearing;
 }
 

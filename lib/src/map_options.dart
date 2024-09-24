@@ -10,13 +10,13 @@ class MapOptions {
     this.style = 'https://demotiles.maplibre.org/style.json',
     this.zoom = 0,
     this.center,
-    this.tilt = 0,
+    this.pitch = 0,
     this.bearing = 0,
     this.controls = const [],
     this.minZoom = 0,
     this.maxZoom = 22,
-    this.minTilt = 0,
-    this.maxTilt = 60,
+    this.minPitch = 0,
+    this.maxPitch = 60,
     @Deprecated('Use the onEvent() callback instead.') this.onClick,
     @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
     @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
@@ -31,8 +31,8 @@ class MapOptions {
   /// The initial zoom level.
   final double zoom;
 
-  /// The initial tilt level. Minimum is 0 and maximum  is 60.
-  final double tilt;
+  /// The initial pitch level. Minimum is 0 and maximum  is 60.
+  final double pitch;
 
   /// The initial bearing of the map. Defaults to 0 (north on top).
   /// 360 is exactly one loop.
@@ -52,15 +52,15 @@ class MapOptions {
   /// The maximum zoom level. Allowed values are 0-24. Defaults to 22.
   final double maxZoom;
 
-  /// The minimum camera tilt (pitch). Allowed values on web are 0-85. Allowed
+  /// The minimum camera pitch / tilt. Allowed values on web are 0-85. Allowed
   /// values on other platforms are 0-60, bigger values will get ignored.
   ///
   /// Defaults to 0.
-  final double minTilt;
+  final double minPitch;
 
-  /// The maximum camera tilt (pitch). Allowed values on web are 0-85. Allowed
-  //   /// values on other platforms are 0-60, bigger values will get ignored.
-  final double maxTilt;
+  /// The maximum camera pitch / tilt. Allowed values on web are 0-85. Allowed
+  /// values on other platforms are 0-60, bigger values will get ignored.
+  final double maxPitch;
 
   /// The maximum bounding box of the map camera. No constraints are in place
   /// if set to `null`.

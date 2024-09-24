@@ -6,7 +6,7 @@ class MapCamera {
   const MapCamera({
     required this.center,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
   });
 
@@ -19,11 +19,11 @@ class MapCamera {
   /// The bearing of the map.
   final double bearing;
 
-  /// The camera tilt of the map.
-  final double tilt;
+  /// The camera pitch of the map.
+  final double pitch;
 
   @override
   String toString() => 'MapCamera('
       'center: Position(lng: ${center.lng}, lat: ${center.lat}), '
-      'zoom: $zoom, bearing: $bearing, tilt: $tilt)';
+      'zoom: $zoom, bearing: $bearing, pitch: $pitch)';
 }

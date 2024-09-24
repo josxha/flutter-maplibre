@@ -53,14 +53,14 @@ class MapOptions {
   MapOptions({
     required this.style,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
     this.center,
     this.maxBounds,
     required this.minZoom,
     required this.maxZoom,
-    required this.minTilt,
-    required this.maxTilt,
+    required this.minPitch,
+    required this.maxPitch,
     required this.listensOnClick,
     required this.listensOnLongClick,
   });
@@ -71,8 +71,8 @@ class MapOptions {
   /// The initial zoom level of the map.
   double zoom;
 
-  /// The initial tilt of the map.
-  double tilt;
+  /// The initial pitch of the map.
+  double pitch;
 
   /// The initial bearing of the map.
   double bearing;
@@ -90,10 +90,10 @@ class MapOptions {
   double maxZoom;
 
   /// The minimum pitch / tilt of the map.
-  double minTilt;
+  double minPitch;
 
   /// The maximum pitch / tilt of the map.
-  double maxTilt;
+  double maxPitch;
 
   /// If the native map should listen to click events.
   bool listensOnClick;
@@ -105,14 +105,14 @@ class MapOptions {
     return <Object?>[
       style,
       zoom,
-      tilt,
+      pitch,
       bearing,
       center,
       maxBounds,
       minZoom,
       maxZoom,
-      minTilt,
-      maxTilt,
+      minPitch,
+      maxPitch,
       listensOnClick,
       listensOnLongClick,
     ];
@@ -123,14 +123,14 @@ class MapOptions {
     return MapOptions(
       style: result[0]! as String,
       zoom: result[1]! as double,
-      tilt: result[2]! as double,
+      pitch: result[2]! as double,
       bearing: result[3]! as double,
       center: result[4] as LngLat?,
       maxBounds: result[5] as LngLatBounds?,
       minZoom: result[6]! as double,
       maxZoom: result[7]! as double,
-      minTilt: result[8]! as double,
-      maxTilt: result[9]! as double,
+      minPitch: result[8]! as double,
+      maxPitch: result[9]! as double,
       listensOnClick: result[10]! as bool,
       listensOnLongClick: result[11]! as bool,
     );
@@ -200,7 +200,7 @@ class MapCamera {
   MapCamera({
     required this.center,
     required this.zoom,
-    required this.tilt,
+    required this.pitch,
     required this.bearing,
   });
 
@@ -208,7 +208,7 @@ class MapCamera {
 
   double zoom;
 
-  double tilt;
+  double pitch;
 
   double bearing;
 
@@ -216,7 +216,7 @@ class MapCamera {
     return <Object?>[
       center,
       zoom,
-      tilt,
+      pitch,
       bearing,
     ];
   }
@@ -226,7 +226,7 @@ class MapCamera {
     return MapCamera(
       center: result[0]! as LngLat,
       zoom: result[1]! as double,
-      tilt: result[2]! as double,
+      pitch: result[2]! as double,
       bearing: result[3]! as double,
     );
   }
@@ -405,7 +405,7 @@ class MapLibreHostApi {
   }
 
   /// Get the current camera position with the map center, zoom level, camera
-  /// tilt and map rotation.
+  /// pitch and map rotation.
   Future<MapCamera> getCamera() async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera$pigeonVar_messageChannelSuffix';

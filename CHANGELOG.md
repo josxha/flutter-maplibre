@@ -5,7 +5,7 @@
 - Add event system to the map.
 - Add and remove sources to the active map style programmatically.
 - Add and remove layers to the active map style programmatically.
-- Add `minZoom`, `maxZoom`, `minTilt`, `maxTilt` and `maxBounds` parameter.
+- Add `minZoom`, `maxZoom`, `minPitch`, `maxPitch` and `maxBounds` parameter.
 - Add `duration` parameter to `flyTo()`.
 - `flyTo()` returns after the animation completes or throws an exception if it
   has been cancelled.
