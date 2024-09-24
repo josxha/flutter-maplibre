@@ -6,9 +6,12 @@
 - Add and remove sources to the active map style programmatically.
 - Add and remove layers to the active map style programmatically.
 - Add `minZoom`, `maxZoom`, `minPitch`, `maxPitch` and `maxBounds` parameter.
-- Add `duration` parameter to `flyTo()`.
+- Add duration parameters to `flyTo()`.
 - `flyTo()` returns after the animation completes or throws an exception if it
   has been cancelled.
+- Deprecate `tilt` parameters in favor of `pitch`.
+- Deprecate `onClick`, `onDoubleClick`, `onSecondaryClick` and `onLongClick` in
+  favor of the event system.
 
 ### Bug fixes
 

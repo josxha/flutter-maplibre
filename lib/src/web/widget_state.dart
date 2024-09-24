@@ -268,6 +268,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
   }) async {
     _nextGestureCausedByController = true;
     _map.jumpTo(
@@ -275,7 +276,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch,
+        pitch: pitch ?? tilt,
       ),
     );
   }
@@ -286,6 +287,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
+    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
@@ -297,7 +299,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: destination,
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch,
+        pitch: pitch ?? tilt,
         speed: webSpeed,
         maxDuration: maxDuration?.inMilliseconds,
       ),
