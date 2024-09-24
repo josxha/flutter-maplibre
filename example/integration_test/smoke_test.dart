@@ -27,7 +27,11 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.jumpTo(
-            center: Position(1, 1), bearing: 1, zoom: 1, pitch: 1);
+          center: Position(1, 1),
+          bearing: 1,
+          zoom: 1,
+          pitch: 1,
+        );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
@@ -45,7 +49,11 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.jumpTo(
-            center: Position(1, 2), bearing: 1, zoom: 1, pitch: 1);
+          center: Position(1, 2),
+          bearing: 1,
+          zoom: 1,
+          pitch: 1,
+        );
         await tester.pumpAndSettle();
         final camera = await ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
