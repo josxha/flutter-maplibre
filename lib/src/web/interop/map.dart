@@ -98,8 +98,10 @@ extension type JsMap._(Camera _) implements Camera {
   external DragRotateHandler dragRotate;
   external KeyboardHandler keyboard;
   external ScrollZoomHandler scrollZoom;
+
   /// Shift and drag to draw a box to zoom in
   external BoxZoomHandler boxZoom;
+
   /// Pitch with rotate
   external bool pitchWithRotate;
   external TwoFingersTouchPitchHandler touchPitch;

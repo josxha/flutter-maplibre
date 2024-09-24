@@ -590,7 +590,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.scrollZoom.disable();
       _map.boxZoom.disable();
     }
-    if (gestures.rotate) { // has to be after doubleClickZoom.enable()
+    if (gestures.rotate) {
       _map.dragRotate.enable();
       _map.touchZoomRotate.disableRotation();
     } else {
