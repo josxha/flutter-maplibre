@@ -111,7 +111,8 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  @Deprecated('Renamed to moveCamera') Future<void> jumpTo({
+  @Deprecated('Renamed to moveCamera')
+  Future<void> jumpTo({
     Position? center,
     double? zoom,
     double? bearing,
@@ -125,7 +126,8 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  @Deprecated('Renamed to animateCamera') Future<void> flyTo({
+  @Deprecated('Renamed to animateCamera')
+  Future<void> flyTo({
     Position? center,
     double? zoom,
     double? bearing,
