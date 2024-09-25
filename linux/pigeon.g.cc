@@ -2117,34 +2117,27 @@ static void maplibre_map_libre_host_api_fit_bounds_cb(FlBasicMessageChannel* cha
   FlValue* value0 = fl_value_get_list_value(message_, 0);
   MaplibreLngLatBounds* bounds = MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value0));
   FlValue* value1 = fl_value_get_list_value(message_, 1);
-  gboolean* linear = nullptr;
-  gboolean linear_value;
-  if (fl_value_get_type(value1) != FL_VALUE_TYPE_NULL) {
-    linear_value = fl_value_get_bool(value1);
-    linear = &linear_value;
-  }
+  MaplibreOffset* offset = MAPLIBRE_OFFSET(fl_value_get_custom_value_object(value1));
   FlValue* value2 = fl_value_get_list_value(message_, 2);
-  MaplibreOffset* offset = MAPLIBRE_OFFSET(fl_value_get_custom_value_object(value2));
+  MaplibrePadding* padding = MAPLIBRE_PADDING(fl_value_get_custom_value_object(value2));
   FlValue* value3 = fl_value_get_list_value(message_, 3);
-  MaplibrePadding* padding = MAPLIBRE_PADDING(fl_value_get_custom_value_object(value3));
-  FlValue* value4 = fl_value_get_list_value(message_, 4);
   double* bearing = nullptr;
   double bearing_value;
-  if (fl_value_get_type(value4) != FL_VALUE_TYPE_NULL) {
-    bearing_value = fl_value_get_float(value4);
+  if (fl_value_get_type(value3) != FL_VALUE_TYPE_NULL) {
+    bearing_value = fl_value_get_float(value3);
     bearing = &bearing_value;
   }
-  FlValue* value5 = fl_value_get_list_value(message_, 5);
+  FlValue* value4 = fl_value_get_list_value(message_, 4);
   double* pitch = nullptr;
   double pitch_value;
-  if (fl_value_get_type(value5) != FL_VALUE_TYPE_NULL) {
-    pitch_value = fl_value_get_float(value5);
+  if (fl_value_get_type(value4) != FL_VALUE_TYPE_NULL) {
+    pitch_value = fl_value_get_float(value4);
     pitch = &pitch_value;
   }
-  FlValue* value6 = fl_value_get_list_value(message_, 6);
-  int64_t duration_ms = fl_value_get_int(value6);
+  FlValue* value5 = fl_value_get_list_value(message_, 5);
+  int64_t duration_ms = fl_value_get_int(value5);
   g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
-  self->vtable->fit_bounds(bounds, linear, offset, padding, bearing, pitch, duration_ms, handle, self->user_data);
+  self->vtable->fit_bounds(bounds, offset, padding, bearing, pitch, duration_ms, handle, self->user_data);
 }
 
 static void maplibre_map_libre_host_api_get_camera_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {

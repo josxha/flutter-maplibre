@@ -519,7 +519,6 @@ class MapLibreHostApi {
   /// Animate the viewport of the map to a new location.
   Future<void> fitBounds({
     required LngLatBounds bounds,
-    required bool? linear,
     required Offset? offset,
     required Padding padding,
     required double? bearing,
@@ -534,16 +533,9 @@ class MapLibreHostApi {
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
-        .send(<Object?>[
-      bounds,
-      linear,
-      offset,
-      padding,
-      bearing,
-      pitch,
-      durationMs
-    ]) as List<Object?>?;
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel.send(
+            <Object?>[bounds, offset, padding, bearing, pitch, durationMs])
+        as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {

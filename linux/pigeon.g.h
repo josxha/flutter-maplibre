@@ -572,7 +572,7 @@ MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* maplibre_map_libre_h
 typedef struct {
   void (*move_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*animate_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*fit_bounds)(MaplibreLngLatBounds* bounds, gboolean* linear, MaplibreOffset* offset, MaplibrePadding* padding, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*fit_bounds)(MaplibreLngLatBounds* bounds, MaplibreOffset* offset, MaplibrePadding* padding, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_camera)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);

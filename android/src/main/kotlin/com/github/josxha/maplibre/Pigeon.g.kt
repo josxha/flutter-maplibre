@@ -458,7 +458,7 @@ interface MapLibreHostApi {
   /** Animate the viewport of the map to a new location. */
   fun animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /** Animate the viewport of the map to a new location. */
-  fun fitBounds(bounds: LngLatBounds, linear: Boolean?, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
+  fun fitBounds(bounds: LngLatBounds, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /**
    * Get the current camera position with the map center, zoom level, camera
    * pitch and map rotation.
@@ -581,13 +581,12 @@ interface MapLibreHostApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val boundsArg = args[0] as LngLatBounds
-            val linearArg = args[1] as Boolean?
-            val offsetArg = args[2] as Offset?
-            val paddingArg = args[3] as Padding
-            val bearingArg = args[4] as Double?
-            val pitchArg = args[5] as Double?
-            val durationMsArg = args[6] as Long
-            api.fitBounds(boundsArg, linearArg, offsetArg, paddingArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
+            val offsetArg = args[1] as Offset?
+            val paddingArg = args[2] as Padding
+            val bearingArg = args[3] as Double?
+            val pitchArg = args[4] as Double?
+            val durationMsArg = args[5] as Long
+            api.fitBounds(boundsArg, offsetArg, paddingArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

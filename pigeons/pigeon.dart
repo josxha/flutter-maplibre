@@ -46,7 +46,6 @@ abstract interface class MapLibreHostApi {
   @async
   void fitBounds({
     required LngLatBounds bounds,
-    required bool? linear,
     required Offset? offset,
     required Padding padding,
     required double? bearing,

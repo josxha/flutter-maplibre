@@ -479,7 +479,6 @@ class MapLibreHostApi {
   // Animate the viewport of the map to a new location.
   virtual void FitBounds(
     const LngLatBounds& bounds,
-    const bool* linear,
     const Offset* offset,
     const Padding& padding,
     const double* bearing,

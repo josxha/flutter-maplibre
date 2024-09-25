@@ -849,27 +849,25 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const auto& bounds_arg = std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_bounds_arg));
-          const auto& encodable_linear_arg = args.at(1);
-          const auto* linear_arg = std::get_if<bool>(&encodable_linear_arg);
-          const auto& encodable_offset_arg = args.at(2);
+          const auto& encodable_offset_arg = args.at(1);
           const auto* offset_arg = encodable_offset_arg.IsNull() ? nullptr : &(std::any_cast<const Offset&>(std::get<CustomEncodableValue>(encodable_offset_arg)));
-          const auto& encodable_padding_arg = args.at(3);
+          const auto& encodable_padding_arg = args.at(2);
           if (encodable_padding_arg.IsNull()) {
             reply(WrapError("padding_arg unexpectedly null."));
             return;
           }
           const auto& padding_arg = std::any_cast<const Padding&>(std::get<CustomEncodableValue>(encodable_padding_arg));
-          const auto& encodable_bearing_arg = args.at(4);
+          const auto& encodable_bearing_arg = args.at(3);
           const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
-          const auto& encodable_pitch_arg = args.at(5);
+          const auto& encodable_pitch_arg = args.at(4);
           const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
-          const auto& encodable_duration_ms_arg = args.at(6);
+          const auto& encodable_duration_ms_arg = args.at(5);
           if (encodable_duration_ms_arg.IsNull()) {
             reply(WrapError("duration_ms_arg unexpectedly null."));
             return;
           }
           const int64_t duration_ms_arg = encodable_duration_ms_arg.LongValue();
-          api->FitBounds(bounds_arg, linear_arg, offset_arg, padding_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
+          api->FitBounds(bounds_arg, offset_arg, padding_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;

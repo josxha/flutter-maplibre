@@ -484,7 +484,7 @@ protocol MapLibreHostApi {
   /// Animate the viewport of the map to a new location.
   func animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Animate the viewport of the map to a new location.
-  func fitBounds(bounds: LngLatBounds, linear: Bool?, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  func fitBounds(bounds: LngLatBounds, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
@@ -597,13 +597,12 @@ class MapLibreHostApiSetup {
       fitBoundsChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let boundsArg = args[0] as! LngLatBounds
-        let linearArg: Bool? = nilOrValue(args[1])
-        let offsetArg: Offset? = nilOrValue(args[2])
-        let paddingArg = args[3] as! Padding
-        let bearingArg: Double? = nilOrValue(args[4])
-        let pitchArg: Double? = nilOrValue(args[5])
-        let durationMsArg = args[6] as! Int64
-        api.fitBounds(bounds: boundsArg, linear: linearArg, offset: offsetArg, padding: paddingArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
+        let offsetArg: Offset? = nilOrValue(args[1])
+        let paddingArg = args[2] as! Padding
+        let bearingArg: Double? = nilOrValue(args[3])
+        let pitchArg: Double? = nilOrValue(args[4])
+        let durationMsArg = args[5] as! Int64
+        api.fitBounds(bounds: boundsArg, offset: offsetArg, padding: paddingArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
