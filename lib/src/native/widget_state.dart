@@ -163,6 +163,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       case CameraUpdateFitBounds():
         await _hostApi.fitBounds(
           bounds: update.bounds.toLngLatBounds(),
+          linear: update.linear,
+          offset: update.offset?.toOffset(),
+          maxZoom: update.maxZoom,
+          padding: update.padding.toPadding(),
+          bearing: update.bearing,
+          pitch: update.pitch,
+          durationMs: 0,
         );
     }
   }
@@ -174,14 +181,27 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    if (update is! CameraUpdateValues) return; // TODO: handle other cases
-    await _hostApi.animateCamera(
-      center: update.center?.toLngLat(),
-      zoom: update.zoom,
-      bearing: update.bearing,
-      pitch: update.pitch,
-      durationMs: nativeDuration.inMilliseconds,
-    );
+    switch (update) {
+      case CameraUpdateValues():
+        await _hostApi.animateCamera(
+          center: update.center?.toLngLat(),
+          zoom: update.zoom,
+          bearing: update.bearing,
+          pitch: update.pitch,
+          durationMs: nativeDuration.inMilliseconds,
+        );
+      case CameraUpdateFitBounds():
+        await _hostApi.fitBounds(
+          bounds: update.bounds.toLngLatBounds(),
+          bearing: update.bearing,
+          pitch: update.pitch,
+          durationMs: nativeDuration.inMilliseconds,
+          padding: update.padding.toPadding(),
+          linear: update.linear,
+          maxZoom: update.maxZoom,
+          offset: update.offset?.toOffset(),
+        );
+    }
   }
 
   @override

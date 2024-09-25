@@ -42,6 +42,19 @@ abstract interface class MapLibreHostApi {
     required int durationMs,
   });
 
+  /// Animate the viewport of the map to a new location.
+  @async
+  void fitBounds({
+    required LngLatBounds bounds,
+    required bool? linear,
+    required Offset? offset,
+    required double? maxZoom,
+    required Padding padding,
+    required double? bearing,
+    required double? pitch,
+    required int durationMs,
+  });
+
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   @async
@@ -53,7 +66,7 @@ abstract interface class MapLibreHostApi {
 
   /// Convert a coordinate to a location on the screen.
   @async
-  ScreenLocation toScreenLocation(double lng, double lat);
+  Offset toScreenLocation(double lng, double lat);
 
   /// Convert a screen location to a coordinate.
   @async
@@ -376,8 +389,8 @@ class LngLat {
 }
 
 /// A pixel location / location on the device screen.
-class ScreenLocation {
-  const ScreenLocation({required this.x, required this.y});
+class Offset {
+  const Offset({required this.x, required this.y});
 
   /// The x coordinate
   final double x;
@@ -414,6 +427,21 @@ class LngLatBounds {
   final double longitudeEast;
   final double latitudeSouth;
   final double latitudeNorth;
+}
+
+/// Camera Padding
+class Padding {
+  const Padding({
+    required this.top,
+    required this.bottom,
+    required this.left,
+    required this.right,
+  });
+
+  final int top;
+  final int bottom;
+  final int left;
+  final int right;
 }
 
 /// Influences the y direction of the tile coordinates.

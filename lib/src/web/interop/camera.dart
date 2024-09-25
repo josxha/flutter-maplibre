@@ -19,10 +19,10 @@ extension type Camera._(JSObject _) implements JSObject {
   ]);
 
   /// Animate the viewport of the map to fit [LngLatBounds].
-  external void fitBounds({
-    required LngLatBounds bounds,
+  external void fitBounds(
+    LngLatBounds bounds,
     FitBoundsOptions? options,
-  });
+  );
 }
 
 /// Options used for [Camera.jumpTo].

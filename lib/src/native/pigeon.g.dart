@@ -226,8 +226,8 @@ class LngLat {
 }
 
 /// A pixel location / location on the device screen.
-class ScreenLocation {
-  ScreenLocation({
+class Offset {
+  Offset({
     required this.x,
     required this.y,
   });
@@ -245,9 +245,9 @@ class ScreenLocation {
     ];
   }
 
-  static ScreenLocation decode(Object result) {
+  static Offset decode(Object result) {
     result as List<Object?>;
-    return ScreenLocation(
+    return Offset(
       x: result[0]! as double,
       y: result[1]! as double,
     );
@@ -328,6 +328,43 @@ class LngLatBounds {
   }
 }
 
+/// Camera Padding
+class Padding {
+  Padding({
+    required this.top,
+    required this.bottom,
+    required this.left,
+    required this.right,
+  });
+
+  int top;
+
+  int bottom;
+
+  int left;
+
+  int right;
+
+  Object encode() {
+    return <Object?>[
+      top,
+      bottom,
+      left,
+      right,
+    ];
+  }
+
+  static Padding decode(Object result) {
+    result as List<Object?>;
+    return Padding(
+      top: result[0]! as int,
+      bottom: result[1]! as int,
+      left: result[2]! as int,
+      right: result[3]! as int,
+    );
+  }
+}
+
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
   @override
@@ -353,7 +390,7 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is LngLat) {
       buffer.putUint8(134);
       writeValue(buffer, value.encode());
-    } else if (value is ScreenLocation) {
+    } else if (value is Offset) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
     } else if (value is MapCamera) {
@@ -361,6 +398,9 @@ class _PigeonCodec extends StandardMessageCodec {
       writeValue(buffer, value.encode());
     } else if (value is LngLatBounds) {
       buffer.putUint8(137);
+      writeValue(buffer, value.encode());
+    } else if (value is Padding) {
+      buffer.putUint8(138);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -386,11 +426,13 @@ class _PigeonCodec extends StandardMessageCodec {
       case 134:
         return LngLat.decode(readValue(buffer)!);
       case 135:
-        return ScreenLocation.decode(readValue(buffer)!);
+        return Offset.decode(readValue(buffer)!);
       case 136:
         return MapCamera.decode(readValue(buffer)!);
       case 137:
         return LngLatBounds.decode(readValue(buffer)!);
+      case 138:
+        return Padding.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -474,6 +516,49 @@ class MapLibreHostApi {
     }
   }
 
+  /// Animate the viewport of the map to a new location.
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    required bool? linear,
+    required Offset? offset,
+    required double? maxZoom,
+    required Padding padding,
+    required double? bearing,
+    required double? pitch,
+    required int durationMs,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final List<Object?>? pigeonVar_replyList = await pigeonVar_channel
+        .send(<Object?>[
+      bounds,
+      linear,
+      offset,
+      maxZoom,
+      padding,
+      bearing,
+      pitch,
+      durationMs
+    ]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   Future<MapCamera> getCamera() async {
@@ -536,7 +621,7 @@ class MapLibreHostApi {
   }
 
   /// Convert a coordinate to a location on the screen.
-  Future<ScreenLocation> toScreenLocation(double lng, double lat) async {
+  Future<Offset> toScreenLocation(double lng, double lat) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.toScreenLocation$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
@@ -561,7 +646,7 @@ class MapLibreHostApi {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as ScreenLocation?)!;
+      return (pigeonVar_replyList[0] as Offset?)!;
     }
   }
 

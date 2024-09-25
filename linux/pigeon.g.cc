@@ -310,56 +310,56 @@ static MaplibreLngLat* maplibre_lng_lat_new_from_list(FlValue* values) {
   return maplibre_lng_lat_new(lng, lat);
 }
 
-struct _MaplibreScreenLocation {
+struct _MaplibreOffset {
   GObject parent_instance;
 
   double x;
   double y;
 };
 
-G_DEFINE_TYPE(MaplibreScreenLocation, maplibre_screen_location, G_TYPE_OBJECT)
+G_DEFINE_TYPE(MaplibreOffset, maplibre_offset, G_TYPE_OBJECT)
 
-static void maplibre_screen_location_dispose(GObject* object) {
-  G_OBJECT_CLASS(maplibre_screen_location_parent_class)->dispose(object);
+static void maplibre_offset_dispose(GObject* object) {
+  G_OBJECT_CLASS(maplibre_offset_parent_class)->dispose(object);
 }
 
-static void maplibre_screen_location_init(MaplibreScreenLocation* self) {
+static void maplibre_offset_init(MaplibreOffset* self) {
 }
 
-static void maplibre_screen_location_class_init(MaplibreScreenLocationClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = maplibre_screen_location_dispose;
+static void maplibre_offset_class_init(MaplibreOffsetClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offset_dispose;
 }
 
-MaplibreScreenLocation* maplibre_screen_location_new(double x, double y) {
-  MaplibreScreenLocation* self = MAPLIBRE_SCREEN_LOCATION(g_object_new(maplibre_screen_location_get_type(), nullptr));
+MaplibreOffset* maplibre_offset_new(double x, double y) {
+  MaplibreOffset* self = MAPLIBRE_OFFSET(g_object_new(maplibre_offset_get_type(), nullptr));
   self->x = x;
   self->y = y;
   return self;
 }
 
-double maplibre_screen_location_get_x(MaplibreScreenLocation* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_SCREEN_LOCATION(self), 0.0);
+double maplibre_offset_get_x(MaplibreOffset* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFSET(self), 0.0);
   return self->x;
 }
 
-double maplibre_screen_location_get_y(MaplibreScreenLocation* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_SCREEN_LOCATION(self), 0.0);
+double maplibre_offset_get_y(MaplibreOffset* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFSET(self), 0.0);
   return self->y;
 }
 
-static FlValue* maplibre_screen_location_to_list(MaplibreScreenLocation* self) {
+static FlValue* maplibre_offset_to_list(MaplibreOffset* self) {
   FlValue* values = fl_value_new_list();
   fl_value_append_take(values, fl_value_new_float(self->x));
   fl_value_append_take(values, fl_value_new_float(self->y));
   return values;
 }
 
-static MaplibreScreenLocation* maplibre_screen_location_new_from_list(FlValue* values) {
+static MaplibreOffset* maplibre_offset_new_from_list(FlValue* values) {
   FlValue* value0 = fl_value_get_list_value(values, 0);
   double x = fl_value_get_float(value0);
   FlValue* value1 = fl_value_get_list_value(values, 1);
   double y = fl_value_get_float(value1);
-  return maplibre_screen_location_new(x, y);
+  return maplibre_offset_new(x, y);
 }
 
 struct _MaplibreMapCamera {
@@ -508,6 +508,78 @@ static MaplibreLngLatBounds* maplibre_lng_lat_bounds_new_from_list(FlValue* valu
   return maplibre_lng_lat_bounds_new(longitude_west, longitude_east, latitude_south, latitude_north);
 }
 
+struct _MaplibrePadding {
+  GObject parent_instance;
+
+  int64_t top;
+  int64_t bottom;
+  int64_t left;
+  int64_t right;
+};
+
+G_DEFINE_TYPE(MaplibrePadding, maplibre_padding, G_TYPE_OBJECT)
+
+static void maplibre_padding_dispose(GObject* object) {
+  G_OBJECT_CLASS(maplibre_padding_parent_class)->dispose(object);
+}
+
+static void maplibre_padding_init(MaplibrePadding* self) {
+}
+
+static void maplibre_padding_class_init(MaplibrePaddingClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_padding_dispose;
+}
+
+MaplibrePadding* maplibre_padding_new(int64_t top, int64_t bottom, int64_t left, int64_t right) {
+  MaplibrePadding* self = MAPLIBRE_PADDING(g_object_new(maplibre_padding_get_type(), nullptr));
+  self->top = top;
+  self->bottom = bottom;
+  self->left = left;
+  self->right = right;
+  return self;
+}
+
+int64_t maplibre_padding_get_top(MaplibrePadding* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_PADDING(self), 0);
+  return self->top;
+}
+
+int64_t maplibre_padding_get_bottom(MaplibrePadding* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_PADDING(self), 0);
+  return self->bottom;
+}
+
+int64_t maplibre_padding_get_left(MaplibrePadding* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_PADDING(self), 0);
+  return self->left;
+}
+
+int64_t maplibre_padding_get_right(MaplibrePadding* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_PADDING(self), 0);
+  return self->right;
+}
+
+static FlValue* maplibre_padding_to_list(MaplibrePadding* self) {
+  FlValue* values = fl_value_new_list();
+  fl_value_append_take(values, fl_value_new_int(self->top));
+  fl_value_append_take(values, fl_value_new_int(self->bottom));
+  fl_value_append_take(values, fl_value_new_int(self->left));
+  fl_value_append_take(values, fl_value_new_int(self->right));
+  return values;
+}
+
+static MaplibrePadding* maplibre_padding_new_from_list(FlValue* values) {
+  FlValue* value0 = fl_value_get_list_value(values, 0);
+  int64_t top = fl_value_get_int(value0);
+  FlValue* value1 = fl_value_get_list_value(values, 1);
+  int64_t bottom = fl_value_get_int(value1);
+  FlValue* value2 = fl_value_get_list_value(values, 2);
+  int64_t left = fl_value_get_int(value2);
+  FlValue* value3 = fl_value_get_list_value(values, 3);
+  int64_t right = fl_value_get_int(value3);
+  return maplibre_padding_new(top, bottom, left, right);
+}
+
 G_DECLARE_FINAL_TYPE(MaplibreMessageCodec, maplibre_message_codec, MAPLIBRE, MESSAGE_CODEC, FlStandardMessageCodec)
 
 struct _MaplibreMessageCodec {
@@ -556,10 +628,10 @@ static gboolean maplibre_message_codec_write_maplibre_lng_lat(FlStandardMessageC
   return fl_standard_message_codec_write_value(codec, buffer, values, error);
 }
 
-static gboolean maplibre_message_codec_write_maplibre_screen_location(FlStandardMessageCodec* codec, GByteArray* buffer, MaplibreScreenLocation* value, GError** error) {
+static gboolean maplibre_message_codec_write_maplibre_offset(FlStandardMessageCodec* codec, GByteArray* buffer, MaplibreOffset* value, GError** error) {
   uint8_t type = 135;
   g_byte_array_append(buffer, &type, sizeof(uint8_t));
-  g_autoptr(FlValue) values = maplibre_screen_location_to_list(value);
+  g_autoptr(FlValue) values = maplibre_offset_to_list(value);
   return fl_standard_message_codec_write_value(codec, buffer, values, error);
 }
 
@@ -574,6 +646,13 @@ static gboolean maplibre_message_codec_write_maplibre_lng_lat_bounds(FlStandardM
   uint8_t type = 137;
   g_byte_array_append(buffer, &type, sizeof(uint8_t));
   g_autoptr(FlValue) values = maplibre_lng_lat_bounds_to_list(value);
+  return fl_standard_message_codec_write_value(codec, buffer, values, error);
+}
+
+static gboolean maplibre_message_codec_write_maplibre_padding(FlStandardMessageCodec* codec, GByteArray* buffer, MaplibrePadding* value, GError** error) {
+  uint8_t type = 138;
+  g_byte_array_append(buffer, &type, sizeof(uint8_t));
+  g_autoptr(FlValue) values = maplibre_padding_to_list(value);
   return fl_standard_message_codec_write_value(codec, buffer, values, error);
 }
 
@@ -593,11 +672,13 @@ static gboolean maplibre_message_codec_write_value(FlStandardMessageCodec* codec
       case 134:
         return maplibre_message_codec_write_maplibre_lng_lat(codec, buffer, MAPLIBRE_LNG_LAT(fl_value_get_custom_value_object(value)), error);
       case 135:
-        return maplibre_message_codec_write_maplibre_screen_location(codec, buffer, MAPLIBRE_SCREEN_LOCATION(fl_value_get_custom_value_object(value)), error);
+        return maplibre_message_codec_write_maplibre_offset(codec, buffer, MAPLIBRE_OFFSET(fl_value_get_custom_value_object(value)), error);
       case 136:
         return maplibre_message_codec_write_maplibre_map_camera(codec, buffer, MAPLIBRE_MAP_CAMERA(fl_value_get_custom_value_object(value)), error);
       case 137:
         return maplibre_message_codec_write_maplibre_lng_lat_bounds(codec, buffer, MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value)), error);
+      case 138:
+        return maplibre_message_codec_write_maplibre_padding(codec, buffer, MAPLIBRE_PADDING(fl_value_get_custom_value_object(value)), error);
     }
   }
 
@@ -661,13 +742,13 @@ static FlValue* maplibre_message_codec_read_maplibre_lng_lat(FlStandardMessageCo
   return fl_value_new_custom_object(134, G_OBJECT(value));
 }
 
-static FlValue* maplibre_message_codec_read_maplibre_screen_location(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, GError** error) {
+static FlValue* maplibre_message_codec_read_maplibre_offset(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, GError** error) {
   g_autoptr(FlValue) values = fl_standard_message_codec_read_value(codec, buffer, offset, error);
   if (values == nullptr) {
     return nullptr;
   }
 
-  g_autoptr(MaplibreScreenLocation) value = maplibre_screen_location_new_from_list(values);
+  g_autoptr(MaplibreOffset) value = maplibre_offset_new_from_list(values);
   if (value == nullptr) {
     g_set_error(error, FL_MESSAGE_CODEC_ERROR, FL_MESSAGE_CODEC_ERROR_FAILED, "Invalid data received for MessageData");
     return nullptr;
@@ -706,6 +787,21 @@ static FlValue* maplibre_message_codec_read_maplibre_lng_lat_bounds(FlStandardMe
   return fl_value_new_custom_object(137, G_OBJECT(value));
 }
 
+static FlValue* maplibre_message_codec_read_maplibre_padding(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, GError** error) {
+  g_autoptr(FlValue) values = fl_standard_message_codec_read_value(codec, buffer, offset, error);
+  if (values == nullptr) {
+    return nullptr;
+  }
+
+  g_autoptr(MaplibrePadding) value = maplibre_padding_new_from_list(values);
+  if (value == nullptr) {
+    g_set_error(error, FL_MESSAGE_CODEC_ERROR, FL_MESSAGE_CODEC_ERROR_FAILED, "Invalid data received for MessageData");
+    return nullptr;
+  }
+
+  return fl_value_new_custom_object(138, G_OBJECT(value));
+}
+
 static FlValue* maplibre_message_codec_read_value_of_type(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, int type, GError** error) {
   switch (type) {
     case 129:
@@ -721,11 +817,13 @@ static FlValue* maplibre_message_codec_read_value_of_type(FlStandardMessageCodec
     case 134:
       return maplibre_message_codec_read_maplibre_lng_lat(codec, buffer, offset, error);
     case 135:
-      return maplibre_message_codec_read_maplibre_screen_location(codec, buffer, offset, error);
+      return maplibre_message_codec_read_maplibre_offset(codec, buffer, offset, error);
     case 136:
       return maplibre_message_codec_read_maplibre_map_camera(codec, buffer, offset, error);
     case 137:
       return maplibre_message_codec_read_maplibre_lng_lat_bounds(codec, buffer, offset, error);
+    case 138:
+      return maplibre_message_codec_read_maplibre_padding(codec, buffer, offset, error);
     default:
       return FL_STANDARD_MESSAGE_CODEC_CLASS(maplibre_message_codec_parent_class)->read_value_of_type(codec, buffer, offset, type, error);
   }
@@ -852,6 +950,45 @@ static MaplibreMapLibreHostApiAnimateCameraResponse* maplibre_map_libre_host_api
   return self;
 }
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiFitBoundsResponse, maplibre_map_libre_host_api_fit_bounds_response, MAPLIBRE, MAP_LIBRE_HOST_API_FIT_BOUNDS_RESPONSE, GObject)
+
+struct _MaplibreMapLibreHostApiFitBoundsResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibreHostApiFitBoundsResponse, maplibre_map_libre_host_api_fit_bounds_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_host_api_fit_bounds_response_dispose(GObject* object) {
+  MaplibreMapLibreHostApiFitBoundsResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FIT_BOUNDS_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_host_api_fit_bounds_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_host_api_fit_bounds_response_init(MaplibreMapLibreHostApiFitBoundsResponse* self) {
+}
+
+static void maplibre_map_libre_host_api_fit_bounds_response_class_init(MaplibreMapLibreHostApiFitBoundsResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_fit_bounds_response_dispose;
+}
+
+static MaplibreMapLibreHostApiFitBoundsResponse* maplibre_map_libre_host_api_fit_bounds_response_new() {
+  MaplibreMapLibreHostApiFitBoundsResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FIT_BOUNDS_RESPONSE(g_object_new(maplibre_map_libre_host_api_fit_bounds_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreMapLibreHostApiFitBoundsResponse* maplibre_map_libre_host_api_fit_bounds_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreMapLibreHostApiFitBoundsResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_FIT_BOUNDS_RESPONSE(g_object_new(maplibre_map_libre_host_api_fit_bounds_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiGetCameraResponse, maplibre_map_libre_host_api_get_camera_response, MAPLIBRE, MAP_LIBRE_HOST_API_GET_CAMERA_RESPONSE, GObject)
 
 struct _MaplibreMapLibreHostApiGetCameraResponse {
@@ -953,7 +1090,7 @@ static void maplibre_map_libre_host_api_to_screen_location_response_class_init(M
   G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_host_api_to_screen_location_response_dispose;
 }
 
-static MaplibreMapLibreHostApiToScreenLocationResponse* maplibre_map_libre_host_api_to_screen_location_response_new(MaplibreScreenLocation* return_value) {
+static MaplibreMapLibreHostApiToScreenLocationResponse* maplibre_map_libre_host_api_to_screen_location_response_new(MaplibreOffset* return_value) {
   MaplibreMapLibreHostApiToScreenLocationResponse* self = MAPLIBRE_MAP_LIBRE_HOST_API_TO_SCREEN_LOCATION_RESPONSE(g_object_new(maplibre_map_libre_host_api_to_screen_location_response_get_type(), nullptr));
   self->value = fl_value_new_list();
   fl_value_append_take(self->value, fl_value_new_custom_object(135, G_OBJECT(return_value)));
@@ -1970,6 +2107,53 @@ static void maplibre_map_libre_host_api_animate_camera_cb(FlBasicMessageChannel*
   self->vtable->animate_camera(center, zoom, bearing, pitch, duration_ms, handle, self->user_data);
 }
 
+static void maplibre_map_libre_host_api_fit_bounds_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->fit_bounds == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  MaplibreLngLatBounds* bounds = MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value0));
+  FlValue* value1 = fl_value_get_list_value(message_, 1);
+  gboolean* linear = nullptr;
+  gboolean linear_value;
+  if (fl_value_get_type(value1) != FL_VALUE_TYPE_NULL) {
+    linear_value = fl_value_get_bool(value1);
+    linear = &linear_value;
+  }
+  FlValue* value2 = fl_value_get_list_value(message_, 2);
+  MaplibreOffset* offset = MAPLIBRE_OFFSET(fl_value_get_custom_value_object(value2));
+  FlValue* value3 = fl_value_get_list_value(message_, 3);
+  double* max_zoom = nullptr;
+  double max_zoom_value;
+  if (fl_value_get_type(value3) != FL_VALUE_TYPE_NULL) {
+    max_zoom_value = fl_value_get_float(value3);
+    max_zoom = &max_zoom_value;
+  }
+  FlValue* value4 = fl_value_get_list_value(message_, 4);
+  MaplibrePadding* padding = MAPLIBRE_PADDING(fl_value_get_custom_value_object(value4));
+  FlValue* value5 = fl_value_get_list_value(message_, 5);
+  double* bearing = nullptr;
+  double bearing_value;
+  if (fl_value_get_type(value5) != FL_VALUE_TYPE_NULL) {
+    bearing_value = fl_value_get_float(value5);
+    bearing = &bearing_value;
+  }
+  FlValue* value6 = fl_value_get_list_value(message_, 6);
+  double* pitch = nullptr;
+  double pitch_value;
+  if (fl_value_get_type(value6) != FL_VALUE_TYPE_NULL) {
+    pitch_value = fl_value_get_float(value6);
+    pitch = &pitch_value;
+  }
+  FlValue* value7 = fl_value_get_list_value(message_, 7);
+  int64_t duration_ms = fl_value_get_int(value7);
+  g_autoptr(MaplibreMapLibreHostApiResponseHandle) handle = maplibre_map_libre_host_api_response_handle_new(channel, response_handle);
+  self->vtable->fit_bounds(bounds, linear, offset, max_zoom, padding, bearing, pitch, duration_ms, handle, self->user_data);
+}
+
 static void maplibre_map_libre_host_api_get_camera_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
   MaplibreMapLibreHostApi* self = MAPLIBRE_MAP_LIBRE_HOST_API(user_data);
 
@@ -2470,6 +2654,9 @@ void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenge
   g_autofree gchar* animate_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) animate_camera_channel = fl_basic_message_channel_new(messenger, animate_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(animate_camera_channel, maplibre_map_libre_host_api_animate_camera_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* fit_bounds_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) fit_bounds_channel = fl_basic_message_channel_new(messenger, fit_bounds_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(fit_bounds_channel, maplibre_map_libre_host_api_fit_bounds_cb, g_object_ref(api_data), g_object_unref);
   g_autofree gchar* get_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) get_camera_channel = fl_basic_message_channel_new(messenger, get_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(get_camera_channel, maplibre_map_libre_host_api_get_camera_cb, g_object_ref(api_data), g_object_unref);
@@ -2560,6 +2747,9 @@ void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messen
   g_autofree gchar* animate_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) animate_camera_channel = fl_basic_message_channel_new(messenger, animate_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(animate_camera_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* fit_bounds_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) fit_bounds_channel = fl_basic_message_channel_new(messenger, fit_bounds_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(fit_bounds_channel, nullptr, nullptr, nullptr);
   g_autofree gchar* get_camera_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreHostApi.getCamera%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) get_camera_channel = fl_basic_message_channel_new(messenger, get_camera_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(get_camera_channel, nullptr, nullptr, nullptr);
@@ -2672,6 +2862,22 @@ void maplibre_map_libre_host_api_respond_error_animate_camera(MaplibreMapLibreHo
   }
 }
 
+void maplibre_map_libre_host_api_respond_fit_bounds(MaplibreMapLibreHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreMapLibreHostApiFitBoundsResponse) response = maplibre_map_libre_host_api_fit_bounds_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "fitBounds", error->message);
+  }
+}
+
+void maplibre_map_libre_host_api_respond_error_fit_bounds(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreMapLibreHostApiFitBoundsResponse) response = maplibre_map_libre_host_api_fit_bounds_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "MapLibreHostApi", "fitBounds", error->message);
+  }
+}
+
 void maplibre_map_libre_host_api_respond_get_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreMapCamera* return_value) {
   g_autoptr(MaplibreMapLibreHostApiGetCameraResponse) response = maplibre_map_libre_host_api_get_camera_response_new(return_value);
   g_autoptr(GError) error = nullptr;
@@ -2704,7 +2910,7 @@ void maplibre_map_libre_host_api_respond_error_get_visible_region(MaplibreMapLib
   }
 }
 
-void maplibre_map_libre_host_api_respond_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreScreenLocation* return_value) {
+void maplibre_map_libre_host_api_respond_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreOffset* return_value) {
   g_autoptr(MaplibreMapLibreHostApiToScreenLocationResponse) response = maplibre_map_libre_host_api_to_screen_location_response_new(return_value);
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {

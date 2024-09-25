@@ -315,8 +315,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         );
       case CameraUpdateFitBounds():
         _map.fitBounds(
-          bounds: update.bounds.toJsLngLatBounds(),
-          options: interop.FitBoundsOptions(
+          update.bounds.toJsLngLatBounds(),
+          interop.FitBoundsOptions(
             offset: update.offset?.toJsPoint(),
             maxZoom: update.maxZoom,
             linear: update.linear,

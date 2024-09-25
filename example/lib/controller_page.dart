@@ -29,7 +29,7 @@ class _ControllerPageState extends State<ControllerPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('jumpTo start');
+                    debugPrint('move to start');
                     await _controller.moveCamera(
                       update: CameraUpdate(
                         center: Position(172.4714, -42.4862),
@@ -38,13 +38,13 @@ class _ControllerPageState extends State<ControllerPage> {
                         bearing: 0,
                       ),
                     );
-                    debugPrint('jumpTo end');
+                    debugPrint('move to end');
                   },
                   child: const Text('Jump to New Zealand'),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('flyTo start');
+                    debugPrint('animate to start');
                     try {
                       await _controller.animateCamera(
                         update: CameraUpdate(
@@ -54,16 +54,41 @@ class _ControllerPageState extends State<ControllerPage> {
                           pitch: 60,
                         ),
                       );
-                      debugPrint('flyTo end');
+                      debugPrint('animate to end');
                     } catch (error) {
                       final e = error as PlatformException;
                       debugPrint(
-                        'flyTo cancelled: code: '
+                        'animate to cancelled: code: '
                         '"${e.code}", message: "${e.message}"',
                       );
                     }
                   },
                   child: const Text('Fly to Iceland'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    debugPrint('fit bounds start');
+                    try {
+                      await _controller.animateCamera(
+                        update: const CameraUpdate.fitBounds(
+                          bounds: LngLatBounds(
+                            longitudeWest: 32.958984,
+                            longitudeEast: 43.50585,
+                            latitudeSouth: -5.353521,
+                            latitudeNorth: 5.615985,
+                          ),
+                        ),
+                      );
+                      debugPrint('fit bounds end');
+                    } catch (error) {
+                      final e = error as PlatformException;
+                      debugPrint(
+                        'fit bounds cancelled: code: '
+                        '"${e.code}", message: "${e.message}"',
+                      );
+                    }
+                  },
+                  child: const Text('Fit bounds to Kenya'),
                 ),
                 OutlinedButton(
                   onPressed: () async {

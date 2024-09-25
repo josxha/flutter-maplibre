@@ -57,10 +57,19 @@ final class CameraUpdateFitBounds extends CameraUpdate {
     this.maxZoom,
     this.offset,
     this.linear,
+    this.bearing,
+    this.pitch,
+    this.padding = EdgeInsets.zero,
   }) : super._();
 
   /// Bounding box.
   final LngLatBounds bounds;
+
+  /// Bounding box.
+  final double? bearing;
+
+  /// Bounding box.
+  final double? pitch;
 
   /// The maximum allowed zoom level.
   final double? maxZoom;
@@ -70,4 +79,7 @@ final class CameraUpdateFitBounds extends CameraUpdate {
 
   /// Uses
   final bool? linear;
+
+  /// Optional camera padding
+  final EdgeInsets padding;
 }
