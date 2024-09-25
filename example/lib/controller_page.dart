@@ -31,10 +31,12 @@ class _ControllerPageState extends State<ControllerPage> {
                   onPressed: () async {
                     debugPrint('jumpTo start');
                     await _controller.moveCamera(
-                      center: Position(172.4714, -42.4862),
-                      zoom: 4,
-                      pitch: 0,
-                      bearing: 0,
+                      update: CameraUpdate(
+                        center: Position(172.4714, -42.4862),
+                        zoom: 4,
+                        pitch: 0,
+                        bearing: 0,
+                      ),
                     );
                     debugPrint('jumpTo end');
                   },
@@ -45,10 +47,12 @@ class _ControllerPageState extends State<ControllerPage> {
                     debugPrint('flyTo start');
                     try {
                       await _controller.animateCamera(
-                        center: Position(-18.6874, 64.9445),
-                        zoom: 5,
-                        bearing: -50,
-                        pitch: 60,
+                        update: CameraUpdate(
+                          center: Position(-18.6874, 64.9445),
+                          zoom: 5,
+                          bearing: -50,
+                          pitch: 60,
+                        ),
                       );
                       debugPrint('flyTo end');
                     } catch (error) {

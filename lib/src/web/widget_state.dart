@@ -253,18 +253,12 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async {
-    final lngLat = _map.unproject(
-      interop.Point(screenLocation.dx, screenLocation.dy),
-    );
-    return lngLat.toPosition();
-  }
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      _map.unproject(screenLocation.toJsPoint()).toPosition();
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenPosition = _map.project(lngLat.toLngLat());
-    return Offset(screenPosition.x.toDouble(), screenPosition.y.toDouble());
-  }
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      _map.project(lngLat.toLngLat()).toOffset();
 
   @override
   Future<void> jumpTo({
@@ -275,7 +269,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
   }) =>
       moveCamera(
-        update: CameraUpdate.values(
+        update: CameraUpdate(
           center: center,
           zoom: zoom,
           bearing: bearing,
@@ -295,7 +289,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration? webMaxDuration,
   }) =>
       animateCamera(
-        update: CameraUpdate.values(
+        update: CameraUpdate(
           center: center,
           zoom: zoom,
           bearing: bearing,
@@ -319,8 +313,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             pitch: update.pitch,
           ),
         );
-      case CameraUpdateInsideBounds():
-      // TODO: Handle this case.
+      case CameraUpdateFitBounds():
+        _map.fitBounds(
+          bounds: update.bounds.toJsLngLatBounds(),
+          options: interop.FitBoundsOptions(
+            offset: update.offset?.toJsPoint(),
+            maxZoom: update.maxZoom,
+            linear: update.linear,
+            maxDuration: 0,
+          ),
+        );
     }
   }
 

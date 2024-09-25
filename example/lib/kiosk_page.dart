@@ -48,10 +48,12 @@ class _KioskPageState extends State<KioskPage> {
   void _onTimer(Timer timer) {
     final location = _locations[index];
     _controller.animateCamera(
-      center: location.center,
-      zoom: location.zoom,
-      bearing: location.bearing,
-      pitch: location.pitch,
+      update: CameraUpdate(
+        center: location.center,
+        zoom: location.zoom,
+        bearing: location.bearing,
+        pitch: location.pitch,
+      ),
     );
     index++;
     if (index >= _locations.length) index = 0;

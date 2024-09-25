@@ -119,7 +119,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? tilt,
   }) =>
       moveCamera(
-        update: CameraUpdate.values(
+        update: CameraUpdate(
           center: center,
           zoom: zoom,
           bearing: bearing,
@@ -139,7 +139,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Duration? webMaxDuration,
   }) =>
       animateCamera(
-        update: CameraUpdate.values(
+        update: CameraUpdate(
           center: center,
           zoom: zoom,
           bearing: bearing,
@@ -152,13 +152,19 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> moveCamera({required CameraUpdate update}) async {
-    if (update is! CameraUpdateValues) return; // TODO: handle other cases
-    await _hostApi.moveCamera(
-      center: update.center?.toLngLat(),
-      zoom: update.zoom,
-      bearing: update.bearing,
-      pitch: update.pitch,
-    );
+    switch (update) {
+      case CameraUpdateValues():
+        await _hostApi.moveCamera(
+          center: update.center?.toLngLat(),
+          zoom: update.zoom,
+          bearing: update.bearing,
+          pitch: update.pitch,
+        );
+      case CameraUpdateFitBounds():
+        await _hostApi.fitBounds(
+          bounds: update.bounds.toLngLatBounds(),
+        );
+    }
   }
 
   @override

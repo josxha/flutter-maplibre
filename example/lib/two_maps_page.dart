@@ -65,8 +65,10 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.moveCamera(
-                center: Position(172.4714, -42.4862),
-                zoom: 4,
+                update: CameraUpdate(
+                  center: Position(172.4714, -42.4862),
+                  zoom: 4,
+                ),
               );
             },
             child: const Text('Move to New Zealand'),
@@ -74,10 +76,12 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.animateCamera(
-                center: Position(-18.6874, 64.9445),
-                zoom: 5,
-                bearing: -50,
-                pitch: 60,
+                update: CameraUpdate(
+                  center: Position(-18.6874, 64.9445),
+                  zoom: 5,
+                  bearing: -50,
+                  pitch: 60,
+                ),
               );
             },
             child: const Text('Animate to Iceland'),

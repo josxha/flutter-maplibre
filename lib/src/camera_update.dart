@@ -5,20 +5,23 @@ import 'package:maplibre/maplibre.dart';
 /// [MapController.animateCamera].
 @immutable
 sealed class CameraUpdate {
-  /// Create a new [CameraUpdate] instance.
-  const CameraUpdate._();
-
   /// Create a new [CameraUpdateValues] instance.
-  const factory CameraUpdate.values({
+  const factory CameraUpdate({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
   }) = CameraUpdateValues._;
 
-  /// Create a new [CameraUpdateInsideBounds] instance.
-  const factory CameraUpdate.insideBounds({required LngLatBounds bounds}) =
-      CameraUpdateInsideBounds._;
+  /// Create a new [CameraUpdate] instance.
+  const CameraUpdate._();
+
+  /// Create a new [CameraUpdateFitBounds] instance.
+  const factory CameraUpdate.fitBounds({
+    required LngLatBounds bounds,
+    double? maxZoom,
+    Offset? offset,
+  }) = CameraUpdateFitBounds._;
 }
 
 /// A [CameraUpdate] with optional target values.
@@ -47,10 +50,24 @@ final class CameraUpdateValues extends CameraUpdate {
 
 /// A [CameraUpdate] with bounds the camera should be inside.
 @immutable
-final class CameraUpdateInsideBounds extends CameraUpdate {
-  /// Create a new [CameraUpdateInsideBounds] instance.
-  const CameraUpdateInsideBounds._({required this.bounds}) : super._();
+final class CameraUpdateFitBounds extends CameraUpdate {
+  /// Create a new [CameraUpdateFitBounds] instance.
+  const CameraUpdateFitBounds._({
+    required this.bounds,
+    this.maxZoom,
+    this.offset,
+    this.linear,
+  }) : super._();
 
-  /// Bounding box
+  /// Bounding box.
   final LngLatBounds bounds;
+
+  /// The maximum allowed zoom level.
+  final double? maxZoom;
+
+  /// Offset for the map center.
+  final Offset? offset;
+
+  /// Uses
+  final bool? linear;
 }

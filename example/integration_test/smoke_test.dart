@@ -27,7 +27,7 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.moveCamera(
-          update: CameraUpdate.values(
+          update: CameraUpdate(
             center: Position(1, 1),
             bearing: 1,
             zoom: 1,
@@ -51,7 +51,7 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.moveCamera(
-          update: CameraUpdate.values(
+          update: CameraUpdate(
             center: Position(1, 2),
             bearing: 1,
             zoom: 1,
@@ -75,7 +75,7 @@ void main() {
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
         await ctrl.animateCamera(
-          update: CameraUpdate.values(
+          update: CameraUpdate(
             center: Position(2, 1),
             bearing: 2,
             zoom: 2,
