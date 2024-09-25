@@ -25,7 +25,7 @@ class _ControllerPageState extends State<ControllerPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
-              runSpacing: 8,
+              alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
                   onPressed: () async {
@@ -38,7 +38,10 @@ class _ControllerPageState extends State<ControllerPage> {
                     );
                     debugPrint('moveCamera end');
                   },
-                  child: const Text('Move to New Zealand'),
+                  child: const Text(
+                    'Move to\nNew Zealand',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
@@ -59,7 +62,10 @@ class _ControllerPageState extends State<ControllerPage> {
                       );
                     }
                   },
-                  child: const Text('Animate to Iceland'),
+                  child: const Text(
+                    'Animate to\nIceland',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
@@ -81,7 +87,10 @@ class _ControllerPageState extends State<ControllerPage> {
                       );
                     }
                   },
-                  child: const Text('Fit bounds to Switzerland'),
+                  child: const Text(
+                    'Fit bounds to\nSwitzerland',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
@@ -108,7 +117,10 @@ pitch: ${camera.pitch}'''),
                       );
                     }
                   },
-                  child: const Text('Current MapCamera'),
+                  child: const Text(
+                    'Current\nMapCamera',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
@@ -129,7 +141,10 @@ pitch: ${camera.pitch}'''),
                         );
                     }
                   },
-                  child: const Text('Meter/Pixel at center'),
+                  child: const Text(
+                    'Meter/Pixel\nat center',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
@@ -143,7 +158,10 @@ pitch: ${camera.pitch}'''),
                         );
                     }
                   },
-                  child: const Text('Visible region'),
+                  child: const Text(
+                    'Visible\nregion',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
