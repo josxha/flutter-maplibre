@@ -60,7 +60,6 @@ class _ButtonsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Wrap(
         spacing: 8,
-        runSpacing: 8,
         children: [
           OutlinedButton(
             onPressed: () {

@@ -318,43 +318,104 @@ double maplibre_lng_lat_get_lng(MaplibreLngLat* object);
 double maplibre_lng_lat_get_lat(MaplibreLngLat* object);
 
 /**
- * MaplibreScreenLocation:
+ * MaplibreOffset:
  *
  * A pixel location / location on the device screen.
  */
 
-G_DECLARE_FINAL_TYPE(MaplibreScreenLocation, maplibre_screen_location, MAPLIBRE, SCREEN_LOCATION, GObject)
+G_DECLARE_FINAL_TYPE(MaplibreOffset, maplibre_offset, MAPLIBRE, OFFSET, GObject)
 
 /**
- * maplibre_screen_location_new:
+ * maplibre_offset_new:
  * x: field in this object.
  * y: field in this object.
  *
- * Creates a new #ScreenLocation object.
+ * Creates a new #Offset object.
  *
- * Returns: a new #MaplibreScreenLocation
+ * Returns: a new #MaplibreOffset
  */
-MaplibreScreenLocation* maplibre_screen_location_new(double x, double y);
+MaplibreOffset* maplibre_offset_new(double x, double y);
 
 /**
- * maplibre_screen_location_get_x
- * @object: a #MaplibreScreenLocation.
+ * maplibre_offset_get_x
+ * @object: a #MaplibreOffset.
  *
  * The x coordinate
  *
  * Returns: the field value.
  */
-double maplibre_screen_location_get_x(MaplibreScreenLocation* object);
+double maplibre_offset_get_x(MaplibreOffset* object);
 
 /**
- * maplibre_screen_location_get_y
- * @object: a #MaplibreScreenLocation.
+ * maplibre_offset_get_y
+ * @object: a #MaplibreOffset.
  *
  * The y coordinate
  *
  * Returns: the field value.
  */
-double maplibre_screen_location_get_y(MaplibreScreenLocation* object);
+double maplibre_offset_get_y(MaplibreOffset* object);
+
+/**
+ * MaplibrePadding:
+ *
+ * Camera Padding
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibrePadding, maplibre_padding, MAPLIBRE, PADDING, GObject)
+
+/**
+ * maplibre_padding_new:
+ * top: field in this object.
+ * bottom: field in this object.
+ * left: field in this object.
+ * right: field in this object.
+ *
+ * Creates a new #Padding object.
+ *
+ * Returns: a new #MaplibrePadding
+ */
+MaplibrePadding* maplibre_padding_new(int64_t top, int64_t bottom, int64_t left, int64_t right);
+
+/**
+ * maplibre_padding_get_top
+ * @object: a #MaplibrePadding.
+ *
+ * Gets the value of the top field of @object.
+ *
+ * Returns: the field value.
+ */
+int64_t maplibre_padding_get_top(MaplibrePadding* object);
+
+/**
+ * maplibre_padding_get_bottom
+ * @object: a #MaplibrePadding.
+ *
+ * Gets the value of the bottom field of @object.
+ *
+ * Returns: the field value.
+ */
+int64_t maplibre_padding_get_bottom(MaplibrePadding* object);
+
+/**
+ * maplibre_padding_get_left
+ * @object: a #MaplibrePadding.
+ *
+ * Gets the value of the left field of @object.
+ *
+ * Returns: the field value.
+ */
+int64_t maplibre_padding_get_left(MaplibrePadding* object);
+
+/**
+ * maplibre_padding_get_right
+ * @object: a #MaplibrePadding.
+ *
+ * Gets the value of the right field of @object.
+ *
+ * Returns: the field value.
+ */
+int64_t maplibre_padding_get_right(MaplibrePadding* object);
 
 /**
  * MaplibreMapCamera:
@@ -509,8 +570,9 @@ MaplibreMapLibreHostApiGetMetersPerPixelAtLatitudeResponse* maplibre_map_libre_h
  * Table of functions exposed by MapLibreHostApi to be implemented by the API provider.
  */
 typedef struct {
-  void (*jump_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*fly_to)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*move_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*animate_camera)(MaplibreLngLat* center, double* zoom, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*fit_bounds)(MaplibreLngLatBounds* bounds, MaplibreOffset* offset, MaplibrePadding* padding, double* bearing, double* pitch, int64_t duration_ms, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_camera)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*get_visible_region)(MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*to_screen_location)(double lng, double lat, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
@@ -563,42 +625,61 @@ void maplibre_map_libre_host_api_set_method_handlers(FlBinaryMessenger* messenge
 void maplibre_map_libre_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
 
 /**
- * maplibre_map_libre_host_api_respond_jump_to:
+ * maplibre_map_libre_host_api_respond_move_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  *
- * Responds to MapLibreHostApi.jumpTo. 
+ * Responds to MapLibreHostApi.moveCamera. 
  */
-void maplibre_map_libre_host_api_respond_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+void maplibre_map_libre_host_api_respond_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle);
 
 /**
- * maplibre_map_libre_host_api_respond_error_jump_to:
+ * maplibre_map_libre_host_api_respond_error_move_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  * @code: error code.
  * @message: error message.
  * @details: (allow-none): error details or %NULL.
  *
- * Responds with an error to MapLibreHostApi.jumpTo. 
+ * Responds with an error to MapLibreHostApi.moveCamera. 
  */
-void maplibre_map_libre_host_api_respond_error_jump_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+void maplibre_map_libre_host_api_respond_error_move_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
- * maplibre_map_libre_host_api_respond_fly_to:
+ * maplibre_map_libre_host_api_respond_animate_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  *
- * Responds to MapLibreHostApi.flyTo. 
+ * Responds to MapLibreHostApi.animateCamera. 
  */
-void maplibre_map_libre_host_api_respond_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle);
+void maplibre_map_libre_host_api_respond_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle);
 
 /**
- * maplibre_map_libre_host_api_respond_error_fly_to:
+ * maplibre_map_libre_host_api_respond_error_animate_camera:
  * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
  * @code: error code.
  * @message: error message.
  * @details: (allow-none): error details or %NULL.
  *
- * Responds with an error to MapLibreHostApi.flyTo. 
+ * Responds with an error to MapLibreHostApi.animateCamera. 
  */
-void maplibre_map_libre_host_api_respond_error_fly_to(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+void maplibre_map_libre_host_api_respond_error_animate_camera(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_map_libre_host_api_respond_fit_bounds:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ *
+ * Responds to MapLibreHostApi.fitBounds. 
+ */
+void maplibre_map_libre_host_api_respond_fit_bounds(MaplibreMapLibreHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_map_libre_host_api_respond_error_fit_bounds:
+ * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to MapLibreHostApi.fitBounds. 
+ */
+void maplibre_map_libre_host_api_respond_error_fit_bounds(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_map_libre_host_api_respond_get_camera:
@@ -647,7 +728,7 @@ void maplibre_map_libre_host_api_respond_error_get_visible_region(MaplibreMapLib
  *
  * Responds to MapLibreHostApi.toScreenLocation. 
  */
-void maplibre_map_libre_host_api_respond_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreScreenLocation* return_value);
+void maplibre_map_libre_host_api_respond_to_screen_location(MaplibreMapLibreHostApiResponseHandle* response_handle, MaplibreOffset* return_value);
 
 /**
  * maplibre_map_libre_host_api_respond_error_to_screen_location:

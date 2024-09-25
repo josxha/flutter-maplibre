@@ -252,7 +252,7 @@ struct LngLat {
 /// A pixel location / location on the device screen.
 ///
 /// Generated class from Pigeon that represents data sent in messages.
-struct ScreenLocation {
+struct Offset {
   /// The x coordinate
   var x: Double
   /// The y coordinate
@@ -261,11 +261,11 @@ struct ScreenLocation {
 
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
-  static func fromList(_ pigeonVar_list: [Any?]) -> ScreenLocation? {
+  static func fromList(_ pigeonVar_list: [Any?]) -> Offset? {
     let x = pigeonVar_list[0] as! Double
     let y = pigeonVar_list[1] as! Double
 
-    return ScreenLocation(
+    return Offset(
       x: x,
       y: y
     )
@@ -274,6 +274,41 @@ struct ScreenLocation {
     return [
       x,
       y,
+    ]
+  }
+}
+
+/// Camera Padding
+///
+/// Generated class from Pigeon that represents data sent in messages.
+struct Padding {
+  var top: Int64
+  var bottom: Int64
+  var left: Int64
+  var right: Int64
+
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> Padding? {
+    let top = pigeonVar_list[0] as! Int64
+    let bottom = pigeonVar_list[1] as! Int64
+    let left = pigeonVar_list[2] as! Int64
+    let right = pigeonVar_list[3] as! Int64
+
+    return Padding(
+      top: top,
+      bottom: bottom,
+      left: left,
+      right: right
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      top,
+      bottom,
+      left,
+      right,
     ]
   }
 }
@@ -376,10 +411,12 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
     case 134:
       return LngLat.fromList(self.readValue() as! [Any?])
     case 135:
-      return ScreenLocation.fromList(self.readValue() as! [Any?])
+      return Offset.fromList(self.readValue() as! [Any?])
     case 136:
-      return MapCamera.fromList(self.readValue() as! [Any?])
+      return Padding.fromList(self.readValue() as! [Any?])
     case 137:
+      return MapCamera.fromList(self.readValue() as! [Any?])
+    case 138:
       return LngLatBounds.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
@@ -407,14 +444,17 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
     } else if let value = value as? LngLat {
       super.writeByte(134)
       super.writeValue(value.toList())
-    } else if let value = value as? ScreenLocation {
+    } else if let value = value as? Offset {
       super.writeByte(135)
       super.writeValue(value.toList())
-    } else if let value = value as? MapCamera {
+    } else if let value = value as? Padding {
       super.writeByte(136)
       super.writeValue(value.toList())
-    } else if let value = value as? LngLatBounds {
+    } else if let value = value as? MapCamera {
       super.writeByte(137)
+      super.writeValue(value.toList())
+    } else if let value = value as? LngLatBounds {
+      super.writeByte(138)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -440,16 +480,18 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
   /// Move the viewport of the map to a new location without any animation.
-  func jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
+  func moveCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Animate the viewport of the map to a new location.
-  func flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  func animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Animate the viewport of the map to a new location.
+  func fitBounds(bounds: LngLatBounds, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
   /// Get the visible region of the current map camera.
   func getVisibleRegion(completion: @escaping (Result<LngLatBounds, Error>) -> Void)
   /// Convert a coordinate to a location on the screen.
-  func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<ScreenLocation, Error>) -> Void)
+  func toScreenLocation(lng: Double, lat: Double, completion: @escaping (Result<Offset, Error>) -> Void)
   /// Convert a screen location to a coordinate.
   func toLngLat(x: Double, y: Double, completion: @escaping (Result<LngLat, Error>) -> Void)
   /// Add a fill layer to the map style.
@@ -507,15 +549,15 @@ class MapLibreHostApiSetup {
   static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
     /// Move the viewport of the map to a new location without any animation.
-    let jumpToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let moveCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      jumpToChannel.setMessageHandler { message, reply in
+      moveCameraChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
-        api.jumpTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
+        api.moveCamera(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -525,19 +567,19 @@ class MapLibreHostApiSetup {
         }
       }
     } else {
-      jumpToChannel.setMessageHandler(nil)
+      moveCameraChannel.setMessageHandler(nil)
     }
     /// Animate the viewport of the map to a new location.
-    let flyToChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let animateCameraChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      flyToChannel.setMessageHandler { message, reply in
+      animateCameraChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let centerArg: LngLat? = nilOrValue(args[0])
         let zoomArg: Double? = nilOrValue(args[1])
         let bearingArg: Double? = nilOrValue(args[2])
         let pitchArg: Double? = nilOrValue(args[3])
         let durationMsArg = args[4] as! Int64
-        api.flyTo(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
+        api.animateCamera(center: centerArg, zoom: zoomArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -547,7 +589,30 @@ class MapLibreHostApiSetup {
         }
       }
     } else {
-      flyToChannel.setMessageHandler(nil)
+      animateCameraChannel.setMessageHandler(nil)
+    }
+    /// Animate the viewport of the map to a new location.
+    let fitBoundsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      fitBoundsChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let boundsArg = args[0] as! LngLatBounds
+        let offsetArg: Offset? = nilOrValue(args[1])
+        let paddingArg = args[2] as! Padding
+        let bearingArg: Double? = nilOrValue(args[3])
+        let pitchArg: Double? = nilOrValue(args[4])
+        let durationMsArg = args[5] as! Int64
+        api.fitBounds(bounds: boundsArg, offset: offsetArg, padding: paddingArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      fitBoundsChannel.setMessageHandler(nil)
     }
     /// Get the current camera position with the map center, zoom level, camera
     /// pitch and map rotation.

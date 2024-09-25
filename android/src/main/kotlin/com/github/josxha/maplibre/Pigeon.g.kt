@@ -233,7 +233,7 @@ data class LngLat (
  *
  * Generated class from Pigeon that represents data sent in messages.
  */
-data class ScreenLocation (
+data class Offset (
   /** The x coordinate */
   val x: Double,
   /** The y coordinate */
@@ -241,16 +241,47 @@ data class ScreenLocation (
 )
  {
   companion object {
-    fun fromList(pigeonVar_list: List<Any?>): ScreenLocation {
+    fun fromList(pigeonVar_list: List<Any?>): Offset {
       val x = pigeonVar_list[0] as Double
       val y = pigeonVar_list[1] as Double
-      return ScreenLocation(x, y)
+      return Offset(x, y)
     }
   }
   fun toList(): List<Any?> {
     return listOf(
       x,
       y,
+    )
+  }
+}
+
+/**
+ * Camera Padding
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
+data class Padding (
+  val top: Long,
+  val bottom: Long,
+  val left: Long,
+  val right: Long
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): Padding {
+      val top = pigeonVar_list[0] as Long
+      val bottom = pigeonVar_list[1] as Long
+      val left = pigeonVar_list[2] as Long
+      val right = pigeonVar_list[3] as Long
+      return Padding(top, bottom, left, right)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      top,
+      bottom,
+      left,
+      right,
     )
   }
 }
@@ -351,15 +382,20 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
       }
       135.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          ScreenLocation.fromList(it)
+          Offset.fromList(it)
         }
       }
       136.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapCamera.fromList(it)
+          Padding.fromList(it)
         }
       }
       137.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
+        }
+      }
+      138.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLatBounds.fromList(it)
         }
@@ -393,16 +429,20 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(134)
         writeValue(stream, value.toList())
       }
-      is ScreenLocation -> {
+      is Offset -> {
         stream.write(135)
         writeValue(stream, value.toList())
       }
-      is MapCamera -> {
+      is Padding -> {
         stream.write(136)
         writeValue(stream, value.toList())
       }
-      is LngLatBounds -> {
+      is MapCamera -> {
         stream.write(137)
+        writeValue(stream, value.toList())
+      }
+      is LngLatBounds -> {
+        stream.write(138)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -414,9 +454,11 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MapLibreHostApi {
   /** Move the viewport of the map to a new location without any animation. */
-  fun jumpTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
+  fun moveCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, callback: (Result<Unit>) -> Unit)
   /** Animate the viewport of the map to a new location. */
-  fun flyTo(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
+  fun animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
+  /** Animate the viewport of the map to a new location. */
+  fun fitBounds(bounds: LngLatBounds, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Long, callback: (Result<Unit>) -> Unit)
   /**
    * Get the current camera position with the map center, zoom level, camera
    * pitch and map rotation.
@@ -425,7 +467,7 @@ interface MapLibreHostApi {
   /** Get the visible region of the current map camera. */
   fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit)
   /** Convert a coordinate to a location on the screen. */
-  fun toScreenLocation(lng: Double, lat: Double, callback: (Result<ScreenLocation>) -> Unit)
+  fun toScreenLocation(lng: Double, lat: Double, callback: (Result<Offset>) -> Unit)
   /** Convert a screen location to a coordinate. */
   fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit)
   /** Add a fill layer to the map style. */
@@ -489,7 +531,7 @@ interface MapLibreHostApi {
     fun setUp(binaryMessenger: BinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -497,7 +539,7 @@ interface MapLibreHostApi {
             val zoomArg = args[1] as Double?
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
-            api.jumpTo(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
+            api.moveCamera(centerArg, zoomArg, bearingArg, pitchArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
@@ -511,7 +553,7 @@ interface MapLibreHostApi {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -520,7 +562,31 @@ interface MapLibreHostApi {
             val bearingArg = args[2] as Double?
             val pitchArg = args[3] as Double?
             val durationMsArg = args[4] as Long
-            api.flyTo(centerArg, zoomArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
+            api.animateCamera(centerArg, zoomArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val boundsArg = args[0] as LngLatBounds
+            val offsetArg = args[1] as Offset?
+            val paddingArg = args[2] as Padding
+            val bearingArg = args[3] as Double?
+            val pitchArg = args[4] as Double?
+            val durationMsArg = args[5] as Long
+            api.fitBounds(boundsArg, offsetArg, paddingArg, bearingArg, pitchArg, durationMsArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))
@@ -576,7 +642,7 @@ interface MapLibreHostApi {
             val args = message as List<Any?>
             val lngArg = args[0] as Double
             val latArg = args[1] as Double
-            api.toScreenLocation(lngArg, latArg) { result: Result<ScreenLocation> ->
+            api.toScreenLocation(lngArg, latArg) { result: Result<Offset> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

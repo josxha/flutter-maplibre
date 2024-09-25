@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 
@@ -13,5 +14,28 @@ extension LngLatBoundsExt on LngLatBounds {
   interop.LngLatBounds toJsLngLatBounds() => interop.LngLatBounds(
         interop.LngLat(lng: longitudeWest, lat: latitudeSouth),
         interop.LngLat(lng: longitudeEast, lat: latitudeNorth),
+      );
+}
+
+/// Extension methods for the [Offset] class. Not exported publicly.
+extension OffsetExt on Offset {
+  /// Convert a [Offset] to an internal [interop.Point].
+  interop.Point toJsPoint() => interop.Point(dx, dy);
+}
+
+/// Extension methods for the [interop.Point] class. Not exported publicly.
+extension JsPointExt on interop.Point {
+  /// Convert a [interop.Point] to an internal [Offset].
+  Offset toOffset() => Offset(x.toDouble(), y.toDouble());
+}
+
+/// Extension methods for the [EdgeInsets] class. Not exported publicly.
+extension EdgeInsetsExt on EdgeInsets {
+  /// Convert a [EdgeInsets] to an internal [interop.PaddingOptions].
+  interop.PaddingOptions toPaddingOptions() => interop.PaddingOptions(
+        right: right,
+        left: left,
+        bottom: bottom,
+        top: top,
       );
 }

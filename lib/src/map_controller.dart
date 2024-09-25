@@ -30,7 +30,21 @@ abstract interface class MapController {
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
+  });
+
+  /// Animate the map camera to a new location.
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+    Offset offset = Offset.zero,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
+    EdgeInsets padding = EdgeInsets.zero,
   });
 
   /// Add a [Marker] to the map.

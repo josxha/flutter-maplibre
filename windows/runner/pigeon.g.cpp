@@ -390,33 +390,33 @@ LngLat LngLat::FromEncodableList(const EncodableList& list) {
   return decoded;
 }
 
-// ScreenLocation
+// Offset
 
-ScreenLocation::ScreenLocation(
+Offset::Offset(
   double x,
   double y)
  : x_(x),
     y_(y) {}
 
-double ScreenLocation::x() const {
+double Offset::x() const {
   return x_;
 }
 
-void ScreenLocation::set_x(double value_arg) {
+void Offset::set_x(double value_arg) {
   x_ = value_arg;
 }
 
 
-double ScreenLocation::y() const {
+double Offset::y() const {
   return y_;
 }
 
-void ScreenLocation::set_y(double value_arg) {
+void Offset::set_y(double value_arg) {
   y_ = value_arg;
 }
 
 
-EncodableList ScreenLocation::ToEncodableList() const {
+EncodableList Offset::ToEncodableList() const {
   EncodableList list;
   list.reserve(2);
   list.push_back(EncodableValue(x_));
@@ -424,10 +424,77 @@ EncodableList ScreenLocation::ToEncodableList() const {
   return list;
 }
 
-ScreenLocation ScreenLocation::FromEncodableList(const EncodableList& list) {
-  ScreenLocation decoded(
+Offset Offset::FromEncodableList(const EncodableList& list) {
+  Offset decoded(
     std::get<double>(list[0]),
     std::get<double>(list[1]));
+  return decoded;
+}
+
+// Padding
+
+Padding::Padding(
+  int64_t top,
+  int64_t bottom,
+  int64_t left,
+  int64_t right)
+ : top_(top),
+    bottom_(bottom),
+    left_(left),
+    right_(right) {}
+
+int64_t Padding::top() const {
+  return top_;
+}
+
+void Padding::set_top(int64_t value_arg) {
+  top_ = value_arg;
+}
+
+
+int64_t Padding::bottom() const {
+  return bottom_;
+}
+
+void Padding::set_bottom(int64_t value_arg) {
+  bottom_ = value_arg;
+}
+
+
+int64_t Padding::left() const {
+  return left_;
+}
+
+void Padding::set_left(int64_t value_arg) {
+  left_ = value_arg;
+}
+
+
+int64_t Padding::right() const {
+  return right_;
+}
+
+void Padding::set_right(int64_t value_arg) {
+  right_ = value_arg;
+}
+
+
+EncodableList Padding::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(4);
+  list.push_back(EncodableValue(top_));
+  list.push_back(EncodableValue(bottom_));
+  list.push_back(EncodableValue(left_));
+  list.push_back(EncodableValue(right_));
+  return list;
+}
+
+Padding Padding::FromEncodableList(const EncodableList& list) {
+  Padding decoded(
+    std::get<int64_t>(list[0]),
+    std::get<int64_t>(list[1]),
+    std::get<int64_t>(list[2]),
+    std::get<int64_t>(list[3]));
   return decoded;
 }
 
@@ -611,12 +678,15 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
         return CustomEncodableValue(LngLat::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 135: {
-        return CustomEncodableValue(ScreenLocation::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(Offset::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 136: {
-        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+        return CustomEncodableValue(Padding::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     case 137: {
+        return CustomEncodableValue(MapCamera::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 138: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
@@ -658,18 +728,23 @@ void PigeonInternalCodecSerializer::WriteValue(
       WriteValue(EncodableValue(std::any_cast<LngLat>(*custom_value).ToEncodableList()), stream);
       return;
     }
-    if (custom_value->type() == typeid(ScreenLocation)) {
+    if (custom_value->type() == typeid(Offset)) {
       stream->WriteByte(135);
-      WriteValue(EncodableValue(std::any_cast<ScreenLocation>(*custom_value).ToEncodableList()), stream);
+      WriteValue(EncodableValue(std::any_cast<Offset>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(Padding)) {
+      stream->WriteByte(136);
+      WriteValue(EncodableValue(std::any_cast<Padding>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(MapCamera)) {
-      stream->WriteByte(136);
+      stream->WriteByte(137);
       WriteValue(EncodableValue(std::any_cast<MapCamera>(*custom_value).ToEncodableList()), stream);
       return;
     }
     if (custom_value->type() == typeid(LngLatBounds)) {
-      stream->WriteByte(137);
+      stream->WriteByte(138);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
       return;
     }
@@ -695,7 +770,7 @@ void MapLibreHostApi::SetUp(
   const std::string& message_channel_suffix) {
   const std::string prepended_suffix = message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "";
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.jumpTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.moveCamera" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -708,7 +783,7 @@ void MapLibreHostApi::SetUp(
           const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
           const auto& encodable_pitch_arg = args.at(3);
           const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
-          api->JumpTo(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
+          api->MoveCamera(center_arg, zoom_arg, bearing_arg, pitch_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
@@ -726,7 +801,7 @@ void MapLibreHostApi::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.flyTo" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.animateCamera" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -745,7 +820,54 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const int64_t duration_ms_arg = encodable_duration_ms_arg.LongValue();
-          api->FlyTo(center_arg, zoom_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
+          api->AnimateCamera(center_arg, zoom_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.fitBounds" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_bounds_arg = args.at(0);
+          if (encodable_bounds_arg.IsNull()) {
+            reply(WrapError("bounds_arg unexpectedly null."));
+            return;
+          }
+          const auto& bounds_arg = std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_bounds_arg));
+          const auto& encodable_offset_arg = args.at(1);
+          const auto* offset_arg = encodable_offset_arg.IsNull() ? nullptr : &(std::any_cast<const Offset&>(std::get<CustomEncodableValue>(encodable_offset_arg)));
+          const auto& encodable_padding_arg = args.at(2);
+          if (encodable_padding_arg.IsNull()) {
+            reply(WrapError("padding_arg unexpectedly null."));
+            return;
+          }
+          const auto& padding_arg = std::any_cast<const Padding&>(std::get<CustomEncodableValue>(encodable_padding_arg));
+          const auto& encodable_bearing_arg = args.at(3);
+          const auto* bearing_arg = std::get_if<double>(&encodable_bearing_arg);
+          const auto& encodable_pitch_arg = args.at(4);
+          const auto* pitch_arg = std::get_if<double>(&encodable_pitch_arg);
+          const auto& encodable_duration_ms_arg = args.at(5);
+          if (encodable_duration_ms_arg.IsNull()) {
+            reply(WrapError("duration_ms_arg unexpectedly null."));
+            return;
+          }
+          const int64_t duration_ms_arg = encodable_duration_ms_arg.LongValue();
+          api->FitBounds(bounds_arg, offset_arg, padding_arg, bearing_arg, pitch_arg, duration_ms_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
@@ -824,7 +946,7 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const auto& lat_arg = std::get<double>(encodable_lat_arg);
-          api->ToScreenLocation(lng_arg, lat_arg, [reply](ErrorOr<ScreenLocation>&& output) {
+          api->ToScreenLocation(lng_arg, lat_arg, [reply](ErrorOr<Offset>&& output) {
             if (output.has_error()) {
               reply(WrapError(output.error()));
               return;
