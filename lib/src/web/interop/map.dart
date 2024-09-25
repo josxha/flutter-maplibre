@@ -133,6 +133,10 @@ extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
     Point? offset,
     num? maxZoom,
     num? maxDuration,
+    PaddingOptions? padding,
+    num? speed,
+    num? pitch,
+    num? bearing,
   });
 }
 

@@ -74,11 +74,10 @@ class _ControllerPageState extends State<ControllerPage> {
                         ),
                       );
                       debugPrint('fitBounds end');
-                    } catch (error) {
-                      final e = error as PlatformException;
+                    } on PlatformException catch (error) {
                       debugPrint(
                         'fitBounds cancelled: code: '
-                        '"${e.code}", message: "${e.message}"',
+                        '"${error.code}", message: "${error.message}"',
                       );
                     }
                   },

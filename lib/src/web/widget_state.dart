@@ -340,10 +340,20 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? maxZoom,
     bool linear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) {
-    // TODO: implement fitBounds
-    throw UnimplementedError();
-  }
+  }) async =>
+      _map.fitBounds(
+        bounds.toJsLngLatBounds(),
+        interop.FitBoundsOptions(
+          // offset: offset?.toJsPoint(),
+          // maxZoom: maxZoom,
+          linear: linear,
+          maxDuration: maxDuration?.inMilliseconds,
+          padding: padding.toPaddingOptions(),
+          speed: webSpeed,
+          pitch: pitch,
+          bearing: bearing,
+        ),
+      );
 
   @override
   Future<void> addSource(Source source) async {
