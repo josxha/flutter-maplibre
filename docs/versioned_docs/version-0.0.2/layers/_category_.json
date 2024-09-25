@@ -1,0 +1,8 @@
+{
+  "label": "Layers",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Add or remove layers from the active map style."
+  }
+}
