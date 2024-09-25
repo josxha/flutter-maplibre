@@ -1,13 +1,15 @@
-## unreleased
+## 0.0.2
 
 ### Features
 
 - Add event system to the map.
 - Bump MapLibre Native on Android to version 11.5.0.
+- Bump other gradle dependencies.
 - Add and remove sources to the active map style programmatically.
 - Add and remove layers to the active map style programmatically.
 - Add `minZoom`, `maxZoom`, `minPitch`, `maxPitch` and `maxBounds` parameter.
 - Add duration parameters to `flyTo()`.
+- Add option to disable some or all input gestures.
 - `flyTo()` returns after the animation completes or throws an exception if it
   has been cancelled.
 - Deprecate `tilt` parameters in favor of `pitch`.
