@@ -134,7 +134,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) =>
       _hostApi.animateCamera(
         center: center?.toLngLat(),
@@ -151,10 +151,10 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
     Offset offset = Offset.zero,
-    double maxZoom = double.maxFinite,
-    bool linear = false,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) =>
       _hostApi.fitBounds(
@@ -163,8 +163,6 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         pitch: pitch,
         durationMs: nativeDuration.inMilliseconds,
         offset: offset.toOffset(),
-        maxZoom: maxZoom,
-        linear: linear,
         padding: padding.toPadding(),
       );
 

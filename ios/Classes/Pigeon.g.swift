@@ -484,7 +484,7 @@ protocol MapLibreHostApi {
   /// Animate the viewport of the map to a new location.
   func animateCamera(center: LngLat?, zoom: Double?, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Animate the viewport of the map to a new location.
-  func fitBounds(bounds: LngLatBounds, linear: Bool?, offset: Offset?, maxZoom: Double?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  func fitBounds(bounds: LngLatBounds, linear: Bool?, offset: Offset?, padding: Padding, bearing: Double?, pitch: Double?, durationMs: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   func getCamera(completion: @escaping (Result<MapCamera, Error>) -> Void)
@@ -599,12 +599,11 @@ class MapLibreHostApiSetup {
         let boundsArg = args[0] as! LngLatBounds
         let linearArg: Bool? = nilOrValue(args[1])
         let offsetArg: Offset? = nilOrValue(args[2])
-        let maxZoomArg: Double? = nilOrValue(args[3])
-        let paddingArg = args[4] as! Padding
-        let bearingArg: Double? = nilOrValue(args[5])
-        let pitchArg: Double? = nilOrValue(args[6])
-        let durationMsArg = args[7] as! Int64
-        api.fitBounds(bounds: boundsArg, linear: linearArg, offset: offsetArg, maxZoom: maxZoomArg, padding: paddingArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
+        let paddingArg = args[3] as! Padding
+        let bearingArg: Double? = nilOrValue(args[4])
+        let pitchArg: Double? = nilOrValue(args[5])
+        let durationMsArg = args[6] as! Int64
+        api.fitBounds(bounds: boundsArg, linear: linearArg, offset: offsetArg, padding: paddingArg, bearing: bearingArg, pitch: pitchArg, durationMs: durationMsArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))

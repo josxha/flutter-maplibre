@@ -48,7 +48,6 @@ abstract interface class MapLibreHostApi {
     required LngLatBounds bounds,
     required bool? linear,
     required Offset? offset,
-    required double? maxZoom,
     required Padding padding,
     required double? bearing,
     required double? pitch,

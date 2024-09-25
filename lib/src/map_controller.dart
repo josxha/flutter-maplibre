@@ -30,7 +30,7 @@ abstract interface class MapController {
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   });
 
   /// Animate the map camera to a new location.
@@ -40,10 +40,10 @@ abstract interface class MapController {
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
     Offset offset = Offset.zero,
-    double maxZoom = double.maxFinite,
-    bool linear = false,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   });
 

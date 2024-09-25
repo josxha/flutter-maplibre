@@ -197,9 +197,7 @@ class MapLibreMapController(
 
     override fun fitBounds(
         bounds: LngLatBounds,
-        linear: Boolean?,
         offset: Offset?,
-        maxZoom: Double?,
         padding: Padding,
         bearing: Double?,
         pitch: Double?,

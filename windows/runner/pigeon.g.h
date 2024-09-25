@@ -481,7 +481,6 @@ class MapLibreHostApi {
     const LngLatBounds& bounds,
     const bool* linear,
     const Offset* offset,
-    const double* max_zoom,
     const Padding& padding,
     const double* bearing,
     const double* pitch,

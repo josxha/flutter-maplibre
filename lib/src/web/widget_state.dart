@@ -288,7 +288,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) async {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
@@ -299,7 +299,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         bearing: bearing,
         pitch: pitch ?? tilt,
         speed: webSpeed,
-        maxDuration: maxDuration?.inMilliseconds,
+        maxDuration: webMaxDuration?.inMilliseconds,
       ),
     );
     final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
@@ -335,19 +335,19 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
     Offset offset = Offset.zero,
-    double maxZoom = double.maxFinite,
-    bool linear = false,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async =>
       _map.fitBounds(
         bounds.toJsLngLatBounds(),
         interop.FitBoundsOptions(
           offset: offset.toJsPoint(),
-          maxZoom: maxZoom,
-          linear: linear,
-          maxDuration: maxDuration?.inMilliseconds,
+          maxZoom: webMaxZoom,
+          linear: webLinear,
+          maxDuration: webMaxDuration?.inMilliseconds,
           padding: padding.toPaddingOptions(),
           speed: webSpeed,
           pitch: pitch,
