@@ -41,8 +41,8 @@ abstract interface class MapController {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
-    Offset? offset,
-    double? maxZoom,
+    Offset offset = Offset.zero,
+    double maxZoom = double.maxFinite,
     bool linear = false,
     EdgeInsets padding = EdgeInsets.zero,
   });

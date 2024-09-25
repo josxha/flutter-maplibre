@@ -336,16 +336,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? maxDuration,
-    Offset? offset,
-    double? maxZoom,
+    Offset offset = Offset.zero,
+    double maxZoom = double.maxFinite,
     bool linear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async =>
       _map.fitBounds(
         bounds.toJsLngLatBounds(),
         interop.FitBoundsOptions(
-          // offset: offset?.toJsPoint(),
-          // maxZoom: maxZoom,
+          offset: offset.toJsPoint(),
+          maxZoom: maxZoom,
           linear: linear,
           maxDuration: maxDuration?.inMilliseconds,
           padding: padding.toPaddingOptions(),
