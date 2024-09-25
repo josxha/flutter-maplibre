@@ -3,8 +3,8 @@ preamble: |
 android_sdk_config:
   add_gradle_deps: true
   android_example: 'example/'
-summarizer:
-  backend: auto
+#summarizer:
+#  backend: doclet
 suspend_fun_to_async: true
 output:
   c:
@@ -13,18 +13,20 @@ output:
   dart:
     path: 'lib/src/jni/'
 #    structure: single_file
+source_path:
+  - 'android/src/main/java'
 classes:
   - 'org.maplibre.android.maps.MapView'
   - 'org.maplibre.android.maps.MapLibreMap'
 exclude:
   fields:
 #    - 'org.apache.pdfbox.contentstream.operator.OperatorName#SHOW_TEXT_LINE_AND_SPACE'
-maven_downloads:
+#maven_downloads:
   ## For these dependencies, both source and JARs are downloaded.
-  source_deps:
-    - 'org.maplibre.gl:android-sdk:11.5.0'
+#  source_deps:
+#    - 'org.maplibre.gl:android-sdk:11.5.0'
   ## Runtime dependencies for which bindings aren't generated directly.
   ## Only JARs are downloaded.
   jar_only_deps:
-#    - 'org.maplibre.gl:android-sdk:11.5.0'
+    - 'org.maplibre.gl:android-sdk:11.5.0'
 #    - 'org.bouncycastle:bcmail-jdk15on:1.70'
