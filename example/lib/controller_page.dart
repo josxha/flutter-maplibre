@@ -29,20 +29,20 @@ class _ControllerPageState extends State<ControllerPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('jumpTo start');
+                    debugPrint('moveCamera start');
                     await _controller.jumpTo(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
                       pitch: 0,
                       bearing: 0,
                     );
-                    debugPrint('jumpTo end');
+                    debugPrint('moveCamera end');
                   },
-                  child: const Text('Jump to New Zealand'),
+                  child: const Text('Move to New Zealand'),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('flyTo start');
+                    debugPrint('animateTo start');
                     try {
                       await _controller.flyTo(
                         center: Position(-18.6874, 64.9445),
@@ -50,16 +50,39 @@ class _ControllerPageState extends State<ControllerPage> {
                         bearing: -50,
                         pitch: 60,
                       );
-                      debugPrint('flyTo end');
+                      debugPrint('animateTo end');
                     } catch (error) {
                       final e = error as PlatformException;
                       debugPrint(
-                        'flyTo cancelled: code: '
+                        'animateTo cancelled: code: '
                         '"${e.code}", message: "${e.message}"',
                       );
                     }
                   },
-                  child: const Text('Fly to Iceland'),
+                  child: const Text('Animate to Iceland'),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    debugPrint('fitBounds start');
+                    try {
+                      await _controller.fitBounds(
+                        bounds: const LngLatBounds(
+                          longitudeWest: 5.894357,
+                          longitudeEast: 10.560848,
+                          latitudeSouth: 45.806154,
+                          latitudeNorth: 47.902069,
+                        ),
+                      );
+                      debugPrint('fitBounds end');
+                    } catch (error) {
+                      final e = error as PlatformException;
+                      debugPrint(
+                        'fitBounds cancelled: code: '
+                        '"${e.code}", message: "${e.message}"',
+                      );
+                    }
+                  },
+                  child: const Text('Fit bounds to Switzerland'),
                 ),
                 OutlinedButton(
                   onPressed: () async {

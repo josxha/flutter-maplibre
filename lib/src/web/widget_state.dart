@@ -18,7 +18,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
-  Completer<interop.MapLibreEvent>? _moveCompleter;
+  Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
 
   MapOptions get _options => widget.options;
@@ -181,8 +181,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.moveEnd,
           (interop.MapLibreEvent event) {
             widget.onEvent?.call(const MapEventCameraIdle());
-            if (!(_moveCompleter?.isCompleted ?? true)) {
-              _moveCompleter?.complete(event);
+            if (!(_movementCompleter?.isCompleted ?? true)) {
+              _movementCompleter?.complete(event);
             }
           }.toJS,
         );
@@ -308,9 +308,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         maxDuration: maxDuration?.inMilliseconds,
       ),
     );
-    final completer = _moveCompleter = Completer<interop.MapLibreEvent>();
+    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
     final _ = await completer.future;
-    _moveCompleter = null;
+    _movementCompleter = null;
 
     // check if the targeted values were reached or if the flight was cancelled
     final newCenter = _map.getCenter();
@@ -332,6 +332,23 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       code: 'CancellationException',
       message: 'Animation cancelled.',
     );
+  }
+
+  @override
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
+    Offset? offset,
+    double? maxZoom,
+    bool linear = false,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) {
+    // TODO: implement fitBounds
+    throw UnimplementedError();
   }
 
   @override

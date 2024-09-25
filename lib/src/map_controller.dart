@@ -33,6 +33,20 @@ abstract interface class MapController {
     Duration? maxDuration,
   });
 
+  /// Animate the map camera to a new location.
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
+    Offset? offset,
+    double? maxZoom,
+    bool linear = false,
+    EdgeInsets padding = EdgeInsets.zero,
+  });
+
   /// Add a [Marker] to the map.
   ///
   /// Only supported on web.

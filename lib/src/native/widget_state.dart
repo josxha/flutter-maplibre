@@ -118,7 +118,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     double? pitch,
   }) =>
-      _hostApi.jumpTo(
+      _hostApi.moveCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
@@ -136,12 +136,36 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? maxDuration,
   }) =>
-      _hostApi.flyTo(
+      _hostApi.animateCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
         pitch: pitch ?? tilt,
         durationMs: nativeDuration.inMilliseconds,
+      );
+
+  @override
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? maxDuration,
+    Offset? offset,
+    double? maxZoom,
+    bool linear = false,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) =>
+      _hostApi.fitBounds(
+        bounds: bounds.toLngLatBounds(),
+        bearing: bearing,
+        pitch: pitch,
+        durationMs: nativeDuration.inMilliseconds,
+        offset: offset?.toOffset(),
+        maxZoom: maxZoom,
+        linear: linear,
+        padding: padding.toPadding(),
       );
 
   @override

@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
@@ -20,9 +19,8 @@ extension LngLatExt on pigeon.LngLat {
 
 /// Extension methods for the [Offset] class. Not exported publicly.
 extension OffsetExt on Offset {
-  /// Convert an [Offset] to an internal [pigeon.ScreenLocation].
-  pigeon.ScreenLocation toScreenLocation() =>
-      pigeon.ScreenLocation(x: dx, y: dy);
+  /// Convert an [Offset] to an internal [pigeon.Offset].
+  pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
 }
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.
@@ -33,5 +31,16 @@ extension LngLatBoundsExt on LngLatBounds {
         longitudeWest: longitudeWest,
         latitudeNorth: latitudeNorth,
         latitudeSouth: latitudeSouth,
+      );
+}
+
+/// Extension methods for the [EdgeInsets] class. Not exported publicly.
+extension EdgeInsetsExt on EdgeInsets {
+  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
+  pigeon.Padding toPadding() => pigeon.Padding(
+        top: top.toInt(),
+        bottom: bottom.toInt(),
+        left: left.toInt(),
+        right: right.toInt(),
       );
 }

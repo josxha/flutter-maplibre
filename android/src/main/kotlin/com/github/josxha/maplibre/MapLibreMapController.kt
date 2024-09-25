@@ -8,7 +8,8 @@ import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
 import RasterDemEncoding
-import ScreenLocation
+import Offset
+import Padding
 import TileScheme
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -152,7 +153,7 @@ class MapLibreMapController(
         // free any resources
     }
 
-    override fun jumpTo(
+    override fun moveCamera(
         center: LngLat?,
         zoom: Double?,
         bearing: Double?,
@@ -169,7 +170,7 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun flyTo(
+    override fun animateCamera(
         center: LngLat?,
         zoom: Double?,
         bearing: Double?,
@@ -194,13 +195,49 @@ class MapLibreMapController(
             })
     }
 
+    override fun fitBounds(
+        bounds: LngLatBounds,
+        linear: Boolean?,
+        offset: Offset?,
+        maxZoom: Double?,
+        padding: Padding,
+        bearing: Double?,
+        pitch: Double?,
+        durationMs: Long,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val cameraUpdate = CameraUpdateFactory.newLatLngBounds(
+            LatLngBounds.Companion.from(
+                bounds.latitudeNorth,
+                bounds.longitudeEast,
+                bounds.latitudeSouth,
+                bounds.longitudeWest
+            ),
+            bearing ?: -1.0,
+            pitch ?: -1.0,
+            padding.left.toInt(),
+            padding.top.toInt(),
+            padding.right.toInt(),
+            padding.bottom.toInt(),
+        )
+        mapLibreMap.animateCamera(
+            cameraUpdate,
+            durationMs.toInt(),
+            object : MapLibreMap.CancelableCallback {
+                override fun onCancel() =
+                    callback(Result.failure(CancellationException("Animation cancelled.")))
+
+                override fun onFinish() = callback(Result.success(Unit))
+            })
+    }
+
     override fun toScreenLocation(
         lng: Double,
         lat: Double,
-        callback: (Result<ScreenLocation>) -> Unit
+        callback: (Result<Offset>) -> Unit
     ) {
         val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng))
-        callback(Result.success(ScreenLocation(location.x.toDouble(), location.y.toDouble())))
+        callback(Result.success(Offset(location.x.toDouble(), location.y.toDouble())))
     }
 
     override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
