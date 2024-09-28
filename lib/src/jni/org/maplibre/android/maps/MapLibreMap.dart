@@ -28,6 +28,26 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../camera/CameraPosition.dart' as cameraposition_;
+
+import '../camera/CameraUpdate.dart' as cameraupdate_;
+
+import '../geometry/LatLng.dart' as latlng_;
+
+import '../geometry/LatLngBounds.dart' as latlngbounds_;
+
+import '../location/LocationComponent.dart' as locationcomponent_;
+
+import '../offline/OfflineRegionDefinition.dart' as offlineregiondefinition_;
+
+import '../style/expressions/Expression.dart' as expression_;
+
+import 'Projection.dart' as projection_;
+
+import 'Style.dart' as style_;
+
+import 'UiSettings.dart' as uisettings_;
+
 /// from: `org.maplibre.android.maps.MapLibreMap$CancelableCallback`
 class MapLibreMap_CancelableCallback extends jni.JObject {
   @override
@@ -1000,7 +1020,7 @@ class MapLibreMap_OnMapClickListener extends jni.JObject {
 
   /// from: `public abstract boolean onMapClick(org.maplibre.android.geometry.LatLng latLng)`
   bool onMapClick(
-    jni.JObject latLng,
+    latlng_.LatLng latLng,
   ) {
     return _onMapClick(reference.pointer, _id_onMapClick as jni.JMethodIDPtr,
             latLng.reference.pointer)
@@ -1068,7 +1088,7 @@ class MapLibreMap_OnMapLongClickListener extends jni.JObject {
 
   /// from: `public abstract boolean onMapLongClick(org.maplibre.android.geometry.LatLng latLng)`
   bool onMapLongClick(
-    jni.JObject latLng,
+    latlng_.LatLng latLng,
   ) {
     return _onMapLongClick(reference.pointer,
             _id_onMapLongClick as jni.JMethodIDPtr, latLng.reference.pointer)
@@ -1927,7 +1947,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void getStyle(org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void getStyle(
-    jni.JObject onStyleLoaded,
+    style_.Style_OnStyleLoaded onStyleLoaded,
   ) {
     _getStyle(reference.pointer, _id_getStyle as jni.JMethodIDPtr,
             onStyleLoaded.reference.pointer)
@@ -1953,9 +1973,9 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.maps.Style getStyle()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getStyle1() {
+  style_.Style getStyle1() {
     return _getStyle1(reference.pointer, _id_getStyle1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const style_.$StyleType());
   }
 
   static final _id_setPrefetchesTiles = _class.instanceMethodId(
@@ -2311,10 +2331,10 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.maps.UiSettings getUiSettings()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUiSettings() {
+  uisettings_.UiSettings getUiSettings() {
     return _getUiSettings(
             reference.pointer, _id_getUiSettings as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const uisettings_.$UiSettingsType());
   }
 
   static final _id_getProjection = _class.instanceMethodId(
@@ -2336,10 +2356,10 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.maps.Projection getProjection()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getProjection() {
+  projection_.Projection getProjection() {
     return _getProjection(
             reference.pointer, _id_getProjection as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const projection_.$ProjectionType());
   }
 
   static final _id_cancelTransitions = _class.instanceMethodId(
@@ -2385,10 +2405,10 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition getCameraPosition()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraPosition() {
+  cameraposition_.CameraPosition getCameraPosition() {
     return _getCameraPosition(
             reference.pointer, _id_getCameraPosition as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_setCameraPosition = _class.instanceMethodId(
@@ -2409,7 +2429,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setCameraPosition(org.maplibre.android.camera.CameraPosition cameraPosition)`
   void setCameraPosition(
-    jni.JObject cameraPosition,
+    cameraposition_.CameraPosition cameraPosition,
   ) {
     _setCameraPosition(
             reference.pointer,
@@ -2436,7 +2456,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void moveCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
   void moveCamera(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
   ) {
     _moveCamera(reference.pointer, _id_moveCamera as jni.JMethodIDPtr,
             cameraUpdate.reference.pointer)
@@ -2464,7 +2484,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void moveCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void moveCamera1(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     MapLibreMap_CancelableCallback cancelableCallback,
   ) {
     _moveCamera1(
@@ -2493,7 +2513,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
   void easeCamera(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
   ) {
     _easeCamera(reference.pointer, _id_easeCamera as jni.JMethodIDPtr,
             cameraUpdate.reference.pointer)
@@ -2521,7 +2541,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera1(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     MapLibreMap_CancelableCallback cancelableCallback,
   ) {
     _easeCamera1(
@@ -2550,7 +2570,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i)`
   void easeCamera2(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
   ) {
     _easeCamera2(reference.pointer, _id_easeCamera2 as jni.JMethodIDPtr,
@@ -2580,7 +2600,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera3(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
     MapLibreMap_CancelableCallback cancelableCallback,
   ) {
@@ -2611,7 +2631,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, boolean z)`
   void easeCamera4(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
     bool z,
   ) {
@@ -2643,7 +2663,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, boolean z, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera5(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
     bool z,
     MapLibreMap_CancelableCallback cancelableCallback,
@@ -2676,7 +2696,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
   void animateCamera(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
   ) {
     _animateCamera(reference.pointer, _id_animateCamera as jni.JMethodIDPtr,
             cameraUpdate.reference.pointer)
@@ -2704,7 +2724,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera1(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     MapLibreMap_CancelableCallback cancelableCallback,
   ) {
     _animateCamera1(
@@ -2733,7 +2753,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i)`
   void animateCamera2(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
   ) {
     _animateCamera2(reference.pointer, _id_animateCamera2 as jni.JMethodIDPtr,
@@ -2763,7 +2783,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera3(
-    jni.JObject cameraUpdate,
+    cameraupdate_.CameraUpdate cameraUpdate,
     int i,
     MapLibreMap_CancelableCallback cancelableCallback,
   ) {
@@ -2945,7 +2965,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setOfflineRegionDefinition(org.maplibre.android.offline.OfflineRegionDefinition offlineRegionDefinition)`
   void setOfflineRegionDefinition(
-    jni.JObject offlineRegionDefinition,
+    offlineregiondefinition_.OfflineRegionDefinition offlineRegionDefinition,
   ) {
     _setOfflineRegionDefinition(
             reference.pointer,
@@ -2975,8 +2995,8 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setOfflineRegionDefinition(org.maplibre.android.offline.OfflineRegionDefinition offlineRegionDefinition, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setOfflineRegionDefinition1(
-    jni.JObject offlineRegionDefinition,
-    jni.JObject onStyleLoaded,
+    offlineregiondefinition_.OfflineRegionDefinition offlineRegionDefinition,
+    style_.Style_OnStyleLoaded onStyleLoaded,
   ) {
     _setOfflineRegionDefinition1(
             reference.pointer,
@@ -3105,7 +3125,7 @@ class MapLibreMap extends jni.JObject {
   /// from: `public void setStyle(java.lang.String string, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setStyle1(
     jni.JString string,
-    jni.JObject onStyleLoaded,
+    style_.Style_OnStyleLoaded onStyleLoaded,
   ) {
     _setStyle1(reference.pointer, _id_setStyle1 as jni.JMethodIDPtr,
             string.reference.pointer, onStyleLoaded.reference.pointer)
@@ -3130,7 +3150,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setStyle(org.maplibre.android.maps.Style$Builder builder)`
   void setStyle2(
-    jni.JObject builder,
+    style_.Style_Builder builder,
   ) {
     _setStyle2(reference.pointer, _id_setStyle2 as jni.JMethodIDPtr,
             builder.reference.pointer)
@@ -3158,8 +3178,8 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setStyle(org.maplibre.android.maps.Style$Builder builder, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setStyle3(
-    jni.JObject builder,
-    jni.JObject onStyleLoaded,
+    style_.Style_Builder builder,
+    style_.Style_OnStyleLoaded onStyleLoaded,
   ) {
     _setStyle3(reference.pointer, _id_setStyle3 as jni.JMethodIDPtr,
             builder.reference.pointer, onStyleLoaded.reference.pointer)
@@ -4044,7 +4064,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public void setLatLngBoundsForCameraTarget(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   void setLatLngBoundsForCameraTarget(
-    jni.JObject latLngBounds,
+    latlngbounds_.LatLngBounds latLngBounds,
   ) {
     _setLatLngBoundsForCameraTarget(
             reference.pointer,
@@ -4071,14 +4091,14 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForLatLngBounds(
-    jni.JObject latLngBounds,
+  cameraposition_.CameraPosition getCameraForLatLngBounds(
+    latlngbounds_.LatLngBounds latLngBounds,
   ) {
     return _getCameraForLatLngBounds(
             reference.pointer,
             _id_getCameraForLatLngBounds as jni.JMethodIDPtr,
             latLngBounds.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForLatLngBounds1 = _class.instanceMethodId(
@@ -4102,8 +4122,8 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForLatLngBounds1(
-    jni.JObject latLngBounds,
+  cameraposition_.CameraPosition getCameraForLatLngBounds1(
+    latlngbounds_.LatLngBounds latLngBounds,
     jni.JArray<jni.jint> is0,
   ) {
     return _getCameraForLatLngBounds1(
@@ -4111,7 +4131,7 @@ class MapLibreMap extends jni.JObject {
             _id_getCameraForLatLngBounds1 as jni.JMethodIDPtr,
             latLngBounds.reference.pointer,
             is0.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForLatLngBounds2 = _class.instanceMethodId(
@@ -4136,8 +4156,8 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForLatLngBounds2(
-    jni.JObject latLngBounds,
+  cameraposition_.CameraPosition getCameraForLatLngBounds2(
+    latlngbounds_.LatLngBounds latLngBounds,
     double d,
     double d1,
   ) {
@@ -4147,7 +4167,7 @@ class MapLibreMap extends jni.JObject {
             latLngBounds.reference.pointer,
             d,
             d1)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForLatLngBounds3 = _class.instanceMethodId(
@@ -4173,8 +4193,8 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int[] is, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForLatLngBounds3(
-    jni.JObject latLngBounds,
+  cameraposition_.CameraPosition getCameraForLatLngBounds3(
+    latlngbounds_.LatLngBounds latLngBounds,
     jni.JArray<jni.jint> is0,
     double d,
     double d1,
@@ -4186,7 +4206,7 @@ class MapLibreMap extends jni.JObject {
             is0.reference.pointer,
             d,
             d1)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForGeometry = _class.instanceMethodId(
@@ -4207,14 +4227,14 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForGeometry(
+  cameraposition_.CameraPosition getCameraForGeometry(
     jni.JObject geometry,
   ) {
     return _getCameraForGeometry(
             reference.pointer,
             _id_getCameraForGeometry as jni.JMethodIDPtr,
             geometry.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForGeometry1 = _class.instanceMethodId(
@@ -4238,7 +4258,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForGeometry1(
+  cameraposition_.CameraPosition getCameraForGeometry1(
     jni.JObject geometry,
     jni.JArray<jni.jint> is0,
   ) {
@@ -4247,7 +4267,7 @@ class MapLibreMap extends jni.JObject {
             _id_getCameraForGeometry1 as jni.JMethodIDPtr,
             geometry.reference.pointer,
             is0.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForGeometry2 = _class.instanceMethodId(
@@ -4272,7 +4292,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForGeometry2(
+  cameraposition_.CameraPosition getCameraForGeometry2(
     jni.JObject geometry,
     double d,
     double d1,
@@ -4283,7 +4303,7 @@ class MapLibreMap extends jni.JObject {
             geometry.reference.pointer,
             d,
             d1)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_getCameraForGeometry3 = _class.instanceMethodId(
@@ -4309,7 +4329,7 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, int[] is, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCameraForGeometry3(
+  cameraposition_.CameraPosition getCameraForGeometry3(
     jni.JObject geometry,
     jni.JArray<jni.jint> is0,
     double d,
@@ -4322,7 +4342,7 @@ class MapLibreMap extends jni.JObject {
             is0.reference.pointer,
             d,
             d1)
-        .object(const jni.JObjectType());
+        .object(const cameraposition_.$CameraPositionType());
   }
 
   static final _id_setPadding = _class.instanceMethodId(
@@ -5324,7 +5344,7 @@ class MapLibreMap extends jni.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   jni.JList<jni.JObject> queryRenderedFeatures1(
     jni.JObject pointF,
-    jni.JObject expression,
+    expression_.Expression expression,
     jni.JArray<jni.JString> strings,
   ) {
     return _queryRenderedFeatures1(
@@ -5397,7 +5417,7 @@ class MapLibreMap extends jni.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   jni.JList<jni.JObject> queryRenderedFeatures3(
     jni.JObject rectF,
-    jni.JObject expression,
+    expression_.Expression expression,
     jni.JArray<jni.JString> strings,
   ) {
     return _queryRenderedFeatures3(
@@ -5428,10 +5448,10 @@ class MapLibreMap extends jni.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponent getLocationComponent()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getLocationComponent() {
+  locationcomponent_.LocationComponent getLocationComponent() {
     return _getLocationComponent(
             reference.pointer, _id_getLocationComponent as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const locationcomponent_.$LocationComponentType());
   }
 }
 
