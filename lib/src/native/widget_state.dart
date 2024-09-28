@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
@@ -11,6 +12,7 @@ import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 final class MapLibreMapStateNative extends State<MapLibreMap>
     implements MapController, pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
+  late final jni.MapLibreMap _jniMapLibreMap;
 
   MapOptions get _options => widget.options;
 
@@ -51,6 +53,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
+    _jniMapLibreMap = jni.MapLibreMapRegistry.Companion.get0(viewId);
 
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
@@ -60,6 +63,12 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _hostApi.updateOptions(getOptions());
     super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _jniMapLibreMap.release();
+    super.dispose();
   }
 
   @override
