@@ -16,7 +16,23 @@ output:
 #source_path:
 #  - 'android/src/main/java'
 classes:
-  - 'org.maplibre.android.maps.MapLibreMap'
+# https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
+#  - 'org.maplibre.android.maps.MapLibreMap'
+  - 'org.maplibre.android.attribution'
+  - 'org.maplibre.android.constants'
+  - 'org.maplibre.android.camera'
+  - 'org.maplibre.android.exceptions'
+  - 'org.maplibre.android.geometry'
+  - 'org.maplibre.android.http'
+  - 'org.maplibre.android.location'
+  - 'org.maplibre.android.log'
+  - 'org.maplibre.android.maps'
+  - 'org.maplibre.android.offline'
+  - 'org.maplibre.android.storage'
+  - 'org.maplibre.android.style'
+  - 'org.maplibre.android.text'
+  - 'org.maplibre.android.util'
+  - 'org.maplibre.android.utils'
 #  - 'org.maplibre.android.maps.MapView'
 #exclude:
 #  fields:
