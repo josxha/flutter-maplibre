@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/jni/org/maplibre/android/camera/_package.dart';
@@ -26,9 +25,11 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.MapLibreMap get _jniMapLibreMap =>
       _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.Companion.get0(_viewId);
 
+  // ignore: unused_element
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
+  // ignore: unused_element
   jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle1();
 
   @override
@@ -121,25 +122,18 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
-    final jniPoint = jni.PointF.new1(screenLocation.dx, screenLocation.dy);
-    final jniLatLng = _jniProjection.fromScreenLocation(jniPoint);
-    final position = jniLatLng.toPosition();
-    jniPoint.release();
-    jniLatLng.release();
-    return position;
+    final lngLat =
+    await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
+    return lngLat.toPosition();
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final jniLatLng = jni.LatLng.new1(
-      lngLat.lat.toDouble(),
+    final screenLocation = await _hostApi.toScreenLocation(
       lngLat.lng.toDouble(),
+      lngLat.lat.toDouble(),
     );
-    final jniPointF = _jniProjection.toScreenLocation(jniLatLng);
-    final offset = Offset(jniPointF.x, jniPointF.y);
-    jniPointF.release();
-    jniLatLng.release();
-    return offset;
+    return Offset(screenLocation.x, screenLocation.y);
   }
 
   @override
@@ -422,38 +416,31 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+      _hostApi.getMetersPerPixelAtLatitude(latitude);
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    final jniRegion = _jniProjection.getVisibleRegion();
-    final jniBounds = jniRegion.latLngBounds;
-    final bounds = LngLatBounds(
-      longitudeWest: jniBounds.longitudeWest,
-      longitudeEast: jniBounds.longitudeEast,
-      latitudeSouth: jniBounds.latitudeSouth,
-      latitudeNorth: jniBounds.latitudeNorth,
+    final bounds = await _hostApi.getVisibleRegion();
+    return LngLatBounds(
+      longitudeWest: bounds.longitudeWest,
+      longitudeEast: bounds.longitudeEast,
+      latitudeSouth: bounds.latitudeSouth,
+      latitudeNorth: bounds.latitudeNorth,
     );
-    jniBounds.release();
-    jniRegion.release();
-    return bounds;
   }
 
   @override
-  Future<void> removeLayer(String id) async =>
-      _jniStyle.removeLayer(id.toJString());
+  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
 
   @override
-  Future<void> removeSource(String id) async =>
-      _jniStyle.removeSource(id.toJString());
+  Future<void> removeSource(String id) => _hostApi.removeSource(id);
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) async =>
+  Future<void> addImage(String id, Uint8List bytes) =>
       _hostApi.addImage(id, bytes);
 
   @override
-  Future<void> removeImage(String id) async =>
-      _jniStyle.removeImage(id.toJString());
+  Future<void> removeImage(String id) => _hostApi.removeImage(id);
 
   @override
   Future<void> updateGeoJsonSource({

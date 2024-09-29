@@ -169,11 +169,6 @@ pitch: ${camera.pitch}'''),
             child: MapLibreMap(
               options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
               onMapCreated: (controller) => _controller = controller,
-              onEvent: (event) {
-                if (event case MapEventClick()) {
-                  print(_controller.toScreenLocation(event.point));
-                }
-              },
             ),
           ),
         ],
