@@ -77,6 +77,99 @@ class OnRenderModeChangedListener extends jni.JObject {
             reference.pointer, _id_onRenderModeChanged as jni.JMethodIDPtr, i)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnRenderModeChangedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onRenderModeChanged(I)V') {
+        _$impls[$p]!.onRenderModeChanged(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnRenderModeChangedListener.implement(
+    $OnRenderModeChangedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnRenderModeChangedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.OnRenderModeChangedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnRenderModeChangedListenerImpl {
+  factory $OnRenderModeChangedListenerImpl({
+    required void Function(int i) onRenderModeChanged,
+  }) = _$OnRenderModeChangedListenerImpl;
+
+  void onRenderModeChanged(int i);
+}
+
+class _$OnRenderModeChangedListenerImpl
+    implements $OnRenderModeChangedListenerImpl {
+  _$OnRenderModeChangedListenerImpl({
+    required void Function(int i) onRenderModeChanged,
+  }) : _onRenderModeChanged = onRenderModeChanged;
+
+  final void Function(int i) _onRenderModeChanged;
+
+  void onRenderModeChanged(int i) {
+    return _onRenderModeChanged(i);
+  }
 }
 
 final class $OnRenderModeChangedListenerType

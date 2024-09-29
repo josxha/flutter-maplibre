@@ -82,6 +82,96 @@ class MapLibreSurfaceView_OnSurfaceViewDetachedListener extends jni.JObject {
             reference.pointer, _id_onSurfaceViewDetached as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSurfaceViewDetached()V') {
+        _$impls[$p]!.onSurfaceViewDetached();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreSurfaceView_OnSurfaceViewDetachedListener.implement(
+    $MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreSurfaceView_OnSurfaceViewDetachedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView$OnSurfaceViewDetachedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl {
+  factory $MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl({
+    required void Function() onSurfaceViewDetached,
+  }) = _$MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl;
+
+  void onSurfaceViewDetached();
+}
+
+class _$MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl
+    implements $MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl {
+  _$MapLibreSurfaceView_OnSurfaceViewDetachedListenerImpl({
+    required void Function() onSurfaceViewDetached,
+  }) : _onSurfaceViewDetached = onSurfaceViewDetached;
+
+  final void Function() _onSurfaceViewDetached;
+
+  void onSurfaceViewDetached() {
+    return _onSurfaceViewDetached();
+  }
 }
 
 final class $MapLibreSurfaceView_OnSurfaceViewDetachedListenerType

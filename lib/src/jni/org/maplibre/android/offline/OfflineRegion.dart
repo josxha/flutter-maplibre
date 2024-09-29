@@ -130,6 +130,80 @@ class OfflineRegion_DownloadState extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $OfflineRegion_DownloadStateType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_DownloadStateImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_DownloadState.implement(
+    $OfflineRegion_DownloadStateImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_DownloadState.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$DownloadState',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_DownloadStateImpl {
+  factory $OfflineRegion_DownloadStateImpl() =
+      _$OfflineRegion_DownloadStateImpl;
+}
+
+class _$OfflineRegion_DownloadStateImpl
+    implements $OfflineRegion_DownloadStateImpl {
+  _$OfflineRegion_DownloadStateImpl();
 }
 
 final class $OfflineRegion_DownloadStateType
@@ -220,6 +294,111 @@ class OfflineRegion_OfflineRegionDeleteCallback extends jni.JObject {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_OfflineRegionDeleteCallbackImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDelete()V') {
+        _$impls[$p]!.onDelete();
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_OfflineRegionDeleteCallback.implement(
+    $OfflineRegion_OfflineRegionDeleteCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_OfflineRegionDeleteCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$OfflineRegionDeleteCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_OfflineRegionDeleteCallbackImpl {
+  factory $OfflineRegion_OfflineRegionDeleteCallbackImpl({
+    required void Function() onDelete,
+    required void Function(jni.JString string) onError,
+  }) = _$OfflineRegion_OfflineRegionDeleteCallbackImpl;
+
+  void onDelete();
+  void onError(jni.JString string);
+}
+
+class _$OfflineRegion_OfflineRegionDeleteCallbackImpl
+    implements $OfflineRegion_OfflineRegionDeleteCallbackImpl {
+  _$OfflineRegion_OfflineRegionDeleteCallbackImpl({
+    required void Function() onDelete,
+    required void Function(jni.JString string) onError,
+  })  : _onDelete = onDelete,
+        _onError = onError;
+
+  final void Function() _onDelete;
+  final void Function(jni.JString string) _onError;
+
+  void onDelete() {
+    return _onDelete();
+  }
+
+  void onError(jni.JString string) {
+    return _onError(string);
   }
 }
 
@@ -314,6 +493,111 @@ class OfflineRegion_OfflineRegionInvalidateCallback extends jni.JObject {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_OfflineRegionInvalidateCallbackImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onInvalidate()V') {
+        _$impls[$p]!.onInvalidate();
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_OfflineRegionInvalidateCallback.implement(
+    $OfflineRegion_OfflineRegionInvalidateCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_OfflineRegionInvalidateCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$OfflineRegionInvalidateCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_OfflineRegionInvalidateCallbackImpl {
+  factory $OfflineRegion_OfflineRegionInvalidateCallbackImpl({
+    required void Function() onInvalidate,
+    required void Function(jni.JString string) onError,
+  }) = _$OfflineRegion_OfflineRegionInvalidateCallbackImpl;
+
+  void onInvalidate();
+  void onError(jni.JString string);
+}
+
+class _$OfflineRegion_OfflineRegionInvalidateCallbackImpl
+    implements $OfflineRegion_OfflineRegionInvalidateCallbackImpl {
+  _$OfflineRegion_OfflineRegionInvalidateCallbackImpl({
+    required void Function() onInvalidate,
+    required void Function(jni.JString string) onError,
+  })  : _onInvalidate = onInvalidate,
+        _onError = onError;
+
+  final void Function() _onInvalidate;
+  final void Function(jni.JString string) _onError;
+
+  void onInvalidate() {
+    return _onInvalidate();
+  }
+
+  void onError(jni.JString string) {
+    return _onError(string);
   }
 }
 
@@ -435,6 +719,146 @@ class OfflineRegion_OfflineRegionObserver extends jni.JObject {
             _id_mapboxTileCountLimitExceeded as jni.JMethodIDPtr, j)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_OfflineRegionObserverImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onStatusChanged(Lorg/maplibre/android/offline/OfflineRegionStatus;)V') {
+        _$impls[$p]!.onStatusChanged(
+          $a[0].castTo(const offlineregionstatus_.$OfflineRegionStatusType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onError(Lorg/maplibre/android/offline/OfflineRegionError;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const offlineregionerror_.$OfflineRegionErrorType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'mapboxTileCountLimitExceeded(J)V') {
+        _$impls[$p]!.mapboxTileCountLimitExceeded(
+          $a[0]
+              .castTo(const jni.JLongType(), releaseOriginal: true)
+              .longValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_OfflineRegionObserver.implement(
+    $OfflineRegion_OfflineRegionObserverImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_OfflineRegionObserver.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$OfflineRegionObserver',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_OfflineRegionObserverImpl {
+  factory $OfflineRegion_OfflineRegionObserverImpl({
+    required void Function(
+            offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
+        onStatusChanged,
+    required void Function(
+            offlineregionerror_.OfflineRegionError offlineRegionError)
+        onError,
+    required void Function(int j) mapboxTileCountLimitExceeded,
+  }) = _$OfflineRegion_OfflineRegionObserverImpl;
+
+  void onStatusChanged(
+      offlineregionstatus_.OfflineRegionStatus offlineRegionStatus);
+  void onError(offlineregionerror_.OfflineRegionError offlineRegionError);
+  void mapboxTileCountLimitExceeded(int j);
+}
+
+class _$OfflineRegion_OfflineRegionObserverImpl
+    implements $OfflineRegion_OfflineRegionObserverImpl {
+  _$OfflineRegion_OfflineRegionObserverImpl({
+    required void Function(
+            offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
+        onStatusChanged,
+    required void Function(
+            offlineregionerror_.OfflineRegionError offlineRegionError)
+        onError,
+    required void Function(int j) mapboxTileCountLimitExceeded,
+  })  : _onStatusChanged = onStatusChanged,
+        _onError = onError,
+        _mapboxTileCountLimitExceeded = mapboxTileCountLimitExceeded;
+
+  final void Function(
+          offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
+      _onStatusChanged;
+  final void Function(offlineregionerror_.OfflineRegionError offlineRegionError)
+      _onError;
+  final void Function(int j) _mapboxTileCountLimitExceeded;
+
+  void onStatusChanged(
+      offlineregionstatus_.OfflineRegionStatus offlineRegionStatus) {
+    return _onStatusChanged(offlineRegionStatus);
+  }
+
+  void onError(offlineregionerror_.OfflineRegionError offlineRegionError) {
+    return _onError(offlineRegionError);
+  }
+
+  void mapboxTileCountLimitExceeded(int j) {
+    return _mapboxTileCountLimitExceeded(j);
+  }
 }
 
 final class $OfflineRegion_OfflineRegionObserverType
@@ -528,6 +952,120 @@ class OfflineRegion_OfflineRegionStatusCallback extends jni.JObject {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_OfflineRegionStatusCallbackImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onStatus(Lorg/maplibre/android/offline/OfflineRegionStatus;)V') {
+        _$impls[$p]!.onStatus(
+          $a[0].castTo(const offlineregionstatus_.$OfflineRegionStatusType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_OfflineRegionStatusCallback.implement(
+    $OfflineRegion_OfflineRegionStatusCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_OfflineRegionStatusCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$OfflineRegionStatusCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_OfflineRegionStatusCallbackImpl {
+  factory $OfflineRegion_OfflineRegionStatusCallbackImpl({
+    required void Function(
+            offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
+        onStatus,
+    required void Function(jni.JString string) onError,
+  }) = _$OfflineRegion_OfflineRegionStatusCallbackImpl;
+
+  void onStatus(offlineregionstatus_.OfflineRegionStatus offlineRegionStatus);
+  void onError(jni.JString string);
+}
+
+class _$OfflineRegion_OfflineRegionStatusCallbackImpl
+    implements $OfflineRegion_OfflineRegionStatusCallbackImpl {
+  _$OfflineRegion_OfflineRegionStatusCallbackImpl({
+    required void Function(
+            offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
+        onStatus,
+    required void Function(jni.JString string) onError,
+  })  : _onStatus = onStatus,
+        _onError = onError;
+
+  final void Function(
+      offlineregionstatus_.OfflineRegionStatus offlineRegionStatus) _onStatus;
+  final void Function(jni.JString string) _onError;
+
+  void onStatus(offlineregionstatus_.OfflineRegionStatus offlineRegionStatus) {
+    return _onStatus(offlineRegionStatus);
+  }
+
+  void onError(jni.JString string) {
+    return _onError(string);
   }
 }
 
@@ -624,6 +1162,114 @@ class OfflineRegion_OfflineRegionUpdateMetadataCallback extends jni.JObject {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onUpdate([B)V') {
+        _$impls[$p]!.onUpdate(
+          $a[0].castTo(const jni.JArrayType(jni.jbyteType()),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegion_OfflineRegionUpdateMetadataCallback.implement(
+    $OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegion_OfflineRegionUpdateMetadataCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegion$OfflineRegionUpdateMetadataCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl {
+  factory $OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl({
+    required void Function(jni.JArray<jni.jbyte> bs) onUpdate,
+    required void Function(jni.JString string) onError,
+  }) = _$OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl;
+
+  void onUpdate(jni.JArray<jni.jbyte> bs);
+  void onError(jni.JString string);
+}
+
+class _$OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl
+    implements $OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl {
+  _$OfflineRegion_OfflineRegionUpdateMetadataCallbackImpl({
+    required void Function(jni.JArray<jni.jbyte> bs) onUpdate,
+    required void Function(jni.JString string) onError,
+  })  : _onUpdate = onUpdate,
+        _onError = onError;
+
+  final void Function(jni.JArray<jni.jbyte> bs) _onUpdate;
+  final void Function(jni.JString string) _onError;
+
+  void onUpdate(jni.JArray<jni.jbyte> bs) {
+    return _onUpdate(bs);
+  }
+
+  void onError(jni.JString string) {
+    return _onError(string);
   }
 }
 

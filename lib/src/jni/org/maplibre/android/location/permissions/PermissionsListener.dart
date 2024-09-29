@@ -102,6 +102,114 @@ class PermissionsListener extends jni.JObject {
             _id_onPermissionResult as jni.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $PermissionsListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onExplanationNeeded(Ljava/util/List;)V') {
+        _$impls[$p]!.onExplanationNeeded(
+          $a[0].castTo(const jni.JListType(jni.JStringType()),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onPermissionResult(Z)V') {
+        _$impls[$p]!.onPermissionResult(
+          $a[0]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory PermissionsListener.implement(
+    $PermissionsListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = PermissionsListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.permissions.PermissionsListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $PermissionsListenerImpl {
+  factory $PermissionsListenerImpl({
+    required void Function(jni.JList<jni.JString> list) onExplanationNeeded,
+    required void Function(bool z) onPermissionResult,
+  }) = _$PermissionsListenerImpl;
+
+  void onExplanationNeeded(jni.JList<jni.JString> list);
+  void onPermissionResult(bool z);
+}
+
+class _$PermissionsListenerImpl implements $PermissionsListenerImpl {
+  _$PermissionsListenerImpl({
+    required void Function(jni.JList<jni.JString> list) onExplanationNeeded,
+    required void Function(bool z) onPermissionResult,
+  })  : _onExplanationNeeded = onExplanationNeeded,
+        _onPermissionResult = onPermissionResult;
+
+  final void Function(jni.JList<jni.JString> list) _onExplanationNeeded;
+  final void Function(bool z) _onPermissionResult;
+
+  void onExplanationNeeded(jni.JList<jni.JString> list) {
+    return _onExplanationNeeded(list);
+  }
+
+  void onPermissionResult(bool z) {
+    return _onPermissionResult(z);
+  }
 }
 
 final class $PermissionsListenerType extends jni.JObjType<PermissionsListener> {

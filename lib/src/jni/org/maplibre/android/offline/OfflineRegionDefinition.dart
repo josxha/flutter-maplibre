@@ -221,6 +221,181 @@ class OfflineRegionDefinition extends jni.JObject {
     return _getType(reference.pointer, _id_getType as jni.JMethodIDPtr)
         .object(const jni.JStringType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegionDefinitionImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'getBounds()Lorg/maplibre/android/geometry/LatLngBounds;') {
+        final $r = _$impls[$p]!.getBounds();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d == r'getStyleURL()Ljava/lang/String;') {
+        final $r = _$impls[$p]!.getStyleURL();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d == r'getMinZoom()D') {
+        final $r = _$impls[$p]!.getMinZoom();
+        return jni.JDouble($r).reference.toPointer();
+      }
+      if ($d == r'getMaxZoom()D') {
+        final $r = _$impls[$p]!.getMaxZoom();
+        return jni.JDouble($r).reference.toPointer();
+      }
+      if ($d == r'getPixelRatio()F') {
+        final $r = _$impls[$p]!.getPixelRatio();
+        return jni.JFloat($r).reference.toPointer();
+      }
+      if ($d == r'getIncludeIdeographs()Z') {
+        final $r = _$impls[$p]!.getIncludeIdeographs();
+        return jni.JBoolean($r).reference.toPointer();
+      }
+      if ($d == r'getType()Ljava/lang/String;') {
+        final $r = _$impls[$p]!.getType();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegionDefinition.implement(
+    $OfflineRegionDefinitionImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegionDefinition.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegionDefinition',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegionDefinitionImpl {
+  factory $OfflineRegionDefinitionImpl({
+    required latlngbounds_.LatLngBounds Function() getBounds,
+    required jni.JString Function() getStyleURL,
+    required double Function() getMinZoom,
+    required double Function() getMaxZoom,
+    required double Function() getPixelRatio,
+    required bool Function() getIncludeIdeographs,
+    required jni.JString Function() getType,
+  }) = _$OfflineRegionDefinitionImpl;
+
+  latlngbounds_.LatLngBounds getBounds();
+  jni.JString getStyleURL();
+  double getMinZoom();
+  double getMaxZoom();
+  double getPixelRatio();
+  bool getIncludeIdeographs();
+  jni.JString getType();
+}
+
+class _$OfflineRegionDefinitionImpl implements $OfflineRegionDefinitionImpl {
+  _$OfflineRegionDefinitionImpl({
+    required latlngbounds_.LatLngBounds Function() getBounds,
+    required jni.JString Function() getStyleURL,
+    required double Function() getMinZoom,
+    required double Function() getMaxZoom,
+    required double Function() getPixelRatio,
+    required bool Function() getIncludeIdeographs,
+    required jni.JString Function() getType,
+  })  : _getBounds = getBounds,
+        _getStyleURL = getStyleURL,
+        _getMinZoom = getMinZoom,
+        _getMaxZoom = getMaxZoom,
+        _getPixelRatio = getPixelRatio,
+        _getIncludeIdeographs = getIncludeIdeographs,
+        _getType = getType;
+
+  final latlngbounds_.LatLngBounds Function() _getBounds;
+  final jni.JString Function() _getStyleURL;
+  final double Function() _getMinZoom;
+  final double Function() _getMaxZoom;
+  final double Function() _getPixelRatio;
+  final bool Function() _getIncludeIdeographs;
+  final jni.JString Function() _getType;
+
+  latlngbounds_.LatLngBounds getBounds() {
+    return _getBounds();
+  }
+
+  jni.JString getStyleURL() {
+    return _getStyleURL();
+  }
+
+  double getMinZoom() {
+    return _getMinZoom();
+  }
+
+  double getMaxZoom() {
+    return _getMaxZoom();
+  }
+
+  double getPixelRatio() {
+    return _getPixelRatio();
+  }
+
+  bool getIncludeIdeographs() {
+    return _getIncludeIdeographs();
+  }
+
+  jni.JString getType() {
+    return _getType();
+  }
 }
 
 final class $OfflineRegionDefinitionType

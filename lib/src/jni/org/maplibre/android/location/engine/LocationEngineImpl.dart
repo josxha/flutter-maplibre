@@ -251,6 +251,263 @@ class LocationEngineImpl<$T extends jni.JObject> extends jni.JObject {
             pendingIntent.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $LocationEngineImplImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'createListener(Lorg/maplibre/android/location/engine/LocationEngineCallback;)Ljava/lang/Object;') {
+        final $r = _$impls[$p]!.createListener(
+          $a[0].castTo(
+              const locationenginecallback_.$LocationEngineCallbackType(
+                  locationengineresult_.$LocationEngineResultType()),
+              releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'getLastLocation(Lorg/maplibre/android/location/engine/LocationEngineCallback;)V') {
+        _$impls[$p]!.getLastLocation(
+          $a[0].castTo(
+              const locationenginecallback_.$LocationEngineCallbackType(
+                  locationengineresult_.$LocationEngineResultType()),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'requestLocationUpdates(Lorg/maplibre/android/location/engine/LocationEngineRequest;Ljava/lang/Object;Landroid/os/Looper;)V') {
+        _$impls[$p]!.requestLocationUpdates(
+          $a[0].castTo(
+              const locationenginerequest_.$LocationEngineRequestType(),
+              releaseOriginal: true),
+          $a[1].castTo(_$impls[$p]!.T, releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'requestLocationUpdates(Lorg/maplibre/android/location/engine/LocationEngineRequest;Landroid/app/PendingIntent;)V') {
+        _$impls[$p]!.requestLocationUpdates1(
+          $a[0].castTo(
+              const locationenginerequest_.$LocationEngineRequestType(),
+              releaseOriginal: true),
+          $a[1].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'removeLocationUpdates(Ljava/lang/Object;)V') {
+        _$impls[$p]!.removeLocationUpdates(
+          $a[0].castTo(_$impls[$p]!.T, releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'removeLocationUpdates(Landroid/app/PendingIntent;)V') {
+        _$impls[$p]!.removeLocationUpdates1(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory LocationEngineImpl.implement(
+    $LocationEngineImplImpl<$T> $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = LocationEngineImpl.fromReference(
+      $impl.T,
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.engine.LocationEngineImpl',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $LocationEngineImplImpl<$T extends jni.JObject> {
+  factory $LocationEngineImplImpl({
+    required jni.JObjType<$T> T,
+    required $T Function(
+            locationenginecallback_.LocationEngineCallback<
+                    locationengineresult_.LocationEngineResult>
+                locationEngineCallback)
+        createListener,
+    required void Function(
+            locationenginecallback_.LocationEngineCallback<
+                    locationengineresult_.LocationEngineResult>
+                locationEngineCallback)
+        getLastLocation,
+    required void Function(
+            locationenginerequest_.LocationEngineRequest locationEngineRequest,
+            $T object,
+            jni.JObject looper)
+        requestLocationUpdates,
+    required void Function(
+            locationenginerequest_.LocationEngineRequest locationEngineRequest,
+            jni.JObject pendingIntent)
+        requestLocationUpdates1,
+    required void Function($T object) removeLocationUpdates,
+    required void Function(jni.JObject pendingIntent) removeLocationUpdates1,
+  }) = _$LocationEngineImplImpl;
+
+  jni.JObjType<$T> get T;
+
+  $T createListener(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback);
+  void getLastLocation(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback);
+  void requestLocationUpdates(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      $T object,
+      jni.JObject looper);
+  void requestLocationUpdates1(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      jni.JObject pendingIntent);
+  void removeLocationUpdates($T object);
+  void removeLocationUpdates1(jni.JObject pendingIntent);
+}
+
+class _$LocationEngineImplImpl<$T extends jni.JObject>
+    implements $LocationEngineImplImpl<$T> {
+  _$LocationEngineImplImpl({
+    required this.T,
+    required $T Function(
+            locationenginecallback_.LocationEngineCallback<
+                    locationengineresult_.LocationEngineResult>
+                locationEngineCallback)
+        createListener,
+    required void Function(
+            locationenginecallback_.LocationEngineCallback<
+                    locationengineresult_.LocationEngineResult>
+                locationEngineCallback)
+        getLastLocation,
+    required void Function(
+            locationenginerequest_.LocationEngineRequest locationEngineRequest,
+            $T object,
+            jni.JObject looper)
+        requestLocationUpdates,
+    required void Function(
+            locationenginerequest_.LocationEngineRequest locationEngineRequest,
+            jni.JObject pendingIntent)
+        requestLocationUpdates1,
+    required void Function($T object) removeLocationUpdates,
+    required void Function(jni.JObject pendingIntent) removeLocationUpdates1,
+  })  : _createListener = createListener,
+        _getLastLocation = getLastLocation,
+        _requestLocationUpdates = requestLocationUpdates,
+        _requestLocationUpdates1 = requestLocationUpdates1,
+        _removeLocationUpdates = removeLocationUpdates,
+        _removeLocationUpdates1 = removeLocationUpdates1;
+
+  @override
+  final jni.JObjType<$T> T;
+
+  final $T Function(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback) _createListener;
+  final void Function(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback) _getLastLocation;
+  final void Function(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      $T object,
+      jni.JObject looper) _requestLocationUpdates;
+  final void Function(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      jni.JObject pendingIntent) _requestLocationUpdates1;
+  final void Function($T object) _removeLocationUpdates;
+  final void Function(jni.JObject pendingIntent) _removeLocationUpdates1;
+
+  $T createListener(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback) {
+    return _createListener(locationEngineCallback);
+  }
+
+  void getLastLocation(
+      locationenginecallback_
+          .LocationEngineCallback<locationengineresult_.LocationEngineResult>
+          locationEngineCallback) {
+    return _getLastLocation(locationEngineCallback);
+  }
+
+  void requestLocationUpdates(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      $T object,
+      jni.JObject looper) {
+    return _requestLocationUpdates(locationEngineRequest, object, looper);
+  }
+
+  void requestLocationUpdates1(
+      locationenginerequest_.LocationEngineRequest locationEngineRequest,
+      jni.JObject pendingIntent) {
+    return _requestLocationUpdates1(locationEngineRequest, pendingIntent);
+  }
+
+  void removeLocationUpdates($T object) {
+    return _removeLocationUpdates(object);
+  }
+
+  void removeLocationUpdates1(jni.JObject pendingIntent) {
+    return _removeLocationUpdates1(pendingIntent);
+  }
 }
 
 final class $LocationEngineImplType<$T extends jni.JObject>

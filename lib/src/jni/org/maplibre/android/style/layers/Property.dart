@@ -54,6 +54,78 @@ class Property_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ANCHOR.implement(
+    $Property_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ANCHORImpl {
+  factory $Property_ANCHORImpl() = _$Property_ANCHORImpl;
+}
+
+class _$Property_ANCHORImpl implements $Property_ANCHORImpl {
+  _$Property_ANCHORImpl();
 }
 
 final class $Property_ANCHORType extends jni.JObjType<Property_ANCHOR> {
@@ -97,6 +169,80 @@ class Property_CIRCLE_PITCH_ALIGNMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_CIRCLE_PITCH_ALIGNMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_CIRCLE_PITCH_ALIGNMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_CIRCLE_PITCH_ALIGNMENT.implement(
+    $Property_CIRCLE_PITCH_ALIGNMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_CIRCLE_PITCH_ALIGNMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$CIRCLE_PITCH_ALIGNMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_CIRCLE_PITCH_ALIGNMENTImpl {
+  factory $Property_CIRCLE_PITCH_ALIGNMENTImpl() =
+      _$Property_CIRCLE_PITCH_ALIGNMENTImpl;
+}
+
+class _$Property_CIRCLE_PITCH_ALIGNMENTImpl
+    implements $Property_CIRCLE_PITCH_ALIGNMENTImpl {
+  _$Property_CIRCLE_PITCH_ALIGNMENTImpl();
 }
 
 final class $Property_CIRCLE_PITCH_ALIGNMENTType
@@ -141,6 +287,80 @@ class Property_CIRCLE_PITCH_SCALE extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_CIRCLE_PITCH_SCALEType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_CIRCLE_PITCH_SCALEImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_CIRCLE_PITCH_SCALE.implement(
+    $Property_CIRCLE_PITCH_SCALEImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_CIRCLE_PITCH_SCALE.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$CIRCLE_PITCH_SCALE',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_CIRCLE_PITCH_SCALEImpl {
+  factory $Property_CIRCLE_PITCH_SCALEImpl() =
+      _$Property_CIRCLE_PITCH_SCALEImpl;
+}
+
+class _$Property_CIRCLE_PITCH_SCALEImpl
+    implements $Property_CIRCLE_PITCH_SCALEImpl {
+  _$Property_CIRCLE_PITCH_SCALEImpl();
 }
 
 final class $Property_CIRCLE_PITCH_SCALEType
@@ -185,6 +405,80 @@ class Property_CIRCLE_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_CIRCLE_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_CIRCLE_TRANSLATE_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_CIRCLE_TRANSLATE_ANCHOR.implement(
+    $Property_CIRCLE_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_CIRCLE_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$CIRCLE_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_CIRCLE_TRANSLATE_ANCHORImpl {
+  factory $Property_CIRCLE_TRANSLATE_ANCHORImpl() =
+      _$Property_CIRCLE_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_CIRCLE_TRANSLATE_ANCHORImpl
+    implements $Property_CIRCLE_TRANSLATE_ANCHORImpl {
+  _$Property_CIRCLE_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_CIRCLE_TRANSLATE_ANCHORType
@@ -230,6 +524,81 @@ class Property_FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_FILL_EXTRUSION_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.implement(
+    $Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$FILL_EXTRUSION_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl {
+  factory $Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl() =
+      _$Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl
+    implements $Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl {
+  _$Property_FILL_EXTRUSION_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_FILL_EXTRUSION_TRANSLATE_ANCHORType
@@ -276,6 +645,80 @@ class Property_FILL_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_FILL_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_FILL_TRANSLATE_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_FILL_TRANSLATE_ANCHOR.implement(
+    $Property_FILL_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_FILL_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$FILL_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_FILL_TRANSLATE_ANCHORImpl {
+  factory $Property_FILL_TRANSLATE_ANCHORImpl() =
+      _$Property_FILL_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_FILL_TRANSLATE_ANCHORImpl
+    implements $Property_FILL_TRANSLATE_ANCHORImpl {
+  _$Property_FILL_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_FILL_TRANSLATE_ANCHORType
@@ -320,6 +763,81 @@ class Property_HILLSHADE_ILLUMINATION_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_HILLSHADE_ILLUMINATION_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_HILLSHADE_ILLUMINATION_ANCHORImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_HILLSHADE_ILLUMINATION_ANCHOR.implement(
+    $Property_HILLSHADE_ILLUMINATION_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$HILLSHADE_ILLUMINATION_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_HILLSHADE_ILLUMINATION_ANCHORImpl {
+  factory $Property_HILLSHADE_ILLUMINATION_ANCHORImpl() =
+      _$Property_HILLSHADE_ILLUMINATION_ANCHORImpl;
+}
+
+class _$Property_HILLSHADE_ILLUMINATION_ANCHORImpl
+    implements $Property_HILLSHADE_ILLUMINATION_ANCHORImpl {
+  _$Property_HILLSHADE_ILLUMINATION_ANCHORImpl();
 }
 
 final class $Property_HILLSHADE_ILLUMINATION_ANCHORType
@@ -365,6 +883,78 @@ class Property_ICON_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ICON_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ICON_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ICON_ANCHOR.implement(
+    $Property_ICON_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ICON_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ICON_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ICON_ANCHORImpl {
+  factory $Property_ICON_ANCHORImpl() = _$Property_ICON_ANCHORImpl;
+}
+
+class _$Property_ICON_ANCHORImpl implements $Property_ICON_ANCHORImpl {
+  _$Property_ICON_ANCHORImpl();
 }
 
 final class $Property_ICON_ANCHORType
@@ -409,6 +999,80 @@ class Property_ICON_PITCH_ALIGNMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ICON_PITCH_ALIGNMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ICON_PITCH_ALIGNMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ICON_PITCH_ALIGNMENT.implement(
+    $Property_ICON_PITCH_ALIGNMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ICON_PITCH_ALIGNMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ICON_PITCH_ALIGNMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ICON_PITCH_ALIGNMENTImpl {
+  factory $Property_ICON_PITCH_ALIGNMENTImpl() =
+      _$Property_ICON_PITCH_ALIGNMENTImpl;
+}
+
+class _$Property_ICON_PITCH_ALIGNMENTImpl
+    implements $Property_ICON_PITCH_ALIGNMENTImpl {
+  _$Property_ICON_PITCH_ALIGNMENTImpl();
 }
 
 final class $Property_ICON_PITCH_ALIGNMENTType
@@ -453,6 +1117,80 @@ class Property_ICON_ROTATION_ALIGNMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ICON_ROTATION_ALIGNMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ICON_ROTATION_ALIGNMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ICON_ROTATION_ALIGNMENT.implement(
+    $Property_ICON_ROTATION_ALIGNMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ICON_ROTATION_ALIGNMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ICON_ROTATION_ALIGNMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ICON_ROTATION_ALIGNMENTImpl {
+  factory $Property_ICON_ROTATION_ALIGNMENTImpl() =
+      _$Property_ICON_ROTATION_ALIGNMENTImpl;
+}
+
+class _$Property_ICON_ROTATION_ALIGNMENTImpl
+    implements $Property_ICON_ROTATION_ALIGNMENTImpl {
+  _$Property_ICON_ROTATION_ALIGNMENTImpl();
 }
 
 final class $Property_ICON_ROTATION_ALIGNMENTType
@@ -497,6 +1235,78 @@ class Property_ICON_TEXT_FIT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ICON_TEXT_FITType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ICON_TEXT_FITImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ICON_TEXT_FIT.implement(
+    $Property_ICON_TEXT_FITImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ICON_TEXT_FIT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ICON_TEXT_FIT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ICON_TEXT_FITImpl {
+  factory $Property_ICON_TEXT_FITImpl() = _$Property_ICON_TEXT_FITImpl;
+}
+
+class _$Property_ICON_TEXT_FITImpl implements $Property_ICON_TEXT_FITImpl {
+  _$Property_ICON_TEXT_FITImpl();
 }
 
 final class $Property_ICON_TEXT_FITType
@@ -541,6 +1351,80 @@ class Property_ICON_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_ICON_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_ICON_TRANSLATE_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_ICON_TRANSLATE_ANCHOR.implement(
+    $Property_ICON_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_ICON_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$ICON_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_ICON_TRANSLATE_ANCHORImpl {
+  factory $Property_ICON_TRANSLATE_ANCHORImpl() =
+      _$Property_ICON_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_ICON_TRANSLATE_ANCHORImpl
+    implements $Property_ICON_TRANSLATE_ANCHORImpl {
+  _$Property_ICON_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_ICON_TRANSLATE_ANCHORType
@@ -585,6 +1469,78 @@ class Property_LINE_CAP extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_LINE_CAPType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_LINE_CAPImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_LINE_CAP.implement(
+    $Property_LINE_CAPImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_LINE_CAP.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$LINE_CAP',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_LINE_CAPImpl {
+  factory $Property_LINE_CAPImpl() = _$Property_LINE_CAPImpl;
+}
+
+class _$Property_LINE_CAPImpl implements $Property_LINE_CAPImpl {
+  _$Property_LINE_CAPImpl();
 }
 
 final class $Property_LINE_CAPType extends jni.JObjType<Property_LINE_CAP> {
@@ -628,6 +1584,78 @@ class Property_LINE_JOIN extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_LINE_JOINType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_LINE_JOINImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_LINE_JOIN.implement(
+    $Property_LINE_JOINImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_LINE_JOIN.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$LINE_JOIN',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_LINE_JOINImpl {
+  factory $Property_LINE_JOINImpl() = _$Property_LINE_JOINImpl;
+}
+
+class _$Property_LINE_JOINImpl implements $Property_LINE_JOINImpl {
+  _$Property_LINE_JOINImpl();
 }
 
 final class $Property_LINE_JOINType extends jni.JObjType<Property_LINE_JOIN> {
@@ -671,6 +1699,80 @@ class Property_LINE_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_LINE_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_LINE_TRANSLATE_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_LINE_TRANSLATE_ANCHOR.implement(
+    $Property_LINE_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_LINE_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$LINE_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_LINE_TRANSLATE_ANCHORImpl {
+  factory $Property_LINE_TRANSLATE_ANCHORImpl() =
+      _$Property_LINE_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_LINE_TRANSLATE_ANCHORImpl
+    implements $Property_LINE_TRANSLATE_ANCHORImpl {
+  _$Property_LINE_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_LINE_TRANSLATE_ANCHORType
@@ -715,6 +1817,79 @@ class Property_RASTER_RESAMPLING extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_RASTER_RESAMPLINGType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_RASTER_RESAMPLINGImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_RASTER_RESAMPLING.implement(
+    $Property_RASTER_RESAMPLINGImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_RASTER_RESAMPLING.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$RASTER_RESAMPLING',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_RASTER_RESAMPLINGImpl {
+  factory $Property_RASTER_RESAMPLINGImpl() = _$Property_RASTER_RESAMPLINGImpl;
+}
+
+class _$Property_RASTER_RESAMPLINGImpl
+    implements $Property_RASTER_RESAMPLINGImpl {
+  _$Property_RASTER_RESAMPLINGImpl();
 }
 
 final class $Property_RASTER_RESAMPLINGType
@@ -759,6 +1934,79 @@ class Property_SYMBOL_PLACEMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_SYMBOL_PLACEMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_SYMBOL_PLACEMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_SYMBOL_PLACEMENT.implement(
+    $Property_SYMBOL_PLACEMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_SYMBOL_PLACEMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$SYMBOL_PLACEMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_SYMBOL_PLACEMENTImpl {
+  factory $Property_SYMBOL_PLACEMENTImpl() = _$Property_SYMBOL_PLACEMENTImpl;
+}
+
+class _$Property_SYMBOL_PLACEMENTImpl
+    implements $Property_SYMBOL_PLACEMENTImpl {
+  _$Property_SYMBOL_PLACEMENTImpl();
 }
 
 final class $Property_SYMBOL_PLACEMENTType
@@ -803,6 +2051,78 @@ class Property_SYMBOL_Z_ORDER extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_SYMBOL_Z_ORDERType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_SYMBOL_Z_ORDERImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_SYMBOL_Z_ORDER.implement(
+    $Property_SYMBOL_Z_ORDERImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_SYMBOL_Z_ORDER.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$SYMBOL_Z_ORDER',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_SYMBOL_Z_ORDERImpl {
+  factory $Property_SYMBOL_Z_ORDERImpl() = _$Property_SYMBOL_Z_ORDERImpl;
+}
+
+class _$Property_SYMBOL_Z_ORDERImpl implements $Property_SYMBOL_Z_ORDERImpl {
+  _$Property_SYMBOL_Z_ORDERImpl();
 }
 
 final class $Property_SYMBOL_Z_ORDERType
@@ -847,6 +2167,78 @@ class Property_TEXT_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_ANCHOR.implement(
+    $Property_TEXT_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_ANCHORImpl {
+  factory $Property_TEXT_ANCHORImpl() = _$Property_TEXT_ANCHORImpl;
+}
+
+class _$Property_TEXT_ANCHORImpl implements $Property_TEXT_ANCHORImpl {
+  _$Property_TEXT_ANCHORImpl();
 }
 
 final class $Property_TEXT_ANCHORType
@@ -891,6 +2283,78 @@ class Property_TEXT_JUSTIFY extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_JUSTIFYType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_JUSTIFYImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_JUSTIFY.implement(
+    $Property_TEXT_JUSTIFYImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_JUSTIFY.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_JUSTIFY',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_JUSTIFYImpl {
+  factory $Property_TEXT_JUSTIFYImpl() = _$Property_TEXT_JUSTIFYImpl;
+}
+
+class _$Property_TEXT_JUSTIFYImpl implements $Property_TEXT_JUSTIFYImpl {
+  _$Property_TEXT_JUSTIFYImpl();
 }
 
 final class $Property_TEXT_JUSTIFYType
@@ -935,6 +2399,80 @@ class Property_TEXT_PITCH_ALIGNMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_PITCH_ALIGNMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_PITCH_ALIGNMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_PITCH_ALIGNMENT.implement(
+    $Property_TEXT_PITCH_ALIGNMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_PITCH_ALIGNMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_PITCH_ALIGNMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_PITCH_ALIGNMENTImpl {
+  factory $Property_TEXT_PITCH_ALIGNMENTImpl() =
+      _$Property_TEXT_PITCH_ALIGNMENTImpl;
+}
+
+class _$Property_TEXT_PITCH_ALIGNMENTImpl
+    implements $Property_TEXT_PITCH_ALIGNMENTImpl {
+  _$Property_TEXT_PITCH_ALIGNMENTImpl();
 }
 
 final class $Property_TEXT_PITCH_ALIGNMENTType
@@ -979,6 +2517,80 @@ class Property_TEXT_ROTATION_ALIGNMENT extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_ROTATION_ALIGNMENTType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_ROTATION_ALIGNMENTImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_ROTATION_ALIGNMENT.implement(
+    $Property_TEXT_ROTATION_ALIGNMENTImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_ROTATION_ALIGNMENT.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_ROTATION_ALIGNMENT',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_ROTATION_ALIGNMENTImpl {
+  factory $Property_TEXT_ROTATION_ALIGNMENTImpl() =
+      _$Property_TEXT_ROTATION_ALIGNMENTImpl;
+}
+
+class _$Property_TEXT_ROTATION_ALIGNMENTImpl
+    implements $Property_TEXT_ROTATION_ALIGNMENTImpl {
+  _$Property_TEXT_ROTATION_ALIGNMENTImpl();
 }
 
 final class $Property_TEXT_ROTATION_ALIGNMENTType
@@ -1023,6 +2635,78 @@ class Property_TEXT_TRANSFORM extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_TRANSFORMType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_TRANSFORMImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_TRANSFORM.implement(
+    $Property_TEXT_TRANSFORMImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_TRANSFORM.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_TRANSFORM',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_TRANSFORMImpl {
+  factory $Property_TEXT_TRANSFORMImpl() = _$Property_TEXT_TRANSFORMImpl;
+}
+
+class _$Property_TEXT_TRANSFORMImpl implements $Property_TEXT_TRANSFORMImpl {
+  _$Property_TEXT_TRANSFORMImpl();
 }
 
 final class $Property_TEXT_TRANSFORMType
@@ -1067,6 +2751,80 @@ class Property_TEXT_TRANSLATE_ANCHOR extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_TRANSLATE_ANCHORType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_TRANSLATE_ANCHORImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_TRANSLATE_ANCHOR.implement(
+    $Property_TEXT_TRANSLATE_ANCHORImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_TRANSLATE_ANCHOR.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_TRANSLATE_ANCHOR',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_TRANSLATE_ANCHORImpl {
+  factory $Property_TEXT_TRANSLATE_ANCHORImpl() =
+      _$Property_TEXT_TRANSLATE_ANCHORImpl;
+}
+
+class _$Property_TEXT_TRANSLATE_ANCHORImpl
+    implements $Property_TEXT_TRANSLATE_ANCHORImpl {
+  _$Property_TEXT_TRANSLATE_ANCHORImpl();
 }
 
 final class $Property_TEXT_TRANSLATE_ANCHORType
@@ -1111,6 +2869,79 @@ class Property_TEXT_WRITING_MODE extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_TEXT_WRITING_MODEType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_TEXT_WRITING_MODEImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_TEXT_WRITING_MODE.implement(
+    $Property_TEXT_WRITING_MODEImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_TEXT_WRITING_MODE.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$TEXT_WRITING_MODE',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_TEXT_WRITING_MODEImpl {
+  factory $Property_TEXT_WRITING_MODEImpl() = _$Property_TEXT_WRITING_MODEImpl;
+}
+
+class _$Property_TEXT_WRITING_MODEImpl
+    implements $Property_TEXT_WRITING_MODEImpl {
+  _$Property_TEXT_WRITING_MODEImpl();
 }
 
 final class $Property_TEXT_WRITING_MODEType
@@ -1155,6 +2986,78 @@ class Property_VISIBILITY extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Property_VISIBILITYType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Property_VISIBILITYImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Property_VISIBILITY.implement(
+    $Property_VISIBILITYImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Property_VISIBILITY.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.layers.Property$VISIBILITY',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Property_VISIBILITYImpl {
+  factory $Property_VISIBILITYImpl() = _$Property_VISIBILITYImpl;
+}
+
+class _$Property_VISIBILITYImpl implements $Property_VISIBILITYImpl {
+  _$Property_VISIBILITYImpl();
 }
 
 final class $Property_VISIBILITYType extends jni.JObjType<Property_VISIBILITY> {

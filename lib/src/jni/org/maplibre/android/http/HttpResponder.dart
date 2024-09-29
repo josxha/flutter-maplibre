@@ -138,6 +138,168 @@ class HttpResponder extends jni.JObject {
             string.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $HttpResponderImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onResponse(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)V') {
+        _$impls[$p]!.onResponse(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[3].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[4].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[5].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[6].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[7].castTo(const jni.JArrayType(jni.jbyteType()),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'handleFailure(ILjava/lang/String;)V') {
+        _$impls[$p]!.handleFailure(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory HttpResponder.implement(
+    $HttpResponderImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = HttpResponder.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.http.HttpResponder',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $HttpResponderImpl {
+  factory $HttpResponderImpl({
+    required void Function(
+            int i,
+            jni.JString string,
+            jni.JString string1,
+            jni.JString string2,
+            jni.JString string3,
+            jni.JString string4,
+            jni.JString string5,
+            jni.JArray<jni.jbyte> bs)
+        onResponse,
+    required void Function(int i, jni.JString string) handleFailure,
+  }) = _$HttpResponderImpl;
+
+  void onResponse(
+      int i,
+      jni.JString string,
+      jni.JString string1,
+      jni.JString string2,
+      jni.JString string3,
+      jni.JString string4,
+      jni.JString string5,
+      jni.JArray<jni.jbyte> bs);
+  void handleFailure(int i, jni.JString string);
+}
+
+class _$HttpResponderImpl implements $HttpResponderImpl {
+  _$HttpResponderImpl({
+    required void Function(
+            int i,
+            jni.JString string,
+            jni.JString string1,
+            jni.JString string2,
+            jni.JString string3,
+            jni.JString string4,
+            jni.JString string5,
+            jni.JArray<jni.jbyte> bs)
+        onResponse,
+    required void Function(int i, jni.JString string) handleFailure,
+  })  : _onResponse = onResponse,
+        _handleFailure = handleFailure;
+
+  final void Function(
+      int i,
+      jni.JString string,
+      jni.JString string1,
+      jni.JString string2,
+      jni.JString string3,
+      jni.JString string4,
+      jni.JString string5,
+      jni.JArray<jni.jbyte> bs) _onResponse;
+  final void Function(int i, jni.JString string) _handleFailure;
+
+  void onResponse(
+      int i,
+      jni.JString string,
+      jni.JString string1,
+      jni.JString string2,
+      jni.JString string3,
+      jni.JString string4,
+      jni.JString string5,
+      jni.JArray<jni.jbyte> bs) {
+    return _onResponse(
+        i, string, string1, string2, string3, string4, string5, bs);
+  }
+
+  void handleFailure(int i, jni.JString string) {
+    return _handleFailure(i, string);
+  }
 }
 
 final class $HttpResponderType extends jni.JObjType<HttpResponder> {

@@ -85,6 +85,99 @@ class MapView_OnCameraDidChangeListener extends jni.JObject {
             _id_onCameraDidChange as jni.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnCameraDidChangeListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraDidChange(Z)V') {
+        _$impls[$p]!.onCameraDidChange(
+          $a[0]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnCameraDidChangeListener.implement(
+    $MapView_OnCameraDidChangeListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnCameraDidChangeListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnCameraDidChangeListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnCameraDidChangeListenerImpl {
+  factory $MapView_OnCameraDidChangeListenerImpl({
+    required void Function(bool z) onCameraDidChange,
+  }) = _$MapView_OnCameraDidChangeListenerImpl;
+
+  void onCameraDidChange(bool z);
+}
+
+class _$MapView_OnCameraDidChangeListenerImpl
+    implements $MapView_OnCameraDidChangeListenerImpl {
+  _$MapView_OnCameraDidChangeListenerImpl({
+    required void Function(bool z) onCameraDidChange,
+  }) : _onCameraDidChange = onCameraDidChange;
+
+  final void Function(bool z) _onCameraDidChange;
+
+  void onCameraDidChange(bool z) {
+    return _onCameraDidChange(z);
+  }
 }
 
 final class $MapView_OnCameraDidChangeListenerType
@@ -152,6 +245,95 @@ class MapView_OnCameraIsChangingListener extends jni.JObject {
             reference.pointer, _id_onCameraIsChanging as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnCameraIsChangingListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraIsChanging()V') {
+        _$impls[$p]!.onCameraIsChanging();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnCameraIsChangingListener.implement(
+    $MapView_OnCameraIsChangingListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnCameraIsChangingListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnCameraIsChangingListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnCameraIsChangingListenerImpl {
+  factory $MapView_OnCameraIsChangingListenerImpl({
+    required void Function() onCameraIsChanging,
+  }) = _$MapView_OnCameraIsChangingListenerImpl;
+
+  void onCameraIsChanging();
+}
+
+class _$MapView_OnCameraIsChangingListenerImpl
+    implements $MapView_OnCameraIsChangingListenerImpl {
+  _$MapView_OnCameraIsChangingListenerImpl({
+    required void Function() onCameraIsChanging,
+  }) : _onCameraIsChanging = onCameraIsChanging;
+
+  final void Function() _onCameraIsChanging;
+
+  void onCameraIsChanging() {
+    return _onCameraIsChanging();
+  }
 }
 
 final class $MapView_OnCameraIsChangingListenerType
@@ -218,6 +400,99 @@ class MapView_OnCameraWillChangeListener extends jni.JObject {
     _onCameraWillChange(reference.pointer,
             _id_onCameraWillChange as jni.JMethodIDPtr, z ? 1 : 0)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnCameraWillChangeListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraWillChange(Z)V') {
+        _$impls[$p]!.onCameraWillChange(
+          $a[0]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnCameraWillChangeListener.implement(
+    $MapView_OnCameraWillChangeListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnCameraWillChangeListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnCameraWillChangeListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnCameraWillChangeListenerImpl {
+  factory $MapView_OnCameraWillChangeListenerImpl({
+    required void Function(bool z) onCameraWillChange,
+  }) = _$MapView_OnCameraWillChangeListenerImpl;
+
+  void onCameraWillChange(bool z);
+}
+
+class _$MapView_OnCameraWillChangeListenerImpl
+    implements $MapView_OnCameraWillChangeListenerImpl {
+  _$MapView_OnCameraWillChangeListenerImpl({
+    required void Function(bool z) onCameraWillChange,
+  }) : _onCameraWillChange = onCameraWillChange;
+
+  final void Function(bool z) _onCameraWillChange;
+
+  void onCameraWillChange(bool z) {
+    return _onCameraWillChange(z);
   }
 }
 
@@ -290,6 +565,98 @@ class MapView_OnCanRemoveUnusedStyleImageListener extends jni.JObject {
             string.reference.pointer)
         .boolean;
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnCanRemoveUnusedStyleImageListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCanRemoveUnusedStyleImage(Ljava/lang/String;)Z') {
+        final $r = _$impls[$p]!.onCanRemoveUnusedStyleImage(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.JBoolean($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnCanRemoveUnusedStyleImageListener.implement(
+    $MapView_OnCanRemoveUnusedStyleImageListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnCanRemoveUnusedStyleImageListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnCanRemoveUnusedStyleImageListenerImpl {
+  factory $MapView_OnCanRemoveUnusedStyleImageListenerImpl({
+    required bool Function(jni.JString string) onCanRemoveUnusedStyleImage,
+  }) = _$MapView_OnCanRemoveUnusedStyleImageListenerImpl;
+
+  bool onCanRemoveUnusedStyleImage(jni.JString string);
+}
+
+class _$MapView_OnCanRemoveUnusedStyleImageListenerImpl
+    implements $MapView_OnCanRemoveUnusedStyleImageListenerImpl {
+  _$MapView_OnCanRemoveUnusedStyleImageListenerImpl({
+    required bool Function(jni.JString string) onCanRemoveUnusedStyleImage,
+  }) : _onCanRemoveUnusedStyleImage = onCanRemoveUnusedStyleImage;
+
+  final bool Function(jni.JString string) _onCanRemoveUnusedStyleImage;
+
+  bool onCanRemoveUnusedStyleImage(jni.JString string) {
+    return _onCanRemoveUnusedStyleImage(string);
+  }
 }
 
 final class $MapView_OnCanRemoveUnusedStyleImageListenerType
@@ -358,6 +725,95 @@ class MapView_OnDidBecomeIdleListener extends jni.JObject {
   void onDidBecomeIdle() {
     _onDidBecomeIdle(reference.pointer, _id_onDidBecomeIdle as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidBecomeIdleListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidBecomeIdle()V') {
+        _$impls[$p]!.onDidBecomeIdle();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidBecomeIdleListener.implement(
+    $MapView_OnDidBecomeIdleListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidBecomeIdleListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidBecomeIdleListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidBecomeIdleListenerImpl {
+  factory $MapView_OnDidBecomeIdleListenerImpl({
+    required void Function() onDidBecomeIdle,
+  }) = _$MapView_OnDidBecomeIdleListenerImpl;
+
+  void onDidBecomeIdle();
+}
+
+class _$MapView_OnDidBecomeIdleListenerImpl
+    implements $MapView_OnDidBecomeIdleListenerImpl {
+  _$MapView_OnDidBecomeIdleListenerImpl({
+    required void Function() onDidBecomeIdle,
+  }) : _onDidBecomeIdle = onDidBecomeIdle;
+
+  final void Function() _onDidBecomeIdle;
+
+  void onDidBecomeIdle() {
+    return _onDidBecomeIdle();
   }
 }
 
@@ -429,6 +885,97 @@ class MapView_OnDidFailLoadingMapListener extends jni.JObject {
             string.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidFailLoadingMapListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidFailLoadingMap(Ljava/lang/String;)V') {
+        _$impls[$p]!.onDidFailLoadingMap(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidFailLoadingMapListener.implement(
+    $MapView_OnDidFailLoadingMapListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidFailLoadingMapListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidFailLoadingMapListenerImpl {
+  factory $MapView_OnDidFailLoadingMapListenerImpl({
+    required void Function(jni.JString string) onDidFailLoadingMap,
+  }) = _$MapView_OnDidFailLoadingMapListenerImpl;
+
+  void onDidFailLoadingMap(jni.JString string);
+}
+
+class _$MapView_OnDidFailLoadingMapListenerImpl
+    implements $MapView_OnDidFailLoadingMapListenerImpl {
+  _$MapView_OnDidFailLoadingMapListenerImpl({
+    required void Function(jni.JString string) onDidFailLoadingMap,
+  }) : _onDidFailLoadingMap = onDidFailLoadingMap;
+
+  final void Function(jni.JString string) _onDidFailLoadingMap;
+
+  void onDidFailLoadingMap(jni.JString string) {
+    return _onDidFailLoadingMap(string);
+  }
 }
 
 final class $MapView_OnDidFailLoadingMapListenerType
@@ -495,6 +1042,96 @@ class MapView_OnDidFinishLoadingMapListener extends jni.JObject {
     _onDidFinishLoadingMap(
             reference.pointer, _id_onDidFinishLoadingMap as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidFinishLoadingMapListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidFinishLoadingMap()V') {
+        _$impls[$p]!.onDidFinishLoadingMap();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidFinishLoadingMapListener.implement(
+    $MapView_OnDidFinishLoadingMapListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidFinishLoadingMapListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidFinishLoadingMapListenerImpl {
+  factory $MapView_OnDidFinishLoadingMapListenerImpl({
+    required void Function() onDidFinishLoadingMap,
+  }) = _$MapView_OnDidFinishLoadingMapListenerImpl;
+
+  void onDidFinishLoadingMap();
+}
+
+class _$MapView_OnDidFinishLoadingMapListenerImpl
+    implements $MapView_OnDidFinishLoadingMapListenerImpl {
+  _$MapView_OnDidFinishLoadingMapListenerImpl({
+    required void Function() onDidFinishLoadingMap,
+  }) : _onDidFinishLoadingMap = onDidFinishLoadingMap;
+
+  final void Function() _onDidFinishLoadingMap;
+
+  void onDidFinishLoadingMap() {
+    return _onDidFinishLoadingMap();
   }
 }
 
@@ -563,6 +1200,96 @@ class MapView_OnDidFinishLoadingStyleListener extends jni.JObject {
     _onDidFinishLoadingStyle(
             reference.pointer, _id_onDidFinishLoadingStyle as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidFinishLoadingStyleListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidFinishLoadingStyle()V') {
+        _$impls[$p]!.onDidFinishLoadingStyle();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidFinishLoadingStyleListener.implement(
+    $MapView_OnDidFinishLoadingStyleListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidFinishLoadingStyleListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidFinishLoadingStyleListenerImpl {
+  factory $MapView_OnDidFinishLoadingStyleListenerImpl({
+    required void Function() onDidFinishLoadingStyle,
+  }) = _$MapView_OnDidFinishLoadingStyleListenerImpl;
+
+  void onDidFinishLoadingStyle();
+}
+
+class _$MapView_OnDidFinishLoadingStyleListenerImpl
+    implements $MapView_OnDidFinishLoadingStyleListenerImpl {
+  _$MapView_OnDidFinishLoadingStyleListenerImpl({
+    required void Function() onDidFinishLoadingStyle,
+  }) : _onDidFinishLoadingStyle = onDidFinishLoadingStyle;
+
+  final void Function() _onDidFinishLoadingStyle;
+
+  void onDidFinishLoadingStyle() {
+    return _onDidFinishLoadingStyle();
   }
 }
 
@@ -637,6 +1364,108 @@ class MapView_OnDidFinishRenderingFrameListener extends jni.JObject {
             _id_onDidFinishRenderingFrame as jni.JMethodIDPtr, z ? 1 : 0, d, d1)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidFinishRenderingFrameListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidFinishRenderingFrame(ZDD)V') {
+        _$impls[$p]!.onDidFinishRenderingFrame(
+          $a[0]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JDoubleType(), releaseOriginal: true)
+              .doubleValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JDoubleType(), releaseOriginal: true)
+              .doubleValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidFinishRenderingFrameListener.implement(
+    $MapView_OnDidFinishRenderingFrameListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidFinishRenderingFrameListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidFinishRenderingFrameListenerImpl {
+  factory $MapView_OnDidFinishRenderingFrameListenerImpl({
+    required void Function(bool z, double d, double d1)
+        onDidFinishRenderingFrame,
+  }) = _$MapView_OnDidFinishRenderingFrameListenerImpl;
+
+  void onDidFinishRenderingFrame(bool z, double d, double d1);
+}
+
+class _$MapView_OnDidFinishRenderingFrameListenerImpl
+    implements $MapView_OnDidFinishRenderingFrameListenerImpl {
+  _$MapView_OnDidFinishRenderingFrameListenerImpl({
+    required void Function(bool z, double d, double d1)
+        onDidFinishRenderingFrame,
+  }) : _onDidFinishRenderingFrame = onDidFinishRenderingFrame;
+
+  final void Function(bool z, double d, double d1) _onDidFinishRenderingFrame;
+
+  void onDidFinishRenderingFrame(bool z, double d, double d1) {
+    return _onDidFinishRenderingFrame(z, d, d1);
+  }
 }
 
 final class $MapView_OnDidFinishRenderingFrameListenerType
@@ -705,6 +1534,100 @@ class MapView_OnDidFinishRenderingMapListener extends jni.JObject {
     _onDidFinishRenderingMap(reference.pointer,
             _id_onDidFinishRenderingMap as jni.JMethodIDPtr, z ? 1 : 0)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnDidFinishRenderingMapListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDidFinishRenderingMap(Z)V') {
+        _$impls[$p]!.onDidFinishRenderingMap(
+          $a[0]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnDidFinishRenderingMapListener.implement(
+    $MapView_OnDidFinishRenderingMapListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnDidFinishRenderingMapListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnDidFinishRenderingMapListenerImpl {
+  factory $MapView_OnDidFinishRenderingMapListenerImpl({
+    required void Function(bool z) onDidFinishRenderingMap,
+  }) = _$MapView_OnDidFinishRenderingMapListenerImpl;
+
+  void onDidFinishRenderingMap(bool z);
+}
+
+class _$MapView_OnDidFinishRenderingMapListenerImpl
+    implements $MapView_OnDidFinishRenderingMapListenerImpl {
+  _$MapView_OnDidFinishRenderingMapListenerImpl({
+    required void Function(bool z) onDidFinishRenderingMap,
+  }) : _onDidFinishRenderingMap = onDidFinishRenderingMap;
+
+  final void Function(bool z) _onDidFinishRenderingMap;
+
+  void onDidFinishRenderingMap(bool z) {
+    return _onDidFinishRenderingMap(z);
   }
 }
 
@@ -778,6 +1701,107 @@ class MapView_OnGlyphsErrorListener extends jni.JObject {
             strings.reference.pointer, i, i1)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnGlyphsErrorListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onGlyphsError([Ljava/lang/String;II)V') {
+        _$impls[$p]!.onGlyphsError(
+          $a[0].castTo(const jni.JArrayType(jni.JStringType()),
+              releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnGlyphsErrorListener.implement(
+    $MapView_OnGlyphsErrorListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnGlyphsErrorListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnGlyphsErrorListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnGlyphsErrorListenerImpl {
+  factory $MapView_OnGlyphsErrorListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsError,
+  }) = _$MapView_OnGlyphsErrorListenerImpl;
+
+  void onGlyphsError(jni.JArray<jni.JString> strings, int i, int i1);
+}
+
+class _$MapView_OnGlyphsErrorListenerImpl
+    implements $MapView_OnGlyphsErrorListenerImpl {
+  _$MapView_OnGlyphsErrorListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsError,
+  }) : _onGlyphsError = onGlyphsError;
+
+  final void Function(jni.JArray<jni.JString> strings, int i, int i1)
+      _onGlyphsError;
+
+  void onGlyphsError(jni.JArray<jni.JString> strings, int i, int i1) {
+    return _onGlyphsError(strings, i, i1);
+  }
 }
 
 final class $MapView_OnGlyphsErrorListenerType
@@ -847,6 +1871,107 @@ class MapView_OnGlyphsLoadedListener extends jni.JObject {
     _onGlyphsLoaded(reference.pointer, _id_onGlyphsLoaded as jni.JMethodIDPtr,
             strings.reference.pointer, i, i1)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnGlyphsLoadedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onGlyphsLoaded([Ljava/lang/String;II)V') {
+        _$impls[$p]!.onGlyphsLoaded(
+          $a[0].castTo(const jni.JArrayType(jni.JStringType()),
+              releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnGlyphsLoadedListener.implement(
+    $MapView_OnGlyphsLoadedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnGlyphsLoadedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnGlyphsLoadedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnGlyphsLoadedListenerImpl {
+  factory $MapView_OnGlyphsLoadedListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsLoaded,
+  }) = _$MapView_OnGlyphsLoadedListenerImpl;
+
+  void onGlyphsLoaded(jni.JArray<jni.JString> strings, int i, int i1);
+}
+
+class _$MapView_OnGlyphsLoadedListenerImpl
+    implements $MapView_OnGlyphsLoadedListenerImpl {
+  _$MapView_OnGlyphsLoadedListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsLoaded,
+  }) : _onGlyphsLoaded = onGlyphsLoaded;
+
+  final void Function(jni.JArray<jni.JString> strings, int i, int i1)
+      _onGlyphsLoaded;
+
+  void onGlyphsLoaded(jni.JArray<jni.JString> strings, int i, int i1) {
+    return _onGlyphsLoaded(strings, i, i1);
   }
 }
 
@@ -922,6 +2047,107 @@ class MapView_OnGlyphsRequestedListener extends jni.JObject {
             i1)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnGlyphsRequestedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onGlyphsRequested([Ljava/lang/String;II)V') {
+        _$impls[$p]!.onGlyphsRequested(
+          $a[0].castTo(const jni.JArrayType(jni.JStringType()),
+              releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnGlyphsRequestedListener.implement(
+    $MapView_OnGlyphsRequestedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnGlyphsRequestedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnGlyphsRequestedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnGlyphsRequestedListenerImpl {
+  factory $MapView_OnGlyphsRequestedListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsRequested,
+  }) = _$MapView_OnGlyphsRequestedListenerImpl;
+
+  void onGlyphsRequested(jni.JArray<jni.JString> strings, int i, int i1);
+}
+
+class _$MapView_OnGlyphsRequestedListenerImpl
+    implements $MapView_OnGlyphsRequestedListenerImpl {
+  _$MapView_OnGlyphsRequestedListenerImpl({
+    required void Function(jni.JArray<jni.JString> strings, int i, int i1)
+        onGlyphsRequested,
+  }) : _onGlyphsRequested = onGlyphsRequested;
+
+  final void Function(jni.JArray<jni.JString> strings, int i, int i1)
+      _onGlyphsRequested;
+
+  void onGlyphsRequested(jni.JArray<jni.JString> strings, int i, int i1) {
+    return _onGlyphsRequested(strings, i, i1);
+  }
 }
 
 final class $MapView_OnGlyphsRequestedListenerType
@@ -995,6 +2221,105 @@ class MapView_OnPostCompileShaderListener extends jni.JObject {
             i1,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnPostCompileShaderListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onPostCompileShader(IILjava/lang/String;)V') {
+        _$impls[$p]!.onPostCompileShader(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnPostCompileShaderListener.implement(
+    $MapView_OnPostCompileShaderListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnPostCompileShaderListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnPostCompileShaderListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnPostCompileShaderListenerImpl {
+  factory $MapView_OnPostCompileShaderListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onPostCompileShader,
+  }) = _$MapView_OnPostCompileShaderListenerImpl;
+
+  void onPostCompileShader(int i, int i1, jni.JString string);
+}
+
+class _$MapView_OnPostCompileShaderListenerImpl
+    implements $MapView_OnPostCompileShaderListenerImpl {
+  _$MapView_OnPostCompileShaderListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onPostCompileShader,
+  }) : _onPostCompileShader = onPostCompileShader;
+
+  final void Function(int i, int i1, jni.JString string) _onPostCompileShader;
+
+  void onPostCompileShader(int i, int i1, jni.JString string) {
+    return _onPostCompileShader(i, i1, string);
   }
 }
 
@@ -1070,6 +2395,105 @@ class MapView_OnPreCompileShaderListener extends jni.JObject {
             string.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnPreCompileShaderListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onPreCompileShader(IILjava/lang/String;)V') {
+        _$impls[$p]!.onPreCompileShader(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnPreCompileShaderListener.implement(
+    $MapView_OnPreCompileShaderListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnPreCompileShaderListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnPreCompileShaderListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnPreCompileShaderListenerImpl {
+  factory $MapView_OnPreCompileShaderListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onPreCompileShader,
+  }) = _$MapView_OnPreCompileShaderListenerImpl;
+
+  void onPreCompileShader(int i, int i1, jni.JString string);
+}
+
+class _$MapView_OnPreCompileShaderListenerImpl
+    implements $MapView_OnPreCompileShaderListenerImpl {
+  _$MapView_OnPreCompileShaderListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onPreCompileShader,
+  }) : _onPreCompileShader = onPreCompileShader;
+
+  final void Function(int i, int i1, jni.JString string) _onPreCompileShader;
+
+  void onPreCompileShader(int i, int i1, jni.JString string) {
+    return _onPreCompileShader(i, i1, string);
+  }
 }
 
 final class $MapView_OnPreCompileShaderListenerType
@@ -1144,6 +2568,106 @@ class MapView_OnShaderCompileFailedListener extends jni.JObject {
             string.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnShaderCompileFailedListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onShaderCompileFailed(IILjava/lang/String;)V') {
+        _$impls[$p]!.onShaderCompileFailed(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnShaderCompileFailedListener.implement(
+    $MapView_OnShaderCompileFailedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnShaderCompileFailedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnShaderCompileFailedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnShaderCompileFailedListenerImpl {
+  factory $MapView_OnShaderCompileFailedListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onShaderCompileFailed,
+  }) = _$MapView_OnShaderCompileFailedListenerImpl;
+
+  void onShaderCompileFailed(int i, int i1, jni.JString string);
+}
+
+class _$MapView_OnShaderCompileFailedListenerImpl
+    implements $MapView_OnShaderCompileFailedListenerImpl {
+  _$MapView_OnShaderCompileFailedListenerImpl({
+    required void Function(int i, int i1, jni.JString string)
+        onShaderCompileFailed,
+  }) : _onShaderCompileFailed = onShaderCompileFailed;
+
+  final void Function(int i, int i1, jni.JString string) _onShaderCompileFailed;
+
+  void onShaderCompileFailed(int i, int i1, jni.JString string) {
+    return _onShaderCompileFailed(i, i1, string);
+  }
 }
 
 final class $MapView_OnShaderCompileFailedListenerType
@@ -1214,6 +2738,97 @@ class MapView_OnSourceChangedListener extends jni.JObject {
             _id_onSourceChangedListener as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnSourceChangedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSourceChangedListener(Ljava/lang/String;)V') {
+        _$impls[$p]!.onSourceChangedListener(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnSourceChangedListener.implement(
+    $MapView_OnSourceChangedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnSourceChangedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnSourceChangedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnSourceChangedListenerImpl {
+  factory $MapView_OnSourceChangedListenerImpl({
+    required void Function(jni.JString string) onSourceChangedListener,
+  }) = _$MapView_OnSourceChangedListenerImpl;
+
+  void onSourceChangedListener(jni.JString string);
+}
+
+class _$MapView_OnSourceChangedListenerImpl
+    implements $MapView_OnSourceChangedListenerImpl {
+  _$MapView_OnSourceChangedListenerImpl({
+    required void Function(jni.JString string) onSourceChangedListener,
+  }) : _onSourceChangedListener = onSourceChangedListener;
+
+  final void Function(jni.JString string) _onSourceChangedListener;
+
+  void onSourceChangedListener(jni.JString string) {
+    return _onSourceChangedListener(string);
   }
 }
 
@@ -1287,6 +2902,100 @@ class MapView_OnSpriteErrorListener extends jni.JObject {
             string.reference.pointer, string1.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnSpriteErrorListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSpriteError(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.onSpriteError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnSpriteErrorListener.implement(
+    $MapView_OnSpriteErrorListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnSpriteErrorListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnSpriteErrorListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnSpriteErrorListenerImpl {
+  factory $MapView_OnSpriteErrorListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteError,
+  }) = _$MapView_OnSpriteErrorListenerImpl;
+
+  void onSpriteError(jni.JString string, jni.JString string1);
+}
+
+class _$MapView_OnSpriteErrorListenerImpl
+    implements $MapView_OnSpriteErrorListenerImpl {
+  _$MapView_OnSpriteErrorListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteError,
+  }) : _onSpriteError = onSpriteError;
+
+  final void Function(jni.JString string, jni.JString string1) _onSpriteError;
+
+  void onSpriteError(jni.JString string, jni.JString string1) {
+    return _onSpriteError(string, string1);
+  }
 }
 
 final class $MapView_OnSpriteErrorListenerType
@@ -1358,6 +3067,100 @@ class MapView_OnSpriteLoadedListener extends jni.JObject {
     _onSpriteLoaded(reference.pointer, _id_onSpriteLoaded as jni.JMethodIDPtr,
             string.reference.pointer, string1.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnSpriteLoadedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSpriteLoaded(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.onSpriteLoaded(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnSpriteLoadedListener.implement(
+    $MapView_OnSpriteLoadedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnSpriteLoadedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnSpriteLoadedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnSpriteLoadedListenerImpl {
+  factory $MapView_OnSpriteLoadedListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteLoaded,
+  }) = _$MapView_OnSpriteLoadedListenerImpl;
+
+  void onSpriteLoaded(jni.JString string, jni.JString string1);
+}
+
+class _$MapView_OnSpriteLoadedListenerImpl
+    implements $MapView_OnSpriteLoadedListenerImpl {
+  _$MapView_OnSpriteLoadedListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteLoaded,
+  }) : _onSpriteLoaded = onSpriteLoaded;
+
+  final void Function(jni.JString string, jni.JString string1) _onSpriteLoaded;
+
+  void onSpriteLoaded(jni.JString string, jni.JString string1) {
+    return _onSpriteLoaded(string, string1);
   }
 }
 
@@ -1434,6 +3237,101 @@ class MapView_OnSpriteRequestedListener extends jni.JObject {
             string1.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnSpriteRequestedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSpriteRequested(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.onSpriteRequested(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnSpriteRequestedListener.implement(
+    $MapView_OnSpriteRequestedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnSpriteRequestedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnSpriteRequestedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnSpriteRequestedListenerImpl {
+  factory $MapView_OnSpriteRequestedListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteRequested,
+  }) = _$MapView_OnSpriteRequestedListenerImpl;
+
+  void onSpriteRequested(jni.JString string, jni.JString string1);
+}
+
+class _$MapView_OnSpriteRequestedListenerImpl
+    implements $MapView_OnSpriteRequestedListenerImpl {
+  _$MapView_OnSpriteRequestedListenerImpl({
+    required void Function(jni.JString string, jni.JString string1)
+        onSpriteRequested,
+  }) : _onSpriteRequested = onSpriteRequested;
+
+  final void Function(jni.JString string, jni.JString string1)
+      _onSpriteRequested;
+
+  void onSpriteRequested(jni.JString string, jni.JString string1) {
+    return _onSpriteRequested(string, string1);
+  }
 }
 
 final class $MapView_OnSpriteRequestedListenerType
@@ -1503,6 +3401,97 @@ class MapView_OnStyleImageMissingListener extends jni.JObject {
             _id_onStyleImageMissing as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnStyleImageMissingListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onStyleImageMissing(Ljava/lang/String;)V') {
+        _$impls[$p]!.onStyleImageMissing(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnStyleImageMissingListener.implement(
+    $MapView_OnStyleImageMissingListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnStyleImageMissingListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnStyleImageMissingListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnStyleImageMissingListenerImpl {
+  factory $MapView_OnStyleImageMissingListenerImpl({
+    required void Function(jni.JString string) onStyleImageMissing,
+  }) = _$MapView_OnStyleImageMissingListenerImpl;
+
+  void onStyleImageMissing(jni.JString string);
+}
+
+class _$MapView_OnStyleImageMissingListenerImpl
+    implements $MapView_OnStyleImageMissingListenerImpl {
+  _$MapView_OnStyleImageMissingListenerImpl({
+    required void Function(jni.JString string) onStyleImageMissing,
+  }) : _onStyleImageMissing = onStyleImageMissing;
+
+  final void Function(jni.JString string) _onStyleImageMissing;
+
+  void onStyleImageMissing(jni.JString string) {
+    return _onStyleImageMissing(string);
   }
 }
 
@@ -1602,6 +3591,121 @@ class MapView_OnTileActionListener extends jni.JObject {
             string.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnTileActionListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onTileAction(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V') {
+        _$impls[$p]!.onTileAction(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[3]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[4]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[5]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[6].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnTileActionListener.implement(
+    $MapView_OnTileActionListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnTileActionListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnTileActionListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnTileActionListenerImpl {
+  factory $MapView_OnTileActionListenerImpl({
+    required void Function(jni.JObject tileOperation, int i, int i1, int i2,
+            int i3, int i4, jni.JString string)
+        onTileAction,
+  }) = _$MapView_OnTileActionListenerImpl;
+
+  void onTileAction(jni.JObject tileOperation, int i, int i1, int i2, int i3,
+      int i4, jni.JString string);
+}
+
+class _$MapView_OnTileActionListenerImpl
+    implements $MapView_OnTileActionListenerImpl {
+  _$MapView_OnTileActionListenerImpl({
+    required void Function(jni.JObject tileOperation, int i, int i1, int i2,
+            int i3, int i4, jni.JString string)
+        onTileAction,
+  }) : _onTileAction = onTileAction;
+
+  final void Function(jni.JObject tileOperation, int i, int i1, int i2, int i3,
+      int i4, jni.JString string) _onTileAction;
+
+  void onTileAction(jni.JObject tileOperation, int i, int i1, int i2, int i3,
+      int i4, jni.JString string) {
+    return _onTileAction(tileOperation, i, i1, i2, i3, i4, string);
+  }
 }
 
 final class $MapView_OnTileActionListenerType
@@ -1668,6 +3772,96 @@ class MapView_OnWillStartLoadingMapListener extends jni.JObject {
     _onWillStartLoadingMap(
             reference.pointer, _id_onWillStartLoadingMap as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnWillStartLoadingMapListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onWillStartLoadingMap()V') {
+        _$impls[$p]!.onWillStartLoadingMap();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnWillStartLoadingMapListener.implement(
+    $MapView_OnWillStartLoadingMapListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnWillStartLoadingMapListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnWillStartLoadingMapListenerImpl {
+  factory $MapView_OnWillStartLoadingMapListenerImpl({
+    required void Function() onWillStartLoadingMap,
+  }) = _$MapView_OnWillStartLoadingMapListenerImpl;
+
+  void onWillStartLoadingMap();
+}
+
+class _$MapView_OnWillStartLoadingMapListenerImpl
+    implements $MapView_OnWillStartLoadingMapListenerImpl {
+  _$MapView_OnWillStartLoadingMapListenerImpl({
+    required void Function() onWillStartLoadingMap,
+  }) : _onWillStartLoadingMap = onWillStartLoadingMap;
+
+  final void Function() _onWillStartLoadingMap;
+
+  void onWillStartLoadingMap() {
+    return _onWillStartLoadingMap();
   }
 }
 
@@ -1738,6 +3932,96 @@ class MapView_OnWillStartRenderingFrameListener extends jni.JObject {
             _id_onWillStartRenderingFrame as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnWillStartRenderingFrameListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onWillStartRenderingFrame()V') {
+        _$impls[$p]!.onWillStartRenderingFrame();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnWillStartRenderingFrameListener.implement(
+    $MapView_OnWillStartRenderingFrameListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnWillStartRenderingFrameListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnWillStartRenderingFrameListenerImpl {
+  factory $MapView_OnWillStartRenderingFrameListenerImpl({
+    required void Function() onWillStartRenderingFrame,
+  }) = _$MapView_OnWillStartRenderingFrameListenerImpl;
+
+  void onWillStartRenderingFrame();
+}
+
+class _$MapView_OnWillStartRenderingFrameListenerImpl
+    implements $MapView_OnWillStartRenderingFrameListenerImpl {
+  _$MapView_OnWillStartRenderingFrameListenerImpl({
+    required void Function() onWillStartRenderingFrame,
+  }) : _onWillStartRenderingFrame = onWillStartRenderingFrame;
+
+  final void Function() _onWillStartRenderingFrame;
+
+  void onWillStartRenderingFrame() {
+    return _onWillStartRenderingFrame();
+  }
 }
 
 final class $MapView_OnWillStartRenderingFrameListenerType
@@ -1806,6 +4090,96 @@ class MapView_OnWillStartRenderingMapListener extends jni.JObject {
     _onWillStartRenderingMap(
             reference.pointer, _id_onWillStartRenderingMap as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapView_OnWillStartRenderingMapListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onWillStartRenderingMap()V') {
+        _$impls[$p]!.onWillStartRenderingMap();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapView_OnWillStartRenderingMapListener.implement(
+    $MapView_OnWillStartRenderingMapListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapView_OnWillStartRenderingMapListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapView_OnWillStartRenderingMapListenerImpl {
+  factory $MapView_OnWillStartRenderingMapListenerImpl({
+    required void Function() onWillStartRenderingMap,
+  }) = _$MapView_OnWillStartRenderingMapListenerImpl;
+
+  void onWillStartRenderingMap();
+}
+
+class _$MapView_OnWillStartRenderingMapListenerImpl
+    implements $MapView_OnWillStartRenderingMapListenerImpl {
+  _$MapView_OnWillStartRenderingMapListenerImpl({
+    required void Function() onWillStartRenderingMap,
+  }) : _onWillStartRenderingMap = onWillStartRenderingMap;
+
+  final void Function() _onWillStartRenderingMap;
+
+  void onWillStartRenderingMap() {
+    return _onWillStartRenderingMap();
   }
 }
 

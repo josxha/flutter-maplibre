@@ -54,6 +54,78 @@ class Resource_Kind extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $Resource_KindType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Resource_KindImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Resource_Kind.implement(
+    $Resource_KindImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Resource_Kind.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.storage.Resource$Kind',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Resource_KindImpl {
+  factory $Resource_KindImpl() = _$Resource_KindImpl;
+}
+
+class _$Resource_KindImpl implements $Resource_KindImpl {
+  _$Resource_KindImpl();
 }
 
 final class $Resource_KindType extends jni.JObjType<Resource_Kind> {

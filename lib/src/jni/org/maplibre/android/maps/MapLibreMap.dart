@@ -117,6 +117,108 @@ class MapLibreMap_CancelableCallback extends jni.JObject {
   void onFinish() {
     _onFinish(reference.pointer, _id_onFinish as jni.JMethodIDPtr).check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_CancelableCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCancel()V') {
+        _$impls[$p]!.onCancel();
+        return jni.nullptr;
+      }
+      if ($d == r'onFinish()V') {
+        _$impls[$p]!.onFinish();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_CancelableCallback.implement(
+    $MapLibreMap_CancelableCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_CancelableCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$CancelableCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_CancelableCallbackImpl {
+  factory $MapLibreMap_CancelableCallbackImpl({
+    required void Function() onCancel,
+    required void Function() onFinish,
+  }) = _$MapLibreMap_CancelableCallbackImpl;
+
+  void onCancel();
+  void onFinish();
+}
+
+class _$MapLibreMap_CancelableCallbackImpl
+    implements $MapLibreMap_CancelableCallbackImpl {
+  _$MapLibreMap_CancelableCallbackImpl({
+    required void Function() onCancel,
+    required void Function() onFinish,
+  })  : _onCancel = onCancel,
+        _onFinish = onFinish;
+
+  final void Function() _onCancel;
+  final void Function() _onFinish;
+
+  void onCancel() {
+    return _onCancel();
+  }
+
+  void onFinish() {
+    return _onFinish();
+  }
 }
 
 final class $MapLibreMap_CancelableCallbackType
@@ -186,6 +288,101 @@ class MapLibreMap_InfoWindowAdapter extends jni.JObject {
             _id_getInfoWindow as jni.JMethodIDPtr, marker.reference.pointer)
         .object(const jni.JObjectType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_InfoWindowAdapterImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'getInfoWindow(Lorg/maplibre/android/annotations/Marker;)Landroid/view/View;') {
+        final $r = _$impls[$p]!.getInfoWindow(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_InfoWindowAdapter.implement(
+    $MapLibreMap_InfoWindowAdapterImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_InfoWindowAdapter.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$InfoWindowAdapter',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_InfoWindowAdapterImpl {
+  factory $MapLibreMap_InfoWindowAdapterImpl({
+    required jni.JObject Function(jni.JObject marker) getInfoWindow,
+  }) = _$MapLibreMap_InfoWindowAdapterImpl;
+
+  jni.JObject getInfoWindow(jni.JObject marker);
+}
+
+class _$MapLibreMap_InfoWindowAdapterImpl
+    implements $MapLibreMap_InfoWindowAdapterImpl {
+  _$MapLibreMap_InfoWindowAdapterImpl({
+    required jni.JObject Function(jni.JObject marker) getInfoWindow,
+  }) : _getInfoWindow = getInfoWindow;
+
+  final jni.JObject Function(jni.JObject marker) _getInfoWindow;
+
+  jni.JObject getInfoWindow(jni.JObject marker) {
+    return _getInfoWindow(marker);
+  }
 }
 
 final class $MapLibreMap_InfoWindowAdapterType
@@ -251,6 +448,95 @@ class MapLibreMap_OnCameraIdleListener extends jni.JObject {
   void onCameraIdle() {
     _onCameraIdle(reference.pointer, _id_onCameraIdle as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnCameraIdleListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraIdle()V') {
+        _$impls[$p]!.onCameraIdle();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnCameraIdleListener.implement(
+    $MapLibreMap_OnCameraIdleListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnCameraIdleListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnCameraIdleListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnCameraIdleListenerImpl {
+  factory $MapLibreMap_OnCameraIdleListenerImpl({
+    required void Function() onCameraIdle,
+  }) = _$MapLibreMap_OnCameraIdleListenerImpl;
+
+  void onCameraIdle();
+}
+
+class _$MapLibreMap_OnCameraIdleListenerImpl
+    implements $MapLibreMap_OnCameraIdleListenerImpl {
+  _$MapLibreMap_OnCameraIdleListenerImpl({
+    required void Function() onCameraIdle,
+  }) : _onCameraIdle = onCameraIdle;
+
+  final void Function() _onCameraIdle;
+
+  void onCameraIdle() {
+    return _onCameraIdle();
   }
 }
 
@@ -320,6 +606,96 @@ class MapLibreMap_OnCameraMoveCanceledListener extends jni.JObject {
             reference.pointer, _id_onCameraMoveCanceled as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnCameraMoveCanceledListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraMoveCanceled()V') {
+        _$impls[$p]!.onCameraMoveCanceled();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnCameraMoveCanceledListener.implement(
+    $MapLibreMap_OnCameraMoveCanceledListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnCameraMoveCanceledListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveCanceledListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnCameraMoveCanceledListenerImpl {
+  factory $MapLibreMap_OnCameraMoveCanceledListenerImpl({
+    required void Function() onCameraMoveCanceled,
+  }) = _$MapLibreMap_OnCameraMoveCanceledListenerImpl;
+
+  void onCameraMoveCanceled();
+}
+
+class _$MapLibreMap_OnCameraMoveCanceledListenerImpl
+    implements $MapLibreMap_OnCameraMoveCanceledListenerImpl {
+  _$MapLibreMap_OnCameraMoveCanceledListenerImpl({
+    required void Function() onCameraMoveCanceled,
+  }) : _onCameraMoveCanceled = onCameraMoveCanceled;
+
+  final void Function() _onCameraMoveCanceled;
+
+  void onCameraMoveCanceled() {
+    return _onCameraMoveCanceled();
+  }
 }
 
 final class $MapLibreMap_OnCameraMoveCanceledListenerType
@@ -387,6 +763,95 @@ class MapLibreMap_OnCameraMoveListener extends jni.JObject {
   void onCameraMove() {
     _onCameraMove(reference.pointer, _id_onCameraMove as jni.JMethodIDPtr)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnCameraMoveListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraMove()V') {
+        _$impls[$p]!.onCameraMove();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnCameraMoveListener.implement(
+    $MapLibreMap_OnCameraMoveListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnCameraMoveListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnCameraMoveListenerImpl {
+  factory $MapLibreMap_OnCameraMoveListenerImpl({
+    required void Function() onCameraMove,
+  }) = _$MapLibreMap_OnCameraMoveListenerImpl;
+
+  void onCameraMove();
+}
+
+class _$MapLibreMap_OnCameraMoveListenerImpl
+    implements $MapLibreMap_OnCameraMoveListenerImpl {
+  _$MapLibreMap_OnCameraMoveListenerImpl({
+    required void Function() onCameraMove,
+  }) : _onCameraMove = onCameraMove;
+
+  final void Function() _onCameraMove;
+
+  void onCameraMove() {
+    return _onCameraMove();
   }
 }
 
@@ -463,6 +928,100 @@ class MapLibreMap_OnCameraMoveStartedListener extends jni.JObject {
     _onCameraMoveStarted(
             reference.pointer, _id_onCameraMoveStarted as jni.JMethodIDPtr, i)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnCameraMoveStartedListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraMoveStarted(I)V') {
+        _$impls[$p]!.onCameraMoveStarted(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnCameraMoveStartedListener.implement(
+    $MapLibreMap_OnCameraMoveStartedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnCameraMoveStartedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveStartedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnCameraMoveStartedListenerImpl {
+  factory $MapLibreMap_OnCameraMoveStartedListenerImpl({
+    required void Function(int i) onCameraMoveStarted,
+  }) = _$MapLibreMap_OnCameraMoveStartedListenerImpl;
+
+  void onCameraMoveStarted(int i);
+}
+
+class _$MapLibreMap_OnCameraMoveStartedListenerImpl
+    implements $MapLibreMap_OnCameraMoveStartedListenerImpl {
+  _$MapLibreMap_OnCameraMoveStartedListenerImpl({
+    required void Function(int i) onCameraMoveStarted,
+  }) : _onCameraMoveStarted = onCameraMoveStarted;
+
+  final void Function(int i) _onCameraMoveStarted;
+
+  void onCameraMoveStarted(int i) {
+    return _onCameraMoveStarted(i);
   }
 }
 
@@ -557,6 +1116,109 @@ class MapLibreMap_OnCompassAnimationListener extends jni.JObject {
             _id_onCompassAnimationFinished as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnCompassAnimationListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCompassAnimation()V') {
+        _$impls[$p]!.onCompassAnimation();
+        return jni.nullptr;
+      }
+      if ($d == r'onCompassAnimationFinished()V') {
+        _$impls[$p]!.onCompassAnimationFinished();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnCompassAnimationListener.implement(
+    $MapLibreMap_OnCompassAnimationListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnCompassAnimationListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnCompassAnimationListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnCompassAnimationListenerImpl {
+  factory $MapLibreMap_OnCompassAnimationListenerImpl({
+    required void Function() onCompassAnimation,
+    required void Function() onCompassAnimationFinished,
+  }) = _$MapLibreMap_OnCompassAnimationListenerImpl;
+
+  void onCompassAnimation();
+  void onCompassAnimationFinished();
+}
+
+class _$MapLibreMap_OnCompassAnimationListenerImpl
+    implements $MapLibreMap_OnCompassAnimationListenerImpl {
+  _$MapLibreMap_OnCompassAnimationListenerImpl({
+    required void Function() onCompassAnimation,
+    required void Function() onCompassAnimationFinished,
+  })  : _onCompassAnimation = onCompassAnimation,
+        _onCompassAnimationFinished = onCompassAnimationFinished;
+
+  final void Function() _onCompassAnimation;
+  final void Function() _onCompassAnimationFinished;
+
+  void onCompassAnimation() {
+    return _onCompassAnimation();
+  }
+
+  void onCompassAnimationFinished() {
+    return _onCompassAnimationFinished();
+  }
 }
 
 final class $MapLibreMap_OnCompassAnimationListenerType
@@ -626,6 +1288,96 @@ class MapLibreMap_OnDeveloperAnimationListener extends jni.JObject {
             _id_onDeveloperAnimationStarted as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnDeveloperAnimationListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onDeveloperAnimationStarted()V') {
+        _$impls[$p]!.onDeveloperAnimationStarted();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnDeveloperAnimationListener.implement(
+    $MapLibreMap_OnDeveloperAnimationListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnDeveloperAnimationListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnDeveloperAnimationListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnDeveloperAnimationListenerImpl {
+  factory $MapLibreMap_OnDeveloperAnimationListenerImpl({
+    required void Function() onDeveloperAnimationStarted,
+  }) = _$MapLibreMap_OnDeveloperAnimationListenerImpl;
+
+  void onDeveloperAnimationStarted();
+}
+
+class _$MapLibreMap_OnDeveloperAnimationListenerImpl
+    implements $MapLibreMap_OnDeveloperAnimationListenerImpl {
+  _$MapLibreMap_OnDeveloperAnimationListenerImpl({
+    required void Function() onDeveloperAnimationStarted,
+  }) : _onDeveloperAnimationStarted = onDeveloperAnimationStarted;
+
+  final void Function() _onDeveloperAnimationStarted;
+
+  void onDeveloperAnimationStarted() {
+    return _onDeveloperAnimationStarted();
+  }
 }
 
 final class $MapLibreMap_OnDeveloperAnimationListenerType
@@ -693,6 +1445,95 @@ class MapLibreMap_OnFlingListener extends jni.JObject {
   void onFling() {
     _onFling(reference.pointer, _id_onFling as jni.JMethodIDPtr).check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnFlingListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onFling()V') {
+        _$impls[$p]!.onFling();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnFlingListener.implement(
+    $MapLibreMap_OnFlingListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnFlingListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnFlingListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnFlingListenerImpl {
+  factory $MapLibreMap_OnFlingListenerImpl({
+    required void Function() onFling,
+  }) = _$MapLibreMap_OnFlingListenerImpl;
+
+  void onFling();
+}
+
+class _$MapLibreMap_OnFlingListenerImpl
+    implements $MapLibreMap_OnFlingListenerImpl {
+  _$MapLibreMap_OnFlingListenerImpl({
+    required void Function() onFling,
+  }) : _onFling = onFling;
+
+  final void Function() _onFling;
+
+  void onFling() {
+    return _onFling();
+  }
 }
 
 final class $MapLibreMap_OnFlingListenerType
@@ -758,6 +1599,99 @@ class MapLibreMap_OnFpsChangedListener extends jni.JObject {
   ) {
     _onFpsChanged(reference.pointer, _id_onFpsChanged as jni.JMethodIDPtr, d)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnFpsChangedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onFpsChanged(D)V') {
+        _$impls[$p]!.onFpsChanged(
+          $a[0]
+              .castTo(const jni.JDoubleType(), releaseOriginal: true)
+              .doubleValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnFpsChangedListener.implement(
+    $MapLibreMap_OnFpsChangedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnFpsChangedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnFpsChangedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnFpsChangedListenerImpl {
+  factory $MapLibreMap_OnFpsChangedListenerImpl({
+    required void Function(double d) onFpsChanged,
+  }) = _$MapLibreMap_OnFpsChangedListenerImpl;
+
+  void onFpsChanged(double d);
+}
+
+class _$MapLibreMap_OnFpsChangedListenerImpl
+    implements $MapLibreMap_OnFpsChangedListenerImpl {
+  _$MapLibreMap_OnFpsChangedListenerImpl({
+    required void Function(double d) onFpsChanged,
+  }) : _onFpsChanged = onFpsChanged;
+
+  final void Function(double d) _onFpsChanged;
+
+  void onFpsChanged(double d) {
+    return _onFpsChanged(d);
   }
 }
 
@@ -827,6 +1761,99 @@ class MapLibreMap_OnInfoWindowClickListener extends jni.JObject {
             _id_onInfoWindowClick as jni.JMethodIDPtr, marker.reference.pointer)
         .boolean;
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnInfoWindowClickListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onInfoWindowClick(Lorg/maplibre/android/annotations/Marker;)Z') {
+        final $r = _$impls[$p]!.onInfoWindowClick(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.JBoolean($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnInfoWindowClickListener.implement(
+    $MapLibreMap_OnInfoWindowClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnInfoWindowClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnInfoWindowClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnInfoWindowClickListenerImpl {
+  factory $MapLibreMap_OnInfoWindowClickListenerImpl({
+    required bool Function(jni.JObject marker) onInfoWindowClick,
+  }) = _$MapLibreMap_OnInfoWindowClickListenerImpl;
+
+  bool onInfoWindowClick(jni.JObject marker);
+}
+
+class _$MapLibreMap_OnInfoWindowClickListenerImpl
+    implements $MapLibreMap_OnInfoWindowClickListenerImpl {
+  _$MapLibreMap_OnInfoWindowClickListenerImpl({
+    required bool Function(jni.JObject marker) onInfoWindowClick,
+  }) : _onInfoWindowClick = onInfoWindowClick;
+
+  final bool Function(jni.JObject marker) _onInfoWindowClick;
+
+  bool onInfoWindowClick(jni.JObject marker) {
+    return _onInfoWindowClick(marker);
+  }
 }
 
 final class $MapLibreMap_OnInfoWindowClickListenerType
@@ -895,6 +1922,99 @@ class MapLibreMap_OnInfoWindowCloseListener extends jni.JObject {
     _onInfoWindowClose(reference.pointer,
             _id_onInfoWindowClose as jni.JMethodIDPtr, marker.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnInfoWindowCloseListenerImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onInfoWindowClose(Lorg/maplibre/android/annotations/Marker;)V') {
+        _$impls[$p]!.onInfoWindowClose(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnInfoWindowCloseListener.implement(
+    $MapLibreMap_OnInfoWindowCloseListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnInfoWindowCloseListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnInfoWindowCloseListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnInfoWindowCloseListenerImpl {
+  factory $MapLibreMap_OnInfoWindowCloseListenerImpl({
+    required void Function(jni.JObject marker) onInfoWindowClose,
+  }) = _$MapLibreMap_OnInfoWindowCloseListenerImpl;
+
+  void onInfoWindowClose(jni.JObject marker);
+}
+
+class _$MapLibreMap_OnInfoWindowCloseListenerImpl
+    implements $MapLibreMap_OnInfoWindowCloseListenerImpl {
+  _$MapLibreMap_OnInfoWindowCloseListenerImpl({
+    required void Function(jni.JObject marker) onInfoWindowClose,
+  }) : _onInfoWindowClose = onInfoWindowClose;
+
+  final void Function(jni.JObject marker) _onInfoWindowClose;
+
+  void onInfoWindowClose(jni.JObject marker) {
+    return _onInfoWindowClose(marker);
   }
 }
 
@@ -968,6 +2088,99 @@ class MapLibreMap_OnInfoWindowLongClickListener extends jni.JObject {
             marker.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnInfoWindowLongClickListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onInfoWindowLongClick(Lorg/maplibre/android/annotations/Marker;)V') {
+        _$impls[$p]!.onInfoWindowLongClick(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnInfoWindowLongClickListener.implement(
+    $MapLibreMap_OnInfoWindowLongClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnInfoWindowLongClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnInfoWindowLongClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnInfoWindowLongClickListenerImpl {
+  factory $MapLibreMap_OnInfoWindowLongClickListenerImpl({
+    required void Function(jni.JObject marker) onInfoWindowLongClick,
+  }) = _$MapLibreMap_OnInfoWindowLongClickListenerImpl;
+
+  void onInfoWindowLongClick(jni.JObject marker);
+}
+
+class _$MapLibreMap_OnInfoWindowLongClickListenerImpl
+    implements $MapLibreMap_OnInfoWindowLongClickListenerImpl {
+  _$MapLibreMap_OnInfoWindowLongClickListenerImpl({
+    required void Function(jni.JObject marker) onInfoWindowLongClick,
+  }) : _onInfoWindowLongClick = onInfoWindowLongClick;
+
+  final void Function(jni.JObject marker) _onInfoWindowLongClick;
+
+  void onInfoWindowLongClick(jni.JObject marker) {
+    return _onInfoWindowLongClick(marker);
+  }
 }
 
 final class $MapLibreMap_OnInfoWindowLongClickListenerType
@@ -1038,6 +2251,97 @@ class MapLibreMap_OnMapClickListener extends jni.JObject {
             latLng.reference.pointer)
         .boolean;
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnMapClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onMapClick(Lorg/maplibre/android/geometry/LatLng;)Z') {
+        final $r = _$impls[$p]!.onMapClick(
+          $a[0].castTo(const latlng_.$LatLngType(), releaseOriginal: true),
+        );
+        return jni.JBoolean($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnMapClickListener.implement(
+    $MapLibreMap_OnMapClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnMapClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnMapClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnMapClickListenerImpl {
+  factory $MapLibreMap_OnMapClickListenerImpl({
+    required bool Function(latlng_.LatLng latLng) onMapClick,
+  }) = _$MapLibreMap_OnMapClickListenerImpl;
+
+  bool onMapClick(latlng_.LatLng latLng);
+}
+
+class _$MapLibreMap_OnMapClickListenerImpl
+    implements $MapLibreMap_OnMapClickListenerImpl {
+  _$MapLibreMap_OnMapClickListenerImpl({
+    required bool Function(latlng_.LatLng latLng) onMapClick,
+  }) : _onMapClick = onMapClick;
+
+  final bool Function(latlng_.LatLng latLng) _onMapClick;
+
+  bool onMapClick(latlng_.LatLng latLng) {
+    return _onMapClick(latLng);
+  }
 }
 
 final class $MapLibreMap_OnMapClickListenerType
@@ -1106,6 +2410,97 @@ class MapLibreMap_OnMapLongClickListener extends jni.JObject {
             _id_onMapLongClick as jni.JMethodIDPtr, latLng.reference.pointer)
         .boolean;
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnMapLongClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onMapLongClick(Lorg/maplibre/android/geometry/LatLng;)Z') {
+        final $r = _$impls[$p]!.onMapLongClick(
+          $a[0].castTo(const latlng_.$LatLngType(), releaseOriginal: true),
+        );
+        return jni.JBoolean($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnMapLongClickListener.implement(
+    $MapLibreMap_OnMapLongClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnMapLongClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnMapLongClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnMapLongClickListenerImpl {
+  factory $MapLibreMap_OnMapLongClickListenerImpl({
+    required bool Function(latlng_.LatLng latLng) onMapLongClick,
+  }) = _$MapLibreMap_OnMapLongClickListenerImpl;
+
+  bool onMapLongClick(latlng_.LatLng latLng);
+}
+
+class _$MapLibreMap_OnMapLongClickListenerImpl
+    implements $MapLibreMap_OnMapLongClickListenerImpl {
+  _$MapLibreMap_OnMapLongClickListenerImpl({
+    required bool Function(latlng_.LatLng latLng) onMapLongClick,
+  }) : _onMapLongClick = onMapLongClick;
+
+  final bool Function(latlng_.LatLng latLng) _onMapLongClick;
+
+  bool onMapLongClick(latlng_.LatLng latLng) {
+    return _onMapLongClick(latLng);
+  }
 }
 
 final class $MapLibreMap_OnMapLongClickListenerType
@@ -1173,6 +2568,97 @@ class MapLibreMap_OnMarkerClickListener extends jni.JObject {
     return _onMarkerClick(reference.pointer,
             _id_onMarkerClick as jni.JMethodIDPtr, marker.reference.pointer)
         .boolean;
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnMarkerClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onMarkerClick(Lorg/maplibre/android/annotations/Marker;)Z') {
+        final $r = _$impls[$p]!.onMarkerClick(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.JBoolean($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnMarkerClickListener.implement(
+    $MapLibreMap_OnMarkerClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnMarkerClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnMarkerClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnMarkerClickListenerImpl {
+  factory $MapLibreMap_OnMarkerClickListenerImpl({
+    required bool Function(jni.JObject marker) onMarkerClick,
+  }) = _$MapLibreMap_OnMarkerClickListenerImpl;
+
+  bool onMarkerClick(jni.JObject marker);
+}
+
+class _$MapLibreMap_OnMarkerClickListenerImpl
+    implements $MapLibreMap_OnMarkerClickListenerImpl {
+  _$MapLibreMap_OnMarkerClickListenerImpl({
+    required bool Function(jni.JObject marker) onMarkerClick,
+  }) : _onMarkerClick = onMarkerClick;
+
+  final bool Function(jni.JObject marker) _onMarkerClick;
+
+  bool onMarkerClick(jni.JObject marker) {
+    return _onMarkerClick(marker);
   }
 }
 
@@ -1292,6 +2778,130 @@ class MapLibreMap_OnMoveListener extends jni.JObject {
             moveGestureDetector.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnMoveListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onMoveBegin(Lorg/maplibre/android/gestures/MoveGestureDetector;)V') {
+        _$impls[$p]!.onMoveBegin(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onMove(Lorg/maplibre/android/gestures/MoveGestureDetector;)V') {
+        _$impls[$p]!.onMove(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onMoveEnd(Lorg/maplibre/android/gestures/MoveGestureDetector;)V') {
+        _$impls[$p]!.onMoveEnd(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnMoveListener.implement(
+    $MapLibreMap_OnMoveListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnMoveListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnMoveListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnMoveListenerImpl {
+  factory $MapLibreMap_OnMoveListenerImpl({
+    required void Function(jni.JObject moveGestureDetector) onMoveBegin,
+    required void Function(jni.JObject moveGestureDetector) onMove,
+    required void Function(jni.JObject moveGestureDetector) onMoveEnd,
+  }) = _$MapLibreMap_OnMoveListenerImpl;
+
+  void onMoveBegin(jni.JObject moveGestureDetector);
+  void onMove(jni.JObject moveGestureDetector);
+  void onMoveEnd(jni.JObject moveGestureDetector);
+}
+
+class _$MapLibreMap_OnMoveListenerImpl
+    implements $MapLibreMap_OnMoveListenerImpl {
+  _$MapLibreMap_OnMoveListenerImpl({
+    required void Function(jni.JObject moveGestureDetector) onMoveBegin,
+    required void Function(jni.JObject moveGestureDetector) onMove,
+    required void Function(jni.JObject moveGestureDetector) onMoveEnd,
+  })  : _onMoveBegin = onMoveBegin,
+        _onMove = onMove,
+        _onMoveEnd = onMoveEnd;
+
+  final void Function(jni.JObject moveGestureDetector) _onMoveBegin;
+  final void Function(jni.JObject moveGestureDetector) _onMove;
+  final void Function(jni.JObject moveGestureDetector) _onMoveEnd;
+
+  void onMoveBegin(jni.JObject moveGestureDetector) {
+    return _onMoveBegin(moveGestureDetector);
+  }
+
+  void onMove(jni.JObject moveGestureDetector) {
+    return _onMove(moveGestureDetector);
+  }
+
+  void onMoveEnd(jni.JObject moveGestureDetector) {
+    return _onMoveEnd(moveGestureDetector);
+  }
 }
 
 final class $MapLibreMap_OnMoveListenerType
@@ -1360,6 +2970,98 @@ class MapLibreMap_OnPolygonClickListener extends jni.JObject {
             polygon.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnPolygonClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onPolygonClick(Lorg/maplibre/android/annotations/Polygon;)V') {
+        _$impls[$p]!.onPolygonClick(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnPolygonClickListener.implement(
+    $MapLibreMap_OnPolygonClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnPolygonClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnPolygonClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnPolygonClickListenerImpl {
+  factory $MapLibreMap_OnPolygonClickListenerImpl({
+    required void Function(jni.JObject polygon) onPolygonClick,
+  }) = _$MapLibreMap_OnPolygonClickListenerImpl;
+
+  void onPolygonClick(jni.JObject polygon);
+}
+
+class _$MapLibreMap_OnPolygonClickListenerImpl
+    implements $MapLibreMap_OnPolygonClickListenerImpl {
+  _$MapLibreMap_OnPolygonClickListenerImpl({
+    required void Function(jni.JObject polygon) onPolygonClick,
+  }) : _onPolygonClick = onPolygonClick;
+
+  final void Function(jni.JObject polygon) _onPolygonClick;
+
+  void onPolygonClick(jni.JObject polygon) {
+    return _onPolygonClick(polygon);
+  }
 }
 
 final class $MapLibreMap_OnPolygonClickListenerType
@@ -1427,6 +3129,98 @@ class MapLibreMap_OnPolylineClickListener extends jni.JObject {
     _onPolylineClick(reference.pointer, _id_onPolylineClick as jni.JMethodIDPtr,
             polyline.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnPolylineClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onPolylineClick(Lorg/maplibre/android/annotations/Polyline;)V') {
+        _$impls[$p]!.onPolylineClick(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnPolylineClickListener.implement(
+    $MapLibreMap_OnPolylineClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnPolylineClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnPolylineClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnPolylineClickListenerImpl {
+  factory $MapLibreMap_OnPolylineClickListenerImpl({
+    required void Function(jni.JObject polyline) onPolylineClick,
+  }) = _$MapLibreMap_OnPolylineClickListenerImpl;
+
+  void onPolylineClick(jni.JObject polyline);
+}
+
+class _$MapLibreMap_OnPolylineClickListenerImpl
+    implements $MapLibreMap_OnPolylineClickListenerImpl {
+  _$MapLibreMap_OnPolylineClickListenerImpl({
+    required void Function(jni.JObject polyline) onPolylineClick,
+  }) : _onPolylineClick = onPolylineClick;
+
+  final void Function(jni.JObject polyline) _onPolylineClick;
+
+  void onPolylineClick(jni.JObject polyline) {
+    return _onPolylineClick(polyline);
   }
 }
 
@@ -1546,6 +3340,130 @@ class MapLibreMap_OnRotateListener extends jni.JObject {
             rotateGestureDetector.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnRotateListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onRotateBegin(Lorg/maplibre/android/gestures/RotateGestureDetector;)V') {
+        _$impls[$p]!.onRotateBegin(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onRotate(Lorg/maplibre/android/gestures/RotateGestureDetector;)V') {
+        _$impls[$p]!.onRotate(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onRotateEnd(Lorg/maplibre/android/gestures/RotateGestureDetector;)V') {
+        _$impls[$p]!.onRotateEnd(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnRotateListener.implement(
+    $MapLibreMap_OnRotateListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnRotateListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnRotateListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnRotateListenerImpl {
+  factory $MapLibreMap_OnRotateListenerImpl({
+    required void Function(jni.JObject rotateGestureDetector) onRotateBegin,
+    required void Function(jni.JObject rotateGestureDetector) onRotate,
+    required void Function(jni.JObject rotateGestureDetector) onRotateEnd,
+  }) = _$MapLibreMap_OnRotateListenerImpl;
+
+  void onRotateBegin(jni.JObject rotateGestureDetector);
+  void onRotate(jni.JObject rotateGestureDetector);
+  void onRotateEnd(jni.JObject rotateGestureDetector);
+}
+
+class _$MapLibreMap_OnRotateListenerImpl
+    implements $MapLibreMap_OnRotateListenerImpl {
+  _$MapLibreMap_OnRotateListenerImpl({
+    required void Function(jni.JObject rotateGestureDetector) onRotateBegin,
+    required void Function(jni.JObject rotateGestureDetector) onRotate,
+    required void Function(jni.JObject rotateGestureDetector) onRotateEnd,
+  })  : _onRotateBegin = onRotateBegin,
+        _onRotate = onRotate,
+        _onRotateEnd = onRotateEnd;
+
+  final void Function(jni.JObject rotateGestureDetector) _onRotateBegin;
+  final void Function(jni.JObject rotateGestureDetector) _onRotate;
+  final void Function(jni.JObject rotateGestureDetector) _onRotateEnd;
+
+  void onRotateBegin(jni.JObject rotateGestureDetector) {
+    return _onRotateBegin(rotateGestureDetector);
+  }
+
+  void onRotate(jni.JObject rotateGestureDetector) {
+    return _onRotate(rotateGestureDetector);
+  }
+
+  void onRotateEnd(jni.JObject rotateGestureDetector) {
+    return _onRotateEnd(rotateGestureDetector);
+  }
 }
 
 final class $MapLibreMap_OnRotateListenerType
@@ -1663,6 +3581,132 @@ class MapLibreMap_OnScaleListener extends jni.JObject {
     _onScaleEnd(reference.pointer, _id_onScaleEnd as jni.JMethodIDPtr,
             standardScaleGestureDetector.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnScaleListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onScaleBegin(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V') {
+        _$impls[$p]!.onScaleBegin(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onScale(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V') {
+        _$impls[$p]!.onScale(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onScaleEnd(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V') {
+        _$impls[$p]!.onScaleEnd(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnScaleListener.implement(
+    $MapLibreMap_OnScaleListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnScaleListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnScaleListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnScaleListenerImpl {
+  factory $MapLibreMap_OnScaleListenerImpl({
+    required void Function(jni.JObject standardScaleGestureDetector)
+        onScaleBegin,
+    required void Function(jni.JObject standardScaleGestureDetector) onScale,
+    required void Function(jni.JObject standardScaleGestureDetector) onScaleEnd,
+  }) = _$MapLibreMap_OnScaleListenerImpl;
+
+  void onScaleBegin(jni.JObject standardScaleGestureDetector);
+  void onScale(jni.JObject standardScaleGestureDetector);
+  void onScaleEnd(jni.JObject standardScaleGestureDetector);
+}
+
+class _$MapLibreMap_OnScaleListenerImpl
+    implements $MapLibreMap_OnScaleListenerImpl {
+  _$MapLibreMap_OnScaleListenerImpl({
+    required void Function(jni.JObject standardScaleGestureDetector)
+        onScaleBegin,
+    required void Function(jni.JObject standardScaleGestureDetector) onScale,
+    required void Function(jni.JObject standardScaleGestureDetector) onScaleEnd,
+  })  : _onScaleBegin = onScaleBegin,
+        _onScale = onScale,
+        _onScaleEnd = onScaleEnd;
+
+  final void Function(jni.JObject standardScaleGestureDetector) _onScaleBegin;
+  final void Function(jni.JObject standardScaleGestureDetector) _onScale;
+  final void Function(jni.JObject standardScaleGestureDetector) _onScaleEnd;
+
+  void onScaleBegin(jni.JObject standardScaleGestureDetector) {
+    return _onScaleBegin(standardScaleGestureDetector);
+  }
+
+  void onScale(jni.JObject standardScaleGestureDetector) {
+    return _onScale(standardScaleGestureDetector);
+  }
+
+  void onScaleEnd(jni.JObject standardScaleGestureDetector) {
+    return _onScaleEnd(standardScaleGestureDetector);
   }
 }
 
@@ -1782,6 +3826,130 @@ class MapLibreMap_OnShoveListener extends jni.JObject {
             shoveGestureDetector.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_OnShoveListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'onShoveBegin(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V') {
+        _$impls[$p]!.onShoveBegin(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onShove(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V') {
+        _$impls[$p]!.onShove(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onShoveEnd(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V') {
+        _$impls[$p]!.onShoveEnd(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_OnShoveListener.implement(
+    $MapLibreMap_OnShoveListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_OnShoveListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$OnShoveListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_OnShoveListenerImpl {
+  factory $MapLibreMap_OnShoveListenerImpl({
+    required void Function(jni.JObject shoveGestureDetector) onShoveBegin,
+    required void Function(jni.JObject shoveGestureDetector) onShove,
+    required void Function(jni.JObject shoveGestureDetector) onShoveEnd,
+  }) = _$MapLibreMap_OnShoveListenerImpl;
+
+  void onShoveBegin(jni.JObject shoveGestureDetector);
+  void onShove(jni.JObject shoveGestureDetector);
+  void onShoveEnd(jni.JObject shoveGestureDetector);
+}
+
+class _$MapLibreMap_OnShoveListenerImpl
+    implements $MapLibreMap_OnShoveListenerImpl {
+  _$MapLibreMap_OnShoveListenerImpl({
+    required void Function(jni.JObject shoveGestureDetector) onShoveBegin,
+    required void Function(jni.JObject shoveGestureDetector) onShove,
+    required void Function(jni.JObject shoveGestureDetector) onShoveEnd,
+  })  : _onShoveBegin = onShoveBegin,
+        _onShove = onShove,
+        _onShoveEnd = onShoveEnd;
+
+  final void Function(jni.JObject shoveGestureDetector) _onShoveBegin;
+  final void Function(jni.JObject shoveGestureDetector) _onShove;
+  final void Function(jni.JObject shoveGestureDetector) _onShoveEnd;
+
+  void onShoveBegin(jni.JObject shoveGestureDetector) {
+    return _onShoveBegin(shoveGestureDetector);
+  }
+
+  void onShove(jni.JObject shoveGestureDetector) {
+    return _onShove(shoveGestureDetector);
+  }
+
+  void onShoveEnd(jni.JObject shoveGestureDetector) {
+    return _onShoveEnd(shoveGestureDetector);
+  }
 }
 
 final class $MapLibreMap_OnShoveListenerType
@@ -1849,6 +4017,97 @@ class MapLibreMap_SnapshotReadyCallback extends jni.JObject {
     _onSnapshotReady(reference.pointer, _id_onSnapshotReady as jni.JMethodIDPtr,
             bitmap.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapLibreMap_SnapshotReadyCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSnapshotReady(Landroid/graphics/Bitmap;)V') {
+        _$impls[$p]!.onSnapshotReady(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapLibreMap_SnapshotReadyCallback.implement(
+    $MapLibreMap_SnapshotReadyCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapLibreMap_SnapshotReadyCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapLibreMap$SnapshotReadyCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapLibreMap_SnapshotReadyCallbackImpl {
+  factory $MapLibreMap_SnapshotReadyCallbackImpl({
+    required void Function(jni.JObject bitmap) onSnapshotReady,
+  }) = _$MapLibreMap_SnapshotReadyCallbackImpl;
+
+  void onSnapshotReady(jni.JObject bitmap);
+}
+
+class _$MapLibreMap_SnapshotReadyCallbackImpl
+    implements $MapLibreMap_SnapshotReadyCallbackImpl {
+  _$MapLibreMap_SnapshotReadyCallbackImpl({
+    required void Function(jni.JObject bitmap) onSnapshotReady,
+  }) : _onSnapshotReady = onSnapshotReady;
+
+  final void Function(jni.JObject bitmap) _onSnapshotReady;
+
+  void onSnapshotReady(jni.JObject bitmap) {
+    return _onSnapshotReady(bitmap);
   }
 }
 

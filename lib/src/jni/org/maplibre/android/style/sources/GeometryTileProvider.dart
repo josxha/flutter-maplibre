@@ -85,6 +85,111 @@ class GeometryTileProvider extends jni.JObject {
             i)
         .object(const jni.JObjectType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $GeometryTileProviderImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'getFeaturesForBounds(Lorg/maplibre/android/geometry/LatLngBounds;I)Lorg/maplibre/geojson/FeatureCollection;') {
+        final $r = _$impls[$p]!.getFeaturesForBounds(
+          $a[0].castTo(const latlngbounds_.$LatLngBoundsType(),
+              releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory GeometryTileProvider.implement(
+    $GeometryTileProviderImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = GeometryTileProvider.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.style.sources.GeometryTileProvider',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $GeometryTileProviderImpl {
+  factory $GeometryTileProviderImpl({
+    required jni.JObject Function(
+            latlngbounds_.LatLngBounds latLngBounds, int i)
+        getFeaturesForBounds,
+  }) = _$GeometryTileProviderImpl;
+
+  jni.JObject getFeaturesForBounds(
+      latlngbounds_.LatLngBounds latLngBounds, int i);
+}
+
+class _$GeometryTileProviderImpl implements $GeometryTileProviderImpl {
+  _$GeometryTileProviderImpl({
+    required jni.JObject Function(
+            latlngbounds_.LatLngBounds latLngBounds, int i)
+        getFeaturesForBounds,
+  }) : _getFeaturesForBounds = getFeaturesForBounds;
+
+  final jni.JObject Function(latlngbounds_.LatLngBounds latLngBounds, int i)
+      _getFeaturesForBounds;
+
+  jni.JObject getFeaturesForBounds(
+      latlngbounds_.LatLngBounds latLngBounds, int i) {
+    return _getFeaturesForBounds(latLngBounds, i);
+  }
 }
 
 final class $GeometryTileProviderType

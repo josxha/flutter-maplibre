@@ -124,6 +124,122 @@ class MapRendererScheduler extends jni.JObject {
     _waitForEmpty(reference.pointer, _id_waitForEmpty as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapRendererSchedulerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'requestRender()V') {
+        _$impls[$p]!.requestRender();
+        return jni.nullptr;
+      }
+      if ($d == r'queueEvent(Ljava/lang/Runnable;)V') {
+        _$impls[$p]!.queueEvent(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'waitForEmpty()V') {
+        _$impls[$p]!.waitForEmpty();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapRendererScheduler.implement(
+    $MapRendererSchedulerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapRendererScheduler.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.renderer.MapRendererScheduler',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapRendererSchedulerImpl {
+  factory $MapRendererSchedulerImpl({
+    required void Function() requestRender,
+    required void Function(jni.JObject runnable) queueEvent,
+    required void Function() waitForEmpty,
+  }) = _$MapRendererSchedulerImpl;
+
+  void requestRender();
+  void queueEvent(jni.JObject runnable);
+  void waitForEmpty();
+}
+
+class _$MapRendererSchedulerImpl implements $MapRendererSchedulerImpl {
+  _$MapRendererSchedulerImpl({
+    required void Function() requestRender,
+    required void Function(jni.JObject runnable) queueEvent,
+    required void Function() waitForEmpty,
+  })  : _requestRender = requestRender,
+        _queueEvent = queueEvent,
+        _waitForEmpty = waitForEmpty;
+
+  final void Function() _requestRender;
+  final void Function(jni.JObject runnable) _queueEvent;
+  final void Function() _waitForEmpty;
+
+  void requestRender() {
+    return _requestRender();
+  }
+
+  void queueEvent(jni.JObject runnable) {
+    return _queueEvent(runnable);
+  }
+
+  void waitForEmpty() {
+    return _waitForEmpty();
+  }
 }
 
 final class $MapRendererSchedulerType

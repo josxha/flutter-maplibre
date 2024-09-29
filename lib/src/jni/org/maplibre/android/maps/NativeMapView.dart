@@ -78,6 +78,98 @@ class NativeMapView_ViewCallback extends jni.JObject {
             reference.pointer, _id_getViewContent as jni.JMethodIDPtr)
         .object(const jni.JObjectType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $NativeMapView_ViewCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'getViewContent()Landroid/graphics/Bitmap;') {
+        final $r = _$impls[$p]!.getViewContent();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory NativeMapView_ViewCallback.implement(
+    $NativeMapView_ViewCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = NativeMapView_ViewCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.NativeMapView$ViewCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $NativeMapView_ViewCallbackImpl {
+  factory $NativeMapView_ViewCallbackImpl({
+    required jni.JObject Function() getViewContent,
+  }) = _$NativeMapView_ViewCallbackImpl;
+
+  jni.JObject getViewContent();
+}
+
+class _$NativeMapView_ViewCallbackImpl
+    implements $NativeMapView_ViewCallbackImpl {
+  _$NativeMapView_ViewCallbackImpl({
+    required jni.JObject Function() getViewContent,
+  }) : _getViewContent = getViewContent;
+
+  final jni.JObject Function() _getViewContent;
+
+  jni.JObject getViewContent() {
+    return _getViewContent();
+  }
 }
 
 final class $NativeMapView_ViewCallbackType

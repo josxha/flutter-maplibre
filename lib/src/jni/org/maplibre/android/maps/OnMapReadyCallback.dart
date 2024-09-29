@@ -80,6 +80,97 @@ class OnMapReadyCallback extends jni.JObject {
             mapLibreMap.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnMapReadyCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onMapReady(Lorg/maplibre/android/maps/MapLibreMap;)V') {
+        _$impls[$p]!.onMapReady(
+          $a[0].castTo(const maplibremap_.$MapLibreMapType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnMapReadyCallback.implement(
+    $OnMapReadyCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnMapReadyCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.OnMapReadyCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnMapReadyCallbackImpl {
+  factory $OnMapReadyCallbackImpl({
+    required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
+  }) = _$OnMapReadyCallbackImpl;
+
+  void onMapReady(maplibremap_.MapLibreMap mapLibreMap);
+}
+
+class _$OnMapReadyCallbackImpl implements $OnMapReadyCallbackImpl {
+  _$OnMapReadyCallbackImpl({
+    required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
+  }) : _onMapReady = onMapReady;
+
+  final void Function(maplibremap_.MapLibreMap mapLibreMap) _onMapReady;
+
+  void onMapReady(maplibremap_.MapLibreMap mapLibreMap) {
+    return _onMapReady(mapLibreMap);
+  }
 }
 
 final class $OnMapReadyCallbackType extends jni.JObjType<OnMapReadyCallback> {

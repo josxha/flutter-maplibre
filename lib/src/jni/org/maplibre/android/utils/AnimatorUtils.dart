@@ -76,6 +76,95 @@ class AnimatorUtils_OnAnimationEndListener extends jni.JObject {
     _onAnimationEnd(reference.pointer, _id_onAnimationEnd as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $AnimatorUtils_OnAnimationEndListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onAnimationEnd()V') {
+        _$impls[$p]!.onAnimationEnd();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory AnimatorUtils_OnAnimationEndListener.implement(
+    $AnimatorUtils_OnAnimationEndListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = AnimatorUtils_OnAnimationEndListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.utils.AnimatorUtils$OnAnimationEndListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $AnimatorUtils_OnAnimationEndListenerImpl {
+  factory $AnimatorUtils_OnAnimationEndListenerImpl({
+    required void Function() onAnimationEnd,
+  }) = _$AnimatorUtils_OnAnimationEndListenerImpl;
+
+  void onAnimationEnd();
+}
+
+class _$AnimatorUtils_OnAnimationEndListenerImpl
+    implements $AnimatorUtils_OnAnimationEndListenerImpl {
+  _$AnimatorUtils_OnAnimationEndListenerImpl({
+    required void Function() onAnimationEnd,
+  }) : _onAnimationEnd = onAnimationEnd;
+
+  final void Function() _onAnimationEnd;
+
+  void onAnimationEnd() {
+    return _onAnimationEnd();
+  }
 }
 
 final class $AnimatorUtils_OnAnimationEndListenerType

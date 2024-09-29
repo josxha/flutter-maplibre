@@ -373,6 +373,276 @@ class LoggerDefinition extends jni.JObject {
             string1.reference.pointer, throwable.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $LoggerDefinitionImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'v(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.v(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'v(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V') {
+        _$impls[$p]!.v1(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'd(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.d(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'd(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V') {
+        _$impls[$p]!.d1(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'i(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.i(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V') {
+        _$impls[$p]!.i1(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'w(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.w(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V') {
+        _$impls[$p]!.w1(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'e(Ljava/lang/String;Ljava/lang/String;)V') {
+        _$impls[$p]!.e(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V') {
+        _$impls[$p]!.e1(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory LoggerDefinition.implement(
+    $LoggerDefinitionImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = LoggerDefinition.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.log.LoggerDefinition',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $LoggerDefinitionImpl {
+  factory $LoggerDefinitionImpl({
+    required void Function(jni.JString string, jni.JString string1) v,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        v1,
+    required void Function(jni.JString string, jni.JString string1) d,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        d1,
+    required void Function(jni.JString string, jni.JString string1) i,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        i1,
+    required void Function(jni.JString string, jni.JString string1) w,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        w1,
+    required void Function(jni.JString string, jni.JString string1) e,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        e1,
+  }) = _$LoggerDefinitionImpl;
+
+  void v(jni.JString string, jni.JString string1);
+  void v1(jni.JString string, jni.JString string1, jni.JObject throwable);
+  void d(jni.JString string, jni.JString string1);
+  void d1(jni.JString string, jni.JString string1, jni.JObject throwable);
+  void i(jni.JString string, jni.JString string1);
+  void i1(jni.JString string, jni.JString string1, jni.JObject throwable);
+  void w(jni.JString string, jni.JString string1);
+  void w1(jni.JString string, jni.JString string1, jni.JObject throwable);
+  void e(jni.JString string, jni.JString string1);
+  void e1(jni.JString string, jni.JString string1, jni.JObject throwable);
+}
+
+class _$LoggerDefinitionImpl implements $LoggerDefinitionImpl {
+  _$LoggerDefinitionImpl({
+    required void Function(jni.JString string, jni.JString string1) v,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        v1,
+    required void Function(jni.JString string, jni.JString string1) d,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        d1,
+    required void Function(jni.JString string, jni.JString string1) i,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        i1,
+    required void Function(jni.JString string, jni.JString string1) w,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        w1,
+    required void Function(jni.JString string, jni.JString string1) e,
+    required void Function(
+            jni.JString string, jni.JString string1, jni.JObject throwable)
+        e1,
+  })  : _v = v,
+        _v1 = v1,
+        _d = d,
+        _d1 = d1,
+        _i = i,
+        _i1 = i1,
+        _w = w,
+        _w1 = w1,
+        _e = e,
+        _e1 = e1;
+
+  final void Function(jni.JString string, jni.JString string1) _v;
+  final void Function(
+      jni.JString string, jni.JString string1, jni.JObject throwable) _v1;
+  final void Function(jni.JString string, jni.JString string1) _d;
+  final void Function(
+      jni.JString string, jni.JString string1, jni.JObject throwable) _d1;
+  final void Function(jni.JString string, jni.JString string1) _i;
+  final void Function(
+      jni.JString string, jni.JString string1, jni.JObject throwable) _i1;
+  final void Function(jni.JString string, jni.JString string1) _w;
+  final void Function(
+      jni.JString string, jni.JString string1, jni.JObject throwable) _w1;
+  final void Function(jni.JString string, jni.JString string1) _e;
+  final void Function(
+      jni.JString string, jni.JString string1, jni.JObject throwable) _e1;
+
+  void v(jni.JString string, jni.JString string1) {
+    return _v(string, string1);
+  }
+
+  void v1(jni.JString string, jni.JString string1, jni.JObject throwable) {
+    return _v1(string, string1, throwable);
+  }
+
+  void d(jni.JString string, jni.JString string1) {
+    return _d(string, string1);
+  }
+
+  void d1(jni.JString string, jni.JString string1, jni.JObject throwable) {
+    return _d1(string, string1, throwable);
+  }
+
+  void i(jni.JString string, jni.JString string1) {
+    return _i(string, string1);
+  }
+
+  void i1(jni.JString string, jni.JString string1, jni.JObject throwable) {
+    return _i1(string, string1, throwable);
+  }
+
+  void w(jni.JString string, jni.JString string1) {
+    return _w(string, string1);
+  }
+
+  void w1(jni.JString string, jni.JString string1, jni.JObject throwable) {
+    return _w1(string, string1, throwable);
+  }
+
+  void e(jni.JString string, jni.JString string1) {
+    return _e(string, string1);
+  }
+
+  void e1(jni.JString string, jni.JString string1, jni.JObject throwable) {
+    return _e1(string, string1, throwable);
+  }
 }
 
 final class $LoggerDefinitionType extends jni.JObjType<LoggerDefinition> {

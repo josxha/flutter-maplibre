@@ -101,6 +101,115 @@ class CompassListener extends jni.JObject {
             _id_onCompassAccuracyChange as jni.JMethodIDPtr, i)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $CompassListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCompassChanged(F)V') {
+        _$impls[$p]!.onCompassChanged(
+          $a[0]
+              .castTo(const jni.JFloatType(), releaseOriginal: true)
+              .floatValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onCompassAccuracyChange(I)V') {
+        _$impls[$p]!.onCompassAccuracyChange(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory CompassListener.implement(
+    $CompassListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = CompassListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.CompassListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $CompassListenerImpl {
+  factory $CompassListenerImpl({
+    required void Function(double f) onCompassChanged,
+    required void Function(int i) onCompassAccuracyChange,
+  }) = _$CompassListenerImpl;
+
+  void onCompassChanged(double f);
+  void onCompassAccuracyChange(int i);
+}
+
+class _$CompassListenerImpl implements $CompassListenerImpl {
+  _$CompassListenerImpl({
+    required void Function(double f) onCompassChanged,
+    required void Function(int i) onCompassAccuracyChange,
+  })  : _onCompassChanged = onCompassChanged,
+        _onCompassAccuracyChange = onCompassAccuracyChange;
+
+  final void Function(double f) _onCompassChanged;
+  final void Function(int i) _onCompassAccuracyChange;
+
+  void onCompassChanged(double f) {
+    return _onCompassChanged(f);
+  }
+
+  void onCompassAccuracyChange(int i) {
+    return _onCompassAccuracyChange(i);
+  }
 }
 
 final class $CompassListenerType extends jni.JObjType<CompassListener> {

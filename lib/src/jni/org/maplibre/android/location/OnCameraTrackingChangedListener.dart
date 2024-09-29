@@ -101,6 +101,112 @@ class OnCameraTrackingChangedListener extends jni.JObject {
             _id_onCameraTrackingChanged as jni.JMethodIDPtr, i)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnCameraTrackingChangedListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCameraTrackingDismissed()V') {
+        _$impls[$p]!.onCameraTrackingDismissed();
+        return jni.nullptr;
+      }
+      if ($d == r'onCameraTrackingChanged(I)V') {
+        _$impls[$p]!.onCameraTrackingChanged(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnCameraTrackingChangedListener.implement(
+    $OnCameraTrackingChangedListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnCameraTrackingChangedListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.OnCameraTrackingChangedListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnCameraTrackingChangedListenerImpl {
+  factory $OnCameraTrackingChangedListenerImpl({
+    required void Function() onCameraTrackingDismissed,
+    required void Function(int i) onCameraTrackingChanged,
+  }) = _$OnCameraTrackingChangedListenerImpl;
+
+  void onCameraTrackingDismissed();
+  void onCameraTrackingChanged(int i);
+}
+
+class _$OnCameraTrackingChangedListenerImpl
+    implements $OnCameraTrackingChangedListenerImpl {
+  _$OnCameraTrackingChangedListenerImpl({
+    required void Function() onCameraTrackingDismissed,
+    required void Function(int i) onCameraTrackingChanged,
+  })  : _onCameraTrackingDismissed = onCameraTrackingDismissed,
+        _onCameraTrackingChanged = onCameraTrackingChanged;
+
+  final void Function() _onCameraTrackingDismissed;
+  final void Function(int i) _onCameraTrackingChanged;
+
+  void onCameraTrackingDismissed() {
+    return _onCameraTrackingDismissed();
+  }
+
+  void onCameraTrackingChanged(int i) {
+    return _onCameraTrackingChanged(i);
+  }
 }
 
 final class $OnCameraTrackingChangedListenerType

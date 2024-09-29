@@ -124,6 +124,80 @@ class OfflineRegionError_ErrorReason extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $OfflineRegionError_ErrorReasonType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OfflineRegionError_ErrorReasonImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OfflineRegionError_ErrorReason.implement(
+    $OfflineRegionError_ErrorReasonImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OfflineRegionError_ErrorReason.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.offline.OfflineRegionError$ErrorReason',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OfflineRegionError_ErrorReasonImpl {
+  factory $OfflineRegionError_ErrorReasonImpl() =
+      _$OfflineRegionError_ErrorReasonImpl;
+}
+
+class _$OfflineRegionError_ErrorReasonImpl
+    implements $OfflineRegionError_ErrorReasonImpl {
+  _$OfflineRegionError_ErrorReasonImpl();
 }
 
 final class $OfflineRegionError_ErrorReasonType

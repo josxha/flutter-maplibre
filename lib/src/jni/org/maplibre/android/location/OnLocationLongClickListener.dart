@@ -77,6 +77,95 @@ class OnLocationLongClickListener extends jni.JObject {
             _id_onLocationComponentLongClick as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnLocationLongClickListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onLocationComponentLongClick()V') {
+        _$impls[$p]!.onLocationComponentLongClick();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnLocationLongClickListener.implement(
+    $OnLocationLongClickListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnLocationLongClickListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.OnLocationLongClickListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnLocationLongClickListenerImpl {
+  factory $OnLocationLongClickListenerImpl({
+    required void Function() onLocationComponentLongClick,
+  }) = _$OnLocationLongClickListenerImpl;
+
+  void onLocationComponentLongClick();
+}
+
+class _$OnLocationLongClickListenerImpl
+    implements $OnLocationLongClickListenerImpl {
+  _$OnLocationLongClickListenerImpl({
+    required void Function() onLocationComponentLongClick,
+  }) : _onLocationComponentLongClick = onLocationComponentLongClick;
+
+  final void Function() _onLocationComponentLongClick;
+
+  void onLocationComponentLongClick() {
+    return _onLocationComponentLongClick();
+  }
 }
 
 final class $OnLocationLongClickListenerType

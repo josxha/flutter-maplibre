@@ -327,6 +327,108 @@ class AttributionMeasure_Command extends jni.JObject {
             attributionMeasure.reference.pointer)
         .object(const attributionlayout_.$AttributionLayoutType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $AttributionMeasure_CommandImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'execute(Lorg/maplibre/android/attribution/AttributionMeasure;)Lorg/maplibre/android/attribution/AttributionLayout;') {
+        final $r = _$impls[$p]!.execute(
+          $a[0].castTo(const $AttributionMeasureType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory AttributionMeasure_Command.implement(
+    $AttributionMeasure_CommandImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = AttributionMeasure_Command.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.attribution.AttributionMeasure$Command',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $AttributionMeasure_CommandImpl {
+  factory $AttributionMeasure_CommandImpl({
+    required attributionlayout_.AttributionLayout Function(
+            AttributionMeasure attributionMeasure)
+        execute,
+  }) = _$AttributionMeasure_CommandImpl;
+
+  attributionlayout_.AttributionLayout execute(
+      AttributionMeasure attributionMeasure);
+}
+
+class _$AttributionMeasure_CommandImpl
+    implements $AttributionMeasure_CommandImpl {
+  _$AttributionMeasure_CommandImpl({
+    required attributionlayout_.AttributionLayout Function(
+            AttributionMeasure attributionMeasure)
+        execute,
+  }) : _execute = execute;
+
+  final attributionlayout_.AttributionLayout Function(
+      AttributionMeasure attributionMeasure) _execute;
+
+  attributionlayout_.AttributionLayout execute(
+      AttributionMeasure attributionMeasure) {
+    return _execute(attributionMeasure);
+  }
 }
 
 final class $AttributionMeasure_CommandType

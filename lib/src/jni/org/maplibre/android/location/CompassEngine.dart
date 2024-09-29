@@ -157,6 +157,147 @@ class CompassEngine extends jni.JObject {
             _id_getLastAccuracySensorStatus as jni.JMethodIDPtr)
         .integer;
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $CompassEngineImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'addCompassListener(Lorg/maplibre/android/location/CompassListener;)V') {
+        _$impls[$p]!.addCompassListener(
+          $a[0].castTo(const compasslistener_.$CompassListenerType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'removeCompassListener(Lorg/maplibre/android/location/CompassListener;)V') {
+        _$impls[$p]!.removeCompassListener(
+          $a[0].castTo(const compasslistener_.$CompassListenerType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'getLastHeading()F') {
+        final $r = _$impls[$p]!.getLastHeading();
+        return jni.JFloat($r).reference.toPointer();
+      }
+      if ($d == r'getLastAccuracySensorStatus()I') {
+        final $r = _$impls[$p]!.getLastAccuracySensorStatus();
+        return jni.JInteger($r).reference.toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory CompassEngine.implement(
+    $CompassEngineImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = CompassEngine.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.location.CompassEngine',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $CompassEngineImpl {
+  factory $CompassEngineImpl({
+    required void Function(compasslistener_.CompassListener compassListener)
+        addCompassListener,
+    required void Function(compasslistener_.CompassListener compassListener)
+        removeCompassListener,
+    required double Function() getLastHeading,
+    required int Function() getLastAccuracySensorStatus,
+  }) = _$CompassEngineImpl;
+
+  void addCompassListener(compasslistener_.CompassListener compassListener);
+  void removeCompassListener(compasslistener_.CompassListener compassListener);
+  double getLastHeading();
+  int getLastAccuracySensorStatus();
+}
+
+class _$CompassEngineImpl implements $CompassEngineImpl {
+  _$CompassEngineImpl({
+    required void Function(compasslistener_.CompassListener compassListener)
+        addCompassListener,
+    required void Function(compasslistener_.CompassListener compassListener)
+        removeCompassListener,
+    required double Function() getLastHeading,
+    required int Function() getLastAccuracySensorStatus,
+  })  : _addCompassListener = addCompassListener,
+        _removeCompassListener = removeCompassListener,
+        _getLastHeading = getLastHeading,
+        _getLastAccuracySensorStatus = getLastAccuracySensorStatus;
+
+  final void Function(compasslistener_.CompassListener compassListener)
+      _addCompassListener;
+  final void Function(compasslistener_.CompassListener compassListener)
+      _removeCompassListener;
+  final double Function() _getLastHeading;
+  final int Function() _getLastAccuracySensorStatus;
+
+  void addCompassListener(compasslistener_.CompassListener compassListener) {
+    return _addCompassListener(compassListener);
+  }
+
+  void removeCompassListener(compasslistener_.CompassListener compassListener) {
+    return _removeCompassListener(compassListener);
+  }
+
+  double getLastHeading() {
+    return _getLastHeading();
+  }
+
+  int getLastAccuracySensorStatus() {
+    return _getLastAccuracySensorStatus();
+  }
 }
 
 final class $CompassEngineType extends jni.JObjType<CompassEngine> {

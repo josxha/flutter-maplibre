@@ -1636,6 +1636,96 @@ class Style_OnStyleLoaded extends jni.JObject {
             style.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Style_OnStyleLoadedImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onStyleLoaded(Lorg/maplibre/android/maps/Style;)V') {
+        _$impls[$p]!.onStyleLoaded(
+          $a[0].castTo(const $StyleType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Style_OnStyleLoaded.implement(
+    $Style_OnStyleLoadedImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Style_OnStyleLoaded.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.Style$OnStyleLoaded',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Style_OnStyleLoadedImpl {
+  factory $Style_OnStyleLoadedImpl({
+    required void Function(Style style) onStyleLoaded,
+  }) = _$Style_OnStyleLoadedImpl;
+
+  void onStyleLoaded(Style style);
+}
+
+class _$Style_OnStyleLoadedImpl implements $Style_OnStyleLoadedImpl {
+  _$Style_OnStyleLoadedImpl({
+    required void Function(Style style) onStyleLoaded,
+  }) : _onStyleLoaded = onStyleLoaded;
+
+  final void Function(Style style) _onStyleLoaded;
+
+  void onStyleLoaded(Style style) {
+    return _onStyleLoaded(style);
+  }
 }
 
 final class $Style_OnStyleLoadedType extends jni.JObjType<Style_OnStyleLoaded> {

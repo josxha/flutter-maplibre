@@ -138,6 +138,142 @@ class HttpRequest extends jni.JObject {
     _cancelRequest(reference.pointer, _id_cancelRequest as jni.JMethodIDPtr)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $HttpRequestImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'executeRequest(Lorg/maplibre/android/http/HttpResponder;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V') {
+        _$impls[$p]!.executeRequest(
+          $a[0].castTo(const httpresponder_.$HttpResponderType(),
+              releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JLongType(), releaseOriginal: true)
+              .longValue(releaseOriginal: true),
+          $a[2].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[3].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[4].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a[5]
+              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+              .booleanValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'cancelRequest()V') {
+        _$impls[$p]!.cancelRequest();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory HttpRequest.implement(
+    $HttpRequestImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = HttpRequest.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.http.HttpRequest',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $HttpRequestImpl {
+  factory $HttpRequestImpl({
+    required void Function(
+            httpresponder_.HttpResponder httpResponder,
+            int j,
+            jni.JString string,
+            jni.JString string1,
+            jni.JString string2,
+            bool z)
+        executeRequest,
+    required void Function() cancelRequest,
+  }) = _$HttpRequestImpl;
+
+  void executeRequest(httpresponder_.HttpResponder httpResponder, int j,
+      jni.JString string, jni.JString string1, jni.JString string2, bool z);
+  void cancelRequest();
+}
+
+class _$HttpRequestImpl implements $HttpRequestImpl {
+  _$HttpRequestImpl({
+    required void Function(
+            httpresponder_.HttpResponder httpResponder,
+            int j,
+            jni.JString string,
+            jni.JString string1,
+            jni.JString string2,
+            bool z)
+        executeRequest,
+    required void Function() cancelRequest,
+  })  : _executeRequest = executeRequest,
+        _cancelRequest = cancelRequest;
+
+  final void Function(
+      httpresponder_.HttpResponder httpResponder,
+      int j,
+      jni.JString string,
+      jni.JString string1,
+      jni.JString string2,
+      bool z) _executeRequest;
+  final void Function() _cancelRequest;
+
+  void executeRequest(httpresponder_.HttpResponder httpResponder, int j,
+      jni.JString string, jni.JString string1, jni.JString string2, bool z) {
+    return _executeRequest(httpResponder, j, string, string1, string2, z);
+  }
+
+  void cancelRequest() {
+    return _cancelRequest();
+  }
 }
 
 final class $HttpRequestType extends jni.JObjType<HttpRequest> {

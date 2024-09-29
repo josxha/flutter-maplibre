@@ -13,22 +13,14 @@ preamble: |
 android_sdk_config:
   add_gradle_deps: true
   android_example: 'example/'
-#summarizer:
-#  backend: doclet
 suspend_fun_to_async: true
 output:
-  c:
-    library_name: maplibre_android
-    path: 'src/maplibre_android'
   dart:
     path: 'lib/src/jni/'
 source_path:
-  - 'android/src/main/kotlin'
   - 'android/src/main'
-  - 'android/src/main/kotlin/com/github/josxha/maplibre'
 classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
-#  - 'org.maplibre.android.maps.MapLibreMap'
   - 'org.maplibre.android.attribution'
   - 'org.maplibre.android.constants'
   - 'org.maplibre.android.camera'
@@ -49,17 +41,5 @@ classes:
   - 'org.maplibre.android.utils'
   - 'android.graphics.PointF'
   - 'com.github.josxha.maplibre.MapLibreMapRegistry'
-#exclude:
-#  fields:
-#    - 'org.apache.pdfbox.contentstream.operator.OperatorName#SHOW_TEXT_LINE_AND_SPACE'
-#maven_downloads:
-  ## For these dependencies, both source and JARs are downloaded.
-#  source_deps:
-#    - 'org.maplibre.gl:android-sdk:11.5.0'
-  ## Runtime dependencies for which bindings aren't generated directly.
-  ## Only JARs are downloaded.
-#  jar_only_deps:
-#    - 'org.maplibre.gl:android-sdk:11.5.0'
-#    - 'org.bouncycastle:bcmail-jdk15on:1.70'
-enable_experimenty:
+enable_experiment:
   - interface_implementation

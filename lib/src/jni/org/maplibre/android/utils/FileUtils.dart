@@ -494,6 +494,109 @@ class FileUtils_OnCheckFileReadPermissionListener extends jni.JObject {
   void onError() {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr).check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FileUtils_OnCheckFileReadPermissionListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onReadPermissionGranted()V') {
+        _$impls[$p]!.onReadPermissionGranted();
+        return jni.nullptr;
+      }
+      if ($d == r'onError()V') {
+        _$impls[$p]!.onError();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FileUtils_OnCheckFileReadPermissionListener.implement(
+    $FileUtils_OnCheckFileReadPermissionListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FileUtils_OnCheckFileReadPermissionListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.utils.FileUtils$OnCheckFileReadPermissionListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FileUtils_OnCheckFileReadPermissionListenerImpl {
+  factory $FileUtils_OnCheckFileReadPermissionListenerImpl({
+    required void Function() onReadPermissionGranted,
+    required void Function() onError,
+  }) = _$FileUtils_OnCheckFileReadPermissionListenerImpl;
+
+  void onReadPermissionGranted();
+  void onError();
+}
+
+class _$FileUtils_OnCheckFileReadPermissionListenerImpl
+    implements $FileUtils_OnCheckFileReadPermissionListenerImpl {
+  _$FileUtils_OnCheckFileReadPermissionListenerImpl({
+    required void Function() onReadPermissionGranted,
+    required void Function() onError,
+  })  : _onReadPermissionGranted = onReadPermissionGranted,
+        _onError = onError;
+
+  final void Function() _onReadPermissionGranted;
+  final void Function() _onError;
+
+  void onReadPermissionGranted() {
+    return _onReadPermissionGranted();
+  }
+
+  void onError() {
+    return _onError();
+  }
 }
 
 final class $FileUtils_OnCheckFileReadPermissionListenerType
@@ -586,6 +689,109 @@ class FileUtils_OnCheckFileWritePermissionListener extends jni.JObject {
   /// from: `public abstract void onError()`
   void onError() {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr).check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FileUtils_OnCheckFileWritePermissionListenerImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onWritePermissionGranted()V') {
+        _$impls[$p]!.onWritePermissionGranted();
+        return jni.nullptr;
+      }
+      if ($d == r'onError()V') {
+        _$impls[$p]!.onError();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FileUtils_OnCheckFileWritePermissionListener.implement(
+    $FileUtils_OnCheckFileWritePermissionListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FileUtils_OnCheckFileWritePermissionListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.utils.FileUtils$OnCheckFileWritePermissionListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FileUtils_OnCheckFileWritePermissionListenerImpl {
+  factory $FileUtils_OnCheckFileWritePermissionListenerImpl({
+    required void Function() onWritePermissionGranted,
+    required void Function() onError,
+  }) = _$FileUtils_OnCheckFileWritePermissionListenerImpl;
+
+  void onWritePermissionGranted();
+  void onError();
+}
+
+class _$FileUtils_OnCheckFileWritePermissionListenerImpl
+    implements $FileUtils_OnCheckFileWritePermissionListenerImpl {
+  _$FileUtils_OnCheckFileWritePermissionListenerImpl({
+    required void Function() onWritePermissionGranted,
+    required void Function() onError,
+  })  : _onWritePermissionGranted = onWritePermissionGranted,
+        _onError = onError;
+
+  final void Function() _onWritePermissionGranted;
+  final void Function() _onError;
+
+  void onWritePermissionGranted() {
+    return _onWritePermissionGranted();
+  }
+
+  void onError() {
+    return _onError();
   }
 }
 

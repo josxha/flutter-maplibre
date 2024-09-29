@@ -82,6 +82,96 @@ class FocalPointChangeListener extends jni.JObject {
             pointF.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FocalPointChangeListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onFocalPointChanged(Landroid/graphics/PointF;)V') {
+        _$impls[$p]!.onFocalPointChanged(
+          $a[0].castTo(const pointf_.$PointFType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FocalPointChangeListener.implement(
+    $FocalPointChangeListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FocalPointChangeListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.FocalPointChangeListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FocalPointChangeListenerImpl {
+  factory $FocalPointChangeListenerImpl({
+    required void Function(pointf_.PointF pointF) onFocalPointChanged,
+  }) = _$FocalPointChangeListenerImpl;
+
+  void onFocalPointChanged(pointf_.PointF pointF);
+}
+
+class _$FocalPointChangeListenerImpl implements $FocalPointChangeListenerImpl {
+  _$FocalPointChangeListenerImpl({
+    required void Function(pointf_.PointF pointF) onFocalPointChanged,
+  }) : _onFocalPointChanged = onFocalPointChanged;
+
+  final void Function(pointf_.PointF pointF) _onFocalPointChanged;
+
+  void onFocalPointChanged(pointf_.PointF pointF) {
+    return _onFocalPointChanged(pointF);
+  }
 }
 
 final class $FocalPointChangeListenerType

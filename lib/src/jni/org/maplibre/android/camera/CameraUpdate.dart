@@ -85,6 +85,108 @@ class CameraUpdate extends jni.JObject {
             mapLibreMap.reference.pointer)
         .object(const cameraposition_.$CameraPositionType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $CameraUpdateImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'getCameraPosition(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;') {
+        final $r = _$impls[$p]!.getCameraPosition(
+          $a[0].castTo(const maplibremap_.$MapLibreMapType(),
+              releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory CameraUpdate.implement(
+    $CameraUpdateImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = CameraUpdate.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.camera.CameraUpdate',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $CameraUpdateImpl {
+  factory $CameraUpdateImpl({
+    required cameraposition_.CameraPosition Function(
+            maplibremap_.MapLibreMap mapLibreMap)
+        getCameraPosition,
+  }) = _$CameraUpdateImpl;
+
+  cameraposition_.CameraPosition getCameraPosition(
+      maplibremap_.MapLibreMap mapLibreMap);
+}
+
+class _$CameraUpdateImpl implements $CameraUpdateImpl {
+  _$CameraUpdateImpl({
+    required cameraposition_.CameraPosition Function(
+            maplibremap_.MapLibreMap mapLibreMap)
+        getCameraPosition,
+  }) : _getCameraPosition = getCameraPosition;
+
+  final cameraposition_.CameraPosition Function(
+      maplibremap_.MapLibreMap mapLibreMap) _getCameraPosition;
+
+  cameraposition_.CameraPosition getCameraPosition(
+      maplibremap_.MapLibreMap mapLibreMap) {
+    return _getCameraPosition(mapLibreMap);
+  }
 }
 
 final class $CameraUpdateType extends jni.JObjType<CameraUpdate> {

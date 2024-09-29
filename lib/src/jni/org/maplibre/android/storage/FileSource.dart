@@ -82,6 +82,103 @@ class FileSource_ResourceTransformCallback extends jni.JObject {
             string.reference.pointer)
         .object(const jni.JStringType());
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FileSource_ResourceTransformCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onURL(ILjava/lang/String;)Ljava/lang/String;') {
+        final $r = _$impls[$p]!.onURL(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[1].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FileSource_ResourceTransformCallback.implement(
+    $FileSource_ResourceTransformCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FileSource_ResourceTransformCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.storage.FileSource$ResourceTransformCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FileSource_ResourceTransformCallbackImpl {
+  factory $FileSource_ResourceTransformCallbackImpl({
+    required jni.JString Function(int i, jni.JString string) onURL,
+  }) = _$FileSource_ResourceTransformCallbackImpl;
+
+  jni.JString onURL(int i, jni.JString string);
+}
+
+class _$FileSource_ResourceTransformCallbackImpl
+    implements $FileSource_ResourceTransformCallbackImpl {
+  _$FileSource_ResourceTransformCallbackImpl({
+    required jni.JString Function(int i, jni.JString string) onURL,
+  }) : _onURL = onURL;
+
+  final jni.JString Function(int i, jni.JString string) _onURL;
+
+  jni.JString onURL(int i, jni.JString string) {
+    return _onURL(i, string);
+  }
 }
 
 final class $FileSource_ResourceTransformCallbackType
@@ -176,6 +273,113 @@ class FileSource_ResourcesCachePathChangeCallback extends jni.JObject {
     _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
             string.reference.pointer)
         .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FileSource_ResourcesCachePathChangeCallbackImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSuccess(Ljava/lang/String;)V') {
+        _$impls[$p]!.onSuccess(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FileSource_ResourcesCachePathChangeCallback.implement(
+    $FileSource_ResourcesCachePathChangeCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FileSource_ResourcesCachePathChangeCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.storage.FileSource$ResourcesCachePathChangeCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FileSource_ResourcesCachePathChangeCallbackImpl {
+  factory $FileSource_ResourcesCachePathChangeCallbackImpl({
+    required void Function(jni.JString string) onSuccess,
+    required void Function(jni.JString string) onError,
+  }) = _$FileSource_ResourcesCachePathChangeCallbackImpl;
+
+  void onSuccess(jni.JString string);
+  void onError(jni.JString string);
+}
+
+class _$FileSource_ResourcesCachePathChangeCallbackImpl
+    implements $FileSource_ResourcesCachePathChangeCallbackImpl {
+  _$FileSource_ResourcesCachePathChangeCallbackImpl({
+    required void Function(jni.JString string) onSuccess,
+    required void Function(jni.JString string) onError,
+  })  : _onSuccess = onSuccess,
+        _onError = onError;
+
+  final void Function(jni.JString string) _onSuccess;
+  final void Function(jni.JString string) _onError;
+
+  void onSuccess(jni.JString string) {
+    return _onSuccess(string);
+  }
+
+  void onError(jni.JString string) {
+    return _onError(string);
   }
 }
 

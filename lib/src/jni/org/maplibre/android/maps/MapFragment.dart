@@ -86,6 +86,97 @@ class MapFragment_OnMapViewReadyCallback extends jni.JObject {
             mapView.reference.pointer)
         .check();
   }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MapFragment_OnMapViewReadyCallbackImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onMapViewReady(Lorg/maplibre/android/maps/MapView;)V') {
+        _$impls[$p]!.onMapViewReady(
+          $a[0].castTo(const mapview_.$MapViewType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MapFragment_OnMapViewReadyCallback.implement(
+    $MapFragment_OnMapViewReadyCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MapFragment_OnMapViewReadyCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'org.maplibre.android.maps.MapFragment$OnMapViewReadyCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MapFragment_OnMapViewReadyCallbackImpl {
+  factory $MapFragment_OnMapViewReadyCallbackImpl({
+    required void Function(mapview_.MapView mapView) onMapViewReady,
+  }) = _$MapFragment_OnMapViewReadyCallbackImpl;
+
+  void onMapViewReady(mapview_.MapView mapView);
+}
+
+class _$MapFragment_OnMapViewReadyCallbackImpl
+    implements $MapFragment_OnMapViewReadyCallbackImpl {
+  _$MapFragment_OnMapViewReadyCallbackImpl({
+    required void Function(mapview_.MapView mapView) onMapViewReady,
+  }) : _onMapViewReady = onMapViewReady;
+
+  final void Function(mapview_.MapView mapView) _onMapViewReady;
+
+  void onMapViewReady(mapview_.MapView mapView) {
+    return _onMapViewReady(mapView);
+  }
 }
 
 final class $MapFragment_OnMapViewReadyCallbackType
