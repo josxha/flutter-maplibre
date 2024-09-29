@@ -26,6 +26,7 @@ import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.geometry.LatLngBounds
 import org.maplibre.android.geometry.LatLngQuad
+import org.maplibre.android.location.permissions.PermissionsManager
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_ANIMATION
 import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_GESTURE
@@ -493,6 +494,9 @@ class MapLibreMapController(
         data: String,
         callback: (Result<Unit>) -> Unit
     ) {
+        val manager = PermissionsManager()
+        manager.onRequestPermissionsResult()
+        manager.requestLocationPermissions()
         val source = mapLibreMap.style?.getSourceAs<GeoJsonSource>(id)
         if (source == null) {
             callback(Result.failure(Exception("LAYER_NOT_FOUND")))
