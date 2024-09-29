@@ -123,7 +123,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final lngLat =
-    await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
+        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
     return lngLat.toPosition();
   }
 
