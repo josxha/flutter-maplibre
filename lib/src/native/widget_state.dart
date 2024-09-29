@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
+import 'package:maplibre/src/jni/org/maplibre/android/camera/_package.dart';
+import 'package:maplibre/src/jni/org/maplibre/android/geometry/_package.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
@@ -143,15 +146,31 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? webMaxDuration,
-  }) =>
-      _hostApi.animateCamera(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch ?? tilt,
-        durationMs: nativeDuration.inMilliseconds,
+    Duration? maxDuration,
+  }) async {
+    final camera = CameraPosition_Builder();
+    if (center case Position()) {
+      camera.target(
+        LatLng.new1(center.lat.toDouble(), center.lng.toDouble()),
       );
+    }
+    if (zoom case double()) camera.zoom(zoom);
+    if (bearing case double()) camera.bearing(bearing);
+    if (pitch case double()) camera.tilt(pitch);
+    final cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build());
+    _jniMapLibreMap.animateCamera2(
+      cameraUpdate,
+      maxDuration?.inMilliseconds ?? 2000,
+    );
+
+    /*return _hostApi.flyTo(
+      center: center?.toLngLat(),
+      zoom: zoom,
+      bearing: bearing,
+      pitch: pitch ?? tilt,
+      durationMs: nativeDuration.inMilliseconds,
+    );*/
+  }
 
   @override
   Future<void> fitBounds({

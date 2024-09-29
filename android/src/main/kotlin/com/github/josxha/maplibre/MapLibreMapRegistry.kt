@@ -9,6 +9,7 @@ class MapLibreMapRegistry {
         public fun get(viewId: Int): MapLibreMap? = registry[viewId]
 
         public fun add(viewId: Int, map: MapLibreMap) {
+            println("$viewId $map")
             registry[viewId] = map
         }
     }
