@@ -10,6 +10,8 @@ preamble: |
   // ignore_for_file: avoid_positional_boolean_parameters
   // ignore_for_file: sort_unnamed_constructors_first
   // ignore_for_file: always_use_package_imports
+  // ignore_for_file: use_late_for_private_fields_and_variables
+  // ignore_for_file: one_member_abstracts
 android_sdk_config:
   add_gradle_deps: true
   android_example: 'example/'
