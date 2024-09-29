@@ -136,7 +136,7 @@ final class MapLibreMapStatePigeon extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) async {
     final camera = CameraPosition_Builder();
     if (center case Position()) {
@@ -147,12 +147,11 @@ final class MapLibreMapStatePigeon extends State<MapLibreMap>
     if (zoom case double()) camera.zoom(zoom);
     if (bearing case double()) camera.bearing(bearing);
     if (pitch case double()) camera.tilt(pitch);
-    return _hostApi.flyTo(
+    return _hostApi.moveCamera(
       center: center?.toLngLat(),
       zoom: zoom,
       bearing: bearing,
       pitch: pitch ?? tilt,
-      durationMs: nativeDuration.inMilliseconds,
     );
   }
 

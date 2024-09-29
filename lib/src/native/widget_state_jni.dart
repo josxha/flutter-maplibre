@@ -144,7 +144,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     double? pitch,
   }) =>
-      _hostApi.jumpTo(
+      _hostApi.moveCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
@@ -160,7 +160,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
-    Duration? maxDuration,
+    Duration? webMaxDuration,
   }) async {
     final camera = CameraPosition_Builder();
     if (center case Position()) {
@@ -171,7 +171,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     if (zoom case double()) camera.zoom(zoom);
     if (bearing case double()) camera.bearing(bearing);
     if (pitch case double()) camera.tilt(pitch);
-    return _hostApi.flyTo(
+    return _hostApi.animateCamera(
       center: center?.toLngLat(),
       zoom: zoom,
       bearing: bearing,
@@ -179,6 +179,28 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       durationMs: nativeDuration.inMilliseconds,
     );
   }
+
+  @override
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+    Offset offset = Offset.zero,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) =>
+      _hostApi.fitBounds(
+        bounds: bounds.toLngLatBounds(),
+        bearing: bearing,
+        pitch: pitch,
+        durationMs: nativeDuration.inMilliseconds,
+        offset: offset.toOffset(),
+        padding: padding.toPadding(),
+      );
 
   @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
