@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/jni/org/maplibre/android/camera/_package.dart';
@@ -11,13 +12,24 @@ import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
-/// non-web platforms like android or ios.
-final class MapLibreMapStateNative extends State<MapLibreMap>
+/// android using JNI and Pigeon as a fallback.
+final class MapLibreMapStateJni extends State<MapLibreMap>
     implements MapController, pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
-  late final jni.MapLibreMap _jniMapLibreMap;
+  late final int _viewId;
+  jni.MapLibreMap? _cachedJniMapLibreMap;
+  jni.Projection? _cachedJniProjection;
+  jni.Style? _cachedJniStyle;
 
   MapOptions get _options => widget.options;
+
+  jni.MapLibreMap get _jniMapLibreMap =>
+      _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.Companion.get0(_viewId);
+
+  jni.Projection get _jniProjection =>
+      _cachedJniProjection ??= _jniMapLibreMap.getProjection();
+
+  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle1();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +68,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
-    _jniMapLibreMap = jni.MapLibreMapRegistry.Companion.get0(viewId);
-
+    _viewId = viewId;
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
   }
@@ -70,7 +81,9 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   void dispose() {
-    _jniMapLibreMap.release();
+    _cachedJniStyle?.release();
+    _cachedJniProjection?.release();
+    _cachedJniMapLibreMap?.release();
     super.dispose();
   }
 
@@ -108,18 +121,25 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
-    final lngLat =
-        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
-    return lngLat.toPosition();
+    final jniPoint = jni.PointF.new1(screenLocation.dx, screenLocation.dy);
+    final jniLatLng = _jniProjection.fromScreenLocation(jniPoint);
+    final position = jniLatLng.toPosition();
+    jniPoint.release();
+    jniLatLng.release();
+    return position;
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenLocation = await _hostApi.toScreenLocation(
-      lngLat.lng.toDouble(),
+    final jniLatLng = jni.LatLng.new1(
       lngLat.lat.toDouble(),
+      lngLat.lng.toDouble(),
     );
-    return Offset(screenLocation.x, screenLocation.y);
+    final jniPointF = _jniProjection.toScreenLocation(jniLatLng);
+    final offset = Offset(jniPointF.x, jniPointF.y);
+    jniPointF.release();
+    jniLatLng.release();
+    return offset;
   }
 
   @override
@@ -130,7 +150,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     @Deprecated('Renamed to pitch') double? tilt,
     double? pitch,
   }) =>
-      _hostApi.moveCamera(
+      _hostApi.jumpTo(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
@@ -157,45 +177,18 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     if (zoom case double()) camera.zoom(zoom);
     if (bearing case double()) camera.bearing(bearing);
     if (pitch case double()) camera.tilt(pitch);
-    final cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build());
-    _jniMapLibreMap.animateCamera2(
-      cameraUpdate,
-      maxDuration?.inMilliseconds ?? 2000,
-    );
-
-    /*return _hostApi.flyTo(
+    return _hostApi.flyTo(
       center: center?.toLngLat(),
       zoom: zoom,
       bearing: bearing,
       pitch: pitch ?? tilt,
       durationMs: nativeDuration.inMilliseconds,
-    );*/
+    );
   }
 
   @override
-  Future<void> fitBounds({
-    required LngLatBounds bounds,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    Offset offset = Offset.zero,
-    double webMaxZoom = double.maxFinite,
-    bool webLinear = false,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) =>
-      _hostApi.fitBounds(
-        bounds: bounds.toLngLatBounds(),
-        bearing: bearing,
-        pitch: pitch,
-        durationMs: nativeDuration.inMilliseconds,
-        offset: offset.toOffset(),
-        padding: padding.toPadding(),
-      );
-
-  @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
+    // TODO: evaluate if jni would improve this function
     await switch (layer) {
       FillLayer() => _hostApi.addFillLayer(
           id: layer.id,
@@ -264,6 +257,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<void> addSource(Source source) async {
+    // TODO: evaluate if jni would improve this function
     await switch (source) {
       GeoJsonSource() =>
         _hostApi.addGeoJsonSource(id: source.id, data: source.data),
@@ -412,42 +406,54 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
 
   @override
   Future<MapCamera> getCamera() async {
-    final camera = await _hostApi.getCamera();
-    return MapCamera(
-      center: camera.center.toPosition(),
-      zoom: camera.zoom,
-      pitch: camera.pitch,
-      bearing: camera.bearing,
+    final jniCamera = _jniMapLibreMap.getCameraPosition();
+    final camera = MapCamera(
+      center: Position(
+        jniCamera.target.getLongitude(),
+        jniCamera.target.getLatitude(),
+      ),
+      zoom: jniCamera.zoom,
+      pitch: jniCamera.tilt,
+      bearing: jniCamera.bearing,
     );
+    jniCamera.release();
+    return camera;
   }
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _hostApi.getMetersPerPixelAtLatitude(latitude);
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    final bounds = await _hostApi.getVisibleRegion();
-    return LngLatBounds(
-      longitudeWest: bounds.longitudeWest,
-      longitudeEast: bounds.longitudeEast,
-      latitudeSouth: bounds.latitudeSouth,
-      latitudeNorth: bounds.latitudeNorth,
+    final jniRegion = _jniProjection.getVisibleRegion();
+    final jniBounds = jniRegion.latLngBounds;
+    final bounds = LngLatBounds(
+      longitudeWest: jniBounds.longitudeWest,
+      longitudeEast: jniBounds.longitudeEast,
+      latitudeSouth: jniBounds.latitudeSouth,
+      latitudeNorth: jniBounds.latitudeNorth,
     );
+    jniBounds.release();
+    jniRegion.release();
+    return bounds;
   }
 
   @override
-  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
+  Future<void> removeLayer(String id) async =>
+      _jniStyle.removeLayer(id.toJString());
 
   @override
-  Future<void> removeSource(String id) => _hostApi.removeSource(id);
+  Future<void> removeSource(String id) async =>
+      _jniStyle.removeSource(id.toJString());
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) =>
+  Future<void> addImage(String id, Uint8List bytes) async =>
       _hostApi.addImage(id, bytes);
 
   @override
-  Future<void> removeImage(String id) => _hostApi.removeImage(id);
+  Future<void> removeImage(String id) async =>
+      _jniStyle.removeImage(id.toJString());
 
   @override
   Future<void> updateGeoJsonSource({

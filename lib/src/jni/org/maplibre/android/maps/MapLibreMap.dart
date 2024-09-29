@@ -40,6 +40,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../../../android/graphics/PointF.dart' as pointf_;
+
 import '../camera/CameraPosition.dart' as cameraposition_;
 
 import '../camera/CameraUpdate.dart' as cameraupdate_;
@@ -5315,7 +5317,7 @@ class MapLibreMap extends jni.JObject {
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   jni.JList<jni.JObject> queryRenderedFeatures(
-    jni.JObject pointF,
+    pointf_.PointF pointF,
     jni.JArray<jni.JString> strings,
   ) {
     return _queryRenderedFeatures(
@@ -5353,7 +5355,7 @@ class MapLibreMap extends jni.JObject {
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   jni.JList<jni.JObject> queryRenderedFeatures1(
-    jni.JObject pointF,
+    pointf_.PointF pointF,
     jni.JObject expression,
     jni.JArray<jni.JString> strings,
   ) {

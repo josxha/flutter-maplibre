@@ -40,6 +40,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../../../android/graphics/PointF.dart' as pointf_;
+
 import 'AttributionDialogManager.dart' as attributiondialogmanager_;
 
 /// from: `org.maplibre.android.maps.UiSettings`
@@ -1818,7 +1820,7 @@ class UiSettings extends jni.JObject {
 
   /// from: `public void setFocalPoint(android.graphics.PointF pointF)`
   void setFocalPoint(
-    jni.JObject pointF,
+    pointf_.PointF pointF,
   ) {
     _setFocalPoint(reference.pointer, _id_setFocalPoint as jni.JMethodIDPtr,
             pointF.reference.pointer)
@@ -1844,10 +1846,10 @@ class UiSettings extends jni.JObject {
 
   /// from: `public android.graphics.PointF getFocalPoint()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getFocalPoint() {
+  pointf_.PointF getFocalPoint() {
     return _getFocalPoint(
             reference.pointer, _id_getFocalPoint as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const pointf_.$PointFType());
   }
 
   static final _id_getHeight = _class.instanceMethodId(

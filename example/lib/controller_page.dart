@@ -53,12 +53,11 @@ class _ControllerPageState extends State<ControllerPage> {
                         bearing: -50,
                         pitch: 60,
                       );
-                      debugPrint('animateTo end');
-                    } catch (error) {
-                      final e = error as PlatformException;
+                      debugPrint('flyTo end');
+                    } on PlatformException catch (error) {
                       debugPrint(
-                        'animateTo cancelled: code: '
-                        '"${e.code}", message: "${e.message}"',
+                        'flyTo cancelled: code: '
+                        '"${error.code}", message: "${error.message}"',
                       );
                     }
                   },
@@ -170,6 +169,11 @@ pitch: ${camera.pitch}'''),
             child: MapLibreMap(
               options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
               onMapCreated: (controller) => _controller = controller,
+              onEvent: (event) {
+                if (event case MapEventClick()) {
+                  print(_controller.toScreenLocation(event.point));
+                }
+              },
             ),
           ),
         ],

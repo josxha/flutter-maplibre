@@ -40,6 +40,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../../../android/graphics/PointF.dart' as pointf_;
+
 /// from: `org.maplibre.android.maps.FocalPointChangeListener`
 class FocalPointChangeListener extends jni.JObject {
   @override
@@ -72,7 +74,7 @@ class FocalPointChangeListener extends jni.JObject {
 
   /// from: `public abstract void onFocalPointChanged(android.graphics.PointF pointF)`
   void onFocalPointChanged(
-    jni.JObject pointF,
+    pointf_.PointF pointF,
   ) {
     _onFocalPointChanged(
             reference.pointer,

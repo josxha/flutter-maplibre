@@ -40,6 +40,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../../../android/graphics/PointF.dart' as pointf_;
+
 import '../geometry/LatLng.dart' as latlng_;
 
 import '../geometry/ProjectedMeters.dart' as projectedmeters_;
@@ -181,7 +183,7 @@ class Projection extends jni.JObject {
   /// from: `public org.maplibre.android.geometry.LatLng fromScreenLocation(android.graphics.PointF pointF)`
   /// The returned object must be released after use, by calling the [release] method.
   latlng_.LatLng fromScreenLocation(
-    jni.JObject pointF,
+    pointf_.PointF pointF,
   ) {
     return _fromScreenLocation(
             reference.pointer,
@@ -315,12 +317,12 @@ class Projection extends jni.JObject {
 
   /// from: `public android.graphics.PointF toScreenLocation(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject toScreenLocation(
+  pointf_.PointF toScreenLocation(
     latlng_.LatLng latLng,
   ) {
     return _toScreenLocation(reference.pointer,
             _id_toScreenLocation as jni.JMethodIDPtr, latLng.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const pointf_.$PointFType());
   }
 
   static final _id_toScreenLocations = _class.instanceMethodId(
