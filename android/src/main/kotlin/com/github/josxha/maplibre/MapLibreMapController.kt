@@ -83,12 +83,7 @@ class MapLibreMapController(
                 .bearing(mapOptions.bearing)
                 .tilt(mapOptions.pitch)
             if (mapOptions.center != null)
-                cameraBuilder.target(
-                    LatLng(
-                        mapOptions.center!!.lat,
-                        mapOptions.center!!.lng
-                    )
-                )
+                cameraBuilder.target(LatLng(mapOptions.center!!.lat, mapOptions.center!!.lng))
             val options = MapLibreMapOptions.createFromAttributes(context)
                 .attributionEnabled(true)
                 .logoEnabled(true)
