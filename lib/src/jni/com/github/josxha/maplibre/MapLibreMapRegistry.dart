@@ -58,30 +58,6 @@ class MapLibreMapRegistry_Companion extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $MapLibreMapRegistry_CompanionType();
-  static final _id_getRegistry = _class.instanceMethodId(
-    r'getRegistry',
-    r'()Ljava/util/HashMap;',
-  );
-
-  static final _getRegistry = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: `public final java.util.HashMap getRegistry()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getRegistry() {
-    return _getRegistry(reference.pointer, _id_getRegistry as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
   static final _id_get0 = _class.instanceMethodId(
     r'get',
     r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
