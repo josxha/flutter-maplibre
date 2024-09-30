@@ -12,9 +12,9 @@ class Fill extends Annotation {
 }
 
 /// A [Fill] layer.
-class FillLayer extends AnnotationLayer<Fill> {
-  /// Create a new [FillLayer] instance.
-  const FillLayer({
+class FillAnnotationLayer extends AnnotationLayer<Fill> {
+  /// Create a new [FillAnnotationLayer] instance.
+  const FillAnnotationLayer({
     required List<Fill> fills,
   }) : super._(list: fills);
 }

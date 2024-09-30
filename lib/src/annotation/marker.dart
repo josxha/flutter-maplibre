@@ -12,9 +12,9 @@ class Marker extends Annotation {
 }
 
 /// A marker layer.
-class MarkerLayer extends AnnotationLayer<Marker> {
-  /// Create a new [MarkerLayer] instance.
-  const MarkerLayer({
+class MarkerAnnotationLayer extends AnnotationLayer<Marker> {
+  /// Create a new [MarkerAnnotationLayer] instance.
+  const MarkerAnnotationLayer({
     required List<Marker> markers,
   }) : super._(list: markers);
 }

@@ -47,7 +47,7 @@ class MapLibreMap extends StatefulWidget {
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
 
-  /// Annotation layers like [MarkerLayer] or [PolylineLayer].
+  /// Annotation layers like [MarkerAnnotationLayer] or [PolylineAnnotationLayer].
   final List<AnnotationLayer> layers;
 
   @override

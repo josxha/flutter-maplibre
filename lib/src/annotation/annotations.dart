@@ -11,7 +11,7 @@ sealed class Annotation {
   const Annotation._();
 }
 
-/// This class is the base for all annotation layer classes like [MarkerLayer].
+/// This class is the base for all annotation layer classes like [MarkerAnnotationLayer].
 sealed class AnnotationLayer<A extends Annotation> {
   const AnnotationLayer._({required this.list});
 

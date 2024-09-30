@@ -12,9 +12,9 @@ class Polyline extends Annotation {
 }
 
 /// A [Polyline] layer.
-class PolylineLayer extends AnnotationLayer<Polyline> {
-  /// Create a new [PolylineLayer] instance.
-  const PolylineLayer({
+class PolylineAnnotationLayer extends AnnotationLayer<Polyline> {
+  /// Create a new [PolylineAnnotationLayer] instance.
+  const PolylineAnnotationLayer({
     required List<Polyline> polyline,
   }) : super._(list: polyline);
 }
