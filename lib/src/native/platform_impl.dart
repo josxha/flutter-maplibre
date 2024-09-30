@@ -7,7 +7,7 @@ import 'package:maplibre/src/native/widget_state_pigeon.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [PlatformInterface] that uses method channels.
-final class PlatformNative extends PlatformInterface {
+final class PlatformImpl extends PlatformInterface {
   @override
   State<MapLibreMap> createWidgetState() =>
       Platform.isAndroid ? MapLibreMapStateJni() : MapLibreMapStatePigeon();
