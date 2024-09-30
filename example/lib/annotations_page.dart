@@ -13,6 +13,12 @@ class AnnotationsPage extends StatefulWidget {
 
 class _AnnotationsPageState extends State<AnnotationsPage> {
   late final MapController _controller;
+  final _markers = <Marker>[
+    Marker(point: Position(9.17, 47.68)),
+    Marker(point: Position(9.17, 48)),
+    Marker(point: Position(9, 48)),
+    Marker(point: Position(9.5, 48)),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +27,16 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
       body: MapLibreMap(
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
-        onStyleLoaded: () async {
-          await _controller.getCamera();
-          // TODO add annotations
+        onEvent: (event) {
+          if (event case MapEventClick()) {
+            setState(() {
+              _markers.add(Marker(point: event.point));
+            });
+          }
         },
+        layers: [
+          MarkerAnnotationLayer(markers: _markers),
+        ],
       ),
     );
   }
