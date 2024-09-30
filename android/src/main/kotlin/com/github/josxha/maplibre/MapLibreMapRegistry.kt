@@ -2,6 +2,7 @@ package com.github.josxha.maplibre
 
 import org.maplibre.android.maps.MapLibreMap
 
+@Keep
 class MapLibreMapRegistry {
     companion object {
         private val registry = HashMap<Int, MapLibreMap>()
