@@ -1,5 +1,6 @@
 package com.github.josxha.maplibre
 
+import androidx.annotation.Keep;
 import org.maplibre.android.maps.MapLibreMap
 
 @Keep
