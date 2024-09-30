@@ -51,5 +51,5 @@ flutter:
       windows:
         pluginClass: MaplibrePluginCApi
       web:
-        pluginClass: PlatformWeb
+        pluginClass: PlatformImpl
         fileName: src/web/platform_impl.dart
