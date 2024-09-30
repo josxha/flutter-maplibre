@@ -90,6 +90,9 @@ extension type JsMap._(Camera _) implements Camera {
   /// Update the maximum bounding box of the map camera.
   external void setMaxBounds(LngLatBounds? maxBounds);
 
+  /// Set projection (mercator, globe)
+  external void setProjection(ProjectionSpecification projection);
+
   /// Get a Source by its id.
   external SourceSpecification getSource(String id);
 
@@ -106,6 +109,14 @@ extension type JsMap._(Camera _) implements Camera {
   external bool pitchWithRotate;
   external TwoFingersTouchPitchHandler touchPitch;
   external TwoFingersTouchZoomRotateHandler touchZoomRotate;
+}
+
+/// Projection options
+@anonymous
+@JS()
+extension type ProjectionSpecification._(JSObject _) implements JSObject {
+  /// Create a new JS [ProjectionSpecification] object.
+  external factory ProjectionSpecification({required String type});
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

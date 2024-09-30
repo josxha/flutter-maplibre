@@ -28,6 +28,12 @@ class _WebControlsPageState extends State<WebControlsPage> {
             NavigationControl(visualizePitch: true),
           ],
         ),
+        onEvent: (event) {
+          if (event case MapEventMoveCamera()) {
+            // ignore: avoid_print
+            print('zoom: ${event.camera.zoom}');
+          }
+        },
       ),
     );
   }
