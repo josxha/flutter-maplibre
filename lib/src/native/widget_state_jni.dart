@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/jni/android/app/Activity.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
-import 'package:maplibre/src/jni/org/maplibre/android/camera/_package.dart';
-import 'package:maplibre/src/jni/org/maplibre/android/geometry/_package.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
@@ -164,15 +162,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    final camera = CameraPosition_Builder();
-    if (center case Position()) {
-      camera.target(
-        LatLng.new1(center.lat.toDouble(), center.lng.toDouble()),
-      );
-    }
-    if (zoom case double()) camera.zoom(zoom);
-    if (bearing case double()) camera.bearing(bearing);
-    if (pitch case double()) camera.tilt(pitch);
     return _hostApi.animateCamera(
       center: center?.toLngLat(),
       zoom: zoom,
@@ -444,16 +433,34 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    final activity = jni.MapLibreMapRegistry.Companion.getActivity();
-
-
-    final bounds = await _hostApi.getVisibleRegion();
-    return LngLatBounds(
-      longitudeWest: bounds.longitudeWest,
-      longitudeEast: bounds.longitudeEast,
-      latitudeSouth: bounds.latitudeSouth,
-      latitudeNorth: bounds.latitudeNorth,
+    final projectionRef = _jniProjection.reference;
+    final boundsRef = await runOnPlatformThread<JReference>(() {
+      final projection = jni.Projection.fromReference(projectionRef);
+      final region = projection.getVisibleRegion();
+      final bounds = region.latLngBounds;
+      region.release();
+      return bounds.reference;
+    });
+    final jniBounds = jni.LatLngBounds.fromReference(boundsRef);
+    final bounds = LngLatBounds(
+      longitudeWest: jniBounds.longitudeWest,
+      longitudeEast: jniBounds.longitudeEast,
+      latitudeSouth: jniBounds.latitudeSouth,
+      latitudeNorth: jniBounds.latitudeNorth,
     );
+    jniBounds.release();
+    return bounds;
+  }
+
+  Future<LngLatBounds> getVisibleRegionPigeon() async {
+    final boundsPigeon = await _hostApi.getVisibleRegion();
+    final bounds = LngLatBounds(
+      longitudeWest: boundsPigeon.longitudeWest,
+      longitudeEast: boundsPigeon.longitudeEast,
+      latitudeSouth: boundsPigeon.latitudeSouth,
+      latitudeNorth: boundsPigeon.latitudeNorth,
+    );
+    return bounds;
   }
 
   @override
