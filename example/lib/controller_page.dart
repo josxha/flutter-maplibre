@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/native/widget_state_jni.dart';
 
 @immutable
 class ControllerPage extends StatefulWidget {
@@ -163,28 +162,6 @@ pitch: ${camera.pitch}'''),
                   },
                   child: const Text(
                     'Visible\nregion',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () async {
-                    final ctrl = _controller as MapLibreMapStateJni;
-                    final sw = Stopwatch()..start();
-                    final region = await ctrl.getVisibleRegionPigeon();
-                    final time = sw.elapsedMicroseconds;
-                    sw.stop();
-
-                    debugPrint(region.toString());
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(
-                          SnackBar(content: Text('$region $time')),
-                        );
-                    }
-                  },
-                  child: const Text(
-                    'Visible\nregion (pigeon)',
                     textAlign: TextAlign.center,
                   ),
                 ),

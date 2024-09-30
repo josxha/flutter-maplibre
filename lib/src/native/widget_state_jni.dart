@@ -452,17 +452,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     return bounds;
   }
 
-  Future<LngLatBounds> getVisibleRegionPigeon() async {
-    final boundsPigeon = await _hostApi.getVisibleRegion();
-    final bounds = LngLatBounds(
-      longitudeWest: boundsPigeon.longitudeWest,
-      longitudeEast: boundsPigeon.longitudeEast,
-      latitudeSouth: boundsPigeon.latitudeSouth,
-      latitudeNorth: boundsPigeon.latitudeNorth,
-    );
-    return bounds;
-  }
-
   @override
   Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
 
