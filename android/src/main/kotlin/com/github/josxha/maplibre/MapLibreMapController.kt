@@ -18,6 +18,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
+// if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
@@ -83,12 +84,7 @@ class MapLibreMapController(
                 .bearing(mapOptions.bearing)
                 .tilt(mapOptions.pitch)
             if (mapOptions.center != null)
-                cameraBuilder.target(
-                    LatLng(
-                        mapOptions.center!!.lat,
-                        mapOptions.center!!.lng
-                    )
-                )
+                cameraBuilder.target(LatLng(mapOptions.center!!.lat, mapOptions.center!!.lng))
             val options = MapLibreMapOptions.createFromAttributes(context)
                 .attributionEnabled(true)
                 .logoEnabled(true)

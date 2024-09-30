@@ -24,6 +24,7 @@ class MapOptions {
     @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
+    this.androidMode = AndroidMode.textureLayer,
   }) : pitch = tilt ?? pitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -98,6 +99,11 @@ class MapOptions {
   /// Not supported on web.
   @Deprecated('Use the onEvent() callback instead.')
   final OnClickCallback? onLongClick;
+
+  /// The platform view type used on android.
+  ///
+  /// https://docs.flutter.dev/platform-integration/android/platform-views
+  final AndroidMode androidMode;
 }
 
 /// The base [MapControl] class that is the parent of all web-only user
@@ -317,3 +323,33 @@ class TerrainControl extends MapControl {
 /// Callback that is used for map interactions like [MapOptions.onClick].
 @Deprecated('Use the onEvent() callback instead.')
 typedef OnClickCallback = void Function(Position point);
+
+/// The different ways a MapLibre map can be displayed on Android.
+///
+/// https://docs.flutter.dev/platform-integration/android/platform-views
+enum AndroidMode {
+  /// Platform Views are rendered as they are normally. Flutter content is
+  /// rendered into a texture. SurfaceFlinger composes the Flutter content and
+  /// the platform views.
+  ///
+  /// - (+) best performance and fidelity of Android views.
+  /// - (-) Flutter performance suffers.
+  /// - (-) FPS of application will be lower.
+  /// - (-) Certain transformations that can be applied to Flutter widgets will not
+  ///   work when applied to platform views.
+  hybridComposition,
+
+  /// Platform Views are rendered into a texture. Flutter draws the platform
+  /// views (via the texture). Flutter content is rendered directly into a
+  /// Surface.
+  ///
+  /// - (+) good performance for Android Views
+  /// - (+) best performance for Flutter rendering.
+  /// - (+) all transformations work correctly.
+  /// - (-) quick scrolling (e.g. a web view) will be janky
+  /// - (-) SurfaceViews are problematic in this mode and will be moved into a
+  ///   virtual display (breaking a11y)
+  /// - (-) Text magnifier will break unless Flutter is rendered into a
+  ///   TextureView.
+  textureLayer;
+}
