@@ -42,6 +42,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../../../../android/app/Activity.dart' as activity_;
+
 import 'PermissionsListener.dart' as permissionslistener_;
 
 /// from: `org.maplibre.android.location.permissions.PermissionsManager`
@@ -230,7 +232,7 @@ class PermissionsManager extends jni.JObject {
 
   /// from: `public void requestLocationPermissions(android.app.Activity activity)`
   void requestLocationPermissions(
-    jni.JObject activity,
+    activity_.Activity activity,
   ) {
     _requestLocationPermissions(
             reference.pointer,

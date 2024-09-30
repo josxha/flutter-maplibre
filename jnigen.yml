@@ -23,6 +23,9 @@ source_path:
   - 'android/src/main'
 classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
+  - 'android.app.Activity'
+  - 'android.graphics.PointF'
+  - 'com.github.josxha.maplibre.MapLibreMapRegistry'
   - 'org.maplibre.android.attribution'
   - 'org.maplibre.android.constants'
   - 'org.maplibre.android.camera'
@@ -41,7 +44,5 @@ classes:
   - 'org.maplibre.android.text'
   - 'org.maplibre.android.util'
   - 'org.maplibre.android.utils'
-  - 'android.graphics.PointF'
-  - 'com.github.josxha.maplibre.MapLibreMapRegistry'
 enable_experiment:
   - interface_implementation

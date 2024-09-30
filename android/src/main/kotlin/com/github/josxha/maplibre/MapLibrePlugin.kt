@@ -23,6 +23,7 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         flutterAssets = binding.flutterAssets
+        MapLibreMapRegistry.activity = binding.activity
         binding
             .platformViewRegistry
             .registerViewFactory(

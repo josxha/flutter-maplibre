@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/jni/android/app/Activity.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/jni/org/maplibre/android/camera/_package.dart';
 import 'package:maplibre/src/jni/org/maplibre/android/geometry/_package.dart';
@@ -442,6 +444,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
+    final activity = jni.MapLibreMapRegistry.Companion.getActivity();
+
+
     final bounds = await _hostApi.getVisibleRegion();
     return LngLatBounds(
       longitudeWest: bounds.longitudeWest,
