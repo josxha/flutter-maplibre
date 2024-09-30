@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -23,12 +22,8 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
-          if (kIsWeb) {
-            // This kind of Marker is only supported on web
-            final _ = await _controller.addMarker(
-              Marker(point: Position(9, 47)),
-            );
-          }
+          await _controller.getCamera();
+          // TODO add annotations
         },
       ),
     );

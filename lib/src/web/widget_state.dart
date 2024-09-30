@@ -236,23 +236,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<Marker> addMarker(Marker marker) async {
-    final lngLat = interop.LngLat(
-      lng: marker.point.lng,
-      lat: marker.point.lat,
-    );
-    final _ = interop.Marker(
-      interop.MarkerOptions(
-        color: marker.color == null
-            ? null
-            : '#${marker.color!.value.toRadixString(16)}',
-        draggable: marker.draggable,
-      ),
-    ).setLngLat(lngLat).addTo(_map);
-    return marker;
-  }
-
-  @override
   Future<Position> toLngLat(Offset screenLocation) async =>
       _map.unproject(screenLocation.toJsPoint()).toPosition();
 

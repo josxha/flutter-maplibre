@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/annotation/annotations.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// The [MapLibreMap] widget that can be inserted into the flutter widget tree.
@@ -15,6 +16,7 @@ class MapLibreMap extends StatefulWidget {
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
+    this.layers = const [],
     super.key,
   });
 
@@ -44,6 +46,9 @@ class MapLibreMap extends StatefulWidget {
 
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
+
+  /// Annotation layers like [MarkerLayer] or [PolylineLayer].
+  final List<AnnotationLayer> layers;
 
   @override
   State<MapLibreMap> createState() =>
