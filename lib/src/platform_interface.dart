@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/native/platform_native.dart';
+import 'package:maplibre/src/native/platform_native.dart'
+    if (dart.library.html) 'package:maplibre/src/web/platform_web.dart';
 
 /// https://pub.dev/packages/plugin_platform_interface#a-note-about-base
 abstract base class PlatformInterface {
