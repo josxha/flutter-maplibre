@@ -5,8 +5,8 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   /// Create a new [PolygonAnnotationLayer] instance.
   PolygonAnnotationLayer({
     required List<Polygon> polygons,
-    this.color = const Color(0x00000000),
-    this.outlineColor = const Color(0x00000000),
+    this.color = const Color(0xFF000000),
+    this.outlineColor = const Color(0xFF000000),
   }) : super._(
           list: polygons,
           sourceId: 'maplibre-polygon-source-${_counter++}',

@@ -6,10 +6,10 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   CircleAnnotationLayer({
     required List<Point> points,
     this.radius = 5,
-    this.color = const Color(0x00000000),
+    this.color = const Color(0xFF000000),
     this.blur = 0,
     this.strokeWidth = 0,
-    this.strokeColor = const Color(0x00000000),
+    this.strokeColor = const Color(0xFF000000),
   }) : super._(
           list: points,
           sourceId: 'maplibre-circle-source-${_counter++}',

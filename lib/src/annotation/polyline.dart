@@ -5,7 +5,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   /// Create a new [PolylineAnnotationLayer] instance.
   PolylineAnnotationLayer({
     required List<LineString> polylines,
-    this.color = const Color(0x00000000),
+    this.color = const Color(0xFF000000),
     this.width = 1,
     this.gapWidth = 0,
     this.blur = 0,
