@@ -18,10 +18,6 @@ class MapOptions {
     this.maxZoom = 22,
     this.minPitch = 0,
     this.maxPitch = 60,
-    @Deprecated('Use the onEvent() callback instead.') this.onClick,
-    @Deprecated('Use the onEvent() callback instead.') this.onDoubleClick,
-    @Deprecated('Use the onEvent() callback instead.') this.onSecondaryClick,
-    @Deprecated('Use the onEvent() callback instead.') this.onLongClick,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
   }) : pitch = tilt ?? pitch;
@@ -75,31 +71,4 @@ class MapOptions {
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
-
-  /// A callback that fires when the user clicks on the map.
-  @Deprecated('Use the onEvent() callback instead.')
-  final OnClickCallback? onClick;
-
-  /// A callback that fires when the user clicks twice on the map.
-  ///
-  /// Only supported on web.
-  @Deprecated('Use the onEvent() callback instead.')
-  final OnClickCallback? onDoubleClick;
-
-  /// A callback that fires when the user clicks on the map with the secondary
-  /// button (e.g. by default the right mouse button).
-  ///
-  /// Only supported on web.
-  @Deprecated('Use the onEvent() callback instead.')
-  final OnClickCallback? onSecondaryClick;
-
-  /// A callback that fires when the user performs a long click or tap on map.
-  ///
-  /// Not supported on web.
-  @Deprecated('Use the onEvent() callback instead.')
-  final OnClickCallback? onLongClick;
 }
-
-/// Callback that is used for map interactions like [MapOptions.onClick].
-@Deprecated('Use the onEvent() callback instead.')
-typedef OnClickCallback = void Function(Position point);

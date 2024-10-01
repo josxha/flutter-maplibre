@@ -125,8 +125,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onClick?.call(point);
           }.toJS,
         );
         _map.on(
@@ -134,8 +132,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventDoubleClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onDoubleClick?.call(point);
           }.toJS,
         );
         _map.on(
@@ -143,8 +139,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventSecondaryClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onSecondaryClick?.call(point);
           }.toJS,
         );
         _map.on(
