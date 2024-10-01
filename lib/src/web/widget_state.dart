@@ -6,7 +6,6 @@ import 'dart:ui_web';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/manager.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';
@@ -21,7 +20,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
-  AnnotationManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -117,7 +115,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             widget.onEvent?.call(const MapEventStyleLoaded());
             widget.onStyleLoaded?.call();
-            _annotationManager = AnnotationManager(this, widget.layers);
+            for (final layer in widget.layers) {
+              layer.registerController(this);
+            }
           }.toJS,
         );
         _map.on(
@@ -235,10 +235,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.gestures != oldWidget.options.gestures) {
       _updateGestures(_options.gestures);
     }
-    if (_annotationManager case final AnnotationManager manager) {
-      if (widget.layers != oldWidget.layers) {
-        manager.update(widget.layers);
-      }
+    for (final layer in widget.layers) {
+      layer.updateOnMap();
     }
     super.didUpdateWidget(oldWidget);
   }

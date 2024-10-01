@@ -3,14 +3,18 @@ part of 'annotations.dart';
 /// A marker layer.
 class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [CircleAnnotationLayer] instance.
-  const CircleAnnotationLayer({
+  CircleAnnotationLayer({
     required List<Point> points,
     this.radius = 5,
     this.color = const Color(0x00000000),
     this.blur = 0,
     this.strokeWidth = 0,
     this.strokeColor = const Color(0x00000000),
-  }) : super._(list: points);
+  }) : super._(
+          list: points,
+          sourceId: 'maplibre-circle-source-${_counter++}',
+          layerId: 'maplibre-circle-layer-${_counter++}',
+        );
 
   /// Circle radius in pixels. Defaults to 5px.
   final int radius;
@@ -34,7 +38,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// The opacity of the circle's stroke.
   double get strokeOpacity => strokeColor.opacity;
 
-  /// Build the paint properties for [CircleLayer.paint].
+  @override
   Map<String, Object> getPaint() => {
         'circle-radius': radius,
         'circle-color': color.toHexStringNoOpacity(),

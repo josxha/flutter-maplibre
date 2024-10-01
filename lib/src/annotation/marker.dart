@@ -3,7 +3,14 @@ part of 'annotations.dart';
 /// A marker layer.
 class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
-  const MarkerAnnotationLayer({
+  MarkerAnnotationLayer({
     required List<Point> points,
-  }) : super._(list: points);
+  }) : super._(
+          list: points,
+          sourceId: 'maplibre-marker-source-${_counter++}',
+          layerId: 'maplibre-marker-layer-${_counter++}',
+        );
+
+  @override
+  Map<String, Object> getPaint() => {};
 }
