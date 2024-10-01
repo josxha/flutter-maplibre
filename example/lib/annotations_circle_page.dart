@@ -12,11 +12,11 @@ class AnnotationsCirclePage extends StatefulWidget {
 }
 
 class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
-  final _circles = <CircleAnnotation>[
-    CircleAnnotation(point: Position(9.17, 47.68)),
-    CircleAnnotation(point: Position(9.17, 48)),
-    CircleAnnotation(point: Position(9, 48)),
-    CircleAnnotation(point: Position(9.5, 48)),
+  final _circles = <Point>[
+    Point(coordinates: Position(9.17, 47.68)),
+    Point(coordinates: Position(9.17, 48)),
+    Point(coordinates: Position(9, 48)),
+    Point(coordinates: Position(9.5, 48)),
   ];
 
   @override
@@ -28,12 +28,12 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _circles.add(CircleAnnotation(point: event.point));
+              _circles.add(Point(coordinates: event.point));
             });
           }
         },
         layers: [
-          CircleAnnotationLayer(circles: _circles),
+          CircleAnnotationLayer(points: _circles),
         ],
       ),
     );

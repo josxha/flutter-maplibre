@@ -5,11 +5,14 @@ import 'package:maplibre/maplibre.dart';
 /// The [AnnotationManager] contains the logic for map annotations.
 class AnnotationManager {
   /// Create a new [AnnotationManager].
-  AnnotationManager(this._mapCtrl, List<AnnotationLayer<Annotation>> layers) {
+  AnnotationManager(
+    this._mapCtrl,
+    List<AnnotationLayer<GeometryObject>> layers,
+  ) {
     final collection = GeometryCollection(
       geometries: (layers.first as CircleAnnotationLayer)
           .list
-          .map((e) => Point(coordinates: e.point))
+          .map((e) => Point(coordinates: e.coordinates))
           .toList(),
     );
     final source = GeoJsonSource(
@@ -23,11 +26,11 @@ class AnnotationManager {
   }
 
   /// Update the [Annotation]s.
-  void update(List<AnnotationLayer<Annotation>> layers) {
+  void update(List<AnnotationLayer<GeometryObject>> layers) {
     final collection = GeometryCollection(
       geometries: (layers.first as CircleAnnotationLayer)
           .list
-          .map((e) => Point(coordinates: e.point))
+          .map((e) => Point(coordinates: e.coordinates))
           .toList(),
     );
     _mapCtrl.updateGeoJsonSource(

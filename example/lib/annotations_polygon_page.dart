@@ -12,11 +12,11 @@ class AnnotationsPolygonPage extends StatefulWidget {
 }
 
 class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
-  final _polygon = <PolygonAnnotation>[
-    PolygonAnnotation(points: [Position(9.17, 47.68)]),
-    PolygonAnnotation(points: [Position(9.17, 48)]),
-    PolygonAnnotation(points: [Position(9, 48)]),
-    PolygonAnnotation(points: [Position(9.5, 48)]),
+  final _polygon = <Polygon>[
+    Polygon(coordinates: [[Position(9.17, 47.68)]]),
+    Polygon(coordinates: [[Position(9.17, 48)]]),
+    Polygon(coordinates: [[Position(9, 48)]]),
+    Polygon(coordinates: [[Position(9.5, 48)]]),
   ];
 
   @override
@@ -28,7 +28,7 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _polygon.add(PolygonAnnotation(points: [event.point]));
+              _polygon.add(Polygon(coordinates: [[event.point]]));
             });
           }
         },
