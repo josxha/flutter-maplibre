@@ -6,7 +6,7 @@ import 'dart:ui_web';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/annotation/manager.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';

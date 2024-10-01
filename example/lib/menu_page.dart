@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_page.dart';
+import 'package:maplibre_example/annotations_circle_page.dart';
+import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_polygon_page.dart';
+import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
@@ -38,11 +41,6 @@ class MenuPage extends StatelessWidget {
                 label: 'Styled Map',
                 iconData: Icons.map,
                 location: StyledMapPage.location,
-              ),
-              ItemCard(
-                label: 'Annotations',
-                iconData: Icons.location_on,
-                location: AnnotationsPage.location,
               ),
               ItemCard(
                 label: 'Parameters',
@@ -82,7 +80,34 @@ class MenuPage extends StatelessWidget {
               ),
             ],
           ),
-          const SliverToBoxAdapter(child: SectionTitle('Map Layers')),
+          const SliverToBoxAdapter(child: SectionTitle('Annotations')),
+          SliverGrid.extent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1.5,
+            children: const [
+              ItemCard(
+                label: 'Circles',
+                iconData: Icons.circle,
+                location: AnnotationsCirclePage.location,
+              ),
+              ItemCard(
+                label: 'Markers',
+                iconData: Icons.location_on,
+                location: AnnotationsMarkerPage.location,
+              ),
+              ItemCard(
+                label: 'Polygons',
+                iconData: Icons.format_shapes,
+                location: AnnotationsPolygonPage.location,
+              ),
+              ItemCard(
+                label: 'Polylines',
+                iconData: Icons.polyline,
+                location: AnnotationsPolylinePage.location,
+              ),
+            ],
+          ),
+          const SliverToBoxAdapter(child: SectionTitle('Layers')),
           SliverGrid.extent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 1.5,

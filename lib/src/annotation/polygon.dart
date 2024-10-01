@@ -12,9 +12,9 @@ class PolygonAnnotation extends Annotation {
 }
 
 /// A [PolygonAnnotation] layer.
-class FillAnnotationLayer extends AnnotationLayer<PolygonAnnotation> {
-  /// Create a new [FillAnnotationLayer] instance.
-  const FillAnnotationLayer({
-    required List<PolygonAnnotation> fills,
-  }) : super._(list: fills);
+class PolygonAnnotationLayer extends AnnotationLayer<PolygonAnnotation> {
+  /// Create a new [PolygonAnnotationLayer] instance.
+  const PolygonAnnotationLayer({
+    required List<PolygonAnnotation> polygons,
+  }) : super._(list: polygons);
 }
