@@ -44,20 +44,30 @@ import 'package:jni/jni.dart' as jni;
 
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart' as maplibremap_;
 
-/// from: `com.github.josxha.maplibre.MapLibreMapRegistry$Companion`
-class MapLibreMapRegistry_Companion extends jni.JObject {
+/// from: `com.github.josxha.maplibre.MapLibreMapRegistry`
+class MapLibreMapRegistry extends jni.JObject {
   @override
-  late final jni.JObjType<MapLibreMapRegistry_Companion> $type = type;
+  late final jni.JObjType<MapLibreMapRegistry> $type = type;
 
-  MapLibreMapRegistry_Companion.fromReference(
+  MapLibreMapRegistry.fromReference(
     jni.JReference reference,
   ) : super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(
-      r'com/github/josxha/maplibre/MapLibreMapRegistry$Companion');
+  static final _class =
+      jni.JClass.forName(r'com/github/josxha/maplibre/MapLibreMapRegistry');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapLibreMapRegistry_CompanionType();
+  static const type = $MapLibreMapRegistryType();
+  static final _id_INSTANCE = _class.staticFieldId(
+    r'INSTANCE',
+    r'Lcom/github/josxha/maplibre/MapLibreMapRegistry;',
+  );
+
+  /// from: `static public final com.github.josxha.maplibre.MapLibreMapRegistry INSTANCE`
+  /// The returned object must be released after use, by calling the [release] method.
+  static MapLibreMapRegistry get INSTANCE =>
+      _id_INSTANCE.get(_class, const $MapLibreMapRegistryType());
+
   static final _id_get0 = _class.instanceMethodId(
     r'get',
     r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
@@ -104,110 +114,6 @@ class MapLibreMapRegistry_Companion extends jni.JObject {
     _add(reference.pointer, _id_add as jni.JMethodIDPtr, i,
             mapLibreMap.reference.pointer)
         .check();
-  }
-
-  static final _id_new0 = _class.constructorId(
-    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: `public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreMapRegistry_Companion(
-    jni.JObject defaultConstructorMarker,
-  ) {
-    return MapLibreMapRegistry_Companion.fromReference(_new0(
-            _class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr,
-            defaultConstructorMarker.reference.pointer)
-        .reference);
-  }
-}
-
-final class $MapLibreMapRegistry_CompanionType
-    extends jni.JObjType<MapLibreMapRegistry_Companion> {
-  const $MapLibreMapRegistry_CompanionType();
-
-  @override
-  String get signature =>
-      r'Lcom/github/josxha/maplibre/MapLibreMapRegistry$Companion;';
-
-  @override
-  MapLibreMapRegistry_Companion fromReference(jni.JReference reference) =>
-      MapLibreMapRegistry_Companion.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($MapLibreMapRegistry_CompanionType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($MapLibreMapRegistry_CompanionType) &&
-        other is $MapLibreMapRegistry_CompanionType;
-  }
-}
-
-/// from: `com.github.josxha.maplibre.MapLibreMapRegistry`
-class MapLibreMapRegistry extends jni.JObject {
-  @override
-  late final jni.JObjType<MapLibreMapRegistry> $type = type;
-
-  MapLibreMapRegistry.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/github/josxha/maplibre/MapLibreMapRegistry');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $MapLibreMapRegistryType();
-  static final _id_Companion = _class.staticFieldId(
-    r'Companion',
-    r'Lcom/github/josxha/maplibre/MapLibreMapRegistry$Companion;',
-  );
-
-  /// from: `static public final com.github.josxha.maplibre.MapLibreMapRegistry$Companion Companion`
-  /// The returned object must be released after use, by calling the [release] method.
-  static MapLibreMapRegistry_Companion get Companion =>
-      _id_Companion.get(_class, const $MapLibreMapRegistry_CompanionType());
-
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: `public void <init>()`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreMapRegistry() {
-    return MapLibreMapRegistry.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
   }
 }
 

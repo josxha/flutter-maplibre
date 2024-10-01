@@ -14,6 +14,8 @@
 # For more details, see
 # http://developer.android.com/guide/developing/tools/proguard.html
 
+-keep class com.github.josxha.maplibre.MapLibreMapRegistry { public *; }
+
 -keep class org.maplibre.android.attribution.** { public *; }
 -keep class org.maplibre.android.camera.** { public *; }
 -keep class org.maplibre.android.constants.** { public *; }
