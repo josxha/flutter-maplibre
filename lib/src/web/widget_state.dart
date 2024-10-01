@@ -582,6 +582,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required String data,
   }) async {
     final source = _map.getSource(id);
+    if (source == null) throw Exception('Source with id "$id" does not exist.');
     source.setData(parse(data));
   }
 
