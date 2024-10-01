@@ -8,7 +8,8 @@ class AnnotationsPolylinePage extends StatefulWidget {
   static const location = '/annotations';
 
   @override
-  State<AnnotationsPolylinePage> createState() => _AnnotationsPolylinePageState();
+  State<AnnotationsPolylinePage> createState() =>
+      _AnnotationsPolylinePageState();
 }
 
 class _AnnotationsPolylinePageState extends State<AnnotationsPolylinePage> {

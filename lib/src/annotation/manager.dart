@@ -7,26 +7,29 @@ class AnnotationManager {
   /// Create a new [AnnotationManager].
   AnnotationManager(
     this._mapCtrl,
-    List<AnnotationLayer<GeometryObject>> layers,
+    List<AnnotationLayer<GeometryType<Object>>> layers,
   ) {
-    final collection = GeometryCollection(
-      geometries: (layers.first as CircleAnnotationLayer)
-          .list
-          .map((e) => Point(coordinates: e.coordinates))
-          .toList(),
-    );
-    final source = GeoJsonSource(
-      id: sourceId,
-      data: jsonEncode(collection.toJson()),
-    );
-    _mapCtrl.addSource(source);
-    _mapCtrl.addLayer(
-      const CircleLayer(id: '$sourceId-circles', sourceId: sourceId),
-    );
+    for (final layer in layers) {
+      final collection = GeometryCollection(
+        geometries: (layer as CircleAnnotationLayer).list,
+      );
+      final source = GeoJsonSource(
+        id: sourceId,
+        data: jsonEncode(collection.toJson()),
+      );
+      _mapCtrl.addSource(source);
+      _mapCtrl.addLayer(
+        const CircleLayer(
+          id: '$sourceId-circles',
+          sourceId: sourceId,
+          paint: {},
+        ),
+      );
+    }
   }
 
   /// Update the [Annotation]s.
-  void update(List<AnnotationLayer<GeometryObject>> layers) {
+  void update(List<AnnotationLayer<GeometryType<Object>>> layers) {
     final collection = GeometryCollection(
       geometries: (layers.first as CircleAnnotationLayer)
           .list

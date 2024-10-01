@@ -14,7 +14,7 @@ sealed class Annotation {
 }
 
 /// This class is the base for all annotation layer classes like [MarkerAnnotationLayer].
-sealed class AnnotationLayer<G extends GeometryObject> {
+sealed class AnnotationLayer<G extends GeometryType<Object>> {
   const AnnotationLayer._({required this.list});
 
   /// The [List] of [Annotation]s.
