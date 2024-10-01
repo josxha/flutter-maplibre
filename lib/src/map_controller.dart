@@ -47,11 +47,6 @@ abstract interface class MapController {
     EdgeInsets padding = EdgeInsets.zero,
   });
 
-  /// Add a [Marker] to the map.
-  ///
-  /// Only supported on web.
-  Future<Marker> addMarker(Marker marker);
-
   /// Add a new source to the map.
   Future<void> addSource(Source source);
 
