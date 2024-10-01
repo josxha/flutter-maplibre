@@ -26,7 +26,7 @@ void main() {
         );
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(
+        await ctrl.moveCamera(
           center: Position(1, 1),
           bearing: 1,
           zoom: 1,
@@ -48,7 +48,7 @@ void main() {
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.jumpTo(
+        await ctrl.moveCamera(
           center: Position(1, 2),
           bearing: 1,
           zoom: 1,
@@ -70,7 +70,7 @@ void main() {
         final app = App(onMapCreated: (controller) => ctrl = controller);
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
-        await ctrl.flyTo(
+        await ctrl.animateCamera(
           center: Position(2, 1),
           bearing: 2,
           zoom: 2,

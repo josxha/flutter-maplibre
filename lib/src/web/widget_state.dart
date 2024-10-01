@@ -244,7 +244,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
@@ -263,7 +263,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,

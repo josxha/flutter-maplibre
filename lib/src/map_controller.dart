@@ -13,7 +13,7 @@ abstract interface class MapController {
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Instantly move the map camera to a new location.
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
@@ -22,7 +22,7 @@ abstract interface class MapController {
   });
 
   /// Animate the map camera to a new location.
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,

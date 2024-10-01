@@ -106,7 +106,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
   }
 
   @override
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
@@ -121,7 +121,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,

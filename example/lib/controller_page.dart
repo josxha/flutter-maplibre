@@ -30,7 +30,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 OutlinedButton(
                   onPressed: () async {
                     debugPrint('moveCamera start');
-                    await _controller.jumpTo(
+                    await _controller.moveCamera(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
                       pitch: 0,
@@ -47,7 +47,7 @@ class _ControllerPageState extends State<ControllerPage> {
                   onPressed: () async {
                     debugPrint('animateTo start');
                     try {
-                      await _controller.flyTo(
+                      await _controller.animateCamera(
                         center: Position(-18.6874, 64.9445),
                         zoom: 5,
                         bearing: -50,
