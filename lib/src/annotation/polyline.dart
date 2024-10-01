@@ -1,20 +1,20 @@
 part of 'annotations.dart';
 
 /// A class that contains the properties for a line on the map.
-class Polyline extends Annotation {
-  /// Create a new [Polyline] instance.
-  const Polyline({
+class PolylineAnnotation extends Annotation {
+  /// Create a new [PolylineAnnotation] instance.
+  const PolylineAnnotation({
     required this.points,
   }) : super._();
 
-  /// The [Position]s of where the [Polyline] is located.
+  /// The [Position]s of where the [PolylineAnnotation] is located.
   final List<Position> points;
 }
 
-/// A [Polyline] layer.
-class PolylineAnnotationLayer extends AnnotationLayer<Polyline> {
+/// A [PolylineAnnotation] layer.
+class PolylineAnnotationLayer extends AnnotationLayer<PolylineAnnotation> {
   /// Create a new [PolylineAnnotationLayer] instance.
   const PolylineAnnotationLayer({
-    required List<Polyline> polyline,
+    required List<PolylineAnnotation> polyline,
   }) : super._(list: polyline);
 }
