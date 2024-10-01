@@ -36,12 +36,12 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
 
   /// Build the paint properties for [CircleLayer.paint].
   Map<String, Object> getPaint() => {
-    'circle-radius': radius,
-    'circle-color': color.toHexStringNoOpacity(),
-    'circle-blur': blur,
-    'circle-opacity': color.opacity,
-    'circle-stroke-width': strokeWidth,
-    'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
-    'circle-stroke-opacity': strokeColor.opacity,
-  };
+        'circle-radius': radius,
+        'circle-color': color.toHexStringNoOpacity(),
+        'circle-blur': blur,
+        'circle-opacity': color.opacity,
+        'circle-stroke-width': strokeWidth,
+        'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
+        'circle-stroke-opacity': strokeColor.opacity,
+      };
 }
