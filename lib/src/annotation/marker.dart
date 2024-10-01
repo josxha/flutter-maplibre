@@ -15,7 +15,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
     this.iconKeepUpright = false,
     this.iconOffset = const [0, 0],
     this.textField = '',
-    this.textFont = 'Open Sans Regular,Arial Unicode MS Regular',
+    this.textFont = const ['Open Sans Regular', 'Arial Unicode MS Regular'],
     this.textSize = 16,
     this.textMaxWidth = 10,
     this.textLineHeight = 1.2,
@@ -89,7 +89,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   final String textField;
 
   /// Font stack to use for displaying text.
-  final String textFont;
+  final List<String> textFont;
 
   /// Font stack to use for displaying text.
   final int textSize;
@@ -185,6 +185,21 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
 
   @override
   Map<String, Object> getPaint() => {
+        'icon-opacity': iconOpacity,
+        'icon-color': iconColor.toHexString(),
+        'icon-halo-color': iconHaloColor.toHexStringNoOpacity(),
+        'icon-halo-width': iconHaloWidth,
+        'icon-halo-blur': iconHaloBlur,
+        'text-opacity': iconOpacity,
+        'text-color': textColor.toHexStringNoOpacity(),
+        'text-halo-color': textHaloColor.toHexString(),
+        'text-halo-width': textHaloWidth,
+        'text-halo-blur': textHaloBlur,
+        'text-translate': textTranslate,
+      };
+
+  @override
+  Map<String, Object> getLayout() => {
         'icon-allow-overlap': iconAllowOverlap,
         'icon-ignore-placement': iconIgnorePlacement,
         'icon-optional': iconOptional,
@@ -209,17 +224,6 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         'text-allow-overlap': textAllowOverlap,
         'text-ignore-placement': textIgnorePlacement,
         'text-optional': textOptional,
-        'icon-opacity': iconOpacity,
-        'icon-color': iconColor.toHexString(),
-        'icon-halo-color': iconHaloColor,
-        'icon-halo-width': iconHaloWidth,
-        'icon-halo-blur': iconHaloBlur,
-        'text-opacity': iconTranslate,
-        'text-color': textColor.toHexStringNoOpacity(),
-        'text-halo-color': textHaloColor.toHexString(),
-        'text-halo-width': textHaloWidth,
-        'text-halo-blur': textHaloBlur,
-        'text-translate': textTranslate,
       };
 
   @override
@@ -227,5 +231,6 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         id: layerId,
         sourceId: sourceId,
         paint: getPaint(),
+        layout: getLayout(),
       );
 }

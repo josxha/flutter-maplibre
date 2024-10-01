@@ -43,6 +43,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
         id: layerId,
         sourceId: sourceId,
         paint: getPaint(),
+        layout: getLayout(),
       );
 
   @override
@@ -55,6 +56,9 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
         'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
         'circle-stroke-opacity': strokeColor.opacity,
       };
+
+  @override
+  Map<String, Object> getLayout() => {};
 
   @override
   bool operator ==(Object other) =>
