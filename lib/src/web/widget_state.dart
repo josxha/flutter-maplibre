@@ -113,8 +113,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.on(
           interop.MapEventType.load,
           (interop.MapMouseEvent event) {
-            widget.onStyleLoaded?.call();
             widget.onEvent?.call(const MapEventStyleLoaded());
+            widget.onStyleLoaded?.call();
+            for (final layer in widget.layers) {
+              layer.registerController(this);
+            }
           }.toJS,
         );
         _map.on(
@@ -232,24 +235,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.gestures != oldWidget.options.gestures) {
       _updateGestures(_options.gestures);
     }
+    for (final layer in widget.layers) {
+      layer.updateOnMap(this);
+    }
     super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  Future<Marker> addMarker(Marker marker) async {
-    final lngLat = interop.LngLat(
-      lng: marker.point.lng,
-      lat: marker.point.lat,
-    );
-    final _ = interop.Marker(
-      interop.MarkerOptions(
-        color: marker.color == null
-            ? null
-            : '#${marker.color!.value.toRadixString(16)}',
-        draggable: marker.draggable,
-      ),
-    ).setLngLat(lngLat).addTo(_map);
-    return marker;
   }
 
   @override
@@ -593,6 +582,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required String data,
   }) async {
     final source = _map.getSource(id);
+    if (source == null) throw Exception('Source with id "$id" does not exist.');
     source.setData(parse(data));
   }
 

@@ -59,18 +59,27 @@ sealed class MapEventUserInput extends MapEvent {
 
   /// The [Position] of where the user clicked at.
   final Position point;
+
+  @override
+  String toString() => 'MapEventUserInput(point: $point)';
 }
 
 /// Emitted when the user clicks on the map.
 final class MapEventClick extends MapEventUserInput {
   /// Create a new [MapEventClick] object.
   const MapEventClick({required super.point});
+
+  @override
+  String toString() => 'MapEventClick(point: $point)';
 }
 
 /// Emitted when the user clicks twice in a short amount of time on the map.
 final class MapEventDoubleClick extends MapEventUserInput {
   /// Create a new [MapEventDoubleClick] object.
   const MapEventDoubleClick({required super.point});
+
+  @override
+  String toString() => 'MapEventDoubleClick(point: $point)';
 }
 
 /// Emitted when the user clicks with the secondary button on the map. This
@@ -78,6 +87,9 @@ final class MapEventDoubleClick extends MapEventUserInput {
 final class MapEventSecondaryClick extends MapEventUserInput {
   /// Create a new [MapEventSecondaryClick] object.
   const MapEventSecondaryClick({required super.point});
+
+  @override
+  String toString() => 'MapEventSecondaryClick(point: $point)';
 }
 
 /// Emitted when the user clicks on the map and holds button down at the same
@@ -85,6 +97,9 @@ final class MapEventSecondaryClick extends MapEventUserInput {
 final class MapEventLongClick extends MapEventUserInput {
   /// Create a new [MapEventLongClick] object.
   const MapEventLongClick({required super.point});
+
+  @override
+  String toString() => 'MapEventLongClick(point: $point)';
 }
 
 /// Emitted when the map enters an idle state.

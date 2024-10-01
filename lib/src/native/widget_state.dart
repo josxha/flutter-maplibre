@@ -90,11 +90,6 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
       );
 
   @override
-  Future<Marker> addMarker(Marker marker) async {
-    throw UnimplementedError('addMarker() is only supported on web.');
-  }
-
-  @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final lngLat =
         await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);

@@ -15,6 +15,7 @@ class MapLibreMap extends StatefulWidget {
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
+    this.layers = const [],
     super.key,
   });
 
@@ -44,6 +45,9 @@ class MapLibreMap extends StatefulWidget {
 
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
+
+  /// Annotation layers like [MarkerAnnotationLayer] or [PolylineAnnotationLayer].
+  final List<AnnotationLayer> layers;
 
   @override
   State<MapLibreMap> createState() =>
