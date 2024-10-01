@@ -33,7 +33,13 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
           }
         },
         layers: [
-          CircleAnnotationLayer(points: _circles),
+          CircleAnnotationLayer(
+            points: _circles,
+            color: Colors.orange.withOpacity(0.5),
+            radius: 20,
+            strokeColor: Colors.red,
+            strokeWidth: 2,
+          ),
         ],
       ),
     );

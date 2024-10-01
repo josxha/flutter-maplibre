@@ -10,21 +10,28 @@ class AnnotationManager {
     List<AnnotationLayer<GeometryType<Object>>> layers,
   ) {
     for (final layer in layers) {
-      final collection = GeometryCollection(
-        geometries: (layer as CircleAnnotationLayer).list,
-      );
-      final source = GeoJsonSource(
-        id: sourceId,
-        data: jsonEncode(collection.toJson()),
-      );
-      _mapCtrl.addSource(source);
-      _mapCtrl.addLayer(
-        const CircleLayer(
-          id: '$sourceId-circles',
-          sourceId: sourceId,
-          paint: {},
-        ),
-      );
+      switch (layer) {
+        case CircleAnnotationLayer():
+          final collection = GeometryCollection(geometries: layer.list);
+          final source = GeoJsonSource(
+            id: sourceId,
+            data: jsonEncode(collection.toJson()),
+          );
+          _mapCtrl.addSource(source);
+          _mapCtrl.addLayer(
+            CircleLayer(
+              id: '$sourceId-circles',
+              sourceId: sourceId,
+              paint: layer.getPaint(),
+            ),
+          );
+        case MarkerAnnotationLayer():
+        // TODO: Handle this case.
+        case PolygonAnnotationLayer():
+        // TODO: Handle this case.
+        case PolylineAnnotationLayer():
+        // TODO: Handle this case.
+      }
     }
   }
 

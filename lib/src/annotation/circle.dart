@@ -33,4 +33,15 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
 
   /// The opacity of the circle's stroke.
   double get strokeOpacity => strokeColor.opacity;
+
+  /// Build the paint properties for [CircleLayer.paint].
+  Map<String, Object> getPaint() => {
+    'circle-radius': radius,
+    'circle-color': color.toHexStringNoOpacity(),
+    'circle-blur': blur,
+    'circle-opacity': color.opacity,
+    'circle-stroke-width': strokeWidth,
+    'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
+    'circle-stroke-opacity': strokeColor.opacity,
+  };
 }

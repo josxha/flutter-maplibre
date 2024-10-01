@@ -5,7 +5,7 @@ import 'package:maplibre/maplibre.dart';
 class AnnotationsPolylinePage extends StatefulWidget {
   const AnnotationsPolylinePage({super.key});
 
-  static const location = '/annotations';
+  static const location = '/annotations/polyline';
 
   @override
   State<AnnotationsPolylinePage> createState() =>

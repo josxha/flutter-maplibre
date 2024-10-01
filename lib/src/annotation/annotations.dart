@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/annotation/extensions.dart';
 
 part 'circle.dart';
 part 'marker.dart';
