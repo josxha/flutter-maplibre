@@ -1,9 +1,9 @@
 part of 'annotations.dart';
 
 /// A class that contains the properties for a map marker.
-class MarkerAnnotation extends Annotation {
-  /// Create a new [MarkerAnnotation] instance.
-  const MarkerAnnotation({
+class CircleAnnotation extends Annotation {
+  /// Create a new [CircleAnnotation] instance.
+  const CircleAnnotation({
     required this.point,
     this.radius = 5,
     this.color = const Color(0x00000000),
@@ -12,7 +12,7 @@ class MarkerAnnotation extends Annotation {
     this.strokeColor = const Color(0x00000000),
   }) : super._();
 
-  /// The [Position] of where the [MarkerAnnotation] is located.
+  /// The [Position] of where the [CircleAnnotation] is located.
   final Position point;
 
   /// Circle radius in pixels. Defaults to 5px.
@@ -39,9 +39,9 @@ class MarkerAnnotation extends Annotation {
 }
 
 /// A marker layer.
-class MarkerAnnotationLayer extends AnnotationLayer<MarkerAnnotation> {
-  /// Create a new [MarkerAnnotationLayer] instance.
-  const MarkerAnnotationLayer({
-    required List<MarkerAnnotation> markers,
-  }) : super._(list: markers);
+class CircleAnnotationLayer extends AnnotationLayer<CircleAnnotation> {
+  /// Create a new [CircleAnnotationLayer] instance.
+  const CircleAnnotationLayer({
+    required List<CircleAnnotation> circles,
+  }) : super._(list: circles);
 }

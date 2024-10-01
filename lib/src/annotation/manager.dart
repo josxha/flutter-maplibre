@@ -7,7 +7,7 @@ class AnnotationManager {
   /// Create a new [AnnotationManager].
   AnnotationManager(this._mapCtrl, List<AnnotationLayer<Annotation>> layers) {
     final collection = GeometryCollection(
-      geometries: (layers.first as MarkerAnnotationLayer)
+      geometries: (layers.first as CircleAnnotationLayer)
           .list
           .map((e) => Point(coordinates: e.point))
           .toList(),
@@ -25,7 +25,7 @@ class AnnotationManager {
   /// Update the [Annotation]s.
   void update(List<AnnotationLayer<Annotation>> layers) {
     final collection = GeometryCollection(
-      geometries: (layers.first as MarkerAnnotationLayer)
+      geometries: (layers.first as CircleAnnotationLayer)
           .list
           .map((e) => Point(coordinates: e.point))
           .toList(),
