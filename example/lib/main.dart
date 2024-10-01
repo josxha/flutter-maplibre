@@ -35,6 +35,10 @@ class MyApp extends StatelessWidget {
       title: 'MapLibre Demo',
       initialRoute: MenuPage.location,
       theme: ThemeData(colorSchemeSeed: Colors.blue),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.blue,
+      ),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
         KioskPage.location: (context) => const KioskPage(),
