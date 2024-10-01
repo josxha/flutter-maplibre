@@ -58,17 +58,31 @@ class MapLibreMapRegistry extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $MapLibreMapRegistryType();
-  static final _id_INSTANCE = _class.staticFieldId(
-    r'INSTANCE',
-    r'Lcom/github/josxha/maplibre/MapLibreMapRegistry;',
+  static final _id_new0 = _class.constructorId(
+    r'()V',
   );
 
-  /// from: `static public final com.github.josxha.maplibre.MapLibreMapRegistry INSTANCE`
-  /// The returned object must be released after use, by calling the [release] method.
-  static MapLibreMapRegistry get INSTANCE =>
-      _id_INSTANCE.get(_class, const $MapLibreMapRegistryType());
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
 
-  static final _id_get0 = _class.instanceMethodId(
+  /// from: `public void <init>()`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MapLibreMapRegistry() {
+    return MapLibreMapRegistry.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+
+  static final _id_get0 = _class.staticMethodId(
     r'get',
     r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
   );
@@ -76,21 +90,21 @@ class MapLibreMapRegistry extends jni.JObject {
   static final _get0 = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
 
-  /// from: `public final org.maplibre.android.maps.MapLibreMap get(int i)`
+  /// from: `static public org.maplibre.android.maps.MapLibreMap get(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  maplibremap_.MapLibreMap get0(
+  static maplibremap_.MapLibreMap get0(
     int i,
   ) {
-    return _get0(reference.pointer, _id_get0 as jni.JMethodIDPtr, i)
+    return _get0(_class.reference.pointer, _id_get0 as jni.JMethodIDPtr, i)
         .object(const maplibremap_.$MapLibreMapType());
   }
 
-  static final _id_add = _class.instanceMethodId(
+  static final _id_add = _class.staticMethodId(
     r'add',
     r'(ILorg/maplibre/android/maps/MapLibreMap;)V',
   );
@@ -101,17 +115,17 @@ class MapLibreMapRegistry extends jni.JObject {
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
                       ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
+          'globalEnv_CallStaticVoidMethod')
       .asFunction<
           jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               int, ffi.Pointer<ffi.Void>)>();
 
-  /// from: `public final void add(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void add(
+  /// from: `static public void add(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
+  static void add(
     int i,
     maplibremap_.MapLibreMap mapLibreMap,
   ) {
-    _add(reference.pointer, _id_add as jni.JMethodIDPtr, i,
+    _add(_class.reference.pointer, _id_add as jni.JMethodIDPtr, i,
             mapLibreMap.reference.pointer)
         .check();
   }

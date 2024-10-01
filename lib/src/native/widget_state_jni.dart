@@ -23,7 +23,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   MapOptions get _options => widget.options;
 
   jni.MapLibreMap get _jniMapLibreMap =>
-      _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.INSTANCE.get0(_viewId);
+      _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.get0(_viewId);
 
   // ignore: unused_element
   jni.Projection get _jniProjection =>
