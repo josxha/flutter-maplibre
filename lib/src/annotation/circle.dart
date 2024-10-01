@@ -48,4 +48,25 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
         'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
         'circle-stroke-opacity': strokeColor.opacity,
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is CircleAnnotationLayer &&
+          runtimeType == other.runtimeType &&
+          radius == other.radius &&
+          color == other.color &&
+          blur == other.blur &&
+          strokeWidth == other.strokeWidth &&
+          strokeColor == other.strokeColor;
+
+  @override
+  int get hashCode =>
+      super.hashCode ^
+      radius.hashCode ^
+      color.hashCode ^
+      blur.hashCode ^
+      strokeWidth.hashCode ^
+      strokeColor.hashCode;
 }

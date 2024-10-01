@@ -236,7 +236,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _updateGestures(_options.gestures);
     }
     for (final layer in widget.layers) {
-      layer.updateOnMap();
+      layer.updateOnMap(this);
     }
     super.didUpdateWidget(oldWidget);
   }
