@@ -13,4 +13,11 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
 
   @override
   Map<String, Object> getPaint() => {};
+
+  @override
+  Layer createLayer() => SymbolLayer(
+    id: layerId,
+    sourceId: sourceId,
+    paint: getPaint(),
+  );
 }

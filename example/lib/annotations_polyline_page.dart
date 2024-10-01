@@ -13,16 +13,17 @@ class AnnotationsPolylinePage extends StatefulWidget {
 }
 
 class _AnnotationsPolylinePageState extends State<AnnotationsPolylinePage> {
-  final _polylines = <LineString>[
-    LineString(
-      coordinates: [
-        Position(9.17, 47.68),
-        Position(9.17, 48),
-        Position(9, 48),
-        Position(9.5, 48),
-      ],
-    ),
-  ];
+  final _layer = PolylineAnnotationLayer(
+    polylines: <LineString>[
+      LineString(
+        coordinates: [
+          Position(9.17, 47.68),
+          Position(9.5, 48),
+          Position(9, 48),
+        ],
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +34,11 @@ class _AnnotationsPolylinePageState extends State<AnnotationsPolylinePage> {
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _polylines.first.coordinates.add(event.point);
+              _layer.list.first.coordinates.add(event.point);
             });
           }
         },
-        layers: [
-          PolylineAnnotationLayer(polylines: _polylines),
-        ],
+        layers: [_layer],
       ),
     );
   }

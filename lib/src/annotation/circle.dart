@@ -39,6 +39,13 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   double get strokeOpacity => strokeColor.opacity;
 
   @override
+  Layer createLayer() => CircleLayer(
+    id: layerId,
+    sourceId: sourceId,
+    paint: getPaint(),
+  );
+
+  @override
   Map<String, Object> getPaint() => {
         'circle-radius': radius,
         'circle-color': color.toHexStringNoOpacity(),

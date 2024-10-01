@@ -13,4 +13,11 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
 
   @override
   Map<String, Object> getPaint() => {};
+
+  @override
+  Layer createLayer() => FillLayer(
+    id: layerId,
+    sourceId: sourceId,
+    paint: getPaint(),
+  );
 }

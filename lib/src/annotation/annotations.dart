@@ -39,21 +39,14 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
       data: jsonEncode(GeometryCollection(geometries: list).toJson()),
     );
     controller.addSource(source);
-    addToMap(controller);
+    controller.addLayer(createLayer());
   }
 
   /// Build the paint properties.
   Map<String, Object> getPaint();
 
   /// Add the annotation layer to the map.
-  void addToMap(MapController controller) {
-    final layer = CircleLayer(
-      id: layerId,
-      sourceId: sourceId,
-      paint: getPaint(),
-    );
-    controller.addLayer(layer);
-  }
+  Layer createLayer();
 
   /// Update the annotations.
   void updateOnMap(MapController controller) {

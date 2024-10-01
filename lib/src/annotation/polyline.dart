@@ -13,4 +13,11 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
 
   @override
   Map<String, Object> getPaint() => {};
+
+  @override
+  Layer createLayer() => LineLayer(
+    id: layerId,
+    sourceId: sourceId,
+    paint: getPaint(),
+  );
 }

@@ -12,12 +12,14 @@ class AnnotationsMarkerPage extends StatefulWidget {
 }
 
 class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
-  final _markers = <Point>[
-    Point(coordinates: Position(9.17, 47.68)),
-    Point(coordinates: Position(9.17, 48)),
-    Point(coordinates: Position(9, 48)),
-    Point(coordinates: Position(9.5, 48)),
-  ];
+  final _layer = MarkerAnnotationLayer(
+    points: <Point>[
+      Point(coordinates: Position(9.17, 47.68)),
+      Point(coordinates: Position(9.17, 48)),
+      Point(coordinates: Position(9, 48)),
+      Point(coordinates: Position(9.5, 48)),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +30,11 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _markers.add(Point(coordinates: event.point));
+              _layer.list.add(Point(coordinates: event.point));
             });
           }
         },
-        layers: [
-          MarkerAnnotationLayer(points: _markers),
-        ],
+        layers: [_layer],
       ),
     );
   }
