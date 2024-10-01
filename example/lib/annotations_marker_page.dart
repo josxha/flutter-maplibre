@@ -19,6 +19,9 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
       Point(coordinates: Position(9, 48)),
       Point(coordinates: Position(9.5, 48)),
     ],
+    textField: 'Marker',
+    textSize: 30,
+    textAllowOverlap: true,
   );
 
   @override

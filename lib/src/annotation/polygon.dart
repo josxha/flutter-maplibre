@@ -24,10 +24,10 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
 
   @override
   Map<String, Object> getPaint() => {
-    'fill-color': color.toHexStringNoOpacity(),
-    'fill-opacity': color.opacity,
-    'fill-outline-color': outlineColor.toHexStringNoOpacity(),
-  };
+        'fill-color': color.toHexStringNoOpacity(),
+        'fill-opacity': color.opacity,
+        'fill-outline-color': outlineColor.toHexStringNoOpacity(),
+      };
 
   @override
   Layer createLayer() => FillLayer(

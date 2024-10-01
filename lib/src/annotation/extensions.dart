@@ -4,4 +4,7 @@ import 'dart:ui';
 extension ColorExt on Color {
   /// Convert the [Color] object to an hex string without the opacity.
   String toHexStringNoOpacity() => '#${value.toRadixString(16).substring(2)}';
+
+  /// Convert the [Color] object to an hex string.
+  String toHexString() => '#${value.toRadixString(16)}';
 }
