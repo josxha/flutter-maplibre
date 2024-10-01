@@ -12,3 +12,4 @@ export 'src/map_gestures.dart';
 export 'src/map_options.dart';
 export 'src/style/style.dart';
 export 'src/utils.dart';
+export 'src/web_controls.dart';
