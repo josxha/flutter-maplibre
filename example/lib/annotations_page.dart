@@ -12,7 +12,6 @@ class AnnotationsPage extends StatefulWidget {
 }
 
 class _AnnotationsPageState extends State<AnnotationsPage> {
-  late final MapController _controller;
   final _markers = <Marker>[
     Marker(point: Position(9.17, 47.68)),
     Marker(point: Position(9.17, 48)),
@@ -26,7 +25,6 @@ class _AnnotationsPageState extends State<AnnotationsPage> {
       appBar: AppBar(title: const Text('Annotations')),
       body: MapLibreMap(
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
-        onMapCreated: (controller) => _controller = controller,
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
