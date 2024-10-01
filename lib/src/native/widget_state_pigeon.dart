@@ -144,7 +144,7 @@ final class MapLibreMapStatePigeon extends State<MapLibreMap>
       center: center?.toLngLat(),
       zoom: zoom,
       bearing: bearing,
-      pitch: pitch ?? tilt,
+      pitch: pitch,
     );
   }
 
