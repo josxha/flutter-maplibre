@@ -24,6 +24,8 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
         ],
       ),
     ],
+    color: Colors.lightBlueAccent.withOpacity(0.6),
+    outlineColor: Colors.blue,
   );
 
   @override

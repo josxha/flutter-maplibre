@@ -66,8 +66,5 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
           layerId == other.layerId;
 
   @override
-  int get hashCode =>
-      list.hashCode ^
-      sourceId.hashCode ^
-      layerId.hashCode;
+  int get hashCode => list.hashCode ^ sourceId.hashCode ^ layerId.hashCode;
 }

@@ -19,7 +19,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// Circle radius in pixels. Defaults to 5px.
   final int radius;
 
-  /// The color of the circle. Defaults to black
+  /// The color of the circle. Defaults to black.
   final Color color;
 
   /// Amount to blur the circle. 1 blurs the circle such that only the
@@ -40,10 +40,10 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
 
   @override
   Layer createLayer() => CircleLayer(
-    id: layerId,
-    sourceId: sourceId,
-    paint: getPaint(),
-  );
+        id: layerId,
+        sourceId: sourceId,
+        paint: getPaint(),
+      );
 
   @override
   Map<String, Object> getPaint() => {

@@ -23,6 +23,10 @@ class _AnnotationsPolylinePageState extends State<AnnotationsPolylinePage> {
         ],
       ),
     ],
+    color: Colors.red,
+    width: 4,
+    blur: 3,
+    dashArray: const [5, 5],
   );
 
   @override
