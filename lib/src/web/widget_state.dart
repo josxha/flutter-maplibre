@@ -64,15 +64,15 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _updateGestures(_options.gestures);
 
         // add controls
-        for (final control in _options.controls) {
+        for (final control in _options.webControls) {
           final jsControl = switch (control) {
-            final ScaleControl control => interop.ScaleControl(
+            final WebScaleControl control => interop.ScaleControl(
                 interop.ScaleControlOptions(
                   maxWidth: control.maxWidth,
                   unit: control.unit.name,
                 ),
               ),
-            final GeolocateControl control => interop.GeolocateControl(
+            final WebGeolocateControl control => interop.GeolocateControl(
                 interop.GeolocateControlOptions(
                   positionOptions: interop.PositionOptions(
                     enableHighAccuracy:
@@ -83,26 +83,26 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
                   ),
                 ),
               ),
-            final AttributionControl control => interop.AttributionControl(
+            final WebAttributionControl control => interop.AttributionControl(
                 interop.AttributionControlOptions(
                   compact: control.compact,
                   customAttribution: control.customAttribution,
                 ),
               ),
-            final FullscreenControl _ => interop.FullscreenControl(
+            final WebFullscreenControl _ => interop.FullscreenControl(
                 interop.FullscreenControlOptions(),
               ),
             final LogoControl control => interop.LogoControl(
                 interop.LogoControlOptions(compact: control.compact),
               ),
-            final NavigationControl control => interop.NavigationControl(
+            final WebNavigationControl control => interop.NavigationControl(
                 interop.NavigationControlOptions(
                   showCompass: control.showCompass,
                   showZoom: control.showZoom,
                   visualizePitch: control.visualizePitch,
                 ),
               ),
-            final TerrainControl control => interop.TerrainControl(
+            final WebTerrainControl control => interop.TerrainControl(
                 interop.TerrainControlOptions(source: control.source),
               ),
           };
