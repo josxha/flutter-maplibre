@@ -110,14 +110,13 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     Position? center,
     double? zoom,
     double? bearing,
-    @Deprecated('Renamed to pitch') double? tilt,
     double? pitch,
   }) =>
       _hostApi.moveCamera(
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch ?? tilt,
+        pitch: pitch,
       );
 
   @override
@@ -126,7 +125,6 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -135,7 +133,7 @@ final class MapLibreMapStateNative extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch ?? tilt,
+        pitch: pitch,
         durationMs: nativeDuration.inMilliseconds,
       );
 

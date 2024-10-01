@@ -33,10 +33,6 @@ class MapOptions {
   /// other platforms.
   final double pitch;
 
-  /// Initial pitch level
-  @Deprecated('Renamed to pitch')
-  double get tilt => pitch;
-
   /// The initial bearing of the map. Defaults to 0 (north on top).
   /// 360 is exactly one loop.
   final double bearing;
