@@ -41,6 +41,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
     this.textHaloWidth = 0,
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
+    this.iconAnchor = IconAnchor.center,
   }) : super._(
           list: points,
           sourceId: 'maplibre-marker-source-${_counter++}',
@@ -183,6 +184,9 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// left and up.
   final List<int> textTranslate;
 
+  /// Part of the icon placed closest to the anchor.
+  final IconAnchor iconAnchor;
+
   @override
   Map<String, Object> getPaint() => {
         'icon-opacity': iconOpacity,
@@ -209,6 +213,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         'icon-padding': iconPadding,
         'icon-keep-upright': iconKeepUpright,
         'icon-offset': iconOffset,
+        'icon-anchor': iconAnchor.name,
         'text-field': textField,
         'text-font': textFont,
         'text-size': textSize,
@@ -233,4 +238,39 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         paint: getPaint(),
         layout: getLayout(),
       );
+}
+
+/// Part of the icon placed closest to the anchor.
+enum IconAnchor {
+  /// The center of the icon is placed closest to the anchor.
+  center('center'),
+
+  /// The left side of the icon is placed closest to the anchor.
+  left('left'),
+
+  /// The right side of the icon is placed closest to the anchor.
+  right('right'),
+
+  /// The top of the icon is placed closest to the anchor.
+  top('top'),
+
+  /// The bottom of the icon is placed closest to the anchor.
+  bottom('bottom'),
+
+  /// The top left corner of the icon is placed closest to the anchor.
+  topLeft('top-left'),
+
+  /// The top right corner of the icon is placed closest to the anchor.
+  topRight('top-right'),
+
+  /// The bottom left corner of the icon is placed closest to the anchor.
+  bottomLeft('bottom-left'),
+
+  /// The bottom right corner of the icon is placed closest to the anchor.
+  bottomRight('bottom-right');
+
+  const IconAnchor(this.name);
+
+  /// The MapLibre Style spec compatible name.
+  final String name;
 }
