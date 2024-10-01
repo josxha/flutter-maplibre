@@ -136,7 +136,7 @@ class WebAttributionControl extends WebMapControl {
   const WebAttributionControl({
     this.compact = true,
     this.customAttribution =
-    '<a href="https://maplibre.org/" target="_blank">MapLibre</a>',
+        '<a href="https://maplibre.org/" target="_blank">MapLibre</a>',
   });
 
   /// If `true`, the attribution control will always collapse when moving the
