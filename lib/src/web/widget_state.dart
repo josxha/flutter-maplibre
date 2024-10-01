@@ -64,15 +64,15 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _updateGestures(_options.gestures);
 
         // add controls
-        for (final control in _options.controls) {
+        for (final control in _options.webControls) {
           final jsControl = switch (control) {
-            final ScaleControl control => interop.ScaleControl(
+            final WebScaleControl control => interop.ScaleControl(
                 interop.ScaleControlOptions(
                   maxWidth: control.maxWidth,
                   unit: control.unit.name,
                 ),
               ),
-            final GeolocateControl control => interop.GeolocateControl(
+            final WebGeolocateControl control => interop.GeolocateControl(
                 interop.GeolocateControlOptions(
                   positionOptions: interop.PositionOptions(
                     enableHighAccuracy:
@@ -83,26 +83,26 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
                   ),
                 ),
               ),
-            final AttributionControl control => interop.AttributionControl(
+            final WebAttributionControl control => interop.AttributionControl(
                 interop.AttributionControlOptions(
                   compact: control.compact,
                   customAttribution: control.customAttribution,
                 ),
               ),
-            final FullscreenControl _ => interop.FullscreenControl(
+            final WebFullscreenControl _ => interop.FullscreenControl(
                 interop.FullscreenControlOptions(),
               ),
             final LogoControl control => interop.LogoControl(
                 interop.LogoControlOptions(compact: control.compact),
               ),
-            final NavigationControl control => interop.NavigationControl(
+            final WebNavigationControl control => interop.NavigationControl(
                 interop.NavigationControlOptions(
                   showCompass: control.showCompass,
                   showZoom: control.showZoom,
                   visualizePitch: control.visualizePitch,
                 ),
               ),
-            final TerrainControl control => interop.TerrainControl(
+            final WebTerrainControl control => interop.TerrainControl(
                 interop.TerrainControlOptions(source: control.source),
               ),
           };
@@ -113,8 +113,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.on(
           interop.MapEventType.load,
           (interop.MapMouseEvent event) {
-            widget.onStyleLoaded?.call();
             widget.onEvent?.call(const MapEventStyleLoaded());
+            widget.onStyleLoaded?.call();
+            for (final layer in widget.layers) {
+              layer.registerController(this);
+            }
           }.toJS,
         );
         _map.on(
@@ -122,8 +125,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onClick?.call(point);
           }.toJS,
         );
         _map.on(
@@ -131,8 +132,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventDoubleClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onDoubleClick?.call(point);
           }.toJS,
         );
         _map.on(
@@ -140,8 +139,6 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             final point = event.lngLat.toPosition();
             widget.onEvent?.call(MapEventSecondaryClick(point: point));
-            // ignore: deprecated_member_use_from_same_package
-            _options.onSecondaryClick?.call(point);
           }.toJS,
         );
         _map.on(
@@ -232,24 +229,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.gestures != oldWidget.options.gestures) {
       _updateGestures(_options.gestures);
     }
+    for (final layer in widget.layers) {
+      layer.updateOnMap(this);
+    }
     super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  Future<Marker> addMarker(Marker marker) async {
-    final lngLat = interop.LngLat(
-      lng: marker.point.lng,
-      lat: marker.point.lat,
-    );
-    final _ = interop.Marker(
-      interop.MarkerOptions(
-        color: marker.color == null
-            ? null
-            : '#${marker.color!.value.toRadixString(16)}',
-        draggable: marker.draggable,
-      ),
-    ).setLngLat(lngLat).addTo(_map);
-    return marker;
   }
 
   @override
@@ -261,12 +244,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
   }) async {
     _nextGestureCausedByController = true;
     _map.jumpTo(
@@ -274,18 +256,17 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: center?.toLngLat(),
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch ?? tilt,
+        pitch: pitch,
       ),
     );
   }
 
   @override
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -297,7 +278,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         center: destination,
         zoom: zoom,
         bearing: bearing,
-        pitch: pitch ?? tilt,
+        pitch: pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
       ),
@@ -593,6 +574,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     required String data,
   }) async {
     final source = _map.getSource(id);
+    if (source == null) throw Exception('Source with id "$id" does not exist.');
     source.setData(parse(data));
   }
 

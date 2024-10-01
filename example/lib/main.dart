@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_page.dart';
+import 'package:maplibre_example/annotations_circle_page.dart';
+import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_polygon_page.dart';
+import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
@@ -32,6 +35,10 @@ class MyApp extends StatelessWidget {
       title: 'MapLibre Demo',
       initialRoute: MenuPage.location,
       theme: ThemeData(colorSchemeSeed: Colors.blue),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.blue,
+      ),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
         KioskPage.location: (context) => const KioskPage(),
@@ -49,7 +56,14 @@ class MyApp extends StatelessWidget {
         LayersRasterPage.location: (context) => const LayersRasterPage(),
         LayersLinePage.location: (context) => const LayersLinePage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
-        AnnotationsPage.location: (context) => const AnnotationsPage(),
+        AnnotationsCirclePage.location: (context) =>
+            const AnnotationsCirclePage(),
+        AnnotationsMarkerPage.location: (context) =>
+            const AnnotationsMarkerPage(),
+        AnnotationsPolylinePage.location: (context) =>
+            const AnnotationsPolylinePage(),
+        AnnotationsPolygonPage.location: (context) =>
+            const AnnotationsPolygonPage(),
         ParametersPage.location: (context) => const ParametersPage(),
         ControllerPage.location: (context) => const ControllerPage(),
         TwoMapsPage.location: (context) => const TwoMapsPage(),
