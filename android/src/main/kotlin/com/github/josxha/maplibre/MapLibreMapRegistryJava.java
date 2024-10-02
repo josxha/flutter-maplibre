@@ -7,7 +7,7 @@ import org.maplibre.android.maps.MapLibreMap;
 import java.util.HashMap;
 
 @Keep
-public class MapLibreMapRegistry {
+public class MapLibreMapRegistryJava {
     private static final HashMap<Integer, MapLibreMap> registry = new HashMap<>();
 
     @Keep

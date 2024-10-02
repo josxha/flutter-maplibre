@@ -14,6 +14,9 @@
 # For more details, see
 # http://developer.android.com/guide/developing/tools/proguard.html
 
+-keep class com.github.josxha.maplibre.** { *; }
+
+
 -keep class com.github.josxha.maplibre.MapLibreMapRegistry { *; }
 -keepclassmembers class com.github.josxha.maplibre.MapLibreMapRegistry { *; }
 -keepnames class com.github.josxha.maplibre.MapLibreMapRegistry { *; }
@@ -28,6 +31,24 @@
     public static ** get(int);
 }
 -keep class com.github.josxha.maplibre.MapLibreMapRegistry {
+    public ** get(int);
+}
+
+
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava { *; }
+-keepclassmembers class com.github.josxha.maplibre.MapLibreMapRegistryJava { *; }
+-keepnames class com.github.josxha.maplibre.MapLibreMapRegistryJava { *; }
+-keepclassmembernames class com.github.josxha.maplibre.MapLibreMapRegistryJava { *; }
+
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava { *; }
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava { public *; }
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava {
+    @androidx.annotation.Keep *;
+}
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava {
+    public static ** get(int);
+}
+-keep class com.github.josxha.maplibre.MapLibreMapRegistryJava {
     public ** get(int);
 }
 -keep @androidx.annotation.Keep class * { *; }
