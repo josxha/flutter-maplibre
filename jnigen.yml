@@ -12,6 +12,7 @@ preamble: |
   // ignore_for_file: always_use_package_imports
   // ignore_for_file: use_late_for_private_fields_and_variables
   // ignore_for_file: one_member_abstracts
+  // ignore_for_file: always_put_required_named_parameters_first
 android_sdk_config:
   add_gradle_deps: true
   android_example: 'example/'
@@ -44,5 +45,3 @@ classes:
   - 'org.maplibre.android.text'
   - 'org.maplibre.android.util'
   - 'org.maplibre.android.utils'
-enable_experiment:
-  - interface_implementation

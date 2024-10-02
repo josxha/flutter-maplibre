@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jni/internal_helpers_for_jnigen.dart';
+import 'package:jni/_internal.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
@@ -23,14 +23,14 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   MapOptions get _options => widget.options;
 
   jni.MapLibreMap get _jniMapLibreMap =>
-      _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.get0(_viewId);
+      _cachedJniMapLibreMap ??= jni.MapLibreMapRegistry.get(_viewId);
 
   // ignore: unused_element
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
   // ignore: unused_element
-  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle1();
+  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle$1();
 
   @override
   Widget build(BuildContext context) {

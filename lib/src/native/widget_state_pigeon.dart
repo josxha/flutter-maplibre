@@ -134,7 +134,7 @@ final class MapLibreMapStatePigeon extends State<MapLibreMap>
     final camera = CameraPosition_Builder();
     if (center case Position()) {
       camera.target(
-        LatLng.new1(center.lat.toDouble(), center.lng.toDouble()),
+        LatLng.new$1(center.lat.toDouble(), center.lng.toDouble()),
       );
     }
     if (zoom case double()) camera.zoom(zoom);
