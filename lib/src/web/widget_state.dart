@@ -114,7 +114,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.load,
           (interop.MapMouseEvent event) {
             widget.onEvent?.call(const MapEventStyleLoaded());
-            _map.setProjection(interop.ProjectionSpecification(type: 'globe'));#
+            _map.setProjection(interop.ProjectionSpecification(type: 'globe'));
             widget.onStyleLoaded?.call();
             for (final layer in widget.layers) {
               layer.registerController(this);
