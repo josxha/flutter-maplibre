@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:js_interop';
 import 'dart:math';
+import 'dart:ui' as ui;
 import 'dart:ui_web';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
@@ -191,7 +194,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Widget build(BuildContext context) => HtmlElementView(viewType: _viewName);
+  Widget build(BuildContext context) => Stack(
+        children: [
+          HtmlElementView(viewType: _viewName),
+          ...widget.layers.whereType<MarkerAnnotationLayer<Widget>>().map(
+                (layer) => WidgetToPng(layer, this),
+              ),
+        ],
+      );
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
@@ -615,5 +625,49 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     } else {
       _map.keyboard.disable();
     }
+  }
+}
+
+/// The [WidgetToPng] widget
+class WidgetToPng extends StatefulWidget {
+  /// Create a new [WidgetToPng] widget.
+  const WidgetToPng(this.layer, this.controller, {super.key});
+
+  /// The marker layer.
+  final MarkerAnnotationLayer<Widget> layer;
+
+  /// The map controller.
+  final MapController controller;
+
+  @override
+  State<WidgetToPng> createState() => _WidgetToPngState();
+}
+
+class _WidgetToPngState extends State<WidgetToPng> {
+  final _key = GlobalKey();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final boundary =
+      _key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+      final image = await boundary.toImage();
+      final byteData =
+      await image.toByteData(format: ui.ImageByteFormat.png);
+      final pngBytes = byteData!.buffer.asUint8List();
+      await widget.controller.addImage(widget.layer.imageId, pngBytes);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: -1000000000,
+      child: RepaintBoundary(
+        key: _key,
+        child: widget.layer.iconImage,
+      ),
+    );
   }
 }

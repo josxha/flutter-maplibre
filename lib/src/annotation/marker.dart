@@ -1,7 +1,7 @@
 part of 'annotations.dart';
 
 /// A marker layer.
-class MarkerAnnotationLayer extends AnnotationLayer<Point> {
+class MarkerAnnotationLayer<I extends Object?> extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
   MarkerAnnotationLayer({
     required List<Point> points,
@@ -48,6 +48,9 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
           layerId: 'maplibre-marker-layer-${_counter++}',
         );
 
+  /// Get a unique image id.
+  final String imageId = 'maplibre-marker-image-${_counter++}';
+
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
   final bool iconAllowOverlap;
@@ -65,7 +68,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   final double iconSize;
 
   /// Name of image in sprite to use for drawing an image background.
-  final String? iconImage;
+  final I? iconImage;
 
   /// Rotates the icon clockwise.
   final double iconRotate;
@@ -209,6 +212,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         'icon-optional': iconOptional,
         'icon-size': iconSize,
         if (iconImage case final String image) 'icon-image': image,
+        if (iconImage case Widget()) 'icon-image': imageId,
         'icon-rotate': iconRotate,
         'icon-padding': iconPadding,
         'icon-keep-upright': iconKeepUpright,
