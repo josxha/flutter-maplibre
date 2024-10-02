@@ -20,12 +20,12 @@ class _WebControlsPageState extends State<WebControlsPage> {
         options: MapOptions(
           zoom: 4,
           center: Position(9.17, 47.68),
-          controls: const [
-            ScaleControl(),
-            GeolocateControl(),
-            FullscreenControl(),
+          webControls: const [
+            WebScaleControl(),
+            WebGeolocateControl(),
+            WebFullscreenControl(),
             LogoControl(),
-            NavigationControl(visualizePitch: true),
+            WebNavigationControl(visualizePitch: true),
           ],
         ),
         onEvent: (event) {

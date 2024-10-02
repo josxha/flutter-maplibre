@@ -13,21 +13,19 @@ abstract interface class MapController {
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Instantly move the map camera to a new location.
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
   });
 
   /// Animate the map camera to a new location.
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -46,11 +44,6 @@ abstract interface class MapController {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   });
-
-  /// Add a [Marker] to the map.
-  ///
-  /// Only supported on web.
-  Future<Marker> addMarker(Marker marker);
 
   /// Add a new source to the map.
   Future<void> addSource(Source source);

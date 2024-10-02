@@ -7,13 +7,8 @@ class MapCamera {
     required this.center,
     required this.zoom,
     required this.bearing,
-    @Deprecated('Renamed to pitch') double? tilt,
-    double? pitch,
-  })  : assert(
-          tilt != null || pitch != null,
-          'Either tilt or pitch must be set.',
-        ),
-        pitch = tilt ?? pitch ?? 0;
+    required this.pitch,
+  });
 
   /// The position of the map center.
   final Position center;
@@ -26,10 +21,6 @@ class MapCamera {
 
   /// The camera pitch of the map.
   final double pitch;
-
-  /// The camera pitch.
-  @Deprecated('Renamed to pitch')
-  double get tilt => pitch;
 
   @override
   String toString() => 'MapCamera('
