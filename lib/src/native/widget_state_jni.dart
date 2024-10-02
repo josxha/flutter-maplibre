@@ -398,18 +398,26 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<MapCamera> getCamera() async {
-    final jniCamera = _jniMapLibreMap.getCameraPosition();
-    final camera = MapCamera(
-      center: Position(
-        jniCamera.target.getLongitude(),
-        jniCamera.target.getLatitude(),
-      ),
-      zoom: jniCamera.zoom,
-      pitch: jniCamera.tilt,
-      bearing: jniCamera.bearing,
-    );
-    jniCamera.release();
-    return camera;
+    try {
+      final jniCamera = _jniMapLibreMap.getCameraPosition();
+      final camera = MapCamera(
+        center: Position(
+          jniCamera.target.getLongitude(),
+          jniCamera.target.getLatitude(),
+        ),
+        zoom: jniCamera.zoom,
+        pitch: jniCamera.tilt,
+        bearing: jniCamera.bearing,
+      );
+      jniCamera.release();
+      return camera;
+    } catch (error, stacktrace) {
+      // ignore: avoid_print
+      print(error);
+      // ignore: avoid_print
+      print(stacktrace);
+      rethrow;
+    }
   }
 
   @override
