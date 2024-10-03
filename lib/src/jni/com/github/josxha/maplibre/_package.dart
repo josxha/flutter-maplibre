@@ -1,1 +1,1 @@
-export 'MapLibreMapRegistry.dart';
+export 'MapLibreRegistry.dart';

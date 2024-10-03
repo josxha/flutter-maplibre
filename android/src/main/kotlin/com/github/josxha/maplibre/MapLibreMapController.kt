@@ -112,7 +112,7 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
-        MapLibreMapRegistry.add(viewId, mapLibreMap)
+        MapLibreRegistry.addMap(viewId, mapLibreMap)
         if (mapOptions.listensOnClick) {
             this.mapLibreMap.addOnMapClickListener { latLng ->
                 flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }

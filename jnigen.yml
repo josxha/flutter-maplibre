@@ -26,7 +26,7 @@ classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
   - 'android.app.Activity'
   - 'android.graphics.PointF'
-  - 'com.github.josxha.maplibre.MapLibreMapRegistry'
+  - 'com.github.josxha.maplibre.MapLibreRegistry'
   - 'org.maplibre.android.attribution'
   - 'org.maplibre.android.camera'
   - 'org.maplibre.android.constants'

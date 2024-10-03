@@ -51,39 +51,39 @@ import 'package:jni/jni.dart' as _$jni;
 
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart' as maplibremap_;
 
-/// from: `com.github.josxha.maplibre.MapLibreMapRegistry`
-class MapLibreMapRegistry extends _$jni.JObject {
+/// from: `com.github.josxha.maplibre.MapLibreRegistry`
+class MapLibreRegistry extends _$jni.JObject {
   @_$jni.internal
   @_$core.override
-  final _$jni.JObjType<MapLibreMapRegistry> $type;
+  final _$jni.JObjType<MapLibreRegistry> $type;
 
   @_$jni.internal
-  MapLibreMapRegistry.fromReference(
+  MapLibreRegistry.fromReference(
     _$jni.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'com/github/josxha/maplibre/MapLibreMapRegistry');
+      _$jni.JClass.forName(r'com/github/josxha/maplibre/MapLibreRegistry');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapLibreMapRegistry$Type();
+  static const type = $MapLibreRegistry$Type();
   static final _id_INSTANCE = _class.staticFieldId(
     r'INSTANCE',
-    r'Lcom/github/josxha/maplibre/MapLibreMapRegistry;',
+    r'Lcom/github/josxha/maplibre/MapLibreRegistry;',
   );
 
-  /// from: `static public final com.github.josxha.maplibre.MapLibreMapRegistry INSTANCE`
+  /// from: `static public final com.github.josxha.maplibre.MapLibreRegistry INSTANCE`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapLibreMapRegistry get INSTANCE =>
-      _id_INSTANCE.get(_class, const $MapLibreMapRegistry$Type());
+  static MapLibreRegistry get INSTANCE =>
+      _id_INSTANCE.get(_class, const $MapLibreRegistry$Type());
 
-  static final _id_get = _class.instanceMethodId(
-    r'get',
+  static final _id_getMap = _class.instanceMethodId(
+    r'getMap',
     r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
   );
 
-  static final _get = _$jni.ProtectedJniExtensions.lookup<
+  static final _getMap = _$jni.ProtectedJniExtensions.lookup<
           _$jni.NativeFunction<
               _$jni.JniResult Function(
                   _$jni.Pointer<_$jni.Void>,
@@ -93,21 +93,21 @@ class MapLibreMapRegistry extends _$jni.JObject {
           _$jni.JniResult Function(
               _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
 
-  /// from: `public final org.maplibre.android.maps.MapLibreMap get(int i)`
+  /// from: `public final org.maplibre.android.maps.MapLibreMap getMap(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  maplibremap_.MapLibreMap get(
+  maplibremap_.MapLibreMap getMap(
     int i,
   ) {
-    return _get(reference.pointer, _id_get as _$jni.JMethodIDPtr, i)
+    return _getMap(reference.pointer, _id_getMap as _$jni.JMethodIDPtr, i)
         .object(const maplibremap_.$MapLibreMap$Type());
   }
 
-  static final _id_add = _class.instanceMethodId(
-    r'add',
+  static final _id_addMap = _class.instanceMethodId(
+    r'addMap',
     r'(ILorg/maplibre/android/maps/MapLibreMap;)V',
   );
 
-  static final _add = _$jni.ProtectedJniExtensions.lookup<
+  static final _addMap = _$jni.ProtectedJniExtensions.lookup<
               _$jni.NativeFunction<
                   _$jni.JThrowablePtr Function(
                       _$jni.Pointer<_$jni.Void>,
@@ -119,30 +119,29 @@ class MapLibreMapRegistry extends _$jni.JObject {
           _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
               _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
 
-  /// from: `public final void add(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void add(
+  /// from: `public final void addMap(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
+  void addMap(
     int i,
     maplibremap_.MapLibreMap mapLibreMap,
   ) {
-    _add(reference.pointer, _id_add as _$jni.JMethodIDPtr, i,
+    _addMap(reference.pointer, _id_addMap as _$jni.JMethodIDPtr, i,
             mapLibreMap.reference.pointer)
         .check();
   }
 }
 
-final class $MapLibreMapRegistry$Type
-    extends _$jni.JObjType<MapLibreMapRegistry> {
+final class $MapLibreRegistry$Type extends _$jni.JObjType<MapLibreRegistry> {
   @_$jni.internal
-  const $MapLibreMapRegistry$Type();
+  const $MapLibreRegistry$Type();
 
   @_$jni.internal
   @_$core.override
-  String get signature => r'Lcom/github/josxha/maplibre/MapLibreMapRegistry;';
+  String get signature => r'Lcom/github/josxha/maplibre/MapLibreRegistry;';
 
   @_$jni.internal
   @_$core.override
-  MapLibreMapRegistry fromReference(_$jni.JReference reference) =>
-      MapLibreMapRegistry.fromReference(reference);
+  MapLibreRegistry fromReference(_$jni.JReference reference) =>
+      MapLibreRegistry.fromReference(reference);
 
   @_$jni.internal
   @_$core.override
@@ -153,11 +152,11 @@ final class $MapLibreMapRegistry$Type
   final superCount = 1;
 
   @_$core.override
-  int get hashCode => ($MapLibreMapRegistry$Type).hashCode;
+  int get hashCode => ($MapLibreRegistry$Type).hashCode;
 
   @_$core.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapLibreMapRegistry$Type) &&
-        other is $MapLibreMapRegistry$Type;
+    return other.runtimeType == ($MapLibreRegistry$Type) &&
+        other is $MapLibreRegistry$Type;
   }
 }
