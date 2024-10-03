@@ -58,7 +58,6 @@ import java.net.URI
 import java.net.URL
 import kotlin.coroutines.cancellation.CancellationException
 
-
 class MapLibreMapController(
     viewId: Int,
     private val context: Context,

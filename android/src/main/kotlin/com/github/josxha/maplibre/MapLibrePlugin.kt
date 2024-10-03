@@ -79,7 +79,7 @@ object FlutterLifecycleAdapter {
 
 class MapLibreMapFactory(
     private val lifecycleProvider: LifecycleProvider,
-    private val binaryMessenger: BinaryMessenger
+    private val binaryMessenger: BinaryMessenger,
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
