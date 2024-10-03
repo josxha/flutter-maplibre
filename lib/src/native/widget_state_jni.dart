@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jni/_internal.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
@@ -418,15 +417,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    final projectionRef = _jniProjection.reference;
-    final boundsRef = await runOnPlatformThread<JReference>(() {
-      final projection = jni.Projection.fromReference(projectionRef);
-      final region = projection.getVisibleRegion();
+    final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
+      final region = _jniProjection.getVisibleRegion();
       final bounds = region.latLngBounds;
       region.release();
-      return bounds.reference;
+      return bounds;
     });
-    final jniBounds = jni.LatLngBounds.fromReference(boundsRef);
     final bounds = LngLatBounds(
       longitudeWest: jniBounds.longitudeWest,
       longitudeEast: jniBounds.longitudeEast,
