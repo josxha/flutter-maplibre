@@ -45,6 +45,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           filter_mode: nofilter
+          file_glob: "!**/*.g.*"
 #  integration-test-ios:
 #    name: "Integration Tests on iOS"
 #    runs-on: macOS-latest
