@@ -147,16 +147,12 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final sw = Stopwatch()..start();
                     final region = await _controller.getVisibleRegion();
-                    final time = sw.elapsedMicroseconds;
-                    sw.stop();
-                    debugPrint(region.toString());
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
-                          SnackBar(content: Text('$region $time')),
+                          SnackBar(content: Text(region.toString())),
                         );
                     }
                   },
