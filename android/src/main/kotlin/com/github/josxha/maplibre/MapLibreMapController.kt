@@ -60,7 +60,7 @@ import kotlin.coroutines.cancellation.CancellationException
 
 
 class MapLibreMapController(
-    viewId: Int,
+    private val viewId: Int,
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
     binaryMessenger: BinaryMessenger
@@ -112,6 +112,7 @@ class MapLibreMapController(
 
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
+        MapLibreRegistry.addMap(viewId, mapLibreMap)
         if (mapOptions.listensOnClick) {
             this.mapLibreMap.addOnMapClickListener { latLng ->
                 flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }
