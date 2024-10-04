@@ -45,8 +45,7 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
           other is PolygonAnnotationLayer &&
           runtimeType == other.runtimeType &&
           color == other.color &&
-          outlineColor == other.outlineColor &&
-          const DeepCollectionEquality().equals(list, other.list);
+          outlineColor == other.outlineColor;
 
   late final int? _cachedHashCode;
 

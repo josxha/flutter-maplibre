@@ -279,8 +279,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
           textHaloWidth == other.textHaloWidth &&
           textHaloBlur == other.textHaloBlur &&
           textTranslate == other.textTranslate &&
-          iconAnchor == other.iconAnchor &&
-          const DeepCollectionEquality().equals(list, other.list);
+          iconAnchor == other.iconAnchor;
 
   late final int? _cachedHashCode;
 

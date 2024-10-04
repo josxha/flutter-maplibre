@@ -36,16 +36,30 @@ class AnnotationManager {
   void updateLayers(List<AnnotationLayer> layers) {
     for (var index = 0; index < layers.length; index++) {
       final layer = layers[index];
-      final oldLayer = _oldLayers[index];
-      if (layer == oldLayer) continue;
+      final oldLayer = index > _oldLayers.length - 1 ? null : _oldLayers[index];
       // update source
-      mapController.updateGeoJsonSource(
-        id: layer.getSourceId(index),
-        data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
-      );
+      // TODO check if the entities of both lists are equal
+      if (oldLayer case AnnotationLayer()) {
+        mapController.updateGeoJsonSource(
+          id: layer.getSourceId(index),
+          data:
+          jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+        );
+      } else {
+        final source = GeoJsonSource(
+          id: layer.getSourceId(index),
+          data:
+          jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+        );
+        mapController.addSource(source);
+      }
       // update layer
-      mapController.removeLayer(oldLayer.getLayerId(index));
-      mapController.addLayer(oldLayer.createLayer(index));
+      if (layer != oldLayer) {
+        if (oldLayer case AnnotationLayer()) {
+          mapController.removeLayer(oldLayer.getLayerId(index));
+        }
+        mapController.addLayer(layer.createLayer(index));
+      }
     }
     // remove any left-over sources and layers from the map
     for (var index = 0; index < (_oldLayers.length - layers.length); index++) {

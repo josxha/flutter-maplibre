@@ -64,8 +64,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
           width == other.width &&
           gapWidth == other.gapWidth &&
           blur == other.blur &&
-          dashArray == other.dashArray &&
-          const DeepCollectionEquality().equals(list, other.list);
+          dashArray == other.dashArray;
 
   late final int? _cachedHashCode;
 
