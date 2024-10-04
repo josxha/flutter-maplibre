@@ -68,7 +68,8 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
           color == other.color &&
           blur == other.blur &&
           strokeWidth == other.strokeWidth &&
-          strokeColor == other.strokeColor;
+          strokeColor == other.strokeColor &&
+          const DeepCollectionEquality().equals(list, other.list);
 
   late final int? _cachedHashCode;
 

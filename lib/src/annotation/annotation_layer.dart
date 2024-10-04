@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/extensions.dart';
+import 'package:collection/collection.dart';
 
 part 'circle_annotation_layer.dart';
 part 'marker_annotation_layer.dart';
@@ -38,7 +39,7 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
       identical(this, other) ||
       other is AnnotationLayer &&
           runtimeType == other.runtimeType &&
-          list == other.list;
+          const DeepCollectionEquality().equals(list, other.list);
 
   @override
   int get hashCode => list.hashCode;

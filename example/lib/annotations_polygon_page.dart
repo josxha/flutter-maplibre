@@ -12,21 +12,17 @@ class AnnotationsPolygonPage extends StatefulWidget {
 }
 
 class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
-  final _layer = PolygonAnnotationLayer(
-    polygons: <Polygon>[
-      Polygon(
-        coordinates: [
-          [
-            Position(9.17, 47.68),
-            Position(9.5, 48),
-            Position(9, 48),
-          ],
+  final _polygons = <Polygon>[
+    Polygon(
+      coordinates: [
+        [
+          Position(9.17, 47.68),
+          Position(9.5, 48),
+          Position(9, 48),
         ],
-      ),
-    ],
-    color: Colors.lightBlueAccent.withOpacity(0.6),
-    outlineColor: Colors.blue,
-  );
+      ],
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +33,17 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _layer.list.first.coordinates.first.add(event.point);
+              _polygons.first.coordinates.first.add(event.point);
             });
           }
         },
-        layers: [_layer],
+        layers: [
+          PolygonAnnotationLayer(
+            polygons: _polygons,
+            color: Colors.lightBlueAccent.withOpacity(0.6),
+            outlineColor: Colors.blue,
+          ),
+        ],
       ),
     );
   }
