@@ -25,6 +25,16 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
+    // Keeping the classes from being removed by proguard.
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
     if (project.android.hasProperty("namespace")) {
         namespace = "com.github.josxha.maplibre"
     }
