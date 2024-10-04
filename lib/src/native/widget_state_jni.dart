@@ -417,8 +417,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
+    final projection = _jniProjection; // necessary to use it in platform thread
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
-      final region = _jniProjection.getVisibleRegion();
+      final region = projection.getVisibleRegion();
       final bounds = region.latLngBounds;
       region.release();
       return bounds;
