@@ -4,6 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   /// Create a new [PolylineAnnotationLayer] instance.
+  // ignore: prefer_const_constructors_in_immutables
   PolylineAnnotationLayer({
     required List<LineString> polylines,
     this.color = const Color(0xFF000000),
@@ -11,11 +12,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
     this.gapWidth = 0,
     this.blur = 0,
     this.dashArray,
-  }) : super._(
-          list: polylines,
-          sourceId: 'maplibre-polyline-source-${_counter++}',
-          layerId: 'maplibre-polyline-layer-${_counter++}',
-        );
+  }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
   final Color color;
@@ -50,9 +47,9 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer() => LineLayer(
-        id: layerId,
-        sourceId: sourceId,
+  Layer createLayer(int index) => LineLayer(
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
       );

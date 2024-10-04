@@ -4,6 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
+  // ignore: prefer_const_constructors_in_immutables
   MarkerAnnotationLayer({
     required List<Point> points,
     this.iconAllowOverlap = false,
@@ -43,11 +44,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
-  }) : super._(
-          list: points,
-          sourceId: 'maplibre-marker-source-${_counter++}',
-          layerId: 'maplibre-marker-layer-${_counter++}',
-        );
+  }) : super._(list: points);
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -233,9 +230,9 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Layer createLayer() => SymbolLayer(
-        id: layerId,
-        sourceId: sourceId,
+  Layer createLayer(int index) => SymbolLayer(
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
       );
@@ -287,8 +284,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   late final int? _cachedHashCode;
 
   @override
-  int get hashCode => _cachedHashCode ??=
-      super.hashCode ^
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
       iconAllowOverlap.hashCode ^
       iconIgnorePlacement.hashCode ^
       iconOptional.hashCode ^
