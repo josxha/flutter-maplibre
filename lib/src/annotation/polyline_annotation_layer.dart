@@ -1,6 +1,7 @@
-part of 'annotations.dart';
+part of 'annotation_layer.dart';
 
 /// A [LineString] layer.
+@immutable
 class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   /// Create a new [PolylineAnnotationLayer] instance.
   PolylineAnnotationLayer({
@@ -55,4 +56,26 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
         paint: getPaint(),
         layout: getLayout(),
       );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is PolylineAnnotationLayer &&
+          runtimeType == other.runtimeType &&
+          color == other.color &&
+          width == other.width &&
+          gapWidth == other.gapWidth &&
+          blur == other.blur &&
+          dashArray == other.dashArray;
+
+  late final int? _cachedHashCode;
+
+  @override
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
+      color.hashCode ^
+      width.hashCode ^
+      gapWidth.hashCode ^
+      blur.hashCode ^
+      dashArray.hashCode;
 }

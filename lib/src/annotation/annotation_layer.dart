@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/extensions.dart';
 
-part 'circle.dart';
-part 'marker.dart';
-part 'polygon.dart';
-part 'polyline.dart';
+part 'circle_annotation_layer.dart';
+part 'marker_annotation_layer.dart';
+part 'polygon_annotation_layer.dart';
+part 'polyline_annotation_layer.dart';
 
 /// This counter guarantees unique source and layer IDs.
 int _counter = 0;
@@ -33,7 +33,7 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
 
   /// Internal used, register a map controller and add the [AnnotationLayer]
   /// to the map.
-  void registerController(MapController controller) {
+  void addToMap(MapController controller, int index) {
     final source = GeoJsonSource(
       id: sourceId,
       data: jsonEncode(GeometryCollection(geometries: list).toJson()),
@@ -52,7 +52,7 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
   Layer createLayer();
 
   /// Update the annotations.
-  void updateOnMap(MapController controller) {
+  void updateOnMap(MapController controller, int index) {
     controller.updateGeoJsonSource(
       id: sourceId,
       data: jsonEncode(GeometryCollection(geometries: list).toJson()),

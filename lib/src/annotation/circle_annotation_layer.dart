@@ -1,6 +1,7 @@
-part of 'annotations.dart';
+part of 'annotation_layer.dart';
 
 /// A marker layer.
+@immutable
 class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [CircleAnnotationLayer] instance.
   CircleAnnotationLayer({
@@ -72,9 +73,10 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
           strokeWidth == other.strokeWidth &&
           strokeColor == other.strokeColor;
 
+  late final int? _cachedHashCode;
+
   @override
-  int get hashCode =>
-      super.hashCode ^
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
       radius.hashCode ^
       color.hashCode ^
       blur.hashCode ^
