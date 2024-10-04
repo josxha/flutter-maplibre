@@ -5,10 +5,10 @@ import 'package:maplibre/src/platform_interface.dart';
 import 'package:maplibre/src/web/widget_state.dart';
 
 /// A web implementation of the MapLibrePlatform of the MapLibre plugin.
-final class PlatformWeb extends PlatformInterface {
-  /// This static method registers [PlatformWeb] when running on web.
+final class PlatformImpl extends PlatformInterface {
+  /// This static method registers [PlatformImpl] when running on web.
   static void registerWith(Registrar registrar) =>
-      PlatformInterface.instance = PlatformWeb();
+      PlatformInterface.instance = PlatformImpl();
 
   @override
   State<MapLibreMap> createWidgetState() => MapLibreMapStateWeb();
