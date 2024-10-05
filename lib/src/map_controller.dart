@@ -48,6 +48,9 @@ abstract interface class MapController {
   /// Add a new source to the map.
   Future<void> addSource(Source source);
 
+  /// Track the user location and show on the map
+  void trackUserLocation();
+
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.
   ///

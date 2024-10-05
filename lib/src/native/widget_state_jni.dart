@@ -186,6 +186,37 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       );
 
   @override
+  void trackUserLocation() {
+    /*final locationComponent = _jniMapLibreMap.getLocationComponent();
+    final jniContext = jni.MapLibreRegistry.context;
+    final locationComponentOptions =
+        jni.LocationComponentOptions.builder(jniContext)
+            .pulseEnabled(true)
+            .build();
+    final locationEngineRequest = jni.LocationEngineRequest_Builder(750)
+        .setFastestInterval(750)
+        .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+        .build();
+    final activationOptions =
+        jni.LocationComponentActivationOptions.builder(jniContext, _jniStyle)
+            .locationComponentOptions(locationComponentOptions)
+            .useDefaultLocationEngine(true)
+            .locationEngineRequest(locationEngineRequest)
+            .build();
+    locationComponent.activateLocationComponent(activationOptions);
+
+    locationComponent.isLocationComponentEnabled();
+    locationComponent.setCameraMode(jni.CameraMode.TRACKING);
+//        locationComponent.forceLocationUpdate(null)
+
+    locationComponent.release();
+    locationComponentOptions.release();
+    locationEngineRequest.release();
+    activationOptions.release();
+    jniContext.release();*/
+  }
+
+  @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     // TODO: evaluate if jni would improve this function
     await switch (layer) {

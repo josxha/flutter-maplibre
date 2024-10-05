@@ -616,4 +616,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.keyboard.disable();
     }
   }
+
+  @override
+  void trackUserLocation() {
+    // TODO: implement trackUserLocation
+  }
 }

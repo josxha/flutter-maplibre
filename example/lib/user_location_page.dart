@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:maplibre/maplibre.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+@immutable
+class UserLocationPage extends StatefulWidget {
+  const UserLocationPage({super.key});
+
+  static const location = '/user-location';
+
+  @override
+  State<UserLocationPage> createState() => _UserLocationPageState();
+}
+
+class _UserLocationPageState extends State<UserLocationPage> {
+  late final MapController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('User Location')),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              spacing: 8,
+              alignment: WrapAlignment.center,
+              children: [
+                OutlinedButton(
+                  onPressed: () async {
+                    final status = await Permission.locationWhenInUse.request();
+                    debugPrint(status.toString());
+                    _controller.trackUserLocation();
+                  },
+                  child: const Text(
+                    'Track user location',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          MapLibreMap(
+            options: MapOptions(zoom: 1, center: Position(0, 0)),
+            onMapCreated: (controller) => _controller = controller,
+            onEvent: (event) {
+              if (event case MapEventClick()) {
+                setState(() {
+                });
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
