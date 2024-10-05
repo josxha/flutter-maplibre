@@ -186,34 +186,38 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       );
 
   @override
-  void trackUserLocation() {
-    /*final locationComponent = _jniMapLibreMap.getLocationComponent();
-    final jniContext = jni.MapLibreRegistry.context;
-    final locationComponentOptions =
-        jni.LocationComponentOptions.builder(jniContext)
-            .pulseEnabled(true)
-            .build();
-    final locationEngineRequest = jni.LocationEngineRequest_Builder(750)
-        .setFastestInterval(750)
-        .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
-        .build();
-    final activationOptions =
-        jni.LocationComponentActivationOptions.builder(jniContext, _jniStyle)
-            .locationComponentOptions(locationComponentOptions)
-            .useDefaultLocationEngine(true)
-            .locationEngineRequest(locationEngineRequest)
-            .build();
-    locationComponent.activateLocationComponent(activationOptions);
+  Future<void> trackUserLocation() async {
+    final jniMapLibreMap = _jniMapLibreMap;
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      final locationComponent = jniMapLibreMap.getLocationComponent();
+      final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
+      final locationComponentOptions =
+      jni.LocationComponentOptions.builder(jniContext)
+          .pulseEnabled(true)
+          .build();
+      final locationEngineRequest = jni.LocationEngineRequest_Builder(750)
+          .setFastestInterval(750)
+          .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+          .build();
+      final activationOptions =
+      jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+          .locationComponentOptions(locationComponentOptions)
+          .useDefaultLocationEngine(true)
+          .locationEngineRequest(locationEngineRequest)
+          .build();
+      locationComponent.activateLocationComponent(activationOptions);
 
-    locationComponent.isLocationComponentEnabled();
-    locationComponent.setCameraMode(jni.CameraMode.TRACKING);
+      locationComponent.isLocationComponentEnabled();
+      locationComponent.setCameraMode(jni.CameraMode.TRACKING);
 //        locationComponent.forceLocationUpdate(null)
 
-    locationComponent.release();
-    locationComponentOptions.release();
-    locationEngineRequest.release();
-    activationOptions.release();
-    jniContext.release();*/
+      locationComponent.release();
+      locationComponentOptions.release();
+      locationEngineRequest.release();
+      activationOptions.release();
+      jniContext.release();
+    });
   }
 
   @override

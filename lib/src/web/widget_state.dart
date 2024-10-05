@@ -618,7 +618,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  void trackUserLocation() {
+  Future<void> trackUserLocation() async {
     // TODO: implement trackUserLocation
   }
 }

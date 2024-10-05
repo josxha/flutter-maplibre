@@ -31,25 +31,21 @@ class _UserLocationPageState extends State<UserLocationPage> {
                   onPressed: () async {
                     final status = await Permission.locationWhenInUse.request();
                     debugPrint(status.toString());
-                    _controller.trackUserLocation();
+                    await _controller.trackUserLocation();
                   },
                   child: const Text(
-                    'Track user location',
+                    'Track location',
                     textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
           ),
-          MapLibreMap(
-            options: MapOptions(zoom: 1, center: Position(0, 0)),
-            onMapCreated: (controller) => _controller = controller,
-            onEvent: (event) {
-              if (event case MapEventClick()) {
-                setState(() {
-                });
-              }
-            },
+          Expanded(
+            child: MapLibreMap(
+              options: MapOptions(zoom: 1, center: Position(0, 0)),
+              onMapCreated: (controller) => _controller = controller,
+            ),
           ),
         ],
       ),
