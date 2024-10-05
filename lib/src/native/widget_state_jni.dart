@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
@@ -193,24 +194,28 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       final locationComponent = jniMapLibreMap.getLocationComponent();
       final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
       final locationComponentOptions =
-      jni.LocationComponentOptions.builder(jniContext)
-          .pulseEnabled(true)
-          .build();
+          jni.LocationComponentOptions.builder(jniContext)
+              .pulseFadeEnabled(true)
+              .accuracyAnimationEnabled(true)
+              .compassAnimationEnabled(true.toJBoolean())
+              .pulseEnabled(true)
+              .build();
       final locationEngineRequest = jni.LocationEngineRequest_Builder(750)
           .setFastestInterval(750)
+          .setMaxWaitTime(1)
           .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
           .build();
       final activationOptions =
-      jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
-          .locationComponentOptions(locationComponentOptions)
-          .useDefaultLocationEngine(true)
-          .locationEngineRequest(locationEngineRequest)
-          .build();
+          jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+              .locationComponentOptions(locationComponentOptions)
+              .useDefaultLocationEngine(true)
+              .locationEngineRequest(locationEngineRequest)
+              .build();
       locationComponent.activateLocationComponent(activationOptions);
 
       locationComponent.isLocationComponentEnabled();
       locationComponent.setCameraMode(jni.CameraMode.TRACKING);
-//        locationComponent.forceLocationUpdate(null)
+      // locationComponent.forceLocationUpdate(null);
 
       locationComponent.release();
       locationComponentOptions.release();
