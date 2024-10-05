@@ -42,14 +42,12 @@ class AnnotationManager {
       if (oldLayer case AnnotationLayer()) {
         mapController.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data:
-          jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data:
-          jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
         );
         mapController.addSource(source);
       }
