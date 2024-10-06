@@ -49,8 +49,6 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
-import '../../../../android/app/Activity.dart' as activity_;
-
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart' as maplibremap_;
 
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
@@ -150,10 +148,10 @@ class MapLibreRegistry extends _$jni.JObject {
 
   /// from: `public final android.app.Activity getActivity()`
   /// The returned object must be released after use, by calling the [release] method.
-  activity_.Activity getActivity() {
+  _$jni.JObject getActivity() {
     return _getActivity(
             reference.pointer, _id_getActivity as _$jni.JMethodIDPtr)
-        .object(const activity_.$Activity$Type());
+        .object(const _$jni.JObjectType());
   }
 
   static final _id_setActivity = _class.instanceMethodId(
@@ -174,7 +172,7 @@ class MapLibreRegistry extends _$jni.JObject {
 
   /// from: `public final void setActivity(android.app.Activity activity)`
   void setActivity(
-    activity_.Activity activity,
+    _$jni.JObject activity,
   ) {
     _setActivity(reference.pointer, _id_setActivity as _$jni.JMethodIDPtr,
             activity.reference.pointer)

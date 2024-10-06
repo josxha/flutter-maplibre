@@ -49,7 +49,14 @@ abstract interface class MapController {
   Future<void> addSource(Source source);
 
   /// Track the user location and show on the map
-  Future<void> trackUserLocation();
+  Future<void> trackUserLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(milliseconds: 1000),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  });
 
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.

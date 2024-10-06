@@ -616,7 +616,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> trackUserLocation() async {
-    // TODO: implement trackUserLocation
+  Future<void> trackUserLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(milliseconds: 1000),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  }) async {
+    debugPrint("Can't track the user location on web.");
   }
 }

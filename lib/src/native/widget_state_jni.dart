@@ -89,7 +89,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  pigeon.MapOptions getOptions() => pigeon.MapOptions(
+  pigeon.MapOptions getOptions() =>
+      pigeon.MapOptions(
         style: _options.style,
         bearing: _options.bearing,
         zoom: _options.zoom,
@@ -97,9 +98,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         center: _options.center == null
             ? null
             : pigeon.LngLat(
-                lng: _options.center!.lng.toDouble(),
-                lat: _options.center!.lat.toDouble(),
-              ),
+          lng: _options.center!.lng.toDouble(),
+          lat: _options.center!.lat.toDouble(),
+        ),
         minZoom: _options.minZoom,
         maxZoom: _options.maxZoom,
         minPitch: _options.minPitch,
@@ -118,7 +119,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final lngLat =
-        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
+    await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
     return lngLat.toPosition();
   }
 
@@ -187,41 +188,63 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       );
 
   @override
-  Future<void> trackUserLocation() async {
+  Future<void> trackUserLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(milliseconds: 1000),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  }) async {
     final jniMapLibreMap = _jniMapLibreMap;
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      final locationComponent = jniMapLibreMap.getLocationComponent();
-      final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
-      final locationComponentOptions =
-          jni.LocationComponentOptions.builder(jniContext)
-              .pulseFadeEnabled(true)
-              .accuracyAnimationEnabled(true)
-              .compassAnimationEnabled(true.toJBoolean())
-              .pulseEnabled(true)
-              .build();
-      final locationEngineRequest = jni.LocationEngineRequest_Builder(750)
-          .setFastestInterval(750)
-          .setMaxWaitTime(1)
-          .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
-          .build();
-      final activationOptions =
-          jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
-              .locationComponentOptions(locationComponentOptions)
-              .useDefaultLocationEngine(true)
-              .locationEngineRequest(locationEngineRequest)
-              .build();
-      locationComponent.activateLocationComponent(activationOptions);
+      try {
+        final locationComponent = jniMapLibreMap.getLocationComponent();
+        final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
+        final locationComponentOptionsBuilder =
+        jni.LocationComponentOptions.builder(jniContext)
+            .pulseFadeEnabled(pulseFade)
+            .accuracyAnimationEnabled(accuracyAnimation)
+            .compassAnimationEnabled(compassAnimation.toJBoolean())
+            .pulseEnabled(pulse);
+        final locationComponentOptions = locationComponentOptionsBuilder.build();
+        final locationEngineRequestBuilder =
+        jni.LocationEngineRequest_Builder(750)
+            .setFastestInterval(fastestInterval.inMilliseconds)
+            .setMaxWaitTime(maxWaitTime.inMilliseconds)
+            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
+        final locationEngineRequest = locationEngineRequestBuilder.build();
+        final activationOptions =
+        jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+            .locationComponentOptions(locationComponentOptions)
+            .useDefaultLocationEngine(true)
+            .locationEngineRequest(locationEngineRequest)
+            .build();
+        locationComponent.activateLocationComponent(activationOptions);
 
-      locationComponent.isLocationComponentEnabled();
-      locationComponent.setCameraMode(jni.CameraMode.TRACKING);
-      // locationComponent.forceLocationUpdate(null);
+        locationComponent.isLocationComponentEnabled();
+        locationComponent.setCameraMode(jni.CameraMode.TRACKING_GPS);
+        /*locationComponent.addOnRenderModeChangedListener(
+        jni.OnRenderModeChangedListener.implement(
+          jni.$OnRenderModeChangedListener(
+            onRenderModeChanged: (i) => debugPrint('onRenderModeChanged'),
+          ),
+        ),
+      );*/
+        // locationComponent.forceLocationUpdate(jni.Location());
 
-      locationComponent.release();
-      locationComponentOptions.release();
-      locationEngineRequest.release();
-      activationOptions.release();
-      jniContext.release();
+        locationComponent.release();
+        locationComponentOptionsBuilder.release();
+        locationComponentOptions.release();
+        locationEngineRequestBuilder.release();
+        locationEngineRequest.release();
+        activationOptions.release();
+        jniContext.release();
+      } catch (error, stacktrace) {
+        debugPrint(error.toString());
+        debugPrintStack(stackTrace: stacktrace);
+      }
     });
   }
 
@@ -229,68 +252,77 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
     // TODO: evaluate if jni would improve this function
     await switch (layer) {
-      FillLayer() => _hostApi.addFillLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      CircleLayer() => _hostApi.addCircleLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      BackgroundLayer() => _hostApi.addBackgroundLayer(
-          id: layer.id,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapLayer() => _hostApi.addHeatmapLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HillshadeLayer() => _hostApi.addHillshadeLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      LineLayer() => _hostApi.addLineLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      RasterLayer() => _hostApi.addRasterLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      SymbolLayer() => _hostApi.addSymbolLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
+      FillLayer() =>
+          _hostApi.addFillLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      CircleLayer() =>
+          _hostApi.addCircleLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      BackgroundLayer() =>
+          _hostApi.addBackgroundLayer(
+            id: layer.id,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      FillExtrusionLayer() =>
+          _hostApi.addFillExtrusionLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      HeatmapLayer() =>
+          _hostApi.addHeatmapLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      HillshadeLayer() =>
+          _hostApi.addHillshadeLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      LineLayer() =>
+          _hostApi.addLineLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      RasterLayer() =>
+          _hostApi.addRasterLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
+      SymbolLayer() =>
+          _hostApi.addSymbolLayer(
+            id: layer.id,
+            sourceId: layer.sourceId,
+            belowLayerId: belowLayerId,
+            layout: layer.layout,
+            paint: layer.paint,
+          ),
     };
   }
 
@@ -299,9 +331,11 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     // TODO: evaluate if jni would improve this function
     await switch (source) {
       GeoJsonSource() =>
-        _hostApi.addGeoJsonSource(id: source.id, data: source.data),
-      RasterDemSource() => switch (source.encoding) {
-          final RasterDemCustomEncoding encoding => _hostApi.addRasterDemSource(
+          _hostApi.addGeoJsonSource(id: source.id, data: source.data),
+      RasterDemSource() =>
+      switch (source.encoding) {
+        final RasterDemCustomEncoding encoding =>
+            _hostApi.addRasterDemSource(
               id: source.id,
               attribution: source.attribution,
               bounds: source.bounds,
@@ -317,7 +351,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               redFactor: encoding.redFactor,
               baseShift: encoding.baseShift,
             ),
-          _ => _hostApi.addRasterDemSource(
+        _ =>
+            _hostApi.addRasterDemSource(
               id: source.id,
               attribution: source.attribution,
               bounds: source.bounds,
@@ -329,51 +364,54 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               tileSize: source.tileSize,
               encoding: switch (source.encoding) {
                 RasterDemTerrariumEncoding() =>
-                  pigeon.RasterDemEncoding.terrarium,
+                pigeon.RasterDemEncoding.terrarium,
                 RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
                 RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
               },
             ),
-        },
-      RasterSource() => _hostApi.addRasterSource(
-          id: source.id,
-          bounds: source.bounds,
-          url: source.url,
-          tiles: source.tiles,
-          minZoom: source.minZoom,
-          maxZoom: source.maxZoom,
-          attribution: source.attribution,
-          tileSize: source.tileSize,
-          volatile: source.volatile,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-        ),
-      VectorSource() => _hostApi.addVectorSource(
-          id: source.id,
-          bounds: source.bounds,
-          attribution: source.attribution,
-          maxZoom: source.maxZoom,
-          minZoom: source.minZoom,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-          sourceLayer: source.sourceLayer,
-          tiles: source.tiles,
-          url: source.url,
-          volatile: source.volatile,
-        ),
-      ImageSource() => _hostApi.addImageSource(
-          id: source.id,
-          url: source.url,
-          coordinates: source.coordinates
-              .map((e) => e.toLngLat())
-              .toList(growable: false),
-        ),
+      },
+      RasterSource() =>
+          _hostApi.addRasterSource(
+            id: source.id,
+            bounds: source.bounds,
+            url: source.url,
+            tiles: source.tiles,
+            minZoom: source.minZoom,
+            maxZoom: source.maxZoom,
+            attribution: source.attribution,
+            tileSize: source.tileSize,
+            volatile: source.volatile,
+            scheme: switch (source.scheme) {
+              TileScheme.xyz => pigeon.TileScheme.xyz,
+              TileScheme.tms => pigeon.TileScheme.tms,
+            },
+          ),
+      VectorSource() =>
+          _hostApi.addVectorSource(
+            id: source.id,
+            bounds: source.bounds,
+            attribution: source.attribution,
+            maxZoom: source.maxZoom,
+            minZoom: source.minZoom,
+            scheme: switch (source.scheme) {
+              TileScheme.xyz => pigeon.TileScheme.xyz,
+              TileScheme.tms => pigeon.TileScheme.tms,
+            },
+            sourceLayer: source.sourceLayer,
+            tiles: source.tiles,
+            url: source.url,
+            volatile: source.volatile,
+          ),
+      ImageSource() =>
+          _hostApi.addImageSource(
+            id: source.id,
+            url: source.url,
+            coordinates: source.coordinates
+                .map((e) => e.toLngLat())
+                .toList(growable: false),
+          ),
       VideoSource() =>
-        throw UnimplementedError('Video source is only supported on web.'),
+      throw UnimplementedError('Video source is only supported on web.'),
     };
   }
 
@@ -400,7 +438,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
       pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
       pigeon.CameraChangeReason.developerAnimation =>
-        CameraChangeReason.developerAnimation,
+      CameraChangeReason.developerAnimation,
     };
     widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
   }

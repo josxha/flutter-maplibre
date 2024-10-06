@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../../android/location/Location.dart' as location_;
+
 /// from: `org.maplibre.android.location.engine.LocationEngineResult`
 class LocationEngineResult extends _$jni.JObject {
   @_$jni.internal
@@ -85,7 +87,7 @@ class LocationEngineResult extends _$jni.JObject {
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult create(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
   static LocationEngineResult create(
-    _$jni.JObject location,
+    location_.Location location,
   ) {
     return _create(_class.reference.pointer, _id_create as _$jni.JMethodIDPtr,
             location.reference.pointer)
@@ -111,7 +113,7 @@ class LocationEngineResult extends _$jni.JObject {
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult create(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
   static LocationEngineResult create$1(
-    _$jni.JList<_$jni.JObject> list,
+    _$jni.JList<location_.Location> list,
   ) {
     return _create$1(_class.reference.pointer,
             _id_create$1 as _$jni.JMethodIDPtr, list.reference.pointer)
@@ -137,10 +139,10 @@ class LocationEngineResult extends _$jni.JObject {
 
   /// from: `public android.location.Location getLastLocation()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getLastLocation() {
+  location_.Location getLastLocation() {
     return _getLastLocation(
             reference.pointer, _id_getLastLocation as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+        .object(const location_.$Location$Type());
   }
 
   static final _id_getLocations = _class.instanceMethodId(
@@ -162,10 +164,10 @@ class LocationEngineResult extends _$jni.JObject {
 
   /// from: `public java.util.List getLocations()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> getLocations() {
+  _$jni.JList<location_.Location> getLocations() {
     return _getLocations(
             reference.pointer, _id_getLocations as _$jni.JMethodIDPtr)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(location_.$Location$Type()));
   }
 
   static final _id_extractResult = _class.staticMethodId(

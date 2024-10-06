@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../android/location/Location.dart' as location_;
+
 import '../maps/MapLibreMap.dart' as maplibremap_;
 
 import '../maps/Transform.dart' as transform_;
@@ -830,7 +832,7 @@ class LocationComponent extends _$jni.JObject {
 
   /// from: `public void forceLocationUpdate(android.location.Location location)`
   void forceLocationUpdate(
-    _$jni.JObject location,
+    location_.Location location,
   ) {
     _forceLocationUpdate(
             reference.pointer,
@@ -858,7 +860,7 @@ class LocationComponent extends _$jni.JObject {
 
   /// from: `public void forceLocationUpdate(java.util.List list, boolean z)`
   void forceLocationUpdate$1(
-    _$jni.JList<_$jni.JObject> list,
+    _$jni.JList<location_.Location> list,
     bool z,
   ) {
     _forceLocationUpdate$1(
@@ -1068,10 +1070,10 @@ class LocationComponent extends _$jni.JObject {
 
   /// from: `public android.location.Location getLastKnownLocation()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getLastKnownLocation() {
+  location_.Location getLastKnownLocation() {
     return _getLastKnownLocation(
             reference.pointer, _id_getLastKnownLocation as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+        .object(const location_.$Location$Type());
   }
 
   static final _id_addOnLocationClickListener = _class.instanceMethodId(
