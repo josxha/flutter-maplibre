@@ -2,7 +2,7 @@
 // the dependency themselves.
 export 'package:geotypes/geotypes.dart';
 
-export 'src/annotation/annotations.dart';
+export 'src/annotation/annotation_layer.dart';
 export 'src/lng_lat_bounds.dart';
 export 'src/map.dart';
 export 'src/map_camera.dart';

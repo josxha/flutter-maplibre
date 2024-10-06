@@ -14,20 +14,12 @@ class AnnotationsMarkerPage extends StatefulWidget {
 }
 
 class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
-  final _layer = MarkerAnnotationLayer(
-    points: <Point>[
-      Point(coordinates: Position(9.17, 47.68)),
-      Point(coordinates: Position(9.17, 48)),
-      Point(coordinates: Position(9, 48)),
-      Point(coordinates: Position(9.5, 48)),
-    ],
-    textField: 'Marker',
-    textAllowOverlap: true,
-    iconImage: 'marker',
-    iconSize: 0.08,
-    iconAnchor: IconAnchor.bottom,
-    textOffset: const [0, 1],
-  );
+  final _points = <Point>[
+    Point(coordinates: Position(9.17, 47.68)),
+    Point(coordinates: Position(9.17, 48)),
+    Point(coordinates: Position(9, 48)),
+    Point(coordinates: Position(9.5, 48)),
+  ];
 
   late final MapController _controller;
 
@@ -50,14 +42,24 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
             case MapEventClick():
               // add a new marker on click
               setState(() {
-                _layer.list.add(Point(coordinates: event.point));
+                _points.add(Point(coordinates: event.point));
               });
             default:
               // ignore all other events
               break;
           }
         },
-        layers: [_layer],
+        layers: [
+          MarkerAnnotationLayer(
+            points: _points,
+            textField: 'Marker',
+            textAllowOverlap: true,
+            iconImage: 'marker',
+            iconSize: 0.08,
+            iconAnchor: IconAnchor.bottom,
+            textOffset: const [0, 1],
+          ),
+        ],
       ),
     );
   }
