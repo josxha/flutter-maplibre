@@ -407,6 +407,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
+    jniCamera.target.release();
     jniCamera.release();
     return camera;
   }
@@ -421,6 +422,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
       final region = projection.getVisibleRegion();
       final bounds = region.latLngBounds;
+      region.latLngBounds.release();
       region.release();
       return bounds;
     });
