@@ -60,10 +60,11 @@ class AnnotationManager {
       }
     }
     // remove any left-over sources and layers from the map
-    for (var index = 0; index < (_oldLayers.length - layers.length); index++) {
+    for (var i = 0; i < (_oldLayers.length - layers.length); i++) {
+      final index = layers.length + i;
       final oldLayer = _oldLayers[index];
-      mapController.removeSource(oldLayer.getSourceId(index));
       mapController.removeLayer(oldLayer.getLayerId(index));
+      mapController.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;
   }
