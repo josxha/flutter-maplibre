@@ -31,7 +31,24 @@ class _UserLocationPageState extends State<UserLocationPage> {
                   onPressed: () async {
                     final status = await Permission.locationWhenInUse.request();
                     debugPrint(status.toString());
-                    await _controller.trackUserLocation();
+                  },
+                  child: const Text(
+                    'Get permission',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    await _controller.enableLocation();
+                  },
+                  child: const Text(
+                    'Enable location',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    await _controller.trackLocation();
                   },
                   child: const Text(
                     'Track location',
