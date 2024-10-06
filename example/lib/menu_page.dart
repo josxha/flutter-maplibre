@@ -20,6 +20,7 @@ import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
+import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -79,6 +80,12 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.animation,
                 location: AnimationPage.location,
               ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'User Location',
+                  iconData: Icons.gps_fixed,
+                  location: UserLocationPage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),

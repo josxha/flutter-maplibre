@@ -614,4 +614,24 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
       _map.keyboard.disable();
     }
   }
+
+  @override
+  Future<void> enableLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(seconds: 1),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  }) async {
+    debugPrint("Can't enable the user location on web programmatically.");
+  }
+
+  @override
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) async {
+    debugPrint("Can't track the user location on web.");
+  }
 }
