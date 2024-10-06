@@ -524,11 +524,11 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
           ? jni.CameraMode.TRACKING // only location
           : jni.CameraMode.NONE, // neither location nor bearing
       BearingTrackMode.compass => trackLocation
-          ? jni.CameraMode.TRACKING_COMPASS
-          : jni.CameraMode.NONE_COMPASS,
+          ? jni.CameraMode.TRACKING_COMPASS // location with compass bearing
+          : jni.CameraMode.NONE_COMPASS, // only compass bearing
       BearingTrackMode.gps => trackLocation
-          ? jni.CameraMode.TRACKING_GPS
-          : jni.CameraMode.NONE_GPS,
+          ? jni.CameraMode.TRACKING_GPS // location with gps bearing
+          : jni.CameraMode.NONE_GPS, // only gps bearing
     };
     await runOnPlatformThread(() {
       locationComponent.setCameraMode(mode);
