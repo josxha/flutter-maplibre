@@ -114,8 +114,10 @@ abstract interface class MapController {
 enum BearingTrackMode {
   /// No bearing tracking.
   none,
+
   /// Use the bearing provided by the compass sensor.
   compass,
+
   /// Use the bearing provided by the GPS location (normalized).
   gps;
 }
@@ -125,9 +127,10 @@ enum BearingTrackMode {
 enum BearingRenderMode {
   /// Do not display the current bearing.
   none,
+
   /// Use the device compass to render the bearing.
   compass,
+
   /// Use the GPS location data to render the bearing.
   gps;
 }
-

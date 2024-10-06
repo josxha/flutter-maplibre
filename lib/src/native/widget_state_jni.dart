@@ -480,24 +480,24 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     };
     final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
     final locationComponentOptionsBuilder =
-    jni.LocationComponentOptions.builder(jniContext)
-        .pulseFadeEnabled(pulseFade)
-        .accuracyAnimationEnabled(accuracyAnimation)
-        .compassAnimationEnabled(compassAnimation.toJBoolean())
-        .pulseEnabled(pulse);
+        jni.LocationComponentOptions.builder(jniContext)
+            .pulseFadeEnabled(pulseFade)
+            .accuracyAnimationEnabled(accuracyAnimation)
+            .compassAnimationEnabled(compassAnimation.toJBoolean())
+            .pulseEnabled(pulse);
     final locationComponentOptions = locationComponentOptionsBuilder.build();
     final locationEngineRequestBuilder =
-    jni.LocationEngineRequest_Builder(750) // TODO integrate as parameter
-        .setFastestInterval(fastestInterval.inMilliseconds)
-        .setMaxWaitTime(maxWaitTime.inMilliseconds)
-        .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
+        jni.LocationEngineRequest_Builder(750) // TODO integrate as parameter
+            .setFastestInterval(fastestInterval.inMilliseconds)
+            .setMaxWaitTime(maxWaitTime.inMilliseconds)
+            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
     final locationEngineRequest = locationEngineRequestBuilder.build();
     final activationOptions =
-    jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
-        .locationComponentOptions(locationComponentOptions)
-        .useDefaultLocationEngine(true)
-        .locationEngineRequest(locationEngineRequest)
-        .build();
+        jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+            .locationComponentOptions(locationComponentOptions)
+            .useDefaultLocationEngine(true)
+            .locationEngineRequest(locationEngineRequest)
+            .build();
 
     await runOnPlatformThread(() {
       locationComponent.activateLocationComponent(activationOptions);
