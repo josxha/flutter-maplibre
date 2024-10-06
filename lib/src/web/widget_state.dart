@@ -618,7 +618,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   @override
   Future<void> enableLocation({
     Duration fastestInterval = const Duration(milliseconds: 750),
-    Duration maxWaitTime = const Duration(milliseconds: 1000),
+    Duration maxWaitTime = const Duration(seconds: 1),
     bool pulseFade = true,
     bool accuracyAnimation = true,
     bool compassAnimation = true,
@@ -628,7 +628,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<void> trackLocation() async {
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) async {
     debugPrint("Can't track the user location on web.");
   }
 }

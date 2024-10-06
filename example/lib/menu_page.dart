@@ -80,11 +80,12 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.animation,
                 location: AnimationPage.location,
               ),
-              ItemCard(
-                label: 'User Location',
-                iconData: Icons.gps_fixed,
-                location: UserLocationPage.location,
-              ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'User Location',
+                  iconData: Icons.gps_fixed,
+                  location: UserLocationPage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),

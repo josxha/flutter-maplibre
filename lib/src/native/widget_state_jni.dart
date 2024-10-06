@@ -463,53 +463,75 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<void> enableLocation({
     Duration fastestInterval = const Duration(milliseconds: 750),
-    Duration maxWaitTime = const Duration(milliseconds: 1000),
+    Duration maxWaitTime = const Duration(seconds: 1),
     bool pulseFade = true,
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final locationComponent = _locationComponent;
     final jniStyle = _jniStyle;
-    await runOnPlatformThread(() {
-      final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
-      final locationComponentOptionsBuilder =
-          jni.LocationComponentOptions.builder(jniContext)
-              .pulseFadeEnabled(pulseFade)
-              .accuracyAnimationEnabled(accuracyAnimation)
-              .compassAnimationEnabled(compassAnimation.toJBoolean())
-              .pulseEnabled(pulse);
-      final locationComponentOptions = locationComponentOptionsBuilder.build();
-      final locationEngineRequestBuilder =
-          jni.LocationEngineRequest_Builder(750)
-              .setFastestInterval(fastestInterval.inMilliseconds)
-              .setMaxWaitTime(maxWaitTime.inMilliseconds)
-              .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
-      final locationEngineRequest = locationEngineRequestBuilder.build();
-      final activationOptions =
-          jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
-              .locationComponentOptions(locationComponentOptions)
-              .useDefaultLocationEngine(true)
-              .locationEngineRequest(locationEngineRequest)
-              .build();
-      locationComponent.activateLocationComponent(activationOptions);
-      locationComponent.setLocationComponentEnabled(true);
+    final bearing = switch (bearingRenderMode) {
+      BearingRenderMode.none => jni.RenderMode.NORMAL,
+      BearingRenderMode.compass => jni.RenderMode.COMPASS,
+      BearingRenderMode.gps => jni.RenderMode.GPS,
+    };
+    final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
+    final locationComponentOptionsBuilder =
+    jni.LocationComponentOptions.builder(jniContext)
+        .pulseFadeEnabled(pulseFade)
+        .accuracyAnimationEnabled(accuracyAnimation)
+        .compassAnimationEnabled(compassAnimation.toJBoolean())
+        .pulseEnabled(pulse);
+    final locationComponentOptions = locationComponentOptionsBuilder.build();
+    final locationEngineRequestBuilder =
+    jni.LocationEngineRequest_Builder(750) // TODO integrate as parameter
+        .setFastestInterval(fastestInterval.inMilliseconds)
+        .setMaxWaitTime(maxWaitTime.inMilliseconds)
+        .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
+    final locationEngineRequest = locationEngineRequestBuilder.build();
+    final activationOptions =
+    jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+        .locationComponentOptions(locationComponentOptions)
+        .useDefaultLocationEngine(true)
+        .locationEngineRequest(locationEngineRequest)
+        .build();
 
-      locationComponentOptionsBuilder.release();
-      locationComponentOptions.release();
-      locationEngineRequestBuilder.release();
-      locationEngineRequest.release();
-      activationOptions.release();
-      jniContext.release();
+    await runOnPlatformThread(() {
+      locationComponent.activateLocationComponent(activationOptions);
+      locationComponent.setRenderMode(bearing);
+      locationComponent.setLocationComponentEnabled(true);
     });
+
+    locationComponentOptionsBuilder.release();
+    locationComponentOptions.release();
+    locationEngineRequestBuilder.release();
+    locationEngineRequest.release();
+    activationOptions.release();
+    jniContext.release();
   }
 
   @override
-  Future<void> trackLocation() async {
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) async {
     final locationComponent = _locationComponent;
+    final mode = switch (trackBearing) {
+      BearingTrackMode.none => trackLocation
+          ? jni.CameraMode.TRACKING // only location
+          : jni.CameraMode.NONE, // neither location nor bearing
+      BearingTrackMode.compass => trackLocation
+          ? jni.CameraMode.TRACKING_COMPASS
+          : jni.CameraMode.NONE_COMPASS,
+      BearingTrackMode.gps => trackLocation
+          ? jni.CameraMode.TRACKING_GPS
+          : jni.CameraMode.NONE_GPS,
+    };
     await runOnPlatformThread(() {
-      locationComponent.setCameraMode(jni.CameraMode.TRACKING_GPS);
+      locationComponent.setCameraMode(mode);
     });
   }
 }
