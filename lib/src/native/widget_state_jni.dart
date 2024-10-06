@@ -470,10 +470,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     bool pulse = true,
   }) async {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
-    final jniMapLibreMap = _jniMapLibreMap;
+    final locationComponent = _locationComponent;
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      final locationComponent = jniMapLibreMap.getLocationComponent();
       final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
       final locationComponentOptionsBuilder =
           jni.LocationComponentOptions.builder(jniContext)
@@ -497,7 +496,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       locationComponent.activateLocationComponent(activationOptions);
       locationComponent.setLocationComponentEnabled(true);
 
-      locationComponent.release();
       locationComponentOptionsBuilder.release();
       locationComponentOptions.release();
       locationEngineRequestBuilder.release();
@@ -508,6 +506,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<void> trackLocation() async =>
-      _locationComponent.setCameraMode(jni.CameraMode.TRACKING_GPS);
+  Future<void> trackLocation() async {
+    final locationComponent = _locationComponent;
+    await runOnPlatformThread(() {
+      locationComponent.setCameraMode(jni.CameraMode.TRACKING_GPS);
+    });
+  }
 }

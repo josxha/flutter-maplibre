@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/styled_map_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 @immutable
@@ -60,7 +61,11 @@ class _UserLocationPageState extends State<UserLocationPage> {
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(zoom: 1, center: Position(0, 0)),
+              options: MapOptions(
+                zoom: 1,
+                center: Position(0, 0),
+                style: StyledMapPage.styleUrl,
+              ),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),
