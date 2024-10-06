@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/annotations_circle_page.dart';
 import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_mixed_page.dart';
 import 'package:maplibre_example/annotations_polygon_page.dart';
 import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
@@ -85,6 +86,11 @@ class MenuPage extends StatelessWidget {
             maxCrossAxisExtent: 200,
             childAspectRatio: 1.5,
             children: const [
+              ItemCard(
+                label: 'Mixed Annotations',
+                iconData: Icons.control_point_duplicate_outlined,
+                location: AnnotationsMixedPage.location,
+              ),
               ItemCard(
                 label: 'Circles',
                 iconData: Icons.circle,
