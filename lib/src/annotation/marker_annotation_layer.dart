@@ -1,8 +1,10 @@
-part of 'annotations.dart';
+part of 'annotation_layer.dart';
 
 /// A marker layer.
+@immutable
 class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
+  // ignore: prefer_const_constructors_in_immutables
   MarkerAnnotationLayer({
     required List<Point> points,
     this.iconAllowOverlap = false,
@@ -42,11 +44,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
-  }) : super._(
-          list: points,
-          sourceId: 'maplibre-marker-source-${_counter++}',
-          layerId: 'maplibre-marker-layer-${_counter++}',
-        );
+  }) : super._(list: points);
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -232,12 +230,98 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Layer createLayer() => SymbolLayer(
-        id: layerId,
-        sourceId: sourceId,
+  Layer createLayer(int index) => SymbolLayer(
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
       );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is MarkerAnnotationLayer &&
+          runtimeType == other.runtimeType &&
+          iconAllowOverlap == other.iconAllowOverlap &&
+          iconIgnorePlacement == other.iconIgnorePlacement &&
+          iconOptional == other.iconOptional &&
+          iconSize == other.iconSize &&
+          iconImage == other.iconImage &&
+          iconRotate == other.iconRotate &&
+          iconPadding == other.iconPadding &&
+          iconKeepUpright == other.iconKeepUpright &&
+          iconOffset == other.iconOffset &&
+          textField == other.textField &&
+          textFont == other.textFont &&
+          textSize == other.textSize &&
+          textMaxWidth == other.textMaxWidth &&
+          textLineHeight == other.textLineHeight &&
+          textLetterSpacing == other.textLetterSpacing &&
+          textRadialOffset == other.textRadialOffset &&
+          textMaxAngle == other.textMaxAngle &&
+          textRotate == other.textRotate &&
+          textPadding == other.textPadding &&
+          textKeepUpright == other.textKeepUpright &&
+          textOffset == other.textOffset &&
+          textAllowOverlap == other.textAllowOverlap &&
+          textIgnorePlacement == other.textIgnorePlacement &&
+          textOptional == other.textOptional &&
+          iconOpacity == other.iconOpacity &&
+          iconColor == other.iconColor &&
+          iconHaloColor == other.iconHaloColor &&
+          iconHaloWidth == other.iconHaloWidth &&
+          iconHaloBlur == other.iconHaloBlur &&
+          iconTranslate == other.iconTranslate &&
+          textOpacity == other.textOpacity &&
+          textColor == other.textColor &&
+          textHaloColor == other.textHaloColor &&
+          textHaloWidth == other.textHaloWidth &&
+          textHaloBlur == other.textHaloBlur &&
+          textTranslate == other.textTranslate &&
+          iconAnchor == other.iconAnchor;
+
+  late final int? _cachedHashCode;
+
+  @override
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
+      iconAllowOverlap.hashCode ^
+      iconIgnorePlacement.hashCode ^
+      iconOptional.hashCode ^
+      iconSize.hashCode ^
+      iconImage.hashCode ^
+      iconRotate.hashCode ^
+      iconPadding.hashCode ^
+      iconKeepUpright.hashCode ^
+      iconOffset.hashCode ^
+      textField.hashCode ^
+      textFont.hashCode ^
+      textSize.hashCode ^
+      textMaxWidth.hashCode ^
+      textLineHeight.hashCode ^
+      textLetterSpacing.hashCode ^
+      textRadialOffset.hashCode ^
+      textMaxAngle.hashCode ^
+      textRotate.hashCode ^
+      textPadding.hashCode ^
+      textKeepUpright.hashCode ^
+      textOffset.hashCode ^
+      textAllowOverlap.hashCode ^
+      textIgnorePlacement.hashCode ^
+      textOptional.hashCode ^
+      iconOpacity.hashCode ^
+      iconColor.hashCode ^
+      iconHaloColor.hashCode ^
+      iconHaloWidth.hashCode ^
+      iconHaloBlur.hashCode ^
+      iconTranslate.hashCode ^
+      textOpacity.hashCode ^
+      textColor.hashCode ^
+      textHaloColor.hashCode ^
+      textHaloWidth.hashCode ^
+      textHaloBlur.hashCode ^
+      textTranslate.hashCode ^
+      iconAnchor.hashCode;
 }
 
 /// Part of the icon placed closest to the anchor.

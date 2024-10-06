@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/annotations_circle_page.dart';
 import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_mixed_page.dart';
 import 'package:maplibre_example/annotations_polygon_page.dart';
 import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
         LayersRasterPage.location: (context) => const LayersRasterPage(),
         LayersLinePage.location: (context) => const LayersLinePage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
+        AnnotationsMixedPage.location: (context) =>
+            const AnnotationsMixedPage(),
         AnnotationsCirclePage.location: (context) =>
             const AnnotationsCirclePage(),
         AnnotationsMarkerPage.location: (context) =>

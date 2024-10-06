@@ -1,8 +1,10 @@
-part of 'annotations.dart';
+part of 'annotation_layer.dart';
 
 /// A [LineString] layer.
+@immutable
 class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   /// Create a new [PolylineAnnotationLayer] instance.
+  // ignore: prefer_const_constructors_in_immutables
   PolylineAnnotationLayer({
     required List<LineString> polylines,
     this.color = const Color(0xFF000000),
@@ -10,11 +12,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
     this.gapWidth = 0,
     this.blur = 0,
     this.dashArray,
-  }) : super._(
-          list: polylines,
-          sourceId: 'maplibre-polyline-source-${_counter++}',
-          layerId: 'maplibre-polyline-layer-${_counter++}',
-        );
+  }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
   final Color color;
@@ -49,10 +47,32 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer() => LineLayer(
-        id: layerId,
-        sourceId: sourceId,
+  Layer createLayer(int index) => LineLayer(
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
       );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is PolylineAnnotationLayer &&
+          runtimeType == other.runtimeType &&
+          color == other.color &&
+          width == other.width &&
+          gapWidth == other.gapWidth &&
+          blur == other.blur &&
+          dashArray == other.dashArray;
+
+  late final int? _cachedHashCode;
+
+  @override
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
+      color.hashCode ^
+      width.hashCode ^
+      gapWidth.hashCode ^
+      blur.hashCode ^
+      dashArray.hashCode;
 }
