@@ -1,0 +1,60 @@
+name: Pull Request Template
+description: A template for pull requests in this repository.
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: A description or bullet points of the changes made in this pull request.
+      placeholder: What changes does this PR introduce?
+      value: |
+        - ...
+        - ...
+        - ...
+  - type: checkboxes
+    attributes:
+      label: Type of Change
+      description: Please select the type of change(s) made.
+      options:
+        - label: 🐛 Bug fix
+          description: Fixes a bug.
+          required: true
+        - label: ✨ New feature
+          description: Adds a new feature.
+          required: true
+        - label: 🔄 Code refactoring
+          description: Improves code structure without changing functionality.
+          required: true
+        - label: 📚 Documentation update
+          description: Updates the documentation.
+          required: true
+        - label: Other
+          description: Other types of changes.
+          required: true
+  - type: textarea
+    attributes:
+      label: Related Issues
+      description: Mention related issues or feature requests (e.g., closes #123).
+      placeholder: e.g., Closes #123
+      value: |
+        - Closes #
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Add any other context or information that might be helpful for the reviewers.
+      placeholder: Provide additional information or links to related documentation.
+  - type: checkboxes
+    attributes:
+      label: Effected Contents
+      description: Please tick all content that is affected by this pull request.
+      options:
+        - label: Android implementation
+        - label: Web implementation
+        - label: Example App in `/example`
+        - label: Documentation in `/docs`
+        - label: Public API
+  - type: checkboxes
+    attributes:
+      label: Breaking Changes
+      description: Please tick this checkbox if your pull request has breaking changes.
+      options:
+        - label: PR contains breaking changes
