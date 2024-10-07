@@ -85,17 +85,25 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
             }
         }
     }
+}
 
-    /*ktlint {
-        version = "0.38.2"
-        android = true // to use the Android Studio KtLint plugin style
-        ignoreFailures = false
-        reporter = "plain" // "plain", "checkstyle", "json", "html" or "visualstudio"
-    }*/
+ktlint {
+    version = "0.43.2"
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter("plain")
+        reporter("checkstyle")
+    }
+//    additionalEditorconfigFile = file("${project.rootDir}/.editorconfig")
+//    disabledRules.set(["import-ordering"])
+    dependencies {
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.15")
+    }
 }
