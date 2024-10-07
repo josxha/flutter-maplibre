@@ -87,7 +87,7 @@ abstract interface class MapController {
   Future<void> removeImage(String id);
 
   /// Queries the map for rendered features.
-  List<String> queryRenderedFeatures(Offset screenLocation);
+  Future<List<String>> queryRenderedFeatures(Offset screenLocation);
 
   /// Show the user location on the map
   Future<void> enableLocation({

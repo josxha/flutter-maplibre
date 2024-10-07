@@ -12,6 +12,7 @@ class AnnotationsCirclePage extends StatefulWidget {
 }
 
 class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
+  late final MapController _controller;
   final _points = <Point>[
     Point(coordinates: Position(9.17, 47.68)),
     Point(coordinates: Position(9.17, 48)),
@@ -25,11 +26,13 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
       appBar: AppBar(title: const Text('Circle Annotations')),
       body: MapLibreMap(
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
-        onEvent: (event) {
+        onMapCreated: (controller) => _controller = controller,
+        onEvent: (event) async {
           if (event case MapEventClick()) {
-            setState(() {
-              _points.add(Point(coordinates: event.point));
-            });
+            final screenPoint = await _controller.toScreenLocation(event.point);
+            final features =
+                await _controller.queryRenderedFeatures(screenPoint);
+            debugPrint(features.join('\n'));
           }
         },
         layers: [

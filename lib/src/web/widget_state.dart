@@ -636,7 +636,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  List<String> queryRenderedFeatures(Offset screenLocation) {
+  Future<List<String>> queryRenderedFeatures(Offset screenLocation) {
     // TODO: implement queryRenderedFeatures
     throw UnimplementedError();
   }
