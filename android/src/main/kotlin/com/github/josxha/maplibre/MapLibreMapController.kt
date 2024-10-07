@@ -85,7 +85,7 @@ class MapLibreMapController(
                     .Builder()
                     .zoom(mapOptions.zoom)
                     .bearing(mapOptions.bearing)
-                    .tilt(mapOptions.pitch)
+                    .tilt(mapOptions.pitch);
             if (mapOptions.center != null) {
                 cameraBuilder.target(
                     LatLng(
