@@ -44,14 +44,14 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
       };
 
   @override
-  Map<String, Object> getLayout() => {};
+  Map<String, Object> getLayout(int index) => {};
 
   @override
   Layer createLayer(int index) => LineLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
-        layout: getLayout(),
+        layout: getLayout(index),
       );
 
   @override

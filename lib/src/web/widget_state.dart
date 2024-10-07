@@ -198,7 +198,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         children: [
           HtmlElementView(viewType: _viewName),
           ...widget.layers.whereType<MarkerAnnotationLayer<Widget>>().map(
-                (layer) => WidgetToPng(layer, this),
+                (layer) => WidgetToPng(layer, this, index),
               ),
         ],
       );
@@ -649,13 +649,16 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 /// The [WidgetToPng] widget
 class WidgetToPng extends StatefulWidget {
   /// Create a new [WidgetToPng] widget.
-  const WidgetToPng(this.layer, this.controller, {super.key});
+  const WidgetToPng(this.layer, this.controller, this.index, {super.key});
 
   /// The marker layer.
   final MarkerAnnotationLayer<Widget> layer;
 
   /// The map controller.
   final MapController controller;
+
+  /// The image index.
+  final int index;
 
   @override
   State<WidgetToPng> createState() => _WidgetToPngState();
@@ -668,12 +671,14 @@ class _WidgetToPngState extends State<WidgetToPng> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final boundary =
-      _key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+          _key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
       final image = await boundary.toImage();
-      final byteData =
-      await image.toByteData(format: ui.ImageByteFormat.png);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
-      await widget.controller.addImage(widget.layer.imageId, pngBytes);
+      await widget.controller.addImage(
+        widget.layer.getImageId(widget.index),
+        pngBytes,
+      );
     });
     super.initState();
   }

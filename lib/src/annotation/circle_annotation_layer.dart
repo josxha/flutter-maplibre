@@ -41,7 +41,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
-        layout: getLayout(),
+        layout: getLayout(index),
       );
 
   @override
@@ -56,7 +56,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Map<String, Object> getLayout() => {};
+  Map<String, Object> getLayout(int index) => {};
 
   @override
   bool operator ==(Object other) =>

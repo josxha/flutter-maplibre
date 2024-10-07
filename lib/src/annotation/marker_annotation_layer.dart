@@ -1,8 +1,7 @@
 part of 'annotation_layer.dart';
 
 /// A marker layer.
-@immutable
-class MarkerAnnotationLayer extends AnnotationLayer<Point> {
+class MarkerAnnotationLayer<I extends Object?> extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
   // ignore: prefer_const_constructors_in_immutables
   MarkerAnnotationLayer({
@@ -45,9 +44,6 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
   }) : super._(list: points);
-
-  /// Get a unique image id.
-  final String imageId = 'maplibre-marker-image-${_counter++}';
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -188,6 +184,9 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// Part of the icon placed closest to the anchor.
   final IconAnchor iconAnchor;
 
+  /// Get the image id.
+  String getImageId(int index) => 'maplibre-image-$index';
+
   @override
   Map<String, Object> getPaint() => {
         'icon-opacity': iconOpacity,
@@ -204,13 +203,13 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Map<String, Object> getLayout() => {
+  Map<String, Object> getLayout(int index) => {
         'icon-allow-overlap': iconAllowOverlap,
         'icon-ignore-placement': iconIgnorePlacement,
         'icon-optional': iconOptional,
         'icon-size': iconSize,
         if (iconImage case final String image) 'icon-image': image,
-        if (iconImage case Widget()) 'icon-image': imageId,
+        if (iconImage case Widget()) 'icon-image': getImageId(index),
         'icon-rotate': iconRotate,
         'icon-padding': iconPadding,
         'icon-keep-upright': iconKeepUpright,
@@ -238,7 +237,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
-        layout: getLayout(),
+        layout: getLayout(index),
       );
 
   @override
