@@ -536,11 +536,11 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<List<String>> queryRenderedFeatures(Offset screenLocation) async {
+  Future<List<Object>> queryRenderedFeatures(Offset screenLocation) async {
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryrenderedfeatures/
     final jniStyle = _jniStyle;
     final jniMapLibreMap = _jniMapLibreMap;
-    return runOnPlatformThread<List<String>>(() {
+    return runOnPlatformThread<List<Object>>(() {
       final layers = jniStyle.getLayers();
       final jArray = JArray(JString.type, layers.length);
       for (var i = 0; i < layers.length; i++) {
@@ -550,9 +550,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
         jArray,
       );
-      return features
+      return features;
+      /*return features
           .map((element) => element.toString())
-          .toList(growable: false);
+          .toList(growable: false);*/
     });
   }
 }
