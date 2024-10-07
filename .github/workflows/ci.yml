@@ -46,6 +46,7 @@ jobs:
           reporter: github-pr-check
           filter_mode: nofilter
           file_glob: "!**/*.g.*"
+          fail_on_error: true
 #  integration-test-ios:
 #    name: "Integration Tests on iOS"
 #    runs-on: macOS-latest
