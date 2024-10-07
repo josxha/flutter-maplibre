@@ -48,6 +48,10 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    dependencies {
+        implementation project(":MapLibreAndroid")
+    }
 }
 
 flutter {

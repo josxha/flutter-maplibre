@@ -6,6 +6,7 @@ import 'dart:ui_web';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/annotation/annotation_manager.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';
@@ -20,6 +21,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
+  late AnnotationManager _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -115,9 +117,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           (interop.MapMouseEvent event) {
             widget.onEvent?.call(const MapEventStyleLoaded());
             widget.onStyleLoaded?.call();
-            for (final layer in widget.layers) {
-              layer.registerController(this);
-            }
+            _annotationManager = AnnotationManager(this, widget.layers);
           }.toJS,
         );
         _map.on(
@@ -229,9 +229,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.gestures != oldWidget.options.gestures) {
       _updateGestures(_options.gestures);
     }
-    for (final layer in widget.layers) {
-      layer.updateOnMap(this);
-    }
+    _annotationManager.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -615,5 +613,25 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     } else {
       _map.keyboard.disable();
     }
+  }
+
+  @override
+  Future<void> enableLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(seconds: 1),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  }) async {
+    debugPrint("Can't enable the user location on web programmatically.");
+  }
+
+  @override
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) async {
+    debugPrint("Can't track the user location on web.");
   }
 }

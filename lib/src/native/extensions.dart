@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// Extension methods for the [Position] class. Not exported publicly.
@@ -15,6 +16,12 @@ extension PositionExt on Position {
 extension LngLatExt on pigeon.LngLat {
   /// Convert an internal [pigeon.LngLat] to a [Position].
   Position toPosition() => Position(lng, lat);
+}
+
+/// Extension methods for the [jni.LatLng] class. Not exported publicly.
+extension JniLatLngExt on jni.LatLng {
+  /// Convert an internal [jni.LatLng] to a [Position].
+  Position toPosition() => Position(getLongitude(), getLatitude());
 }
 
 /// Extension methods for the [Offset] class. Not exported publicly.
