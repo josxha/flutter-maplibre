@@ -101,8 +101,6 @@ ktlint {
         reporter("plain")
         reporter("checkstyle")
     }
-//    additionalEditorconfigFile = file("${project.rootDir}/.editorconfig")
-//    disabledRules.set(["import-ordering"])
     dependencies {
         ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.15")
     }
