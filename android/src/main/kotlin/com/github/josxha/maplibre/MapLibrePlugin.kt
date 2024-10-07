@@ -22,7 +22,7 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        MapLibreRegistry.context = binding.applicationContext;
+        MapLibreRegistry.context = binding.applicationContext
         flutterAssets = binding.flutterAssets
         binding
             .platformViewRegistry
