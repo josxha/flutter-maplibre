@@ -15,13 +15,16 @@ object MapLibreRegistry {
     @Keep
     public fun getMap(viewId: Int): MapLibreMap? = mapRegistry[viewId]
 
-    fun addMap(viewId: Int, map: MapLibreMap) {
+    fun addMap(
+        viewId: Int,
+        map: MapLibreMap,
+    ) {
         mapRegistry[viewId] = map
     }
 
     // TODO: Storing the Activity in a static field is a potential memory leak.
-    public var activity: Activity? = null;
+    public var activity: Activity? = null
 
     // TODO: Storing the Context in a static field is a potential memory leak.
-    public var context: Context? = null;
+    public var context: Context? = null
 }
