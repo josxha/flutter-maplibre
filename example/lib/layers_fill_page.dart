@@ -23,6 +23,14 @@ class _LayersFillPageState extends State<LayersFillPage> {
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
+        onEvent: (event) async {
+          if (event case MapEventClick()) {
+            final screenPoint = await _controller.toScreenLocation(event.point);
+            final features =
+            await _controller.queryRenderedFeatures(screenPoint);
+            debugPrint(features.join('\n'));
+          }
+        },
       ),
     );
   }
