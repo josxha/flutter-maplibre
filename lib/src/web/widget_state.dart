@@ -634,4 +634,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }) async {
     debugPrint("Can't track the user location on web.");
   }
+
+  @override
+  List<String> queryRenderedFeatures(Offset screenLocation) {
+    // TODO: implement queryRenderedFeatures
+    throw UnimplementedError();
+  }
 }
