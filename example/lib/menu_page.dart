@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/annotations_circle_page.dart';
 import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_mixed_page.dart';
 import 'package:maplibre_example/annotations_polygon_page.dart';
 import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
@@ -19,6 +20,7 @@ import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
+import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -78,6 +80,12 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.animation,
                 location: AnimationPage.location,
               ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'User Location',
+                  iconData: Icons.gps_fixed,
+                  location: UserLocationPage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
@@ -85,6 +93,11 @@ class MenuPage extends StatelessWidget {
             maxCrossAxisExtent: 200,
             childAspectRatio: 1.5,
             children: const [
+              ItemCard(
+                label: 'Mixed Annotations',
+                iconData: Icons.control_point_duplicate_outlined,
+                location: AnnotationsMixedPage.location,
+              ),
               ItemCard(
                 label: 'Circles',
                 iconData: Icons.circle,

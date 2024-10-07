@@ -49,8 +49,6 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
-import '../../../../../android/app/Activity.dart' as activity_;
-
 import 'PermissionsListener.dart' as permissionslistener_;
 
 /// from: `org.maplibre.android.location.permissions.PermissionsManager`
@@ -248,7 +246,7 @@ class PermissionsManager extends _$jni.JObject {
 
   /// from: `public void requestLocationPermissions(android.app.Activity activity)`
   void requestLocationPermissions(
-    activity_.Activity activity,
+    _$jni.JObject activity,
   ) {
     _requestLocationPermissions(
             reference.pointer,

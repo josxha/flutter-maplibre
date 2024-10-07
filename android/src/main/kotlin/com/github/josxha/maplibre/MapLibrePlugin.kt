@@ -10,18 +10,17 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
-import org.maplibre.android.camera.CameraPosition
-import org.maplibre.android.geometry.LatLng
-import org.maplibre.android.maps.MapLibreMapOptions
 
 /** MapLibrePlugin */
-class MapLibrePlugin : FlutterPlugin, ActivityAware {
-
+class MapLibrePlugin :
+    FlutterPlugin,
+    ActivityAware {
     private var lifecycle: Lifecycle? = null
 
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        MapLibreRegistry.context = binding.applicationContext
         flutterAssets = binding.flutterAssets
         binding
             .platformViewRegistry
@@ -31,8 +30,8 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
                     object : LifecycleProvider {
                         override fun getLifecycle(): Lifecycle? = lifecycle
                     },
-                    binaryMessenger = binding.binaryMessenger
-                )
+                    binaryMessenger = binding.binaryMessenger,
+                ),
             )
     }
 
@@ -41,7 +40,6 @@ class MapLibrePlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -79,17 +77,19 @@ object FlutterLifecycleAdapter {
 
 class MapLibreMapFactory(
     private val lifecycleProvider: LifecycleProvider,
-    private val binaryMessenger: BinaryMessenger
+    private val binaryMessenger: BinaryMessenger,
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
-
-    override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
-        return MapLibreMapController(
+    override fun create(
+        context: Context,
+        viewId: Int,
+        args: Any?,
+    ): PlatformView =
+        MapLibreMapController(
             viewId,
             context,
             lifecycleProvider,
             binaryMessenger,
         )
-    }
 }
 
 interface LifecycleProvider {

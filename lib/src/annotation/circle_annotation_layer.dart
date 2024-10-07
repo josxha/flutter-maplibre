@@ -1,8 +1,10 @@
-part of 'annotations.dart';
+part of 'annotation_layer.dart';
 
 /// A marker layer.
+@immutable
 class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [CircleAnnotationLayer] instance.
+  // ignore: prefer_const_constructors_in_immutables
   CircleAnnotationLayer({
     required List<Point> points,
     this.radius = 5,
@@ -10,11 +12,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
     this.blur = 0,
     this.strokeWidth = 0,
     this.strokeColor = const Color(0xFF000000),
-  }) : super._(
-          list: points,
-          sourceId: 'maplibre-circle-source-${_counter++}',
-          layerId: 'maplibre-circle-layer-${_counter++}',
-        );
+  }) : super._(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.
   final int radius;
@@ -39,9 +37,9 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   double get strokeOpacity => strokeColor.opacity;
 
   @override
-  Layer createLayer() => CircleLayer(
-        id: layerId,
-        sourceId: sourceId,
+  Layer createLayer(int index) => CircleLayer(
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
       );
@@ -72,9 +70,10 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
           strokeWidth == other.strokeWidth &&
           strokeColor == other.strokeColor;
 
+  late final int? _cachedHashCode;
+
   @override
-  int get hashCode =>
-      super.hashCode ^
+  int get hashCode => _cachedHashCode ??= super.hashCode ^
       radius.hashCode ^
       color.hashCode ^
       blur.hashCode ^

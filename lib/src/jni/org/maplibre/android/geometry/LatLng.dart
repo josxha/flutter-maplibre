@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../android/location/Location.dart' as location_;
+
 /// from: `org.maplibre.android.geometry.LatLng$Companion`
 class LatLng_Companion extends _$jni.JObject {
   @_$jni.internal
@@ -432,7 +434,7 @@ class LatLng extends _$jni.JObject {
   /// from: `public void <init>(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
   factory LatLng.new$3(
-    _$jni.JObject location,
+    location_.Location location,
   ) {
     return LatLng.fromReference(_new$3(_class.reference.pointer,
             _id_new$3 as _$jni.JMethodIDPtr, location.reference.pointer)

@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
@@ -17,6 +18,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
+  jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
 
   MapOptions get _options => widget.options;
@@ -24,12 +26,13 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.MapLibreMap get _jniMapLibreMap =>
       _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
 
-  // ignore: unused_element
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
-  // ignore: unused_element
   jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle$1();
+
+  jni.LocationComponent get _locationComponent =>
+      _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +87,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     _cachedJniStyle?.release();
     _cachedJniProjection?.release();
     _cachedJniMapLibreMap?.release();
+    _cachedLocationComponent?.release();
     super.dispose();
   }
 
@@ -407,6 +411,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
+    jniCamera.target.release();
     jniCamera.release();
     return camera;
   }
@@ -421,6 +426,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
       final region = projection.getVisibleRegion();
       final bounds = region.latLngBounds;
+      region.latLngBounds.release();
       region.release();
       return bounds;
     });
@@ -453,4 +459,79 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     required String data,
   }) =>
       _hostApi.updateGeoJsonSource(id: id, data: data);
+
+  @override
+  Future<void> enableLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(seconds: 1),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+  }) async {
+    // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
+    final locationComponent = _locationComponent;
+    final jniStyle = _jniStyle;
+    final bearing = switch (bearingRenderMode) {
+      BearingRenderMode.none => jni.RenderMode.NORMAL,
+      BearingRenderMode.compass => jni.RenderMode.COMPASS,
+      BearingRenderMode.gps => jni.RenderMode.GPS,
+    };
+    final jniContext = jni.MapLibreRegistry.INSTANCE.getContext();
+    final locationComponentOptionsBuilder =
+        jni.LocationComponentOptions.builder(jniContext)
+            .pulseFadeEnabled(pulseFade)
+            .accuracyAnimationEnabled(accuracyAnimation)
+            .compassAnimationEnabled(compassAnimation.toJBoolean())
+            .pulseEnabled(pulse);
+    final locationComponentOptions = locationComponentOptionsBuilder.build();
+    final locationEngineRequestBuilder =
+        jni.LocationEngineRequest_Builder(750) // TODO integrate as parameter
+            .setFastestInterval(fastestInterval.inMilliseconds)
+            .setMaxWaitTime(maxWaitTime.inMilliseconds)
+            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
+    final locationEngineRequest = locationEngineRequestBuilder.build();
+    final activationOptions =
+        jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
+            .locationComponentOptions(locationComponentOptions)
+            .useDefaultLocationEngine(true)
+            .locationEngineRequest(locationEngineRequest)
+            .build();
+
+    await runOnPlatformThread(() {
+      locationComponent.activateLocationComponent(activationOptions);
+      locationComponent.setRenderMode(bearing);
+      locationComponent.setLocationComponentEnabled(true);
+    });
+
+    locationComponentOptionsBuilder.release();
+    locationComponentOptions.release();
+    locationEngineRequestBuilder.release();
+    locationEngineRequest.release();
+    activationOptions.release();
+    jniContext.release();
+  }
+
+  @override
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) async {
+    final locationComponent = _locationComponent;
+    final mode = switch (trackBearing) {
+      BearingTrackMode.none => trackLocation
+          ? jni.CameraMode.TRACKING // only location
+          : jni.CameraMode.NONE, // neither location nor bearing
+      BearingTrackMode.compass => trackLocation
+          ? jni.CameraMode.TRACKING_COMPASS // location with compass bearing
+          : jni.CameraMode.NONE_COMPASS, // only compass bearing
+      BearingTrackMode.gps => trackLocation
+          ? jni.CameraMode.TRACKING_GPS // location with gps bearing
+          : jni.CameraMode.NONE_GPS, // only gps bearing
+    };
+    await runOnPlatformThread(() {
+      locationComponent.setCameraMode(mode);
+    });
+  }
 }

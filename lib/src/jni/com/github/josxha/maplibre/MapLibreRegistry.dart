@@ -128,6 +128,105 @@ class MapLibreRegistry extends _$jni.JObject {
             mapLibreMap.reference.pointer)
         .check();
   }
+
+  static final _id_getActivity = _class.instanceMethodId(
+    r'getActivity',
+    r'()Landroid/app/Activity;',
+  );
+
+  static final _getActivity = _$jni.ProtectedJniExtensions.lookup<
+          _$jni.NativeFunction<
+              _$jni.JniResult Function(
+                _$jni.Pointer<_$jni.Void>,
+                _$jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          _$jni.JniResult Function(
+            _$jni.Pointer<_$jni.Void>,
+            _$jni.JMethodIDPtr,
+          )>();
+
+  /// from: `public final android.app.Activity getActivity()`
+  /// The returned object must be released after use, by calling the [release] method.
+  _$jni.JObject getActivity() {
+    return _getActivity(
+            reference.pointer, _id_getActivity as _$jni.JMethodIDPtr)
+        .object(const _$jni.JObjectType());
+  }
+
+  static final _id_setActivity = _class.instanceMethodId(
+    r'setActivity',
+    r'(Landroid/app/Activity;)V',
+  );
+
+  static final _setActivity = _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JThrowablePtr Function(
+                      _$jni.Pointer<_$jni.Void>,
+                      _$jni.JMethodIDPtr,
+                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
+  /// from: `public final void setActivity(android.app.Activity activity)`
+  void setActivity(
+    _$jni.JObject activity,
+  ) {
+    _setActivity(reference.pointer, _id_setActivity as _$jni.JMethodIDPtr,
+            activity.reference.pointer)
+        .check();
+  }
+
+  static final _id_getContext = _class.instanceMethodId(
+    r'getContext',
+    r'()Landroid/content/Context;',
+  );
+
+  static final _getContext = _$jni.ProtectedJniExtensions.lookup<
+          _$jni.NativeFunction<
+              _$jni.JniResult Function(
+                _$jni.Pointer<_$jni.Void>,
+                _$jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          _$jni.JniResult Function(
+            _$jni.Pointer<_$jni.Void>,
+            _$jni.JMethodIDPtr,
+          )>();
+
+  /// from: `public final android.content.Context getContext()`
+  /// The returned object must be released after use, by calling the [release] method.
+  _$jni.JObject getContext() {
+    return _getContext(reference.pointer, _id_getContext as _$jni.JMethodIDPtr)
+        .object(const _$jni.JObjectType());
+  }
+
+  static final _id_setContext = _class.instanceMethodId(
+    r'setContext',
+    r'(Landroid/content/Context;)V',
+  );
+
+  static final _setContext = _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JThrowablePtr Function(
+                      _$jni.Pointer<_$jni.Void>,
+                      _$jni.JMethodIDPtr,
+                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
+  /// from: `public final void setContext(android.content.Context context)`
+  void setContext(
+    _$jni.JObject context,
+  ) {
+    _setContext(reference.pointer, _id_setContext as _$jni.JMethodIDPtr,
+            context.reference.pointer)
+        .check();
+  }
 }
 
 final class $MapLibreRegistry$Type extends _$jni.JObjType<MapLibreRegistry> {

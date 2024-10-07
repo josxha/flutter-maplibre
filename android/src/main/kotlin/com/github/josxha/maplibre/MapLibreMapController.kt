@@ -7,9 +7,9 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
-import RasterDemEncoding
 import Offset
 import Padding
+import RasterDemEncoding
 import TileScheme
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -58,13 +58,15 @@ import java.net.URI
 import java.net.URL
 import kotlin.coroutines.cancellation.CancellationException
 
-
 class MapLibreMapController(
     private val viewId: Int,
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
-    binaryMessenger: BinaryMessenger
-) : PlatformView, DefaultLifecycleObserver, OnMapReadyCallback, MapLibreHostApi {
+    binaryMessenger: BinaryMessenger,
+) : PlatformView,
+    DefaultLifecycleObserver,
+    OnMapReadyCallback,
+    MapLibreHostApi {
     private val mapViewContainer = FrameLayout(context)
     private lateinit var mapLibreMap: MapLibreMap
     private lateinit var mapView: MapView
@@ -78,27 +80,32 @@ class MapLibreMapController(
         flutterApi = MapLibreFlutterApi(binaryMessenger, channelSuffix)
         flutterApi.getOptions { result: Result<MapOptions> ->
             mapOptions = result.getOrThrow()
-            val cameraBuilder = CameraPosition.Builder()
-                .zoom(mapOptions.zoom)
-                .bearing(mapOptions.bearing)
-                .tilt(mapOptions.pitch)
-            if (mapOptions.center != null)
+            val cameraBuilder =
+                CameraPosition
+                    .Builder()
+                    .zoom(mapOptions.zoom)
+                    .bearing(mapOptions.bearing)
+                    .tilt(mapOptions.pitch)
+            if (mapOptions.center != null) {
                 cameraBuilder.target(
                     LatLng(
                         mapOptions.center!!.lat,
-                        mapOptions.center!!.lng
-                    )
+                        mapOptions.center!!.lng,
+                    ),
                 )
-            val options = MapLibreMapOptions.createFromAttributes(context)
-                .attributionEnabled(true)
-                .logoEnabled(true)
-                .textureMode(true)
-                .compassEnabled(true)
-                .minZoomPreference(mapOptions.minZoom)
-                .maxZoomPreference(mapOptions.maxZoom)
-                .minPitchPreference(mapOptions.minPitch)
-                .maxPitchPreference(mapOptions.maxPitch)
-                .camera(cameraBuilder.build())
+            }
+            val options =
+                MapLibreMapOptions
+                    .createFromAttributes(context)
+                    .attributionEnabled(true)
+                    .logoEnabled(true)
+                    .textureMode(true)
+                    .compassEnabled(true)
+                    .minZoomPreference(mapOptions.minZoom)
+                    .maxZoomPreference(mapOptions.maxZoom)
+                    .minPitchPreference(mapOptions.minPitch)
+                    .maxPitchPreference(mapOptions.maxPitch)
+                    .camera(cameraBuilder.build())
 
             MapLibre.getInstance(context) // needs to be called before MapView gets created
             mapView = MapView(context, options)
@@ -135,12 +142,13 @@ class MapLibreMapController(
         this.mapLibreMap.addOnCameraIdleListener { flutterApi.onCameraIdle { } }
         this.mapView.addOnDidBecomeIdleListener { flutterApi.onIdle { } }
         this.mapLibreMap.addOnCameraMoveStartedListener { reason ->
-            val changeReason = when (reason) {
-                REASON_API_ANIMATION -> CameraChangeReason.API_ANIMATION
-                REASON_API_GESTURE -> CameraChangeReason.API_GESTURE
-                REASON_DEVELOPER_ANIMATION -> CameraChangeReason.DEVELOPER_ANIMATION
-                else -> null
-            }
+            val changeReason =
+                when (reason) {
+                    REASON_API_ANIMATION -> CameraChangeReason.API_ANIMATION
+                    REASON_API_GESTURE -> CameraChangeReason.API_GESTURE
+                    REASON_DEVELOPER_ANIMATION -> CameraChangeReason.DEVELOPER_ANIMATION
+                    else -> null
+                }
             if (changeReason != null) flutterApi.onStartMoveCamera(changeReason) { }
         }
         val style = Style.Builder().fromUri(mapOptions.style)
@@ -159,7 +167,7 @@ class MapLibreMapController(
         zoom: Double?,
         bearing: Double?,
         pitch: Double?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val camera = CameraPosition.Builder()
         if (center != null) camera.target(LatLng(center.lat, center.lng))
@@ -177,7 +185,7 @@ class MapLibreMapController(
         bearing: Double?,
         pitch: Double?,
         durationMs: Long,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val camera = CameraPosition.Builder()
         if (center != null) camera.target(LatLng(center.lat, center.lng))
@@ -189,11 +197,11 @@ class MapLibreMapController(
             cameraUpdate,
             durationMs.toInt(),
             object : MapLibreMap.CancelableCallback {
-                override fun onCancel() =
-                    callback(Result.failure(CancellationException("Animation cancelled.")))
+                override fun onCancel() = callback(Result.failure(CancellationException("Animation cancelled.")))
 
                 override fun onFinish() = callback(Result.success(Unit))
-            })
+            },
+        )
     }
 
     override fun fitBounds(
@@ -203,63 +211,69 @@ class MapLibreMapController(
         bearing: Double?,
         pitch: Double?,
         durationMs: Long,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
-        val cameraUpdate = CameraUpdateFactory.newLatLngBounds(
-            LatLngBounds.Companion.from(
-                bounds.latitudeNorth,
-                bounds.longitudeEast,
-                bounds.latitudeSouth,
-                bounds.longitudeWest
-            ),
-            bearing ?: -1.0,
-            pitch ?: -1.0,
-            padding.left.toInt(),
-            padding.top.toInt(),
-            padding.right.toInt(),
-            padding.bottom.toInt(),
-        )
+        val cameraUpdate =
+            CameraUpdateFactory.newLatLngBounds(
+                LatLngBounds.Companion.from(
+                    bounds.latitudeNorth,
+                    bounds.longitudeEast,
+                    bounds.latitudeSouth,
+                    bounds.longitudeWest,
+                ),
+                bearing ?: -1.0,
+                pitch ?: -1.0,
+                padding.left.toInt(),
+                padding.top.toInt(),
+                padding.right.toInt(),
+                padding.bottom.toInt(),
+            )
         mapLibreMap.animateCamera(
             cameraUpdate,
             durationMs.toInt(),
             object : MapLibreMap.CancelableCallback {
-                override fun onCancel() =
-                    callback(Result.failure(CancellationException("Animation cancelled.")))
+                override fun onCancel() = callback(Result.failure(CancellationException("Animation cancelled.")))
 
                 override fun onFinish() = callback(Result.success(Unit))
-            })
+            },
+        )
     }
 
     override fun toScreenLocation(
         lng: Double,
         lat: Double,
-        callback: (Result<Offset>) -> Unit
+        callback: (Result<Offset>) -> Unit,
     ) {
         val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng))
         callback(Result.success(Offset(location.x.toDouble(), location.y.toDouble())))
     }
 
-    override fun toLngLat(x: Double, y: Double, callback: (Result<LngLat>) -> Unit) {
+    override fun toLngLat(
+        x: Double,
+        y: Double,
+        callback: (Result<LngLat>) -> Unit,
+    ) {
         val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()))
         callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
     private val gson = Gson()
-    private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> {
-        return entries.map { entry ->
-            // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
-            when (entry.value) {
-                is ArrayList<*> -> {
-                    val value = entry.value as ArrayList<*>
-                    val json = gson.toJsonTree(value)
-                    val expression = Expression.Converter.convert(json)
-                    PaintPropertyValue(entry.key, expression)
-                }
 
-                else -> PaintPropertyValue(entry.key, entry.value)
-            }
-        }.toTypedArray()
-    }
+    private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
+        entries
+            .map { entry ->
+                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+                when (entry.value) {
+                    is ArrayList<*> -> {
+                        val value = entry.value as ArrayList<*>
+                        val json = gson.toJsonTree(value)
+                        val expression = Expression.Converter.convert(json)
+                        PaintPropertyValue(entry.key, expression)
+                    }
+
+                    else -> PaintPropertyValue(entry.key, entry.value)
+                }
+            }.toTypedArray()
 
     override fun addFillLayer(
         id: String,
@@ -267,7 +281,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -285,7 +299,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = CircleLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -302,7 +316,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = BackgroundLayer(id)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -320,7 +334,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillExtrusionLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -338,7 +352,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HeatmapLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -356,7 +370,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HillshadeLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -374,7 +388,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = LineLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -392,7 +406,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = RasterLayer(id, sourceId)
 //        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -410,7 +424,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = SymbolLayer(id, sourceId)
         layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -422,18 +436,26 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun removeLayer(id: String, callback: (Result<Unit>) -> Unit) {
+    override fun removeLayer(
+        id: String,
+        callback: (Result<Unit>) -> Unit,
+    ) {
         mapLibreMap.style?.removeLayer(id)
         callback(Result.success(Unit))
-
     }
 
-    override fun removeSource(id: String, callback: (Result<Unit>) -> Unit) {
+    override fun removeSource(
+        id: String,
+        callback: (Result<Unit>) -> Unit,
+    ) {
         mapLibreMap.style?.removeSource(id)
         callback(Result.success(Unit))
     }
 
-    override fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit) {
+    override fun loadImage(
+        url: String,
+        callback: (Result<ByteArray>) -> Unit,
+    ) {
         try {
             val bytes = URL(url).openConnection().getInputStream().readBytes()
             callback(Result.success(bytes))
@@ -443,13 +465,20 @@ class MapLibreMapController(
         }
     }
 
-    override fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit) {
+    override fun addImage(
+        id: String,
+        bytes: ByteArray,
+        callback: (Result<Unit>) -> Unit,
+    ) {
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
         callback(Result.success(Unit))
     }
 
-    override fun removeImage(id: String, callback: (Result<Unit>) -> Unit) {
+    override fun removeImage(
+        id: String,
+        callback: (Result<Unit>) -> Unit,
+    ) {
         mapLibreMap.style?.removeImage(id)
         callback(Result.success(Unit))
     }
@@ -464,26 +493,28 @@ class MapLibreMapController(
 
     override fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit) {
         val bounds = mapLibreMap.projection.visibleRegion.latLngBounds
-        val lngLatBounds = LngLatBounds(
-            bounds.longitudeWest,
-            bounds.longitudeEast,
-            bounds.latitudeSouth,
-            bounds.latitudeNorth
-        )
+        val lngLatBounds =
+            LngLatBounds(
+                bounds.longitudeWest,
+                bounds.longitudeEast,
+                bounds.latitudeSouth,
+                bounds.latitudeNorth,
+            )
         callback(Result.success(lngLatBounds))
     }
 
     override fun addGeoJsonSource(
         id: String,
         data: String,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val options = GeoJsonOptions()
-        val source = if (data.first() == '{') {
-            GeoJsonSource(id, data, options)
-        } else {
-            GeoJsonSource(id, URI(data), options)
-        }
+        val source =
+            if (data.first() == '{') {
+                GeoJsonSource(id, data, options)
+            } else {
+                GeoJsonSource(id, URI(data), options)
+            }
         mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
@@ -491,7 +522,7 @@ class MapLibreMapController(
     override fun updateGeoJsonSource(
         id: String,
         data: String,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val source = mapLibreMap.style?.getSourceAs<GeoJsonSource>(id)
         if (source == null) {
@@ -506,14 +537,15 @@ class MapLibreMapController(
         id: String,
         url: String,
         coordinates: List<LngLat>,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
-        val quad = LatLngQuad(
-            LatLng(coordinates[0].lat, coordinates[0].lng),
-            LatLng(coordinates[0].lat, coordinates[0].lng),
-            LatLng(coordinates[0].lat, coordinates[0].lng),
-            LatLng(coordinates[0].lat, coordinates[0].lng)
-        )
+        val quad =
+            LatLngQuad(
+                LatLng(coordinates[0].lat, coordinates[0].lng),
+                LatLng(coordinates[0].lat, coordinates[0].lng),
+                LatLng(coordinates[0].lat, coordinates[0].lng),
+                LatLng(coordinates[0].lat, coordinates[0].lng),
+            )
         val source = ImageSource(id, quad, URI(url))
         mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
@@ -530,17 +562,18 @@ class MapLibreMapController(
         scheme: TileScheme,
         attribution: String?,
         volatile: Boolean,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
-        val source = if (url == null) {
-            // TODO improve this
-            val tileSet = TileSet("{}", tiles!!.first())
-            tileSet.maxZoom = maxZoom.toFloat()
-            tileSet.minZoom = minZoom.toFloat()
-            RasterSource(id, tileSet, tileSize.toInt())
-        } else {
-            RasterSource(id, url, tileSize.toInt())
-        }
+        val source =
+            if (url == null) {
+                // TODO improve this
+                val tileSet = TileSet("{}", tiles!!.first())
+                tileSet.maxZoom = maxZoom.toFloat()
+                tileSet.minZoom = minZoom.toFloat()
+                RasterSource(id, tileSet, tileSize.toInt())
+            } else {
+                RasterSource(id, url, tileSize.toInt())
+            }
         source.isVolatile = volatile
         // TODO apply other properties
         mapLibreMap.style?.addSource(source)
@@ -562,7 +595,7 @@ class MapLibreMapController(
         blueFactor: Double,
         greenFactor: Double,
         baseShift: Double,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val source = RasterDemSource(id, url, tileSize.toInt())
         source.isVolatile = volatile
@@ -582,7 +615,7 @@ class MapLibreMapController(
         attribution: String?,
         volatile: Boolean,
         sourceLayer: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val source = VectorSource(id, url)
         source.isVolatile = volatile
@@ -591,18 +624,24 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun getMetersPerPixelAtLatitude(latitude: Double): Double =
-        mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
+    override fun getMetersPerPixelAtLatitude(latitude: Double): Double = mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
 
-    override fun updateOptions(options: MapOptions, callback: (Result<Unit>) -> Unit) {
-        if (mapOptions.minZoom != options.minZoom)
+    override fun updateOptions(
+        options: MapOptions,
+        callback: (Result<Unit>) -> Unit,
+    ) {
+        if (mapOptions.minZoom != options.minZoom) {
             mapLibreMap.setMinZoomPreference(options.minZoom)
-        if (mapOptions.maxZoom != options.maxZoom)
+        }
+        if (mapOptions.maxZoom != options.maxZoom) {
             mapLibreMap.setMaxZoomPreference(options.maxZoom)
-        if (mapOptions.minPitch != options.minPitch)
+        }
+        if (mapOptions.minPitch != options.minPitch) {
             mapLibreMap.setMinPitchPreference(options.minPitch)
-        if (mapOptions.maxPitch != options.maxPitch)
+        }
+        if (mapOptions.maxPitch != options.maxPitch) {
             mapLibreMap.setMaxPitchPreference(options.maxPitch)
+        }
 
         // map bounds
         val oldBounds = mapOptions.maxBounds
@@ -611,22 +650,30 @@ class MapLibreMapController(
             // remove map bounds
             mapLibreMap.setLatLngBoundsForCameraTarget(null)
         } else if (oldBounds == null && newBounds != null) {
-            val bounds = LatLngBounds.from(
-                newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest
-            )
+            val bounds =
+                LatLngBounds.from(
+                    newBounds.latitudeNorth,
+                    newBounds.longitudeEast,
+                    newBounds.latitudeSouth,
+                    newBounds.longitudeWest,
+                )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         } else if (newBounds != null &&
             // can get improved when https://github.com/flutter/flutter/issues/118087 is implemented
-            (oldBounds?.latitudeNorth != newBounds.latitudeNorth
-                    || oldBounds.latitudeSouth != newBounds.latitudeSouth
-                    || oldBounds.longitudeEast != newBounds.longitudeEast
-                    || oldBounds.longitudeWest != newBounds.longitudeWest)
-        ) {
-            val bounds = LatLngBounds.from(
-                newBounds.latitudeNorth, newBounds.longitudeEast,
-                newBounds.latitudeSouth, newBounds.longitudeWest
+            (
+                oldBounds?.latitudeNorth != newBounds.latitudeNorth ||
+                    oldBounds.latitudeSouth != newBounds.latitudeSouth ||
+                    oldBounds.longitudeEast != newBounds.longitudeEast ||
+                    oldBounds.longitudeWest != newBounds.longitudeWest
             )
+        ) {
+            val bounds =
+                LatLngBounds.from(
+                    newBounds.latitudeNorth,
+                    newBounds.longitudeEast,
+                    newBounds.latitudeSouth,
+                    newBounds.longitudeWest,
+                )
             mapLibreMap.setLatLngBoundsForCameraTarget(bounds)
         }
 
