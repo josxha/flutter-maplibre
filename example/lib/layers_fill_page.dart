@@ -27,8 +27,10 @@ class _LayersFillPageState extends State<LayersFillPage> {
           if (event case MapEventClick()) {
             final screenPoint = await _controller.toScreenLocation(event.point);
             final features =
-            await _controller.queryRenderedFeatures(screenPoint);
-            debugPrint(features.join('\n'));
+                await _controller.queryRenderedFeatures(screenPoint);
+            debugPrint(
+              '${features.length} features clicked: ${features.first}',
+            );
           }
         },
       ),
