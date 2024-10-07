@@ -104,4 +104,7 @@ ktlint {
     dependencies {
         ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.15")
     }
+    filter {
+        exclude("**/*.g.kt")
+    }
 }
