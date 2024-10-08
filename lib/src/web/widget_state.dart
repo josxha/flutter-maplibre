@@ -644,10 +644,9 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     return features.toDart
         .map(
           (e) => RenderedFeature(
-            layerId: e.layer.toString(),
+            layerId: e.layer.id,
             sourceId: e.source,
             sourceLayer: e.sourceLayer,
-            state: e.state.toString(),
           ),
         )
         .toList(growable: false);

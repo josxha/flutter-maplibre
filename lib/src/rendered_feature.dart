@@ -9,7 +9,6 @@ class RenderedFeature {
     required this.layerId,
     required this.sourceId,
     required this.sourceLayer,
-    required this.state,
   });
 
   /// The layer id.
@@ -21,12 +20,9 @@ class RenderedFeature {
   /// The source layer id.
   final String? sourceLayer;
 
-  /// The state.
-  final String? state;
-
   @override
   String toString() => 'RenderedFeature(layerId: $layerId, '
-      'sourceId: $sourceId, sourceLayer: $sourceLayer, state: $state)';
+      'sourceId: $sourceId, sourceLayer: $sourceLayer)';
 
   @override
   bool operator ==(Object other) =>
@@ -35,13 +31,11 @@ class RenderedFeature {
           runtimeType == other.runtimeType &&
           layerId == other.layerId &&
           sourceId == other.sourceId &&
-          sourceLayer == other.sourceLayer &&
-          state == other.state;
+          sourceLayer == other.sourceLayer;
 
   @override
   int get hashCode =>
       layerId.hashCode ^
       sourceId.hashCode ^
-      sourceLayer.hashCode ^
-      state.hashCode;
+      sourceLayer.hashCode;
 }

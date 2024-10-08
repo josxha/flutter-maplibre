@@ -215,6 +215,9 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required JSAny layout,
     required JSAny paint,
   });
+
+  /// Get the layer id.
+  external String id;
 }
 
 /// Image data used by [JsMap.addImage].

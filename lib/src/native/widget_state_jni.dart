@@ -540,7 +540,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     Offset screenLocation,
   ) async {
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryrenderedfeatures/
-    final jniStyle = _jniStyle;
     final jniMapLibreMap = _jniMapLibreMap;
     final jniFeatures = await runOnPlatformThread<List<jni.Feature>>(() {
       return jniMapLibreMap.queryRenderedFeatures(
@@ -554,7 +553,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         layerId: jniFeature.id().toDartString(releaseOriginal: true),
         sourceId: jniFeature.toJson().toDartString(releaseOriginal: true),
         sourceLayer: null,
-        state: null,
       );
       jniFeature.release();
       return feature;
