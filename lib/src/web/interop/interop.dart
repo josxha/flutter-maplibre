@@ -66,6 +66,4 @@ extension type LngLatBounds._(JSObject _) implements JSObject {
 }
 
 /// https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/DistributiveOmit/
-extension type DistributiveOmit<T, K>._(JSObject _) implements JSObject {
-
-}
+extension type DistributiveOmit<T, K>._(JSObject _) implements JSObject {}

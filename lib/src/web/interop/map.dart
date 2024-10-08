@@ -109,7 +109,10 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Returns an array of MapGeoJSONFeature objects representing visible
   /// features that satisfy the query parameters.
-  external JSArray<MapGeoJSONFeature> queryRenderedFeatures(Point jsPoint, JSAny? options);
+  external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
+    Point jsPoint,
+    JSAny? options,
+  );
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

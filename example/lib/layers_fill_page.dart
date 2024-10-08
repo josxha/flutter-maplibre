@@ -27,10 +27,10 @@ class _LayersFillPageState extends State<LayersFillPage> {
           if (event case MapEventClick()) {
             final screenPoint = await _controller.toScreenLocation(event.point);
             final features =
-            await _controller.queryRenderedFeatures(screenPoint);
+                await _controller.queryRenderedFeatures(screenPoint);
             debugPrint(
               '${features.length} features clicked\n'
-                  '${features.join('\n')}',
+              '${features.join('\n')}',
             );
           }
         },
@@ -40,7 +40,7 @@ class _LayersFillPageState extends State<LayersFillPage> {
 
   Future<void> _onStyleLoaded() async {
     final geojsonPolygon =
-    await rootBundle.loadString('assets/geojson/lake-constance.json');
+        await rootBundle.loadString('assets/geojson/lake-constance.json');
     await _controller.addSource(
       GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
     );
