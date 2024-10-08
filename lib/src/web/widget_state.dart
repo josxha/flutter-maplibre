@@ -636,10 +636,20 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<List<Object>> queryRenderedFeatures(Offset screenLocation) async {
-    final features = _map.queryRenderedFeatures(screenLocation.toJsPoint(), null);
+  Future<List<RenderedFeature>> queryRenderedFeatures(
+    Offset screenLocation,
+  ) async {
+    final features =
+        _map.queryRenderedFeatures(screenLocation.toJsPoint(), null);
     return features.toDart
-        .map((e) => '${e.layer.runtimeType}, ${e.source}, ${e.sourceLayer}, ${e.state.runtimeType}')
+        .map(
+          (e) => RenderedFeature(
+            layerId: e.layer.toString(),
+            sourceId: e.source,
+            sourceLayer: e.sourceLayer,
+            state: e.state.toString(),
+          ),
+        )
         .toList(growable: false);
   }
 }
