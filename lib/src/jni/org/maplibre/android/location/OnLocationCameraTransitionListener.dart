@@ -208,7 +208,7 @@ class OnLocationCameraTransitionListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnLocationCameraTransitionListener {
+abstract base mixin class $OnLocationCameraTransitionListener {
   factory $OnLocationCameraTransitionListener({
     required void Function(int i) onLocationCameraTransitionFinished,
     bool onLocationCameraTransitionFinished$async,
@@ -222,8 +222,8 @@ abstract mixin class $OnLocationCameraTransitionListener {
   bool get onLocationCameraTransitionCanceled$async => false;
 }
 
-class _$OnLocationCameraTransitionListener
-    implements $OnLocationCameraTransitionListener {
+final class _$OnLocationCameraTransitionListener
+    with $OnLocationCameraTransitionListener {
   _$OnLocationCameraTransitionListener({
     required void Function(int i) onLocationCameraTransitionFinished,
     this.onLocationCameraTransitionFinished$async = false,

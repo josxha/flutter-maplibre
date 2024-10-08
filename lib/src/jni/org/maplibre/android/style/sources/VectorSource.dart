@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../geojson/Feature.dart' as feature_;
+
 import 'Source.dart' as source_;
 
 import 'TileSet.dart' as tileset_;
@@ -258,7 +260,7 @@ class VectorSource extends source_.Source {
 
   /// from: `public final java.util.List querySourceFeatures(java.lang.Object[] strings, org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> querySourceFeatures(
+  _$jni.JList<feature_.Feature> querySourceFeatures(
     _$jni.JArray<_$jni.JString> strings,
     _$jni.JObject expression,
   ) {
@@ -267,7 +269,7 @@ class VectorSource extends source_.Source {
             _id_querySourceFeatures as _$jni.JMethodIDPtr,
             strings.reference.pointer,
             expression.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_getUrl = _class.instanceMethodId(

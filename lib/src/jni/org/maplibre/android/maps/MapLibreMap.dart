@@ -51,6 +51,8 @@ import 'package:jni/jni.dart' as _$jni;
 
 import '../../../../android/graphics/PointF.dart' as pointf_;
 
+import '../../geojson/Feature.dart' as feature_;
+
 import '../camera/CameraPosition.dart' as cameraposition_;
 
 import '../camera/CameraUpdate.dart' as cameraupdate_;
@@ -213,7 +215,7 @@ class MapLibreMap_CancelableCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_CancelableCallback {
+abstract base mixin class $MapLibreMap_CancelableCallback {
   factory $MapLibreMap_CancelableCallback({
     required void Function() onCancel,
     bool onCancel$async,
@@ -227,8 +229,8 @@ abstract mixin class $MapLibreMap_CancelableCallback {
   bool get onFinish$async => false;
 }
 
-class _$MapLibreMap_CancelableCallback
-    implements $MapLibreMap_CancelableCallback {
+final class _$MapLibreMap_CancelableCallback
+    with $MapLibreMap_CancelableCallback {
   _$MapLibreMap_CancelableCallback({
     required void Function() onCancel,
     this.onCancel$async = false,
@@ -409,7 +411,7 @@ class MapLibreMap_InfoWindowAdapter extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_InfoWindowAdapter {
+abstract base mixin class $MapLibreMap_InfoWindowAdapter {
   factory $MapLibreMap_InfoWindowAdapter({
     required _$jni.JObject Function(_$jni.JObject marker) getInfoWindow,
   }) = _$MapLibreMap_InfoWindowAdapter;
@@ -417,8 +419,8 @@ abstract mixin class $MapLibreMap_InfoWindowAdapter {
   _$jni.JObject getInfoWindow(_$jni.JObject marker);
 }
 
-class _$MapLibreMap_InfoWindowAdapter
-    implements $MapLibreMap_InfoWindowAdapter {
+final class _$MapLibreMap_InfoWindowAdapter
+    with $MapLibreMap_InfoWindowAdapter {
   _$MapLibreMap_InfoWindowAdapter({
     required _$jni.JObject Function(_$jni.JObject marker) getInfoWindow,
   }) : _getInfoWindow = getInfoWindow;
@@ -581,7 +583,7 @@ class MapLibreMap_OnCameraIdleListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnCameraIdleListener {
+abstract base mixin class $MapLibreMap_OnCameraIdleListener {
   factory $MapLibreMap_OnCameraIdleListener({
     required void Function() onCameraIdle,
     bool onCameraIdle$async,
@@ -591,8 +593,8 @@ abstract mixin class $MapLibreMap_OnCameraIdleListener {
   bool get onCameraIdle$async => false;
 }
 
-class _$MapLibreMap_OnCameraIdleListener
-    implements $MapLibreMap_OnCameraIdleListener {
+final class _$MapLibreMap_OnCameraIdleListener
+    with $MapLibreMap_OnCameraIdleListener {
   _$MapLibreMap_OnCameraIdleListener({
     required void Function() onCameraIdle,
     this.onCameraIdle$async = false,
@@ -759,7 +761,7 @@ class MapLibreMap_OnCameraMoveCanceledListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnCameraMoveCanceledListener {
+abstract base mixin class $MapLibreMap_OnCameraMoveCanceledListener {
   factory $MapLibreMap_OnCameraMoveCanceledListener({
     required void Function() onCameraMoveCanceled,
     bool onCameraMoveCanceled$async,
@@ -769,8 +771,8 @@ abstract mixin class $MapLibreMap_OnCameraMoveCanceledListener {
   bool get onCameraMoveCanceled$async => false;
 }
 
-class _$MapLibreMap_OnCameraMoveCanceledListener
-    implements $MapLibreMap_OnCameraMoveCanceledListener {
+final class _$MapLibreMap_OnCameraMoveCanceledListener
+    with $MapLibreMap_OnCameraMoveCanceledListener {
   _$MapLibreMap_OnCameraMoveCanceledListener({
     required void Function() onCameraMoveCanceled,
     this.onCameraMoveCanceled$async = false,
@@ -937,7 +939,7 @@ class MapLibreMap_OnCameraMoveListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnCameraMoveListener {
+abstract base mixin class $MapLibreMap_OnCameraMoveListener {
   factory $MapLibreMap_OnCameraMoveListener({
     required void Function() onCameraMove,
     bool onCameraMove$async,
@@ -947,8 +949,8 @@ abstract mixin class $MapLibreMap_OnCameraMoveListener {
   bool get onCameraMove$async => false;
 }
 
-class _$MapLibreMap_OnCameraMoveListener
-    implements $MapLibreMap_OnCameraMoveListener {
+final class _$MapLibreMap_OnCameraMoveListener
+    with $MapLibreMap_OnCameraMoveListener {
   _$MapLibreMap_OnCameraMoveListener({
     required void Function() onCameraMove,
     this.onCameraMove$async = false,
@@ -1128,7 +1130,7 @@ class MapLibreMap_OnCameraMoveStartedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnCameraMoveStartedListener {
+abstract base mixin class $MapLibreMap_OnCameraMoveStartedListener {
   factory $MapLibreMap_OnCameraMoveStartedListener({
     required void Function(int i) onCameraMoveStarted,
     bool onCameraMoveStarted$async,
@@ -1138,8 +1140,8 @@ abstract mixin class $MapLibreMap_OnCameraMoveStartedListener {
   bool get onCameraMoveStarted$async => false;
 }
 
-class _$MapLibreMap_OnCameraMoveStartedListener
-    implements $MapLibreMap_OnCameraMoveStartedListener {
+final class _$MapLibreMap_OnCameraMoveStartedListener
+    with $MapLibreMap_OnCameraMoveStartedListener {
   _$MapLibreMap_OnCameraMoveStartedListener({
     required void Function(int i) onCameraMoveStarted,
     this.onCameraMoveStarted$async = false,
@@ -1339,7 +1341,7 @@ class MapLibreMap_OnCompassAnimationListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnCompassAnimationListener {
+abstract base mixin class $MapLibreMap_OnCompassAnimationListener {
   factory $MapLibreMap_OnCompassAnimationListener({
     required void Function() onCompassAnimation,
     bool onCompassAnimation$async,
@@ -1353,8 +1355,8 @@ abstract mixin class $MapLibreMap_OnCompassAnimationListener {
   bool get onCompassAnimationFinished$async => false;
 }
 
-class _$MapLibreMap_OnCompassAnimationListener
-    implements $MapLibreMap_OnCompassAnimationListener {
+final class _$MapLibreMap_OnCompassAnimationListener
+    with $MapLibreMap_OnCompassAnimationListener {
   _$MapLibreMap_OnCompassAnimationListener({
     required void Function() onCompassAnimation,
     this.onCompassAnimation$async = false,
@@ -1534,7 +1536,7 @@ class MapLibreMap_OnDeveloperAnimationListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnDeveloperAnimationListener {
+abstract base mixin class $MapLibreMap_OnDeveloperAnimationListener {
   factory $MapLibreMap_OnDeveloperAnimationListener({
     required void Function() onDeveloperAnimationStarted,
     bool onDeveloperAnimationStarted$async,
@@ -1544,8 +1546,8 @@ abstract mixin class $MapLibreMap_OnDeveloperAnimationListener {
   bool get onDeveloperAnimationStarted$async => false;
 }
 
-class _$MapLibreMap_OnDeveloperAnimationListener
-    implements $MapLibreMap_OnDeveloperAnimationListener {
+final class _$MapLibreMap_OnDeveloperAnimationListener
+    with $MapLibreMap_OnDeveloperAnimationListener {
   _$MapLibreMap_OnDeveloperAnimationListener({
     required void Function() onDeveloperAnimationStarted,
     this.onDeveloperAnimationStarted$async = false,
@@ -1711,7 +1713,7 @@ class MapLibreMap_OnFlingListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnFlingListener {
+abstract base mixin class $MapLibreMap_OnFlingListener {
   factory $MapLibreMap_OnFlingListener({
     required void Function() onFling,
     bool onFling$async,
@@ -1721,7 +1723,7 @@ abstract mixin class $MapLibreMap_OnFlingListener {
   bool get onFling$async => false;
 }
 
-class _$MapLibreMap_OnFlingListener implements $MapLibreMap_OnFlingListener {
+final class _$MapLibreMap_OnFlingListener with $MapLibreMap_OnFlingListener {
   _$MapLibreMap_OnFlingListener({
     required void Function() onFling,
     this.onFling$async = false,
@@ -1890,7 +1892,7 @@ class MapLibreMap_OnFpsChangedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnFpsChangedListener {
+abstract base mixin class $MapLibreMap_OnFpsChangedListener {
   factory $MapLibreMap_OnFpsChangedListener({
     required void Function(double d) onFpsChanged,
     bool onFpsChanged$async,
@@ -1900,8 +1902,8 @@ abstract mixin class $MapLibreMap_OnFpsChangedListener {
   bool get onFpsChanged$async => false;
 }
 
-class _$MapLibreMap_OnFpsChangedListener
-    implements $MapLibreMap_OnFpsChangedListener {
+final class _$MapLibreMap_OnFpsChangedListener
+    with $MapLibreMap_OnFpsChangedListener {
   _$MapLibreMap_OnFpsChangedListener({
     required void Function(double d) onFpsChanged,
     this.onFpsChanged$async = false,
@@ -2072,7 +2074,7 @@ class MapLibreMap_OnInfoWindowClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnInfoWindowClickListener {
+abstract base mixin class $MapLibreMap_OnInfoWindowClickListener {
   factory $MapLibreMap_OnInfoWindowClickListener({
     required bool Function(_$jni.JObject marker) onInfoWindowClick,
   }) = _$MapLibreMap_OnInfoWindowClickListener;
@@ -2080,8 +2082,8 @@ abstract mixin class $MapLibreMap_OnInfoWindowClickListener {
   bool onInfoWindowClick(_$jni.JObject marker);
 }
 
-class _$MapLibreMap_OnInfoWindowClickListener
-    implements $MapLibreMap_OnInfoWindowClickListener {
+final class _$MapLibreMap_OnInfoWindowClickListener
+    with $MapLibreMap_OnInfoWindowClickListener {
   _$MapLibreMap_OnInfoWindowClickListener({
     required bool Function(_$jni.JObject marker) onInfoWindowClick,
   }) : _onInfoWindowClick = onInfoWindowClick;
@@ -2254,7 +2256,7 @@ class MapLibreMap_OnInfoWindowCloseListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnInfoWindowCloseListener {
+abstract base mixin class $MapLibreMap_OnInfoWindowCloseListener {
   factory $MapLibreMap_OnInfoWindowCloseListener({
     required void Function(_$jni.JObject marker) onInfoWindowClose,
     bool onInfoWindowClose$async,
@@ -2264,8 +2266,8 @@ abstract mixin class $MapLibreMap_OnInfoWindowCloseListener {
   bool get onInfoWindowClose$async => false;
 }
 
-class _$MapLibreMap_OnInfoWindowCloseListener
-    implements $MapLibreMap_OnInfoWindowCloseListener {
+final class _$MapLibreMap_OnInfoWindowCloseListener
+    with $MapLibreMap_OnInfoWindowCloseListener {
   _$MapLibreMap_OnInfoWindowCloseListener({
     required void Function(_$jni.JObject marker) onInfoWindowClose,
     this.onInfoWindowClose$async = false,
@@ -2440,7 +2442,7 @@ class MapLibreMap_OnInfoWindowLongClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnInfoWindowLongClickListener {
+abstract base mixin class $MapLibreMap_OnInfoWindowLongClickListener {
   factory $MapLibreMap_OnInfoWindowLongClickListener({
     required void Function(_$jni.JObject marker) onInfoWindowLongClick,
     bool onInfoWindowLongClick$async,
@@ -2450,8 +2452,8 @@ abstract mixin class $MapLibreMap_OnInfoWindowLongClickListener {
   bool get onInfoWindowLongClick$async => false;
 }
 
-class _$MapLibreMap_OnInfoWindowLongClickListener
-    implements $MapLibreMap_OnInfoWindowLongClickListener {
+final class _$MapLibreMap_OnInfoWindowLongClickListener
+    with $MapLibreMap_OnInfoWindowLongClickListener {
   _$MapLibreMap_OnInfoWindowLongClickListener({
     required void Function(_$jni.JObject marker) onInfoWindowLongClick,
     this.onInfoWindowLongClick$async = false,
@@ -2621,7 +2623,7 @@ class MapLibreMap_OnMapClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnMapClickListener {
+abstract base mixin class $MapLibreMap_OnMapClickListener {
   factory $MapLibreMap_OnMapClickListener({
     required bool Function(latlng_.LatLng latLng) onMapClick,
   }) = _$MapLibreMap_OnMapClickListener;
@@ -2629,8 +2631,8 @@ abstract mixin class $MapLibreMap_OnMapClickListener {
   bool onMapClick(latlng_.LatLng latLng);
 }
 
-class _$MapLibreMap_OnMapClickListener
-    implements $MapLibreMap_OnMapClickListener {
+final class _$MapLibreMap_OnMapClickListener
+    with $MapLibreMap_OnMapClickListener {
   _$MapLibreMap_OnMapClickListener({
     required bool Function(latlng_.LatLng latLng) onMapClick,
   }) : _onMapClick = onMapClick;
@@ -2796,7 +2798,7 @@ class MapLibreMap_OnMapLongClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnMapLongClickListener {
+abstract base mixin class $MapLibreMap_OnMapLongClickListener {
   factory $MapLibreMap_OnMapLongClickListener({
     required bool Function(latlng_.LatLng latLng) onMapLongClick,
   }) = _$MapLibreMap_OnMapLongClickListener;
@@ -2804,8 +2806,8 @@ abstract mixin class $MapLibreMap_OnMapLongClickListener {
   bool onMapLongClick(latlng_.LatLng latLng);
 }
 
-class _$MapLibreMap_OnMapLongClickListener
-    implements $MapLibreMap_OnMapLongClickListener {
+final class _$MapLibreMap_OnMapLongClickListener
+    with $MapLibreMap_OnMapLongClickListener {
   _$MapLibreMap_OnMapLongClickListener({
     required bool Function(latlng_.LatLng latLng) onMapLongClick,
   }) : _onMapLongClick = onMapLongClick;
@@ -2971,7 +2973,7 @@ class MapLibreMap_OnMarkerClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnMarkerClickListener {
+abstract base mixin class $MapLibreMap_OnMarkerClickListener {
   factory $MapLibreMap_OnMarkerClickListener({
     required bool Function(_$jni.JObject marker) onMarkerClick,
   }) = _$MapLibreMap_OnMarkerClickListener;
@@ -2979,8 +2981,8 @@ abstract mixin class $MapLibreMap_OnMarkerClickListener {
   bool onMarkerClick(_$jni.JObject marker);
 }
 
-class _$MapLibreMap_OnMarkerClickListener
-    implements $MapLibreMap_OnMarkerClickListener {
+final class _$MapLibreMap_OnMarkerClickListener
+    with $MapLibreMap_OnMarkerClickListener {
   _$MapLibreMap_OnMarkerClickListener({
     required bool Function(_$jni.JObject marker) onMarkerClick,
   }) : _onMarkerClick = onMarkerClick;
@@ -3217,7 +3219,7 @@ class MapLibreMap_OnMoveListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnMoveListener {
+abstract base mixin class $MapLibreMap_OnMoveListener {
   factory $MapLibreMap_OnMoveListener({
     required void Function(_$jni.JObject moveGestureDetector) onMoveBegin,
     bool onMoveBegin$async,
@@ -3235,7 +3237,7 @@ abstract mixin class $MapLibreMap_OnMoveListener {
   bool get onMoveEnd$async => false;
 }
 
-class _$MapLibreMap_OnMoveListener implements $MapLibreMap_OnMoveListener {
+final class _$MapLibreMap_OnMoveListener with $MapLibreMap_OnMoveListener {
   _$MapLibreMap_OnMoveListener({
     required void Function(_$jni.JObject moveGestureDetector) onMoveBegin,
     this.onMoveBegin$async = false,
@@ -3425,7 +3427,7 @@ class MapLibreMap_OnPolygonClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnPolygonClickListener {
+abstract base mixin class $MapLibreMap_OnPolygonClickListener {
   factory $MapLibreMap_OnPolygonClickListener({
     required void Function(_$jni.JObject polygon) onPolygonClick,
     bool onPolygonClick$async,
@@ -3435,8 +3437,8 @@ abstract mixin class $MapLibreMap_OnPolygonClickListener {
   bool get onPolygonClick$async => false;
 }
 
-class _$MapLibreMap_OnPolygonClickListener
-    implements $MapLibreMap_OnPolygonClickListener {
+final class _$MapLibreMap_OnPolygonClickListener
+    with $MapLibreMap_OnPolygonClickListener {
   _$MapLibreMap_OnPolygonClickListener({
     required void Function(_$jni.JObject polygon) onPolygonClick,
     this.onPolygonClick$async = false,
@@ -3611,7 +3613,7 @@ class MapLibreMap_OnPolylineClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnPolylineClickListener {
+abstract base mixin class $MapLibreMap_OnPolylineClickListener {
   factory $MapLibreMap_OnPolylineClickListener({
     required void Function(_$jni.JObject polyline) onPolylineClick,
     bool onPolylineClick$async,
@@ -3621,8 +3623,8 @@ abstract mixin class $MapLibreMap_OnPolylineClickListener {
   bool get onPolylineClick$async => false;
 }
 
-class _$MapLibreMap_OnPolylineClickListener
-    implements $MapLibreMap_OnPolylineClickListener {
+final class _$MapLibreMap_OnPolylineClickListener
+    with $MapLibreMap_OnPolylineClickListener {
   _$MapLibreMap_OnPolylineClickListener({
     required void Function(_$jni.JObject polyline) onPolylineClick,
     this.onPolylineClick$async = false,
@@ -3862,7 +3864,7 @@ class MapLibreMap_OnRotateListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnRotateListener {
+abstract base mixin class $MapLibreMap_OnRotateListener {
   factory $MapLibreMap_OnRotateListener({
     required void Function(_$jni.JObject rotateGestureDetector) onRotateBegin,
     bool onRotateBegin$async,
@@ -3880,7 +3882,7 @@ abstract mixin class $MapLibreMap_OnRotateListener {
   bool get onRotateEnd$async => false;
 }
 
-class _$MapLibreMap_OnRotateListener implements $MapLibreMap_OnRotateListener {
+final class _$MapLibreMap_OnRotateListener with $MapLibreMap_OnRotateListener {
   _$MapLibreMap_OnRotateListener({
     required void Function(_$jni.JObject rotateGestureDetector) onRotateBegin,
     this.onRotateBegin$async = false,
@@ -4137,7 +4139,7 @@ class MapLibreMap_OnScaleListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnScaleListener {
+abstract base mixin class $MapLibreMap_OnScaleListener {
   factory $MapLibreMap_OnScaleListener({
     required void Function(_$jni.JObject standardScaleGestureDetector)
         onScaleBegin,
@@ -4157,7 +4159,7 @@ abstract mixin class $MapLibreMap_OnScaleListener {
   bool get onScaleEnd$async => false;
 }
 
-class _$MapLibreMap_OnScaleListener implements $MapLibreMap_OnScaleListener {
+final class _$MapLibreMap_OnScaleListener with $MapLibreMap_OnScaleListener {
   _$MapLibreMap_OnScaleListener({
     required void Function(_$jni.JObject standardScaleGestureDetector)
         onScaleBegin,
@@ -4416,7 +4418,7 @@ class MapLibreMap_OnShoveListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_OnShoveListener {
+abstract base mixin class $MapLibreMap_OnShoveListener {
   factory $MapLibreMap_OnShoveListener({
     required void Function(_$jni.JObject shoveGestureDetector) onShoveBegin,
     bool onShoveBegin$async,
@@ -4434,7 +4436,7 @@ abstract mixin class $MapLibreMap_OnShoveListener {
   bool get onShoveEnd$async => false;
 }
 
-class _$MapLibreMap_OnShoveListener implements $MapLibreMap_OnShoveListener {
+final class _$MapLibreMap_OnShoveListener with $MapLibreMap_OnShoveListener {
   _$MapLibreMap_OnShoveListener({
     required void Function(_$jni.JObject shoveGestureDetector) onShoveBegin,
     this.onShoveBegin$async = false,
@@ -4622,7 +4624,7 @@ class MapLibreMap_SnapshotReadyCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreMap_SnapshotReadyCallback {
+abstract base mixin class $MapLibreMap_SnapshotReadyCallback {
   factory $MapLibreMap_SnapshotReadyCallback({
     required void Function(_$jni.JObject bitmap) onSnapshotReady,
     bool onSnapshotReady$async,
@@ -4632,8 +4634,8 @@ abstract mixin class $MapLibreMap_SnapshotReadyCallback {
   bool get onSnapshotReady$async => false;
 }
 
-class _$MapLibreMap_SnapshotReadyCallback
-    implements $MapLibreMap_SnapshotReadyCallback {
+final class _$MapLibreMap_SnapshotReadyCallback
+    with $MapLibreMap_SnapshotReadyCallback {
   _$MapLibreMap_SnapshotReadyCallback({
     required void Function(_$jni.JObject bitmap) onSnapshotReady,
     this.onSnapshotReady$async = false,
@@ -8224,7 +8226,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures(
     pointf_.PointF pointF,
     _$jni.JArray<_$jni.JString> strings,
   ) {
@@ -8233,7 +8235,7 @@ class MapLibreMap extends _$jni.JObject {
             _id_queryRenderedFeatures as _$jni.JMethodIDPtr,
             pointF.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$1 = _class.instanceMethodId(
@@ -8262,7 +8264,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$1(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$1(
     pointf_.PointF pointF,
     _$jni.JObject expression,
     _$jni.JArray<_$jni.JString> strings,
@@ -8273,7 +8275,7 @@ class MapLibreMap extends _$jni.JObject {
             pointF.reference.pointer,
             expression.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$2 = _class.instanceMethodId(
@@ -8300,7 +8302,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$2(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$2(
     _$jni.JObject rectF,
     _$jni.JArray<_$jni.JString> strings,
   ) {
@@ -8309,7 +8311,7 @@ class MapLibreMap extends _$jni.JObject {
             _id_queryRenderedFeatures$2 as _$jni.JMethodIDPtr,
             rectF.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$3 = _class.instanceMethodId(
@@ -8338,7 +8340,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$3(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$3(
     _$jni.JObject rectF,
     _$jni.JObject expression,
     _$jni.JArray<_$jni.JString> strings,
@@ -8349,7 +8351,7 @@ class MapLibreMap extends _$jni.JObject {
             rectF.reference.pointer,
             expression.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_getLocationComponent = _class.instanceMethodId(

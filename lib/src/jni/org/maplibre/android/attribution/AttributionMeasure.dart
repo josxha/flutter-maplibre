@@ -433,7 +433,7 @@ class AttributionMeasure_Command extends _$jni.JObject {
   }
 }
 
-abstract mixin class $AttributionMeasure_Command {
+abstract base mixin class $AttributionMeasure_Command {
   factory $AttributionMeasure_Command({
     required attributionlayout_.AttributionLayout Function(
             AttributionMeasure attributionMeasure)
@@ -444,7 +444,7 @@ abstract mixin class $AttributionMeasure_Command {
       AttributionMeasure attributionMeasure);
 }
 
-class _$AttributionMeasure_Command implements $AttributionMeasure_Command {
+final class _$AttributionMeasure_Command with $AttributionMeasure_Command {
   _$AttributionMeasure_Command({
     required attributionlayout_.AttributionLayout Function(
             AttributionMeasure attributionMeasure)
