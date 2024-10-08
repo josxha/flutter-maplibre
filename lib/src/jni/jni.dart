@@ -22,3 +22,4 @@ export 'org/maplibre/android/style/types/_package.dart';
 export 'org/maplibre/android/text/_package.dart';
 export 'org/maplibre/android/util/_package.dart';
 export 'org/maplibre/android/utils/_package.dart';
+export 'org/maplibre/geojson/_package.dart';

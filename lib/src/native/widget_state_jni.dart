@@ -542,7 +542,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryrenderedfeatures/
     final jniStyle = _jniStyle;
     final jniMapLibreMap = _jniMapLibreMap;
-    final features = await runOnPlatformThread<List<JObject>>(() {
+    final features = await runOnPlatformThread<List<jni.Feature>>(() {
       final layers = jniStyle.getLayers();
       final jArray = JArray(JString.type, layers.length);
       for (var i = 0; i < layers.length; i++) {
@@ -555,7 +555,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     });
     return features
         .map(
-          (e) => const RenderedFeature(
+          (feature) => const RenderedFeature(
             layerId: null,
             sourceId: null,
             sourceLayer: null,
