@@ -543,14 +543,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final jniStyle = _jniStyle;
     final jniMapLibreMap = _jniMapLibreMap;
     final jniFeatures = await runOnPlatformThread<List<jni.Feature>>(() {
-      final layers = jniStyle.getLayers();
-      final jArray = JArray(JString.type, layers.length);
-      for (var i = 0; i < layers.length; i++) {
-        jArray[i] = layers[i].getId();
-      }
       return jniMapLibreMap.queryRenderedFeatures(
         jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
-        jArray,
+        JArray(JString.type, 0),
       );
     });
     return List.generate(jniFeatures.length, (index) {

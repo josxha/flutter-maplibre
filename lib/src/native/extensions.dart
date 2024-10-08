@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/jni/jni.dart' as jni;
+import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// Extension methods for the [Position] class. Not exported publicly.
