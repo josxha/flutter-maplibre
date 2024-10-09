@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/annotation/annotation_manager.dart';
 import 'package:maplibre/src/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
@@ -20,6 +21,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
+  late AnnotationManager _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -79,6 +81,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _hostApi.updateOptions(getOptions());
+    _annotationManager.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -345,6 +348,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   void onStyleLoaded() {
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
+    _annotationManager = AnnotationManager(this, widget.layers);
   }
 
   @override
