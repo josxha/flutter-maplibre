@@ -357,7 +357,7 @@ class FileUtils_OnCheckFileReadPermissionListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $FileUtils_OnCheckFileReadPermissionListener {
+abstract base mixin class $FileUtils_OnCheckFileReadPermissionListener {
   factory $FileUtils_OnCheckFileReadPermissionListener({
     required void Function() onReadPermissionGranted,
     bool onReadPermissionGranted$async,
@@ -371,8 +371,8 @@ abstract mixin class $FileUtils_OnCheckFileReadPermissionListener {
   bool get onError$async => false;
 }
 
-class _$FileUtils_OnCheckFileReadPermissionListener
-    implements $FileUtils_OnCheckFileReadPermissionListener {
+final class _$FileUtils_OnCheckFileReadPermissionListener
+    with $FileUtils_OnCheckFileReadPermissionListener {
   _$FileUtils_OnCheckFileReadPermissionListener({
     required void Function() onReadPermissionGranted,
     this.onReadPermissionGranted$async = false,
@@ -579,7 +579,7 @@ class FileUtils_OnCheckFileWritePermissionListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $FileUtils_OnCheckFileWritePermissionListener {
+abstract base mixin class $FileUtils_OnCheckFileWritePermissionListener {
   factory $FileUtils_OnCheckFileWritePermissionListener({
     required void Function() onWritePermissionGranted,
     bool onWritePermissionGranted$async,
@@ -593,8 +593,8 @@ abstract mixin class $FileUtils_OnCheckFileWritePermissionListener {
   bool get onError$async => false;
 }
 
-class _$FileUtils_OnCheckFileWritePermissionListener
-    implements $FileUtils_OnCheckFileWritePermissionListener {
+final class _$FileUtils_OnCheckFileWritePermissionListener
+    with $FileUtils_OnCheckFileWritePermissionListener {
   _$FileUtils_OnCheckFileWritePermissionListener({
     required void Function() onWritePermissionGranted,
     this.onWritePermissionGranted$async = false,

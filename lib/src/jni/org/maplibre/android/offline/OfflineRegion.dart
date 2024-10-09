@@ -223,11 +223,11 @@ class OfflineRegion_DownloadState extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_DownloadState {
+abstract base mixin class $OfflineRegion_DownloadState {
   factory $OfflineRegion_DownloadState() = _$OfflineRegion_DownloadState;
 }
 
-class _$OfflineRegion_DownloadState implements $OfflineRegion_DownloadState {
+final class _$OfflineRegion_DownloadState with $OfflineRegion_DownloadState {
   _$OfflineRegion_DownloadState();
 }
 
@@ -414,7 +414,7 @@ class OfflineRegion_OfflineRegionDeleteCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_OfflineRegionDeleteCallback {
+abstract base mixin class $OfflineRegion_OfflineRegionDeleteCallback {
   factory $OfflineRegion_OfflineRegionDeleteCallback({
     required void Function() onDelete,
     bool onDelete$async,
@@ -428,8 +428,8 @@ abstract mixin class $OfflineRegion_OfflineRegionDeleteCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineRegion_OfflineRegionDeleteCallback
-    implements $OfflineRegion_OfflineRegionDeleteCallback {
+final class _$OfflineRegion_OfflineRegionDeleteCallback
+    with $OfflineRegion_OfflineRegionDeleteCallback {
   _$OfflineRegion_OfflineRegionDeleteCallback({
     required void Function() onDelete,
     this.onDelete$async = false,
@@ -639,7 +639,7 @@ class OfflineRegion_OfflineRegionInvalidateCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_OfflineRegionInvalidateCallback {
+abstract base mixin class $OfflineRegion_OfflineRegionInvalidateCallback {
   factory $OfflineRegion_OfflineRegionInvalidateCallback({
     required void Function() onInvalidate,
     bool onInvalidate$async,
@@ -653,8 +653,8 @@ abstract mixin class $OfflineRegion_OfflineRegionInvalidateCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineRegion_OfflineRegionInvalidateCallback
-    implements $OfflineRegion_OfflineRegionInvalidateCallback {
+final class _$OfflineRegion_OfflineRegionInvalidateCallback
+    with $OfflineRegion_OfflineRegionInvalidateCallback {
   _$OfflineRegion_OfflineRegionInvalidateCallback({
     required void Function() onInvalidate,
     this.onInvalidate$async = false,
@@ -910,7 +910,7 @@ class OfflineRegion_OfflineRegionObserver extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_OfflineRegionObserver {
+abstract base mixin class $OfflineRegion_OfflineRegionObserver {
   factory $OfflineRegion_OfflineRegionObserver({
     required void Function(
             offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
@@ -933,8 +933,8 @@ abstract mixin class $OfflineRegion_OfflineRegionObserver {
   bool get mapboxTileCountLimitExceeded$async => false;
 }
 
-class _$OfflineRegion_OfflineRegionObserver
-    implements $OfflineRegion_OfflineRegionObserver {
+final class _$OfflineRegion_OfflineRegionObserver
+    with $OfflineRegion_OfflineRegionObserver {
   _$OfflineRegion_OfflineRegionObserver({
     required void Function(
             offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
@@ -1166,7 +1166,7 @@ class OfflineRegion_OfflineRegionStatusCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_OfflineRegionStatusCallback {
+abstract base mixin class $OfflineRegion_OfflineRegionStatusCallback {
   factory $OfflineRegion_OfflineRegionStatusCallback({
     required void Function(
             offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
@@ -1182,8 +1182,8 @@ abstract mixin class $OfflineRegion_OfflineRegionStatusCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineRegion_OfflineRegionStatusCallback
-    implements $OfflineRegion_OfflineRegionStatusCallback {
+final class _$OfflineRegion_OfflineRegionStatusCallback
+    with $OfflineRegion_OfflineRegionStatusCallback {
   _$OfflineRegion_OfflineRegionStatusCallback({
     required void Function(
             offlineregionstatus_.OfflineRegionStatus offlineRegionStatus)
@@ -1402,7 +1402,7 @@ class OfflineRegion_OfflineRegionUpdateMetadataCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegion_OfflineRegionUpdateMetadataCallback {
+abstract base mixin class $OfflineRegion_OfflineRegionUpdateMetadataCallback {
   factory $OfflineRegion_OfflineRegionUpdateMetadataCallback({
     required void Function(_$jni.JArray<_$jni.jbyte> bs) onUpdate,
     bool onUpdate$async,
@@ -1416,8 +1416,8 @@ abstract mixin class $OfflineRegion_OfflineRegionUpdateMetadataCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineRegion_OfflineRegionUpdateMetadataCallback
-    implements $OfflineRegion_OfflineRegionUpdateMetadataCallback {
+final class _$OfflineRegion_OfflineRegionUpdateMetadataCallback
+    with $OfflineRegion_OfflineRegionUpdateMetadataCallback {
   _$OfflineRegion_OfflineRegionUpdateMetadataCallback({
     required void Function(_$jni.JArray<_$jni.jbyte> bs) onUpdate,
     this.onUpdate$async = false,

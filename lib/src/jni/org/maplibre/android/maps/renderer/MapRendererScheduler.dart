@@ -227,7 +227,7 @@ class MapRendererScheduler extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapRendererScheduler {
+abstract base mixin class $MapRendererScheduler {
   factory $MapRendererScheduler({
     required void Function() requestRender,
     bool requestRender$async,
@@ -245,7 +245,7 @@ abstract mixin class $MapRendererScheduler {
   bool get waitForEmpty$async => false;
 }
 
-class _$MapRendererScheduler implements $MapRendererScheduler {
+final class _$MapRendererScheduler with $MapRendererScheduler {
   _$MapRendererScheduler({
     required void Function() requestRender,
     this.requestRender$async = false,

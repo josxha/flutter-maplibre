@@ -215,7 +215,7 @@ class LocationEngineCallback<$T extends _$jni.JObject> extends _$jni.JObject {
   }
 }
 
-abstract mixin class $LocationEngineCallback<$T extends _$jni.JObject> {
+abstract base mixin class $LocationEngineCallback<$T extends _$jni.JObject> {
   factory $LocationEngineCallback({
     required _$jni.JObjType<$T> T,
     required void Function($T object) onSuccess,
@@ -232,8 +232,8 @@ abstract mixin class $LocationEngineCallback<$T extends _$jni.JObject> {
   bool get onFailure$async => false;
 }
 
-class _$LocationEngineCallback<$T extends _$jni.JObject>
-    implements $LocationEngineCallback<$T> {
+final class _$LocationEngineCallback<$T extends _$jni.JObject>
+    with $LocationEngineCallback<$T> {
   _$LocationEngineCallback({
     required this.T,
     required void Function($T object) onSuccess,

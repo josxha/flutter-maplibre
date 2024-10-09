@@ -139,11 +139,11 @@ class RenderMode_Mode extends _$jni.JObject {
   }
 }
 
-abstract mixin class $RenderMode_Mode {
+abstract base mixin class $RenderMode_Mode {
   factory $RenderMode_Mode() = _$RenderMode_Mode;
 }
 
-class _$RenderMode_Mode implements $RenderMode_Mode {
+final class _$RenderMode_Mode with $RenderMode_Mode {
   _$RenderMode_Mode();
 }
 

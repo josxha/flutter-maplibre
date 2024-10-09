@@ -208,7 +208,7 @@ class PermissionsListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $PermissionsListener {
+abstract base mixin class $PermissionsListener {
   factory $PermissionsListener({
     required void Function(_$jni.JList<_$jni.JString> list) onExplanationNeeded,
     bool onExplanationNeeded$async,
@@ -222,7 +222,7 @@ abstract mixin class $PermissionsListener {
   bool get onPermissionResult$async => false;
 }
 
-class _$PermissionsListener implements $PermissionsListener {
+final class _$PermissionsListener with $PermissionsListener {
   _$PermissionsListener({
     required void Function(_$jni.JList<_$jni.JString> list) onExplanationNeeded,
     this.onExplanationNeeded$async = false,

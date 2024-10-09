@@ -181,7 +181,7 @@ class MapFragment_OnMapViewReadyCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapFragment_OnMapViewReadyCallback {
+abstract base mixin class $MapFragment_OnMapViewReadyCallback {
   factory $MapFragment_OnMapViewReadyCallback({
     required void Function(mapview_.MapView mapView) onMapViewReady,
     bool onMapViewReady$async,
@@ -191,8 +191,8 @@ abstract mixin class $MapFragment_OnMapViewReadyCallback {
   bool get onMapViewReady$async => false;
 }
 
-class _$MapFragment_OnMapViewReadyCallback
-    implements $MapFragment_OnMapViewReadyCallback {
+final class _$MapFragment_OnMapViewReadyCallback
+    with $MapFragment_OnMapViewReadyCallback {
   _$MapFragment_OnMapViewReadyCallback({
     required void Function(mapview_.MapView mapView) onMapViewReady,
     this.onMapViewReady$async = false,

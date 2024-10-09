@@ -1821,7 +1821,7 @@ class Style_OnStyleLoaded extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Style_OnStyleLoaded {
+abstract base mixin class $Style_OnStyleLoaded {
   factory $Style_OnStyleLoaded({
     required void Function(Style style) onStyleLoaded,
     bool onStyleLoaded$async,
@@ -1831,7 +1831,7 @@ abstract mixin class $Style_OnStyleLoaded {
   bool get onStyleLoaded$async => false;
 }
 
-class _$Style_OnStyleLoaded implements $Style_OnStyleLoaded {
+final class _$Style_OnStyleLoaded with $Style_OnStyleLoaded {
   _$Style_OnStyleLoaded({
     required void Function(Style style) onStyleLoaded,
     this.onStyleLoaded$async = false,

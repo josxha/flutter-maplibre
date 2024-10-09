@@ -175,7 +175,7 @@ class OnMapReadyCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnMapReadyCallback {
+abstract base mixin class $OnMapReadyCallback {
   factory $OnMapReadyCallback({
     required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
     bool onMapReady$async,
@@ -185,7 +185,7 @@ abstract mixin class $OnMapReadyCallback {
   bool get onMapReady$async => false;
 }
 
-class _$OnMapReadyCallback implements $OnMapReadyCallback {
+final class _$OnMapReadyCallback with $OnMapReadyCallback {
   _$OnMapReadyCallback({
     required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
     this.onMapReady$async = false,

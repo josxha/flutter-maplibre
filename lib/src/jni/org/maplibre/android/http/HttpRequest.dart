@@ -248,7 +248,7 @@ class HttpRequest extends _$jni.JObject {
   }
 }
 
-abstract mixin class $HttpRequest {
+abstract base mixin class $HttpRequest {
   factory $HttpRequest({
     required void Function(
             httpresponder_.HttpResponder httpResponder,
@@ -275,7 +275,7 @@ abstract mixin class $HttpRequest {
   bool get cancelRequest$async => false;
 }
 
-class _$HttpRequest implements $HttpRequest {
+final class _$HttpRequest with $HttpRequest {
   _$HttpRequest({
     required void Function(
             httpresponder_.HttpResponder httpResponder,

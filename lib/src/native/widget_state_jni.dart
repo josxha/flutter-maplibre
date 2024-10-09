@@ -21,7 +21,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
-  late AnnotationManager _annotationManager;
+  AnnotationManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -81,7 +81,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _hostApi.updateOptions(getOptions());
-    _annotationManager.updateLayers(widget.layers);
+    _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -123,18 +123,24 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
-    final lngLat =
-        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
-    return lngLat.toPosition();
+    final jniProjection = _jniProjection;
+    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
+      return jniProjection.fromScreenLocation(screenLocation.toPointF());
+    });
+    final position = jniLatLng.toPosition();
+    jniLatLng.release();
+    return position;
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenLocation = await _hostApi.toScreenLocation(
-      lngLat.lng.toDouble(),
-      lngLat.lat.toDouble(),
-    );
-    return Offset(screenLocation.x, screenLocation.y);
+    final jniProjection = _jniProjection;
+    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
+      return jniProjection.toScreenLocation(lngLat.toLatLng());
+    });
+    final position = jniPoint.toOffset();
+    jniPoint.release();
+    return position;
   }
 
   @override
@@ -143,13 +149,36 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
-  }) =>
-      _hostApi.moveCamera(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+  }) async {
+    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    if (center != null) cameraPositionBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPositionBuilder.zoom(zoom);
+    if (pitch != null) cameraPositionBuilder.tilt(pitch);
+    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+
+    final cameraPosition = cameraPositionBuilder.build();
+    cameraPositionBuilder.release();
+    final cameraUpdate =
+        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.moveCamera$1(
+        cameraUpdate,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
       );
+      return completer.future;
+    });
+    cameraUpdate.release();
+  }
 
   @override
   Future<void> animateCamera({
@@ -161,13 +190,35 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    return _hostApi.animateCamera(
-      center: center?.toLngLat(),
-      zoom: zoom,
-      bearing: bearing,
-      pitch: pitch,
-      durationMs: nativeDuration.inMilliseconds,
-    );
+    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    if (center != null) cameraPositionBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPositionBuilder.zoom(zoom);
+    if (pitch != null) cameraPositionBuilder.tilt(pitch);
+    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+
+    final cameraPosition = cameraPositionBuilder.build();
+    cameraPositionBuilder.release();
+    final cameraUpdate =
+        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.animateCamera$3(
+        cameraUpdate,
+        nativeDuration.inMilliseconds,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
+      );
+      return completer.future;
+    });
+    cameraUpdate.release();
   }
 
   @override
@@ -182,166 +233,153 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) =>
-      _hostApi.fitBounds(
-        bounds: bounds.toLngLatBounds(),
-        bearing: bearing,
-        pitch: pitch,
-        durationMs: nativeDuration.inMilliseconds,
-        offset: offset.toOffset(),
-        padding: padding.toPadding(),
+  }) async {
+    final latLngBounds = jni.LatLngBounds.from(
+      bounds.latitudeNorth,
+      bounds.longitudeEast,
+      bounds.latitudeSouth,
+      bounds.longitudeWest,
+    );
+    final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
+      latLngBounds,
+      bearing ?? -1.0,
+      pitch ?? -1.0,
+      padding.left.toInt(),
+      padding.top.toInt(),
+      padding.right.toInt(),
+      padding.bottom.toInt(),
+    );
+    latLngBounds.release();
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.animateCamera$3(
+        cameraUpdate,
+        nativeDuration.inMilliseconds,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
       );
+      return completer.future;
+    });
+    cameraUpdate.release();
+  }
 
   @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
-    // TODO: evaluate if jni would improve this function
-    await switch (layer) {
-      FillLayer() => _hostApi.addFillLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      CircleLayer() => _hostApi.addCircleLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      BackgroundLayer() => _hostApi.addBackgroundLayer(
-          id: layer.id,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapLayer() => _hostApi.addHeatmapLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HillshadeLayer() => _hostApi.addHillshadeLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      LineLayer() => _hostApi.addLineLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      RasterLayer() => _hostApi.addRasterLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      SymbolLayer() => _hostApi.addSymbolLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-    };
+    final jni.Layer jniLayer;
+    final jniId = layer.id.toJString();
+    switch (layer) {
+      case FillLayer():
+        jniLayer = jni.FillLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case CircleLayer():
+        jniLayer = jni.CircleLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case BackgroundLayer():
+        jniLayer = jni.BackgroundLayer(jniId);
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case FillExtrusionLayer():
+        jniLayer = jni.FillExtrusionLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case HeatmapLayer():
+        jniLayer = jni.HeatmapLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case HillshadeLayer():
+        jniLayer = jni.HillshadeLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case LineLayer():
+        jniLayer = jni.LineLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case RasterLayer():
+        jniLayer = jni.RasterLayer(jniId, layer.sourceId.toJString());
+      // TODO doesn't use: layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case SymbolLayer():
+        jniLayer = jni.SymbolLayer(jniId, layer.sourceId.toJString());
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+    }
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      if (belowLayerId != null) {
+        jniStyle.addLayerBelow(jniLayer, belowLayerId.toJString());
+      } else {
+        jniStyle.addLayer(jniLayer);
+      }
+    });
   }
 
   @override
   Future<void> addSource(Source source) async {
-    // TODO: evaluate if jni would improve this function
-    await switch (source) {
-      GeoJsonSource() =>
-        _hostApi.addGeoJsonSource(id: source.id, data: source.data),
-      RasterDemSource() => switch (source.encoding) {
-          final RasterDemCustomEncoding encoding => _hostApi.addRasterDemSource(
-              id: source.id,
-              attribution: source.attribution,
-              bounds: source.bounds,
-              volatile: source.volatile,
-              url: source.url,
-              tiles: source.tiles,
-              minZoom: source.minZoom,
-              maxZoom: source.maxZoom,
-              tileSize: source.tileSize,
-              encoding: pigeon.RasterDemEncoding.custom,
-              greenFactor: encoding.greenFactor,
-              blueFactor: encoding.blueFactor,
-              redFactor: encoding.redFactor,
-              baseShift: encoding.baseShift,
-            ),
-          _ => _hostApi.addRasterDemSource(
-              id: source.id,
-              attribution: source.attribution,
-              bounds: source.bounds,
-              volatile: source.volatile,
-              url: source.url,
-              tiles: source.tiles,
-              minZoom: source.minZoom,
-              maxZoom: source.maxZoom,
-              tileSize: source.tileSize,
-              encoding: switch (source.encoding) {
-                RasterDemTerrariumEncoding() =>
-                  pigeon.RasterDemEncoding.terrarium,
-                RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
-                RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
-              },
-            ),
-        },
-      RasterSource() => _hostApi.addRasterSource(
-          id: source.id,
-          bounds: source.bounds,
-          url: source.url,
-          tiles: source.tiles,
-          minZoom: source.minZoom,
-          maxZoom: source.maxZoom,
-          attribution: source.attribution,
-          tileSize: source.tileSize,
-          volatile: source.volatile,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-        ),
-      VectorSource() => _hostApi.addVectorSource(
-          id: source.id,
-          bounds: source.bounds,
-          attribution: source.attribution,
-          maxZoom: source.maxZoom,
-          minZoom: source.minZoom,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-          sourceLayer: source.sourceLayer,
-          tiles: source.tiles,
-          url: source.url,
-          volatile: source.volatile,
-        ),
-      ImageSource() => _hostApi.addImageSource(
-          id: source.id,
-          url: source.url,
-          coordinates: source.coordinates
-              .map((e) => e.toLngLat())
-              .toList(growable: false),
-        ),
-      VideoSource() =>
-        throw UnimplementedError('Video source is only supported on web.'),
-    };
+    final jniStyle = _jniStyle;
+    final jni.Source jniSource;
+    final jniId = source.id.toJString();
+    switch (source) {
+      case GeoJsonSource():
+        final jniOptions = jni.GeoJsonOptions();
+        final jniData = source.data.toJString();
+        if (source.data.startsWith('{')) {
+          jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
+        } else {
+          final jniUri = jni.URI.create(jniData);
+          jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+          jniUri.release();
+        }
+        jniOptions.release();
+      case RasterDemSource():
+        jniSource = jni.RasterDemSource.new$4(
+          jniId,
+          source.url!.toJString(),
+          source.tileSize,
+        );
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
+      case RasterSource():
+        if (source.url case final String url) {
+          jniSource =
+              jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+        } else {
+          // TODO improve this
+          final tilesArray = JArray(JString.type, source.tiles!.length);
+          for (var i = 0; i < source.tiles!.length; i++) {
+            tilesArray[i] = source.tiles![i].toJString();
+          }
+          final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
+            ..setMaxZoom(source.maxZoom)
+            ..setMinZoom(source.minZoom);
+          jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
+          tilesArray.release();
+          tileSet.release();
+        }
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
+      case VectorSource():
+        jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
+      case ImageSource():
+        final jniQuad = jni.LatLngQuad(
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
+        );
+        final jniUri = jni.URI(source.url.toJString());
+        jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
+        jniUri.release();
+        jniQuad.release();
+      case VideoSource():
+        throw UnimplementedError('Video source is only supported on web.');
+    }
+    await runOnPlatformThread(() {
+      jniStyle.addSource(jniSource);
+    });
+    jniSource.release();
   }
 
   @override
@@ -404,7 +442,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async {
+  MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
     final camera = MapCamera(
       center: Position(
@@ -422,7 +460,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _hostApi.getMetersPerPixelAtLatitude(latitude);
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
@@ -445,24 +483,45 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
+  Future<void> removeLayer(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeLayer(id.toJString());
+    });
+  }
 
   @override
-  Future<void> removeSource(String id) => _hostApi.removeSource(id);
+  Future<void> removeSource(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeSource(id.toJString());
+    });
+  }
 
   @override
   Future<void> addImage(String id, Uint8List bytes) =>
       _hostApi.addImage(id, bytes);
 
   @override
-  Future<void> removeImage(String id) => _hostApi.removeImage(id);
+  Future<void> removeImage(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeImage(id.toJString());
+    });
+  }
 
   @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
-  }) =>
-      _hostApi.updateGeoJsonSource(id: id, data: data);
+  }) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      final source =
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
+      source.setGeoJson$3(data.toJString());
+    });
+  }
 
   @override
   Future<void> enableLocation({

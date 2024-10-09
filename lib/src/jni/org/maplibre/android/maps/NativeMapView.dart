@@ -170,7 +170,7 @@ class NativeMapView_ViewCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $NativeMapView_ViewCallback {
+abstract base mixin class $NativeMapView_ViewCallback {
   factory $NativeMapView_ViewCallback({
     required _$jni.JObject Function() getViewContent,
   }) = _$NativeMapView_ViewCallback;
@@ -178,7 +178,7 @@ abstract mixin class $NativeMapView_ViewCallback {
   _$jni.JObject getViewContent();
 }
 
-class _$NativeMapView_ViewCallback implements $NativeMapView_ViewCallback {
+final class _$NativeMapView_ViewCallback with $NativeMapView_ViewCallback {
   _$NativeMapView_ViewCallback({
     required _$jni.JObject Function() getViewContent,
   }) : _getViewContent = getViewContent;

@@ -168,7 +168,7 @@ class AnimatorUtils_OnAnimationEndListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $AnimatorUtils_OnAnimationEndListener {
+abstract base mixin class $AnimatorUtils_OnAnimationEndListener {
   factory $AnimatorUtils_OnAnimationEndListener({
     required void Function() onAnimationEnd,
     bool onAnimationEnd$async,
@@ -178,8 +178,8 @@ abstract mixin class $AnimatorUtils_OnAnimationEndListener {
   bool get onAnimationEnd$async => false;
 }
 
-class _$AnimatorUtils_OnAnimationEndListener
-    implements $AnimatorUtils_OnAnimationEndListener {
+final class _$AnimatorUtils_OnAnimationEndListener
+    with $AnimatorUtils_OnAnimationEndListener {
   _$AnimatorUtils_OnAnimationEndListener({
     required void Function() onAnimationEnd,
     this.onAnimationEnd$async = false,

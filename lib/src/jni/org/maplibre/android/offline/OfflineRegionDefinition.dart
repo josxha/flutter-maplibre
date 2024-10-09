@@ -344,7 +344,7 @@ class OfflineRegionDefinition extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegionDefinition {
+abstract base mixin class $OfflineRegionDefinition {
   factory $OfflineRegionDefinition({
     required latlngbounds_.LatLngBounds Function() getBounds,
     required _$jni.JString Function() getStyleURL,
@@ -364,7 +364,7 @@ abstract mixin class $OfflineRegionDefinition {
   _$jni.JString getType();
 }
 
-class _$OfflineRegionDefinition implements $OfflineRegionDefinition {
+final class _$OfflineRegionDefinition with $OfflineRegionDefinition {
   _$OfflineRegionDefinition({
     required latlngbounds_.LatLngBounds Function() getBounds,
     required _$jni.JString Function() getStyleURL,

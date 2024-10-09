@@ -172,7 +172,7 @@ class OnLocationStaleListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnLocationStaleListener {
+abstract base mixin class $OnLocationStaleListener {
   factory $OnLocationStaleListener({
     required void Function(bool z) onStaleStateChange,
     bool onStaleStateChange$async,
@@ -182,7 +182,7 @@ abstract mixin class $OnLocationStaleListener {
   bool get onStaleStateChange$async => false;
 }
 
-class _$OnLocationStaleListener implements $OnLocationStaleListener {
+final class _$OnLocationStaleListener with $OnLocationStaleListener {
   _$OnLocationStaleListener({
     required void Function(bool z) onStaleStateChange,
     this.onStaleStateChange$async = false,

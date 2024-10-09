@@ -174,7 +174,7 @@ class MapLibreSurfaceView_OnSurfaceViewDetachedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapLibreSurfaceView_OnSurfaceViewDetachedListener {
+abstract base mixin class $MapLibreSurfaceView_OnSurfaceViewDetachedListener {
   factory $MapLibreSurfaceView_OnSurfaceViewDetachedListener({
     required void Function() onSurfaceViewDetached,
     bool onSurfaceViewDetached$async,
@@ -184,8 +184,8 @@ abstract mixin class $MapLibreSurfaceView_OnSurfaceViewDetachedListener {
   bool get onSurfaceViewDetached$async => false;
 }
 
-class _$MapLibreSurfaceView_OnSurfaceViewDetachedListener
-    implements $MapLibreSurfaceView_OnSurfaceViewDetachedListener {
+final class _$MapLibreSurfaceView_OnSurfaceViewDetachedListener
+    with $MapLibreSurfaceView_OnSurfaceViewDetachedListener {
   _$MapLibreSurfaceView_OnSurfaceViewDetachedListener({
     required void Function() onSurfaceViewDetached,
     this.onSurfaceViewDetached$async = false,

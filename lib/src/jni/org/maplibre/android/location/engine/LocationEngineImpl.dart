@@ -408,7 +408,7 @@ class LocationEngineImpl<$T extends _$jni.JObject> extends _$jni.JObject {
   }
 }
 
-abstract mixin class $LocationEngineImpl<$T extends _$jni.JObject> {
+abstract base mixin class $LocationEngineImpl<$T extends _$jni.JObject> {
   factory $LocationEngineImpl({
     required _$jni.JObjType<$T> T,
     required $T Function(
@@ -465,8 +465,8 @@ abstract mixin class $LocationEngineImpl<$T extends _$jni.JObject> {
   bool get removeLocationUpdates$1$async => false;
 }
 
-class _$LocationEngineImpl<$T extends _$jni.JObject>
-    implements $LocationEngineImpl<$T> {
+final class _$LocationEngineImpl<$T extends _$jni.JObject>
+    with $LocationEngineImpl<$T> {
   _$LocationEngineImpl({
     required this.T,
     required $T Function(

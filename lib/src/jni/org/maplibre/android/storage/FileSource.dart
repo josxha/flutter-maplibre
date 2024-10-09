@@ -181,7 +181,7 @@ class FileSource_ResourceTransformCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $FileSource_ResourceTransformCallback {
+abstract base mixin class $FileSource_ResourceTransformCallback {
   factory $FileSource_ResourceTransformCallback({
     required _$jni.JString Function(int i, _$jni.JString string) onURL,
   }) = _$FileSource_ResourceTransformCallback;
@@ -189,8 +189,8 @@ abstract mixin class $FileSource_ResourceTransformCallback {
   _$jni.JString onURL(int i, _$jni.JString string);
 }
 
-class _$FileSource_ResourceTransformCallback
-    implements $FileSource_ResourceTransformCallback {
+final class _$FileSource_ResourceTransformCallback
+    with $FileSource_ResourceTransformCallback {
   _$FileSource_ResourceTransformCallback({
     required _$jni.JString Function(int i, _$jni.JString string) onURL,
   }) : _onURL = onURL;
@@ -391,7 +391,7 @@ class FileSource_ResourcesCachePathChangeCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $FileSource_ResourcesCachePathChangeCallback {
+abstract base mixin class $FileSource_ResourcesCachePathChangeCallback {
   factory $FileSource_ResourcesCachePathChangeCallback({
     required void Function(_$jni.JString string) onSuccess,
     bool onSuccess$async,
@@ -405,8 +405,8 @@ abstract mixin class $FileSource_ResourcesCachePathChangeCallback {
   bool get onError$async => false;
 }
 
-class _$FileSource_ResourcesCachePathChangeCallback
-    implements $FileSource_ResourcesCachePathChangeCallback {
+final class _$FileSource_ResourcesCachePathChangeCallback
+    with $FileSource_ResourcesCachePathChangeCallback {
   _$FileSource_ResourcesCachePathChangeCallback({
     required void Function(_$jni.JString string) onSuccess,
     this.onSuccess$async = false,

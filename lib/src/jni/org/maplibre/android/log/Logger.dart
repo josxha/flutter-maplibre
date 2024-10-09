@@ -141,11 +141,11 @@ class Logger_LogLevel extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Logger_LogLevel {
+abstract base mixin class $Logger_LogLevel {
   factory $Logger_LogLevel() = _$Logger_LogLevel;
 }
 
-class _$Logger_LogLevel implements $Logger_LogLevel {
+final class _$Logger_LogLevel with $Logger_LogLevel {
   _$Logger_LogLevel();
 }
 

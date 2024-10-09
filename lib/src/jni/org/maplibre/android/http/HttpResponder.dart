@@ -254,7 +254,7 @@ class HttpResponder extends _$jni.JObject {
   }
 }
 
-abstract mixin class $HttpResponder {
+abstract base mixin class $HttpResponder {
   factory $HttpResponder({
     required void Function(
             int i,
@@ -285,7 +285,7 @@ abstract mixin class $HttpResponder {
   bool get handleFailure$async => false;
 }
 
-class _$HttpResponder implements $HttpResponder {
+final class _$HttpResponder with $HttpResponder {
   _$HttpResponder({
     required void Function(
             int i,

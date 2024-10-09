@@ -217,12 +217,12 @@ class OfflineRegionError_ErrorReason extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineRegionError_ErrorReason {
+abstract base mixin class $OfflineRegionError_ErrorReason {
   factory $OfflineRegionError_ErrorReason() = _$OfflineRegionError_ErrorReason;
 }
 
-class _$OfflineRegionError_ErrorReason
-    implements $OfflineRegionError_ErrorReason {
+final class _$OfflineRegionError_ErrorReason
+    with $OfflineRegionError_ErrorReason {
   _$OfflineRegionError_ErrorReason();
 }
 

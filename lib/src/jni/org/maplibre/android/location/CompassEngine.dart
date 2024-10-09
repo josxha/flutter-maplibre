@@ -272,7 +272,7 @@ class CompassEngine extends _$jni.JObject {
   }
 }
 
-abstract mixin class $CompassEngine {
+abstract base mixin class $CompassEngine {
   factory $CompassEngine({
     required void Function(compasslistener_.CompassListener compassListener)
         addCompassListener,
@@ -292,7 +292,7 @@ abstract mixin class $CompassEngine {
   int getLastAccuracySensorStatus();
 }
 
-class _$CompassEngine implements $CompassEngine {
+final class _$CompassEngine with $CompassEngine {
   _$CompassEngine({
     required void Function(compasslistener_.CompassListener compassListener)
         addCompassListener,
