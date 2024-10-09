@@ -6,7 +6,7 @@ description: 'Add Polylines to the map.'
 
 # Polyline Annotations
 
-Polylines are a simple way to display data on the map.
+Polylines are way to show paths or similar on the map.
 
 <a href="/demo/#/annotations/polyline">
 <img src="/img/annotations/annotations-polyline.jpg" 

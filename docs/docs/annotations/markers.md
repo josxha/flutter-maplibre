@@ -6,7 +6,7 @@ description: 'Add Markers to the map.'
 
 # Marker Annotations
 
-Markers are a simple way to display data on the map.
+Markers are a way to show data on the map with labels and/or icons.
 
 <a href="/demo/#/annotations/marker">
 <img src="/img/annotations/annotations-markers.jpg" 

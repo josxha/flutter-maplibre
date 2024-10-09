@@ -6,11 +6,11 @@ description: 'Add Circles to the map.'
 
 # Circle Annotations
 
-Circles are a simple way to display data on the map.
+Circles are a simple way to show data on the map.
 
 <a href="/demo/#/annotations/circle">
 <img src="/img/annotations/annotations-circles.jpg" 
-     alt="Circles" height="300px"/>
+     alt="Circles" />
 </a>
 
 ## Basic Usage

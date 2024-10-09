@@ -6,7 +6,7 @@ description: 'Add Polygons to the map.'
 
 # Polygon Annotations
 
-Polygons are a simple way to display data on the map.
+Polygons are way to highlight an area on the map.
 
 <a href="/demo/#/annotations/polygon">
 <img src="/img/annotations/annotations-polygon.jpg" 
