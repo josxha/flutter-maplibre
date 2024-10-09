@@ -6,8 +6,8 @@ description: 'Paint and Layout properties can be used to style your layers and c
 
 # Paint & Layout Properties
 
-While the [AnnotationLayers](../annotations) can only use simple values for its
-annotations, [Layers](../layers) can use the powerful paint and layout
+While the [AnnotationLayers](../category/layers) can only use simple values for its
+annotations, [Layers](../category/layers) can use the powerful paint and layout
 properties. See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers)
 for all available properties for the different layers.
