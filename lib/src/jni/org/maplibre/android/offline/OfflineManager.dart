@@ -314,7 +314,7 @@ class OfflineManager_CreateOfflineRegionCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineManager_CreateOfflineRegionCallback {
+abstract base mixin class $OfflineManager_CreateOfflineRegionCallback {
   factory $OfflineManager_CreateOfflineRegionCallback({
     required void Function(offlineregion_.OfflineRegion offlineRegion) onCreate,
     bool onCreate$async,
@@ -328,8 +328,8 @@ abstract mixin class $OfflineManager_CreateOfflineRegionCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineManager_CreateOfflineRegionCallback
-    implements $OfflineManager_CreateOfflineRegionCallback {
+final class _$OfflineManager_CreateOfflineRegionCallback
+    with $OfflineManager_CreateOfflineRegionCallback {
   _$OfflineManager_CreateOfflineRegionCallback({
     required void Function(offlineregion_.OfflineRegion offlineRegion) onCreate,
     this.onCreate$async = false,
@@ -537,7 +537,7 @@ class OfflineManager_FileSourceCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineManager_FileSourceCallback {
+abstract base mixin class $OfflineManager_FileSourceCallback {
   factory $OfflineManager_FileSourceCallback({
     required void Function() onSuccess,
     bool onSuccess$async,
@@ -551,8 +551,8 @@ abstract mixin class $OfflineManager_FileSourceCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineManager_FileSourceCallback
-    implements $OfflineManager_FileSourceCallback {
+final class _$OfflineManager_FileSourceCallback
+    with $OfflineManager_FileSourceCallback {
   _$OfflineManager_FileSourceCallback({
     required void Function() onSuccess,
     this.onSuccess$async = false,
@@ -794,7 +794,7 @@ class OfflineManager_GetOfflineRegionCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineManager_GetOfflineRegionCallback {
+abstract base mixin class $OfflineManager_GetOfflineRegionCallback {
   factory $OfflineManager_GetOfflineRegionCallback({
     required void Function(offlineregion_.OfflineRegion offlineRegion) onRegion,
     bool onRegion$async,
@@ -812,8 +812,8 @@ abstract mixin class $OfflineManager_GetOfflineRegionCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineManager_GetOfflineRegionCallback
-    implements $OfflineManager_GetOfflineRegionCallback {
+final class _$OfflineManager_GetOfflineRegionCallback
+    with $OfflineManager_GetOfflineRegionCallback {
   _$OfflineManager_GetOfflineRegionCallback({
     required void Function(offlineregion_.OfflineRegion offlineRegion) onRegion,
     this.onRegion$async = false,
@@ -1037,7 +1037,7 @@ class OfflineManager_ListOfflineRegionsCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineManager_ListOfflineRegionsCallback {
+abstract base mixin class $OfflineManager_ListOfflineRegionsCallback {
   factory $OfflineManager_ListOfflineRegionsCallback({
     required void Function(
             _$jni.JArray<offlineregion_.OfflineRegion> offlineRegions)
@@ -1053,8 +1053,8 @@ abstract mixin class $OfflineManager_ListOfflineRegionsCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineManager_ListOfflineRegionsCallback
-    implements $OfflineManager_ListOfflineRegionsCallback {
+final class _$OfflineManager_ListOfflineRegionsCallback
+    with $OfflineManager_ListOfflineRegionsCallback {
   _$OfflineManager_ListOfflineRegionsCallback({
     required void Function(
             _$jni.JArray<offlineregion_.OfflineRegion> offlineRegions)
@@ -1273,7 +1273,7 @@ class OfflineManager_MergeOfflineRegionsCallback extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OfflineManager_MergeOfflineRegionsCallback {
+abstract base mixin class $OfflineManager_MergeOfflineRegionsCallback {
   factory $OfflineManager_MergeOfflineRegionsCallback({
     required void Function(
             _$jni.JArray<offlineregion_.OfflineRegion> offlineRegions)
@@ -1289,8 +1289,8 @@ abstract mixin class $OfflineManager_MergeOfflineRegionsCallback {
   bool get onError$async => false;
 }
 
-class _$OfflineManager_MergeOfflineRegionsCallback
-    implements $OfflineManager_MergeOfflineRegionsCallback {
+final class _$OfflineManager_MergeOfflineRegionsCallback
+    with $OfflineManager_MergeOfflineRegionsCallback {
   _$OfflineManager_MergeOfflineRegionsCallback({
     required void Function(
             _$jni.JArray<offlineregion_.OfflineRegion> offlineRegions)

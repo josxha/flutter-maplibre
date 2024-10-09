@@ -202,7 +202,7 @@ class OnCameraTrackingChangedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnCameraTrackingChangedListener {
+abstract base mixin class $OnCameraTrackingChangedListener {
   factory $OnCameraTrackingChangedListener({
     required void Function() onCameraTrackingDismissed,
     bool onCameraTrackingDismissed$async,
@@ -216,8 +216,8 @@ abstract mixin class $OnCameraTrackingChangedListener {
   bool get onCameraTrackingChanged$async => false;
 }
 
-class _$OnCameraTrackingChangedListener
-    implements $OnCameraTrackingChangedListener {
+final class _$OnCameraTrackingChangedListener
+    with $OnCameraTrackingChangedListener {
   _$OnCameraTrackingChangedListener({
     required void Function() onCameraTrackingDismissed,
     this.onCameraTrackingDismissed$async = false,

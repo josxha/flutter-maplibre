@@ -139,11 +139,11 @@ class CameraMode_Mode extends _$jni.JObject {
   }
 }
 
-abstract mixin class $CameraMode_Mode {
+abstract base mixin class $CameraMode_Mode {
   factory $CameraMode_Mode() = _$CameraMode_Mode;
 }
 
-class _$CameraMode_Mode implements $CameraMode_Mode {
+final class _$CameraMode_Mode with $CameraMode_Mode {
   _$CameraMode_Mode();
 }
 

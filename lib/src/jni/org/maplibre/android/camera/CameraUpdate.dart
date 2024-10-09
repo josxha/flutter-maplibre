@@ -181,7 +181,7 @@ class CameraUpdate extends _$jni.JObject {
   }
 }
 
-abstract mixin class $CameraUpdate {
+abstract base mixin class $CameraUpdate {
   factory $CameraUpdate({
     required cameraposition_.CameraPosition Function(
             maplibremap_.MapLibreMap mapLibreMap)
@@ -192,7 +192,7 @@ abstract mixin class $CameraUpdate {
       maplibremap_.MapLibreMap mapLibreMap);
 }
 
-class _$CameraUpdate implements $CameraUpdate {
+final class _$CameraUpdate with $CameraUpdate {
   _$CameraUpdate({
     required cameraposition_.CameraPosition Function(
             maplibremap_.MapLibreMap mapLibreMap)
