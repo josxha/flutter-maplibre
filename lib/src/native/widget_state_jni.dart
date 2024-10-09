@@ -555,8 +555,14 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
-  }) =>
-      _hostApi.updateGeoJsonSource(id: id, data: data);
+  }) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      final source =
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
+      source.setGeoJson$3(data.toJString());
+    });
+  }
 
   @override
   Future<void> enableLocation({
