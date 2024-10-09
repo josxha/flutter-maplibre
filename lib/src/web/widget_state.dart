@@ -197,9 +197,10 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   Widget build(BuildContext context) => Stack(
         children: [
           HtmlElementView(viewType: _viewName),
-          ...widget.layers.whereType<MarkerAnnotationLayer<Widget>>().map(
-                (layer) => WidgetToPng(layer, this, index),
-              ),
+          ...widget.layers
+              .whereType<MarkerAnnotationLayer<Widget>>()
+              .indexed
+              .map((e) => WidgetToPng(e.$2, this, e.$1)),
         ],
       );
 
