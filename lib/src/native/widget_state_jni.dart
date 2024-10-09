@@ -342,13 +342,13 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<void> addSource(Source source) async {
+    final jniStyle = _jniStyle;
+    final jni.Source jniSource;
+    final jniId = source.id.toJString();
     switch (source) {
       case GeoJsonSource():
-        final jniStyle = _jniStyle;
         final jniOptions = jni.GeoJsonOptions();
-        final jniId = source.id.toJString();
         final jniData = source.data.toJString();
-        final jni.GeoJsonSource jniSource;
         if (source.data.startsWith('{')) {
           jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
         } else {
@@ -356,92 +356,56 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
           jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
           jniUri.release();
         }
-        await runOnPlatformThread(() {
-          jniStyle.addSource(jniSource);
-        });
         jniOptions.release();
-        jniSource.release();
       case RasterDemSource():
-        switch (source.encoding) {
-          case final RasterDemCustomEncoding encoding:
-            await _hostApi.addRasterDemSource(
-              id: source.id,
-              attribution: source.attribution,
-              bounds: source.bounds,
-              volatile: source.volatile,
-              url: source.url,
-              tiles: source.tiles,
-              minZoom: source.minZoom,
-              maxZoom: source.maxZoom,
-              tileSize: source.tileSize,
-              encoding: pigeon.RasterDemEncoding.custom,
-              greenFactor: encoding.greenFactor,
-              blueFactor: encoding.blueFactor,
-              redFactor: encoding.redFactor,
-              baseShift: encoding.baseShift,
-            );
-          default:
-            await _hostApi.addRasterDemSource(
-              id: source.id,
-              attribution: source.attribution,
-              bounds: source.bounds,
-              volatile: source.volatile,
-              url: source.url,
-              tiles: source.tiles,
-              minZoom: source.minZoom,
-              maxZoom: source.maxZoom,
-              tileSize: source.tileSize,
-              encoding: switch (source.encoding) {
-                RasterDemTerrariumEncoding() =>
-                  pigeon.RasterDemEncoding.terrarium,
-                RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
-                RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
-              },
-            );
-        }
+        jniSource = jni.RasterDemSource.new$4(
+          jniId,
+          source.url!.toJString(),
+          source.tileSize,
+        );
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
       case RasterSource():
-        await _hostApi.addRasterSource(
-          id: source.id,
-          bounds: source.bounds,
-          url: source.url,
-          tiles: source.tiles,
-          minZoom: source.minZoom,
-          maxZoom: source.maxZoom,
-          attribution: source.attribution,
-          tileSize: source.tileSize,
-          volatile: source.volatile,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-        );
+        if (source.url case final String url) {
+          jniSource =
+              jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+        } else {
+          // TODO improve this
+          final tilesArray = JArray(JString.type, source.tiles!.length);
+          for (var i = 0; i < source.tiles!.length; i++) {
+            tilesArray[i] = source.tiles![i].toJString();
+          }
+          final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
+            ..setMaxZoom(source.maxZoom)
+            ..setMinZoom(source.minZoom);
+          jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
+          tilesArray.release();
+          tileSet.release();
+        }
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
       case VectorSource():
-        await _hostApi.addVectorSource(
-          id: source.id,
-          bounds: source.bounds,
-          attribution: source.attribution,
-          maxZoom: source.maxZoom,
-          minZoom: source.minZoom,
-          scheme: switch (source.scheme) {
-            TileScheme.xyz => pigeon.TileScheme.xyz,
-            TileScheme.tms => pigeon.TileScheme.tms,
-          },
-          sourceLayer: source.sourceLayer,
-          tiles: source.tiles,
-          url: source.url,
-          volatile: source.volatile,
-        );
+        jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
+        // TODO apply other properties
+        jniSource.setVolatile(source.volatile.toJBoolean());
       case ImageSource():
-        await _hostApi.addImageSource(
-          id: source.id,
-          url: source.url,
-          coordinates: source.coordinates
-              .map((e) => e.toLngLat())
-              .toList(growable: false),
+        final jniQuad = jni.LatLngQuad(
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
+          source.coordinates[0].toLatLng(),
         );
+        final jniUri = jni.URI(source.url.toJString());
+        jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
+        jniUri.release();
+        jniQuad.release();
       case VideoSource():
         throw UnimplementedError('Video source is only supported on web.');
     }
+    await runOnPlatformThread(() {
+      jniStyle.addSource(jniSource);
+    });
+    jniSource.release();
   }
 
   @override

@@ -424,53 +424,6 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun addImageSource(
-        id: String,
-        url: String,
-        coordinates: List<LngLat>,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val quad =
-            LatLngQuad(
-                LatLng(coordinates[0].lat, coordinates[0].lng),
-                LatLng(coordinates[0].lat, coordinates[0].lng),
-                LatLng(coordinates[0].lat, coordinates[0].lng),
-                LatLng(coordinates[0].lat, coordinates[0].lng),
-            )
-        val source = ImageSource(id, quad, URI(url))
-        mapLibreMap.style?.addSource(source)
-        callback(Result.success(Unit))
-    }
-
-    override fun addRasterSource(
-        id: String,
-        url: String?,
-        tiles: List<String>?,
-        bounds: List<Double>,
-        minZoom: Double,
-        maxZoom: Double,
-        tileSize: Long,
-        scheme: TileScheme,
-        attribution: String?,
-        volatile: Boolean,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val source =
-            if (url == null) {
-                // TODO improve this
-                val tileSet = TileSet("{}", tiles!!.first())
-                tileSet.maxZoom = maxZoom.toFloat()
-                tileSet.minZoom = minZoom.toFloat()
-                RasterSource(id, tileSet, tileSize.toInt())
-            } else {
-                RasterSource(id, url, tileSize.toInt())
-            }
-        source.isVolatile = volatile
-        // TODO apply other properties
-        mapLibreMap.style?.addSource(source)
-        callback(Result.success(Unit))
-    }
-
     override fun addRasterDemSource(
         id: String,
         url: String?,
@@ -489,26 +442,6 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val source = RasterDemSource(id, url, tileSize.toInt())
-        source.isVolatile = volatile
-        // TODO apply other properties
-        mapLibreMap.style?.addSource(source)
-        callback(Result.success(Unit))
-    }
-
-    override fun addVectorSource(
-        id: String,
-        url: String?,
-        tiles: List<String>?,
-        bounds: List<Double>,
-        scheme: TileScheme,
-        minZoom: Double,
-        maxZoom: Double,
-        attribution: String?,
-        volatile: Boolean,
-        sourceLayer: String?,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val source = VectorSource(id, url)
         source.isVolatile = volatile
         // TODO apply other properties
         mapLibreMap.style?.addSource(source)

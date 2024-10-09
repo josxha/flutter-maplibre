@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import 'URL.dart' as url_;
+
 /// from: `java.net.URI`
 class URI extends _$jni.JObject {
   @_$jni.internal
@@ -446,9 +448,9 @@ class URI extends _$jni.JObject {
 
   /// from: `public java.net.URL toURL()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject toURL() {
+  url_.URL toURL() {
     return _toURL(reference.pointer, _id_toURL as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+        .object(const url_.$URL$Type());
   }
 
   static final _id_getScheme = _class.instanceMethodId(

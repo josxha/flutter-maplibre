@@ -51,6 +51,8 @@ import 'package:jni/jni.dart' as _$jni;
 
 import '../../../../../java/net/URI.dart' as uri_;
 
+import '../../../../../java/net/URL.dart' as url_;
+
 import 'GeoJsonOptions.dart' as geojsonoptions_;
 
 import 'Source.dart' as source_;
@@ -255,7 +257,7 @@ class GeoJsonSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory GeoJsonSource.new$5(
     _$jni.JString string,
-    _$jni.JObject uRL,
+    url_.URL uRL,
   ) {
     return GeoJsonSource.fromReference(_new$5(
             _class.reference.pointer,
@@ -292,7 +294,7 @@ class GeoJsonSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory GeoJsonSource.new$6(
     _$jni.JString string,
-    _$jni.JObject uRL,
+    url_.URL uRL,
     geojsonoptions_.GeoJsonOptions geoJsonOptions,
   ) {
     return GeoJsonSource.fromReference(_new$6(
@@ -718,7 +720,7 @@ class GeoJsonSource extends source_.Source {
 
   /// from: `public final void setUrl(java.net.URL uRL)`
   void setUrl(
-    _$jni.JObject uRL,
+    url_.URL uRL,
   ) {
     _setUrl(reference.pointer, _id_setUrl as _$jni.JMethodIDPtr,
             uRL.reference.pointer)

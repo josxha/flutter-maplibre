@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../../java/net/URL.dart' as url_;
+
 import 'Source.dart' as source_;
 
 import 'TileSet.dart' as tileset_;
@@ -119,7 +121,7 @@ class VectorSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory VectorSource.new$1(
     _$jni.JString string,
-    _$jni.JObject uRL,
+    url_.URL uRL,
   ) {
     return VectorSource.fromReference(_new$1(
             _class.reference.pointer,
