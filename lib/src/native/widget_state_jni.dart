@@ -522,7 +522,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _hostApi.getMetersPerPixelAtLatitude(latitude);
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {

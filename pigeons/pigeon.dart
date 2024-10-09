@@ -185,10 +185,6 @@ abstract interface class MapLibreHostApi {
     required String? sourceLayer,
   });
 
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
-  double getMetersPerPixelAtLatitude(double latitude);
-
   /// Update the map options.
   @async
   void updateOptions(MapOptions options);

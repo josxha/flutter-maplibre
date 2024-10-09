@@ -515,8 +515,6 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    override fun getMetersPerPixelAtLatitude(latitude: Double): Double = mapLibreMap.projection.getMetersPerPixelAtLatitude(latitude)
-
     override fun updateOptions(
         options: MapOptions,
         callback: (Result<Unit>) -> Unit,
