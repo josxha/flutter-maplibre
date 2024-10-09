@@ -162,41 +162,6 @@ class MapLibreMapController(
         // free any resources
     }
 
-    override fun fitBounds(
-        bounds: LngLatBounds,
-        offset: Offset?,
-        padding: Padding,
-        bearing: Double?,
-        pitch: Double?,
-        durationMs: Long,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val cameraUpdate =
-            CameraUpdateFactory.newLatLngBounds(
-                LatLngBounds.Companion.from(
-                    bounds.latitudeNorth,
-                    bounds.longitudeEast,
-                    bounds.latitudeSouth,
-                    bounds.longitudeWest,
-                ),
-                bearing ?: -1.0,
-                pitch ?: -1.0,
-                padding.left.toInt(),
-                padding.top.toInt(),
-                padding.right.toInt(),
-                padding.bottom.toInt(),
-            )
-        mapLibreMap.animateCamera(
-            cameraUpdate,
-            durationMs.toInt(),
-            object : MapLibreMap.CancelableCallback {
-                override fun onCancel() = callback(Result.failure(CancellationException("Animation cancelled.")))
-
-                override fun onFinish() = callback(Result.success(Unit))
-            },
-        )
-    }
-
     private val gson = Gson()
 
     private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =

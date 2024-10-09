@@ -23,17 +23,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
-  /// Animate the viewport of the map to a new location.
-  @async
-  void fitBounds({
-    required LngLatBounds bounds,
-    required Offset? offset,
-    required Padding padding,
-    required double? bearing,
-    required double? pitch,
-    required int durationMs,
-  });
-
   /// Get the current camera position with the map center, zoom level, camera
   /// pitch and map rotation.
   @async

@@ -233,15 +233,43 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) =>
-      _hostApi.fitBounds(
-        bounds: bounds.toLngLatBounds(),
-        bearing: bearing,
-        pitch: pitch,
-        durationMs: nativeDuration.inMilliseconds,
-        offset: offset.toOffset(),
-        padding: padding.toPadding(),
+  }) async {
+    final latLngBounds = jni.LatLngBounds.from(
+      bounds.latitudeNorth,
+      bounds.longitudeEast,
+      bounds.latitudeSouth,
+      bounds.longitudeWest,
+    );
+    final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
+      latLngBounds,
+      bearing ?? -1.0,
+      pitch ?? -1.0,
+      padding.left.toInt(),
+      padding.top.toInt(),
+      padding.right.toInt(),
+      padding.bottom.toInt(),
+    );
+    latLngBounds.release();
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.animateCamera$3(
+        cameraUpdate,
+        nativeDuration.inMilliseconds,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
       );
+      return completer.future;
+    });
+    cameraUpdate.release();
+  }
 
   @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
