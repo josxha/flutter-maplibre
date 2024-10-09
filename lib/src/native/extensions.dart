@@ -10,6 +10,7 @@ extension PositionExt on Position {
         lng: lng.toDouble(),
         lat: lat.toDouble(),
       );
+
   /// Convert a [Position] to an [jni.LatLng].
   jni.LatLng toLatLng() => jni.LatLng.new$1(lat.toDouble(), lng.toDouble());
 }
