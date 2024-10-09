@@ -483,7 +483,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async {
+  MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
     final camera = MapCamera(
       center: Position(

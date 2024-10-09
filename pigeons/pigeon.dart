@@ -23,11 +23,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
-  /// Get the current camera position with the map center, zoom level, camera
-  /// pitch and map rotation.
-  @async
-  MapCamera getCamera();
-
   /// Get the visible region of the current map camera.
   @async
   LngLatBounds getVisibleRegion();
