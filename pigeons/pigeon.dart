@@ -23,10 +23,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
-  /// Get the visible region of the current map camera.
-  @async
-  LngLatBounds getVisibleRegion();
-
   /// Add a fill layer to the map style.
   @async
   void addFillLayer({
