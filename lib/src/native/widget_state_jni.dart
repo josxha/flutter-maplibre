@@ -273,71 +273,45 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
-    // TODO: evaluate if jni would improve this function
-    await switch (layer) {
-      FillLayer() => _hostApi.addFillLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      CircleLayer() => _hostApi.addCircleLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      BackgroundLayer() => _hostApi.addBackgroundLayer(
-          id: layer.id,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapLayer() => _hostApi.addHeatmapLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HillshadeLayer() => _hostApi.addHillshadeLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      LineLayer() => _hostApi.addLineLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      RasterLayer() => _hostApi.addRasterLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      SymbolLayer() => _hostApi.addSymbolLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-    };
+    final jni.Layer jniLayer;
+    final jniId = layer.id.toJString();
+    switch (layer) {
+      case FillLayer():
+        jniLayer = jni.FillLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case CircleLayer():
+        jniLayer = jni.CircleLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case BackgroundLayer():
+        jniLayer = jni.BackgroundLayer(jniId);
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case FillExtrusionLayer():
+        jniLayer = jni.FillExtrusionLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case HeatmapLayer():
+        jniLayer = jni.HeatmapLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case HillshadeLayer():
+        jniLayer = jni.HillshadeLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case LineLayer():
+        jniLayer = jni.LineLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case RasterLayer():
+        jniLayer = jni.RasterLayer(jniId, layer.sourceId.toJString());
+        // TODO doesn't use: layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      case SymbolLayer():
+        jniLayer = jni.SymbolLayer(jniId, layer.sourceId.toJString());
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+    }
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      if (belowLayerId != null) {
+        jniStyle.addLayerBelow(jniLayer, belowLayerId.toJString());
+      } else {
+        jniStyle.addLayer(jniLayer);
+      }
+    });
   }
 
   @override
