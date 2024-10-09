@@ -13,21 +13,21 @@ your `web/index.html` file:
 <head>
     <!-- other html -->
     <!-- highlight-start -->
-    <script src='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@^4.3/dist/maplibre-gl.css'
+    <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
           rel='stylesheet'/>
     <!-- highlight-end -->
 </head>
 </html>
 ```
 
-`^4.3` ensures that your app will always use the latest version of
-[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 4 but not
+`^5.0` ensures that your app will always use the latest version of
+[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 5 but not
 suddenly
 use an incompatible version.
 
 If you want to always use the latest version use `latest` or use the full
-version number like `4.3.0` if you want to use a specific version.
+version number like `5.0.0` if you want to use a specific version.
 
 You can read about changes in maplibre-gl-js in
 the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGELOG.md).
