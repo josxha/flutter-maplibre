@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
@@ -542,16 +543,38 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryrenderedfeatures/
     final jniMapLibreMap = _jniMapLibreMap;
     final jniFeatures = await runOnPlatformThread<List<jni.Feature>>(() {
+      final jniLayers = jniMapLibreMap.getStyle$1().getLayers();
+      final layerIds = JArray(JString.type, jniLayers.length);
+      for (var i = 0; i < jniLayers.length; i++) {
+        final jniLayer = jniLayers[i];
+        layerIds[i] = switch (jniLayer.jClass.toString()) {
+          'class org.maplibre.android.style.layers.BackgroundLayer' =>
+            jniLayer.as(jni.BackgroundLayer.type).getId(),
+          'class org.maplibre.android.style.layers.LineLayer' =>
+            jniLayer.as(jni.LineLayer.type).getId(),
+          'class org.maplibre.android.style.layers.FillLayer' =>
+            jniLayer.as(jni.FillLayer.type).getId(),
+          'class org.maplibre.android.style.layers.SymbolLayer' =>
+            jniLayer.as(jni.SymbolLayer.type).getId(),
+          _ => throw Exception("Can't handle layer: ${jniLayer.jClass}"),
+        };
+      }
+
       return jniMapLibreMap.queryRenderedFeatures(
         jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
-        JArray(JString.type, 0),
+        JArray(JString.type, 0), // using an empty list to query all
       );
     });
     return List.generate(jniFeatures.length, (index) {
       final jniFeature = jniFeatures[index];
+      final json =
+          jsonDecode(jniFeature.toJson().toDartString(releaseOriginal: true))
+              as Map<String, Object?>;
+      (json['geometry']! as Map).remove('coordinates');
+      debugPrint(json.toString());
       final feature = RenderedFeature(
         layerId: jniFeature.id().toDartString(releaseOriginal: true),
-        sourceId: jniFeature.toJson().toDartString(releaseOriginal: true),
+        sourceId: null,
         sourceLayer: null,
       );
       jniFeature.release();
