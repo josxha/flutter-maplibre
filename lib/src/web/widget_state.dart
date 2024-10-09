@@ -97,7 +97,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             final WebFullscreenControl _ => interop.FullscreenControl(
                 interop.FullscreenControlOptions(),
               ),
-            final LogoControl control => interop.LogoControl(
+            final WebLogoControl control => interop.LogoControl(
                 interop.LogoControlOptions(compact: control.compact),
               ),
             final WebNavigationControl control => interop.NavigationControl(
