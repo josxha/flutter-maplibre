@@ -25,13 +25,6 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
       appBar: AppBar(title: const Text('Circle Annotations')),
       body: MapLibreMap(
         options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
-        onEvent: (event) {
-          if (event case MapEventClick()) {
-            setState(() {
-              _points.add(Point(coordinates: event.point));
-            });
-          }
-        },
         layers: [
           CircleAnnotationLayer(
             points: _points,

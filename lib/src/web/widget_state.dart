@@ -634,4 +634,21 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }) async {
     debugPrint("Can't track the user location on web.");
   }
+
+  @override
+  Future<List<RenderedFeature>> queryRenderedFeatures(
+    Offset screenLocation,
+  ) async {
+    final features =
+        _map.queryRenderedFeatures(screenLocation.toJsPoint(), null);
+    return features.toDart
+        .map(
+          (e) => RenderedFeature(
+            layerId: e.layer.id,
+            sourceId: e.source,
+            sourceLayer: e.sourceLayer,
+          ),
+        )
+        .toList(growable: false);
+  }
 }
