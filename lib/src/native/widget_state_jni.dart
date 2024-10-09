@@ -278,31 +278,31 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     switch (layer) {
       case FillLayer():
         jniLayer = jni.FillLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case CircleLayer():
         jniLayer = jni.CircleLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case BackgroundLayer():
         jniLayer = jni.BackgroundLayer(jniId);
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case FillExtrusionLayer():
         jniLayer = jni.FillExtrusionLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case HeatmapLayer():
         jniLayer = jni.HeatmapLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case HillshadeLayer():
         jniLayer = jni.HillshadeLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case LineLayer():
         jniLayer = jni.LineLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case RasterLayer():
         jniLayer = jni.RasterLayer(jniId, layer.sourceId.toJString());
-        // TODO doesn't use: layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // TODO doesn't use: layer.setProperties(*parseProperties(paint), *parseProperties(layout))
       case SymbolLayer():
         jniLayer = jni.SymbolLayer(jniId, layer.sourceId.toJString());
-        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+      // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
     }
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
