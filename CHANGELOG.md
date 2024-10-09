@@ -12,7 +12,8 @@
   (Minimum Dart version
   of [3.5.0](https://medium.com/dartlang/dart-3-5-6ca36259fa2f)).
 
-Read the [Migration Guide]() for instructions on how to upgrade.
+Read the [Upgrade Guide](https://flutter-maplibre.pages.dev/docs/upgrade) for
+instructions on how to upgrade.
 
 ### New Features
 
