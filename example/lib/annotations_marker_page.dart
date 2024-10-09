@@ -22,6 +22,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
   ];
 
   late final MapController _controller;
+  bool _imageLoaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,9 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
                   await http.get(Uri.parse(LayersSymbolPage.imageUrl));
               final bytes = response.bodyBytes;
               await _controller.addImage('marker', bytes);
+              setState(() {
+                _imageLoaded = true;
+              });
             case MapEventClick():
               // add a new marker on click
               setState(() {
@@ -54,7 +58,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
             points: _points,
             textField: 'Marker',
             textAllowOverlap: true,
-            iconImage: 'marker',
+            iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.08,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
