@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Line'
 description: 'Add Lines to the map.'
 ---
 

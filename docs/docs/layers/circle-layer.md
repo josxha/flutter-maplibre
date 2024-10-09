@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Circle'
 description: 'Add Circles to the map.'
 ---
 
@@ -17,27 +18,24 @@ late final MapController _controller;
 
 @override
 Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(title: const Text('Events')),
-    body: MapLibreMap(
-        options: MapOptions(center: Position(9.17, 47.68)),
-        onMapCreated: (controller) => _controller = controller,
-        onStyleLoaded: () async {
-          // highlight-start
-          // add the source
-          const earthquakes = GeoJsonSource(
-            id: _sourceId,
-            data:
-            'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
-          );
-          await _controller.addSource(earthquakes);
+  return MapLibreMap(
+      options: MapOptions(center: Position(9.17, 47.68)),
+      onMapCreated: (controller) => _controller = controller,
+      onStyleLoaded: () async {
+        // highlight-start
+        // add the source
+        const earthquakes = GeoJsonSource(
+          id: _sourceId,
+          data:
+          'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
+        );
+        await _controller.addSource(earthquakes);
 
-          // add the source with a layer on the map
-          const circleLayer = CircleLayer(id: _layerId, sourceId: _sourceId);
-          await _controller.addLayer(circleLayer);
-          // highlight-end
-        }
-    ),
+        // add the source with a layer on the map
+        const circleLayer = CircleLayer(id: _layerId, sourceId: _sourceId);
+        await _controller.addLayer(circleLayer);
+        // highlight-end
+      }
   );
 }
 ```

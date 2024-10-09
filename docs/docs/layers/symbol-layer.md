@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Symbol'
 description: 'Add Markers to the map.'
 ---
 

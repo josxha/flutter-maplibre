@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Hillshade'
 description: 'Render elevation on the map.'
 ---
 

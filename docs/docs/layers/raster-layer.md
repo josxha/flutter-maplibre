@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Raster'
 description: 'Add Raster Tiles on the map.'
 ---
 

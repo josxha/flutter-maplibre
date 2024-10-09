@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Fill Extrusion'
 description: 'Add 3D building outlines to the map.'
 ---
 

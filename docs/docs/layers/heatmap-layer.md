@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: 'Heatmap'
 description: 'Add Heatmaps to the map.'
 ---
 
