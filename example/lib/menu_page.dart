@@ -22,6 +22,7 @@ import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
+import 'package:maplibre_example/web_view.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -39,6 +40,11 @@ class MenuPage extends StatelessWidget {
             maxCrossAxisExtent: 200,
             childAspectRatio: 1.5,
             children: const [
+              ItemCard(
+                label: 'Web View',
+                iconData: Icons.web_asset,
+                location: WebViewPage.location,
+              ),
               ItemCard(
                 label: 'Styled Map',
                 iconData: Icons.map,
