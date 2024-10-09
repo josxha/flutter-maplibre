@@ -121,10 +121,6 @@ abstract interface class MapLibreHostApi {
   @async
   void addImage(String id, Uint8List bytes);
 
-  /// Removes an image from the map
-  @async
-  void removeImage(String id);
-
   /// Add a GeoJSON source to the map style.
   @async
   void addGeoJsonSource({

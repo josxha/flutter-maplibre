@@ -544,7 +544,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       _hostApi.addImage(id, bytes);
 
   @override
-  Future<void> removeImage(String id) => _hostApi.removeImage(id);
+  Future<void> removeImage(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeImage(id.toJString());
+    });
+  }
 
   @override
   Future<void> updateGeoJsonSource({
