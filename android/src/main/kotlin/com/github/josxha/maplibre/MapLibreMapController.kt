@@ -162,48 +162,6 @@ class MapLibreMapController(
         // free any resources
     }
 
-    override fun moveCamera(
-        center: LngLat?,
-        zoom: Double?,
-        bearing: Double?,
-        pitch: Double?,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val camera = CameraPosition.Builder()
-        if (center != null) camera.target(LatLng(center.lat, center.lng))
-        if (zoom != null) camera.zoom(zoom)
-        if (pitch != null) camera.tilt(pitch)
-        if (bearing != null) camera.bearing(bearing)
-        val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
-        mapLibreMap.moveCamera(cameraUpdate)
-        callback(Result.success(Unit))
-    }
-
-    override fun animateCamera(
-        center: LngLat?,
-        zoom: Double?,
-        bearing: Double?,
-        pitch: Double?,
-        durationMs: Long,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val camera = CameraPosition.Builder()
-        if (center != null) camera.target(LatLng(center.lat, center.lng))
-        if (zoom != null) camera.zoom(zoom)
-        if (pitch != null) camera.tilt(pitch)
-        if (bearing != null) camera.bearing(bearing)
-        val cameraUpdate = CameraUpdateFactory.newCameraPosition(camera.build())
-        mapLibreMap.animateCamera(
-            cameraUpdate,
-            durationMs.toInt(),
-            object : MapLibreMap.CancelableCallback {
-                override fun onCancel() = callback(Result.failure(CancellationException("Animation cancelled.")))
-
-                override fun onFinish() = callback(Result.success(Unit))
-            },
-        )
-    }
-
     override fun fitBounds(
         bounds: LngLatBounds,
         offset: Offset?,
@@ -237,24 +195,6 @@ class MapLibreMapController(
                 override fun onFinish() = callback(Result.success(Unit))
             },
         )
-    }
-
-    override fun toScreenLocation(
-        lng: Double,
-        lat: Double,
-        callback: (Result<Offset>) -> Unit,
-    ) {
-        val location = mapLibreMap.projection.toScreenLocation(LatLng(lat, lng))
-        callback(Result.success(Offset(location.x.toDouble(), location.y.toDouble())))
-    }
-
-    override fun toLngLat(
-        x: Double,
-        y: Double,
-        callback: (Result<LngLat>) -> Unit,
-    ) {
-        val latLng = mapLibreMap.projection.fromScreenLocation(PointF(x.toFloat(), y.toFloat()))
-        callback(Result.success(LngLat(latLng.longitude, latLng.latitude)))
     }
 
     private val gson = Gson()

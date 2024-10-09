@@ -23,25 +23,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
-  /// Move the viewport of the map to a new location without any animation.
-  @async
-  void moveCamera({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-  });
-
-  /// Animate the viewport of the map to a new location.
-  @async
-  void animateCamera({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-    required int durationMs,
-  });
-
   /// Animate the viewport of the map to a new location.
   @async
   void fitBounds({
@@ -61,14 +42,6 @@ abstract interface class MapLibreHostApi {
   /// Get the visible region of the current map camera.
   @async
   LngLatBounds getVisibleRegion();
-
-  /// Convert a coordinate to a location on the screen.
-  @async
-  Offset toScreenLocation(double lng, double lat);
-
-  /// Convert a screen location to a coordinate.
-  @async
-  LngLat toLngLat(double x, double y);
 
   /// Add a fill layer to the map style.
   @async

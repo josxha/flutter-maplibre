@@ -10,6 +10,8 @@ extension PositionExt on Position {
         lng: lng.toDouble(),
         lat: lat.toDouble(),
       );
+  /// Convert a [Position] to an [jni.LatLng].
+  jni.LatLng toLatLng() => jni.LatLng.new$1(lat.toDouble(), lng.toDouble());
 }
 
 /// Extension methods for the [pigeon.LngLat] class. Not exported publicly.
@@ -24,10 +26,19 @@ extension JniLatLngExt on jni.LatLng {
   Position toPosition() => Position(getLongitude(), getLatitude());
 }
 
+/// Extension methods for the [jni.PointF] class. Not exported publicly.
+extension PointExt on jni.PointF {
+  /// Convert an [jni.PointF] to a [Offset].
+  Offset toOffset() => Offset(x, y);
+}
+
 /// Extension methods for the [Offset] class. Not exported publicly.
 extension OffsetExt on Offset {
   /// Convert an [Offset] to an internal [pigeon.Offset].
   pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
+
+  /// Convert an [Offset] to an [jni.PointF].
+  jni.PointF toPointF() => jni.PointF.new$1(dx, dy);
 }
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.

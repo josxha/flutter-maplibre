@@ -21,7 +21,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
-  late AnnotationManager _annotationManager;
+  AnnotationManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -81,7 +81,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _hostApi.updateOptions(getOptions());
-    _annotationManager.updateLayers(widget.layers);
+    _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -123,18 +123,24 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
-    final lngLat =
-        await _hostApi.toLngLat(screenLocation.dx, screenLocation.dy);
-    return lngLat.toPosition();
+    final jniProjection = _jniProjection;
+    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
+      return jniProjection.fromScreenLocation(screenLocation.toPointF());
+    });
+    final position = jniLatLng.toPosition();
+    jniLatLng.release();
+    return position;
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
-    final screenLocation = await _hostApi.toScreenLocation(
-      lngLat.lng.toDouble(),
-      lngLat.lat.toDouble(),
-    );
-    return Offset(screenLocation.x, screenLocation.y);
+    final jniProjection = _jniProjection;
+    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
+      return jniProjection.toScreenLocation(lngLat.toLatLng());
+    });
+    final position = jniPoint.toOffset();
+    jniPoint.release();
+    return position;
   }
 
   @override
@@ -143,13 +149,36 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double? zoom,
     double? bearing,
     double? pitch,
-  }) =>
-      _hostApi.moveCamera(
-        center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+  }) async {
+    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    if (center != null) cameraPositionBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPositionBuilder.zoom(zoom);
+    if (pitch != null) cameraPositionBuilder.tilt(pitch);
+    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+
+    final cameraPosition = cameraPositionBuilder.build();
+    cameraPositionBuilder.release();
+    final cameraUpdate =
+        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.moveCamera$1(
+        cameraUpdate,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
       );
+      return completer.future;
+    });
+    cameraUpdate.release();
+  }
 
   @override
   Future<void> animateCamera({
@@ -161,13 +190,35 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    return _hostApi.animateCamera(
-      center: center?.toLngLat(),
-      zoom: zoom,
-      bearing: bearing,
-      pitch: pitch,
-      durationMs: nativeDuration.inMilliseconds,
-    );
+    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    if (center != null) cameraPositionBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPositionBuilder.zoom(zoom);
+    if (pitch != null) cameraPositionBuilder.tilt(pitch);
+    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+
+    final cameraPosition = cameraPositionBuilder.build();
+    cameraPositionBuilder.release();
+    final cameraUpdate =
+        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+
+    final jniMapLibreMap = _jniMapLibreMap;
+    final completer = Completer<void>();
+    await runOnPlatformThread(() {
+      jniMapLibreMap.animateCamera$3(
+        cameraUpdate,
+        nativeDuration.inMilliseconds,
+        jni.MapLibreMap_CancelableCallback.implement(
+          jni.$MapLibreMap_CancelableCallback(
+            onCancel: () => completer.completeError(
+              Exception('Animation cancelled.'),
+            ),
+            onFinish: completer.complete,
+          ),
+        ),
+      );
+      return completer.future;
+    });
+    cameraUpdate.release();
   }
 
   @override
