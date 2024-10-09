@@ -44,15 +44,10 @@ Check out
 the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_circle_page.dart)
 for to learn more.
 
-## Style
+## Style & Layout
 
-Use the `paint` property to style your `CircleLayer` to change the style of the
-map.
+Use the `paint` property to change the style and the `layout`
+property to change the behavior on the map.
 
-See
-the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers/#circle)
-for all available properties.
-
-## Layout
-
-Use the `layout` property to change how the circles behave on the map.
+Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
+topic. 
