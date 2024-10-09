@@ -172,9 +172,9 @@ class WebFullscreenControl extends WebMapControl {
 
 /// A `LogoControl` is a control that adds the watermark.
 @immutable
-class LogoControl extends WebMapControl {
-  /// Default constructor for the [LogoControl].
-  const LogoControl({this.compact});
+class WebLogoControl extends WebMapControl {
+  /// Default constructor for the [WebLogoControl].
+  const WebLogoControl({this.compact});
 
   /// If `true`, force a compact logo. If `false`, force the full logo.
   ///
