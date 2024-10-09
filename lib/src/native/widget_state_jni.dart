@@ -342,12 +342,29 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<void> addSource(Source source) async {
-    // TODO: evaluate if jni would improve this function
-    await switch (source) {
-      GeoJsonSource() =>
-        _hostApi.addGeoJsonSource(id: source.id, data: source.data),
-      RasterDemSource() => switch (source.encoding) {
-          final RasterDemCustomEncoding encoding => _hostApi.addRasterDemSource(
+    switch (source) {
+      case GeoJsonSource():
+        final jniStyle = _jniStyle;
+        final jniOptions = jni.GeoJsonOptions();
+        final jniId = source.id.toJString();
+        final jniData = source.data.toJString();
+        final jni.GeoJsonSource jniSource;
+        if (source.data.startsWith('{')) {
+          jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
+        } else {
+          final jniUri = jni.URI.create(jniData);
+          jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+          jniUri.release();
+        }
+        await runOnPlatformThread(() {
+          jniStyle.addSource(jniSource);
+        });
+        jniOptions.release();
+        jniSource.release();
+      case RasterDemSource():
+        switch (source.encoding) {
+          case final RasterDemCustomEncoding encoding:
+            await _hostApi.addRasterDemSource(
               id: source.id,
               attribution: source.attribution,
               bounds: source.bounds,
@@ -362,8 +379,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               blueFactor: encoding.blueFactor,
               redFactor: encoding.redFactor,
               baseShift: encoding.baseShift,
-            ),
-          _ => _hostApi.addRasterDemSource(
+            );
+          default:
+            await _hostApi.addRasterDemSource(
               id: source.id,
               attribution: source.attribution,
               bounds: source.bounds,
@@ -379,9 +397,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
                 RasterDemMapboxEncoding() => pigeon.RasterDemEncoding.mapbox,
                 RasterDemCustomEncoding() => pigeon.RasterDemEncoding.custom,
               },
-            ),
-        },
-      RasterSource() => _hostApi.addRasterSource(
+            );
+        }
+      case RasterSource():
+        await _hostApi.addRasterSource(
           id: source.id,
           bounds: source.bounds,
           url: source.url,
@@ -395,8 +414,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
             TileScheme.xyz => pigeon.TileScheme.xyz,
             TileScheme.tms => pigeon.TileScheme.tms,
           },
-        ),
-      VectorSource() => _hostApi.addVectorSource(
+        );
+      case VectorSource():
+        await _hostApi.addVectorSource(
           id: source.id,
           bounds: source.bounds,
           attribution: source.attribution,
@@ -410,17 +430,18 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
           tiles: source.tiles,
           url: source.url,
           volatile: source.volatile,
-        ),
-      ImageSource() => _hostApi.addImageSource(
+        );
+      case ImageSource():
+        await _hostApi.addImageSource(
           id: source.id,
           url: source.url,
           coordinates: source.coordinates
               .map((e) => e.toLngLat())
               .toList(growable: false),
-        ),
-      VideoSource() =>
-        throw UnimplementedError('Video source is only supported on web.'),
-    };
+        );
+      case VideoSource():
+        throw UnimplementedError('Video source is only supported on web.');
+    }
   }
 
   @override

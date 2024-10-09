@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../../java/net/URI.dart' as uri_;
+
 import 'Source.dart' as source_;
 
 import 'TileSet.dart' as tileset_;
@@ -244,7 +246,7 @@ class RasterDemSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterDemSource.new$2(
     _$jni.JString string,
-    _$jni.JObject uRI,
+    uri_.URI uRI,
   ) {
     return RasterDemSource.fromReference(_new$2(
             _class.reference.pointer,
