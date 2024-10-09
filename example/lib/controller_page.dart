@@ -53,12 +53,11 @@ class _ControllerPageState extends State<ControllerPage> {
                         bearing: -50,
                         pitch: 60,
                       );
-                      debugPrint('animateTo end');
-                    } catch (error) {
-                      final e = error as PlatformException;
+                      debugPrint('flyTo end');
+                    } on PlatformException catch (error) {
                       debugPrint(
-                        'animateTo cancelled: code: '
-                        '"${e.code}", message: "${e.message}"',
+                        'flyTo cancelled: code: '
+                        '"${error.code}", message: "${error.message}"',
                       );
                     }
                   },
@@ -149,7 +148,6 @@ pitch: ${camera.pitch}'''),
                 OutlinedButton(
                   onPressed: () async {
                     final region = await _controller.getVisibleRegion();
-                    debugPrint(region.toString());
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
