@@ -112,14 +112,6 @@ abstract interface class MapLibreHostApi {
     String? belowLayerId,
   });
 
-  /// Removes the layer with the given ID from the map's style.
-  @async
-  void removeLayer(String id);
-
-  /// Removes the source with the given ID from the map's style.
-  @async
-  void removeSource(String id);
-
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
   @async

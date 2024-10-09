@@ -524,10 +524,20 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<void> removeLayer(String id) async => _hostApi.removeLayer(id);
+  Future<void> removeLayer(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeLayer(id.toJString());
+    });
+  }
 
   @override
-  Future<void> removeSource(String id) => _hostApi.removeSource(id);
+  Future<void> removeSource(String id) async {
+    final jniStyle = _jniStyle;
+    await runOnPlatformThread(() {
+      jniStyle.removeSource(id.toJString());
+    });
+  }
 
   @override
   Future<void> addImage(String id, Uint8List bytes) =>
