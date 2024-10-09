@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
+sidebar_position: 30
 ---
 
-# Map Styles
+# Styles
 
 By default, the default MapLibre style gets used which shows only countries.
 To change this use the style of a tile provider or create and use your own map
@@ -15,6 +15,8 @@ options like so:
 Widget build() {
   return MapLibreMap(
       options: MapOptions(
+        center: Position(9.17, 47.68),
+        // highlight-next-line
         style: 'https://demotiles.maplibre.org/style.json',
       )
   );
@@ -24,11 +26,11 @@ Widget build() {
 The following formats are supported:
 
 1. Passing the URL of the map style. This should be a custom map style served
-   remotely using a URL that start with `http(s)://`.
-2. Passing the style as a local file. create an JSON file in app directory (e.g.
-   ApplicationDocumentsDirectory). Set the style string to the absolute path of
-   this JSON file.
-3. Passing the raw JSON of the map style. This is only supported on Android.
+   remotely using a URL that starts with `http(s)://`.
+2. Passing the style as a local file. Create a JSON file in the app directory
+   (e.g. ApplicationDocumentsDirectory). Then, set the style string to
+   the absolute path of this JSON file.
+3. (Android only) Passing the raw JSON of the map style.
 
 ## Tile sources that require an API key
 
@@ -42,13 +44,20 @@ https://tiles.example.com/{z}/{x}/{y}.pbf?api_key={your_key}
 
 ## Use existing styles
 
-Every tile provider provides map styles that you can use. Note, that the style
-needs to be compatible with the tile naming scheme. For example OpenMapTiles
-styles used by MapTiler are not compatible with Protomaps tiles.
+Every tile provider provides map styles that you can use.
 
-Have a look
-at [Awesome MapLibre](https://github.com/maplibre/awesome-maplibre#maptile-providers)
-to get an overview over available tile
+:::warning
+
+Note, that the style
+needs to be compatible with the tile schema used by the tile server.
+For example OpenMapTiles styles used by MapTiler are not compatible with
+Protomaps tiles.
+
+:::
+
+Have a look at
+the [awesome-maplibre](https://github.com/maplibre/awesome-maplibre#maptile-providers)
+list to get an overview over available tile
 providers that support the MVT standard.
 
 ## Create a custom style

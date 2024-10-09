@@ -1,8 +1,8 @@
 ---
-sidebar_position: 6
+sidebar_position: 40
 ---
 
-# Map Events
+# Events
 
 The event system is the used if you want to listen to any user interactions or
 state changes on the map.
@@ -15,14 +15,11 @@ parameter.
 ```dart
   @override
 Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(title: const Text('Events')),
-    body: MapLibreMap(
-      options: MapOptions(center: Position(9.17, 47.68)),
-      // highlight-start
-      onEvent: _onEvent,
-      // highlight-end
-    ),
+  return MapLibreMap(
+    options: MapOptions(center: Position(9.17, 47.68)),
+    // highlight-start
+    onEvent: _onEvent,
+    // highlight-end
   );
 }
 
