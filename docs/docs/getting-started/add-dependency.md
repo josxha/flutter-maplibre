@@ -22,7 +22,7 @@ dependencies:
 ```
 
 Ensure that you use the documentation of the right
-version. [Click here]((https://flutter-maplibre.pages.dev/docs/getting-started/add-dependency))
+version. [Click here](/docs/getting-started/add-dependency)
 to get to docs of the latest released version.
 You can find the latest version of the package on
 [pub.dev](https://pub.dev/packages/maplibre) or here:
