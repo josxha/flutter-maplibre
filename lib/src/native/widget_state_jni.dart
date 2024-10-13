@@ -80,7 +80,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    // TODO: use JNI to update options
     _updateOptions(oldWidget);
     _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
@@ -95,42 +94,46 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     super.dispose();
   }
 
-  void _updateOptions(MapLibreMap oldWidget) {
-    _jniMapLibreMap.setMinZoomPreference(_options.minZoom);
-    _jniMapLibreMap.setMaxZoomPreference(_options.maxZoom);
-    _jniMapLibreMap.setMinPitchPreference(_options.minPitch);
-    _jniMapLibreMap.setMaxPitchPreference(_options.maxPitch);
+  Future<void> _updateOptions(MapLibreMap oldWidget) async {
+    final jniMap = _jniMapLibreMap;
+    final options = _options;
+    await runOnPlatformThread(() {
+      jniMap.setMinZoomPreference(options.minZoom);
+      jniMap.setMaxZoomPreference(options.maxZoom);
+      jniMap.setMinPitchPreference(options.minPitch);
+      jniMap.setMaxPitchPreference(options.maxPitch);
 
-    // map bounds
-    final oldBounds = oldWidget.options.maxBounds;
-    final newBounds = _options.maxBounds;
-    if (oldBounds != null && newBounds == null) {
-      // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
-      // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
-    } else if ((oldBounds == null && newBounds != null) ||
-        (newBounds != null && oldBounds != newBounds)) {
-      final bounds = newBounds.toLatLngBounds();
-      _jniMapLibreMap.setLatLngBoundsForCameraTarget(bounds);
-    }
+      // map bounds
+      final oldBounds = oldWidget.options.maxBounds;
+      final newBounds = options.maxBounds;
+      if (oldBounds != null && newBounds == null) {
+        // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
+        // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
+      } else if ((oldBounds == null && newBounds != null) ||
+          (newBounds != null && oldBounds != newBounds)) {
+        final bounds = newBounds.toLatLngBounds();
+        jniMap.setLatLngBoundsForCameraTarget(bounds);
+      }
 
-    // gestures
-    final uiSettings = _jniMapLibreMap.getUiSettings();
-    if (_options.gestures.rotate != oldWidget.options.gestures.rotate) {
-      uiSettings.setRotateGesturesEnabled(_options.gestures.rotate);
-    }
-    if (_options.gestures.pan != oldWidget.options.gestures.pan) {
-      uiSettings.setRotateGesturesEnabled(_options.gestures.pan);
-    }
-    if (_options.gestures.zoom != oldWidget.options.gestures.zoom) {
-      uiSettings.setZoomGesturesEnabled(_options.gestures.zoom);
-      uiSettings.setDoubleTapGesturesEnabled(_options.gestures.zoom);
-      uiSettings.setScrollGesturesEnabled(_options.gestures.zoom);
-      uiSettings.setQuickZoomGesturesEnabled(_options.gestures.zoom);
-    }
-    if (_options.gestures.pitch != oldWidget.options.gestures.pitch) {
-      uiSettings.setTiltGesturesEnabled(_options.gestures.pitch);
-    }
-    uiSettings.release();
+      // gestures
+      final uiSettings = jniMap.getUiSettings();
+      if (options.gestures.rotate != oldWidget.options.gestures.rotate) {
+        uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
+      }
+      if (options.gestures.pan != oldWidget.options.gestures.pan) {
+        uiSettings.setRotateGesturesEnabled(options.gestures.pan);
+      }
+      if (options.gestures.zoom != oldWidget.options.gestures.zoom) {
+        uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
+        uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);
+        uiSettings.setScrollGesturesEnabled(options.gestures.zoom);
+        uiSettings.setQuickZoomGesturesEnabled(options.gestures.zoom);
+      }
+      if (options.gestures.pitch != oldWidget.options.gestures.pitch) {
+        uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
+      }
+      uiSettings.release();
+    });
   }
 
   @override
