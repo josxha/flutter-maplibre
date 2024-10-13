@@ -109,7 +109,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       final oldBounds = oldOptions.maxBounds;
       final newBounds = options.maxBounds;
       if (oldBounds != null && newBounds == null) {
-        // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
+        // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
         // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
       } else if ((oldBounds == null && newBounds != null) ||
           (newBounds != null && oldBounds != newBounds)) {
@@ -122,9 +122,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       if (options.gestures.rotate != oldOptions.gestures.rotate) {
         uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
       }
-      if (options.gestures.pan != oldOptions.gestures.pan) {
+      /*if (options.gestures.pan != oldOptions.gestures.pan) {
         uiSettings.setRotateGesturesEnabled(options.gestures.pan);
-      }
+      }*/
       if (options.gestures.zoom != oldOptions.gestures.zoom) {
         uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
         uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);

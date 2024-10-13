@@ -88,6 +88,12 @@ class MapLibreMapController(
                     .maxZoomPreference(mapOptions.maxZoom)
                     .minPitchPreference(mapOptions.minPitch)
                     .maxPitchPreference(mapOptions.maxPitch)
+                    .rotateGesturesEnabled(mapOptions.gestures.rotate)
+                    .zoomGesturesEnabled(mapOptions.gestures.zoom)
+                    .doubleTapGesturesEnabled(mapOptions.gestures.zoom)
+                    .scrollGesturesEnabled(mapOptions.gestures.zoom)
+                    .quickZoomGesturesEnabled(mapOptions.gestures.zoom)
+                    .tiltGesturesEnabled(mapOptions.gestures.tilt)
                     .camera(cameraBuilder.build())
 
             MapLibre.getInstance(context) // needs to be called before MapView gets created
