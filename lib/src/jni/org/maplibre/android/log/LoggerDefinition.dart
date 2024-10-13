@@ -589,7 +589,7 @@ class LoggerDefinition extends _$jni.JObject {
   }
 }
 
-abstract mixin class $LoggerDefinition {
+abstract base mixin class $LoggerDefinition {
   factory $LoggerDefinition({
     required void Function(_$jni.JString string, _$jni.JString string1) v,
     bool v$async,
@@ -650,7 +650,7 @@ abstract mixin class $LoggerDefinition {
   bool get e$1$async => false;
 }
 
-class _$LoggerDefinition implements $LoggerDefinition {
+final class _$LoggerDefinition with $LoggerDefinition {
   _$LoggerDefinition({
     required void Function(_$jni.JString string, _$jni.JString string1) v,
     this.v$async = false,

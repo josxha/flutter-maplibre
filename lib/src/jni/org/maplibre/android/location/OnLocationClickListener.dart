@@ -169,7 +169,7 @@ class OnLocationClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnLocationClickListener {
+abstract base mixin class $OnLocationClickListener {
   factory $OnLocationClickListener({
     required void Function() onLocationComponentClick,
     bool onLocationComponentClick$async,
@@ -179,7 +179,7 @@ abstract mixin class $OnLocationClickListener {
   bool get onLocationComponentClick$async => false;
 }
 
-class _$OnLocationClickListener implements $OnLocationClickListener {
+final class _$OnLocationClickListener with $OnLocationClickListener {
   _$OnLocationClickListener({
     required void Function() onLocationComponentClick,
     this.onLocationComponentClick$async = false,

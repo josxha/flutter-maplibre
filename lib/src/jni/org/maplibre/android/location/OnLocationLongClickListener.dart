@@ -170,7 +170,7 @@ class OnLocationLongClickListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnLocationLongClickListener {
+abstract base mixin class $OnLocationLongClickListener {
   factory $OnLocationLongClickListener({
     required void Function() onLocationComponentLongClick,
     bool onLocationComponentLongClick$async,
@@ -180,7 +180,7 @@ abstract mixin class $OnLocationLongClickListener {
   bool get onLocationComponentLongClick$async => false;
 }
 
-class _$OnLocationLongClickListener implements $OnLocationLongClickListener {
+final class _$OnLocationLongClickListener with $OnLocationLongClickListener {
   _$OnLocationLongClickListener({
     required void Function() onLocationComponentLongClick,
     this.onLocationComponentLongClick$async = false,

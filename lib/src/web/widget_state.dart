@@ -516,7 +516,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async => MapCamera(
+  MapCamera getCamera() => MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
         pitch: _map.getPitch().toDouble(),
