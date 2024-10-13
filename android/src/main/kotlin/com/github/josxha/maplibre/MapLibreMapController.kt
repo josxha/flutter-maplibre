@@ -146,13 +146,23 @@ class MapLibreMapController(
     private fun parsePaintProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
         entries
             .map { entry ->
-                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+//                println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
                 when (entry.value) {
                     is ArrayList<*> -> {
                         val value = entry.value as ArrayList<*>
-                        val json = gson.toJsonTree(value)
-                        val expression = Expression.Converter.convert(json)
-                        PaintPropertyValue(entry.key, expression)
+                        if (value.isEmpty()) {
+                            PaintPropertyValue(entry.key, value)
+                        }
+                        when (value.first()) {
+                            is String -> {
+                                val json = gson.toJsonTree(value)
+                                val expression = Expression.Converter.convert(json)
+                                PaintPropertyValue(entry.key, expression)
+                            }
+                            else -> {
+                                PaintPropertyValue(entry.key, value.toArray())
+                            }
+                        }
                     }
 
                     else -> PaintPropertyValue(entry.key, entry.value)
@@ -162,13 +172,23 @@ class MapLibreMapController(
     private fun parseLayoutProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
         entries
             .map { entry ->
-                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+//                println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
                 when (entry.value) {
                     is ArrayList<*> -> {
                         val value = entry.value as ArrayList<*>
-                        val json = gson.toJsonTree(value)
-                        val expression = Expression.Converter.convert(json)
-                        LayoutPropertyValue(entry.key, expression)
+                        if (value.isEmpty()) {
+                            LayoutPropertyValue(entry.key, value)
+                        }
+                        when (value.first()) {
+                            is String -> {
+                                val json = gson.toJsonTree(value)
+                                val expression = Expression.Converter.convert(json)
+                                LayoutPropertyValue(entry.key, expression)
+                            }
+                            else -> {
+                                LayoutPropertyValue(entry.key, value.toArray())
+                            }
+                        }
                     }
 
                     else -> LayoutPropertyValue(entry.key, entry.value)
