@@ -93,7 +93,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     debugPrint(camera.toString());
                     if (context.mounted) {
                       await showDialog<void>(
@@ -123,7 +123,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
                     final meters =
                         await _controller.getMetersPerPixelAtLatitude(lat);
