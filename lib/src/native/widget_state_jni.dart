@@ -80,7 +80,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    _updateOptions(oldWidget);
+    unawaited(_updateOptions(oldWidget));
     _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -383,69 +383,68 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<void> addSource(Source source) async {
     final jniStyle = _jniStyle;
-    final jni.Source jniSource;
     final jniId = source.id.toJString();
-    switch (source) {
-      case GeoJsonSource():
-        final jniOptions = jni.GeoJsonOptions();
-        final jniData = source.data.toJString();
-        if (source.data.startsWith('{')) {
-          jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
-        } else {
-          final jniUri = jni.URI.create(jniData);
-          jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
-          jniUri.release();
-        }
-        jniOptions.release();
-      case RasterDemSource():
-        jniSource = jni.RasterDemSource.new$4(
-          jniId,
-          source.url!.toJString(),
-          source.tileSize,
-        );
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case RasterSource():
-        if (source.url case final String url) {
-          jniSource =
-              jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
-        } else {
-          // TODO improve this
-          final tilesArray = JArray(JString.type, source.tiles!.length);
-          for (var i = 0; i < source.tiles!.length; i++) {
-            tilesArray[i] = source.tiles![i].toJString();
-          }
-          final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
-            ..setMaxZoom(source.maxZoom)
-            ..setMinZoom(source.minZoom);
-          jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
-          tilesArray.release();
-          tileSet.release();
-        }
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case VectorSource():
-        jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case ImageSource():
-        final jniQuad = jni.LatLngQuad(
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-        );
-        final jniUri = jni.URI(source.url.toJString());
-        jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
-        jniUri.release();
-        jniQuad.release();
-      case VideoSource():
-        throw UnimplementedError('Video source is only supported on web.');
-    }
     await runOnPlatformThread(() {
+      final jni.Source jniSource;
+      switch (source) {
+        case GeoJsonSource():
+          final jniOptions = jni.GeoJsonOptions();
+          final jniData = source.data.toJString();
+          if (source.data.startsWith('{')) {
+            jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
+          } else {
+            final jniUri = jni.URI.create(jniData);
+            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+            jniUri.release();
+          }
+          jniOptions.release();
+        case RasterDemSource():
+          jniSource = jni.RasterDemSource.new$4(
+            jniId,
+            source.url!.toJString(),
+            source.tileSize,
+          );
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case RasterSource():
+          if (source.url case final String url) {
+            jniSource =
+                jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+          } else {
+            final tilesArray = JArray(JString.type, source.tiles!.length);
+            for (var i = 0; i < source.tiles!.length; i++) {
+              tilesArray[i] = source.tiles![i].toJString();
+            }
+            final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
+              ..setMaxZoom(source.maxZoom)
+              ..setMinZoom(source.minZoom);
+            jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
+            tilesArray.release();
+            tileSet.release();
+          }
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case VectorSource():
+          jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case ImageSource():
+          final jniQuad = jni.LatLngQuad(
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+          );
+          final jniUri = jni.URI(source.url.toJString());
+          jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
+          jniUri.release();
+          jniQuad.release();
+        case VideoSource():
+          throw UnimplementedError('Video source is only supported on web.');
+      }
       jniStyle.addSource(jniSource);
+      jniSource.release();
     });
-    jniSource.release();
   }
 
   @override
