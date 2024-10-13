@@ -51,6 +51,14 @@ extension LngLatBoundsExt on LngLatBounds {
         latitudeNorth: latitudeNorth,
         latitudeSouth: latitudeSouth,
       );
+
+  /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
+  jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
+        latitudeNorth,
+        longitudeEast,
+        latitudeSouth,
+        longitudeWest,
+      );
 }
 
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.

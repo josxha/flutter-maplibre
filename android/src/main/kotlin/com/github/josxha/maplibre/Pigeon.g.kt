@@ -121,10 +121,6 @@ data class MapOptions (
   val minPitch: Double,
   /** The maximum pitch / tilt of the map. */
   val maxPitch: Double,
-  /** If the native map should listen to click events. */
-  val listensOnClick: Boolean,
-  /** If the native map should listen to long click events. */
-  val listensOnLongClick: Boolean,
   /** The map gestures. */
   val gestures: MapGestures
 )
@@ -141,10 +137,8 @@ data class MapOptions (
       val maxZoom = pigeonVar_list[7] as Double
       val minPitch = pigeonVar_list[8] as Double
       val maxPitch = pigeonVar_list[9] as Double
-      val listensOnClick = pigeonVar_list[10] as Boolean
-      val listensOnLongClick = pigeonVar_list[11] as Boolean
-      val gestures = pigeonVar_list[12] as MapGestures
-      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, listensOnClick, listensOnLongClick, gestures)
+      val gestures = pigeonVar_list[10] as MapGestures
+      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, gestures)
     }
   }
   fun toList(): List<Any?> {
@@ -159,8 +153,6 @@ data class MapOptions (
       maxZoom,
       minPitch,
       maxPitch,
-      listensOnClick,
-      listensOnLongClick,
       gestures,
     )
   }
@@ -478,8 +470,6 @@ interface MapLibreHostApi {
   fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
   /** Add an image to the map. */
   fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
-  /** Update the map options. */
-  fun updateOptions(options: MapOptions, callback: (Result<Unit>) -> Unit)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -724,25 +714,6 @@ interface MapLibreHostApi {
             val idArg = args[0] as String
             val bytesArg = args[1] as ByteArray
             api.addImage(idArg, bytesArg) { result: Result<Unit> ->
-              val error = result.exceptionOrNull()
-              if (error != null) {
-                reply.reply(wrapError(error))
-              } else {
-                reply.reply(wrapResult(null))
-              }
-            }
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val optionsArg = args[0] as MapOptions
-            api.updateOptions(optionsArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(wrapError(error))

@@ -73,8 +73,6 @@ class MapOptions {
     required this.maxZoom,
     required this.minPitch,
     required this.maxPitch,
-    required this.listensOnClick,
-    required this.listensOnLongClick,
     required this.gestures,
   });
 
@@ -108,12 +106,6 @@ class MapOptions {
   /// The maximum pitch / tilt of the map.
   double maxPitch;
 
-  /// If the native map should listen to click events.
-  bool listensOnClick;
-
-  /// If the native map should listen to long click events.
-  bool listensOnLongClick;
-
   /// The map gestures.
   MapGestures gestures;
 
@@ -129,8 +121,6 @@ class MapOptions {
       maxZoom,
       minPitch,
       maxPitch,
-      listensOnClick,
-      listensOnLongClick,
       gestures,
     ];
   }
@@ -148,9 +138,7 @@ class MapOptions {
       maxZoom: result[7]! as double,
       minPitch: result[8]! as double,
       maxPitch: result[9]! as double,
-      listensOnClick: result[10]! as bool,
-      listensOnLongClick: result[11]! as bool,
-      gestures: result[12]! as MapGestures,
+      gestures: result[10]! as MapGestures,
     );
   }
 }
@@ -783,31 +771,6 @@ class MapLibreHostApi {
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_channel.send(<Object?>[id, bytes]) as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
-
-  /// Update the map options.
-  Future<void> updateOptions(MapOptions options) async {
-    final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[options]) as List<Object?>?;
     if (pigeonVar_replyList == null) {
       throw _createConnectionError(pigeonVar_channelName);
     } else if (pigeonVar_replyList.length > 1) {

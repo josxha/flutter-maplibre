@@ -120,10 +120,6 @@ abstract interface class MapLibreHostApi {
   /// Add an image to the map.
   @async
   void addImage(String id, Uint8List bytes);
-
-  /// Update the map options.
-  @async
-  void updateOptions(MapOptions options);
 }
 
 @FlutterApi()
@@ -173,8 +169,6 @@ class MapOptions {
     required this.maxZoom,
     required this.minPitch,
     required this.maxPitch,
-    required this.listensOnClick,
-    required this.listensOnLongClick,
     required this.gestures,
   });
 
@@ -207,12 +201,6 @@ class MapOptions {
 
   /// The maximum pitch / tilt of the map.
   final double maxPitch;
-
-  /// If the native map should listen to click events.
-  final bool listensOnClick;
-
-  /// If the native map should listen to long click events.
-  final bool listensOnLongClick;
 
   /// The map gestures.
   final MapGestures gestures;

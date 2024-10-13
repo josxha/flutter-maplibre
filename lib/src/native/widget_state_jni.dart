@@ -81,7 +81,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     // TODO: use JNI to update options
-    _hostApi.updateOptions(getOptions());
+    _updateOptions(oldWidget);
     _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -93,6 +93,44 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     _cachedJniMapLibreMap?.release();
     _cachedLocationComponent?.release();
     super.dispose();
+  }
+
+  void _updateOptions(MapLibreMap oldWidget) {
+    _jniMapLibreMap.setMinZoomPreference(_options.minZoom);
+    _jniMapLibreMap.setMaxZoomPreference(_options.maxZoom);
+    _jniMapLibreMap.setMinPitchPreference(_options.minPitch);
+    _jniMapLibreMap.setMaxPitchPreference(_options.maxPitch);
+
+    // map bounds
+    final oldBounds = oldWidget.options.maxBounds;
+    final newBounds = _options.maxBounds;
+    if (oldBounds != null && newBounds == null) {
+      // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
+      // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
+    } else if ((oldBounds == null && newBounds != null) ||
+        (newBounds != null && oldBounds != newBounds)) {
+      final bounds = newBounds.toLatLngBounds();
+      _jniMapLibreMap.setLatLngBoundsForCameraTarget(bounds);
+    }
+
+    // gestures
+    final uiSettings = _jniMapLibreMap.getUiSettings();
+    if (_options.gestures.rotate != oldWidget.options.gestures.rotate) {
+      uiSettings.setRotateGesturesEnabled(_options.gestures.rotate);
+    }
+    if (_options.gestures.pan != oldWidget.options.gestures.pan) {
+      uiSettings.setRotateGesturesEnabled(_options.gestures.pan);
+    }
+    if (_options.gestures.zoom != oldWidget.options.gestures.zoom) {
+      uiSettings.setZoomGesturesEnabled(_options.gestures.zoom);
+      uiSettings.setDoubleTapGesturesEnabled(_options.gestures.zoom);
+      uiSettings.setScrollGesturesEnabled(_options.gestures.zoom);
+      uiSettings.setQuickZoomGesturesEnabled(_options.gestures.zoom);
+    }
+    if (_options.gestures.pitch != oldWidget.options.gestures.pitch) {
+      uiSettings.setTiltGesturesEnabled(_options.gestures.pitch);
+    }
+    uiSettings.release();
   }
 
   @override
@@ -112,8 +150,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         minPitch: _options.minPitch,
         maxPitch: _options.maxPitch,
         maxBounds: _options.maxBounds?.toLngLatBounds(),
-        listensOnClick: widget.onEvent != null,
-        listensOnLongClick: widget.onEvent != null,
         gestures: pigeon.MapGestures(
           rotate: _options.gestures.rotate,
           pan: _options.gestures.pan,

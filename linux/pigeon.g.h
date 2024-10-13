@@ -77,15 +77,13 @@ G_DECLARE_FINAL_TYPE(MaplibreMapOptions, maplibre_map_options, MAPLIBRE, MAP_OPT
  * max_zoom: field in this object.
  * min_pitch: field in this object.
  * max_pitch: field in this object.
- * listens_on_click: field in this object.
- * listens_on_long_click: field in this object.
  * gestures: field in this object.
  *
  * Creates a new #MapOptions object.
  *
  * Returns: a new #MaplibreMapOptions
  */
-MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, gboolean listens_on_click, gboolean listens_on_long_click, MaplibreMapGestures* gestures);
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, MaplibreMapGestures* gestures);
 
 /**
  * maplibre_map_options_get_style
@@ -186,26 +184,6 @@ double maplibre_map_options_get_min_pitch(MaplibreMapOptions* object);
  * Returns: the field value.
  */
 double maplibre_map_options_get_max_pitch(MaplibreMapOptions* object);
-
-/**
- * maplibre_map_options_get_listens_on_click
- * @object: a #MaplibreMapOptions.
- *
- * If the native map should listen to click events.
- *
- * Returns: the field value.
- */
-gboolean maplibre_map_options_get_listens_on_click(MaplibreMapOptions* object);
-
-/**
- * maplibre_map_options_get_listens_on_long_click
- * @object: a #MaplibreMapOptions.
- *
- * If the native map should listen to long click events.
- *
- * Returns: the field value.
- */
-gboolean maplibre_map_options_get_listens_on_long_click(MaplibreMapOptions* object);
 
 /**
  * maplibre_map_options_get_gestures
@@ -558,7 +536,6 @@ typedef struct {
   void (*add_symbol_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*load_image)(const gchar* url, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_image)(const gchar* id, const uint8_t* bytes, size_t bytes_length, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*update_options)(MaplibreMapOptions* options, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
 } MaplibreMapLibreHostApiVTable;
 
 /**
@@ -794,25 +771,6 @@ void maplibre_map_libre_host_api_respond_add_image(MaplibreMapLibreHostApiRespon
  * Responds with an error to MapLibreHostApi.addImage. 
  */
 void maplibre_map_libre_host_api_respond_error_add_image(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
-
-/**
- * maplibre_map_libre_host_api_respond_update_options:
- * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
- *
- * Responds to MapLibreHostApi.updateOptions. 
- */
-void maplibre_map_libre_host_api_respond_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle);
-
-/**
- * maplibre_map_libre_host_api_respond_error_update_options:
- * @response_handle: a #MaplibreMapLibreHostApiResponseHandle.
- * @code: error code.
- * @message: error message.
- * @details: (allow-none): error details or %NULL.
- *
- * Responds with an error to MapLibreHostApi.updateOptions. 
- */
-void maplibre_map_libre_host_api_respond_error_update_options(MaplibreMapLibreHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiGetOptionsResponse, maplibre_map_libre_flutter_api_get_options_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_GET_OPTIONS_RESPONSE, GObject)
 

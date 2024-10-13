@@ -121,10 +121,6 @@ struct MapOptions {
   var minPitch: Double
   /// The maximum pitch / tilt of the map.
   var maxPitch: Double
-  /// If the native map should listen to click events.
-  var listensOnClick: Bool
-  /// If the native map should listen to long click events.
-  var listensOnLongClick: Bool
   /// The map gestures.
   var gestures: MapGestures
 
@@ -142,9 +138,7 @@ struct MapOptions {
     let maxZoom = pigeonVar_list[7] as! Double
     let minPitch = pigeonVar_list[8] as! Double
     let maxPitch = pigeonVar_list[9] as! Double
-    let listensOnClick = pigeonVar_list[10] as! Bool
-    let listensOnLongClick = pigeonVar_list[11] as! Bool
-    let gestures = pigeonVar_list[12] as! MapGestures
+    let gestures = pigeonVar_list[10] as! MapGestures
 
     return MapOptions(
       style: style,
@@ -157,8 +151,6 @@ struct MapOptions {
       maxZoom: maxZoom,
       minPitch: minPitch,
       maxPitch: maxPitch,
-      listensOnClick: listensOnClick,
-      listensOnLongClick: listensOnLongClick,
       gestures: gestures
     )
   }
@@ -174,8 +166,6 @@ struct MapOptions {
       maxZoom,
       minPitch,
       maxPitch,
-      listensOnClick,
-      listensOnLongClick,
       gestures,
     ]
   }
@@ -502,8 +492,6 @@ protocol MapLibreHostApi {
   func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
   /// Add an image to the map.
   func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void)
-  /// Update the map options.
-  func updateOptions(options: MapOptions, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -746,24 +734,6 @@ class MapLibreHostApiSetup {
       }
     } else {
       addImageChannel.setMessageHandler(nil)
-    }
-    /// Update the map options.
-    let updateOptionsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      updateOptionsChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let optionsArg = args[0] as! MapOptions
-        api.updateOptions(options: optionsArg) { result in
-          switch result {
-          case .success:
-            reply(wrapResult(nil))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
-        }
-      }
-    } else {
-      updateOptionsChannel.setMessageHandler(nil)
     }
   }
 }

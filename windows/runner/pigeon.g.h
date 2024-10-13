@@ -102,8 +102,6 @@ class MapOptions {
     double max_zoom,
     double min_pitch,
     double max_pitch,
-    bool listens_on_click,
-    bool listens_on_long_click,
     const MapGestures& gestures);
 
   // Constructs an object setting all fields.
@@ -118,8 +116,6 @@ class MapOptions {
     double max_zoom,
     double min_pitch,
     double max_pitch,
-    bool listens_on_click,
-    bool listens_on_long_click,
     const MapGestures& gestures);
 
   ~MapOptions() = default;
@@ -169,14 +165,6 @@ class MapOptions {
   double max_pitch() const;
   void set_max_pitch(double value_arg);
 
-  // If the native map should listen to click events.
-  bool listens_on_click() const;
-  void set_listens_on_click(bool value_arg);
-
-  // If the native map should listen to long click events.
-  bool listens_on_long_click() const;
-  void set_listens_on_long_click(bool value_arg);
-
   // The map gestures.
   const MapGestures& gestures() const;
   void set_gestures(const MapGestures& value_arg);
@@ -198,8 +186,6 @@ class MapOptions {
   double max_zoom_;
   double min_pitch_;
   double max_pitch_;
-  bool listens_on_click_;
-  bool listens_on_long_click_;
   std::unique_ptr<MapGestures> gestures_;
 
 };
@@ -541,10 +527,6 @@ class MapLibreHostApi {
   virtual void AddImage(
     const std::string& id,
     const std::vector<uint8_t>& bytes,
-    std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Update the map options.
-  virtual void UpdateOptions(
-    const MapOptions& options,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
 
   // The codec used by MapLibreHostApi.

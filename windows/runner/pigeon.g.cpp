@@ -39,8 +39,6 @@ MapOptions::MapOptions(
   double max_zoom,
   double min_pitch,
   double max_pitch,
-  bool listens_on_click,
-  bool listens_on_long_click,
   const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
@@ -50,8 +48,6 @@ MapOptions::MapOptions(
     max_zoom_(max_zoom),
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
-    listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click),
     gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(
@@ -65,8 +61,6 @@ MapOptions::MapOptions(
   double max_zoom,
   double min_pitch,
   double max_pitch,
-  bool listens_on_click,
-  bool listens_on_long_click,
   const MapGestures& gestures)
  : style_(style),
     zoom_(zoom),
@@ -78,8 +72,6 @@ MapOptions::MapOptions(
     max_zoom_(max_zoom),
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
-    listens_on_click_(listens_on_click),
-    listens_on_long_click_(listens_on_long_click),
     gestures_(std::make_unique<MapGestures>(gestures)) {}
 
 MapOptions::MapOptions(const MapOptions& other)
@@ -93,8 +85,6 @@ MapOptions::MapOptions(const MapOptions& other)
     max_zoom_(other.max_zoom_),
     min_pitch_(other.min_pitch_),
     max_pitch_(other.max_pitch_),
-    listens_on_click_(other.listens_on_click_),
-    listens_on_long_click_(other.listens_on_long_click_),
     gestures_(std::make_unique<MapGestures>(*other.gestures_)) {}
 
 MapOptions& MapOptions::operator=(const MapOptions& other) {
@@ -108,8 +98,6 @@ MapOptions& MapOptions::operator=(const MapOptions& other) {
   max_zoom_ = other.max_zoom_;
   min_pitch_ = other.min_pitch_;
   max_pitch_ = other.max_pitch_;
-  listens_on_click_ = other.listens_on_click_;
-  listens_on_long_click_ = other.listens_on_long_click_;
   gestures_ = std::make_unique<MapGestures>(*other.gestures_);
   return *this;
 }
@@ -212,24 +200,6 @@ void MapOptions::set_max_pitch(double value_arg) {
 }
 
 
-bool MapOptions::listens_on_click() const {
-  return listens_on_click_;
-}
-
-void MapOptions::set_listens_on_click(bool value_arg) {
-  listens_on_click_ = value_arg;
-}
-
-
-bool MapOptions::listens_on_long_click() const {
-  return listens_on_long_click_;
-}
-
-void MapOptions::set_listens_on_long_click(bool value_arg) {
-  listens_on_long_click_ = value_arg;
-}
-
-
 const MapGestures& MapOptions::gestures() const {
   return *gestures_;
 }
@@ -241,7 +211,7 @@ void MapOptions::set_gestures(const MapGestures& value_arg) {
 
 EncodableList MapOptions::ToEncodableList() const {
   EncodableList list;
-  list.reserve(13);
+  list.reserve(11);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
   list.push_back(EncodableValue(pitch_));
@@ -252,8 +222,6 @@ EncodableList MapOptions::ToEncodableList() const {
   list.push_back(EncodableValue(max_zoom_));
   list.push_back(EncodableValue(min_pitch_));
   list.push_back(EncodableValue(max_pitch_));
-  list.push_back(EncodableValue(listens_on_click_));
-  list.push_back(EncodableValue(listens_on_long_click_));
   list.push_back(CustomEncodableValue(*gestures_));
   return list;
 }
@@ -268,9 +236,7 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
     std::get<double>(list[7]),
     std::get<double>(list[8]),
     std::get<double>(list[9]),
-    std::get<bool>(list[10]),
-    std::get<bool>(list[11]),
-    std::any_cast<const MapGestures&>(std::get<CustomEncodableValue>(list[12])));
+    std::any_cast<const MapGestures&>(std::get<CustomEncodableValue>(list[10])));
   auto& encodable_center = list[4];
   if (!encodable_center.IsNull()) {
     decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
@@ -1252,35 +1218,6 @@ void MapLibreHostApi::SetUp(
           }
           const auto& bytes_arg = std::get<std::vector<uint8_t>>(encodable_bytes_arg);
           api->AddImage(id_arg, bytes_arg, [reply](std::optional<FlutterError>&& output) {
-            if (output.has_value()) {
-              reply(WrapError(output.value()));
-              return;
-            }
-            EncodableList wrapped;
-            wrapped.push_back(EncodableValue());
-            reply(EncodableValue(std::move(wrapped)));
-          });
-        } catch (const std::exception& exception) {
-          reply(WrapError(exception.what()));
-        }
-      });
-    } else {
-      channel.SetMessageHandler(nullptr);
-    }
-  }
-  {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.updateOptions" + prepended_suffix, &GetCodec());
-    if (api != nullptr) {
-      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
-        try {
-          const auto& args = std::get<EncodableList>(message);
-          const auto& encodable_options_arg = args.at(0);
-          if (encodable_options_arg.IsNull()) {
-            reply(WrapError("options_arg unexpectedly null."));
-            return;
-          }
-          const auto& options_arg = std::any_cast<const MapOptions&>(std::get<CustomEncodableValue>(encodable_options_arg));
-          api->UpdateOptions(options_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
               return;
