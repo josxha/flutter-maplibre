@@ -80,7 +80,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    unawaited(_updateOptions(oldWidget));
+    _updateOptions(oldWidget);
     _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -96,6 +96,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
@@ -103,8 +104,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       jniMap.setMinPitchPreference(options.minPitch);
       jniMap.setMaxPitchPreference(options.maxPitch);
 
+
       // map bounds
-      final oldBounds = oldWidget.options.maxBounds;
+      final oldBounds = oldOptions.maxBounds;
       final newBounds = options.maxBounds;
       if (oldBounds != null && newBounds == null) {
         // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
@@ -117,19 +119,19 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
       // gestures
       final uiSettings = jniMap.getUiSettings();
-      if (options.gestures.rotate != oldWidget.options.gestures.rotate) {
+      if (options.gestures.rotate != oldOptions.gestures.rotate) {
         uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
       }
-      if (options.gestures.pan != oldWidget.options.gestures.pan) {
+      if (options.gestures.pan != oldOptions.gestures.pan) {
         uiSettings.setRotateGesturesEnabled(options.gestures.pan);
       }
-      if (options.gestures.zoom != oldWidget.options.gestures.zoom) {
+      if (options.gestures.zoom != oldOptions.gestures.zoom) {
         uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
         uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);
         uiSettings.setScrollGesturesEnabled(options.gestures.zoom);
         uiSettings.setQuickZoomGesturesEnabled(options.gestures.zoom);
       }
-      if (options.gestures.pitch != oldWidget.options.gestures.pitch) {
+      if (options.gestures.pitch != oldOptions.gestures.pitch) {
         uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
       }
       uiSettings.release();
