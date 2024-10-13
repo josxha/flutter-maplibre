@@ -104,7 +104,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       jniMap.setMinPitchPreference(options.minPitch);
       jniMap.setMaxPitchPreference(options.maxPitch);
 
-
       // map bounds
       final oldBounds = oldOptions.maxBounds;
       final newBounds = options.maxBounds;
@@ -203,10 +202,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
 
-    final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
+    final jniMap = _jniMapLibreMap;
     await runOnPlatformThread(() {
-      jniMapLibreMap.moveCamera$1(
+      final completer = Completer<void>();
+      jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
           jni.$MapLibreMap_CancelableCallback(
@@ -214,9 +213,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onFinish$async: true,
+            onCancel$async: true,
           ),
         ),
       );
+      jniMap.moveCamera(cameraUpdate);
       return completer.future;
     });
     cameraUpdate.release();
@@ -244,8 +246,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
 
     final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
     await runOnPlatformThread(() {
+      final completer = Completer<void>();
       jniMapLibreMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
@@ -255,6 +257,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onFinish$async: true,
+            onCancel$async: true,
           ),
         ),
       );
@@ -294,8 +298,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     latLngBounds.release();
 
     final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
     await runOnPlatformThread(() {
+      final completer = Completer<void>();
       jniMapLibreMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
@@ -305,6 +309,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onCancel$async: true,
+            onFinish$async: true,
           ),
         ),
       );
@@ -526,8 +532,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread(() {
+      return jniProjection.getMetersPerPixelAtLatitude(latitude);
+    });
+  }
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
