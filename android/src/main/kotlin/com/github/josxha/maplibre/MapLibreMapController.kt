@@ -2,12 +2,10 @@ package com.github.josxha.maplibre
 
 import CameraChangeReason
 import LngLat
-import LngLatBounds
 import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
-import RasterDemEncoding
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.View
@@ -34,16 +32,13 @@ import org.maplibre.android.style.layers.FillExtrusionLayer
 import org.maplibre.android.style.layers.FillLayer
 import org.maplibre.android.style.layers.HeatmapLayer
 import org.maplibre.android.style.layers.HillshadeLayer
+import org.maplibre.android.style.layers.LayoutPropertyValue
 import org.maplibre.android.style.layers.LineLayer
 import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
-import org.maplibre.android.style.sources.GeoJsonOptions
-import org.maplibre.android.style.sources.GeoJsonSource
-import org.maplibre.android.style.sources.RasterDemSource
 import java.io.IOException
-import java.net.URI
 import java.net.URL
 
 class MapLibreMapController(
@@ -148,7 +143,7 @@ class MapLibreMapController(
 
     private val gson = Gson()
 
-    private fun parseProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
+    private fun parsePaintProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
         entries
             .map { entry ->
                 // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
@@ -164,6 +159,22 @@ class MapLibreMapController(
                 }
             }.toTypedArray()
 
+    private fun parseLayoutProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
+        entries
+            .map { entry ->
+                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+                when (entry.value) {
+                    is ArrayList<*> -> {
+                        val value = entry.value as ArrayList<*>
+                        val json = gson.toJsonTree(value)
+                        val expression = Expression.Converter.convert(json)
+                        LayoutPropertyValue(entry.key, expression)
+                    }
+
+                    else -> LayoutPropertyValue(entry.key, entry.value)
+                }
+            }.toTypedArray()
+
     override fun addFillLayer(
         id: String,
         sourceId: String,
@@ -173,7 +184,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -191,7 +202,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = CircleLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -208,7 +219,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = BackgroundLayer(id)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -226,7 +237,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillExtrusionLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -244,7 +255,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HeatmapLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -262,7 +273,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HillshadeLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -280,7 +291,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = LineLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -316,28 +327,12 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = SymbolLayer(id, sourceId)
-        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
             mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
         }
-        callback(Result.success(Unit))
-    }
-
-    override fun removeLayer(
-        id: String,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        mapLibreMap.style?.removeLayer(id)
-        callback(Result.success(Unit))
-    }
-
-    override fun removeSource(
-        id: String,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        mapLibreMap.style?.removeSource(id)
         callback(Result.success(Unit))
     }
 
@@ -361,74 +356,6 @@ class MapLibreMapController(
     ) {
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
-        callback(Result.success(Unit))
-    }
-
-    override fun removeImage(
-        id: String,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        mapLibreMap.style?.removeImage(id)
-        callback(Result.success(Unit))
-    }
-
-    override fun getCamera(callback: (Result<MapCamera>) -> Unit) {
-        val position = mapLibreMap.cameraPosition
-        val target = mapLibreMap.cameraPosition.target!!
-        val center = LngLat(target.longitude, target.latitude)
-        val camera = MapCamera(center, position.zoom, position.tilt, position.bearing)
-        callback(Result.success(camera))
-    }
-
-    override fun getVisibleRegion(callback: (Result<LngLatBounds>) -> Unit) {
-        val bounds = mapLibreMap.projection.visibleRegion.latLngBounds
-        val lngLatBounds =
-            LngLatBounds(
-                bounds.longitudeWest,
-                bounds.longitudeEast,
-                bounds.latitudeSouth,
-                bounds.latitudeNorth,
-            )
-        callback(Result.success(lngLatBounds))
-    }
-
-    override fun addGeoJsonSource(
-        id: String,
-        data: String,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val options = GeoJsonOptions()
-        val source =
-            if (data.first() == '{') {
-                GeoJsonSource(id, data, options)
-            } else {
-                GeoJsonSource(id, URI(data), options)
-            }
-        mapLibreMap.style?.addSource(source)
-        callback(Result.success(Unit))
-    }
-
-    override fun addRasterDemSource(
-        id: String,
-        url: String?,
-        tiles: List<String>?,
-        bounds: List<Double>,
-        minZoom: Double,
-        maxZoom: Double,
-        tileSize: Long,
-        attribution: String?,
-        encoding: RasterDemEncoding,
-        volatile: Boolean,
-        redFactor: Double,
-        blueFactor: Double,
-        greenFactor: Double,
-        baseShift: Double,
-        callback: (Result<Unit>) -> Unit,
-    ) {
-        val source = RasterDemSource(id, url, tileSize.toInt())
-        source.isVolatile = volatile
-        // TODO apply other properties
-        mapLibreMap.style?.addSource(source)
         callback(Result.success(Unit))
     }
 }
