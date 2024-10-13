@@ -173,7 +173,7 @@ class LocalRequestTask_OnLocalRequestResponse extends _$jni.JObject {
   }
 }
 
-abstract mixin class $LocalRequestTask_OnLocalRequestResponse {
+abstract base mixin class $LocalRequestTask_OnLocalRequestResponse {
   factory $LocalRequestTask_OnLocalRequestResponse({
     required void Function(_$jni.JArray<_$jni.jbyte> bs) onResponse,
     bool onResponse$async,
@@ -183,8 +183,8 @@ abstract mixin class $LocalRequestTask_OnLocalRequestResponse {
   bool get onResponse$async => false;
 }
 
-class _$LocalRequestTask_OnLocalRequestResponse
-    implements $LocalRequestTask_OnLocalRequestResponse {
+final class _$LocalRequestTask_OnLocalRequestResponse
+    with $LocalRequestTask_OnLocalRequestResponse {
   _$LocalRequestTask_OnLocalRequestResponse({
     required void Function(_$jni.JArray<_$jni.jbyte> bs) onResponse,
     this.onResponse$async = false,
