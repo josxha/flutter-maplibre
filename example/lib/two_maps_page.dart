@@ -66,6 +66,8 @@ class _ButtonsWidget extends StatelessWidget {
               controller?.moveCamera(
                 center: Position(172.4714, -42.4862),
                 zoom: 4,
+                bearing: 0,
+                pitch: 0,
               );
             },
             child: const Text('Move to New Zealand'),

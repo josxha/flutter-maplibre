@@ -743,6 +743,8 @@ protocol MapLibreFlutterApiProtocol {
   func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void)
   /// Callback for when the style has been loaded.
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback for when the map is ready and can be used.
+  func onMapReady(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user clicks on the map.
   func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map idles.
@@ -796,6 +798,25 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   /// Callback for when the style has been loaded.
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage(nil) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(PigeonError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(Void()))
+      }
+    }
+  }
+  /// Callback for when the map is ready and can be used.
+  func onMapReady(completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMapReady\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
