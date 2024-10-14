@@ -16,9 +16,12 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
     Polygon(
       coordinates: [
         [
-          Position(9.17, 47.68),
-          Position(9.5, 48),
-          Position(9, 48),
+          Position(8.201306116882563, 48.107357488669464),
+          Position(8.885254895692924, 48.09428546381665),
+          Position(8.759684141159909, 47.69326800157776),
+          Position(9.631980099303235, 48.08929468133098),
+          Position(8.68543348810175, 48.45383566718806),
+          Position(8.201306116882563, 48.107357488669464),
         ],
       ],
     ),
