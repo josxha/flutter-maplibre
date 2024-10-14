@@ -96,6 +96,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    // We need to check for null to avoid crashes of the app when the map
+    // options change before the map has been initialized.
+    if (jniMap.isNull) return;
+
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
@@ -121,6 +125,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       if (options.gestures.rotate != oldOptions.gestures.rotate) {
         uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
       }
+      // TODO: pan is not handled, there is no setPanGestureEnabled on Android.
       /*if (options.gestures.pan != oldOptions.gestures.pan) {
         uiSettings.setRotateGesturesEnabled(options.gestures.pan);
       }*/
