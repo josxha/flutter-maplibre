@@ -96,6 +96,11 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    // We need to check for null to avoid crashes of the app when the map
+    // options change before the map has been initialized.
+    if (jniMap.isNull) return;
+
+    final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
@@ -104,10 +109,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       jniMap.setMaxPitchPreference(options.maxPitch);
 
       // map bounds
-      final oldBounds = oldWidget.options.maxBounds;
+      final oldBounds = oldOptions.maxBounds;
       final newBounds = options.maxBounds;
       if (oldBounds != null && newBounds == null) {
-        // TODO setLatLngBoundsForCameraTarget(@Nullable LatLngBounds latLngBounds)
+        // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
         // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
       } else if ((oldBounds == null && newBounds != null) ||
           (newBounds != null && oldBounds != newBounds)) {
@@ -117,19 +122,20 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
       // gestures
       final uiSettings = jniMap.getUiSettings();
-      if (options.gestures.rotate != oldWidget.options.gestures.rotate) {
+      if (options.gestures.rotate != oldOptions.gestures.rotate) {
         uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
       }
-      if (options.gestures.pan != oldWidget.options.gestures.pan) {
+      // TODO: pan is not handled, there is no setPanGestureEnabled on Android.
+      /*if (options.gestures.pan != oldOptions.gestures.pan) {
         uiSettings.setRotateGesturesEnabled(options.gestures.pan);
-      }
-      if (options.gestures.zoom != oldWidget.options.gestures.zoom) {
+      }*/
+      if (options.gestures.zoom != oldOptions.gestures.zoom) {
         uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
         uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);
         uiSettings.setScrollGesturesEnabled(options.gestures.zoom);
         uiSettings.setQuickZoomGesturesEnabled(options.gestures.zoom);
       }
-      if (options.gestures.pitch != oldWidget.options.gestures.pitch) {
+      if (options.gestures.pitch != oldOptions.gestures.pitch) {
         uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
       }
       uiSettings.release();
@@ -201,10 +207,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
 
-    final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
+    final jniMap = _jniMapLibreMap;
     await runOnPlatformThread(() {
-      jniMapLibreMap.moveCamera$1(
+      final completer = Completer<void>();
+      jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
           jni.$MapLibreMap_CancelableCallback(
@@ -212,9 +218,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onFinish$async: true,
+            onCancel$async: true,
           ),
         ),
       );
+      jniMap.moveCamera(cameraUpdate);
       return completer.future;
     });
     cameraUpdate.release();
@@ -242,8 +251,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
 
     final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
     await runOnPlatformThread(() {
+      final completer = Completer<void>();
       jniMapLibreMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
@@ -253,6 +262,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onFinish$async: true,
+            onCancel$async: true,
           ),
         ),
       );
@@ -292,8 +303,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     latLngBounds.release();
 
     final jniMapLibreMap = _jniMapLibreMap;
-    final completer = Completer<void>();
     await runOnPlatformThread(() {
+      final completer = Completer<void>();
       jniMapLibreMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
@@ -303,6 +314,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
               Exception('Animation cancelled.'),
             ),
             onFinish: completer.complete,
+            onCancel$async: true,
+            onFinish$async: true,
           ),
         ),
       );
@@ -383,69 +396,68 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<void> addSource(Source source) async {
     final jniStyle = _jniStyle;
-    final jni.Source jniSource;
     final jniId = source.id.toJString();
-    switch (source) {
-      case GeoJsonSource():
-        final jniOptions = jni.GeoJsonOptions();
-        final jniData = source.data.toJString();
-        if (source.data.startsWith('{')) {
-          jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
-        } else {
-          final jniUri = jni.URI.create(jniData);
-          jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
-          jniUri.release();
-        }
-        jniOptions.release();
-      case RasterDemSource():
-        jniSource = jni.RasterDemSource.new$4(
-          jniId,
-          source.url!.toJString(),
-          source.tileSize,
-        );
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case RasterSource():
-        if (source.url case final String url) {
-          jniSource =
-              jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
-        } else {
-          // TODO improve this
-          final tilesArray = JArray(JString.type, source.tiles!.length);
-          for (var i = 0; i < source.tiles!.length; i++) {
-            tilesArray[i] = source.tiles![i].toJString();
-          }
-          final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
-            ..setMaxZoom(source.maxZoom)
-            ..setMinZoom(source.minZoom);
-          jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
-          tilesArray.release();
-          tileSet.release();
-        }
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case VectorSource():
-        jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
-        // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
-      case ImageSource():
-        final jniQuad = jni.LatLngQuad(
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-          source.coordinates[0].toLatLng(),
-        );
-        final jniUri = jni.URI(source.url.toJString());
-        jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
-        jniUri.release();
-        jniQuad.release();
-      case VideoSource():
-        throw UnimplementedError('Video source is only supported on web.');
-    }
     await runOnPlatformThread(() {
+      final jni.Source jniSource;
+      switch (source) {
+        case GeoJsonSource():
+          final jniOptions = jni.GeoJsonOptions();
+          final jniData = source.data.toJString();
+          if (source.data.startsWith('{')) {
+            jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
+          } else {
+            final jniUri = jni.URI.create(jniData);
+            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+            jniUri.release();
+          }
+          jniOptions.release();
+        case RasterDemSource():
+          jniSource = jni.RasterDemSource.new$4(
+            jniId,
+            source.url!.toJString(),
+            source.tileSize,
+          );
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case RasterSource():
+          if (source.url case final String url) {
+            jniSource =
+                jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+          } else {
+            final tilesArray = JArray(JString.type, source.tiles!.length);
+            for (var i = 0; i < source.tiles!.length; i++) {
+              tilesArray[i] = source.tiles![i].toJString();
+            }
+            final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
+              ..setMaxZoom(source.maxZoom)
+              ..setMinZoom(source.minZoom);
+            jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
+            tilesArray.release();
+            tileSet.release();
+          }
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case VectorSource():
+          jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
+          // TODO apply other properties
+          jniSource.setVolatile(source.volatile.toJBoolean());
+        case ImageSource():
+          final jniQuad = jni.LatLngQuad(
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+            source.coordinates[0].toLatLng(),
+          );
+          final jniUri = jni.URI(source.url.toJString());
+          jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
+          jniUri.release();
+          jniQuad.release();
+        case VideoSource():
+          throw UnimplementedError('Video source is only supported on web.');
+      }
       jniStyle.addSource(jniSource);
+      jniSource.release();
     });
-    jniSource.release();
   }
 
   @override
@@ -525,8 +537,12 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread(() {
+      return jniProjection.getMetersPerPixelAtLatitude(latitude);
+    });
+  }
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
