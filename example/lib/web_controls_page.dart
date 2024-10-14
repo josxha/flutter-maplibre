@@ -24,7 +24,7 @@ class _WebControlsPageState extends State<WebControlsPage> {
             WebScaleControl(),
             WebGeolocateControl(),
             WebFullscreenControl(),
-            LogoControl(),
+            WebLogoControl(),
             WebNavigationControl(visualizePitch: true),
           ],
         ),

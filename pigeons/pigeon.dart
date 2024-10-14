@@ -23,53 +23,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
-  /// Move the viewport of the map to a new location without any animation.
-  @async
-  void moveCamera({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-  });
-
-  /// Animate the viewport of the map to a new location.
-  @async
-  void animateCamera({
-    required LngLat? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-    required int durationMs,
-  });
-
-  /// Animate the viewport of the map to a new location.
-  @async
-  void fitBounds({
-    required LngLatBounds bounds,
-    required Offset? offset,
-    required Padding padding,
-    required double? bearing,
-    required double? pitch,
-    required int durationMs,
-  });
-
-  /// Get the current camera position with the map center, zoom level, camera
-  /// pitch and map rotation.
-  @async
-  MapCamera getCamera();
-
-  /// Get the visible region of the current map camera.
-  @async
-  LngLatBounds getVisibleRegion();
-
-  /// Convert a coordinate to a location on the screen.
-  @async
-  Offset toScreenLocation(double lng, double lat);
-
-  /// Convert a screen location to a coordinate.
-  @async
-  LngLat toLngLat(double x, double y);
-
   /// Add a fill layer to the map style.
   @async
   void addFillLayer({
@@ -159,14 +112,6 @@ abstract interface class MapLibreHostApi {
     String? belowLayerId,
   });
 
-  /// Removes the layer with the given ID from the map's style.
-  @async
-  void removeLayer(String id);
-
-  /// Removes the source with the given ID from the map's style.
-  @async
-  void removeSource(String id);
-
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
   @async
@@ -175,89 +120,6 @@ abstract interface class MapLibreHostApi {
   /// Add an image to the map.
   @async
   void addImage(String id, Uint8List bytes);
-
-  /// Removes an image from the map
-  @async
-  void removeImage(String id);
-
-  /// Add a GeoJSON source to the map style.
-  @async
-  void addGeoJsonSource({
-    required String id,
-    required String data,
-  });
-
-  /// Update the data of a GeoJSON source.
-  @async
-  void updateGeoJsonSource({
-    required String id,
-    required String data,
-  });
-
-  /// Add a image source to the map style.
-  @async
-  void addImageSource({
-    required String id,
-    required String url,
-    required List<LngLat> coordinates,
-  });
-
-  /// Add a raster source to the map style.
-  @async
-  void addRasterSource({
-    required String id,
-    required String? url,
-    required List<String>? tiles,
-    required List<double> bounds,
-    required double minZoom,
-    required double maxZoom,
-    required int tileSize,
-    required TileScheme scheme,
-    required String? attribution,
-    required bool volatile,
-  });
-
-  /// Add a raster DEM source to the map style.
-  @async
-  void addRasterDemSource({
-    required String id,
-    required String? url,
-    required List<String>? tiles,
-    required List<double> bounds,
-    required double minZoom,
-    required double maxZoom,
-    required int tileSize,
-    required String? attribution,
-    required RasterDemEncoding encoding,
-    required bool volatile,
-    double redFactor = 1,
-    double blueFactor = 1,
-    double greenFactor = 1,
-    double baseShift = 0,
-  });
-
-  /// Add a vector source to the map style.
-  @async
-  void addVectorSource({
-    required String id,
-    required String? url,
-    required List<String>? tiles,
-    required List<double> bounds,
-    required TileScheme scheme,
-    required double minZoom,
-    required double maxZoom,
-    required String? attribution,
-    required bool volatile,
-    required String? sourceLayer,
-  });
-
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
-  double getMetersPerPixelAtLatitude(double latitude);
-
-  /// Update the map options.
-  @async
-  void updateOptions(MapOptions options);
 }
 
 @FlutterApi()
@@ -307,8 +169,6 @@ class MapOptions {
     required this.maxZoom,
     required this.minPitch,
     required this.maxPitch,
-    required this.listensOnClick,
-    required this.listensOnLongClick,
     required this.gestures,
   });
 
@@ -341,12 +201,6 @@ class MapOptions {
 
   /// The maximum pitch / tilt of the map.
   final double maxPitch;
-
-  /// If the native map should listen to click events.
-  final bool listensOnClick;
-
-  /// If the native map should listen to long click events.
-  final bool listensOnLongClick;
 
   /// The map gestures.
   final MapGestures gestures;

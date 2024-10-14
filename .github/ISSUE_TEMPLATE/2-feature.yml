@@ -4,14 +4,14 @@ title: "[FEATURE] <title>"
 labels: [ "feature" ]
 body:
   - type: textarea
-    id: details
+    id: description
     attributes:
       label: Feature Description
       description: Please describe the feature you have in mind.
     validations:
       required: true
   - type: textarea
-    id: details
+    id: usecase
     attributes:
       label: Sample Use Case
       description: It is important to have at least one real-work szenario where this feature is required. There is no need to share any personal information here.

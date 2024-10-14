@@ -93,7 +93,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     debugPrint(camera.toString());
                     if (context.mounted) {
                       await showDialog<void>(
@@ -123,7 +123,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
                     final meters =
                         await _controller.getMetersPerPixelAtLatitude(lat);
@@ -158,6 +158,47 @@ pitch: ${camera.pitch}'''),
                   },
                   child: const Text(
                     'Visible\nregion',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final lngLat = await _controller.toLngLat(Offset.zero);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Position(${lngLat.lng}, ${lngLat.lat})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toLngLat 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final offset =
+                        await _controller.toScreenLocation(Position(0, 0));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Offset(${offset.dx}, ${offset.dy})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toScreenLocation 0,0',
                     textAlign: TextAlign.center,
                   ),
                 ),

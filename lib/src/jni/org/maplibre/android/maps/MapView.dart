@@ -178,7 +178,7 @@ class MapView_OnCameraDidChangeListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnCameraDidChangeListener {
+abstract base mixin class $MapView_OnCameraDidChangeListener {
   factory $MapView_OnCameraDidChangeListener({
     required void Function(bool z) onCameraDidChange,
     bool onCameraDidChange$async,
@@ -188,8 +188,8 @@ abstract mixin class $MapView_OnCameraDidChangeListener {
   bool get onCameraDidChange$async => false;
 }
 
-class _$MapView_OnCameraDidChangeListener
-    implements $MapView_OnCameraDidChangeListener {
+final class _$MapView_OnCameraDidChangeListener
+    with $MapView_OnCameraDidChangeListener {
   _$MapView_OnCameraDidChangeListener({
     required void Function(bool z) onCameraDidChange,
     this.onCameraDidChange$async = false,
@@ -356,7 +356,7 @@ class MapView_OnCameraIsChangingListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnCameraIsChangingListener {
+abstract base mixin class $MapView_OnCameraIsChangingListener {
   factory $MapView_OnCameraIsChangingListener({
     required void Function() onCameraIsChanging,
     bool onCameraIsChanging$async,
@@ -366,8 +366,8 @@ abstract mixin class $MapView_OnCameraIsChangingListener {
   bool get onCameraIsChanging$async => false;
 }
 
-class _$MapView_OnCameraIsChangingListener
-    implements $MapView_OnCameraIsChangingListener {
+final class _$MapView_OnCameraIsChangingListener
+    with $MapView_OnCameraIsChangingListener {
   _$MapView_OnCameraIsChangingListener({
     required void Function() onCameraIsChanging,
     this.onCameraIsChanging$async = false,
@@ -539,7 +539,7 @@ class MapView_OnCameraWillChangeListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnCameraWillChangeListener {
+abstract base mixin class $MapView_OnCameraWillChangeListener {
   factory $MapView_OnCameraWillChangeListener({
     required void Function(bool z) onCameraWillChange,
     bool onCameraWillChange$async,
@@ -549,8 +549,8 @@ abstract mixin class $MapView_OnCameraWillChangeListener {
   bool get onCameraWillChange$async => false;
 }
 
-class _$MapView_OnCameraWillChangeListener
-    implements $MapView_OnCameraWillChangeListener {
+final class _$MapView_OnCameraWillChangeListener
+    with $MapView_OnCameraWillChangeListener {
   _$MapView_OnCameraWillChangeListener({
     required void Function(bool z) onCameraWillChange,
     this.onCameraWillChange$async = false,
@@ -722,7 +722,7 @@ class MapView_OnCanRemoveUnusedStyleImageListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnCanRemoveUnusedStyleImageListener {
+abstract base mixin class $MapView_OnCanRemoveUnusedStyleImageListener {
   factory $MapView_OnCanRemoveUnusedStyleImageListener({
     required bool Function(_$jni.JString string) onCanRemoveUnusedStyleImage,
   }) = _$MapView_OnCanRemoveUnusedStyleImageListener;
@@ -730,8 +730,8 @@ abstract mixin class $MapView_OnCanRemoveUnusedStyleImageListener {
   bool onCanRemoveUnusedStyleImage(_$jni.JString string);
 }
 
-class _$MapView_OnCanRemoveUnusedStyleImageListener
-    implements $MapView_OnCanRemoveUnusedStyleImageListener {
+final class _$MapView_OnCanRemoveUnusedStyleImageListener
+    with $MapView_OnCanRemoveUnusedStyleImageListener {
   _$MapView_OnCanRemoveUnusedStyleImageListener({
     required bool Function(_$jni.JString string) onCanRemoveUnusedStyleImage,
   }) : _onCanRemoveUnusedStyleImage = onCanRemoveUnusedStyleImage;
@@ -898,7 +898,7 @@ class MapView_OnDidBecomeIdleListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidBecomeIdleListener {
+abstract base mixin class $MapView_OnDidBecomeIdleListener {
   factory $MapView_OnDidBecomeIdleListener({
     required void Function() onDidBecomeIdle,
     bool onDidBecomeIdle$async,
@@ -908,8 +908,8 @@ abstract mixin class $MapView_OnDidBecomeIdleListener {
   bool get onDidBecomeIdle$async => false;
 }
 
-class _$MapView_OnDidBecomeIdleListener
-    implements $MapView_OnDidBecomeIdleListener {
+final class _$MapView_OnDidBecomeIdleListener
+    with $MapView_OnDidBecomeIdleListener {
   _$MapView_OnDidBecomeIdleListener({
     required void Function() onDidBecomeIdle,
     this.onDidBecomeIdle$async = false,
@@ -1082,7 +1082,7 @@ class MapView_OnDidFailLoadingMapListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidFailLoadingMapListener {
+abstract base mixin class $MapView_OnDidFailLoadingMapListener {
   factory $MapView_OnDidFailLoadingMapListener({
     required void Function(_$jni.JString string) onDidFailLoadingMap,
     bool onDidFailLoadingMap$async,
@@ -1092,8 +1092,8 @@ abstract mixin class $MapView_OnDidFailLoadingMapListener {
   bool get onDidFailLoadingMap$async => false;
 }
 
-class _$MapView_OnDidFailLoadingMapListener
-    implements $MapView_OnDidFailLoadingMapListener {
+final class _$MapView_OnDidFailLoadingMapListener
+    with $MapView_OnDidFailLoadingMapListener {
   _$MapView_OnDidFailLoadingMapListener({
     required void Function(_$jni.JString string) onDidFailLoadingMap,
     this.onDidFailLoadingMap$async = false,
@@ -1261,7 +1261,7 @@ class MapView_OnDidFinishLoadingMapListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidFinishLoadingMapListener {
+abstract base mixin class $MapView_OnDidFinishLoadingMapListener {
   factory $MapView_OnDidFinishLoadingMapListener({
     required void Function() onDidFinishLoadingMap,
     bool onDidFinishLoadingMap$async,
@@ -1271,8 +1271,8 @@ abstract mixin class $MapView_OnDidFinishLoadingMapListener {
   bool get onDidFinishLoadingMap$async => false;
 }
 
-class _$MapView_OnDidFinishLoadingMapListener
-    implements $MapView_OnDidFinishLoadingMapListener {
+final class _$MapView_OnDidFinishLoadingMapListener
+    with $MapView_OnDidFinishLoadingMapListener {
   _$MapView_OnDidFinishLoadingMapListener({
     required void Function() onDidFinishLoadingMap,
     this.onDidFinishLoadingMap$async = false,
@@ -1440,7 +1440,7 @@ class MapView_OnDidFinishLoadingStyleListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidFinishLoadingStyleListener {
+abstract base mixin class $MapView_OnDidFinishLoadingStyleListener {
   factory $MapView_OnDidFinishLoadingStyleListener({
     required void Function() onDidFinishLoadingStyle,
     bool onDidFinishLoadingStyle$async,
@@ -1450,8 +1450,8 @@ abstract mixin class $MapView_OnDidFinishLoadingStyleListener {
   bool get onDidFinishLoadingStyle$async => false;
 }
 
-class _$MapView_OnDidFinishLoadingStyleListener
-    implements $MapView_OnDidFinishLoadingStyleListener {
+final class _$MapView_OnDidFinishLoadingStyleListener
+    with $MapView_OnDidFinishLoadingStyleListener {
   _$MapView_OnDidFinishLoadingStyleListener({
     required void Function() onDidFinishLoadingStyle,
     this.onDidFinishLoadingStyle$async = false,
@@ -1642,7 +1642,7 @@ class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidFinishRenderingFrameListener {
+abstract base mixin class $MapView_OnDidFinishRenderingFrameListener {
   factory $MapView_OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
         onDidFinishRenderingFrame,
@@ -1653,8 +1653,8 @@ abstract mixin class $MapView_OnDidFinishRenderingFrameListener {
   bool get onDidFinishRenderingFrame$async => false;
 }
 
-class _$MapView_OnDidFinishRenderingFrameListener
-    implements $MapView_OnDidFinishRenderingFrameListener {
+final class _$MapView_OnDidFinishRenderingFrameListener
+    with $MapView_OnDidFinishRenderingFrameListener {
   _$MapView_OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
         onDidFinishRenderingFrame,
@@ -1829,7 +1829,7 @@ class MapView_OnDidFinishRenderingMapListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnDidFinishRenderingMapListener {
+abstract base mixin class $MapView_OnDidFinishRenderingMapListener {
   factory $MapView_OnDidFinishRenderingMapListener({
     required void Function(bool z) onDidFinishRenderingMap,
     bool onDidFinishRenderingMap$async,
@@ -1839,8 +1839,8 @@ abstract mixin class $MapView_OnDidFinishRenderingMapListener {
   bool get onDidFinishRenderingMap$async => false;
 }
 
-class _$MapView_OnDidFinishRenderingMapListener
-    implements $MapView_OnDidFinishRenderingMapListener {
+final class _$MapView_OnDidFinishRenderingMapListener
+    with $MapView_OnDidFinishRenderingMapListener {
   _$MapView_OnDidFinishRenderingMapListener({
     required void Function(bool z) onDidFinishRenderingMap,
     this.onDidFinishRenderingMap$async = false,
@@ -2024,7 +2024,7 @@ class MapView_OnGlyphsErrorListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnGlyphsErrorListener {
+abstract base mixin class $MapView_OnGlyphsErrorListener {
   factory $MapView_OnGlyphsErrorListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsError,
@@ -2035,8 +2035,8 @@ abstract mixin class $MapView_OnGlyphsErrorListener {
   bool get onGlyphsError$async => false;
 }
 
-class _$MapView_OnGlyphsErrorListener
-    implements $MapView_OnGlyphsErrorListener {
+final class _$MapView_OnGlyphsErrorListener
+    with $MapView_OnGlyphsErrorListener {
   _$MapView_OnGlyphsErrorListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsError,
@@ -2221,7 +2221,7 @@ class MapView_OnGlyphsLoadedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnGlyphsLoadedListener {
+abstract base mixin class $MapView_OnGlyphsLoadedListener {
   factory $MapView_OnGlyphsLoadedListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsLoaded,
@@ -2232,8 +2232,8 @@ abstract mixin class $MapView_OnGlyphsLoadedListener {
   bool get onGlyphsLoaded$async => false;
 }
 
-class _$MapView_OnGlyphsLoadedListener
-    implements $MapView_OnGlyphsLoadedListener {
+final class _$MapView_OnGlyphsLoadedListener
+    with $MapView_OnGlyphsLoadedListener {
   _$MapView_OnGlyphsLoadedListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsLoaded,
@@ -2422,7 +2422,7 @@ class MapView_OnGlyphsRequestedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnGlyphsRequestedListener {
+abstract base mixin class $MapView_OnGlyphsRequestedListener {
   factory $MapView_OnGlyphsRequestedListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsRequested,
@@ -2433,8 +2433,8 @@ abstract mixin class $MapView_OnGlyphsRequestedListener {
   bool get onGlyphsRequested$async => false;
 }
 
-class _$MapView_OnGlyphsRequestedListener
-    implements $MapView_OnGlyphsRequestedListener {
+final class _$MapView_OnGlyphsRequestedListener
+    with $MapView_OnGlyphsRequestedListener {
   _$MapView_OnGlyphsRequestedListener({
     required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
         onGlyphsRequested,
@@ -2623,7 +2623,7 @@ class MapView_OnPostCompileShaderListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnPostCompileShaderListener {
+abstract base mixin class $MapView_OnPostCompileShaderListener {
   factory $MapView_OnPostCompileShaderListener({
     required void Function(int i, int i1, _$jni.JString string)
         onPostCompileShader,
@@ -2634,8 +2634,8 @@ abstract mixin class $MapView_OnPostCompileShaderListener {
   bool get onPostCompileShader$async => false;
 }
 
-class _$MapView_OnPostCompileShaderListener
-    implements $MapView_OnPostCompileShaderListener {
+final class _$MapView_OnPostCompileShaderListener
+    with $MapView_OnPostCompileShaderListener {
   _$MapView_OnPostCompileShaderListener({
     required void Function(int i, int i1, _$jni.JString string)
         onPostCompileShader,
@@ -2824,7 +2824,7 @@ class MapView_OnPreCompileShaderListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnPreCompileShaderListener {
+abstract base mixin class $MapView_OnPreCompileShaderListener {
   factory $MapView_OnPreCompileShaderListener({
     required void Function(int i, int i1, _$jni.JString string)
         onPreCompileShader,
@@ -2835,8 +2835,8 @@ abstract mixin class $MapView_OnPreCompileShaderListener {
   bool get onPreCompileShader$async => false;
 }
 
-class _$MapView_OnPreCompileShaderListener
-    implements $MapView_OnPreCompileShaderListener {
+final class _$MapView_OnPreCompileShaderListener
+    with $MapView_OnPreCompileShaderListener {
   _$MapView_OnPreCompileShaderListener({
     required void Function(int i, int i1, _$jni.JString string)
         onPreCompileShader,
@@ -3025,7 +3025,7 @@ class MapView_OnShaderCompileFailedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnShaderCompileFailedListener {
+abstract base mixin class $MapView_OnShaderCompileFailedListener {
   factory $MapView_OnShaderCompileFailedListener({
     required void Function(int i, int i1, _$jni.JString string)
         onShaderCompileFailed,
@@ -3036,8 +3036,8 @@ abstract mixin class $MapView_OnShaderCompileFailedListener {
   bool get onShaderCompileFailed$async => false;
 }
 
-class _$MapView_OnShaderCompileFailedListener
-    implements $MapView_OnShaderCompileFailedListener {
+final class _$MapView_OnShaderCompileFailedListener
+    with $MapView_OnShaderCompileFailedListener {
   _$MapView_OnShaderCompileFailedListener({
     required void Function(int i, int i1, _$jni.JString string)
         onShaderCompileFailed,
@@ -3212,7 +3212,7 @@ class MapView_OnSourceChangedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnSourceChangedListener {
+abstract base mixin class $MapView_OnSourceChangedListener {
   factory $MapView_OnSourceChangedListener({
     required void Function(_$jni.JString string) onSourceChangedListener,
     bool onSourceChangedListener$async,
@@ -3222,8 +3222,8 @@ abstract mixin class $MapView_OnSourceChangedListener {
   bool get onSourceChangedListener$async => false;
 }
 
-class _$MapView_OnSourceChangedListener
-    implements $MapView_OnSourceChangedListener {
+final class _$MapView_OnSourceChangedListener
+    with $MapView_OnSourceChangedListener {
   _$MapView_OnSourceChangedListener({
     required void Function(_$jni.JString string) onSourceChangedListener,
     this.onSourceChangedListener$async = false,
@@ -3401,7 +3401,7 @@ class MapView_OnSpriteErrorListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnSpriteErrorListener {
+abstract base mixin class $MapView_OnSpriteErrorListener {
   factory $MapView_OnSpriteErrorListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteError,
@@ -3412,8 +3412,8 @@ abstract mixin class $MapView_OnSpriteErrorListener {
   bool get onSpriteError$async => false;
 }
 
-class _$MapView_OnSpriteErrorListener
-    implements $MapView_OnSpriteErrorListener {
+final class _$MapView_OnSpriteErrorListener
+    with $MapView_OnSpriteErrorListener {
   _$MapView_OnSpriteErrorListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteError,
@@ -3593,7 +3593,7 @@ class MapView_OnSpriteLoadedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnSpriteLoadedListener {
+abstract base mixin class $MapView_OnSpriteLoadedListener {
   factory $MapView_OnSpriteLoadedListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteLoaded,
@@ -3604,8 +3604,8 @@ abstract mixin class $MapView_OnSpriteLoadedListener {
   bool get onSpriteLoaded$async => false;
 }
 
-class _$MapView_OnSpriteLoadedListener
-    implements $MapView_OnSpriteLoadedListener {
+final class _$MapView_OnSpriteLoadedListener
+    with $MapView_OnSpriteLoadedListener {
   _$MapView_OnSpriteLoadedListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteLoaded,
@@ -3788,7 +3788,7 @@ class MapView_OnSpriteRequestedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnSpriteRequestedListener {
+abstract base mixin class $MapView_OnSpriteRequestedListener {
   factory $MapView_OnSpriteRequestedListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteRequested,
@@ -3799,8 +3799,8 @@ abstract mixin class $MapView_OnSpriteRequestedListener {
   bool get onSpriteRequested$async => false;
 }
 
-class _$MapView_OnSpriteRequestedListener
-    implements $MapView_OnSpriteRequestedListener {
+final class _$MapView_OnSpriteRequestedListener
+    with $MapView_OnSpriteRequestedListener {
   _$MapView_OnSpriteRequestedListener({
     required void Function(_$jni.JString string, _$jni.JString string1)
         onSpriteRequested,
@@ -3975,7 +3975,7 @@ class MapView_OnStyleImageMissingListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnStyleImageMissingListener {
+abstract base mixin class $MapView_OnStyleImageMissingListener {
   factory $MapView_OnStyleImageMissingListener({
     required void Function(_$jni.JString string) onStyleImageMissing,
     bool onStyleImageMissing$async,
@@ -3985,8 +3985,8 @@ abstract mixin class $MapView_OnStyleImageMissingListener {
   bool get onStyleImageMissing$async => false;
 }
 
-class _$MapView_OnStyleImageMissingListener
-    implements $MapView_OnStyleImageMissingListener {
+final class _$MapView_OnStyleImageMissingListener
+    with $MapView_OnStyleImageMissingListener {
   _$MapView_OnStyleImageMissingListener({
     required void Function(_$jni.JString string) onStyleImageMissing,
     this.onStyleImageMissing$async = false,
@@ -4204,7 +4204,7 @@ class MapView_OnTileActionListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnTileActionListener {
+abstract base mixin class $MapView_OnTileActionListener {
   factory $MapView_OnTileActionListener({
     required void Function(_$jni.JObject tileOperation, int i, int i1, int i2,
             int i3, int i4, _$jni.JString string)
@@ -4217,7 +4217,7 @@ abstract mixin class $MapView_OnTileActionListener {
   bool get onTileAction$async => false;
 }
 
-class _$MapView_OnTileActionListener implements $MapView_OnTileActionListener {
+final class _$MapView_OnTileActionListener with $MapView_OnTileActionListener {
   _$MapView_OnTileActionListener({
     required void Function(_$jni.JObject tileOperation, int i, int i1, int i2,
             int i3, int i4, _$jni.JString string)
@@ -4388,7 +4388,7 @@ class MapView_OnWillStartLoadingMapListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnWillStartLoadingMapListener {
+abstract base mixin class $MapView_OnWillStartLoadingMapListener {
   factory $MapView_OnWillStartLoadingMapListener({
     required void Function() onWillStartLoadingMap,
     bool onWillStartLoadingMap$async,
@@ -4398,8 +4398,8 @@ abstract mixin class $MapView_OnWillStartLoadingMapListener {
   bool get onWillStartLoadingMap$async => false;
 }
 
-class _$MapView_OnWillStartLoadingMapListener
-    implements $MapView_OnWillStartLoadingMapListener {
+final class _$MapView_OnWillStartLoadingMapListener
+    with $MapView_OnWillStartLoadingMapListener {
   _$MapView_OnWillStartLoadingMapListener({
     required void Function() onWillStartLoadingMap,
     this.onWillStartLoadingMap$async = false,
@@ -4568,7 +4568,7 @@ class MapView_OnWillStartRenderingFrameListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnWillStartRenderingFrameListener {
+abstract base mixin class $MapView_OnWillStartRenderingFrameListener {
   factory $MapView_OnWillStartRenderingFrameListener({
     required void Function() onWillStartRenderingFrame,
     bool onWillStartRenderingFrame$async,
@@ -4578,8 +4578,8 @@ abstract mixin class $MapView_OnWillStartRenderingFrameListener {
   bool get onWillStartRenderingFrame$async => false;
 }
 
-class _$MapView_OnWillStartRenderingFrameListener
-    implements $MapView_OnWillStartRenderingFrameListener {
+final class _$MapView_OnWillStartRenderingFrameListener
+    with $MapView_OnWillStartRenderingFrameListener {
   _$MapView_OnWillStartRenderingFrameListener({
     required void Function() onWillStartRenderingFrame,
     this.onWillStartRenderingFrame$async = false,
@@ -4749,7 +4749,7 @@ class MapView_OnWillStartRenderingMapListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $MapView_OnWillStartRenderingMapListener {
+abstract base mixin class $MapView_OnWillStartRenderingMapListener {
   factory $MapView_OnWillStartRenderingMapListener({
     required void Function() onWillStartRenderingMap,
     bool onWillStartRenderingMap$async,
@@ -4759,8 +4759,8 @@ abstract mixin class $MapView_OnWillStartRenderingMapListener {
   bool get onWillStartRenderingMap$async => false;
 }
 
-class _$MapView_OnWillStartRenderingMapListener
-    implements $MapView_OnWillStartRenderingMapListener {
+final class _$MapView_OnWillStartRenderingMapListener
+    with $MapView_OnWillStartRenderingMapListener {
   _$MapView_OnWillStartRenderingMapListener({
     required void Function() onWillStartRenderingMap,
     this.onWillStartRenderingMap$async = false,

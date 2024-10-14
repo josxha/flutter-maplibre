@@ -94,7 +94,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             final WebFullscreenControl _ => interop.FullscreenControl(
                 interop.FullscreenControlOptions(),
               ),
-            final LogoControl control => interop.LogoControl(
+            final WebLogoControl control => interop.LogoControl(
                 interop.LogoControlOptions(compact: control.compact),
               ),
             final WebNavigationControl control => interop.NavigationControl(
@@ -517,7 +517,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<MapCamera> getCamera() async => MapCamera(
+  MapCamera getCamera() => MapCamera(
         center: _map.getCenter().toPosition(),
         zoom: _map.getZoom().toDouble(),
         pitch: _map.getPitch().toDouble(),

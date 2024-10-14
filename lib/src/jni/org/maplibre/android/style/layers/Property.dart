@@ -139,11 +139,11 @@ class Property_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ANCHOR {
+abstract base mixin class $Property_ANCHOR {
   factory $Property_ANCHOR() = _$Property_ANCHOR;
 }
 
-class _$Property_ANCHOR implements $Property_ANCHOR {
+final class _$Property_ANCHOR with $Property_ANCHOR {
   _$Property_ANCHOR();
 }
 
@@ -269,13 +269,13 @@ class Property_CIRCLE_PITCH_ALIGNMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_CIRCLE_PITCH_ALIGNMENT {
+abstract base mixin class $Property_CIRCLE_PITCH_ALIGNMENT {
   factory $Property_CIRCLE_PITCH_ALIGNMENT() =
       _$Property_CIRCLE_PITCH_ALIGNMENT;
 }
 
-class _$Property_CIRCLE_PITCH_ALIGNMENT
-    implements $Property_CIRCLE_PITCH_ALIGNMENT {
+final class _$Property_CIRCLE_PITCH_ALIGNMENT
+    with $Property_CIRCLE_PITCH_ALIGNMENT {
   _$Property_CIRCLE_PITCH_ALIGNMENT();
 }
 
@@ -402,11 +402,11 @@ class Property_CIRCLE_PITCH_SCALE extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_CIRCLE_PITCH_SCALE {
+abstract base mixin class $Property_CIRCLE_PITCH_SCALE {
   factory $Property_CIRCLE_PITCH_SCALE() = _$Property_CIRCLE_PITCH_SCALE;
 }
 
-class _$Property_CIRCLE_PITCH_SCALE implements $Property_CIRCLE_PITCH_SCALE {
+final class _$Property_CIRCLE_PITCH_SCALE with $Property_CIRCLE_PITCH_SCALE {
   _$Property_CIRCLE_PITCH_SCALE();
 }
 
@@ -533,13 +533,13 @@ class Property_CIRCLE_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_CIRCLE_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_CIRCLE_TRANSLATE_ANCHOR {
   factory $Property_CIRCLE_TRANSLATE_ANCHOR() =
       _$Property_CIRCLE_TRANSLATE_ANCHOR;
 }
 
-class _$Property_CIRCLE_TRANSLATE_ANCHOR
-    implements $Property_CIRCLE_TRANSLATE_ANCHOR {
+final class _$Property_CIRCLE_TRANSLATE_ANCHOR
+    with $Property_CIRCLE_TRANSLATE_ANCHOR {
   _$Property_CIRCLE_TRANSLATE_ANCHOR();
 }
 
@@ -667,13 +667,13 @@ class Property_FILL_EXTRUSION_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
   factory $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR() =
       _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR;
 }
 
-class _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR
-    implements $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
+final class _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR
+    with $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
   _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR();
 }
 
@@ -802,12 +802,12 @@ class Property_FILL_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_FILL_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_FILL_TRANSLATE_ANCHOR {
   factory $Property_FILL_TRANSLATE_ANCHOR() = _$Property_FILL_TRANSLATE_ANCHOR;
 }
 
-class _$Property_FILL_TRANSLATE_ANCHOR
-    implements $Property_FILL_TRANSLATE_ANCHOR {
+final class _$Property_FILL_TRANSLATE_ANCHOR
+    with $Property_FILL_TRANSLATE_ANCHOR {
   _$Property_FILL_TRANSLATE_ANCHOR();
 }
 
@@ -935,13 +935,13 @@ class Property_HILLSHADE_ILLUMINATION_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_HILLSHADE_ILLUMINATION_ANCHOR {
+abstract base mixin class $Property_HILLSHADE_ILLUMINATION_ANCHOR {
   factory $Property_HILLSHADE_ILLUMINATION_ANCHOR() =
       _$Property_HILLSHADE_ILLUMINATION_ANCHOR;
 }
 
-class _$Property_HILLSHADE_ILLUMINATION_ANCHOR
-    implements $Property_HILLSHADE_ILLUMINATION_ANCHOR {
+final class _$Property_HILLSHADE_ILLUMINATION_ANCHOR
+    with $Property_HILLSHADE_ILLUMINATION_ANCHOR {
   _$Property_HILLSHADE_ILLUMINATION_ANCHOR();
 }
 
@@ -1070,11 +1070,11 @@ class Property_ICON_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ICON_ANCHOR {
+abstract base mixin class $Property_ICON_ANCHOR {
   factory $Property_ICON_ANCHOR() = _$Property_ICON_ANCHOR;
 }
 
-class _$Property_ICON_ANCHOR implements $Property_ICON_ANCHOR {
+final class _$Property_ICON_ANCHOR with $Property_ICON_ANCHOR {
   _$Property_ICON_ANCHOR();
 }
 
@@ -1201,12 +1201,12 @@ class Property_ICON_PITCH_ALIGNMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ICON_PITCH_ALIGNMENT {
+abstract base mixin class $Property_ICON_PITCH_ALIGNMENT {
   factory $Property_ICON_PITCH_ALIGNMENT() = _$Property_ICON_PITCH_ALIGNMENT;
 }
 
-class _$Property_ICON_PITCH_ALIGNMENT
-    implements $Property_ICON_PITCH_ALIGNMENT {
+final class _$Property_ICON_PITCH_ALIGNMENT
+    with $Property_ICON_PITCH_ALIGNMENT {
   _$Property_ICON_PITCH_ALIGNMENT();
 }
 
@@ -1333,13 +1333,13 @@ class Property_ICON_ROTATION_ALIGNMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ICON_ROTATION_ALIGNMENT {
+abstract base mixin class $Property_ICON_ROTATION_ALIGNMENT {
   factory $Property_ICON_ROTATION_ALIGNMENT() =
       _$Property_ICON_ROTATION_ALIGNMENT;
 }
 
-class _$Property_ICON_ROTATION_ALIGNMENT
-    implements $Property_ICON_ROTATION_ALIGNMENT {
+final class _$Property_ICON_ROTATION_ALIGNMENT
+    with $Property_ICON_ROTATION_ALIGNMENT {
   _$Property_ICON_ROTATION_ALIGNMENT();
 }
 
@@ -1466,11 +1466,11 @@ class Property_ICON_TEXT_FIT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ICON_TEXT_FIT {
+abstract base mixin class $Property_ICON_TEXT_FIT {
   factory $Property_ICON_TEXT_FIT() = _$Property_ICON_TEXT_FIT;
 }
 
-class _$Property_ICON_TEXT_FIT implements $Property_ICON_TEXT_FIT {
+final class _$Property_ICON_TEXT_FIT with $Property_ICON_TEXT_FIT {
   _$Property_ICON_TEXT_FIT();
 }
 
@@ -1597,12 +1597,12 @@ class Property_ICON_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_ICON_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_ICON_TRANSLATE_ANCHOR {
   factory $Property_ICON_TRANSLATE_ANCHOR() = _$Property_ICON_TRANSLATE_ANCHOR;
 }
 
-class _$Property_ICON_TRANSLATE_ANCHOR
-    implements $Property_ICON_TRANSLATE_ANCHOR {
+final class _$Property_ICON_TRANSLATE_ANCHOR
+    with $Property_ICON_TRANSLATE_ANCHOR {
   _$Property_ICON_TRANSLATE_ANCHOR();
 }
 
@@ -1729,11 +1729,11 @@ class Property_LINE_CAP extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_LINE_CAP {
+abstract base mixin class $Property_LINE_CAP {
   factory $Property_LINE_CAP() = _$Property_LINE_CAP;
 }
 
-class _$Property_LINE_CAP implements $Property_LINE_CAP {
+final class _$Property_LINE_CAP with $Property_LINE_CAP {
   _$Property_LINE_CAP();
 }
 
@@ -1859,11 +1859,11 @@ class Property_LINE_JOIN extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_LINE_JOIN {
+abstract base mixin class $Property_LINE_JOIN {
   factory $Property_LINE_JOIN() = _$Property_LINE_JOIN;
 }
 
-class _$Property_LINE_JOIN implements $Property_LINE_JOIN {
+final class _$Property_LINE_JOIN with $Property_LINE_JOIN {
   _$Property_LINE_JOIN();
 }
 
@@ -1990,12 +1990,12 @@ class Property_LINE_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_LINE_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_LINE_TRANSLATE_ANCHOR {
   factory $Property_LINE_TRANSLATE_ANCHOR() = _$Property_LINE_TRANSLATE_ANCHOR;
 }
 
-class _$Property_LINE_TRANSLATE_ANCHOR
-    implements $Property_LINE_TRANSLATE_ANCHOR {
+final class _$Property_LINE_TRANSLATE_ANCHOR
+    with $Property_LINE_TRANSLATE_ANCHOR {
   _$Property_LINE_TRANSLATE_ANCHOR();
 }
 
@@ -2122,11 +2122,11 @@ class Property_RASTER_RESAMPLING extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_RASTER_RESAMPLING {
+abstract base mixin class $Property_RASTER_RESAMPLING {
   factory $Property_RASTER_RESAMPLING() = _$Property_RASTER_RESAMPLING;
 }
 
-class _$Property_RASTER_RESAMPLING implements $Property_RASTER_RESAMPLING {
+final class _$Property_RASTER_RESAMPLING with $Property_RASTER_RESAMPLING {
   _$Property_RASTER_RESAMPLING();
 }
 
@@ -2253,11 +2253,11 @@ class Property_SYMBOL_PLACEMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_SYMBOL_PLACEMENT {
+abstract base mixin class $Property_SYMBOL_PLACEMENT {
   factory $Property_SYMBOL_PLACEMENT() = _$Property_SYMBOL_PLACEMENT;
 }
 
-class _$Property_SYMBOL_PLACEMENT implements $Property_SYMBOL_PLACEMENT {
+final class _$Property_SYMBOL_PLACEMENT with $Property_SYMBOL_PLACEMENT {
   _$Property_SYMBOL_PLACEMENT();
 }
 
@@ -2384,11 +2384,11 @@ class Property_SYMBOL_Z_ORDER extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_SYMBOL_Z_ORDER {
+abstract base mixin class $Property_SYMBOL_Z_ORDER {
   factory $Property_SYMBOL_Z_ORDER() = _$Property_SYMBOL_Z_ORDER;
 }
 
-class _$Property_SYMBOL_Z_ORDER implements $Property_SYMBOL_Z_ORDER {
+final class _$Property_SYMBOL_Z_ORDER with $Property_SYMBOL_Z_ORDER {
   _$Property_SYMBOL_Z_ORDER();
 }
 
@@ -2515,11 +2515,11 @@ class Property_TEXT_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_ANCHOR {
+abstract base mixin class $Property_TEXT_ANCHOR {
   factory $Property_TEXT_ANCHOR() = _$Property_TEXT_ANCHOR;
 }
 
-class _$Property_TEXT_ANCHOR implements $Property_TEXT_ANCHOR {
+final class _$Property_TEXT_ANCHOR with $Property_TEXT_ANCHOR {
   _$Property_TEXT_ANCHOR();
 }
 
@@ -2646,11 +2646,11 @@ class Property_TEXT_JUSTIFY extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_JUSTIFY {
+abstract base mixin class $Property_TEXT_JUSTIFY {
   factory $Property_TEXT_JUSTIFY() = _$Property_TEXT_JUSTIFY;
 }
 
-class _$Property_TEXT_JUSTIFY implements $Property_TEXT_JUSTIFY {
+final class _$Property_TEXT_JUSTIFY with $Property_TEXT_JUSTIFY {
   _$Property_TEXT_JUSTIFY();
 }
 
@@ -2777,12 +2777,12 @@ class Property_TEXT_PITCH_ALIGNMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_PITCH_ALIGNMENT {
+abstract base mixin class $Property_TEXT_PITCH_ALIGNMENT {
   factory $Property_TEXT_PITCH_ALIGNMENT() = _$Property_TEXT_PITCH_ALIGNMENT;
 }
 
-class _$Property_TEXT_PITCH_ALIGNMENT
-    implements $Property_TEXT_PITCH_ALIGNMENT {
+final class _$Property_TEXT_PITCH_ALIGNMENT
+    with $Property_TEXT_PITCH_ALIGNMENT {
   _$Property_TEXT_PITCH_ALIGNMENT();
 }
 
@@ -2909,13 +2909,13 @@ class Property_TEXT_ROTATION_ALIGNMENT extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_ROTATION_ALIGNMENT {
+abstract base mixin class $Property_TEXT_ROTATION_ALIGNMENT {
   factory $Property_TEXT_ROTATION_ALIGNMENT() =
       _$Property_TEXT_ROTATION_ALIGNMENT;
 }
 
-class _$Property_TEXT_ROTATION_ALIGNMENT
-    implements $Property_TEXT_ROTATION_ALIGNMENT {
+final class _$Property_TEXT_ROTATION_ALIGNMENT
+    with $Property_TEXT_ROTATION_ALIGNMENT {
   _$Property_TEXT_ROTATION_ALIGNMENT();
 }
 
@@ -3042,11 +3042,11 @@ class Property_TEXT_TRANSFORM extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_TRANSFORM {
+abstract base mixin class $Property_TEXT_TRANSFORM {
   factory $Property_TEXT_TRANSFORM() = _$Property_TEXT_TRANSFORM;
 }
 
-class _$Property_TEXT_TRANSFORM implements $Property_TEXT_TRANSFORM {
+final class _$Property_TEXT_TRANSFORM with $Property_TEXT_TRANSFORM {
   _$Property_TEXT_TRANSFORM();
 }
 
@@ -3173,12 +3173,12 @@ class Property_TEXT_TRANSLATE_ANCHOR extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_TRANSLATE_ANCHOR {
+abstract base mixin class $Property_TEXT_TRANSLATE_ANCHOR {
   factory $Property_TEXT_TRANSLATE_ANCHOR() = _$Property_TEXT_TRANSLATE_ANCHOR;
 }
 
-class _$Property_TEXT_TRANSLATE_ANCHOR
-    implements $Property_TEXT_TRANSLATE_ANCHOR {
+final class _$Property_TEXT_TRANSLATE_ANCHOR
+    with $Property_TEXT_TRANSLATE_ANCHOR {
   _$Property_TEXT_TRANSLATE_ANCHOR();
 }
 
@@ -3305,11 +3305,11 @@ class Property_TEXT_WRITING_MODE extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_TEXT_WRITING_MODE {
+abstract base mixin class $Property_TEXT_WRITING_MODE {
   factory $Property_TEXT_WRITING_MODE() = _$Property_TEXT_WRITING_MODE;
 }
 
-class _$Property_TEXT_WRITING_MODE implements $Property_TEXT_WRITING_MODE {
+final class _$Property_TEXT_WRITING_MODE with $Property_TEXT_WRITING_MODE {
   _$Property_TEXT_WRITING_MODE();
 }
 
@@ -3436,11 +3436,11 @@ class Property_VISIBILITY extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Property_VISIBILITY {
+abstract base mixin class $Property_VISIBILITY {
   factory $Property_VISIBILITY() = _$Property_VISIBILITY;
 }
 
-class _$Property_VISIBILITY implements $Property_VISIBILITY {
+final class _$Property_VISIBILITY with $Property_VISIBILITY {
   _$Property_VISIBILITY();
 }
 

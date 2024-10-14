@@ -139,11 +139,11 @@ class Resource_Kind extends _$jni.JObject {
   }
 }
 
-abstract mixin class $Resource_Kind {
+abstract base mixin class $Resource_Kind {
   factory $Resource_Kind() = _$Resource_Kind;
 }
 
-class _$Resource_Kind implements $Resource_Kind {
+final class _$Resource_Kind with $Resource_Kind {
   _$Resource_Kind();
 }
 
