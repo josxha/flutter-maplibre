@@ -176,7 +176,7 @@ class FocalPointChangeListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $FocalPointChangeListener {
+abstract base mixin class $FocalPointChangeListener {
   factory $FocalPointChangeListener({
     required void Function(pointf_.PointF pointF) onFocalPointChanged,
     bool onFocalPointChanged$async,
@@ -186,7 +186,7 @@ abstract mixin class $FocalPointChangeListener {
   bool get onFocalPointChanged$async => false;
 }
 
-class _$FocalPointChangeListener implements $FocalPointChangeListener {
+final class _$FocalPointChangeListener with $FocalPointChangeListener {
   _$FocalPointChangeListener({
     required void Function(pointf_.PointF pointF) onFocalPointChanged,
     this.onFocalPointChanged$async = false,

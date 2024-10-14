@@ -172,7 +172,7 @@ class OnRenderModeChangedListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $OnRenderModeChangedListener {
+abstract base mixin class $OnRenderModeChangedListener {
   factory $OnRenderModeChangedListener({
     required void Function(int i) onRenderModeChanged,
     bool onRenderModeChanged$async,
@@ -182,7 +182,7 @@ abstract mixin class $OnRenderModeChangedListener {
   bool get onRenderModeChanged$async => false;
 }
 
-class _$OnRenderModeChangedListener implements $OnRenderModeChangedListener {
+final class _$OnRenderModeChangedListener with $OnRenderModeChangedListener {
   _$OnRenderModeChangedListener({
     required void Function(int i) onRenderModeChanged,
     this.onRenderModeChanged$async = false,

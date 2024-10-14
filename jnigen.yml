@@ -27,6 +27,8 @@ classes:
   - 'android.graphics.PointF'
   - 'android.location.Location'
   - 'com.github.josxha.maplibre.MapLibreRegistry'
+  - 'java.net.URI'
+  - 'java.net.URL'
   - 'org.maplibre.android.attribution'
   - 'org.maplibre.android.camera'
   - 'org.maplibre.android.constants'

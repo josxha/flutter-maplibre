@@ -185,7 +185,7 @@ class GeometryTileProvider extends _$jni.JObject {
   }
 }
 
-abstract mixin class $GeometryTileProvider {
+abstract base mixin class $GeometryTileProvider {
   factory $GeometryTileProvider({
     required _$jni.JObject Function(
             latlngbounds_.LatLngBounds latLngBounds, int i)
@@ -196,7 +196,7 @@ abstract mixin class $GeometryTileProvider {
       latlngbounds_.LatLngBounds latLngBounds, int i);
 }
 
-class _$GeometryTileProvider implements $GeometryTileProvider {
+final class _$GeometryTileProvider with $GeometryTileProvider {
   _$GeometryTileProvider({
     required _$jni.JObject Function(
             latlngbounds_.LatLngBounds latLngBounds, int i)

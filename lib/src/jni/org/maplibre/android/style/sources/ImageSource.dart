@@ -49,6 +49,10 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../../java/net/URI.dart' as uri_;
+
+import '../../../../../java/net/URL.dart' as url_;
+
 import '../../geometry/LatLngQuad.dart' as latlngquad_;
 
 import 'Source.dart' as source_;
@@ -122,7 +126,7 @@ class ImageSource extends source_.Source {
   factory ImageSource.new$1(
     _$jni.JString string,
     latlngquad_.LatLngQuad latLngQuad,
-    _$jni.JObject uRL,
+    url_.URL uRL,
   ) {
     return ImageSource.fromReference(_new$1(
             _class.reference.pointer,
@@ -161,7 +165,7 @@ class ImageSource extends source_.Source {
   factory ImageSource.new$2(
     _$jni.JString string,
     latlngquad_.LatLngQuad latLngQuad,
-    _$jni.JObject uRI,
+    uri_.URI uRI,
   ) {
     return ImageSource.fromReference(_new$2(
             _class.reference.pointer,
@@ -268,7 +272,7 @@ class ImageSource extends source_.Source {
 
   /// from: `public final void setUrl(java.net.URL uRL)`
   void setUrl(
-    _$jni.JObject uRL,
+    url_.URL uRL,
   ) {
     _setUrl(reference.pointer, _id_setUrl as _$jni.JMethodIDPtr,
             uRL.reference.pointer)
@@ -318,7 +322,7 @@ class ImageSource extends source_.Source {
 
   /// from: `public final void setUri(java.net.URI uRI)`
   void setUri(
-    _$jni.JObject uRI,
+    uri_.URI uRI,
   ) {
     _setUri(reference.pointer, _id_setUri as _$jni.JMethodIDPtr,
             uRI.reference.pointer)

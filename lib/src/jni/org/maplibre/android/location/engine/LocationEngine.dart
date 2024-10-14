@@ -364,7 +364,7 @@ class LocationEngine extends _$jni.JObject {
   }
 }
 
-abstract mixin class $LocationEngine {
+abstract base mixin class $LocationEngine {
   factory $LocationEngine({
     required void Function(
             locationenginecallback_.LocationEngineCallback<
@@ -420,7 +420,7 @@ abstract mixin class $LocationEngine {
   bool get removeLocationUpdates$1$async => false;
 }
 
-class _$LocationEngine implements $LocationEngine {
+final class _$LocationEngine with $LocationEngine {
   _$LocationEngine({
     required void Function(
             locationenginecallback_.LocationEngineCallback<
