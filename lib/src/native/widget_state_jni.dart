@@ -24,20 +24,16 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   MapOptions get _options => widget.options;
 
-  jni.MapLibreMap? get _jniMapLibreMap {
-    if (_cachedJniMapLibreMap != null) return _cachedJniMapLibreMap;
-    final map = jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
-    if (map.isNull || map.isReleased) return null;
-    return _cachedJniMapLibreMap = map;
-  }
+  jni.MapLibreMap get _jniMapLibreMap =>
+      _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
 
-  jni.Projection? get _jniProjection =>
-      _cachedJniProjection ??= _jniMapLibreMap?.getProjection();
+  jni.Projection get _jniProjection =>
+      _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
-  jni.Style? get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap?.getStyle$1();
+  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle$1();
 
-  jni.LocationComponent? get _locationComponent =>
-      _cachedLocationComponent ??= _jniMapLibreMap?.getLocationComponent();
+  jni.LocationComponent get _locationComponent =>
+      _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +65,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
+    jni.Logger.setVerbosity(jni.Logger.WARN);
   }
 
   @override
@@ -95,10 +92,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
-    // We need to check for null to avoid crashes of the app when the map
-    // options change before the map has been initialized.
-    if (jniMap == null) return;
-
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
@@ -169,8 +162,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final jniProjection = _jniProjection;
-    if (jniProjection == null) throw Exception('Map not ready');
-
     final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
       return jniProjection.fromScreenLocation(screenLocation.toPointF());
     });
@@ -182,8 +173,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
     final jniProjection = _jniProjection;
-    if (jniProjection == null) throw Exception('Map not ready');
-
     final jniPoint = await runOnPlatformThread<jni.PointF>(() {
       return jniProjection.toScreenLocation(lngLat.toLatLng());
     });
@@ -200,8 +189,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double? pitch,
   }) async {
     final jniMap = _jniMapLibreMap;
-    if (jniMap == null) throw Exception('Map not ready');
-
     final cameraPositionBuilder = jni.CameraPosition_Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
@@ -244,8 +231,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     Duration? webMaxDuration,
   }) async {
     final jniMap = _jniMapLibreMap;
-    if (jniMap == null) throw Exception('Map not ready');
-
     final cameraPositionBuilder = jni.CameraPosition_Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
@@ -292,8 +277,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final jniMap = _jniMapLibreMap;
-    if (jniMap == null) throw Exception('Map not ready');
-
     final latLngBounds = bounds.toLatLngBounds();
     final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
       latLngBounds,
@@ -399,8 +382,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   Future<void> addSource(Source source) async {
     final jniStyle = _jniStyle;
-    if (jniStyle == null) throw Exception('Map not ready');
-
     final jniId = source.id.toJString();
     await runOnPlatformThread(() {
       final jni.Source jniSource;
@@ -526,24 +507,22 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   MapCamera getCamera() {
-    final jniCamera = _jniMapLibreMap!.getCameraPosition();
+    final jniCamera = _jniMapLibreMap.getCameraPosition();
+    final jniTarget = jniCamera.target;
     final camera = MapCamera(
-      center: Position(
-        jniCamera.target.getLongitude(),
-        jniCamera.target.getLatitude(),
-      ),
+      center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
-    jniCamera.target.release();
+    jniTarget.release();
     jniCamera.release();
     return camera;
   }
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    final jniProjection = _jniProjection!;
+    final jniProjection = _jniProjection;
     return runOnPlatformThread(() {
       return jniProjection.getMetersPerPixelAtLatitude(latitude);
     });
@@ -551,12 +530,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    final projection =
-        _jniProjection!; // necessary to use it in platform thread
+    final projection = _jniProjection; // necessary to use it in platform thread
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
       final region = projection.getVisibleRegion();
       final bounds = region.latLngBounds;
-      region.latLngBounds.release();
       region.release();
       return bounds;
     });
@@ -567,12 +544,13 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       latitudeNorth: jniBounds.latitudeNorth,
     );
     jniBounds.release();
+    jniBounds.release();
     return bounds;
   }
 
   @override
   Future<void> removeLayer(String id) async {
-    final jniStyle = _jniStyle!;
+    final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       jniStyle.removeLayer(id.toJString());
     });
@@ -580,7 +558,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<void> removeSource(String id) async {
-    final jniStyle = _jniStyle!;
+    final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       jniStyle.removeSource(id.toJString());
     });
@@ -593,7 +571,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Future<void> removeImage(String id) async {
-    final jniStyle = _jniStyle!;
+    final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       jniStyle.removeImage(id.toJString());
     });
@@ -604,7 +582,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     required String id,
     required String data,
   }) async {
-    final jniStyle = _jniStyle!;
+    final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       final source =
           jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
@@ -623,8 +601,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
-    final locationComponent = _locationComponent!;
-    final jniStyle = _jniStyle!;
+    final locationComponent = _locationComponent;
+    final jniStyle = _jniStyle;
     final bearing = switch (bearingRenderMode) {
       BearingRenderMode.none => jni.RenderMode.NORMAL,
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
@@ -670,7 +648,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
-    final locationComponent = _locationComponent!;
+    final locationComponent = _locationComponent;
     final mode = switch (trackBearing) {
       BearingTrackMode.none => trackLocation
           ? jni.CameraMode.TRACKING // only location
