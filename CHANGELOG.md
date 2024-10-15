@@ -18,6 +18,8 @@ instructions on how to upgrade.
 
 ### New Features
 
+- Bump MapLibre Android SDK
+  to [11.5.1](https://github.com/maplibre/maplibre-native/releases/tag/android-v11.5.1).
 - Add high level `AnnotationLayer`s as easy to use annotations.
 - Use [jnigen](https://pub.dev/packages/jnigen) for direct interop with Java.
 - Add user location to the map.
