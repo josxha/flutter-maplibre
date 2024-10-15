@@ -1986,6 +1986,84 @@ MaplibreMapLibreFlutterApiOnStyleLoadedResponse* maplibre_map_libre_flutter_api_
   return maplibre_map_libre_flutter_api_on_style_loaded_response_new(response);
 }
 
+struct _MaplibreMapLibreFlutterApiOnMapReadyResponse {
+  GObject parent_instance;
+
+  FlValue* error;
+};
+
+G_DEFINE_TYPE(MaplibreMapLibreFlutterApiOnMapReadyResponse, maplibre_map_libre_flutter_api_on_map_ready_response, G_TYPE_OBJECT)
+
+static void maplibre_map_libre_flutter_api_on_map_ready_response_dispose(GObject* object) {
+  MaplibreMapLibreFlutterApiOnMapReadyResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(object);
+  g_clear_pointer(&self->error, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_map_libre_flutter_api_on_map_ready_response_parent_class)->dispose(object);
+}
+
+static void maplibre_map_libre_flutter_api_on_map_ready_response_init(MaplibreMapLibreFlutterApiOnMapReadyResponse* self) {
+}
+
+static void maplibre_map_libre_flutter_api_on_map_ready_response_class_init(MaplibreMapLibreFlutterApiOnMapReadyResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_flutter_api_on_map_ready_response_dispose;
+}
+
+static MaplibreMapLibreFlutterApiOnMapReadyResponse* maplibre_map_libre_flutter_api_on_map_ready_response_new(FlValue* response) {
+  MaplibreMapLibreFlutterApiOnMapReadyResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(g_object_new(maplibre_map_libre_flutter_api_on_map_ready_response_get_type(), nullptr));
+  if (fl_value_get_length(response) > 1) {
+    self->error = fl_value_ref(response);
+  }
+  return self;
+}
+
+gboolean maplibre_map_libre_flutter_api_on_map_ready_response_is_error(MaplibreMapLibreFlutterApiOnMapReadyResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(self), FALSE);
+  return self->error != nullptr;
+}
+
+const gchar* maplibre_map_libre_flutter_api_on_map_ready_response_get_error_code(MaplibreMapLibreFlutterApiOnMapReadyResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_map_ready_response_is_error(self));
+  return fl_value_get_string(fl_value_get_list_value(self->error, 0));
+}
+
+const gchar* maplibre_map_libre_flutter_api_on_map_ready_response_get_error_message(MaplibreMapLibreFlutterApiOnMapReadyResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_map_ready_response_is_error(self));
+  return fl_value_get_string(fl_value_get_list_value(self->error, 1));
+}
+
+FlValue* maplibre_map_libre_flutter_api_on_map_ready_response_get_error_details(MaplibreMapLibreFlutterApiOnMapReadyResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_MAP_READY_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_map_ready_response_is_error(self));
+  return fl_value_get_list_value(self->error, 2);
+}
+
+static void maplibre_map_libre_flutter_api_on_map_ready_cb(GObject* object, GAsyncResult* result, gpointer user_data) {
+  GTask* task = G_TASK(user_data);
+  g_task_return_pointer(task, result, g_object_unref);
+}
+
+void maplibre_map_libre_flutter_api_on_map_ready(MaplibreMapLibreFlutterApi* self, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data) {
+  g_autoptr(FlValue) args = fl_value_new_list();
+  g_autofree gchar* channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMapReady%s", self->suffix);
+  g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
+  FlBasicMessageChannel* channel = fl_basic_message_channel_new(self->messenger, channel_name, FL_MESSAGE_CODEC(codec));
+  GTask* task = g_task_new(self, cancellable, callback, user_data);
+  g_task_set_task_data(task, channel, g_object_unref);
+  fl_basic_message_channel_send(channel, args, cancellable, maplibre_map_libre_flutter_api_on_map_ready_cb, task);
+}
+
+MaplibreMapLibreFlutterApiOnMapReadyResponse* maplibre_map_libre_flutter_api_on_map_ready_finish(MaplibreMapLibreFlutterApi* self, GAsyncResult* result, GError** error) {
+  g_autoptr(GTask) task = G_TASK(result);
+  GAsyncResult* r = G_ASYNC_RESULT(g_task_propagate_pointer(task, nullptr));
+  FlBasicMessageChannel* channel = FL_BASIC_MESSAGE_CHANNEL(g_task_get_task_data(task));
+  g_autoptr(FlValue) response = fl_basic_message_channel_send_finish(channel, r, error);
+  if (response == nullptr) { 
+    return nullptr;
+  }
+  return maplibre_map_libre_flutter_api_on_map_ready_response_new(response);
+}
+
 struct _MaplibreMapLibreFlutterApiOnClickResponse {
   GObject parent_instance;
 

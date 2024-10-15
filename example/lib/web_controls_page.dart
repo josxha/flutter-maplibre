@@ -18,8 +18,8 @@ class _WebControlsPageState extends State<WebControlsPage> {
       appBar: AppBar(title: const Text('Web Controls')),
       body: MapLibreMap(
         options: MapOptions(
-          zoom: 4,
-          center: Position(9.17, 47.68),
+          initZoom: 4,
+          initCenter: Position(9.17, 47.68),
           webControls: const [
             WebScaleControl(),
             WebGeolocateControl(),

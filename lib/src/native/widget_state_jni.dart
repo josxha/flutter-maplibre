@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -38,42 +37,39 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
-      // Texture Layer (or Texture Layer Hybrid Composition)
-      // Platform Views are rendered into a texture. Flutter draws the
-      // platform views (via the texture). Flutter content is rendered
-      // directly into a Surface.
-      // + good performance for Android Views
-      // + best performance for Flutter rendering.
-      // + all transformations work correctly.
-      // - quick scrolling (e.g. a web view) will be janky
-      // - SurfaceViews are problematic in this mode and will be moved into a
-      //   virtual display (breaking a11y)
-      // - Text magnifier will break unless Flutter is rendered into a
-      //   TextureView.
-      // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
-      return AndroidView(
-        viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: widget.gestureRecognizers,
-        creationParamsCodec: const StandardMessageCodec(),
-      );
-    } else if (Platform.isIOS) {
-      return UiKitView(
-        viewType: 'plugins.flutter.io/maplibre',
-        onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: widget.gestureRecognizers,
-        creationParamsCodec: const StandardMessageCodec(),
-      );
-    }
-    throw UnsupportedError('[MapLibreMap] Unsupported Platform');
+    // Texture Layer (or Texture Layer Hybrid Composition)
+    // Platform Views are rendered into a texture. Flutter draws the
+    // platform views (via the texture). Flutter content is rendered
+    // directly into a Surface.
+    // + good performance for Android Views
+    // + best performance for Flutter rendering.
+    // + all transformations work correctly.
+    // - quick scrolling (e.g. a web view) will be janky
+    // - SurfaceViews are problematic in this mode and will be moved into a
+    //   virtual display (breaking a11y)
+    // - Text magnifier will break unless Flutter is rendered into a
+    //   TextureView.
+    // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
+    return AndroidView(
+      viewType: 'plugins.flutter.io/maplibre',
+      onPlatformViewCreated: _onPlatformViewCreated,
+      gestureRecognizers: widget.gestureRecognizers,
+      creationParamsCodec: const StandardMessageCodec(),
+    );
   }
 
+  /// This method gets called when the platform view is created. It is not
+  /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
+    jni.Logger.setVerbosity(jni.Logger.WARN);
+  }
+
+  @override
+  void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
   }
@@ -96,10 +92,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
-    // We need to check for null to avoid crashes of the app when the map
-    // options change before the map has been initialized.
-    if (jniMap.isNull) return;
-
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
@@ -144,15 +136,15 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
-        style: _options.style,
-        bearing: _options.bearing,
-        zoom: _options.zoom,
-        pitch: _options.pitch,
-        center: _options.center == null
+        style: _options.initStyle,
+        bearing: _options.initBearing,
+        zoom: _options.initZoom,
+        pitch: _options.initPitch,
+        center: _options.initCenter == null
             ? null
             : pigeon.LngLat(
-                lng: _options.center!.lng.toDouble(),
-                lat: _options.center!.lat.toDouble(),
+                lng: _options.initCenter!.lng.toDouble(),
+                lat: _options.initCenter!.lat.toDouble(),
               ),
         minZoom: _options.minZoom,
         maxZoom: _options.maxZoom,
@@ -196,6 +188,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double? bearing,
     double? pitch,
   }) async {
+    final jniMap = _jniMapLibreMap;
     final cameraPositionBuilder = jni.CameraPosition_Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
@@ -206,24 +199,21 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     cameraPositionBuilder.release();
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
-
-    final jniMap = _jniMapLibreMap;
     await runOnPlatformThread(() {
       final completer = Completer<void>();
-      jniMap.moveCamera$1(
+      jniMap.moveCamera(cameraUpdate);
+      /*jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
           jni.$MapLibreMap_CancelableCallback(
-            onCancel: () => completer.completeError(
-              Exception('Animation cancelled.'),
-            ),
+            onCancel: () =>
+                completer.completeError(Exception('Animation cancelled.')),
             onFinish: completer.complete,
             onFinish$async: true,
             onCancel$async: true,
           ),
         ),
-      );
-      jniMap.moveCamera(cameraUpdate);
+      );*/
       return completer.future;
     });
     cameraUpdate.release();
@@ -239,6 +229,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
+    final jniMap = _jniMapLibreMap;
     final cameraPositionBuilder = jni.CameraPosition_Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
@@ -250,23 +241,22 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
 
-    final jniMapLibreMap = _jniMapLibreMap;
-    await runOnPlatformThread(() {
+    await runOnPlatformThread(() async {
       final completer = Completer<void>();
-      jniMapLibreMap.animateCamera$3(
+      jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
+      /*jniMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
         jni.MapLibreMap_CancelableCallback.implement(
           jni.$MapLibreMap_CancelableCallback(
-            onCancel: () => completer.completeError(
-              Exception('Animation cancelled.'),
-            ),
+            onCancel: () =>
+                completer.completeError(Exception('Animation cancelled.')),
             onFinish: completer.complete,
             onFinish$async: true,
             onCancel$async: true,
           ),
         ),
-      );
+      );*/
       return completer.future;
     });
     cameraUpdate.release();
@@ -285,12 +275,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final latLngBounds = jni.LatLngBounds.from(
-      bounds.latitudeNorth,
-      bounds.longitudeEast,
-      bounds.latitudeSouth,
-      bounds.longitudeWest,
-    );
+    final jniMap = _jniMapLibreMap;
+    final latLngBounds = bounds.toLatLngBounds();
     final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
       latLngBounds,
       bearing ?? -1.0,
@@ -302,23 +288,22 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     );
     latLngBounds.release();
 
-    final jniMapLibreMap = _jniMapLibreMap;
     await runOnPlatformThread(() {
       final completer = Completer<void>();
-      jniMapLibreMap.animateCamera$3(
+      jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
+      /*jniMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
         jni.MapLibreMap_CancelableCallback.implement(
           jni.$MapLibreMap_CancelableCallback(
-            onCancel: () => completer.completeError(
-              Exception('Animation cancelled.'),
-            ),
+            onCancel: () =>
+                completer.completeError(Exception('Animation cancelled.')),
             onFinish: completer.complete,
             onCancel$async: true,
             onFinish$async: true,
           ),
         ),
-      );
+      );*/
       return completer.future;
     });
     cameraUpdate.release();
@@ -522,16 +507,14 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   @override
   MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
+    final jniTarget = jniCamera.target;
     final camera = MapCamera(
-      center: Position(
-        jniCamera.target.getLongitude(),
-        jniCamera.target.getLatitude(),
-      ),
+      center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
-    jniCamera.target.release();
+    jniTarget.release();
     jniCamera.release();
     return camera;
   }
@@ -550,7 +533,6 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
       final region = projection.getVisibleRegion();
       final bounds = region.latLngBounds;
-      region.latLngBounds.release();
       region.release();
       return bounds;
     });
@@ -560,6 +542,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       latitudeSouth: jniBounds.latitudeSouth,
       latitudeNorth: jniBounds.latitudeNorth,
     );
+    jniBounds.release();
     jniBounds.release();
     return bounds;
   }
