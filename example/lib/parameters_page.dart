@@ -85,8 +85,8 @@ class _ParametersPageState extends State<ParametersPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                center: Position(0, 0),
-                zoom: 3,
+                initCenter: Position(0, 0),
+                initZoom: 3,
                 minZoom: _minZoom,
                 maxZoom: _maxZoom,
                 minPitch: _minPitch,

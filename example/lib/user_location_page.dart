@@ -62,9 +62,9 @@ class _UserLocationPageState extends State<UserLocationPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                zoom: 1,
-                center: Position(0, 0),
-                style: StyledMapPage.styleUrl,
+                initZoom: 1,
+                initCenter: Position(0, 0),
+                initStyle: StyledMapPage.styleUrl,
               ),
               onMapCreated: (controller) => _controller = controller,
             ),

@@ -24,7 +24,7 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Circle Annotations')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {

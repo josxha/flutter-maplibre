@@ -23,7 +23,7 @@ class App extends StatelessWidget {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreMap(
-          options: options ?? MapOptions(center: Position(0, 0)),
+          options: options ?? MapOptions(initCenter: Position(0, 0)),
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
         ),
