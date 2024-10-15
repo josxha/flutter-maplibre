@@ -1,2 +1,2 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file('MapLibreAndroid-10.5.0.aar'))
+artifacts.add("default", file('android-sdk-11.5.1.aar'))
