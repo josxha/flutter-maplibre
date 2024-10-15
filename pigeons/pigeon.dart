@@ -130,6 +130,9 @@ abstract interface class MapLibreFlutterApi {
   /// Callback for when the style has been loaded.
   void onStyleLoaded();
 
+  /// Callback for when the map is ready and can be used.
+  void onMapReady();
+
   /// Callback when the user clicks on the map.
   void onClick(LngLat point);
 

@@ -562,6 +562,10 @@ class MapLibreFlutterApi {
   void OnStyleLoaded(
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
+  // Callback for when the map is ready and can be used.
+  void OnMapReady(
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
   // Callback when the user clicks on the map.
   void OnClick(
     const LngLat& point,
