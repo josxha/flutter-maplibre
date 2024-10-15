@@ -794,6 +794,9 @@ abstract class MapLibreFlutterApi {
   /// Callback for when the style has been loaded.
   void onStyleLoaded();
 
+  /// Callback for when the map is ready and can be used.
+  void onMapReady();
+
   /// Callback when the user clicks on the map.
   void onClick(LngLat point);
 
@@ -862,6 +865,29 @@ abstract class MapLibreFlutterApi {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           try {
             api.onStyleLoaded();
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMapReady$messageChannelSuffix',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          try {
+            api.onMapReady();
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
