@@ -27,7 +27,9 @@ class _AnimationPageState extends State<AnimationPage> {
       appBar: AppBar(title: const Text('Animation')),
       body: MapLibreMap(
         options: MapOptions(
-            initZoom: 14, initCenter: Position(-122.01971, 45.632472)),
+          initZoom: 14,
+          initCenter: Position(-122.01971, 45.632472),
+        ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
