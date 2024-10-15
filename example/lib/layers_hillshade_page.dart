@@ -22,7 +22,7 @@ class _LayersHillshadePageState extends State<LayersHillshadePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Hillshade Layer')),
       body: MapLibreMap(
-        options: MapOptions(center: Position(11.39085, 47.27574), zoom: 10),
+        options: MapOptions(initCenter: Position(11.39085, 47.27574), initZoom: 10),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),

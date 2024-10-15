@@ -24,7 +24,7 @@ class _LayersHeatmapPageState extends State<LayersHeatmapPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Heatmap Layer')),
       body: MapLibreMap(
-        options: MapOptions(center: Position(-120, 50), zoom: 2),
+        options: MapOptions(initCenter: Position(-120, 50), initZoom: 2),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),

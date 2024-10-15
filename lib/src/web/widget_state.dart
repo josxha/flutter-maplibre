@@ -39,11 +39,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
-            style: _options.style,
-            zoom: _options.zoom,
-            center: _options.center?.toLngLat(),
-            bearing: _options.bearing,
-            pitch: _options.pitch,
+            style: _options.initStyle,
+            zoom: _options.initZoom,
+            center: _options.initCenter?.toLngLat(),
+            bearing: _options.initBearing,
+            pitch: _options.initPitch,
           ),
         );
 

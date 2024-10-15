@@ -21,7 +21,7 @@ class _EventsPageState extends State<EventsPage> {
       body: Stack(
         children: [
           MapLibreMap(
-            options: MapOptions(center: Position(9.17, 47.68)),
+            options: MapOptions(initCenter: Position(9.17, 47.68)),
             onEvent: _onEvent,
           ),
           IgnorePointer(
