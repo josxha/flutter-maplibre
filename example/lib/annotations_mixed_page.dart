@@ -78,7 +78,8 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+              options:
+                  MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
               onEvent: (event) {
                 if (event case MapEventClick()) {
                   setState(() {
