@@ -28,9 +28,9 @@ class _StyledMapPageState extends State<StyledMapPage> {
       appBar: AppBar(title: const Text('Styled Map')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(9.17, 47.68),
-          zoom: 8,
-          style: Theme.of(context).brightness == Brightness.light
+          initCenter: Position(9.17, 47.68),
+          initZoom: 8,
+          initStyle: Theme.of(context).brightness == Brightness.light
               ? StyledMapPage.styleUrl
               : StyledMapPage.styleUrlDark,
         ),

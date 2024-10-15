@@ -22,7 +22,7 @@ void main() {
         late final MapController ctrl;
         final app = App(
           onMapCreated: (controller) => ctrl = controller,
-          options: MapOptions(center: Position(1, 2)),
+          options: MapOptions(initCenter: Position(1, 2)),
         );
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();

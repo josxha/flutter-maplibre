@@ -136,15 +136,15 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
-        style: _options.style,
-        bearing: _options.bearing,
-        zoom: _options.zoom,
-        pitch: _options.pitch,
-        center: _options.center == null
+        style: _options.initStyle,
+        bearing: _options.initBearing,
+        zoom: _options.initZoom,
+        pitch: _options.initPitch,
+        center: _options.initCenter == null
             ? null
             : pigeon.LngLat(
-                lng: _options.center!.lng.toDouble(),
-                lat: _options.center!.lat.toDouble(),
+                lng: _options.initCenter!.lng.toDouble(),
+                lat: _options.initCenter!.lat.toDouble(),
               ),
         minZoom: _options.minZoom,
         maxZoom: _options.maxZoom,
