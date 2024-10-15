@@ -6,6 +6,7 @@
   example `WebGeolocateControl`.
 - Rename web-only `MapOptions.controls` to `MapOptions.webControls`.
 - Rename `jumpTo()` to `moveCamera()` and `flyTo()` to `animateCamera()`.
+- Add `init` prefix to not modifiable `MapOptions` parameters.
 - Remove click callbacks in favor of the event system.
 - Bump minimum Flutter version
   to [3.24.0](https://medium.com/flutter/whats-new-in-flutter-3-24-6c040f87d1e4)

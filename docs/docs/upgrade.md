@@ -41,18 +41,22 @@ Run `flutter upgrade` to upgrade Flutter.
 Some properties and class names have changed. Replace the old with the new
 names.
 
-| Old Name               | New Name                   |
-|------------------------|----------------------------|
-| controller.jumpTo()    | controller.moveCamera()    |
-| controller.flyTo()     | controller.animateCamera() |
-| MapOptions(controls: ) | MapOptions(webControls: )  |
-| MapControl()           | WebMapControl()            |
-| ScaleControl()         | WebScaleControl()          |
-| LogoControl()          | WebLogoControl()           |
-| GeolocateControl()     | WebGeolocateControl()      |
-| FullscreenControl()    | WebFullscreenControl()     |
-| NavigationControl()    | WebNavigationControl()     |
-| mapCamera.tilt         | mapCamera.pitch            |
+| Old Name               | New Name                    |
+|------------------------|-----------------------------|
+| controller.jumpTo()    | controller.moveCamera()     |
+| controller.flyTo()     | controller.animateCamera()  |
+| MapOptions(controls: ) | MapOptions(webControls: )   |
+| MapOptions(style: )    | MapOptions(initStyle: )     |
+| MapOptions(zoom: )     | MapOptions(initZoom: )      |
+| MapOptions(center: )   | MapOptions(initCenter: )    |
+| MapOptions(bearing: )  | MapOptions(initBearing: )   |
+| MapControl()           | WebMapControl()             |
+| ScaleControl()         | WebScaleControl()           |
+| LogoControl()          | WebLogoControl()            |
+| GeolocateControl()     | WebGeolocateControl()       |
+| FullscreenControl()    | WebFullscreenControl()      |
+| NavigationControl()    | WebNavigationControl()      |
+| mapCamera.tilt         | mapCamera.pitch             |
 
 ### 3. Use the event system
 
