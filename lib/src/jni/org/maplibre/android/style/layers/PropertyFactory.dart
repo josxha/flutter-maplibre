@@ -5609,7 +5609,7 @@ class PropertyFactory extends _$jni.JObject {
 
   static final _id_iconPadding = _class.staticMethodId(
     r'iconPadding',
-    r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
+    r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
   static final _iconPadding = _$jni.ProtectedJniExtensions.lookup<
@@ -5623,20 +5623,19 @@ class PropertyFactory extends _$jni.JObject {
           _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
               _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
 
-  /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(java.lang.Object[] floats)`
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> iconPadding(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue_.PropertyValue<_$jni.JFloat> iconPadding(
+    _$jni.JFloat float,
   ) {
     return _iconPadding(_class.reference.pointer,
-            _id_iconPadding as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_iconPadding as _$jni.JMethodIDPtr, float.reference.pointer)
+        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
   }
 
   static final _id_iconPadding$1 = _class.staticMethodId(
     r'iconPadding',
-    r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
+    r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
   static final _iconPadding$1 = _$jni.ProtectedJniExtensions.lookup<
@@ -5650,14 +5649,41 @@ class PropertyFactory extends _$jni.JObject {
           _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
               _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
 
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(java.lang.Object[] floats)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> iconPadding$1(
+    _$jni.JArray<_$jni.JFloat> floats,
+  ) {
+    return _iconPadding$1(_class.reference.pointer,
+            _id_iconPadding$1 as _$jni.JMethodIDPtr, floats.reference.pointer)
+        .object(const propertyvalue_.$PropertyValue$Type(
+            _$jni.JArrayType(_$jni.JFloatType())));
+  }
+
+  static final _id_iconPadding$2 = _class.staticMethodId(
+    r'iconPadding',
+    r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _iconPadding$2 = _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JniResult Function(
+                      _$jni.Pointer<_$jni.Void>,
+                      _$jni.JMethodIDPtr,
+                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconPadding$1(
+  static propertyvalue_.PropertyValue<_$jni.JObject> iconPadding$2(
     _$jni.JObject expression,
   ) {
-    return _iconPadding$1(
+    return _iconPadding$2(
             _class.reference.pointer,
-            _id_iconPadding$1 as _$jni.JMethodIDPtr,
+            _id_iconPadding$2 as _$jni.JMethodIDPtr,
             expression.reference.pointer)
         .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
   }
