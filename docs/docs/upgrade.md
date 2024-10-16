@@ -11,10 +11,9 @@ through all of them.
 ## General Information on Breaking Changes
 
 We are using
-the [pub.dev version convention](https://dart.dev/tools/pub/versioning) for the
-package.
-
-While the package is prior its `1.0.0` release, the following rules apply:
+the [pub.dev version convention](https://dart.dev/tools/pub/versioning#semantic-versions)
+for the package. While the package is prior its `1.0.0` release, the following
+rules apply:
 
 - Every minor `0.x.0` release can introduce breaking changes.
 - Every increase of the patch value `0.0.x` adds new features and functionality.
@@ -23,9 +22,6 @@ While the package is prior its `1.0.0` release, the following rules apply:
 
 By setting `^0.1.0` in your pubspec.yaml file pub will automatically resolve a
 compatible package version but won't use the next breaking release `0.2.0`.
-
-Read [Semantic versions](https://dart.dev/tools/pub/versioning#semantic-versions)
-for more information.
 
 ## Step-by-Step guide
 
@@ -41,22 +37,22 @@ Run `flutter upgrade` to upgrade Flutter.
 Some properties and class names have changed. Replace the old with the new
 names.
 
-| Old Name               | New Name                    |
-|------------------------|-----------------------------|
-| controller.jumpTo()    | controller.moveCamera()     |
-| controller.flyTo()     | controller.animateCamera()  |
-| MapOptions(controls: ) | MapOptions(webControls: )   |
-| MapOptions(style: )    | MapOptions(initStyle: )     |
-| MapOptions(zoom: )     | MapOptions(initZoom: )      |
-| MapOptions(center: )   | MapOptions(initCenter: )    |
-| MapOptions(bearing: )  | MapOptions(initBearing: )   |
-| MapControl()           | WebMapControl()             |
-| ScaleControl()         | WebScaleControl()           |
-| LogoControl()          | WebLogoControl()            |
-| GeolocateControl()     | WebGeolocateControl()       |
-| FullscreenControl()    | WebFullscreenControl()      |
-| NavigationControl()    | WebNavigationControl()      |
-| mapCamera.tilt         | mapCamera.pitch             |
+| Old Name               | New Name                   |
+|------------------------|----------------------------|
+| controller.jumpTo()    | controller.moveCamera()    |
+| controller.flyTo()     | controller.animateCamera() |
+| MapOptions(controls: ) | MapOptions(webControls: )  |
+| MapOptions(style: )    | MapOptions(initStyle: )    |
+| MapOptions(zoom: )     | MapOptions(initZoom: )     |
+| MapOptions(center: )   | MapOptions(initCenter: )   |
+| MapOptions(bearing: )  | MapOptions(initBearing: )  |
+| MapControl()           | WebMapControl()            |
+| ScaleControl()         | WebScaleControl()          |
+| LogoControl()          | WebLogoControl()           |
+| GeolocateControl()     | WebGeolocateControl()      |
+| FullscreenControl()    | WebFullscreenControl()     |
+| NavigationControl()    | WebNavigationControl()     |
+| mapCamera.tilt         | mapCamera.pitch            |
 
 ### 3. Use the event system
 
@@ -69,3 +65,10 @@ Check out the [Map Events](./events) documentation to see how you can use them.
 | onDoubleClick     | MapEventDoubleClick    |
 | onSecondaryClick  | MapEventSecondaryClick |
 | onLongClick       | MapEventLongClick      |
+
+### 4. Removed functionality
+
+It is currently not possible to await the end of `controller.animateCamera()`
+because of deadlock issues with callbacks in jni.
+In the meantime, you have to rely on `MapEventCameraIdle` to detect once
+animation is finished.
