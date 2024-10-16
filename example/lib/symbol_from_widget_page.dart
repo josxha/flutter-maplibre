@@ -32,16 +32,17 @@ class _SymbolFromWidgetPageState extends State<SymbolFromWidgetPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Symbol from Widget')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+        options:
+            MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) async {
           switch (event) {
             case MapEventClick():
-            // add a new marker on click
+              // add a new marker on click
               setState(() {
                 _layer.list.add(Point(coordinates: event.point));
               });
             default:
-            // ignore all other events
+              // ignore all other events
               break;
           }
         },

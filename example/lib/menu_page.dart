@@ -88,7 +88,7 @@ class MenuPage extends StatelessWidget {
                   location: UserLocationPage.location,
                 ),
                 ItemCard(
-                  label: 'Widgets as Symbols',
+                  label: 'Symbol from Widget',
                   iconData: Icons.widgets,
                   location: SymbolFromWidgetPage.location,
                 ),

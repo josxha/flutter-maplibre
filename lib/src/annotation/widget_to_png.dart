@@ -25,15 +25,23 @@ class WidgetToPng extends StatefulWidget {
 class _WidgetToPngState extends State<WidgetToPng> {
   final _key = GlobalKey();
 
+  Future<void> _buildPng() async {
+    final boundary =
+        _key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+    if (boundary.debugNeedsPaint) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _buildPng());
+      return;
+    }
+    final image = await boundary.toImage();
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngBytes = byteData!.buffer.asUint8List();
+    await widget.controller.addImage(widget.imageId, pngBytes);
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final boundary =
-          _key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-      final image = await boundary.toImage();
-      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      final pngBytes = byteData!.buffer.asUint8List();
-      await widget.controller.addImage(widget.imageId, pngBytes);
+      await _buildPng();
     });
     super.initState();
   }
