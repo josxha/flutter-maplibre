@@ -21,7 +21,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
-  late AnnotationManager _annotationManager;
+  AnnotationManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -39,11 +39,11 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
-            style: _options.style,
-            zoom: _options.zoom,
-            center: _options.center?.toLngLat(),
-            bearing: _options.bearing,
-            pitch: _options.pitch,
+            style: _options.initStyle,
+            zoom: _options.initZoom,
+            center: _options.initCenter?.toLngLat(),
+            bearing: _options.initBearing,
+            pitch: _options.initPitch,
           ),
         );
 
@@ -230,7 +230,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     if (_options.gestures != oldWidget.options.gestures) {
       _updateGestures(_options.gestures);
     }
-    _annotationManager.updateLayers(widget.layers);
+    _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 

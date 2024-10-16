@@ -141,6 +141,7 @@ class MapLibreMapController(
             this.style = loadedStyle
             flutterApi.onStyleLoaded { }
         }
+        flutterApi.onMapReady { }
     }
 
     override fun dispose() {
@@ -165,6 +166,7 @@ class MapLibreMapController(
                                 val expression = Expression.Converter.convert(json)
                                 PaintPropertyValue(entry.key, expression)
                             }
+
                             else -> {
                                 PaintPropertyValue(entry.key, value.toArray())
                             }
@@ -191,6 +193,7 @@ class MapLibreMapController(
                                 val expression = Expression.Converter.convert(json)
                                 LayoutPropertyValue(entry.key, expression)
                             }
+
                             else -> {
                                 LayoutPropertyValue(entry.key, value.toArray())
                             }

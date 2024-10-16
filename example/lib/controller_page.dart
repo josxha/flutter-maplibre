@@ -25,6 +25,7 @@ class _ControllerPageState extends State<ControllerPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
@@ -207,7 +208,8 @@ pitch: ${camera.pitch}'''),
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
+              options:
+                  MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

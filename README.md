@@ -41,7 +41,7 @@ functionality.
     <tr>
       <td style="text-align: center;">
         <strong>Add circles</strong>
-        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/fe660b8d1c055d32e74cbc2ee0809281331a130b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
       </td>
       <td style="text-align: center;">
         <strong>Add 3D building outlines</strong>
@@ -83,9 +83,8 @@ functionality.
 
 ### Demo Application
 
-Check out the [hosted demo application](https://flutter-maplibre.pages.dev/demo)
-or dive into
-the [example app code](https://github.com/josxha/flutter-maplibre/tree/main/example/lib).
+- [Hosted Demo App](https://flutter-maplibre.pages.dev/demo)
+- [Code of the Example App](https://github.com/josxha/flutter-maplibre/tree/main/example/lib)
 
 ### Get Started & Documentation
 
@@ -96,36 +95,18 @@ If you want to know more about the classes and properties of the package, have
 a look at
 the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html).
 
-### State of Implementation
-
-This package is still a young package and in an early stage.
-While it offers a modern implementation, it currently lacks some
-functionality. [See our documentation to learn more.](https://flutter-maplibre.pages.dev/docs/supported-features)
-
 ## Development & Contributing
 
-If you need a feature or experience a bug you want to fix contributions are
-welcome.
+All kinds of contributions are welcome. Thanks a lot if you consider to
+contribute in any way! There are different ways how you can help the
+development:
 
-#### Run Code Generation
-
-We use code generation from [pigeon](https://pub.dev/packages/pigeon).
-If you change the file [pigeons/pigeon.dart](pigeons/pigeon.dart) you'll have
-to run the code generator.
-Use the generator script in the [./pigeons](./pigeons) directory (or run the
-commands manually) to generate the necessary code.
-
-#### Test with WebAssembly
-
-This package supports WebAssembly builds! 🥳
-
-```bash
-flutter pub global activate dhttpd # only once
-cd example
-flutter build web --wasm
-dhttpd '--headers=Cross-Origin-Embedder-Policy=credentialless;Cross-Origin-Opener-Policy=same-origin' --path=build/web
-```
-
-or follow
-the [flutter documentation](https://docs.flutter.dev/platform-integration/web/wasm#serving-wasm-locally)
-about Flutter WASM builds.
+- Use the package in your project
+  and [share feedback](https://github.com/josxha/flutter-maplibre/discussions/categories/show-and-tell).
+- [Open bug reports](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=bug&projects=&template=1-bug.yml&title=%5BBUG%5D+%3Ctitle%3E)
+  in case you find any.
+- If you need a specific
+  feature, [open a feature request](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=feature&projects=&template=2-feature.yml&title=%5BFEATURE%5D+%3Ctitle%3E).
+  or [post your idea as discussion](https://github.com/josxha/flutter-maplibre/discussions/categories/ideas).
+- Enhance the package documentation.
+- [Sponsor this project](https://www.paypal.com/paypalme/joschaeckert).
