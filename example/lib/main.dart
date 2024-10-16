@@ -17,6 +17,7 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/marker_from_widget_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
         EventsPage.location: (context) => const EventsPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         UserLocationPage.location: (context) => const UserLocationPage(),
+        AnnotationsWidgetMarkerPage.location: (context) =>
+            const AnnotationsWidgetMarkerPage(),
         LayersSymbolPage.location: (context) => const LayersSymbolPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersHeatmapPage.location: (context) => const LayersHeatmapPage(),

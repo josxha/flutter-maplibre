@@ -17,6 +17,7 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/marker_from_widget_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -86,6 +87,11 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.gps_fixed,
                   location: UserLocationPage.location,
                 ),
+              ItemCard(
+                label: 'Widget Marker',
+                iconData: Icons.widgets,
+                location: AnnotationsWidgetMarkerPage.location,
+              ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
