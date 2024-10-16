@@ -19,6 +19,7 @@ import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/symbol_from_widget_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
@@ -85,6 +86,11 @@ class MenuPage extends StatelessWidget {
                   label: 'User Location',
                   iconData: Icons.gps_fixed,
                   location: UserLocationPage.location,
+                ),
+                ItemCard(
+                  label: 'Widgets as Symbols',
+                  iconData: Icons.widgets,
+                  location: SymbolFromWidgetPage.location,
                 ),
             ],
           ),
