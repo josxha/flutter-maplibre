@@ -26,6 +26,7 @@ class _UserLocationPageState extends State<UserLocationPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(

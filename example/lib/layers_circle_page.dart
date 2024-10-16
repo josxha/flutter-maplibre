@@ -62,16 +62,6 @@ const _circleLayer = CircleLayer(
         1,
         1,
         6,
-        4
-      ],
-      16,
-      [
-        'interpolate',
-        ['linear'],
-        ['get', 'mag'],
-        1,
-        5,
-        6,
         50
       ]
     ],
