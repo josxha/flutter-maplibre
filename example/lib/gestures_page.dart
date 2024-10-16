@@ -26,6 +26,7 @@ class _GesturesPageState extends State<GesturesPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               children: Gestures.values
                   .map(
                     (e) => ChoiceChip(
