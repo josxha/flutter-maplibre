@@ -41,7 +41,7 @@ functionality.
     <tr>
       <td style="text-align: center;">
         <strong>Add circles</strong>
-        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/427311f8f4577c215bf73caf46e3769629e74e3b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
+        <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/fe660b8d1c055d32e74cbc2ee0809281331a130b/docs/static/img/layers/circle_layer.jpg" alt="Circle Layer" />
       </td>
       <td style="text-align: center;">
         <strong>Add 3D building outlines</strong>
