@@ -34,6 +34,7 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
@@ -78,7 +79,8 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+              options:
+                  MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
               onEvent: (event) {
                 if (event case MapEventClick()) {
                   setState(() {

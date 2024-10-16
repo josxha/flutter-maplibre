@@ -205,7 +205,7 @@ class CompassListener extends _$jni.JObject {
   }
 }
 
-abstract mixin class $CompassListener {
+abstract base mixin class $CompassListener {
   factory $CompassListener({
     required void Function(double f) onCompassChanged,
     bool onCompassChanged$async,
@@ -219,7 +219,7 @@ abstract mixin class $CompassListener {
   bool get onCompassAccuracyChange$async => false;
 }
 
-class _$CompassListener implements $CompassListener {
+final class _$CompassListener with $CompassListener {
   _$CompassListener({
     required void Function(double f) onCompassChanged,
     this.onCompassChanged$async = false,

@@ -19,14 +19,28 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
     Point(coordinates: Position(9.5, 48)),
   ];
 
+  late final MapController _controller;
+  bool _imageLoaded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Marker Annotations')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) async {
           switch (event) {
+            case MapEventMapCreated():
+              _controller = event.mapController;
+            case MapEventStyleLoaded():
+              // add marker image to map
+              final response =
+                  await http.get(Uri.parse(LayersSymbolPage.imageUrl));
+              final bytes = response.bodyBytes;
+              await _controller.addImage('marker', bytes);
+              setState(() {
+                _imageLoaded = true;
+              });
             case MapEventClick():
               // add a new marker on click
               setState(() {
@@ -42,7 +56,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
             points: _points,
             textField: 'Marker',
             textAllowOverlap: true,
-            iconImage: 'marker',
+            iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.08,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],

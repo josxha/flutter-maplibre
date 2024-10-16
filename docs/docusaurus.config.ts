@@ -64,7 +64,7 @@ const config: Config = {
                     label: 'Getting Started',
                 },
                 {
-                    href: '/docs/',
+                    href: '/docs/index/',
                     sidebarId: 'docsSidebar',
                     position: 'left',
                     label: 'Docs',
@@ -107,7 +107,7 @@ const config: Config = {
                         },
                         {
                             label: 'Docs',
-                            to: '/docs/',
+                            to: '/docs/index/',
                         },
                         {
                             label: 'API Reference',

@@ -22,7 +22,7 @@ void main() {
         late final MapController ctrl;
         final app = App(
           onMapCreated: (controller) => ctrl = controller,
-          options: MapOptions(center: Position(1, 2)),
+          options: MapOptions(initCenter: Position(1, 2)),
         );
         await tester.pumpWidget(app);
         await tester.pumpAndSettle();
@@ -33,7 +33,7 @@ void main() {
           pitch: 1,
         );
         await tester.pumpAndSettle();
-        final camera = await ctrl.getCamera();
+        final camera = ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
         expect(camera.center.lat, closeTo(1, 0.00001));
         expect(camera.zoom, closeTo(1, 0.00001));
@@ -55,7 +55,7 @@ void main() {
           pitch: 1,
         );
         await tester.pumpAndSettle();
-        final camera = await ctrl.getCamera();
+        final camera = ctrl.getCamera();
         expect(camera.center.lng, closeTo(1, 0.00001));
         expect(camera.center.lat, closeTo(2, 0.00001));
         expect(camera.zoom, closeTo(1, 0.00001));
@@ -79,7 +79,7 @@ void main() {
           nativeDuration: Duration.zero,
         );
         await tester.pumpAndSettle();
-        final camera = await ctrl.getCamera();
+        final camera = ctrl.getCamera();
         expect(camera.center.lng, closeTo(2, 0.00001));
         expect(camera.center.lat, closeTo(1, 0.00001));
         expect(camera.zoom, closeTo(2, 0.00001));

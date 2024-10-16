@@ -25,6 +25,7 @@ class _ControllerPageState extends State<ControllerPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
@@ -93,7 +94,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     debugPrint(camera.toString());
                     if (context.mounted) {
                       await showDialog<void>(
@@ -123,7 +124,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
                     final meters =
                         await _controller.getMetersPerPixelAtLatitude(lat);
@@ -161,12 +162,54 @@ pitch: ${camera.pitch}'''),
                     textAlign: TextAlign.center,
                   ),
                 ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final lngLat = await _controller.toLngLat(Offset.zero);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Position(${lngLat.lng}, ${lngLat.lat})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toLngLat 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final offset =
+                        await _controller.toScreenLocation(Position(0, 0));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Offset(${offset.dx}, ${offset.dy})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toScreenLocation 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
+              options:
+                  MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

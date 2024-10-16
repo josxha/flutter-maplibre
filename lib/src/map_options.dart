@@ -7,12 +7,12 @@ import 'package:maplibre/maplibre.dart';
 class MapOptions {
   /// Default constructor for the [MapOptions].
   const MapOptions({
-    this.style = 'https://demotiles.maplibre.org/style.json',
-    this.zoom = 0,
-    this.center,
+    this.initStyle = 'https://demotiles.maplibre.org/style.json',
+    this.initZoom = 0,
+    this.initCenter,
     @Deprecated('Renamed to pitch') double? tilt,
     double pitch = 0,
-    this.bearing = 0,
+    this.initBearing = 0,
     this.webControls = const [],
     this.minZoom = 0,
     this.maxZoom = 22,
@@ -20,25 +20,25 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-  }) : pitch = tilt ?? pitch;
+  }) : initPitch = tilt ?? pitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
-  final String style;
+  final String initStyle;
 
   /// The initial zoom level.
-  final double zoom;
+  final double initZoom;
 
   /// The initial pitch level. Minimum is 0 and maximum is 85 on web and 60 on
   /// other platforms.
-  final double pitch;
+  final double initPitch;
 
   /// The initial bearing of the map. Defaults to 0 (north on top).
   /// 360 is exactly one loop.
-  final double bearing;
+  final double initBearing;
 
   /// The initial center on the map.
-  final Position? center;
+  final Position? initCenter;
 
   /// A list of user interface control buttons that should get used.
   ///
