@@ -12,6 +12,7 @@
   to [3.24.0](https://medium.com/flutter/whats-new-in-flutter-3-24-6c040f87d1e4)
   (Minimum Dart version
   of [3.5.0](https://medium.com/dartlang/dart-3-5-6ca36259fa2f)).
+- Can't await the end of `animateCamera()` in this version.
 
 Read the [Upgrade Guide](https://flutter-maplibre.pages.dev/docs/upgrade) for
 instructions on how to upgrade.
