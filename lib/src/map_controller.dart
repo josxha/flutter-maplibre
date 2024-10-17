@@ -86,6 +86,9 @@ abstract interface class MapController {
   /// Removes an image from the map
   Future<void> removeImage(String id);
 
+  /// Queries the map for rendered features.
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+
   /// Show the user location on the map
   Future<void> enableLocation({
     Duration fastestInterval = const Duration(milliseconds: 750),

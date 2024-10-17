@@ -51,6 +51,8 @@ import 'package:jni/jni.dart' as _$jni;
 
 import '../../../../android/graphics/PointF.dart' as pointf_;
 
+import '../../geojson/Feature.dart' as feature_;
+
 import '../camera/CameraPosition.dart' as cameraposition_;
 
 import '../camera/CameraUpdate.dart' as cameraupdate_;
@@ -8224,7 +8226,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures(
     pointf_.PointF pointF,
     _$jni.JArray<_$jni.JString> strings,
   ) {
@@ -8233,7 +8235,7 @@ class MapLibreMap extends _$jni.JObject {
             _id_queryRenderedFeatures as _$jni.JMethodIDPtr,
             pointF.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$1 = _class.instanceMethodId(
@@ -8262,7 +8264,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$1(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$1(
     pointf_.PointF pointF,
     _$jni.JObject expression,
     _$jni.JArray<_$jni.JString> strings,
@@ -8273,7 +8275,7 @@ class MapLibreMap extends _$jni.JObject {
             pointF.reference.pointer,
             expression.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$2 = _class.instanceMethodId(
@@ -8300,7 +8302,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$2(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$2(
     _$jni.JObject rectF,
     _$jni.JArray<_$jni.JString> strings,
   ) {
@@ -8309,7 +8311,7 @@ class MapLibreMap extends _$jni.JObject {
             _id_queryRenderedFeatures$2 as _$jni.JMethodIDPtr,
             rectF.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_queryRenderedFeatures$3 = _class.instanceMethodId(
@@ -8338,7 +8340,7 @@ class MapLibreMap extends _$jni.JObject {
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> queryRenderedFeatures$3(
+  _$jni.JList<feature_.Feature> queryRenderedFeatures$3(
     _$jni.JObject rectF,
     _$jni.JObject expression,
     _$jni.JArray<_$jni.JString> strings,
@@ -8349,7 +8351,7 @@ class MapLibreMap extends _$jni.JObject {
             rectF.reference.pointer,
             expression.reference.pointer,
             strings.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_getLocationComponent = _class.instanceMethodId(

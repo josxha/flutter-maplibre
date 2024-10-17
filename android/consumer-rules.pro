@@ -16,3 +16,4 @@
 -keep class org.maplibre.android.text.** { public *; }
 -keep class org.maplibre.android.util.** { public *; }
 -keep class org.maplibre.android.utils.** { public *; }
+-keep class org.maplibre.geojson.** { public *; }

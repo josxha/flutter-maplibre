@@ -577,6 +577,63 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+    // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
+    final jniMapLibreMap = _jniMapLibreMap;
+    final jniStyle = _jniStyle;
+    final result = await runOnPlatformThread<List<QueriedLayer>>(() {
+      final jniLayers = jniStyle.getLayers();
+      final queriedLayers = <QueriedLayer>[];
+      for (var i = jniLayers.length - 1; i >= 0; i--) {
+        final jniLayer = jniLayers[i];
+        JString? jLayerId;
+        late final JString jSourceId;
+        late final JString jSourceLayer;
+        switch (jniLayer.jClass.toString()) {
+          case 'class org.maplibre.android.style.layers.LineLayer':
+            final layer = jniLayer.as(jni.LineLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.FillLayer':
+            final layer = jniLayer.as(jni.FillLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.SymbolLayer':
+            final layer = jniLayer.as(jni.SymbolLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+        }
+        jniLayer.release();
+        if (jLayerId == null) continue; // ignore all other layers
+
+        final queryLayerIds = JArray(JString.type, 1)..[0] = jLayerId;
+        final jniFeatures = jniMapLibreMap.queryRenderedFeatures(
+          jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+          queryLayerIds, // query one layer at a time
+        );
+        queryLayerIds.release();
+        if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
+        jniFeatures.release();
+        final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+        final queriedLayer = QueriedLayer(
+          layerId: jLayerId.toDartString(releaseOriginal: true),
+          sourceId: jSourceId.toDartString(releaseOriginal: true),
+          sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
+        );
+        queriedLayers.add(queriedLayer);
+      }
+      return queriedLayers;
+    });
+    return result;
+  }
+
+  @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
