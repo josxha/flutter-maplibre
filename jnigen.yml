@@ -19,7 +19,7 @@ android_sdk_config:
 suspend_fun_to_async: true
 output:
   dart:
-    path: 'lib/src/jni/'
+    path: 'lib/src/native/jni/'
 source_path:
   - 'android/src/main'
 classes:
