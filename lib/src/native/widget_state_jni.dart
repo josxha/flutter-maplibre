@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
@@ -537,48 +536,59 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   }
 
   @override
-  Future<List<RenderedFeature>> queryRenderedFeatures(
-    Offset screenLocation,
-  ) async {
-    // https://maplibre.org/maplibre-gl-js/docs/examples/queryrenderedfeatures/
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+    // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
     final jniMapLibreMap = _jniMapLibreMap;
-    final jniFeatures = await runOnPlatformThread<List<jni.Feature>>(() {
-      final jniLayers = jniMapLibreMap.getStyle$1().getLayers();
-      final layerIds = JArray(JString.type, jniLayers.length);
-      for (var i = 0; i < jniLayers.length; i++) {
+    final jniStyle = _jniStyle;
+    final result = await runOnPlatformThread<List<QueriedLayer>>(() {
+      final jniLayers = jniStyle.getLayers();
+      final queriedLayers = <QueriedLayer>[];
+      for (var i = jniLayers.length - 1; i >= 0; i--) {
         final jniLayer = jniLayers[i];
-        layerIds[i] = switch (jniLayer.jClass.toString()) {
-          'class org.maplibre.android.style.layers.BackgroundLayer' =>
-            jniLayer.as(jni.BackgroundLayer.type).getId(),
-          'class org.maplibre.android.style.layers.LineLayer' =>
-            jniLayer.as(jni.LineLayer.type).getId(),
-          'class org.maplibre.android.style.layers.FillLayer' =>
-            jniLayer.as(jni.FillLayer.type).getId(),
-          'class org.maplibre.android.style.layers.SymbolLayer' =>
-            jniLayer.as(jni.SymbolLayer.type).getId(),
-          _ => throw Exception("Can't handle layer: ${jniLayer.jClass}"),
-        };
-      }
+        JString? jLayerId;
+        late final JString jSourceId;
+        late final JString jSourceLayer;
+        switch (jniLayer.jClass.toString()) {
+          case 'class org.maplibre.android.style.layers.LineLayer':
+            final layer = jniLayer.as(jni.LineLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.FillLayer':
+            final layer = jniLayer.as(jni.FillLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.SymbolLayer':
+            final layer = jniLayer.as(jni.SymbolLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+        }
+        jniLayer.release();
+        if (jLayerId == null) continue; // ignore all other layers
 
-      return jniMapLibreMap.queryRenderedFeatures(
-        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
-        JArray(JString.type, 0), // using an empty list to query all
-      );
+        final queryLayerIds = JArray(JString.type, 1)..[0] = jLayerId;
+        final jniFeatures = jniMapLibreMap.queryRenderedFeatures(
+          jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+          queryLayerIds, // query one layer at a time
+        );
+        queryLayerIds.release();
+        if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
+        jniFeatures.release();
+        final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+        final queriedLayer = QueriedLayer(
+          layerId: jLayerId.toDartString(releaseOriginal: true),
+          sourceId: jSourceId.toDartString(releaseOriginal: true),
+          sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
+        );
+        queriedLayers.add(queriedLayer);
+      }
+      return queriedLayers;
     });
-    return List.generate(jniFeatures.length, (index) {
-      final jniFeature = jniFeatures[index];
-      final json =
-          jsonDecode(jniFeature.toJson().toDartString(releaseOriginal: true))
-              as Map<String, Object?>;
-      (json['geometry']! as Map).remove('coordinates');
-      debugPrint(json.toString());
-      final feature = RenderedFeature(
-        layerId: jniFeature.id().toDartString(releaseOriginal: true),
-        sourceId: null,
-        sourceLayer: null,
-      );
-      jniFeature.release();
-      return feature;
-    });
+    return result;
   }
 }

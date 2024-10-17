@@ -27,7 +27,7 @@ class _LayersFillPageState extends State<LayersFillPage> {
           if (event case MapEventClick()) {
             final screenPoint = await _controller.toScreenLocation(event.point);
             final features =
-                await _controller.queryRenderedFeatures(screenPoint);
+                await _controller.queryLayers(screenPoint);
             debugPrint(
               '${features.length} features clicked\n'
               '${features.join('\n')}',

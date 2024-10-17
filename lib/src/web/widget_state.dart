@@ -636,14 +636,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Future<List<RenderedFeature>> queryRenderedFeatures(
+  Future<List<QueriedLayer>> queryLayers(
     Offset screenLocation,
   ) async {
     final features =
         _map.queryRenderedFeatures(screenLocation.toJsPoint(), null);
     return features.toDart
         .map(
-          (e) => RenderedFeature(
+          (e) => QueriedLayer(
             layerId: e.layer.id,
             sourceId: e.source,
             sourceLayer: e.sourceLayer,
