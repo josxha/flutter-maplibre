@@ -116,6 +116,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           interop.MapEventType.load,
           (interop.MapMouseEvent event) {
             widget.onEvent?.call(const MapEventStyleLoaded());
+            _map.setProjection(interop.ProjectionSpecification(type: 'globe'));
             widget.onStyleLoaded?.call();
             _annotationManager = AnnotationManager(this, widget.layers);
           }.toJS,
