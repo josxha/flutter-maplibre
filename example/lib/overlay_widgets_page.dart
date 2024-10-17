@@ -37,6 +37,7 @@ class ZoomButtons extends StatelessWidget {
       alignment: Alignment.bottomRight,
       padding: const EdgeInsets.all(12),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         spacing: 8,
         children: [
           FloatingActionButton(
