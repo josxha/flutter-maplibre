@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
-import 'package:maplibre/src/jni/jni.dart' as jni;
+import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
