@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 
-/// Return used for [MapController.queryQueriedLayers].
+/// Return used for [MapController.queryLayers].
 @immutable
 class QueriedLayer {
   /// Create a new [QueriedLayer] object.

@@ -49,6 +49,8 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../geojson/Feature.dart' as feature_;
+
 import '../../geometry/LatLngBounds.dart' as latlngbounds_;
 
 import 'CustomGeometrySourceOptions.dart' as customgeometrysourceoptions_;
@@ -765,14 +767,14 @@ class CustomGeometrySource extends source_.Source {
 
   /// from: `public final java.util.List querySourceFeatures(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> querySourceFeatures(
+  _$jni.JList<feature_.Feature> querySourceFeatures(
     _$jni.JObject expression,
   ) {
     return _querySourceFeatures(
             reference.pointer,
             _id_querySourceFeatures as _$jni.JMethodIDPtr,
             expression.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 }
 

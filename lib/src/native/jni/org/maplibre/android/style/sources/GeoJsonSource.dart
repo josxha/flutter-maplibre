@@ -53,6 +53,8 @@ import '../../../../../java/net/URI.dart' as uri_;
 
 import '../../../../../java/net/URL.dart' as url_;
 
+import '../../../geojson/Feature.dart' as feature_;
+
 import 'GeoJsonOptions.dart' as geojsonoptions_;
 
 import 'Source.dart' as source_;
@@ -479,7 +481,7 @@ class GeoJsonSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory GeoJsonSource.new$11(
     _$jni.JString string,
-    _$jni.JObject feature,
+    feature_.Feature feature,
   ) {
     return GeoJsonSource.fromReference(_new$11(
             _class.reference.pointer,
@@ -516,7 +518,7 @@ class GeoJsonSource extends source_.Source {
   /// The returned object must be released after use, by calling the [release] method.
   factory GeoJsonSource.new$12(
     _$jni.JString string,
-    _$jni.JObject feature,
+    feature_.Feature feature,
     geojsonoptions_.GeoJsonOptions geoJsonOptions,
   ) {
     return GeoJsonSource.fromReference(_new$12(
@@ -620,7 +622,7 @@ class GeoJsonSource extends source_.Source {
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.Feature feature)`
   void setGeoJson(
-    _$jni.JObject feature,
+    feature_.Feature feature,
   ) {
     _setGeoJson(reference.pointer, _id_setGeoJson as _$jni.JMethodIDPtr,
             feature.reference.pointer)
@@ -868,14 +870,14 @@ class GeoJsonSource extends source_.Source {
 
   /// from: `public final java.util.List querySourceFeatures(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<_$jni.JObject> querySourceFeatures(
+  _$jni.JList<feature_.Feature> querySourceFeatures(
     _$jni.JObject expression,
   ) {
     return _querySourceFeatures(
             reference.pointer,
             _id_querySourceFeatures as _$jni.JMethodIDPtr,
             expression.reference.pointer)
-        .object(const _$jni.JListType(_$jni.JObjectType()));
+        .object(const _$jni.JListType(feature_.$Feature$Type()));
   }
 
   static final _id_getClusterChildren = _class.instanceMethodId(
@@ -897,7 +899,7 @@ class GeoJsonSource extends source_.Source {
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterChildren(org.maplibre.geojson.Feature feature)`
   /// The returned object must be released after use, by calling the [release] method.
   _$jni.JObject getClusterChildren(
-    _$jni.JObject feature,
+    feature_.Feature feature,
   ) {
     return _getClusterChildren(
             reference.pointer,
@@ -929,7 +931,7 @@ class GeoJsonSource extends source_.Source {
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterLeaves(org.maplibre.geojson.Feature feature, long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
   _$jni.JObject getClusterLeaves(
-    _$jni.JObject feature,
+    feature_.Feature feature,
     int j,
     int j1,
   ) {
@@ -960,7 +962,7 @@ class GeoJsonSource extends source_.Source {
 
   /// from: `public final int getClusterExpansionZoom(org.maplibre.geojson.Feature feature)`
   int getClusterExpansionZoom(
-    _$jni.JObject feature,
+    feature_.Feature feature,
   ) {
     return _getClusterExpansionZoom(
             reference.pointer,
