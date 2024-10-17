@@ -30,3 +30,7 @@ build/
 
 # converage
 **/coverage/
+
+# jnigen
+/mvn_jar/
+/mvn_java/
