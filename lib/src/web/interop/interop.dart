@@ -11,6 +11,7 @@ part 'controls.dart';
 part 'events.dart';
 part 'gesture_handlers.dart';
 part 'map.dart';
+part 'map_geojson_feature.dart';
 part 'marker.dart';
 
 /// A simple x/y [Point] class for JavaScript.
