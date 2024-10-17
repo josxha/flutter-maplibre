@@ -1,3 +1,9 @@
+## UNRELEASED
+
+## New Features
+
+- Add `controller.queryLayers()` that returns all layers at a screen location.
+
 ## 0.1.0
 
 ### Breaking Changes
