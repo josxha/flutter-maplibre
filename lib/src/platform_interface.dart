@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/platform_impl.dart'
     if (dart.library.html) 'package:maplibre/src/web/platform_impl.dart';
 
@@ -17,5 +16,5 @@ abstract base class PlatformInterface {
   static PlatformInterface instance = PlatformImpl();
 
   /// Return a platform specific [State<MapLibreMap>] object.
-  State<MapLibreMap> createWidgetState();
+  MapLibreMapState createWidgetState();
 }

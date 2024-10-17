@@ -6,14 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateJni extends State<MapLibreMap>
-    implements MapController, pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateJni extends MapLibreMapState
+    implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
@@ -36,7 +37,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPlatformWidget(BuildContext context) {
     // Texture Layer (or Texture Layer Hybrid Composition)
     // Platform Views are rendered into a texture. Flutter draws the
     // platform views (via the texture). Flutter content is rendered
