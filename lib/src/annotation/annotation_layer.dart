@@ -28,7 +28,7 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
   Map<String, Object> getPaint();
 
   /// Build the layout properties.
-  Map<String, Object> getLayout();
+  Map<String, Object> getLayout(int index);
 
   /// Add the annotation layer to the map.
   Layer createLayer(int index);
