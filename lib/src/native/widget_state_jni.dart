@@ -729,7 +729,14 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   Future<List<String>> getAttributions() async {
-    // TODO: return
-    return [];
+    final attributions = <String>[];
+    final jSources = _jniStyle.getSources();
+    for (final jSource in jSources) {
+      final attribution = jSource.getAttribution();
+      if (attribution.isNull) continue;
+      attributions.add(attribution.toDartString(releaseOriginal: true));
+    }
+    jSources.release();
+    return attributions;
   }
 }

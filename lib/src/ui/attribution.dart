@@ -55,13 +55,14 @@ class _AttributionState extends State<Attribution> {
       future: controller.getAttributions(),
       builder: (context, snapshot) {
         if (snapshot.data case final List<String> attributions) {
+          final theme = Theme.of(context);
           return Container(
             alignment: Alignment.bottomRight,
             padding: widget.padding,
             child: PointerInterceptor(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: theme.scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
@@ -76,7 +77,7 @@ class _AttributionState extends State<Attribution> {
                           InkWell(
                             child: Text(
                               'MapLibre |',
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: theme.textTheme.bodySmall,
                             ),
                             onTap: () {
                               launchUrl(Uri.parse('https://maplibre.org/'));
@@ -119,7 +120,6 @@ class _HtmlWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.bodySmall;
-
     final textSpans = <TextSpan>[];
     final document = html_parser.parse(html);
     for (final node in document.body!.nodes) {
