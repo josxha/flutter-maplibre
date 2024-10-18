@@ -1,4 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as html_parser;
 import 'package:maplibre/maplibre.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -48,48 +51,97 @@ class _AttributionState extends State<Attribution> {
       _expanded = false;
     }
 
-    return Container(
-      alignment: Alignment.bottomRight,
-      padding: widget.padding,
-      child: PointerInterceptor(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (_expanded) ...[
-                  const SizedBox(width: 8),
-                  if (widget.showMapLibre) ...[
-                    InkWell(
-                      child: const Text(
-                        'MapLibre |',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      onTap: () =>
-                          launchUrl(Uri.parse('https://maplibre.org/')),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                ],
-                IconButton(
-                  onPressed: () => setState(() {
-                    _initMapCamera = null;
-                    _expanded = !_expanded;
-                  }),
-                  icon: const Icon(Icons.info, size: 18),
-                  padding: const EdgeInsets.all(4),
-                  constraints: const BoxConstraints(),
+    return FutureBuilder<List<String>>(
+      future: controller.getAttributions(),
+      builder: (context, snapshot) {
+        if (snapshot.data case final List<String> attributions) {
+          return Container(
+            alignment: Alignment.bottomRight,
+            padding: widget.padding,
+            child: PointerInterceptor(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ],
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_expanded) ...[
+                        const SizedBox(width: 8),
+                        if (widget.showMapLibre) ...[
+                          InkWell(
+                            child: Text(
+                              'MapLibre |',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            onTap: () {
+                              launchUrl(Uri.parse('https://maplibre.org/'));
+                            },
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                        ...attributions.map(_HtmlWidget.new),
+                      ],
+                      IconButton(
+                        onPressed: () => setState(() {
+                          _initMapCamera = null;
+                          _expanded = !_expanded;
+                        }),
+                        icon: const Icon(Icons.info, size: 18),
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+          );
+        }
+        if (snapshot.error case final Object error) {
+          debugPrint(error.toString());
+        }
+        return const SizedBox.shrink();
+      },
     );
+  }
+}
+
+class _HtmlWidget extends StatelessWidget {
+  const _HtmlWidget(this.html);
+
+  final String html;
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.bodySmall;
+
+    final textSpans = <TextSpan>[];
+    final document = html_parser.parse(html);
+    for (final node in document.body!.nodes) {
+      if (node is dom.Text) {
+        // pure text
+        textSpans.add(TextSpan(text: node.text));
+      } else if (node is dom.Element && node.localName == 'a') {
+        // link
+        textSpans.add(
+          TextSpan(
+            text: node.text,
+            style: textStyle,
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                if (node.attributes['href'] case final String href) {
+                  launchUrl(Uri.parse(href));
+                }
+              },
+          ),
+        );
+      }
+    }
+    return RichText(text: TextSpan(style: textStyle, children: textSpans));
   }
 }

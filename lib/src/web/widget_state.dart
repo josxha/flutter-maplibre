@@ -654,4 +654,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         )
         .toList(growable: false);
   }
+
+  @override
+  Future<List<String>> getAttributions() async {
+    final jsStyle = _map.getStyle();
+    final sources =
+        jsStyle?.sources.dartify() as Map<Object?, Object?>?;
+    if (sources == null) return const [];
+    final attributions = <String>[];
+    for (final value in sources.values) {
+      final source = value! as Map<Object?, Object?>;
+      attributions.add(source['attribution'].toString());
+    }
+    return attributions;
+  }
 }

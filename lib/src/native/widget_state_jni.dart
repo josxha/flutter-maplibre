@@ -726,4 +726,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
       locationComponent.setCameraMode(mode);
     });
   }
+
+  @override
+  Future<List<String>> getAttributions() async {
+    // TODO: return
+    return [];
+  }
 }

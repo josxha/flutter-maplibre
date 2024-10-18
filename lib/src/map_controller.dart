@@ -92,6 +92,9 @@ abstract interface class MapController {
   /// coordinates at different latitudes.
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
+  /// Get a list of all attributions from the map style.
+  Future<List<String>> getAttributions();
+
   /// The smallest bounding box that includes the visible region.
   Future<LngLatBounds> getVisibleRegion();
 
