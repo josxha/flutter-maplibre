@@ -528,7 +528,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final zoom = _map.getZoom();
     // https://wiki.openstreetmap.org/wiki/Zoom_levels
     return circumferenceOfEarth *
-        cos(latitude * radian2degree) /
+        cos(latitude * degree2Radian) /
         pow(2, zoom + 9);
   }
 

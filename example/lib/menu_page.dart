@@ -17,10 +17,10 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
-import 'package:maplibre_example/overlay_widgets_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
+import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
@@ -88,9 +88,9 @@ class MenuPage extends StatelessWidget {
                   location: UserLocationPage.location,
                 ),
                 ItemCard(
-                  label: 'Overlay Widgets',
-                  iconData: Icons.widgets,
-                  location: OverlayWidgetsPage.location,
+                  label: 'User interface',
+                  iconData: Icons.desktop_mac,
+                  location: UserInterfacePage.location,
                 ),
             ],
           ),

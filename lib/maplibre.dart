@@ -12,5 +12,7 @@ export 'src/map_gestures.dart';
 export 'src/map_options.dart';
 export 'src/queried_layer.dart';
 export 'src/style/style.dart';
+export 'src/ui/compass.dart';
+export 'src/ui/zoom_buttons.dart';
 export 'src/utils.dart';
 export 'src/web_controls.dart';
