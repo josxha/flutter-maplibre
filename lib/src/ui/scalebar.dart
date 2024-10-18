@@ -14,8 +14,8 @@ class Scalebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
-    if (controller == null) return const SizedBox.shrink();
-    final camera = controller.getCamera();
+    final camera = MapCamera.maybeOf(context);
+    if (controller == null || camera == null) return const SizedBox.shrink();
     final futureMetersPerPixel = controller.getMetersPerPixelAtLatitude(
       camera.center.lat.toDouble(),
     );

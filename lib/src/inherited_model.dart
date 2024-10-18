@@ -17,7 +17,7 @@ class MapLibreInheritedModel extends InheritedModel<MapController> {
   final MapController mapController;
 
   /// [MapCamera] instance.
-  final MapCamera mapCamera;
+  final MapCamera? mapCamera;
 
   /// Get the [InheritedModel] that is used to inject models into the widget
   /// tree that can referenced further down in the widget tree.

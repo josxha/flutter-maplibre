@@ -20,12 +20,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   MapOptions get options => widget.options;
 
   @override
-  late MapCamera camera = MapCamera(
-    center: options.initCenter ?? Position(0, 0),
-    zoom: options.initZoom,
-    bearing: options.initBearing,
-    pitch: options.initPitch,
-  );
+  MapCamera? camera;
 
   @override
   Widget build(BuildContext context) {

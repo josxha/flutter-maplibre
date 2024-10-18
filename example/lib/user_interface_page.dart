@@ -21,7 +21,7 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
         options: MapOptions(
           initZoom: 3,
           initCenter: Position(9.17, 47.68),
-          initStyle: StyledMapPage.styleUrl
+          initStyle: StyledMapPage.styleUrl,
         ),
         children: const [
           Scalebar(),

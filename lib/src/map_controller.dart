@@ -82,7 +82,7 @@ abstract interface class MapController {
   MapCamera getCamera();
 
   /// Get the current camera position on the map.
-  MapCamera get camera;
+  MapCamera? get camera;
 
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.

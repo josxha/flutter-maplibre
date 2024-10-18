@@ -89,7 +89,7 @@ class MenuPage extends StatelessWidget {
                 ),
                 ItemCard(
                   label: 'User interface',
-                  iconData: Icons.desktop_mac,
+                  iconData: Icons.control_camera,
                   location: UserInterfacePage.location,
                 ),
             ],

@@ -42,8 +42,8 @@ class _AttributionState extends State<Attribution> {
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
-    if (controller == null) return const SizedBox.shrink();
-    final camera = MapCamera.of(context);
+    final camera = MapCamera.maybeOf(context);
+    if (controller == null || camera == null) return const SizedBox.shrink();
 
     _initMapCamera ??= camera;
     if (_initMapCamera != camera && _expanded) {
