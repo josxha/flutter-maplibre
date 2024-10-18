@@ -3,6 +3,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 
 /// The current camera position on the map.
+@immutable
 class MapCamera {
   /// Default constructor for a [MapCamera].
   const MapCamera({
@@ -39,4 +40,22 @@ class MapCamera {
   String toString() => 'MapCamera('
       'center: Position(lng: ${center.lng}, lat: ${center.lat}), '
       'zoom: $zoom, bearing: $bearing, pitch: $pitch)';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MapCamera &&
+          runtimeType == other.runtimeType &&
+          center == other.center &&
+          zoom == other.zoom &&
+          bearing == other.bearing &&
+          pitch == other.pitch;
+
+  @override
+  int get hashCode => Object.hash(
+        center.hashCode,
+        zoom.hashCode,
+        bearing.hashCode,
+        pitch.hashCode,
+      );
 }

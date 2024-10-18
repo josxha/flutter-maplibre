@@ -49,7 +49,6 @@ class _ScaleBarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final unit = metersPerPixel >= 10 ? _Unit.km : _Unit.m;
-    debugPrint('metersPerPixel: $metersPerPixel, unit: ${unit.name}');
     final meters = switch (metersPerPixel) {
       >= 500000 => 50000000,
       >= 300000 => 30000000,

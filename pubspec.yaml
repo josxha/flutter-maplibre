@@ -28,6 +28,7 @@ dependencies:
   geotypes: ^0.0.2
   jni: ^0.12.0
   pointer_interceptor: ^0.10.1+2
+  url_launcher: ^6.0.0
   web: ^1.0.0
 
 dev_dependencies:
