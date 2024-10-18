@@ -4,12 +4,16 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
+///
+/// This widget is purposefully kept simple. If you need to change the design
+/// or behavior of the zoom buttons a lot, prefer to copy this class into your
+/// app and adjust it according to your needs.
 class ZoomButtons extends StatelessWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
   const ZoomButtons({
     super.key,
-    this.padding = const EdgeInsets.symmetric(vertical: 30, horizontal: 12),
+    this.padding = const EdgeInsets.symmetric(vertical: 50, horizontal: 12),
   });
 
   /// The padding.
