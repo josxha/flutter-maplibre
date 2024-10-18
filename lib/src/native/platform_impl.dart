@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/widget_state_jni.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
@@ -7,5 +6,5 @@ import 'package:maplibre/src/platform_interface.dart';
 final class PlatformImpl extends PlatformInterface {
   @override
   // currently only Android is supported
-  State<MapLibreMap> createWidgetState() => MapLibreMapStateJni();
+  MapLibreMapState createWidgetState() => MapLibreMapStateJni();
 }

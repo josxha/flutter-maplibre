@@ -16,11 +16,16 @@ class MapLibreMap extends StatefulWidget {
     this.onStyleLoaded,
     this.onEvent,
     this.layers = const [],
+    this.children = const [],
     super.key,
   });
 
   /// Use the [options] field to customize the map and set default values.
   final MapOptions options;
+
+  /// Flutter widgets that get displayed on top on the map and are within the
+  /// [MapLibreMap] context.
+  final List<Widget> children;
 
   /// Which gestures should be consumed by the map.
   ///

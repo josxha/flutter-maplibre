@@ -20,12 +20,17 @@ environment:
   flutter: '>=3.24.0' # jni >=0.12.0 depends on meta ^1.15.0
 
 dependencies:
+  cupertino_icons: ^1.0.0
   flutter:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
+  flutter_markdown: ^0.7.4
   geotypes: ^0.0.2
+  html: ^0.15.4
   jni: ^0.12.0
+  pointer_interceptor: ^0.10.1+2
+  url_launcher: ^6.0.0
   web: ^1.0.0
 
 dev_dependencies:
