@@ -19,6 +19,8 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
       body: MapLibreMap(
         options: MapOptions(initZoom: 4, initCenter: Position(9.17, 47.68)),
         children: const [
+          Scalebar(),
+          Attribution(),
           ZoomButtons(),
           Compass.cupertino(),
         ],
