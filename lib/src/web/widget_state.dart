@@ -55,6 +55,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           () => widget.onEvent?.call(MapEventMapCreated(mapController: this)),
         );
         Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          setState(() => isInitialized = true);
+        });
         _resizeMap();
 
         // set options
@@ -165,15 +168,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _map.on(
           interop.MapEventType.move,
           (interop.MapLibreEvent event) {
-            setState(() {
-              camera = MapCamera(
-                center: _map.getCenter().toPosition(),
-                zoom: _map.getZoom().toDouble(),
-                pitch: _map.getPitch().toDouble(),
-                bearing: _map.getBearing().toDouble(),
-              );
-            });
-            widget.onEvent?.call(MapEventMoveCamera(camera: camera));
+            final mapCamera = MapCamera(
+              center: _map.getCenter().toPosition(),
+              zoom: _map.getZoom().toDouble(),
+              pitch: _map.getPitch().toDouble(),
+              bearing: _map.getBearing().toDouble(),
+            );
+            setState(() => camera = mapCamera);
+            widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
           }.toJS,
         );
         _map.on(
@@ -658,8 +660,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   @override
   Future<List<String>> getAttributions() async {
     final jsStyle = _map.getStyle();
-    final sources =
-        jsStyle?.sources.dartify() as Map<Object?, Object?>?;
+    final sources = jsStyle?.sources.dartify() as Map<Object?, Object?>?;
     if (sources == null) return const [];
     final attributions = <String>[];
     for (final value in sources.values) {

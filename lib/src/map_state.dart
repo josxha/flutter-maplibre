@@ -22,6 +22,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   @override
   MapCamera? camera;
 
+  /// Set to true once the map is initialized and a [MapController.camera]
+  /// is set.
+  bool isInitialized = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,7 +34,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         MapLibreInheritedModel(
           mapController: this,
           mapCamera: camera,
-          child: Stack(children: widget.children),
+          child: isInitialized
+              ? Stack(children: widget.children)
+              : const SizedBox.shrink(),
         ),
       ],
     );
