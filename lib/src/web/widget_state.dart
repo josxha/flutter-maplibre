@@ -22,6 +22,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   AnnotationManager? _annotationManager;
 
   /// Get the [MapOptions] from [MapLibreMap.options].
+  @override
   MapOptions get options => widget.options;
 
   @override
@@ -164,12 +165,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _map.on(
           interop.MapEventType.move,
           (interop.MapLibreEvent event) {
-            final camera = MapCamera(
-              center: _map.getCenter().toPosition(),
-              zoom: _map.getZoom().toDouble(),
-              pitch: _map.getPitch().toDouble(),
-              bearing: _map.getBearing().toDouble(),
-            );
+            setState(() {
+              camera = MapCamera(
+                center: _map.getCenter().toPosition(),
+                zoom: _map.getZoom().toDouble(),
+                pitch: _map.getPitch().toDouble(),
+                bearing: _map.getBearing().toDouble(),
+              );
+            });
             widget.onEvent?.call(MapEventMoveCamera(camera: camera));
           }.toJS,
         );

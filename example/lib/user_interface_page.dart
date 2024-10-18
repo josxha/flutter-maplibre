@@ -17,7 +17,11 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('User Interface')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 4, initCenter: Position(9.17, 47.68)),
+        options: MapOptions(
+          initZoom: 7,
+          initCenter: Position(9.17, 47.68),
+          initStyle: 'https://tiles.versatiles.org/assets/styles/colorful.json',
+        ),
         children: const [
           Scalebar(),
           Attribution(),

@@ -25,6 +25,9 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   MapOptions get _options => widget.options;
 
+  @override
+  late MapCamera camera;
+
   jni.MapLibreMap get _jniMapLibreMap =>
       _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
 
@@ -455,13 +458,15 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   void onMoveCamera(pigeon.MapCamera camera) {
-    final mapCamera = MapCamera(
-      center: camera.center.toPosition(),
-      zoom: camera.zoom,
-      pitch: camera.pitch,
-      bearing: camera.bearing,
-    );
-    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+    setState(() {
+      this.camera = MapCamera(
+        center: camera.center.toPosition(),
+        zoom: camera.zoom,
+        pitch: camera.pitch,
+        bearing: camera.bearing,
+      );
+    });
+    widget.onEvent?.call(MapEventMoveCamera(camera: this.camera));
   }
 
   @override

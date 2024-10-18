@@ -16,16 +16,28 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// circles and polylines.
   AnnotationManager? annotationManager;
 
+  /// Get the [MapOptions] from [MapLibreMap.options].
+  MapOptions get options => widget.options;
+
+  @override
+  late MapCamera camera = MapCamera(
+    center: options.initCenter ?? Position(0, 0),
+    zoom: options.initZoom,
+    bearing: options.initBearing,
+    pitch: options.initPitch,
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MapLibreInheritedModel(
-      mapController: this,
-      child: Stack(
-        children: [
-          buildPlatformWidget(context),
-          ...widget.children,
-        ],
-      ),
+    return Stack(
+      children: [
+        buildPlatformWidget(context),
+        MapLibreInheritedModel(
+          mapController: this,
+          mapCamera: camera,
+          child: Stack(children: widget.children),
+        ),
+      ],
     );
   }
 

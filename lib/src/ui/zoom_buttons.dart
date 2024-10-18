@@ -22,11 +22,15 @@ class ZoomButtons extends StatelessWidget {
           spacing: 8,
           children: [
             FloatingActionButton(
-              onPressed: () => controller.animateCamera(zoom: controller.getCamera().zoom + 1),
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom + 1,
+              ),
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
-              onPressed: () => controller.animateCamera(zoom: controller.getCamera().zoom - 1),
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom - 1,
+              ),
               child: const Icon(Icons.remove),
             ),
           ],

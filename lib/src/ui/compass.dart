@@ -87,7 +87,7 @@ class Compass extends StatelessWidget {
       alignment: alignment,
       padding: padding,
       child: Transform.rotate(
-        angle: (camera.bearing + rotationOffset) * degree2Radian,
+        angle: (-camera.bearing + rotationOffset) * degree2Radian,
         child: PointerInterceptor(
           child: IconButton(
             alignment: Alignment.center,
