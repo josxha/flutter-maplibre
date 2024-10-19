@@ -38,7 +38,6 @@ class Attribution extends StatefulWidget {
 class _AttributionState extends State<Attribution> {
   bool _expanded = true;
   MapCamera? _initMapCamera;
-  Future<List<String>>? _future;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,7 @@ class _AttributionState extends State<Attribution> {
     }
 
     return FutureBuilder<List<String>>(
-      future: _future ??= controller.getAttributions(),
+      future: controller.getAttributions(),
       builder: (context, snapshot) {
         if (snapshot.data case final List<String> attributions) {
           final theme = Theme.of(context);
