@@ -35,7 +35,7 @@ class ZoomButtons extends StatelessWidget {
               heroTag: 'MapLibreZoomInButton',
               onPressed: () => controller.animateCamera(
                 zoom: controller.getCamera().zoom + 1,
-                nativeDuration: Duration(milliseconds: 200),
+                nativeDuration: const Duration(milliseconds: 200),
               ),
               child: const Icon(Icons.add),
             ),
@@ -43,7 +43,7 @@ class ZoomButtons extends StatelessWidget {
               heroTag: 'MapLibreZoomOutButton',
               onPressed: () => controller.animateCamera(
                 zoom: controller.getCamera().zoom - 1,
-                nativeDuration: Duration(milliseconds: 200),
+                nativeDuration: const Duration(milliseconds: 200),
               ),
               child: const Icon(Icons.remove),
             ),
