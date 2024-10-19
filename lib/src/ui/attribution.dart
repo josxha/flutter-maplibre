@@ -46,7 +46,7 @@ class _AttributionState extends State<Attribution> {
     if (controller == null || camera == null) return const SizedBox.shrink();
 
     _initMapCamera ??= camera;
-    if (_initMapCamera != camera && _expanded) {
+    if (_expanded && !widget.keepExpanded && _initMapCamera != camera) {
       _initMapCamera = null;
       _expanded = false;
     }
