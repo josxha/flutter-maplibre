@@ -32,12 +32,14 @@ class ZoomButtons extends StatelessWidget {
           spacing: 8,
           children: [
             FloatingActionButton(
+              heroTag: 'MapLibreZoomInButton',
               onPressed: () => controller.animateCamera(
                 zoom: controller.getCamera().zoom + 1,
               ),
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
+              heroTag: 'MapLibreZoomOutButton',
               onPressed: () => controller.animateCamera(
                 zoom: controller.getCamera().zoom - 1,
               ),
