@@ -76,7 +76,7 @@ class _AttributionState extends State<Attribution> {
                         if (widget.showMapLibre) ...[
                           InkWell(
                             child: Text(
-                              'MapLibre |',
+                              'MapLibre${attributions.isEmpty ? '' : ' |'}',
                               style: theme.textTheme.bodySmall,
                             ),
                             onTap: () {
