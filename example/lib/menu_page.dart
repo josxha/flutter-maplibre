@@ -87,11 +87,11 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.gps_fixed,
                   location: UserLocationPage.location,
                 ),
-                ItemCard(
-                  label: 'User interface',
-                  iconData: Icons.control_camera,
-                  location: UserInterfacePage.location,
-                ),
+              ItemCard(
+                label: 'User interface',
+                iconData: Icons.control_camera,
+                location: UserInterfacePage.location,
+              ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
