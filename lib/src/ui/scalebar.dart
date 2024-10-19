@@ -19,6 +19,7 @@ class Scalebar extends StatelessWidget {
     final futureMetersPerPixel = controller.getMetersPerPixelAtLatitude(
       camera.center.lat.toDouble(),
     );
+    final theme = Theme.of(context);
     return Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(12),
@@ -26,7 +27,7 @@ class Scalebar extends StatelessWidget {
         future: futureMetersPerPixel,
         builder: (context, snapshot) {
           if (snapshot.data case final double data) {
-            return CustomPaint(painter: _ScaleBarPainter(data));
+            return CustomPaint(painter: _ScaleBarPainter(data, theme));
           }
           return const SizedBox.shrink();
         },
@@ -36,15 +37,17 @@ class Scalebar extends StatelessWidget {
 }
 
 class _ScaleBarPainter extends CustomPainter {
-  _ScaleBarPainter(this.metersPerPixel);
+  _ScaleBarPainter(this.metersPerPixel, this.theme);
 
   final double metersPerPixel;
+  final ThemeData theme;
 
-  final _linePaint = Paint()
-    ..color = Colors.black
+  late final _linePaint = Paint()
+    ..color = theme.textTheme.bodySmall?.color ?? Colors.black
     ..strokeWidth = 1.5;
 
-  final _backgroundPaint = Paint()..color = Colors.white60;
+  late final _backgroundPaint = Paint()
+    ..color = theme.scaffoldBackgroundColor.withOpacity(0.62);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -105,7 +108,7 @@ class _ScaleBarPainter extends CustomPainter {
 
     final textPainter = TextPainter(
       text: TextSpan(
-        style: const TextStyle(fontSize: 12),
+        style: theme.textTheme.bodySmall,
         text: '${meters / unit.meters} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,

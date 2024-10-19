@@ -66,7 +66,6 @@ final class MapLibreMapStateJni extends MapLibreMapState
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
-    setState(() => isInitialized = true);
     jni.Logger.setVerbosity(jni.Logger.WARN);
   }
 
@@ -74,6 +73,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
   void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
+    setState(() => isInitialized = true);
   }
 
   @override

@@ -87,14 +87,18 @@ class _AttributionState extends State<Attribution> {
                         ],
                         ...attributions.map(_HtmlWidget.new),
                       ],
-                      IconButton(
-                        onPressed: () => setState(() {
-                          _initMapCamera = null;
-                          _expanded = !_expanded;
-                        }),
-                        icon: const Icon(Icons.info, size: 18),
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
+                      // The SizedBox enforces the height on android (web works without it).
+                      SizedBox.square(
+                        dimension: 30,
+                        child: IconButton(
+                          onPressed: () => setState(() {
+                            _initMapCamera = null;
+                            _expanded = !_expanded;
+                          }),
+                          icon: const Icon(Icons.info, size: 18),
+                          padding: const EdgeInsets.all(4),
+                          constraints: const BoxConstraints(),
+                        ),
                       ),
                     ],
                   ),
