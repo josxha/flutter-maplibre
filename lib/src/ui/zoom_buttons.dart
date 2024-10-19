@@ -29,7 +29,6 @@ class ZoomButtons extends StatelessWidget {
       child: PointerInterceptor(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 8,
           children: [
             FloatingActionButton(
               heroTag: 'MapLibreZoomInButton',
@@ -39,6 +38,7 @@ class ZoomButtons extends StatelessWidget {
               ),
               child: const Icon(Icons.add),
             ),
+            const SizedBox(height: 8),
             FloatingActionButton(
               heroTag: 'MapLibreZoomOutButton',
               onPressed: () => controller.animateCamera(
