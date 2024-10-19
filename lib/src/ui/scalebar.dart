@@ -43,11 +43,11 @@ class _ScaleBarPainter extends CustomPainter {
   final ThemeData theme;
 
   late final _linePaint = Paint()
-    ..color = theme.textTheme.bodySmall?.color ?? Colors.black
+    ..color = Colors.black
     ..strokeWidth = 1.5;
 
   late final _backgroundPaint = Paint()
-    ..color = theme.scaffoldBackgroundColor.withOpacity(0.62);
+    ..color = Colors.white60;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -108,7 +108,7 @@ class _ScaleBarPainter extends CustomPainter {
 
     final textPainter = TextPainter(
       text: TextSpan(
-        style: theme.textTheme.bodySmall,
+        style: theme.textTheme.bodySmall?.copyWith(color: Colors.black),
         text: '${meters / unit.meters} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,
