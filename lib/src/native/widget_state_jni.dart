@@ -73,7 +73,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
   void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
-    setState(() => isInitialized = true);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
   }
 
   @override
@@ -452,6 +455,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
     _annotationManager = AnnotationManager(this, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 
   @override
@@ -511,15 +516,16 @@ final class MapLibreMapStateJni extends MapLibreMapState
   MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
     final jniTarget = jniCamera.target;
-    final camera = MapCamera(
+    final mapCamera = MapCamera(
       center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
+    // camera = mapCamera;
     jniTarget.release();
     jniCamera.release();
-    return camera;
+    return mapCamera;
   }
 
   @override

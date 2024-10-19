@@ -50,12 +50,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         document.body?.appendChild(_htmlElement);
         // Invoke the onMapCreated callback async to avoid getting it called
         // during the widget build.
-        Future.delayed(
-          Duration.zero,
-          () => widget.onEvent?.call(MapEventMapCreated(mapController: this)),
-        );
-        Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(Duration.zero, () {
+          widget.onEvent?.call(MapEventMapCreated(mapController: this));
+          widget.onMapCreated?.call(this);
           setState(() => isInitialized = true);
         });
         _resizeMap();
@@ -121,6 +118,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             widget.onEvent?.call(const MapEventStyleLoaded());
             widget.onStyleLoaded?.call();
             _annotationManager = AnnotationManager(this, widget.layers);
+            // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+            setState(() {});
           }.toJS,
         );
         _map.on(
