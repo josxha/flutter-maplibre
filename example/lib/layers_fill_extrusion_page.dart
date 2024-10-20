@@ -28,7 +28,7 @@ class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
         options: MapOptions(
           initCenter: Position(-87.61694, 41.86625),
           initZoom: 15.99,
-          pitch: 40,
+          initPitch: 40,
           initBearing: 20,
           initStyle: StyledMapPage.styleUrl,
         ),

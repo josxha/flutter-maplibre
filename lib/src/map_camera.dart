@@ -52,10 +52,5 @@ class MapCamera {
           pitch == other.pitch;
 
   @override
-  int get hashCode => Object.hash(
-        center.hashCode,
-        zoom.hashCode,
-        bearing.hashCode,
-        pitch.hashCode,
-      );
+  int get hashCode => Object.hash(center, zoom, bearing, pitch);
 }
