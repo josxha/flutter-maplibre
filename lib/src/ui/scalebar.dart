@@ -46,8 +46,7 @@ class _ScaleBarPainter extends CustomPainter {
     ..color = Colors.black
     ..strokeWidth = 1.5;
 
-  late final _backgroundPaint = Paint()
-    ..color = Colors.white60;
+  late final _backgroundPaint = Paint()..color = Colors.white60;
 
   @override
   void paint(Canvas canvas, Size size) {
