@@ -284,44 +284,46 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   late final int? _cachedHashCode;
 
   @override
-  int get hashCode => _cachedHashCode ??= super.hashCode ^
-      iconAllowOverlap.hashCode ^
-      iconIgnorePlacement.hashCode ^
-      iconOptional.hashCode ^
-      iconSize.hashCode ^
-      iconImage.hashCode ^
-      iconRotate.hashCode ^
-      iconPadding.hashCode ^
-      iconKeepUpright.hashCode ^
-      iconOffset.hashCode ^
-      textField.hashCode ^
-      textFont.hashCode ^
-      textSize.hashCode ^
-      textMaxWidth.hashCode ^
-      textLineHeight.hashCode ^
-      textLetterSpacing.hashCode ^
-      textRadialOffset.hashCode ^
-      textMaxAngle.hashCode ^
-      textRotate.hashCode ^
-      textPadding.hashCode ^
-      textKeepUpright.hashCode ^
-      textOffset.hashCode ^
-      textAllowOverlap.hashCode ^
-      textIgnorePlacement.hashCode ^
-      textOptional.hashCode ^
-      iconOpacity.hashCode ^
-      iconColor.hashCode ^
-      iconHaloColor.hashCode ^
-      iconHaloWidth.hashCode ^
-      iconHaloBlur.hashCode ^
-      iconTranslate.hashCode ^
-      textOpacity.hashCode ^
-      textColor.hashCode ^
-      textHaloColor.hashCode ^
-      textHaloWidth.hashCode ^
-      textHaloBlur.hashCode ^
-      textTranslate.hashCode ^
-      iconAnchor.hashCode;
+  int get hashCode => _cachedHashCode ??= Object.hashAll([
+        super,
+        iconAllowOverlap,
+        iconIgnorePlacement,
+        iconOptional,
+        iconSize,
+        iconImage,
+        iconRotate,
+        iconPadding,
+        iconKeepUpright,
+        iconOffset,
+        textField,
+        textFont,
+        textSize,
+        textMaxWidth,
+        textLineHeight,
+        textLetterSpacing,
+        textRadialOffset,
+        textMaxAngle,
+        textRotate,
+        textPadding,
+        textKeepUpright,
+        textOffset,
+        textAllowOverlap,
+        textIgnorePlacement,
+        textOptional,
+        iconOpacity,
+        iconColor,
+        iconHaloColor,
+        iconHaloWidth,
+        iconHaloBlur,
+        iconTranslate,
+        textOpacity,
+        textColor,
+        textHaloColor,
+        textHaloWidth,
+        textHaloBlur,
+        textTranslate,
+        iconAnchor,
+      ]);
 }
 
 /// Part of the icon placed closest to the anchor.

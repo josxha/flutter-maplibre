@@ -55,6 +55,5 @@ class MapGestures {
           pitch == other.pitch;
 
   @override
-  int get hashCode =>
-      rotate.hashCode ^ pan.hashCode ^ zoom.hashCode ^ pitch.hashCode;
+  int get hashCode => Object.hash(rotate, pan, zoom, pitch);
 }

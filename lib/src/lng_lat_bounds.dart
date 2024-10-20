@@ -56,8 +56,5 @@ class LngLatBounds {
 
   @override
   int get hashCode =>
-      longitudeWest.hashCode ^
-      longitudeEast.hashCode ^
-      latitudeSouth.hashCode ^
-      latitudeNorth.hashCode;
+      Object.hash(longitudeWest, longitudeEast, latitudeSouth, latitudeNorth);
 }
