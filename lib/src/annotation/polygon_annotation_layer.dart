@@ -28,14 +28,14 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
       };
 
   @override
-  Map<String, Object> getLayout() => {};
+  Map<String, Object> getLayout(int index) => {};
 
   @override
   Layer createLayer(int index) => FillLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
-        layout: getLayout(),
+        layout: getLayout(index),
       );
 
   @override

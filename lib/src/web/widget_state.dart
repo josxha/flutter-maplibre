@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/annotation/widget_to_png.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';
@@ -191,7 +192,15 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Widget build(BuildContext context) => HtmlElementView(viewType: _viewName);
+  Widget build(BuildContext context) => Stack(
+        children: [
+          HtmlElementView(viewType: _viewName),
+          ...widget.layers
+              .whereType<MarkerAnnotationLayer<Widget>>()
+              .indexed
+              .map((e) => WidgetToPng(e.$2, this, e.$2.getImageId(e.$1))),
+        ],
+      );
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
