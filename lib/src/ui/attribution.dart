@@ -14,12 +14,16 @@ class Attribution extends StatefulWidget {
   const Attribution({
     super.key,
     this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    this.alignment = Alignment.bottomRight,
     this.showMapLibre = true,
     this.keepExpanded = false,
   });
 
   /// The padding.
   final EdgeInsets padding;
+
+  /// The alignment.
+  final Alignment alignment;
 
   /// Shows that you are using MapLibre.
   ///
@@ -57,7 +61,7 @@ class _AttributionState extends State<Attribution> {
         if (snapshot.data case final List<String> attributions) {
           final theme = Theme.of(context);
           return Container(
-            alignment: Alignment.bottomRight,
+            alignment: widget.alignment,
             padding: widget.padding,
             child: PointerInterceptor(
               child: Container(
@@ -72,17 +76,20 @@ class _AttributionState extends State<Attribution> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (_expanded) ...[
-                        const SizedBox(width: 8),
                         if (widget.showMapLibre) ...[
-                          InkWell(
-                            child: Text(
-                              'MapLibre${attributions.isEmpty ? '' : ' |'}',
-                              style: theme.textTheme.bodySmall,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: InkWell(
+                              child: Text(
+                                'MapLibre${attributions.isEmpty ? '' : ' |'}',
+                                style: theme.textTheme.bodySmall,
+                              ),
+                              onTap: () =>
+                                  launchUrl(Uri.parse('https://maplibre.org/')),
                             ),
-                            onTap: () =>
-                                launchUrl(Uri.parse('https://maplibre.org/')),
                           ),
-                          const SizedBox(width: 8),
+                          if (widget.showMapLibre && attributions.isNotEmpty)
+                            const SizedBox(width: 4),
                         ],
                         ...attributions.map(_HtmlWidget.new),
                       ],
