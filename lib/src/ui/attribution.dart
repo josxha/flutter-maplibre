@@ -78,7 +78,10 @@ class _AttributionState extends State<Attribution> {
                       if (_expanded) ...[
                         if (widget.showMapLibre) ...[
                           Padding(
-                            padding: const EdgeInsets.only(left: 8),
+                            padding: EdgeInsets.only(
+                              left: 8,
+                              right: attributions.isEmpty ? 0 : 4,
+                            ),
                             child: InkWell(
                               child: Text(
                                 'MapLibre${attributions.isEmpty ? '' : ' |'}',
@@ -88,8 +91,6 @@ class _AttributionState extends State<Attribution> {
                                   launchUrl(Uri.parse('https://maplibre.org/')),
                             ),
                           ),
-                          if (widget.showMapLibre && attributions.isNotEmpty)
-                            const SizedBox(width: 4),
                         ],
                         ...attributions.map(_HtmlWidget.new),
                       ],
