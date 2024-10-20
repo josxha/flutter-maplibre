@@ -736,10 +736,12 @@ final class MapLibreMapStateJni extends MapLibreMapState
   @override
   Future<List<String>> getAttributions() async {
     final attributions = <String>[];
+    // style can be null when the map hasn't finished initializing.
+    if (_jniStyle.isNull) return const [];
     final jSources = _jniStyle.getSources();
     for (final jSource in jSources) {
       final attribution = jSource.getAttribution();
-      if (attribution.isNull) continue;
+      if (attribution.isNull || attribution.length == 0) continue;
       attributions.add(attribution.toDartString(releaseOriginal: true));
     }
     jSources.release();
