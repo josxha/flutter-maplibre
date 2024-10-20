@@ -10,8 +10,8 @@ class MapOptions {
     this.initStyle = 'https://demotiles.maplibre.org/style.json',
     this.initZoom = 0,
     this.initCenter,
-    @Deprecated('Renamed to pitch') double? tilt,
-    double pitch = 0,
+    @Deprecated('Renamed to initPitch') double? pitch,
+    double initPitch = 0,
     this.initBearing = 0,
     this.webControls = const [],
     this.minZoom = 0,
@@ -20,7 +20,7 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-  }) : initPitch = tilt ?? pitch;
+  }) : initPitch = pitch ?? initPitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).

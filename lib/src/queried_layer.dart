@@ -34,6 +34,5 @@ class QueriedLayer {
           sourceLayer == other.sourceLayer;
 
   @override
-  int get hashCode =>
-      layerId.hashCode ^ sourceId.hashCode ^ sourceLayer.hashCode;
+  int get hashCode => Object.hash(layerId, sourceId, sourceLayer);
 }
