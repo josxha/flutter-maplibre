@@ -8,7 +8,7 @@ import 'package:maplibre_example/annotations_polygon_page.dart';
 import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
-import 'package:maplibre_example/flutter_map_page.dart';
+import 'package:maplibre_example/flutter_map_in_maplibre_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_fill_extrusion_page.dart';
@@ -18,6 +18,7 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/maplibre_in_flutter_map_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -42,9 +43,14 @@ class MenuPage extends StatelessWidget {
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
-                label: 'Inside flutter_map',
+                label: 'MapLibre in FlutterMap',
                 iconData: Icons.star,
-                location: FlutterMapPage.location,
+                location: FlutterMapInMapLibrePage.location,
+              ),
+              ItemCard(
+                label: 'FlutterMap in MapLibre',
+                iconData: Icons.star,
+                location: MapLibreInFlutterMapPage.location,
               ),
               ItemCard(
                 label: 'Styled Map',

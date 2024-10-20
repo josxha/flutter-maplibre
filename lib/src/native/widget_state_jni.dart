@@ -208,7 +208,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
     await runOnPlatformThread(() {
-      final completer = Completer<void>();
+      // final completer = Completer<void>();
       jniMap.moveCamera(cameraUpdate);
       /*jniMap.moveCamera$1(
         cameraUpdate,
@@ -222,7 +222,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
           ),
         ),
       );*/
-      return completer.future;
+      // return completer.future;
     });
     cameraUpdate.release();
   }

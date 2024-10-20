@@ -7,7 +7,7 @@ import 'package:maplibre_example/annotations_polygon_page.dart';
 import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
-import 'package:maplibre_example/flutter_map_page.dart';
+import 'package:maplibre_example/flutter_map_in_maplibre_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
@@ -18,6 +18,7 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/maplibre_in_flutter_map_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showPerformanceOverlay: true,
       title: 'MapLibre Demo',
       initialRoute: MenuPage.location,
       theme: ThemeData(colorSchemeSeed: Colors.blue),
@@ -45,7 +47,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
-        FlutterMapPage.location: (context) => const FlutterMapPage(),
+        FlutterMapInMapLibrePage.location: (context) =>
+            const FlutterMapInMapLibrePage(),
+        MapLibreInFlutterMapPage.location: (context) =>
+            const MapLibreInFlutterMapPage(),
         KioskPage.location: (context) => const KioskPage(),
         AnimationPage.location: (context) => const AnimationPage(),
         GesturesPage.location: (context) => const GesturesPage(),
