@@ -270,14 +270,19 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
         mapController: _fmController,
         options: MapOptions(
           initialZoom: 2,
-          onPositionChanged: (camera, hasGesture) {
-            debugPrint(camera.center.toString());
-            _mlController?.moveCamera(
-              center:
-                  ml.Position(camera.center.longitude, camera.center.latitude),
-              zoom: camera.zoom - 1,
-              bearing: camera.rotation,
-            );
+          onMapEvent: (event) {
+            final camera = event.camera;
+            if (event is MapEventWithMove) {
+              debugPrint(camera.center.toString());
+              _mlController?.moveCamera(
+                center: ml.Position(
+                  camera.center.longitude,
+                  camera.center.latitude,
+                ),
+                zoom: camera.zoom - 1,
+                bearing: -camera.rotation,
+              );
+            }
           },
         ),
         children: [
@@ -286,6 +291,7 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
               options: ml.MapOptions(
                 initCenter: ml.Position(9.17, 47.68),
                 initStyle: StyledMapPage.styleUrl,
+                gestures: const ml.MapGestures.none(),
               ),
               onMapCreated: (controller) => _mlController = controller,
             ),
