@@ -25,45 +25,76 @@ class _ControllerPageState extends State<ControllerPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
-              runSpacing: 8,
+              runSpacing: 2,
+              alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('jumpTo start');
-                    await _controller.jumpTo(
+                    debugPrint('moveCamera start');
+                    await _controller.moveCamera(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
-                      tilt: 0,
+                      pitch: 0,
                       bearing: 0,
                     );
-                    debugPrint('jumpTo end');
+                    debugPrint('moveCamera end');
                   },
-                  child: const Text('Jump to New Zealand'),
+                  child: const Text(
+                    'Move to\nNew Zealand',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('flyTo start');
+                    debugPrint('animateTo start');
                     try {
-                      await _controller.flyTo(
+                      await _controller.animateCamera(
                         center: Position(-18.6874, 64.9445),
                         zoom: 5,
                         bearing: -50,
-                        tilt: 60,
+                        pitch: 60,
                       );
                       debugPrint('flyTo end');
-                    } catch (error) {
-                      final e = error as PlatformException;
+                    } on PlatformException catch (error) {
                       debugPrint(
                         'flyTo cancelled: code: '
-                        '"${e.code}", message: "${e.message}"',
+                        '"${error.code}", message: "${error.message}"',
                       );
                     }
                   },
-                  child: const Text('Fly to Iceland'),
+                  child: const Text(
+                    'Animate to\nIceland',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    debugPrint('fitBounds start');
+                    try {
+                      await _controller.fitBounds(
+                        bounds: const LngLatBounds(
+                          longitudeWest: 5.894357,
+                          longitudeEast: 10.560848,
+                          latitudeSouth: 45.806154,
+                          latitudeNorth: 47.902069,
+                        ),
+                      );
+                      debugPrint('fitBounds end');
+                    } on PlatformException catch (error) {
+                      debugPrint(
+                        'fitBounds cancelled: code: '
+                        '"${error.code}", message: "${error.message}"',
+                      );
+                    }
+                  },
+                  child: const Text(
+                    'Fit bounds to\nSwitzerland',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final camera = _controller.getCamera();
                     debugPrint(camera.toString());
                     if (context.mounted) {
                       await showDialog<void>(
@@ -75,7 +106,7 @@ center.lng: ${camera.center.lng}
 center.lat: ${camera.center.lat}
 zoom: ${camera.zoom}
 bearing: ${camera.bearing}
-tilt: ${camera.tilt}'''),
+pitch: ${camera.pitch}'''),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(),
@@ -86,11 +117,14 @@ tilt: ${camera.tilt}'''),
                       );
                     }
                   },
-                  child: const Text('Current MapCamera'),
+                  child: const Text(
+                    'Current\nMapCamera',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
                     final meters =
                         await _controller.getMetersPerPixelAtLatitude(lat);
@@ -107,12 +141,14 @@ tilt: ${camera.tilt}'''),
                         );
                     }
                   },
-                  child: const Text('Meter/Pixel at center'),
+                  child: const Text(
+                    'Meter/Pixel\nat center',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () async {
                     final region = await _controller.getVisibleRegion();
-                    debugPrint(region.toString());
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -121,14 +157,59 @@ tilt: ${camera.tilt}'''),
                         );
                     }
                   },
-                  child: const Text('Visible region'),
+                  child: const Text(
+                    'Visible\nregion',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final lngLat = await _controller.toLngLat(Offset.zero);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Position(${lngLat.lng}, ${lngLat.lat})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toLngLat 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final offset =
+                        await _controller.toScreenLocation(Position(0, 0));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Offset(${offset.dx}, ${offset.dy})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toScreenLocation 0,0',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
+              options:
+                  MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

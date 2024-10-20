@@ -36,7 +36,7 @@ class _KioskPageState extends State<KioskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-        options: MapOptions(style: _styleUrl, center: Position(0, 0)),
+        options: MapOptions(initStyle: _styleUrl, initCenter: Position(0, 0)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () {
           _timer = Timer.periodic(const Duration(seconds: 5), _onTimer);
@@ -47,11 +47,11 @@ class _KioskPageState extends State<KioskPage> {
 
   void _onTimer(Timer timer) {
     final location = _locations[index];
-    _controller.flyTo(
+    _controller.animateCamera(
       center: location.center,
       zoom: location.zoom,
       bearing: location.bearing,
-      tilt: location.tilt,
+      pitch: location.pitch,
     );
     index++;
     if (index >= _locations.length) index = 0;
@@ -65,10 +65,10 @@ class _KioskPageState extends State<KioskPage> {
 }
 
 class _Location {
-  const _Location(this.center, this.zoom, this.bearing, this.tilt);
+  const _Location(this.center, this.zoom, this.bearing, this.pitch);
 
   final Position center;
   final double zoom;
   final double bearing;
-  final double tilt;
+  final double pitch;
 }

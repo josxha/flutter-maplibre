@@ -55,7 +55,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// east is up.
   external num getBearing();
 
-  /// Returns the map's current pitch (tilt).
+  /// Returns the map's current pitch / tilt.
   external num getPitch();
 
   /// Returns the map's geographical bounds. When the bearing or pitch is
@@ -74,6 +74,48 @@ extension type JsMap._(Camera _) implements Camera {
 
   /// Remove an image from the map by its id.
   external void removeImage(String id);
+
+  /// Update the min zoom level.
+  external void setMinZoom(double? minZoom);
+
+  /// Update the max zoom level.
+  external void setMaxZoom(double? maxZoom);
+
+  /// Update the min camera pitch / tilt.
+  external void setMinPitch(double? minPitch);
+
+  /// Update the max camera pitch / tilt.
+  external void setMaxPitch(double? maxPitch);
+
+  /// Update the maximum bounding box of the map camera.
+  external void setMaxBounds(LngLatBounds? maxBounds);
+
+  /// Get a Source by its id.
+  external SourceSpecification? getSource(String id);
+
+  /// Get the loaded style.
+  external StyleSpecification? getStyle();
+
+  external DoubleClickZoomHandler doubleClickZoom;
+  external DragPanHandler dragPan;
+  external DragRotateHandler dragRotate;
+  external KeyboardHandler keyboard;
+  external ScrollZoomHandler scrollZoom;
+
+  /// Shift and drag to draw a box to zoom in
+  external BoxZoomHandler boxZoom;
+
+  /// Pitch with rotate
+  external bool pitchWithRotate;
+  external TwoFingersTouchPitchHandler touchPitch;
+  external TwoFingersTouchZoomRotateHandler touchZoomRotate;
+
+  /// Returns an array of MapGeoJSONFeature objects representing visible
+  /// features that satisfy the query parameters.
+  external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
+    Point jsPoint,
+    JSAny? options,
+  );
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -94,13 +136,17 @@ extension type MapOptions._(JSObject _) implements JSObject {
 /// Options to specify the map bounds.
 @anonymous
 @JS()
-extension type FitBoundsOptions._(JSObject _) implements JSObject {
+extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
   /// Create a new JS [FitBoundsOptions] object.
   external FitBoundsOptions({
     bool? linear,
-    // TODO  Offset? offset,
+    Point? offset,
     num? maxZoom,
-    // TODO All parameters from FlyToOptions
+    num? maxDuration,
+    PaddingOptions? padding,
+    num? speed,
+    num? pitch,
+    num? bearing,
   });
 }
 
@@ -155,6 +201,9 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
     required JSAny urls,
     required JSAny coordinates,
   });
+
+  /// Used to update the data of a GeoJSON source.
+  external void setData(JSAny data);
 }
 
 /// The specifications of map layers.
@@ -169,6 +218,9 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required JSAny layout,
     required JSAny paint,
   });
+
+  /// Get the layer id.
+  external String id;
 }
 
 /// Image data used by [JsMap.addImage].

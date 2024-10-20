@@ -9,8 +9,11 @@ import 'package:web/web.dart';
 part 'camera.dart';
 part 'controls.dart';
 part 'events.dart';
-part 'marker.dart';
+part 'gesture_handlers.dart';
 part 'map.dart';
+part 'map_geojson_feature.dart';
+part 'style_specification.dart';
+part 'marker.dart';
 
 /// A simple x/y [Point] class for JavaScript.
 @anonymous
@@ -47,6 +50,9 @@ extension type LngLat._(JSObject _) implements JSObject {
 /// defined by its southwest and northeast points in longitude and latitude.
 @JS()
 extension type LngLatBounds._(JSObject _) implements JSObject {
+  /// Create a new JS [LngLatBounds] object.
+  external LngLatBounds(LngLat? sw, LngLat? ne);
+
   /// Returns the west edge of the bounding box.
   external num getWest();
 

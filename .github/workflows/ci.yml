@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format:
-    name: "Check formatting"
+  format-dart:
+    name: "[Dart] Check formatting"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,8 +22,8 @@ jobs:
           cache: true
       - name: Lint analysis
         run: dart format --set-exit-if-changed .
-  lint:
-    name: "Static code analysis"
+  lint-dart:
+    name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +34,19 @@ jobs:
         run: dart pub get
       - name: Lint analysis
         run: dart analyze --fatal-warnings --fatal-infos
+  lint-kotlin:
+    name: "[Kotlin] Code quality"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ktlint
+        uses: ScaCap/action-ktlint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check
+          filter_mode: nofilter
+          file_glob: "!**/*.g.*"
+          fail_on_error: true
 #  integration-test-ios:
 #    name: "Integration Tests on iOS"
 #    runs-on: macOS-latest
@@ -130,7 +143,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.22.3', '' ]
+        sdk: [ '3.24.3', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -162,7 +175,7 @@ jobs:
 #    strategy:
 #      fail-fast: false
 #      matrix:
-#        sdk: [ '3.22.3', '' ]
+#        sdk: [ '3.24.3', '' ]
 #    steps:
 #      - uses: actions/checkout@v4
 #      - uses: subosito/flutter-action@v2
@@ -191,7 +204,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.22.3', '' ]
+        sdk: [ '3.24.3', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2

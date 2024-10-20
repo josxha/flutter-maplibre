@@ -15,11 +15,17 @@ class MapLibreMap extends StatefulWidget {
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
+    this.layers = const [],
+    this.children = const [],
     super.key,
   });
 
   /// Use the [options] field to customize the map and set default values.
   final MapOptions options;
+
+  /// Flutter widgets that get displayed on top on the map and are within the
+  /// [MapLibreMap] context.
+  final List<Widget> children;
 
   /// Which gestures should be consumed by the map.
   ///
@@ -32,18 +38,25 @@ class MapLibreMap extends StatefulWidget {
   /// for gestures that were not claimed by any other gesture recognizer.
   final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
 
+  /// Called when the native platform view has been created and the map is
+  /// ready.
+  ///
   /// Please note: you should only add annotations (e.g. symbols or circles)
   /// after `onStyleLoadedCallback` has been called.
   final MapCreatedCallback? onMapCreated;
 
   /// Called when the map style has been successfully loaded and the annotation
-  /// managers have been enabled.
+  /// manager is active.
+  ///
   /// Please note: you should only add annotations (e.g. symbols or circles)
   /// after this callback has been called.
   final VoidCallback? onStyleLoaded;
 
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
+
+  /// Annotation layers like [MarkerAnnotationLayer] or [PolylineAnnotationLayer].
+  final List<AnnotationLayer> layers;
 
   @override
   State<MapLibreMap> createState() =>

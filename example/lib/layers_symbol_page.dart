@@ -22,7 +22,7 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Symbol Layer')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 3, center: Position(9.17, 47.68)),
+        options: MapOptions(initZoom: 3, initCenter: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: () async {
           // load the image data

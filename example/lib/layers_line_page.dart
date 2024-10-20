@@ -20,7 +20,7 @@ class _LayersLinePageState extends State<LayersLinePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Line Layer')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
@@ -41,6 +41,3 @@ class _LayersLinePageState extends State<LayersLinePage> {
     );
   }
 }
-
-// TODO fill extrusion layer
-// TODO line layer

@@ -25,8 +25,8 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
       appBar: AppBar(title: const Text('Circle Layer')),
       body: MapLibreMap(
         options: MapOptions(
-          center: Position(-152.9959, 59.8150),
-          zoom: 9,
+          initCenter: Position(-152.9959, 59.8150),
+          initZoom: 9,
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
@@ -61,16 +61,6 @@ const _circleLayer = CircleLayer(
         ['get', 'mag'],
         1,
         1,
-        6,
-        4
-      ],
-      16,
-      [
-        'interpolate',
-        ['linear'],
-        ['get', 'mag'],
-        1,
-        5,
         6,
         50
       ]
