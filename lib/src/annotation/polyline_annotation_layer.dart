@@ -70,5 +70,5 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
 
   @override
   int get hashCode => _cachedHashCode ??=
-      Object.hashAll([super, color, width, gapWidth, blur, dashArray]);
+      Object.hash(super.hashCode, color, width, gapWidth, blur, dashArray);
 }

@@ -285,7 +285,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
 
   @override
   int get hashCode => _cachedHashCode ??= Object.hashAll([
-        super,
+        super.hashCode,
         iconAllowOverlap,
         iconIgnorePlacement,
         iconOptional,
