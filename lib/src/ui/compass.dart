@@ -93,7 +93,11 @@ class Compass extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.zero,
             icon: icon,
-            onPressed: onPressed ?? () => controller.animateCamera(bearing: 0),
+            onPressed: onPressed ??
+                () => controller.animateCamera(
+                      bearing: 0,
+                      nativeDuration: const Duration(milliseconds: 200),
+                    ),
           ),
         ),
       ),
