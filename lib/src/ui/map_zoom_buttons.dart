@@ -8,6 +8,7 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 /// This widget is purposefully kept simple. If you need to change the design
 /// or behavior of the zoom buttons a lot, prefer to copy this class into your
 /// app and adjust it according to your needs.
+@immutable
 class MapZoomButtons extends StatelessWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].

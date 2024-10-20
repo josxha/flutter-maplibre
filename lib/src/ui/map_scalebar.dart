@@ -6,6 +6,7 @@ import 'package:maplibre/maplibre.dart';
 
 /// Display a scalebar to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
+@immutable
 class MapScalebar extends StatelessWidget {
   /// Display a scalebar to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].

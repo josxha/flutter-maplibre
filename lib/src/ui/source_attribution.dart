@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
+@immutable
 class SourceAttribution extends StatefulWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].

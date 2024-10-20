@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Return used for [MapController.queryLayers].
