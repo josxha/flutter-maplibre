@@ -97,6 +97,9 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    // jniMap can be null if the widget rebuilds while the map hasn't been initialized.
+    if (jniMap.isNull) return;
+
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
