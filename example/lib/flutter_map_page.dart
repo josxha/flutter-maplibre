@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:maplibre/maplibre.dart' as ml;
-// ignore: directives_ordering
 import 'package:latlong2/latlong.dart';
+import 'package:maplibre/maplibre.dart' as ml;
 import 'package:maplibre_example/styled_map_page.dart';
 
 @immutable
@@ -36,8 +35,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       borderColor: Colors.red,
       borderStrokeWidth: 4,
       hitValue: (
-      title: 'Basic Unfilled Polygon',
-      subtitle: 'Nothing really special here...',
+        title: 'Basic Unfilled Polygon',
+        subtitle: 'Nothing really special here...',
       ),
     ),
     Polygon(
@@ -50,8 +49,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       borderColor: Colors.yellow,
       borderStrokeWidth: 4,
       hitValue: (
-      title: 'Basic Filled Polygon',
-      subtitle: 'Nothing really special here...',
+        title: 'Basic Filled Polygon',
+        subtitle: 'Nothing really special here...',
       ),
     ),
     Polygon(
@@ -65,8 +64,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       borderColor: Colors.lightBlue,
       color: Colors.yellow,
       hitValue: (
-      title: 'Polygon With Dashed Borders',
-      subtitle: '...',
+        title: 'Polygon With Dashed Borders',
+        subtitle: '...',
       ),
     ),
     Polygon(
@@ -80,8 +79,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       borderColor: Colors.purple,
       label: 'Label!',
       hitValue: (
-      title: 'Polygon With Label',
-      subtitle: 'This is a very descriptive label!',
+        title: 'Polygon With Label',
+        subtitle: 'This is a very descriptive label!',
       ),
     ),
     Polygon(
@@ -98,8 +97,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       rotateLabel: true,
       labelPlacement: PolygonLabelPlacement.polylabel,
       hitValue: (
-      title: 'Polygon With Rotated Label',
-      subtitle: "Now you don't have to turn your head so much",
+        title: 'Polygon With Rotated Label',
+        subtitle: "Now you don't have to turn your head so much",
       ),
     ),
     Polygon(
@@ -130,20 +129,19 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       ]
           .map(
             (latlngs) => latlngs
-            .map((latlng) => LatLng(latlng.latitude, latlng.longitude + 8))
-            .toList(),
-      )
+                .map((latlng) => LatLng(latlng.latitude, latlng.longitude + 8))
+                .toList(),
+          )
           .toList(),
       borderStrokeWidth: 4,
       borderColor: Colors.orange,
       color: Colors.orange.withOpacity(0.5),
       label: 'This one is not\nperformantly rendered',
       rotateLabel: true,
-      labelPlacement: PolygonLabelPlacement.centroid,
       labelStyle: const TextStyle(color: Colors.black),
       hitValue: (
-      title: 'Polygon With Hole',
-      subtitle: 'A bit like Swiss cheese maybe?',
+        title: 'Polygon With Hole',
+        subtitle: 'A bit like Swiss cheese maybe?',
       ),
     ),
     Polygon(
@@ -176,23 +174,23 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
       ]
           .map(
             (latlngs) => latlngs
-            .map((latlng) =>
-            LatLng(latlng.latitude - 6, latlng.longitude + 8))
-            .toList()
-            .reversed // Test that holes are always cut, no matter winding
-            .toList(),
-      )
+                .map(
+                  (latlng) => LatLng(latlng.latitude - 6, latlng.longitude + 8),
+                )
+                .toList()
+                .reversed // Test that holes are always cut, no matter winding
+                .toList(),
+          )
           .toList(),
       borderStrokeWidth: 4,
       borderColor: Colors.orange,
       color: Colors.orange.withOpacity(0.5),
       label: 'This one is not\nperformantly rendered',
       rotateLabel: true,
-      labelPlacement: PolygonLabelPlacement.centroid,
       labelStyle: const TextStyle(color: Colors.black),
       hitValue: (
-      title: 'Polygon With Hole & Self Intersection',
-      subtitle: 'This one still works with performant rendering',
+        title: 'Polygon With Hole & Self Intersection',
+        subtitle: 'This one still works with performant rendering',
       ),
     ),
     Polygon(
@@ -201,16 +199,16 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
         LatLng(61.861458, 0.949468),
         LatLng(61.861427, 0.949626),
         LatLng(61.859015, 0.951513),
-        LatLng(61.858129, 0.952652)
+        LatLng(61.858129, 0.952652),
       ],
       holePointsList: [],
       color: Colors.lightGreen.withOpacity(0.5),
       borderColor: Colors.lightGreen.withOpacity(0.5),
       borderStrokeWidth: 10,
       hitValue: (
-      title: 'Testing opacity treatment (small)',
-      subtitle:
-      "Holes shouldn't be cut, and colors should be mixed correctly",
+        title: 'Testing opacity treatment (small)',
+        subtitle:
+            "Holes shouldn't be cut, and colors should be mixed correctly",
       ),
     ),
     Polygon(
@@ -235,7 +233,7 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
         LatLng(61.856787, 0.946656),
         LatLng(61.857578, 0.946675),
         LatLng(61.859338, 0.946453),
-        LatLng(61.861042, 0.946502)
+        LatLng(61.861042, 0.946502),
       ],
       holePointsList: const [
         [
@@ -248,21 +246,21 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
           LatLng(61.858766, 0.947818),
           LatLng(61.858893, 0.947779),
           LatLng(61.858975, 0.947542),
-          LatLng(61.858881, 0.947234)
+          LatLng(61.858881, 0.947234),
         ]
       ],
       color: Colors.lightGreen.withOpacity(0.5),
       borderColor: Colors.lightGreen.withOpacity(0.5),
       borderStrokeWidth: 10,
       hitValue: (
-      title: 'Testing opacity treatment (large)',
-      subtitle:
-      "Holes shouldn't be cut, and colors should be mixed correctly",
+        title: 'Testing opacity treatment (large)',
+        subtitle:
+            "Holes shouldn't be cut, and colors should be mixed correctly",
       ),
     ),
   ];
   late final _polygons =
-  Map.fromEntries(_polygonsRaw.map((e) => MapEntry(e.hitValue, e)));
+      Map.fromEntries(_polygonsRaw.map((e) => MapEntry(e.hitValue, e)));
 
   @override
   Widget build(BuildContext context) {
@@ -274,8 +272,9 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
           initialZoom: 2,
           onPositionChanged: (camera, hasGesture) {
             debugPrint(camera.center.toString());
-            _mlController?.jumpTo(
-              center: ml.Position(camera.center.longitude, camera.center.latitude),
+            _mlController?.moveCamera(
+              center:
+                  ml.Position(camera.center.longitude, camera.center.latitude),
               zoom: camera.zoom - 1,
               bearing: camera.rotation,
             );
@@ -285,8 +284,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
           IgnorePointer(
             child: ml.MapLibreMap(
               options: ml.MapOptions(
-                center: ml.Position(9.17, 47.68),
-                style: StyledMapPage.styleUrl,
+                initCenter: ml.Position(9.17, 47.68),
+                initStyle: StyledMapPage.styleUrl,
               ),
               onMapCreated: (controller) => _mlController = controller,
             ),
@@ -383,8 +382,9 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
                   LatLng(54, -14),
                   LatLng(54, -18),
                 ]
-                    .map((latlng) =>
-                    LatLng(latlng.latitude - 6, latlng.longitude))
+                    .map(
+                      (latlng) => LatLng(latlng.latitude - 6, latlng.longitude),
+                    )
                     .toList(),
                 holePointsList: [
                   const [
@@ -405,10 +405,12 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
                 ]
                     .map(
                       (latlngs) => latlngs
-                      .map((latlng) =>
-                      LatLng(latlng.latitude - 6, latlng.longitude))
-                      .toList(),
-                )
+                          .map(
+                            (latlng) =>
+                                LatLng(latlng.latitude - 6, latlng.longitude),
+                          )
+                          .toList(),
+                    )
                     .toList(),
                 borderStrokeWidth: 4,
                 borderColor: Colors.black,
@@ -422,10 +424,10 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
   }
 
   void _openTouchedGonsModal(
-      String eventType,
-      List<HitValue> tappedLines,
-      LatLng coords,
-      ) {
+    String eventType,
+    List<HitValue> tappedLines,
+    LatLng coords,
+  ) {
     showModalBottomSheet<void>(
       context: context,
       builder: (context) => Padding(
@@ -449,8 +451,8 @@ class _FlutterMapPageState extends State<FlutterMapPage> {
                     leading: index == 0
                         ? const Icon(Icons.vertical_align_top)
                         : index == tappedLines.length - 1
-                        ? const Icon(Icons.vertical_align_bottom)
-                        : const SizedBox.shrink(),
+                            ? const Icon(Icons.vertical_align_bottom)
+                            : const SizedBox.shrink(),
                     title: Text(tappedLineData.title),
                     subtitle: Text(tappedLineData.subtitle),
                     dense: true,
