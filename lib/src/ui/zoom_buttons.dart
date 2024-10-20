@@ -14,17 +14,22 @@ class ZoomButtons extends StatelessWidget {
   const ZoomButtons({
     super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 50, horizontal: 12),
+    this.alignment = Alignment.bottomRight,
   });
 
   /// The padding.
   final EdgeInsets padding;
 
+  /// The alignment of the buttons.
+  final Alignment alignment;
+
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
     if (controller == null) return const SizedBox.shrink();
+
     return Container(
-      alignment: Alignment.bottomRight,
+      alignment: alignment,
       padding: padding,
       child: PointerInterceptor(
         child: Column(
