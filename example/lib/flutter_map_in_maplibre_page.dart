@@ -12,13 +12,13 @@ class FlutterMapInMapLibrePage extends StatefulWidget {
   static const location = '/flutter-map-in-maplibre';
 
   @override
-  State<FlutterMapInMapLibrePage> createState() => _FlutterMapInMapLibrePageState();
+  State<FlutterMapInMapLibrePage> createState() =>
+      _FlutterMapInMapLibrePageState();
 }
 
 typedef HitValue = ({String title, String subtitle});
 
 class _FlutterMapInMapLibrePageState extends State<FlutterMapInMapLibrePage> {
-  ml.MapController? _mlController;
   late final MapController _fmController = MapController();
 
   final LayerHitNotifier<HitValue> _hitNotifier = ValueNotifier(null);
@@ -270,160 +270,164 @@ class _FlutterMapInMapLibrePageState extends State<FlutterMapInMapLibrePage> {
         options: ml.MapOptions(
           initCenter: ml.Position(9.17, 47.68),
           initStyle: StyledMapPage.styleUrl,
-          gestures: const ml.MapGestures.none(),
         ),
-        onMapCreated: (controller) => _mlController = controller,
+        onEvent: (event) {
+          if (event is ml.MapEventMoveCamera) {
+            _fmController.moveAndRotate(
+              LatLng(
+                event.camera.center.lat.toDouble(),
+                event.camera.center.lng.toDouble(),
+              ),
+              event.camera.zoom+1,
+              -event.camera.bearing,
+            );
+          }
+        },
         children: [
-          FlutterMap(
-            mapController: _fmController,
-            options: MapOptions(
-              initialZoom: 2,
-              onMapEvent: (event) {
-                final camera = event.camera;
-                if (event is MapEventWithMove) {
-                  // debugPrint(camera.center.toString());
-                  _mlController?.moveCamera(
-                    center: ml.Position(
-                      camera.center.longitude,
-                      camera.center.latitude,
+          IgnorePointer(
+            child: FlutterMap(
+              mapController: _fmController,
+              options: const MapOptions(
+                initialZoom: 2,
+                backgroundColor: Colors.transparent,
+                interactionOptions:
+                    InteractionOptions(flags: InteractiveFlag.none),
+              ),
+              children: [
+                MouseRegion(
+                  hitTestBehavior: HitTestBehavior.deferToChild,
+                  cursor: SystemMouseCursors.click,
+                  onHover: (_) {
+                    final hitValues = _hitNotifier.value?.hitValues.toList();
+                    if (hitValues == null) return;
+
+                    if (listEquals(hitValues, _prevHitValues)) return;
+                    _prevHitValues = hitValues;
+
+                    final hoverLines = hitValues.map((v) {
+                      final original = _polygons[v]!;
+
+                      return Polygon<HitValue>(
+                        points: original.points,
+                        holePointsList: original.holePointsList,
+                        color: Colors.transparent,
+                        borderStrokeWidth: 15,
+                        borderColor: Colors.green,
+                        disableHolesBorder: original.disableHolesBorder,
+                      );
+                    }).toList();
+                    setState(() => _hoverGons = hoverLines);
+                  },
+                  onExit: (_) {
+                    _prevHitValues = null;
+                    setState(() => _hoverGons = null);
+                  },
+                  child: GestureDetector(
+                    onTap: () => _openTouchedGonsModal(
+                      'Tapped',
+                      _hitNotifier.value!.hitValues,
+                      _hitNotifier.value!.coordinate,
                     ),
-                    zoom: camera.zoom - 1,
-                    bearing: -camera.rotation,
-                  );
-                }
-              },
-            ),
-            children: [
-              MouseRegion(
-                hitTestBehavior: HitTestBehavior.deferToChild,
-                cursor: SystemMouseCursors.click,
-                onHover: (_) {
-                  final hitValues = _hitNotifier.value?.hitValues.toList();
-                  if (hitValues == null) return;
-
-                  if (listEquals(hitValues, _prevHitValues)) return;
-                  _prevHitValues = hitValues;
-
-                  final hoverLines = hitValues.map((v) {
-                    final original = _polygons[v]!;
-
-                    return Polygon<HitValue>(
-                      points: original.points,
-                      holePointsList: original.holePointsList,
-                      color: Colors.transparent,
-                      borderStrokeWidth: 15,
-                      borderColor: Colors.green,
-                      disableHolesBorder: original.disableHolesBorder,
-                    );
-                  }).toList();
-                  setState(() => _hoverGons = hoverLines);
-                },
-                onExit: (_) {
-                  _prevHitValues = null;
-                  setState(() => _hoverGons = null);
-                },
-                child: GestureDetector(
-                  onTap: () => _openTouchedGonsModal(
-                    'Tapped',
-                    _hitNotifier.value!.hitValues,
-                    _hitNotifier.value!.coordinate,
-                  ),
-                  onLongPress: () => _openTouchedGonsModal(
-                    'Long pressed',
-                    _hitNotifier.value!.hitValues,
-                    _hitNotifier.value!.coordinate,
-                  ),
-                  onSecondaryTap: () => _openTouchedGonsModal(
-                    'Secondary tapped',
-                    _hitNotifier.value!.hitValues,
-                    _hitNotifier.value!.coordinate,
-                  ),
-                  child: PolygonLayer(
-                    hitNotifier: _hitNotifier,
-                    simplificationTolerance: 0,
-                    polygons: [..._polygonsRaw, ...?_hoverGons],
+                    onLongPress: () => _openTouchedGonsModal(
+                      'Long pressed',
+                      _hitNotifier.value!.hitValues,
+                      _hitNotifier.value!.coordinate,
+                    ),
+                    onSecondaryTap: () => _openTouchedGonsModal(
+                      'Secondary tapped',
+                      _hitNotifier.value!.hitValues,
+                      _hitNotifier.value!.coordinate,
+                    ),
+                    child: PolygonLayer(
+                      hitNotifier: _hitNotifier,
+                      simplificationTolerance: 0,
+                      polygons: [..._polygonsRaw, ...?_hoverGons],
+                    ),
                   ),
                 ),
-              ),
-              PolygonLayer(
-                simplificationTolerance: 0,
-                useAltRendering: true,
-                polygons: [
-                  Polygon(
-                    points: const [
-                      LatLng(50, -18),
-                      LatLng(50, -14),
-                      LatLng(51.5, -12.5),
-                      LatLng(54, -14),
-                      LatLng(54, -18),
-                    ],
-                    holePointsList: [
-                      const [
-                        LatLng(52, -17),
-                        LatLng(52, -16),
-                        LatLng(51.5, -15.5),
-                        LatLng(51, -16),
-                        LatLng(51, -17),
+                PolygonLayer(
+                  simplificationTolerance: 0,
+                  useAltRendering: true,
+                  polygons: [
+                    Polygon(
+                      points: const [
+                        LatLng(50, -18),
+                        LatLng(50, -14),
+                        LatLng(51.5, -12.5),
+                        LatLng(54, -14),
+                        LatLng(54, -18),
                       ],
-                      const [
-                        LatLng(53.5, -17),
-                        LatLng(53.5, -16),
-                        LatLng(53, -15),
-                        LatLng(52.25, -15),
-                        LatLng(52.25, -16),
-                        LatLng(52.75, -17),
+                      holePointsList: [
+                        const [
+                          LatLng(52, -17),
+                          LatLng(52, -16),
+                          LatLng(51.5, -15.5),
+                          LatLng(51, -16),
+                          LatLng(51, -17),
+                        ],
+                        const [
+                          LatLng(53.5, -17),
+                          LatLng(53.5, -16),
+                          LatLng(53, -15),
+                          LatLng(52.25, -15),
+                          LatLng(52.25, -16),
+                          LatLng(52.75, -17),
+                        ],
                       ],
-                    ],
-                    borderStrokeWidth: 4,
-                    borderColor: Colors.black,
-                    color: Colors.green,
-                  ),
-                  Polygon(
-                    points: const [
-                      LatLng(50, -18),
-                      LatLng(53, -16),
-                      LatLng(51.5, -12.5),
-                      LatLng(54, -14),
-                      LatLng(54, -18),
-                    ]
-                        .map(
-                          (latlng) => LatLng(latlng.latitude - 6, latlng.longitude),
-                    )
-                        .toList(),
-                    holePointsList: [
-                      const [
-                        LatLng(52, -17),
-                        LatLng(52, -16),
-                        LatLng(51.5, -15.5),
-                        LatLng(51, -16),
-                        LatLng(51, -17),
-                      ],
-                      const [
-                        LatLng(53.5, -17),
-                        LatLng(53.5, -16),
-                        LatLng(53, -15),
-                        LatLng(52.25, -15),
-                        LatLng(52.25, -16),
-                        LatLng(52.75, -17),
-                      ],
-                    ]
-                        .map(
-                          (latlngs) => latlngs
+                      borderStrokeWidth: 4,
+                      borderColor: Colors.black,
+                      color: Colors.green,
+                    ),
+                    Polygon(
+                      points: const [
+                        LatLng(50, -18),
+                        LatLng(53, -16),
+                        LatLng(51.5, -12.5),
+                        LatLng(54, -14),
+                        LatLng(54, -18),
+                      ]
                           .map(
                             (latlng) =>
-                            LatLng(latlng.latitude - 6, latlng.longitude),
-                      )
+                                LatLng(latlng.latitude - 6, latlng.longitude),
+                          )
                           .toList(),
-                    )
-                        .toList(),
-                    borderStrokeWidth: 4,
-                    borderColor: Colors.black,
-                    color: Colors.green,
-                  ),
-                ],
-              ),
-            ],
-          )
+                      holePointsList: [
+                        const [
+                          LatLng(52, -17),
+                          LatLng(52, -16),
+                          LatLng(51.5, -15.5),
+                          LatLng(51, -16),
+                          LatLng(51, -17),
+                        ],
+                        const [
+                          LatLng(53.5, -17),
+                          LatLng(53.5, -16),
+                          LatLng(53, -15),
+                          LatLng(52.25, -15),
+                          LatLng(52.25, -16),
+                          LatLng(52.75, -17),
+                        ],
+                      ]
+                          .map(
+                            (latlngs) => latlngs
+                                .map(
+                                  (latlng) => LatLng(
+                                    latlng.latitude - 6,
+                                    latlng.longitude,
+                                  ),
+                                )
+                                .toList(),
+                          )
+                          .toList(),
+                      borderStrokeWidth: 4,
+                      borderColor: Colors.black,
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

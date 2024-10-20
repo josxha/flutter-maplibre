@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      showPerformanceOverlay: true,
       title: 'MapLibre Demo',
       initialRoute: MenuPage.location,
       theme: ThemeData(colorSchemeSeed: Colors.blue),

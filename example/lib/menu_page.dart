@@ -45,12 +45,12 @@ class MenuPage extends StatelessWidget {
               ItemCard(
                 label: 'MapLibre in FlutterMap',
                 iconData: Icons.star,
-                location: FlutterMapInMapLibrePage.location,
+                location: MapLibreInFlutterMapPage.location,
               ),
               ItemCard(
                 label: 'FlutterMap in MapLibre',
                 iconData: Icons.star,
-                location: MapLibreInFlutterMapPage.location,
+                location: FlutterMapInMapLibrePage.location,
               ),
               ItemCard(
                 label: 'Styled Map',
