@@ -7,28 +7,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/web/extensions.dart';
 import 'package:maplibre/src/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/web/interop/json.dart';
 import 'package:web/web.dart';
 
 /// The web specific implementation of the [MapLibreMap] widget.
-final class MapLibreMapStateWeb extends State<MapLibreMap>
-    implements MapController {
-  static int _counter = 0;
-  final _viewName = 'plugins.flutter.io/maplibre${_counter++}';
+final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
   AnnotationManager? _annotationManager;
 
-  MapOptions get _options => widget.options;
+  /// Get the [MapOptions] from [MapLibreMap.options].
+  @override
+  MapOptions get options => widget.options;
 
   @override
   void initState() {
     platformViewRegistry.registerViewFactory(
-      _viewName,
+      viewName,
       (int viewId, [dynamic params]) {
         _htmlElement = HTMLDivElement()
           ..style.padding = '0'
@@ -39,34 +39,34 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map = interop.JsMap(
           interop.MapOptions(
             container: _htmlElement,
-            style: _options.initStyle,
-            zoom: _options.initZoom,
-            center: _options.initCenter?.toLngLat(),
-            bearing: _options.initBearing,
-            pitch: _options.initPitch,
+            style: options.initStyle,
+            zoom: options.initZoom,
+            center: options.initCenter?.toLngLat(),
+            bearing: options.initBearing,
+            pitch: options.initPitch,
           ),
         );
 
         document.body?.appendChild(_htmlElement);
         // Invoke the onMapCreated callback async to avoid getting it called
         // during the widget build.
-        Future.delayed(
-          Duration.zero,
-          () => widget.onEvent?.call(MapEventMapCreated(mapController: this)),
-        );
-        Future.delayed(Duration.zero, () => widget.onMapCreated?.call(this));
+        Future.delayed(Duration.zero, () {
+          widget.onEvent?.call(MapEventMapCreated(mapController: this));
+          widget.onMapCreated?.call(this);
+          setState(() => isInitialized = true);
+        });
         _resizeMap();
 
         // set options
-        _map.setMinZoom(_options.minZoom);
-        _map.setMaxZoom(_options.maxZoom);
-        _map.setMinPitch(_options.minPitch);
-        _map.setMaxPitch(_options.maxPitch);
-        _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
-        _updateGestures(_options.gestures);
+        _map.setMinZoom(options.minZoom);
+        _map.setMaxZoom(options.maxZoom);
+        _map.setMinPitch(options.minPitch);
+        _map.setMaxPitch(options.maxPitch);
+        _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+        _updateGestures(options.gestures);
 
         // add controls
-        for (final control in _options.webControls) {
+        for (final control in options.webControls) {
           final jsControl = switch (control) {
             final WebScaleControl control => interop.ScaleControl(
                 interop.ScaleControlOptions(
@@ -118,6 +118,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
             widget.onEvent?.call(const MapEventStyleLoaded());
             widget.onStyleLoaded?.call();
             _annotationManager = AnnotationManager(this, widget.layers);
+            // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+            setState(() {});
           }.toJS,
         );
         _map.on(
@@ -165,13 +167,14 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
         _map.on(
           interop.MapEventType.move,
           (interop.MapLibreEvent event) {
-            final camera = MapCamera(
+            final mapCamera = MapCamera(
               center: _map.getCenter().toPosition(),
               zoom: _map.getZoom().toDouble(),
               pitch: _map.getPitch().toDouble(),
               bearing: _map.getBearing().toDouble(),
             );
-            widget.onEvent?.call(MapEventMoveCamera(camera: camera));
+            setState(() => camera = mapCamera);
+            widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
           }.toJS,
         );
         _map.on(
@@ -191,7 +194,8 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
   }
 
   @override
-  Widget build(BuildContext context) => HtmlElementView(viewType: _viewName);
+  Widget buildPlatformWidget(BuildContext context) =>
+      HtmlElementView(viewType: viewName);
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
@@ -211,23 +215,23 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    if (_options.minZoom != oldWidget.options.minZoom) {
-      _map.setMinZoom(_options.minZoom);
+    if (options.minZoom != oldWidget.options.minZoom) {
+      _map.setMinZoom(options.minZoom);
     }
-    if (_options.maxZoom != oldWidget.options.maxZoom) {
-      _map.setMaxZoom(_options.maxZoom);
+    if (options.maxZoom != oldWidget.options.maxZoom) {
+      _map.setMaxZoom(options.maxZoom);
     }
-    if (_options.minPitch != oldWidget.options.minPitch) {
-      _map.setMinPitch(_options.minPitch);
+    if (options.minPitch != oldWidget.options.minPitch) {
+      _map.setMinPitch(options.minPitch);
     }
-    if (_options.maxPitch != oldWidget.options.maxPitch) {
-      _map.setMaxPitch(_options.maxPitch);
+    if (options.maxPitch != oldWidget.options.maxPitch) {
+      _map.setMaxPitch(options.maxPitch);
     }
-    if (_options.maxBounds != oldWidget.options.maxBounds) {
-      _map.setMaxBounds(_options.maxBounds?.toJsLngLatBounds());
+    if (options.maxBounds != oldWidget.options.maxBounds) {
+      _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
     }
-    if (_options.gestures != oldWidget.options.gestures) {
-      _updateGestures(_options.gestures);
+    if (options.gestures != oldWidget.options.gestures) {
+      _updateGestures(options.gestures);
     }
     _annotationManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
@@ -528,7 +532,7 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
     final zoom = _map.getZoom();
     // https://wiki.openstreetmap.org/wiki/Zoom_levels
     return circumferenceOfEarth *
-        cos(latitude * radian2degree) /
+        cos(latitude * degree2Radian) /
         pow(2, zoom + 9);
   }
 
@@ -650,5 +654,18 @@ final class MapLibreMapStateWeb extends State<MapLibreMap>
           ),
         )
         .toList(growable: false);
+  }
+
+  @override
+  Future<List<String>> getAttributions() async {
+    final jsStyle = _map.getStyle();
+    final sources = jsStyle?.sources.dartify() as Map<Object?, Object?>?;
+    if (sources == null) return const [];
+    final attributions = <String>[];
+    for (final value in sources.values) {
+      final source = value! as Map<Object?, Object?>;
+      attributions.add(source['attribution'].toString());
+    }
+    return attributions;
   }
 }

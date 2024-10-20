@@ -1,6 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform_interface.dart';
 import 'package:maplibre/src/web/widget_state.dart';
 
@@ -11,5 +10,5 @@ final class PlatformImpl extends PlatformInterface {
       PlatformInterface.instance = PlatformImpl();
 
   @override
-  State<MapLibreMap> createWidgetState() => MapLibreMapStateWeb();
+  MapLibreMapState createWidgetState() => MapLibreMapStateWeb();
 }

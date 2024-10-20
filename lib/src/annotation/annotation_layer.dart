@@ -1,4 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/extensions.dart';
 
