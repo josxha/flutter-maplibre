@@ -8,10 +8,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
-class Attribution extends StatefulWidget {
+class SourceAttribution extends StatefulWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
-  const Attribution({
+  const SourceAttribution({
     super.key,
     this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     this.alignment = Alignment.bottomRight,
@@ -36,10 +36,10 @@ class Attribution extends StatefulWidget {
   final bool keepExpanded;
 
   @override
-  State<Attribution> createState() => _AttributionState();
+  State<SourceAttribution> createState() => _SourceAttributionState();
 }
 
-class _AttributionState extends State<Attribution> {
+class _SourceAttributionState extends State<SourceAttribution> {
   bool _expanded = true;
   MapCamera? _initMapCamera;
 
@@ -57,67 +57,63 @@ class _AttributionState extends State<Attribution> {
 
     return FutureBuilder<List<String>>(
       future: controller.getAttributions(),
+      initialData: const [],
       builder: (context, snapshot) {
-        if (snapshot.data case final List<String> attributions) {
-          final theme = Theme.of(context);
-          return Container(
-            alignment: widget.alignment,
-            padding: widget.padding,
-            child: PointerInterceptor(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: theme.scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (_expanded) ...[
-                        if (widget.showMapLibre) ...[
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 8,
-                              right: attributions.isEmpty ? 0 : 4,
-                            ),
-                            child: InkWell(
-                              child: Text(
-                                'MapLibre${attributions.isEmpty ? '' : ' |'}',
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              onTap: () =>
-                                  launchUrl(Uri.parse('https://maplibre.org/')),
-                            ),
+        final attributions = snapshot.data ?? const [];
+        final theme = Theme.of(context);
+        return Container(
+          alignment: widget.alignment,
+          padding: widget.padding,
+          child: PointerInterceptor(
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_expanded) ...[
+                      if (widget.showMapLibre) ...[
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 8,
+                            right: attributions.isEmpty ? 0 : 4,
                           ),
-                        ],
-                        ...attributions.map(_HtmlWidget.new),
-                      ],
-                      // The SizedBox enforces the height on android (web works without it).
-                      SizedBox.square(
-                        dimension: 30,
-                        child: IconButton(
-                          onPressed: () => setState(() {
-                            _initMapCamera = null;
-                            _expanded = !_expanded;
-                          }),
-                          icon: const Icon(Icons.info, size: 18),
-                          padding: const EdgeInsets.all(4),
-                          constraints: const BoxConstraints(),
+                          child: InkWell(
+                            child: Text(
+                              'MapLibre${attributions.isEmpty ? '' : ' |'}',
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            onTap: () =>
+                                launchUrl(Uri.parse('https://maplibre.org/')),
+                          ),
                         ),
-                      ),
+                      ],
+                      ...attributions.map(_HtmlWidget.new),
                     ],
-                  ),
+                    // The SizedBox enforces the height on android (web works without it).
+                    SizedBox.square(
+                      dimension: 30,
+                      child: IconButton(
+                        onPressed: () => setState(() {
+                          _initMapCamera = null;
+                          _expanded = !_expanded;
+                        }),
+                        icon: const Icon(Icons.info, size: 18),
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          );
-        }
-        if (snapshot.error case final Object error) {
-          debugPrint(error.toString());
-        }
-        return const SizedBox.shrink();
+          ),
+        );
       },
     );
   }

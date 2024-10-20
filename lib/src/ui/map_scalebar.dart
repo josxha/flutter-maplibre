@@ -6,10 +6,10 @@ import 'package:maplibre/maplibre.dart';
 
 /// Display a scalebar to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
-class Scalebar extends StatelessWidget {
+class MapScalebar extends StatelessWidget {
   /// Display a scalebar to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
-  const Scalebar({super.key});
+  const MapScalebar({super.key});
 
   @override
   Widget build(BuildContext context) {

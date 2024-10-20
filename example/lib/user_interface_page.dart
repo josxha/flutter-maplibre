@@ -26,10 +26,10 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
               : StyledMapPage.styleUrlDark,
         ),
         children: const [
-          Scalebar(),
-          Attribution(),
-          ZoomButtons(),
-          Compass.cupertino(),
+          MapScalebar(),
+          SourceAttribution(),
+          MapZoomButtons(),
+          MapCompass(),
         ],
       ),
     );

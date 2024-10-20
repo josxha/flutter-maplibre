@@ -455,6 +455,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   void onStyleLoaded() {
+    // We need to refresh the cached style for when the style reloads.
+    if (_cachedJniStyle?.isNull ?? false) _cachedJniStyle?.release();
+    _cachedJniStyle = _jniMapLibreMap.getStyle$1();
+
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
     _annotationManager = AnnotationManager(this, widget.layers);

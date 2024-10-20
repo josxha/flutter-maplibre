@@ -20,7 +20,6 @@ environment:
   flutter: '>=3.24.0' # jni >=0.12.0 depends on meta ^1.15.0
 
 dependencies:
-  cupertino_icons: ^1.0.0
   flutter:
     sdk: flutter
   flutter_markdown: ^0.7.4

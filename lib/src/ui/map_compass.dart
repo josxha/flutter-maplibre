@@ -6,9 +6,9 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// A compass for flutter_map that shows the map rotation and allows to reset
 /// the rotation back to 0.
-class Compass extends StatelessWidget {
+class MapCompass extends StatelessWidget {
   /// Use this constructor if you want to customize your compass.
-  const Compass({
+  const MapCompass({
     this.child,
     super.key,
     this.rotationOffset = 0,
