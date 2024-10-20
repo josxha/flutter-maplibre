@@ -93,6 +93,9 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
+  /// Get the loaded style.
+  external StyleSpecification? getStyle();
+
   external DoubleClickZoomHandler doubleClickZoom;
   external DragPanHandler dragPan;
   external DragRotateHandler dragRotate;

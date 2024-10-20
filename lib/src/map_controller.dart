@@ -1,11 +1,23 @@
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapController] can be used to control, update and manipulate a
 /// rendered [MapLibreMap].
 abstract interface class MapController {
+  /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
+  /// Returns null if called outside of the [MapLibreMap.children].
+  static MapController? maybeOf(BuildContext context) =>
+      MapLibreInheritedModel.maybeMapControllerOf(context);
+
+  /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
+  /// Returns null if called outside of the [MapLibreMap.children].
+  static MapController of(BuildContext context) =>
+      maybeOf(context) ??
+      (throw StateError('Unable to find an instance of MapController'));
+
   /// Convert a latitude/longitude coordinate to a screen location.
   Future<Offset> toScreenLocation(Position lngLat);
 
@@ -69,6 +81,9 @@ abstract interface class MapController {
   /// Get the current camera position on the map.
   MapCamera getCamera();
 
+  /// Get the current camera position on the map.
+  MapCamera? get camera;
+
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
   ///
@@ -76,6 +91,9 @@ abstract interface class MapController {
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
   Future<double> getMetersPerPixelAtLatitude(double latitude);
+
+  /// Get a list of all attributions from the map style.
+  Future<List<String>> getAttributions();
 
   /// The smallest bounding box that includes the visible region.
   Future<LngLatBounds> getVisibleRegion();

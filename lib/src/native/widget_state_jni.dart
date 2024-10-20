@@ -6,14 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateJni extends State<MapLibreMap>
-    implements MapController, pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateJni extends MapLibreMapState
+    implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
@@ -36,7 +37,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPlatformWidget(BuildContext context) {
     // Texture Layer (or Texture Layer Hybrid Composition)
     // Platform Views are rendered into a texture. Flutter draws the
     // platform views (via the texture). Flutter content is rendered
@@ -72,6 +73,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
   }
 
   @override
@@ -92,6 +97,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    // jniMap can be null if the widget rebuilds while the map hasn't been initialized.
+    if (jniMap.isNull) return;
+
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
@@ -447,9 +455,15 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   @override
   void onStyleLoaded() {
+    // We need to refresh the cached style for when the style reloads.
+    if (_cachedJniStyle?.isNull ?? false) _cachedJniStyle?.release();
+    _cachedJniStyle = _jniMapLibreMap.getStyle$1();
+
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
     _annotationManager = AnnotationManager(this, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 
   @override
@@ -460,6 +474,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       pitch: camera.pitch,
       bearing: camera.bearing,
     );
+    setState(() => this.camera = mapCamera);
     widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
   }
 
@@ -508,15 +523,16 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
     final jniTarget = jniCamera.target;
-    final camera = MapCamera(
+    final mapCamera = MapCamera(
       center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
+    // camera = mapCamera;
     jniTarget.release();
     jniCamera.release();
-    return camera;
+    return mapCamera;
   }
 
   @override
@@ -719,5 +735,20 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     await runOnPlatformThread(() {
       locationComponent.setCameraMode(mode);
     });
+  }
+
+  @override
+  Future<List<String>> getAttributions() async {
+    final attributions = <String>[];
+    // style can be null when the map hasn't finished initializing.
+    if (_jniStyle.isNull) return const [];
+    final jSources = _jniStyle.getSources();
+    for (final jSource in jSources) {
+      final attribution = jSource.getAttribution();
+      if (attribution.isNull || attribution.length == 0) continue;
+      attributions.add(attribution.toDartString(releaseOriginal: true));
+    }
+    jSources.release();
+    return attributions;
   }
 }
