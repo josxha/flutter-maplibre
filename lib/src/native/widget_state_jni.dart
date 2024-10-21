@@ -556,14 +556,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
       region.release();
       return bounds;
     });
-    final bounds = LngLatBounds(
-      longitudeWest: jniBounds.longitudeWest,
-      longitudeEast: jniBounds.longitudeEast,
-      latitudeSouth: jniBounds.latitudeSouth,
-      latitudeNorth: jniBounds.latitudeNorth,
-    );
-    jniBounds.release();
-    jniBounds.release();
+    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
     return bounds;
   }
 
