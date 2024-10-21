@@ -167,7 +167,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
         ),
         compass: _options.nativeCompass,
         logo: _options.nativeLogo,
-        attribution: _options.nativeAttribution,
+        attribution: _options.attribution,
         androidTextureMode: _options.androidTextureMode,
       );
 

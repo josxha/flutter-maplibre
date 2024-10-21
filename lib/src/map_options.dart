@@ -22,7 +22,7 @@ class MapOptions {
     this.gestures = const MapGestures.all(),
     this.nativeCompass = true,
     this.nativeLogo = true,
-    this.nativeAttribution = true,
+    this.attribution = true,
     this.androidTextureMode = true,
   }) : initPitch = pitch ?? initPitch;
 
@@ -79,7 +79,7 @@ class MapOptions {
   final bool nativeLogo;
 
   /// Toggle the MapLibre Native logo.
-  final bool nativeAttribution;
+  final bool attribution;
 
   /// Toggle the texture mode on Android.
   ///
