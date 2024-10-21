@@ -172,26 +172,14 @@ final class MapLibreMapStateJni extends MapLibreMapState
       );
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async {
-    final jniProjection = _jniProjection;
-    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
-      return jniProjection.fromScreenLocation(screenLocation.toPointF());
-    });
-    final position = jniLatLng.toPosition();
-    jniLatLng.release();
-    return position;
-  }
+  Position toLngLat(Offset screenLocation) => _jniProjection
+      .fromScreenLocation(screenLocation.toPointF())
+      .toPosition(releaseOriginal: true);
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    final jniProjection = _jniProjection;
-    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
-      return jniProjection.toScreenLocation(lngLat.toLatLng());
-    });
-    final position = jniPoint.toOffset();
-    jniPoint.release();
-    return position;
-  }
+  Offset toScreenLocation(Position lngLat) => _jniProjection
+      .toScreenLocation(lngLat.toLatLng())
+      .toOffset(releaseOriginal: true);
 
   @override
   Future<void> moveCamera({

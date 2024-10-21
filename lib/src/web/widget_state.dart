@@ -239,11 +239,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
+  Position toLngLat(Offset screenLocation) =>
       _map.unproject(screenLocation.toJsPoint()).toPosition();
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
+  Offset toScreenLocation(Position lngLat) =>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
