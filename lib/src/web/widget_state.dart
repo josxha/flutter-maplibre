@@ -665,7 +665,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final attributions = <String>[];
     for (final value in sources.values) {
       final source = value! as Map<Object?, Object?>;
-      attributions.add(source['attribution'].toString());
+      final attribution = source['attribution'];
+      if (attribution == null) continue;
+      if (attribution is String && attribution.isEmpty) continue;
+      attributions.add(attribution.toString());
     }
     return attributions;
   }
