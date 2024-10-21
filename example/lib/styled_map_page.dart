@@ -33,7 +33,9 @@ class _StyledMapPageState extends State<StyledMapPage> {
           initStyle: Theme.of(context).brightness == Brightness.light
               ? StyledMapPage.styleUrl
               : StyledMapPage.styleUrlDark,
+          attribution: false,
         ),
+        children: const [SourceAttribution()],
       ),
     );
   }
