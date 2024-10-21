@@ -239,11 +239,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
+  Position toLngLat(Offset screenLocation) =>
       _map.unproject(screenLocation.toJsPoint()).toPosition();
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
+  Offset toScreenLocation(Position lngLat) =>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
@@ -528,17 +528,15 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         bearing: _map.getBearing().toDouble(),
       );
 
+  /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    final zoom = _map.getZoom();
-    // https://wiki.openstreetmap.org/wiki/Zoom_levels
-    return circumferenceOfEarth *
-        cos(latitude * degree2Radian) /
-        pow(2, zoom + 9);
-  }
+  double getMetersPerPixelAtLatitude(double latitude) =>
+      circumferenceOfEarth *
+      cos(latitude * degree2Radian) /
+      pow(2, _map.getZoom() + 9);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
+  LngLatBounds getVisibleRegion() {
     final bounds = _map.getBounds();
     return LngLatBounds(
       longitudeWest: bounds.getWest().toDouble(),

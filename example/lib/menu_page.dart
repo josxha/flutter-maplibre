@@ -23,6 +23,7 @@ import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
+import 'package:maplibre_example/widget_layer.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -91,6 +92,11 @@ class MenuPage extends StatelessWidget {
                 label: 'User interface',
                 iconData: Icons.control_camera,
                 location: UserInterfacePage.location,
+              ),
+              ItemCard(
+                label: 'Widget Layer',
+                iconData: Icons.location_on,
+                location: WidgetLayerPage.location,
               ),
             ],
           ),

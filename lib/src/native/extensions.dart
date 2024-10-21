@@ -24,13 +24,21 @@ extension LngLatExt on pigeon.LngLat {
 /// Extension methods for the [jni.LatLng] class. Not exported publicly.
 extension JniLatLngExt on jni.LatLng {
   /// Convert an internal [jni.LatLng] to a [Position].
-  Position toPosition() => Position(getLongitude(), getLatitude());
+  Position toPosition({bool releaseOriginal = false}) {
+    final position = Position(getLongitude(), getLatitude());
+    if (releaseOriginal) release();
+    return position;
+  }
 }
 
 /// Extension methods for the [jni.PointF] class. Not exported publicly.
 extension PointExt on jni.PointF {
   /// Convert an [jni.PointF] to a [Offset].
-  Offset toOffset() => Offset(x, y);
+  Offset toOffset({bool releaseOriginal = false}) {
+    final offset = Offset(x, y);
+    if (releaseOriginal) release();
+    return offset;
+  }
 }
 
 /// Extension methods for the [Offset] class. Not exported publicly.
