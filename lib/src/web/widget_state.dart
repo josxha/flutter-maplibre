@@ -528,14 +528,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         bearing: _map.getBearing().toDouble(),
       );
 
+  /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    final zoom = _map.getZoom();
-    // https://wiki.openstreetmap.org/wiki/Zoom_levels
-    return circumferenceOfEarth *
-        cos(latitude * degree2Radian) /
-        pow(2, zoom + 9);
-  }
+  double getMetersPerPixelAtLatitude(double latitude) =>
+      circumferenceOfEarth *
+      cos(latitude * degree2Radian) /
+      pow(2, _map.getZoom() + 9);
 
   @override
   LngLatBounds getVisibleRegion() {

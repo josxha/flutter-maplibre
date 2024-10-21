@@ -528,12 +528,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread(() {
-      return jniProjection.getMetersPerPixelAtLatitude(latitude);
-    });
-  }
+  double getMetersPerPixelAtLatitude(double latitude) =>
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
   LngLatBounds getVisibleRegion() {

@@ -90,7 +90,7 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  Future<double> getMetersPerPixelAtLatitude(double latitude);
+  double getMetersPerPixelAtLatitude(double latitude);
 
   /// Get a list of all attributions from the map style.
   Future<List<String>> getAttributions();
