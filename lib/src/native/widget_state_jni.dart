@@ -165,6 +165,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
           zoom: _options.gestures.zoom,
           tilt: _options.gestures.pitch,
         ),
+        compass: _options.nativeCompass,
+        logo: _options.nativeLogo,
+        attribution: _options.nativeAttribution,
+        androidTextureMode: _options.androidTextureMode,
       );
 
   @override
