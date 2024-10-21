@@ -20,6 +20,10 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
+    this.nativeCompass = true,
+    this.nativeLogo = true,
+    this.nativeAttribution = true,
+    this.androidTextureMode = true,
   }) : initPitch = pitch ?? initPitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -67,4 +71,19 @@ class MapOptions {
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
+
+  /// Toggle the MapLibre Native compass.
+  final bool nativeCompass;
+
+  /// Toggle the MapLibre Native logo.
+  final bool nativeLogo;
+
+  /// Toggle the MapLibre Native logo.
+  final bool nativeAttribution;
+
+  /// Toggle the texture mode on Android.
+  ///
+  /// textureMode comes at a significant performance penalty.
+  /// https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
+  final bool androidTextureMode;
 }
