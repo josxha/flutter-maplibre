@@ -56,12 +56,16 @@ class _SourceAttributionState extends State<SourceAttribution> {
       _expanded = false;
     }
 
+    final theme = Theme.of(context);
     return FutureBuilder<List<String>>(
       future: controller.getAttributions(),
       initialData: const [],
       builder: (context, snapshot) {
+        if (snapshot.error != null) {
+          debugPrint('SourceAttribution error: ${snapshot.error}');
+          debugPrintStack(stackTrace: snapshot.stackTrace);
+        }
         final attributions = snapshot.data ?? const [];
-        final theme = Theme.of(context);
         return Container(
           alignment: widget.alignment,
           padding: widget.padding,
