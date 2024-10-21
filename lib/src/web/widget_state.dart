@@ -538,7 +538,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
+  LngLatBounds getVisibleRegion() {
     final bounds = _map.getBounds();
     return LngLatBounds(
       longitudeWest: bounds.getWest().toDouble(),

@@ -96,7 +96,7 @@ abstract interface class MapController {
   Future<List<String>> getAttributions();
 
   /// The smallest bounding box that includes the visible region.
-  Future<LngLatBounds> getVisibleRegion();
+  LngLatBounds getVisibleRegion();
 
   /// Add an image to the map.
   Future<void> addImage(String id, Uint8List bytes);

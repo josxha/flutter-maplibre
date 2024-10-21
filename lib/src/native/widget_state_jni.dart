@@ -536,16 +536,11 @@ final class MapLibreMapStateJni extends MapLibreMapState
   }
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
-    final projection = _jniProjection; // necessary to use it in platform thread
-    final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
-      final region = projection.getVisibleRegion();
-      final bounds = region.latLngBounds;
-      region.release();
-      return bounds;
-    });
-    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
-    return bounds;
+  LngLatBounds getVisibleRegion() {
+    final region = _jniProjection.getVisibleRegion();
+    final jniBounds = region.latLngBounds;
+    region.release();
+    return jniBounds.toLngLatBounds(releaseOriginal: true);
   }
 
   @override
