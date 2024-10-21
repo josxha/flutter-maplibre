@@ -31,7 +31,12 @@ final class MapLibreMapStateJni extends MapLibreMapState
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
-  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle$1();
+  jni.Style? get _jniStyle {
+    if (_cachedJniStyle != null) return _cachedJniStyle;
+    final style = _jniMapLibreMap.getStyle$1();
+    if (style.isNull) return null;
+    return _cachedJniStyle ??= style;
+  }
 
   jni.LocationComponent get _locationComponent =>
       _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
@@ -440,7 +445,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
         case VideoSource():
           throw UnimplementedError('Video source is only supported on web.');
       }
-      jniStyle.addSource(jniSource);
+      jniStyle?.addSource(jniSource);
       jniSource.release();
     });
   }
@@ -543,7 +548,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
   Future<void> removeLayer(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeLayer(id.toJString());
+      jniStyle?.removeLayer(id.toJString());
     });
   }
 
@@ -551,7 +556,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
   Future<void> removeSource(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeSource(id.toJString());
+      jniStyle?.removeSource(id.toJString());
     });
   }
 
@@ -564,7 +569,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
   Future<void> removeImage(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeImage(id.toJString());
+      jniStyle?.removeImage(id.toJString());
     });
   }
 
@@ -573,6 +578,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
     final jniMapLibreMap = _jniMapLibreMap;
     final jniStyle = _jniStyle;
+    if (jniStyle == null) return [];
+
     final result = await runOnPlatformThread<List<QueriedLayer>>(() {
       final jniLayers = jniStyle.getLayers();
       final queriedLayers = <QueriedLayer>[];
@@ -631,6 +638,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
     required String data,
   }) async {
     final jniStyle = _jniStyle;
+    if (jniStyle == null) return;
     await runOnPlatformThread(() {
       final source =
           jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
@@ -651,6 +659,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final locationComponent = _locationComponent;
     final jniStyle = _jniStyle;
+    if (jniStyle == null) return;
+
     final bearing = switch (bearingRenderMode) {
       BearingRenderMode.none => jni.RenderMode.NORMAL,
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
@@ -715,16 +725,22 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   Future<List<String>> getAttributions() async {
-    final attributions = <String>[];
     // style can be null when the map hasn't finished initializing.
-    if (_jniStyle.isNull) return const [];
-    final jSources = _jniStyle.getSources();
-    for (final jSource in jSources) {
-      final attribution = jSource.getAttribution();
-      if (attribution.isNull || attribution.length == 0) continue;
-      attributions.add(attribution.toDartString(releaseOriginal: true));
-    }
-    jSources.release();
-    return attributions;
+    final style = _jniStyle;
+    if (style == null) return const [];
+
+    return runOnPlatformThread<List<String>>(() {
+      final jSources = style.getSources();
+      final attributions = <String>[];
+      for (final jSource in jSources) {
+        final jniAttribution = jSource.getAttribution();
+        if (jniAttribution.isNull) continue;
+        final attribution = jniAttribution.toDartString(releaseOriginal: true);
+        if (attribution.trim().isEmpty) continue;
+        attributions.add(attribution);
+      }
+      jSources.release();
+      return attributions;
+    });
   }
 }
