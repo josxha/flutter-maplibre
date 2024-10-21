@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/translucent_pointer.dart';
 
 /// Use the [WidgetLayer] to display [Widget]s on the [MapLibreMap]
 /// by using it in [MapLibreMap.children].
@@ -24,7 +25,7 @@ class WidgetLayer extends StatelessWidget {
         ? MediaQuery.devicePixelRatioOf(context)
         : 1.0;
 
-    return Stack(
+    final child = Stack(
       children: markers.map((m) {
         final screenLocation = controller.toScreenLocation(m.point);
 
@@ -33,11 +34,9 @@ class WidgetLayer extends StatelessWidget {
         if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
         return Positioned(
           left: screenLocation.dx / pixelRatio -
-              m.size.width / 2 *
-              (m.alignment.x + 1),
+              m.size.width / 2 * (m.alignment.x + 1),
           top: screenLocation.dy / pixelRatio -
-              m.size.height / 2 *
-              (m.alignment.y + 1),
+              m.size.height / 2 * (m.alignment.y + 1),
           height: m.size.height,
           width: m.size.width,
           child: Transform(
@@ -48,6 +47,9 @@ class WidgetLayer extends StatelessWidget {
         );
       }).toList(growable: false),
     );
+    if (kIsWeb) return child;
+    // Android needs a TranslucentPointer
+    return TranslucentPointer(child: child);
   }
 }
 
