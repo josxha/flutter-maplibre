@@ -5,6 +5,10 @@ description: 'Render elevation on the map.'
 
 # Hillshade Layer
 
+:::info
+The features described on this site have been added in version `0.1.1`.
+:::
+
 The `HillshadeLayer` is either used by the map style or can be added to the map
 programmatically to use DEM tiles. Those tiles are used to render elevation on 
 the map.

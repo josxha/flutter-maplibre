@@ -4,6 +4,10 @@ sidebar_position: 6
 
 # Map Events
 
+:::info
+The features described on this site have been added in version `0.1.1`.
+:::
+
 The event system is the used if you want to listen to any user interactions or
 state changes on the map.
 

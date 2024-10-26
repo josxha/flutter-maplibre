@@ -25,4 +25,4 @@ plugins {
 }
 
 include ":app"
-include ':MapLibreAndroid'
+// JNIGEN include ':MapLibreAndroid'

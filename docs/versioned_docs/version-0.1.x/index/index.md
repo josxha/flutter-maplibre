@@ -13,6 +13,7 @@ Here is an overview what you can find in this documentation:
 - [Getting started](../getting-started/add-dependency) helps you to integrate the
   package into your project.
 - [Styles](../styles) can be used to customize the design of the map.
+- [User Interface](../ui) provides easy to use controls and indicators.
 - [Annotations](../category/annotations) are an easy way to add Markers, Circles,
   Polylines or Polygons to the map.
 - [Layers](../category/layers) are a powerful way to add or remove new layers to
