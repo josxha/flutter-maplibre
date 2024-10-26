@@ -5,6 +5,10 @@ description: 'Add Raster Tiles on the map.'
 
 # Raster Layer
 
+:::info
+The features described on this site have been added in version `0.1.1`.
+:::
+
 The `RasterLayer` is either used by the map style or can be added to the map
 programmatically to render raster tiles on your map.
 

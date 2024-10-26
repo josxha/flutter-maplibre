@@ -5,6 +5,10 @@ description: 'Add Polygons to the map.'
 
 # Fill Layer
 
+:::info
+The features described on this site have been added in version `0.1.1`.
+:::
+
 The `FillLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 

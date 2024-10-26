@@ -3,7 +3,8 @@
 ### New Features
 
 - Add `controller.queryLayers()` to check what layers have been clicked.
-- Add scalebar, zoom buttons, compass and attribution widgets as an unified user interface.
+- Add scalebar, zoom buttons, compass and attribution widgets as a unified user
+  interface.
 - Improve hash distribution
 - Add `MapOptions` parameters to toggle platform specific UIs.
 
