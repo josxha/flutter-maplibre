@@ -1,8 +1,19 @@
-## UNRELEASED
+## 0.1.1
 
-## New Features
+### New Features
 
-- Add `controller.queryLayers()` that returns all layers at a screen location.
+- Add `controller.queryLayers()` to check what layers have been clicked.
+- Add scalebar, zoom buttons, compass and attribution widgets as a unified user
+  interface.
+- Improve hash distribution
+- Add `MapOptions` parameters to toggle platform specific UIs.
+
+### Bug Fixes
+
+- Fix `controller.getVisibleRegion()` throws exception on Android.
+
+Full
+Changelog: [v0.1.0...v0.1.1](https://github.com/josxha/flutter-maplibre/compare/v0.1.0...v0.1.1)
 
 ## 0.1.0
 
