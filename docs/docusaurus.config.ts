@@ -71,7 +71,7 @@ const config: Config = {
                 },
                 {
                     type: 'docsVersionDropdown',
-                    position: 'right',
+                    position: 'left',
                 },
                 {
                     href: "https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html",
