@@ -4,13 +4,13 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "pub"
     directories:
       - "/"
       - "/example"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     ignore:
       - dependency-name: "*"
         update-types:
@@ -19,7 +19,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/docs"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     open-pull-requests-limit: 10
     groups:
       dependencies:
@@ -29,4 +29,4 @@ updates:
       - "/android"
       - "/example/android"
     schedule:
-      interval: "daily"
+      interval: "weekly"
