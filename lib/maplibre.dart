@@ -10,6 +10,7 @@ export 'src/map_controller.dart';
 export 'src/map_events.dart';
 export 'src/map_gestures.dart';
 export 'src/map_options.dart';
+export 'src/offline_manager.dart';
 export 'src/queried_layer.dart';
 export 'src/style/style.dart';
 export 'src/ui/map_compass.dart';
