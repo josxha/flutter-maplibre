@@ -11,6 +11,7 @@ import 'package:maplibre/src/native/jni/jni.dart' as jni;
 class OfflineManagerNative implements OfflineManager {
   /// Create a new [OfflineManager].
   OfflineManagerNative() {
+    // TODO call MapLibre.getInstance(context) before!
     _jContext = jni.MapLibreRegistry.INSTANCE.getContext();
     _jManager = jni.OfflineManager.getInstance(_jContext);
   }
