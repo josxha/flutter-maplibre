@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:jni/jni.dart';
@@ -9,15 +10,19 @@ import 'package:maplibre/src/native/jni/jni.dart' as jni;
 
 /// MapLibre Android specific implementation of the [OfflineManager].
 class OfflineManagerNative implements OfflineManager {
-  /// Create a new [OfflineManager].
-  OfflineManagerNative() {
-    _jContext = jni.MapLibreRegistry.INSTANCE.getContext();
-    jni.MapLibre.getInstance(_jContext);
-    _jManager = jni.OfflineManager.getInstance(_jContext);
-  }
+  const OfflineManagerNative._(this._jManager);
 
-  late final JObject _jContext;
-  late final jni.OfflineManager _jManager;
+  final jni.OfflineManager _jManager;
+
+  /// Create a new [OfflineManager].
+  static Future<OfflineManager> createInstance() async {
+    final jContext = jni.MapLibreRegistry.INSTANCE.getContext();
+    await runOnPlatformThread(() {
+      jni.MapLibre.getInstance(jContext);
+    });
+    final jManager = jni.OfflineManager.getInstance(jContext);
+    return OfflineManagerNative._(jManager);
+  }
 
   @override
   void dispose() {

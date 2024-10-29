@@ -6,17 +6,18 @@ abstract interface class OfflineManager {
   /// Create a new [OfflineManager].
   ///
   /// You'll have to call [dispose] to free resources once no longer needed.
-  factory OfflineManager() = OfflineManagerNative;
+  static Future<OfflineManager> createInstance() async =>
+      OfflineManagerNative.createInstance();
 
   /// Call to free resources when the [OfflineManager] is no longer needed.
   void dispose();
 
   /// Merge offline regions from a secondary database into the main offline
   /// database.
-  void mergeOfflineRegions({required String path});
+  Future<List<Object>> mergeOfflineRegions({required String path});
 
   /// Retrieve given region in the offline database.
-  void getOfflineRegion({required int regionId});
+  Future<Object> getOfflineRegion({required int regionId});
 
   /// Sets the maximum number of tiles that may be downloaded and stored on
   /// the current device. By default, the limit is set to 6,000.
