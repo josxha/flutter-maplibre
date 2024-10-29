@@ -14,10 +14,10 @@ abstract interface class OfflineManager {
 
   /// Merge offline regions from a secondary database into the main offline
   /// database.
-  Future<List<Object>> mergeOfflineRegions({required String path});
+  Future<List<OfflineRegion>> mergeOfflineRegions({required String path});
 
   /// Retrieve given region in the offline database.
-  Future<Object> getOfflineRegion({required int regionId});
+  Future<OfflineRegion> getOfflineRegion({required int regionId});
 
   /// Sets the maximum number of tiles that may be downloaded and stored on
   /// the current device. By default, the limit is set to 6,000.
@@ -33,7 +33,7 @@ abstract interface class OfflineManager {
   Future<void> invalidateAmbientCache();
 
   /// Retrieve all regions in the offline database.
-  Future<List<Object>> listOfflineRegions();
+  Future<List<OfflineRegion>> listOfflineRegions();
 
   /// Packs the existing database file into a minimal amount of disk space.
   Future<void> packDatabase();
@@ -46,7 +46,7 @@ abstract interface class OfflineManager {
   void runPackDatabaseAutomatically({required bool enabled});
 
   /// Downloads a map region.
-  Future<Object> downloadRegion({
+  Future<OfflineRegion> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
     required double minZoom,

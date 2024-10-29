@@ -30,19 +30,20 @@ class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<List<Object>> mergeOfflineRegions({required String path}) async {
+  Future<List<OfflineRegion>> mergeOfflineRegions(
+      {required String path}) async {
     final jPath = JString.fromString(path);
-    final completer = Completer<List<Object>>();
+    final completer = Completer<List<OfflineRegion>>();
     _jManager.mergeOfflineRegions(
       jPath,
       jni.OfflineManager_MergeOfflineRegionsCallback.implement(
         jni.$OfflineManager_MergeOfflineRegionsCallback(
           onMerge: (jRegions) {
-            final list = List.generate(jRegions.length, (index) {
-              final jRegion = jRegions[index];
-              return jRegion;
-            });
-            completer.complete(list);
+            final regions = List.generate(
+              jRegions.length,
+              (index) => jRegions[index].toOfflineRegion(),
+            );
+            completer.complete(regions);
           },
           onError: (error) => completer
               .completeError(error.toDartString(releaseOriginal: true)),
@@ -54,16 +55,13 @@ class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<Object> getOfflineRegion({required int regionId}) async {
-    final completer = Completer<Object>();
+  Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
+    final completer = Completer<OfflineRegion>();
     _jManager.getOfflineRegion(
       regionId,
       jni.OfflineManager_GetOfflineRegionCallback.implement(
         jni.$OfflineManager_GetOfflineRegionCallback(
-          onRegion: (region) {
-            // TODO map to a public type
-            completer.complete(region.getId());
-          },
+          onRegion: (region) => completer.complete(region.toOfflineRegion()),
           onRegionNotFound: () {
             completer.completeError(Exception('Region not found'));
           },
@@ -158,17 +156,16 @@ class OfflineManagerNative implements OfflineManager {
       _jManager.runPackDatabaseAutomatically(enabled);
 
   @override
-  Future<List<Object>> listOfflineRegions() async {
-    final completer = Completer<List<Object>>();
+  Future<List<OfflineRegion>> listOfflineRegions() async {
+    final completer = Completer<List<OfflineRegion>>();
     _jManager.listOfflineRegions(
       jni.OfflineManager_ListOfflineRegionsCallback.implement(
         jni.$OfflineManager_ListOfflineRegionsCallback(
           onList: (jRegions) {
-            final list = List.generate(jRegions.length, (index) {
-              final jRegion = jRegions[index];
-              // TODO map to a public type
-              return jRegion;
-            });
+            final list = List.generate(
+              jRegions.length,
+              (index) => jRegions[index].toOfflineRegion(),
+            );
             completer.complete(list);
           },
           onError: (error) => completer.completeError(Exception(error)),
@@ -179,7 +176,7 @@ class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<Object> downloadRegion({
+  Future<OfflineRegion> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
     required double minZoom,
@@ -187,7 +184,7 @@ class OfflineManagerNative implements OfflineManager {
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
   }) async {
-    final completer = Completer<Object>();
+    final completer = Completer<OfflineRegion>();
     final jMapStyleUrl = mapStyleUrl.toJString();
     final jBounds = bounds.toLatLngBounds();
     final jDefinition = jni.OfflineTilePyramidRegionDefinition(
@@ -220,7 +217,9 @@ class OfflineManagerNative implements OfflineManager {
                       jRegion
                           .setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
                       // This can be called multiple times, check if already completed
-                      if (!completer.isCompleted) completer.complete(jRegion);
+                      if (!completer.isCompleted) {
+                        completer.complete(jRegion.toOfflineRegion());
+                      }
                       return;
                     }
 

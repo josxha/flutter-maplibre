@@ -31,70 +31,72 @@ class _OfflinePageState extends State<OfflinePage> {
                     final regions = await manager.mergeOfflineRegions(
                       path: 'region.mbtiles',
                     );
-                    debugPrint('offline regions merged: $regions');
+                    _print(
+                      'offline regions merged:\n${regions.join('\n')}',
+                    );
                   },
                 ),
                 ListTile(
                   title: const Text('getOfflineRegion'),
                   onTap: () async {
                     final region = await manager.getOfflineRegion(regionId: 1);
-                    debugPrint('offline region: $region');
+                    _print('offline region: $region');
                   },
                 ),
                 ListTile(
                   title: const Text('setOfflineTileCountLimit'),
                   onTap: () async {
                     manager.setOfflineTileCountLimit(amount: 5000);
-                    debugPrint('offline tile count limit set');
+                    _print('offline tile count limit set');
                   },
                 ),
                 ListTile(
                   title: const Text('setMaximumAmbientCacheSize'),
                   onTap: () async {
                     await manager.setMaximumAmbientCacheSize(bytes: 10000000);
-                    debugPrint('maximum ambient cache size set');
+                    _print('maximum ambient cache size set');
                   },
                 ),
                 ListTile(
                   title: const Text('clearAmbientCache'),
                   onTap: () async {
                     await manager.clearAmbientCache();
-                    debugPrint('ambient cache cleared');
+                    _print('ambient cache cleared');
                   },
                 ),
                 ListTile(
                   title: const Text('invalidateAmbientCache'),
                   onTap: () async {
                     await manager.invalidateAmbientCache();
-                    debugPrint('ambient cache invalidated');
+                    _print('ambient cache invalidated');
                   },
                 ),
                 ListTile(
                   title: const Text('listOfflineRegions'),
                   onTap: () async {
                     final regions = await manager.listOfflineRegions();
-                    debugPrint('offline regions: $regions');
+                    _print('offline regions:\n${regions.join('\n')}');
                   },
                 ),
                 ListTile(
                   title: const Text('packDatabase'),
                   onTap: () async {
                     await manager.packDatabase();
-                    debugPrint('database optimized');
+                    _print('database optimized');
                   },
                 ),
                 ListTile(
                   title: const Text('resetDatabase'),
                   onTap: () async {
                     await manager.resetDatabase();
-                    debugPrint('database reset');
+                    _print('database reset');
                   },
                 ),
                 ListTile(
                   title: const Text('runPackDatabaseAutomatically'),
                   onTap: () async {
                     manager.runPackDatabaseAutomatically(enabled: true);
-                    debugPrint('enable automatic database optimization');
+                    _print('enable automatic database optimization');
                   },
                 ),
                 ListTile(
@@ -112,7 +114,7 @@ class _OfflinePageState extends State<OfflinePage> {
                       mapStyleUrl: StyledMapPage.styleUrl,
                       pixelDensity: 1,
                     );
-                    debugPrint('region downloaded: $region');
+                    _print('region downloaded: $region');
                   },
                 ),
               ],
@@ -125,6 +127,13 @@ class _OfflinePageState extends State<OfflinePage> {
         },
       ),
     );
+  }
+
+  void _print(String message) {
+    debugPrint(message);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
