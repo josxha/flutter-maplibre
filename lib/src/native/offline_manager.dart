@@ -7,6 +7,7 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/extensions.dart';
 import 'package:maplibre/src/native/jni/jni.dart' as jni;
+import 'package:maplibre/src/offline/download_progress.dart';
 
 /// MapLibre Android specific implementation of the [OfflineManager].
 class OfflineManagerNative implements OfflineManager {
@@ -30,8 +31,9 @@ class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<List<OfflineRegion>> mergeOfflineRegions(
-      {required String path}) async {
+  Future<List<OfflineRegion>> mergeOfflineRegions({
+    required String path,
+  }) async {
     final jPath = JString.fromString(path);
     final completer = Completer<List<OfflineRegion>>();
     _jManager.mergeOfflineRegions(
@@ -176,15 +178,15 @@ class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<OfflineRegion> downloadRegion({
+  Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
     required double minZoom,
     required double maxZoom,
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
-  }) async {
-    final completer = Completer<OfflineRegion>();
+  }) {
+    final stream = StreamController<DownloadProgress>();
     final jMapStyleUrl = mapStyleUrl.toJString();
     final jBounds = bounds.toLatLngBounds();
     final jDefinition = jni.OfflineTilePyramidRegionDefinition(
@@ -209,50 +211,63 @@ class OfflineManagerNative implements OfflineManager {
       jni.OfflineManager_CreateOfflineRegionCallback.implement(
         jni.$OfflineManager_CreateOfflineRegionCallback(
           onCreate: (jRegion) {
-            jRegion.setObserver(
-              jni.OfflineRegion_OfflineRegionObserver.implement(
-                jni.$OfflineRegion_OfflineRegionObserver(
-                  onStatusChanged: (status) {
-                    if (status.isComplete()) {
-                      jRegion
-                          .setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-                      // This can be called multiple times, check if already completed
-                      if (!completer.isCompleted) {
-                        completer.complete(jRegion.toOfflineRegion());
-                      }
-                      return;
-                    }
-
-                    final progress = (status.getRequiredResourceCount() > 0)
-                        ? status.getCompletedResourceCount() /
-                            status.getRequiredResourceCount()
-                        : 0;
-                    debugPrint('Progress: $progress');
-                  },
-                  onError: (error) {
-                    jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-                    completer.completeError(
-                      Exception(
-                        error.getMessage().toDartString(releaseOriginal: true),
+            final region = jRegion.toOfflineRegion();
+            final jObserver = jni.OfflineRegion_OfflineRegionObserver.implement(
+              jni.$OfflineRegion_OfflineRegionObserver(
+                onStatusChanged: (status) {
+                  // send update to stream
+                  if (!stream.isClosed) {
+                    stream.add(
+                      DownloadProgress(
+                        loadedBytes: status.getCompletedResourceSize(),
+                        loadedTiles: status.getCompletedResourceCount(),
+                        totalTiles: status.getRequiredResourceCount(),
+                        totalTilesEstimated:
+                        !status.isRequiredResourceCountPrecise(),
+                        region: region,
+                        downloadCompleted: status.isComplete(),
                       ),
                     );
-                  },
-                  mapboxTileCountLimitExceeded: (limit) {
+                  }
+
+                  // end download if status is complete
+                  if (status.isComplete()) {
                     jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-                    completer.completeError(
-                      Exception('Tile count limit exceeded: $limit'),
-                    );
-                  },
-                ),
+                    // This can be called multiple times, check if already completed
+                    if (!stream.isClosed) {
+                      stream.close();
+                    }
+                    return;
+                  }
+                },
+                onError: (error) {
+                  debugPrint('onError: $error');
+                  jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
+                  stream.addError(
+                    Exception(
+                      error.getMessage().toDartString(releaseOriginal: true),
+                    ),
+                  );
+                },
+                mapboxTileCountLimitExceeded: (limit) {
+                  debugPrint('mapboxTileCountLimitExceeded: $limit');
+                  jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
+                  stream.addError(
+                    Exception('Tile count limit exceeded: $limit'),
+                  );
+                },
               ),
             );
+            jRegion.setObserver(jObserver);
+            jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
+            debugPrint('download started');
           },
-          onError: (error) => completer.completeError(Exception(error)),
+          onError: (error) => stream.addError(Exception(error)),
         ),
       ),
     );
     jMapStyleUrl.release();
     jBounds.release();
-    return completer.future;
+    return stream.stream;
   }
 }

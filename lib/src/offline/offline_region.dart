@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Model class that represents a map region for offline usage.
@@ -49,8 +49,7 @@ class OfflineRegion {
       Object.hash(id, bounds, minZoom, maxZoom, pixelRatio, styleUrl);
 
   @override
-  String toString() {
-    return 'OfflineRegion(id: $id, bounds: $bounds, minZoom: $minZoom, '
-        'maxZoom: $maxZoom, pixelRatio: $pixelRatio, styleUrl: $styleUrl)';
-  }
+  String toString() => 'OfflineRegion(id: $id, bounds: $bounds, '
+      'minZoom: $minZoom, maxZoom: $maxZoom, pixelRatio: $pixelRatio, '
+      'styleUrl: $styleUrl)';
 }

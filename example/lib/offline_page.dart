@@ -14,6 +14,7 @@ class OfflinePage extends StatefulWidget {
 
 class _OfflinePageState extends State<OfflinePage> {
   final _futureOfflineManager = OfflineManager.createInstance();
+  String? _downloadProgress;
 
   @override
   Widget build(BuildContext context) {
@@ -28,93 +29,162 @@ class _OfflinePageState extends State<OfflinePage> {
                 ListTile(
                   title: const Text('mergeOfflineRegions'),
                   onTap: () async {
-                    final regions = await manager.mergeOfflineRegions(
-                      path: 'region.mbtiles',
-                    );
-                    _print(
-                      'offline regions merged:\n${regions.join('\n')}',
-                    );
+                    try {
+                      final regions = await manager.mergeOfflineRegions(
+                        path: 'region.mbtiles',
+                      );
+                      _print(
+                        'offline regions merged:\n${regions.join('\n')}',
+                      );
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('getOfflineRegion'),
                   onTap: () async {
-                    final region = await manager.getOfflineRegion(regionId: 1);
-                    _print('offline region: $region');
+                    try {
+                      final region =
+                          await manager.getOfflineRegion(regionId: 1);
+                      _print('offline region: $region');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('setOfflineTileCountLimit'),
                   onTap: () async {
-                    manager.setOfflineTileCountLimit(amount: 5000);
-                    _print('offline tile count limit set');
+                    try {
+                      manager.setOfflineTileCountLimit(amount: 5000);
+                      _print('offline tile count limit set');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('setMaximumAmbientCacheSize'),
                   onTap: () async {
-                    await manager.setMaximumAmbientCacheSize(bytes: 10000000);
-                    _print('maximum ambient cache size set');
+                    try {
+                      await manager.setMaximumAmbientCacheSize(bytes: 10000000);
+                      _print('maximum ambient cache size set');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('clearAmbientCache'),
                   onTap: () async {
-                    await manager.clearAmbientCache();
-                    _print('ambient cache cleared');
+                    try {
+                      await manager.clearAmbientCache();
+                      _print('ambient cache cleared');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('invalidateAmbientCache'),
                   onTap: () async {
-                    await manager.invalidateAmbientCache();
-                    _print('ambient cache invalidated');
+                    try {
+                      await manager.invalidateAmbientCache();
+                      _print('ambient cache invalidated');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('listOfflineRegions'),
                   onTap: () async {
-                    final regions = await manager.listOfflineRegions();
-                    _print('offline regions:\n${regions.join('\n')}');
+                    try {
+                      final regions = await manager.listOfflineRegions();
+                      _print('offline regions:\n${regions.join('\n')}');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('packDatabase'),
                   onTap: () async {
-                    await manager.packDatabase();
-                    _print('database optimized');
+                    try {
+                      await manager.packDatabase();
+                      _print('database optimized');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('resetDatabase'),
                   onTap: () async {
-                    await manager.resetDatabase();
-                    _print('database reset');
+                    try {
+                      await manager.resetDatabase();
+                      _print('database reset');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('runPackDatabaseAutomatically'),
                   onTap: () async {
-                    manager.runPackDatabaseAutomatically(enabled: true);
-                    _print('enable automatic database optimization');
+                    try {
+                      manager.runPackDatabaseAutomatically(enabled: true);
+                      _print('enable automatic database optimization');
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
                   },
                 ),
                 ListTile(
                   title: const Text('downloadRegion'),
+                  trailing: Text(_downloadProgress ?? ''),
                   onTap: () async {
-                    final region = await manager.downloadRegion(
+                    final stream = manager.downloadRegion(
                       minZoom: 0,
-                      maxZoom: 1,
+                      maxZoom: 3,
                       bounds: const LngLatBounds(
-                        longitudeWest: -1,
-                        longitudeEast: 1,
-                        latitudeSouth: -1,
-                        latitudeNorth: 1,
+                        longitudeWest: -180,
+                        longitudeEast: 180,
+                        latitudeSouth: -90,
+                        latitudeNorth: 90,
                       ),
                       mapStyleUrl: StyledMapPage.styleUrl,
                       pixelDensity: 1,
                     );
-                    _print('region downloaded: $region');
+                    try {
+                      await for (final update in stream) {
+                        if (update.downloadCompleted) {
+                          _print('region downloaded: ${update.region}');
+                          setState(() => _downloadProgress = null);
+                        } else {
+                          setState(() {
+                            _downloadProgress =
+                            '${update.loadedTiles}/${update.totalTiles} '
+                                '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
+                          });
+                        }
+                      }
+                    } catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                      setState(() => _downloadProgress = null);
+                    }
                   },
                 ),
               ],

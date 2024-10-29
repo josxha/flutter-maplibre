@@ -1,5 +1,6 @@
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/offline_manager.dart';
+import 'package:maplibre/src/offline/download_progress.dart';
 
 /// Use the offline manager to download map regions for offline usage.
 abstract interface class OfflineManager {
@@ -46,7 +47,7 @@ abstract interface class OfflineManager {
   void runPackDatabaseAutomatically({required bool enabled});
 
   /// Downloads a map region.
-  Future<OfflineRegion> downloadRegion({
+  Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
     required double minZoom,
