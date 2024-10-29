@@ -98,7 +98,7 @@ class _OfflinePageState extends State<OfflinePage> {
                             ),
                           ],
                         )
-                      : Text(_downloadProgressBregenz!),
+                      : Text(_downloadProgressWorld!),
                 ),
                 ListTile(
                   title: const Text('Download Bregenz'),
