@@ -23,10 +23,10 @@ class _OfflinePageState extends State<OfflinePage> {
     latitudeNorth: 90,
   );
   final _boundsBregenz = const LngLatBounds(
-    longitudeWest: 47.446159,
-    longitudeEast: 47.574776,
-    latitudeSouth: 9.589786,
-    latitudeNorth: 9.766498,
+    longitudeWest: 9.589786,
+    longitudeEast: 9.766498,
+    latitudeSouth: 47.446159,
+    latitudeNorth: 47.574776,
   );
 
   @override
@@ -90,6 +90,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                       bounds: _boundsWorld,
                                       zoom: 1,
                                       center: Position(0, 0),
+                                      maxZoom: 3,
                                     ),
                                   ),
                                 );
@@ -109,7 +110,7 @@ class _OfflinePageState extends State<OfflinePage> {
                             IconButton(
                               onPressed: () async {
                                 final stream = manager.downloadRegion(
-                                  minZoom: 0,
+                                  minZoom: 10,
                                   maxZoom: 14,
                                   bounds: _boundsBregenz,
                                   mapStyleUrl: StyledMapPage.styleUrl,
@@ -149,7 +150,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                     builder: (context) => _OfflineMapPage(
                                       title: 'Bregenz',
                                       bounds: _boundsBregenz,
-                                      zoom: 14,
+                                      zoom: 12,
                                       center: Position(9.717795, 47.504100),
                                     ),
                                   ),
@@ -318,12 +319,14 @@ class _OfflineMapPage extends StatelessWidget {
     required this.bounds,
     required this.center,
     required this.zoom,
+    this.maxZoom = 20,
   });
 
   final String title;
   final LngLatBounds bounds;
   final Position center;
   final double zoom;
+  final double maxZoom;
 
   @override
   Widget build(BuildContext context) {
@@ -335,7 +338,25 @@ class _OfflineMapPage extends StatelessWidget {
           maxBounds: bounds,
           initCenter: center,
           initZoom: zoom,
+          maxZoom: maxZoom,
         ),
+        layers: [
+          PolylineAnnotationLayer(
+            color: Colors.red,
+            width: 3,
+            polylines: [
+              LineString(
+                coordinates: [
+                  Position(bounds.longitudeWest, bounds.latitudeSouth),
+                  Position(bounds.longitudeWest, bounds.latitudeNorth),
+                  Position(bounds.longitudeEast, bounds.latitudeNorth),
+                  Position(bounds.longitudeEast, bounds.latitudeSouth),
+                  Position(bounds.longitudeWest, bounds.latitudeSouth),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
