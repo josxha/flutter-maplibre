@@ -17,6 +17,7 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -92,6 +93,12 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.control_camera,
                 location: UserInterfacePage.location,
               ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Offline',
+                  iconData: Icons.wifi_off,
+                  location: OfflinePage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
