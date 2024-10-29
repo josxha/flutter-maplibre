@@ -1,17 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/native/offline_manager.dart';
 import 'package:maplibre/src/offline/download_progress.dart';
+import 'package:maplibre/src/platform_interface.dart';
 
 /// Use the offline manager to download map regions for offline usage.
 abstract interface class OfflineManager {
   /// Create a new [OfflineManager].
   ///
   /// You'll have to call [dispose] to free resources once no longer needed.
-  static Future<OfflineManager> createInstance() async {
-    if (kIsWeb) throw Exception('The OfflineManager can not be used on web.');
-    return OfflineManagerNative.createInstance();
-  }
+  static Future<OfflineManager> createInstance() async =>
+      PlatformInterface.instance.createOfflineManager();
 
   /// Call to free resources when the [OfflineManager] is no longer needed.
   void dispose();
