@@ -33,6 +33,7 @@ classes:
   - 'com.github.josxha.maplibre.MapLibreRegistry'
   - 'java.net.URI'
   - 'java.net.URL'
+  - 'org.maplibre.android.MapLibre'
   - 'org.maplibre.android.attribution'
   - 'org.maplibre.android.camera'
   - 'org.maplibre.android.constants'

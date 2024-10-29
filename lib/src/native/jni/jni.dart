@@ -2,6 +2,7 @@ export 'android/graphics/_package.dart';
 export 'android/location/_package.dart';
 export 'com/github/josxha/maplibre/_package.dart';
 export 'java/net/_package.dart';
+export 'org/maplibre/android/_package.dart';
 export 'org/maplibre/android/attribution/_package.dart';
 export 'org/maplibre/android/camera/_package.dart';
 export 'org/maplibre/android/constants/_package.dart';
