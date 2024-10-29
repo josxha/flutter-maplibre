@@ -222,7 +222,7 @@ class OfflineManagerNative implements OfflineManager {
                         loadedTiles: status.getCompletedResourceCount(),
                         totalTiles: status.getRequiredResourceCount(),
                         totalTilesEstimated:
-                        !status.isRequiredResourceCountPrecise(),
+                            !status.isRequiredResourceCountPrecise(),
                         region: region,
                         downloadCompleted: status.isComplete(),
                       ),

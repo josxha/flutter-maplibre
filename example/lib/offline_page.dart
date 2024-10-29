@@ -104,7 +104,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   title: const Text('Download Bregenz'),
                   trailing: _downloadProgressBregenz == null
                       ? Row(
-                    mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               onPressed: () async {
