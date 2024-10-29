@@ -93,11 +93,12 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.control_camera,
                 location: UserInterfacePage.location,
               ),
-              ItemCard(
-                label: 'Offline',
-                iconData: Icons.wifi_off,
-                location: OfflinePage.location,
-              ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Offline',
+                  iconData: Icons.wifi_off,
+                  location: OfflinePage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
