@@ -14,7 +14,20 @@ class OfflinePage extends StatefulWidget {
 
 class _OfflinePageState extends State<OfflinePage> {
   final _futureOfflineManager = OfflineManager.createInstance();
-  String? _downloadProgress;
+  String? _downloadProgressWorld;
+  String? _downloadProgressBregenz;
+  final _boundsWorld = const LngLatBounds(
+    longitudeWest: -180,
+    longitudeEast: 180,
+    latitudeSouth: -90,
+    latitudeNorth: 90,
+  );
+  final _boundsBregenz = const LngLatBounds(
+    longitudeWest: 47.446159,
+    longitudeEast: 47.574776,
+    latitudeSouth: 9.589786,
+    latitudeNorth: 9.766498,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +40,129 @@ class _OfflinePageState extends State<OfflinePage> {
             return ListView(
               children: [
                 ListTile(
-                  title: const Text('mergeOfflineRegions'),
+                  title: const Text('Download World Overview'),
+                  trailing: _downloadProgressWorld == null
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              onPressed: () async {
+                                final stream = manager.downloadRegion(
+                                  minZoom: 0,
+                                  maxZoom: 14,
+                                  bounds: _boundsBregenz,
+                                  mapStyleUrl: StyledMapPage.styleUrl,
+                                  pixelDensity: 1,
+                                );
+                                try {
+                                  await for (final update in stream) {
+                                    if (update.downloadCompleted) {
+                                      _print(
+                                        'region downloaded: ${update.region}',
+                                      );
+                                      setState(() {
+                                        _downloadProgressWorld = null;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _downloadProgressWorld =
+                                            '${update.loadedTiles}/${update.totalTiles} '
+                                            '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
+                                      });
+                                    }
+                                  }
+                                } catch (error, stacktrace) {
+                                  _print(error.toString());
+                                  debugPrintStack(stackTrace: stacktrace);
+                                  setState(
+                                    () => _downloadProgressWorld = null,
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.download),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (context) => _OfflineMapPage(
+                                      title: 'World',
+                                      bounds: _boundsWorld,
+                                      zoom: 1,
+                                      center: Position(0, 0),
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.map),
+                            ),
+                          ],
+                        )
+                      : Text(_downloadProgressBregenz!),
+                ),
+                ListTile(
+                  title: const Text('Download Bregenz'),
+                  trailing: _downloadProgressBregenz == null
+                      ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              onPressed: () async {
+                                final stream = manager.downloadRegion(
+                                  minZoom: 0,
+                                  maxZoom: 14,
+                                  bounds: _boundsBregenz,
+                                  mapStyleUrl: StyledMapPage.styleUrl,
+                                  pixelDensity: 1,
+                                );
+                                try {
+                                  await for (final update in stream) {
+                                    if (update.downloadCompleted) {
+                                      _print(
+                                        'region downloaded: ${update.region}',
+                                      );
+                                      setState(() {
+                                        _downloadProgressBregenz = null;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _downloadProgressBregenz =
+                                            '${update.loadedTiles}/${update.totalTiles} '
+                                            '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
+                                      });
+                                    }
+                                  }
+                                } catch (error, stacktrace) {
+                                  _print(error.toString());
+                                  debugPrintStack(stackTrace: stacktrace);
+                                  setState(
+                                    () => _downloadProgressBregenz = null,
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.download),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (context) => _OfflineMapPage(
+                                      title: 'Bregenz',
+                                      bounds: _boundsBregenz,
+                                      zoom: 14,
+                                      center: Position(9.717795, 47.504100),
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.map),
+                            ),
+                          ],
+                        )
+                      : Text(_downloadProgressBregenz!),
+                ),
+                ListTile(
+                  title: const Text('Merge Offline Regions'),
                   onTap: () async {
                     try {
                       final regions = await manager.mergeOfflineRegions(
@@ -43,7 +178,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('getOfflineRegion'),
+                  title: const Text('Get Offline Region'),
                   onTap: () async {
                     try {
                       final region =
@@ -56,7 +191,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('setOfflineTileCountLimit'),
+                  title: const Text('Set Offline Tile Count Limit'),
                   onTap: () async {
                     try {
                       manager.setOfflineTileCountLimit(amount: 5000);
@@ -68,7 +203,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('setMaximumAmbientCacheSize'),
+                  title: const Text('Set Maximum Ambient Cache Size'),
                   onTap: () async {
                     try {
                       await manager.setMaximumAmbientCacheSize(bytes: 10000000);
@@ -80,7 +215,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('clearAmbientCache'),
+                  title: const Text('Clear Ambient Cache'),
                   onTap: () async {
                     try {
                       await manager.clearAmbientCache();
@@ -92,7 +227,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('invalidateAmbientCache'),
+                  title: const Text('Invalidate Ambient Cache'),
                   onTap: () async {
                     try {
                       await manager.invalidateAmbientCache();
@@ -104,7 +239,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('listOfflineRegions'),
+                  title: const Text('List Offline Regions'),
                   onTap: () async {
                     try {
                       final regions = await manager.listOfflineRegions();
@@ -116,7 +251,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('packDatabase'),
+                  title: const Text('Pack Database'),
                   onTap: () async {
                     try {
                       await manager.packDatabase();
@@ -128,7 +263,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('resetDatabase'),
+                  title: const Text('Reset Database'),
                   onTap: () async {
                     try {
                       await manager.resetDatabase();
@@ -140,7 +275,7 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('runPackDatabaseAutomatically'),
+                  title: const Text('Run Pack Database Automatically'),
                   onTap: () async {
                     try {
                       manager.runPackDatabaseAutomatically(enabled: true);
@@ -148,42 +283,6 @@ class _OfflinePageState extends State<OfflinePage> {
                     } catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
-                ),
-                ListTile(
-                  title: const Text('downloadRegion'),
-                  trailing: Text(_downloadProgress ?? ''),
-                  onTap: () async {
-                    final stream = manager.downloadRegion(
-                      minZoom: 0,
-                      maxZoom: 3,
-                      bounds: const LngLatBounds(
-                        longitudeWest: -180,
-                        longitudeEast: 180,
-                        latitudeSouth: -90,
-                        latitudeNorth: 90,
-                      ),
-                      mapStyleUrl: StyledMapPage.styleUrl,
-                      pixelDensity: 1,
-                    );
-                    try {
-                      await for (final update in stream) {
-                        if (update.downloadCompleted) {
-                          _print('region downloaded: ${update.region}');
-                          setState(() => _downloadProgress = null);
-                        } else {
-                          setState(() {
-                            _downloadProgress =
-                            '${update.loadedTiles}/${update.totalTiles} '
-                                '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
-                          });
-                        }
-                      }
-                    } catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                      setState(() => _downloadProgress = null);
                     }
                   },
                 ),
@@ -210,5 +309,34 @@ class _OfflinePageState extends State<OfflinePage> {
   void dispose() {
     _futureOfflineManager.then((manager) => manager.dispose());
     super.dispose();
+  }
+}
+
+class _OfflineMapPage extends StatelessWidget {
+  const _OfflineMapPage({
+    required this.title,
+    required this.bounds,
+    required this.center,
+    required this.zoom,
+  });
+
+  final String title;
+  final LngLatBounds bounds;
+  final Position center;
+  final double zoom;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Offline Map "$title"')),
+      body: MapLibreMap(
+        options: MapOptions(
+          initStyle: StyledMapPage.styleUrl,
+          maxBounds: bounds,
+          initCenter: center,
+          initZoom: zoom,
+        ),
+      ),
+    );
   }
 }

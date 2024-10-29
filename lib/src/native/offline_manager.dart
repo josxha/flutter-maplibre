@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/native/extensions.dart';
@@ -241,7 +240,6 @@ class OfflineManagerNative implements OfflineManager {
                   }
                 },
                 onError: (error) {
-                  debugPrint('onError: $error');
                   jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
                   stream.addError(
                     Exception(
@@ -250,7 +248,6 @@ class OfflineManagerNative implements OfflineManager {
                   );
                 },
                 mapboxTileCountLimitExceeded: (limit) {
-                  debugPrint('mapboxTileCountLimitExceeded: $limit');
                   jRegion.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
                   stream.addError(
                     Exception('Tile count limit exceeded: $limit'),
@@ -260,7 +257,6 @@ class OfflineManagerNative implements OfflineManager {
             );
             jRegion.setObserver(jObserver);
             jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
-            debugPrint('download started');
           },
           onError: (error) => stream.addError(Exception(error)),
         ),
