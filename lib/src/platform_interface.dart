@@ -21,4 +21,7 @@ abstract base class PlatformInterface {
 
   /// Return a platform specific [OfflineManager] object.
   Future<OfflineManager> createOfflineManager();
+
+  /// Return a platform specific [PermissionManager] object.
+  PermissionManager createPermissionManager();
 }

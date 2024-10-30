@@ -19,6 +19,7 @@ import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
+import 'package:maplibre_example/permissions_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
@@ -98,6 +99,12 @@ class MenuPage extends StatelessWidget {
                   label: 'Offline',
                   iconData: Icons.wifi_off,
                   location: OfflinePage.location,
+                ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Permissions',
+                  iconData: Icons.key,
+                  location: PermissionsPage.location,
                 ),
             ],
           ),

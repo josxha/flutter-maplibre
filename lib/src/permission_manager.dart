@@ -1,16 +1,21 @@
+import 'package:maplibre/src/platform_interface.dart';
+
 /// The Permission Manager provides functionality to check if location
 /// permissions are granted and can request permissions.
 abstract interface class PermissionManager {
+  factory PermissionManager() =>
+      PlatformInterface.instance.createPermissionManager();
+
   /// Returns true if access to background location is granted.
-  bool get isBackgroundLocationPermissionGranted;
+  bool get backgroundLocationPermissionGranted;
 
   /// Returns true if either access to coarse location or to fine location
   /// is granted.
-  bool get areLocationPermissionsGranted;
+  bool get locationPermissionsGranted;
 
   /// Check if the operating system requires to ask for location permissions
   /// at runtime.
-  bool get areRuntimePermissionsRequired;
+  bool get runtimePermissionsRequired;
 
   /// Request runtime location permissions.
   void requestLocationPermissions();

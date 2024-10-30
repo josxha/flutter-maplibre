@@ -47,15 +47,15 @@ class PermissionManagerNative implements PermissionManager {
       jni.MapLibreRegistry.INSTANCE.getActivityPluginBinding();
 
   @override
-  bool get areLocationPermissionsGranted =>
+  bool get locationPermissionsGranted =>
       jni.PermissionsManager.areLocationPermissionsGranted(_jContext);
 
   @override
-  bool get areRuntimePermissionsRequired =>
+  bool get runtimePermissionsRequired =>
       jni.PermissionsManager.areRuntimePermissionsRequired();
 
   @override
-  bool get isBackgroundLocationPermissionGranted =>
+  bool get backgroundLocationPermissionGranted =>
       jni.PermissionsManager.isBackgroundLocationPermissionGranted(_jContext);
 
   @override
