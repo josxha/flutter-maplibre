@@ -1,5 +1,6 @@
 package com.github.josxha.maplibre
 
+import PermissionManagerHostApi
 import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -7,14 +8,19 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
+import org.maplibre.android.location.permissions.PermissionsListener
+import org.maplibre.android.location.permissions.PermissionsManager
 
 /** MapLibrePlugin */
 class MapLibrePlugin :
     FlutterPlugin,
-    ActivityAware {
+    ActivityAware,
+    PluginRegistry.RequestPermissionsResultListener,
+    PermissionManagerHostApi {
     private var lifecycle: Lifecycle? = null
 
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
@@ -36,8 +42,8 @@ class MapLibrePlugin :
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        MapLibreRegistry.activityPluginBinding = binding
         MapLibreRegistry.activity = binding.activity
+        binding.addRequestPermissionsResultListener(this)
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
     }
 
@@ -54,6 +60,38 @@ class MapLibrePlugin :
 
     override fun onDetachedFromActivityForConfigChanges() {
         onDetachedFromActivity()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ): Boolean {
+        permissionsManager?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        return true
+    }
+
+    private var permissionsManager: PermissionsManager? = null
+
+    override fun requestLocationPermissions(
+        explanation: String,
+        callback: (Result<Boolean>) -> Unit,
+    ) {
+        permissionsManager =
+            PermissionsManager(
+                object : PermissionsListener {
+                    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
+                        println("onExplanationNeeded")
+                        callback(Result.failure(Exception("Explanation Required")))
+                    }
+
+                    override fun onPermissionResult(granted: Boolean) {
+                        println("onPermissionResult")
+                        callback(Result.success(granted))
+                    }
+                },
+            )
+        permissionsManager?.requestLocationPermissions(MapLibreRegistry.activity)
     }
 }
 

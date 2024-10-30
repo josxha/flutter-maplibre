@@ -10,6 +10,7 @@ if ($packages -match "pigeon") {
 
 # Run pigeon and format Dart files
 dart run pigeon --input pigeons/pigeon.dart
+dart run pigeon --input pigeons/permission_manager_pigeon.dart
 dart format .
 
 # Copy file from ios to macos directory

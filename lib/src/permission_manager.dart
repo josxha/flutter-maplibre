@@ -20,7 +20,7 @@ abstract interface class PermissionManager {
   bool get runtimePermissionsRequired;
 
   /// Request runtime location permissions.
-  void requestLocationPermissions();
+  Future<bool> requestLocationPermissions();
 
   /// Call this function when you don't need the [PermissionManager] any
   /// longer to free resources.
