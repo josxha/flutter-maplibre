@@ -30,11 +30,8 @@ class PermissionManagerNative implements PermissionManager {
         },
       ),
     );
-    _activityBinding.addRequestPermissionsResultListener(_listener);
-    /*binding.addRequestPermissionsResultListener { requestCode, permissions, grantResults ->
-    PermissionsManager().onRequestPermissionsResult(requestCode, permissions, grantResults)
-    true
-    }*/
+    print('_activityBinding null: ${_activityBinding.isNull}');
+    // _activityBinding.addRequestPermissionsResultListener(_listener);
   }
 
   late final jni.PermissionsManager _jManager;

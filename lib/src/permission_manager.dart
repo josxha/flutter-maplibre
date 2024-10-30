@@ -2,6 +2,8 @@ import 'package:maplibre/src/platform_interface.dart';
 
 /// The Permission Manager provides functionality to check if location
 /// permissions are granted and can request permissions.
+///
+/// The [PermissionManager] cannot be used on web.
 abstract interface class PermissionManager {
   factory PermissionManager() =>
       PlatformInterface.instance.createPermissionManager();

@@ -21,21 +21,34 @@ class _PermissionsPageState extends State<PermissionsPage> {
       body: ListView(
         children: [
           ListTile(
-            leading: const Text('runtimePermissionsRequired'),
-            trailing: Text('${_manager.runtimePermissionsRequired}'),
+            title: const Text('runtimePermissionsRequired'),
+            subtitle: const Text(
+              'Weather the OS requires to ask for permissions at runtime.',
+            ),
+            trailing: _manager.runtimePermissionsRequired.toIcon(),
           ),
           ListTile(
-            leading: const Text('locationPermissionsGranted'),
-            trailing: Text('${_manager.locationPermissionsGranted}'),
+            title: const Text('locationPermissionsGranted'),
+            subtitle: const Text(
+              'Weather location permissions are granted.',
+            ),
+            trailing: _manager.locationPermissionsGranted.toIcon(),
           ),
           ListTile(
-            leading: const Text('backgroundLocationPermissionGranted'),
-            trailing: Text('${_manager.backgroundLocationPermissionGranted}'),
+            title: const Text('backgroundLocationPermissionGranted'),
+            subtitle: const Text(
+              'Weather permission is granted to access location in '
+              'the background.',
+            ),
+            trailing: _manager.backgroundLocationPermissionGranted.toIcon(),
           ),
           ListTile(
             title: OutlinedButton(
-              child: const Text('more to come'),
-              onPressed: () {},
+              child: const Text('requestLocationPermissions'),
+              onPressed: () {
+                _manager.requestLocationPermissions();
+                setState(() {}); // refresh the screen
+              },
             ),
           ),
         ],
@@ -55,4 +68,11 @@ class _PermissionsPageState extends State<PermissionsPage> {
     _manager.dispose();
     super.dispose();
   }
+}
+
+extension BoolExt on bool {
+  Widget toIcon() => Icon(
+        this ? Icons.check_box : Icons.cancel,
+        color: this ? Colors.green : Colors.red,
+      );
 }
