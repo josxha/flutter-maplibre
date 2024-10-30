@@ -49,6 +49,9 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
+import '../../../../io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding.dart'
+    as activitypluginbinding_;
+
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart' as maplibremap_;
 
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
@@ -126,6 +129,58 @@ class MapLibreRegistry extends _$jni.JObject {
   ) {
     _addMap(reference.pointer, _id_addMap as _$jni.JMethodIDPtr, i,
             mapLibreMap.reference.pointer)
+        .check();
+  }
+
+  static final _id_getActivityPluginBinding = _class.instanceMethodId(
+    r'getActivityPluginBinding',
+    r'()Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding;',
+  );
+
+  static final _getActivityPluginBinding = _$jni.ProtectedJniExtensions.lookup<
+          _$jni.NativeFunction<
+              _$jni.JniResult Function(
+                _$jni.Pointer<_$jni.Void>,
+                _$jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          _$jni.JniResult Function(
+            _$jni.Pointer<_$jni.Void>,
+            _$jni.JMethodIDPtr,
+          )>();
+
+  /// from: `public final io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding getActivityPluginBinding()`
+  /// The returned object must be released after use, by calling the [release] method.
+  activitypluginbinding_.ActivityPluginBinding getActivityPluginBinding() {
+    return _getActivityPluginBinding(reference.pointer,
+            _id_getActivityPluginBinding as _$jni.JMethodIDPtr)
+        .object(const activitypluginbinding_.$ActivityPluginBinding$Type());
+  }
+
+  static final _id_setActivityPluginBinding = _class.instanceMethodId(
+    r'setActivityPluginBinding',
+    r'(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding;)V',
+  );
+
+  static final _setActivityPluginBinding = _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JThrowablePtr Function(
+                      _$jni.Pointer<_$jni.Void>,
+                      _$jni.JMethodIDPtr,
+                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
+  /// from: `public final void setActivityPluginBinding(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding activityPluginBinding)`
+  void setActivityPluginBinding(
+    activitypluginbinding_.ActivityPluginBinding activityPluginBinding,
+  ) {
+    _setActivityPluginBinding(
+            reference.pointer,
+            _id_setActivityPluginBinding as _$jni.JMethodIDPtr,
+            activityPluginBinding.reference.pointer)
         .check();
   }
 

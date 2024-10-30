@@ -36,6 +36,8 @@ class MapLibrePlugin :
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        MapLibreRegistry.activityPluginBinding = binding
+        MapLibreRegistry.activity = binding.activity
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
     }
 

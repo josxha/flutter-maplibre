@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.Keep
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import org.maplibre.android.maps.MapLibreMap
 
 @Keep
@@ -21,6 +22,9 @@ object MapLibreRegistry {
     ) {
         mapRegistry[viewId] = map
     }
+
+    // TODO: Storing the ActivityPluginBinding in a static field is a potential memory leak.
+    public var activityPluginBinding: ActivityPluginBinding? = null
 
     // TODO: Storing the Activity in a static field is a potential memory leak.
     public var activity: Activity? = null
