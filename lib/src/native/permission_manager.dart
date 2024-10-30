@@ -20,12 +20,17 @@ class PermissionManagerNative implements PermissionManager {
         ),
       ),
     );
-    _listener =
-        jni.PluginRegistry_RequestPermissionsResultListener.implement(
+    _listener = jni.PluginRegistry_RequestPermissionsResultListener.implement(
       jni.$PluginRegistry_RequestPermissionsResultListener(
         onRequestPermissionsResult: (requestCode, permissions, grantResults) {
-          print('onRequestPermissionsResult: $requestCode, $permissions, $grantResults');
-          _jManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+          print(
+            'onRequestPermissionsResult: $requestCode, $permissions, $grantResults',
+          );
+          _jManager.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults,
+          );
           return true;
         },
       ),

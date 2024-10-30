@@ -56,13 +56,6 @@ class _PermissionsPageState extends State<PermissionsPage> {
     );
   }
 
-  void _print(String message) {
-    debugPrint(message);
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
-  }
-
   @override
   void dispose() {
     _manager.dispose();
