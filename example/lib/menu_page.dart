@@ -39,7 +39,7 @@ class MenuPage extends StatelessWidget {
         slivers: [
           const SliverToBoxAdapter(child: SectionTitle('General')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -110,7 +110,7 @@ class MenuPage extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -142,7 +142,7 @@ class MenuPage extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SectionTitle('Layers')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -213,7 +213,7 @@ class ItemCard extends StatelessWidget {
         onTap: () => Navigator.of(context).pushNamed(location),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(iconData), Text(label)],
+          children: [Icon(iconData), Text(label, textAlign: TextAlign.center)],
         ),
       ),
     );
@@ -227,6 +227,8 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(label, style: const TextStyle(fontSize: 18)));
+    return ListTile(
+      title: Text(label, style: const TextStyle(fontSize: 18)),
+    );
   }
 }
