@@ -95,11 +95,6 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.control_camera,
                 location: UserInterfacePage.location,
               ),
-              ItemCard(
-                label: 'Widget Layer',
-                iconData: Icons.location_on,
-                location: WidgetLayerPage.location,
-              ),
               if (!kIsWeb)
                 ItemCard(
                   label: 'Offline',
@@ -123,6 +118,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Mixed Annotations',
                 iconData: Icons.control_point_duplicate_outlined,
                 location: AnnotationsMixedPage.location,
+              ),
+              ItemCard(
+                label: 'Widgets',
+                iconData: Icons.location_on,
+                location: WidgetLayerPage.location,
               ),
               ItemCard(
                 label: 'Circles',

@@ -48,6 +48,10 @@ class WidgetLayer extends StatelessWidget {
                 ),
               );
             }
+            if (snapshot.error case final Object error) {
+              debugPrint(error.toString());
+              debugPrintStack(stackTrace: snapshot.stackTrace);
+            }
             return const SizedBox.shrink();
           },
         );
