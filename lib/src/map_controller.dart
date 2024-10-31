@@ -19,10 +19,20 @@ abstract interface class MapController {
       (throw StateError('Unable to find an instance of MapController'));
 
   /// Convert a latitude/longitude coordinate to a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
   Future<Offset> toScreenLocation(Position lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
   Future<Position> toLngLat(Offset screenLocation);
+
+  /// Convert a latitude/longitude coordinate to a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats);
+
+  /// Get the latitude/longitude coordinate for a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
+  Future<List<Position>> toLngLats(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
   Future<void> moveCamera({
@@ -90,12 +100,14 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
+  // TODO: can be made sync when flutter raster and ui thread are merged
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
   /// Get a list of all attributions from the map style.
   Future<List<String>> getAttributions();
 
   /// The smallest bounding box that includes the visible region.
+  // TODO: can be made sync when flutter raster and ui thread are merged
   Future<LngLatBounds> getVisibleRegion();
 
   /// Add an image to the map.

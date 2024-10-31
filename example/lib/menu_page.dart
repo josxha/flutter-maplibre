@@ -25,6 +25,7 @@ import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
+import 'package:maplibre_example/widget_layer_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -117,6 +118,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Mixed Annotations',
                 iconData: Icons.control_point_duplicate_outlined,
                 location: AnnotationsMixedPage.location,
+              ),
+              ItemCard(
+                label: 'Widgets',
+                iconData: Icons.location_on,
+                location: WidgetLayerPage.location,
               ),
               ItemCard(
                 label: 'Circles',
