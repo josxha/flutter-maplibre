@@ -19,6 +19,7 @@ import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
+import 'package:maplibre_example/permissions_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
@@ -38,7 +39,7 @@ class MenuPage extends StatelessWidget {
         slivers: [
           const SliverToBoxAdapter(child: SectionTitle('General')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -99,11 +100,17 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.wifi_off,
                   location: OfflinePage.location,
                 ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Permissions',
+                  iconData: Icons.key,
+                  location: PermissionsPage.location,
+                ),
             ],
           ),
           const SliverToBoxAdapter(child: SectionTitle('Annotations')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -135,7 +142,7 @@ class MenuPage extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SectionTitle('Layers')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -206,7 +213,7 @@ class ItemCard extends StatelessWidget {
         onTap: () => Navigator.of(context).pushNamed(location),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(iconData), Text(label)],
+          children: [Icon(iconData), Text(label, textAlign: TextAlign.center)],
         ),
       ),
     );
@@ -220,6 +227,8 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(label, style: const TextStyle(fontSize: 18)));
+    return ListTile(
+      title: Text(label, style: const TextStyle(fontSize: 18)),
+    );
   }
 }

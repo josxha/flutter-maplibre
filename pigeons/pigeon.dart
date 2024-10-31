@@ -159,6 +159,16 @@ abstract interface class MapLibreFlutterApi {
   void onStartMoveCamera(CameraChangeReason reason);
 }
 
+@HostApi()
+// ignore: one_member_abstracts
+abstract interface class PermissionManagerHostApi {
+  /// Request location permissions.
+  @async
+  bool requestLocationPermissions({
+    required String explanation,
+  });
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   const MapOptions({
