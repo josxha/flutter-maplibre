@@ -12,6 +12,7 @@ export 'src/map_gestures.dart';
 export 'src/map_options.dart';
 export 'src/offline/offline_manager.dart';
 export 'src/offline/offline_region.dart';
+export 'src/permission_manager.dart';
 export 'src/queried_layer.dart';
 export 'src/style/style.dart';
 export 'src/ui/map_compass.dart';
