@@ -215,24 +215,3 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web
-
-  build-web-wasm:
-    name: "Build Web WASM"
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: example
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.24.3', '' ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build web
-        run: flutter build web --wasm
