@@ -33,8 +33,8 @@ class _UserLocationPageState extends State<UserLocationPage> {
                   onPressed: () async {
                     final granted =
                         await _permissionManager.requestLocationPermissions(
-                          explanation: 'Show the user location on the map.',
-                        );
+                      explanation: 'Show the user location on the map.',
+                    );
                     debugPrint(granted.toString());
                   },
                   child: const Text(
