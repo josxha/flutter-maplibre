@@ -18,7 +18,9 @@ import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/menu_page.dart';
+import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
+import 'package:maplibre_example/permissions_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
@@ -53,6 +55,8 @@ class MyApp extends StatelessWidget {
         UserLocationPage.location: (context) => const UserLocationPage(),
         UserInterfacePage.location: (context) => const UserInterfacePage(),
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
+        OfflinePage.location: (context) => const OfflinePage(),
+        PermissionsPage.location: (context) => const PermissionsPage(),
         LayersSymbolPage.location: (context) => const LayersSymbolPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersHeatmapPage.location: (context) => const LayersHeatmapPage(),

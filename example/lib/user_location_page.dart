@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/styled_map_page.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 @immutable
 class UserLocationPage extends StatefulWidget {
@@ -14,6 +13,7 @@ class UserLocationPage extends StatefulWidget {
 }
 
 class _UserLocationPageState extends State<UserLocationPage> {
+  final _permissionManager = PermissionManager();
   late final MapController _controller;
 
   @override
@@ -31,8 +31,11 @@ class _UserLocationPageState extends State<UserLocationPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    final status = await Permission.locationWhenInUse.request();
-                    debugPrint(status.toString());
+                    final granted =
+                        await _permissionManager.requestLocationPermissions(
+                      explanation: 'Show the user location on the map.',
+                    );
+                    debugPrint(granted.toString());
                   },
                   child: const Text(
                     'Get permission',

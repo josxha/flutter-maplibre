@@ -1,3 +1,4 @@
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/platform_impl.dart'
     if (dart.library.html) 'package:maplibre/src/web/platform_impl.dart';
@@ -17,4 +18,10 @@ abstract base class PlatformInterface {
 
   /// Return a platform specific [State<MapLibreMap>] object.
   MapLibreMapState createWidgetState();
+
+  /// Return a platform specific [OfflineManager] object.
+  Future<OfflineManager> createOfflineManager();
+
+  /// Return a platform specific [PermissionManager] object.
+  PermissionManager createPermissionManager();
 }

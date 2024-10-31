@@ -374,7 +374,6 @@ class MapLibreMapController(
             val bytes = URL(url).openConnection().getInputStream().readBytes()
             callback(Result.success(bytes))
         } catch (e: IOException) {
-            println(e)
             callback(Result.failure(e))
         }
     }

@@ -94,3 +94,22 @@ extension EdgeInsetsExt on EdgeInsets {
         right: right.toInt(),
       );
 }
+
+/// Extension methods for the [EdgeInsets] class. Not exported publicly.
+extension OfflineRegionExt on jni.OfflineRegion {
+  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
+  OfflineRegion toOfflineRegion() {
+    final jDefinition = getDefinition();
+    // TODO add getMetadata();
+    final region = OfflineRegion(
+      id: getId(),
+      bounds: jDefinition.getBounds().toLngLatBounds(releaseOriginal: true),
+      minZoom: jDefinition.getMinZoom(),
+      maxZoom: jDefinition.getMaxZoom(),
+      pixelRatio: jDefinition.getPixelRatio(),
+      styleUrl: jDefinition.getStyleURL().toDartString(releaseOriginal: true),
+    );
+    jDefinition.release();
+    return region;
+  }
+}
