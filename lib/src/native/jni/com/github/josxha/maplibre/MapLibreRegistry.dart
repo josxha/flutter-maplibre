@@ -49,9 +49,6 @@ import 'dart:core' as _$core;
 import 'package:jni/_internal.dart' as _$jni;
 import 'package:jni/jni.dart' as _$jni;
 
-import '../../../../io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding.dart'
-    as activitypluginbinding_;
-
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart' as maplibremap_;
 
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
@@ -151,10 +148,10 @@ class MapLibreRegistry extends _$jni.JObject {
 
   /// from: `public final io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding getActivityPluginBinding()`
   /// The returned object must be released after use, by calling the [release] method.
-  activitypluginbinding_.ActivityPluginBinding getActivityPluginBinding() {
+  _$jni.JObject getActivityPluginBinding() {
     return _getActivityPluginBinding(reference.pointer,
             _id_getActivityPluginBinding as _$jni.JMethodIDPtr)
-        .object(const activitypluginbinding_.$ActivityPluginBinding$Type());
+        .object(const _$jni.JObjectType());
   }
 
   static final _id_setActivityPluginBinding = _class.instanceMethodId(
@@ -175,7 +172,7 @@ class MapLibreRegistry extends _$jni.JObject {
 
   /// from: `public final void setActivityPluginBinding(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding activityPluginBinding)`
   void setActivityPluginBinding(
-    activitypluginbinding_.ActivityPluginBinding activityPluginBinding,
+    _$jni.JObject activityPluginBinding,
   ) {
     _setActivityPluginBinding(
             reference.pointer,
