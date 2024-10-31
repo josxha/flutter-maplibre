@@ -1,11 +1,23 @@
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapController] can be used to control, update and manipulate a
 /// rendered [MapLibreMap].
 abstract interface class MapController {
+  /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
+  /// Returns null if called outside of the [MapLibreMap.children].
+  static MapController? maybeOf(BuildContext context) =>
+      MapLibreInheritedModel.maybeMapControllerOf(context);
+
+  /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
+  /// Returns null if called outside of the [MapLibreMap.children].
+  static MapController of(BuildContext context) =>
+      maybeOf(context) ??
+      (throw StateError('Unable to find an instance of MapController'));
+
   /// Convert a latitude/longitude coordinate to a screen location.
   Future<Offset> toScreenLocation(Position lngLat);
 
@@ -13,21 +25,19 @@ abstract interface class MapController {
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Instantly move the map camera to a new location.
-  Future<void> jumpTo({
+  Future<void> moveCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
   });
 
   /// Animate the map camera to a new location.
-  Future<void> flyTo({
+  Future<void> animateCamera({
     Position? center,
     double? zoom,
     double? bearing,
     double? pitch,
-    @Deprecated('Renamed to pitch') double? tilt,
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
@@ -46,11 +56,6 @@ abstract interface class MapController {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   });
-
-  /// Add a [Marker] to the map.
-  ///
-  /// Only supported on web.
-  Future<Marker> addMarker(Marker marker);
 
   /// Add a new source to the map.
   Future<void> addSource(Source source);
@@ -74,7 +79,10 @@ abstract interface class MapController {
   Future<void> removeSource(String id);
 
   /// Get the current camera position on the map.
-  Future<MapCamera> getCamera();
+  MapCamera getCamera();
+
+  /// Get the current camera position on the map.
+  MapCamera? get camera;
 
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
@@ -84,6 +92,9 @@ abstract interface class MapController {
   /// coordinates at different latitudes.
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
+  /// Get a list of all attributions from the map style.
+  Future<List<String>> getAttributions();
+
   /// The smallest bounding box that includes the visible region.
   Future<LngLatBounds> getVisibleRegion();
 
@@ -92,4 +103,55 @@ abstract interface class MapController {
 
   /// Removes an image from the map
   Future<void> removeImage(String id);
+
+  /// Queries the map for rendered features.
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+
+  /// Show the user location on the map
+  Future<void> enableLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(seconds: 1),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+  });
+
+  /// Track the user location on the map
+  ///
+  /// Set [trackLocation] to false if only the bearing should get tracked
+  /// (defaults to true).
+  ///
+  /// Use [trackBearing] to set if the bearing should get tracked according to
+  /// the GPS location, compass direction or ignored.
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  });
+}
+
+/// The mode how the bearing should get tracked on the map.
+/// Used in [MapController.trackLocation].
+enum BearingTrackMode {
+  /// No bearing tracking.
+  none,
+
+  /// Use the bearing provided by the compass sensor.
+  compass,
+
+  /// Use the bearing provided by the GPS location (normalized).
+  gps;
+}
+
+/// The mode how render the location on the map.
+/// Used in [MapController.enableLocation].
+enum BearingRenderMode {
+  /// Do not display the current bearing.
+  none,
+
+  /// Use the device compass to render the bearing.
+  compass,
+
+  /// Use the GPS location data to render the bearing.
+  gps;
 }

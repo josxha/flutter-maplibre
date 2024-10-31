@@ -16,3 +16,21 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+ktlint {
+    version = "0.43.2"
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter("plain")
+        reporter("checkstyle")
+    }
+    dependencies {
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.17")
+    }
+    filter {
+        exclude("**/*.g.kt")
+    }
+}

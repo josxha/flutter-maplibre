@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
     title: 'MapLibre Flutter',
-    tagline: 'Unofficial MapLibre bindings for Flutter',
+    tagline: 'Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs.',
     favicon: 'img/favicon-32x32.png',
 
     // Set the production url of your site here
@@ -64,14 +64,14 @@ const config: Config = {
                     label: 'Getting Started',
                 },
                 {
-                    href: '/docs/',
+                    href: '/docs/index/',
                     sidebarId: 'docsSidebar',
                     position: 'left',
                     label: 'Docs',
                 },
                 {
                     type: 'docsVersionDropdown',
-                    position: 'right',
+                    position: 'left',
                 },
                 {
                     href: "https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html",
@@ -107,7 +107,7 @@ const config: Config = {
                         },
                         {
                             label: 'Docs',
-                            to: '/docs/',
+                            to: '/docs/index/',
                         },
                         {
                             label: 'API Reference',

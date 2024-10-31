@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_page.dart';
+import 'package:maplibre_example/annotations_circle_page.dart';
+import 'package:maplibre_example/annotations_marker_page.dart';
+import 'package:maplibre_example/annotations_mixed_page.dart';
+import 'package:maplibre_example/annotations_polygon_page.dart';
+import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
@@ -13,9 +17,13 @@ import 'package:maplibre_example/layers_hillshade_page.dart';
 import 'package:maplibre_example/layers_line_page.dart';
 import 'package:maplibre_example/layers_raster_page.dart';
 import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
+import 'package:maplibre_example/permissions_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
+import 'package:maplibre_example/user_interface_page.dart';
+import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -31,18 +39,13 @@ class MenuPage extends StatelessWidget {
         slivers: [
           const SliverToBoxAdapter(child: SectionTitle('General')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
                 label: 'Styled Map',
                 iconData: Icons.map,
                 location: StyledMapPage.location,
-              ),
-              ItemCard(
-                label: 'Annotations',
-                iconData: Icons.location_on,
-                location: AnnotationsPage.location,
               ),
               ItemCard(
                 label: 'Parameters',
@@ -80,11 +83,66 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.animation,
                 location: AnimationPage.location,
               ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'User Location',
+                  iconData: Icons.gps_fixed,
+                  location: UserLocationPage.location,
+                ),
+              ItemCard(
+                label: 'User interface',
+                iconData: Icons.control_camera,
+                location: UserInterfacePage.location,
+              ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Offline',
+                  iconData: Icons.wifi_off,
+                  location: OfflinePage.location,
+                ),
+              if (!kIsWeb)
+                ItemCard(
+                  label: 'Permissions',
+                  iconData: Icons.key,
+                  location: PermissionsPage.location,
+                ),
             ],
           ),
-          const SliverToBoxAdapter(child: SectionTitle('Map Layers')),
+          const SliverToBoxAdapter(child: SectionTitle('Annotations')),
           SliverGrid.extent(
-            maxCrossAxisExtent: 200,
+            maxCrossAxisExtent: 150,
+            childAspectRatio: 1.5,
+            children: const [
+              ItemCard(
+                label: 'Mixed Annotations',
+                iconData: Icons.control_point_duplicate_outlined,
+                location: AnnotationsMixedPage.location,
+              ),
+              ItemCard(
+                label: 'Circles',
+                iconData: Icons.circle,
+                location: AnnotationsCirclePage.location,
+              ),
+              ItemCard(
+                label: 'Markers',
+                iconData: Icons.location_on,
+                location: AnnotationsMarkerPage.location,
+              ),
+              ItemCard(
+                label: 'Polygons',
+                iconData: Icons.format_shapes,
+                location: AnnotationsPolygonPage.location,
+              ),
+              ItemCard(
+                label: 'Polylines',
+                iconData: Icons.polyline,
+                location: AnnotationsPolylinePage.location,
+              ),
+            ],
+          ),
+          const SliverToBoxAdapter(child: SectionTitle('Layers')),
+          SliverGrid.extent(
+            maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
@@ -155,7 +213,7 @@ class ItemCard extends StatelessWidget {
         onTap: () => Navigator.of(context).pushNamed(location),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(iconData), Text(label)],
+          children: [Icon(iconData), Text(label, textAlign: TextAlign.center)],
         ),
       ),
     );
@@ -169,6 +227,8 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(label, style: const TextStyle(fontSize: 18)));
+    return ListTile(
+      title: Text(label, style: const TextStyle(fontSize: 18)),
+    );
   }
 }

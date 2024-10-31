@@ -25,12 +25,13 @@ class _ControllerPageState extends State<ControllerPage> {
             padding: const EdgeInsets.all(8),
             child: Wrap(
               spacing: 8,
+              runSpacing: 2,
               alignment: WrapAlignment.center,
               children: [
                 OutlinedButton(
                   onPressed: () async {
                     debugPrint('moveCamera start');
-                    await _controller.jumpTo(
+                    await _controller.moveCamera(
                       center: Position(172.4714, -42.4862),
                       zoom: 4,
                       pitch: 0,
@@ -47,18 +48,17 @@ class _ControllerPageState extends State<ControllerPage> {
                   onPressed: () async {
                     debugPrint('animateTo start');
                     try {
-                      await _controller.flyTo(
+                      await _controller.animateCamera(
                         center: Position(-18.6874, 64.9445),
                         zoom: 5,
                         bearing: -50,
                         pitch: 60,
                       );
-                      debugPrint('animateTo end');
-                    } catch (error) {
-                      final e = error as PlatformException;
+                      debugPrint('flyTo end');
+                    } on PlatformException catch (error) {
                       debugPrint(
-                        'animateTo cancelled: code: '
-                        '"${e.code}", message: "${e.message}"',
+                        'flyTo cancelled: code: '
+                        '"${error.code}", message: "${error.message}"',
                       );
                     }
                   },
@@ -94,7 +94,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     debugPrint(camera.toString());
                     if (context.mounted) {
                       await showDialog<void>(
@@ -124,7 +124,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final camera = await _controller.getCamera();
+                    final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
                     final meters =
                         await _controller.getMetersPerPixelAtLatitude(lat);
@@ -149,7 +149,6 @@ pitch: ${camera.pitch}'''),
                 OutlinedButton(
                   onPressed: () async {
                     final region = await _controller.getVisibleRegion();
-                    debugPrint(region.toString());
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -163,12 +162,54 @@ pitch: ${camera.pitch}'''),
                     textAlign: TextAlign.center,
                   ),
                 ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final lngLat = await _controller.toLngLat(Offset.zero);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Position(${lngLat.lng}, ${lngLat.lat})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toLngLat 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () async {
+                    final offset =
+                        await _controller.toScreenLocation(Position(0, 0));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Offset(${offset.dx}, ${offset.dy})',
+                            ),
+                          ),
+                        );
+                    }
+                  },
+                  child: const Text(
+                    'toScreenLocation 0,0',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68), zoom: 3),
+              options:
+                  MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

@@ -20,9 +20,31 @@ class _LayersFillPageState extends State<LayersFillPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Fill Layer')),
       body: MapLibreMap(
-        options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
+        onEvent: (event) async {
+          if (event case MapEventClick()) {
+            final screenPoint = await _controller.toScreenLocation(event.point);
+            final features = await _controller.queryLayers(screenPoint);
+            debugPrint(
+              '${features.length} layers clicked\n'
+              '${features.join('\n')}',
+            );
+            if (context.mounted) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${features.length} layers clicked: '
+                      '${features.map((e) => e.layerId).join(', ')}',
+                    ),
+                  ),
+                );
+            }
+          }
+        },
       ),
     );
   }
@@ -31,12 +53,12 @@ class _LayersFillPageState extends State<LayersFillPage> {
     final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
     await _controller.addSource(
-      GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
+      GeoJsonSource(id: 'LakeConstance-Source', data: geojsonPolygon),
     );
     await _controller.addLayer(
       const FillLayer(
-        id: 'geojson-fill',
-        sourceId: 'LakeConstance',
+        id: 'LakeConstance-Layer',
+        sourceId: 'LakeConstance-Source',
         paint: {'fill-color': '#429ef5'},
       ),
     );

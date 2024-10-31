@@ -24,7 +24,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller1),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68)),
+              options: MapOptions(initCenter: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller1 = controller);
@@ -35,7 +35,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller2),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(center: Position(9.17, 47.68)),
+              options: MapOptions(initCenter: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller2 = controller);
@@ -60,19 +60,22 @@ class _ButtonsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Wrap(
         spacing: 8,
+        runSpacing: 2,
         children: [
           OutlinedButton(
             onPressed: () {
-              controller?.jumpTo(
+              controller?.moveCamera(
                 center: Position(172.4714, -42.4862),
                 zoom: 4,
+                bearing: 0,
+                pitch: 0,
               );
             },
             child: const Text('Move to New Zealand'),
           ),
           OutlinedButton(
             onPressed: () {
-              controller?.flyTo(
+              controller?.animateCamera(
                 center: Position(-18.6874, 64.9445),
                 zoom: 5,
                 bearing: -50,

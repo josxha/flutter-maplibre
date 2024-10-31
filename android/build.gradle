@@ -2,15 +2,19 @@ group = "com.github.josxha.maplibre"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.0.20"
+    ext.kotlin_version = "2.0.21"
     repositories {
         google()
         mavenCentral()
+        maven { // repository used only for ktlint
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:12.1.1")
     }
 }
 
@@ -23,8 +27,19 @@ allprojects {
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 android {
+    // Keeping the classes from being removed by proguard.
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
     if (project.android.hasProperty("namespace")) {
         namespace = "com.github.josxha.maplibre"
     }
@@ -50,12 +65,18 @@ android {
     }
 
     dependencies {
-        implementation 'org.maplibre.gl:android-sdk:11.5.0'
-//        implementation 'org.maplibre.gl:android-plugin-annotation-v9:3.0.0'
-//        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.0'
-//        implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+// JNIGEN       implementation project(":MapLibreAndroid")
+// JNIGEN        implementation 'com.google.code.gson:gson:2.11.0'
+        implementation 'org.maplibre.gl:android-sdk:11.5.2' // JNIGEN
+// JNIGEN        implementation 'org.maplibre.gl:maplibre-android-gestures:0.0.3'
+// JNIGEN        implementation 'org.maplibre.gl:android-sdk-geojson:6.0.1'
+// JNIGEN        implementation 'org.maplibre.gl:android-sdk-turf:6.0.1'
+// JNIGEN        implementation 'com.jakewharton.timber:timber:5.0.1'
+// JNIGEN        implementation 'androidx.annotation:annotation:1.9.0'
+//        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
+// JNIGEN        implementation 'com.squareup.okhttp3:okhttp:4.12.0'
         testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.14.1")
+        testImplementation("org.mockito:mockito-core:5.14.2")
     }
 
     testOptions {
@@ -63,10 +84,26 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
             }
         }
+    }
+}
+
+ktlint {
+    version = "0.43.2"
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter("plain")
+        reporter("checkstyle")
+    }
+    dependencies {
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.17")
+    }
+    filter {
+        exclude("**/*.g.kt")
     }
 }
