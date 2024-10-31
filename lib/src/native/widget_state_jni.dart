@@ -179,19 +179,45 @@ final class MapLibreMapStateJni extends MapLibreMapState
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final jniProjection = _jniProjection;
-    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
-      return jniProjection.fromScreenLocation(screenLocation.toPointF());
+    return runOnPlatformThread<Position>(() {
+      return jniProjection
+          .fromScreenLocation(screenLocation.toPointF())
+          .toPosition(releaseOriginal: true);
     });
-    return jniLatLng.toPosition(releaseOriginal: true);
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
     final jniProjection = _jniProjection;
-    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
-      return jniProjection.toScreenLocation(lngLat.toLatLng());
+    return runOnPlatformThread<Offset>(() {
+      return jniProjection
+          .toScreenLocation(lngLat.toLatLng())
+          .toOffset(releaseOriginal: true);
     });
-    return jniPoint.toOffset(releaseOriginal: true);
+  }
+
+  @override
+  Future<List<Position>> toLngLats(List<Offset> screenLocations) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread<List<Position>>(() {
+      return screenLocations.map((screenLocation) {
+        return jniProjection
+            .fromScreenLocation(screenLocation.toPointF())
+            .toPosition(releaseOriginal: true);
+      }).toList(growable: false);
+    });
+  }
+
+  @override
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread<List<Offset>>(() {
+      return lngLats.map((lngLat) {
+        return jniProjection
+            .toScreenLocation(lngLat.toLatLng())
+            .toOffset(releaseOriginal: true);
+      }).toList(growable: false);
+    });
   }
 
   @override

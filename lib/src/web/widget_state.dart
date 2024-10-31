@@ -247,6 +247,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
+  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
+      screenLocations
+          .map((offset) => _map.unproject(offset.toJsPoint()).toPosition())
+          .toList(growable: false);
+
+  @override
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
+      lngLats
+          .map((lngLat) => _map.project(lngLat.toLngLat()).toOffset())
+          .toList(growable: false);
+
+  @override
   Future<void> moveCamera({
     Position? center,
     double? zoom,

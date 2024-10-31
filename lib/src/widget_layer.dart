@@ -25,15 +25,18 @@ class WidgetLayer extends StatelessWidget {
         ? MediaQuery.devicePixelRatioOf(context)
         : 1.0;
 
-    final child = Stack(
-      children: markers.map((m) {
-        final matrix = Matrix4.identity();
-        if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
-        if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
-        return FutureBuilder<Offset>(
-          future: controller.toScreenLocation(m.point),
-          builder: (context, snapshot) {
-            if (snapshot.data case final Offset offset) {
+    final points = markers.map((m) => m.point).toList(growable: false);
+    final child = FutureBuilder<List<Offset>>(
+      future: controller.toScreenLocations(points),
+      builder: (context, snapshot) {
+        if (snapshot.data case final List<Offset> offsets) {
+          return Stack(
+            children: markers.indexed.map((e) {
+              final offset = offsets[e.$1];
+              final m = e.$2;
+              final matrix = Matrix4.identity();
+              if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
+              if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
               return Positioned(
                 left: offset.dx / pixelRatio -
                     m.size.width / 2 * (m.alignment.x + 1),
@@ -47,15 +50,15 @@ class WidgetLayer extends StatelessWidget {
                   child: m.child,
                 ),
               );
-            }
-            if (snapshot.error case final Object error) {
-              debugPrint(error.toString());
-              debugPrintStack(stackTrace: snapshot.stackTrace);
-            }
-            return const SizedBox.shrink();
-          },
-        );
-      }).toList(growable: false),
+            }).toList(growable: false),
+          );
+        }
+        if (snapshot.error case final Object error) {
+          debugPrint(error.toString());
+          debugPrintStack(stackTrace: snapshot.stackTrace);
+        }
+        return const SizedBox.shrink();
+      },
     );
     if (kIsWeb) return child;
     // Android needs a TranslucentPointer

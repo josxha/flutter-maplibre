@@ -26,6 +26,14 @@ abstract interface class MapController {
   // TODO: can be made sync when flutter raster and ui thread are merged
   Future<Position> toLngLat(Offset screenLocation);
 
+  /// Convert a latitude/longitude coordinate to a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats);
+
+  /// Get the latitude/longitude coordinate for a screen location.
+  // TODO: can be made sync when flutter raster and ui thread are merged
+  Future<List<Position>> toLngLats(List<Offset> screenLocations);
+
   /// Instantly move the map camera to a new location.
   Future<void> moveCamera({
     Position? center,
