@@ -47,7 +47,9 @@ class _PermissionsPageState extends State<PermissionsPage> {
               child: const Text('requestLocationPermissions'),
               onPressed: () async {
                 try {
-                  final granted = await _manager.requestLocationPermissions();
+                  final granted = await _manager.requestLocationPermissions(
+                    explanation: 'Show the user location on the map.',
+                  );
                   debugPrint('requestLocationPermissions granted: $granted');
                   setState(() {}); // refresh the screen
                 } catch (error, stacktrace) {
@@ -60,12 +62,6 @@ class _PermissionsPageState extends State<PermissionsPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _manager.dispose();
-    super.dispose();
   }
 }
 

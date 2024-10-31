@@ -27,10 +27,7 @@ class PermissionManagerNative implements PermissionManager {
       jni.PermissionsManager.isBackgroundLocationPermissionGranted(_jContext);
 
   @override
-  Future<bool> requestLocationPermissions() async {
-    return _api.requestLocationPermissions(explanation: 'Test explanation');
+  Future<bool> requestLocationPermissions({required String explanation}) async {
+    return _api.requestLocationPermissions(explanation: explanation);
   }
-
-  @override
-  void dispose() {}
 }

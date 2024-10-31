@@ -16,7 +16,6 @@ dependencies:
   http: ^1.2.2
   maplibre:
     path: ../
-  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:
