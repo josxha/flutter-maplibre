@@ -50,6 +50,7 @@ template<class T> class ErrorOr {
  private:
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   ErrorOr() = default;
   T TakeValue() && { return std::get<T>(std::move(v_)); }
 
@@ -199,6 +200,7 @@ class MapOptions {
   flutter::EncodableList ToEncodableList() const;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   std::string style_;
   double zoom_;
@@ -254,6 +256,7 @@ class MapGestures {
   friend class MapOptions;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   bool rotate_;
   bool pan_;
@@ -289,6 +292,7 @@ class LngLat {
   friend class MapCamera;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double lng_;
   double lat_;
@@ -320,6 +324,7 @@ class Offset {
   flutter::EncodableList ToEncodableList() const;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double x_;
   double y_;
@@ -357,6 +362,7 @@ class Padding {
   flutter::EncodableList ToEncodableList() const;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   int64_t top_;
   int64_t bottom_;
@@ -401,6 +407,7 @@ class MapCamera {
   flutter::EncodableList ToEncodableList() const;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   std::unique_ptr<LngLat> center_;
   double zoom_;
@@ -441,6 +448,7 @@ class LngLatBounds {
   friend class MapOptions;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double longitude_west_;
   double longitude_east_;
@@ -639,5 +647,33 @@ class MapLibreFlutterApi {
   std::string message_channel_suffix_;
 };
 
+// Generated interface from Pigeon that represents a handler of messages from Flutter.
+class PermissionManagerHostApi {
+ public:
+  PermissionManagerHostApi(const PermissionManagerHostApi&) = delete;
+  PermissionManagerHostApi& operator=(const PermissionManagerHostApi&) = delete;
+  virtual ~PermissionManagerHostApi() {}
+  // Request location permissions.
+  virtual void RequestLocationPermissions(
+    const std::string& explanation,
+    std::function<void(ErrorOr<bool> reply)> result) = 0;
+
+  // The codec used by PermissionManagerHostApi.
+  static const flutter::StandardMessageCodec& GetCodec();
+  // Sets up an instance of `PermissionManagerHostApi` to handle messages through the `binary_messenger`.
+  static void SetUp(
+    flutter::BinaryMessenger* binary_messenger,
+    PermissionManagerHostApi* api);
+  static void SetUp(
+    flutter::BinaryMessenger* binary_messenger,
+    PermissionManagerHostApi* api,
+    const std::string& message_channel_suffix);
+  static flutter::EncodableValue WrapError(std::string_view error_message);
+  static flutter::EncodableValue WrapError(const FlutterError& error);
+
+ protected:
+  PermissionManagerHostApi() = default;
+
+};
 }  // namespace pigeon_maplibre
 #endif  // PIGEON_PIGEON_G_H_

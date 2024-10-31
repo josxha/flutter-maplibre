@@ -8,6 +8,5 @@ else
 fi
 
 dart run pigeon --input pigeons/pigeon.dart
-dart run pigeon --input pigeons/permission_manager_pigeon.dart
 dart format .
 cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift

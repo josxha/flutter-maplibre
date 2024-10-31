@@ -1566,6 +1566,60 @@ void maplibre_map_libre_flutter_api_on_start_move_camera(MaplibreMapLibreFlutter
  */
 MaplibreMapLibreFlutterApiOnStartMoveCameraResponse* maplibre_map_libre_flutter_api_on_start_move_camera_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
+G_DECLARE_FINAL_TYPE(MaplibrePermissionManagerHostApiResponseHandle, maplibre_permission_manager_host_api_response_handle, MAPLIBRE, PERMISSION_MANAGER_HOST_API_RESPONSE_HANDLE, GObject)
+
+/**
+ * MaplibrePermissionManagerHostApiVTable:
+ *
+ * Table of functions exposed by PermissionManagerHostApi to be implemented by the API provider.
+ */
+typedef struct {
+  void (*request_location_permissions)(const gchar* explanation, MaplibrePermissionManagerHostApiResponseHandle* response_handle, gpointer user_data);
+} MaplibrePermissionManagerHostApiVTable;
+
+/**
+ * maplibre_permission_manager_host_api_set_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ * @vtable: implementations of the methods in this API.
+ * @user_data: (closure): user data to pass to the functions in @vtable.
+ * @user_data_free_func: (allow-none): a function which gets called to free @user_data, or %NULL.
+ *
+ * Connects the method handlers in the PermissionManagerHostApi API.
+ */
+void maplibre_permission_manager_host_api_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibrePermissionManagerHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func);
+
+/**
+ * maplibre_permission_manager_host_api_clear_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ *
+ * Clears the method handlers in the PermissionManagerHostApi API.
+ */
+void maplibre_permission_manager_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_permission_manager_host_api_respond_request_location_permissions:
+ * @response_handle: a #MaplibrePermissionManagerHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to PermissionManagerHostApi.requestLocationPermissions. 
+ */
+void maplibre_permission_manager_host_api_respond_request_location_permissions(MaplibrePermissionManagerHostApiResponseHandle* response_handle, gboolean return_value);
+
+/**
+ * maplibre_permission_manager_host_api_respond_error_request_location_permissions:
+ * @response_handle: a #MaplibrePermissionManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to PermissionManagerHostApi.requestLocationPermissions. 
+ */
+void maplibre_permission_manager_host_api_respond_error_request_location_permissions(MaplibrePermissionManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
 G_END_DECLS
 
 #endif  // PIGEON_PIGEON_G_H_

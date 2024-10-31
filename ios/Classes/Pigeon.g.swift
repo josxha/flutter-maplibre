@@ -1007,3 +1007,35 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
 }
+/// Generated protocol from Pigeon that represents a handler of messages from Flutter.
+protocol PermissionManagerHostApi {
+  /// Request location permissions.
+  func requestLocationPermissions(explanation: String, completion: @escaping (Result<Bool, Error>) -> Void)
+}
+
+/// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
+class PermissionManagerHostApiSetup {
+  static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
+  /// Sets up an instance of `PermissionManagerHostApi` to handle messages through the `binaryMessenger`.
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: PermissionManagerHostApi?, messageChannelSuffix: String = "") {
+    let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
+    /// Request location permissions.
+    let requestLocationPermissionsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.PermissionManagerHostApi.requestLocationPermissions\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      requestLocationPermissionsChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let explanationArg = args[0] as! String
+        api.requestLocationPermissions(explanation: explanationArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      requestLocationPermissionsChannel.setMessageHandler(nil)
+    }
+  }
+}
