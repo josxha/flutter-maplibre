@@ -25,7 +25,7 @@ import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/web_controls_page.dart';
-import 'package:maplibre_example/widget_layer.dart';
+import 'package:maplibre_example/widget_layer_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
