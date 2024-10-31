@@ -1,7 +1,7 @@
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/map_state.dart';
-import 'package:maplibre/src/native/platform_impl.dart'
-    if (dart.library.html) 'package:maplibre/src/web/platform_impl.dart';
+import 'package:maplibre/src/web/platform_impl.dart'
+    if (dart.library.io) 'package:maplibre/src/native/platform_impl.dart';
 
 /// https://pub.dev/packages/plugin_platform_interface#a-note-about-base
 abstract base class PlatformInterface {
