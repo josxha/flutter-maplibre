@@ -177,14 +177,22 @@ final class MapLibreMapStateJni extends MapLibreMapState
       );
 
   @override
-  Position toLngLat(Offset screenLocation) => _jniProjection
-      .fromScreenLocation(screenLocation.toPointF())
-      .toPosition(releaseOriginal: true);
+  Future<Position> toLngLat(Offset screenLocation) async {
+    final jniProjection = _jniProjection;
+    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
+      return jniProjection.fromScreenLocation(screenLocation.toPointF());
+    });
+    return jniLatLng.toPosition(releaseOriginal: true);
+  }
 
   @override
-  Offset toScreenLocation(Position lngLat) => _jniProjection
-      .toScreenLocation(lngLat.toLatLng())
-      .toOffset(releaseOriginal: true);
+  Future<Offset> toScreenLocation(Position lngLat) async {
+    final jniProjection = _jniProjection;
+    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
+      return jniProjection.toScreenLocation(lngLat.toLatLng());
+    });
+    return jniPoint.toOffset(releaseOriginal: true);
+  }
 
   @override
   Future<void> moveCamera({
@@ -533,15 +541,24 @@ final class MapLibreMapStateJni extends MapLibreMapState
   }
 
   @override
-  double getMetersPerPixelAtLatitude(double latitude) =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread(() {
+      return jniProjection.getMetersPerPixelAtLatitude(latitude);
+    });
+  }
 
   @override
-  LngLatBounds getVisibleRegion() {
-    final region = _jniProjection.getVisibleRegion();
-    final jniBounds = region.latLngBounds;
-    region.release();
-    return jniBounds.toLngLatBounds(releaseOriginal: true);
+  Future<LngLatBounds> getVisibleRegion() async {
+    final projection = _jniProjection; // necessary to use it in platform thread
+    final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
+      final region = projection.getVisibleRegion();
+      final bounds = region.latLngBounds;
+      region.release();
+      return bounds;
+    });
+    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
+    return bounds;
   }
 
   @override

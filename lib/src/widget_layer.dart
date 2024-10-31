@@ -27,23 +27,29 @@ class WidgetLayer extends StatelessWidget {
 
     final child = Stack(
       children: markers.map((m) {
-        final screenLocation = controller.toScreenLocation(m.point);
-
         final matrix = Matrix4.identity();
         if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
         if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
-        return Positioned(
-          left: screenLocation.dx / pixelRatio -
-              m.size.width / 2 * (m.alignment.x + 1),
-          top: screenLocation.dy / pixelRatio -
-              m.size.height / 2 * (m.alignment.y + 1),
-          height: m.size.height,
-          width: m.size.width,
-          child: Transform(
-            transform: matrix,
-            alignment: m.alignment,
-            child: m.child,
-          ),
+        return FutureBuilder<Offset>(
+          future: controller.toScreenLocation(m.point),
+          builder: (context, snapshot) {
+            if (snapshot.data case final Offset offset) {
+              return Positioned(
+                left: offset.dx / pixelRatio -
+                    m.size.width / 2 * (m.alignment.x + 1),
+                top: offset.dy / pixelRatio -
+                    m.size.height / 2 * (m.alignment.y + 1),
+                height: m.size.height,
+                width: m.size.width,
+                child: Transform(
+                  transform: matrix,
+                  alignment: m.alignment,
+                  child: m.child,
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         );
       }).toList(growable: false),
     );

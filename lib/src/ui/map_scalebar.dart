@@ -17,14 +17,22 @@ class MapScalebar extends StatelessWidget {
     final controller = MapController.maybeOf(context);
     final camera = MapCamera.maybeOf(context);
     if (controller == null || camera == null) return const SizedBox.shrink();
-    final metersPerPixel = controller.getMetersPerPixelAtLatitude(
+    final futureMetersPerPixel = controller.getMetersPerPixelAtLatitude(
       camera.center.lat.toDouble(),
     );
     final theme = Theme.of(context);
     return Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(12),
-      child: CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme)),
+      child: FutureBuilder<double>(
+        future: futureMetersPerPixel,
+        builder: (context, snapshot) {
+          if (snapshot.data case final double data) {
+            return CustomPaint(painter: _ScaleBarPainter(data, theme));
+          }
+          return const SizedBox.shrink();
+        },
+      ),
     );
   }
 }

@@ -164,7 +164,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final lngLat = _controller.toLngLat(Offset.zero);
+                    final lngLat = await _controller.toLngLat(Offset.zero);
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -184,7 +184,8 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final offset = _controller.toScreenLocation(Position(0, 0));
+                    final offset =
+                        await _controller.toScreenLocation(Position(0, 0));
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()

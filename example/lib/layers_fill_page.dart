@@ -25,7 +25,7 @@ class _LayersFillPageState extends State<LayersFillPage> {
         onStyleLoaded: _onStyleLoaded,
         onEvent: (event) async {
           if (event case MapEventClick()) {
-            final screenPoint = _controller.toScreenLocation(event.point);
+            final screenPoint = await _controller.toScreenLocation(event.point);
             final features = await _controller.queryLayers(screenPoint);
             debugPrint(
               '${features.length} layers clicked\n'
