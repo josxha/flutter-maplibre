@@ -96,6 +96,9 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
+  /// Get the loaded style.
+  external StyleSpecification? getStyle();
+
   external DoubleClickZoomHandler doubleClickZoom;
   external DragPanHandler dragPan;
   external DragRotateHandler dragRotate;
@@ -109,6 +112,13 @@ extension type JsMap._(Camera _) implements Camera {
   external bool pitchWithRotate;
   external TwoFingersTouchPitchHandler touchPitch;
   external TwoFingersTouchZoomRotateHandler touchZoomRotate;
+
+  /// Returns an array of MapGeoJSONFeature objects representing visible
+  /// features that satisfy the query parameters.
+  external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
+    Point jsPoint,
+    JSAny? options,
+  );
 }
 
 /// Projection options
@@ -127,10 +137,11 @@ extension type MapOptions._(JSObject _) implements JSObject {
   external factory MapOptions({
     required String style,
     required JSObject container,
-    double zoom = 0,
-    LngLat? center,
-    double bearing = 0,
-    double pitch = 0,
+    required double zoom,
+    required LngLat? center,
+    required double bearing,
+    required double pitch,
+    required bool attributionControl,
   });
 }
 
@@ -219,6 +230,9 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required JSAny layout,
     required JSAny paint,
   });
+
+  /// Get the layer id.
+  external String id;
 }
 
 /// Image data used by [JsMap.addImage].

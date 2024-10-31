@@ -159,6 +159,16 @@ abstract interface class MapLibreFlutterApi {
   void onStartMoveCamera(CameraChangeReason reason);
 }
 
+@HostApi()
+// ignore: one_member_abstracts
+abstract interface class PermissionManagerHostApi {
+  /// Request location permissions.
+  @async
+  bool requestLocationPermissions({
+    required String explanation,
+  });
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   const MapOptions({
@@ -173,6 +183,10 @@ class MapOptions {
     required this.minPitch,
     required this.maxPitch,
     required this.gestures,
+    required this.compass,
+    required this.logo,
+    required this.attribution,
+    required this.androidTextureMode,
   });
 
   /// The URL of the used map style.
@@ -207,6 +221,18 @@ class MapOptions {
 
   /// The map gestures.
   final MapGestures gestures;
+
+  /// Toggle the MapLibre Native compass.
+  final bool compass;
+
+  /// Toggle the MapLibre Native logo.
+  final bool logo;
+
+  /// Toggle the MapLibre Native attribution.
+  final bool attribution;
+
+  /// Toggle the texture mode on android.
+  final bool androidTextureMode;
 }
 
 /// Map gestures

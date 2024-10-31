@@ -10,8 +10,8 @@ class MapOptions {
     this.initStyle = 'https://demotiles.maplibre.org/style.json',
     this.initZoom = 0,
     this.initCenter,
-    @Deprecated('Renamed to pitch') double? tilt,
-    double pitch = 0,
+    @Deprecated('Renamed to initPitch') double? pitch,
+    double initPitch = 0,
     this.initBearing = 0,
     this.webControls = const [],
     this.minZoom = 0,
@@ -20,7 +20,11 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-  }) : initPitch = tilt ?? pitch;
+    this.nativeCompass = true,
+    this.nativeLogo = true,
+    this.attribution = true,
+    this.androidTextureMode = true,
+  }) : initPitch = pitch ?? initPitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
@@ -67,4 +71,19 @@ class MapOptions {
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
+
+  /// Toggle the MapLibre Native compass.
+  final bool nativeCompass;
+
+  /// Toggle the MapLibre Native logo.
+  final bool nativeLogo;
+
+  /// Toggle the MapLibre Native logo.
+  final bool attribution;
+
+  /// Toggle the texture mode on Android.
+  ///
+  /// textureMode comes at a significant performance penalty.
+  /// https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
+  final bool androidTextureMode;
 }

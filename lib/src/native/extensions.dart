@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/jni/jni.dart' as jni;
+import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// Extension methods for the [Position] class. Not exported publicly.
@@ -24,13 +24,21 @@ extension LngLatExt on pigeon.LngLat {
 /// Extension methods for the [jni.LatLng] class. Not exported publicly.
 extension JniLatLngExt on jni.LatLng {
   /// Convert an internal [jni.LatLng] to a [Position].
-  Position toPosition() => Position(getLongitude(), getLatitude());
+  Position toPosition({bool releaseOriginal = false}) {
+    final position = Position(getLongitude(), getLatitude());
+    if (releaseOriginal) release();
+    return position;
+  }
 }
 
 /// Extension methods for the [jni.PointF] class. Not exported publicly.
 extension PointExt on jni.PointF {
   /// Convert an [jni.PointF] to a [Offset].
-  Offset toOffset() => Offset(x, y);
+  Offset toOffset({bool releaseOriginal = false}) {
+    final offset = Offset(x, y);
+    if (releaseOriginal) release();
+    return offset;
+  }
 }
 
 /// Extension methods for the [Offset] class. Not exported publicly.
@@ -61,6 +69,21 @@ extension LngLatBoundsExt on LngLatBounds {
       );
 }
 
+/// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
+extension LatLngBounds on jni.LatLngBounds {
+  /// Convert an internal [jni.LatLngBounds] to an [LngLatBounds].
+  LngLatBounds toLngLatBounds({bool releaseOriginal = false}) {
+    final bounds = LngLatBounds(
+      longitudeWest: longitudeWest,
+      longitudeEast: longitudeEast,
+      latitudeSouth: latitudeSouth,
+      latitudeNorth: latitudeNorth,
+    );
+    release();
+    return bounds;
+  }
+}
+
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
@@ -70,4 +93,23 @@ extension EdgeInsetsExt on EdgeInsets {
         left: left.toInt(),
         right: right.toInt(),
       );
+}
+
+/// Extension methods for the [EdgeInsets] class. Not exported publicly.
+extension OfflineRegionExt on jni.OfflineRegion {
+  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
+  OfflineRegion toOfflineRegion() {
+    final jDefinition = getDefinition();
+    // TODO add getMetadata();
+    final region = OfflineRegion(
+      id: getId(),
+      bounds: jDefinition.getBounds().toLngLatBounds(releaseOriginal: true),
+      minZoom: jDefinition.getMinZoom(),
+      maxZoom: jDefinition.getMaxZoom(),
+      pixelRatio: jDefinition.getPixelRatio(),
+      styleUrl: jDefinition.getStyleURL().toDartString(releaseOriginal: true),
+    );
+    jDefinition.release();
+    return region;
+  }
 }

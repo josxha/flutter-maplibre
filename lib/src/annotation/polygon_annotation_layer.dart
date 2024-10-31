@@ -50,6 +50,6 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   late final int? _cachedHashCode;
 
   @override
-  int get hashCode => _cachedHashCode ??=
-      super.hashCode ^ color.hashCode ^ outlineColor.hashCode;
+  int get hashCode =>
+      _cachedHashCode ??= Object.hash(super.hashCode, color, outlineColor);
 }

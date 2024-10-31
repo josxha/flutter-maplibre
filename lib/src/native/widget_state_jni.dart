@@ -6,14 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
-import 'package:maplibre/src/jni/jni.dart' as jni;
+import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/native/extensions.dart';
+import 'package:maplibre/src/native/jni/jni.dart' as jni;
 import 'package:maplibre/src/native/pigeon.g.dart' as pigeon;
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateJni extends State<MapLibreMap>
-    implements MapController, pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateJni extends MapLibreMapState
+    implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
@@ -30,13 +31,18 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
-  jni.Style get _jniStyle => _cachedJniStyle ??= _jniMapLibreMap.getStyle$1();
+  jni.Style? get _jniStyle {
+    if (_cachedJniStyle != null) return _cachedJniStyle;
+    final style = _jniMapLibreMap.getStyle$1();
+    if (style.isNull) return null;
+    return _cachedJniStyle ??= style;
+  }
 
   jni.LocationComponent get _locationComponent =>
       _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPlatformWidget(BuildContext context) {
     // Texture Layer (or Texture Layer Hybrid Composition)
     // Platform Views are rendered into a texture. Flutter draws the
     // platform views (via the texture). Flutter content is rendered
@@ -72,6 +78,10 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
   }
 
   @override
@@ -92,6 +102,9 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final jniMap = _jniMapLibreMap;
+    // jniMap can be null if the widget rebuilds while the map hasn't been initialized.
+    if (jniMap.isNull) return;
+
     final oldOptions = oldWidget.options;
     final options = _options;
     await runOnPlatformThread(() {
@@ -157,28 +170,54 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
           zoom: _options.gestures.zoom,
           tilt: _options.gestures.pitch,
         ),
+        compass: _options.nativeCompass,
+        logo: _options.nativeLogo,
+        attribution: _options.attribution,
+        androidTextureMode: _options.androidTextureMode,
       );
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
     final jniProjection = _jniProjection;
-    final jniLatLng = await runOnPlatformThread<jni.LatLng>(() {
-      return jniProjection.fromScreenLocation(screenLocation.toPointF());
+    return runOnPlatformThread<Position>(() {
+      return jniProjection
+          .fromScreenLocation(screenLocation.toPointF())
+          .toPosition(releaseOriginal: true);
     });
-    final position = jniLatLng.toPosition();
-    jniLatLng.release();
-    return position;
   }
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async {
     final jniProjection = _jniProjection;
-    final jniPoint = await runOnPlatformThread<jni.PointF>(() {
-      return jniProjection.toScreenLocation(lngLat.toLatLng());
+    return runOnPlatformThread<Offset>(() {
+      return jniProjection
+          .toScreenLocation(lngLat.toLatLng())
+          .toOffset(releaseOriginal: true);
     });
-    final position = jniPoint.toOffset();
-    jniPoint.release();
-    return position;
+  }
+
+  @override
+  Future<List<Position>> toLngLats(List<Offset> screenLocations) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread<List<Position>>(() {
+      return screenLocations.map((screenLocation) {
+        return jniProjection
+            .fromScreenLocation(screenLocation.toPointF())
+            .toPosition(releaseOriginal: true);
+      }).toList(growable: false);
+    });
+  }
+
+  @override
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async {
+    final jniProjection = _jniProjection;
+    return runOnPlatformThread<List<Offset>>(() {
+      return lngLats.map((lngLat) {
+        return jniProjection
+            .toScreenLocation(lngLat.toLatLng())
+            .toOffset(releaseOriginal: true);
+      }).toList(growable: false);
+    });
   }
 
   @override
@@ -440,16 +479,22 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
         case VideoSource():
           throw UnimplementedError('Video source is only supported on web.');
       }
-      jniStyle.addSource(jniSource);
+      jniStyle?.addSource(jniSource);
       jniSource.release();
     });
   }
 
   @override
   void onStyleLoaded() {
+    // We need to refresh the cached style for when the style reloads.
+    if (_cachedJniStyle?.isNull ?? false) _cachedJniStyle?.release();
+    _cachedJniStyle = _jniMapLibreMap.getStyle$1();
+
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
     _annotationManager = AnnotationManager(this, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 
   @override
@@ -460,6 +505,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       pitch: camera.pitch,
       bearing: camera.bearing,
     );
+    setState(() => this.camera = mapCamera);
     widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
   }
 
@@ -508,15 +554,16 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   MapCamera getCamera() {
     final jniCamera = _jniMapLibreMap.getCameraPosition();
     final jniTarget = jniCamera.target;
-    final camera = MapCamera(
+    final mapCamera = MapCamera(
       center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
     );
+    // camera = mapCamera;
     jniTarget.release();
     jniCamera.release();
-    return camera;
+    return mapCamera;
   }
 
   @override
@@ -536,14 +583,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
       region.release();
       return bounds;
     });
-    final bounds = LngLatBounds(
-      longitudeWest: jniBounds.longitudeWest,
-      longitudeEast: jniBounds.longitudeEast,
-      latitudeSouth: jniBounds.latitudeSouth,
-      latitudeNorth: jniBounds.latitudeNorth,
-    );
-    jniBounds.release();
-    jniBounds.release();
+    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
     return bounds;
   }
 
@@ -551,7 +591,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   Future<void> removeLayer(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeLayer(id.toJString());
+      jniStyle?.removeLayer(id.toJString());
     });
   }
 
@@ -559,7 +599,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   Future<void> removeSource(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeSource(id.toJString());
+      jniStyle?.removeSource(id.toJString());
     });
   }
 
@@ -572,8 +612,67 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
   Future<void> removeImage(String id) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      jniStyle.removeImage(id.toJString());
+      jniStyle?.removeImage(id.toJString());
     });
+  }
+
+  @override
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+    // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
+    final jniMapLibreMap = _jniMapLibreMap;
+    final jniStyle = _jniStyle;
+    if (jniStyle == null) return [];
+
+    final result = await runOnPlatformThread<List<QueriedLayer>>(() {
+      final jniLayers = jniStyle.getLayers();
+      final queriedLayers = <QueriedLayer>[];
+      for (var i = jniLayers.length - 1; i >= 0; i--) {
+        final jniLayer = jniLayers[i];
+        JString? jLayerId;
+        late final JString jSourceId;
+        late final JString jSourceLayer;
+        switch (jniLayer.jClass.toString()) {
+          case 'class org.maplibre.android.style.layers.LineLayer':
+            final layer = jniLayer.as(jni.LineLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.FillLayer':
+            final layer = jniLayer.as(jni.FillLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+          case 'class org.maplibre.android.style.layers.SymbolLayer':
+            final layer = jniLayer.as(jni.SymbolLayer.type);
+            jLayerId = layer.getId();
+            jSourceId = layer.getSourceId();
+            jSourceLayer = layer.getSourceLayer();
+            layer.release();
+        }
+        jniLayer.release();
+        if (jLayerId == null) continue; // ignore all other layers
+
+        final queryLayerIds = JArray(JString.type, 1)..[0] = jLayerId;
+        final jniFeatures = jniMapLibreMap.queryRenderedFeatures(
+          jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+          queryLayerIds, // query one layer at a time
+        );
+        queryLayerIds.release();
+        if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
+        jniFeatures.release();
+        final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+        final queriedLayer = QueriedLayer(
+          layerId: jLayerId.toDartString(releaseOriginal: true),
+          sourceId: jSourceId.toDartString(releaseOriginal: true),
+          sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
+        );
+        queriedLayers.add(queriedLayer);
+      }
+      return queriedLayers;
+    });
+    return result;
   }
 
   @override
@@ -582,6 +681,7 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     required String data,
   }) async {
     final jniStyle = _jniStyle;
+    if (jniStyle == null) return;
     await runOnPlatformThread(() {
       final source =
           jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
@@ -602,6 +702,8 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final locationComponent = _locationComponent;
     final jniStyle = _jniStyle;
+    if (jniStyle == null) return;
+
     final bearing = switch (bearingRenderMode) {
       BearingRenderMode.none => jni.RenderMode.NORMAL,
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
@@ -661,6 +763,27 @@ final class MapLibreMapStateJni extends State<MapLibreMap>
     };
     await runOnPlatformThread(() {
       locationComponent.setCameraMode(mode);
+    });
+  }
+
+  @override
+  Future<List<String>> getAttributions() async {
+    // style can be null when the map hasn't finished initializing.
+    final style = _jniStyle;
+    if (style == null) return const [];
+
+    return runOnPlatformThread<List<String>>(() {
+      final jSources = style.getSources();
+      final attributions = <String>[];
+      for (final jSource in jSources) {
+        final jniAttribution = jSource.getAttribution();
+        if (jniAttribution.isNull) continue;
+        final attribution = jniAttribution.toDartString(releaseOriginal: true);
+        if (attribution.trim().isEmpty) continue;
+        attributions.add(attribution);
+      }
+      jSources.release();
+      return attributions;
     });
   }
 }

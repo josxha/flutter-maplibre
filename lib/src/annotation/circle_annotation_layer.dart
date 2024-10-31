@@ -73,10 +73,12 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   late final int? _cachedHashCode;
 
   @override
-  int get hashCode => _cachedHashCode ??= super.hashCode ^
-      radius.hashCode ^
-      color.hashCode ^
-      blur.hashCode ^
-      strokeWidth.hashCode ^
-      strokeColor.hashCode;
+  int get hashCode => _cachedHashCode ??= Object.hash(
+        super.hashCode,
+        radius,
+        color,
+        blur,
+        strokeWidth,
+        strokeColor,
+      );
 }

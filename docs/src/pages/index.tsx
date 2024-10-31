@@ -22,11 +22,6 @@ function HomepageHeader() {
             to="/docs/getting-started/add-dependency">
             Getting Started
           </Link>
-          <Link
-            className="button button--secondary button--lg"
-            to="/demo">
-            Example App
-          </Link>
         </div>
       </div>
     </header>

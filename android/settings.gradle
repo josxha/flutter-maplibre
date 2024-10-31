@@ -1,4 +1,4 @@
 rootProject.name = 'maplibre'
 
-include ':MapLibreAndroid'
-project(':MapLibreAndroid').projectDir = new File('../example/android/MapLibreAndroid')
+// JNIGEN include ':MapLibreAndroid'
+// JNIGEN project(':MapLibreAndroid').projectDir = new File('../example/android/MapLibreAndroid')

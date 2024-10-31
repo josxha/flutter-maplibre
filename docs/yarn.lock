@@ -2405,6 +2405,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/react@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@mdx-js/react@npm:3.1.0"
+  dependencies:
+    "@types/mdx": "npm:^2.0.0"
+  peerDependencies:
+    "@types/react": ">=16"
+    react: ">=16"
+  checksum: 10c0/381ed1211ba2b8491bf0ad9ef0d8d1badcdd114e1931d55d44019d4b827cc2752586708f9c7d2f9c3244150ed81f1f671a6ca95fae0edd5797fb47a22e06ceca
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -4893,7 +4905,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:^3.5.2"
     "@docusaurus/tsconfig": "npm:^3.5.2"
     "@docusaurus/types": "npm:^3.5.2"
-    "@mdx-js/react": "npm:^3.0.0"
+    "@mdx-js/react": "npm:^3.1.0"
     clsx: "npm:^2.0.0"
     prism-react-renderer: "npm:^2.3.0"
     react: "npm:^18.0.0"
@@ -6388,8 +6400,8 @@ __metadata:
   linkType: hard
 
 "http-proxy-middleware@npm:^2.0.3":
-  version: 2.0.6
-  resolution: "http-proxy-middleware@npm:2.0.6"
+  version: 2.0.7
+  resolution: "http-proxy-middleware@npm:2.0.7"
   dependencies:
     "@types/http-proxy": "npm:^1.17.8"
     http-proxy: "npm:^1.18.1"
@@ -6401,7 +6413,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/express":
       optional: true
-  checksum: 10c0/25a0e550dd1900ee5048a692e0e9b2b6339d06d487a705d90c47e359e9c6561d648cd7862d001d090e651c9efffa1b6e5160fcf1f299b5fa4935f76e9754eb11
+  checksum: 10c0/8d00a61eb215b83826460b07489d8bb095368ec16e02a9d63e228dcf7524e7c20d61561e5476de1391aecd4ec32ea093279cdc972115b311f8e0a95a24c9e47e
   languageName: node
   linkType: hard
 
