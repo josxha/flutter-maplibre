@@ -22,11 +22,13 @@ class MapLibrePlugin :
     PluginRegistry.RequestPermissionsResultListener,
     PermissionManagerHostApi {
     private var lifecycle: Lifecycle? = null
+    private lateinit var permissionManagerApi: PermissionManagerHostApi
 
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         MapLibreRegistry.context = binding.applicationContext
+        PermissionManagerHostApi.setUp(binding.binaryMessenger, this)
         flutterAssets = binding.flutterAssets
         binding
             .platformViewRegistry
@@ -81,12 +83,10 @@ class MapLibrePlugin :
             PermissionsManager(
                 object : PermissionsListener {
                     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-                        println("onExplanationNeeded")
                         callback(Result.failure(Exception("Explanation Required")))
                     }
 
                     override fun onPermissionResult(granted: Boolean) {
-                        println("onPermissionResult")
                         callback(Result.success(granted))
                     }
                 },

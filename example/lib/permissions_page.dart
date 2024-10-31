@@ -45,9 +45,15 @@ class _PermissionsPageState extends State<PermissionsPage> {
           ListTile(
             title: OutlinedButton(
               child: const Text('requestLocationPermissions'),
-              onPressed: () {
-                _manager.requestLocationPermissions();
-                setState(() {}); // refresh the screen
+              onPressed: () async {
+                try {
+                  final granted = await _manager.requestLocationPermissions();
+                  debugPrint('requestLocationPermissions granted: $granted');
+                  setState(() {}); // refresh the screen
+                } catch (error, stacktrace) {
+                  debugPrint(error.toString());
+                  debugPrintStack(stackTrace: stacktrace);
+                }
               },
             ),
           ),
