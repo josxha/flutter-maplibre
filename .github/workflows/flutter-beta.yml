@@ -55,7 +55,7 @@ jobs:
 #          name: maplibre-flutter-demo.app
 #          path: example/build/ios/iphonesimulator
   build-web:
-    name: "Build web"
+    name: "Build Web"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -68,3 +68,17 @@ jobs:
           cache: true
       - name: Build web
         run: flutter build web
+  build-web-wasm:
+    name: "Build Web WASM"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - name: Build web
+        run: flutter build web --wasm

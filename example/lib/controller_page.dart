@@ -147,8 +147,8 @@ pitch: ${camera.pitch}'''),
                   ),
                 ),
                 OutlinedButton(
-                  onPressed: () async {
-                    final region = await _controller.getVisibleRegion();
+                  onPressed: () {
+                    final region = _controller.getVisibleRegion();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
