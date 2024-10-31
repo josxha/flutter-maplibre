@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -43,25 +46,38 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    // Texture Layer (or Texture Layer Hybrid Composition)
-    // Platform Views are rendered into a texture. Flutter draws the
-    // platform views (via the texture). Flutter content is rendered
-    // directly into a Surface.
-    // + good performance for Android Views
-    // + best performance for Flutter rendering.
-    // + all transformations work correctly.
-    // - quick scrolling (e.g. a web view) will be janky
-    // - SurfaceViews are problematic in this mode and will be moved into a
-    //   virtual display (breaking a11y)
-    // - Text magnifier will break unless Flutter is rendered into a
-    //   TextureView.
-    // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
-    return AndroidView(
-      viewType: 'plugins.flutter.io/maplibre',
-      onPlatformViewCreated: _onPlatformViewCreated,
-      gestureRecognizers: widget.gestureRecognizers,
-      creationParamsCodec: const StandardMessageCodec(),
-    );
+    switch (_options.androidMode) {
+      case AndroidMode.hybridComposition:
+        return PlatformViewLink(
+          viewType: 'plugins.flutter.io/maplibre',
+          surfaceFactory: (context, controller) {
+            return AndroidViewSurface(
+              controller: controller as AndroidViewController,
+              gestureRecognizers: widget.gestureRecognizers ??
+                  const <Factory<OneSequenceGestureRecognizer>>{},
+              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            );
+          },
+          onCreatePlatformView: (params) {
+            return PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: 'plugins.flutter.io/maplibre',
+              layoutDirection: TextDirection.ltr,
+              creationParamsCodec: const StandardMessageCodec(),
+              onFocus: () => params.onFocusChanged(true),
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..create();
+          },
+        );
+      case AndroidMode.textureLayer:
+        return AndroidView(
+          viewType: 'plugins.flutter.io/maplibre',
+          onPlatformViewCreated: _onPlatformViewCreated,
+          gestureRecognizers: widget.gestureRecognizers,
+          creationParamsCodec: const StandardMessageCodec(),
+        );
+    }
   }
 
   /// This method gets called when the platform view is created. It is not
