@@ -1,5 +1,7 @@
 package com.github.josxha.maplibre
 
+// if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
+
 import CameraChangeReason
 import LngLat
 import MapCamera
@@ -12,7 +14,6 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
-// if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
