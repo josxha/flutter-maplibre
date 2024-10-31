@@ -83,7 +83,8 @@ class MapLibrePlugin :
             PermissionsManager(
                 object : PermissionsListener {
                     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-                        callback(Result.failure(Exception("Explanation Required")))
+                        // This method fires when the user gets prompted to accept the permissions.
+                        // No not handle the return here, onPermissionResult will still be called.
                     }
 
                     override fun onPermissionResult(granted: Boolean) {
