@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -43,24 +46,69 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    // Texture Layer (or Texture Layer Hybrid Composition)
-    // Platform Views are rendered into a texture. Flutter draws the
-    // platform views (via the texture). Flutter content is rendered
-    // directly into a Surface.
-    // + good performance for Android Views
-    // + best performance for Flutter rendering.
-    // + all transformations work correctly.
-    // - quick scrolling (e.g. a web view) will be janky
-    // - SurfaceViews are problematic in this mode and will be moved into a
-    //   virtual display (breaking a11y)
-    // - Text magnifier will break unless Flutter is rendered into a
-    //   TextureView.
-    // https://docs.flutter.dev/platform-integration/android/platform-views#texturelayerhybridcompisition
-    return AndroidView(
-      viewType: 'plugins.flutter.io/maplibre',
-      onPlatformViewCreated: _onPlatformViewCreated,
-      gestureRecognizers: widget.gestureRecognizers,
-      creationParamsCodec: const StandardMessageCodec(),
+    const viewType = 'plugins.flutter.io/maplibre';
+    final mode = _options.androidMode;
+    if (mode == AndroidPlatformViewMode.tlhc_vd) {
+      return AndroidView(
+        viewType: viewType,
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: widget.gestureRecognizers,
+      );
+    }
+    return PlatformViewLink(
+      viewType: viewType,
+      surfaceFactory: (context, controller) {
+        return AndroidViewSurface(
+          controller: controller as AndroidViewController,
+          gestureRecognizers: widget.gestureRecognizers ??
+              const <Factory<OneSequenceGestureRecognizer>>{},
+          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+        );
+      },
+      onCreatePlatformView: (params) {
+        final viewController = switch (mode) {
+          // This attempts to use the newest and most efficient platform view
+          // implementation when possible. In cases where that is not
+          // supported, it falls back to using Hybrid Composition, which is
+          // the mode used by initExpensiveAndroidView.
+          // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
+          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Android-Platform-Views.md#selecting-a-mode
+          AndroidPlatformViewMode.tlhc_hc =>
+            PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+          AndroidPlatformViewMode.tlhc_vd =>
+            PlatformViewsService.initAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+          AndroidPlatformViewMode.hc =>
+            PlatformViewsService.initExpensiveAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
+          AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+        };
+        return viewController
+          ..addOnPlatformViewCreatedListener((id) {
+            params.onPlatformViewCreated(id);
+            _onPlatformViewCreated(id);
+          })
+          ..create();
+      },
     );
   }
 
