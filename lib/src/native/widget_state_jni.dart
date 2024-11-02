@@ -46,57 +46,66 @@ final class MapLibreMapStateJni extends MapLibreMapState
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    switch (_options.androidMode) {
-      case AndroidPlatformViewMode.tlhc_vd:
-        return AndroidView(
-          viewType: 'plugins.flutter.io/maplibre',
-          onPlatformViewCreated: _onPlatformViewCreated,
-          gestureRecognizers: widget.gestureRecognizers,
-        );
-      case AndroidPlatformViewMode.tlhc_hc:
-        return PlatformViewLink(
-          viewType: 'plugins.flutter.io/maplibre',
-          surfaceFactory: (context, controller) {
-            return AndroidViewSurface(
-              controller: controller as AndroidViewController,
-              gestureRecognizers: widget.gestureRecognizers ??
-                  const <Factory<OneSequenceGestureRecognizer>>{},
-              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-            );
-          },
-          onCreatePlatformView: (params) {
-            // This attempts to use the newest and most efficient platform view
-            // implementation when possible. In cases where that is not
-            // supported, it falls back to using Hybrid Composition, which is
-            // the mode used by initExpensiveAndroidView.
-            // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
-            return PlatformViewsService.initSurfaceAndroidView(
-              id: params.id,
-              viewType: 'plugins.flutter.io/maplibre',
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            )
-              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-              ..create();
-            /*return PlatformViewsService.initExpensiveAndroidView(
-              id: params.id,
-              viewType: 'plugins.flutter.io/maplibre',
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            )
-              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-              ..create();*/
-            /*return PlatformViewsService.initAndroidView(
-              id: params.id,
-              viewType: 'plugins.flutter.io/maplibre',
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            )
-              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-              ..create();*/
-          },
-        );
+    const viewType = 'plugins.flutter.io/maplibre';
+    final mode = _options.androidMode;
+    if (mode == AndroidPlatformViewMode.tlhc_vd) {
+      return AndroidView(
+        viewType: viewType,
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: widget.gestureRecognizers,
+      );
     }
+    return PlatformViewLink(
+      viewType: viewType,
+      surfaceFactory: (context, controller) {
+        return AndroidViewSurface(
+          controller: controller as AndroidViewController,
+          gestureRecognizers: widget.gestureRecognizers ??
+              const <Factory<OneSequenceGestureRecognizer>>{},
+          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+        );
+      },
+      onCreatePlatformView: (params) {
+        final viewController = switch (mode) {
+          // This attempts to use the newest and most efficient platform view
+          // implementation when possible. In cases where that is not
+          // supported, it falls back to using Hybrid Composition, which is
+          // the mode used by initExpensiveAndroidView.
+          // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
+          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Android-Platform-Views.md#selecting-a-mode
+          AndroidPlatformViewMode.tlhc_hc =>
+            PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+          AndroidPlatformViewMode.tlhc_vd => PlatformViewsService.initAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
+          AndroidPlatformViewMode.hc =>
+            PlatformViewsService.initExpensiveAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+        // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
+          AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
+        };
+        return viewController
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..create();
+      },
+    );
   }
 
   /// This method gets called when the platform view is created. It is not

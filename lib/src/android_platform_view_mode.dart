@@ -15,9 +15,9 @@ enum AndroidPlatformViewMode {
   /// or MapWidget.textureView is false.
   tlhc_hc,
 
-  /*/// Always use [Hybrid Composition](https://github.com/flutter/flutter/blob/master/docs/platforms/Hybrid-Composition.md).
-  hc,*/
+  /// Always use [Hybrid Composition](https://github.com/flutter/flutter/blob/master/docs/platforms/Hybrid-Composition.md).
+  hc,
 
-  /*/// Always use [Virtual Display](https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md).
-  vd;*/
+  /// Always use [Virtual Display](https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md).
+  vd;
 }
