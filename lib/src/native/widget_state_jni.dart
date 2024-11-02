@@ -47,7 +47,13 @@ final class MapLibreMapStateJni extends MapLibreMapState
   @override
   Widget buildPlatformWidget(BuildContext context) {
     switch (_options.androidMode) {
-      case AndroidMode.hybridComposition:
+      case AndroidPlatformViewMode.tlhc_vd:
+        return AndroidView(
+          viewType: 'plugins.flutter.io/maplibre',
+          onPlatformViewCreated: _onPlatformViewCreated,
+          gestureRecognizers: widget.gestureRecognizers,
+        );
+      case AndroidPlatformViewMode.tlhc_hc:
         return PlatformViewLink(
           viewType: 'plugins.flutter.io/maplibre',
           surfaceFactory: (context, controller) {
@@ -59,23 +65,36 @@ final class MapLibreMapStateJni extends MapLibreMapState
             );
           },
           onCreatePlatformView: (params) {
+            // This attempts to use the newest and most efficient platform view
+            // implementation when possible. In cases where that is not
+            // supported, it falls back to using Hybrid Composition, which is
+            // the mode used by initExpensiveAndroidView.
+            // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
             return PlatformViewsService.initSurfaceAndroidView(
               id: params.id,
               viewType: 'plugins.flutter.io/maplibre',
               layoutDirection: TextDirection.ltr,
-              creationParamsCodec: const StandardMessageCodec(),
               onFocus: () => params.onFocusChanged(true),
             )
               ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
               ..create();
+            /*return PlatformViewsService.initExpensiveAndroidView(
+              id: params.id,
+              viewType: 'plugins.flutter.io/maplibre',
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..create();*/
+            /*return PlatformViewsService.initAndroidView(
+              id: params.id,
+              viewType: 'plugins.flutter.io/maplibre',
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..create();*/
           },
-        );
-      case AndroidMode.textureLayer:
-        return AndroidView(
-          viewType: 'plugins.flutter.io/maplibre',
-          onPlatformViewCreated: _onPlatformViewCreated,
-          gestureRecognizers: widget.gestureRecognizers,
-          creationParamsCodec: const StandardMessageCodec(),
         );
     }
   }
