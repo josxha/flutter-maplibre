@@ -80,12 +80,13 @@ final class MapLibreMapStateJni extends MapLibreMapState
               layoutDirection: TextDirection.ltr,
               onFocus: () => params.onFocusChanged(true),
             ),
-          AndroidPlatformViewMode.tlhc_vd => PlatformViewsService.initAndroidView(
-            id: params.id,
-            viewType: viewType,
-            layoutDirection: TextDirection.ltr,
-            onFocus: () => params.onFocusChanged(true),
-          ),
+          AndroidPlatformViewMode.tlhc_vd =>
+            PlatformViewsService.initAndroidView(
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
           AndroidPlatformViewMode.hc =>
             PlatformViewsService.initExpensiveAndroidView(
               id: params.id,
@@ -93,7 +94,7 @@ final class MapLibreMapStateJni extends MapLibreMapState
               layoutDirection: TextDirection.ltr,
               onFocus: () => params.onFocusChanged(true),
             ),
-        // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
+          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
           AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
               id: params.id,
               viewType: viewType,
