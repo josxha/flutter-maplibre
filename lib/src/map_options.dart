@@ -24,6 +24,7 @@ class MapOptions {
     this.nativeLogo = true,
     this.attribution = true,
     this.androidTextureMode = true,
+    this.androidMode = AndroidPlatformViewMode.tlhc_vd,
   }) : initPitch = pitch ?? initPitch;
 
   /// The style URL that should get used. If not set, the default MapLibre style
@@ -80,6 +81,11 @@ class MapOptions {
 
   /// Toggle the MapLibre Native logo.
   final bool attribution;
+
+  /// The platform view type used on android.
+  ///
+  /// https://docs.flutter.dev/platform-integration/android/platform-views
+  final AndroidPlatformViewMode androidMode;
 
   /// Toggle the texture mode on Android.
   ///
