@@ -102,7 +102,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
             ),
         };
         return viewController
-          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..addOnPlatformViewCreatedListener((id) {
+            params.onPlatformViewCreated(id);
+            _onPlatformViewCreated(id);
+          })
           ..create();
       },
     );
