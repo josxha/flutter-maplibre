@@ -99,7 +99,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           emulator-boot-timeout: 1800 # 30 minutes
-          script: cd example && flutter test integration_test -r expanded --timeout=none --coverage
+          script: cd example && flutter test integration_test -r expanded --timeout=none --coverage --coverage-package maplibre
       - name: "Install coverde"
         run: dart pub global activate coverde
       - name: "Prepare coverage data"
