@@ -1,0 +1,26 @@
+name: "Daily Maintenance"
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  close-issues:
+    name: "Close Issues"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-issue-stale: 7
+          days-before-issue-close: 7
+          stale-issue-label: "stale"
+          stale-issue-message: "This issue requires additional information in order to be resolved. However, there hasn't been any response within one week.\nThis issue will be automatically closed in one week if there is no response."
+          close-issue-message: "This issue was closed because it has been inactive for 2 weeks but requires information in order to be resolved."
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          remove-stale-when-updated: true
+          any-of-labels: "question"
+          labels-to-remove-when-unstale: "question,stale"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
