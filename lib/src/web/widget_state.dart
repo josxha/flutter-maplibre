@@ -557,12 +557,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      getMetersPerPixelAtLatitudeSync(latitude);
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
       circumferenceOfEarth *
       cos(latitude * degree2Radian) /
       pow(2, _map.getZoom() + 9);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
+  LngLatBounds getVisibleRegionSync() {
     final bounds = _map.getBounds();
     return LngLatBounds(
       longitudeWest: bounds.getWest().toDouble(),

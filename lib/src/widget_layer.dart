@@ -26,43 +26,52 @@ class WidgetLayer extends StatelessWidget {
         : 1.0;
 
     final points = markers.map((m) => m.point).toList(growable: false);
-    final child = FutureBuilder<List<Offset>>(
-      future: controller.toScreenLocations(points),
-      builder: (context, snapshot) {
-        if (snapshot.data case final List<Offset> offsets) {
-          return Stack(
-            children: markers.indexed.map((e) {
-              final offset = offsets[e.$1];
-              final m = e.$2;
-              final matrix = Matrix4.identity();
-              if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
-              if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
-              return Positioned(
-                left: offset.dx / pixelRatio -
-                    m.size.width / 2 * (m.alignment.x + 1),
-                top: offset.dy / pixelRatio -
-                    m.size.height / 2 * (m.alignment.y + 1),
-                height: m.size.height,
-                width: m.size.width,
-                child: Transform(
-                  transform: matrix,
-                  alignment: m.alignment,
-                  child: m.child,
-                ),
-              );
-            }).toList(growable: false),
-          );
-        }
-        if (snapshot.error case final Object error) {
-          debugPrint(error.toString());
-          debugPrintStack(stackTrace: snapshot.stackTrace);
-        }
-        return const SizedBox.shrink();
-      },
+
+    Widget buildChild(List<Offset> offsets) => Stack(
+      // TODO: filter markers that are completely outside of the visible screen.
+      children: markers.indexed.map((e) {
+        final offset = offsets[e.$1];
+        final m = e.$2;
+        final matrix = Matrix4.identity();
+        if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
+        if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
+        return Positioned(
+          left: offset.dx / pixelRatio -
+              m.size.width / 2 * (m.alignment.x + 1),
+          top: offset.dy / pixelRatio -
+              m.size.height / 2 * (m.alignment.y + 1),
+          height: m.size.height,
+          width: m.size.width,
+          child: Transform(
+            transform: matrix,
+            alignment: m.alignment,
+            child: m.child,
+          ),
+        );
+      }).toList(growable: false),
     );
-    if (kIsWeb) return child;
+
+    if (kIsWeb) {
+      final offsets = controller.toScreenLocationsSync(points);
+      return buildChild(offsets);
+    }
+
     // Android needs a TranslucentPointer
-    return TranslucentPointer(child: child);
+    return TranslucentPointer(
+      child: FutureBuilder<List<Offset>>(
+        future: controller.toScreenLocations(points),
+        builder: (context, snapshot) {
+          if (snapshot.data case final List<Offset> offsets) {
+            return buildChild(offsets);
+          }
+          if (snapshot.error case final Object error) {
+            debugPrint(error.toString());
+            debugPrintStack(stackTrace: snapshot.stackTrace);
+          }
+          return const SizedBox.shrink();
+        },
+      ),
+    );
   }
 }
 

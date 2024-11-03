@@ -858,4 +858,14 @@ final class MapLibreMapStateJni extends MapLibreMapState
       throw UnimplementedError(
         'toScreenLocationsSync is only supported on web',
       );
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+      throw UnimplementedError(
+        'getMetersPerPixelAtLatitudeSync is only supported on web',
+      );
+
+  @override
+  LngLatBounds getVisibleRegionSync() =>
+      throw UnimplementedError('getVisibleRegionSync is only supported on web');
 }

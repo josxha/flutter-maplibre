@@ -123,12 +123,27 @@ abstract interface class MapController {
   // TODO: can be made sync when flutter raster and ui thread are merged
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
-  /// Get a list of all attributions from the map style.
-  Future<List<String>> getAttributions();
-
   /// The smallest bounding box that includes the visible region.
   // TODO: can be made sync when flutter raster and ui thread are merged
   Future<LngLatBounds> getVisibleRegion();
+
+  /// Returns the distance spanned by one pixel at the specified latitude and
+  /// current zoom level.
+  ///
+  /// The distance between pixels decreases as the latitude approaches the
+  /// poles. This relationship parallels the relationship between longitudinal
+  /// coordinates at different latitudes.
+  ///
+  /// Only supported on web.
+  double getMetersPerPixelAtLatitudeSync(double latitude);
+
+  /// The smallest bounding box that includes the visible region.
+  ///
+  /// Only supported on web.
+  LngLatBounds getVisibleRegionSync();
+
+  /// Get a list of all attributions from the map style.
+  Future<List<String>> getAttributions();
 
   /// Add an image to the map.
   Future<void> addImage(String id, Uint8List bytes);
