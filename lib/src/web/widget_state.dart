@@ -239,24 +239,38 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
+  Position toLngLatSync(Offset screenLocation) =>
       _map.unproject(screenLocation.toJsPoint()).toPosition();
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
+  List<Position> toLngLatsSync(List<Offset> screenLocations) => screenLocations
+      .map((offset) => _map.unproject(offset.toJsPoint()).toPosition())
+      .toList(growable: false);
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) =>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) => lngLats
+      .map((lngLat) => _map.project(lngLat.toLngLat()).toOffset())
+      .toList(growable: false);
+
+  @override
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      toLngLatSync(screenLocation);
+
+  @override
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      toScreenLocationSync(lngLat);
+
+  @override
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      screenLocations
-          .map((offset) => _map.unproject(offset.toJsPoint()).toPosition())
-          .toList(growable: false);
+      toLngLatsSync(screenLocations);
 
   @override
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      lngLats
-          .map((lngLat) => _map.project(lngLat.toLngLat()).toOffset())
-          .toList(growable: false);
+      toScreenLocationsSync(lngLats);
 
   @override
   Future<void> moveCamera({
@@ -543,12 +557,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      getMetersPerPixelAtLatitudeSync(latitude);
+
+  @override
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
       circumferenceOfEarth *
       cos(latitude * degree2Radian) /
       pow(2, _map.getZoom() + 9);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
+  LngLatBounds getVisibleRegionSync() {
     final bounds = _map.getBounds();
     return LngLatBounds(
       longitudeWest: bounds.getWest().toDouble(),

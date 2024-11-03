@@ -3,7 +3,7 @@ import 'package:pigeon/pigeon.dart';
 @ConfigurePigeon(
   PigeonOptions(
     dartOut: 'lib/src/native/pigeon.g.dart',
-    dartOptions: DartOptions(),
+    dartOptions: DartOptions(copyrightHeader: ['// coverage:ignore-file']),
     dartPackageName: 'maplibre',
     // linux
     gobjectHeaderOut: 'linux/pigeon.g.h',
