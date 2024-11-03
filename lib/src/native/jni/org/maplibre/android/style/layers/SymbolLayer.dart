@@ -1071,6 +1071,34 @@ class SymbolLayer extends layer_.Layer {
             _$jni.JArrayType(_$jni.JStringType())));
   }
 
+  static final _id_getTextVariableAnchorOffset = _class.instanceMethodId(
+    r'getTextVariableAnchorOffset',
+    r'()Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _getTextVariableAnchorOffset =
+      _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JniResult Function(
+                    _$jni.Pointer<_$jni.Void>,
+                    _$jni.JMethodIDPtr,
+                  )>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              _$jni.JniResult Function(
+                _$jni.Pointer<_$jni.Void>,
+                _$jni.JMethodIDPtr,
+              )>();
+
+  /// from: `public org.maplibre.android.style.layers.PropertyValue getTextVariableAnchorOffset()`
+  /// The returned object must be released after use, by calling the [release] method.
+  propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JObject>>
+      getTextVariableAnchorOffset() {
+    return _getTextVariableAnchorOffset(reference.pointer,
+            _id_getTextVariableAnchorOffset as _$jni.JMethodIDPtr)
+        .object(const propertyvalue_.$PropertyValue$Type(
+            _$jni.JArrayType(_$jni.JObjectType())));
+  }
+
   static final _id_getTextAnchor = _class.instanceMethodId(
     r'getTextAnchor',
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',

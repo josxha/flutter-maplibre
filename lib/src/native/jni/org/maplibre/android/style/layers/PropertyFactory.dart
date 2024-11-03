@@ -6535,6 +6535,65 @@ class PropertyFactory extends _$jni.JObject {
         .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
   }
 
+  static final _id_textVariableAnchorOffset = _class.staticMethodId(
+    r'textVariableAnchorOffset',
+    r'([Ljava/lang/Object;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _textVariableAnchorOffset = _$jni.ProtectedJniExtensions.lookup<
+              _$jni.NativeFunction<
+                  _$jni.JniResult Function(
+                      _$jni.Pointer<_$jni.Void>,
+                      _$jni.JMethodIDPtr,
+                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchorOffset(java.lang.Object[] objects)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JObject>>
+      textVariableAnchorOffset(
+    _$jni.JArray<_$jni.JObject> objects,
+  ) {
+    return _textVariableAnchorOffset(
+            _class.reference.pointer,
+            _id_textVariableAnchorOffset as _$jni.JMethodIDPtr,
+            objects.reference.pointer)
+        .object(const propertyvalue_.$PropertyValue$Type(
+            _$jni.JArrayType(_$jni.JObjectType())));
+  }
+
+  static final _id_textVariableAnchorOffset$1 = _class.staticMethodId(
+    r'textVariableAnchorOffset',
+    r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _textVariableAnchorOffset$1 =
+      _$jni.ProtectedJniExtensions.lookup<
+                  _$jni.NativeFunction<
+                      _$jni.JniResult Function(
+                          _$jni.Pointer<_$jni.Void>,
+                          _$jni.JMethodIDPtr,
+                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+              'globalEnv_CallStaticObjectMethod')
+          .asFunction<
+              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
+                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchorOffset(org.maplibre.android.style.expressions.Expression expression)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static propertyvalue_.PropertyValue<_$jni.JObject> textVariableAnchorOffset$1(
+    _$jni.JObject expression,
+  ) {
+    return _textVariableAnchorOffset$1(
+            _class.reference.pointer,
+            _id_textVariableAnchorOffset$1 as _$jni.JMethodIDPtr,
+            expression.reference.pointer)
+        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+  }
+
   static final _id_textAnchor = _class.staticMethodId(
     r'textAnchor',
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
