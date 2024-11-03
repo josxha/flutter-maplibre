@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -19,13 +21,13 @@ void main() {
     testWidgets(
       'getCamera',
       (tester) async {
-        late final MapController ctrl;
+        final ctrlCompleter = Completer<MapController>();
         final app = App(
-          onMapCreated: (controller) => ctrl = controller,
+          onMapCreated: ctrlCompleter.complete,
           options: MapOptions(initCenter: Position(1, 2)),
         );
         await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
+        final ctrl = await ctrlCompleter.future;
         await ctrl.moveCamera(
           center: Position(1, 1),
           bearing: 1,
@@ -42,12 +44,12 @@ void main() {
       },
     );
     testWidgets(
-      'jumpTo',
+      'moveCamera',
       (tester) async {
-        late final MapController ctrl;
-        final app = App(onMapCreated: (controller) => ctrl = controller);
+        final ctrlCompleter = Completer<MapController>();
+        final app = App(onMapCreated: ctrlCompleter.complete);
         await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
+        final ctrl = await ctrlCompleter.future;
         await ctrl.moveCamera(
           center: Position(1, 2),
           bearing: 1,
@@ -64,12 +66,12 @@ void main() {
       },
     );
     testWidgets(
-      'flyTo',
+      'animateCamera',
       (tester) async {
-        late final MapController ctrl;
-        final app = App(onMapCreated: (controller) => ctrl = controller);
+        final ctrlCompleter = Completer<MapController>();
+        final app = App(onMapCreated: ctrlCompleter.complete);
         await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
+        final ctrl = await ctrlCompleter.future;
         await ctrl.animateCamera(
           center: Position(2, 1),
           bearing: 2,
@@ -88,7 +90,7 @@ void main() {
       },
     );
     /*testWidgets(
-      'flyTo cancel',
+      'animateCamera cancel',
       (tester) async {
         late final MapController ctrl;
         final app = App(onMapCreated: (controller) => ctrl = controller);
