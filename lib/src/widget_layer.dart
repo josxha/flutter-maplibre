@@ -28,28 +28,28 @@ class WidgetLayer extends StatelessWidget {
     final points = markers.map((m) => m.point).toList(growable: false);
 
     Widget buildChild(List<Offset> offsets) => Stack(
-      // TODO: filter markers that are completely outside of the visible screen.
-      children: markers.indexed.map((e) {
-        final offset = offsets[e.$1];
-        final m = e.$2;
-        final matrix = Matrix4.identity();
-        if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
-        if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
-        return Positioned(
-          left: offset.dx / pixelRatio -
-              m.size.width / 2 * (m.alignment.x + 1),
-          top: offset.dy / pixelRatio -
-              m.size.height / 2 * (m.alignment.y + 1),
-          height: m.size.height,
-          width: m.size.width,
-          child: Transform(
-            transform: matrix,
-            alignment: m.alignment,
-            child: m.child,
-          ),
+          // TODO: filter markers that are completely outside of the visible screen.
+          children: markers.indexed.map((e) {
+            final offset = offsets[e.$1];
+            final m = e.$2;
+            final matrix = Matrix4.identity();
+            if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
+            if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
+            return Positioned(
+              left: offset.dx / pixelRatio -
+                  m.size.width / 2 * (m.alignment.x + 1),
+              top: offset.dy / pixelRatio -
+                  m.size.height / 2 * (m.alignment.y + 1),
+              height: m.size.height,
+              width: m.size.width,
+              child: Transform(
+                transform: matrix,
+                alignment: m.alignment,
+                child: m.child,
+              ),
+            );
+          }).toList(growable: false),
         );
-      }).toList(growable: false),
-    );
 
     if (kIsWeb) {
       final offsets = controller.toScreenLocationsSync(points);
