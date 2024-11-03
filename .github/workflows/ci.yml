@@ -103,7 +103,7 @@ jobs:
       - name: "Install coverde"
         run: dart pub global activate coverde
       - name: "Prepare coverage data"
-        run: coverde value -i example/coverage/lcov.info > coverage/result.txt
+        run: coverde value -i coverage/lcov.info > coverage/result.txt
       - name: "Run Codecov"
         uses: codecov/codecov-action@v4
         if: ${{ matrix.api-level == '34' }}
