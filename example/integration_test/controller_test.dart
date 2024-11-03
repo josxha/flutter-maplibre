@@ -5,7 +5,6 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 
 import 'app.dart';
-import 'models_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -57,5 +56,4 @@ void main() {
       expect(camera.pitch, closeTo(1, 0.00001));
     });
   });
-  group('model classes', modelTests);
 }
