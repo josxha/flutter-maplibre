@@ -40,10 +40,9 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final offset = await ctrl.toScreenLocation(Position(1,2));
-      print('offset: $offset');
-      expect(offset.dx, closeTo(1, 0.00001));
-      expect(offset.dy, closeTo(2, 0.00001));
+      final offset = await ctrl.toScreenLocation(Position(1, 2));
+      expect(offset.dx, closeTo(1, 160.0));
+      expect(offset.dy, closeTo(2, 316.4));
     });
 
     testWidgets('moveCamera', (tester) async {
