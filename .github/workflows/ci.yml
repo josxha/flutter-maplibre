@@ -69,7 +69,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [ 21 ] # TODO add 34
+        api-level: [ 21, 23, 34 ]
     timeout-minutes: 30
     defaults:
       run:
