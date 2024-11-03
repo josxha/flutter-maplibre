@@ -9,11 +9,6 @@ import 'app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('controller', () {
-    testWidgets('render map', (tester) async {
-      await tester.pumpWidget(const App());
-      await tester.pumpAndSettle();
-      expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
-    });
     testWidgets('getCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
@@ -36,6 +31,21 @@ void main() {
       expect(camera.bearing, closeTo(1, 0.00001));
       expect(camera.pitch, closeTo(1, 0.00001));
     });
+
+    testWidgets('toScreenLocation', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final offset = await ctrl.toScreenLocation(Position(1,2));
+      print('offset: $offset');
+      expect(offset.dx, closeTo(1, 0.00001));
+      expect(offset.dy, closeTo(2, 0.00001));
+    });
+
     testWidgets('moveCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(onMapCreated: ctrlCompleter.complete);
