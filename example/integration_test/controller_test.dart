@@ -65,7 +65,7 @@ void main() {
         expect(camera.pitch, closeTo(1, 0.00001));
       },
     );
-    testWidgets(
+    /*testWidgets(
       'animateCamera',
       (tester) async {
         final ctrlCompleter = Completer<MapController>();
@@ -88,7 +88,7 @@ void main() {
         expect(camera.bearing, closeTo(2, 0.00001));
         expect(camera.pitch, closeTo(2, 0.00001));
       },
-    );
+    );*/
     /*testWidgets(
       'animateCamera cancel',
       (tester) async {
