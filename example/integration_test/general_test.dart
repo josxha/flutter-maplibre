@@ -7,8 +7,58 @@ import 'app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('General', () {
-    testWidgets('render map', (tester) async {
-      await tester.pumpWidget(const App());
+    testWidgets('render map with tlhc_vd', (tester) async {
+      await tester.pumpWidget(
+        App(
+          options: MapOptions(
+            initCenter: Position(0, 0),
+            // ignore: avoid_redundant_argument_values
+            androidMode: AndroidPlatformViewMode.tlhc_vd,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
+    });
+
+    testWidgets('render map with tlhc_hc', (tester) async {
+      await tester.pumpWidget(
+        App(
+          options: MapOptions(
+            initCenter: Position(0, 0),
+            // ignore: avoid_redundant_argument_values
+            androidMode: AndroidPlatformViewMode.tlhc_hc,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
+    });
+
+    testWidgets('render map with hc', (tester) async {
+      await tester.pumpWidget(
+        App(
+          options: MapOptions(
+            initCenter: Position(0, 0),
+            // ignore: avoid_redundant_argument_values
+            androidMode: AndroidPlatformViewMode.hc,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
+    });
+
+    testWidgets('render map with vd', (tester) async {
+      await tester.pumpWidget(
+        App(
+          options: MapOptions(
+            initCenter: Position(0, 0),
+            // ignore: avoid_redundant_argument_values
+            androidMode: AndroidPlatformViewMode.vd,
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
     });
