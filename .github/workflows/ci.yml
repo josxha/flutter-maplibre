@@ -100,6 +100,10 @@ jobs:
           arch: x86_64
           emulator-boot-timeout: 1800 # 30 minutes
           script: cd example && flutter test integration_test -r expanded --timeout=none --coverage
+      - name: "Install coverde"
+        run: dart pub global activate coverde
+      - name: "Prepare coverage data"
+        run: coverde value -i example/coverage/lcov.info > coverage/result.txt
       - name: "Run Codecov"
         uses: codecov/codecov-action@v4
         if: ${{ matrix.api-level == '34' }}
