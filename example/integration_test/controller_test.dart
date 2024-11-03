@@ -65,4 +65,18 @@ void main() {
       expect(camera.pitch, closeTo(1, 0.00001));
     });
   });
+
+  testWidgets('addSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = ImageSource(
+      id: '1',
+      url: 'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
+      coordinates: [Position(0, 0), Position(1, 1)],
+    );
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
 }
