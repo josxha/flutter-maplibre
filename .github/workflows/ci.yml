@@ -48,7 +48,7 @@ jobs:
           file_glob: "!**/*.g.*"
           fail_on_error: true
 #  integration-test-ios:
-#    name: "Integration Tests on iOS"
+#    name: "[iOS] Integration tests"
 #    runs-on: macOS-latest
 #    defaults:
 #      run:
@@ -64,7 +64,7 @@ jobs:
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded
   integration-test-android:
-    name: "[Android] Integration Tests"
+    name: "[Android] Integration tests"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -101,7 +101,7 @@ jobs:
           emulator-boot-timeout: 1800 # 30 minutes
           script: cd example && flutter test integration_test -r expanded --timeout=none
 #  integration-test-web:
-#    name: "Integration Tests on Web"
+#    name: "[Web] Integration tests"
 #    runs-on: ubuntu-latest
 #    timeout-minutes: 30
 #    defaults:
@@ -141,7 +141,7 @@ jobs:
       - name: Check package score
         run: pana --exit-code-threshold 0 --no-dartdoc .
   build-android:
-    name: "Build Android APK"
+    name: "[Android] Build APK"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -172,7 +172,7 @@ jobs:
           name: maplibre-flutter-demo.apk
           path: example/build/app/outputs/flutter-apk/app-release.apk
 #  build-iOS:
-#    name: Build iOS package
+#    name: [iOS] Build package
 #    runs-on: macos-latest
 #    timeout-minutes: 30
 #    defaults:
@@ -202,7 +202,7 @@ jobs:
 #          name: maplibre-flutter-demo.app
 #          path: example/build/ios/iphonesimulator
   build-web:
-    name: "Build Web"
+    name: "[Web] Build"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -222,7 +222,7 @@ jobs:
       - name: Build web
         run: flutter build web
   build-web-wasm:
-    name: "Build Web WASM"
+    name: "[Web] Build WASM"
     runs-on: ubuntu-latest
     defaults:
       run:
