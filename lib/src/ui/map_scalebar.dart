@@ -1,6 +1,6 @@
-import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -17,10 +17,18 @@ class MapScalebar extends StatelessWidget {
     final controller = MapController.maybeOf(context);
     final camera = MapCamera.maybeOf(context);
     if (controller == null || camera == null) return const SizedBox.shrink();
-    final futureMetersPerPixel = controller.getMetersPerPixelAtLatitude(
-      camera.center.lat.toDouble(),
-    );
+
+    final latitude = camera.center.lat.toDouble();
     final theme = Theme.of(context);
+
+    if (kIsWeb) {
+      final metersPerPixel =
+          controller.getMetersPerPixelAtLatitudeSync(latitude);
+      return CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme));
+    }
+
+    final futureMetersPerPixel =
+        controller.getMetersPerPixelAtLatitude(latitude);
     return Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(12),
