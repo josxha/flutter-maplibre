@@ -22,10 +22,10 @@ class MapScalebar extends StatelessWidget {
     final theme = Theme.of(context);
 
     Widget buildChild(double metersPerPixel) => Container(
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(12),
-      child: CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme)),
-    );
+          alignment: Alignment.bottomLeft,
+          padding: const EdgeInsets.all(12),
+          child: CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme)),
+        );
 
     if (kIsWeb) {
       final metersPerPixel =
