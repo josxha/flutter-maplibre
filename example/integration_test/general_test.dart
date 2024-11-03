@@ -8,15 +8,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('General', () {
     testWidgets('render map with tlhc_vd', (tester) async {
-      await tester.pumpWidget(
-        App(
-          options: MapOptions(
-            initCenter: Position(0, 0),
-            // ignore: avoid_redundant_argument_values
-            androidMode: AndroidPlatformViewMode.tlhc_vd,
-          ),
-        ),
-      );
+      await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
     });
@@ -26,7 +18,6 @@ void main() {
         App(
           options: MapOptions(
             initCenter: Position(0, 0),
-            // ignore: avoid_redundant_argument_values
             androidMode: AndroidPlatformViewMode.tlhc_hc,
           ),
         ),
@@ -40,7 +31,6 @@ void main() {
         App(
           options: MapOptions(
             initCenter: Position(0, 0),
-            // ignore: avoid_redundant_argument_values
             androidMode: AndroidPlatformViewMode.hc,
           ),
         ),
@@ -54,12 +44,25 @@ void main() {
         App(
           options: MapOptions(
             initCenter: Position(0, 0),
-            // ignore: avoid_redundant_argument_values
             androidMode: AndroidPlatformViewMode.vd,
           ),
         ),
       );
       await tester.pumpAndSettle();
+      expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
+    });
+
+    testWidgets('update map options', (tester) async {
+      await tester.pumpWidget(
+        App(
+          options: MapOptions(
+            initCenter: Position(0, 0),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.pump();
+      // TODO: better checks
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
     });
   });
