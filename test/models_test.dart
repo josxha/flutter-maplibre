@@ -47,10 +47,10 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
       final oString = o.toString();
-      expect(oString, contains(o.latitudeSouth));
-      expect(oString, contains(o.latitudeNorth));
-      expect(oString, contains(o.longitudeEast));
-      expect(oString, contains(o.longitudeWest));
+      expect(oString, contains(o.latitudeSouth.toString()));
+      expect(oString, contains(o.latitudeNorth.toString()));
+      expect(oString, contains(o.longitudeEast.toString()));
+      expect(oString, contains(o.longitudeWest.toString()));
     });
     test('MapCamera', () {
       final o = MapCamera(
@@ -69,9 +69,9 @@ void main() {
       expect(o.hashCode, isNot(equals(o2.hashCode)));
       final oString = o.toString();
       expect(oString, contains('Position(${o.center.lng}, ${o.center.lat})'));
-      expect(oString, contains(o.pitch));
-      expect(oString, contains(o.bearing));
-      expect(oString, contains(o.zoom));
+      expect(oString, contains(o.pitch.toString()));
+      expect(oString, contains(o.bearing.toString()));
+      expect(oString, contains(o.zoom.toString()));
     });
   });
 }
