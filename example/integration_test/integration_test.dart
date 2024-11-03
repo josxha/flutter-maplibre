@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 
 import 'app.dart';
-import 'model_tests.dart';
+import 'models_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
