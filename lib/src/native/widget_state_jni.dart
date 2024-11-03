@@ -289,6 +289,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     await runOnPlatformThread(() {
       final completer = Completer<void>();
       jniMap.moveCamera(cameraUpdate);
+      // TODO: jni causes sometimes a deadlock, complete immediately for now
+      completer.complete();
       /*jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
@@ -331,6 +333,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     await runOnPlatformThread(() async {
       final completer = Completer<void>();
       jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
+      // TODO: jni causes sometimes a deadlock, complete immediately for now
+      completer.complete();
       /*jniMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,
@@ -378,6 +382,8 @@ final class MapLibreMapStateJni extends MapLibreMapState
     await runOnPlatformThread(() {
       final completer = Completer<void>();
       jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
+      // TODO: jni causes sometimes a deadlock, complete immediately for now
+      completer.complete();
       /*jniMap.animateCamera$3(
         cameraUpdate,
         nativeDuration.inMilliseconds,

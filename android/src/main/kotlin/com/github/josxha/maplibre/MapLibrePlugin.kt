@@ -22,7 +22,6 @@ class MapLibrePlugin :
     PluginRegistry.RequestPermissionsResultListener,
     PermissionManagerHostApi {
     private var lifecycle: Lifecycle? = null
-    private lateinit var permissionManagerApi: PermissionManagerHostApi
 
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
