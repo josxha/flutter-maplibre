@@ -68,7 +68,10 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
       final oString = o.toString();
-      expect(oString, contains('Position(${o.center.lng}, ${o.center.lat})'));
+      expect(
+        oString,
+        contains('Position(lng: ${o.center.lng}, lat: ${o.center.lat})'),
+      );
       expect(oString, contains(o.pitch.toString()));
       expect(oString, contains(o.bearing.toString()));
       expect(oString, contains(o.zoom.toString()));
