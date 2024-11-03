@@ -840,4 +840,22 @@ final class MapLibreMapStateJni extends MapLibreMapState
       return attributions;
     });
   }
+
+  @override
+  Position toLngLatSync(Offset screenLocation) =>
+      throw UnimplementedError('toLngLatSync is only supported on web');
+
+  @override
+  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
+      throw UnimplementedError('toLngLatsSync is only supported on web');
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) =>
+      throw UnimplementedError('toScreenLocationSync is only supported on web');
+
+  @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
+      throw UnimplementedError(
+        'toScreenLocationsSync is only supported on web',
+      );
 }
