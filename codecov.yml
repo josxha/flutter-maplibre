@@ -1,3 +1,4 @@
 ignore:
   - "**/*.g.dart"
+  - "lib/src/native/jni"
   - "example"
