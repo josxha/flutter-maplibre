@@ -71,9 +71,6 @@ jobs:
       matrix:
         api-level: [ 23, 34 ] # TODO: add 21
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: example
     steps:
       - uses: actions/checkout@v4
       - name: "Setup Flutter SDK"
