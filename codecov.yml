@@ -1,3 +1,12 @@
+comment:
+  # this posts no PR comment if there are no coverage changes
+  require_changes: true
+  status:
+    project:
+      default:
+        target: 0%
+        threshold: 0%
+
 ignore:
   - "**/*.g.dart"
   - "lib/src/native/jni"
