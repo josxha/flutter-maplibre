@@ -21,26 +21,28 @@ class MapScalebar extends StatelessWidget {
     final latitude = camera.center.lat.toDouble();
     final theme = Theme.of(context);
 
+    Widget buildChild(double metersPerPixel) => Container(
+          alignment: Alignment.bottomLeft,
+          padding: const EdgeInsets.all(12),
+          child: CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme)),
+        );
+
     if (kIsWeb) {
       final metersPerPixel =
           controller.getMetersPerPixelAtLatitudeSync(latitude);
-      return CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme));
+      return buildChild(metersPerPixel);
     }
 
     final futureMetersPerPixel =
         controller.getMetersPerPixelAtLatitude(latitude);
-    return Container(
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(12),
-      child: FutureBuilder<double>(
-        future: futureMetersPerPixel,
-        builder: (context, snapshot) {
-          if (snapshot.data case final double data) {
-            return CustomPaint(painter: _ScaleBarPainter(data, theme));
-          }
-          return const SizedBox.shrink();
-        },
-      ),
+    return FutureBuilder<double>(
+      future: futureMetersPerPixel,
+      builder: (context, snapshot) {
+        if (snapshot.data case final double data) {
+          return buildChild(data);
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }
