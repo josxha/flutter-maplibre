@@ -7,8 +7,8 @@ import 'permission_manager_test.dart' as permission;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  // controller.main();
-  // general.main();
+  controller.main();
+  general.main();
   offline.main();
-  // permission.main();
+  permission.main();
 }
