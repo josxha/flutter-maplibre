@@ -38,7 +38,7 @@ class MapOptions {
   /// Throws an [StateError] if called outside of the [MapLibreMap.children].
   static MapController of(BuildContext context) =>
       maybeOf(context) ??
-          (throw StateError('Unable to find an instance of MapController'));
+      (throw StateError('Unable to find an instance of MapController'));
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
