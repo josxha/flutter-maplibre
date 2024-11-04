@@ -49,8 +49,8 @@ class _OfflinePageState extends State<OfflinePage> {
                               onPressed: () async {
                                 final stream = manager.downloadRegion(
                                   minZoom: 0,
-                                  maxZoom: 14,
-                                  bounds: _boundsBregenz,
+                                  maxZoom: 2,
+                                  bounds: _boundsWorld,
                                   mapStyleUrl: StyledMapPage.styleUrl,
                                   pixelDensity: 1,
                                 );
@@ -90,7 +90,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                       bounds: _boundsWorld,
                                       zoom: 1,
                                       center: Position(0, 0),
-                                      maxZoom: 3,
+                                      maxZoom: 2,
                                     ),
                                   ),
                                 );
