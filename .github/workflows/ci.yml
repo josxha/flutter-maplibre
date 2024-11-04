@@ -63,6 +63,29 @@ jobs:
 #          cache: true
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded
+  unit-test-android:
+    name: "[Android] Unit tests"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.24.3', '' ]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Setup Flutter SDK"
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Run unit tests"
+        run: flutter test --timeout=600s --coverage
+      - name: "Run Codecov"
+        uses: codecov/codecov-action@v4
+        if: ${{ matrix.sdk == '' }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
@@ -71,9 +94,6 @@ jobs:
       matrix:
         api-level: [ 23, 34 ] # TODO: add 21
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: example
     steps:
       - uses: actions/checkout@v4
       - name: "Setup Flutter SDK"
@@ -99,7 +119,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           emulator-boot-timeout: 1800 # 30 minutes
-          script: cd example && flutter test integration_test -r expanded --timeout=none --coverage --coverage-package maplibre
+          script: cd example && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
       - name: "Run Codecov"
         uses: codecov/codecov-action@v4
         if: ${{ matrix.api-level == '34' }}

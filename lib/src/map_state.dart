@@ -17,6 +17,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   AnnotationManager? annotationManager;
 
   /// Get the [MapOptions] from [MapLibreMap.options].
+  @override
   MapOptions get options => widget.options;
 
   @override

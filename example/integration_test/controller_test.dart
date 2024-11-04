@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -8,135 +11,165 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
   group('controller', () {
-    testWidgets(
-      'render map',
-      (tester) async {
-        await tester.pumpWidget(const App());
-        await tester.pumpAndSettle();
-        expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
-      },
+    testWidgets('getCamera', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      await ctrl.moveCamera(
+        center: Position(1, 1),
+        bearing: 1,
+        zoom: 1,
+        pitch: 1,
+      );
+      await tester.pumpAndSettle();
+      final camera = ctrl.getCamera();
+      expect(camera.center.lng, closeTo(1, 0.00001));
+      expect(camera.center.lat, closeTo(1, 0.00001));
+      expect(camera.zoom, closeTo(1, 0.00001));
+      expect(camera.bearing, closeTo(1, 0.00001));
+      expect(camera.pitch, closeTo(1, 0.00001));
+    });
+
+    testWidgets('toScreenLocation', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final offset = await ctrl.toScreenLocation(Position(1, 2));
+      // Different devices have different screen sizes.
+      expect(offset.dx, greaterThanOrEqualTo(0));
+      expect(offset.dy, greaterThanOrEqualTo(0));
+    });
+
+    testWidgets('moveCamera', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(onMapCreated: ctrlCompleter.complete);
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      await ctrl.moveCamera(
+        center: Position(1, 2),
+        bearing: 1,
+        zoom: 1,
+        pitch: 1,
+      );
+      await tester.pumpAndSettle();
+      final camera = ctrl.getCamera();
+      expect(camera.center.lng, closeTo(1, 0.00001));
+      expect(camera.center.lat, closeTo(2, 0.00001));
+      expect(camera.zoom, closeTo(1, 0.00001));
+      expect(camera.bearing, closeTo(1, 0.00001));
+      expect(camera.pitch, closeTo(1, 0.00001));
+    });
+  });
+
+  testWidgets('add ImageSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = ImageSource(
+      id: '1',
+      url:
+          'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
+      coordinates: [Position(0, 0), Position(1, 1)],
     );
-    testWidgets(
-      'getCamera',
-      (tester) async {
-        final ctrlCompleter = Completer<MapController>();
-        final app = App(
-          onMapCreated: ctrlCompleter.complete,
-          options: MapOptions(initCenter: Position(1, 2)),
-        );
-        await tester.pumpWidget(app);
-        final ctrl = await ctrlCompleter.future;
-        await ctrl.moveCamera(
-          center: Position(1, 1),
-          bearing: 1,
-          zoom: 1,
-          pitch: 1,
-        );
-        await tester.pumpAndSettle();
-        final camera = ctrl.getCamera();
-        expect(camera.center.lng, closeTo(1, 0.00001));
-        expect(camera.center.lat, closeTo(1, 0.00001));
-        expect(camera.zoom, closeTo(1, 0.00001));
-        expect(camera.bearing, closeTo(1, 0.00001));
-        expect(camera.pitch, closeTo(1, 0.00001));
-      },
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add GeoJsonSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = GeoJsonSource(
+      id: '1',
+      data: jsonEncode(
+        GeometryCollection(
+          geometries: [Point(coordinates: Position(12, 2))],
+        ).toJson(),
+      ),
     );
-    testWidgets(
-      'moveCamera',
-      (tester) async {
-        final ctrlCompleter = Completer<MapController>();
-        final app = App(onMapCreated: ctrlCompleter.complete);
-        await tester.pumpWidget(app);
-        final ctrl = await ctrlCompleter.future;
-        await ctrl.moveCamera(
-          center: Position(1, 2),
-          bearing: 1,
-          zoom: 1,
-          pitch: 1,
-        );
-        await tester.pumpAndSettle();
-        final camera = ctrl.getCamera();
-        expect(camera.center.lng, closeTo(1, 0.00001));
-        expect(camera.center.lat, closeTo(2, 0.00001));
-        expect(camera.zoom, closeTo(1, 0.00001));
-        expect(camera.bearing, closeTo(1, 0.00001));
-        expect(camera.pitch, closeTo(1, 0.00001));
-      },
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add VideoSource', (tester) async {
+    if (!kIsWeb) return; // VideoSource is only supported on web.
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = VideoSource(
+      id: '1',
+      coordinates: [Position(0, 0), Position(10, 10)],
+      urls: [
+        'https://file-examples.com/storage/fefd65c2506728a13a07e72/2017/04/file_example_MP4_480_1_5MG.mp4',
+      ],
     );
-    /*testWidgets(
-      'animateCamera',
-      (tester) async {
-        final ctrlCompleter = Completer<MapController>();
-        final app = App(onMapCreated: ctrlCompleter.complete);
-        await tester.pumpWidget(app);
-        final ctrl = await ctrlCompleter.future;
-        await ctrl.animateCamera(
-          center: Position(2, 1),
-          bearing: 2,
-          zoom: 2,
-          pitch: 2,
-          webSpeed: 100,
-          nativeDuration: Duration.zero,
-        );
-        await tester.pumpAndSettle();
-        final camera = ctrl.getCamera();
-        expect(camera.center.lng, closeTo(2, 0.00001));
-        expect(camera.center.lat, closeTo(1, 0.00001));
-        expect(camera.zoom, closeTo(2, 0.00001));
-        expect(camera.bearing, closeTo(2, 0.00001));
-        expect(camera.pitch, closeTo(2, 0.00001));
-      },
-    );*/
-    /*testWidgets(
-      'animateCamera cancel',
-      (tester) async {
-        late final MapController ctrl;
-        final app = App(onMapCreated: (controller) => ctrl = controller);
-        await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
-        final future = ctrl.flyTo(
-          center: Position(2, 2),
-          bearing: 2,
-          zoom: 2,
-          pitch: 2,
-          webSpeed: 0.1,
-          nativeDuration: const Duration(days: 1),
-        );
-        // TODO perform gesture
-        await expectLater(
-          future,
-          throwsA(isA<PlatformException>()),
-        );
-      },
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add RasterDemSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = RasterDemSource(
+      id: '1',
+      url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
+      tileSize: 256,
     );
-    testWidgets(
-      'getMetersPerPixelAtLatitude',
-      (tester) async {
-        late final MapController ctrl;
-        final app = App(onMapCreated: (controller) => ctrl = controller);
-        await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
-        final meters = await ctrl.getMetersPerPixelAtLatitude(23);
-        // TODO adjust value
-        expect(meters, closeTo(12345, 0.00001));
-      },
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add RasterSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = RasterSource(
+      id: '1',
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      maxZoom: 20,
+      tileSize: 256,
+      attribution:
+          '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
-    testWidgets(
-      'getVisibleRegion',
-      (tester) async {
-        late final MapController ctrl;
-        final app = App(onMapCreated: (controller) => ctrl = controller);
-        await tester.pumpWidget(app);
-        await tester.pumpAndSettle();
-        final region = await ctrl.getVisibleRegion();
-        // TODO adjust values
-        expect(region.latitudeNorth, closeTo(85.05112862791722, 0.00001));
-        expect(region.latitudeSouth, closeTo(12345, 0.00001));
-        expect(region.longitudeEast, closeTo(12345, 0.00001));
-        expect(region.longitudeWest, closeTo(12345, 0.00001));
-      },
-    );*/
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add VectorSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = VectorSource(
+      id: '1',
+      url: 'https://demotiles.maplibre.org/tiles/tiles.json',
+    );
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add BackgroundLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = BackgroundLayer(id: '1', color: Colors.black);
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
   });
 }

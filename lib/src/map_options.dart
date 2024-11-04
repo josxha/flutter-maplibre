@@ -1,5 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapOptions] class is used to set default values for the [MapLibreMap]
 /// widget.
@@ -26,6 +27,17 @@ class MapOptions {
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
   }) : initPitch = pitch ?? initPitch;
+
+  /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
+  /// Returns null if called outside of the [MapLibreMap.children].
+  static MapController? maybeOf(BuildContext context) =>
+      MapLibreInheritedModel.maybeMapControllerOf(context);
+
+  /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
+  /// Throws an [StateError] if called outside of the [MapLibreMap.children].
+  static MapController of(BuildContext context) =>
+      maybeOf(context) ??
+      (throw StateError('Unable to find an instance of MapController'));
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).

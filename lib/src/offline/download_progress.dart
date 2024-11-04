@@ -71,13 +71,11 @@ class DownloadProgress {
       );
 
   @override
-  String toString() {
-    return 'DownloadProgress('
-        'loadedBytes: $loadedBytes, '
-        'loadedTiles: $loadedTiles, '
-        'totalTiles: $totalTiles, '
-        'totalTilesEstimated: $totalTilesEstimated, '
-        'region: $region, '
-        'downloadCompleted: $downloadCompleted)';
-  }
+  String toString() => 'DownloadProgress('
+      'loadedBytes: $loadedBytes, '
+      'loadedTiles: $loadedTiles, '
+      'totalTiles: $totalTiles, '
+      'totalTilesEstimated: $totalTilesEstimated, '
+      'region: $region, '
+      'downloadCompleted: $downloadCompleted)';
 }

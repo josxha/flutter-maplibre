@@ -13,10 +13,13 @@ abstract interface class MapController {
       MapLibreInheritedModel.maybeMapControllerOf(context);
 
   /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
-  /// Returns null if called outside of the [MapLibreMap.children].
+  /// Throws an [StateError] if called outside of the [MapLibreMap.children].
   static MapController of(BuildContext context) =>
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapController'));
+
+  /// Get the [MapOptions] from [MapLibreMap.options].
+  MapOptions get options;
 
   /// Convert a latitude/longitude coordinate to a screen location.
   // TODO: can be made sync when flutter raster and ui thread are merged
