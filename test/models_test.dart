@@ -34,6 +34,7 @@ void main() {
       expect(all, equals(all2));
       expect(all, isNot(equals(none)));
       expect(all.hashCode, isNot(equals(none.hashCode)));
+      expect(all, equals(all2));
       expect(all.hashCode, equals(all2.hashCode));
     });
     test('LngLatBounds', () {
