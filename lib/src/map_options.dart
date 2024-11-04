@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
