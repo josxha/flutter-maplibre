@@ -8,5 +8,5 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   controller.main();
   general.main();
-  // permission.main();
+  permission.main();
 }

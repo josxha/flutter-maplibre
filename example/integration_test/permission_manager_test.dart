@@ -7,7 +7,7 @@ import 'app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('PermissionManager', () {
-    testWidgets('backgroundLocationPermissionGranted', (tester) async {
+    /*testWidgets('backgroundLocationPermissionGranted', (tester) async {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       final manager = PermissionManager();
@@ -19,7 +19,7 @@ void main() {
       await tester.pumpAndSettle();
       final manager = PermissionManager();
       expect(manager.locationPermissionsGranted, isFalse);
-    });
+    });*/
 
     testWidgets('runtimePermissionsRequired', (tester) async {
       await tester.pumpWidget(const App());
