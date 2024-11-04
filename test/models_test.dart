@@ -47,7 +47,7 @@ void main() {
       final o2 = o.copyWith(longitudeEast: 15);
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
-      
+
       final o3 = o.copyWith();
       expect(o, equals(o3));
       expect(o.hashCode, equals(o3.hashCode));

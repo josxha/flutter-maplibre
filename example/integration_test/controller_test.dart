@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -66,7 +68,7 @@ void main() {
     });
   });
 
-  testWidgets('addSource', (tester) async {
+  testWidgets('add ImageSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
@@ -78,6 +80,79 @@ void main() {
       coordinates: [Position(0, 0), Position(1, 1)],
     );
     await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add GeoJsonSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = GeoJsonSource(
+      id: '1',
+      data: jsonEncode(
+        GeometryCollection(
+          geometries: [Point(coordinates: Position(12, 2))],
+        ).toJson(),
+      ),
+    );
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add VideoSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    final source = VideoSource(
+      id: '1',
+      coordinates: [Position(0, 0), Position(10, 10)],
+      urls: [
+        'https://file-examples.com/storage/fefd65c2506728a13a07e72/2017/04/file_example_MP4_480_1_5MG.mp4',
+      ],
+    );
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add RasterDemSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = RasterDemSource(id: '1');
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add RasterSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = RasterSource(id: '1');
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add VectorSource', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const source = VectorSource(id: '1');
+    await ctrl.addSource(source);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('add BackgroundLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = BackgroundLayer(id: '1', color: Colors.black);
+    await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
 }
