@@ -31,7 +31,7 @@ class MapCamera {
       MapLibreInheritedModel.maybeMapCameraOf(context);
 
   /// Find the [MapCamera] of the closest [MapLibreMap] in the widget tree.
-  /// Returns null if called outside of the [MapLibreMap.children].
+  /// Throws an [StateError] if called outside of the [MapLibreMap.children].
   static MapCamera of(BuildContext context) =>
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapCamera'));

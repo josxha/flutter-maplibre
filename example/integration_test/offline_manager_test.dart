@@ -60,9 +60,11 @@ void main() {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
+      await manager.resetDatabase();
+
       const styleUrl = 'https://demotiles.maplibre.org/style.json';
       final stream = manager.downloadRegion(
-        maxZoom: 1,
+        maxZoom: 0,
         minZoom: 0,
         pixelDensity: 1,
         mapStyleUrl: styleUrl,
@@ -76,10 +78,27 @@ void main() {
       await for (final event in stream) {
         expect(event.region.styleUrl, styleUrl);
         expect(event.region.minZoom, 0);
-        expect(event.region.maxZoom, 1);
+        expect(event.region.maxZoom, 0);
       }
       final last = await stream.last;
       expect(last.progress, closeTo(1, 0.1));
+
+      // get regions
+      final regions = await manager.listOfflineRegions();
+      expect(regions, hasLength(1));
+      final region = regions.first;
+      expect(
+        region.styleUrl,
+        equals('https://demotiles.maplibre.org/style.json'),
+      );
+      expect(region.minZoom, 0);
+      expect(region.maxZoom, 0);
+
+      // get region
+      final region2 = await manager.getOfflineRegion(regionId: 1);
+      expect(region, equals(region2));
+      expect(region.hashCode, equals(region2.hashCode));
+
       manager.dispose();
     });
   });
