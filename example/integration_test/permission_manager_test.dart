@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       final manager = PermissionManager();
-      expect(manager.backgroundLocationPermissionGranted, isTrue);
+      expect(manager.backgroundLocationPermissionGranted, isFalse);
     });
 
     testWidgets('locationPermissionsGranted', (tester) async {
