@@ -468,6 +468,9 @@ final class MapLibreMapStateJni extends MapLibreMapState
           layout: layer.layout,
           paint: layer.paint,
         ),
+      _ => throw UnimplementedError(
+          'The Layer is not supported: ${layer.runtimeType}',
+        ),
     };
   }
 
@@ -532,6 +535,10 @@ final class MapLibreMapStateJni extends MapLibreMapState
           jniQuad.release();
         case VideoSource():
           throw UnimplementedError('Video source is only supported on web.');
+        default:
+          throw UnimplementedError(
+            'The Source is not supported: ${source.runtimeType}',
+          );
       }
       jniStyle?.addSource(jniSource);
       jniSource.release();

@@ -10,7 +10,8 @@ part 'video_source.dart';
 /// The base Source class that can't be used directly.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources
-sealed class Source {
+interface class Source {
+  /// Create a new [Source] instance.
   const Source({required this.id});
 
   /// The id of the source.

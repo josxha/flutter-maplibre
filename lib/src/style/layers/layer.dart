@@ -13,7 +13,8 @@ part 'raster_layer.dart';
 part 'symbol_layer.dart';
 
 /// The base Layer class that can't be used directly.
-sealed class Layer {
+interface class Layer {
+  /// Create a new [Layer] instance.
   const Layer({
     required this.id,
     this.layout = const {},
@@ -59,7 +60,7 @@ sealed class Layer {
 
 /// A [Layer] that pulls its data from a [Source]. Basically every layer
 /// except [BackgroundLayer].
-sealed class LayerWithSource extends Layer {
+interface class LayerWithSource extends Layer {
   /// const constructor for [LayerWithSource].
   const LayerWithSource({
     required super.id,
