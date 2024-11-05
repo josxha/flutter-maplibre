@@ -63,8 +63,8 @@ jobs:
 #          cache: true
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded
-  unit-test-android:
-    name: "[Android] Unit tests"
+  unit-test:
+    name: "Unit tests"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

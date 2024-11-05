@@ -45,7 +45,7 @@ void main() {
 
       manager.updateLayers([layer1]);
       verify(
-            () => controller.updateGeoJsonSource(
+        () => controller.updateGeoJsonSource(
           id: any(named: 'id'),
           data: any(named: 'data'),
         ),
@@ -57,6 +57,5 @@ void main() {
       verify(() => controller.removeSource(any())).called(1);
       verifyNoMoreInteractions(controller);
     });
-
   });
 }
