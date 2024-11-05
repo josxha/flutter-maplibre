@@ -28,7 +28,10 @@ class _EventsPageState extends State<EventsPage> {
             child: Container(
               padding: const EdgeInsets.all(8),
               alignment: Alignment.bottomLeft,
-              child: Text(_eventMessages.join('\n')),
+              child: Text(
+                _eventMessages.join('\n'),
+                style: const TextStyle(color: Colors.black),
+              ),
             ),
           ),
         ],

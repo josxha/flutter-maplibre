@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'shared/ui_app.dart';
+import '../shared/ui_app.dart';
 
 void main() {
   setUpAll(() {
