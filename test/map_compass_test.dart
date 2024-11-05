@@ -11,7 +11,7 @@ void main() {
   });
 
   group('MapCompass', () {
-    testWidgets('MapCompass rotation', (tester) async {
+    testWidgets('check rotation', (tester) async {
       final camera = MapCamera(
         center: Position(0, 0),
         zoom: 0,
@@ -20,11 +20,10 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      final compassKey = GlobalKey(debugLabel: 'MapCompass');
       final app = App(
         camera: camera,
         controller: controller,
-        children: [MapCompass(key: compassKey)],
+        children: const [MapCompass()],
       );
       await tester.pumpWidget(app);
       final transform = tester.firstWidget(find.byType(Transform)) as Transform;
@@ -32,7 +31,7 @@ void main() {
       expect(transform.transform.storage[1], isNot(isZero));
     });
 
-    testWidgets('MapCompass reset rotation', (tester) async {
+    testWidgets('reset rotation', (tester) async {
       final camera = MapCamera(
         center: Position(0, 0),
         zoom: 0,
