@@ -4,8 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class CircleAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [CircleAnnotationLayer] instance.
-  // ignore: prefer_const_constructors_in_immutables
-  CircleAnnotationLayer({
+  const CircleAnnotationLayer({
     required List<Point> points,
     this.radius = 5,
     this.color = const Color(0xFF000000),
@@ -70,10 +69,8 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
           strokeWidth == other.strokeWidth &&
           strokeColor == other.strokeColor;
 
-  late final int? _cachedHashCode;
-
   @override
-  int get hashCode => _cachedHashCode ??= Object.hash(
+  int get hashCode => Object.hash(
         super.hashCode,
         radius,
         color,

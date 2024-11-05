@@ -4,8 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   /// Create a new [MarkerAnnotationLayer] instance.
-  // ignore: prefer_const_constructors_in_immutables
-  MarkerAnnotationLayer({
+  const MarkerAnnotationLayer({
     required List<Point> points,
     this.iconAllowOverlap = false,
     this.iconIgnorePlacement = false,
@@ -281,10 +280,8 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
           textTranslate == other.textTranslate &&
           iconAnchor == other.iconAnchor;
 
-  late final int? _cachedHashCode;
-
   @override
-  int get hashCode => _cachedHashCode ??= Object.hashAll([
+  int get hashCode => Object.hashAll([
         super.hashCode,
         iconAllowOverlap,
         iconIgnorePlacement,

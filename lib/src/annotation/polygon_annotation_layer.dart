@@ -4,8 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   /// Create a new [PolygonAnnotationLayer] instance.
-  // ignore: prefer_const_constructors_in_immutables
-  PolygonAnnotationLayer({
+  const PolygonAnnotationLayer({
     required List<Polygon> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
@@ -47,9 +46,6 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
           color == other.color &&
           outlineColor == other.outlineColor;
 
-  late final int? _cachedHashCode;
-
   @override
-  int get hashCode =>
-      _cachedHashCode ??= Object.hash(super.hashCode, color, outlineColor);
+  int get hashCode => Object.hash(super.hashCode, color, outlineColor);
 }
