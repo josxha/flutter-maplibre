@@ -9,5 +9,5 @@ comment:
 
 ignore:
   - "**/*.g.dart"
-  - "lib/src/native/jni"
+  - "lib/src/platform/android/jni"
   - "example"
