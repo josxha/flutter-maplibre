@@ -226,26 +226,26 @@ jobs:
 #        with:
 #          name: maplibre-flutter-demo.app
 #          path: example/build/ios/iphonesimulator
-#  build-web:
-#    name: "[Web] Build"
-#    runs-on: ubuntu-latest
-#    defaults:
-#      run:
-#        working-directory: example
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: [ '3.24.0', '' ]
-#    steps:
-#      - uses: actions/checkout@v4
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: ${{ matrix.sdk }}
-#          cache: true
-#      - name: "Get Flutter dependencies"
-#        run: dart pub get
-#      - name: Build web
-#        run: flutter build web
+  build-web:
+    name: "[Web] Build"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.24.0', '' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build web
+        run: flutter build web
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
