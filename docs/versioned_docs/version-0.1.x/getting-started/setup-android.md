@@ -86,7 +86,6 @@ manifest`android/app/src/main/AndroidManifest.xml`.
 </manifest>
 ```
 
-Starting from Android API level 23 you also need to request it at runtime. This
-plugin does not handle this for you. You can either use the flutter package
-[location](https://pub.dev/packages/location)
-or [permission_handler](https://pub.dev/packages/permission_handler) for this.
+Starting from Android API level 23 you also need to request it at runtime.
+You can use the `PermissionManager` for it (only available with version 0.1.2 or
+later).
