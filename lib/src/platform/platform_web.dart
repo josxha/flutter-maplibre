@@ -2,8 +2,8 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/offline/offline_manager.dart';
 import 'package:maplibre/src/permission_manager.dart';
+import 'package:maplibre/src/platform/web/widget_state.dart';
 import 'package:maplibre/src/platform_interface.dart';
-import 'package:maplibre/src/web/widget_state.dart';
 
 /// A web implementation of the MapLibrePlatform of the MapLibre plugin.
 final class PlatformImpl extends PlatformInterface {

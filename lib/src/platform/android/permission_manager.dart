@@ -1,14 +1,14 @@
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/native/jni/jni.dart' as jni;
-import 'package:maplibre/src/native/permission_manager_pigeon.g.dart';
+import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
+import 'package:maplibre/src/platform/pigeon.g.dart';
 
 /// MapLibre Android specific implementation of the [PermissionManager].
 ///
 /// https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.location.permissions/-permissions-manager/index.html
-class PermissionManagerNative implements PermissionManager {
-  /// Create a new [PermissionManagerNative] instance.
-  PermissionManagerNative();
+class PermissionManagerAndroid implements PermissionManager {
+  /// Create a new [PermissionManagerAndroid] instance.
+  PermissionManagerAndroid();
 
   final _api = PermissionManagerHostApi();
 
