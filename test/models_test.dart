@@ -71,6 +71,8 @@ void main() {
         bearing: 0,
         center: Position(0, 0),
       );
+      expect(o, equals(o));
+      expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
       final oString = o.toString();
@@ -81,6 +83,87 @@ void main() {
       expect(oString, contains(o.pitch.toString()));
       expect(oString, contains(o.bearing.toString()));
       expect(oString, contains(o.zoom.toString()));
+    });
+    test('OfflineRegion', () {
+      const o = OfflineRegion(
+        minZoom: 2,
+        maxZoom: 4,
+        bounds: LngLatBounds(
+          longitudeWest: 1,
+          longitudeEast: 3,
+          latitudeSouth: -3,
+          latitudeNorth: 3,
+        ),
+        id: 23,
+        pixelRatio: 1,
+        styleUrl: 'https://example.com/style.json',
+      );
+      const o2 = OfflineRegion(
+        minZoom: 3,
+        maxZoom: 4,
+        bounds: LngLatBounds(
+          longitudeWest: 0,
+          longitudeEast: 3,
+          latitudeSouth: -5,
+          latitudeNorth: 3,
+        ),
+        id: 22,
+        pixelRatio: 1,
+        styleUrl: 'https://example.com/style2.json',
+      );
+      expect(o, equals(o));
+      expect(o2, equals(o2));
+      expect(o, isNot(equals(o2)));
+      expect(o.hashCode, isNot(equals(o2.hashCode)));
+      final oString = o.toString();
+      expect(oString, contains(o.bounds.toString()));
+      expect(oString, contains(o.minZoom.toString()));
+      expect(oString, contains(o.maxZoom.toString()));
+      expect(oString, contains(o.id.toString()));
+      expect(oString, contains(o.pixelRatio.toString()));
+      expect(oString, contains(o.styleUrl));
+    });
+    test('DownloadProgress', () {
+      const region = OfflineRegion(
+        minZoom: 2,
+        maxZoom: 4,
+        bounds: LngLatBounds(
+          longitudeWest: 1,
+          longitudeEast: 3,
+          latitudeSouth: -3,
+          latitudeNorth: 3,
+        ),
+        id: 23,
+        pixelRatio: 1,
+        styleUrl: 'https://example.com/style.json',
+      );
+      const o = DownloadProgress(
+        downloadCompleted: false,
+        loadedBytes: 12,
+        loadedTiles: 1,
+        region: region,
+        totalTiles: 2,
+        totalTilesEstimated: true,
+      );
+      const o2 = DownloadProgress(
+        downloadCompleted: true,
+        loadedBytes: 13,
+        loadedTiles: 1,
+        region: region,
+        totalTiles: 2,
+        totalTilesEstimated: false,
+      );
+      expect(o, equals(o));
+      expect(o2, equals(o2));
+      expect(o, isNot(equals(o2)));
+      expect(o.hashCode, isNot(equals(o2.hashCode)));
+      final oString = o.toString();
+      expect(oString, contains(o.downloadCompleted.toString()));
+      expect(oString, contains(o.loadedBytes.toString()));
+      expect(oString, contains(o.loadedTiles.toString()));
+      expect(oString, contains(o.region.toString()));
+      expect(oString, contains(o.totalTiles.toString()));
+      expect(oString, contains(o.totalTilesEstimated.toString()));
     });
   });
 }

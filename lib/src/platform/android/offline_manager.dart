@@ -4,13 +4,12 @@ import 'dart:ui';
 
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/native/extensions.dart';
-import 'package:maplibre/src/native/jni/jni.dart' as jni;
-import 'package:maplibre/src/offline/download_progress.dart';
+import 'package:maplibre/src/platform/android/extensions.dart';
+import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
 
 /// MapLibre Android specific implementation of the [OfflineManager].
-class OfflineManagerNative implements OfflineManager {
-  const OfflineManagerNative._(this._jManager);
+class OfflineManagerAndroid implements OfflineManager {
+  const OfflineManagerAndroid._(this._jManager);
 
   final jni.OfflineManager _jManager;
 
@@ -21,7 +20,7 @@ class OfflineManagerNative implements OfflineManager {
       jni.MapLibre.getInstance(jContext);
     });
     final jManager = jni.OfflineManager.getInstance(jContext);
-    return OfflineManagerNative._(jManager);
+    return OfflineManagerAndroid._(jManager);
   }
 
   @override

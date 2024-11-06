@@ -4,8 +4,7 @@ part of 'annotation_layer.dart';
 @immutable
 class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   /// Create a new [PolylineAnnotationLayer] instance.
-  // ignore: prefer_const_constructors_in_immutables
-  PolylineAnnotationLayer({
+  const PolylineAnnotationLayer({
     required List<LineString> polylines,
     this.color = const Color(0xFF000000),
     this.width = 1,
@@ -66,9 +65,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
           blur == other.blur &&
           dashArray == other.dashArray;
 
-  late final int? _cachedHashCode;
-
   @override
-  int get hashCode => _cachedHashCode ??=
+  int get hashCode =>
       Object.hash(super.hashCode, color, width, gapWidth, blur, dashArray);
 }

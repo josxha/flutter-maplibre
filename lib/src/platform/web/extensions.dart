@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/web/interop/interop.dart' as interop;
+import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
 
 /// Extension methods for the [Position] class. Not exported publicly.
 extension PositionExt on Position {

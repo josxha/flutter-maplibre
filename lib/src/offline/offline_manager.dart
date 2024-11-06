@@ -1,5 +1,4 @@
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/offline/download_progress.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// Use the offline manager to download map regions for offline usage.

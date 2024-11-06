@@ -8,9 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
 import 'package:maplibre/src/map_state.dart';
-import 'package:maplibre/src/web/extensions.dart';
-import 'package:maplibre/src/web/interop/interop.dart' as interop;
-import 'package:maplibre/src/web/interop/json.dart';
+import 'package:maplibre/src/platform/web/extensions.dart';
+import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
+import 'package:maplibre/src/platform/web/interop/json.dart';
 import 'package:web/web.dart';
 
 /// The web specific implementation of the [MapLibreMap] widget.

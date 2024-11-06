@@ -63,13 +63,13 @@ jobs:
 #          cache: true
 #      - run: flutter pub get
 #      - run: flutter test integration_test --no-pub -r expanded
-  unit-test-android:
-    name: "[Android] Unit tests"
+  unit-test:
+    name: "Unit tests"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.3', '' ]
+        sdk: [ '3.24.0', '' ]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -174,7 +174,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.3', '' ]
+        sdk: [ '3.24.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -206,7 +206,7 @@ jobs:
 #    strategy:
 #      fail-fast: false
 #      matrix:
-#        sdk: [ '3.24.3', '' ]
+#        sdk: [ '3.24.0', '' ]
 #    steps:
 #      - uses: actions/checkout@v4
 #      - uses: subosito/flutter-action@v2
@@ -235,7 +235,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.3', '' ]
+        sdk: [ '3.24.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -255,7 +255,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.3', '' ]
+        sdk: [ '3.24.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2

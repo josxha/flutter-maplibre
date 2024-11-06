@@ -10,7 +10,18 @@ import 'package:maplibre/maplibre.dart';
 class MapScalebar extends StatelessWidget {
   /// Display a scalebar to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
-  const MapScalebar({super.key});
+  const MapScalebar({
+    this.alignment = Alignment.bottomLeft,
+    this.padding = const EdgeInsets.all(12),
+    super.key,
+  });
+
+  /// The [Alignment] of the scalebar controls in what corner the scalebar
+  /// gets drawn.
+  final Alignment alignment;
+
+  /// The [padding] of the scalebar.
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +32,14 @@ class MapScalebar extends StatelessWidget {
     final latitude = camera.center.lat.toDouble();
     final theme = Theme.of(context);
 
-    Widget buildChild(double metersPerPixel) => Container(
-          alignment: Alignment.bottomLeft,
-          padding: const EdgeInsets.all(12),
-          child: CustomPaint(painter: _ScaleBarPainter(metersPerPixel, theme)),
-        );
+    Widget buildChild(double metersPerPixel) {
+      final painter = _ScaleBarPainter(metersPerPixel, theme);
+      return Container(
+        alignment: alignment,
+        padding: padding,
+        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+      );
+    }
 
     if (kIsWeb) {
       final metersPerPixel =
@@ -52,6 +66,42 @@ class _ScaleBarPainter extends CustomPainter {
 
   final double metersPerPixel;
   final ThemeData theme;
+  late final meters = switch (metersPerPixel) {
+    >= 300000 => 50000000,
+    >= 200000 => 30000000,
+    >= 100000 => 20000000,
+    >= 75000 => 10000000,
+    >= 50000 => 5000000,
+    >= 30000 => 3000000,
+    >= 15000 => 2000000,
+    >= 10000 => 1000000,
+    >= 5000 => 500000,
+    >= 3000 => 300000,
+    >= 2000 => 200000,
+    >= 1000 => 100000,
+    >= 500 => 50000,
+    >= 300 => 30000,
+    >= 200 => 20000,
+    >= 100 => 10000,
+    >= 50 => 5000,
+    >= 30 => 3000,
+    >= 20 => 2000,
+    >= 10 => 1000,
+    >= 5 => 500,
+    >= 3 => 300,
+    >= 2 => 200,
+    >= 1 => 100,
+    >= 0.5 => 50,
+    >= 0.3 => 30,
+    >= 0.2 => 20,
+    >= 0.1 => 10,
+    >= 0.05 => 5,
+    >= 0.03 => 3,
+    >= 0.02 => 2,
+    >= 0.01 => 1,
+    _ => metersPerPixel * 100,
+  };
+  late final double width = meters / metersPerPixel;
 
   late final _linePaint = Paint()
     ..color = Colors.black
@@ -62,47 +112,11 @@ class _ScaleBarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final unit = metersPerPixel >= 10 ? _Unit.km : _Unit.m;
-    final meters = switch (metersPerPixel) {
-      >= 300000 => 50000000,
-      >= 200000 => 30000000,
-      >= 100000 => 20000000,
-      >= 75000 => 10000000,
-      >= 50000 => 5000000,
-      >= 30000 => 3000000,
-      >= 15000 => 2000000,
-      >= 10000 => 1000000,
-      >= 5000 => 500000,
-      >= 3000 => 300000,
-      >= 2000 => 200000,
-      >= 1000 => 100000,
-      >= 500 => 50000,
-      >= 300 => 30000,
-      >= 200 => 20000,
-      >= 100 => 10000,
-      >= 50 => 5000,
-      >= 30 => 3000,
-      >= 20 => 2000,
-      >= 10 => 1000,
-      >= 5 => 500,
-      >= 3 => 300,
-      >= 2 => 200,
-      >= 1 => 100,
-      >= 0.5 => 50,
-      >= 0.3 => 30,
-      >= 0.2 => 20,
-      >= 0.1 => 10,
-      >= 0.05 => 5,
-      >= 0.03 => 3,
-      >= 0.02 => 2,
-      >= 0.01 => 1,
-      _ => metersPerPixel * 100,
-    };
-    final width = meters / metersPerPixel;
     canvas.drawVertices(
       Vertices.raw(
         VertexMode.triangles,
         Float32List.fromList(
-          [0, -22, 0, 0, width, -22, 0, 0, width, 0, width, -22],
+          [0, 22, 0, 0, width, 22, 0, 0, width, 0, width, 22],
         ),
       ),
       BlendMode.color,
@@ -111,7 +125,7 @@ class _ScaleBarPainter extends CustomPainter {
     canvas.drawRawPoints(
       PointMode.lines,
       Float32List.fromList(
-        [0, -22, 0, 0, 0, 0, width, 0, width, 0, width, -22],
+        [0, 22, 0, 0, 0, 22, width, 22, width, 0, width, 22],
       ),
       _linePaint,
     );
@@ -125,7 +139,7 @@ class _ScaleBarPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
     );
     textPainter.layout();
-    textPainter.paint(canvas, const Offset(5, -18));
+    textPainter.paint(canvas, const Offset(5, 5));
   }
 
   @override
