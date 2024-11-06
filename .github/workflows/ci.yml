@@ -125,32 +125,32 @@ jobs:
         if: ${{ matrix.api-level == '34' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-#  integration-test-web:
-#    name: "[Web] Integration tests"
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 30
-#    defaults:
-#      run:
-#        working-directory: example
-#    steps:
-#      - uses: actions/checkout@v4
-#      - name: "Setup Flutter SDK"
-#        uses: subosito/flutter-action@v2
-#        with:
-#          cache: true
-#      - name: "Get Flutter dependencies"
-#        run: flutter pub get
-#      - name: "Start chromedriver"
-#        run: |
-#          sudo chromedriver --enable --port=4444 &
-#      - name: "Run integration tests"
-#        run: |
-#          flutter drive \
-#            --driver=test_driver/integration_test.dart \
-#            --target=integration_test/smoke_test.dart \
-#            -d web-server \
-#            --release \
-#            --browser-name=chrome
+  integration-test-web:
+    name: "[Web] Integration tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Setup Flutter SDK"
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Start chromedriver"
+        run: |
+          sudo chromedriver --enable --port=4444 &
+      - name: "Run integration tests"
+        run: |
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/main.dart \
+            -d web-server \
+            --release \
+            --browser-name=chrome
   score:
     name: "Package score"
     runs-on: ubuntu-latest
