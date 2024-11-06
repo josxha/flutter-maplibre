@@ -22,6 +22,7 @@ void main() {
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
+      expect(o.hashCode, equals(o2.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('MarkerAnnotationLayer', () {
@@ -45,6 +46,7 @@ void main() {
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
+      expect(o.hashCode, equals(o2.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('PolygonAnnotationLayer', () {
@@ -70,6 +72,7 @@ void main() {
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
+      expect(o.hashCode, equals(o2.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('PolylineAnnotationLayer', () {
@@ -98,6 +101,7 @@ void main() {
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
+      expect(o.hashCode, equals(o2.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
   });
