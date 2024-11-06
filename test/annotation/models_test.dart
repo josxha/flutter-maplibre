@@ -24,6 +24,11 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
+
+      expect(o.getSourceId(5123), contains(5123.toString()));
+      expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.getLayout(), isA<Map<String, Object>>());
+      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('MarkerAnnotationLayer', () {
       final o = MarkerAnnotationLayer(
@@ -48,6 +53,11 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
+
+      expect(o.getSourceId(5123), contains(5123.toString()));
+      expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.getLayout(), isA<Map<String, Object>>());
+      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolygonAnnotationLayer', () {
       final o = PolygonAnnotationLayer(
@@ -74,6 +84,11 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
+
+      expect(o.getSourceId(5123), contains(5123.toString()));
+      expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.getLayout(), isA<Map<String, Object>>());
+      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolylineAnnotationLayer', () {
       final o = PolylineAnnotationLayer(
@@ -103,6 +118,11 @@ void main() {
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
+
+      expect(o.getSourceId(5123), contains(5123.toString()));
+      expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.getLayout(), isA<Map<String, Object>>());
+      expect(o.getPaint(), isA<Map<String, Object>>());
     });
   });
 }
