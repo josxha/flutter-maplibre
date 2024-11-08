@@ -22,7 +22,7 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   @override
   Map<String, Object> getPaint() => {
         'fill-color': color.toHexStringNoOpacity(),
-        'fill-opacity': color.opacity,
+        'fill-opacity': opacity,
         'fill-outline-color': outlineColor.toHexStringNoOpacity(),
       };
 

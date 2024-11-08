@@ -65,9 +65,10 @@ android {
     }
 
     dependencies {
+        // noinspection GradleDynamicVersion
+        implementation 'org.maplibre.gl:android-sdk:11.6.+' // JNIGEN
 // JNIGEN       implementation project(":MapLibreAndroid")
 // JNIGEN        implementation 'com.google.code.gson:gson:2.11.0'
-        implementation 'org.maplibre.gl:android-sdk:11.6.0' // JNIGEN
 // JNIGEN        implementation 'org.maplibre.gl:maplibre-android-gestures:0.0.3'
 // JNIGEN        implementation 'org.maplibre.gl:android-sdk-geojson:6.0.1'
 // JNIGEN        implementation 'org.maplibre.gl:android-sdk-turf:6.0.1'

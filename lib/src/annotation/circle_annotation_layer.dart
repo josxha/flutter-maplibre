@@ -48,10 +48,10 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
         'circle-radius': radius,
         'circle-color': color.toHexStringNoOpacity(),
         'circle-blur': blur,
-        'circle-opacity': color.opacity,
+        'circle-opacity': opacity,
         'circle-stroke-width': strokeWidth,
         'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
-        'circle-stroke-opacity': strokeColor.opacity,
+        'circle-stroke-opacity': strokeOpacity,
       };
 
   @override
