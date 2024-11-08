@@ -3,7 +3,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/annotation/annotation_manager.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../shared/ui_app.dart';
+import '../shared/mocks.dart';
 
 class MockSource extends Mock implements Source {}
 

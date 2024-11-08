@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 
+import 'shared/mocks.dart';
+
 void main() {
   group('Model Classes', () {
     test('QueriedLayer', () {
@@ -164,6 +166,51 @@ void main() {
       expect(oString, contains(o.region.toString()));
       expect(oString, contains(o.totalTiles.toString()));
       expect(oString, contains(o.totalTilesEstimated.toString()));
+    });
+    test('MapEvents', () {
+      final controller = MockMapController();
+      final camera = MockMapCamera();
+      final position = MockPosition();
+
+      final mapCreated = MapEventMapCreated(mapController: controller);
+      expect(mapCreated, isA<MapEvent>());
+      expect(mapCreated.mapController, equals(controller));
+
+      final moveCamera = MapEventMoveCamera(camera: camera);
+      expect(moveCamera, isA<MapEvent>());
+      expect(moveCamera.camera, equals(camera));
+
+      const startMoveCamera = MapEventStartMoveCamera(
+        reason: CameraChangeReason.apiGesture,
+      );
+      expect(startMoveCamera, isA<MapEvent>());
+      expect(startMoveCamera.reason, equals(CameraChangeReason.apiGesture));
+
+      final click = MapEventClick(point: position);
+      expect(click, isA<MapEvent>());
+      expect(click.point, equals(position));
+      expect(click.toString(), contains('MapEventClick'));
+
+      final doubleClick = MapEventDoubleClick(point: position);
+      expect(doubleClick, isA<MapEvent>());
+      expect(doubleClick.point, equals(position));
+      expect(doubleClick.toString(), contains('MapEventDoubleClick'));
+
+      final secondaryClick = MapEventSecondaryClick(point: position);
+      expect(secondaryClick, isA<MapEvent>());
+      expect(secondaryClick.point, equals(position));
+      expect(secondaryClick.toString(), contains('MapEventSecondaryClick'));
+
+      final longClick = MapEventLongClick(point: position);
+      expect(longClick, isA<MapEvent>());
+      expect(longClick.point, equals(position));
+      expect(longClick.toString(), contains('MapEventLongClick'));
+
+      const idle = MapEventIdle();
+      expect(idle, isA<MapEvent>());
+
+      const cameraIdle = MapEventCameraIdle();
+      expect(cameraIdle, isA<MapEvent>());
     });
   });
 }

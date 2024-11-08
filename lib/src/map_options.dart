@@ -30,14 +30,14 @@ class MapOptions {
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].
-  static MapController? maybeOf(BuildContext context) =>
-      MapLibreInheritedModel.maybeMapControllerOf(context);
+  static MapOptions? maybeOf(BuildContext context) =>
+      MapLibreInheritedModel.maybeMapControllerOf(context)?.options;
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
   /// Throws an [StateError] if called outside of the [MapLibreMap.children].
-  static MapController of(BuildContext context) =>
+  static MapOptions of(BuildContext context) =>
       maybeOf(context) ??
-      (throw StateError('Unable to find an instance of MapController'));
+      (throw StateError('Unable to find an instance of MapOptions'));
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
