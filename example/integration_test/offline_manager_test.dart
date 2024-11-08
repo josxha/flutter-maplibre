@@ -56,6 +56,26 @@ void main() {
       manager.runPackDatabaseAutomatically(enabled: true);
       manager.dispose();
     });
+    testWidgets('getOfflineRegion', (tester) async {
+      await tester.pumpWidget(const App());
+      await tester.pumpAndSettle();
+      final manager = await OfflineManager.createInstance();
+      expect(
+        () async => manager.getOfflineRegion(regionId: 234),
+        throwsA(isA<Exception>()),
+      );
+      manager.dispose();
+    });
+    testWidgets('listOfflineRegions', (tester) async {
+      await tester.pumpWidget(const App());
+      await tester.pumpAndSettle();
+      final manager = await OfflineManager.createInstance();
+      expect(
+        () async => manager.listOfflineRegions(),
+        isEmpty,
+      );
+      manager.dispose();
+    });
     /*testWidgets('downloadRegion', (tester) async {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();

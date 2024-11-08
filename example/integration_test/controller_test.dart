@@ -49,6 +49,58 @@ void main() {
       expect(offset.dy, greaterThanOrEqualTo(0));
     });
 
+    testWidgets('toScreenLocations', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final offsets = await ctrl.toScreenLocations([
+        Position(1, 2),
+        Position(43.5, -23),
+      ]);
+      // Different devices have different screen sizes.
+      expect(offsets[0].dx, greaterThanOrEqualTo(0));
+      expect(offsets[0].dy, greaterThanOrEqualTo(0));
+      expect(offsets[1].dx, greaterThanOrEqualTo(0));
+      expect(offsets[1].dy, greaterThanOrEqualTo(0));
+    });
+
+    testWidgets('toLngLat', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final lngLat = await ctrl.toLngLat(Offset.zero);
+      // Different devices have different screen sizes.
+      expect(lngLat.lng, greaterThanOrEqualTo(0));
+      expect(lngLat.lat, greaterThanOrEqualTo(0));
+    });
+
+    testWidgets('toLnLats', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final lngLats = await ctrl.toLngLats([
+        const Offset(23, 53),
+        const Offset(23.3, 53.5),
+      ]);
+      // Different devices have different screen sizes.
+      expect(lngLats[0].lng, greaterThanOrEqualTo(0));
+      expect(lngLats[0].lat, greaterThanOrEqualTo(0));
+      expect(lngLats[1].lng, greaterThanOrEqualTo(0));
+      expect(lngLats[1].lat, greaterThanOrEqualTo(0));
+    });
+
     testWidgets('moveCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(onMapCreated: ctrlCompleter.complete);
