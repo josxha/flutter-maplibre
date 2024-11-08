@@ -40,9 +40,8 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      // TODO: compare Positions
-      // super == other &&
-          other is PolygonAnnotationLayer &&
+      super == other &&
+      other is PolygonAnnotationLayer &&
           runtimeType == other.runtimeType &&
           color == other.color &&
           outlineColor == other.outlineColor;
