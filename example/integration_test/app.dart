@@ -10,11 +10,13 @@ class App extends StatelessWidget {
     this.options,
     this.onMapCreated,
     this.onStyleLoaded,
+    this.onEvent,
     super.key,
   });
 
   final MapOptions? options;
   final MapCreatedCallback? onMapCreated;
+  final MapEventCallback? onEvent;
   final VoidCallback? onStyleLoaded;
 
   @override
@@ -26,6 +28,7 @@ class App extends StatelessWidget {
           options: options ?? MapOptions(initCenter: Position(0, 0)),
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
+          onEvent: onEvent,
         ),
       ),
     );
