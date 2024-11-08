@@ -71,7 +71,7 @@ void main() {
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       expect(
-        () async => manager.listOfflineRegions(),
+        await manager.listOfflineRegions(),
         isEmpty,
       );
       manager.dispose();

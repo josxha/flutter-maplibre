@@ -78,8 +78,8 @@ void main() {
       final ctrl = await ctrlCompleter.future;
       final lngLat = await ctrl.toLngLat(Offset.zero);
       // Different devices have different screen sizes.
-      expect(lngLat.lng, greaterThanOrEqualTo(0));
-      expect(lngLat.lat, greaterThanOrEqualTo(0));
+      expect(lngLat.lng, isNot(equals(0)));
+      expect(lngLat.lat, isNot(equals(0)));
     });
 
     testWidgets('toLnLats', (tester) async {
@@ -95,10 +95,10 @@ void main() {
         const Offset(23.3, 53.5),
       ]);
       // Different devices have different screen sizes.
-      expect(lngLats[0].lng, greaterThanOrEqualTo(0));
-      expect(lngLats[0].lat, greaterThanOrEqualTo(0));
-      expect(lngLats[1].lng, greaterThanOrEqualTo(0));
-      expect(lngLats[1].lat, greaterThanOrEqualTo(0));
+      expect(lngLats[0].lng, isNot(equals(0)));
+      expect(lngLats[0].lat, isNot(equals(0)));
+      expect(lngLats[1].lng, isNot(equals(0)));
+      expect(lngLats[1].lat, isNot(equals(0)));
     });
 
     testWidgets('moveCamera', (tester) async {
