@@ -57,7 +57,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other &&
-      other is PolylineAnnotationLayer &&
+          other is PolylineAnnotationLayer &&
           runtimeType == other.runtimeType &&
           color == other.color &&
           width == other.width &&
@@ -67,6 +67,5 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
 
   @override
   int get hashCode =>
-      // TODO: compare Positions
-      Object.hash(/*super.hashCode,*/ color, width, gapWidth, blur, dashArray);
+      Object.hash(super.hashCode, color, width, gapWidth, blur, dashArray);
 }
