@@ -93,8 +93,8 @@ void main() {
         ],
       );
       expect(o, equals(o));
-      // TODO: expect(o2, equals(o3));
-      // TODO: expect(o2.hashCode, equals(o3.hashCode));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
@@ -138,8 +138,8 @@ void main() {
         ],
       );
       expect(o, equals(o));
-      // TODO: expect(o2, equals(o3));
-      // TODO: expect(o2.hashCode, equals(o3.hashCode));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
