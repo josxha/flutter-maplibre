@@ -53,17 +53,15 @@ void main() {
     });
 
     testWidgets('update map options', (tester) async {
-      await tester.pumpWidget(
-        App(
-          options: MapOptions(
-            initCenter: Position(0, 0),
-          ),
-        ),
-      );
+      final o1 = MapOptions(initCenter: Position(0, 0));
+      await tester.pumpWidget(App(options: o1));
       await tester.pumpAndSettle();
       await tester.pump();
-      // TODO: better checks
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
+
+      final o2 = MapOptions(initCenter: Position(0, 0), maxPitch: 0);
+      await tester.pumpWidget(App(options: o2));
+      await tester.pump();
     });
   });
 }
