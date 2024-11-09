@@ -2,8 +2,8 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/native/pigeon.g.dart',
-    dartOptions: DartOptions(copyrightHeader: ['// coverage:ignore-file']),
+    dartOut: 'lib/src/platform/pigeon.g.dart',
+    dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     // linux
     gobjectHeaderOut: 'linux/pigeon.g.h',
