@@ -11,7 +11,13 @@ concepts, and API details for `OfflineManager`.
 
 The download manager needs to be created asynchronous by
 using `OfflineManager.createInstance()`. You can store the instance for later
-use. Don't forget to call `manager.dispose()` when you no longer need it. You
+use.
+
+```dart
+Future<OfflineManager> futureManager = OfflineManager.createInstance();
+```
+
+Don't forget to call `manager.dispose()` when you no longer need it. You
 can do this for example in the `dispose` override of a flutter widget:
 
 ```dart
