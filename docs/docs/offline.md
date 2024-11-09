@@ -9,10 +9,6 @@ offline maps. It enables users to download and interact with map data in areas
 with limited or no internet access. Here, we’ll cover key features, usage
 concepts, and API details for `OfflineManager`.
 
-:::info
-The features described on this site have been added in version `0.1.2`.
-:::
-
 The download manager needs to be created asynchronous by
 using `OfflineManager.createInstance()`. You can store the instance for later
 use. Don't forget to call `manager.dispose()` when you no longer need it. You
