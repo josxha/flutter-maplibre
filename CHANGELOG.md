@@ -1,6 +1,8 @@
 ## 0.1.2
 
-With this release, Android and Web are
+This release adds the last missing features for Android and Web, that are were
+planned for now. The package will continue its ongoing efforts for stability
+before iOS gets added as a supported platform.
 
 ### New Features
 
