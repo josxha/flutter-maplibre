@@ -25,8 +25,6 @@ class WidgetLayer extends StatelessWidget {
         ? MediaQuery.devicePixelRatioOf(context)
         : 1.0;
 
-    final points = markers.map((m) => m.point).toList(growable: false);
-
     Widget buildChild(List<Offset> offsets) => Stack(
           // TODO: filter markers that are completely outside of the visible screen.
           children: markers.indexed.map((e) {
@@ -51,6 +49,8 @@ class WidgetLayer extends StatelessWidget {
           }).toList(growable: false),
         );
 
+    final points = markers.map((m) => m.point).toList(growable: false);
+
     if (kIsWeb) {
       final offsets = controller.toScreenLocationsSync(points);
       return buildChild(offsets);
@@ -62,6 +62,7 @@ class WidgetLayer extends StatelessWidget {
         future: controller.toScreenLocations(points),
         builder: (context, snapshot) {
           if (snapshot.data case final List<Offset> offsets) {
+            print(offsets);
             return buildChild(offsets);
           }
           if (snapshot.error case final Object error) {

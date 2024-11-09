@@ -27,6 +27,7 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<CircleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -60,6 +61,7 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<SymbolLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -101,6 +103,7 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<FillLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -146,6 +149,7 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<LineLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
