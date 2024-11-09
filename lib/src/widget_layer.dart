@@ -62,7 +62,6 @@ class WidgetLayer extends StatelessWidget {
         future: controller.toScreenLocations(points),
         builder: (context, snapshot) {
           if (snapshot.data case final List<Offset> offsets) {
-            print(offsets);
             return buildChild(offsets);
           }
           if (snapshot.error case final Object error) {

@@ -98,7 +98,6 @@ void main() {
       expect(find.byType(WidgetLayer), findsOneWidget);
       expect(find.byType(Positioned), findsNWidgets(3));
 
-
       final finder = find.descendant(
         of: find.byType(WidgetLayer),
         matching: find.byType(Positioned),
