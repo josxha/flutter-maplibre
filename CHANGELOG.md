@@ -1,3 +1,38 @@
+## 0.1.2
+
+This release adds the last missing features for Android and Web, that are were
+planned for now. The package will continue its ongoing efforts for stability
+before iOS gets added as a supported platform.
+
+### New Features
+
+- Add `OfflineManager` for offline maps, cache management and bulk downloading.
+- Add `PermissionsManager` to check and request location permissions.
+- Add `WidgetLayer` to support widgets as Markers on the map.
+- Add alternative Flutter platform view options for Texture Layer Hybrid
+  Composition, Hybrid Composition, Virtual Display.
+- Bump MapLibre Native on Android to version `11.6.+`.
+- Add web-only controller functions `toScreenLocationSync()`,
+  `toLngLatSync()`, `toScreenLocationsSync()`, `toLngLatsSync()`,
+  `getMetersPerPixelAtLatitudeSync()` and `getVisibleRegionSync()`.
+- Add `MapOptions.of(context)` and `MapOptions.maybeOf(context)`.
+- Add `padding` and `alignment` parameters to the `MapScalebar` widget.
+
+## Bug Fixes
+
+- Fix WebAssembly builds.
+- Remove unused `flutter_markdown` package.
+
+## Misc
+
+- Add unit tests, add Android integration tests.
+- Use [codecov](https://app.codecov.io/gh/josxha/flutter-maplibre) to monitor
+  test coverage.
+- Improve file structure by using a `/platform` directory.
+
+Full
+Changelog: [v0.1.1...v0.1.2](https://github.com/josxha/flutter-maplibre/compare/v0.1.1...v0.1.2)
+
 ## 0.1.1
 
 ### New Features
