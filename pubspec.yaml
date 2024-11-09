@@ -22,7 +22,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_markdown: ^0.7.4
   flutter_web_plugins:
     sdk: flutter
   geotypes: ^0.0.2

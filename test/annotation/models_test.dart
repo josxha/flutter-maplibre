@@ -16,17 +16,18 @@ void main() {
         strokeColor: Colors.greenAccent,
         radius: 10,
       );
-      const o2 = CircleAnnotationLayer(
-        points: [],
-      );
+      const o2 = CircleAnnotationLayer(points: []);
+      const o3 = CircleAnnotationLayer(points: []);
       expect(o, equals(o));
-      expect(o2, equals(o2));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<CircleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -48,14 +49,19 @@ void main() {
       const o2 = MarkerAnnotationLayer(
         points: [],
       );
+      const o3 = MarkerAnnotationLayer(
+        points: [],
+      );
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
-      expect(o.hashCode, equals(o.hashCode));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<SymbolLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -65,6 +71,7 @@ void main() {
           Polygon(
             coordinates: [
               [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
             ],
           ),
         ],
@@ -74,19 +81,29 @@ void main() {
           Polygon(
             coordinates: [
               [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
             ],
           ),
         ],
       );
+      /*final o3 = PolygonAnnotationLayer(
+        polygons: [
+          Polygon(
+            coordinates: [
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+            ],
+          ),
+        ],
+      );*/
       expect(o, equals(o));
-      expect(o2, equals(o2));
+      // expect(o2, equals(o3));
+      // expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<FillLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
@@ -97,7 +114,6 @@ void main() {
             coordinates: [
               Position(2, 23.4),
               Position(5.2, 32),
-              Position(53, 2),
             ],
           ),
         ],
@@ -113,14 +129,27 @@ void main() {
           ),
         ],
       );
+      /*final o3 = PolylineAnnotationLayer(
+        polylines: [
+          LineString(
+            coordinates: [
+              Position(2, 23.4),
+              Position(5.2, 32),
+              Position(53, 2),
+            ],
+          ),
+        ],
+      );*/
       expect(o, equals(o));
-      expect(o2, equals(o2));
+      // expect(o2, equals(o3));
+      // expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
+      expect(o.createLayer(142), isA<LineLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });

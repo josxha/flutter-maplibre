@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -12,41 +14,45 @@ void main() {
       final mockCamera = MockMapCamera();
       final mockController = MockMapController();
 
+      final completer = Completer<BuildContext>();
       final app = App(
         camera: mockCamera,
         controller: mockController,
         children: [
           Builder(
             builder: (context) {
-              expect(MapController.maybeOf(context), equals(mockController));
-              expect(MapController.of(context), equals(mockController));
+              completer.complete(context);
               return const SizedBox.shrink();
             },
           ),
         ],
       );
       await tester.pumpWidget(app);
-      await tester.pumpAndSettle();
+      final context = await completer.future;
+      expect(MapController.maybeOf(context), equals(mockController));
+      expect(MapController.of(context), equals(mockController));
     });
     testWidgets('MapCamera', (tester) async {
       final mockCamera = MockMapCamera();
       final mockController = MockMapController();
 
+      final completer = Completer<BuildContext>();
       final app = App(
         camera: mockCamera,
         controller: mockController,
         children: [
           Builder(
             builder: (context) {
-              expect(MapCamera.maybeOf(context), equals(mockCamera));
-              expect(MapCamera.of(context), equals(mockCamera));
+              completer.complete(context);
               return const SizedBox.shrink();
             },
           ),
         ],
       );
       await tester.pumpWidget(app);
-      await tester.pumpAndSettle();
+      final context = await completer.future;
+      expect(MapCamera.maybeOf(context), equals(mockCamera));
+      expect(MapCamera.of(context), equals(mockCamera));
     });
     testWidgets('MapOptions', (tester) async {
       final mockCamera = MockMapCamera();
@@ -54,21 +60,23 @@ void main() {
       final mockOptions = MockMapOptions();
       when(() => mockController.options).thenReturn(mockOptions);
 
+      final completer = Completer<BuildContext>();
       final app = App(
         camera: mockCamera,
         controller: mockController,
         children: [
           Builder(
             builder: (context) {
-              expect(MapOptions.maybeOf(context), equals(mockOptions));
-              expect(MapOptions.of(context), equals(mockOptions));
+              completer.complete(context);
               return const SizedBox.shrink();
             },
           ),
         ],
       );
       await tester.pumpWidget(app);
-      await tester.pumpAndSettle();
+      final context = await completer.future;
+      expect(MapOptions.maybeOf(context), equals(mockOptions));
+      expect(MapOptions.of(context), equals(mockOptions));
     });
   });
 }

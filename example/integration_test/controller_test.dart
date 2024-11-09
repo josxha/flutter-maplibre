@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/styled_map_page.dart';
 
 import 'app.dart';
 
@@ -14,12 +15,15 @@ void main() {
   group('controller', () {
     testWidgets('getCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
+      final events = <MapEvent>[];
       final app = App(
         onMapCreated: ctrlCompleter.complete,
         options: MapOptions(initCenter: Position(1, 2)),
+        onEvent: events.add,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
+      events.clear();
       await ctrl.moveCamera(
         center: Position(1, 1),
         bearing: 1,
@@ -27,12 +31,17 @@ void main() {
         pitch: 1,
       );
       await tester.pumpAndSettle();
+
       final camera = ctrl.getCamera();
       expect(camera.center.lng, closeTo(1, 0.00001));
       expect(camera.center.lat, closeTo(1, 0.00001));
       expect(camera.zoom, closeTo(1, 0.00001));
       expect(camera.bearing, closeTo(1, 0.00001));
       expect(camera.pitch, closeTo(1, 0.00001));
+
+      expect(events[events.length - 3], isA<MapEventStartMoveCamera>());
+      expect(events[events.length - 2], isA<MapEventMoveCamera>());
+      expect(events[events.length - 1], isA<MapEventCameraIdle>());
     });
 
     testWidgets('toScreenLocation', (tester) async {
@@ -47,6 +56,185 @@ void main() {
       // Different devices have different screen sizes.
       expect(offset.dx, greaterThanOrEqualTo(0));
       expect(offset.dy, greaterThanOrEqualTo(0));
+    });
+
+    testWidgets('toScreenLocations', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final offsets = await ctrl.toScreenLocations([
+        Position(1, 2),
+        Position(43.5, -23),
+      ]);
+      // Different devices have different screen sizes.
+      expect(offsets[0].dx, greaterThanOrEqualTo(0));
+      expect(offsets[0].dy, greaterThanOrEqualTo(0));
+      expect(offsets[1].dx, greaterThanOrEqualTo(0));
+      expect(offsets[1].dy, greaterThanOrEqualTo(0));
+    });
+
+    testWidgets('toLngLat', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final lngLat = await ctrl.toLngLat(Offset.zero);
+      // Different devices have different screen sizes.
+      expect(lngLat.lng, isNot(equals(0)));
+      expect(lngLat.lat, isNot(equals(0)));
+    });
+
+    testWidgets('toLnLats', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2)),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final lngLats = await ctrl.toLngLats([
+        const Offset(23, 53),
+        const Offset(23.3, 53.5),
+      ]);
+      // Different devices have different screen sizes.
+      expect(lngLats[0].lng, isNot(equals(0)));
+      expect(lngLats[0].lat, isNot(equals(0)));
+      expect(lngLats[1].lng, isNot(equals(0)));
+      expect(lngLats[1].lat, isNot(equals(0)));
+    });
+
+    testWidgets('getMetersPerPixelAtLatitude', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(1, 2), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final meters = await ctrl.getMetersPerPixelAtLatitude(2.34);
+      expect(meters, closeTo(76.37, 0.1));
+    });
+
+    testWidgets('getVisibleRegion', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      final region = await ctrl.getVisibleRegion();
+      // testing devices have different screen sizes
+      expect(region.longitudeWest, lessThan(0));
+      expect(region.longitudeEast, greaterThan(0));
+      expect(region.latitudeNorth, greaterThan(0));
+      expect(region.latitudeSouth, lessThan(0));
+
+      expect(region.longitudeWest, greaterThan(-10));
+      expect(region.longitudeEast, lessThan(10));
+      expect(region.latitudeNorth, lessThan(10));
+      expect(region.latitudeSouth, greaterThan(-10));
+    });
+
+    testWidgets('removeLayer', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      // ensure no crash if a layer does not exist
+      await ctrl.removeLayer('notExisting');
+
+      const layer = RasterLayer(id: 'rasterLayer', sourceId: 'source');
+      await ctrl.addLayer(layer);
+      await ctrl.removeLayer(layer.id);
+    });
+
+    testWidgets('removeSource', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+
+      // ensure no crash if a source does not exist
+      await ctrl.removeSource('notExisting');
+
+      const source = GeoJsonSource(id: 'source', data: '{}');
+      await ctrl.addSource(source);
+      await ctrl.removeSource(source.id);
+    });
+
+    testWidgets('updateGeoJsonSource', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+
+      const source = GeoJsonSource(id: '1', data: '{}');
+      await ctrl.addSource(source);
+      await ctrl.updateGeoJsonSource(
+        id: source.id,
+        data: jsonEncode(
+          GeometryCollection(geometries: [Point(coordinates: Position(0, 0))])
+              .toJson(),
+        ),
+      );
+    });
+
+    testWidgets('queryLayers', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final styleCompleter = Completer<void>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        onStyleLoaded: styleCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      await styleCompleter.future;
+      final size = tester.getSize(find.byType(MapLibreMap));
+
+      var layers = await ctrl.queryLayers(Offset(size.width, size.height));
+      expect(layers, hasLength(0));
+
+      layers = await ctrl.queryLayers(Offset.zero);
+      expect(layers, hasLength(0));
+    });
+
+    testWidgets('getAttributions', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final styleCompleter = Completer<void>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        onStyleLoaded: styleCompleter.complete,
+        options: MapOptions(
+          initCenter: Position(0, 0),
+          initZoom: 10,
+          initStyle: StyledMapPage.styleUrl,
+        ),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      await styleCompleter.future;
+
+      final attributions = await ctrl.getAttributions();
+      expect(attributions, hasLength(1));
+      expect(attributions.first, contains('OpenStreetMap'));
     });
 
     testWidgets('moveCamera', (tester) async {
@@ -169,6 +357,87 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = BackgroundLayer(id: '1', color: Colors.black);
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add FillLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = FillLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add CircleLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = CircleLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add FillExtrusionLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = FillExtrusionLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add HeatmapLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = HeatmapLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add HillshadeLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = HillshadeLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add LineLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = LineLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add RasterLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = RasterLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add SymbolLayer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = SymbolLayer(id: '1', sourceId: 'source1');
+    await ctrl.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+  testWidgets('add unknown Layer', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+    const layer = SymbolLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
