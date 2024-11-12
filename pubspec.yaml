@@ -8,6 +8,10 @@ documentation: https://flutter-maplibre.pages.dev/docs/index/
 
 topics: [ map, maplibre, mvt ]
 
+screenshots:
+  - description: 'MapLibre Logo'
+    path: example/assets/logo.png
+
 funding:
   - https://www.paypal.com/paypalme/joschaeckert
 
