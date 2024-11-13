@@ -44,6 +44,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             center: options.initCenter?.toLngLat(),
             bearing: options.initBearing,
             pitch: options.initPitch,
+            attributionControl: false,
           ),
         );
 
