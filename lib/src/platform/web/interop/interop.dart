@@ -7,7 +7,6 @@ import 'package:maplibre/maplibre.dart';
 import 'package:web/web.dart';
 
 part 'camera.dart';
-part 'controls.dart';
 part 'events.dart';
 part 'gesture_handlers.dart';
 part 'map.dart';
