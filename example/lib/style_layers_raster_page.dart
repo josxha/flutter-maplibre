@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class LayersRasterPage extends StatefulWidget {
-  const LayersRasterPage({super.key});
+class StyleLayersRasterPage extends StatefulWidget {
+  const StyleLayersRasterPage({super.key});
 
-  static const location = '/layers/raster';
+  static const location = '/style-layers/raster';
 
   @override
-  State<LayersRasterPage> createState() => _LayersRasterPageState();
+  State<StyleLayersRasterPage> createState() => _StyleLayersRasterPageState();
 }
 
 const _layerId = 'showcaseLayer';
 const _sourceId = 'openStreetMap';
 
-class _LayersRasterPageState extends State<LayersRasterPage> {
+class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
   late final MapController _controller;
 
   // If you are looking for just a way how to display OpenStreetMap on the
@@ -25,7 +25,7 @@ class _LayersRasterPageState extends State<LayersRasterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Raster Layer')),
+      appBar: AppBar(title: const Text('Raster Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initCenter: Position(9, 48), initZoom: 7),
         onMapCreated: (controller) => _controller = controller,
@@ -44,11 +44,11 @@ class _LayersRasterPageState extends State<LayersRasterPage> {
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
     await _controller.addSource(openStreetMap);
-    await _controller.addLayer(_rasterLayer);
+    await _controller.addLayer(_rasterStyleLayer);
   }
 }
 
-const _rasterLayer = RasterLayer(
+const _rasterStyleLayer = RasterStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
 );

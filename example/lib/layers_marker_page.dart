@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/style_layers_symbol_page.dart';
 
 @immutable
-class AnnotationsMarkerPage extends StatefulWidget {
-  const AnnotationsMarkerPage({super.key});
+class LayersMarkerPage extends StatefulWidget {
+  const LayersMarkerPage({super.key});
 
-  static const location = '/annotations/marker';
+  static const location = '/layers/marker';
 
   @override
-  State<AnnotationsMarkerPage> createState() => _AnnotationsMarkerPageState();
+  State<LayersMarkerPage> createState() => _LayersMarkerPageState();
 }
 
-class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
+class _LayersMarkerPageState extends State<LayersMarkerPage> {
   final _points = <Point>[
     Point(coordinates: Position(9.17, 47.68)),
     Point(coordinates: Position(9.17, 48)),
@@ -27,7 +27,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Marker Annotations')),
+      appBar: AppBar(title: const Text('Marker Layers')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) async {
@@ -37,7 +37,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
             case MapEventStyleLoaded():
               // add marker image to map
               final response =
-                  await http.get(Uri.parse(LayersSymbolPage.imageUrl));
+                  await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
               final bytes = response.bodyBytes;
               await _controller.addImage('marker', bytes);
               setState(() {
@@ -54,7 +54,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
           }
         },
         layers: [
-          MarkerAnnotationLayer(
+          MarkerLayer(
             points: _points,
             textField: 'Marker',
             textAllowOverlap: true,

@@ -1,10 +1,10 @@
-part of 'annotation_layer.dart';
+part of 'layer.dart';
 
 /// A [Polygon] layer.
 @immutable
-class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
-  /// Create a new [PolygonAnnotationLayer] instance.
-  const PolygonAnnotationLayer({
+class PolygonLayer extends Layer<Polygon> {
+  /// Create a new [PolygonLayer] instance.
+  const PolygonLayer({
     required List<Polygon> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
@@ -30,7 +30,7 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer(int index) => FillLayer(
+  StyleLayer createStyleLayer(int index) => FillStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
@@ -41,7 +41,7 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other &&
-          other is PolygonAnnotationLayer &&
+          other is PolygonLayer &&
           runtimeType == other.runtimeType &&
           color == other.color &&
           outlineColor == other.outlineColor;

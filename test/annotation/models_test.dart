@@ -5,7 +5,7 @@ import 'package:maplibre/maplibre.dart';
 void main() {
   group('Annotation Model Classes', () {
     test('CircleAnnotationLayer', () {
-      final o = CircleAnnotationLayer(
+      final o = CircleLayer(
         points: [
           Point(coordinates: Position(0, 0)),
           Point(coordinates: Position(12.4, -4)),
@@ -16,8 +16,8 @@ void main() {
         strokeColor: Colors.greenAccent,
         radius: 10,
       );
-      const o2 = CircleAnnotationLayer(points: []);
-      const o3 = CircleAnnotationLayer(points: []);
+      const o2 = CircleLayer(points: []);
+      const o3 = CircleLayer(points: []);
       expect(o, equals(o));
       expect(o2, equals(o3));
       expect(o2.hashCode, equals(o3.hashCode));
@@ -27,12 +27,12 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createLayer(142), isA<CircleLayer>());
+      expect(o.createStyleLayer(142), isA<CircleStyleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('MarkerAnnotationLayer', () {
-      final o = MarkerAnnotationLayer(
+      final o = MarkerLayer(
         points: [
           Point(coordinates: Position(0, 0)),
           Point(coordinates: Position(12.4, -4)),
@@ -46,10 +46,10 @@ void main() {
         textAllowOverlap: true,
         textSize: 23,
       );
-      const o2 = MarkerAnnotationLayer(
+      const o2 = MarkerLayer(
         points: [],
       );
-      const o3 = MarkerAnnotationLayer(
+      const o3 = MarkerLayer(
         points: [],
       );
       expect(o, equals(o));
@@ -61,12 +61,12 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createLayer(142), isA<SymbolLayer>());
+      expect(o.createStyleLayer(142), isA<SymbolStyleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolygonAnnotationLayer', () {
-      final o = PolygonAnnotationLayer(
+      final o = PolygonLayer(
         polygons: [
           Polygon(
             coordinates: [
@@ -76,7 +76,7 @@ void main() {
           ),
         ],
       );
-      final o2 = PolygonAnnotationLayer(
+      final o2 = PolygonLayer(
         polygons: [
           Polygon(
             coordinates: [
@@ -103,12 +103,12 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createLayer(142), isA<FillLayer>());
+      expect(o.createStyleLayer(142), isA<FillStyleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolylineAnnotationLayer', () {
-      final o = PolylineAnnotationLayer(
+      final o = PolylineLayer(
         polylines: [
           LineString(
             coordinates: [
@@ -118,7 +118,7 @@ void main() {
           ),
         ],
       );
-      final o2 = PolylineAnnotationLayer(
+      final o2 = PolylineLayer(
         polylines: [
           LineString(
             coordinates: [
@@ -149,7 +149,7 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createLayer(142), isA<LineLayer>());
+      expect(o.createStyleLayer(142), isA<LineStyleLayer>());
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });

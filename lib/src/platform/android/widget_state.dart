@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
@@ -24,7 +24,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
-  AnnotationManager? _annotationManager;
+  LayerManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -403,65 +403,65 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     // TODO: use JNI for this method
     await switch (layer) {
-      FillLayer() => _hostApi.addFillLayer(
+      FillStyleLayer() => _hostApi.addFillLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      CircleLayer() => _hostApi.addCircleLayer(
+      CircleStyleLayer() => _hostApi.addCircleLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      BackgroundLayer() => _hostApi.addBackgroundLayer(
+      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
           id: layer.id,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      FillExtrusionLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapLayer() => _hostApi.addHeatmapLayer(
+      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      HillshadeLayer() => _hostApi.addHillshadeLayer(
+      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      LineLayer() => _hostApi.addLineLayer(
+      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      RasterLayer() => _hostApi.addRasterLayer(
+      LineStyleLayer() => _hostApi.addLineLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
         ),
-      SymbolLayer() => _hostApi.addSymbolLayer(
+      RasterStyleLayer() => _hostApi.addRasterLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
+      SymbolStyleLayer() => _hostApi.addSymbolLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
@@ -553,7 +553,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
-    _annotationManager = AnnotationManager(this, widget.layers);
+    _annotationManager = LayerManager(this, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }

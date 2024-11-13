@@ -1,11 +1,11 @@
-part of 'layer.dart';
+part of 'style_layer.dart';
 
 /// A layer that contains circles.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
-final class LineLayer extends LayerWithSource {
-  /// Default constructor for a [LineLayer] instance.
-  const LineLayer({
+final class LineStyleLayer extends StyleLayerWithSource {
+  /// Default constructor for a [LineStyleLayer] instance.
+  const LineStyleLayer({
     required super.id,
     required super.sourceId,
     super.layout,

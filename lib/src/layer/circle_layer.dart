@@ -1,10 +1,10 @@
-part of 'annotation_layer.dart';
+part of 'layer.dart';
 
-/// A marker layer.
+/// A [Point] layer.
 @immutable
-class CircleAnnotationLayer extends AnnotationLayer<Point> {
-  /// Create a new [CircleAnnotationLayer] instance.
-  const CircleAnnotationLayer({
+class CircleLayer extends Layer<Point> {
+  /// Create a new [CircleLayer] instance.
+  const CircleLayer({
     required List<Point> points,
     this.radius = 5,
     this.color = const Color(0xFF000000),
@@ -36,7 +36,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   double get strokeOpacity => strokeColor.opacity;
 
   @override
-  Layer createLayer(int index) => CircleLayer(
+  StyleLayer createStyleLayer(int index) => CircleStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
@@ -61,7 +61,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other &&
-          other is CircleAnnotationLayer &&
+          other is CircleLayer &&
           runtimeType == other.runtimeType &&
           radius == other.radius &&
           color == other.color &&

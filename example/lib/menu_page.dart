@@ -1,25 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_circle_page.dart';
-import 'package:maplibre_example/annotations_marker_page.dart';
-import 'package:maplibre_example/annotations_mixed_page.dart';
-import 'package:maplibre_example/annotations_polygon_page.dart';
-import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
-import 'package:maplibre_example/layers_fill_extrusion_page.dart';
-import 'package:maplibre_example/layers_fill_page.dart';
-import 'package:maplibre_example/layers_heatmap_page.dart';
-import 'package:maplibre_example/layers_hillshade_page.dart';
-import 'package:maplibre_example/layers_line_page.dart';
-import 'package:maplibre_example/layers_raster_page.dart';
-import 'package:maplibre_example/layers_symbol_page.dart';
+import 'package:maplibre_example/layers_marker_page.dart';
+import 'package:maplibre_example/layers_mixed_page.dart';
+import 'package:maplibre_example/layers_polygon_page.dart';
+import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
+import 'package:maplibre_example/style_layers_circle_page.dart';
+import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
+import 'package:maplibre_example/style_layers_fill_page.dart';
+import 'package:maplibre_example/style_layers_heatmap_page.dart';
+import 'package:maplibre_example/style_layers_hillshade_page.dart';
+import 'package:maplibre_example/style_layers_line_page.dart';
+import 'package:maplibre_example/style_layers_raster_page.dart';
+import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
@@ -102,15 +102,15 @@ class MenuPage extends StatelessWidget {
                 ),
             ],
           ),
-          const SliverToBoxAdapter(child: SectionTitle('Annotations')),
+          const SliverToBoxAdapter(child: SectionTitle('Layers')),
           SliverGrid.extent(
             maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
-                label: 'Mixed Annotations',
+                label: 'Mixed Layers',
                 iconData: Icons.control_point_duplicate_outlined,
-                location: AnnotationsMixedPage.location,
+                location: LayersMixedPage.location,
               ),
               ItemCard(
                 label: 'Widgets',
@@ -120,26 +120,26 @@ class MenuPage extends StatelessWidget {
               ItemCard(
                 label: 'Circles',
                 iconData: Icons.circle,
-                location: AnnotationsCirclePage.location,
+                location: LayersCirclePage.location,
               ),
               ItemCard(
                 label: 'Markers',
                 iconData: Icons.location_on,
-                location: AnnotationsMarkerPage.location,
+                location: LayersMarkerPage.location,
               ),
               ItemCard(
                 label: 'Polygons',
                 iconData: Icons.format_shapes,
-                location: AnnotationsPolygonPage.location,
+                location: LayersPolygonPage.location,
               ),
               ItemCard(
                 label: 'Polylines',
                 iconData: Icons.polyline,
-                location: AnnotationsPolylinePage.location,
+                location: LayersPolylinePage.location,
               ),
             ],
           ),
-          const SliverToBoxAdapter(child: SectionTitle('Layers')),
+          const SliverToBoxAdapter(child: SectionTitle('Style Layers')),
           SliverGrid.extent(
             maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
@@ -147,42 +147,42 @@ class MenuPage extends StatelessWidget {
               ItemCard(
                 label: 'Circle',
                 iconData: Icons.circle,
-                location: LayersCirclePage.location,
+                location: StyleLayersCirclePage.location,
               ),
               ItemCard(
                 label: 'Fill',
                 iconData: Icons.format_shapes,
-                location: LayersFillPage.location,
+                location: StyleLayersFillPage.location,
               ),
               ItemCard(
                 label: 'Fill Extrusion',
                 iconData: Icons.house,
-                location: LayersFillExtrusionPage.location,
+                location: StyleLayersFillExtrusionPage.location,
               ),
               ItemCard(
                 label: 'Heatmap',
                 iconData: Icons.thermostat,
-                location: LayersHeatmapPage.location,
+                location: StyleLayersHeatmapPage.location,
               ),
               ItemCard(
                 label: 'Hillshade',
                 iconData: Icons.landscape,
-                location: LayersHillshadePage.location,
+                location: StyleLayersHillshadePage.location,
               ),
               ItemCard(
                 label: 'Line',
                 iconData: Icons.polyline,
-                location: LayersLinePage.location,
+                location: StyleLayersLinePage.location,
               ),
               ItemCard(
                 label: 'Raster',
                 iconData: Icons.grid_on,
-                location: LayersRasterPage.location,
+                location: StyleLayersRasterPage.location,
               ),
               ItemCard(
                 label: 'Symbol',
                 iconData: Icons.emoji_emotions,
-                location: LayersSymbolPage.location,
+                location: StyleLayersSymbolPage.location,
               ),
             ],
           ),
