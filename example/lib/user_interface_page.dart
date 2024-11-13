@@ -21,9 +21,7 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
         options: MapOptions(
           initZoom: 3,
           initCenter: Position(9.17, 47.68),
-          initStyle: Theme.of(context).brightness == Brightness.light
-              ? StyledMapPage.styleUrl
-              : StyledMapPage.styleUrlDark,
+          initStyle: Theme.of(context).brightness == Brightness.light ? StyledMapPage.styleUrl : StyledMapPage.styleUrlDark,
           attribution: false,
           nativeCompass: false,
           nativeLogo: false,
@@ -31,7 +29,9 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
         children: const [
           MapScalebar(),
           SourceAttribution(),
-          MapZoomButtons(),
+          MapControlButtons(
+            showTrackLocation: true,
+          ),
           MapCompass(),
         ],
       ),
