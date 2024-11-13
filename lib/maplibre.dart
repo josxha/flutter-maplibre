@@ -22,5 +22,4 @@ export 'src/ui/map_scalebar.dart';
 export 'src/ui/map_zoom_buttons.dart';
 export 'src/ui/source_attribution.dart';
 export 'src/utils.dart';
-export 'src/web_controls.dart';
 export 'src/widget_layer.dart';
