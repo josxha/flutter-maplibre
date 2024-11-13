@@ -17,7 +17,7 @@ sealed class Layer<G extends GeometryType<Object>> {
     required this.list,
   });
 
-  /// The [List] of annotations.
+  /// The [List] of layers.
   final List<G> list;
 
   /// Get a unique source id.
