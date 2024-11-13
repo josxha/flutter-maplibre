@@ -82,8 +82,11 @@ class MapLibreMapController(
             val options =
                 MapLibreMapOptions
                     .createFromAttributes(context)
+                    .attributionEnabled(false)
+                    .logoEnabled(false)
                     // TODO: textureMode comes at a significant performance penalty, https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
                     .textureMode(mapOptions.androidTextureMode)
+                    .compassEnabled(false)
                     .minZoomPreference(mapOptions.minZoom)
                     .maxZoomPreference(mapOptions.maxZoom)
                     .minPitchPreference(mapOptions.minPitch)
