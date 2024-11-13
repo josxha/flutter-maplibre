@@ -1,11 +1,11 @@
-part of 'layer.dart';
+part of 'style_layer.dart';
 
 /// A layer that contains circles.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
-final class HeatmapLayer extends LayerWithSource {
-  /// Default constructor for a [HeatmapLayer] instance.
-  const HeatmapLayer({
+final class FillExtrusionStyleLayer extends StyleLayerWithSource {
+  /// Default constructor for a [FillExtrusionStyleLayer] instance.
+  const FillExtrusionStyleLayer({
     required super.id,
     required super.sourceId,
     super.layout,

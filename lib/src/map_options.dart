@@ -14,7 +14,6 @@ class MapOptions {
     @Deprecated('Renamed to initPitch') double? pitch,
     double initPitch = 0,
     this.initBearing = 0,
-    this.webControls = const [],
     this.minZoom = 0,
     this.maxZoom = 22,
     this.minPitch = 0,
@@ -53,11 +52,6 @@ class MapOptions {
 
   /// The initial center on the map.
   final Position? initCenter;
-
-  /// A list of user interface control buttons that should get used.
-  ///
-  /// Only supported on web.
-  final List<WebMapControl> webControls;
 
   /// The minimum zoom level. Allowed values are 0-24. Defaults to 0.
   final double minZoom;

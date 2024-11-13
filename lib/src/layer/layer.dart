@@ -2,22 +2,22 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/extensions.dart';
+import 'package:maplibre/src/layer/extensions.dart';
 
-part 'circle_annotation_layer.dart';
-part 'marker_annotation_layer.dart';
-part 'polygon_annotation_layer.dart';
-part 'polyline_annotation_layer.dart';
+part 'circle_layer.dart';
+part 'marker_layer.dart';
+part 'polygon_layer.dart';
+part 'polyline_layer.dart';
 
 /// This class is the base for all annotation layer classes like
-/// [MarkerAnnotationLayer].
+/// [MarkerLayer].
 @immutable
-sealed class AnnotationLayer<G extends GeometryType<Object>> {
-  const AnnotationLayer._({
+sealed class Layer<G extends GeometryType<Object>> {
+  const Layer._({
     required this.list,
   });
 
-  /// The [List] of annotations.
+  /// The [List] of layers.
   final List<G> list;
 
   /// Get a unique source id.
@@ -33,14 +33,12 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
   Map<String, Object> getLayout();
 
   /// Add the annotation layer to the map.
-  Layer createLayer(int index);
+  StyleLayer createStyleLayer(int index);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AnnotationLayer &&
-          runtimeType == other.runtimeType &&
-          list == other.list;
+      other is Layer && runtimeType == other.runtimeType && list == other.list;
 
   @override
   int get hashCode => list.hashCode;

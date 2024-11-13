@@ -1,10 +1,10 @@
-part of 'annotation_layer.dart';
+part of 'layer.dart';
 
-/// A marker layer.
+/// A [Point] layer.
 @immutable
-class MarkerAnnotationLayer extends AnnotationLayer<Point> {
-  /// Create a new [MarkerAnnotationLayer] instance.
-  const MarkerAnnotationLayer({
+class MarkerLayer extends Layer<Point> {
+  /// Create a new [MarkerLayer] instance.
+  const MarkerLayer({
     required List<Point> points,
     this.iconAllowOverlap = false,
     this.iconIgnorePlacement = false,
@@ -229,7 +229,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Layer createLayer(int index) => SymbolLayer(
+  StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
@@ -240,7 +240,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other &&
-          other is MarkerAnnotationLayer &&
+          other is MarkerLayer &&
           runtimeType == other.runtimeType &&
           iconAllowOverlap == other.iconAllowOverlap &&
           iconIgnorePlacement == other.iconIgnorePlacement &&

@@ -5,25 +5,26 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 
 @immutable
-class LayersFillExtrusionPage extends StatefulWidget {
-  const LayersFillExtrusionPage({super.key});
+class StyleLayersFillExtrusionPage extends StatefulWidget {
+  const StyleLayersFillExtrusionPage({super.key});
 
-  static const location = '/layers/fill-extrusion';
+  static const location = '/style-layers/fill-extrusion';
 
   @override
-  State<LayersFillExtrusionPage> createState() =>
-      _LayersFillExtrusionPageState();
+  State<StyleLayersFillExtrusionPage> createState() =>
+      _StyleLayersFillExtrusionPageState();
 }
 
 const _sourceId = 'floorplan';
 
-class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
+class _StyleLayersFillExtrusionPageState
+    extends State<StyleLayersFillExtrusionPage> {
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Fill Extrusion Layer')),
+      appBar: AppBar(title: const Text('Fill Extrusion Style Layer')),
       body: MapLibreMap(
         options: MapOptions(
           initCenter: Position(-87.61694, 41.86625),
@@ -46,11 +47,11 @@ class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
-    await _controller.addLayer(_fillExtrusionLayer);
+    await _controller.addLayer(_fillExtrusionStyleLayer);
   }
 }
 
-const _fillExtrusionLayer = FillExtrusionLayer(
+const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
   id: 'room-extrusion',
   sourceId: _sourceId,
   paint: {
