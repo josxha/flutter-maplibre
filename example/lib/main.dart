@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_circle_page.dart';
-import 'package:maplibre_example/annotations_marker_page.dart';
-import 'package:maplibre_example/annotations_mixed_page.dart';
-import 'package:maplibre_example/annotations_polygon_page.dart';
-import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
+import 'package:maplibre_example/layers_circle_page.dart';
+import 'package:maplibre_example/layers_marker_page.dart';
+import 'package:maplibre_example/layers_mixed_page.dart';
+import 'package:maplibre_example/layers_polygon_page.dart';
+import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
@@ -72,16 +72,11 @@ class MyApp extends StatelessWidget {
             const StyleLayersRasterPage(),
         StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
-        AnnotationsMixedPage.location: (context) =>
-            const AnnotationsMixedPage(),
-        AnnotationsCirclePage.location: (context) =>
-            const AnnotationsCirclePage(),
-        AnnotationsMarkerPage.location: (context) =>
-            const AnnotationsMarkerPage(),
-        AnnotationsPolylinePage.location: (context) =>
-            const AnnotationsPolylinePage(),
-        AnnotationsPolygonPage.location: (context) =>
-            const AnnotationsPolygonPage(),
+        LayersMixedPage.location: (context) => const LayersMixedPage(),
+        LayersCirclePage.location: (context) => const LayersCirclePage(),
+        LayersMarkerPage.location: (context) => const LayersMarkerPage(),
+        LayersPolylinePage.location: (context) => const LayersPolylinePage(),
+        LayersPolygonPage.location: (context) => const LayersPolygonPage(),
         ParametersPage.location: (context) => const ParametersPage(),
         ControllerPage.location: (context) => const ControllerPage(),
         TwoMapsPage.location: (context) => const TwoMapsPage(),

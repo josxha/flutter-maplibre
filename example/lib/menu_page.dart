@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/annotations_marker_page.dart';
-import 'package:maplibre_example/annotations_mixed_page.dart';
-import 'package:maplibre_example/annotations_polygon_page.dart';
-import 'package:maplibre_example/annotations_polyline_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
+import 'package:maplibre_example/layers_circle_page.dart';
+import 'package:maplibre_example/layers_marker_page.dart';
+import 'package:maplibre_example/layers_mixed_page.dart';
+import 'package:maplibre_example/layers_polygon_page.dart';
+import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
@@ -108,15 +109,15 @@ class MenuPage extends StatelessWidget {
                 ),
             ],
           ),
-          const SliverToBoxAdapter(child: SectionTitle('Annotations')),
+          const SliverToBoxAdapter(child: SectionTitle('Layers')),
           SliverGrid.extent(
             maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
-                label: 'Mixed Annotations',
+                label: 'Mixed Layers',
                 iconData: Icons.control_point_duplicate_outlined,
-                location: AnnotationsMixedPage.location,
+                location: LayersMixedPage.location,
               ),
               ItemCard(
                 label: 'Widgets',
@@ -126,22 +127,22 @@ class MenuPage extends StatelessWidget {
               ItemCard(
                 label: 'Circles',
                 iconData: Icons.circle,
-                location: StyleLayersCirclePage.location,
+                location: LayersCirclePage.location,
               ),
               ItemCard(
                 label: 'Markers',
                 iconData: Icons.location_on,
-                location: AnnotationsMarkerPage.location,
+                location: LayersMarkerPage.location,
               ),
               ItemCard(
                 label: 'Polygons',
                 iconData: Icons.format_shapes,
-                location: AnnotationsPolygonPage.location,
+                location: LayersPolygonPage.location,
               ),
               ItemCard(
                 label: 'Polylines',
                 iconData: Icons.polyline,
-                location: AnnotationsPolylinePage.location,
+                location: LayersPolylinePage.location,
               ),
             ],
           ),

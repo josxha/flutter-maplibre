@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class AnnotationsCirclePage extends StatefulWidget {
-  const AnnotationsCirclePage({super.key});
+class LayersCirclePage extends StatefulWidget {
+  const LayersCirclePage({super.key});
 
-  static const location = '/annotations/circle';
+  static const location = '/layers/circle';
 
   @override
-  State<AnnotationsCirclePage> createState() => _AnnotationsCirclePageState();
+  State<LayersCirclePage> createState() => _LayersCirclePageState();
 }
 
-class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
+class _LayersCirclePageState extends State<LayersCirclePage> {
   final _points = <Point>[
     Point(coordinates: Position(9.17, 47.68)),
     Point(coordinates: Position(9.17, 48)),
@@ -22,7 +22,7 @@ class _AnnotationsCirclePageState extends State<AnnotationsCirclePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Circle Annotations')),
+      appBar: AppBar(title: const Text('Circle Layers')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) {
