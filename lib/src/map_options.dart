@@ -21,9 +21,6 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-    this.nativeCompass = true,
-    this.nativeLogo = true,
-    this.attribution = true,
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
   }) : initPitch = pitch ?? initPitch;
@@ -84,15 +81,6 @@ class MapOptions {
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
-
-  /// Toggle the MapLibre Native compass.
-  final bool nativeCompass;
-
-  /// Toggle the MapLibre Native logo.
-  final bool nativeLogo;
-
-  /// Toggle the MapLibre Native logo.
-  final bool attribution;
 
   /// The platform view type used on android.
   ///

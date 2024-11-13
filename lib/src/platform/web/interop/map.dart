@@ -130,7 +130,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required LngLat? center,
     required double bearing,
     required double pitch,
-    required bool attributionControl,
   });
 }
 

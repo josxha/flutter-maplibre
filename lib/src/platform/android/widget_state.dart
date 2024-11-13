@@ -218,9 +218,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           zoom: _options.gestures.zoom,
           tilt: _options.gestures.pitch,
         ),
-        compass: _options.nativeCompass,
-        logo: _options.nativeLogo,
-        attribution: _options.attribution,
         androidTextureMode: _options.androidTextureMode,
       );
 
