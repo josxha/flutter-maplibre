@@ -10,7 +10,7 @@ topics: [ map, maplibre, mvt ]
 
 screenshots:
   - description: 'MapLibre Logo'
-    path: '/logo.png'
+    path: 'https://raw.githubusercontent.com/josxha/flutter-maplibre/8ca434efc7f03732bbe5cf28729f1316d6d89419/logo.png'
 
 funding:
   - https://www.paypal.com/paypalme/joschaeckert
