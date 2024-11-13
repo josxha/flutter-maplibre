@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/layer_manager.dart';
 import 'package:maplibre/src/inherited_model.dart';
+import 'package:maplibre/src/layer/layer_manager.dart';
 
 /// The [State] of the [MapLibreMap] widget.
 abstract class MapLibreMapState extends State<MapLibreMap>

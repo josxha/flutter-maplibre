@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/layer_manager.dart';
+import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../shared/mocks.dart';

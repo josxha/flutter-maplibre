@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/layer_manager.dart';
+import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;

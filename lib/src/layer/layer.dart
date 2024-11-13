@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/extensions.dart';
+import 'package:maplibre/src/layer/extensions.dart';
 
 part 'circle_layer.dart';
 part 'marker_layer.dart';
