@@ -6,7 +6,8 @@ import 'package:flutter/foundation.dart';
 @Deprecated('Use the `User Interface` widgets in MapLibreMap `children` field.')
 sealed class WebMapControl {
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebMapControl();
 }
 
@@ -17,7 +18,8 @@ sealed class WebMapControl {
 class WebScaleControl extends WebMapControl {
   /// Default constructor for the [WebScaleControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebScaleControl({
     this.maxWidth = 100,
     this.unit = Unit.metric,
@@ -32,7 +34,8 @@ class WebScaleControl extends WebMapControl {
 
 /// The unit type for length to use for the [WebScaleControl]
 @Deprecated(
-    'WebScaleControl is deprecated. Use the `User Interface` widgets in MapLibreMap `children` field.')
+  'WebScaleControl is deprecated. Use the `User Interface` widgets in MapLibreMap `children` field.',
+)
 enum Unit {
   /// Use the imperial system with units like inch, foot, yard or mile.
   imperial,
@@ -76,7 +79,8 @@ enum Unit {
 class WebGeolocateControl extends WebMapControl {
   /// Default constructor for the [WebGeolocateControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebGeolocateControl({
     this.positionOptions = const WebPositionOptions(),
     this.fitBoundsOptions,
@@ -117,7 +121,8 @@ class WebPositionOptions {
   /// Default constructor for the [WebPositionOptions].
   // TODO add fields
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebPositionOptions({
     this.enableHighAccuracy = false,
     this.timeout = const Duration(seconds: 6),
@@ -141,7 +146,8 @@ class WebFitBoundsOptions {
   /// Default constructor for the [WebFitBoundsOptions].
   // TODO add fields
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebFitBoundsOptions();
 }
 
@@ -152,7 +158,8 @@ class WebFitBoundsOptions {
 class WebAttributionControl extends WebMapControl {
   /// Default constructor for the [WebAttributionControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebAttributionControl({
     this.compact = true,
     this.customAttribution =
@@ -189,7 +196,8 @@ class WebAttributionControl extends WebMapControl {
 class WebFullscreenControl extends WebMapControl {
   /// Default constructor for the [WebFullscreenControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebFullscreenControl();
 }
 
@@ -199,7 +207,8 @@ class WebFullscreenControl extends WebMapControl {
 class WebLogoControl extends WebMapControl {
   /// Default constructor for the [WebLogoControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebLogoControl({this.compact});
 
   /// If `true`, force a compact logo. If `false`, force the full logo.
@@ -215,7 +224,8 @@ class WebLogoControl extends WebMapControl {
 class WebNavigationControl extends WebMapControl {
   /// Default constructor for the [WebNavigationControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebNavigationControl({
     this.showCompass = true,
     this.showZoom = true,
@@ -239,7 +249,8 @@ class WebNavigationControl extends WebMapControl {
 class WebTerrainControl extends WebMapControl {
   /// Default constructor for the [WebTerrainControl].
   @Deprecated(
-      'Use the `User Interface` widgets in MapLibreMap `children` field.')
+    'Use the `User Interface` widgets in MapLibreMap `children` field.',
+  )
   const WebTerrainControl({required this.source});
 
   /// The source from the style
