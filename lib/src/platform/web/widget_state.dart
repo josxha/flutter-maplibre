@@ -66,52 +66,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
         _updateGestures(options.gestures);
 
-        // add controls
-        for (final control in options.webControls) {
-          final jsControl = switch (control) {
-            final WebScaleControl control => interop.ScaleControl(
-                interop.ScaleControlOptions(
-                  maxWidth: control.maxWidth,
-                  unit: control.unit.name,
-                ),
-              ),
-            final WebGeolocateControl control => interop.GeolocateControl(
-                interop.GeolocateControlOptions(
-                  positionOptions: interop.PositionOptions(
-                    enableHighAccuracy:
-                        control.positionOptions.enableHighAccuracy,
-                    maximumAge:
-                        control.positionOptions.maximumAge.inMilliseconds,
-                    timeout: control.positionOptions.timeout.inMilliseconds,
-                  ),
-                ),
-              ),
-            final WebAttributionControl control => interop.AttributionControl(
-                interop.AttributionControlOptions(
-                  compact: control.compact,
-                  customAttribution: control.customAttribution,
-                ),
-              ),
-            final WebFullscreenControl _ => interop.FullscreenControl(
-                interop.FullscreenControlOptions(),
-              ),
-            final WebLogoControl control => interop.LogoControl(
-                interop.LogoControlOptions(compact: control.compact),
-              ),
-            final WebNavigationControl control => interop.NavigationControl(
-                interop.NavigationControlOptions(
-                  showCompass: control.showCompass,
-                  showZoom: control.showZoom,
-                  visualizePitch: control.visualizePitch,
-                ),
-              ),
-            final WebTerrainControl control => interop.TerrainControl(
-                interop.TerrainControlOptions(source: control.source),
-              ),
-          };
-          _map.addControl(jsControl);
-        }
-
         // add callbacks
         _map.on(
           interop.MapEventType.load,
