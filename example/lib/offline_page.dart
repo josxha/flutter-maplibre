@@ -341,7 +341,7 @@ class _OfflineMapPage extends StatelessWidget {
           maxZoom: maxZoom,
         ),
         layers: [
-          PolylineAnnotationLayer(
+          PolylineLayer(
             color: Colors.red,
             width: 3,
             polylines: [

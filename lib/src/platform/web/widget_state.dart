@@ -6,7 +6,7 @@ import 'dart:ui_web';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/web/extensions.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
@@ -19,7 +19,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
-  AnnotationManager? _annotationManager;
+  LayerManager? _layerManager;
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
@@ -118,7 +118,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           (interop.MapMouseEvent event) {
             widget.onEvent?.call(const MapEventStyleLoaded());
             widget.onStyleLoaded?.call();
-            _annotationManager = AnnotationManager(this, widget.layers);
+            _layerManager = LayerManager(this, widget.layers);
             // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
             setState(() {});
           }.toJS,
@@ -234,7 +234,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (options.gestures != oldWidget.options.gestures) {
       _updateGestures(options.gestures);
     }
-    _annotationManager?.updateLayers(widget.layers);
+    _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -442,9 +442,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     switch (layer) {
-      case FillLayer():
+      case FillStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -455,7 +455,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case CircleLayer():
+      case CircleStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -466,7 +466,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case BackgroundLayer():
+      case BackgroundStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -477,7 +477,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case FillExtrusionLayer():
+      case FillExtrusionStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -488,7 +488,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case HeatmapLayer():
+      case HeatmapStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -499,7 +499,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case HillshadeLayer():
+      case HillshadeStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -510,7 +510,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case LineLayer():
+      case LineStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -521,7 +521,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case RasterLayer():
+      case RasterStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -532,7 +532,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case SymbolLayer():
+      case SymbolStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,

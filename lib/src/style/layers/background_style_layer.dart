@@ -1,9 +1,9 @@
-part of 'layer.dart';
+part of 'style_layer.dart';
 
 /// https://maplibre.org/maplibre-style-spec/layers/#background
-final class BackgroundLayer extends Layer {
-  /// Create a new [BackgroundLayer].
-  const BackgroundLayer({
+final class BackgroundStyleLayer extends StyleLayer {
+  /// Create a new [BackgroundStyleLayer].
+  const BackgroundStyleLayer({
     required super.id,
     this.visible = true,
     this.color = const Color(0x00000000),
