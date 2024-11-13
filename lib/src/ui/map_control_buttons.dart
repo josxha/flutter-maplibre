@@ -65,7 +65,6 @@ class MapControlButtons extends StatelessWidget {
               const SizedBox(height: 8),
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
-                tooltip: 'Track location',
                 onPressed: () {
                   permissionManager ??= PermissionManager();
 
