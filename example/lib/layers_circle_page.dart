@@ -41,11 +41,11 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
     await _controller.addSource(earthquakes);
-    await _controller.addLayer(_circleLayer);
+    await _controller.addLayer(_circleStyleLayer);
   }
 }
 
-const _circleLayer = CircleLayer(
+const _circleStyleLayer = CircleStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   paint: {

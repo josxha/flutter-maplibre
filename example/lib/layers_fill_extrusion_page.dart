@@ -46,11 +46,11 @@ class _LayersFillExtrusionPageState extends State<LayersFillExtrusionPage> {
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
-    await _controller.addLayer(_fillExtrusionLayer);
+    await _controller.addLayer(_fillExtrusionStyleLayer);
   }
 }
 
-const _fillExtrusionLayer = FillExtrusionLayer(
+const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
   id: 'room-extrusion',
   sourceId: _sourceId,
   paint: {

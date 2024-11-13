@@ -36,7 +36,7 @@ class CircleAnnotationLayer extends AnnotationLayer<Point> {
   double get strokeOpacity => strokeColor.opacity;
 
   @override
-  Layer createLayer(int index) => CircleLayer(
+  StyleLayer createStyleLayer(int index) => CircleStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),

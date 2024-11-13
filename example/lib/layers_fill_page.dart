@@ -56,7 +56,7 @@ class _LayersFillPageState extends State<LayersFillPage> {
       GeoJsonSource(id: 'LakeConstance-Source', data: geojsonPolygon),
     );
     await _controller.addLayer(
-      const FillLayer(
+      const FillStyleLayer(
         id: 'LakeConstance-Layer',
         sourceId: 'LakeConstance-Source',
         paint: {'fill-color': '#429ef5'},

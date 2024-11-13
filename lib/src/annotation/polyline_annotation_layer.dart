@@ -46,7 +46,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer(int index) => LineLayer(
+  StyleLayer createStyleLayer(int index) => LineStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),

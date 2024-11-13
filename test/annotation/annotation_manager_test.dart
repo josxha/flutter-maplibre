@@ -7,13 +7,13 @@ import '../shared/mocks.dart';
 
 class MockSource extends Mock implements Source {}
 
-class MockLayer extends Mock implements Layer {}
+class MockStyleLayer extends Mock implements StyleLayer {}
 
 void main() {
   group('AnnotationManager', () {
     setUpAll(() {
       registerFallbackValue(MockSource());
-      registerFallbackValue(MockLayer());
+      registerFallbackValue(MockStyleLayer());
     });
 
     late MapController controller;
@@ -39,7 +39,7 @@ void main() {
       manager.updateLayers([layer1]);
       verify(() => controller.addSource(any(that: isA<GeoJsonSource>())))
           .called(1);
-      verify(() => controller.addLayer(any(that: isA<CircleLayer>())))
+      verify(() => controller.addLayer(any(that: isA<CircleStyleLayer>())))
           .called(1);
       verifyNoMoreInteractions(controller);
 

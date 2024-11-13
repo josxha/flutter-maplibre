@@ -30,7 +30,7 @@ class PolygonAnnotationLayer extends AnnotationLayer<Polygon> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer(int index) => FillLayer(
+  StyleLayer createStyleLayer(int index) => FillStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),

@@ -38,11 +38,11 @@ class _LayersHeatmapPageState extends State<LayersHeatmapPage> {
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
     await _controller.addSource(earthquakes);
-    await _controller.addLayer(_heatmapLayer);
+    await _controller.addLayer(_heatmapStyleLayer);
   }
 }
 
-const _heatmapLayer = HeatmapLayer(
+const _heatmapStyleLayer = HeatmapStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   paint: {

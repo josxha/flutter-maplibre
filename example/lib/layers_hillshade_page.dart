@@ -37,11 +37,11 @@ class _LayersHillshadePageState extends State<LayersHillshadePage> {
       tileSize: 256,
     );
     await _controller.addSource(hillshade);
-    await _controller.addLayer(_hillshadeLayer);
+    await _controller.addLayer(_hillshadeStyleLayer);
   }
 }
 
-const _hillshadeLayer = HillshadeLayer(
+const _hillshadeStyleLayer = HillshadeStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   paint: {'hillshade-shadow-color': '#473B24'},

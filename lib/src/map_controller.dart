@@ -100,7 +100,7 @@ abstract interface class MapController {
   /// resulting in the new layer appearing visually beneath the existing layer.
   /// If this argument is not specified, the layer will be appended to the end
   /// of the layers array and appear visually above all other layers.
-  Future<void> addLayer(Layer layer, {String? belowLayerId});
+  Future<void> addLayer(StyleLayer layer, {String? belowLayerId});
 
   /// Update the data of a GeoJSON source.
   Future<void> updateGeoJsonSource({required String id, required String data});

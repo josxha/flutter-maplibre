@@ -33,7 +33,7 @@ class _LayersLinePageState extends State<LayersLinePage> {
       GeoJsonSource(id: 'Path', data: geojsonLine),
     );
     await _controller.addLayer(
-      const LineLayer(
+      const LineStyleLayer(
         id: 'geojson-line',
         sourceId: 'Path',
         paint: {'line-color': '#F00', 'line-width': 3},

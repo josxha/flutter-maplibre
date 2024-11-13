@@ -33,7 +33,7 @@ sealed class AnnotationLayer<G extends GeometryType<Object>> {
   Map<String, Object> getLayout();
 
   /// Add the annotation layer to the map.
-  Layer createLayer(int index);
+  StyleLayer createStyleLayer(int index);
 
   @override
   bool operator ==(Object other) =>

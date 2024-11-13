@@ -42,7 +42,7 @@ class _LayersSymbolPageState extends State<LayersSymbolPage> {
 
           // display the image on the map
           await _controller.addLayer(
-            const SymbolLayer(
+            const SymbolStyleLayer(
               id: 'images',
               sourceId: 'points',
               layout: {

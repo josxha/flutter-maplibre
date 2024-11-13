@@ -442,9 +442,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<void> addLayer(Layer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     switch (layer) {
-      case FillLayer():
+      case FillStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -455,7 +455,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case CircleLayer():
+      case CircleStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -466,7 +466,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case BackgroundLayer():
+      case BackgroundStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -477,7 +477,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case FillExtrusionLayer():
+      case FillExtrusionStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -488,7 +488,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case HeatmapLayer():
+      case HeatmapStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -499,7 +499,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case HillshadeLayer():
+      case HillshadeStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -510,7 +510,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case LineLayer():
+      case LineStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -521,7 +521,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case RasterLayer():
+      case RasterStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,
@@ -532,7 +532,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
           belowLayerId,
         );
-      case SymbolLayer():
+      case SymbolStyleLayer():
         _map.addLayer(
           interop.LayerSpecification(
             id: layer.id,

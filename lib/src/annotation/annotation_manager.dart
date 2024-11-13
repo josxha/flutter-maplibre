@@ -18,7 +18,7 @@ class AnnotationManager {
         data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
       );
       mapController.addSource(source);
-      mapController.addLayer(layer.createLayer(index));
+      mapController.addLayer(layer.createStyleLayer(index));
     }
     _oldLayers = layers;
   }
@@ -56,7 +56,7 @@ class AnnotationManager {
         if (oldLayer case AnnotationLayer()) {
           mapController.removeLayer(oldLayer.getLayerId(index));
         }
-        mapController.addLayer(layer.createLayer(index));
+        mapController.addLayer(layer.createStyleLayer(index));
       }
     }
     // remove any left-over sources and layers from the map

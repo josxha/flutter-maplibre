@@ -229,7 +229,7 @@ class MarkerAnnotationLayer extends AnnotationLayer<Point> {
       };
 
   @override
-  Layer createLayer(int index) => SymbolLayer(
+  StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),

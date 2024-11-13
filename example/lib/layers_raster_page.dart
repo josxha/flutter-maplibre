@@ -44,11 +44,11 @@ class _LayersRasterPageState extends State<LayersRasterPage> {
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
     await _controller.addSource(openStreetMap);
-    await _controller.addLayer(_rasterLayer);
+    await _controller.addLayer(_rasterStyleLayer);
   }
 }
 
-const _rasterLayer = RasterLayer(
+const _rasterStyleLayer = RasterStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
 );
