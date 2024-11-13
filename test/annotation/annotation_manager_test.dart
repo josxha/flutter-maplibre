@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/annotation/layer_manager.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../shared/mocks.dart';
@@ -32,9 +32,8 @@ void main() {
     });
 
     testWidgets('add and remove layers', (tester) async {
-      final manager = AnnotationManager(controller, []);
-      final layer1 =
-          CircleAnnotationLayer(points: [Point(coordinates: Position(0, 0))]);
+      final manager = LayerManager(controller, []);
+      final layer1 = CircleLayer(points: [Point(coordinates: Position(0, 0))]);
 
       manager.updateLayers([layer1]);
       verify(() => controller.addSource(any(that: isA<GeoJsonSource>())))

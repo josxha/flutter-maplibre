@@ -37,7 +37,7 @@ class _AnnotationsPolylinePageState extends State<AnnotationsPolylinePage> {
           }
         },
         layers: [
-          PolylineAnnotationLayer(
+          PolylineLayer(
             polylines: _polylines,
             color: Colors.red,
             width: 4,

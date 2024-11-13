@@ -54,7 +54,7 @@ class _AnnotationsMarkerPageState extends State<AnnotationsMarkerPage> {
           }
         },
         layers: [
-          MarkerAnnotationLayer(
+          MarkerLayer(
             points: _points,
             textField: 'Marker',
             textAllowOverlap: true,

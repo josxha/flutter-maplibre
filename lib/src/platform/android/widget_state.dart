@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/annotation/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
@@ -24,7 +24,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
   jni.Style? _cachedJniStyle;
-  AnnotationManager? _annotationManager;
+  LayerManager? _annotationManager;
 
   MapOptions get _options => widget.options;
 
@@ -553,7 +553,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     widget.onEvent?.call(const MapEventStyleLoaded());
     widget.onStyleLoaded?.call();
-    _annotationManager = AnnotationManager(this, widget.layers);
+    _annotationManager = LayerManager(this, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }

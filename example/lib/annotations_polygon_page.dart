@@ -41,7 +41,7 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
           }
         },
         layers: [
-          PolygonAnnotationLayer(
+          PolygonLayer(
             polygons: _polygons,
             color: Colors.lightBlueAccent.withOpacity(0.6),
             outlineColor: Colors.blue,

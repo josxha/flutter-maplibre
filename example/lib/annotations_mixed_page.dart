@@ -22,7 +22,7 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
     Point(coordinates: Position(9.5, 48)),
   ];
   Color _circleColor = Colors.orange.withOpacity(0.5);
-  PolylineAnnotationLayer? _polylineLayer;
+  PolylineLayer? _polylineLayer;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
                   onPressed: () {
                     setState(() {
                       if (_polylineLayer == null) {
-                        _polylineLayer = PolylineAnnotationLayer(
+                        _polylineLayer = PolylineLayer(
                           polylines: [
                             LineString(
                               coordinates: [
@@ -89,14 +89,14 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
                 }
               },
               layers: [
-                CircleAnnotationLayer(
+                CircleLayer(
                   points: _circlePoints,
                   color: _circleColor,
                   radius: 20,
                   strokeColor: Colors.red,
                   strokeWidth: 2,
                 ),
-                if (_polylineLayer case final AnnotationLayer layer) layer,
+                if (_polylineLayer case final Layer layer) layer,
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/annotation/annotation_manager.dart';
+import 'package:maplibre/src/annotation/layer_manager.dart';
 import 'package:maplibre/src/inherited_model.dart';
 
 /// The [State] of the [MapLibreMap] widget.
@@ -12,9 +12,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// A unique name for the platform view.
   final viewName = 'plugins.flutter.io/maplibre${_counter++}';
 
-  /// The [AnnotationManager] handles the high level markers, polygons,
+  /// The [LayerManager] handles the high level markers, polygons,
   /// circles and polylines.
-  AnnotationManager? annotationManager;
+  LayerManager? layerManager;
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
