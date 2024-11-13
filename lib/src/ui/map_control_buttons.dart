@@ -71,7 +71,8 @@ class MapControlButtons extends StatelessWidget {
 
                   if (permissionManager != null) {
                     PermissionManager().requestLocationPermissions(
-                      explanation: 'We need your location to show it on the map.',
+                      explanation:
+                          'We need your location to show it on the map.',
                     );
 
                     if (permissionManager!.locationPermissionsGranted) {
