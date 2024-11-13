@@ -24,7 +24,6 @@ import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
-import 'package:maplibre_example/web_controls_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -63,12 +62,6 @@ class MenuPage extends StatelessWidget {
                 iconData: Icons.notifications,
                 location: EventsPage.location,
               ),
-              if (kIsWeb)
-                ItemCard(
-                  label: 'Web Controls',
-                  iconData: Icons.toggle_off,
-                  location: WebControlsPage.location,
-                ),
               ItemCard(
                 label: 'Controller',
                 iconData: Icons.api,
