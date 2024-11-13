@@ -9,18 +9,18 @@ import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
-import 'package:maplibre_example/layers_circle_page.dart';
-import 'package:maplibre_example/layers_fill_extrusion_page.dart';
-import 'package:maplibre_example/layers_fill_page.dart';
-import 'package:maplibre_example/layers_heatmap_page.dart';
-import 'package:maplibre_example/layers_hillshade_page.dart';
-import 'package:maplibre_example/layers_line_page.dart';
-import 'package:maplibre_example/layers_raster_page.dart';
-import 'package:maplibre_example/layers_symbol_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
+import 'package:maplibre_example/style_layers_circle_page.dart';
+import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
+import 'package:maplibre_example/style_layers_fill_page.dart';
+import 'package:maplibre_example/style_layers_heatmap_page.dart';
+import 'package:maplibre_example/style_layers_hillshade_page.dart';
+import 'package:maplibre_example/style_layers_line_page.dart';
+import 'package:maplibre_example/style_layers_raster_page.dart';
+import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
@@ -57,15 +57,20 @@ class MyApp extends StatelessWidget {
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
-        LayersSymbolPage.location: (context) => const LayersSymbolPage(),
-        LayersCirclePage.location: (context) => const LayersCirclePage(),
-        LayersHeatmapPage.location: (context) => const LayersHeatmapPage(),
-        LayersHillshadePage.location: (context) => const LayersHillshadePage(),
-        LayersFillPage.location: (context) => const LayersFillPage(),
-        LayersFillExtrusionPage.location: (context) =>
-            const LayersFillExtrusionPage(),
-        LayersRasterPage.location: (context) => const LayersRasterPage(),
-        LayersLinePage.location: (context) => const LayersLinePage(),
+        StyleLayersSymbolPage.location: (context) =>
+            const StyleLayersSymbolPage(),
+        StyleLayersCirclePage.location: (context) =>
+            const StyleLayersCirclePage(),
+        StyleLayersHeatmapPage.location: (context) =>
+            const StyleLayersHeatmapPage(),
+        StyleLayersHillshadePage.location: (context) =>
+            const StyleLayersHillshadePage(),
+        StyleLayersFillPage.location: (context) => const StyleLayersFillPage(),
+        StyleLayersFillExtrusionPage.location: (context) =>
+            const StyleLayersFillExtrusionPage(),
+        StyleLayersRasterPage.location: (context) =>
+            const StyleLayersRasterPage(),
+        StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
         WebControlsPage.location: (context) => const WebControlsPage(),
         AnnotationsMixedPage.location: (context) =>
             const AnnotationsMixedPage(),

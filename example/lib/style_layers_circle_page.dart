@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class LayersCirclePage extends StatefulWidget {
-  const LayersCirclePage({super.key});
+class StyleLayersCirclePage extends StatefulWidget {
+  const StyleLayersCirclePage({super.key});
 
-  static const location = '/layers/circle';
+  static const location = '/style-layers/circle';
 
   @override
-  State<LayersCirclePage> createState() => _LayersCirclePageState();
+  State<StyleLayersCirclePage> createState() => _StyleLayersCirclePageState();
 }
 
 const _layerId = 'showcaseLayer';
 const _sourceId = 'earthquakes';
 
-class _LayersCirclePageState extends State<LayersCirclePage> {
+class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Circle Layer')),
+      appBar: AppBar(title: const Text('Circle Style Layer')),
       body: MapLibreMap(
         options: MapOptions(
           initCenter: Position(-152.9959, 59.8150),

@@ -3,22 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class LayersLinePage extends StatefulWidget {
-  const LayersLinePage({super.key});
+class StyleLayersLinePage extends StatefulWidget {
+  const StyleLayersLinePage({super.key});
 
-  static const location = '/layers/line';
+  static const location = '/style-layers/line';
 
   @override
-  State<LayersLinePage> createState() => _LayersLinePageState();
+  State<StyleLayersLinePage> createState() => _StyleLayersLinePageState();
 }
 
-class _LayersLinePageState extends State<LayersLinePage> {
+class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Line Layer')),
+      appBar: AppBar(title: const Text('Line Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onMapCreated: (controller) => _controller = controller,

@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class LayersHeatmapPage extends StatefulWidget {
-  const LayersHeatmapPage({super.key});
+class StyleLayersHeatmapPage extends StatefulWidget {
+  const StyleLayersHeatmapPage({super.key});
 
-  static const location = '/layers/heatmap';
+  static const location = '/style-layers/heatmap';
 
   @override
-  State<LayersHeatmapPage> createState() => _LayersHeatmapPageState();
+  State<StyleLayersHeatmapPage> createState() => _StyleLayersHeatmapPageState();
 }
 
 const _layerId = 'showcaseLayer';
 const _sourceId = 'earthquakes';
 
-class _LayersHeatmapPageState extends State<LayersHeatmapPage> {
+class _StyleLayersHeatmapPageState extends State<StyleLayersHeatmapPage> {
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Heatmap Layer')),
+      appBar: AppBar(title: const Text('Heatmap Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initCenter: Position(-120, 50), initZoom: 2),
         onMapCreated: (controller) => _controller = controller,

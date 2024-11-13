@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class LayersHillshadePage extends StatefulWidget {
-  const LayersHillshadePage({super.key});
+class StyleLayersHillshadePage extends StatefulWidget {
+  const StyleLayersHillshadePage({super.key});
 
-  static const location = '/layers/hillshade';
+  static const location = '/style-layers/hillshade';
 
   @override
-  State<LayersHillshadePage> createState() => _LayersHillshadePageState();
+  State<StyleLayersHillshadePage> createState() =>
+      _StyleLayersHillshadePageState();
 }
 
 const _layerId = 'showcaseLayer';
 const _sourceId = 'hills';
 
-class _LayersHillshadePageState extends State<LayersHillshadePage> {
+class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
   late final MapController _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Hillshade Layer')),
+      appBar: AppBar(title: const Text('Hillshade Style Layer')),
       body: MapLibreMap(
         options:
             MapOptions(initCenter: Position(11.39085, 47.27574), initZoom: 10),
