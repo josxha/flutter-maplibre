@@ -123,12 +123,6 @@ struct MapOptions {
   var maxPitch: Double
   /// The map gestures.
   var gestures: MapGestures
-  /// Toggle the MapLibre Native compass.
-  var compass: Bool
-  /// Toggle the MapLibre Native logo.
-  var logo: Bool
-  /// Toggle the MapLibre Native attribution.
-  var attribution: Bool
   /// Toggle the texture mode on android.
   var androidTextureMode: Bool
 
@@ -147,10 +141,7 @@ struct MapOptions {
     let minPitch = pigeonVar_list[8] as! Double
     let maxPitch = pigeonVar_list[9] as! Double
     let gestures = pigeonVar_list[10] as! MapGestures
-    let compass = pigeonVar_list[11] as! Bool
-    let logo = pigeonVar_list[12] as! Bool
-    let attribution = pigeonVar_list[13] as! Bool
-    let androidTextureMode = pigeonVar_list[14] as! Bool
+    let androidTextureMode = pigeonVar_list[11] as! Bool
 
     return MapOptions(
       style: style,
@@ -164,9 +155,6 @@ struct MapOptions {
       minPitch: minPitch,
       maxPitch: maxPitch,
       gestures: gestures,
-      compass: compass,
-      logo: logo,
-      attribution: attribution,
       androidTextureMode: androidTextureMode
     )
   }
@@ -183,9 +171,6 @@ struct MapOptions {
       minPitch,
       maxPitch,
       gestures,
-      compass,
-      logo,
-      attribution,
       androidTextureMode,
     ]
   }

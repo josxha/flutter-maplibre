@@ -17,9 +17,6 @@ struct _MaplibreMapOptions {
   double min_pitch;
   double max_pitch;
   MaplibreMapGestures* gestures;
-  gboolean compass;
-  gboolean logo;
-  gboolean attribution;
   gboolean android_texture_mode;
 };
 
@@ -41,7 +38,7 @@ static void maplibre_map_options_class_init(MaplibreMapOptionsClass* klass) {
   G_OBJECT_CLASS(klass)->dispose = maplibre_map_options_dispose;
 }
 
-MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, MaplibreMapGestures* gestures, gboolean compass, gboolean logo, gboolean attribution, gboolean android_texture_mode) {
+MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, double pitch, double bearing, MaplibreLngLat* center, MaplibreLngLatBounds* max_bounds, double min_zoom, double max_zoom, double min_pitch, double max_pitch, MaplibreMapGestures* gestures, gboolean android_texture_mode) {
   MaplibreMapOptions* self = MAPLIBRE_MAP_OPTIONS(g_object_new(maplibre_map_options_get_type(), nullptr));
   self->style = g_strdup(style);
   self->zoom = zoom;
@@ -64,9 +61,6 @@ MaplibreMapOptions* maplibre_map_options_new(const gchar* style, double zoom, do
   self->min_pitch = min_pitch;
   self->max_pitch = max_pitch;
   self->gestures = MAPLIBRE_MAP_GESTURES(g_object_ref(gestures));
-  self->compass = compass;
-  self->logo = logo;
-  self->attribution = attribution;
   self->android_texture_mode = android_texture_mode;
   return self;
 }
@@ -126,21 +120,6 @@ MaplibreMapGestures* maplibre_map_options_get_gestures(MaplibreMapOptions* self)
   return self->gestures;
 }
 
-gboolean maplibre_map_options_get_compass(MaplibreMapOptions* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), FALSE);
-  return self->compass;
-}
-
-gboolean maplibre_map_options_get_logo(MaplibreMapOptions* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), FALSE);
-  return self->logo;
-}
-
-gboolean maplibre_map_options_get_attribution(MaplibreMapOptions* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), FALSE);
-  return self->attribution;
-}
-
 gboolean maplibre_map_options_get_android_texture_mode(MaplibreMapOptions* self) {
   g_return_val_if_fail(MAPLIBRE_IS_MAP_OPTIONS(self), FALSE);
   return self->android_texture_mode;
@@ -159,9 +138,6 @@ static FlValue* maplibre_map_options_to_list(MaplibreMapOptions* self) {
   fl_value_append_take(values, fl_value_new_float(self->min_pitch));
   fl_value_append_take(values, fl_value_new_float(self->max_pitch));
   fl_value_append_take(values, fl_value_new_custom_object(133, G_OBJECT(self->gestures)));
-  fl_value_append_take(values, fl_value_new_bool(self->compass));
-  fl_value_append_take(values, fl_value_new_bool(self->logo));
-  fl_value_append_take(values, fl_value_new_bool(self->attribution));
   fl_value_append_take(values, fl_value_new_bool(self->android_texture_mode));
   return values;
 }
@@ -196,14 +172,8 @@ static MaplibreMapOptions* maplibre_map_options_new_from_list(FlValue* values) {
   FlValue* value10 = fl_value_get_list_value(values, 10);
   MaplibreMapGestures* gestures = MAPLIBRE_MAP_GESTURES(fl_value_get_custom_value_object(value10));
   FlValue* value11 = fl_value_get_list_value(values, 11);
-  gboolean compass = fl_value_get_bool(value11);
-  FlValue* value12 = fl_value_get_list_value(values, 12);
-  gboolean logo = fl_value_get_bool(value12);
-  FlValue* value13 = fl_value_get_list_value(values, 13);
-  gboolean attribution = fl_value_get_bool(value13);
-  FlValue* value14 = fl_value_get_list_value(values, 14);
-  gboolean android_texture_mode = fl_value_get_bool(value14);
-  return maplibre_map_options_new(style, zoom, pitch, bearing, center, max_bounds, min_zoom, max_zoom, min_pitch, max_pitch, gestures, compass, logo, attribution, android_texture_mode);
+  gboolean android_texture_mode = fl_value_get_bool(value11);
+  return maplibre_map_options_new(style, zoom, pitch, bearing, center, max_bounds, min_zoom, max_zoom, min_pitch, max_pitch, gestures, android_texture_mode);
 }
 
 struct _MaplibreMapGestures {
