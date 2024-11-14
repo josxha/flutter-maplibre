@@ -1,10 +1,10 @@
-part of 'annotation_layer.dart';
+part of 'layer.dart';
 
 /// A [LineString] layer.
 @immutable
-class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
-  /// Create a new [PolylineAnnotationLayer] instance.
-  const PolylineAnnotationLayer({
+class PolylineLayer extends Layer<LineString> {
+  /// Create a new [PolylineLayer] instance.
+  const PolylineLayer({
     required List<LineString> polylines,
     this.color = const Color(0xFF000000),
     this.width = 1,
@@ -46,7 +46,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   Map<String, Object> getLayout() => {};
 
   @override
-  Layer createLayer(int index) => LineLayer(
+  StyleLayer createStyleLayer(int index) => LineStyleLayer(
         id: getLayerId(index),
         sourceId: getSourceId(index),
         paint: getPaint(),
@@ -57,7 +57,7 @@ class PolylineAnnotationLayer extends AnnotationLayer<LineString> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other &&
-          other is PolylineAnnotationLayer &&
+          other is PolylineLayer &&
           runtimeType == other.runtimeType &&
           color == other.color &&
           width == other.width &&

@@ -20,9 +20,6 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
         options: MapOptions(
           initZoom: 3,
           initCenter: Position(0, 0),
-          attribution: false,
-          nativeCompass: false,
-          nativeLogo: false,
         ),
         children: [
           WidgetLayer(

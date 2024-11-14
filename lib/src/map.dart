@@ -41,22 +41,22 @@ class MapLibreMap extends StatefulWidget {
   /// Called when the native platform view has been created and the map is
   /// ready.
   ///
-  /// Please note: you should only add annotations (e.g. symbols or circles)
+  /// Please note: you should only add style layers (e.g. symbols or circles)
   /// after `onStyleLoadedCallback` has been called.
   final MapCreatedCallback? onMapCreated;
 
   /// Called when the map style has been successfully loaded and the annotation
   /// manager is active.
   ///
-  /// Please note: you should only add annotations (e.g. symbols or circles)
+  /// Please note: you should only add style layers (e.g. symbols or circles)
   /// after this callback has been called.
   final VoidCallback? onStyleLoaded;
 
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
 
-  /// Annotation layers like [MarkerAnnotationLayer] or [PolylineAnnotationLayer].
-  final List<AnnotationLayer> layers;
+  /// Layers like [MarkerLayer] or [PolylineLayer].
+  final List<Layer> layers;
 
   @override
   State<MapLibreMap> createState() =>

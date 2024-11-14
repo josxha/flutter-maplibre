@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class AnnotationsPolygonPage extends StatefulWidget {
-  const AnnotationsPolygonPage({super.key});
+class LayersPolygonPage extends StatefulWidget {
+  const LayersPolygonPage({super.key});
 
-  static const location = '/annotations/polygon';
+  static const location = '/layers/polygon';
 
   @override
-  State<AnnotationsPolygonPage> createState() => _AnnotationsPolygonPageState();
+  State<LayersPolygonPage> createState() => _LayersPolygonPageState();
 }
 
-class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
+class _LayersPolygonPageState extends State<LayersPolygonPage> {
   final _polygons = <Polygon>[
     Polygon(
       coordinates: [
@@ -30,7 +30,7 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Polygon Annotations')),
+      appBar: AppBar(title: const Text('Polygon Layers')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) {
@@ -41,7 +41,7 @@ class _AnnotationsPolygonPageState extends State<AnnotationsPolygonPage> {
           }
         },
         layers: [
-          PolygonAnnotationLayer(
+          PolygonLayer(
             polygons: _polygons,
             color: Colors.lightBlueAccent.withOpacity(0.6),
             outlineColor: Colors.blue,

@@ -24,9 +24,6 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
           initStyle: Theme.of(context).brightness == Brightness.light
               ? StyledMapPage.styleUrl
               : StyledMapPage.styleUrlDark,
-          attribution: false,
-          nativeCompass: false,
-          nativeLogo: false,
         ),
         children: const [
           MapScalebar(),

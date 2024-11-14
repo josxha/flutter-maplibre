@@ -1,11 +1,11 @@
-part of 'layer.dart';
+part of 'style_layer.dart';
 
 /// A layer that contains circles.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
-final class HillshadeLayer extends LayerWithSource {
-  /// Default constructor for a [HillshadeLayer] instance.
-  const HillshadeLayer({
+final class HillshadeStyleLayer extends StyleLayerWithSource {
+  /// Default constructor for a [HillshadeStyleLayer] instance.
+  const HillshadeStyleLayer({
     required super.id,
     required super.sourceId,
     super.layout,

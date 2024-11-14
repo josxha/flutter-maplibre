@@ -123,12 +123,6 @@ data class MapOptions (
   val maxPitch: Double,
   /** The map gestures. */
   val gestures: MapGestures,
-  /** Toggle the MapLibre Native compass. */
-  val compass: Boolean,
-  /** Toggle the MapLibre Native logo. */
-  val logo: Boolean,
-  /** Toggle the MapLibre Native attribution. */
-  val attribution: Boolean,
   /** Toggle the texture mode on android. */
   val androidTextureMode: Boolean
 )
@@ -146,11 +140,8 @@ data class MapOptions (
       val minPitch = pigeonVar_list[8] as Double
       val maxPitch = pigeonVar_list[9] as Double
       val gestures = pigeonVar_list[10] as MapGestures
-      val compass = pigeonVar_list[11] as Boolean
-      val logo = pigeonVar_list[12] as Boolean
-      val attribution = pigeonVar_list[13] as Boolean
-      val androidTextureMode = pigeonVar_list[14] as Boolean
-      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, gestures, compass, logo, attribution, androidTextureMode)
+      val androidTextureMode = pigeonVar_list[11] as Boolean
+      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, gestures, androidTextureMode)
     }
   }
   fun toList(): List<Any?> {
@@ -166,9 +157,6 @@ data class MapOptions (
       minPitch,
       maxPitch,
       gestures,
-      compass,
-      logo,
-      attribution,
       androidTextureMode,
     )
   }
