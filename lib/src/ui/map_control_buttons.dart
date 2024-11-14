@@ -10,7 +10,7 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 /// or behavior of the zoom buttons a lot, prefer to copy this class into your
 /// app and adjust it according to your needs.
 @immutable
-class MapControlButtons extends StatelessWidget {
+class MapControlButtons extends StatefulWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
   const MapControlButtons({
@@ -18,6 +18,7 @@ class MapControlButtons extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 50, horizontal: 12),
     this.alignment = Alignment.bottomRight,
     this.showTrackLocation = false,
+    this.requestPermissionsExplanation = 'We need your location to show it on the map.',
   });
 
   /// The padding.
@@ -31,15 +32,30 @@ class MapControlButtons extends StatelessWidget {
   /// This button is currently not available on web.
   final bool showTrackLocation;
 
+  /// The explanation to show when requesting location permissions.
+  final String requestPermissionsExplanation;
+
+  @override
+  State<MapControlButtons> createState() => _MapControlButtonsState();
+}
+
+class _MapControlButtonsState extends State<MapControlButtons> {
+  late final PermissionManager? permissionManager;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!kIsWeb) permissionManager = PermissionManager();
+  }
+
   @override
   Widget build(BuildContext context) {
-    PermissionManager? permissionManager;
     final controller = MapController.maybeOf(context);
     if (controller == null) return const SizedBox.shrink();
 
     return Container(
-      alignment: alignment,
-      padding: padding,
+      alignment: widget.alignment,
+      padding: widget.padding,
       child: PointerInterceptor(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -61,23 +77,20 @@ class MapControlButtons extends StatelessWidget {
               ),
               child: const Icon(Icons.remove),
             ),
-            if (showTrackLocation && !kIsWeb) ...[
+            if (widget.showTrackLocation && !kIsWeb) ...[
               const SizedBox(height: 8),
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
-                onPressed: () {
-                  permissionManager ??= PermissionManager();
+                onPressed: () async {
+                  if (permissionManager == null) return;
 
-                  if (permissionManager != null) {
-                    PermissionManager().requestLocationPermissions(
-                      explanation:
-                          'We need your location to show it on the map.',
-                    );
+                  await permissionManager?.requestLocationPermissions(
+                    explanation: widget.requestPermissionsExplanation,
+                  );
 
-                    if (permissionManager!.locationPermissionsGranted) {
-                      controller.enableLocation();
-                      controller.trackLocation();
-                    }
+                  if (permissionManager?.locationPermissionsGranted ?? false) {
+                    await controller.enableLocation();
+                    await controller.trackLocation();
                   }
                 },
                 child: const Icon(Icons.gps_fixed),
