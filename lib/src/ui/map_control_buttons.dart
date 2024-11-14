@@ -46,8 +46,9 @@ class _MapControlButtonsState extends State<MapControlButtons> {
   @override
   void initState() {
     super.initState();
-    if (!kIsWeb && widget.showTrackLocation)
+    if (!kIsWeb && widget.showTrackLocation) {
       permissionManager = PermissionManager();
+    }
   }
 
   @override
