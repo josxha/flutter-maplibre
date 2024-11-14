@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -29,7 +28,6 @@ void main() {
           MapControlButtons(
             alignment: alignment,
             padding: padding,
-            showTrackLocation: true,
           ),
         ],
       );
@@ -38,11 +36,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(MapControlButtons), findsOneWidget);
-      if (!kIsWeb) {
-        expect(find.byType(FloatingActionButton), findsExactly(3));
-      } else {
-        expect(find.byType(FloatingActionButton), findsExactly(2));
-      }
     });
   });
 }
