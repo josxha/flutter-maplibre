@@ -121,6 +121,8 @@ class _MapControlButtonsState extends State<MapControlButtons> {
   }
 
   Future<void> _enableLocationTracking(MapController controller) async {
+    if (!permissionManager!.locationPermissionsGranted) return;
+
     await controller.enableLocation();
     await controller.trackLocation();
     setState(() {
