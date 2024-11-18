@@ -18,7 +18,8 @@ class MapControlButtons extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 50, horizontal: 12),
     this.alignment = Alignment.bottomRight,
     this.showTrackLocation = false,
-    this.requestPermissionsExplanation = 'We need your location to show it on the map.',
+    this.requestPermissionsExplanation =
+        'We need your location to show it on the map.',
   });
 
   /// The padding.
