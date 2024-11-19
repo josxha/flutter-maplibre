@@ -14,16 +14,12 @@ class MapOptions {
     @Deprecated('Renamed to initPitch') double? pitch,
     double initPitch = 0,
     this.initBearing = 0,
-    this.webControls = const [],
     this.minZoom = 0,
     this.maxZoom = 22,
     this.minPitch = 0,
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-    this.nativeCompass = true,
-    this.nativeLogo = true,
-    this.attribution = true,
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
   }) : initPitch = pitch ?? initPitch;
@@ -57,11 +53,6 @@ class MapOptions {
   /// The initial center on the map.
   final Position? initCenter;
 
-  /// A list of user interface control buttons that should get used.
-  ///
-  /// Only supported on web.
-  final List<WebMapControl> webControls;
-
   /// The minimum zoom level. Allowed values are 0-24. Defaults to 0.
   final double minZoom;
 
@@ -84,15 +75,6 @@ class MapOptions {
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
-
-  /// Toggle the MapLibre Native compass.
-  final bool nativeCompass;
-
-  /// Toggle the MapLibre Native logo.
-  final bool nativeLogo;
-
-  /// Toggle the MapLibre Native logo.
-  final bool attribution;
 
   /// The platform view type used on android.
   ///

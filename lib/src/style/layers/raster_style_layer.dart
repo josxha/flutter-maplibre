@@ -1,11 +1,11 @@
-part of 'layer.dart';
+part of 'style_layer.dart';
 
 /// A layer that contains markers.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#symbol
-final class RasterLayer extends LayerWithSource {
-  /// Default constructor for a [RasterLayer] instance.
-  const RasterLayer({
+final class RasterStyleLayer extends StyleLayerWithSource {
+  /// Default constructor for a [RasterStyleLayer] instance.
+  const RasterStyleLayer({
     required super.id,
     required super.sourceId,
     super.layout,

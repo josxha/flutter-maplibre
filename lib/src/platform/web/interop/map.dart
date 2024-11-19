@@ -6,9 +6,6 @@ extension type JsMap._(Camera _) implements Camera {
   /// Create a new MapLibre map.
   external JsMap(MapOptions options);
 
-  /// Add a web-only control button to the map.
-  external void addControl(IControl control);
-
   /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1383
   external void on(String type, JSExportedDartFunction listener);
 

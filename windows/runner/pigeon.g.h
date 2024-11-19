@@ -104,9 +104,6 @@ class MapOptions {
     double min_pitch,
     double max_pitch,
     const MapGestures& gestures,
-    bool compass,
-    bool logo,
-    bool attribution,
     bool android_texture_mode);
 
   // Constructs an object setting all fields.
@@ -122,9 +119,6 @@ class MapOptions {
     double min_pitch,
     double max_pitch,
     const MapGestures& gestures,
-    bool compass,
-    bool logo,
-    bool attribution,
     bool android_texture_mode);
 
   ~MapOptions() = default;
@@ -178,18 +172,6 @@ class MapOptions {
   const MapGestures& gestures() const;
   void set_gestures(const MapGestures& value_arg);
 
-  // Toggle the MapLibre Native compass.
-  bool compass() const;
-  void set_compass(bool value_arg);
-
-  // Toggle the MapLibre Native logo.
-  bool logo() const;
-  void set_logo(bool value_arg);
-
-  // Toggle the MapLibre Native attribution.
-  bool attribution() const;
-  void set_attribution(bool value_arg);
-
   // Toggle the texture mode on android.
   bool android_texture_mode() const;
   void set_android_texture_mode(bool value_arg);
@@ -213,9 +195,6 @@ class MapOptions {
   double min_pitch_;
   double max_pitch_;
   std::unique_ptr<MapGestures> gestures_;
-  bool compass_;
-  bool logo_;
-  bool attribution_;
   bool android_texture_mode_;
 
 };

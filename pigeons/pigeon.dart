@@ -183,9 +183,6 @@ class MapOptions {
     required this.minPitch,
     required this.maxPitch,
     required this.gestures,
-    required this.compass,
-    required this.logo,
-    required this.attribution,
     required this.androidTextureMode,
   });
 
@@ -221,15 +218,6 @@ class MapOptions {
 
   /// The map gestures.
   final MapGestures gestures;
-
-  /// Toggle the MapLibre Native compass.
-  final bool compass;
-
-  /// Toggle the MapLibre Native logo.
-  final bool logo;
-
-  /// Toggle the MapLibre Native attribution.
-  final bool attribution;
 
   /// Toggle the texture mode on android.
   final bool androidTextureMode;

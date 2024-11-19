@@ -2,20 +2,20 @@ import 'dart:ui';
 
 import 'package:maplibre/maplibre.dart';
 
-part 'background_layer.dart';
-part 'circle_layer.dart';
-part 'fill_extrusion_layer.dart';
-part 'fill_layer.dart';
-part 'heatmap_layer.dart';
-part 'hillshade_layer.dart';
-part 'line_layer.dart';
-part 'raster_layer.dart';
-part 'symbol_layer.dart';
+part 'background_style_layer.dart';
+part 'circle_style_layer.dart';
+part 'fill_extrusion_style_layer.dart';
+part 'fill_style_layer.dart';
+part 'heatmap_style_layer.dart';
+part 'hillshade_style_layer.dart';
+part 'line_style_layer.dart';
+part 'raster_style_layer.dart';
+part 'symbol_style_layer.dart';
 
 /// The base Layer class that can't be used directly.
-interface class Layer {
-  /// Create a new [Layer] instance.
-  const Layer({
+interface class StyleLayer {
+  /// Create a new [StyleLayer] instance.
+  const StyleLayer({
     required this.id,
     this.layout = const {},
     this.paint = const {},
@@ -58,11 +58,11 @@ interface class Layer {
   final Map<String, Object> paint;
 }
 
-/// A [Layer] that pulls its data from a [Source]. Basically every layer
-/// except [BackgroundLayer].
-interface class LayerWithSource extends Layer {
-  /// const constructor for [LayerWithSource].
-  const LayerWithSource({
+/// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
+/// except [BackgroundStyleLayer].
+interface class StyleLayerWithSource extends StyleLayer {
+  /// const constructor for [StyleLayerWithSource].
+  const StyleLayerWithSource({
     required super.id,
     required this.sourceId,
     super.paint = const {},

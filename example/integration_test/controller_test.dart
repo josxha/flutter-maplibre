@@ -154,7 +154,7 @@ void main() {
       // ensure no crash if a layer does not exist
       await ctrl.removeLayer('notExisting');
 
-      const layer = RasterLayer(id: 'rasterLayer', sourceId: 'source');
+      const layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
       await ctrl.addLayer(layer);
       await ctrl.removeLayer(layer.id);
     });
@@ -356,7 +356,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = BackgroundLayer(id: '1', color: Colors.black);
+    const layer = BackgroundStyleLayer(id: '1', color: Colors.black);
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -365,7 +365,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillLayer(id: '1', sourceId: 'source1');
+    const layer = FillStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -374,7 +374,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = CircleLayer(id: '1', sourceId: 'source1');
+    const layer = CircleStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -383,7 +383,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillExtrusionLayer(id: '1', sourceId: 'source1');
+    const layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -392,7 +392,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HeatmapLayer(id: '1', sourceId: 'source1');
+    const layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -401,7 +401,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HillshadeLayer(id: '1', sourceId: 'source1');
+    const layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -410,7 +410,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = LineLayer(id: '1', sourceId: 'source1');
+    const layer = LineStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -419,7 +419,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = RasterLayer(id: '1', sourceId: 'source1');
+    const layer = RasterStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -428,7 +428,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolLayer(id: '1', sourceId: 'source1');
+    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -437,7 +437,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolLayer(id: '1', sourceId: 'source1');
+    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.addLayer(layer);
     await tester.pumpAndSettle();
   });

@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
-class AnnotationsMixedPage extends StatefulWidget {
-  const AnnotationsMixedPage({super.key});
+class LayersMixedPage extends StatefulWidget {
+  const LayersMixedPage({super.key});
 
-  static const location = '/annotations/mixed';
+  static const location = '/layers/mixed';
 
   @override
-  State<AnnotationsMixedPage> createState() => _AnnotationsMixedPageState();
+  State<LayersMixedPage> createState() => _LayersMixedPageState();
 }
 
-class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
+class _LayersMixedPageState extends State<LayersMixedPage> {
   final _random = Random.secure();
   final _circlePoints = <Point>[
     Point(coordinates: Position(9.17, 47.68)),
@@ -22,12 +22,12 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
     Point(coordinates: Position(9.5, 48)),
   ];
   Color _circleColor = Colors.orange.withOpacity(0.5);
-  PolylineAnnotationLayer? _polylineLayer;
+  PolylineLayer? _polylineLayer;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mixed Annotations')),
+      appBar: AppBar(title: const Text('Mixed Layers')),
       body: Column(
         children: [
           Padding(
@@ -53,7 +53,7 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
                   onPressed: () {
                     setState(() {
                       if (_polylineLayer == null) {
-                        _polylineLayer = PolylineAnnotationLayer(
+                        _polylineLayer = PolylineLayer(
                           polylines: [
                             LineString(
                               coordinates: [
@@ -89,14 +89,14 @@ class _AnnotationsMixedPageState extends State<AnnotationsMixedPage> {
                 }
               },
               layers: [
-                CircleAnnotationLayer(
+                CircleLayer(
                   points: _circlePoints,
                   color: _circleColor,
                   radius: 20,
                   strokeColor: Colors.red,
                   strokeWidth: 2,
                 ),
-                if (_polylineLayer case final AnnotationLayer layer) layer,
+                if (_polylineLayer case final Layer layer) layer,
               ],
             ),
           ),

@@ -40,9 +40,6 @@ MapOptions::MapOptions(
   double min_pitch,
   double max_pitch,
   const MapGestures& gestures,
-  bool compass,
-  bool logo,
-  bool attribution,
   bool android_texture_mode)
  : style_(style),
     zoom_(zoom),
@@ -53,9 +50,6 @@ MapOptions::MapOptions(
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
     gestures_(std::make_unique<MapGestures>(gestures)),
-    compass_(compass),
-    logo_(logo),
-    attribution_(attribution),
     android_texture_mode_(android_texture_mode) {}
 
 MapOptions::MapOptions(
@@ -70,9 +64,6 @@ MapOptions::MapOptions(
   double min_pitch,
   double max_pitch,
   const MapGestures& gestures,
-  bool compass,
-  bool logo,
-  bool attribution,
   bool android_texture_mode)
  : style_(style),
     zoom_(zoom),
@@ -85,9 +76,6 @@ MapOptions::MapOptions(
     min_pitch_(min_pitch),
     max_pitch_(max_pitch),
     gestures_(std::make_unique<MapGestures>(gestures)),
-    compass_(compass),
-    logo_(logo),
-    attribution_(attribution),
     android_texture_mode_(android_texture_mode) {}
 
 MapOptions::MapOptions(const MapOptions& other)
@@ -102,9 +90,6 @@ MapOptions::MapOptions(const MapOptions& other)
     min_pitch_(other.min_pitch_),
     max_pitch_(other.max_pitch_),
     gestures_(std::make_unique<MapGestures>(*other.gestures_)),
-    compass_(other.compass_),
-    logo_(other.logo_),
-    attribution_(other.attribution_),
     android_texture_mode_(other.android_texture_mode_) {}
 
 MapOptions& MapOptions::operator=(const MapOptions& other) {
@@ -119,9 +104,6 @@ MapOptions& MapOptions::operator=(const MapOptions& other) {
   min_pitch_ = other.min_pitch_;
   max_pitch_ = other.max_pitch_;
   gestures_ = std::make_unique<MapGestures>(*other.gestures_);
-  compass_ = other.compass_;
-  logo_ = other.logo_;
-  attribution_ = other.attribution_;
   android_texture_mode_ = other.android_texture_mode_;
   return *this;
 }
@@ -233,33 +215,6 @@ void MapOptions::set_gestures(const MapGestures& value_arg) {
 }
 
 
-bool MapOptions::compass() const {
-  return compass_;
-}
-
-void MapOptions::set_compass(bool value_arg) {
-  compass_ = value_arg;
-}
-
-
-bool MapOptions::logo() const {
-  return logo_;
-}
-
-void MapOptions::set_logo(bool value_arg) {
-  logo_ = value_arg;
-}
-
-
-bool MapOptions::attribution() const {
-  return attribution_;
-}
-
-void MapOptions::set_attribution(bool value_arg) {
-  attribution_ = value_arg;
-}
-
-
 bool MapOptions::android_texture_mode() const {
   return android_texture_mode_;
 }
@@ -271,7 +226,7 @@ void MapOptions::set_android_texture_mode(bool value_arg) {
 
 EncodableList MapOptions::ToEncodableList() const {
   EncodableList list;
-  list.reserve(15);
+  list.reserve(12);
   list.push_back(EncodableValue(style_));
   list.push_back(EncodableValue(zoom_));
   list.push_back(EncodableValue(pitch_));
@@ -283,9 +238,6 @@ EncodableList MapOptions::ToEncodableList() const {
   list.push_back(EncodableValue(min_pitch_));
   list.push_back(EncodableValue(max_pitch_));
   list.push_back(CustomEncodableValue(*gestures_));
-  list.push_back(EncodableValue(compass_));
-  list.push_back(EncodableValue(logo_));
-  list.push_back(EncodableValue(attribution_));
   list.push_back(EncodableValue(android_texture_mode_));
   return list;
 }
@@ -301,10 +253,7 @@ MapOptions MapOptions::FromEncodableList(const EncodableList& list) {
     std::get<double>(list[8]),
     std::get<double>(list[9]),
     std::any_cast<const MapGestures&>(std::get<CustomEncodableValue>(list[10])),
-    std::get<bool>(list[11]),
-    std::get<bool>(list[12]),
-    std::get<bool>(list[13]),
-    std::get<bool>(list[14]));
+    std::get<bool>(list[11]));
   auto& encodable_center = list[4];
   if (!encodable_center.IsNull()) {
     decoded.set_center(std::any_cast<const LngLat&>(std::get<CustomEncodableValue>(encodable_center)));
