@@ -265,6 +265,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     });
   }
 
+  Completer<void>? _moveCameraLock;
+  Position? _moveCameraCenter;
+  double? _moveCameraZoom;
+  double? _moveCameraBearing;
+  double? _moveCameraPitch;
+
   @override
   Future<void> moveCamera({
     Position? center,
@@ -272,22 +278,37 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     double? bearing,
     double? pitch,
   }) async {
+    // always use the newest camera positioning
+    _moveCameraCenter = center;
+    _moveCameraZoom = zoom;
+    _moveCameraBearing = bearing;
+    _moveCameraPitch = pitch;
+    // only allow one pending call
+    if (_moveCameraLock != null) return;
+    _moveCameraLock = Completer();
+
     final jniMap = _jniMapLibreMap;
     final cameraPositionBuilder = jni.CameraPosition_Builder();
-    if (center != null) cameraPositionBuilder.target(center.toLatLng());
-    if (zoom != null) cameraPositionBuilder.zoom(zoom);
-    if (pitch != null) cameraPositionBuilder.tilt(pitch);
-    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+    if (_moveCameraCenter case final Position center) {
+      cameraPositionBuilder.target(center.toLatLng());
+    }
+    if (_moveCameraZoom case final double zoom) {
+      cameraPositionBuilder.zoom(zoom);
+    }
+    if (_moveCameraPitch case final double pitch) {
+      cameraPositionBuilder.tilt(pitch);
+    }
+    if (_moveCameraBearing case final double bearing) {
+      cameraPositionBuilder.bearing(bearing);
+    }
 
     final cameraPosition = cameraPositionBuilder.build();
     cameraPositionBuilder.release();
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
     await runOnPlatformThread(() {
-      final completer = Completer<void>();
       jniMap.moveCamera(cameraUpdate);
       // TODO: jni causes sometimes a deadlock, complete immediately for now
-      completer.complete();
       /*jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
@@ -300,9 +321,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           ),
         ),
       );*/
-      return completer.future;
     });
     cameraUpdate.release();
+    _moveCameraLock?.complete();
   }
 
   @override
