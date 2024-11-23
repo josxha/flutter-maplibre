@@ -42,18 +42,13 @@ class MapControlButtons extends StatefulWidget {
 
 class _MapControlButtonsState extends State<MapControlButtons> {
   late final PermissionManager? permissionManager;
-  bool loading = false;
-  bool isGpsFixed = false;
+  _TrackLocationState trackState = _TrackLocationState.gpsNotFixed;
 
   @override
   void initState() {
     super.initState();
     if (!kIsWeb && widget.showTrackLocation) {
       permissionManager = PermissionManager();
-
-      // if (permissionManager!.locationPermissionsGranted) {
-      //   setState(() => isGpsFixed = true);
-      // }
     }
   }
 
@@ -91,7 +86,7 @@ class _MapControlButtonsState extends State<MapControlButtons> {
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
                 onPressed: () async {
-                  setState(() => loading = true);
+                  setState(() => trackState = _TrackLocationState.loading);
 
                   try {
                     if (!permissionManager!.locationPermissionsGranted) {
@@ -99,18 +94,19 @@ class _MapControlButtonsState extends State<MapControlButtons> {
                         explanation: widget.requestPermissionsExplanation,
                       );
                     }
-                    await _enableLocationTracking(controller);
                   } finally {
-                    setState(() => loading = false);
+                    await _initializeLocationTracking(controller);
                   }
                 },
-                child: loading
+                child: trackState == _TrackLocationState.loading
                     ? const SizedBox.square(
                         dimension: kDefaultFontSize,
                         child: CircularProgressIndicator(),
                       )
                     : Icon(
-                        isGpsFixed ? Icons.gps_fixed : Icons.gps_not_fixed,
+                        trackState == _TrackLocationState.gpsFixed
+                            ? Icons.gps_fixed
+                            : Icons.gps_not_fixed,
                       ),
               ),
             ],
@@ -120,14 +116,31 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     );
   }
 
-  Future<void> _enableLocationTracking(MapController controller) async {
-    if (!permissionManager!.locationPermissionsGranted) return;
+  Future<void> _initializeLocationTracking(
+    MapController controller,
+  ) async {
+    if (!permissionManager!.locationPermissionsGranted) {
+      setState(() => trackState = _TrackLocationState.gpsNotFixed);
+    }
 
-    await controller.enableLocation();
-    await controller.trackLocation();
-    setState(() {
-      loading = false;
-      isGpsFixed = true;
-    });
+    try {
+      await controller.enableLocation();
+      await controller.trackLocation();
+      setState(() => trackState = _TrackLocationState.gpsFixed);
+    } catch (error) {
+      setState(() => trackState = _TrackLocationState.gpsNotFixed);
+    }
   }
+}
+
+/// Location tracking state.
+enum _TrackLocationState {
+  /// Whether the permission is currently being fetched.
+  loading,
+
+  /// The permission is granted.
+  gpsFixed,
+
+  /// The permission is denied.
+  gpsNotFixed,
 }
