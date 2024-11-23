@@ -42,12 +42,18 @@ class MapControlButtons extends StatefulWidget {
 
 class _MapControlButtonsState extends State<MapControlButtons> {
   late final PermissionManager? permissionManager;
+  bool loading = false;
+  bool isGpsFixed = false;
 
   @override
   void initState() {
     super.initState();
     if (!kIsWeb && widget.showTrackLocation) {
       permissionManager = PermissionManager();
+
+      // if (permissionManager!.locationPermissionsGranted) {
+      //   setState(() => isGpsFixed = true);
+      // }
     }
   }
 
@@ -80,28 +86,48 @@ class _MapControlButtonsState extends State<MapControlButtons> {
               ),
               child: const Icon(Icons.remove),
             ),
-            if (widget.showTrackLocation && !kIsWeb) ...[
+            if (!kIsWeb && widget.showTrackLocation) ...[
               const SizedBox(height: 8),
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
                 onPressed: () async {
-                  if (permissionManager == null) return;
+                  setState(() => loading = true);
 
-                  await permissionManager?.requestLocationPermissions(
-                    explanation: widget.requestPermissionsExplanation,
-                  );
-
-                  if (permissionManager?.locationPermissionsGranted ?? false) {
-                    await controller.enableLocation();
-                    await controller.trackLocation();
+                  try {
+                    if (!permissionManager!.locationPermissionsGranted) {
+                      await permissionManager!.requestLocationPermissions(
+                        explanation: widget.requestPermissionsExplanation,
+                      );
+                    }
+                    await _enableLocationTracking(controller);
+                  } finally {
+                    setState(() => loading = false);
                   }
                 },
-                child: const Icon(Icons.gps_fixed),
+                child: loading
+                    ? const SizedBox.square(
+                        dimension: kDefaultFontSize,
+                        child: CircularProgressIndicator(),
+                      )
+                    : Icon(
+                        isGpsFixed ? Icons.gps_fixed : Icons.gps_not_fixed,
+                      ),
               ),
             ],
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _enableLocationTracking(MapController controller) async {
+    if (!permissionManager!.locationPermissionsGranted) return;
+
+    await controller.enableLocation();
+    await controller.trackLocation();
+    setState(() {
+      loading = false;
+      isGpsFixed = true;
+    });
   }
 }
