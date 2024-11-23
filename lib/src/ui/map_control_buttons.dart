@@ -41,14 +41,16 @@ class MapControlButtons extends StatefulWidget {
 }
 
 class _MapControlButtonsState extends State<MapControlButtons> {
-  late final PermissionManager? permissionManager;
-  _TrackLocationState trackState = _TrackLocationState.gpsNotFixed;
+  late final PermissionManager? _permissionManager;
+  _TrackLocationState _trackState = _TrackLocationState.gpsNotFixed;
+
+  late bool _trackLocationButtonInitialized = false;
 
   @override
   void initState() {
     super.initState();
     if (!kIsWeb && widget.showTrackLocation) {
-      permissionManager = PermissionManager();
+      _permissionManager = PermissionManager();
     }
   }
 
@@ -56,6 +58,17 @@ class _MapControlButtonsState extends State<MapControlButtons> {
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
     if (controller == null) return const SizedBox.shrink();
+
+    if (!kIsWeb && widget.showTrackLocation) {
+      if (!_trackLocationButtonInitialized) {
+        _trackLocationButtonInitialized = true;
+        if (_permissionManager?.locationPermissionsGranted ?? false) {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            await _initializeLocation(controller, trackLocation: false);
+          });
+        }
+      }
+    }
 
     return Container(
       alignment: widget.alignment,
@@ -85,26 +98,14 @@ class _MapControlButtonsState extends State<MapControlButtons> {
               const SizedBox(height: 8),
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
-                onPressed: () async {
-                  setState(() => trackState = _TrackLocationState.loading);
-
-                  try {
-                    if (!permissionManager!.locationPermissionsGranted) {
-                      await permissionManager!.requestLocationPermissions(
-                        explanation: widget.requestPermissionsExplanation,
-                      );
-                    }
-                  } finally {
-                    await _initializeLocationTracking(controller);
-                  }
-                },
-                child: trackState == _TrackLocationState.loading
+                onPressed: () async => _initializeLocation(controller),
+                child: _trackState == _TrackLocationState.loading
                     ? const SizedBox.square(
                         dimension: kDefaultFontSize,
                         child: CircularProgressIndicator(),
                       )
                     : Icon(
-                        trackState == _TrackLocationState.gpsFixed
+                        _trackState == _TrackLocationState.gpsFixed
                             ? Icons.gps_fixed
                             : Icons.gps_not_fixed,
                       ),
@@ -116,19 +117,38 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     );
   }
 
-  Future<void> _initializeLocationTracking(
-    MapController controller,
-  ) async {
-    if (!permissionManager!.locationPermissionsGranted) {
-      setState(() => trackState = _TrackLocationState.gpsNotFixed);
+  Future<void> _initializeLocation(
+    MapController controller, {
+    bool trackLocation = true,
+  }) async {
+    try {
+      if (!_permissionManager!.locationPermissionsGranted) {
+        setState(() => _trackState = _TrackLocationState.loading);
+
+        await _permissionManager.requestLocationPermissions(
+          explanation: widget.requestPermissionsExplanation,
+        );
+      }
+    } finally {
+      await _enableLocationServices(controller, trackLocation: trackLocation);
+    }
+  }
+
+  Future<void> _enableLocationServices(
+    MapController controller, {
+    bool trackLocation = true,
+  }) async {
+    if (!_permissionManager!.locationPermissionsGranted) {
+      setState(() => _trackState = _TrackLocationState.gpsNotFixed);
     }
 
     try {
       await controller.enableLocation();
-      await controller.trackLocation();
-      setState(() => trackState = _TrackLocationState.gpsFixed);
+      setState(() => _trackState = _TrackLocationState.gpsFixed);
+
+      if (trackLocation) await controller.trackLocation();
     } catch (error) {
-      setState(() => trackState = _TrackLocationState.gpsNotFixed);
+      setState(() => _trackState = _TrackLocationState.gpsNotFixed);
     }
   }
 }
