@@ -28,7 +28,7 @@ ktlint {
         reporter("checkstyle")
     }
     dependencies {
-        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.19")
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.+")
     }
     filter {
         exclude("**/*.g.kt")
