@@ -15,26 +15,23 @@ class StyleLayersSymbolPage extends StatefulWidget {
 }
 
 class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Symbol Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 3, initCenter: Position(9.17, 47.68)),
-        onMapCreated: (controller) => _controller = controller,
-        onStyleLoaded: () async {
+        onStyleLoaded: (style) async {
           // load the image data
           final response =
               await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
           final bytes = response.bodyBytes;
 
           // add the image to the map
-          await _controller.addImage('marker', bytes);
+          await style.addImage('marker', bytes);
 
           // add some points as GeoJSON source to the map
-          await _controller.addSource(
+          await style.addSource(
             const GeoJsonSource(
               id: 'points',
               data: _geoJsonString,
@@ -42,7 +39,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
           );
 
           // display the image on the map
-          await _controller.addLayer(
+          await style.addLayer(
             const SymbolStyleLayer(
               id: 'images',
               sourceId: 'points',

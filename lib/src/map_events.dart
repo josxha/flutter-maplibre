@@ -8,7 +8,10 @@ sealed class MapEvent {
 /// Emitted when the map style has been loaded.
 final class MapEventStyleLoaded extends MapEvent {
   /// Create a new [MapEventStyleLoaded] object.
-  const MapEventStyleLoaded();
+  const MapEventStyleLoaded(this.style);
+
+  /// The loaded style.
+  final StyleController style;
 }
 
 /// Emitted when the native map view has been created.

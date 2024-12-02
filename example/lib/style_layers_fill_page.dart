@@ -49,13 +49,13 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
-    await _controller.addSource(
+    await style.addSource(
       GeoJsonSource(id: 'LakeConstance-Source', data: geojsonPolygon),
     );
-    await _controller.addLayer(
+    await style.addLayer(
       const FillStyleLayer(
         id: 'LakeConstance-Layer',
         sourceId: 'LakeConstance-Source',

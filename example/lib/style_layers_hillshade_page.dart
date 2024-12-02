@@ -16,8 +16,6 @@ const _layerId = 'showcaseLayer';
 const _sourceId = 'hills';
 
 class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +23,19 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
       body: MapLibreMap(
         options:
             MapOptions(initCenter: Position(11.39085, 47.27574), initZoom: 10),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     const hillshade = RasterDemSource(
       id: _sourceId,
       url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
       tileSize: 256,
     );
-    await _controller.addSource(hillshade);
-    await _controller.addLayer(_hillshadeStyleLayer);
+    await style.addSource(hillshade);
+    await style.addLayer(_hillshadeStyleLayer);
   }
 }
 
