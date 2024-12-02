@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:12.1.1")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:12.1.2")
     }
 }
 
