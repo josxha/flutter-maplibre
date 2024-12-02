@@ -16,8 +16,10 @@ void main() {
         pitch: 0,
       );
       final controller = MockMapController();
+      final style = MockStyleController();
       when(controller.getCamera).thenReturn(camera);
-      when(controller.getAttributions).thenAnswer(
+      when(() => controller.style).thenReturn(style);
+      when(style.getAttributions).thenAnswer(
         (_) async =>
             ['Source 1', '<a href="https://maplibre.org">Source 2</a>'],
       );

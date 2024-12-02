@@ -17,6 +17,7 @@ export 'src/offline/offline_region.dart';
 export 'src/permission_manager.dart';
 export 'src/queried_layer.dart';
 export 'src/style/style.dart';
+export 'src/style_controller.dart';
 export 'src/ui/map_compass.dart';
 export 'src/ui/map_control_buttons.dart';
 export 'src/ui/map_scalebar.dart';

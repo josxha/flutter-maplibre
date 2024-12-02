@@ -17,28 +17,25 @@ const _layerId = 'showcaseLayer';
 const _sourceId = 'earthquakes';
 
 class _StyleLayersHeatmapPageState extends State<StyleLayersHeatmapPage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Heatmap Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initCenter: Position(-120, 50), initZoom: 2),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     const earthquakes = GeoJsonSource(
       id: _sourceId,
       data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
-    await _controller.addSource(earthquakes);
-    await _controller.addLayer(_heatmapStyleLayer);
+    await style.addSource(earthquakes);
+    await style.addLayer(_heatmapStyleLayer);
   }
 }
 

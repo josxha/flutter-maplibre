@@ -16,45 +16,44 @@ void main() {
       registerFallbackValue(MockStyleLayer());
     });
 
-    late MapController controller;
+    late StyleController style;
     setUp(() {
-      controller = MockMapController();
-      when(() => controller.addSource(any())).thenAnswer((_) async {});
-      when(() => controller.removeSource(any())).thenAnswer((_) async {});
+      style = MockStyleController();
+      when(() => style.addSource(any())).thenAnswer((_) async {});
+      when(() => style.removeSource(any())).thenAnswer((_) async {});
       when(
-        () => controller.updateGeoJsonSource(
+        () => style.updateGeoJsonSource(
           id: any(named: 'id'),
           data: any(named: 'data'),
         ),
       ).thenAnswer((_) async {});
-      when(() => controller.addLayer(any())).thenAnswer((_) async {});
-      when(() => controller.removeLayer(any())).thenAnswer((_) async {});
+      when(() => style.addLayer(any())).thenAnswer((_) async {});
+      when(() => style.removeLayer(any())).thenAnswer((_) async {});
     });
 
     testWidgets('add and remove layers', (tester) async {
-      final manager = LayerManager(controller, []);
+      final manager = LayerManager(style, []);
       final layer1 = CircleLayer(points: [Point(coordinates: Position(0, 0))]);
 
       manager.updateLayers([layer1]);
-      verify(() => controller.addSource(any(that: isA<GeoJsonSource>())))
+      verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
+      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
           .called(1);
-      verify(() => controller.addLayer(any(that: isA<CircleStyleLayer>())))
-          .called(1);
-      verifyNoMoreInteractions(controller);
+      verifyNoMoreInteractions(style);
 
       manager.updateLayers([layer1]);
       verify(
-        () => controller.updateGeoJsonSource(
+        () => style.updateGeoJsonSource(
           id: any(named: 'id'),
           data: any(named: 'data'),
         ),
       ).called(1);
-      verifyNoMoreInteractions(controller);
+      verifyNoMoreInteractions(style);
 
       manager.updateLayers([]);
-      verify(() => controller.removeLayer(any())).called(1);
-      verify(() => controller.removeSource(any())).called(1);
-      verifyNoMoreInteractions(controller);
+      verify(() => style.removeLayer(any())).called(1);
+      verify(() => style.removeSource(any())).called(1);
+      verifyNoMoreInteractions(style);
     });
   });
 }

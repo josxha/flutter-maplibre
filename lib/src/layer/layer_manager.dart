@@ -11,20 +11,20 @@ class LayerManager {
   ///
   /// It creates all sources and layers on the map. It's not needed to compare
   /// the layers with [_oldLayers] in for the initial creation.
-  LayerManager(this.mapController, List<Layer> layers) {
+  LayerManager(this.style, List<Layer> layers) {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
         data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
       );
-      mapController.addSource(source);
-      mapController.addLayer(layer.createStyleLayer(index));
+      style.addSource(source);
+      style.addLayer(layer.createStyleLayer(index));
     }
     _oldLayers = layers;
   }
 
-  /// The [MapController] of the [MapLibreMap].
-  final MapController mapController;
+  /// The [StyleController] of the [MapLibreMap].
+  final StyleController style;
 
   /// The saved [Layer]s from before `setState()` gets called and the
   /// layers get changed.
@@ -40,7 +40,7 @@ class LayerManager {
       // update source
       // TODO check if the entities of both lists are equal
       if (oldLayer case Layer()) {
-        mapController.updateGeoJsonSource(
+        style.updateGeoJsonSource(
           id: layer.getSourceId(index),
           data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
         );
@@ -49,22 +49,22 @@ class LayerManager {
           id: layer.getSourceId(index),
           data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
         );
-        mapController.addSource(source);
+        style.addSource(source);
       }
       // update layer
       if (layer != oldLayer) {
         if (oldLayer case Layer()) {
-          mapController.removeLayer(oldLayer.getLayerId(index));
+          style.removeLayer(oldLayer.getLayerId(index));
         }
-        mapController.addLayer(layer.createStyleLayer(index));
+        style.addLayer(layer.createStyleLayer(index));
       }
     }
     // remove any left-over sources and layers from the map
     for (var i = 0; i < (_oldLayers.length - layers.length); i++) {
       final index = layers.length + i;
       final oldLayer = _oldLayers[index];
-      mapController.removeLayer(oldLayer.getLayerId(index));
-      mapController.removeSource(oldLayer.getSourceId(index));
+      style.removeLayer(oldLayer.getLayerId(index));
+      style.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;
   }
