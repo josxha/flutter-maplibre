@@ -28,6 +28,7 @@ ktlint {
         reporter("checkstyle")
     }
     dependencies {
+        // noinspection GradleDynamicVersion
         ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.+")
     }
     filter {

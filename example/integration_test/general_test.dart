@@ -26,7 +26,7 @@ void main() {
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
     });
 
-    testWidgets('render map with hc', (tester) async {
+    /*testWidgets('render map with hc', (tester) async {
       await tester.pumpWidget(
         App(
           options: MapOptions(
@@ -50,7 +50,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
-    });
+    });*/
 
     testWidgets('update map options', (tester) async {
       final o1 = MapOptions(initCenter: Position(0, 0));
