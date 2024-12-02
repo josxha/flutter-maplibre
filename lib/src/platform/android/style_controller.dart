@@ -12,70 +12,70 @@ class StyleControllerAndroid implements StyleController {
     // TODO: use JNI for this method
     await switch (layer) {
       FillStyleLayer() => _hostApi.addFillLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       CircleStyleLayer() => _hostApi.addCircleLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-        id: layer.id,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       LineStyleLayer() => _hostApi.addLineLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       RasterStyleLayer() => _hostApi.addRasterLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       SymbolStyleLayer() => _hostApi.addSymbolLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       _ => throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      ),
+          'The Layer is not supported: ${layer.runtimeType}',
+        ),
     };
   }
 
@@ -169,7 +169,7 @@ class StyleControllerAndroid implements StyleController {
   @override
   Future<void> addImage(String id, Uint8List bytes) =>
       // TODO: use JNI for this method
-  _hostApi.addImage(id, bytes);
+      _hostApi.addImage(id, bytes);
 
   @override
   Future<void> removeImage(String id) async {
@@ -187,7 +187,7 @@ class StyleControllerAndroid implements StyleController {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       final source =
-      jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
       source.setGeoJson$3(data.toJString());
     });
   }

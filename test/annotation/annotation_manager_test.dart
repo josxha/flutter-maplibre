@@ -36,8 +36,7 @@ void main() {
       final layer1 = CircleLayer(points: [Point(coordinates: Position(0, 0))]);
 
       manager.updateLayers([layer1]);
-      verify(() => style.addSource(any(that: isA<GeoJsonSource>())))
-          .called(1);
+      verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
       verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
           .called(1);
       verifyNoMoreInteractions(style);

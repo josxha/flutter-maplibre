@@ -19,7 +19,6 @@ const _sourceId = 'floorplan';
 
 class _StyleLayersFillExtrusionPageState
     extends State<StyleLayersFillExtrusionPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

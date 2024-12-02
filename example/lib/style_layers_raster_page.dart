@@ -15,7 +15,6 @@ const _layerId = 'showcaseLayer';
 const _sourceId = 'openStreetMap';
 
 class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
-
   // If you are looking for just a way how to display OpenStreetMap on the
   // map then this is NOT the right approach. You can create a Style JSON that
   // contains only a raster source for the OpenStreetMap tile server and one
