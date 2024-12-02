@@ -75,7 +75,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _map.on(
           interop.MapEventType.load,
           (interop.MapMouseEvent event) {
+            style?.dispose();
             final styleCtrl = StyleControllerWeb(_map);
+            style = styleCtrl;
             widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
             widget.onStyleLoaded?.call(styleCtrl);
             _layerManager = LayerManager(styleCtrl, widget.layers);
@@ -169,6 +171,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void dispose() {
+    style?.dispose();
     _map.remove();
     _htmlElement.remove();
     super.dispose();
