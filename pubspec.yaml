@@ -8,10 +8,6 @@ documentation: https://flutter-maplibre.pages.dev/docs/index/
 
 topics: [ map, maplibre, mvt ]
 
-screenshots:
-  - description: 'MapLibre Logo'
-    path: 'logo.png'
-
 funding:
   - https://www.paypal.com/paypalme/joschaeckert
 
@@ -43,6 +39,10 @@ dev_dependencies:
   mocktail: ^1.0.4
   pigeon: ^22.0.0
   very_good_analysis: ^6.0.0
+
+screenshots:
+  - description: 'MapLibre Logo'
+    path: 'logo.png'
 
 flutter:
   plugin:
