@@ -21,7 +21,6 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
     Point(coordinates: Position(9.5, 48)),
   ];
 
-  late final MapController _controller;
   bool _imageLoaded = false;
 
   @override
@@ -32,14 +31,12 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) async {
           switch (event) {
-            case MapEventMapCreated():
-              _controller = event.mapController;
             case MapEventStyleLoaded():
               // add marker image to map
               final response =
                   await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
               final bytes = response.bodyBytes;
-              await _controller.addImage('marker', bytes);
+              await event.style.addImage('marker', bytes);
               setState(() {
                 _imageLoaded = true;
               });

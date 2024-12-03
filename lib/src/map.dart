@@ -50,7 +50,7 @@ class MapLibreMap extends StatefulWidget {
   ///
   /// Please note: you should only add style layers (e.g. symbols or circles)
   /// after this callback has been called.
-  final VoidCallback? onStyleLoaded;
+  final StyleLoadedCallback? onStyleLoaded;
 
   /// Use this callback to handle emitted map events.
   final MapEventCallback? onEvent;
@@ -67,6 +67,10 @@ class MapLibreMap extends StatefulWidget {
 /// Callback that fires once the native MapLibre map has been created for a
 /// [MapLibreMap] widget. It provides the [MapController] to the user.
 typedef MapCreatedCallback = void Function(MapController controller);
+
+/// Callback that fires once the map style has successfully loaded.
+/// It provides the [StyleController] to the user.
+typedef StyleLoadedCallback = void Function(StyleController style);
 
 /// Callback that fires every time a [MapEvent] gets emitted by the map.
 typedef MapEventCallback = void Function(MapEvent event);

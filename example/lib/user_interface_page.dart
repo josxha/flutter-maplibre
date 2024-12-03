@@ -28,7 +28,9 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
         children: const [
           MapScalebar(),
           SourceAttribution(),
-          MapZoomButtons(),
+          MapControlButtons(
+            showTrackLocation: true,
+          ),
           MapCompass(),
         ],
       ),

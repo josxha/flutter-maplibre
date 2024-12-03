@@ -6,9 +6,7 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "pub"
-    directories:
-      - "/"
-      - "/example"
+    directories: [ "/", "/example" ]
     schedule:
       interval: "weekly"
     ignore:
@@ -25,8 +23,9 @@ updates:
       dependencies:
         patterns: [ "*" ]
   - package-ecosystem: "gradle"
-    directories:
-      - "/android"
-      - "/example/android"
+    directories: [ "/android" , "/example/android" ]
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns: [ "*" ]

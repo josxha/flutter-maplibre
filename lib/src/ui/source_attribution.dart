@@ -46,9 +46,9 @@ class _SourceAttributionState extends State<SourceAttribution> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = MapController.maybeOf(context);
+    final style = MapController.maybeOf(context)?.style;
     final camera = MapCamera.maybeOf(context);
-    if (controller == null || camera == null) return const SizedBox.shrink();
+    if (style == null || camera == null) return const SizedBox.shrink();
 
     _initMapCamera ??= camera;
     if (_expanded && !widget.keepExpanded && _initMapCamera != camera) {
@@ -58,7 +58,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
 
     final theme = Theme.of(context);
     return FutureBuilder<List<String>>(
-      future: controller.getAttributions(),
+      future: style.getAttributions(),
       initialData: const [],
       builder: (context, snapshot) {
         if (snapshot.error != null) {

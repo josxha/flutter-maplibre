@@ -38,7 +38,7 @@ class _KioskPageState extends State<KioskPage> {
       body: MapLibreMap(
         options: MapOptions(initStyle: _styleUrl, initCenter: Position(0, 0)),
         onMapCreated: (controller) => _controller = controller,
-        onStyleLoaded: () {
+        onStyleLoaded: (_) {
           _timer = Timer.periodic(const Duration(seconds: 5), _onTimer);
         },
       ),

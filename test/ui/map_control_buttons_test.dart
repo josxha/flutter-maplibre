@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:mocktail/mocktail.dart';
@@ -6,8 +6,10 @@ import 'package:mocktail/mocktail.dart';
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
 
+class MockPermissionManager extends Mock implements PermissionManager {}
+
 void main() {
-  group('MapZoomButtons', () {
+  group('MapControlButtons', () {
     testWidgets('render', (tester) async {
       final camera = MapCamera(
         center: Position(0, 0),
@@ -23,14 +25,17 @@ void main() {
         camera: camera,
         controller: controller,
         children: const [
-          MapZoomButtons(alignment: alignment, padding: padding),
+          MapControlButtons(
+            alignment: alignment,
+            padding: padding,
+          ),
         ],
       );
       await tester.pumpWidget(app);
       // give some time for getAttributions
       await tester.pumpAndSettle();
 
-      expect(find.byType(MapZoomButtons), findsOneWidget);
+      expect(find.byType(MapControlButtons), findsOneWidget);
     });
   });
 }

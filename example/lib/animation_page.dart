@@ -18,7 +18,6 @@ class AnimationPage extends StatefulWidget {
 const _sourceId = 'AnimatedPath';
 
 class _AnimationPageState extends State<AnimationPage> {
-  late final MapController _controller;
   Timer? _timer;
 
   @override
@@ -30,13 +29,12 @@ class _AnimationPageState extends State<AnimationPage> {
           initZoom: 14,
           initCenter: Position(-122.01971, 45.632472),
         ),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     final response = await get(
       Uri.parse('https://maplibre.org/maplibre-gl-js/docs/assets/hike.geojson'),
     );
@@ -51,10 +49,10 @@ class _AnimationPageState extends State<AnimationPage> {
 
     // a LineString on MapLibre Native must have at least 2 Points
     lineString.coordinates = allCoords.sublist(0, 2);
-    await _controller.addSource(
+    await style.addSource(
       GeoJsonSource(id: _sourceId, data: jsonEncode(geojson.toJson())),
     );
-    await _controller.addLayer(
+    await style.addLayer(
       const LineStyleLayer(
         id: 'geojson-line',
         sourceId: _sourceId,
@@ -71,7 +69,7 @@ class _AnimationPageState extends State<AnimationPage> {
         return;
       }
       lineString.coordinates = allCoords.sublist(0, index);
-      _controller.updateGeoJsonSource(
+      style.updateGeoJsonSource(
         id: _sourceId,
         data: jsonEncode(geojson.toJson()),
       );

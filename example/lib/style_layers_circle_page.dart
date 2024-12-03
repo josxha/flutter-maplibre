@@ -17,8 +17,6 @@ const _layerId = 'showcaseLayer';
 const _sourceId = 'earthquakes';
 
 class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,20 +26,19 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
           initCenter: Position(-152.9959, 59.8150),
           initZoom: 9,
         ),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     const earthquakes = GeoJsonSource(
       id: _sourceId,
       data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
-    await _controller.addSource(earthquakes);
-    await _controller.addLayer(_circleStyleLayer);
+    await style.addSource(earthquakes);
+    await style.addLayer(_circleStyleLayer);
   }
 }
 
