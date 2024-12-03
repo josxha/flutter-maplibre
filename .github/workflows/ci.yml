@@ -162,7 +162,9 @@ jobs:
         with:
           cache: true
       - name: Install pana
-        run: dart pub global activate pana
+        run: |
+          npm install --global cwebp-bin webpinfo gif2webp-bin && \
+          dart pub global activate pana
       - name: Check package score
         run: pana --exit-code-threshold 0 --no-dartdoc .
   build-android:
