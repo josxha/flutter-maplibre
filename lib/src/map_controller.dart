@@ -80,7 +80,7 @@ abstract interface class MapController {
 
   /// Animate the map camera to a new location.
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required BBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -109,7 +109,7 @@ abstract interface class MapController {
 
   /// The smallest bounding box that includes the visible region.
   // TODO: can be made sync when flutter raster and ui thread are merged
-  Future<LngLatBounds> getVisibleRegion();
+  Future<BBox> getVisibleRegion();
 
   /// Returns the distance spanned by one pixel at the specified latitude and
   /// current zoom level.
@@ -124,7 +124,7 @@ abstract interface class MapController {
   /// The smallest bounding box that includes the visible region.
   ///
   /// Only supported on web.
-  LngLatBounds getVisibleRegionSync();
+  BBox getVisibleRegionSync();
 
   /// Queries the map for rendered features.
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);

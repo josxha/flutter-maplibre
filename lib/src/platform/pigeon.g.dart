@@ -93,7 +93,7 @@ class MapOptions {
   LngLat? center;
 
   /// The maximum bounding box of the map camera.
-  LngLatBounds? maxBounds;
+  BBox? maxBounds;
 
   /// The minimum zoom level of the map.
   double minZoom;
@@ -138,7 +138,7 @@ class MapOptions {
       pitch: result[2]! as double,
       bearing: result[3]! as double,
       center: result[4] as LngLat?,
-      maxBounds: result[5] as LngLatBounds?,
+      maxBounds: result[5] as BBox?,
       minZoom: result[6]! as double,
       maxZoom: result[7]! as double,
       minPitch: result[8]! as double,
@@ -323,8 +323,8 @@ class MapCamera {
 }
 
 /// LatLng bound object
-class LngLatBounds {
-  LngLatBounds({
+class BBox {
+  BBox({
     required this.longitudeWest,
     required this.longitudeEast,
     required this.latitudeSouth,
@@ -348,9 +348,9 @@ class LngLatBounds {
     ];
   }
 
-  static LngLatBounds decode(Object result) {
+  static BBox decode(Object result) {
     result as List<Object?>;
-    return LngLatBounds(
+    return BBox(
       longitudeWest: result[0]! as double,
       longitudeEast: result[1]! as double,
       latitudeSouth: result[2]! as double,
@@ -393,7 +393,7 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is MapCamera) {
       buffer.putUint8(137);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is BBox) {
       buffer.putUint8(138);
       writeValue(buffer, value.encode());
     } else {
@@ -426,7 +426,7 @@ class _PigeonCodec extends StandardMessageCodec {
       case 137:
         return MapCamera.decode(readValue(buffer)!);
       case 138:
-        return LngLatBounds.decode(readValue(buffer)!);
+        return BBox.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }

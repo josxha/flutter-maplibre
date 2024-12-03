@@ -71,7 +71,7 @@ class MapOptions {
 
   /// The maximum bounding box of the map camera. No constraints are in place
   /// if set to `null`.
-  final LngLatBounds? maxBounds;
+  final BBox? maxBounds;
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;

@@ -18,7 +18,7 @@ class OfflineRegion {
   final int id;
 
   /// The bounding box of the map region.
-  final LngLatBounds bounds;
+  final BBox bounds;
 
   /// The minimum zoom level.
   final double minZoom;

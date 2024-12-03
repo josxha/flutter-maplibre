@@ -16,13 +16,13 @@ class _OfflinePageState extends State<OfflinePage> {
   final _futureOfflineManager = OfflineManager.createInstance();
   String? _downloadProgressWorld;
   String? _downloadProgressBregenz;
-  final _boundsWorld = const LngLatBounds(
+  final _boundsWorld = BBox(
     longitudeWest: -180,
     longitudeEast: 180,
     latitudeSouth: -90,
     latitudeNorth: 90,
   );
-  final _boundsBregenz = const LngLatBounds(
+  final _boundsBregenz = BBox(
     longitudeWest: 9.589786,
     longitudeEast: 9.766498,
     latitudeSouth: 47.446159,
