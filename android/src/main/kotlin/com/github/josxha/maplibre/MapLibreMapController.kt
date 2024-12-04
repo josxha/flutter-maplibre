@@ -400,15 +400,16 @@ class MapLibreMapController(
             if (enabled) {
                 val positionLatLng = mapLibreMap.projection.fromScreenLocation(PointF(event.x, event.y))
                 val position = LngLat(positionLatLng.longitude, positionLatLng.latitude)
-    
-                val event = when (event.action) {
-                    MotionEvent.ACTION_DOWN -> PointerEventType.DOWN
-                    MotionEvent.ACTION_MOVE -> PointerEventType.MOVE
-                    MotionEvent.ACTION_UP -> PointerEventType.UP
-                    else -> null
-                }
-    
-                if(event != null) flutterApi.onPointerEvent(event, position) { }
+
+                val event = 
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> PointerEventType.DOWN
+                        MotionEvent.ACTION_MOVE -> PointerEventType.MOVE
+                        MotionEvent.ACTION_UP -> PointerEventType.UP
+                        else -> null
+                    }
+
+                if (event != null) flutterApi.onPointerEvent(event, position) { }
             }
             false
         }
