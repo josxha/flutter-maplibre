@@ -1,10 +1,13 @@
 part of 'source.dart';
 
 /// An image source. The url value contains the image location. The coordinates
-/// array contains [longitude, latitude] pairs for the image corners listed in
+/// array contains [Position]s for the image corners listed in
 /// clockwise order: top left, top right, bottom right, bottom left.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#image
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class ImageSource extends Source {
   /// The default constructor for a [ImageSource] object.
   const ImageSource({

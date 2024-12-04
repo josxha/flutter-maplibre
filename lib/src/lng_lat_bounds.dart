@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 /// LatLng bounds class.
+///
+/// {@category Basic}
 @immutable
 class LngLatBounds {
   /// Create a new [LngLatBounds] object.

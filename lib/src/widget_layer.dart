@@ -7,6 +7,8 @@ import 'package:maplibre/src/translucent_pointer.dart';
 
 /// Use the [WidgetLayer] to display [Widget]s on the [MapLibreMap]
 /// by using it in [MapLibreMap.children].
+///
+/// {@category Layers}
 class WidgetLayer extends StatelessWidget {
   /// Create a new [WidgetLayer] widget.
   const WidgetLayer({required this.markers, super.key});
@@ -76,6 +78,8 @@ class WidgetLayer extends StatelessWidget {
 }
 
 /// Model class for a widget marker, can be used in a [WidgetLayer].
+///
+/// {@category Layers}
 @immutable
 class Marker {
   /// Create a new [Marker] instance.

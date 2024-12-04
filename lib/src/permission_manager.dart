@@ -4,6 +4,8 @@ import 'package:maplibre/src/platform_interface.dart';
 /// permissions are granted and can request permissions.
 ///
 /// The [PermissionManager] cannot be used on web.
+///
+/// {@category Basic}
 abstract interface class PermissionManager {
   factory PermissionManager() =>
       PlatformInterface.instance.createPermissionManager();
