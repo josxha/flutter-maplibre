@@ -40,6 +40,10 @@ dev_dependencies:
   pigeon: ^22.0.0
   very_good_analysis: ^6.0.0
 
+screenshots:
+  - description: 'MapLibre Logo'
+    path: 'logo.png'
+
 flutter:
   plugin:
     platforms:
