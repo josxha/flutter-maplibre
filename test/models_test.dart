@@ -27,8 +27,13 @@ void main() {
     });
     test('MapGestures', () {
       const all = MapGestures.all();
-      const all2 =
-          MapGestures(rotate: true, zoom: true, pitch: true, pan: true);
+      const all2 = MapGestures(
+        rotate: true,
+        zoom: true,
+        pitch: true,
+        pan: true,
+        drag: true,
+      );
       const none = MapGestures.none();
 
       expect(all.allEnabled, isTrue);

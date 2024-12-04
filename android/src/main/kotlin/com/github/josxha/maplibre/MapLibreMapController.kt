@@ -3,6 +3,7 @@ package com.github.josxha.maplibre
 // if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
 
 import CameraChangeReason
+import PointerEventType
 import LngLat
 import MapCamera
 import MapLibreFlutterApi
@@ -10,6 +11,8 @@ import MapLibreHostApi
 import MapOptions
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.PointF
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -104,6 +107,8 @@ class MapLibreMapController(
             lifecycleProvider.getLifecycle()?.addObserver(this)
             mapView.getMapAsync(this)
             mapViewContainer.addView(mapView)
+
+            setPointerListenerEnabled(mapOptions.gestures.drag)
         }
     }
 
@@ -388,5 +393,24 @@ class MapLibreMapController(
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
         callback(Result.success(Unit))
+    }
+
+    override fun setPointerListenerEnabled(enabled: Boolean) {
+        mapView.setOnTouchListener { _, event ->
+            if (enabled) {
+                val positionLatLng = mapLibreMap.projection.fromScreenLocation(PointF(event.x, event.y))
+                val position = LngLat(positionLatLng.longitude, positionLatLng.latitude)
+    
+                val event = when (event.action) {
+                    MotionEvent.ACTION_DOWN -> PointerEventType.DOWN
+                    MotionEvent.ACTION_MOVE -> PointerEventType.MOVE
+                    MotionEvent.ACTION_UP -> PointerEventType.UP
+                    else -> null
+                }
+    
+                if(event != null) flutterApi.onPointerEvent(event, position) { }
+            }
+            false
+        }
     }
 }

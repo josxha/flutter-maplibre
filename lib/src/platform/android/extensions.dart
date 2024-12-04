@@ -113,3 +113,15 @@ extension OfflineRegionExt on jni.OfflineRegion {
     return region;
   }
 }
+
+/// Extension methods for the [pigeon.PointerEventType] class. Not exported publicly.
+extension PointerEventTypeExt on pigeon.PointerEventType {
+  /// Convert a [pigeon.PointerEventType] to a [PointerEventType].
+  PointerEventType toPointerEventType() {
+    return switch (this) {
+      pigeon.PointerEventType.up => PointerEventType.up,
+      pigeon.PointerEventType.move => PointerEventType.move,
+      pigeon.PointerEventType.down => PointerEventType.down,
+    };
+  }
+}

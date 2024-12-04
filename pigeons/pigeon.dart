@@ -120,6 +120,9 @@ abstract interface class MapLibreHostApi {
   /// Add an image to the map.
   @async
   void addImage(String id, Uint8List bytes);
+
+  /// Enable or disable the pointer events listener on the view.
+  void setPointerListenerEnabled({required bool enabled});
 }
 
 @FlutterApi()
@@ -151,6 +154,9 @@ abstract interface class MapLibreFlutterApi {
 
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
+
+  /// Callback when the user performs a pointer event.
+  void onPointerEvent(PointerEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -231,6 +237,7 @@ class MapGestures {
     required this.pan,
     required this.zoom,
     required this.tilt,
+    required this.drag,
   });
 
   /// Rotate the map bearing.
@@ -244,6 +251,9 @@ class MapGestures {
 
   /// Tilt (pitch) the map camera.
   final bool tilt;
+
+  /// Toggle the drag gestures.
+  final bool drag;
 }
 
 /// A longitude/latitude coordinate object.
@@ -345,4 +355,16 @@ enum CameraChangeReason {
 
   /// API gesture
   apiGesture;
+}
+
+/// The pointer events that can be performed by a user.
+enum PointerEventType {
+  /// The user pressed down on the screen.
+  down,
+
+  /// The user is moving the pointer.
+  move,
+
+  /// The user released the pointer.
+  up,
 }

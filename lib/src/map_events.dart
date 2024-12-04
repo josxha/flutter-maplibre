@@ -54,6 +54,33 @@ enum CameraChangeReason {
   apiGesture;
 }
 
+/// Emitted when the user interact with the map using pointer events.
+final class MapEventUserPointerInput extends MapEvent {
+  /// Create a new [MapEventUserPointerInput] object.
+  const MapEventUserPointerInput({
+    required this.eventType,
+    required this.position,
+  });
+
+  /// The type of the drag event.
+  final PointerEventType eventType;
+
+  /// The position of the drag event.
+  final Position position;
+}
+
+/// The pointer events that can be performed by a user.
+enum PointerEventType {
+  /// The user pressed down on the screen.
+  down,
+
+  /// The user is moving the pointer.
+  move,
+
+  /// The user released the pointer.
+  up,
+}
+
 /// Emitted when the user interacts with the map in any way. Use this class if
 /// you don't care about the type of gesture.
 sealed class MapEventUserInput extends MapEvent {

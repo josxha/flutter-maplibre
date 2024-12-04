@@ -152,6 +152,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     final oldOptions = oldWidget.options;
     final options = _options;
+
+    if (options.gestures.drag != oldOptions.gestures.drag) {
+      unawaited(
+        _hostApi.setPointerListenerEnabled(enabled: options.gestures.drag),
+      );
+    }
+
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
       jniMap.setMaxZoomPreference(options.maxZoom);
@@ -214,6 +221,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           pan: _options.gestures.pan,
           zoom: _options.gestures.zoom,
           tilt: _options.gestures.pitch,
+          drag: _options.gestures.drag,
         ),
         androidTextureMode: _options.androidTextureMode,
       );
@@ -464,6 +472,19 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   void onLongClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventLongClick(point: position));
+  }
+
+  @override
+  Future<void> onPointerEvent(
+    pigeon.PointerEventType event,
+    pigeon.LngLat position,
+  ) async {
+    widget.onEvent?.call(
+      MapEventUserPointerInput(
+        eventType: event.toPointerEventType(),
+        position: position.toPosition(),
+      ),
+    );
   }
 
   @override
