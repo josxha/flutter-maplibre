@@ -50,17 +50,17 @@ extension OffsetExt on Offset {
   jni.PointF toPointF() => jni.PointF.new$1(dx, dy);
 }
 
-/// Extension methods for the [LngLatBounds] class. Not exported publicly.
-extension LngLatBoundsExt on LngLatBounds {
-  /// Convert an [LngLatBounds] to an internal [pigeon.LngLatBounds].
-  pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
+/// Extension methods for the [BBox] class. Not exported publicly.
+extension BBoxExt on BBox {
+  /// Convert an [BBox] to an internal [pigeon.LngLatBounds].
+  pigeon.LngLatBounds toBBox() => pigeon.LngLatBounds(
         longitudeEast: longitudeEast,
         longitudeWest: longitudeWest,
         latitudeNorth: latitudeNorth,
         latitudeSouth: latitudeSouth,
       );
 
-  /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
+  /// Convert an [BBox] to an internal [jni.LatLngBounds].
   jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
         latitudeNorth,
         longitudeEast,
@@ -71,9 +71,9 @@ extension LngLatBoundsExt on LngLatBounds {
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
 extension LatLngBounds on jni.LatLngBounds {
-  /// Convert an internal [jni.LatLngBounds] to an [LngLatBounds].
-  LngLatBounds toLngLatBounds({bool releaseOriginal = false}) {
-    final bounds = LngLatBounds(
+  /// Convert an internal [jni.LatLngBounds] to an [BBox].
+  BBox toBBox({bool releaseOriginal = false}) {
+    final bounds = BBox.named(
       longitudeWest: longitudeWest,
       longitudeEast: longitudeEast,
       latitudeSouth: latitudeSouth,
@@ -103,7 +103,7 @@ extension OfflineRegionExt on jni.OfflineRegion {
     // TODO add getMetadata();
     final region = OfflineRegion(
       id: getId(),
-      bounds: jDefinition.getBounds().toLngLatBounds(releaseOriginal: true),
+      bounds: jDefinition.getBounds().toBBox(releaseOriginal: true),
       minZoom: jDefinition.getMinZoom(),
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),

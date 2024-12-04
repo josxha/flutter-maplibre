@@ -9,9 +9,9 @@ extension PositionExt on Position {
 }
 
 /// Extension methods for the [Position] class. Not exported publicly.
-extension LngLatBoundsExt on LngLatBounds {
+extension BBoxExt on BBox {
   /// Convert a [Position] to an internal [interop.LngLat].
-  interop.LngLatBounds toJsLngLatBounds() => interop.LngLatBounds(
+  interop.BBox toJsBBox() => interop.BBox(
         interop.LngLat(lng: longitudeWest, lat: latitudeSouth),
         interop.LngLat(lng: longitudeEast, lat: latitudeNorth),
       );

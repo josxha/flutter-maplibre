@@ -58,7 +58,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// Returns the map's geographical bounds. When the bearing or pitch is
   /// non-zero, the visible region is not an axis-aligned rectangle, and the
   /// result is the smallest bounds that encompasses the visible region.
-  external LngLatBounds getBounds();
+  external BBox getBounds();
 
   /// Removes the layer with the given ID from the map's style.
   external void removeLayer(String id);
@@ -85,7 +85,7 @@ extension type JsMap._(Camera _) implements Camera {
   external void setMaxPitch(double? maxPitch);
 
   /// Update the maximum bounding box of the map camera.
-  external void setMaxBounds(LngLatBounds? maxBounds);
+  external void setMaxBounds(BBox? maxBounds);
 
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);

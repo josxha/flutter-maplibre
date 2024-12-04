@@ -208,7 +208,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
         maxZoom: _options.maxZoom,
         minPitch: _options.minPitch,
         maxPitch: _options.maxPitch,
-        maxBounds: _options.maxBounds?.toLngLatBounds(),
+        maxBounds: _options.maxBounds?.toBBox(),
         gestures: pigeon.MapGestures(
           rotate: _options.gestures.rotate,
           pan: _options.gestures.pan,
@@ -349,7 +349,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
   @override
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required BBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -491,7 +491,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
+  Future<BBox> getVisibleRegion() async {
     final projection = _jniProjection; // necessary to use it in platform thread
     final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
       final region = projection.getVisibleRegion();
@@ -499,7 +499,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       region.release();
       return bounds;
     });
-    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
+    final bounds = jniBounds.toBBox(releaseOriginal: true);
     return bounds;
   }
 
@@ -666,6 +666,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       );
 
   @override
-  LngLatBounds getVisibleRegionSync() =>
+  BBox getVisibleRegionSync() =>
       throw UnimplementedError('getVisibleRegionSync is only supported on web');
 }

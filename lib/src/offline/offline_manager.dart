@@ -52,7 +52,7 @@ abstract interface class OfflineManager {
   /// Downloads a map region.
   Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
-    required LngLatBounds bounds,
+    required BBox bounds,
     required double minZoom,
     required double maxZoom,
     required double pixelDensity,

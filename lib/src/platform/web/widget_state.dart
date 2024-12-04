@@ -303,7 +303,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required BBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -342,7 +342,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       getMetersPerPixelAtLatitudeSync(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
+  Future<BBox> getVisibleRegion() async => getVisibleRegionSync();
 
   @override
   double getMetersPerPixelAtLatitudeSync(double latitude) =>
@@ -351,9 +351,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       pow(2, _map.getZoom() + 9);
 
   @override
-  LngLatBounds getVisibleRegionSync() {
+  BBox getVisibleRegionSync() {
     final bounds = _map.getBounds();
-    return LngLatBounds(
+    return BBox(
       longitudeWest: bounds.getWest().toDouble(),
       longitudeEast: bounds.getEast().toDouble(),
       latitudeSouth: bounds.getSouth().toDouble(),

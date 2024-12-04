@@ -45,12 +45,12 @@ extension type LngLat._(JSObject _) implements JSObject {
   Position toPosition() => Position(lng, lat);
 }
 
-/// A [LngLatBounds] object represents a geographical bounding box,
+/// A [BBox] object represents a geographical bounding box,
 /// defined by its southwest and northeast points in longitude and latitude.
 @JS()
-extension type LngLatBounds._(JSObject _) implements JSObject {
-  /// Create a new JS [LngLatBounds] object.
-  external LngLatBounds(LngLat? sw, LngLat? ne);
+extension type BBox._(JSObject _) implements JSObject {
+  /// Create a new JS [BBox] object.
+  external BBox(LngLat? sw, LngLat? ne);
 
   /// Returns the west edge of the bounding box.
   external num getWest();
