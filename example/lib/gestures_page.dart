@@ -50,6 +50,7 @@ class _GesturesPageState extends State<GesturesPage> {
                   pan: _selections[Gestures.pan]!,
                   zoom: _selections[Gestures.zoom]!,
                   pitch: _selections[Gestures.tilt]!,
+                  drag: _selections[Gestures.drag]!,
                 ),
               ),
             ),
@@ -64,5 +65,6 @@ enum Gestures {
   rotate,
   pan,
   zoom,
-  tilt;
+  tilt,
+  drag;
 }

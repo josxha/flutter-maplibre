@@ -13,15 +13,33 @@ class EventsPage extends StatefulWidget {
 
 class _EventsPageState extends State<EventsPage> {
   final _eventMessages = <String>[];
+  bool dragEnabled = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Events')),
+      appBar: AppBar(
+        title: const Text('Events'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ChoiceChip(
+              label: const Text('Drag'),
+              selected: dragEnabled,
+              onSelected: (value) => setState(() {
+                dragEnabled = !dragEnabled;
+              }),
+            ),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           MapLibreMap(
-            options: MapOptions(initCenter: Position(9.17, 47.68)),
+            options: MapOptions(
+              initCenter: Position(9.17, 47.68),
+              gestures: MapGestures.all(drag: dragEnabled),
+            ),
             onEvent: _onEvent,
           ),
           IgnorePointer(
@@ -59,6 +77,9 @@ class _EventsPageState extends State<EventsPage> {
           _print('secondary clicked: ${_formatPosition(event.point)}'),
         MapEventIdle() => _print('idle'),
         MapEventCameraIdle() => _print('camera idle'),
+        MapEventUserPointerInput() => _print(
+            'pointer ${event.eventType.name} at position: ${_formatPosition(event.position)}',
+          ),
       };
 
   void _print(String message) {
