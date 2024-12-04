@@ -1,6 +1,11 @@
 part of 'style_layer.dart';
 
+/// A simple background layer.
+///
 /// https://maplibre.org/maplibre-style-spec/layers/#background
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
 final class BackgroundStyleLayer extends StyleLayer {
   /// Create a new [BackgroundStyleLayer].
   const BackgroundStyleLayer({

@@ -4,6 +4,8 @@ import 'package:maplibre/src/platform_interface.dart';
 /// Use the offline manager to download map regions for offline usage.
 ///
 /// The [OfflineManager] cannot be used on web.
+///
+/// {@category Offline}
 abstract interface class OfflineManager {
   /// Create a new [OfflineManager].
   ///

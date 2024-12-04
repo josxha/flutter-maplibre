@@ -13,6 +13,9 @@ part 'raster_style_layer.dart';
 part 'symbol_style_layer.dart';
 
 /// The base Layer class that can't be used directly.
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
 interface class StyleLayer {
   /// Create a new [StyleLayer] instance.
   const StyleLayer({
@@ -60,6 +63,9 @@ interface class StyleLayer {
 
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
 /// except [BackgroundStyleLayer].
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
 interface class StyleLayerWithSource extends StyleLayer {
   /// const constructor for [StyleLayerWithSource].
   const StyleLayerWithSource({

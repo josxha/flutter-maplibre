@@ -4,6 +4,8 @@ import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapController] can be used to control, update and manipulate a
 /// rendered [MapLibreMap].
+///
+/// {@category Basic}
 abstract interface class MapController {
   /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].
@@ -24,19 +26,19 @@ abstract interface class MapController {
   StyleController? get style;
 
   /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Offset> toScreenLocation(Position lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Offset>> toScreenLocations(List<Position> lngLats);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Position>> toLngLats(List<Offset> screenLocations);
 
   /// Convert a latitude/longitude coordinate to a screen location.
@@ -104,7 +106,7 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
   /// The smallest bounding box that includes the visible region.
@@ -154,6 +156,8 @@ abstract interface class MapController {
 
 /// The mode how the bearing should get tracked on the map.
 /// Used in [MapController.trackLocation].
+///
+/// {@category Basic}
 enum BearingTrackMode {
   /// No bearing tracking.
   none,
@@ -167,6 +171,8 @@ enum BearingTrackMode {
 
 /// The mode how render the location on the map.
 /// Used in [MapController.enableLocation].
+///
+/// {@category Basic}
 enum BearingRenderMode {
   /// Do not display the current bearing.
   none,

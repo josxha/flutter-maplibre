@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Return used for [MapController.queryLayers].
+///
+/// {@category Basic}
 @immutable
 class QueriedLayer {
   /// Create a new [QueriedLayer] object.

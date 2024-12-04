@@ -3,6 +3,8 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 
 /// The current camera position on the map.
+///
+/// {@category Basic}
 @immutable
 class MapCamera {
   /// Default constructor for a [MapCamera].

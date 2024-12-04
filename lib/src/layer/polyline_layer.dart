@@ -1,6 +1,8 @@
 part of 'layer.dart';
 
 /// A [LineString] layer.
+///
+/// {@category Layers}
 @immutable
 class PolylineLayer extends Layer<LineString> {
   /// Create a new [PolylineLayer] instance.

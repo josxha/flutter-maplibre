@@ -4,6 +4,8 @@ import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapOptions] class is used to set default values for the [MapLibreMap]
 /// widget.
+///
+/// {@category Basic}
 @immutable
 class MapOptions {
   /// Default constructor for the [MapOptions].

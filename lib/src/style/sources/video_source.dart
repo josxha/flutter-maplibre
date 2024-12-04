@@ -16,6 +16,9 @@ part of 'source.dart';
 /// Only supported on web.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#video
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class VideoSource extends Source {
   /// The default constructor for a [VideoSource] object.
   const VideoSource({
