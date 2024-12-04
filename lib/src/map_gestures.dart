@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 /// Configure gestures that are enabled on the map.
+///
+/// {@category Basic}
 @immutable
 class MapGestures {
   /// Create a new [MapGestures] object by setting all gestures.

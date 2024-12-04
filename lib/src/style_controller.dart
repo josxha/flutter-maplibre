@@ -4,6 +4,8 @@ import 'package:maplibre/maplibre.dart';
 
 /// The [StyleController] can be used to manipulate the style of
 /// a [MapLibreMap]. It can be accessed via [MapController.style].
+///
+/// {@category Basic}
 abstract interface class StyleController {
   /// Add a new source to the map.
   Future<void> addSource(Source source);

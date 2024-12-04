@@ -1,6 +1,8 @@
 part of 'layer.dart';
 
 /// A [Point] layer.
+///
+/// {@category Layers}
 @immutable
 class MarkerLayer extends Layer<Point> {
   /// Create a new [MarkerLayer] instance.

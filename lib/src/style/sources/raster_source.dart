@@ -3,6 +3,9 @@ part of 'source.dart';
 /// A raster tile source.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#raster
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class RasterSource extends Source {
   /// The default constructor for a [RasterSource] object.
   const RasterSource({
