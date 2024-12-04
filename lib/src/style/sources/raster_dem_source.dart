@@ -4,6 +4,9 @@ part of 'source.dart';
 /// Terrarium tiles.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#raster-dem
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class RasterDemSource extends Source {
   /// The default constructor for a [RasterDemSource] object.
   const RasterDemSource({
@@ -65,12 +68,18 @@ final class RasterDemSource extends Source {
 }
 
 /// The encoding used by this source. Mapbox Terrain RGB is used by default.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 sealed class RasterDemEncoding {
   const RasterDemEncoding();
 }
 
 /// Terrarium format PNG tiles.
 /// See https://aws.amazon.com/es/public-datasets/terrain/ for more info.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class RasterDemTerrariumEncoding extends RasterDemEncoding {
   /// Create a [RasterDemTerrariumEncoding].
   const RasterDemTerrariumEncoding();
@@ -79,6 +88,9 @@ final class RasterDemTerrariumEncoding extends RasterDemEncoding {
 /// Mapbox Terrain RGB tiles.
 /// See https://www.mapbox.com/help/access-elevation-data/#mapbox-terrain-rgb
 /// for more info.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class RasterDemMapboxEncoding extends RasterDemEncoding {
   /// Create a [RasterDemMapboxEncoding].
   const RasterDemMapboxEncoding();
@@ -86,6 +98,9 @@ final class RasterDemMapboxEncoding extends RasterDemEncoding {
 
 /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
 /// parameters.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class RasterDemCustomEncoding extends RasterDemEncoding {
   /// Create a [RasterDemCustomEncoding].
   const RasterDemCustomEncoding({

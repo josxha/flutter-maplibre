@@ -1,6 +1,8 @@
 part of 'layer.dart';
 
 /// A [Polygon] layer.
+///
+/// {@category Layers}
 @immutable
 class PolygonLayer extends Layer<Polygon> {
   /// Create a new [PolygonLayer] instance.

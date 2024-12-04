@@ -11,6 +11,8 @@ part 'polyline_layer.dart';
 
 /// This class is the base for all annotation layer classes like
 /// [MarkerLayer].
+///
+/// {@category Layers}
 @immutable
 sealed class Layer<G extends GeometryType<Object>> {
   const Layer._({

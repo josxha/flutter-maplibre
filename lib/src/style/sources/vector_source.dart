@@ -6,6 +6,9 @@ part of 'source.dart';
 /// specify a source-layer value.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#vector
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class VectorSource extends Source {
   /// The default constructor for a [VectorSource] object.
   const VectorSource({

@@ -1,0 +1,21 @@
+dartdoc:
+  categories:
+    "Basic": { markdown: "doc/basic.md" }
+    "Events": { markdown: "doc/events.md" }
+    "Layers": { markdown: "doc/layers.md" }
+    "Style": { markdown: "doc/style.md" }
+    "Style Layers": { markdown: "doc/style.md" }
+    "Style Sources": { markdown: "doc/style.md" }
+    "UI": { markdown: "doc/ui.md" }
+    "Offline": { markdown: "doc/offline.md" }
+  categoryOrder:
+    - "Basic"
+    - "Events"
+    - "Layers"
+    - "Style"
+    - "Style Layers"
+    - "Style Sources"
+    - "UI"
+    - "Offline"
+  showUndocumentedCategories: true
+  favicon: "doc/favicon-32x32.png"
