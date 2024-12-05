@@ -18,7 +18,9 @@ let package = Package(
     targets: [
         .target(
             name: "maplibre_ios",
-            dependencies: [],
+            dependencies: [
+                .product(name: "MapLibre", package: "maplibre-gl-native-distribution")
+            ],
             resources: [
                 // If your plugin requires a privacy manifest, for example if it uses any required
                 // reason APIs, update the PrivacyInfo.xcprivacy file to describe your plugin's

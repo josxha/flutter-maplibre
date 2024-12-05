@@ -1,4 +1,5 @@
 import Flutter
+import MapLibre
 import UIKit
 
 class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
@@ -19,11 +20,6 @@ class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
             viewIdentifier: viewId,
             arguments: args,
             binaryMessenger: messenger)
-    }
-
-    /// Implementing this method is only necessary when the `arguments` in `createWithFrame` is not `nil`.
-    public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
-          return FlutterStandardMessageCodec.sharedInstance()
     }
 }
 
@@ -47,12 +43,17 @@ class MapLibreView: NSObject, FlutterPlatformView {
     }
 
     func createNativeView(view _view: UIView){
-        _view.backgroundColor = UIColor.blue
-        let nativeLabel = UILabel()
-        nativeLabel.text = "Native text from iOS"
-        nativeLabel.textColor = UIColor.white
-        nativeLabel.textAlignment = .center
-        nativeLabel.frame = CGRect(x: 0, y: 0, width: 180, height: 48.0)
-        _view.addSubview(nativeLabel)
+        //_view.backgroundColor = UIColor.blue
+        //let nativeLabel = UILabel()
+        //nativeLabel.text = "Native text from iOS, Yieha!"
+        //nativeLabel.textColor = UIColor.white
+        //nativeLabel.textAlignment = .center
+        //nativeLabel.frame = CGRect(x: 0, y: 0, width: 300, height: 48.0)
+
+        let delegate = MapViewDelegate();
+        let mapView = MLNMapView(frame: _view.bounds)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        _view.addSubview(mapView)
+        mapView.delegate = delegate
     }
 }
