@@ -21,7 +21,7 @@ flutter:
   plugin:
     platforms:
       ios:
-        pluginClass: MaplibreIosPlugin
+        pluginClass: MapLibreIosPlugin
 
 ffigen:
   name: MapLibreFFi

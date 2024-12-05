@@ -13,6 +13,7 @@ funding:
 
 platforms:
   android:
+  ios:
   web:
 
 environment:
@@ -27,6 +28,8 @@ dependencies:
   geotypes: ^0.0.2
   html: ^0.15.4
   jni: ^0.12.0
+  maplibre_ios:
+    path: maplibre_ios
   pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
   web: ^1.0.0
