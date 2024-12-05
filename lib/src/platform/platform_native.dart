@@ -30,7 +30,7 @@ final class PlatformImpl extends PlatformInterface {
   @override
   PermissionManager createPermissionManager() {
     if (Platform.isAndroid) return PermissionManagerAndroid();
-    if (Platform.isIOS) return PermissionManagerIos();
+    if (Platform.isIOS) return const PermissionManagerIos();
     throw UnimplementedError('Unsupported platform');
   }
 }

@@ -11,7 +11,10 @@ let package = Package(
     products: [
         .library(name: "maplibre-ios", targets: ["maplibre_ios"])
     ],
-    dependencies: [],
+    dependencies: [
+        // Needs to be the same version as in ../maplibre_ios.podspec
+        .package(url: "https://github.com/maplibre/maplibre-gl-native-distribution", .upToNextMinor(from: "6.8.1")),
+    ],
     targets: [
         .target(
             name: "maplibre_ios",
