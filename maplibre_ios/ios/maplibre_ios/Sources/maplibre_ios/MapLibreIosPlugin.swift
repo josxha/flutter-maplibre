@@ -1,4 +1,5 @@
 import Flutter
+import MapLibre
 import UIKit
 
 public class MapLibreIosPlugin: NSObject, FlutterPlugin {
