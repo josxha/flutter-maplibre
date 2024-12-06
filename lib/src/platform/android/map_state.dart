@@ -11,14 +11,14 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
-import 'package:maplibre/src/platform/map_state_pigeon.dart';
+import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon {
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;

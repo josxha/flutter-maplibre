@@ -11,7 +11,7 @@ import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-abstract class MapLibreMapStatePigeon extends MapLibreMapState
+abstract class MapLibreMapStateNative extends MapLibreMapState
     implements pigeon.MapLibreFlutterApi {
   @override
   void onMapReady() {
