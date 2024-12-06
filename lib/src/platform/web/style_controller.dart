@@ -1,4 +1,4 @@
-part of 'widget_state.dart';
+part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb implements StyleController {
