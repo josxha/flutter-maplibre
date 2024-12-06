@@ -44,7 +44,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     if (mode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
         viewType: viewType,
-        onPlatformViewCreated: onPlatformViewCreated,
+        onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
       );
     }
@@ -98,7 +98,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
             params.onPlatformViewCreated(id);
-            onPlatformViewCreated(id);
+            _onPlatformViewCreated(id);
           })
           ..create();
       },
@@ -107,7 +107,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
-  void onPlatformViewCreated(int viewId) {
+  void _onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
