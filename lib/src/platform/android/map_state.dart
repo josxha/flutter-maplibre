@@ -18,8 +18,7 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
-    implements pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
