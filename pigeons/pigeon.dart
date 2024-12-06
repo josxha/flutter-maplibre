@@ -17,7 +17,8 @@ import 'package:pigeon/pigeon.dart';
     kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
     kotlinOptions: KotlinOptions(),
     // ios
-    swiftOut: 'ios/Classes/Pigeon.g.swift',
+    swiftOut:
+        'maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
     swiftOptions: SwiftOptions(),
   ),
 )
