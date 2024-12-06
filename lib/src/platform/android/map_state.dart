@@ -11,8 +11,8 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
+import 'package:maplibre/src/platform/map_state_pigeon.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre/src/platform/widget_state_pigeon.dart';
 
 part 'style_controller.dart';
 
@@ -25,7 +25,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
-  LayerManager? _annotationManager;
 
   @override
   StyleControllerAndroid? style;
@@ -46,7 +45,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
     if (mode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
         viewType: viewType,
-        onPlatformViewCreated: _onPlatformViewCreated,
+        onPlatformViewCreated: onPlatformViewCreated,
         gestureRecognizers: widget.gestureRecognizers,
       );
     }
@@ -100,7 +99,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
             params.onPlatformViewCreated(id);
-            _onPlatformViewCreated(id);
+            onPlatformViewCreated(id);
           })
           ..create();
       },
@@ -109,7 +108,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
 
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
-  void _onPlatformViewCreated(int viewId) {
+  void onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
@@ -120,13 +119,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
-    _annotationManager?.updateLayers(widget.layers);
+    layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    style?.dispose();
     _cachedJniProjection?.release();
     _cachedJniMapLibreMap?.release();
     _cachedLocationComponent?.release();
@@ -370,7 +368,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStatePigeon
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
-    _annotationManager = LayerManager(styleCtrl, widget.layers);
+    layerManager = LayerManager(styleCtrl, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }

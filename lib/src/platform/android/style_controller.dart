@@ -1,4 +1,4 @@
-part of 'widget_state.dart';
+part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
@@ -214,7 +214,9 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   void dispose() {
-    _jniStyle.release();
+    if (!_jniStyle.isNull && !_jniStyle.isReleased) {
+      _jniStyle.release();
+    }
   }
 
   JList<jni.Layer> _getLayers() => _jniStyle.getLayers();

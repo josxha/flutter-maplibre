@@ -13,7 +13,6 @@ import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 /// android using JNI and Pigeon as a fallback.
 abstract class MapLibreMapStatePigeon extends MapLibreMapState
     implements pigeon.MapLibreFlutterApi {
-
   @override
   void onMapReady() {
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
@@ -22,6 +21,12 @@ abstract class MapLibreMapStatePigeon extends MapLibreMapState
       camera = getCamera();
       isInitialized = true;
     });
+  }
+
+  @override
+  void dispose() {
+    style?.dispose();
+    super.dispose();
   }
 
   @override
