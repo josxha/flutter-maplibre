@@ -353,7 +353,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   @override
   BBox getVisibleRegionSync() {
     final bounds = _map.getBounds();
-    return BBox(
+    return BBox.named(
       longitudeWest: bounds.getWest().toDouble(),
       longitudeEast: bounds.getEast().toDouble(),
       latitudeSouth: bounds.getSouth().toDouble(),

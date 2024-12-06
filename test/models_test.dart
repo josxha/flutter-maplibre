@@ -126,10 +126,10 @@ void main() {
       expect(oString, contains(o.styleUrl));
     });
     test('DownloadProgress', () {
-      const region = OfflineRegion(
+      final region = OfflineRegion(
         minZoom: 2,
         maxZoom: 4,
-        bounds: LngLatBounds(
+        bounds: BBox(
           longitudeWest: 1,
           longitudeEast: 3,
           latitudeSouth: -3,
@@ -139,7 +139,7 @@ void main() {
         pixelRatio: 1,
         styleUrl: 'https://example.com/style.json',
       );
-      const o = DownloadProgress(
+      final o = DownloadProgress(
         downloadCompleted: false,
         loadedBytes: 12,
         loadedTiles: 1,

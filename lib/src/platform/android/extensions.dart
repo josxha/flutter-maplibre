@@ -62,10 +62,10 @@ extension BBoxExt on BBox {
 
   /// Convert an [BBox] to an internal [jni.LatLngBounds].
   jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
-        latitudeNorth,
-        longitudeEast,
-        latitudeSouth,
-        longitudeWest,
+        lat2.toDouble(),
+        lng2.toDouble(),
+        lat1.toDouble(),
+        lng1.toDouble(),
       );
 }
 
