@@ -16,17 +16,17 @@ class _OfflinePageState extends State<OfflinePage> {
   final _futureOfflineManager = OfflineManager.createInstance();
   String? _downloadProgressWorld;
   String? _downloadProgressBregenz;
-  final _boundsWorld = BBox(
-    longitudeWest: -180,
-    longitudeEast: 180,
-    latitudeSouth: -90,
-    latitudeNorth: 90,
+  final _boundsWorld = BBox.named(
+    lng1: -180,
+    lng2: 180,
+    lat1: -90,
+    lat2: 90,
   );
-  final _boundsBregenz = BBox(
-    longitudeWest: 9.589786,
-    longitudeEast: 9.766498,
-    latitudeSouth: 47.446159,
-    latitudeNorth: 47.574776,
+  final _boundsBregenz = BBox.named(
+    lng1: 9.589786,
+    lng2: 9.766498,
+    lat1: 47.446159,
+    lat2: 47.574776,
   );
 
   @override
@@ -323,7 +323,7 @@ class _OfflineMapPage extends StatelessWidget {
   });
 
   final String title;
-  final LngLatBounds bounds;
+  final BBox bounds;
   final Position center;
   final double zoom;
   final double maxZoom;

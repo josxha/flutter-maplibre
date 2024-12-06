@@ -53,11 +53,11 @@ extension OffsetExt on Offset {
 /// Extension methods for the [BBox] class. Not exported publicly.
 extension BBoxExt on BBox {
   /// Convert an [BBox] to an internal [pigeon.LngLatBounds].
-  pigeon.LngLatBounds toBBox() => pigeon.LngLatBounds(
-        longitudeEast: longitudeEast,
-        longitudeWest: longitudeWest,
-        latitudeNorth: latitudeNorth,
-        latitudeSouth: latitudeSouth,
+  pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
+        longitudeEast: lng2.toDouble(),
+        longitudeWest: lng1.toDouble(),
+        latitudeNorth: lat2.toDouble(),
+        latitudeSouth: lat1.toDouble(),
       );
 
   /// Convert an [BBox] to an internal [jni.LatLngBounds].
@@ -74,10 +74,10 @@ extension LatLngBounds on jni.LatLngBounds {
   /// Convert an internal [jni.LatLngBounds] to an [BBox].
   BBox toBBox({bool releaseOriginal = false}) {
     final bounds = BBox.named(
-      longitudeWest: longitudeWest,
-      longitudeEast: longitudeEast,
-      latitudeSouth: latitudeSouth,
-      latitudeNorth: latitudeNorth,
+      lng1: longitudeWest,
+      lng2: longitudeEast,
+      lat1: latitudeSouth,
+      lat2: latitudeNorth,
     );
     release();
     return bounds;

@@ -16,11 +16,11 @@ class _ParametersPageState extends State<ParametersPage> {
   double _maxZoom = 22;
   double _minPitch = 0;
   double _maxPitch = 60;
-  LngLatBounds _lngLatBounds = const LngLatBounds(
-    longitudeWest: -180,
-    longitudeEast: 179,
-    latitudeSouth: -90,
-    latitudeNorth: 90,
+  BBox _lngLatBounds = BBox.named(
+    lng1: -180,
+    lng2: 179,
+    lat1: -90,
+    lat2: 90,
   );
 
   @override
@@ -55,14 +55,14 @@ class _ParametersPageState extends State<ParametersPage> {
                 ),
                 _SliderWidget(
                   label: 'Longitude',
-                  start: _lngLatBounds.longitudeWest,
-                  end: _lngLatBounds.longitudeEast,
+                  start: _lngLatBounds.lng1.toDouble(),
+                  end: _lngLatBounds.lng2.toDouble(),
                   min: -180,
                   max: 179,
                   onChanged: (range) => setState(() {
                     _lngLatBounds = _lngLatBounds.copyWith(
-                      longitudeWest: range.start,
-                      longitudeEast: range.end,
+                      lng1: range.start,
+                      lng2: range.end,
                     );
                   }),
                 ),
