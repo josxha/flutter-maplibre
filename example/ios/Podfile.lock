@@ -1,26 +1,20 @@
 PODS:
   - Flutter (1.0.0)
-  - maplibre (0.0.1):
-    - Flutter
   - objective_c (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - maplibre (from `.symlinks/plugins/maplibre/ios`)
   - objective_c (from `.symlinks/plugins/objective_c/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  maplibre:
-    :path: ".symlinks/plugins/maplibre/ios"
   objective_c:
     :path: ".symlinks/plugins/objective_c/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  maplibre: f193c9491caa4ee8916dbc309b04ddfd3fc8cf65
   objective_c: 77e887b5ba1827970907e10e832eec1683f3431d
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5

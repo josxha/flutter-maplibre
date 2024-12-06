@@ -53,8 +53,6 @@ flutter:
       android:
         package: com.github.josxha.maplibre
         pluginClass: MapLibrePlugin
-      ios:
-        pluginClass: MaplibrePlugin
       linux:
         pluginClass: MaplibrePlugin
       macos:
