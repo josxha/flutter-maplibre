@@ -4,12 +4,12 @@ title: 'Fill'
 description: 'Add Polygons to the map.'
 ---
 
-# Fill Layer
+# Fill StyleLayer
 
-The `FillLayer` is either used by the map style or can be added to the map
+The `FillStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Fill Layer](/img/layers/fill_layer.jpg)](/demo/#/layers/fill)
+[![Fill Style Layer](/img/layers/fill_layer.jpg)](/demo/#/style-layers/fill)
 
 ## Basic Usage
 
@@ -21,15 +21,15 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
-        await _controller.addSource(
+        await style.addSource(
           GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
         );
-        await _controller.addLayer(
-          const FillLayer(
+        await style.addLayer(
+          const FillStyleLayer(
             id: 'geojson-fill',
             sourceId: 'LakeConstance',
             paint: {'fill-color': '#429ef5'},

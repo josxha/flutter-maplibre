@@ -4,12 +4,12 @@ title: 'Fill Extrusion'
 description: 'Add 3D building outlines to the map.'
 ---
 
-# Fill Extrusion Layer
+# Fill Extrusion Style Layer
 
-The `FillExtrusionLayer` is either used by the map style or can be added to the
+The `FillExtrusionStyleLayer` is either used by the map style or can be added to the
 map programmatically to symbolize data on the map.
 
-[![Fill Extrusion Layer](/img/layers/fill_extrusion_layer.jpg)](/demo/#/layers/fill-extrusion)
+[![Fill Extrusion Style Layer](/img/layers/fill_extrusion_layer.jpg)](/demo/#/style-layers/fill-extrusion)
 
 ## Basic Usage
 
@@ -21,16 +21,32 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
+        // add the tile source
         // highlight-start
-        await _controller.addSource(
+        await style.addSource(
           const GeoJsonSource(
             id: _sourceId,
             data:
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
           ),
         );
-        await _controller.addLayer(_fillExtrusionLayer);
+        // highlight-end
+        const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
+          id: 'room-extrusion',
+          sourceId: _sourceId,
+          paint: {
+            // See the MapLibre Style Specification for details on data expressions.
+            // https://maplibre.org/maplibre-style-spec/expressions/
+            'fill-extrusion-color': ['get', 'color'],
+            'fill-extrusion-height': ['get', 'height'],
+            'fill-extrusion-base': ['get', 'base_height'],
+            'fill-extrusion-opacity': 0.5
+          },
+        );
+        // add the layer
+        // highlight-start
+        await style.addLayer(_fillExtrusionLayer);
         // highlight-end
       }
   );
@@ -38,7 +54,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_circle_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_circle_page.dart)
 for to learn more.
 
 ## Style & Layout

@@ -36,7 +36,7 @@ class MapScreenState extends State<MapScreen> {
           // wait for the onStyleLoadedCallback.
           _mapController = controller;
         },
-        onStyleLoaded: () {
+        onStyleLoaded: (style) {
           debugPrint('Map loaded 😎');
         },
       ),

@@ -8,7 +8,7 @@ description: 'Add Circles to the map.'
 
 Circles are a simple way to show data on the map.
 
-<a href="/demo/#/annotations/circle">
+<a href="/demo/#/layers/circle">
 <img src="/img/annotations/annotations-circles.jpg" 
      alt="Circles" />
 </a>
@@ -22,7 +22,7 @@ Widget build(BuildContext context) {
     options: MapOptions(center: Position(9.17, 47.68)),
     layers: [
       // highlight-start
-      CircleAnnotationLayer(
+      CircleLayer(
         points: <Point>[
           Point(coordinates: Position(9.17, 47.68)),
           Point(coordinates: Position(9.17, 48)),
@@ -40,7 +40,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-That's it! You can add multiple `CircleAnnotationLayer`s with different
+That's it! You can add multiple `CircleLayer`s with different
 properties.
 
 ## Update
@@ -49,12 +49,12 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/annotations_circle_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_circle_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout
 
-The `CircleAnnotationLayer` has a lot of parameters you can use for styling.
+The `CircleLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Circles, you can use the more
 low level [CircleLayer](../layers/circle-layer).

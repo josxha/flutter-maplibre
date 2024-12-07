@@ -4,12 +4,12 @@ title: 'Raster'
 description: 'Add Raster Tiles on the map.'
 ---
 
-# Raster Layer
+# Raster Style Layer
 
-The `RasterLayer` is either used by the map style or can be added to the map
+The `RasterStyleLayer` is either used by the map style or can be added to the map
 programmatically to render raster tiles on your map.
 
-[![Raster Layer](/img/layers/raster_layer.jpg)](/demo/#/layers/raster)
+[![Raster Style Layer](/img/layers/raster_layer.jpg)](/demo/#/style-layers/raster)
 
 ## Basic Usage
 
@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         const openStreetMap = RasterSource(
           id: _sourceId,
@@ -31,12 +31,12 @@ Widget build(BuildContext context) {
           attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         );
-        await _controller.addSource(openStreetMap);
-        const layer = RasterLayer(
+        await style.addSource(openStreetMap);
+        const layer = RasterStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
         );
-        await _controller.addLayer(layer);
+        await style.addLayer(layer);
         // highlight-end
       }
   );
@@ -44,7 +44,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_raster_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_raster_page.dart)
 to learn more.
 
 ## Style & Layout

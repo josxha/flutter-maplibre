@@ -4,12 +4,12 @@ title: 'Heatmap'
 description: 'Add Heatmaps to the map.'
 ---
 
-# Heatmap Layer
+# Heatmap Style Layer
 
-The `HeatmapLayer` is either used by the map style or can be added to the map
+The `HeatmapStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Heatmap Layer](/img/layers/heatmap_layer.jpg)](/demo/#/layers/heatmap)
+[![Heatmap Layer](/img/layers/heatmap_layer.jpg)](/demo/#/style-layers/heatmap)
 
 ## Basic Usage
 
@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         const earthquakes = GeoJsonSource(
           id: _sourceId,
@@ -29,8 +29,8 @@ Widget build(BuildContext context) {
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
         await _controller.addSource(earthquakes);
-        const layer = HeatmapLayer(id: _layerId, sourceId: _sourceId);
-        await _controller.addLayer(layer);
+        const layer = HeatmapStyleLayer(id: _layerId, sourceId: _sourceId);
+        await style.addLayer(layer);
         // highlight-end
       }
   );
@@ -38,7 +38,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_circle_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_circle_page.dart)
 for to learn more.
 
 ## Style & Layout

@@ -4,12 +4,12 @@ title: 'Circle'
 description: 'Add Circles to the map.'
 ---
 
-# Circle Layer
+# Circle Style Layer
 
-The `CircleLayer` is either used by the map style or can be added to the map
+The `CircleStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Circle Layer](/img/layers/circle_layer.jpg)](/demo/#/layers/circle)
+[![Circle Style Layer](/img/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
 
 ## Basic Usage
 
@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         // add the source
         const earthquakes = GeoJsonSource(
@@ -29,11 +29,11 @@ Widget build(BuildContext context) {
           data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
-        await _controller.addSource(earthquakes);
+        await style.addSource(earthquakes);
 
         // add the source with a layer on the map
-        const circleLayer = CircleLayer(id: _layerId, sourceId: _sourceId);
-        await _controller.addLayer(circleLayer);
+        const layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
+        await style.addLayer(layer);
         // highlight-end
       }
   );

@@ -8,7 +8,7 @@ description: 'Add Markers to the map.'
 
 Markers are a way to show data on the map with labels and/or icons.
 
-<a href="/demo/#/annotations/marker">
+<a href="/demo/#/layers/marker">
 <img src="/img/annotations/annotations-markers.jpg" 
      alt="Markers" />
 </a>
@@ -46,7 +46,7 @@ Widget build(BuildContext context) {
     },
     layers: [
       // highlight-start
-      MarkerAnnotationLayer(
+      MarkerLayer(
         points: <Point>[
           Point(coordinates: Position(9.17, 47.68)),
           Point(coordinates: Position(9.17, 48)),
@@ -66,7 +66,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-That's it! You can add multiple `MarkerAnnotationLayer`s with different
+That's it! You can add multiple `MarkerLayer`s with different
 properties.
 
 ## Update
@@ -75,12 +75,12 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/annotations_marker_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_marker_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout
 
-The `MarkerAnnotationLayer` has a lot of parameters you can use for styling.
+The `MarkerLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Markers, you can use the more
 low level [SymbolLayer](../layers/symbol-layer).
