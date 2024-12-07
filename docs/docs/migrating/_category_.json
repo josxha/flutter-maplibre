@@ -3,6 +3,6 @@
   "position": 15,
   "link": {
     "type": "generated-index",
-    "description": "Useful information and tips if you want to migrate your app to use the `maplibre` package."
+    "description": "Useful tips and hints if you want to migrate your app to use the maplibre package."
   }
 }

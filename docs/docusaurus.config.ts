@@ -75,6 +75,18 @@ const config: Config = {
                     label: 'Docs',
                 },
                 {
+                    href: '/features/',
+                    sidebarId: 'docsSidebar',
+                    position: 'left',
+                    label: 'Features',
+                },
+                {
+                    href: '/peer-comparison/',
+                    sidebarId: 'docsSidebar',
+                    position: 'left',
+                    label: 'Compare',
+                },
+                {
                     type: 'docsVersionDropdown',
                     position: 'left',
                 },
