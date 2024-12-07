@@ -22,8 +22,6 @@ flowchart TD
     MapLibreMapStateWeb -->|interop| TypeScript([TypeScript])
 ```
 
-The Diagram consists of the following four layers:
-
 ### 1. Public API
 
 `MapLibreMap` and `MapController` is part of the public API. That part of the
