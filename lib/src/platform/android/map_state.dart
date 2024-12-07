@@ -9,25 +9,21 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
+import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapState
-    implements pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
-  LayerManager? _annotationManager;
-
-  MapOptions get _options => widget.options;
 
   @override
   StyleControllerAndroid? style;
@@ -44,7 +40,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   @override
   Widget buildPlatformWidget(BuildContext context) {
     const viewType = 'plugins.flutter.io/maplibre';
-    final mode = _options.androidMode;
+    final mode = options.androidMode;
     if (mode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
         viewType: viewType,
@@ -120,25 +116,14 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  void onMapReady() {
-    widget.onEvent?.call(MapEventMapCreated(mapController: this));
-    widget.onMapCreated?.call(this);
-    setState(() {
-      camera = getCamera();
-      isInitialized = true;
-    });
-  }
-
-  @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
-    _annotationManager?.updateLayers(widget.layers);
+    layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    style?.dispose();
     _cachedJniProjection?.release();
     _cachedJniMapLibreMap?.release();
     _cachedLocationComponent?.release();
@@ -151,7 +136,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     if (jniMap.isNull) return;
 
     final oldOptions = oldWidget.options;
-    final options = _options;
+    final options = this.options;
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
       jniMap.setMaxZoomPreference(options.maxZoom);
@@ -191,32 +176,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       uiSettings.release();
     });
   }
-
-  @override
-  pigeon.MapOptions getOptions() => pigeon.MapOptions(
-        style: _options.initStyle,
-        bearing: _options.initBearing,
-        zoom: _options.initZoom,
-        pitch: _options.initPitch,
-        center: _options.initCenter == null
-            ? null
-            : pigeon.LngLat(
-                lng: _options.initCenter!.lng.toDouble(),
-                lat: _options.initCenter!.lat.toDouble(),
-              ),
-        minZoom: _options.minZoom,
-        maxZoom: _options.maxZoom,
-        minPitch: _options.minPitch,
-        maxPitch: _options.maxPitch,
-        maxBounds: _options.maxBounds?.toLngLatBounds(),
-        gestures: pigeon.MapGestures(
-          rotate: _options.gestures.rotate,
-          pan: _options.gestures.pan,
-          zoom: _options.gestures.zoom,
-          tilt: _options.gestures.pitch,
-        ),
-        androidTextureMode: _options.androidTextureMode,
-      );
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
@@ -408,62 +367,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
-    _annotationManager = LayerManager(styleCtrl, widget.layers);
+    layerManager = LayerManager(styleCtrl, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
-  }
-
-  @override
-  void onMoveCamera(pigeon.MapCamera camera) {
-    final mapCamera = MapCamera(
-      center: camera.center.toPosition(),
-      zoom: camera.zoom,
-      pitch: camera.pitch,
-      bearing: camera.bearing,
-    );
-    setState(() => this.camera = mapCamera);
-    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
-  }
-
-  @override
-  void onStartMoveCamera(pigeon.CameraChangeReason reason) {
-    final changeReason = switch (reason) {
-      pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
-      pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
-      pigeon.CameraChangeReason.developerAnimation =>
-        CameraChangeReason.developerAnimation,
-    };
-    widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
-  }
-
-  @override
-  void onIdle() => widget.onEvent?.call(const MapEventIdle());
-
-  @override
-  void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
-
-  @override
-  void onDoubleClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onSecondaryClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onLongClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventLongClick(point: position));
   }
 
   @override
@@ -640,32 +546,4 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       locationComponent.setCameraMode(mode);
     });
   }
-
-  @override
-  Position toLngLatSync(Offset screenLocation) =>
-      throw UnimplementedError('toLngLatSync is only supported on web');
-
-  @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
-      throw UnimplementedError('toLngLatsSync is only supported on web');
-
-  @override
-  Offset toScreenLocationSync(Position lngLat) =>
-      throw UnimplementedError('toScreenLocationSync is only supported on web');
-
-  @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
-      throw UnimplementedError(
-        'toScreenLocationsSync is only supported on web',
-      );
-
-  @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) =>
-      throw UnimplementedError(
-        'getMetersPerPixelAtLatitudeSync is only supported on web',
-      );
-
-  @override
-  LngLatBounds getVisibleRegionSync() =>
-      throw UnimplementedError('getVisibleRegionSync is only supported on web');
 }

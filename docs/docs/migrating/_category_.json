@@ -1,0 +1,8 @@
+{
+  "label": "Migrate from other packages",
+  "position": 25,
+  "link": {
+    "type": "generated-index",
+    "description": "Useful tips and hints if you want to migrate your app to use the maplibre package."
+  }
+}

@@ -1,15 +1,15 @@
 ---
 sidebar_position: 1
-title: 'Fill Extrusion'
-description: 'Add 3D building outlines to the map.'
+title: 'Fill'
+description: 'Add Polygons to the map.'
 ---
 
-# Fill Extrusion Layer
+# Fill StyleLayer
 
-The `FillExtrusionLayer` is either used by the map style or can be added to the
-map programmatically to symbolize data on the map.
+The `FillStyleLayer` is either used by the map style or can be added to the map
+programmatically to symbolize data on the map.
 
-[![Fill Extrusion Layer](/img/layers/fill_extrusion_layer.jpg)](/demo/#/layers/fill-extrusion)
+[![Fill Style Layer](/img/layers/fill_layer.jpg)](/demo/#/style-layers/fill)
 
 ## Basic Usage
 
@@ -21,16 +21,20 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
-        await _controller.addSource(
-          const GeoJsonSource(
-            id: _sourceId,
-            data:
-            'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
+        final geojsonPolygon =
+        await rootBundle.loadString('assets/geojson/lake-constance.json');
+        await style.addSource(
+          GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
+        );
+        await style.addLayer(
+          const FillStyleLayer(
+            id: 'geojson-fill',
+            sourceId: 'LakeConstance',
+            paint: {'fill-color': '#429ef5'},
           ),
         );
-        await _controller.addLayer(_fillExtrusionLayer);
         // highlight-end
       }
   );
