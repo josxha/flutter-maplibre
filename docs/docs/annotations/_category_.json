@@ -1,8 +1,0 @@
-{
-  "label": "Annotations",
-  "position": 60,
-  "link": {
-    "type": "generated-index",
-    "description": "Annotation Layers are a convenient and easy way to add Markers, Circles, Polylines or Polygons to the map."
-  }
-}
