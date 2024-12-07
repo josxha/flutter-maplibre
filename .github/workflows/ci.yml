@@ -198,8 +198,8 @@ jobs:
         with:
           name: maplibre-flutter-demo.apk
           path: example/build/app/outputs/flutter-apk/app-release.apk
-  build-iOS:
-    name: [iOS] Build package
+  build-ios:
+    name: "[iOS] Build package"
     runs-on: macos-latest
     timeout-minutes: 30
     defaults:
