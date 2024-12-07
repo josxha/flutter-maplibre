@@ -1,4 +1,4 @@
-part of 'widget_state.dart';
+part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerIos implements StyleController {
