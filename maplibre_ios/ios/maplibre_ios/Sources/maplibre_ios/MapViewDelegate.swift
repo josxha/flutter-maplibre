@@ -1,11 +1,36 @@
 import MapLibre
 import Flutter
 
-class MapViewDelegate: NSObject, MLNMapViewDelegate, MapLibreHostApi {
-    var mapView: MLNMapView!
+class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi {
+    private var _view: UIView = UIView()
+    private var _mapView: MLNMapView!
+    private var _viewId: Int64
+    private var _flutterApi: MapLibreFlutterApi
+    private var _mapOptions: MapOptions? = nil
+    
+    init(
+        frame: CGRect,
+        viewId viewId: Int64,
+        binaryMessenger binaryMessenger: FlutterBinaryMessenger
+    ) {
+        var channelSuffix = String(viewId)
+        self._viewId = viewId
+        self._flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
+        super.init()
+        MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
+        _mapView = MLNMapView(frame: _view.bounds)
+        // TODO apply MapOptions
+        _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        _view.addSubview(_mapView)
+        _mapView.delegate = self
+    }
 
+    func view() -> UIView {
+        return _view
+    }
     // MLNMapViewDelegate method called when map has finished loading
-    func mapView(_: MLNMapView, didFinishLoading _: MLNStyle) {
+    func mapView(mapView: MLNMapView, didFinishLoading _: MLNStyle) {
+        self._mapView = mapView
     }
     /// Add a fill layer to the map style.
     func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
