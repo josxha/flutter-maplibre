@@ -198,36 +198,36 @@ jobs:
         with:
           name: maplibre-flutter-demo.apk
           path: example/build/app/outputs/flutter-apk/app-release.apk
-#  build-iOS:
-#    name: [iOS] Build package
-#    runs-on: macos-latest
-#    timeout-minutes: 30
-#    defaults:
-#      run:
-#        working-directory: example
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: [ '3.24.0', '' ]
-#    steps:
-#      - uses: actions/checkout@v4
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: ${{ matrix.sdk }}
-#          cache: true
-#      - uses: maxim-lobanov/setup-cocoapods@v1
-#        with:
-#          podfile-path: example/ios/Podfile.lock
-#      - name: "Get Flutter dependencies"
-#        run: dart pub get
-#      - name: Build iOS package
-#        run: flutter build ios --simulator
-#      - name: Upload Runner.app as artifact
-#        if: ${{ matrix.sdk == '' }}
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: maplibre-flutter-demo.app
-#          path: example/build/ios/iphonesimulator
+  build-ios:
+    name: "[iOS] Build package"
+    runs-on: macos-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: example
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.24.0', '' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          podfile-path: example/ios/Podfile.lock
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: "Build iOS package"
+        run: flutter build ios --simulator
+      - name: Upload Runner.app as artifact
+        if: ${{ matrix.sdk == '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: maplibre-flutter-demo.app
+          path: example/build/ios/iphonesimulator
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
