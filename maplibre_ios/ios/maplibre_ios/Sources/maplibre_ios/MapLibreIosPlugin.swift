@@ -1,11 +1,15 @@
 import Flutter
+import MapLibre
 import UIKit
 
-public class MaplibrePlugin: NSObject, FlutterPlugin {
+public class MapLibreIosPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "maplibre", binaryMessenger: registrar.messenger())
-    let instance = MaplibrePlugin()
+    let channel = FlutterMethodChannel(name: "maplibre_ios", binaryMessenger: registrar.messenger())
+    let instance = MapLibreIosPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
+
+    let factory = MapLibreViewFactory(messenger: registrar.messenger())
+    registrar.register(factory, withId: "plugins.flutter.io/maplibre")
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

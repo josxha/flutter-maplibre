@@ -9,4 +9,4 @@ fi
 
 dart run pigeon --input pigeons/pigeon.dart
 dart format .
-cp ios/Classes/Pigeon.g.swift macos/Classes/Pigeon.g.swift
+cp maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift macos/Classes/Pigeon.g.swift
