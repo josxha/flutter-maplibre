@@ -57,4 +57,4 @@ if you want to see how things come together.
 The `CircleLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Circles, you can use the more
-low level [CircleLayer](../layers/circle-layer).
+low level [CircleLayer](../style-layers/circle-layer).

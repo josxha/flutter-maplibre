@@ -83,4 +83,4 @@ if you want to see how things come together.
 The `MarkerLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Markers, you can use the more
-low level [SymbolLayer](../layers/symbol-layer).
+low level [SymbolLayer](../style-layers/symbol-layer).

@@ -60,4 +60,4 @@ if you want to see how things come together.
 The `PolylineLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Polylines, you can use the more
-low level [LineLayer](../layers/line-layer).
+low level [LineLayer](../style-layers/line-layer).
