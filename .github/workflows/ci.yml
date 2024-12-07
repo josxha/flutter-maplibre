@@ -22,6 +22,15 @@ jobs:
           cache: true
       - name: Lint analysis
         run: dart format --set-exit-if-changed .
+  lints-swift:
+    name: "[Swift] Check formatting"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Install SwiftFormat"
+        run: brew install swiftformat
+      - name: "Format Swift code"
+        run: swiftformat --verbose --lint .s
   lint-dart:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
