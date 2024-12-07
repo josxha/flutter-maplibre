@@ -16,13 +16,56 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         var channelSuffix = String(viewId)
         self._viewId = viewId
         self._flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
-        super.init()
+        super.init() // self can be used after calling super.init()
         MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
         _mapView = MLNMapView(frame: _view.bounds)
         // TODO apply MapOptions
         _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         _view.addSubview(_mapView)
         _mapView.delegate = self
+        self._flutterApi.getOptions { result in
+            switch result {
+            case .success(let mapOptions):
+                self._mapOptions = mapOptions
+                if let center = mapOptions.center {
+                    var mapCenter = CLLocationCoordinate2D(latitude: center.lat, longitude: center.lng)
+                    self._mapView.setCenter(mapCenter, zoomLevel: mapOptions.zoom, animated: false)
+                }
+                self._mapView.showAttribution(false)
+                self._mapView.minimumZoomLevel = mapOptions.minZoom
+                self._mapView.maximumZoomLevel = mapOptions.maxZoom
+                self._mapView.minimumPitch = mapOptions.minPitch
+                self._mapView.maximumPitch = mapOptions.maxPitch
+                self._mapView.allowsRotating = mapOptions.gestures.rotate
+                self._mapView.allowsZooming = mapOptions.gestures.zoom
+                self._mapView.allowsTilting = mapOptions.gestures.tilt
+                self._mapView.allowsScrolling = mapOptions.gestures.pan
+                self._mapView.styleURL = URL(string: mapOptions.style)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+        //self._mapView.addGestureRecognizer(UIPanGestureRecognizer(target: self._view, action: #selector(onPan)))
+        //self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self._view, action: #selector(onTap)))
+    }
+    
+    @objc func onPan() {
+        var mlnCamera = _mapView.camera
+        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
+        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
+        _flutterApi.onMoveCamera(camera: pigeonCamera) { result in
+            // do nothig
+        }
+    }
+    
+    @objc func onTap() {
+        var mlnCamera = _mapView.camera
+        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
+        _flutterApi.onClick(point: center) { result in
+            // do nothig
+        }
     }
 
     func view() -> UIView {
@@ -32,27 +75,26 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     func mapView(mapView: MLNMapView, didFinishLoading _: MLNStyle) {
         self._mapView = mapView
     }
-    /// Add a fill layer to the map style.
+    
     func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a circle layer to the map style.
+    
     func addCircleLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a background layer to the map style.
+    
     func addBackgroundLayer(id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a fill extrusion layer to the map style.
+    
     func addFillExtrusionLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a heatmap layer to the map style.
+    
     func addHeatmapLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a hillshade layer to the map style.
+    
     func addHillshadeLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a line layer to the map style.
+    
     func addLineLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a raster layer to the map style.
+    
     func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Add a symbol layer to the map style.
+    
     func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void) {}
-    /// Loads an image to the map. An image needs to be loaded before it can
-    /// get used.
+    
     func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {}
-    /// Add an image to the map.
+    
     func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void) {}
 }
