@@ -60,16 +60,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    final ffiOldCamera = _mapView.camera;
-    final ffiNewCamera = ffi.MLNMapCamera.alloc();
-    ffiNewCamera.heading = bearing ?? ffiOldCamera.heading;
-    ffiNewCamera.centerCoordinate =
-        center?.toCLLocationCoordinate2D() ?? ffiOldCamera.centerCoordinate;
-    ffiNewCamera.heading = bearing ?? ffiOldCamera.heading;
-    // TODO apply zoom level
-    _mapView.setCamera_animated_(ffiNewCamera, true);
-    ffiOldCamera.release();
-    ffiNewCamera.release();
+    if (zoom != null) _mapView.zoomLevel = zoom;
+    final ffiCamera = _mapView.camera;
+    if (pitch != null) ffiCamera.pitch = pitch;
+    if (bearing != null) ffiCamera.heading = bearing;
+    if (center != null) {
+      ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
+    }
+    _mapView.flyToCamera_withDuration_completionHandler_(
+      ffiCamera,
+      nativeDuration.inMicroseconds / 1000000,
+      null,
+    );
   }
 
   @override
@@ -81,8 +83,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool compassAnimation = true,
     bool pulse = true,
   }) async {
-    // TODO: implement enableLocation
-    throw UnimplementedError();
+    _mapView.showsUserLocation = true;
   }
 
   @override
@@ -114,9 +115,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    return _projection.metersPerPoint; // TODO use latitude parameter
-  }
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      _mapView.metersPerPointAtLatitude_(latitude);
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
@@ -136,9 +136,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
-      // TODO ffiCamera.centerCoordinate = ffi.CLLocationCoordinate2D;
+      ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    ffiCamera.release();
+    _mapView.setCamera_animated_(ffiCamera, false);
   }
 
   @override
@@ -213,7 +213,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
-    // TODO: implement trackLocation
-    throw UnimplementedError();
+    if (!trackLocation) {
+      _mapView.userTrackingMode =
+          ffi.MLNUserTrackingMode.MLNUserTrackingModeNone;
+      return;
+    }
+    _mapView.userTrackingMode = switch (trackBearing) {
+      BearingTrackMode.none =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollow,
+      BearingTrackMode.compass =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+      BearingTrackMode.gps =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+    };
   }
 }
