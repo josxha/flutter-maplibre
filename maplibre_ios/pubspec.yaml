@@ -31,14 +31,17 @@ ffigen:
   exclude-all-by-default: true
   objc-interfaces:
     include:
-      - 'MLNMapView'
+      #- 'MLNMapView'
+      - 'MapLibreRegistry'
     module:
-      'MLNMapView': 'MapLibre'
+      #'MLNMapView': 'MapLibre'
+      'MapLibreRegistry': 'maplibre_ios'
   headers:
     entry-points:
-      #- '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MapLibre.h'
-      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h'
-      - '/Users/joscha/Documents/GitHub/flutter-maplibre/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.swift'
+      - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
+      #- '~/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MapLibre.h'
+      #- '~/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h'
+      #- '~/Documents/GitHub/flutter-maplibre/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.swift'
     #include-directives:
       #- '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers'
   preamble: |
