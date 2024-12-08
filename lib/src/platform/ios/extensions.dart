@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 import 'dart:ui';
 
 import 'package:geotypes/geotypes.dart';
