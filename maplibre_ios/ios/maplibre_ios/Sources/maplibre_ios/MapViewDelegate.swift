@@ -45,6 +45,9 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 print(error)
             }
         }
+        self._flutterApi.onMapReady {result in
+            // do nothing
+        }
         // self._mapView.addGestureRecognizer(UIPanGestureRecognizer(target: self._view, action: #selector(onPan)))
         // self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self._view, action: #selector(onTap)))
     }

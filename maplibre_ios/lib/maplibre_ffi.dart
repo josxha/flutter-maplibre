@@ -10,6 +10,13 @@ import 'package:ffi/ffi.dart' as pkg_ffi;
 @ffi.Native<
     ffi.Pointer<objc.ObjCBlockImpl> Function(
         ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjovn7(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<
+    ffi.Pointer<objc.ObjCBlockImpl> Function(
+        ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
@@ -432,9 +439,451 @@ final class MLNCoordinateBounds extends ffi.Struct {
   external CLLocationCoordinate2D ne;
 }
 
-/// WARNING: MLNMapCamera is a stub. To generate bindings for this class, include
-/// MLNMapCamera in your config's objc-interfaces list.
-///
+late final _class_MLNMapCamera = objc.getClass("MapLibre.MLNMapCamera");
+late final _sel_centerCoordinate = objc.registerName("centerCoordinate");
+final _objc_msgSend_18o5nok = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        CLLocationCoordinate2D Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_18o5nokStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CLLocationCoordinate2D>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<CLLocationCoordinate2D>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setCenterCoordinate_ =
+    objc.registerName("setCenterCoordinate:");
+final _objc_msgSend_1zv0am = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>();
+late final _sel_heading = objc.registerName("heading");
+final _objc_msgSend_1ukqyt8 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        double Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        double Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setHeading_ = objc.registerName("setHeading:");
+final _objc_msgSend_hwm8nu = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Double)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, double)>();
+late final _sel_pitch = objc.registerName("pitch");
+late final _sel_setPitch_ = objc.registerName("setPitch:");
+late final _sel_altitude = objc.registerName("altitude");
+late final _sel_setAltitude_ = objc.registerName("setAltitude:");
+late final _sel_viewingDistance = objc.registerName("viewingDistance");
+late final _sel_setViewingDistance_ = objc.registerName("setViewingDistance:");
+late final _sel_camera = objc.registerName("camera");
+late final _sel_cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_ =
+    objc.registerName(
+        "cameraLookingAtCenterCoordinate:fromEyeCoordinate:eyeAltitude:");
+final _objc_msgSend_15ghv6w = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                CLLocationCoordinate2D,
+                ffi.Double)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            CLLocationCoordinate2D,
+            double)>();
+late final _sel_cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_ =
+    objc.registerName(
+        "cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading:");
+final _objc_msgSend_em17dp = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Double,
+                ffi.Double,
+                ffi.Double)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            double,
+            double,
+            double)>();
+late final _sel_cameraLookingAtCenterCoordinate_altitude_pitch_heading_ = objc
+    .registerName("cameraLookingAtCenterCoordinate:altitude:pitch:heading:");
+late final _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_ =
+    objc.registerName(
+        "cameraLookingAtCenterCoordinate:fromDistance:pitch:heading:");
+late final _sel_isEqualToMapCamera_ = objc.registerName("isEqualToMapCamera:");
+late final _sel_supportsSecureCoding =
+    objc.registerName("supportsSecureCoding");
+final _objc_msgSend_91o635 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Bool Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        bool Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+bool _ObjCBlock_bool_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<bool Function(ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_bool_ffiVoid_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Bool Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_bool_ffiVoid_fnPtrTrampoline, false)
+        .cast();
+bool _ObjCBlock_bool_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as bool Function(ffi.Pointer<ffi.Void>))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_bool_ffiVoid_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Bool Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_bool_ffiVoid_closureTrampoline, false)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_bool_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>(pointer,
+              retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>
+      fromFunctionPointer(
+              ffi.Pointer<
+                      ffi.NativeFunction<
+                          ffi.Bool Function(ffi.Pointer<ffi.Void> arg0)>>
+                  ptr) =>
+          objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>(
+              objc.newPointerBlock(_ObjCBlock_bool_ffiVoid_fnPtrCallable, ptr.cast()),
+              retain: false,
+              release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)> fromFunction(
+          bool Function(ffi.Pointer<ffi.Void>) fn) =>
+      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>(
+          objc.newClosureBlock(_ObjCBlock_bool_ffiVoid_closureCallable,
+              (ffi.Pointer<ffi.Void> arg0) => fn(arg0)),
+          retain: false,
+          release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_bool_ffiVoid_CallExtension
+    on objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)> {
+  bool call(ffi.Pointer<ffi.Void> arg0) => ref.pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> block,
+                  ffi.Pointer<ffi.Void> arg0)>>()
+      .asFunction<
+          bool Function(ffi.Pointer<objc.ObjCBlockImpl>,
+              ffi.Pointer<ffi.Void>)>()(ref.pointer, arg0);
+}
+
+late final _sel_encodeWithCoder_ = objc.registerName("encodeWithCoder:");
+void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block,
+    ffi.Pointer<ffi.Void> arg0,
+    ffi.Pointer<objc.ObjCObject> arg1) {
+  (objc.getBlockClosure(block) as void Function(
+      ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<
+        ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>
+    _ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>.listener(
+        _ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_NSCoder {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<
+              ffi.Void Function(ffi.Pointer<ffi.Void>,
+                  objc.NSCoder)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(ffi.Pointer<ffi.Void> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1)>>
+              ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>
+      fromFunction(void Function(ffi.Pointer<ffi.Void>, objc.NSCoder) fn) =>
+          objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>(
+              objc.newClosureBlock(
+                  _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureCallable,
+                  (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+                      fn(
+                          arg0,
+                          objc.NSCoder.castFromPointer(arg1,
+                              retain: true, release: true))),
+              retain: false,
+              release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>
+      listener(void Function(ffi.Pointer<ffi.Void>, objc.NSCoder) fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerCallable.nativeFunction
+            .cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+            arg0,
+            objc.NSCoder.castFromPointer(arg1, retain: false, release: true)));
+    final wrapper = _MapLibreFFi_wrapListenerBlock_wjovn7(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<
+            ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_NSCoder_CallExtension
+    on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSCoder)> {
+  void call(ffi.Pointer<ffi.Void> arg0, objc.NSCoder arg1) => ref
+          .pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>()(
+      ref.pointer, arg0, arg1.ref.pointer);
+}
+
+late final _sel_initWithCoder_ = objc.registerName("initWithCoder:");
+final _objc_msgSend_62nh5j = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+instancetype _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                instancetype Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            instancetype Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                instancetype Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrTrampoline)
+        .cast();
+instancetype _ObjCBlock_instancetype_ffiVoid_NSCoder_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as instancetype Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_NSCoder_closureCallable =
+    ffi.Pointer.fromFunction<
+                instancetype Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_instancetype_ffiVoid_NSCoder_closureTrampoline)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
+abstract final class ObjCBlock_instancetype_ffiVoid_NSCoder {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<
+          objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+              ffi.Pointer<ffi.Void>, objc.NSCoder)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<
+              objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+                  ffi.Pointer<ffi.Void>,
+                  objc.NSCoder)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<
+          objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+              ffi.Pointer<ffi.Void>, objc.NSCoder)>
+      fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<instancetype Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>> ptr) =>
+          objc.ObjCBlock<
+                  objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+                      ffi.Pointer<ffi.Void>, objc.NSCoder)>(
+              objc.newPointerBlock(
+                  _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrCallable, ptr.cast()),
+              retain: false,
+              release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)> fromFunction(
+          Dartinstancetype? Function(ffi.Pointer<ffi.Void>, objc.NSCoder) fn) =>
+      objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>(
+          objc.newClosureBlock(
+              _ObjCBlock_instancetype_ffiVoid_NSCoder_closureCallable,
+              (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+                  fn(arg0, objc.NSCoder.castFromPointer(arg1, retain: true, release: true))
+                      ?.ref
+                      .retainAndReturnPointer() ??
+                  ffi.nullptr),
+          retain: false,
+          release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
+extension ObjCBlock_instancetype_ffiVoid_NSCoder_CallExtension
+    on objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+            ffi.Pointer<ffi.Void>, objc.NSCoder)> {
+  Dartinstancetype? call(ffi.Pointer<ffi.Void> arg0, objc.NSCoder arg1) => ref
+              .pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      instancetype Function(
+                          ffi.Pointer<objc.ObjCBlockImpl> block,
+                          ffi.Pointer<ffi.Void> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1)>>()
+              .asFunction<instancetype Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>()
+              (ref.pointer, arg0, arg1.ref.pointer)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<ffi.NativeFunction<instancetype Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
+              .asFunction<instancetype Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>)>()(ref.pointer, arg0, arg1.ref.pointer),
+          retain: false,
+          release: true);
+}
+
 /// An ``MLNMapCamera`` object represents a viewpoint from which the user observes
 /// some point on an ``MLNMapView``.
 ///
@@ -457,6 +906,298 @@ class MLNMapCamera extends objc.NSObject {
   MLNMapCamera.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
       {bool retain = false, bool release = false})
       : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNMapCamera].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapCamera);
+  }
+
+  /// Coordinate at the center of the map view.
+  CLLocationCoordinate2D get centerCoordinate {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_18o5nokStret(
+            _ptr, this.ref.pointer, _sel_centerCoordinate)
+        : _ptr.ref =
+            _objc_msgSend_18o5nok(this.ref.pointer, _sel_centerCoordinate);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+  }
+
+  /// Coordinate at the center of the map view.
+  set centerCoordinate(CLLocationCoordinate2D value) {
+    return _objc_msgSend_1zv0am(
+        this.ref.pointer, _sel_setCenterCoordinate_, value);
+  }
+
+  /// Heading measured in degrees clockwise from true north.
+  double get heading {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_heading)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_heading);
+  }
+
+  /// Heading measured in degrees clockwise from true north.
+  set heading(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setHeading_, value);
+  }
+
+  /// Pitch toward the horizon measured in degrees, with 0 degrees resulting in a
+  /// two-dimensional map.
+  double get pitch {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_pitch)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_pitch);
+  }
+
+  /// Pitch toward the horizon measured in degrees, with 0 degrees resulting in a
+  /// two-dimensional map.
+  set pitch(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setPitch_, value);
+  }
+
+  /// The altitude (measured in meters) above the map at which the camera is
+  /// situated.
+  ///
+  /// The altitude is the distance from the viewpoint to the map, perpendicular to
+  /// the map plane. This property does not account for physical elevation.
+  ///
+  /// This property’s value may be less than that of the ``viewingDistance`` property.
+  /// Setting this property automatically updates the ``viewingDistance`` property
+  /// based on the ``pitch`` property’s current value.
+  double get altitude {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_altitude)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_altitude);
+  }
+
+  /// The altitude (measured in meters) above the map at which the camera is
+  /// situated.
+  ///
+  /// The altitude is the distance from the viewpoint to the map, perpendicular to
+  /// the map plane. This property does not account for physical elevation.
+  ///
+  /// This property’s value may be less than that of the ``viewingDistance`` property.
+  /// Setting this property automatically updates the ``viewingDistance`` property
+  /// based on the ``pitch`` property’s current value.
+  set altitude(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setAltitude_, value);
+  }
+
+  /// The straight-line distance from the viewpoint to the ``centerCoordinate``.
+  ///
+  /// Setting this property automatically updates the ``altitude`` property based on
+  /// the ``pitch`` property’s current value.
+  double get viewingDistance {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_viewingDistance)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_viewingDistance);
+  }
+
+  /// The straight-line distance from the viewpoint to the ``centerCoordinate``.
+  ///
+  /// Setting this property automatically updates the ``altitude`` property based on
+  /// the ``pitch`` property’s current value.
+  set viewingDistance(double value) {
+    return _objc_msgSend_hwm8nu(
+        this.ref.pointer, _sel_setViewingDistance_, value);
+  }
+
+  /// Returns a new camera with all properties set to 0.
+  static MLNMapCamera camera() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNMapCamera, _sel_camera);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a new camera based on information about the camera’s viewpoint
+  /// and focus point.
+  ///
+  /// @param centerCoordinate The geographic coordinate on which the map should be
+  /// centered.
+  /// @param eyeCoordinate The geometric coordinate at which the camera should be
+  /// situated.
+  /// @param eyeAltitude The altitude (measured in meters) above the map at which the
+  /// camera should be situated. The altitude may be less than the distance from
+  /// the camera’s viewpoint to the camera’s focus point.
+  static MLNMapCamera
+      cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_(
+          CLLocationCoordinate2D centerCoordinate,
+          CLLocationCoordinate2D eyeCoordinate,
+          double eyeAltitude) {
+    final _ret = _objc_msgSend_15ghv6w(
+        _class_MLNMapCamera,
+        _sel_cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_,
+        centerCoordinate,
+        eyeCoordinate,
+        eyeAltitude);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a new camera with the given distance, pitch, and heading.
+  ///
+  /// This method interprets the distance as a straight-line distance from the
+  /// viewpoint to the center coordinate. To specify the altitude of the viewpoint,
+  /// use the ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method.
+  ///
+  /// @param centerCoordinate The geographic coordinate on which the map should be
+  /// centered.
+  /// @param distance The straight-line distance from the viewpoint to the
+  /// ``centerCoordinate``.
+  /// @param pitch The viewing angle of the camera, measured in degrees. A value of
+  /// `0` results in a camera pointed straight down at the map. Angles greater
+  /// than `0` result in a camera angled toward the horizon.
+  /// @param heading The camera’s heading, measured in degrees clockwise from true
+  /// north. A value of `0` means that the top edge of the map view corresponds to
+  /// true north. The value `90` means the top of the map is pointing due east.
+  /// The value `180` means the top of the map points due south, and so on.
+  static MLNMapCamera
+      cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_(
+          CLLocationCoordinate2D centerCoordinate,
+          double distance,
+          double pitch,
+          double heading) {
+    final _ret = _objc_msgSend_em17dp(
+        _class_MLNMapCamera,
+        _sel_cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_,
+        centerCoordinate,
+        distance,
+        pitch,
+        heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a new camera with the given altitude, pitch, and heading.
+  ///
+  /// @param centerCoordinate The geographic coordinate on which the map should be
+  /// centered.
+  /// @param altitude The altitude (measured in meters) above the map at which the
+  /// camera should be situated. The altitude may be less than the distance from
+  /// the camera’s viewpoint to the camera’s focus point.
+  /// @param pitch The viewing angle of the camera, measured in degrees. A value of
+  /// `0` results in a camera pointed straight down at the map. Angles greater
+  /// than `0` result in a camera angled toward the horizon.
+  /// @param heading The camera’s heading, measured in degrees clockwise from true
+  /// north. A value of `0` means that the top edge of the map view corresponds to
+  /// true north. The value `90` means the top of the map is pointing due east.
+  /// The value `180` means the top of the map points due south, and so on.
+  static MLNMapCamera cameraLookingAtCenterCoordinate_altitude_pitch_heading_(
+      CLLocationCoordinate2D centerCoordinate,
+      double altitude,
+      double pitch,
+      double heading) {
+    final _ret = _objc_msgSend_em17dp(
+        _class_MLNMapCamera,
+        _sel_cameraLookingAtCenterCoordinate_altitude_pitch_heading_,
+        centerCoordinate,
+        altitude,
+        pitch,
+        heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// > This initializer incorrectly interprets the `distance` parameter. To
+  /// specify the straight-line distance from the viewpoint to ``centerCoordinate``,
+  /// use the ``cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading:``
+  /// method. To specify the altitude of the viewpoint, use the
+  /// ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method, which has
+  /// the same behavior as this initializer.
+  static MLNMapCamera
+      cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_(
+          CLLocationCoordinate2D centerCoordinate,
+          double distance,
+          double pitch,
+          double heading) {
+    final _ret = _objc_msgSend_em17dp(
+        _class_MLNMapCamera,
+        _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_,
+        centerCoordinate,
+        distance,
+        pitch,
+        heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a Boolean value indicating whether the given camera is functionally
+  /// equivalent to the receiver.
+  ///
+  /// Unlike `isEqual:`, this method returns `YES` if the difference between the
+  /// coordinates, altitudes, pitches, or headings of the two camera objects is
+  /// negligible.
+  ///
+  /// @param otherCamera The camera with which to compare the receiver.
+  /// @return A Boolean value indicating whether the two cameras are functionally
+  /// equivalent.
+  bool isEqualToMapCamera_(MLNMapCamera otherCamera) {
+    return _objc_msgSend_69e0x1(
+        this.ref.pointer, _sel_isEqualToMapCamera_, otherCamera.ref.pointer);
+  }
+
+  /// init
+  MLNMapCamera init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNMapCamera new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNMapCamera, _sel_new);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNMapCamera allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNMapCamera, _sel_allocWithZone_, zone);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNMapCamera alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNMapCamera, _sel_alloc);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNMapCamera self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNMapCamera retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNMapCamera autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMapCamera, _sel_supportsSecureCoding);
+  }
+
+  /// encodeWithCoder:
+  void encodeWithCoder_(objc.NSCoder coder) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+  }
+
+  /// initWithCoder:
+  MLNMapCamera? initWithCoder_(objc.NSCoder coder) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithCoder_, coder.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
 }
 
 /// WARNING: MLNStyle is a stub. To generate bindings for this class, include
@@ -741,14 +1482,6 @@ late final _sel_setStyleURL_ = objc.registerName("setStyleURL:");
 late final _sel_reloadStyle_ = objc.registerName("reloadStyle:");
 late final _sel_automaticallyAdjustsContentInset =
     objc.registerName("automaticallyAdjustsContentInset");
-final _objc_msgSend_91o635 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Bool Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        bool Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setAutomaticallyAdjustsContentInset_ =
     objc.registerName("setAutomaticallyAdjustsContentInset:");
 final _objc_msgSend_1s56lr9 = objc.msgSendPointer
@@ -1109,14 +1842,6 @@ final _objc_msgSend_1pl9qdv = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_updateUserLocationAnnotationViewAnimatedWithDuration_ =
     objc.registerName("updateUserLocationAnnotationViewAnimatedWithDuration:");
-final _objc_msgSend_hwm8nu = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, ffi.Double)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, double)>();
 late final _sel_showsUserHeadingIndicator =
     objc.registerName("showsUserHeadingIndicator");
 late final _sel_setShowsUserHeadingIndicator_ =
@@ -1126,34 +1851,8 @@ late final _sel_displayHeadingCalibration =
 late final _sel_setDisplayHeadingCalibration_ =
     objc.registerName("setDisplayHeadingCalibration:");
 late final _sel_targetCoordinate = objc.registerName("targetCoordinate");
-final _objc_msgSend_18o5nok = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        CLLocationCoordinate2D Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-final _objc_msgSend_18o5nokStret = objc.msgSendStretPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(
-                ffi.Pointer<CLLocationCoordinate2D>,
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        void Function(ffi.Pointer<CLLocationCoordinate2D>,
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setTargetCoordinate_ =
     objc.registerName("setTargetCoordinate:");
-final _objc_msgSend_1zv0am = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>();
 late final _sel_setTargetCoordinate_animated_ =
     objc.registerName("setTargetCoordinate:animated:");
 final _objc_msgSend_o7hjv2 = objc.msgSendPointer
@@ -1221,27 +1920,8 @@ late final _sel_isHapticFeedbackEnabled =
 late final _sel_setHapticFeedbackEnabled_ =
     objc.registerName("setHapticFeedbackEnabled:");
 late final _sel_decelerationRate = objc.registerName("decelerationRate");
-final _objc_msgSend_1ukqyt8 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        double Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        double Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setDecelerationRate_ =
     objc.registerName("setDecelerationRate:");
-late final _sel_centerCoordinate = objc.registerName("centerCoordinate");
-late final _sel_setCenterCoordinate_ =
-    objc.registerName("setCenterCoordinate:");
 late final _sel_setCenterCoordinate_animated_ =
     objc.registerName("setCenterCoordinate:animated:");
 late final _sel_setCenterCoordinate_zoomLevel_animated_ =
@@ -1516,7 +2196,6 @@ final _objc_msgSend_1xot3wa = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             bool,
             ffi.Pointer<objc.ObjCBlockImpl>)>();
-late final _sel_camera = objc.registerName("camera");
 late final _sel_setCamera_ = objc.registerName("setCamera:");
 late final _sel_setCamera_animated_ = objc.registerName("setCamera:animated:");
 late final _sel_setCamera_withDuration_animationTimingFunction_ =
@@ -2010,16 +2689,6 @@ class MLNAnnotationView extends objc.ObjCObjectBase {
 }
 
 late final _sel_viewForAnnotation_ = objc.registerName("viewForAnnotation:");
-final _objc_msgSend_62nh5j = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>,
-                ffi.Pointer<objc.ObjCObject>)>>()
-    .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
 
 /// WARNING: MLNAnnotationImage is a stub. To generate bindings for this class, include
 /// MLNAnnotationImage in your config's objc-interfaces list.

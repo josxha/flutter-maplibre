@@ -31,11 +31,13 @@ ffigen:
   exclude-all-by-default: true
   objc-interfaces:
     include:
-      - 'MLNMapView'
       - 'MapLibreRegistry'
+      - 'MLNMapView'
+      - 'MLNMapCamera'
     module:
-      'MLNMapView': 'MapLibre'
       'MapLibreRegistry': 'maplibre_ios'
+      'MLNMapView': 'MapLibre'
+      'MLNMapCamera': 'MapLibre'
   headers:
     entry-points:
       - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'

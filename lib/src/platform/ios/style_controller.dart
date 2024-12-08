@@ -2,7 +2,10 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerIos implements StyleController {
-  const StyleControllerIos._();
+  const StyleControllerIos._(this._mapView, this._hostApi);
+
+  final ffi.MLNMapView _mapView;
+  final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addImage(String id, Uint8List bytes) {
