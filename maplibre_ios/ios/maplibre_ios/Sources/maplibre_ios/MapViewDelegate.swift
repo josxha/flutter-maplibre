@@ -19,7 +19,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         super.init() // self can be used after calling super.init()
         MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
         _mapView = MLNMapView(frame: _view.bounds)
-        // TODO: apply MapOptions
+        MapLibreRegistry.addMap(viewId: viewId, map: _mapView)
         _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         _view.addSubview(_mapView)
         _mapView.delegate = self
