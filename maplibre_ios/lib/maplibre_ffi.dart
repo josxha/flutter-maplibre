@@ -5,8 +5,57 @@
 // ignore_for_file: type=lint
 import 'dart:ffi' as ffi;
 import 'package:objective_c/objective_c.dart' as objc;
+import 'package:ffi/ffi.dart' as pkg_ffi;
+
+@ffi.Native<
+    ffi.Pointer<objc.ObjCBlockImpl> Function(
+        ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+final class CGPoint extends ffi.Struct {
+  @ffi.Double()
+  external double x;
+
+  @ffi.Double()
+  external double y;
+}
+
+final class CGSize extends ffi.Struct {
+  @ffi.Double()
+  external double width;
+
+  @ffi.Double()
+  external double height;
+}
+
+final class CGRect extends ffi.Struct {
+  external CGPoint origin;
+
+  external CGSize size;
+}
 
 final class _NSZone extends ffi.Opaque {}
+
+/// WARNING: NSPredicate is a stub. To generate bindings for this class, include
+/// NSPredicate in your config's objc-interfaces list.
+///
+/// NSPredicate
+class NSPredicate extends objc.NSObject {
+  NSPredicate._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [NSPredicate] that points to the same underlying object as [other].
+  NSPredicate.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [NSPredicate] that wraps the given raw object pointer.
+  NSPredicate.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
 
 late final _class_MapLibreRegistry =
     objc.getClass("maplibre_ios.MapLibreRegistry");
@@ -265,5 +314,4766 @@ class MapLibreRegistry extends objc.NSObject {
   MapLibreRegistry autorelease() {
     final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
     return MapLibreRegistry.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+/// Options for enabling debugging features in an ``MLNMapView`` instance.
+enum MLNMapDebugMaskOptions {
+  /// Edges of tile boundaries are shown as thick, red lines to help diagnose
+  /// tile clipping issues.
+  MLNMapDebugTileBoundariesMask(2),
+
+  /// Each tile shows its tile coordinate (x/y/z) in the upper-left corner.
+  MLNMapDebugTileInfoMask(4),
+
+  /// Each tile shows a timestamp indicating when it was loaded.
+  MLNMapDebugTimestampsMask(8),
+
+  /// Edges of glyphs and symbols are shown as faint, green lines to help
+  /// diagnose collision and label placement issues.
+  MLNMapDebugCollisionBoxesMask(16),
+
+  /// Each drawing operation is replaced by a translucent fill. Overlapping
+  /// drawing operations appear more prominent to help diagnose overdrawing.
+  /// > Note: This option does nothing in Release builds of the SDK.
+  MLNMapDebugOverdrawVisualizationMask(32),
+
+  /// The stencil buffer is shown instead of the color buffer.
+  /// > Note: This option does nothing in Release builds of the SDK.
+  MLNMapDebugStencilBufferMask(64),
+
+  /// The depth buffer is shown instead of the color buffer.
+  /// > Note: This option does nothing in Release builds of the SDK.
+  MLNMapDebugDepthBufferMask(128);
+
+  final int value;
+  const MLNMapDebugMaskOptions(this.value);
+
+  static MLNMapDebugMaskOptions fromValue(int value) => switch (value) {
+        2 => MLNMapDebugTileBoundariesMask,
+        4 => MLNMapDebugTileInfoMask,
+        8 => MLNMapDebugTimestampsMask,
+        16 => MLNMapDebugCollisionBoxesMask,
+        32 => MLNMapDebugOverdrawVisualizationMask,
+        64 => MLNMapDebugStencilBufferMask,
+        128 => MLNMapDebugDepthBufferMask,
+        _ => throw ArgumentError(
+            "Unknown value for MLNMapDebugMaskOptions: $value"),
+      };
+}
+
+/// A structure containing information about a transition.
+final class MLNTransition extends ffi.Struct {
+  /// The amount of time the animation should take, not including the delay.
+  @ffi.Double()
+  external double duration;
+
+  /// The amount of time in seconds to wait before beginning the animation.
+  @ffi.Double()
+  external double delay;
+}
+
+/// Constants indicating the visibility of different map ornaments.
+enum MLNOrnamentVisibility {
+  /// A constant indicating that the ornament adapts to the current map state.
+  MLNOrnamentVisibilityAdaptive(0),
+
+  /// A constant indicating that the ornament is always hidden.
+  MLNOrnamentVisibilityHidden(1),
+
+  /// A constant indicating that the ornament is always visible.
+  MLNOrnamentVisibilityVisible(2);
+
+  final int value;
+  const MLNOrnamentVisibility(this.value);
+
+  static MLNOrnamentVisibility fromValue(int value) => switch (value) {
+        0 => MLNOrnamentVisibilityAdaptive,
+        1 => MLNOrnamentVisibilityHidden,
+        2 => MLNOrnamentVisibilityVisible,
+        _ => throw ArgumentError(
+            "Unknown value for MLNOrnamentVisibility: $value"),
+      };
+}
+
+/// WARNING: MLNCompassButton is a stub. To generate bindings for this class, include
+/// MLNCompassButton in your config's objc-interfaces list.
+///
+/// A specialized view that displays the current compass heading for its associated map.
+class MLNCompassButton extends objc.ObjCObjectBase {
+  MLNCompassButton._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNCompassButton] that points to the same underlying object as [other].
+  MLNCompassButton.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNCompassButton] that wraps the given raw object pointer.
+  MLNCompassButton.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+final class CLLocationCoordinate2D extends ffi.Struct {
+  @ffi.Double()
+  external double latitude;
+
+  @ffi.Double()
+  external double longitude;
+}
+
+/// A rectangular area as measured on a two-dimensional map projection.
+final class MLNCoordinateBounds extends ffi.Struct {
+  /// Coordinate at the southwest corner.
+  external CLLocationCoordinate2D sw;
+
+  /// Coordinate at the northeast corner.
+  external CLLocationCoordinate2D ne;
+}
+
+/// WARNING: MLNMapCamera is a stub. To generate bindings for this class, include
+/// MLNMapCamera in your config's objc-interfaces list.
+///
+/// An ``MLNMapCamera`` object represents a viewpoint from which the user observes
+/// some point on an ``MLNMapView``.
+///
+/// #### Related examples
+/// - <doc:BlockingGesturesExample>: learn how to use the
+/// ``MLNMapViewDelegate/mapView:shouldChangeFromCamera:toCamera:`` method of ``MLNMapViewDelegate`` to
+/// restrict panning.
+/// - *TODO:* Camera animation, learn how to create a camera that rotates
+/// around a central point.
+class MLNMapCamera extends objc.NSObject {
+  MLNMapCamera._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNMapCamera] that points to the same underlying object as [other].
+  MLNMapCamera.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNMapCamera] that wraps the given raw object pointer.
+  MLNMapCamera.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+/// WARNING: MLNStyle is a stub. To generate bindings for this class, include
+/// MLNStyle in your config's objc-interfaces list.
+///
+/// The proxy object for the current map style.
+///
+/// MLNStyle provides a set of convenience methods for changing default styles included
+/// with MapLibre.
+///
+/// It is also possible to directly manipulate the current map style
+/// via ``MLNMapView/style`` by updating the style's data sources or layers.
+///
+/// > Note: Wait until the map style has finished loading before modifying a map's
+/// style via any of the ``MLNStyle`` instance methods below. You can use the
+/// ``MLNMapViewDelegate/mapView:didFinishLoadingStyle:`` or
+/// ``MLNMapViewDelegate/mapViewDidFinishLoadingMap:`` methods as indicators
+/// that it's safe to modify the map's style.
+class MLNStyle extends objc.NSObject {
+  MLNStyle._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNStyle] that points to the same underlying object as [other].
+  MLNStyle.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNStyle] that wraps the given raw object pointer.
+  MLNStyle.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+/// The vertical alignment of an annotation within a map view. Used with
+/// ``MLNMapView/userLocationVerticalAlignment``.
+enum MLNAnnotationVerticalAlignment {
+  /// Aligns the annotation vertically in the center of the map view.
+  MLNAnnotationVerticalAlignmentCenter(0),
+
+  /// Aligns the annotation vertically at the top of the map view.
+  MLNAnnotationVerticalAlignmentTop(1),
+
+  /// Aligns the annotation vertically at the bottom of the map view.
+  MLNAnnotationVerticalAlignmentBottom(2);
+
+  final int value;
+  const MLNAnnotationVerticalAlignment(this.value);
+
+  static MLNAnnotationVerticalAlignment fromValue(int value) => switch (value) {
+        0 => MLNAnnotationVerticalAlignmentCenter,
+        1 => MLNAnnotationVerticalAlignmentTop,
+        2 => MLNAnnotationVerticalAlignmentBottom,
+        _ => throw ArgumentError(
+            "Unknown value for MLNAnnotationVerticalAlignment: $value"),
+      };
+}
+
+/// The position of scale bar, compass, logo and attribution in a map view. Used with
+/// ``MLNMapView/scaleBarPosition``,
+/// ``MLNMapView/compassViewPosition``,
+/// ``MLNMapView/logoViewPosition``,
+/// ``MLNMapView/attributionButtonPosition``.
+enum MLNOrnamentPosition {
+  /// Place the ornament in the top left of the map view.
+  MLNOrnamentPositionTopLeft(0),
+
+  /// Place the ornament in the top right of the map view.
+  MLNOrnamentPositionTopRight(1),
+
+  /// Place the ornament in the bottom left of the map view.
+  MLNOrnamentPositionBottomLeft(2),
+
+  /// Place the ornament in the bottom right of the map view.
+  MLNOrnamentPositionBottomRight(3);
+
+  final int value;
+  const MLNOrnamentPosition(this.value);
+
+  static MLNOrnamentPosition fromValue(int value) => switch (value) {
+        0 => MLNOrnamentPositionTopLeft,
+        1 => MLNOrnamentPositionTopRight,
+        2 => MLNOrnamentPositionBottomLeft,
+        3 => MLNOrnamentPositionBottomRight,
+        _ =>
+          throw ArgumentError("Unknown value for MLNOrnamentPosition: $value"),
+      };
+}
+
+/// The mode used to track the user location on the map. Used with
+/// ``MLNMapView/userTrackingMode``.
+///
+/// #### Related examples
+/// - TODO: Switch between user tracking modes</a> example to learn how to toggle modes and
+/// how each mode behaves.
+enum MLNUserTrackingMode {
+  /// The map does not follow the user location.
+  MLNUserTrackingModeNone(0),
+
+  /// The map follows the user location. This tracking mode falls back
+  /// to ``MLNUserTrackingMode/MLNUserTrackingModeNone`` if the user pans the map view.
+  MLNUserTrackingModeFollow(1),
+
+  /// The map follows the user location and rotates when the heading changes.
+  /// The default user location annotation displays a fan-shaped indicator with
+  /// the current heading. The heading indicator represents the direction the
+  /// device is facing, which is sized according to the reported accuracy.
+  ///
+  /// This tracking mode is disabled if the user pans the map view, but
+  /// remains enabled if the user zooms in. If the user rotates the map
+  /// view, this tracking mode will fall back to ``MLNUserTrackingModeFollow``.
+  MLNUserTrackingModeFollowWithHeading(2),
+
+  /// The map follows the user location and rotates when the course changes.
+  /// Course represents the direction in which the device is traveling.
+  /// The default user location annotation shows a puck-shaped indicator
+  /// that rotates as the course changes.
+  ///
+  /// This tracking mode is disabled if the user pans the map view, but
+  /// remains enabled if the user zooms in. If the user rotates the map view,
+  /// this tracking mode will fall back to ``MLNUserTrackingModeFollow``.
+  MLNUserTrackingModeFollowWithCourse(3);
+
+  final int value;
+  const MLNUserTrackingMode(this.value);
+
+  static MLNUserTrackingMode fromValue(int value) => switch (value) {
+        0 => MLNUserTrackingModeNone,
+        1 => MLNUserTrackingModeFollow,
+        2 => MLNUserTrackingModeFollowWithHeading,
+        3 => MLNUserTrackingModeFollowWithCourse,
+        _ =>
+          throw ArgumentError("Unknown value for MLNUserTrackingMode: $value"),
+      };
+}
+
+enum MLNPanScrollingMode {
+  /// The map allows the user to only scroll horizontally.
+  MLNPanScrollingModeHorizontal(0),
+
+  /// The map allows the user to only scroll vertically.
+  MLNPanScrollingModeVertical(1),
+
+  /// The map allows the user to scroll both horizontally and vertically.
+  MLNPanScrollingModeDefault(2);
+
+  final int value;
+  const MLNPanScrollingMode(this.value);
+
+  static MLNPanScrollingMode fromValue(int value) => switch (value) {
+        0 => MLNPanScrollingModeHorizontal,
+        1 => MLNPanScrollingModeVertical,
+        2 => MLNPanScrollingModeDefault,
+        _ =>
+          throw ArgumentError("Unknown value for MLNPanScrollingMode: $value"),
+      };
+}
+
+late final _class_MLNMapView = objc.getClass("MapLibre.MLNMapView");
+late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
+final _objc_msgSend_19adbty = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CGRect)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CGRect)>();
+late final _sel_initWithFrame_styleURL_ =
+    objc.registerName("initWithFrame:styleURL:");
+final _objc_msgSend_qsq5p6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGRect,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGRect,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_delegate = objc.registerName("delegate");
+late final _sel_setDelegate_ = objc.registerName("setDelegate:");
+late final _sel_style = objc.registerName("style");
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_MLNStyle_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_MLNStyle_ffiVoid_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_MLNStyle_ffiVoid_fnPtrTrampoline)
+        .cast();
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_MLNStyle_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<ffi.Void>))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_MLNStyle_ffiVoid_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_MLNStyle_ffiVoid_closureTrampoline)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_MLNStyle_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>(pointer,
+              retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<ffi.Void> arg0)>>
+              ptr) =>
+      objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>(
+          objc.newPointerBlock(
+              _ObjCBlock_MLNStyle_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)> fromFunction(
+          MLNStyle? Function(ffi.Pointer<ffi.Void>) fn) =>
+      objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>(
+          objc.newClosureBlock(
+              _ObjCBlock_MLNStyle_ffiVoid_closureCallable,
+              (ffi.Pointer<ffi.Void> arg0) =>
+                  fn(arg0)?.ref.retainAndAutorelease() ?? ffi.nullptr),
+          retain: false,
+          release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_MLNStyle_ffiVoid_CallExtension
+    on objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)> {
+  MLNStyle? call(ffi.Pointer<ffi.Void> arg0) => ref.pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<objc.ObjCBlockImpl> block,
+                          ffi.Pointer<ffi.Void> arg0)>>()
+              .asFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>()
+              (ref.pointer, arg0)
+              .address ==
+          0
+      ? null
+      : MLNStyle.castFromPointer(
+          ref.pointer.ref.invoke
+              .cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
+              .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>()(ref.pointer, arg0),
+          retain: true,
+          release: true);
+}
+
+late final _sel_styleURL = objc.registerName("styleURL");
+late final _sel_setStyleURL_ = objc.registerName("setStyleURL:");
+late final _sel_reloadStyle_ = objc.registerName("reloadStyle:");
+late final _sel_automaticallyAdjustsContentInset =
+    objc.registerName("automaticallyAdjustsContentInset");
+final _objc_msgSend_91o635 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Bool Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        bool Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setAutomaticallyAdjustsContentInset_ =
+    objc.registerName("setAutomaticallyAdjustsContentInset:");
+final _objc_msgSend_1s56lr9 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, bool)>();
+late final _sel_showsScale = objc.registerName("showsScale");
+late final _sel_setShowsScale_ = objc.registerName("setShowsScale:");
+
+/// WARNING: MLNScaleBar is a stub. To generate bindings for this class, include
+/// MLNScaleBar in your config's objc-interfaces list.
+///
+/// MLNScaleBar
+class MLNScaleBar extends objc.ObjCObjectBase {
+  MLNScaleBar._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNScaleBar] that points to the same underlying object as [other].
+  MLNScaleBar.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNScaleBar] that wraps the given raw object pointer.
+  MLNScaleBar.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_scaleBar = objc.registerName("scaleBar");
+late final _sel_scaleBarShouldShowDarkStyles =
+    objc.registerName("scaleBarShouldShowDarkStyles");
+late final _sel_setScaleBarShouldShowDarkStyles_ =
+    objc.registerName("setScaleBarShouldShowDarkStyles:");
+late final _sel_scaleBarUsesMetricSystem =
+    objc.registerName("scaleBarUsesMetricSystem");
+late final _sel_setScaleBarUsesMetricSystem_ =
+    objc.registerName("setScaleBarUsesMetricSystem:");
+late final _sel_scaleBarPosition = objc.registerName("scaleBarPosition");
+final _objc_msgSend_1c31cvt = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setScaleBarPosition_ =
+    objc.registerName("setScaleBarPosition:");
+final _objc_msgSend_8fd115 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_scaleBarMargins = objc.registerName("scaleBarMargins");
+final _objc_msgSend_1uwdhlk = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CGPoint Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        CGPoint Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_1uwdhlkStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CGPoint>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<CGPoint>, ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setScaleBarMargins_ = objc.registerName("setScaleBarMargins:");
+final _objc_msgSend_iy8iz6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CGPoint)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CGPoint)>();
+late final _sel_compassView = objc.registerName("compassView");
+late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
+late final _sel_setCompassViewPosition_ =
+    objc.registerName("setCompassViewPosition:");
+late final _sel_compassViewMargins = objc.registerName("compassViewMargins");
+late final _sel_setCompassViewMargins_ =
+    objc.registerName("setCompassViewMargins:");
+late final _sel_logoView = objc.registerName("logoView");
+final _objc_msgSend_1p5sbp0 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<ffi.Int> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        ffi.Pointer<ffi.Int> Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_logoViewPosition = objc.registerName("logoViewPosition");
+late final _sel_setLogoViewPosition_ =
+    objc.registerName("setLogoViewPosition:");
+late final _sel_logoViewMargins = objc.registerName("logoViewMargins");
+late final _sel_setLogoViewMargins_ = objc.registerName("setLogoViewMargins:");
+late final _sel_attributionButton = objc.registerName("attributionButton");
+late final _sel_attributionButtonPosition =
+    objc.registerName("attributionButtonPosition");
+late final _sel_setAttributionButtonPosition_ =
+    objc.registerName("setAttributionButtonPosition:");
+late final _sel_attributionButtonMargins =
+    objc.registerName("attributionButtonMargins");
+late final _sel_setAttributionButtonMargins_ =
+    objc.registerName("setAttributionButtonMargins:");
+late final _sel_showAttribution_ = objc.registerName("showAttribution:");
+late final _sel_preferredFramesPerSecond =
+    objc.registerName("preferredFramesPerSecond");
+final _objc_msgSend_1hz7y9r = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Long Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setPreferredFramesPerSecond_ =
+    objc.registerName("setPreferredFramesPerSecond:");
+final _objc_msgSend_4sp4xj = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Long)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_prefetchesTiles = objc.registerName("prefetchesTiles");
+late final _sel_setPrefetchesTiles_ = objc.registerName("setPrefetchesTiles:");
+late final _sel_tileCacheEnabled = objc.registerName("tileCacheEnabled");
+late final _sel_setTileCacheEnabled_ =
+    objc.registerName("setTileCacheEnabled:");
+late final _sel_locationManager = objc.registerName("locationManager");
+late final _sel_setLocationManager_ = objc.registerName("setLocationManager:");
+late final _sel_showsUserLocation = objc.registerName("showsUserLocation");
+late final _sel_setShowsUserLocation_ =
+    objc.registerName("setShowsUserLocation:");
+late final _sel_shouldRequestAuthorizationToUseLocationServices =
+    objc.registerName("shouldRequestAuthorizationToUseLocationServices");
+late final _sel_setShouldRequestAuthorizationToUseLocationServices_ =
+    objc.registerName("setShouldRequestAuthorizationToUseLocationServices:");
+late final _sel_isUserLocationVisible =
+    objc.registerName("isUserLocationVisible");
+
+/// WARNING: MLNUserLocation is a stub. To generate bindings for this class, include
+/// MLNUserLocation in your config's objc-interfaces list.
+///
+/// MLNUserLocation
+class MLNUserLocation extends objc.ObjCObjectBase {
+  MLNUserLocation._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNUserLocation] that points to the same underlying object as [other].
+  MLNUserLocation.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNUserLocation] that wraps the given raw object pointer.
+  MLNUserLocation.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_userLocation = objc.registerName("userLocation");
+late final _sel_userTrackingMode = objc.registerName("userTrackingMode");
+final _objc_msgSend_1swtepj = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setUserTrackingMode_ =
+    objc.registerName("setUserTrackingMode:");
+final _objc_msgSend_xoapar = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_setUserTrackingMode_animated_ =
+    objc.registerName("setUserTrackingMode:animated:");
+final _objc_msgSend_7oa3sf = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong, ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int, bool)>();
+void _ObjCBlock_ffiVoid_fnPtrTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    block.ref.target
+        .cast<ffi.NativeFunction<ffi.Void Function()>>()
+        .asFunction<void Function()>()();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_fnPtrTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_closureTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    (objc.getBlockClosure(block) as void Function())();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_closureTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_listenerTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) {
+  (objc.getBlockClosure(block) as void Function())();
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
+    _ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>.listener(
+        _ObjCBlock_ffiVoid_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
+abstract final class ObjCBlock_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function()> castFromPointer(
+          ffi.Pointer<objc.ObjCBlockImpl> pointer,
+          {bool retain = false,
+          bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function()>(pointer,
+          retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunctionPointer(
+          ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunction(void Function() fn) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newClosureBlock(_ObjCBlock_ffiVoid_closureCallable, () => fn()),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function()> listener(void Function() fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_listenerCallable.nativeFunction.cast(), () => fn());
+    final wrapper = _MapLibreFFi_wrapListenerBlock_1pl9qdv(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function()>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
+extension ObjCBlock_ffiVoid_CallExtension
+    on objc.ObjCBlock<ffi.Void Function()> {
+  void call() => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)>>()
+          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
+        ref.pointer,
+      );
+}
+
+late final _sel_setUserTrackingMode_animated_completionHandler_ =
+    objc.registerName("setUserTrackingMode:animated:completionHandler:");
+final _objc_msgSend_1iu40ms = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.UnsignedLong,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            int,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_userLocationVerticalAlignment =
+    objc.registerName("userLocationVerticalAlignment");
+final _objc_msgSend_1m9zum6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setUserLocationVerticalAlignment_ =
+    objc.registerName("setUserLocationVerticalAlignment:");
+final _objc_msgSend_47doj4 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_setUserLocationVerticalAlignment_animated_ =
+    objc.registerName("setUserLocationVerticalAlignment:animated:");
+final _objc_msgSend_1qddrus = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong, ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int, bool)>();
+late final _sel_updateUserLocationAnnotationView =
+    objc.registerName("updateUserLocationAnnotationView");
+final _objc_msgSend_1pl9qdv = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_updateUserLocationAnnotationViewAnimatedWithDuration_ =
+    objc.registerName("updateUserLocationAnnotationViewAnimatedWithDuration:");
+final _objc_msgSend_hwm8nu = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Double)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, double)>();
+late final _sel_showsUserHeadingIndicator =
+    objc.registerName("showsUserHeadingIndicator");
+late final _sel_setShowsUserHeadingIndicator_ =
+    objc.registerName("setShowsUserHeadingIndicator:");
+late final _sel_displayHeadingCalibration =
+    objc.registerName("displayHeadingCalibration");
+late final _sel_setDisplayHeadingCalibration_ =
+    objc.registerName("setDisplayHeadingCalibration:");
+late final _sel_targetCoordinate = objc.registerName("targetCoordinate");
+final _objc_msgSend_18o5nok = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        CLLocationCoordinate2D Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_18o5nokStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CLLocationCoordinate2D>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<CLLocationCoordinate2D>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setTargetCoordinate_ =
+    objc.registerName("setTargetCoordinate:");
+final _objc_msgSend_1zv0am = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D)>();
+late final _sel_setTargetCoordinate_animated_ =
+    objc.registerName("setTargetCoordinate:animated:");
+final _objc_msgSend_o7hjv2 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CLLocationCoordinate2D, bool)>();
+late final _sel_setTargetCoordinate_animated_completionHandler_ =
+    objc.registerName("setTargetCoordinate:animated:completionHandler:");
+final _objc_msgSend_1pbhom5 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_isZoomEnabled = objc.registerName("isZoomEnabled");
+late final _sel_setZoomEnabled_ = objc.registerName("setZoomEnabled:");
+late final _sel_isScrollEnabled = objc.registerName("isScrollEnabled");
+late final _sel_setScrollEnabled_ = objc.registerName("setScrollEnabled:");
+late final _sel_panScrollingMode = objc.registerName("panScrollingMode");
+final _objc_msgSend_1vb5jwj = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setPanScrollingMode_ =
+    objc.registerName("setPanScrollingMode:");
+final _objc_msgSend_k7jknj = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_isRotateEnabled = objc.registerName("isRotateEnabled");
+late final _sel_setRotateEnabled_ = objc.registerName("setRotateEnabled:");
+late final _sel_isPitchEnabled = objc.registerName("isPitchEnabled");
+late final _sel_setPitchEnabled_ = objc.registerName("setPitchEnabled:");
+late final _sel_anchorRotateOrZoomGesturesToCenterCoordinate =
+    objc.registerName("anchorRotateOrZoomGesturesToCenterCoordinate");
+late final _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_ =
+    objc.registerName("setAnchorRotateOrZoomGesturesToCenterCoordinate:");
+late final _sel_isHapticFeedbackEnabled =
+    objc.registerName("isHapticFeedbackEnabled");
+late final _sel_setHapticFeedbackEnabled_ =
+    objc.registerName("setHapticFeedbackEnabled:");
+late final _sel_decelerationRate = objc.registerName("decelerationRate");
+final _objc_msgSend_1ukqyt8 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        double Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        double Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setDecelerationRate_ =
+    objc.registerName("setDecelerationRate:");
+late final _sel_centerCoordinate = objc.registerName("centerCoordinate");
+late final _sel_setCenterCoordinate_ =
+    objc.registerName("setCenterCoordinate:");
+late final _sel_setCenterCoordinate_animated_ =
+    objc.registerName("setCenterCoordinate:animated:");
+late final _sel_setCenterCoordinate_zoomLevel_animated_ =
+    objc.registerName("setCenterCoordinate:zoomLevel:animated:");
+final _objc_msgSend_sbs4d5 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Double,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            double,
+            bool)>();
+late final _sel_setCenterCoordinate_zoomLevel_direction_animated_ =
+    objc.registerName("setCenterCoordinate:zoomLevel:direction:animated:");
+final _objc_msgSend_3zczym = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Double,
+                ffi.Double,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            double,
+            double,
+            bool)>();
+late final _sel_setCenterCoordinate_zoomLevel_direction_animated_completionHandler_ =
+    objc.registerName(
+        "setCenterCoordinate:zoomLevel:direction:animated:completionHandler:");
+final _objc_msgSend_d9pvdp = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Double,
+                ffi.Double,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            double,
+            double,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_zoomLevel = objc.registerName("zoomLevel");
+late final _sel_setZoomLevel_ = objc.registerName("setZoomLevel:");
+late final _sel_setZoomLevel_animated_ =
+    objc.registerName("setZoomLevel:animated:");
+final _objc_msgSend_ghxo7e = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Double, ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, double, bool)>();
+late final _sel_minimumZoomLevel = objc.registerName("minimumZoomLevel");
+late final _sel_setMinimumZoomLevel_ =
+    objc.registerName("setMinimumZoomLevel:");
+late final _sel_maximumZoomLevel = objc.registerName("maximumZoomLevel");
+late final _sel_setMaximumZoomLevel_ =
+    objc.registerName("setMaximumZoomLevel:");
+late final _sel_direction = objc.registerName("direction");
+late final _sel_setDirection_ = objc.registerName("setDirection:");
+late final _sel_setDirection_animated_ =
+    objc.registerName("setDirection:animated:");
+late final _sel_minimumPitch = objc.registerName("minimumPitch");
+late final _sel_setMinimumPitch_ = objc.registerName("setMinimumPitch:");
+late final _sel_maximumPitch = objc.registerName("maximumPitch");
+late final _sel_setMaximumPitch_ = objc.registerName("setMaximumPitch:");
+late final _sel_resetNorth = objc.registerName("resetNorth");
+late final _sel_resetPosition = objc.registerName("resetPosition");
+late final _sel_visibleCoordinateBounds =
+    objc.registerName("visibleCoordinateBounds");
+final _objc_msgSend_ygoa6a = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        MLNCoordinateBounds Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_ygoa6aStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<MLNCoordinateBounds>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<MLNCoordinateBounds>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setVisibleCoordinateBounds_ =
+    objc.registerName("setVisibleCoordinateBounds:");
+final _objc_msgSend_9ay59k = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds)>();
+late final _sel_setVisibleCoordinateBounds_animated_ =
+    objc.registerName("setVisibleCoordinateBounds:animated:");
+final _objc_msgSend_148tmbg = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds, bool)>();
+late final _sel_setVisibleCoordinateBounds_edgePadding_animated_ =
+    objc.registerName("setVisibleCoordinateBounds:edgePadding:animated:");
+final _objc_msgSend_13x0pfk = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>,
+            bool)>();
+late final _sel_setVisibleCoordinateBounds_edgePadding_animated_completionHandler_ =
+    objc.registerName(
+        "setVisibleCoordinateBounds:edgePadding:animated:completionHandler:");
+final _objc_msgSend_5ott2b = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_setVisibleCoordinates_count_edgePadding_animated_ =
+    objc.registerName("setVisibleCoordinates:count:edgePadding:animated:");
+final _objc_msgSend_9zf1tv = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<CLLocationCoordinate2D>,
+                ffi.UnsignedLong,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<CLLocationCoordinate2D>,
+            int,
+            ffi.Pointer<objc.ObjCObject>,
+            bool)>();
+late final _sel_setVisibleCoordinates_count_edgePadding_direction_duration_animationTimingFunction_completionHandler_ =
+    objc.registerName(
+        "setVisibleCoordinates:count:edgePadding:direction:duration:animationTimingFunction:completionHandler:");
+final _objc_msgSend_g22jge = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<CLLocationCoordinate2D>,
+                ffi.UnsignedLong,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<CLLocationCoordinate2D>,
+            int,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            double,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_showAnnotations_animated_ =
+    objc.registerName("showAnnotations:animated:");
+final _objc_msgSend_gk45w7 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool)>();
+late final _sel_showAnnotations_edgePadding_animated_ =
+    objc.registerName("showAnnotations:edgePadding:animated:");
+final _objc_msgSend_k4ykup = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool)>();
+late final _sel_showAnnotations_edgePadding_animated_completionHandler_ = objc
+    .registerName("showAnnotations:edgePadding:animated:completionHandler:");
+final _objc_msgSend_1xot3wa = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_camera = objc.registerName("camera");
+late final _sel_setCamera_ = objc.registerName("setCamera:");
+late final _sel_setCamera_animated_ = objc.registerName("setCamera:animated:");
+late final _sel_setCamera_withDuration_animationTimingFunction_ =
+    objc.registerName("setCamera:withDuration:animationTimingFunction:");
+final _objc_msgSend_1rg1izw = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_setCamera_withDuration_animationTimingFunction_completionHandler_ =
+    objc.registerName(
+        "setCamera:withDuration:animationTimingFunction:completionHandler:");
+final _objc_msgSend_vmwi8n = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_setCamera_withDuration_animationTimingFunction_edgePadding_completionHandler_ =
+    objc.registerName(
+        "setCamera:withDuration:animationTimingFunction:edgePadding:completionHandler:");
+final _objc_msgSend_q6aes3 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_flyToCamera_completionHandler_ =
+    objc.registerName("flyToCamera:completionHandler:");
+final _objc_msgSend_14pxqbs = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_flyToCamera_withDuration_completionHandler_ =
+    objc.registerName("flyToCamera:withDuration:completionHandler:");
+final _objc_msgSend_s4h8qz = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_flyToCamera_withDuration_peakAltitude_completionHandler_ = objc
+    .registerName("flyToCamera:withDuration:peakAltitude:completionHandler:");
+final _objc_msgSend_1oun51c = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            double,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_flyToCamera_edgePadding_withDuration_completionHandler_ = objc
+    .registerName("flyToCamera:edgePadding:withDuration:completionHandler:");
+final _objc_msgSend_mqlsb9 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_cameraThatFitsCoordinateBounds_ =
+    objc.registerName("cameraThatFitsCoordinateBounds:");
+final _objc_msgSend_3usbrg = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds)>();
+late final _sel_cameraThatFitsCoordinateBounds_edgePadding_ =
+    objc.registerName("cameraThatFitsCoordinateBounds:edgePadding:");
+final _objc_msgSend_1z0kiwg = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_camera_fittingCoordinateBounds_edgePadding_ =
+    objc.registerName("camera:fittingCoordinateBounds:edgePadding:");
+final _objc_msgSend_1mt4adu = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>)>();
+
+/// WARNING: MLNShape is a stub. To generate bindings for this class, include
+/// MLNShape in your config's objc-interfaces list.
+///
+/// MLNShape
+class MLNShape extends objc.ObjCObjectBase {
+  MLNShape._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNShape] that points to the same underlying object as [other].
+  MLNShape.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNShape] that wraps the given raw object pointer.
+  MLNShape.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_camera_fittingShape_edgePadding_ =
+    objc.registerName("camera:fittingShape:edgePadding:");
+final _objc_msgSend_582s3n = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_cameraThatFitsShape_direction_edgePadding_ =
+    objc.registerName("cameraThatFitsShape:direction:edgePadding:");
+final _objc_msgSend_45qm9k = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            double,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_anchorPointForGesture_ =
+    objc.registerName("anchorPointForGesture:");
+final _objc_msgSend_11ku3hk = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CGPoint Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        CGPoint Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_11ku3hkStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CGPoint>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<CGPoint>, ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_contentInset = objc.registerName("contentInset");
+final _objc_msgSend_13yqbb6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Int Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setContentInset_ = objc.registerName("setContentInset:");
+final _objc_msgSend_9o8504 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Int)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_cameraEdgeInsets = objc.registerName("cameraEdgeInsets");
+late final _sel_setContentInset_animated_ =
+    objc.registerName("setContentInset:animated:");
+late final _sel_setContentInset_animated_completionHandler_ =
+    objc.registerName("setContentInset:animated:completionHandler:");
+final _objc_msgSend_3br9h8 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_convertPoint_toCoordinateFromView_ =
+    objc.registerName("convertPoint:toCoordinateFromView:");
+final _objc_msgSend_13n8ay5 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CLLocationCoordinate2D Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGPoint,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        CLLocationCoordinate2D Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGPoint,
+            ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_13n8ay5Stret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CLLocationCoordinate2D>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGPoint,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<CLLocationCoordinate2D>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGPoint,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_convertCoordinate_toPointToView_ =
+    objc.registerName("convertCoordinate:toPointToView:");
+final _objc_msgSend_1a63hef = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CGPoint Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        CGPoint Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_1a63hefStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CGPoint>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CLLocationCoordinate2D,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<CGPoint>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CLLocationCoordinate2D,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_convertRect_toCoordinateBoundsFromView_ =
+    objc.registerName("convertRect:toCoordinateBoundsFromView:");
+final _objc_msgSend_g6it35 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            MLNCoordinateBounds Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGRect,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        MLNCoordinateBounds Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGRect,
+            ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_g6it35Stret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<MLNCoordinateBounds>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGRect,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<MLNCoordinateBounds>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGRect,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_convertCoordinateBounds_toRectToView_ =
+    objc.registerName("convertCoordinateBounds:toRectToView:");
+final _objc_msgSend_1nli2vf = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            CGRect Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        CGRect Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_1nli2vfStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<CGRect>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                MLNCoordinateBounds,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<CGRect>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            MLNCoordinateBounds,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_metersPerPointAtLatitude_ =
+    objc.registerName("metersPerPointAtLatitude:");
+final _objc_msgSend_1tczmpv = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Double)>>()
+    .asFunction<
+        double Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, double)>();
+final _objc_msgSend_1tczmpvFpret = objc.msgSendFpretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Double)>>()
+    .asFunction<
+        double Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, double)>();
+
+/// WARNING: MLNMapProjection is a stub. To generate bindings for this class, include
+/// MLNMapProjection in your config's objc-interfaces list.
+///
+/// MLNMapProjection
+class MLNMapProjection extends objc.ObjCObjectBase {
+  MLNMapProjection._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNMapProjection] that points to the same underlying object as [other].
+  MLNMapProjection.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNMapProjection] that wraps the given raw object pointer.
+  MLNMapProjection.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_mapProjection = objc.registerName("mapProjection");
+late final _sel_annotations = objc.registerName("annotations");
+late final _sel_addAnnotation_ = objc.registerName("addAnnotation:");
+late final _sel_addAnnotations_ = objc.registerName("addAnnotations:");
+late final _sel_removeAnnotation_ = objc.registerName("removeAnnotation:");
+late final _sel_removeAnnotations_ = objc.registerName("removeAnnotations:");
+
+/// WARNING: MLNAnnotationView is a stub. To generate bindings for this class, include
+/// MLNAnnotationView in your config's objc-interfaces list.
+///
+/// MLNAnnotationView
+class MLNAnnotationView extends objc.ObjCObjectBase {
+  MLNAnnotationView._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNAnnotationView] that points to the same underlying object as [other].
+  MLNAnnotationView.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNAnnotationView] that wraps the given raw object pointer.
+  MLNAnnotationView.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_viewForAnnotation_ = objc.registerName("viewForAnnotation:");
+final _objc_msgSend_62nh5j = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+
+/// WARNING: MLNAnnotationImage is a stub. To generate bindings for this class, include
+/// MLNAnnotationImage in your config's objc-interfaces list.
+///
+/// MLNAnnotationImage
+class MLNAnnotationImage extends objc.ObjCObjectBase {
+  MLNAnnotationImage._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNAnnotationImage] that points to the same underlying object as [other].
+  MLNAnnotationImage.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNAnnotationImage] that wraps the given raw object pointer.
+  MLNAnnotationImage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _sel_dequeueReusableAnnotationImageWithIdentifier_ =
+    objc.registerName("dequeueReusableAnnotationImageWithIdentifier:");
+late final _sel_dequeueReusableAnnotationViewWithIdentifier_ =
+    objc.registerName("dequeueReusableAnnotationViewWithIdentifier:");
+late final _sel_visibleAnnotations = objc.registerName("visibleAnnotations");
+late final _sel_visibleAnnotationsInRect_ =
+    objc.registerName("visibleAnnotationsInRect:");
+late final _sel_selectedAnnotations = objc.registerName("selectedAnnotations");
+late final _sel_setSelectedAnnotations_ =
+    objc.registerName("setSelectedAnnotations:");
+late final _sel_selectAnnotation_animated_ =
+    objc.registerName("selectAnnotation:animated:");
+late final _sel_selectAnnotation_animated_completionHandler_ =
+    objc.registerName("selectAnnotation:animated:completionHandler:");
+late final _sel_selectAnnotation_moveIntoView_animateSelection_completionHandler_ =
+    objc.registerName(
+        "selectAnnotation:moveIntoView:animateSelection:completionHandler:");
+final _objc_msgSend_11qxhhc = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_deselectAnnotation_animated_ =
+    objc.registerName("deselectAnnotation:animated:");
+late final _sel_overlays = objc.registerName("overlays");
+late final _sel_addOverlay_ = objc.registerName("addOverlay:");
+late final _sel_addOverlays_ = objc.registerName("addOverlays:");
+late final _sel_removeOverlay_ = objc.registerName("removeOverlay:");
+late final _sel_removeOverlays_ = objc.registerName("removeOverlays:");
+late final _sel_visibleFeaturesAtPoint_ =
+    objc.registerName("visibleFeaturesAtPoint:");
+final _objc_msgSend_czt8e6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CGPoint)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CGPoint)>();
+late final _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_ =
+    objc.registerName("visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:");
+final _objc_msgSend_b4j0k2 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGPoint,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGPoint,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_predicate_ =
+    objc.registerName(
+        "visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:");
+final _objc_msgSend_1htecti = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGPoint,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGPoint,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_visibleFeaturesInRect_ =
+    objc.registerName("visibleFeaturesInRect:");
+late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_ =
+    objc.registerName("visibleFeaturesInRect:inStyleLayersWithIdentifiers:");
+late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ =
+    objc.registerName(
+        "visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:");
+final _objc_msgSend_1hrqp72 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGRect,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGRect,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_debugMask = objc.registerName("debugMask");
+final _objc_msgSend_1kwkjor = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setDebugMask_ = objc.registerName("setDebugMask:");
+final _objc_msgSend_pisvbv = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+
+/// An interactive, customizable map view with an interface similar to the one
+/// provided by Apple’s MapKit.
+///
+/// Using ``MLNMapView``, you can embed the map inside a view, allow users to
+/// manipulate it with standard gestures, animate the map between different
+/// viewpoints, and present information in the form of annotations and overlays.
+///
+/// The map view loads scalable vector tiles that conform to the
+/// <a href="https://github.com/mapbox/vector-tile-spec">Mapbox Vector Tile Specification</a>.
+/// It styles them with a style that conforms to the
+/// <a href="https://maplibre.org/maplibre-style-spec/">MapLibre Style Spec</a>.
+/// Such styles can be designed with
+/// <a href="https://maplibre.org/maputnik/">Maputnik</a>.
+///
+///
+/// Because ``MLNMapView`` loads asynchronously, several delegate methods are available
+/// for receiving map-related updates. These methods can be used to ensure that certain operations
+/// have completed before taking any additional actions. Information on these methods is located
+/// in the ``MLNMapViewDelegate`` protocol documentation.
+///
+/// Adding your own gesture recognizer to ``MLNMapView`` will block the corresponding
+/// gesture recognizer built into ``MLNMapView``. To avoid conflicts, define which
+/// gesture takes precedence. For example, you can create your own
+/// `UITapGestureRecognizer` that will be invoked only if the default ``MLNMapView``
+/// tap gesture fails:
+///
+/// ```swift
+/// let mapTapGestureRecognizer = UITapGestureRecognizer(target: self, action:
+/// #selector(myCustomFunction)) for recognizer in mapView.gestureRecognizers! where recognizer is
+/// UITapGestureRecognizer { mapTapGestureRecognizer.require(toFail: recognizer)
+/// }
+/// mapView.addGestureRecognizer(mapTapGestureRecognizer)
+/// ```
+///
+/// > Note: You are responsible for getting permission to use the map data and for
+/// ensuring that your use adheres to the relevant terms of use.
+class MLNMapView extends objc.ObjCObjectBase {
+  MLNMapView._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNMapView] that points to the same underlying object as [other].
+  MLNMapView.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNMapView] that wraps the given raw object pointer.
+  MLNMapView.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNMapView].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapView);
+  }
+
+  /// Initializes and returns a newly allocated map view with the specified frame
+  /// and the default style.
+  ///
+  /// @param frame The frame for the view, measured in points.
+  /// @return An initialized map view.
+  MLNMapView initWithFrame_(CGRect frame) {
+    final _ret = _objc_msgSend_19adbty(
+        this.ref.retainAndReturnPointer(), _sel_initWithFrame_, frame);
+    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Initializes and returns a newly allocated map view with the specified frame
+  /// and style URL.
+  ///
+  /// @param frame The frame for the view, measured in points.
+  /// @param styleURL URL of the map style to display. The URL may be a full HTTP
+  /// or HTTPS URL, a canonical URL or a path to a local file relative
+  /// to the application’s resource path. Specify `nil` for the default style.
+  /// @return An initialized map view.
+  ///
+  /// #### Related examples
+  ///
+  /// - TODO: initialize an ``MLNMapView`` with a custom style
+  /// - TODO: how to initialize an ``MLNMapView`` with a third-party tile source
+  MLNMapView initWithFrame_styleURL_(CGRect frame, objc.NSURL? styleURL) {
+    final _ret = _objc_msgSend_qsq5p6(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithFrame_styleURL_,
+        frame,
+        styleURL?.ref.pointer ?? ffi.nullptr);
+    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// The receiver’s delegate.
+  ///
+  /// A map view sends messages to its delegate to notify it of changes to its
+  /// contents or the viewpoint. The delegate also provides information about
+  /// annotations displayed on the map, such as the styles to apply to individual
+  /// annotations.
+  objc.ObjCObjectBase? get delegate {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_delegate);
+    return _ret.address == 0
+        ? null
+        : objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// The receiver’s delegate.
+  ///
+  /// A map view sends messages to its delegate to notify it of changes to its
+  /// contents or the viewpoint. The delegate also provides information about
+  /// annotations displayed on the map, such as the styles to apply to individual
+  /// annotations.
+  set delegate(objc.ObjCObjectBase? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setDelegate_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The style currently displayed in the receiver.
+  MLNStyle? get style {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_style);
+    return _ret.address == 0
+        ? null
+        : MLNStyle.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// URL of the style currently displayed in the receiver.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL, canonical URL, or
+  /// a path to a local file relative to the application’s resource path.
+  ///
+  /// If you set this property to `nil`, the receiver will use the default style
+  /// and this property will automatically be set to that style’s URL.
+  ///
+  /// If you want to modify the current style without replacing it outright, or if
+  /// you want to introspect individual style attributes, use the `style` property.
+  ///
+  /// #### Related examples
+  /// - TODO: change the style of a map at runtime.
+  objc.NSURL get styleURL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_styleURL);
+    return objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// URL of the style currently displayed in the receiver.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL, canonical URL, or
+  /// a path to a local file relative to the application’s resource path.
+  ///
+  /// If you set this property to `nil`, the receiver will use the default style
+  /// and this property will automatically be set to that style’s URL.
+  ///
+  /// If you want to modify the current style without replacing it outright, or if
+  /// you want to introspect individual style attributes, use the `style` property.
+  ///
+  /// #### Related examples
+  /// - TODO: change the style of a map at runtime.
+  set styleURL(objc.NSURL value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setStyleURL_, value.ref.pointer);
+  }
+
+  /// Reloads the style.
+  ///
+  /// You do not normally need to call this method. The map view automatically
+  /// responds to changes in network connectivity by reloading the style.
+  ///
+  /// This method does not bust the cache. Even if the style has recently changed on
+  /// the server, calling this method does not necessarily ensure that the map view
+  /// reflects those changes.
+  void reloadStyle_(objc.ObjCObjectBase? sender) {
+    _objc_msgSend_1jdvcbf(this.ref.pointer, _sel_reloadStyle_,
+        sender?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// A boolean value that indicates if whether the map view should automatically
+  /// adjust its content insets.
+  ///
+  /// When this property is set to `YES` the map automatically updates its
+  /// `contentInset` property to account for any area not covered by navigation bars,
+  /// tab bars, toolbars, and other ancestors that obscure the map view.
+  bool get automaticallyAdjustsContentInset {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_automaticallyAdjustsContentInset);
+  }
+
+  /// A boolean value that indicates if whether the map view should automatically
+  /// adjust its content insets.
+  ///
+  /// When this property is set to `YES` the map automatically updates its
+  /// `contentInset` property to account for any area not covered by navigation bars,
+  /// tab bars, toolbars, and other ancestors that obscure the map view.
+  set automaticallyAdjustsContentInset(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setAutomaticallyAdjustsContentInset_, value);
+  }
+
+  /// A Boolean value indicating whether the map may display scale information.
+  ///
+  /// The scale bar may not be shown at all zoom levels. The scale bar becomes visible
+  /// when the maximum distance visible on the map view is less than 400 miles (800
+  /// kilometers). The zoom level where this occurs depends on the latitude at the map
+  /// view’s center coordinate, as well as the device screen width. At latitudes
+  /// farther from the equator, the scale bar becomes visible at lower zoom levels.
+  ///
+  /// The unit of measurement is determined by the user's device locale.
+  ///
+  /// The view controlled by this property is available at `scaleBar`. The default value
+  /// of this property is `NO`.
+  bool get showsScale {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_showsScale);
+  }
+
+  /// A Boolean value indicating whether the map may display scale information.
+  ///
+  /// The scale bar may not be shown at all zoom levels. The scale bar becomes visible
+  /// when the maximum distance visible on the map view is less than 400 miles (800
+  /// kilometers). The zoom level where this occurs depends on the latitude at the map
+  /// view’s center coordinate, as well as the device screen width. At latitudes
+  /// farther from the equator, the scale bar becomes visible at lower zoom levels.
+  ///
+  /// The unit of measurement is determined by the user's device locale.
+  ///
+  /// The view controlled by this property is available at `scaleBar`. The default value
+  /// of this property is `NO`.
+  set showsScale(bool value) {
+    return _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setShowsScale_, value);
+  }
+
+  /// A control indicating the scale of the map. The scale bar is positioned in the
+  /// upper-left corner. Enable the scale bar via `showsScale`.
+  MLNScaleBar get scaleBar {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_scaleBar);
+    return MLNScaleBar.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Sets whether the scale uses styles that make it easier to read on a dark styled map
+  bool get scaleBarShouldShowDarkStyles {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_scaleBarShouldShowDarkStyles);
+  }
+
+  /// Sets whether the scale uses styles that make it easier to read on a dark styled map
+  set scaleBarShouldShowDarkStyles(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setScaleBarShouldShowDarkStyles_, value);
+  }
+
+  /// Sets whether the scale uses metric
+  bool get scaleBarUsesMetricSystem {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_scaleBarUsesMetricSystem);
+  }
+
+  /// Sets whether the scale uses metric
+  set scaleBarUsesMetricSystem(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setScaleBarUsesMetricSystem_, value);
+  }
+
+  /// The position of the scale bar. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionTopLeft``.
+  MLNOrnamentPosition get scaleBarPosition {
+    final _ret = _objc_msgSend_1c31cvt(this.ref.pointer, _sel_scaleBarPosition);
+    return MLNOrnamentPosition.fromValue(_ret);
+  }
+
+  /// The position of the scale bar. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionTopLeft``.
+  set scaleBarPosition(MLNOrnamentPosition value) {
+    return _objc_msgSend_8fd115(
+        this.ref.pointer, _sel_setScaleBarPosition_, value.value);
+  }
+
+  /// A `CGPoint` indicating the position offset of the scale bar.
+  CGPoint get scaleBarMargins {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1uwdhlkStret(
+            _ptr, this.ref.pointer, _sel_scaleBarMargins)
+        : _ptr.ref =
+            _objc_msgSend_1uwdhlk(this.ref.pointer, _sel_scaleBarMargins);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// A `CGPoint` indicating the position offset of the scale bar.
+  set scaleBarMargins(CGPoint value) {
+    return _objc_msgSend_iy8iz6(
+        this.ref.pointer, _sel_setScaleBarMargins_, value);
+  }
+
+  /// A control indicating the map’s direction and allowing the user to manipulate
+  /// the direction, positioned in the upper-right corner.
+  MLNCompassButton get compassView {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_compassView);
+    return MLNCompassButton.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The position of the compass view. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionTopRight``.
+  MLNOrnamentPosition get compassViewPosition {
+    final _ret =
+        _objc_msgSend_1c31cvt(this.ref.pointer, _sel_compassViewPosition);
+    return MLNOrnamentPosition.fromValue(_ret);
+  }
+
+  /// The position of the compass view. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionTopRight``.
+  set compassViewPosition(MLNOrnamentPosition value) {
+    return _objc_msgSend_8fd115(
+        this.ref.pointer, _sel_setCompassViewPosition_, value.value);
+  }
+
+  /// A `CGPoint` indicating the position offset of the compass.
+  CGPoint get compassViewMargins {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1uwdhlkStret(
+            _ptr, this.ref.pointer, _sel_compassViewMargins)
+        : _ptr.ref =
+            _objc_msgSend_1uwdhlk(this.ref.pointer, _sel_compassViewMargins);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// A `CGPoint` indicating the position offset of the compass.
+  set compassViewMargins(CGPoint value) {
+    return _objc_msgSend_iy8iz6(
+        this.ref.pointer, _sel_setCompassViewMargins_, value);
+  }
+
+  /// A logo, the MapLibre logo by default, positioned in the lower-left corner.
+  /// You are not required to display this, but some vector-sources may require attribution.
+  ffi.Pointer<ffi.Int> get logoView {
+    return _objc_msgSend_1p5sbp0(this.ref.pointer, _sel_logoView);
+  }
+
+  /// The position of the logo view. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionBottomLeft``.
+  MLNOrnamentPosition get logoViewPosition {
+    final _ret = _objc_msgSend_1c31cvt(this.ref.pointer, _sel_logoViewPosition);
+    return MLNOrnamentPosition.fromValue(_ret);
+  }
+
+  /// The position of the logo view. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionBottomLeft``.
+  set logoViewPosition(MLNOrnamentPosition value) {
+    return _objc_msgSend_8fd115(
+        this.ref.pointer, _sel_setLogoViewPosition_, value.value);
+  }
+
+  /// A `CGPoint` indicating the position offset of the logo.
+  CGPoint get logoViewMargins {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1uwdhlkStret(
+            _ptr, this.ref.pointer, _sel_logoViewMargins)
+        : _ptr.ref =
+            _objc_msgSend_1uwdhlk(this.ref.pointer, _sel_logoViewMargins);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// A `CGPoint` indicating the position offset of the logo.
+  set logoViewMargins(CGPoint value) {
+    return _objc_msgSend_iy8iz6(
+        this.ref.pointer, _sel_setLogoViewMargins_, value);
+  }
+
+  /// A view showing legally required copyright notices,
+  /// positioned at the bottom-right of the map view.
+  ///
+  /// If you choose to reimplement this view, assign the `-showAttribution:` method
+  /// as the action for your view to present the default notices and settings.
+  ///
+  /// > Note: Attribution is often required for many vector sources,
+  /// OpenStreetMap data, or other data such as satellite or terrain
+  /// data. If that applies to this map view, do not hide this view or remove
+  /// any notices from it.
+  ffi.Pointer<ffi.Int> get attributionButton {
+    return _objc_msgSend_1p5sbp0(this.ref.pointer, _sel_attributionButton);
+  }
+
+  /// The position of the attribution button. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionBottomRight``.
+  MLNOrnamentPosition get attributionButtonPosition {
+    final _ret =
+        _objc_msgSend_1c31cvt(this.ref.pointer, _sel_attributionButtonPosition);
+    return MLNOrnamentPosition.fromValue(_ret);
+  }
+
+  /// The position of the attribution button. The default value is
+  /// ``MLNOrnamentPosition/MLNOrnamentPositionBottomRight``.
+  set attributionButtonPosition(MLNOrnamentPosition value) {
+    return _objc_msgSend_8fd115(
+        this.ref.pointer, _sel_setAttributionButtonPosition_, value.value);
+  }
+
+  /// A `CGPoint` indicating the position offset of the attribution.
+  CGPoint get attributionButtonMargins {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1uwdhlkStret(
+            _ptr, this.ref.pointer, _sel_attributionButtonMargins)
+        : _ptr.ref = _objc_msgSend_1uwdhlk(
+            this.ref.pointer, _sel_attributionButtonMargins);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// A `CGPoint` indicating the position offset of the attribution.
+  set attributionButtonMargins(CGPoint value) {
+    return _objc_msgSend_iy8iz6(
+        this.ref.pointer, _sel_setAttributionButtonMargins_, value);
+  }
+
+  /// Show the attribution action sheet.
+  ///
+  /// This action is performed when the user taps on the attribution button provided
+  /// by default via the `attributionButton` property. If you implement a custom
+  /// attribution button, you should add this action to the button.
+  void showAttribution_(objc.ObjCObjectBase sender) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_showAttribution_, sender.ref.pointer);
+  }
+
+  /// The preferred frame rate at which the map view is rendered.
+  ///
+  /// The default value for this property is
+  /// ``MLNMapViewPreferredFramesPerSecondDefault``, which will adaptively set the
+  /// preferred frame rate based on the capability of the user’s device to maintain
+  /// a smooth experience.
+  ///
+  /// In addition to the provided ``MLNMapViewPreferredFramesPerSecond`` options, this
+  /// property can be set to arbitrary integer values.
+  ///
+  /// @see `CADisplayLink.preferredFramesPerSecond`
+  int get preferredFramesPerSecond {
+    return _objc_msgSend_1hz7y9r(
+        this.ref.pointer, _sel_preferredFramesPerSecond);
+  }
+
+  /// The preferred frame rate at which the map view is rendered.
+  ///
+  /// The default value for this property is
+  /// ``MLNMapViewPreferredFramesPerSecondDefault``, which will adaptively set the
+  /// preferred frame rate based on the capability of the user’s device to maintain
+  /// a smooth experience.
+  ///
+  /// In addition to the provided ``MLNMapViewPreferredFramesPerSecond`` options, this
+  /// property can be set to arbitrary integer values.
+  ///
+  /// @see `CADisplayLink.preferredFramesPerSecond`
+  set preferredFramesPerSecond(int value) {
+    return _objc_msgSend_4sp4xj(
+        this.ref.pointer, _sel_setPreferredFramesPerSecond_, value);
+  }
+
+  /// A Boolean value indicating whether the map should prefetch tiles.
+  ///
+  /// When this property is set to `YES`, the map view prefetches tiles designed for
+  /// a low zoom level and displays them until receiving more detailed tiles for the
+  /// current zoom level. The prefetched tiles typically contain simplified versions
+  /// of each shape, improving the map view’s perceived performance.
+  ///
+  /// The default value of this property is `YES`.
+  bool get prefetchesTiles {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_prefetchesTiles);
+  }
+
+  /// A Boolean value indicating whether the map should prefetch tiles.
+  ///
+  /// When this property is set to `YES`, the map view prefetches tiles designed for
+  /// a low zoom level and displays them until receiving more detailed tiles for the
+  /// current zoom level. The prefetched tiles typically contain simplified versions
+  /// of each shape, improving the map view’s perceived performance.
+  ///
+  /// The default value of this property is `YES`.
+  set prefetchesTiles(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setPrefetchesTiles_, value);
+  }
+
+  /// A Boolean value indicating whether the map may cache tiles for different zoom levels or not.
+  ///
+  /// When this property is set to `YES`,  the map view consumes more memory and
+  /// provide a smoother user experience when zoom in/out.
+  ///
+  /// The default value of this property is `YES`.
+  bool get tileCacheEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_tileCacheEnabled);
+  }
+
+  /// A Boolean value indicating whether the map may cache tiles for different zoom levels or not.
+  ///
+  /// When this property is set to `YES`,  the map view consumes more memory and
+  /// provide a smoother user experience when zoom in/out.
+  ///
+  /// The default value of this property is `YES`.
+  set tileCacheEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setTileCacheEnabled_, value);
+  }
+
+  /// The object that this map view uses to start and stop the delivery of
+  /// location-related updates.
+  ///
+  /// To receive the current user location, implement the
+  /// ``MLNMapViewDelegate/mapView:didUpdateUserLocation:`` and
+  /// ``MLNMapViewDelegate/mapView:didFailToLocateUserWithError:`` methods.
+  ///
+  /// If setting this property to `nil` or if no custom manager is provided this
+  /// property is set to the default location manager.
+  ///
+  /// ``MLNMapView`` uses a default location manager. If you want to substitute your
+  /// own location manager, you should do so by setting this property before setting
+  /// `showsUserLocation` to `YES`. To restore the default location manager,
+  /// set this property to `nil`.
+  objc.ObjCObjectBase get locationManager {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_locationManager);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// The object that this map view uses to start and stop the delivery of
+  /// location-related updates.
+  ///
+  /// To receive the current user location, implement the
+  /// ``MLNMapViewDelegate/mapView:didUpdateUserLocation:`` and
+  /// ``MLNMapViewDelegate/mapView:didFailToLocateUserWithError:`` methods.
+  ///
+  /// If setting this property to `nil` or if no custom manager is provided this
+  /// property is set to the default location manager.
+  ///
+  /// ``MLNMapView`` uses a default location manager. If you want to substitute your
+  /// own location manager, you should do so by setting this property before setting
+  /// `showsUserLocation` to `YES`. To restore the default location manager,
+  /// set this property to `nil`.
+  set locationManager(objc.ObjCObjectBase value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setLocationManager_, value.ref.pointer);
+  }
+
+  /// A Boolean value indicating whether the map may display the user location.
+  ///
+  /// Setting this property to `YES` causes the map view to use the Core Location
+  /// framework to find the current location. As long as this property is `YES`, the
+  /// map view continues to track the user’s location and update it periodically.
+  ///
+  /// This property does not indicate whether the user’s position is actually visible
+  /// on the map, only whether the map view is allowed to display it. To determine
+  /// whether the user’s position is visible, use the `userLocationVisible` property.
+  /// The default value of this property is `NO`.
+  ///
+  /// Your app must specify a value for `NSLocationWhenInUseUsageDescription` or
+  /// `NSLocationAlwaysUsageDescription` in its `Info.plist` to satisfy the
+  /// requirements of the underlying Core Location framework when enabling this
+  /// property.
+  ///
+  /// If you implement a custom location manager, set the `locationManager` before
+  /// calling `showsUserLocation`.
+  bool get showsUserLocation {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_showsUserLocation);
+  }
+
+  /// A Boolean value indicating whether the map may display the user location.
+  ///
+  /// Setting this property to `YES` causes the map view to use the Core Location
+  /// framework to find the current location. As long as this property is `YES`, the
+  /// map view continues to track the user’s location and update it periodically.
+  ///
+  /// This property does not indicate whether the user’s position is actually visible
+  /// on the map, only whether the map view is allowed to display it. To determine
+  /// whether the user’s position is visible, use the `userLocationVisible` property.
+  /// The default value of this property is `NO`.
+  ///
+  /// Your app must specify a value for `NSLocationWhenInUseUsageDescription` or
+  /// `NSLocationAlwaysUsageDescription` in its `Info.plist` to satisfy the
+  /// requirements of the underlying Core Location framework when enabling this
+  /// property.
+  ///
+  /// If you implement a custom location manager, set the `locationManager` before
+  /// calling `showsUserLocation`.
+  set showsUserLocation(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setShowsUserLocation_, value);
+  }
+
+  /// A Boolean value indicating whether the map may request authorization to use location services.
+  ///
+  /// Setting this property to `YES` causes the map view to use the Core Location
+  /// framework to request authorization when authorizationStatus == kCLAuthorizationStatusNotDetermined.
+  ///
+  /// The default value of this property is `YES`.
+  bool get shouldRequestAuthorizationToUseLocationServices {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_shouldRequestAuthorizationToUseLocationServices);
+  }
+
+  /// A Boolean value indicating whether the map may request authorization to use location services.
+  ///
+  /// Setting this property to `YES` causes the map view to use the Core Location
+  /// framework to request authorization when authorizationStatus == kCLAuthorizationStatusNotDetermined.
+  ///
+  /// The default value of this property is `YES`.
+  set shouldRequestAuthorizationToUseLocationServices(bool value) {
+    return _objc_msgSend_1s56lr9(this.ref.pointer,
+        _sel_setShouldRequestAuthorizationToUseLocationServices_, value);
+  }
+
+  /// A Boolean value indicating whether the device’s current location is visible in
+  /// the map view.
+  ///
+  /// Use `showsUserLocation` to control the visibility of the on-screen user
+  /// location annotation.
+  bool get userLocationVisible {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isUserLocationVisible);
+  }
+
+  /// Returns the annotation object indicating the user’s current location.
+  MLNUserLocation? get userLocation {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_userLocation);
+    return _ret.address == 0
+        ? null
+        : MLNUserLocation.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The mode used to track the user location. The default value is
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeNone``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setUserTrackingMode:animated:` method instead.
+  ///
+  /// #### Related examples
+  /// - TODO: Customize the user location annotation and learn how to customize the
+  /// default user location annotation shown by ``MLNUserTrackingMode``.
+  MLNUserTrackingMode get userTrackingMode {
+    final _ret = _objc_msgSend_1swtepj(this.ref.pointer, _sel_userTrackingMode);
+    return MLNUserTrackingMode.fromValue(_ret);
+  }
+
+  /// The mode used to track the user location. The default value is
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeNone``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setUserTrackingMode:animated:` method instead.
+  ///
+  /// #### Related examples
+  /// - TODO: Customize the user location annotation and learn how to customize the
+  /// default user location annotation shown by ``MLNUserTrackingMode``.
+  set userTrackingMode(MLNUserTrackingMode value) {
+    return _objc_msgSend_xoapar(
+        this.ref.pointer, _sel_setUserTrackingMode_, value.value);
+  }
+
+  /// Deprecated. Sets the mode used to track the user location, with an optional transition.
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-setUserTrackingMode:animated:completionHandler:` method.
+  ///
+  /// @param mode The mode used to track the user location.
+  /// @param animated If `YES`, there is an animated transition from the current
+  /// viewport to a viewport that results from the change to `mode`. If `NO`, the
+  /// map view instantaneously changes to the new viewport. This parameter only
+  /// affects the initial transition; subsequent changes to the user location or
+  /// heading are always animated.
+  void setUserTrackingMode_animated_(MLNUserTrackingMode mode, bool animated) {
+    _objc_msgSend_7oa3sf(this.ref.pointer, _sel_setUserTrackingMode_animated_,
+        mode.value, animated);
+  }
+
+  /// Sets the mode used to track the user location, with an optional transition and
+  /// completion handler.
+  ///
+  /// @param mode The mode used to track the user location.
+  /// @param animated If `YES`, there is an animated transition from the current
+  /// viewport to a viewport that results from the change to `mode`. If `NO`, the
+  /// map view instantaneously changes to the new viewport. This parameter only
+  /// affects the initial transition; subsequent changes to the user location or
+  /// heading are always animated.
+  /// @param completion The block executed after the animation finishes.
+  void setUserTrackingMode_animated_completionHandler_(MLNUserTrackingMode mode,
+      bool animated, objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_1iu40ms(
+        this.ref.pointer,
+        _sel_setUserTrackingMode_animated_completionHandler_,
+        mode.value,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The vertical alignment of the user location annotation within the receiver. The
+  /// default value is ``MLNAnnotationVerticalAlignment/MLNAnnotationVerticalAlignmentCenter``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setUserLocationVerticalAlignment:animated:` method instead.
+  MLNAnnotationVerticalAlignment get userLocationVerticalAlignment {
+    final _ret = _objc_msgSend_1m9zum6(
+        this.ref.pointer, _sel_userLocationVerticalAlignment);
+    return MLNAnnotationVerticalAlignment.fromValue(_ret);
+  }
+
+  /// The vertical alignment of the user location annotation within the receiver. The
+  /// default value is ``MLNAnnotationVerticalAlignment/MLNAnnotationVerticalAlignmentCenter``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setUserLocationVerticalAlignment:animated:` method instead.
+  set userLocationVerticalAlignment(MLNAnnotationVerticalAlignment value) {
+    return _objc_msgSend_47doj4(
+        this.ref.pointer, _sel_setUserLocationVerticalAlignment_, value.value);
+  }
+
+  /// Sets the vertical alignment of the user location annotation within the
+  /// receiver, with an optional transition.
+  ///
+  /// @param alignment The vertical alignment of the user location annotation.
+  /// @param animated If `YES`, the user location annotation animates to its new
+  /// position within the map view. If `NO`, the user location annotation
+  /// instantaneously moves to its new position.
+  void setUserLocationVerticalAlignment_animated_(
+      MLNAnnotationVerticalAlignment alignment, bool animated) {
+    _objc_msgSend_1qddrus(
+        this.ref.pointer,
+        _sel_setUserLocationVerticalAlignment_animated_,
+        alignment.value,
+        animated);
+  }
+
+  /// Updates the position of the user location annotation view by retreiving the user's last
+  /// known location.
+  void updateUserLocationAnnotationView() {
+    _objc_msgSend_1pl9qdv(
+        this.ref.pointer, _sel_updateUserLocationAnnotationView);
+  }
+
+  /// Updates the position of the user location annotation view by retreiving the user's last
+  /// known location with a specified duration.
+  /// @param duration The duration to animate the change in seconds.
+  void updateUserLocationAnnotationViewAnimatedWithDuration_(double duration) {
+    _objc_msgSend_hwm8nu(this.ref.pointer,
+        _sel_updateUserLocationAnnotationViewAnimatedWithDuration_, duration);
+  }
+
+  /// A Boolean value indicating whether the user location annotation may display a
+  /// permanent heading indicator.
+  ///
+  /// Setting this property to `YES` causes the default user location annotation to
+  /// appear and always show an arrow-shaped heading indicator, if heading is
+  /// available. This property does not rotate the map; for that, see
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithHeading``.
+  ///
+  /// This property has no effect when ``userTrackingMode`` is
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithHeading`` or
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// The default value of this property is `NO`.
+  bool get showsUserHeadingIndicator {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_showsUserHeadingIndicator);
+  }
+
+  /// A Boolean value indicating whether the user location annotation may display a
+  /// permanent heading indicator.
+  ///
+  /// Setting this property to `YES` causes the default user location annotation to
+  /// appear and always show an arrow-shaped heading indicator, if heading is
+  /// available. This property does not rotate the map; for that, see
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithHeading``.
+  ///
+  /// This property has no effect when ``userTrackingMode`` is
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithHeading`` or
+  /// ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// The default value of this property is `NO`.
+  set showsUserHeadingIndicator(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setShowsUserHeadingIndicator_, value);
+  }
+
+  /// Whether the map view should display a heading calibration alert when necessary.
+  /// The default value is `YES`.
+  bool get displayHeadingCalibration {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_displayHeadingCalibration);
+  }
+
+  /// Whether the map view should display a heading calibration alert when necessary.
+  /// The default value is `YES`.
+  set displayHeadingCalibration(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setDisplayHeadingCalibration_, value);
+  }
+
+  /// The geographic coordinate that is the subject of observation as the user
+  /// location is being tracked.
+  ///
+  /// By default, this property is set to an invalid coordinate, indicating that
+  /// there is no target. In course tracking mode, the target forms one of two foci
+  /// in the viewport, the other being the user location annotation. Typically, this
+  /// property is set to a destination or waypoint in a real-time navigation scene.
+  /// As the user annotation moves toward the target, the map automatically zooms in
+  /// to fit both foci optimally within the viewport.
+  ///
+  /// This property has no effect if the `userTrackingMode` property is set to a
+  /// value other than ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setTargetCoordinate:animated:` method instead.
+  CLLocationCoordinate2D get targetCoordinate {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_18o5nokStret(
+            _ptr, this.ref.pointer, _sel_targetCoordinate)
+        : _ptr.ref =
+            _objc_msgSend_18o5nok(this.ref.pointer, _sel_targetCoordinate);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+  }
+
+  /// The geographic coordinate that is the subject of observation as the user
+  /// location is being tracked.
+  ///
+  /// By default, this property is set to an invalid coordinate, indicating that
+  /// there is no target. In course tracking mode, the target forms one of two foci
+  /// in the viewport, the other being the user location annotation. Typically, this
+  /// property is set to a destination or waypoint in a real-time navigation scene.
+  /// As the user annotation moves toward the target, the map automatically zooms in
+  /// to fit both foci optimally within the viewport.
+  ///
+  /// This property has no effect if the `userTrackingMode` property is set to a
+  /// value other than ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// Changing the value of this property updates the map view with an animated
+  /// transition. If you don’t want to animate the change, use the
+  /// `-setTargetCoordinate:animated:` method instead.
+  set targetCoordinate(CLLocationCoordinate2D value) {
+    return _objc_msgSend_1zv0am(
+        this.ref.pointer, _sel_setTargetCoordinate_, value);
+  }
+
+  /// Deprecated. Sets the geographic coordinate that is the subject of observation as
+  /// the user location is being tracked, with an optional transition animation.
+  ///
+  /// By default, the target coordinate is set to an invalid coordinate, indicating
+  /// that there is no target. In course tracking mode, the target forms one of two
+  /// foci in the viewport, the other being the user location annotation. Typically,
+  /// the target is set to a destination or waypoint in a real-time navigation scene.
+  /// As the user annotation moves toward the target, the map automatically zooms in
+  /// to fit both foci optimally within the viewport.
+  ///
+  /// This method has no effect if the `userTrackingMode` property is set to a value
+  /// other than ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-setTargetCoordinate:animated:completionHandler:` method.
+  ///
+  /// @param targetCoordinate The target coordinate to fit within the viewport.
+  /// @param animated If `YES`, the map animates to fit the target within the map
+  /// view. If `NO`, the map fits the target instantaneously.
+  void setTargetCoordinate_animated_(
+      CLLocationCoordinate2D targetCoordinate, bool animated) {
+    _objc_msgSend_o7hjv2(this.ref.pointer, _sel_setTargetCoordinate_animated_,
+        targetCoordinate, animated);
+  }
+
+  /// Sets the geographic coordinate that is the subject of observation as the user
+  /// location is being tracked, with an optional transition animation and completion
+  /// handler.
+  ///
+  /// By default, the target coordinate is set to an invalid coordinate, indicating
+  /// that there is no target. In course tracking mode, the target forms one of two
+  /// foci in the viewport, the other being the user location annotation. Typically,
+  /// the target is set to a destination or waypoint in a real-time navigation scene.
+  /// As the user annotation moves toward the target, the map automatically zooms in
+  /// to fit both foci optimally within the viewport.
+  ///
+  /// This method has no effect if the `userTrackingMode` property is set to a value
+  /// other than ``MLNUserTrackingMode/MLNUserTrackingModeFollowWithCourse``.
+  ///
+  /// @param targetCoordinate The target coordinate to fit within the viewport.
+  /// @param animated If `YES`, the map animates to fit the target within the map
+  /// view. If `NO`, the map fits the target instantaneously.
+  /// @param completion The block executed after the animation finishes.
+  void setTargetCoordinate_animated_completionHandler_(
+      CLLocationCoordinate2D targetCoordinate,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_1pbhom5(
+        this.ref.pointer,
+        _sel_setTargetCoordinate_animated_completionHandler_,
+        targetCoordinate,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// A Boolean value that determines whether the user may zoom the map in and
+  /// out, changing the zoom level.
+  ///
+  /// When this property is set to `YES`, the default, the user may zoom the map
+  /// in and out by pinching two fingers or by double tapping, holding, and moving
+  /// the finger up and down.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the map zoom
+  /// programmatically.
+  bool get zoomEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isZoomEnabled);
+  }
+
+  /// A Boolean value that determines whether the user may zoom the map in and
+  /// out, changing the zoom level.
+  ///
+  /// When this property is set to `YES`, the default, the user may zoom the map
+  /// in and out by pinching two fingers or by double tapping, holding, and moving
+  /// the finger up and down.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the map zoom
+  /// programmatically.
+  set zoomEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setZoomEnabled_, value);
+  }
+
+  /// A Boolean value that determines whether the user may scroll around the map,
+  /// changing the center coordinate.
+  ///
+  /// When this property is set to `YES`, the default, the user may scroll the map
+  /// by dragging or swiping with one finger.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the map location
+  /// programmatically.
+  bool get scrollEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isScrollEnabled);
+  }
+
+  /// A Boolean value that determines whether the user may scroll around the map,
+  /// changing the center coordinate.
+  ///
+  /// When this property is set to `YES`, the default, the user may scroll the map
+  /// by dragging or swiping with one finger.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the map location
+  /// programmatically.
+  set scrollEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setScrollEnabled_, value);
+  }
+
+  /// The scrolling mode the user is allowed to use to interact with the map.
+  ///
+  /// `MLNPanScrollingModeHorizontal` only allows the user to scroll horizontally on the map,
+  /// restricting a user's ability to scroll vertically.
+  /// `MLNPanScrollingModeVertical` only allows the user to scroll vertically on the map,
+  /// restricting a user's ability to scroll horizontally.
+  /// ``MLNPanScrollingMode/MLNPanScrollingModeDefault`` allows the user to scroll both horizontally and
+  /// vertically on the map.
+  ///
+  /// By default, this property is set to ``MLNPanScrollingMode/MLNPanScrollingModeDefault``.
+  MLNPanScrollingMode get panScrollingMode {
+    final _ret = _objc_msgSend_1vb5jwj(this.ref.pointer, _sel_panScrollingMode);
+    return MLNPanScrollingMode.fromValue(_ret);
+  }
+
+  /// The scrolling mode the user is allowed to use to interact with the map.
+  ///
+  /// `MLNPanScrollingModeHorizontal` only allows the user to scroll horizontally on the map,
+  /// restricting a user's ability to scroll vertically.
+  /// `MLNPanScrollingModeVertical` only allows the user to scroll vertically on the map,
+  /// restricting a user's ability to scroll horizontally.
+  /// ``MLNPanScrollingMode/MLNPanScrollingModeDefault`` allows the user to scroll both horizontally and
+  /// vertically on the map.
+  ///
+  /// By default, this property is set to ``MLNPanScrollingMode/MLNPanScrollingModeDefault``.
+  set panScrollingMode(MLNPanScrollingMode value) {
+    return _objc_msgSend_k7jknj(
+        this.ref.pointer, _sel_setPanScrollingMode_, value.value);
+  }
+
+  /// A Boolean value that determines whether the user may rotate the map,
+  /// changing the direction.
+  ///
+  /// When this property is set to `YES`, the default, the user may rotate the map
+  /// by moving two fingers in a circular motion.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still rotate the map
+  /// programmatically.
+  bool get rotateEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isRotateEnabled);
+  }
+
+  /// A Boolean value that determines whether the user may rotate the map,
+  /// changing the direction.
+  ///
+  /// When this property is set to `YES`, the default, the user may rotate the map
+  /// by moving two fingers in a circular motion.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still rotate the map
+  /// programmatically.
+  set rotateEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setRotateEnabled_, value);
+  }
+
+  /// A Boolean value that determines whether the user may change the pitch (tilt) of
+  /// the map.
+  ///
+  /// When this property is set to `YES`, the default, the user may tilt the map by
+  /// vertically dragging two fingers.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the pitch of the map
+  /// programmatically.
+  ///
+  /// The default value of this property is `YES`.
+  bool get pitchEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isPitchEnabled);
+  }
+
+  /// A Boolean value that determines whether the user may change the pitch (tilt) of
+  /// the map.
+  ///
+  /// When this property is set to `YES`, the default, the user may tilt the map by
+  /// vertically dragging two fingers.
+  ///
+  /// This property controls only user interactions with the map. If you set the
+  /// value of this property to `NO`, you may still change the pitch of the map
+  /// programmatically.
+  ///
+  /// The default value of this property is `YES`.
+  set pitchEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setPitchEnabled_, value);
+  }
+
+  /// A Boolean value that determines whether gestures are anchored to the center coordinate of the map
+  /// while rotating or zooming. Default value is set to NO.
+  bool get anchorRotateOrZoomGesturesToCenterCoordinate {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_anchorRotateOrZoomGesturesToCenterCoordinate);
+  }
+
+  /// A Boolean value that determines whether gestures are anchored to the center coordinate of the map
+  /// while rotating or zooming. Default value is set to NO.
+  set anchorRotateOrZoomGesturesToCenterCoordinate(bool value) {
+    return _objc_msgSend_1s56lr9(this.ref.pointer,
+        _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_, value);
+  }
+
+  /// A Boolean value that determines whether the user will receive haptic feedback
+  /// for certain interactions with the map.
+  ///
+  /// When this property is set to `YES`, the default, a `UIImpactFeedbackStyleLight`
+  /// haptic feedback event be played when the user rotates the map to due north
+  /// (0°).
+  ///
+  /// This feature requires a device that supports haptic feedback, running iOS 10 or
+  /// newer.
+  bool get hapticFeedbackEnabled {
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isHapticFeedbackEnabled);
+  }
+
+  /// A Boolean value that determines whether the user will receive haptic feedback
+  /// for certain interactions with the map.
+  ///
+  /// When this property is set to `YES`, the default, a `UIImpactFeedbackStyleLight`
+  /// haptic feedback event be played when the user rotates the map to due north
+  /// (0°).
+  ///
+  /// This feature requires a device that supports haptic feedback, running iOS 10 or
+  /// newer.
+  set hapticFeedbackEnabled(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setHapticFeedbackEnabled_, value);
+  }
+
+  /// A floating-point value that determines the rate of deceleration after the user
+  /// lifts their finger.
+  ///
+  /// Your application can use the ``MLNMapViewDecelerationRateNormal`` and
+  /// ``MLNMapViewDecelerationRateFast`` constants as reference points for reasonable
+  /// deceleration rates. ``MLNMapViewDecelerationRateImmediate`` can be used to
+  /// disable deceleration entirely.
+  double get decelerationRate {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_decelerationRate)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_decelerationRate);
+  }
+
+  /// A floating-point value that determines the rate of deceleration after the user
+  /// lifts their finger.
+  ///
+  /// Your application can use the ``MLNMapViewDecelerationRateNormal`` and
+  /// ``MLNMapViewDecelerationRateFast`` constants as reference points for reasonable
+  /// deceleration rates. ``MLNMapViewDecelerationRateImmediate`` can be used to
+  /// disable deceleration entirely.
+  set decelerationRate(double value) {
+    return _objc_msgSend_hwm8nu(
+        this.ref.pointer, _sel_setDecelerationRate_, value);
+  }
+
+  /// The geographic coordinate at the center of the map view.
+  ///
+  /// Changing the value of this property centers the map on the new coordinate
+  /// without changing the current zoom level.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setCenterCoordinate:animated:` method
+  /// instead.
+  CLLocationCoordinate2D get centerCoordinate {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_18o5nokStret(
+            _ptr, this.ref.pointer, _sel_centerCoordinate)
+        : _ptr.ref =
+            _objc_msgSend_18o5nok(this.ref.pointer, _sel_centerCoordinate);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+  }
+
+  /// The geographic coordinate at the center of the map view.
+  ///
+  /// Changing the value of this property centers the map on the new coordinate
+  /// without changing the current zoom level.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setCenterCoordinate:animated:` method
+  /// instead.
+  set centerCoordinate(CLLocationCoordinate2D value) {
+    return _objc_msgSend_1zv0am(
+        this.ref.pointer, _sel_setCenterCoordinate_, value);
+  }
+
+  /// Changes the center coordinate of the map and optionally animates the change.
+  ///
+  /// Changing the center coordinate centers the map on the new coordinate without
+  /// changing the current zoom level. For animated changes, wait until the map view has
+  /// finished loading before calling this method.
+  ///
+  /// @param coordinate The new center coordinate for the map.
+  /// @param animated Specify `YES` if you want the map view to scroll to the new
+  /// location or `NO` if you want the map to display the new location
+  /// immediately.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`.
+  void setCenterCoordinate_animated_(
+      CLLocationCoordinate2D coordinate, bool animated) {
+    _objc_msgSend_o7hjv2(this.ref.pointer, _sel_setCenterCoordinate_animated_,
+        coordinate, animated);
+  }
+
+  /// Changes the center coordinate and zoom level of the map and optionally animates
+  /// the change. For animated changes, wait until the map view has
+  /// finished loading before calling this method.
+  ///
+  /// @param centerCoordinate The new center coordinate for the map.
+  /// @param zoomLevel The new zoom level for the map.
+  /// @param animated Specify `YES` if you want the map view to animate scrolling and
+  /// zooming to the new location or `NO` if you want the map to display the new
+  /// location immediately.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`.
+  void setCenterCoordinate_zoomLevel_animated_(
+      CLLocationCoordinate2D centerCoordinate,
+      double zoomLevel,
+      bool animated) {
+    _objc_msgSend_sbs4d5(
+        this.ref.pointer,
+        _sel_setCenterCoordinate_zoomLevel_animated_,
+        centerCoordinate,
+        zoomLevel,
+        animated);
+  }
+
+  /// Changes the center coordinate, zoom level, and direction of the map and
+  /// optionally animates the change. For animated changes, wait until the map view has
+  /// finished loading before calling this method.
+  ///
+  /// @param centerCoordinate The new center coordinate for the map.
+  /// @param zoomLevel The new zoom level for the map.
+  /// @param direction The new direction for the map, measured in degrees relative to
+  /// true north. A negative value leaves the map’s direction unchanged.
+  /// @param animated Specify `YES` if you want the map view to animate scrolling,
+  /// zooming, and rotating to the new location or `NO` if you want the map to
+  /// display the new location immediately.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`.
+  void setCenterCoordinate_zoomLevel_direction_animated_(
+      CLLocationCoordinate2D centerCoordinate,
+      double zoomLevel,
+      double direction,
+      bool animated) {
+    _objc_msgSend_3zczym(
+        this.ref.pointer,
+        _sel_setCenterCoordinate_zoomLevel_direction_animated_,
+        centerCoordinate,
+        zoomLevel,
+        direction,
+        animated);
+  }
+
+  /// Changes the center coordinate, zoom level, and direction of the map, calling a
+  /// completion handler at the end of an optional animation. For animated changes,
+  /// wait until the map view has finished loading before calling this method.
+  ///
+  /// @param centerCoordinate The new center coordinate for the map.
+  /// @param zoomLevel The new zoom level for the map.
+  /// @param direction The new direction for the map, measured in degrees relative to
+  /// true north. A negative value leaves the map’s direction unchanged.
+  /// @param animated Specify `YES` if you want the map view to animate scrolling,
+  /// zooming, and rotating to the new location or `NO` if you want the map to
+  /// display the new location immediately.
+  /// @param completion The block executed after the animation finishes.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`.
+  void setCenterCoordinate_zoomLevel_direction_animated_completionHandler_(
+      CLLocationCoordinate2D centerCoordinate,
+      double zoomLevel,
+      double direction,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_d9pvdp(
+        this.ref.pointer,
+        _sel_setCenterCoordinate_zoomLevel_direction_animated_completionHandler_,
+        centerCoordinate,
+        zoomLevel,
+        direction,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The zoom level of the receiver.
+  ///
+  /// In addition to affecting the visual size and detail of features on the map,
+  /// the zoom level affects the size of the vector tiles that are loaded. At zoom
+  /// level 0, each tile covers the entire world map; at zoom level 1, it covers ¼
+  /// of the world; at zoom level 2, <sup>1</sup>⁄<sub>16</sub> of the world, and
+  /// so on.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setZoomLevel:animated:` method instead.
+  double get zoomLevel {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_zoomLevel)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_zoomLevel);
+  }
+
+  /// The zoom level of the receiver.
+  ///
+  /// In addition to affecting the visual size and detail of features on the map,
+  /// the zoom level affects the size of the vector tiles that are loaded. At zoom
+  /// level 0, each tile covers the entire world map; at zoom level 1, it covers ¼
+  /// of the world; at zoom level 2, <sup>1</sup>⁄<sub>16</sub> of the world, and
+  /// so on.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setZoomLevel:animated:` method instead.
+  set zoomLevel(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setZoomLevel_, value);
+  }
+
+  /// Changes the zoom level of the map and optionally animates the change.
+  ///
+  /// Changing the zoom level scales the map without changing the current center
+  /// coordinate.
+  ///
+  /// @param zoomLevel The new zoom level for the map.
+  /// @param animated Specify `YES` if you want the map view to animate the change
+  /// to the new zoom level or `NO` if you want the map to display the new
+  /// zoom level immediately.
+  void setZoomLevel_animated_(double zoomLevel, bool animated) {
+    _objc_msgSend_ghxo7e(
+        this.ref.pointer, _sel_setZoomLevel_animated_, zoomLevel, animated);
+  }
+
+  /// The minimum zoom level at which the map can be shown.
+  ///
+  /// Depending on the map view’s aspect ratio, the map view may be prevented
+  /// from reaching the minimum zoom level, in order to keep the map from
+  /// repeating within the current viewport.
+  ///
+  /// If the value of this property is greater than that of the
+  /// maximumZoomLevel property, the behavior is undefined.
+  ///
+  /// The default minimumZoomLevel is 0.
+  double get minimumZoomLevel {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_minimumZoomLevel)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_minimumZoomLevel);
+  }
+
+  /// The minimum zoom level at which the map can be shown.
+  ///
+  /// Depending on the map view’s aspect ratio, the map view may be prevented
+  /// from reaching the minimum zoom level, in order to keep the map from
+  /// repeating within the current viewport.
+  ///
+  /// If the value of this property is greater than that of the
+  /// maximumZoomLevel property, the behavior is undefined.
+  ///
+  /// The default minimumZoomLevel is 0.
+  set minimumZoomLevel(double value) {
+    return _objc_msgSend_hwm8nu(
+        this.ref.pointer, _sel_setMinimumZoomLevel_, value);
+  }
+
+  /// The maximum zoom level the map can be shown at.
+  ///
+  /// If the value of this property is smaller than that of the
+  /// minimumZoomLevel property, the behavior is undefined.
+  ///
+  /// The default maximumZoomLevel is 22. The upper bound for this property
+  /// is 25.5.
+  double get maximumZoomLevel {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_maximumZoomLevel)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_maximumZoomLevel);
+  }
+
+  /// The maximum zoom level the map can be shown at.
+  ///
+  /// If the value of this property is smaller than that of the
+  /// minimumZoomLevel property, the behavior is undefined.
+  ///
+  /// The default maximumZoomLevel is 22. The upper bound for this property
+  /// is 25.5.
+  set maximumZoomLevel(double value) {
+    return _objc_msgSend_hwm8nu(
+        this.ref.pointer, _sel_setMaximumZoomLevel_, value);
+  }
+
+  /// The heading of the map, measured in degrees clockwise from true north.
+  ///
+  /// The value `0` means that the top edge of the map view corresponds to true
+  /// north. The value `90` means the top of the map is pointing due east. The
+  /// value `180` means the top of the map points due south, and so on.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setDirection:animated:` method instead.
+  double get direction {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_direction)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_direction);
+  }
+
+  /// The heading of the map, measured in degrees clockwise from true north.
+  ///
+  /// The value `0` means that the top edge of the map view corresponds to true
+  /// north. The value `90` means the top of the map is pointing due east. The
+  /// value `180` means the top of the map points due south, and so on.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setDirection:animated:` method instead.
+  set direction(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setDirection_, value);
+  }
+
+  /// Changes the heading of the map and optionally animates the change.
+  ///
+  /// @param direction The heading of the map, measured in degrees clockwise from
+  /// true north.
+  /// @param animated Specify `YES` if you want the map view to animate the change
+  /// to the new heading or `NO` if you want the map to display the new
+  /// heading immediately.
+  ///
+  /// Changing the heading rotates the map without changing the current center
+  /// coordinate or zoom level.
+  void setDirection_animated_(double direction, bool animated) {
+    _objc_msgSend_ghxo7e(
+        this.ref.pointer, _sel_setDirection_animated_, direction, animated);
+  }
+
+  /// The minimum pitch of the map’s camera toward the horizon measured in degrees.
+  ///
+  /// If the value of this property is greater than that of the `maximumPitch`
+  /// property, the behavior is undefined. The pitch may not be less than 0
+  /// regardless of this property.
+  ///
+  /// The default value of this property is 0 degrees, allowing the map to appear
+  /// two-dimensional.
+  double get minimumPitch {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_minimumPitch)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_minimumPitch);
+  }
+
+  /// The minimum pitch of the map’s camera toward the horizon measured in degrees.
+  ///
+  /// If the value of this property is greater than that of the `maximumPitch`
+  /// property, the behavior is undefined. The pitch may not be less than 0
+  /// regardless of this property.
+  ///
+  /// The default value of this property is 0 degrees, allowing the map to appear
+  /// two-dimensional.
+  set minimumPitch(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setMinimumPitch_, value);
+  }
+
+  /// The maximum pitch of the map’s camera toward the horizon measured in degrees.
+  ///
+  /// If the value of this property is smaller than that of the `minimumPitch`
+  /// property, the behavior is undefined. The pitch may not exceed 60 degrees
+  /// regardless of this property.
+  ///
+  /// The default value of this property is 60 degrees.
+  double get maximumPitch {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_maximumPitch)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_maximumPitch);
+  }
+
+  /// The maximum pitch of the map’s camera toward the horizon measured in degrees.
+  ///
+  /// If the value of this property is smaller than that of the `minimumPitch`
+  /// property, the behavior is undefined. The pitch may not exceed 60 degrees
+  /// regardless of this property.
+  ///
+  /// The default value of this property is 60 degrees.
+  set maximumPitch(double value) {
+    return _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setMaximumPitch_, value);
+  }
+
+  /// Resets the map rotation to a northern heading — a `direction` of `0` degrees.
+  void resetNorth() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_resetNorth);
+  }
+
+  /// Resets the map to the current style’s default viewport.
+  ///
+  /// If the style doesn’t specify a default viewport, the map resets to a minimum
+  /// zoom level, a center coordinate of (0, 0), and a northern heading.
+  void resetPosition() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_resetPosition);
+  }
+
+  /// The coordinate bounds visible in the receiver’s viewport.
+  ///
+  /// Changing the value of this property updates the receiver immediately. If you
+  /// want to animate the change, call `-setVisibleCoordinateBounds:animated:`
+  /// instead.
+  ///
+  /// If a longitude is less than −180 degrees or greater than 180 degrees, the
+  /// visible bounds straddles the antimeridian or international date line. For
+  /// example, if both Tokyo and San Francisco are visible, the visible bounds might
+  /// extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  MLNCoordinateBounds get visibleCoordinateBounds {
+    final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_ygoa6aStret(
+            _ptr, this.ref.pointer, _sel_visibleCoordinateBounds)
+        : _ptr.ref = _objc_msgSend_ygoa6a(
+            this.ref.pointer, _sel_visibleCoordinateBounds);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNCoordinateBounds>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNCoordinateBounds>(_finalizable);
+  }
+
+  /// The coordinate bounds visible in the receiver’s viewport.
+  ///
+  /// Changing the value of this property updates the receiver immediately. If you
+  /// want to animate the change, call `-setVisibleCoordinateBounds:animated:`
+  /// instead.
+  ///
+  /// If a longitude is less than −180 degrees or greater than 180 degrees, the
+  /// visible bounds straddles the antimeridian or international date line. For
+  /// example, if both Tokyo and San Francisco are visible, the visible bounds might
+  /// extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  set visibleCoordinateBounds(MLNCoordinateBounds value) {
+    return _objc_msgSend_9ay59k(
+        this.ref.pointer, _sel_setVisibleCoordinateBounds_, value);
+  }
+
+  /// Changes the receiver’s viewport to fit the given coordinate bounds,
+  /// optionally animating the change.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible bounds to extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  ///
+  /// @param bounds The bounds that the viewport will show in its entirety.
+  /// @param animated Specify `YES` to animate the change by smoothly scrolling
+  /// and zooming or `NO` to immediately display the given bounds.
+  void setVisibleCoordinateBounds_animated_(
+      MLNCoordinateBounds bounds, bool animated) {
+    _objc_msgSend_148tmbg(this.ref.pointer,
+        _sel_setVisibleCoordinateBounds_animated_, bounds, animated);
+  }
+
+  /// Deprecated. Changes the receiver’s viewport to fit the given coordinate bounds with
+  /// some additional padding on each side.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible bounds to extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-setVisibleCoordinateBounds:edgePadding:animated:completionHandler:` method.
+  ///
+  /// @param bounds The bounds that the viewport will show in its entirety.
+  /// @param insets The minimum padding (in screen points) that will be visible
+  /// around the given coordinate bounds.
+  /// @param animated Specify `YES` to animate the change by smoothly scrolling and
+  /// zooming or `NO` to immediately display the given bounds.
+  void setVisibleCoordinateBounds_edgePadding_animated_(
+      MLNCoordinateBounds bounds, objc.ObjCObjectBase insets, bool animated) {
+    _objc_msgSend_13x0pfk(
+        this.ref.pointer,
+        _sel_setVisibleCoordinateBounds_edgePadding_animated_,
+        bounds,
+        insets.ref.pointer,
+        animated);
+  }
+
+  /// Changes the receiver’s viewport to fit the given coordinate bounds with some
+  /// additional padding on each side, optionally calling a completion handler.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible bounds to extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  ///
+  /// @param bounds The bounds that the viewport will show in its entirety.
+  /// @param insets The minimum padding (in screen points) that will be visible
+  /// around the given coordinate bounds.
+  /// @param animated Specify `YES` to animate the change by smoothly scrolling and
+  /// zooming or `NO` to immediately display the given bounds.
+  /// @param completion The block executed after the animation finishes.
+  void setVisibleCoordinateBounds_edgePadding_animated_completionHandler_(
+      MLNCoordinateBounds bounds,
+      objc.ObjCObjectBase insets,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_5ott2b(
+        this.ref.pointer,
+        _sel_setVisibleCoordinateBounds_edgePadding_animated_completionHandler_,
+        bounds,
+        insets.ref.pointer,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Changes the receiver’s viewport to fit all of the given coordinates with some
+  /// additional padding on each side.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible coordinates to (35.68476, −220.24257) and (37.78428, −122.41310).
+  ///
+  /// @param coordinates The coordinates that the viewport will show.
+  /// @param count The number of coordinates. This number must not be greater than
+  /// the number of elements in `coordinates`.
+  /// @param insets The minimum padding (in screen points) that will be visible
+  /// around the given coordinate bounds.
+  /// @param animated Specify `YES` to animate the change by smoothly scrolling and
+  /// zooming or `NO` to immediately display the given bounds.
+  void setVisibleCoordinates_count_edgePadding_animated_(
+      ffi.Pointer<CLLocationCoordinate2D> coordinates,
+      int count,
+      objc.ObjCObjectBase insets,
+      bool animated) {
+    _objc_msgSend_9zf1tv(
+        this.ref.pointer,
+        _sel_setVisibleCoordinates_count_edgePadding_animated_,
+        coordinates,
+        count,
+        insets.ref.pointer,
+        animated);
+  }
+
+  /// Changes the receiver’s viewport to fit all of the given coordinates with some
+  /// additional padding on each side, optionally calling a completion handler.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible coordinates to (35.68476, −220.24257) and (37.78428, −122.41310).
+  ///
+  /// @param coordinates The coordinates that the viewport will show.
+  /// @param count The number of coordinates. This number must not be greater than
+  /// the number of elements in `coordinates`.
+  /// @param insets The minimum padding (in screen points) that will be visible
+  /// around the given coordinate bounds.
+  /// @param direction The direction to rotate the map to, measured in degrees
+  /// relative to true north. A negative value leaves the map’s direction
+  /// unchanged.
+  /// @param duration The duration to animate the change in seconds.
+  /// @param function The timing function to animate the change.
+  /// @param completion The block executed after the animation finishes.
+  void
+      setVisibleCoordinates_count_edgePadding_direction_duration_animationTimingFunction_completionHandler_(
+          ffi.Pointer<CLLocationCoordinate2D> coordinates,
+          int count,
+          objc.ObjCObjectBase insets,
+          double direction,
+          double duration,
+          objc.ObjCObjectBase function,
+          objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_g22jge(
+        this.ref.pointer,
+        _sel_setVisibleCoordinates_count_edgePadding_direction_duration_animationTimingFunction_completionHandler_,
+        coordinates,
+        count,
+        insets.ref.pointer,
+        direction,
+        duration,
+        function.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Sets the visible region so that the map displays the specified annotations.
+  ///
+  /// Calling this method updates the value in the `visibleCoordinateBounds` property
+  /// and potentially other properties to reflect the new map region. A small amount
+  /// of padding is reserved around the edges of the map view. To specify a different
+  /// amount of padding, use the `-showAnnotations:edgePadding:animated:` method.
+  ///
+  /// @param annotations The annotations that you want to be visible in the map.
+  /// @param animated `YES` if you want the map region change to be animated, or `NO`
+  /// if you want the map to display the new region immediately without animations.
+  void showAnnotations_animated_(objc.NSArray annotations, bool animated) {
+    _objc_msgSend_gk45w7(this.ref.pointer, _sel_showAnnotations_animated_,
+        annotations.ref.pointer, animated);
+  }
+
+  /// Deprecated. Sets the visible region so that the map displays the specified
+  /// annotations with the specified amount of padding on each side.
+  ///
+  /// Calling this method updates the value in the `visibleCoordinateBounds` property
+  /// and potentially other properties to reflect the new map region.
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-showAnnotations:edgePadding:animated:completionHandler:` method.
+  ///
+  /// @param annotations The annotations that you want to be visible in the map.
+  /// @param insets The minimum padding (in screen points) around the edges of the
+  /// map view to keep clear of annotations.
+  /// @param animated `YES` if you want the map region change to be animated, or `NO`
+  /// if you want the map to display the new region immediately without animations.
+  void showAnnotations_edgePadding_animated_(
+      objc.NSArray annotations, objc.ObjCObjectBase insets, bool animated) {
+    _objc_msgSend_k4ykup(
+        this.ref.pointer,
+        _sel_showAnnotations_edgePadding_animated_,
+        annotations.ref.pointer,
+        insets.ref.pointer,
+        animated);
+  }
+
+  /// Sets the visible region so that the map displays the specified annotations with
+  /// the specified amount of padding on each side and an optional completion
+  /// handler.
+  ///
+  /// Calling this method updates the value in the `visibleCoordinateBounds` property
+  /// and potentially other properties to reflect the new map region.
+  ///
+  /// @param annotations The annotations that you want to be visible in the map.
+  /// @param insets The minimum padding (in screen points) around the edges of the
+  /// map view to keep clear of annotations.
+  /// @param animated `YES` if you want the map region change to be animated, or `NO`
+  /// if you want the map to display the new region immediately without animations.
+  /// @param completion The block executed after the animation finishes.
+  void showAnnotations_edgePadding_animated_completionHandler_(
+      objc.NSArray annotations,
+      objc.ObjCObjectBase insets,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_1xot3wa(
+        this.ref.pointer,
+        _sel_showAnnotations_edgePadding_animated_completionHandler_,
+        annotations.ref.pointer,
+        insets.ref.pointer,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// A camera representing the current viewpoint of the map.
+  MLNMapCamera get camera {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_camera);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// A camera representing the current viewpoint of the map.
+  set camera(MLNMapCamera value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setCamera_, value.ref.pointer);
+  }
+
+  /// Moves the viewpoint to a different location with respect to the map with an
+  /// optional transition animation. For animated changes, wait until the map view has
+  /// finished loading before calling this method.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param animated Specify `YES` if you want the map view to animate the change to
+  /// the new viewpoint or `NO` if you want the map to display the new viewpoint
+  /// immediately.
+  ///
+  /// #### Related examples
+  /// - TODO: Camera animation: learn how to trigger an animation that rotates around a central point.
+  void setCamera_animated_(MLNMapCamera camera, bool animated) {
+    _objc_msgSend_gk45w7(this.ref.pointer, _sel_setCamera_animated_,
+        camera.ref.pointer, animated);
+  }
+
+  /// Moves the viewpoint to a different location with respect to the map with an
+  /// optional transition duration and timing function. For animated changes, wait
+  /// until the map view has finished loading before calling this method.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously.
+  /// @param function A timing function used for the animation. Set this parameter to
+  /// `nil` for a transition that matches most system animations. If the duration
+  /// is `0`, this parameter is ignored.
+  ///
+  /// #### Related examples
+  /// - TODO: Camera animation: learn how to create a timed animation that
+  /// rotates around a central point for a specific duration.
+  void setCamera_withDuration_animationTimingFunction_(
+      MLNMapCamera camera, double duration, objc.ObjCObjectBase function) {
+    _objc_msgSend_1rg1izw(
+        this.ref.pointer,
+        _sel_setCamera_withDuration_animationTimingFunction_,
+        camera.ref.pointer,
+        duration,
+        function.ref.pointer);
+  }
+
+  /// Moves the viewpoint to a different location with respect to the map with an
+  /// optional transition duration and timing function. For animated changes, wait
+  /// until the map view has finished loading before calling this method.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously.
+  /// @param function A timing function used for the animation. Set this parameter to
+  /// `nil` for a transition that matches most system animations. If the duration
+  /// is `0`, this parameter is ignored.
+  /// @param completion The block to execute after the animation finishes.
+  void setCamera_withDuration_animationTimingFunction_completionHandler_(
+      MLNMapCamera camera,
+      double duration,
+      objc.ObjCObjectBase function,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_vmwi8n(
+        this.ref.pointer,
+        _sel_setCamera_withDuration_animationTimingFunction_completionHandler_,
+        camera.ref.pointer,
+        duration,
+        function.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Moves the viewpoint to a different location with respect to the map with an
+  /// optional transition duration and timing function, and optionally some additional
+  /// padding on each side. For animated changes, wait until the map view has
+  /// finished loading before calling this method.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously.
+  /// @param function A timing function used for the animation. Set this parameter to
+  /// `nil` for a transition that matches most system animations. If the duration
+  /// is `0`, this parameter is ignored.
+  /// @param edgePadding The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @param completion The block to execute after the animation finishes.
+  void
+      setCamera_withDuration_animationTimingFunction_edgePadding_completionHandler_(
+          MLNMapCamera camera,
+          double duration,
+          objc.ObjCObjectBase function,
+          objc.ObjCObjectBase edgePadding,
+          objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_q6aes3(
+        this.ref.pointer,
+        _sel_setCamera_withDuration_animationTimingFunction_edgePadding_completionHandler_,
+        camera.ref.pointer,
+        duration,
+        function.ref.pointer,
+        edgePadding.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Moves the viewpoint to a different location using a transition animation that
+  /// evokes powered flight and a default duration based on the length of the flight
+  /// path.
+  ///
+  /// The transition animation seamlessly incorporates zooming and panning to help
+  /// the user find his or her bearings even after traversing a great distance.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param completion The block to execute after the animation finishes.
+  void flyToCamera_completionHandler_(
+      MLNMapCamera camera, objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_14pxqbs(this.ref.pointer, _sel_flyToCamera_completionHandler_,
+        camera.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Moves the viewpoint to a different location using a transition animation that
+  /// evokes powered flight and an optional transition duration.
+  ///
+  /// The transition animation seamlessly incorporates zooming and panning to help
+  /// the user find his or her bearings even after traversing a great distance.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously. Specify a negative value to use the default duration, which
+  /// is based on the length of the flight path.
+  /// @param completion The block to execute after the animation finishes.
+  void flyToCamera_withDuration_completionHandler_(MLNMapCamera camera,
+      double duration, objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_s4h8qz(
+        this.ref.pointer,
+        _sel_flyToCamera_withDuration_completionHandler_,
+        camera.ref.pointer,
+        duration,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Moves the viewpoint to a different location using a transition animation that
+  /// evokes powered flight and an optional transition duration and peak altitude.
+  ///
+  /// The transition animation seamlessly incorporates zooming and panning to help
+  /// the user find his or her bearings even after traversing a great distance.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously. Specify a negative value to use the default duration, which
+  /// is based on the length of the flight path.
+  /// @param peakAltitude The altitude, measured in meters, at the midpoint of the
+  /// animation. The value of this parameter is ignored if it is negative or if
+  /// the animation transition resulting from a similar call to
+  /// `-setCamera:animated:` would have a midpoint at a higher altitude.
+  /// @param completion The block to execute after the animation finishes.
+  void flyToCamera_withDuration_peakAltitude_completionHandler_(
+      MLNMapCamera camera,
+      double duration,
+      double peakAltitude,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_1oun51c(
+        this.ref.pointer,
+        _sel_flyToCamera_withDuration_peakAltitude_completionHandler_,
+        camera.ref.pointer,
+        duration,
+        peakAltitude,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Moves the viewpoint to a different location using a transition animation that
+  /// evokes powered flight.
+  ///
+  /// The transition animation seamlessly incorporates zooming and panning to help
+  /// the user find his or her bearings even after traversing a great distance.
+  ///
+  /// @param camera The new viewpoint.
+  /// @param duration The amount of time, measured in seconds, that the transition
+  /// animation should take. Specify `0` to jump to the new viewpoint
+  /// instantaneously. Specify a negative value to use the default duration, which
+  /// is based on the length of the flight path.
+  /// @param edgePadding The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @param completion The block to execute after the animation finishes.
+  void flyToCamera_edgePadding_withDuration_completionHandler_(
+      MLNMapCamera camera,
+      objc.ObjCObjectBase insets,
+      double duration,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_mqlsb9(
+        this.ref.pointer,
+        _sel_flyToCamera_edgePadding_withDuration_completionHandler_,
+        camera.ref.pointer,
+        insets.ref.pointer,
+        duration,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Returns the camera that best fits the given coordinate bounds.
+  ///
+  /// @param bounds The coordinate bounds to fit to the receiver’s viewport.
+  /// @return A camera object centered on the same location as the coordinate
+  /// bounds with zoom level as high (close to the ground) as possible while still
+  /// including the entire coordinate bounds. The camera object uses the current
+  /// direction and pitch.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`; you may receive a `nil` return value
+  /// depending on the order of notification delivery.
+  MLNMapCamera cameraThatFitsCoordinateBounds_(MLNCoordinateBounds bounds) {
+    final _ret = _objc_msgSend_3usbrg(
+        this.ref.pointer, _sel_cameraThatFitsCoordinateBounds_, bounds);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the camera that best fits the given coordinate bounds with some
+  /// additional padding on each side.
+  ///
+  /// @param bounds The coordinate bounds to fit to the receiver’s viewport.
+  /// @param insets The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @return A camera object centered on the same location as the coordinate bounds
+  /// with zoom level as high (close to the ground) as possible while still
+  /// including the entire coordinate bounds. The camera object uses the current
+  /// direction and pitch.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`; you may receive a `nil` return value
+  /// depending on the order of notification delivery.
+  MLNMapCamera cameraThatFitsCoordinateBounds_edgePadding_(
+      MLNCoordinateBounds bounds, objc.ObjCObjectBase insets) {
+    final _ret = _objc_msgSend_1z0kiwg(
+        this.ref.pointer,
+        _sel_cameraThatFitsCoordinateBounds_edgePadding_,
+        bounds,
+        insets.ref.pointer);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the camera that best fits the given coordinate bounds with some
+  /// additional padding on each side, matching an existing camera as much as
+  /// possible.
+  ///
+  /// @param camera The camera that the return camera should adhere to. All values
+  /// on this camera will be manipulated except for pitch and direction.
+  /// @param bounds The coordinate bounds to fit to the receiver’s viewport.
+  /// @param insets The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @return A camera object centered on the same location as the coordinate bounds
+  /// with zoom level as high (close to the ground) as possible while still
+  /// including the entire coordinate bounds. The initial camera's pitch and
+  /// direction will be honored.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`; you may receive a `nil` return value
+  /// depending on the order of notification delivery.
+  MLNMapCamera camera_fittingCoordinateBounds_edgePadding_(MLNMapCamera camera,
+      MLNCoordinateBounds bounds, objc.ObjCObjectBase insets) {
+    final _ret = _objc_msgSend_1mt4adu(
+        this.ref.pointer,
+        _sel_camera_fittingCoordinateBounds_edgePadding_,
+        camera.ref.pointer,
+        bounds,
+        insets.ref.pointer);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the camera that best fits the given shape with some additional padding
+  /// on each side, matching an existing camera as much as possible.
+  ///
+  /// @param camera The camera that the return camera should adhere to. All values
+  /// on this camera will be manipulated except for pitch and direction.
+  /// @param shape The shape to fit to the receiver’s viewport.
+  /// @param insets The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @return A camera object centered on the shape's center with zoom level as high
+  /// (close to the ground) as possible while still including the entire shape.
+  /// The initial camera's pitch and direction will be honored.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`; you may receive a `nil` return value
+  /// depending on the order of notification delivery.
+  MLNMapCamera camera_fittingShape_edgePadding_(
+      MLNMapCamera camera, MLNShape shape, objc.ObjCObjectBase insets) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.pointer,
+        _sel_camera_fittingShape_edgePadding_,
+        camera.ref.pointer,
+        shape.ref.pointer,
+        insets.ref.pointer);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the camera that best fits the given shape with some additional padding
+  /// on each side while looking in the specified direction.
+  ///
+  /// @param shape The shape to fit to the receiver’s viewport.
+  /// @param direction The direction of the viewport, measured in degrees clockwise
+  /// from true north.
+  /// @param insets The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver’s camera.
+  /// @return A camera object centered on the shape's center with zoom level as high
+  /// (close to the ground) as possible while still including the entire shape.
+  /// The camera object uses the current pitch.
+  ///
+  /// > Note: The behavior of this method is undefined if called in response to
+  /// `UIApplicationWillTerminateNotification`; you may receive a `nil` return value
+  /// depending on the order of notification delivery.
+  MLNMapCamera cameraThatFitsShape_direction_edgePadding_(
+      MLNShape shape, double direction, objc.ObjCObjectBase insets) {
+    final _ret = _objc_msgSend_45qm9k(
+        this.ref.pointer,
+        _sel_cameraThatFitsShape_direction_edgePadding_,
+        shape.ref.pointer,
+        direction,
+        insets.ref.pointer);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the point in this view’s coordinate system on which to “anchor” in
+  /// response to a user-initiated gesture.
+  ///
+  /// For example, a pinch-to-zoom gesture would anchor the map at the midpoint of
+  /// the pinch.
+  ///
+  /// If the ``userTrackingMode`` property is not ``MLNUserTrackingMode/MLNUserTrackingModeNone``, the
+  /// user annotation is used as the anchor point.
+  ///
+  /// Subclasses may override this method to provide specialized behavior - for
+  /// example, anchoring on the map’s center point to provide a "locked" zooming
+  /// mode.
+  ///
+  /// @param gesture An anchorable user gesture.
+  /// @return The point on which to anchor in response to the gesture.
+  CGPoint anchorPointForGesture_(objc.ObjCObjectBase gesture) {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_11ku3hkStret(_ptr, this.ref.pointer,
+            _sel_anchorPointForGesture_, gesture.ref.pointer)
+        : _ptr.ref = _objc_msgSend_11ku3hk(
+            this.ref.pointer, _sel_anchorPointForGesture_, gesture.ref.pointer);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// The distance from the edges of the map view’s frame to the edges of the map
+  /// view’s logical viewport.
+  ///
+  /// When the value of this property is equal to `UIEdgeInsetsZero`, viewport
+  /// properties such as `centerCoordinate` assume a viewport that matches the map
+  /// view’s frame. Otherwise, those properties are inset, excluding part of the
+  /// frame from the viewport. For instance, if the only the top edge is inset, the
+  /// map center is effectively shifted downward.
+  ///
+  /// When the map view’s superview is an instance of `UIViewController` whose
+  /// `automaticallyAdjustsScrollViewInsets` property is `YES`, the value of this
+  /// property may be overridden at any time.
+  ///
+  /// The usage of `automaticallyAdjustsScrollViewInsets` has been deprecated
+  /// use the map view’s property ``MLNMapView/automaticallyAdjustsContentInset``instead.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setContentInset:animated:completionHandler:`
+  /// method instead.
+  int get contentInset {
+    return _objc_msgSend_13yqbb6(this.ref.pointer, _sel_contentInset);
+  }
+
+  /// The distance from the edges of the map view’s frame to the edges of the map
+  /// view’s logical viewport.
+  ///
+  /// When the value of this property is equal to `UIEdgeInsetsZero`, viewport
+  /// properties such as `centerCoordinate` assume a viewport that matches the map
+  /// view’s frame. Otherwise, those properties are inset, excluding part of the
+  /// frame from the viewport. For instance, if the only the top edge is inset, the
+  /// map center is effectively shifted downward.
+  ///
+  /// When the map view’s superview is an instance of `UIViewController` whose
+  /// `automaticallyAdjustsScrollViewInsets` property is `YES`, the value of this
+  /// property may be overridden at any time.
+  ///
+  /// The usage of `automaticallyAdjustsScrollViewInsets` has been deprecated
+  /// use the map view’s property ``MLNMapView/automaticallyAdjustsContentInset``instead.
+  ///
+  /// Changing the value of this property updates the map view immediately. If you
+  /// want to animate the change, use the `-setContentInset:animated:completionHandler:`
+  /// method instead.
+  set contentInset(int value) {
+    return _objc_msgSend_9o8504(this.ref.pointer, _sel_setContentInset_, value);
+  }
+
+  /// The current edge insets of the current map view’s camera.
+  ///
+  /// Camera edge insets are formed as accumulation of map view's content insets
+  /// and the edge padding passed to the method like `seCamera:...edgePadding:`,
+  /// `setVisibleCoordinates:...edgePadding:`, `showAnnotations:...edgePadding:` etc.
+  ///
+  /// The camera edge insets influences the `centerCoordinate` of the viewport.
+  /// This value is read-only, in order to apply paddings,  use either persistent
+  /// `contentInset`, either transient `edgePadding` parameter of the `set...` methods.
+  int get cameraEdgeInsets {
+    return _objc_msgSend_13yqbb6(this.ref.pointer, _sel_cameraEdgeInsets);
+  }
+
+  /// Deprecated. Sets the distance from the edges of the map view’s frame to the edges
+  /// of the map view’s logical viewport with an optional transition animation.
+  ///
+  /// When the value of this property is equal to `UIEdgeInsetsZero`, viewport
+  /// properties such as `centerCoordinate` assume a viewport that matches the map
+  /// view’s frame. Otherwise, those properties are inset, excluding part of the
+  /// frame from the viewport. For instance, if the only the top edge is inset, the
+  /// map center is effectively shifted downward.
+  ///
+  /// When the map view’s superview is an instance of `UIViewController` whose
+  /// `automaticallyAdjustsScrollViewInsets` property is `YES`, the value of this
+  /// property may be overridden at any time.
+  ///
+  /// The usage of `automaticallyAdjustsScrollViewInsets` has been deprecated
+  /// use the map view’s property ``MLNMapView/automaticallyAdjustsContentInset``instead.
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-setContentInset:animated:completionHandler:` method.
+  ///
+  /// @param contentInset The new values to inset the content by.
+  /// @param animated Specify `YES` if you want the map view to animate the change to
+  /// the content inset or `NO` if you want the map to inset the content
+  /// immediately.
+  void setContentInset_animated_(
+      objc.ObjCObjectBase contentInset, bool animated) {
+    _objc_msgSend_gk45w7(this.ref.pointer, _sel_setContentInset_animated_,
+        contentInset.ref.pointer, animated);
+  }
+
+  /// Sets the distance from the edges of the map view’s frame to the edges of the
+  /// map view’s logical viewport with an optional transition animation and
+  /// completion handler.
+  ///
+  /// When the value of this property is equal to `UIEdgeInsetsZero`, viewport
+  /// properties such as `centerCoordinate` assume a viewport that matches the map
+  /// view’s frame. Otherwise, those properties are inset, excluding part of the
+  /// frame from the viewport. For instance, if the only the top edge is inset, the
+  /// map center is effectively shifted downward.
+  ///
+  /// When the map view’s superview is an instance of `UIViewController` whose
+  /// `automaticallyAdjustsScrollViewInsets` property is `YES`, the value of this
+  /// property may be overridden at any time.
+  ///
+  /// The usage of `automaticallyAdjustsScrollViewInsets` has been deprecated
+  /// use the map view’s property ``MLNMapView/automaticallyAdjustsContentInset``instead.
+  ///
+  /// @param contentInset The new values to inset the content by.
+  /// @param animated Specify `YES` if you want the map view to animate the change to
+  /// the content inset or `NO` if you want the map to inset the content
+  /// immediately.
+  /// @param completion The block executed after the animation finishes.
+  void setContentInset_animated_completionHandler_(
+      objc.ObjCObjectBase contentInset,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_3br9h8(
+        this.ref.pointer,
+        _sel_setContentInset_animated_completionHandler_,
+        contentInset.ref.pointer,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Converts a point in the given view’s coordinate system to a geographic
+  /// coordinate.
+  ///
+  /// @param point The point to convert.
+  /// @param view The view in whose coordinate system the point is expressed.
+  /// @return The geographic coordinate at the given point.
+  ///
+  /// #### Related examples
+  /// - TODO: Point conversion example to learn how to convert a `CGPoint` to a map coordinate.
+  CLLocationCoordinate2D convertPoint_toCoordinateFromView_(
+      CGPoint point, objc.ObjCObjectBase view) {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_13n8ay5Stret(_ptr, this.ref.pointer,
+            _sel_convertPoint_toCoordinateFromView_, point, view.ref.pointer)
+        : _ptr.ref = _objc_msgSend_13n8ay5(this.ref.pointer,
+            _sel_convertPoint_toCoordinateFromView_, point, view.ref.pointer);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+  }
+
+  /// Converts a geographic coordinate to a point in the given view’s coordinate
+  /// system.
+  ///
+  /// @param coordinate The geographic coordinate to convert.
+  /// @param view The view in whose coordinate system the returned point should be
+  /// expressed. If this parameter is `nil`, the returned point is expressed
+  /// in the window’s coordinate system. If `view` is not `nil`, it must
+  /// belong to the same window as the map view.
+  /// @return The point (in the appropriate view or window coordinate system)
+  /// corresponding to the given geographic coordinate.
+  ///
+  /// #### Related examples
+  /// - TODO: Point conversion: learn how to convert a map coordinate to a `CGPoint` object.
+  CGPoint convertCoordinate_toPointToView_(
+      CLLocationCoordinate2D coordinate, objc.ObjCObjectBase view) {
+    final _ptr = pkg_ffi.calloc<CGPoint>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1a63hefStret(_ptr, this.ref.pointer,
+            _sel_convertCoordinate_toPointToView_, coordinate, view.ref.pointer)
+        : _ptr.ref = _objc_msgSend_1a63hef(
+            this.ref.pointer,
+            _sel_convertCoordinate_toPointToView_,
+            coordinate,
+            view.ref.pointer);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGPoint>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGPoint>(_finalizable);
+  }
+
+  /// Converts a rectangle in the given view’s coordinate system to a geographic
+  /// bounding box.
+  ///
+  /// If the returned coordinate bounds contains a longitude is less than −180 degrees
+  /// or greater than 180 degrees, the bounding box straddles the antimeridian or
+  /// international date line.
+  ///
+  /// @param rect The rectangle to convert.
+  /// @param view The view in whose coordinate system the rectangle is expressed.
+  /// @return The geographic bounding box coextensive with the given rectangle.
+  MLNCoordinateBounds convertRect_toCoordinateBoundsFromView_(
+      CGRect rect, objc.ObjCObjectBase view) {
+    final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_g6it35Stret(
+            _ptr,
+            this.ref.pointer,
+            _sel_convertRect_toCoordinateBoundsFromView_,
+            rect,
+            view.ref.pointer)
+        : _ptr.ref = _objc_msgSend_g6it35(
+            this.ref.pointer,
+            _sel_convertRect_toCoordinateBoundsFromView_,
+            rect,
+            view.ref.pointer);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNCoordinateBounds>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNCoordinateBounds>(_finalizable);
+  }
+
+  /// Converts a geographic bounding box to a rectangle in the given view’s
+  /// coordinate system.
+  ///
+  /// To bring both sides of the antimeridian or international date line into view,
+  /// specify some longitudes less than −180 degrees or greater than 180 degrees. For
+  /// example, to show both Tokyo and San Francisco simultaneously, you could set the
+  /// visible bounds to extend from (35.68476, −220.24257) to (37.78428, −122.41310).
+  ///
+  /// @param bounds The geographic bounding box to convert.
+  /// @param view The view in whose coordinate system the returned rectangle should
+  /// be expressed. If this parameter is `nil`, the returned rectangle is
+  /// expressed in the window’s coordinate system. If `view` is not `nil`, it must
+  /// belong to the same window as the map view.
+  CGRect convertCoordinateBounds_toRectToView_(
+      MLNCoordinateBounds bounds, objc.ObjCObjectBase view) {
+    final _ptr = pkg_ffi.calloc<CGRect>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1nli2vfStret(
+            _ptr,
+            this.ref.pointer,
+            _sel_convertCoordinateBounds_toRectToView_,
+            bounds,
+            view.ref.pointer)
+        : _ptr.ref = _objc_msgSend_1nli2vf(
+            this.ref.pointer,
+            _sel_convertCoordinateBounds_toRectToView_,
+            bounds,
+            view.ref.pointer);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CGRect>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CGRect>(_finalizable);
+  }
+
+  /// Returns the distance spanned by one point in the map view’s coordinate system
+  /// at the given latitude and current zoom level.
+  ///
+  /// The distance between points decreases as the latitude approaches the poles.
+  /// This relationship parallels the relationship between longitudinal coordinates
+  /// at different latitudes.
+  ///
+  /// @param latitude The latitude of the geographic coordinate represented by the
+  /// point.
+  /// @return The distance in meters spanned by a single point.
+  double metersPerPointAtLatitude_(double latitude) {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1tczmpvFpret(
+            this.ref.pointer, _sel_metersPerPointAtLatitude_, latitude)
+        : _objc_msgSend_1tczmpv(
+            this.ref.pointer, _sel_metersPerPointAtLatitude_, latitude);
+  }
+
+  /// Returns the new map projection instance initialized with the map view,
+  /// i.e. with the current camera state.
+  MLNMapProjection mapProjection() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_mapProjection);
+    return MLNMapProjection.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The complete list of annotations associated with the receiver. (read-only)
+  ///
+  /// The objects in this array must adopt the ``MLNAnnotation`` protocol. If no
+  /// annotations are associated with the map view, the value of this property is
+  /// `nil`.
+  objc.NSArray? get annotations {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_annotations);
+    return _ret.address == 0
+        ? null
+        : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Adds an annotation to the map view.
+  ///
+  /// > Note: ``MLNMultiPolyline``, ``MLNMultiPolyline``, ``MLNMultiPolyline``, and
+  /// ``MLNPointCollection`` objects cannot be added to the map view at this time.
+  /// Any multipoint, multipolyline, multipolygon, shape or point collection
+  /// object that is specified is silently ignored.
+  ///
+  /// @param annotation The annotation object to add to the receiver. This object
+  /// must conform to the ``MLNAnnotation`` protocol. The map view retains the
+  /// annotation object.
+  ///
+  /// #### Related examples
+  /// - TODO: add a line annotation from GeoJSON.
+  /// - TODO: add an annotation to an ``MLNMapView`` object.
+  void addAnnotation_(objc.ObjCObjectBase annotation) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_addAnnotation_, annotation.ref.pointer);
+  }
+
+  /// Adds an array of annotations to the map view.
+  ///
+  /// > Note: ``MLNMultiPolyline``, ``MLNMultiPolyline``, and ``MLNMultiPolyline`` objects
+  /// cannot be added to the map view at this time. Nor can ``MLNMultiPoint``
+  /// objects that are not instances of ``MLNPolyline`` or ``MLNPolyline``. Any
+  /// multipoint, multipolyline, multipolygon, or shape collection objects that
+  /// are specified are silently ignored.
+  ///
+  /// @param annotations An array of annotation objects. Each object in the array
+  /// must conform to the ``MLNAnnotation`` protocol. The map view retains each
+  /// individual annotation object.
+  void addAnnotations_(objc.NSArray annotations) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_addAnnotations_, annotations.ref.pointer);
+  }
+
+  /// Removes an annotation from the map view, deselecting it if it is selected.
+  ///
+  /// Removing an annotation object dissociates it from the map view entirely,
+  /// preventing it from being displayed on the map. Thus you would typically call
+  /// this method only when you want to hide or delete a given annotation.
+  ///
+  /// @param annotation The annotation object to remove. This object must conform
+  /// to the ``MLNAnnotation`` protocol
+  void removeAnnotation_(objc.ObjCObjectBase annotation) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_removeAnnotation_, annotation.ref.pointer);
+  }
+
+  /// Removes an array of annotations from the map view, deselecting any selected
+  /// annotations in the array.
+  ///
+  /// Removing annotation objects dissociates them from the map view entirely,
+  /// preventing them from being displayed on the map. Thus you would typically
+  /// call this method only when you want to hide or delete the given annotations.
+  ///
+  /// @param annotations The array of annotation objects to remove. Objects in the
+  /// array must conform to the ``MLNAnnotation`` protocol.
+  void removeAnnotations_(objc.NSArray annotations) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_removeAnnotations_, annotations.ref.pointer);
+  }
+
+  /// Returns an ``MLNAnnotationView`` if the given annotation is currently associated
+  /// with a view, otherwise nil.
+  ///
+  /// @param annotation The annotation associated with the view.
+  /// Annotation must conform to the ``MLNAnnotation`` protocol.
+  MLNAnnotationView? viewForAnnotation_(objc.ObjCObjectBase annotation) {
+    final _ret = _objc_msgSend_62nh5j(
+        this.ref.pointer, _sel_viewForAnnotation_, annotation.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNAnnotationView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a reusable annotation image object associated with its identifier.
+  ///
+  /// For performance reasons, you should generally reuse ``MLNAnnotationImage``
+  /// objects for identical-looking annotations in your map views. Dequeueing
+  /// saves time and memory during performance-critical operations such as
+  /// scrolling.
+  ///
+  /// @param identifier A string identifying the annotation image to be reused.
+  /// This string is the same one you specify when initially returning the
+  /// annotation image object using the `-mapView:imageForAnnotation:` method.
+  /// @return An annotation image object with the given identifier, or `nil` if no
+  /// such object exists in the reuse queue.
+  ///
+  /// #### Related examples
+  /// - TODO: Add annotation views and images: learn how to most efficiently
+  /// reuse an ``MLNAnnotationImage``.
+  MLNAnnotationImage? dequeueReusableAnnotationImageWithIdentifier_(
+      objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(
+        this.ref.pointer,
+        _sel_dequeueReusableAnnotationImageWithIdentifier_,
+        identifier.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNAnnotationImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns a reusable annotation view object associated with its identifier.
+  ///
+  /// For performance reasons, you should generally reuse ``MLNAnnotationView``
+  /// objects for identical-looking annotations in your map views. Dequeueing
+  /// saves time and memory during performance-critical operations such as
+  /// scrolling.
+  ///
+  /// @param identifier A string identifying the annotation view to be reused.
+  /// This string is the same one you specify when initially returning the
+  /// annotation view object using the `-mapView:viewForAnnotation:` method.
+  /// @return An annotation view object with the given identifier, or `nil` if no
+  /// such object exists in the reuse queue.
+  MLNAnnotationView? dequeueReusableAnnotationViewWithIdentifier_(
+      objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(
+        this.ref.pointer,
+        _sel_dequeueReusableAnnotationViewWithIdentifier_,
+        identifier.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNAnnotationView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The complete list of annotations associated with the receiver that are
+  /// currently visible.
+  ///
+  /// The objects in this array must adopt the ``MLNAnnotation`` protocol. If no
+  /// annotations are associated with the map view or if no annotations associated
+  /// with the map view are currently visible, the value of this property is `nil`.
+  objc.NSArray? get visibleAnnotations {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.pointer, _sel_visibleAnnotations);
+    return _ret.address == 0
+        ? null
+        : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the list of annotations associated with the receiver that intersect with
+  /// the given rectangle.
+  ///
+  /// @param rect A rectangle expressed in the map view’s coordinate system.
+  /// @return An array of objects that adopt the ``MLNAnnotation`` protocol or `nil` if
+  /// no annotations associated with the map view are currently visible in the
+  /// rectangle.
+  objc.NSArray? visibleAnnotationsInRect_(CGRect rect) {
+    final _ret = _objc_msgSend_19adbty(
+        this.ref.pointer, _sel_visibleAnnotationsInRect_, rect);
+    return _ret.address == 0
+        ? null
+        : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The currently selected annotations.
+  ///
+  /// Assigning a new array to this property selects only the first annotation in
+  /// the array.
+  ///
+  /// If the annotation is of type ``MLNPointAnnotation`` and is offscreen, the camera
+  /// will animate to bring the annotation and its callout just on screen. If you
+  /// need finer control, consider using `-selectAnnotation:animated:`.
+  ///
+  /// > Note: In versions prior to `4.0.0` if the annotation was offscreen it was not
+  /// selected.
+  objc.NSArray get selectedAnnotations {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.pointer, _sel_selectedAnnotations);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The currently selected annotations.
+  ///
+  /// Assigning a new array to this property selects only the first annotation in
+  /// the array.
+  ///
+  /// If the annotation is of type ``MLNPointAnnotation`` and is offscreen, the camera
+  /// will animate to bring the annotation and its callout just on screen. If you
+  /// need finer control, consider using `-selectAnnotation:animated:`.
+  ///
+  /// > Note: In versions prior to `4.0.0` if the annotation was offscreen it was not
+  /// selected.
+  set selectedAnnotations(objc.NSArray value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setSelectedAnnotations_, value.ref.pointer);
+  }
+
+  /// Deprecated. Selects an annotation and displays its callout view.
+  ///
+  /// The `animated` parameter determines whether the selection is animated including whether the map is
+  /// panned to bring the annotation into view, specifically:
+  ///
+  /// | `animated` parameter | Effect |
+  /// |------------------|--------|
+  /// | `NO`             | The annotation is selected, and the callout is presented. However the map is
+  /// not panned to bring the annotation or callout into view. The presentation of the callout is NOT
+  /// animated. | | `YES`            | The annotation is selected, and the callout is presented. If the
+  /// annotation is not visible (or is partially visible) *and* is of type ``MLNPointAnnotation``, the
+  /// map is panned so that the annotation and its callout are brought into view. The annotation is *not*
+  /// centered within the viewport. |
+  ///
+  /// Note that a selection initiated by a single tap gesture is always animated.
+  ///
+  /// To specify a completion handler to execute after the animation finishes, use
+  /// the `-selectAnnotation:animated:completionHandler:` method.
+  ///
+  /// @param annotation The annotation object to select.
+  /// @param animated If `YES`, the annotation and callout view are animated on-screen.
+  ///
+  /// > Note: In versions prior to `4.0.0` selecting an offscreen annotation did not
+  /// change the camera.
+  void selectAnnotation_animated_(
+      objc.ObjCObjectBase annotation, bool animated) {
+    _objc_msgSend_gk45w7(this.ref.pointer, _sel_selectAnnotation_animated_,
+        annotation.ref.pointer, animated);
+  }
+
+  /// Selects an annotation and displays its callout view with an optional completion
+  /// handler.
+  ///
+  /// The `animated` parameter determines whether the selection is animated including whether the map is
+  /// panned to bring the annotation into view, specifically:
+  ///
+  /// | `animated` parameter | Effect |
+  /// |------------------|--------|
+  /// | `NO`             | The annotation is selected, and the callout is presented. However the map is
+  /// not panned to bring the annotation or callout into view. The presentation of the callout is NOT
+  /// animated. | | `YES`            | The annotation is selected, and the callout is presented. If the
+  /// annotation is not visible (or is partially visible) *and* is of type ``MLNPointAnnotation``, the
+  /// map is panned so that the annotation and its callout are brought into view. The annotation is *not*
+  /// centered within the viewport. |
+  ///
+  /// Note that a selection initiated by a single tap gesture is always animated.
+  ///
+  /// @param annotation The annotation object to select.
+  /// @param animated If `YES`, the annotation and callout view are animated on-screen.
+  /// @param completion The block executed after the animation finishes.
+  ///
+  /// > Note: In versions prior to `4.0.0` selecting an offscreen annotation did not
+  /// change the camera.
+  void selectAnnotation_animated_completionHandler_(
+      objc.ObjCObjectBase annotation,
+      bool animated,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_3br9h8(
+        this.ref.pointer,
+        _sel_selectAnnotation_animated_completionHandler_,
+        annotation.ref.pointer,
+        animated,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// :nodoc:
+  /// Selects an annotation and displays its callout view with an optional completion
+  /// handler. This method should be considered "alpha" and as such is subject to
+  /// change.
+  ///
+  /// @param annotation The annotation object to select.
+  /// @param moveIntoView If the annotation is not visible (or is partially visible) *and* is of type
+  /// ``MLNPointAnnotation``, the map is panned so that the annotation and its callout are brought into
+  /// view. The annotation is *not* centered within the viewport.
+  /// @param animateSelection If `YES`, the annotation's selection state and callout view's presentation
+  /// are animated.
+  /// @param completion The block executed after the animation finishes.
+  void selectAnnotation_moveIntoView_animateSelection_completionHandler_(
+      objc.ObjCObjectBase annotation,
+      bool moveIntoView,
+      bool animateSelection,
+      objc.ObjCBlock<ffi.Void Function()>? completion) {
+    _objc_msgSend_11qxhhc(
+        this.ref.pointer,
+        _sel_selectAnnotation_moveIntoView_animateSelection_completionHandler_,
+        annotation.ref.pointer,
+        moveIntoView,
+        animateSelection,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Deselects an annotation and hides its callout view.
+  ///
+  /// @param annotation The annotation object to deselect.
+  /// @param animated If `YES`, the callout view is animated offscreen.
+  void deselectAnnotation_animated_(
+      objc.ObjCObjectBase? annotation, bool animated) {
+    _objc_msgSend_gk45w7(this.ref.pointer, _sel_deselectAnnotation_animated_,
+        annotation?.ref.pointer ?? ffi.nullptr, animated);
+  }
+
+  /// The complete list of overlays associated with the receiver. (read-only)
+  ///
+  /// The objects in this array must adopt the ``MLNOverlay`` protocol. If no
+  /// overlays are associated with the map view, the value of this property is
+  /// empty array.
+  objc.NSArray get overlays {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_overlays);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Adds a single overlay object to the map.
+  ///
+  /// To remove an overlay from a map, use the `-removeOverlay:` method.
+  ///
+  /// @param overlay The overlay object to add. This object must conform to the
+  /// ``MLNOverlay`` protocol.
+  void addOverlay_(objc.ObjCObjectBase overlay) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_addOverlay_, overlay.ref.pointer);
+  }
+
+  /// Adds an array of overlay objects to the map.
+  ///
+  /// To remove multiple overlays from a map, use the `-removeOverlays:` method.
+  ///
+  /// @param overlays An array of objects, each of which must conform to the
+  /// ``MLNOverlay`` protocol.
+  void addOverlays_(objc.NSArray overlays) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_addOverlays_, overlays.ref.pointer);
+  }
+
+  /// Removes a single overlay object from the map.
+  ///
+  /// If the specified overlay is not currently associated with the map view, this
+  /// method does nothing.
+  ///
+  /// @param overlay The overlay object to remove.
+  void removeOverlay_(objc.ObjCObjectBase overlay) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_removeOverlay_, overlay.ref.pointer);
+  }
+
+  /// Removes one or more overlay objects from the map.
+  ///
+  /// If a given overlay object is not associated with the map view, it is ignored.
+  ///
+  /// @param overlays An array of objects, each of which conforms to the ``MLNOverlay``
+  /// protocol.
+  void removeOverlays_(objc.NSArray overlays) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_removeOverlays_, overlays.ref.pointer);
+  }
+
+  /// Returns an array of rendered map features that intersect with a given point.
+  ///
+  /// This method may return features from any of the map’s style layers. To restrict
+  /// the search to a particular layer or layers, use the
+  /// `-visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:` method. For more
+  /// information about searching for map features, see that method’s documentation.
+  ///
+  /// @param point A point expressed in the map view’s coordinate system.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  ///
+  /// #### Related examples
+  /// - TODO: Select a feature within a layer: to learn how to query an
+  /// ``MLNMapView`` object for visible ``MLNMapView`` objects.
+  objc.NSArray visibleFeaturesAtPoint_(CGPoint point) {
+    final _ret = _objc_msgSend_czt8e6(
+        this.ref.pointer, _sel_visibleFeaturesAtPoint_, point);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of rendered map features that intersect with a given point,
+  /// restricted to the given style layers.
+  ///
+  /// This method returns all the intersecting features from the specified layers. To
+  /// filter the returned features, use the
+  /// `-visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:` method. For
+  /// more information about searching for map features, see that method’s
+  /// documentation.
+  ///
+  /// @param point A point expressed in the map view’s coordinate system.
+  /// @param styleLayerIdentifiers A set of strings that correspond to the names
+  /// of layers defined in the current style. Only the features contained in
+  /// these layers are included in the returned array.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  objc.NSArray visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
+      CGPoint point, objc.NSSet? styleLayerIdentifiers) {
+    final _ret = _objc_msgSend_b4j0k2(
+        this.ref.pointer,
+        _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_,
+        point,
+        styleLayerIdentifiers?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of rendered map features that intersect with a given point,
+  /// restricted to the given style layers and filtered by the given predicate.
+  ///
+  /// Each object in the returned array represents a feature rendered by the
+  /// current style and provides access to attributes specified by the relevant map
+  /// content sources. The returned array includes features loaded by
+  /// ``MLNShapeSource`` and ``MLNShapeSource`` objects but does not include
+  /// anything from ``MLNRasterTileSource`` objects, or from video or canvas sources,
+  /// which are unsupported by this SDK.
+  ///
+  /// The returned features are drawn by a style layer in the current style. For
+  /// example, suppose the current style uses the
+  /// <a href="https://www.mapbox.com/vector-tiles/mapbox-streets/">Mapbox Streets source</a>,
+  /// but none of the specified style layers includes features that have the `maki`
+  /// property set to `bus`. If you pass a point corresponding to the location of a
+  /// bus stop into this method, the bus stop feature does not appear in the
+  /// resulting array. On the other hand, if the style does include bus stops, an
+  /// ``MLNFeature`` object representing that bus stop is returned and its
+  /// `featureAttributes` dictionary has the `maki` key set to `bus` (along with
+  /// other attributes). The dictionary contains only the attributes provided by the
+  /// tile source; it does not include computed attribute values or rules about how
+  /// the feature is rendered by the current style.
+  ///
+  /// The returned array is sorted by z-order, starting with the topmost rendered
+  /// feature and ending with the bottommost rendered feature. A feature that is
+  /// rendered multiple times due to wrapping across the antimeridian at low zoom
+  /// levels is included only once, subject to the caveat that follows.
+  ///
+  /// Features come from tiled vector data or GeoJSON data that is converted to tiles
+  /// internally, so feature geometries are clipped at tile boundaries and features
+  /// may appear duplicated across tiles. For example, suppose the specified point
+  /// lies along a road that spans the screen. The resulting array includes those
+  /// parts of the road that lie within the map tile that contain the specified
+  /// point, even if the road extends into other tiles.
+  ///
+  /// To find out the layer names in a particular style, view the style in
+  /// <a href="https://maplibre.org/maputnik">Maputnik</a>.
+  ///
+  /// Only visible features are returned. To obtain features regardless of
+  /// visibility, use the
+  /// ``MLNVectorTileSource/featuresInSourceLayersWithIdentifiers:predicate:`` and
+  /// ``MLNShapeSource/featuresMatchingPredicate:`` methods on the relevant sources.
+  ///
+  /// The returned features may also include features corresponding to annotations.
+  /// These features are not object-equal to the ``MLNAnnotation`` objects that were
+  /// originally added to the map. To query the map for annotations, use
+  /// `visibleAnnotations` or ``MLNMapView/visibleAnnotationsInRect:``.
+  ///
+  ///
+  /// @param point A point expressed in the map view’s coordinate system.
+  /// @param styleLayerIdentifiers A set of strings that correspond to the names of
+  /// layers defined in the current style. Only the features contained in these
+  /// layers are included in the returned array.
+  /// @param predicate A predicate to filter the returned features.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  objc.NSArray visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_predicate_(
+      CGPoint point,
+      objc.NSSet? styleLayerIdentifiers,
+      NSPredicate? predicate) {
+    final _ret = _objc_msgSend_1htecti(
+        this.ref.pointer,
+        _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_predicate_,
+        point,
+        styleLayerIdentifiers?.ref.pointer ?? ffi.nullptr,
+        predicate?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of rendered map features that intersect with the given
+  /// rectangle.
+  ///
+  /// This method may return features from any of the map’s style layers. To restrict
+  /// the search to a particular layer or layers, use the
+  /// `-visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:` method. For more
+  /// information about searching for map features, see that method’s documentation.
+  ///
+  /// @param rect A rectangle expressed in the map view’s coordinate system.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  objc.NSArray visibleFeaturesInRect_(CGRect rect) {
+    final _ret = _objc_msgSend_19adbty(
+        this.ref.pointer, _sel_visibleFeaturesInRect_, rect);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of rendered map features that intersect with the given
+  /// rectangle, restricted to the given style layers.
+  ///
+  /// This method returns all the intersecting features from the specified layers. To
+  /// filter the returned features, use the
+  /// `-visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:` method. For
+  /// more information about searching for map features, see that method’s
+  /// documentation.
+  ///
+  /// @param rect A rectangle expressed in the map view’s coordinate system.
+  /// @param styleLayerIdentifiers A set of strings that correspond to the names of
+  /// layers defined in the current style. Only the features contained in these
+  /// layers are included in the returned array.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  objc.NSArray visibleFeaturesInRect_inStyleLayersWithIdentifiers_(
+      CGRect rect, objc.NSSet? styleLayerIdentifiers) {
+    final _ret = _objc_msgSend_qsq5p6(
+        this.ref.pointer,
+        _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_,
+        rect,
+        styleLayerIdentifiers?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of rendered map features that intersect with the given
+  /// rectangle, restricted to the given style layers and filtered by the given
+  /// predicate.
+  ///
+  /// Each object in the returned array represents a feature rendered by the
+  /// current style and provides access to attributes specified by the relevant map
+  /// content sources. The returned array includes features loaded by
+  /// ``MLNShapeSource`` and ``MLNShapeSource`` objects but does not include
+  /// anything from ``MLNRasterTileSource`` objects, or from video or canvas sources,
+  /// which are unsupported by this SDK.
+  ///
+  /// The returned features are drawn by a style layer in the current style. For
+  /// example, suppose the current style uses a particular source,
+  /// but none of the specified style layers includes features that have the `maki`
+  /// property set to `bus`. If you pass a rectangle containing the location of a bus
+  /// stop into this method, the bus stop feature does not appear in the resulting
+  /// array. On the other hand, if the style does include bus stops, an ``MLNFeature``
+  /// object representing that bus stop is returned and its `featureAttributes`
+  /// dictionary has the `maki` key set to `bus` (along with other attributes). The
+  /// dictionary contains only the attributes provided by the tile source; it does
+  /// not include computed attribute values or rules about how the feature is
+  /// rendered by the current style.
+  ///
+  /// The returned array is sorted by z-order, starting with the topmost rendered
+  /// feature and ending with the bottommost rendered feature. A feature that is
+  /// rendered multiple times due to wrapping across the antimeridian at low zoom
+  /// levels is included only once, subject to the caveat that follows.
+  ///
+  /// Features come from tiled vector data or GeoJSON data that is converted to tiles
+  /// internally, so feature geometries are clipped at tile boundaries and features
+  /// may appear duplicated across tiles. For example, suppose the specified
+  /// rectangle intersects with a road that spans the screen. The resulting array
+  /// includes those parts of the road that lie within the map tiles covering the
+  /// specified rectangle, even if the road extends into other tiles. The portion of
+  /// the road within each map tile is included individually.
+  ///
+  /// To find out the layer names in a particular style, view the style in
+  /// <a href="https://maplibre.org/maputnik">Maputnik</a>.
+  ///
+  /// Only visible features are returned. To obtain features regardless of
+  /// visibility, use the
+  /// ``MLNVectorTileSource/featuresInSourceLayersWithIdentifiers:predicate:`` and
+  /// ``MLNShapeSource/featuresMatchingPredicate:`` methods on the relevant sources.
+  ///
+  /// @param rect A rectangle expressed in the map view’s coordinate system.
+  /// @param styleLayerIdentifiers A set of strings that correspond to the names of
+  /// layers defined in the current style. Only the features contained in these
+  /// layers are included in the returned array.
+  /// @param predicate A predicate to filter the returned features.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the sources used by the current style.
+  objc.NSArray visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_(
+      CGRect rect, objc.NSSet? styleLayerIdentifiers, NSPredicate? predicate) {
+    final _ret = _objc_msgSend_1hrqp72(
+        this.ref.pointer,
+        _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_,
+        rect,
+        styleLayerIdentifiers?.ref.pointer ?? ffi.nullptr,
+        predicate?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The options that determine which debugging aids are shown on the map.
+  ///
+  /// These options are all disabled by default and should remain disabled in
+  /// released software for performance and aesthetic reasons.
+  MLNMapDebugMaskOptions get debugMask {
+    final _ret = _objc_msgSend_1kwkjor(this.ref.pointer, _sel_debugMask);
+    return MLNMapDebugMaskOptions.fromValue(_ret);
+  }
+
+  /// The options that determine which debugging aids are shown on the map.
+  ///
+  /// These options are all disabled by default and should remain disabled in
+  /// released software for performance and aesthetic reasons.
+  set debugMask(MLNMapDebugMaskOptions value) {
+    return _objc_msgSend_pisvbv(
+        this.ref.pointer, _sel_setDebugMask_, value.value);
   }
 }
