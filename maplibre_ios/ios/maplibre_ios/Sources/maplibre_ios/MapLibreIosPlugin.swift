@@ -9,7 +9,7 @@ public class MapLibreIosPlugin: NSObject, FlutterPlugin {
         registrar.addMethodCallDelegate(instance, channel: channel)
 
         let factory = MapLibreViewFactory(messenger: registrar.messenger())
-        registrar.register(factory, withId: "plugins.flutter.io/maplibre")
+           registrar.register(factory, withId: "plugins.flutter.io/maplibre")
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
