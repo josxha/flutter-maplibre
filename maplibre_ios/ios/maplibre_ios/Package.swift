@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "maplibre_ios",
     platforms: [
-        .iOS("12.0")
+        .iOS("12.0"),
     ],
     products: [
-        .library(name: "maplibre-ios", targets: ["maplibre_ios"])
+        .library(name: "maplibre-ios", targets: ["maplibre_ios"]),
     ],
     dependencies: [
         // Needs to be the same version as in ../maplibre_ios.podspec
@@ -19,11 +19,11 @@ let package = Package(
         .target(
             name: "maplibre_ios",
             dependencies: [
-                .product(name: "MapLibre", package: "maplibre-gl-native-distribution")
+                .product(name: "MapLibre", package: "maplibre-gl-native-distribution"),
             ],
             cSettings: [
-                .headerSearchPath("include/maplibre_ios")
+                .headerSearchPath("include/maplibre_ios"),
             ]
-        )
+        ),
     ]
 )

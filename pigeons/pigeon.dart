@@ -5,6 +5,7 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/src/platform/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
+    copyrightHeader: 'pigeons/header.txt',
     // linux
     gobjectHeaderOut: 'linux/pigeon.g.h',
     gobjectSourceOut: 'linux/pigeon.g.cc',
