@@ -1,16 +1,16 @@
 import Foundation
-import MapLibre
+//import MapLibre
 
-@objc class MapLibreRegistry: NSObject {
-    private static var mapRegistry: [Int64: MLNMapView] = [:]
+@objc public class MapLibreRegistry: NSObject {
+    private static var mapRegistry: [Int64: AnyObject] = [:]
 
     // Method to get the map for a given viewId
-    @objc public static func getMap(viewId: Int64) -> MLNMapView? {
+    @objc public static func getMap(viewId: Int64) -> AnyObject? {
         return mapRegistry[viewId]
     }
 
     // Method to add a map to the registry
-    public static func addMap(viewId: Int64, map: MLNMapView) {
+    public static func addMap(viewId: Int64, map: AnyObject) {
         mapRegistry[viewId] = map
     }
 
