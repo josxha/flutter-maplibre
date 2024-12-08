@@ -13,11 +13,12 @@ class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
     func create(
         withFrame frame: CGRect,
         viewIdentifier viewId: Int64,
-        arguments args: Any?
+        arguments _: Any?
     ) -> FlutterPlatformView {
         return MapLibreView(
             frame: frame,
             viewId: viewId,
-            binaryMessenger: messenger)
+            binaryMessenger: messenger
+        )
     }
 }
