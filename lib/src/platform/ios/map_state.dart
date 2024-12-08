@@ -11,6 +11,7 @@ import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
+import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
 
 part 'style_controller.dart';
 
@@ -21,6 +22,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   LayerManager? _annotationManager;
+  ffi.MLNMapView? _cachedMapView;
+
+  ffi.MLNMapView get _mapView => _cachedMapView ??=
+      ffi.MLNMapView.castFrom(ffi.MapLibreRegistry.getMapWithViewId_(_viewId)!);
 
   MapOptions get _options => widget.options;
 
