@@ -23,6 +23,11 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         _view.addSubview(_mapView)
         _mapView.delegate = self
+        // disable the default UI because they are rebuilt in Flutter
+        _mapView.compassView.isHidden = true
+        _mapView.attributionButton.isHidden = true
+        _mapView.logoView.isHidden = true
+        // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
             case let .success(mapOptions):
@@ -45,9 +50,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 print(error)
             }
         }
-        self._flutterApi.onMapReady {result in
-            // do nothing
-        }
+        self._flutterApi.onMapReady { _ in }
         // self._mapView.addGestureRecognizer(UIPanGestureRecognizer(target: self._view, action: #selector(onPan)))
         // self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self._view, action: #selector(onTap)))
     }
@@ -56,17 +59,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         var mlnCamera = _mapView.camera
         var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
         var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
-        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in
-            // do nothig
-        }
+        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
     @objc func onTap() {
         var mlnCamera = _mapView.camera
         var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        _flutterApi.onClick(point: center) { _ in
-            // do nothig
-        }
+        _flutterApi.onClick(point: center) { _ in }
     }
 
     func view() -> UIView {
