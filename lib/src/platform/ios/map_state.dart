@@ -19,13 +19,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   ffi.MLNMapView? _cachedMapView;
-  ffi.MLNMapProjection? _cachedProjection;
 
   ffi.MLNMapView get _mapView => _cachedMapView ??=
       ffi.MLNMapView.castFrom(ffi.MapLibreRegistry.getMapWithViewId_(_viewId)!);
-
-  ffi.MLNMapProjection get _projection =>
-      _cachedProjection ??= _mapView.mapProjection();
 
   @override
   StyleControllerIos? style;
@@ -99,6 +95,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
+    
+    //final insetcontentInset = ffi.M;
+    // _mapView.setContentInset_animated_(contentInset, true);
     // TODO: implement fitBounds
     throw UnimplementedError();
   }
@@ -120,8 +119,13 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<LngLatBounds> getVisibleRegion() async {
-    // TODO: implement getVisibleRegion
-    throw UnimplementedError();
+    final bounds = _mapView.visibleCoordinateBounds;
+    return LngLatBounds(
+      longitudeWest: bounds.sw.longitude,
+      longitudeEast: bounds.ne.longitude,
+      latitudeSouth: bounds.sw.latitude,
+      latitudeNorth: bounds.ne.latitude,
+    );
   }
 
   @override
@@ -157,14 +161,28 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   void dispose() {
-    _cachedProjection?.release();
+    style?.dispose();
     super.dispose();
   }
 
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
-    // TODO: implement queryLayers
-    throw UnimplementedError();
+    final style = this.style;
+    if (style == null) return [];
+    final layers = style._getLayers();
+
+    final point = screenLocation.toCGPoint();
+    final queriedLayers = <QueriedLayer>[];
+    for (var i = 0; i < layers.count; i++) {
+      final layer = layers.objectAtIndex_(i);
+      print(layer.ref.runtimeType);
+      final features =
+          _mapView.visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
+        point,
+        NSSet.setWithObject_(layer),
+      );
+    }
+    return queriedLayers;
   }
 
   @override

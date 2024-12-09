@@ -133,4 +133,6 @@ class StyleControllerIos implements StyleController {
     // TODO: implement updateGeoJsonSource
     throw UnimplementedError();
   }
+
+  NSArray _getLayers() => _ffiStyle.layers;
 }
