@@ -1,16 +1,14 @@
 import 'dart:async';
-import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre/src/map_state.dart';
+import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
+import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
+import 'package:objective_c/objective_c.dart';
 
 part 'style_controller.dart';
 
@@ -20,9 +18,14 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
-  LayerManager? _annotationManager;
+  ffi.MLNMapView? _cachedMapView;
+  ffi.MLNMapProjection? _cachedProjection;
 
-  MapOptions get _options => widget.options;
+  ffi.MLNMapView get _mapView => _cachedMapView ??=
+      ffi.MLNMapView.castFrom(ffi.MapLibreRegistry.getMapWithViewId_(_viewId)!);
+
+  ffi.MLNMapProjection get _projection =>
+      _cachedProjection ??= _mapView.mapProjection();
 
   @override
   StyleControllerIos? style;
@@ -56,9 +59,19 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
-  }) {
-    // TODO: implement animateCamera
-    throw UnimplementedError();
+  }) async {
+    if (zoom != null) _mapView.zoomLevel = zoom;
+    final ffiCamera = _mapView.camera;
+    if (pitch != null) ffiCamera.pitch = pitch;
+    if (bearing != null) ffiCamera.heading = bearing;
+    if (center != null) {
+      ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
+    }
+    _mapView.flyToCamera_withDuration_completionHandler_(
+      ffiCamera,
+      nativeDuration.inMicroseconds / 1000000,
+      null,
+    );
   }
 
   @override
@@ -69,9 +82,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
-  }) {
-    // TODO: implement enableLocation
-    throw UnimplementedError();
+  }) async {
+    _mapView.showsUserLocation = true;
   }
 
   @override
@@ -86,25 +98,28 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) {
+  }) async {
     // TODO: implement fitBounds
     throw UnimplementedError();
   }
 
   @override
   MapCamera getCamera() {
-    // TODO: implement getCamera
-    throw UnimplementedError();
+    final ffiCamera = _mapView.camera;
+    return MapCamera(
+      center: ffiCamera.centerCoordinate.toPosition(),
+      zoom: _mapView.zoomLevel,
+      bearing: ffiCamera.heading,
+      pitch: ffiCamera.pitch,
+    );
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) {
-    // TODO: implement getMetersPerPixelAtLatitude
-    throw UnimplementedError();
-  }
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      _mapView.metersPerPointAtLatitude_(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() {
+  Future<LngLatBounds> getVisibleRegion() async {
     // TODO: implement getVisibleRegion
     throw UnimplementedError();
   }
@@ -115,52 +130,101 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double? zoom,
     double? bearing,
     double? pitch,
-  }) {
-    // TODO: implement moveCamera
-    throw UnimplementedError();
+  }) async {
+    if (zoom != null) _mapView.zoomLevel = zoom;
+    final ffiCamera = _mapView.camera;
+    if (pitch != null) ffiCamera.pitch = pitch;
+    if (bearing != null) ffiCamera.heading = bearing;
+    if (center != null) {
+      ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
+    }
+    _mapView.setCamera_animated_(ffiCamera, false);
   }
 
   @override
   void onStyleLoaded() {
-    // TODO: implement onStyleLoaded
+    // We need to refresh the cached style for when the style reloads.
+    style?.dispose();
+    final styleCtrl = StyleControllerIos._(_mapView.style!, _hostApi);
+    style = styleCtrl;
+
+    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
+    widget.onStyleLoaded?.call(styleCtrl);
+    layerManager = LayerManager(styleCtrl, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) {
+  void dispose() {
+    _cachedProjection?.release();
+    super.dispose();
+  }
+
+  @override
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
     // TODO: implement queryLayers
     throw UnimplementedError();
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) {
-    // TODO: implement toLngLat
-    throw UnimplementedError();
+  Future<Position> toLngLat(Offset screenLocation) async {
+    final coords = _mapView.convertPoint_toCoordinateFromView_(
+      screenLocation.toCGPoint(),
+      _mapView,
+    );
+    return coords.toPosition();
   }
 
   @override
-  Future<List<Position>> toLngLats(List<Offset> screenLocations) {
-    // TODO: implement toLngLats
-    throw UnimplementedError();
+  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
+      screenLocations
+          .map(
+            (e) => _mapView
+                .convertPoint_toCoordinateFromView_(e.toCGPoint(), _mapView)
+                .toPosition(),
+          )
+          .toList(growable: false);
+
+  @override
+  Future<Offset> toScreenLocation(Position lngLat) async {
+    final coords = _mapView.convertCoordinate_toPointToView_(
+      lngLat.toCLLocationCoordinate2D(),
+      _mapView,
+    );
+    return coords.toOffset();
   }
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) {
-    // TODO: implement toScreenLocation
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats) {
-    // TODO: implement toScreenLocations
-    throw UnimplementedError();
-  }
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
+      lngLats
+          .map(
+            (e) => _mapView
+                .convertCoordinate_toPointToView_(
+                  e.toCLLocationCoordinate2D(),
+                  _mapView,
+                )
+                .toOffset(),
+          )
+          .toList(growable: false);
 
   @override
   Future<void> trackLocation({
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
-  }) {
-    // TODO: implement trackLocation
-    throw UnimplementedError();
+  }) async {
+    if (!trackLocation) {
+      _mapView.userTrackingMode =
+          ffi.MLNUserTrackingMode.MLNUserTrackingModeNone;
+      return;
+    }
+    _mapView.userTrackingMode = switch (trackBearing) {
+      BearingTrackMode.none =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollow,
+      BearingTrackMode.compass =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+      BearingTrackMode.gps =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+    };
   }
 }
