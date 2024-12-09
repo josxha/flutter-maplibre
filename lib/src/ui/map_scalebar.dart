@@ -36,10 +36,14 @@ class MapScalebar extends StatelessWidget {
 
     Widget buildChild(double metersPerPixel) {
       final painter = _ScaleBarPainter(metersPerPixel, theme);
-      return Container(
-        alignment: alignment,
-        padding: padding,
-        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+      // Use a SafeArea to ensure the widget is completely visible on devices
+      // with rounded edges like iOS.
+      return SafeArea(
+        child: Container(
+          alignment: alignment,
+          padding: padding,
+          child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+        ),
       );
     }
 

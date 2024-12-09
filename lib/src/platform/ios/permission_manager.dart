@@ -11,7 +11,7 @@ class PermissionManagerIos implements PermissionManager {
 
   @override
   // TODO: implement locationPermissionsGranted
-  bool get locationPermissionsGranted => throw UnimplementedError();
+  bool get locationPermissionsGranted => false;
 
   @override
   Future<bool> requestLocationPermissions({required String explanation}) {
