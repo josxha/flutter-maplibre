@@ -5225,7 +5225,7 @@ class MLNMapView extends objc.ObjCObjectBase {
   /// around the given coordinate bounds.
   /// @param animated Specify `YES` to animate the change by smoothly scrolling and
   /// zooming or `NO` to immediately display the given bounds.
-  void setVisibleCoordinateBounds_edgePadding_animated_(
+  void _edgePadding_animated_(
       MLNCoordinateBounds bounds, objc.ObjCObjectBase insets, bool animated) {
     _objc_msgSend_13x0pfk(
         this.ref.pointer,

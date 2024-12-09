@@ -4,7 +4,7 @@ part of 'map_state.dart';
 class StyleControllerIos implements StyleController {
   const StyleControllerIos._(this._ffiStyle, this._hostApi);
 
-  final ffi.MLNStyle _ffiStyle;
+  final MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
   @override

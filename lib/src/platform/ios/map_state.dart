@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,7 @@ import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
+import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart';
 
 part 'style_controller.dart';
@@ -18,10 +19,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
-  ffi.MLNMapView? _cachedMapView;
+  MLNMapView? _cachedMapView;
 
-  ffi.MLNMapView get _mapView => _cachedMapView ??=
-      ffi.MLNMapView.castFrom(ffi.MapLibreRegistry.getMapWithViewId_(_viewId)!);
+  MLNMapView get _mapView => _cachedMapView ??=
+      MLNMapView.castFrom(MapLibreRegistry.getMapWithViewId_(_viewId)!);
 
   @override
   StyleControllerIos? style;
@@ -95,11 +96,17 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    
-    //final insetcontentInset = ffi.M;
-    // _mapView.setContentInset_animated_(contentInset, true);
-    // TODO: implement fitBounds
-    throw UnimplementedError();
+    final sw = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = bounds.longitudeWest
+      ..latitude = bounds.latitudeSouth;
+    final ne = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = bounds.longitudeEast
+      ..latitude = bounds.latitudeNorth;
+    final ffiBounds = Struct.create<MLNCoordinateBounds>()
+      ..sw = sw
+      ..ne = ne;
+    // TODO support padding with Struct UIEdgeInsets
+    _mapView.setVisibleCoordinateBounds_animated_(ffiBounds, true);
   }
 
   @override
@@ -233,16 +240,16 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }) async {
     if (!trackLocation) {
       _mapView.userTrackingMode =
-          ffi.MLNUserTrackingMode.MLNUserTrackingModeNone;
+          MLNUserTrackingMode.MLNUserTrackingModeNone;
       return;
     }
     _mapView.userTrackingMode = switch (trackBearing) {
       BearingTrackMode.none =>
-        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollow,
+        MLNUserTrackingMode.MLNUserTrackingModeFollow,
       BearingTrackMode.compass =>
-        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+        MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
       BearingTrackMode.gps =>
-        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+        MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
   }
 }

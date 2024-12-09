@@ -10,8 +10,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
     init(
         frame _: CGRect,
-        viewId viewId: Int64,
-        binaryMessenger binaryMessenger: FlutterBinaryMessenger
+        viewId: Int64,
+        binaryMessenger: FlutterBinaryMessenger
     ) {
         var channelSuffix = String(viewId)
         _viewId = viewId
