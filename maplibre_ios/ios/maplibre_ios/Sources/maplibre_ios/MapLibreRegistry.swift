@@ -1,6 +1,10 @@
 import Foundation
 //import MapLibre
 
+// Update the header file for this class like this:
+// cd maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/
+// swiftc -c MapLibreRegistry.swift -module-name maplibre_ios -emit-objc-header-path MapLibreRegistry.h -emit-library -o libmaplibreios.dylib
+
 @objc public class MapLibreRegistry: NSObject {
     private static var mapRegistry: [Int64: AnyObject] = [:]
 

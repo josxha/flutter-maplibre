@@ -39,6 +39,7 @@ ffigen:
       - 'MLNMapProjection'
       - 'MLNStyle'
       - 'MLNSource'
+      - 'NSImage'
     module:
       'MapLibreRegistry': 'maplibre_ios'
       'MLNMapView': 'MapLibre'

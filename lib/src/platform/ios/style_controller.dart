@@ -9,6 +9,7 @@ class StyleControllerIos implements StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
+    //_ffiStyle.setImage_forName_(ffi.NSImage(), NSString(id));
     // TODO: implement addImage
     throw UnimplementedError();
   }

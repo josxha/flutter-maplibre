@@ -1456,10 +1456,8 @@ final _objc_msgSend_wjvic9 = objc.msgSendPointer
 late final _sel_insertLayer_aboveLayer_ =
     objc.registerName("insertLayer:aboveLayer:");
 late final _sel_removeLayer_ = objc.registerName("removeLayer:");
+late final _class_NSImage = objc.getClass("NSImage");
 
-/// WARNING: NSImage is a stub. To generate bindings for this class, include
-/// NSImage in your config's objc-interfaces list.
-///
 /// NSImage
 class NSImage extends objc.ObjCObjectBase {
   NSImage._(ffi.Pointer<objc.ObjCObject> pointer,
@@ -1474,6 +1472,12 @@ class NSImage extends objc.ObjCObjectBase {
   NSImage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
       {bool retain = false, bool release = false})
       : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [NSImage].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_NSImage);
+  }
 }
 
 late final _sel_imageForName_ = objc.registerName("imageForName:");
