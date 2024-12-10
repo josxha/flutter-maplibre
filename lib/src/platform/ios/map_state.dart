@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
@@ -158,8 +156,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = StyleControllerIos._(_mapView.style!, _hostApi);
-    style = styleCtrl;
+    final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);

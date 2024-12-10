@@ -76,9 +76,9 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         // Do not override the default behavior
         return true
     }
-
+    
     // MLNMapViewDelegate method called when map has finished loading
-    func mapView(mapView: MLNMapView, didFinishLoading _: MLNStyle) {
+    func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
         _mapView = mapView
         _flutterApi.onStyleLoaded() { _ in }
     }

@@ -43,4 +43,12 @@ extension CGPointExt on CGPoint {
 extension StringExt on String {
   /// Convert to a [NSURL].
   NSURL? toNSURL() => NSURL.URLWithString_(toNSString());
+
+  /// Convert to a [NSURL].
+  NSData? toNSDataUTF8() => toNSString().dataUsingEncoding_(
+        nsUTF8StringEncoding,
+      );
 }
+
+/// UTF8 Encoding
+const nsUTF8StringEncoding = 4;

@@ -91,31 +91,25 @@ class StyleControllerIos implements StyleController {
     final MLNSource ffiSource;
     switch (source) {
       case GeoJsonSource():
-        final shapeSource = ffiSource = MLNShapeSource.new1();
+        final shapeSource = MLNShapeSource.new1();
         if (source.data.startsWith('{')) {
-          final bytes = utf8.encoder.convert(source.data);
-          final ffiBytes = malloc.allocate<Uint8>(bytes.length);
-          ffiBytes.asTypedList(bytes.length).setAll(0, bytes);
           shapeSource.initWithIdentifier_shape_options_(
             source.id.toNSString(),
             MLNShape.shapeWithData_encoding_error_(
-              NSData.dataWithBytesNoCopy_length_(
-                Pointer.fromAddress(ffiBytes.address),
-                bytes.length,
-              ),
-              4, // NSUTF8StringEncoding
+              source.data.toNSDataUTF8()!,
+              nsUTF8StringEncoding,
               nullptr,
             ),
-            NSDictionary.new1()..init(),
+            NSDictionary.new1(),
           );
-          malloc.free(ffiBytes);
         } else {
           shapeSource.initWithIdentifier_URL_options_(
             source.id.toNSString(),
             source.data.toNSURL()!,
-            NSDictionary.new1()..init(),
+            NSDictionary.new1(),
           );
         }
+        ffiSource = shapeSource;
       case RasterDemSource():
         final demSource = ffiSource = MLNRasterDEMSource.new1();
         if (source.url case final String url) {
@@ -132,7 +126,7 @@ class StyleControllerIos implements StyleController {
           demSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
             ffiUrls,
-            NSDictionary.new1()..init(),
+            NSDictionary.new1(),
           );
         }
       case RasterSource():
@@ -151,7 +145,7 @@ class StyleControllerIos implements StyleController {
           rasterSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
             ffiUrls,
-            NSDictionary.new1()..init(),
+            NSDictionary.new1(),
           );
         }
       case VectorSource():
@@ -169,7 +163,7 @@ class StyleControllerIos implements StyleController {
           vectorSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
             ffiUrls,
-            NSDictionary.new1()..init(),
+            NSDictionary.new1(),
           );
         }
       case ImageSource():
@@ -198,13 +192,13 @@ class StyleControllerIos implements StyleController {
 
   @override
   Future<void> dispose() async {
-    _ffiStyle.release();
+    //_ffiStyle.release();
   }
 
   @override
   Future<List<String>> getAttributions() async {
+    return [];
     // TODO: implement getAttributions
-    throw UnimplementedError();
   }
 
   @override
@@ -237,7 +231,13 @@ class StyleControllerIos implements StyleController {
     required String id,
     required String data,
   }) async {
-    final source = _ffiStyle.sourceWithIdentifier_(id.toNSString());
+    final source =
+        _ffiStyle.sourceWithIdentifier_(id.toNSString())! as MLNShapeSource;
+    source.shape = MLNShape.shapeWithData_encoding_error_(
+      data.toNSDataUTF8()!,
+      4, // utf-8
+      nullptr,
+    );
     // TODO: implement updateGeoJsonSource
     throw UnimplementedError();
   }
