@@ -180,14 +180,21 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
-    for (var i = 0; i < layers.count; i++) {
+    for (var i = layers.count-1; i >= 0; i--) {
       final layer = layers.objectAtIndex_(i);
       print(layer.ref.runtimeType);
       final features =
           _mapView.visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
         point,
-        NSSet.setWithObject_(layer),
+        NSSet.setWithObject_(layer), // TODO use layer.id
       );
+      if (features.count == 0) continue;
+      /*final queriedLayer = QueriedLayer(
+        layerId: jLayerId.toDartString(releaseOriginal: true),
+        sourceId: jSourceId.toDartString(releaseOriginal: true),
+        sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
+      );
+      queriedLayers.add(queriedLayer);*/
     }
     return queriedLayers;
   }

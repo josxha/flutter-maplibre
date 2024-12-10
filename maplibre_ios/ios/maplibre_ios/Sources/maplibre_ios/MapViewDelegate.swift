@@ -1,7 +1,7 @@
 import Flutter
 import MapLibre
 
-class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi {
+class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi, UIGestureRecognizerDelegate {
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
     private var _viewId: Int64
@@ -51,25 +51,53 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
             }
         }
         self._flutterApi.onMapReady { _ in }
-        // self._mapView.addGestureRecognizer(UIPanGestureRecognizer(target: self._view, action: #selector(onPan)))
-        // self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self._view, action: #selector(onTap)))
+        // pan gesture
+        var panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
+        panRecognizer.delegate = self
+        self._mapView.addGestureRecognizer(panRecognizer)
+        // pinch gesture
+        var pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
+        pinchRecognizer.delegate = self
+        self._mapView.addGestureRecognizer(pinchRecognizer)
+        // rotate gesture
+        var rotateRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
+        rotateRecognizer.delegate = self
+        self._mapView.addGestureRecognizer(rotateRecognizer)
+        // swipe gesture
+        var swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
+        swipeRecognizer.delegate = self
+        self._mapView.addGestureRecognizer(swipeRecognizer)
+        // tap gestures
+        self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(sender:))))
+        self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(sender:))))
     }
 
-    @objc func onPan() {
+    @objc func onMoveCamera(sender: UITapGestureRecognizer) {
         var mlnCamera = _mapView.camera
         var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
         var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
         _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
-    @objc func onTap() {
-        var mlnCamera = _mapView.camera
-        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        _flutterApi.onClick(point: center) { _ in }
+    @objc func onTap(sender: UITapGestureRecognizer) {
+        var screenPosition = sender.location(in: _mapView)
+        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+        _flutterApi.onClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
+    }
+
+    @objc func onLongPress(sender: UILongPressGestureRecognizer) {
+        var screenPosition = sender.location(in: _mapView)
+        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+        _flutterApi.onLongClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
     }
 
     func view() -> UIView {
         return _view
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow the pan recognizer to work with the map's gesture recognizers
+        return true
     }
 
     // MLNMapViewDelegate method called when map has finished loading
