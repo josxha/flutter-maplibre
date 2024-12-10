@@ -20,7 +20,7 @@ sealed class Layer<G extends GeometryType<Object>> {
   });
 
   /// The [List] of layers.
-  final List<G> list;
+  final List<Feature<G>> list;
 
   /// Get a unique source id.
   String getSourceId(int index) => 'maplibre-source-$index';
@@ -37,10 +37,23 @@ sealed class Layer<G extends GeometryType<Object>> {
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
 
+  /// Create a [Feature] list from a list of [G]s.
+  static List<Feature<G>> generateFeatureList<G extends GeometryType<Object>>(
+    List<G> geometries,
+  ) {
+    final list = <Feature<G>>[];
+    for (final (index, point) in geometries.indexed) {
+      list.add(Feature(id: index, geometry: point));
+    }
+    return list;
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Layer && runtimeType == other.runtimeType && list == other.list;
+      other is Layer &&
+          runtimeType == other.runtimeType &&
+          listEquals(list, other.list);
 
   @override
   int get hashCode => list.hashCode;

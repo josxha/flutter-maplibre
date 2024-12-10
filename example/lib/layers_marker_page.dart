@@ -52,7 +52,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         },
         layers: [
           MarkerLayer(
-            points: _points,
+            markers: Layer.generateFeatureList(_points),
             textField: 'Marker',
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,

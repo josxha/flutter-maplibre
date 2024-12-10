@@ -15,7 +15,7 @@ class LayerManager {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
-        data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+        data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
       );
       style.addSource(source);
       style.addLayer(layer.createStyleLayer(index));
@@ -30,6 +30,9 @@ class LayerManager {
   /// layers get changed.
   late List<Layer> _oldLayers;
 
+  /// The feature that is currently being dragged by the user.
+  late Feature? _dragFeature;
+
   /// Called when `setState()` gets called and the widget rebuilds. This method
   /// translates the declarative layer definition of [MapLibreMap.layers] to
   /// imperative calls to the maps' [MapController].
@@ -42,12 +45,12 @@ class LayerManager {
       if (oldLayer case Layer()) {
         style.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
         );
         style.addSource(source);
       }
@@ -67,5 +70,32 @@ class LayerManager {
       style.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;
+  }
+
+  void onFeatureDrag(MapEventFeatureDragged event) {
+    switch (event.eventType) {
+      case PointerEventType.down:
+      // c
+      case PointerEventType.move:
+      case PointerEventType.up:
+    }
+  }
+
+  void _onDrag(
+    dynamic id, {
+    required Point origin,
+    required Point current,
+  }) {}
+
+  void _updateGeometryInLayer(
+    Layer layer,
+    GeometryType<Object> geometry,
+    int index,
+  ) {
+    layer.list[index].geometry = geometry;
+    style.updateGeoJsonSource(
+      id: layer.getSourceId(index),
+      data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
+    );
   }
 }

@@ -7,7 +7,7 @@ part of 'layer.dart';
 class PolylineLayer extends Layer<LineString> {
   /// Create a new [PolylineLayer] instance.
   const PolylineLayer({
-    required List<LineString> polylines,
+    required List<Feature<LineString>> polylines,
     this.color = const Color(0xFF000000),
     this.width = 1,
     this.gapWidth = 0,
@@ -56,18 +56,23 @@ class PolylineLayer extends Layer<LineString> {
       );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is PolylineLayer &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          width == other.width &&
-          gapWidth == other.gapWidth &&
-          blur == other.blur &&
-          dashArray == other.dashArray;
+  bool operator ==(covariant PolylineLayer other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.color == color &&
+      other.width == width &&
+      other.gapWidth == gapWidth &&
+      other.blur == blur &&
+      listEquals(other.dashArray, dashArray);
+  }
 
   @override
-  int get hashCode =>
-      Object.hash(super.hashCode, color, width, gapWidth, blur, dashArray);
+  int get hashCode {
+    return color.hashCode ^
+      width.hashCode ^
+      gapWidth.hashCode ^
+      blur.hashCode ^
+      dashArray.hashCode;
+  }
 }

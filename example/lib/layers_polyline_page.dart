@@ -37,7 +37,7 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
         },
         layers: [
           PolylineLayer(
-            polylines: _polylines,
+            polylines: Layer.generateFeatureList(_polylines),
             color: Colors.red,
             width: 4,
             blur: 3,

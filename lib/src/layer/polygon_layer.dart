@@ -7,7 +7,7 @@ part of 'layer.dart';
 class PolygonLayer extends Layer<Polygon> {
   /// Create a new [PolygonLayer] instance.
   const PolygonLayer({
-    required List<Polygon> polygons,
+    required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
   }) : super._(list: polygons);
@@ -40,14 +40,14 @@ class PolygonLayer extends Layer<Polygon> {
       );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is PolygonLayer &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          outlineColor == other.outlineColor;
+  bool operator ==(covariant PolygonLayer other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.color == color &&
+      other.outlineColor == outlineColor;
+  }
 
   @override
-  int get hashCode => Object.hash(super.hashCode, color, outlineColor);
+  int get hashCode => color.hashCode ^ outlineColor.hashCode;
 }
