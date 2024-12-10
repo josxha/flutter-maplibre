@@ -95,10 +95,18 @@ class StyleControllerIos implements StyleController {
             ffiSource = MLNShapeSource.new1()..identifier = NSString(source.id);
         final data = NSString(source.data);
         if (source.data.startsWith('{')) {
+          final bytes = utf8.encoder.convert(source.data);
+          final ffiBytes = malloc.allocate<Uint8>(bytes.length);
+          ffiBytes.asTypedList(bytes.length).setAll(0, bytes);
           shapeSource.shape = MLNShape.shapeWithData_encoding_error_(
-            data,
-            String.Encoding.utf8.rawValue,
+            NSData.dataWithBytesNoCopy_length_(
+              Pointer.fromAddress(ffiBytes.address),
+              bytes.length,
+            ),
+            4, // NSUTF8StringEncoding
+            nullptr,
           );
+          malloc.free(ffiBytes);
         } else {
           shapeSource.URL = NSURL.URLWithString_(data);
         }
@@ -113,10 +121,12 @@ class StyleControllerIos implements StyleController {
           ..identifier = NSString(source.id);
       case ImageSource():
         final coordinates = Struct.create<MLNCoordinateQuad>()
-        ..bottomLeft = source.coordinates[0].toCLLocationCoordinate2D()
-        ..bottomLeft = source.coordinates[1].toCLLocationCoordinate2D()
-        ..bottomLeft = source.coordinates[2].toCLLocationCoordinate2D()
-        ..bottomLeft = source.coordinates[3].toCLLocationCoordinate2D();
+          ..bottomLeft =
+              source.coordinates.bottomLeft.toCLLocationCoordinate2D()
+          ..bottomRight =
+              source.coordinates.bottomRight.toCLLocationCoordinate2D()
+          ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
+          ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         ffiSource = MLNImageSource.new1()
           ..identifier = NSString(source.id)
           ..URL = NSURL.URLWithString_(NSString(source.url))
