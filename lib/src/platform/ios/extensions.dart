@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:geotypes/geotypes.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
+import 'package:objective_c/objective_c.dart';
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {
@@ -36,4 +37,10 @@ extension OffsetExt on Offset {
 extension CGPointExt on CGPoint {
   /// Convert a [CGPoint] to a [Offset].
   Offset toOffset() => Offset(x, y);
+}
+
+/// Internal extensions on [String].
+extension StringExt on String {
+  /// Convert to a [NSURL].
+  NSURL? toNSURL() => NSURL.URLWithString_(toNSString());
 }
