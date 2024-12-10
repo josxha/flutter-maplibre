@@ -10,14 +10,14 @@ import 'package:ffi/ffi.dart' as pkg_ffi;
 @ffi.Native<
     ffi.Pointer<objc.ObjCBlockImpl> Function(
         ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjovn7(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<
     ffi.Pointer<objc.ObjCBlockImpl> Function(
         ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjovn7(
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
@@ -44,268 +44,6 @@ final class CGRect extends ffi.Struct {
 }
 
 final class _NSZone extends ffi.Opaque {}
-
-enum NSQualityOfService {
-  NSQualityOfServiceUserInteractive(33),
-  NSQualityOfServiceUserInitiated(25),
-  NSQualityOfServiceUtility(17),
-  NSQualityOfServiceBackground(9),
-  NSQualityOfServiceDefault(-1);
-
-  final int value;
-  const NSQualityOfService(this.value);
-
-  static NSQualityOfService fromValue(int value) => switch (value) {
-        33 => NSQualityOfServiceUserInteractive,
-        25 => NSQualityOfServiceUserInitiated,
-        17 => NSQualityOfServiceUtility,
-        9 => NSQualityOfServiceBackground,
-        -1 => NSQualityOfServiceDefault,
-        _ =>
-          throw ArgumentError("Unknown value for NSQualityOfService: $value"),
-      };
-}
-
-void _ObjCBlock_ffiVoid_fnPtrTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) =>
-    block.ref.target
-        .cast<ffi.NativeFunction<ffi.Void Function()>>()
-        .asFunction<void Function()>()();
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable = ffi.Pointer
-        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
-            _ObjCBlock_ffiVoid_fnPtrTrampoline)
-    .cast();
-void _ObjCBlock_ffiVoid_closureTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) =>
-    (objc.getBlockClosure(block) as void Function())();
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable = ffi.Pointer
-        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
-            _ObjCBlock_ffiVoid_closureTrampoline)
-    .cast();
-void _ObjCBlock_ffiVoid_listenerTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) {
-  (objc.getBlockClosure(block) as void Function())();
-  objc.objectRelease(block.cast());
-}
-
-ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
-    _ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
-            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>.listener(
-        _ObjCBlock_ffiVoid_listenerTrampoline)
-      ..keepIsolateAlive = false;
-
-/// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
-abstract final class ObjCBlock_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Void Function()> castFromPointer(
-          ffi.Pointer<objc.ObjCBlockImpl> pointer,
-          {bool retain = false,
-          bool release = false}) =>
-      objc.ObjCBlock<ffi.Void Function()>(pointer,
-          retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function()> fromFunctionPointer(
-          ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> ptr) =>
-      objc.ObjCBlock<ffi.Void Function()>(
-          objc.newPointerBlock(_ObjCBlock_ffiVoid_fnPtrCallable, ptr.cast()),
-          retain: false,
-          release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function()> fromFunction(void Function() fn) =>
-      objc.ObjCBlock<ffi.Void Function()>(
-          objc.newClosureBlock(_ObjCBlock_ffiVoid_closureCallable, () => fn()),
-          retain: false,
-          release: true);
-
-  /// Creates a listener block from a Dart function.
-  ///
-  /// This is based on FFI's NativeCallable.listener, and has the same
-  /// capabilities and limitations. This block can be invoked from any thread,
-  /// but only supports void functions, and is not run synchronously. See
-  /// NativeCallable.listener for more details.
-  ///
-  /// Note that unlike the default behavior of NativeCallable.listener, listener
-  /// blocks do not keep the isolate alive.
-  static objc.ObjCBlock<ffi.Void Function()> listener(void Function() fn) {
-    final raw = objc.newClosureBlock(
-        _ObjCBlock_ffiVoid_listenerCallable.nativeFunction.cast(), () => fn());
-    final wrapper = _MapLibreFFi_wrapListenerBlock_1pl9qdv(raw);
-    objc.objectRelease(raw.cast());
-    return objc.ObjCBlock<ffi.Void Function()>(wrapper,
-        retain: false, release: true);
-  }
-}
-
-/// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
-extension ObjCBlock_ffiVoid_CallExtension
-    on objc.ObjCBlock<ffi.Void Function()> {
-  void call() => ref.pointer.ref.invoke
-          .cast<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)>>()
-          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
-        ref.pointer,
-      );
-}
-
-ffi.Pointer<objc.ObjCBlockImpl>
-    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline(
-            ffi.Pointer<objc.ObjCBlockImpl> block,
-            ffi.Pointer<objc.ObjCObject> arg0) =>
-        block.ref.target
-            .cast<
-                ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCBlockImpl> Function(
-                        ffi.Pointer<objc.ObjCObject> arg0)>>()
-            .asFunction<
-                ffi.Pointer<objc.ObjCBlockImpl> Function(
-                    ffi.Pointer<objc.ObjCObject>)>()(arg0);
-ffi.Pointer<ffi.Void>
-    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrCallable =
-    ffi.Pointer.fromFunction<
-                ffi.Pointer<objc.ObjCBlockImpl> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<objc.ObjCObject>)>(
-            _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline)
-        .cast();
-ffi.Pointer<objc.ObjCBlockImpl>
-    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline(
-            ffi.Pointer<objc.ObjCBlockImpl> block,
-            ffi.Pointer<objc.ObjCObject> arg0) =>
-        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCBlockImpl>
-            Function(ffi.Pointer<objc.ObjCObject>))(arg0);
-ffi.Pointer<ffi.Void>
-    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureCallable =
-    ffi.Pointer.fromFunction<
-                ffi.Pointer<objc.ObjCBlockImpl> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<objc.ObjCObject>)>(
-            _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline)
-        .cast();
-
-/// Construction methods for `objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>`.
-abstract final class ObjCBlock_NSProgressUnpublishingHandler_NSProgress {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc
-      .ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>
-      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-              {bool retain = false, bool release = false}) =>
-          objc.ObjCBlock<
-              objc.ObjCBlock<ffi.Void Function()>? Function(
-                  NSProgress)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> fromFunctionPointer(
-          ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCBlockImpl> Function(
-                          ffi.Pointer<objc.ObjCObject> arg0)>>
-              ptr) =>
-      objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>(
-          objc.newPointerBlock(
-              _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrCallable, ptr.cast()),
-          retain: false,
-          release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<
-      objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> fromFunction(
-          objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress) fn) =>
-      objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>(
-          objc.newClosureBlock(
-              _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureCallable,
-              (ffi.Pointer<objc.ObjCObject> arg0) =>
-                  fn(NSProgress.castFromPointer(arg0, retain: true, release: true))
-                      ?.ref
-                      .retainAndAutorelease() ??
-                  ffi.nullptr),
-          retain: false,
-          release: true);
-}
-
-/// Call operator for `objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>`.
-extension ObjCBlock_NSProgressUnpublishingHandler_NSProgress_CallExtension
-    on objc
-    .ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> {
-  objc.ObjCBlock<ffi.Void Function()>? call(NSProgress arg0) => ref.pointer.ref.invoke
-              .cast<
-                  ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCBlockImpl> Function(
-                          ffi.Pointer<objc.ObjCBlockImpl> block,
-                          ffi.Pointer<objc.ObjCObject> arg0)>>()
-              .asFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<objc.ObjCObject>)>()
-              (ref.pointer, arg0.ref.pointer)
-              .address ==
-          0
-      ? null
-      : ObjCBlock_ffiVoid.castFromPointer(
-          ref.pointer.ref.invoke
-              .cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0)>>()
-              .asFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<objc.ObjCObject>)>()(ref.pointer, arg0.ref.pointer),
-          retain: true,
-          release: true);
-}
-
-enum NSOperationQueuePriority {
-  NSOperationQueuePriorityVeryLow(-8),
-  NSOperationQueuePriorityLow(-4),
-  NSOperationQueuePriorityNormal(0),
-  NSOperationQueuePriorityHigh(4),
-  NSOperationQueuePriorityVeryHigh(8);
-
-  final int value;
-  const NSOperationQueuePriority(this.value);
-
-  static NSOperationQueuePriority fromValue(int value) => switch (value) {
-        -8 => NSOperationQueuePriorityVeryLow,
-        -4 => NSOperationQueuePriorityLow,
-        0 => NSOperationQueuePriorityNormal,
-        4 => NSOperationQueuePriorityHigh,
-        8 => NSOperationQueuePriorityVeryHigh,
-        _ => throw ArgumentError(
-            "Unknown value for NSOperationQueuePriority: $value"),
-      };
-}
-
-/// WARNING: NSOperationQueue is a stub. To generate bindings for this class, include
-/// NSOperationQueue in your config's objc-interfaces list.
-///
-/// NSOperationQueue
-class NSOperationQueue extends objc.NSObject {
-  NSOperationQueue._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
-
-  /// Constructs a [NSOperationQueue] that points to the same underlying object as [other].
-  NSOperationQueue.castFrom(objc.ObjCObjectBase other)
-      : this._(other.ref.pointer, retain: true, release: true);
-
-  /// Constructs a [NSOperationQueue] that wraps the given raw object pointer.
-  NSOperationQueue.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-}
 
 /// WARNING: NSPredicate is a stub. To generate bindings for this class, include
 /// NSPredicate in your config's objc-interfaces list.
@@ -2629,6 +2367,101 @@ final _objc_msgSend_7oa3sf = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, int, bool)>();
+void _ObjCBlock_ffiVoid_fnPtrTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    block.ref.target
+        .cast<ffi.NativeFunction<ffi.Void Function()>>()
+        .asFunction<void Function()>()();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_fnPtrTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_closureTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    (objc.getBlockClosure(block) as void Function())();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_closureTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_listenerTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) {
+  (objc.getBlockClosure(block) as void Function())();
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
+    _ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>.listener(
+        _ObjCBlock_ffiVoid_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
+abstract final class ObjCBlock_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function()> castFromPointer(
+          ffi.Pointer<objc.ObjCBlockImpl> pointer,
+          {bool retain = false,
+          bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function()>(pointer,
+          retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunctionPointer(
+          ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunction(void Function() fn) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newClosureBlock(_ObjCBlock_ffiVoid_closureCallable, () => fn()),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function()> listener(void Function() fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_listenerCallable.nativeFunction.cast(), () => fn());
+    final wrapper = _MapLibreFFi_wrapListenerBlock_1pl9qdv(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function()>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
+extension ObjCBlock_ffiVoid_CallExtension
+    on objc.ObjCBlock<ffi.Void Function()> {
+  void call() => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)>>()
+          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
+        ref.pointer,
+      );
+}
+
 late final _sel_setUserTrackingMode_animated_completionHandler_ =
     objc.registerName("setUserTrackingMode:animated:completionHandler:");
 final _objc_msgSend_1iu40ms = objc.msgSendPointer
@@ -8053,271 +7886,6 @@ class MLNShapeSource extends MLNSource {
   MLNShapeSource autorelease() {
     final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
     return MLNShapeSource.castFromPointer(_ret, retain: true, release: true);
-  }
-}
-
-late final _class_MLNComputedShapeSource =
-    objc.getClass("MLNComputedShapeSource");
-late final _sel_initWithIdentifier_options_ =
-    objc.registerName("initWithIdentifier:options:");
-late final _sel_initWithIdentifier_dataSource_options_ =
-    objc.registerName("initWithIdentifier:dataSource:options:");
-late final _sel_invalidateBounds_ = objc.registerName("invalidateBounds:");
-late final _sel_invalidateTileAtX_y_zoomLevel_ =
-    objc.registerName("invalidateTileAtX:y:zoomLevel:");
-final _objc_msgSend_1r0ktp8 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>,
-                ffi.UnsignedLong,
-                ffi.UnsignedLong,
-                ffi.UnsignedLong)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, int, int, int)>();
-late final _sel_setFeatures_inTileAtX_y_zoomLevel_ =
-    objc.registerName("setFeatures:inTileAtX:y:zoomLevel:");
-final _objc_msgSend_6vicua = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>,
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.UnsignedLong,
-                ffi.UnsignedLong,
-                ffi.UnsignedLong)>>()
-    .asFunction<
-        void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            int,
-            int)>();
-late final _sel_dataSource = objc.registerName("dataSource");
-late final _sel_setDataSource_ = objc.registerName("setDataSource:");
-late final _sel_requestQueue = objc.registerName("requestQueue");
-
-/// ``MLNComputedShapeSource`` is a map content source that supplies vector shapes,
-/// one tile at a time, to be shown on the map on demand. You implement a class
-/// conforming to the ``MLNComputedShapeSourceDataSource`` protocol that returns
-/// instances of ``MLNShape`` or ``MLNShape``, then add a computed shape source to an
-/// ``MLNStyle`` object along with an ``MLNStyle`` object. The vector style
-/// layer defines the appearance of any content supplied by the computed shape
-/// source.
-///
-/// ``MLNComputedShapeSource`` is similar to ``MLNComputedShapeSource`` but is optimized for
-/// data sets that change dynamically or are too large to fit completely in memory.
-/// It is also useful for data that is divided into tiles in a format other than
-/// <a href="https://www.mapbox.com/vector-tiles/">Mapbox Vector Tiles</a>. For
-/// <a href="http://geojson.org/">GeoJSON</a> data, use the ``MLNShapeSource`` class.
-/// For static tiles or Mapbox Vector Tiles, use the ``MLNVectorTileSource`` class.
-///
-/// You can add and remove sources dynamically using methods such as
-/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``. This class
-/// cannot be represented in a style JSON file; you must add it ot the style at
-/// runtime.
-class MLNComputedShapeSource extends MLNSource {
-  MLNComputedShapeSource._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
-
-  /// Constructs a [MLNComputedShapeSource] that points to the same underlying object as [other].
-  MLNComputedShapeSource.castFrom(objc.ObjCObjectBase other)
-      : this._(other.ref.pointer, retain: true, release: true);
-
-  /// Constructs a [MLNComputedShapeSource] that wraps the given raw object pointer.
-  MLNComputedShapeSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [MLNComputedShapeSource].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_69e0x1(
-        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNComputedShapeSource);
-  }
-
-  /// Returns a custom shape data source initialized with an identifier, and a
-  /// dictionary of options for the source according to the
-  /// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
-  /// specification</a>.
-  ///
-  /// This class supports the following options:
-  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
-  /// ``MLNShapeSourceOptionBuffer``,
-  /// ``MLNShapeSourceOptionSimplificationTolerance``,
-  /// ``MLNShapeSourceOptionWrapsCoordinates``, and
-  /// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed
-  /// shape source cannot be clustered.
-  ///
-  /// @param identifier A string that uniquely identifies the source.
-  /// @param options An `NSDictionary` of options for this source.
-  MLNComputedShapeSource initWithIdentifier_options_(
-      objc.NSString identifier, objc.NSDictionary? options) {
-    final _ret = _objc_msgSend_rsfdlh(
-        this.ref.retainAndReturnPointer(),
-        _sel_initWithIdentifier_options_,
-        identifier.ref.pointer,
-        options?.ref.pointer ?? ffi.nullptr);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// Returns a custom shape data source initialized with an identifier, data source, and a
-  /// dictionary of options for the source according to the
-  /// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
-  /// specification</a>.
-  ///
-  /// This class supports the following options:
-  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
-  /// ``MLNShapeSourceOptionBuffer``,
-  /// ``MLNShapeSourceOptionSimplificationTolerance``,
-  /// ``MLNShapeSourceOptionWrapsCoordinates``, and
-  /// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed shape
-  /// source cannot be clustered.
-  ///
-  /// @param identifier A string that uniquely identifies the source.
-  /// @param options An `NSDictionary` of options for this source.
-  MLNComputedShapeSource initWithIdentifier_dataSource_options_(
-      objc.NSString identifier,
-      objc.ObjCObjectBase dataSource,
-      objc.NSDictionary? options) {
-    final _ret = _objc_msgSend_582s3n(
-        this.ref.retainAndReturnPointer(),
-        _sel_initWithIdentifier_dataSource_options_,
-        identifier.ref.pointer,
-        dataSource.ref.pointer,
-        options?.ref.pointer ?? ffi.nullptr);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// Invalidates all the features and properties intersecting with or contained in
-  /// the specified bounds. New fetch requests will immediately be invoked on the
-  /// ``MLNComputedShapeSourceDataSource``.
-  /// @param bounds  Coordinate bounds to invalidate.
-  void invalidateBounds_(MLNCoordinateBounds bounds) {
-    _objc_msgSend_9ay59k(this.ref.pointer, _sel_invalidateBounds_, bounds);
-  }
-
-  /// Invalidates all the feautres and properties of a given tile. A new fetch request
-  /// will immediately be invoked on the ``MLNComputedShapeSourceDataSource``.
-  /// @param x Tile X coordinate.
-  /// @param y Tile Y coordinate.
-  /// @param zoomLevel Tile zoom level.
-  void invalidateTileAtX_y_zoomLevel_(int x, int y, int zoomLevel) {
-    _objc_msgSend_1r0ktp8(
-        this.ref.pointer, _sel_invalidateTileAtX_y_zoomLevel_, x, y, zoomLevel);
-  }
-
-  /// Set a new set of features for a tile. This method can be invkoed from background threads.
-  /// For best performance, use this method only to update tiles that have already been requested
-  /// through ``MLNComputedShapeSourceDataSource/``
-  /// @param features  Features for the tile.
-  /// @param x         Tile X coordinate.
-  /// @param y         Tile Y coordinate.
-  /// @param zoomLevel Tile zoom level.
-  void setFeatures_inTileAtX_y_zoomLevel_(
-      objc.NSArray features, int x, int y, int zoomLevel) {
-    _objc_msgSend_6vicua(
-        this.ref.pointer,
-        _sel_setFeatures_inTileAtX_y_zoomLevel_,
-        features.ref.pointer,
-        x,
-        y,
-        zoomLevel);
-  }
-
-  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
-  /// for tile data.
-  objc.ObjCObjectBase? get dataSource {
-    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_dataSource);
-    return _ret.address == 0
-        ? null
-        : objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
-  /// for tile data.
-  set dataSource(objc.ObjCObjectBase? value) {
-    return _objc_msgSend_1jdvcbf(this.ref.pointer, _sel_setDataSource_,
-        value?.ref.pointer ?? ffi.nullptr);
-  }
-
-  /// A queue that calls to the data source will be made on.
-  NSOperationQueue get requestQueue {
-    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_requestQueue);
-    return NSOperationQueue.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// init
-  MLNComputedShapeSource init() {
-    final _ret =
-        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// Returns a source initialized with an identifier.
-  ///
-  /// After initializing and configuring the source, add it to a map view’s style
-  /// using the ``MLNStyle/addSource:`` method.
-  ///
-  /// @param identifier A string that uniquely identifies the source in the style to
-  /// which it is added.
-  /// @return An initialized source.
-  MLNComputedShapeSource initWithIdentifier_(objc.NSString identifier) {
-    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
-        _sel_initWithIdentifier_, identifier.ref.pointer);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// new
-  static MLNComputedShapeSource new1() {
-    final _ret = _objc_msgSend_1x359cv(_class_MLNComputedShapeSource, _sel_new);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// allocWithZone:
-  static MLNComputedShapeSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
-    final _ret = _objc_msgSend_hzlb60(
-        _class_MLNComputedShapeSource, _sel_allocWithZone_, zone);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// alloc
-  static MLNComputedShapeSource alloc() {
-    final _ret =
-        _objc_msgSend_1x359cv(_class_MLNComputedShapeSource, _sel_alloc);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// self
-  MLNComputedShapeSource self() {
-    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: true, release: true);
-  }
-
-  /// retain
-  MLNComputedShapeSource retain() {
-    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: true, release: true);
-  }
-
-  /// autorelease
-  MLNComputedShapeSource autorelease() {
-    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
-    return MLNComputedShapeSource.castFromPointer(_ret,
-        retain: true, release: true);
   }
 }
 
