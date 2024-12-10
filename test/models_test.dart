@@ -39,8 +39,8 @@ void main() {
       expect(all, equals(all2));
       expect(all.hashCode, equals(all2.hashCode));
     });
-    test('LngLatBounds', () {
-      const o = LngLatBounds(
+    test('BBox', () {
+      const o = BBox(
         latitudeSouth: -10,
         latitudeNorth: 10,
         longitudeWest: -10,
@@ -90,7 +90,7 @@ void main() {
       const o = OfflineRegion(
         minZoom: 2,
         maxZoom: 4,
-        bounds: LngLatBounds(
+        bounds: BBox(
           longitudeWest: 1,
           longitudeEast: 3,
           latitudeSouth: -3,
@@ -103,7 +103,7 @@ void main() {
       const o2 = OfflineRegion(
         minZoom: 3,
         maxZoom: 4,
-        bounds: LngLatBounds(
+        bounds: BBox(
           longitudeWest: 0,
           longitudeEast: 3,
           latitudeSouth: -5,
