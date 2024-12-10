@@ -51,32 +51,9 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
             }
         }
         self._flutterApi.onMapReady { _ in }
-        // pan gesture
-        var panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
-        panRecognizer.delegate = self
-        self._mapView.addGestureRecognizer(panRecognizer)
-        // pinch gesture
-        var pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
-        pinchRecognizer.delegate = self
-        self._mapView.addGestureRecognizer(pinchRecognizer)
-        // rotate gesture
-        var rotateRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
-        rotateRecognizer.delegate = self
-        self._mapView.addGestureRecognizer(rotateRecognizer)
-        // swipe gesture
-        var swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onMoveCamera(sender:)))
-        swipeRecognizer.delegate = self
-        self._mapView.addGestureRecognizer(swipeRecognizer)
         // tap gestures
         self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(sender:))))
         self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(sender:))))
-    }
-
-    @objc func onMoveCamera(sender: UITapGestureRecognizer) {
-        var mlnCamera = _mapView.camera
-        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
-        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
     @objc func onTap(sender: UITapGestureRecognizer) {
@@ -96,13 +73,28 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Allow the pan recognizer to work with the map's gesture recognizers
+        // Do not override the default behavior
         return true
     }
 
     // MLNMapViewDelegate method called when map has finished loading
     func mapView(mapView: MLNMapView, didFinishLoading _: MLNStyle) {
         _mapView = mapView
+    }
+    
+    func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
+        onCameraMoved()
+    }
+    
+    func mapViewRegionIsChanging(_ mapView: MLNMapView) {
+        onCameraMoved()
+    }
+    
+    func onCameraMoved() {
+        var mlnCamera = _mapView.camera
+        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
+        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
+        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
     func addFillLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
