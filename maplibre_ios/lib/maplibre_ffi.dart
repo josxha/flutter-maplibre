@@ -10,14 +10,14 @@ import 'package:ffi/ffi.dart' as pkg_ffi;
 @ffi.Native<
     ffi.Pointer<objc.ObjCBlockImpl> Function(
         ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjovn7(
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<
     ffi.Pointer<objc.ObjCBlockImpl> Function(
         ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjovn7(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
@@ -44,6 +44,268 @@ final class CGRect extends ffi.Struct {
 }
 
 final class _NSZone extends ffi.Opaque {}
+
+enum NSQualityOfService {
+  NSQualityOfServiceUserInteractive(33),
+  NSQualityOfServiceUserInitiated(25),
+  NSQualityOfServiceUtility(17),
+  NSQualityOfServiceBackground(9),
+  NSQualityOfServiceDefault(-1);
+
+  final int value;
+  const NSQualityOfService(this.value);
+
+  static NSQualityOfService fromValue(int value) => switch (value) {
+        33 => NSQualityOfServiceUserInteractive,
+        25 => NSQualityOfServiceUserInitiated,
+        17 => NSQualityOfServiceUtility,
+        9 => NSQualityOfServiceBackground,
+        -1 => NSQualityOfServiceDefault,
+        _ =>
+          throw ArgumentError("Unknown value for NSQualityOfService: $value"),
+      };
+}
+
+void _ObjCBlock_ffiVoid_fnPtrTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    block.ref.target
+        .cast<ffi.NativeFunction<ffi.Void Function()>>()
+        .asFunction<void Function()>()();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_fnPtrTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_closureTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) =>
+    (objc.getBlockClosure(block) as void Function())();
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable = ffi.Pointer
+        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
+            _ObjCBlock_ffiVoid_closureTrampoline)
+    .cast();
+void _ObjCBlock_ffiVoid_listenerTrampoline(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+) {
+  (objc.getBlockClosure(block) as void Function())();
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
+    _ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>.listener(
+        _ObjCBlock_ffiVoid_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
+abstract final class ObjCBlock_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function()> castFromPointer(
+          ffi.Pointer<objc.ObjCBlockImpl> pointer,
+          {bool retain = false,
+          bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function()>(pointer,
+          retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunctionPointer(
+          ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function()> fromFunction(void Function() fn) =>
+      objc.ObjCBlock<ffi.Void Function()>(
+          objc.newClosureBlock(_ObjCBlock_ffiVoid_closureCallable, () => fn()),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function()> listener(void Function() fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_listenerCallable.nativeFunction.cast(), () => fn());
+    final wrapper = _MapLibreFFi_wrapListenerBlock_1pl9qdv(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function()>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
+extension ObjCBlock_ffiVoid_CallExtension
+    on objc.ObjCBlock<ffi.Void Function()> {
+  void call() => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)>>()
+          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
+        ref.pointer,
+      );
+}
+
+ffi.Pointer<objc.ObjCBlockImpl>
+    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline(
+            ffi.Pointer<objc.ObjCBlockImpl> block,
+            ffi.Pointer<objc.ObjCObject> arg0) =>
+        block.ref.target
+            .cast<
+                ffi.NativeFunction<
+                    ffi.Pointer<objc.ObjCBlockImpl> Function(
+                        ffi.Pointer<objc.ObjCObject> arg0)>>()
+            .asFunction<
+                ffi.Pointer<objc.ObjCBlockImpl> Function(
+                    ffi.Pointer<objc.ObjCObject>)>()(arg0);
+ffi.Pointer<ffi.Void>
+    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCBlockImpl> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline)
+        .cast();
+ffi.Pointer<objc.ObjCBlockImpl>
+    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlockImpl> block,
+            ffi.Pointer<objc.ObjCObject> arg0) =>
+        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCBlockImpl>
+            Function(ffi.Pointer<objc.ObjCObject>))(arg0);
+ffi.Pointer<ffi.Void>
+    _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCBlockImpl> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>`.
+abstract final class ObjCBlock_NSProgressUnpublishingHandler_NSProgress {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc
+      .ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<
+              objc.ObjCBlock<ffi.Void Function()>? Function(
+                  NSProgress)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCBlockImpl> Function(
+                          ffi.Pointer<objc.ObjCObject> arg0)>>
+              ptr) =>
+      objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>(
+          objc.newPointerBlock(
+              _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<
+      objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> fromFunction(
+          objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress) fn) =>
+      objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>(
+          objc.newClosureBlock(
+              _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureCallable,
+              (ffi.Pointer<objc.ObjCObject> arg0) =>
+                  fn(NSProgress.castFromPointer(arg0, retain: true, release: true))
+                      ?.ref
+                      .retainAndAutorelease() ??
+                  ffi.nullptr),
+          retain: false,
+          release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>`.
+extension ObjCBlock_NSProgressUnpublishingHandler_NSProgress_CallExtension
+    on objc
+    .ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)> {
+  objc.ObjCBlock<ffi.Void Function()>? call(NSProgress arg0) => ref.pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCBlockImpl> Function(
+                          ffi.Pointer<objc.ObjCBlockImpl> block,
+                          ffi.Pointer<objc.ObjCObject> arg0)>>()
+              .asFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<objc.ObjCObject>)>()
+              (ref.pointer, arg0.ref.pointer)
+              .address ==
+          0
+      ? null
+      : ObjCBlock_ffiVoid.castFromPointer(
+          ref.pointer.ref.invoke
+              .cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0)>>()
+              .asFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<objc.ObjCObject>)>()(ref.pointer, arg0.ref.pointer),
+          retain: true,
+          release: true);
+}
+
+enum NSOperationQueuePriority {
+  NSOperationQueuePriorityVeryLow(-8),
+  NSOperationQueuePriorityLow(-4),
+  NSOperationQueuePriorityNormal(0),
+  NSOperationQueuePriorityHigh(4),
+  NSOperationQueuePriorityVeryHigh(8);
+
+  final int value;
+  const NSOperationQueuePriority(this.value);
+
+  static NSOperationQueuePriority fromValue(int value) => switch (value) {
+        -8 => NSOperationQueuePriorityVeryLow,
+        -4 => NSOperationQueuePriorityLow,
+        0 => NSOperationQueuePriorityNormal,
+        4 => NSOperationQueuePriorityHigh,
+        8 => NSOperationQueuePriorityVeryHigh,
+        _ => throw ArgumentError(
+            "Unknown value for NSOperationQueuePriority: $value"),
+      };
+}
+
+/// WARNING: NSOperationQueue is a stub. To generate bindings for this class, include
+/// NSOperationQueue in your config's objc-interfaces list.
+///
+/// NSOperationQueue
+class NSOperationQueue extends objc.NSObject {
+  NSOperationQueue._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [NSOperationQueue] that points to the same underlying object as [other].
+  NSOperationQueue.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [NSOperationQueue] that wraps the given raw object pointer.
+  NSOperationQueue.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
 
 /// WARNING: NSPredicate is a stub. To generate bindings for this class, include
 /// NSPredicate in your config's objc-interfaces list.
@@ -437,6 +699,24 @@ final class MLNCoordinateBounds extends ffi.Struct {
 
   /// Coordinate at the northeast corner.
   external CLLocationCoordinate2D ne;
+}
+
+/// A quadrilateral area as measured on a two-dimensional map projection.
+/// ``MLNCoordinateQuad`` differs from ``MLNCoordinateQuad`` in that it allows
+/// representation of non-axis aligned bounds and non-rectangular quadrilaterals.
+/// The coordinates are described in counter clockwise order from top left.
+final class MLNCoordinateQuad extends ffi.Struct {
+  /// Coordinate at the top left corner.
+  external CLLocationCoordinate2D topLeft;
+
+  /// Coordinate at the bottom left corner.
+  external CLLocationCoordinate2D bottomLeft;
+
+  /// Coordinate at the bottom right corner.
+  external CLLocationCoordinate2D bottomRight;
+
+  /// Coordinate at the top right corner.
+  external CLLocationCoordinate2D topRight;
 }
 
 late final _class_MLNMapCamera = objc.getClass("MapLibre.MLNMapCamera");
@@ -2349,101 +2629,6 @@ final _objc_msgSend_7oa3sf = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, int, bool)>();
-void _ObjCBlock_ffiVoid_fnPtrTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) =>
-    block.ref.target
-        .cast<ffi.NativeFunction<ffi.Void Function()>>()
-        .asFunction<void Function()>()();
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable = ffi.Pointer
-        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
-            _ObjCBlock_ffiVoid_fnPtrTrampoline)
-    .cast();
-void _ObjCBlock_ffiVoid_closureTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) =>
-    (objc.getBlockClosure(block) as void Function())();
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable = ffi.Pointer
-        .fromFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>(
-            _ObjCBlock_ffiVoid_closureTrampoline)
-    .cast();
-void _ObjCBlock_ffiVoid_listenerTrampoline(
-  ffi.Pointer<objc.ObjCBlockImpl> block,
-) {
-  (objc.getBlockClosure(block) as void Function())();
-  objc.objectRelease(block.cast());
-}
-
-ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
-    _ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
-            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>.listener(
-        _ObjCBlock_ffiVoid_listenerTrampoline)
-      ..keepIsolateAlive = false;
-
-/// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
-abstract final class ObjCBlock_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Void Function()> castFromPointer(
-          ffi.Pointer<objc.ObjCBlockImpl> pointer,
-          {bool retain = false,
-          bool release = false}) =>
-      objc.ObjCBlock<ffi.Void Function()>(pointer,
-          retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function()> fromFunctionPointer(
-          ffi.Pointer<ffi.NativeFunction<ffi.Void Function()>> ptr) =>
-      objc.ObjCBlock<ffi.Void Function()>(
-          objc.newPointerBlock(_ObjCBlock_ffiVoid_fnPtrCallable, ptr.cast()),
-          retain: false,
-          release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function()> fromFunction(void Function() fn) =>
-      objc.ObjCBlock<ffi.Void Function()>(
-          objc.newClosureBlock(_ObjCBlock_ffiVoid_closureCallable, () => fn()),
-          retain: false,
-          release: true);
-
-  /// Creates a listener block from a Dart function.
-  ///
-  /// This is based on FFI's NativeCallable.listener, and has the same
-  /// capabilities and limitations. This block can be invoked from any thread,
-  /// but only supports void functions, and is not run synchronously. See
-  /// NativeCallable.listener for more details.
-  ///
-  /// Note that unlike the default behavior of NativeCallable.listener, listener
-  /// blocks do not keep the isolate alive.
-  static objc.ObjCBlock<ffi.Void Function()> listener(void Function() fn) {
-    final raw = objc.newClosureBlock(
-        _ObjCBlock_ffiVoid_listenerCallable.nativeFunction.cast(), () => fn());
-    final wrapper = _MapLibreFFi_wrapListenerBlock_1pl9qdv(raw);
-    objc.objectRelease(raw.cast());
-    return objc.ObjCBlock<ffi.Void Function()>(wrapper,
-        retain: false, release: true);
-  }
-}
-
-/// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
-extension ObjCBlock_ffiVoid_CallExtension
-    on objc.ObjCBlock<ffi.Void Function()> {
-  void call() => ref.pointer.ref.invoke
-          .cast<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)>>()
-          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
-        ref.pointer,
-      );
-}
-
 late final _sel_setUserTrackingMode_animated_completionHandler_ =
     objc.registerName("setUserTrackingMode:animated:completionHandler:");
 final _objc_msgSend_1iu40ms = objc.msgSendPointer
@@ -3040,15 +3225,138 @@ final _objc_msgSend_1mt4adu = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             MLNCoordinateBounds,
             ffi.Pointer<objc.ObjCObject>)>();
+late final _class_MLNShape = objc.getClass("MLNShape");
+late final _sel_shapeWithData_encoding_error_ =
+    objc.registerName("shapeWithData:encoding:error:");
+final _objc_msgSend_94cet5 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.UnsignedLong,
+                ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            int,
+            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>();
+late final _sel_title = objc.registerName("title");
+late final _sel_setTitle_ = objc.registerName("setTitle:");
+late final _sel_subtitle = objc.registerName("subtitle");
+late final _sel_setSubtitle_ = objc.registerName("setSubtitle:");
+late final _sel_toolTip = objc.registerName("toolTip");
+late final _sel_setToolTip_ = objc.registerName("setToolTip:");
+late final _sel_geoJSONDataUsingEncoding_ =
+    objc.registerName("geoJSONDataUsingEncoding:");
+final _objc_msgSend_1qrcblu = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_coordinate = objc.registerName("coordinate");
+CLLocationCoordinate2D
+    _ObjCBlock_CLLocationCoordinate2D_ffiVoid_fnPtrTrampoline(
+            ffi.Pointer<objc.ObjCBlockImpl> block,
+            ffi.Pointer<ffi.Void> arg0) =>
+        block.ref.target
+            .cast<
+                ffi.NativeFunction<
+                    CLLocationCoordinate2D Function(
+                        ffi.Pointer<ffi.Void> arg0)>>()
+            .asFunction<
+                CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_CLLocationCoordinate2D_ffiVoid_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                CLLocationCoordinate2D Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_CLLocationCoordinate2D_ffiVoid_fnPtrTrampoline)
+        .cast();
+CLLocationCoordinate2D
+    _ObjCBlock_CLLocationCoordinate2D_ffiVoid_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlockImpl> block,
+            ffi.Pointer<ffi.Void> arg0) =>
+        (objc.getBlockClosure(block) as CLLocationCoordinate2D Function(
+            ffi.Pointer<ffi.Void>))(arg0);
+ffi.Pointer<ffi.Void>
+    _ObjCBlock_CLLocationCoordinate2D_ffiVoid_closureCallable =
+    ffi.Pointer.fromFunction<
+                CLLocationCoordinate2D Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_CLLocationCoordinate2D_ffiVoid_closureTrampoline)
+        .cast();
 
-/// WARNING: MLNShape is a stub. To generate bindings for this class, include
-/// MLNShape in your config's objc-interfaces list.
-///
+/// Construction methods for `objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_CLLocationCoordinate2D_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<
+                  CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(
+              pointer,
+              retain: retain,
+              release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      CLLocationCoordinate2D Function(
+                          ffi.Pointer<ffi.Void> arg0)>>
+              ptr) =>
+      objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(
+          objc.newPointerBlock(
+              _ObjCBlock_CLLocationCoordinate2D_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>
+      fromFunction(CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>) fn) =>
+          objc.ObjCBlock<
+                  CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(
+              objc.newClosureBlock(
+                  _ObjCBlock_CLLocationCoordinate2D_ffiVoid_closureCallable,
+                  (ffi.Pointer<ffi.Void> arg0) => fn(arg0)),
+              retain: false,
+              release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_CLLocationCoordinate2D_ffiVoid_CallExtension
+    on objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> {
+  CLLocationCoordinate2D call(ffi.Pointer<ffi.Void> arg0) =>
+      ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  CLLocationCoordinate2D Function(
+                      ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<ffi.Void> arg0)>>()
+          .asFunction<
+              CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>)>()(ref.pointer, arg0);
+}
+
 /// MLNShape
-class MLNShape extends objc.ObjCObjectBase {
+class MLNShape extends objc.NSObject {
   MLNShape._(ffi.Pointer<objc.ObjCObject> pointer,
       {bool retain = false, bool release = false})
-      : super(pointer, retain: retain, release: release);
+      : super.castFromPointer(pointer, retain: retain, release: release);
 
   /// Constructs a [MLNShape] that points to the same underlying object as [other].
   MLNShape.castFrom(objc.ObjCObjectBase other)
@@ -3058,6 +3366,210 @@ class MLNShape extends objc.ObjCObjectBase {
   MLNShape.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
       {bool retain = false, bool release = false})
       : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNShape].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShape);
+  }
+
+  /// Returns an ``MLNShape`` object initialized with the given data interpreted as a
+  /// string containing a GeoJSON object.
+  ///
+  /// If the GeoJSON object is a geometry, the returned value is a kind of
+  /// ``MLNShape``. If it is a feature object, the returned value is a kind of
+  /// ``MLNShape`` that conforms to the ``MLNShape`` protocol. If it is a feature
+  /// collection object, the returned value is an instance of
+  /// ``MLNShapeCollectionFeature``.
+  ///
+  /// ### Example
+  ///
+  /// ```swift
+  /// let url = mainBundle.url(forResource: "amsterdam", withExtension: "geojson")!
+  /// let data = try! Data(contentsOf: url)
+  /// let feature = try! MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) as!
+  /// MLNShapeCollectionFeature
+  /// ```
+  ///
+  /// @param data String data containing GeoJSON source code.
+  /// @param encoding The encoding used by `data`.
+  /// @param outError Upon return, if an error has occurred, a pointer to an
+  /// `NSError` object describing the error. Pass in `NULL` to ignore any error.
+  /// @return An ``MLNShape`` object representation of `data`, or `nil` if `data` could
+  /// not be parsed as valid GeoJSON source code. If `nil`, `outError` contains an
+  /// `NSError` object describing the problem.
+  static MLNShape? shapeWithData_encoding_error_(objc.NSData data, int encoding,
+      ffi.Pointer<ffi.Pointer<objc.ObjCObject>> outError) {
+    final _ret = _objc_msgSend_94cet5(
+        _class_MLNShape,
+        _sel_shapeWithData_encoding_error_,
+        data.ref.pointer,
+        encoding,
+        outError);
+    return _ret.address == 0
+        ? null
+        : MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The title of the shape annotation.
+  ///
+  /// The default value of this property is `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``. To name
+  /// a shape used in a shape source, create an ``MLNFeature`` and add an attribute to
+  /// the ``MLNFeature/attributes`` property.
+  objc.NSString? get title {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_title);
+    return _ret.address == 0
+        ? null
+        : objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The title of the shape annotation.
+  ///
+  /// The default value of this property is `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``. To name
+  /// a shape used in a shape source, create an ``MLNFeature`` and add an attribute to
+  /// the ``MLNFeature/attributes`` property.
+  set title(objc.NSString? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setTitle_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The subtitle of the shape annotation. The default value of this property is
+  /// `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``. To
+  /// provide additional information about a shape used in a shape source, create an
+  /// ``MLNFeature`` and add an attribute to the ``MLNFeature/attributes`` property.
+  objc.NSString? get subtitle {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_subtitle);
+    return _ret.address == 0
+        ? null
+        : objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The subtitle of the shape annotation. The default value of this property is
+  /// `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``. To
+  /// provide additional information about a shape used in a shape source, create an
+  /// ``MLNFeature`` and add an attribute to the ``MLNFeature/attributes`` property.
+  set subtitle(objc.NSString? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setSubtitle_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The tooltip of the shape annotation.
+  ///
+  /// The default value of this property is `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``.
+  objc.NSString? get toolTip {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_toolTip);
+    return _ret.address == 0
+        ? null
+        : objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The tooltip of the shape annotation.
+  ///
+  /// The default value of this property is `nil`.
+  ///
+  /// This property is ignored when the shape is used in an ``MLNShapeSource``.
+  set toolTip(objc.NSString? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setToolTip_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Returns the GeoJSON string representation of the shape encapsulated in a data
+  /// object.
+  ///
+  /// @param encoding The string encoding to use.
+  /// @return A data object containing the shape’s GeoJSON string representation.
+  objc.NSData geoJSONDataUsingEncoding_(int encoding) {
+    final _ret = _objc_msgSend_1qrcblu(
+        this.ref.pointer, _sel_geoJSONDataUsingEncoding_, encoding);
+    return objc.NSData.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// init
+  MLNShape init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNShape new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNShape, _sel_new);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNShape allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNShape, _sel_allocWithZone_, zone);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNShape alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNShape, _sel_alloc);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNShape self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNShape retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNShape autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The center point (specified as a map coordinate) of the annotation. (required)
+  /// (read-only)
+  CLLocationCoordinate2D get coordinate {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_18o5nokStret(_ptr, this.ref.pointer, _sel_coordinate)
+        : _ptr.ref = _objc_msgSend_18o5nok(this.ref.pointer, _sel_coordinate);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+  }
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNShape, _sel_supportsSecureCoding);
+  }
+
+  /// encodeWithCoder:
+  void encodeWithCoder_(objc.NSCoder coder) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+  }
+
+  /// initWithCoder:
+  MLNShape? initWithCoder_(objc.NSCoder coder) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithCoder_, coder.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
 }
 
 late final _sel_camera_fittingShape_edgePadding_ =
@@ -5225,7 +5737,7 @@ class MLNMapView extends objc.ObjCObjectBase {
   /// around the given coordinate bounds.
   /// @param animated Specify `YES` to animate the change by smoothly scrolling and
   /// zooming or `NO` to immediately display the given bounds.
-  void _edgePadding_animated_(
+  void setVisibleCoordinateBounds_edgePadding_animated_(
       MLNCoordinateBounds bounds, objc.ObjCObjectBase insets, bool animated) {
     _objc_msgSend_13x0pfk(
         this.ref.pointer,
@@ -6606,5 +7118,1917 @@ class MLNMapView extends objc.ObjCObjectBase {
   set debugMask(MLNMapDebugMaskOptions value) {
     return _objc_msgSend_pisvbv(
         this.ref.pointer, _sel_setDebugMask_, value.value);
+  }
+}
+
+/// WARNING: MLNPointAnnotation is a stub. To generate bindings for this class, include
+/// MLNPointAnnotation in your config's objc-interfaces list.
+///
+/// An ``MLNPointAnnotation`` object represents a one-dimensional shape located at a
+/// single geographical coordinate. Depending on how it is used, an
+/// ``MLNPointAnnotation`` object is known as a point annotation or point shape. For
+/// example, you could use a point shape to represent a city at low zoom levels, an
+/// address at high zoom levels, or the location of a long press gesture.
+///
+/// You can add point shapes to the map by adding them to an ``MLNShapeSource``
+/// object. Configure the appearance of an ``MLNShapeSource``’s or
+/// ``MLNVectorTileSource``’s point shapes collectively using an ``MLNVectorTileSource`` or
+/// ``MLNSymbolStyleLayer`` object.
+///
+/// For more interactivity, add a selectable point annotation to a map view using
+/// the ``MLNMapView/addAnnotation:`` method. Alternatively, define your own model
+/// class that conforms to the ``MLNAnnotation`` protocol. Configure a point
+/// annotation’s appearance using
+/// ``MLNMapViewDelegate/mapView:imageForAnnotation:`` or
+/// ``MLNMapViewDelegate/mapView:viewForAnnotation:`` (iOS only). A point
+/// annotation’s ``MLNShape/title`` and ``MLNShape/title`` properties define the
+/// default content of the annotation’s callout (on iOS) or popover (on macOS).
+///
+/// To group multiple related points together in one shape, use an
+/// ``MLNPointCollection`` or ``MLNPointCollection`` object. To access
+/// a point’s attributes, use an ``MLNPointFeature`` object.
+///
+/// A point shape is known as a
+/// <a href="https://tools.ietf.org/html/rfc7946#section-3.1.2">Point</a> geometry
+/// in GeoJSON.
+///
+/// #### Related examples
+/// TODO: Mark a place on the map with an annotation
+/// TODO: Mark a place on the map with an image
+/// TODO: Default callout usage
+/// Learn how to add ``MLNPointAnnotation`` objects to your map.
+class MLNPointAnnotation extends MLNShape {
+  MLNPointAnnotation._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNPointAnnotation] that points to the same underlying object as [other].
+  MLNPointAnnotation.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNPointAnnotation] that wraps the given raw object pointer.
+  MLNPointAnnotation.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+/// WARNING: MLNPointFeature is a stub. To generate bindings for this class, include
+/// MLNPointFeature in your config's objc-interfaces list.
+///
+/// An ``MLNPointFeature`` object associates a point shape with an optional
+/// identifier and attributes.
+///
+/// #### Related examples
+/// - <doc:WebAPIDataExample>
+class MLNPointFeature extends MLNPointAnnotation {
+  MLNPointFeature._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNPointFeature] that points to the same underlying object as [other].
+  MLNPointFeature.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNPointFeature] that wraps the given raw object pointer.
+  MLNPointFeature.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+/// WARNING: MLNPointFeatureCluster is a stub. To generate bindings for this class, include
+/// MLNPointFeatureCluster in your config's objc-interfaces list.
+///
+/// An ``MLNPointFeatureCluster`` object associates a point shape (with an optional
+/// identifier and attributes) and represents a point cluster.
+///
+/// @see ``MLNCluster``
+///
+/// #### Related examples
+/// TODO: Clustering point data, learn how to initialize
+/// clusters and add them to your map.
+class MLNPointFeatureCluster extends MLNPointFeature {
+  MLNPointFeatureCluster._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNPointFeatureCluster] that points to the same underlying object as [other].
+  MLNPointFeatureCluster.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNPointFeatureCluster] that wraps the given raw object pointer.
+  MLNPointFeatureCluster.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
+late final _class_MLNTileSource = objc.getClass("MLNTileSource");
+late final _sel_configurationURL = objc.registerName("configurationURL");
+late final _sel_attributionInfos = objc.registerName("attributionInfos");
+
+/// ``MLNTileSource`` is a map content source that supplies map tiles to be shown on
+/// the map. The location of and metadata about the tiles are defined either by an
+/// option dictionary or by an external file that conforms to the
+/// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+/// A tile source is added to an ``MLNStyle`` object along with one or more
+/// ``MLNRasterStyleLayer`` or ``MLNRasterStyleLayer`` objects. Use a style layer to
+/// control the appearance of content supplied by the tile source.
+///
+/// A tile source is also known as a tile set. To learn about the structure of a
+/// Mapbox-hosted tile set, view it in
+/// <a href="https://www.mapbox.com/studio/tilesets/">Mapbox Studio’s Tilesets editor</a>.
+///
+/// Create instances of ``MLNRasterTileSource`` and ``MLNRasterTileSource`` in order
+/// to use ``MLNTileSource``'s properties and methods. Do not create instances of
+/// ``MLNTileSource`` directly, and do not create your own subclasses of this class.
+class MLNTileSource extends MLNSource {
+  MLNTileSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNTileSource] that points to the same underlying object as [other].
+  MLNTileSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNTileSource] that wraps the given raw object pointer.
+  MLNTileSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNTileSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTileSource);
+  }
+
+  /// The URL to the TileJSON configuration file that specifies the contents of the
+  /// source.
+  ///
+  /// If the receiver was initialized using
+  /// `-initWithIdentifier:tileURLTemplates:options`, this property is set to `nil`.
+  objc.NSURL? get configurationURL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_configurationURL);
+    return _ret.address == 0
+        ? null
+        : objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// An array of ``MLNAttributionInfo`` objects that define the attribution
+  /// statements to be displayed when the map is shown to the user.
+  ///
+  /// By default, this array is empty. If the source is initialized with a
+  /// configuration URL, this array is also empty until the configuration JSON file
+  /// is loaded.
+  objc.NSArray get attributionInfos {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_attributionInfos);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// init
+  MLNTileSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNTileSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNTileSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNTileSource, _sel_new);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNTileSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNTileSource, _sel_allocWithZone_, zone);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNTileSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNTileSource, _sel_alloc);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNTileSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNTileSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNTileSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNTileSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNTileSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNTileSource.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_MLNVectorTileSource =
+    objc.getClass("MapLibre.MLNVectorTileSource");
+late final _sel_initWithIdentifier_configurationURL_ =
+    objc.registerName("initWithIdentifier:configurationURL:");
+final _objc_msgSend_rsfdlh = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_initWithIdentifier_tileURLTemplates_options_ =
+    objc.registerName("initWithIdentifier:tileURLTemplates:options:");
+late final _sel_featuresInSourceLayersWithIdentifiers_predicate_ =
+    objc.registerName("featuresInSourceLayersWithIdentifiers:predicate:");
+
+/// ``MLNVectorTileSource`` is a map content source that supplies tiled vector data
+/// in <a href="https://www.mapbox.com/vector-tiles/">Mapbox Vector Tile</a> format
+/// to be shown on the map. The location of and metadata about the tiles are
+/// defined either by an option dictionary or by an external file that conforms to
+/// the
+/// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+/// A vector tile source is added to an ``MLNStyle`` object along with one or more
+/// ``MLNVectorStyleLayer`` objects. A vector style layer defines the appearance of
+/// any content supplied by the vector tile source.
+///
+/// ``MLNVectorTileSource`` is optimized for data sets that are too large to fit
+/// completely in memory, such as vector tile sets or data sets managed in
+/// <a href="https://www.mapbox.com/studio/">Mapbox Studio</a>. For
+/// <a href="http://geojson.org/">GeoJSON</a> data, use the ``MLNShapeSource``
+/// class. For tiled data that changes dynamically, the ``MLNComputedShapeSource``
+/// class may be a suitable alternative.
+///
+/// Each
+/// <a href="https://maplibre.org/maplibre-style-spec/sources/#vector"><code>vector</code></a>
+/// source defined by the style JSON file is represented at runtime by an
+/// ``MLNVectorTileSource`` object that you can use to initialize new style layers.
+/// You can also add and remove sources dynamically using methods such as
+/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``.
+///
+/// Within each vector tile, each geometric coordinate must lie between
+/// −1&nbsp;×&nbsp;<var>extent</var> and
+/// (<var>extent</var>&nbsp;×&nbsp;2)&nbsp;−&nbsp;1, inclusive. Any vector style
+/// layer initialized with a vector tile source must have a non-`nil` value in its
+/// `sourceLayerIdentifier` property.
+///
+/// Commonly used vector tile sources include
+/// <a href="https://www.mapbox.com/vector-tiles/mapbox-streets/">Mapbox Streets</a>,
+/// <a href="https://www.mapbox.com/vector-tiles/mapbox-terrain/">Mapbox Terrain</a>,
+/// and
+/// <a href="https://www.mapbox.com/vector-tiles/mapbox-traffic-v1/">Mapbox Traffic</a>.
+///
+/// ### Example
+///
+/// ```swift
+/// let source = MLNVectorTileSource(identifier: "pois", tileURLTemplates:
+/// ["https://example.com/vector-tiles/{z}/{x}/{y}.mvt"], options: [ .minimumZoomLevel: 9,
+/// .maximumZoomLevel: 16,
+/// .attributionInfos: [
+/// MLNAttributionInfo(title: NSAttributedString(string: "© Mapbox"), url: URL(string:
+/// "https://mapbox.com"))
+/// ]
+/// ])
+/// mapView.style?.addSource(source)
+/// ```
+///
+/// #### Related examples
+/// TODO: Data-driven circles, learn how to add data to your map using
+/// an ``MLNVectorTileSource`` object.
+class MLNVectorTileSource extends MLNTileSource {
+  MLNVectorTileSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNVectorTileSource] that points to the same underlying object as [other].
+  MLNVectorTileSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNVectorTileSource] that wraps the given raw object pointer.
+  MLNVectorTileSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNVectorTileSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorTileSource);
+  }
+
+  /// Returns a vector tile source initialized with an identifier and configuration
+  /// URL.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or a canonical
+  /// URL. The URL should point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURL A URL to a TileJSON configuration file describing the
+  /// source’s contents and other metadata.
+  /// @return An initialized vector tile source.
+  MLNVectorTileSource initWithIdentifier_configurationURL_(
+      objc.NSString identifier, objc.NSURL configurationURL) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURL_,
+        identifier.ref.pointer,
+        configurationURL.ref.pointer);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a vector tile source initialized an identifier, tile URL templates, and
+  /// options.
+  ///
+  /// Tile URL templates are strings that specify the URLs of the vector tiles to
+  /// load. See the “<a href="../tile-url-templates.html">Tile URL Templates</a>”
+  /// guide for information about the format of a tile URL template.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param tileURLTemplates An array of tile URL template strings. Only the first
+  /// string is used; any additional strings are ignored.
+  /// @param options A dictionary containing configuration options. See
+  /// ``MLNTileSourceOption`` for available keys and values. Pass in `nil` to use
+  /// the default values.
+  /// @return An initialized tile source.
+  MLNVectorTileSource initWithIdentifier_tileURLTemplates_options_(
+      objc.NSString identifier,
+      objc.NSArray tileURLTemplates,
+      objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_tileURLTemplates_options_,
+        identifier.ref.pointer,
+        tileURLTemplates.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns an array of map features loaded by this source, restricted to the given
+  /// source layers and filtered by the given predicate.
+  ///
+  /// Each object in the returned array represents a feature loaded by the source and
+  /// provides access to attributes specified as part of the loaded feature. The
+  /// source loads a feature if the source is added to an ``MLNMapView``’s style; that
+  /// style has a layer that uses the source; and the map view has recently scrolled
+  /// to the region containing the feature.
+  ///
+  /// Features come from tiled vector data that is converted to tiles internally, so
+  /// feature geometries are clipped at tile boundaries and features may appear
+  /// duplicated across tiles. For example, suppose part of a lengthy polyline
+  /// representing a road has recently scrolled into view. The resulting array
+  /// includes those parts of the road that lie within the map tiles that the source
+  /// has loaded, even if the road extends into other tiles. The portion of the road
+  /// within each map tile is included individually.
+  ///
+  /// Returned features may not necessarily be visible to the user at the time they
+  /// are loaded: the style may contain a layer that forces the source’s tiles to
+  /// load but filters out the features in question, preventing them from being
+  /// drawn. To obtain only _visible_ features, use the
+  /// ``MLNMapView/visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:``
+  /// or
+  /// ``MLNMapView/visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:``
+  /// method.
+  ///
+  /// @param sourceLayerIdentifiers The source layers to include in the query. Only
+  /// the features contained in these source layers are included in the returned
+  /// array. This array may not be empty.
+  /// @param predicate A predicate to filter the returned features. Use `nil` to
+  /// include all loaded features.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features loaded by the source that match the predicate.
+  objc.NSArray featuresInSourceLayersWithIdentifiers_predicate_(
+      objc.NSSet sourceLayerIdentifiers, NSPredicate? predicate) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.pointer,
+        _sel_featuresInSourceLayersWithIdentifiers_predicate_,
+        sourceLayerIdentifiers.ref.pointer,
+        predicate?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// init
+  MLNVectorTileSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNVectorTileSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNVectorTileSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNVectorTileSource, _sel_new);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNVectorTileSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNVectorTileSource, _sel_allocWithZone_, zone);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNVectorTileSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNVectorTileSource, _sel_alloc);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNVectorTileSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// retain
+  MLNVectorTileSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNVectorTileSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+}
+
+late final _class_MLNShapeSource = objc.getClass("MLNShapeSource");
+late final _sel_initWithIdentifier_URL_options_ =
+    objc.registerName("initWithIdentifier:URL:options:");
+late final _sel_initWithIdentifier_shape_options_ =
+    objc.registerName("initWithIdentifier:shape:options:");
+late final _sel_initWithIdentifier_features_options_ =
+    objc.registerName("initWithIdentifier:features:options:");
+late final _sel_initWithIdentifier_shapes_options_ =
+    objc.registerName("initWithIdentifier:shapes:options:");
+late final _sel_shape = objc.registerName("shape");
+late final _sel_setShape_ = objc.registerName("setShape:");
+late final _sel_URL = objc.registerName("URL");
+late final _sel_setURL_ = objc.registerName("setURL:");
+late final _sel_featuresMatchingPredicate_ =
+    objc.registerName("featuresMatchingPredicate:");
+late final _sel_leavesOfCluster_offset_limit_ =
+    objc.registerName("leavesOfCluster:offset:limit:");
+final _objc_msgSend_x2b4hx = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.UnsignedLong,
+                ffi.UnsignedLong)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            int,
+            int)>();
+late final _sel_childrenOfCluster_ = objc.registerName("childrenOfCluster:");
+late final _sel_zoomLevelForExpandingCluster_ =
+    objc.registerName("zoomLevelForExpandingCluster:");
+final _objc_msgSend_hlyk7w = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        double Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+final _objc_msgSend_hlyk7wFpret = objc.msgSendFpretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Double Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        double Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+
+/// ``MLNShapeSource`` is a map content source that supplies vector shapes to be
+/// shown on the map. The shapes may be instances of ``MLNShape`` or ``MLNShape``,
+/// or they may be defined by local or external
+/// <a href="http://geojson.org/">GeoJSON</a> code. A shape source is added to an
+/// ``MLNStyle`` object along with an ``MLNStyle`` object. The vector style
+/// layer defines the appearance of any content supplied by the shape source. You
+/// can update a shape source by setting its `shape` or `URL` property.
+///
+/// ``MLNShapeSource`` is optimized for data sets that change dynamically and fit
+/// completely in memory. For large data sets that do not fit completely in memory,
+/// use the ``MLNComputedShapeSource`` or ``MLNComputedShapeSource`` class.
+///
+/// Each
+/// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson"><code>geojson</code></a>
+/// source defined by the style JSON file is represented at runtime by an
+/// ``MLNShapeSource`` object that you can use to refine the map’s content and
+/// initialize new style layers. You can also add and remove sources dynamically
+/// using methods such as ``MLNStyle/addSource:`` and
+/// ``MLNStyle/sourceWithIdentifier:``.
+///
+/// Any vector style layer initialized with a shape source should have a `nil`
+/// value in its `sourceLayerIdentifier` property.
+///
+/// ### Example
+///
+/// ```swift
+/// var coordinates: [CLLocationCoordinate2D] = [
+/// CLLocationCoordinate2D(latitude: 37.77, longitude: -122.42),
+/// CLLocationCoordinate2D(latitude: 38.91, longitude: -77.04),
+/// ]
+/// let polyline = MLNPolylineFeature(coordinates: &coordinates, count: UInt(coordinates.count))
+/// let source = MLNShapeSource(identifier: "lines", features: [polyline], options: nil)
+/// mapView.style?.addSource(source)
+/// ```
+///
+/// #### Related examples
+/// TODO: Cluster point data
+/// TODO: Use images to cluster point data
+/// TODO: Add live data
+/// Learn how to add data to your map using this ``MLNSource`` object.
+class MLNShapeSource extends MLNSource {
+  MLNShapeSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNShapeSource] that points to the same underlying object as [other].
+  MLNShapeSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNShapeSource] that wraps the given raw object pointer.
+  MLNShapeSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNShapeSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeSource);
+  }
+
+  /// Returns a shape source with an identifier, URL, and dictionary of options for
+  /// the source.
+  ///
+  /// This class supports the following options: ``MLNShapeSourceOptionClustered``,
+  /// ``MLNShapeSourceOptionClusterRadius``,
+  /// ``MLNShapeSourceOptionMaximumZoomLevelForClustering``,
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``, and
+  /// ``MLNShapeSourceOptionSimplificationTolerance``. Shapes provided by a shape
+  /// source are not clipped or wrapped automatically.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param url An HTTP(S) URL, absolute file URL, or local file URL relative to the
+  /// current application’s resource bundle.
+  /// @param options An `NSDictionary` of options for this source.
+  /// @return An initialized shape source.
+  ///
+  /// #### Related examples
+  /// TODO: Add live data, learn how to add live data to your map by
+  /// updating the an ``MLNShapeSource`` object's `URL` property.
+  MLNShapeSource initWithIdentifier_URL_options_(
+      objc.NSString identifier, objc.NSURL url, objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_URL_options_,
+        identifier.ref.pointer,
+        url.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a shape source with an identifier, a shape, and dictionary of options
+  /// for the source.
+  ///
+  /// This class supports the following options: ``MLNShapeSourceOptionClustered``,
+  /// ``MLNShapeSourceOptionClusterRadius``,
+  /// ``MLNShapeSourceOptionMaximumZoomLevelForClustering``,
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``, and
+  /// ``MLNShapeSourceOptionSimplificationTolerance``. Shapes provided by a shape
+  /// source are not clipped or wrapped automatically.
+  ///
+  /// To specify attributes about the shape, use an instance of an ``MLNShape``
+  /// subclass that conforms to the ``MLNFeature`` protocol, such as ``MLNFeature``.
+  /// To include multiple shapes in the source, use an ``MLNShapeCollection`` or
+  /// ``MLNShapeCollectionFeature`` object, or use the
+  /// `-initWithIdentifier:features:options:` or
+  /// `-initWithIdentifier:shapes:options:` methods.
+  ///
+  /// To create a shape from GeoJSON source code, use the
+  /// ``MLNShape/shapeWithData:encoding:error:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param shape A concrete subclass of ``MLNShape``
+  /// @param options An `NSDictionary` of options for this source.
+  /// @return An initialized shape source.
+  ///
+  /// #### Related examples
+  /// TODO: Animate a line, learn how to animate line data by continously
+  /// updating an ``MLNShapeSource``'s `shape` attribute.
+  MLNShapeSource initWithIdentifier_shape_options_(
+      objc.NSString identifier, MLNShape? shape, objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_shape_options_,
+        identifier.ref.pointer,
+        shape?.ref.pointer ?? ffi.nullptr,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a shape source with an identifier, an array of features, and a dictionary
+  /// of options for the source.
+  ///
+  /// This class supports the following options: ``MLNShapeSourceOptionClustered``,
+  /// ``MLNShapeSourceOptionClusterRadius``,
+  /// ``MLNShapeSourceOptionMaximumZoomLevelForClustering``,
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``, and
+  /// ``MLNShapeSourceOptionSimplificationTolerance``. Shapes provided by a shape
+  /// source are not clipped or wrapped automatically.
+  ///
+  /// Unlike `-initWithIdentifier:shapes:options:`, this method accepts ``MLNFeature``
+  /// instances, such as ``MLNPointFeature`` objects, whose attributes you can use when
+  /// applying a predicate to ``MLNVectorStyleLayer`` or configuring a style layer’s
+  /// appearance.
+  ///
+  /// To create a shape from GeoJSON source code, use the
+  /// ``MLNShape/shapeWithData:encoding:error:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param features An array of objects that conform to the MLNFeature protocol.
+  /// @param options An `NSDictionary` of options for this source.
+  /// @return An initialized shape source.
+  MLNShapeSource initWithIdentifier_features_options_(objc.NSString identifier,
+      objc.NSArray features, objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_features_options_,
+        identifier.ref.pointer,
+        features.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a shape source with an identifier, an array of shapes, and a dictionary of
+  /// options for the source.
+  ///
+  /// This class supports the following options: ``MLNShapeSourceOptionClustered``,
+  /// ``MLNShapeSourceOptionClusterRadius``,
+  /// ``MLNShapeSourceOptionMaximumZoomLevelForClustering``,
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``, and
+  /// ``MLNShapeSourceOptionSimplificationTolerance``. Shapes provided by a shape
+  /// source are not clipped or wrapped automatically.
+  ///
+  /// Any ``MLNFeature`` instance passed into this initializer is treated as an ordinary
+  /// shape, causing any attributes to be inaccessible to an ``MLNVectorStyleLayer`` when
+  /// evaluating a predicate or configuring certain layout or paint attributes. To
+  /// preserve the attributes associated with each feature, use the
+  /// `-initWithIdentifier:features:options:` method instead.
+  ///
+  /// To create a shape from GeoJSON source code, use the
+  /// ``MLNShape/shapeWithData:encoding:error:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param shapes An array of shapes; each shape is a member of a concrete subclass of MLNShape.
+  /// @param options An `NSDictionary` of options for this source.
+  /// @return An initialized shape source.
+  MLNShapeSource initWithIdentifier_shapes_options_(objc.NSString identifier,
+      objc.NSArray shapes, objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_shapes_options_,
+        identifier.ref.pointer,
+        shapes.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// The contents of the source. A shape can represent a GeoJSON geometry, a
+  /// feature, or a collection of features.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:URL:options:`, this
+  /// property is set to `nil`. This property is unavailable until the receiver is
+  /// passed into ``MLNStyle/addSource:``.
+  ///
+  /// You can get/set the shapes within a collection via this property. Actions must
+  /// be performed on the application's main thread.
+  MLNShape? get shape {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_shape);
+    return _ret.address == 0
+        ? null
+        : MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The contents of the source. A shape can represent a GeoJSON geometry, a
+  /// feature, or a collection of features.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:URL:options:`, this
+  /// property is set to `nil`. This property is unavailable until the receiver is
+  /// passed into ``MLNStyle/addSource:``.
+  ///
+  /// You can get/set the shapes within a collection via this property. Actions must
+  /// be performed on the application's main thread.
+  set shape(MLNShape? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setShape_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The URL to the GeoJSON document that specifies the contents of the source.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:shape:options:`,
+  /// this property is set to `nil`.
+  objc.NSURL? get URL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_URL);
+    return _ret.address == 0
+        ? null
+        : objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The URL to the GeoJSON document that specifies the contents of the source.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:shape:options:`,
+  /// this property is set to `nil`.
+  set URL(objc.NSURL? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Returns an array of map features for this source, filtered by the given
+  /// predicate.
+  ///
+  /// Each object in the returned array represents a feature for the current style
+  /// and provides access to attributes specified via the `shape` property.
+  ///
+  /// Features come from tiled GeoJSON data that is converted to tiles internally,
+  /// so feature geometries are clipped at tile boundaries and features
+  /// may appear duplicated across tiles. For example, suppose this source contains a
+  /// long polyline representing a road. The resulting array includes those parts of
+  /// the road that lie within the map tiles that the source has loaded, even if the
+  /// road extends into other tiles. The portion of the road within each map tile is
+  /// included individually.
+  ///
+  /// Returned features may not necessarily be visible to the user at the time they
+  /// are loaded: the style may lack a layer that draws the features in question. To
+  /// obtain only _visible_ features, use the
+  /// ``MLNMapView/visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:``
+  /// or
+  /// ``MLNMapView/visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:``
+  /// method.
+  ///
+  /// @param predicate A predicate to filter the returned features. Use `nil` to
+  /// include all features in the source.
+  /// @return An array of objects conforming to the ``MLNFeature`` protocol that
+  /// represent features in the source that match the predicate.
+  objc.NSArray featuresMatchingPredicate_(NSPredicate? predicate) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.pointer,
+        _sel_featuresMatchingPredicate_, predicate?.ref.pointer ?? ffi.nullptr);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of map features that are the leaves of the specified cluster.
+  /// ("Leaves" are the original points that belong to the cluster.)
+  ///
+  /// This method supports pagination; you supply an offset (number of features to skip)
+  /// and a maximum number of features to return.
+  ///
+  /// @param cluster An object of type ``MLNPointFeatureCluster`` (that conforms to the
+  /// ``MLNPointFeatureCluster`` protocol).
+  /// @param offset Number of features to skip.
+  /// @param limit The maximum number of features to return
+  ///
+  /// @return An array of objects that conform to the ``MLNFeature`` protocol.
+  objc.NSArray leavesOfCluster_offset_limit_(
+      MLNPointFeatureCluster cluster, int offset, int limit) {
+    final _ret = _objc_msgSend_x2b4hx(this.ref.pointer,
+        _sel_leavesOfCluster_offset_limit_, cluster.ref.pointer, offset, limit);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns an array of map features that are the immediate children of the specified
+  /// cluster *on the next zoom level*. The may include features that also conform to
+  /// the ``MLNCluster`` protocol (currently only objects of type ``MLNCluster``).
+  ///
+  /// @param cluster An object of type ``MLNPointFeatureCluster`` (that conforms to the
+  /// ``MLNPointFeatureCluster`` protocol).
+  ///
+  /// @return An array of objects that conform to the ``MLNFeature`` protocol.
+  ///
+  /// > Note: The returned array may contain the `cluster` that was passed in, if the next
+  /// zoom level doesn't match the zoom level for expanding that cluster. See
+  /// ``MLNShapeSource/zoomLevelForExpandingCluster:``.
+  objc.NSArray childrenOfCluster_(MLNPointFeatureCluster cluster) {
+    final _ret = _objc_msgSend_62nh5j(
+        this.ref.pointer, _sel_childrenOfCluster_, cluster.ref.pointer);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Returns the zoom level at which the given cluster expands.
+  ///
+  /// @param cluster An object of type ``MLNPointFeatureCluster`` (that conforms to the
+  /// ``MLNPointFeatureCluster`` protocol).
+  ///
+  /// @return Zoom level. This should be >= 0; any negative return value should be
+  /// considered an error.
+  double zoomLevelForExpandingCluster_(MLNPointFeatureCluster cluster) {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_hlyk7wFpret(this.ref.pointer,
+            _sel_zoomLevelForExpandingCluster_, cluster.ref.pointer)
+        : _objc_msgSend_hlyk7w(this.ref.pointer,
+            _sel_zoomLevelForExpandingCluster_, cluster.ref.pointer);
+  }
+
+  /// init
+  MLNShapeSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNShapeSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNShapeSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNShapeSource, _sel_new);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNShapeSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNShapeSource, _sel_allocWithZone_, zone);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNShapeSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNShapeSource, _sel_alloc);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNShapeSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNShapeSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNShapeSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNShapeSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNShapeSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNShapeSource.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_MLNComputedShapeSource =
+    objc.getClass("MLNComputedShapeSource");
+late final _sel_initWithIdentifier_options_ =
+    objc.registerName("initWithIdentifier:options:");
+late final _sel_initWithIdentifier_dataSource_options_ =
+    objc.registerName("initWithIdentifier:dataSource:options:");
+late final _sel_invalidateBounds_ = objc.registerName("invalidateBounds:");
+late final _sel_invalidateTileAtX_y_zoomLevel_ =
+    objc.registerName("invalidateTileAtX:y:zoomLevel:");
+final _objc_msgSend_1r0ktp8 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.UnsignedLong,
+                ffi.UnsignedLong,
+                ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int, int, int)>();
+late final _sel_setFeatures_inTileAtX_y_zoomLevel_ =
+    objc.registerName("setFeatures:inTileAtX:y:zoomLevel:");
+final _objc_msgSend_6vicua = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.UnsignedLong,
+                ffi.UnsignedLong,
+                ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            int,
+            int,
+            int)>();
+late final _sel_dataSource = objc.registerName("dataSource");
+late final _sel_setDataSource_ = objc.registerName("setDataSource:");
+late final _sel_requestQueue = objc.registerName("requestQueue");
+
+/// ``MLNComputedShapeSource`` is a map content source that supplies vector shapes,
+/// one tile at a time, to be shown on the map on demand. You implement a class
+/// conforming to the ``MLNComputedShapeSourceDataSource`` protocol that returns
+/// instances of ``MLNShape`` or ``MLNShape``, then add a computed shape source to an
+/// ``MLNStyle`` object along with an ``MLNStyle`` object. The vector style
+/// layer defines the appearance of any content supplied by the computed shape
+/// source.
+///
+/// ``MLNComputedShapeSource`` is similar to ``MLNComputedShapeSource`` but is optimized for
+/// data sets that change dynamically or are too large to fit completely in memory.
+/// It is also useful for data that is divided into tiles in a format other than
+/// <a href="https://www.mapbox.com/vector-tiles/">Mapbox Vector Tiles</a>. For
+/// <a href="http://geojson.org/">GeoJSON</a> data, use the ``MLNShapeSource`` class.
+/// For static tiles or Mapbox Vector Tiles, use the ``MLNVectorTileSource`` class.
+///
+/// You can add and remove sources dynamically using methods such as
+/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``. This class
+/// cannot be represented in a style JSON file; you must add it ot the style at
+/// runtime.
+class MLNComputedShapeSource extends MLNSource {
+  MLNComputedShapeSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNComputedShapeSource] that points to the same underlying object as [other].
+  MLNComputedShapeSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNComputedShapeSource] that wraps the given raw object pointer.
+  MLNComputedShapeSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNComputedShapeSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNComputedShapeSource);
+  }
+
+  /// Returns a custom shape data source initialized with an identifier, and a
+  /// dictionary of options for the source according to the
+  /// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
+  /// specification</a>.
+  ///
+  /// This class supports the following options:
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``,
+  /// ``MLNShapeSourceOptionSimplificationTolerance``,
+  /// ``MLNShapeSourceOptionWrapsCoordinates``, and
+  /// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed
+  /// shape source cannot be clustered.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param options An `NSDictionary` of options for this source.
+  MLNComputedShapeSource initWithIdentifier_options_(
+      objc.NSString identifier, objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_options_,
+        identifier.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a custom shape data source initialized with an identifier, data source, and a
+  /// dictionary of options for the source according to the
+  /// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
+  /// specification</a>.
+  ///
+  /// This class supports the following options:
+  /// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
+  /// ``MLNShapeSourceOptionBuffer``,
+  /// ``MLNShapeSourceOptionSimplificationTolerance``,
+  /// ``MLNShapeSourceOptionWrapsCoordinates``, and
+  /// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed shape
+  /// source cannot be clustered.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param options An `NSDictionary` of options for this source.
+  MLNComputedShapeSource initWithIdentifier_dataSource_options_(
+      objc.NSString identifier,
+      objc.ObjCObjectBase dataSource,
+      objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_dataSource_options_,
+        identifier.ref.pointer,
+        dataSource.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Invalidates all the features and properties intersecting with or contained in
+  /// the specified bounds. New fetch requests will immediately be invoked on the
+  /// ``MLNComputedShapeSourceDataSource``.
+  /// @param bounds  Coordinate bounds to invalidate.
+  void invalidateBounds_(MLNCoordinateBounds bounds) {
+    _objc_msgSend_9ay59k(this.ref.pointer, _sel_invalidateBounds_, bounds);
+  }
+
+  /// Invalidates all the feautres and properties of a given tile. A new fetch request
+  /// will immediately be invoked on the ``MLNComputedShapeSourceDataSource``.
+  /// @param x Tile X coordinate.
+  /// @param y Tile Y coordinate.
+  /// @param zoomLevel Tile zoom level.
+  void invalidateTileAtX_y_zoomLevel_(int x, int y, int zoomLevel) {
+    _objc_msgSend_1r0ktp8(
+        this.ref.pointer, _sel_invalidateTileAtX_y_zoomLevel_, x, y, zoomLevel);
+  }
+
+  /// Set a new set of features for a tile. This method can be invkoed from background threads.
+  /// For best performance, use this method only to update tiles that have already been requested
+  /// through ``MLNComputedShapeSourceDataSource/``
+  /// @param features  Features for the tile.
+  /// @param x         Tile X coordinate.
+  /// @param y         Tile Y coordinate.
+  /// @param zoomLevel Tile zoom level.
+  void setFeatures_inTileAtX_y_zoomLevel_(
+      objc.NSArray features, int x, int y, int zoomLevel) {
+    _objc_msgSend_6vicua(
+        this.ref.pointer,
+        _sel_setFeatures_inTileAtX_y_zoomLevel_,
+        features.ref.pointer,
+        x,
+        y,
+        zoomLevel);
+  }
+
+  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
+  /// for tile data.
+  objc.ObjCObjectBase? get dataSource {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_dataSource);
+    return _ret.address == 0
+        ? null
+        : objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
+  /// for tile data.
+  set dataSource(objc.ObjCObjectBase? value) {
+    return _objc_msgSend_1jdvcbf(this.ref.pointer, _sel_setDataSource_,
+        value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// A queue that calls to the data source will be made on.
+  NSOperationQueue get requestQueue {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_requestQueue);
+    return NSOperationQueue.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// init
+  MLNComputedShapeSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNComputedShapeSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNComputedShapeSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNComputedShapeSource, _sel_new);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNComputedShapeSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNComputedShapeSource, _sel_allocWithZone_, zone);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNComputedShapeSource alloc() {
+    final _ret =
+        _objc_msgSend_1x359cv(_class_MLNComputedShapeSource, _sel_alloc);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNComputedShapeSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// retain
+  MLNComputedShapeSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNComputedShapeSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNComputedShapeSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+}
+
+late final _class_MLNImageSource = objc.getClass("MLNImageSource");
+late final _sel_initWithIdentifier_coordinateQuad_URL_ =
+    objc.registerName("initWithIdentifier:coordinateQuad:URL:");
+final _objc_msgSend_1d4cwk4 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                MLNCoordinateQuad,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            MLNCoordinateQuad,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_initWithIdentifier_coordinateQuad_image_ =
+    objc.registerName("initWithIdentifier:coordinateQuad:image:");
+late final _sel_image = objc.registerName("image");
+late final _sel_setImage_ = objc.registerName("setImage:");
+late final _sel_coordinates = objc.registerName("coordinates");
+final _objc_msgSend_1ua371c = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            MLNCoordinateQuad Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        MLNCoordinateQuad Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_1ua371cStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<MLNCoordinateQuad>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<MLNCoordinateQuad>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setCoordinates_ = objc.registerName("setCoordinates:");
+final _objc_msgSend_1wvd2xm = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, MLNCoordinateQuad)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, MLNCoordinateQuad)>();
+
+/// ``MLNImageSource`` is a content source that is used for a georeferenced raster
+/// image to be shown on the map. The georeferenced image scales and rotates as the
+/// user zooms and rotates the map. Images may also be used as icons or patterns
+/// in a style layer. To register an image for use as an icon or pattern,
+/// use the ``MLNStyle/setImage:forName:`` method. To configure a point
+/// annotation’s image, use the ``MLNAnnotationImage`` class.
+///
+/// The geographic location of the raster image content, supplied with
+/// ``MLNCoordinateQuad``, can be non-axis aligned.
+/// ``MLNImageSource`` supports raster content from `NSURL`, `NSImage` (macOS), or
+/// `UIImage` (iOS).
+/// An image source is added to an ``MLNStyle`` object along with one or more
+/// ``MLNRasterStyleLayer`` objects. Use a raster style layer to control the
+/// appearance of content supplied by the image source.
+///
+/// Each
+/// <a href="https://maplibre.org/maplibre-style-spec/#sources-image"><code>image</code></a>
+/// source defined by the style JSON file is represented at runtime by an
+/// ``MLNImageSource`` object that you can use to initialize new style layers. You
+/// can also add and remove sources dynamically using methods such as
+/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``.
+///
+/// ### Example
+///
+/// ```swift
+/// let coordinates = MLNCoordinateQuad(
+/// topLeft: CLLocationCoordinate2D(latitude: 46.437, longitude: -80.425),
+/// bottomLeft: CLLocationCoordinate2D(latitude: 37.936, longitude: -80.425),
+/// bottomRight: CLLocationCoordinate2D(latitude: 37.936, longitude: -71.516),
+/// topRight: CLLocationCoordinate2D(latitude: 46.437, longitude: -71.516))
+/// let source = MLNImageSource(identifier: "radar", coordinateQuad: coordinates, url: URL(string:
+/// "https://maplibre.org/maplibre-gl-js-docs/assets/radar.gif")!) mapView.style?.addSource(source)
+/// ```
+///
+/// #### Related examples
+/// TODO: Add an image, learn how to add an image to your map using ``MLNImageSource``.
+class MLNImageSource extends MLNSource {
+  MLNImageSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNImageSource] that points to the same underlying object as [other].
+  MLNImageSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNImageSource] that wraps the given raw object pointer.
+  MLNImageSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNImageSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNImageSource);
+  }
+
+  /// Returns a georeferenced image source with an identifier, coordinates and a URL.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param coordinateQuad the top left, top right, bottom right, and bottom left coordinates for the
+  /// image.
+  /// @param url An HTTP(S) URL, absolute file URL, or local file URL relative to the
+  /// current application’s resource bundle.
+  /// @return An initialized shape source.
+  MLNImageSource initWithIdentifier_coordinateQuad_URL_(
+      objc.NSString identifier,
+      MLNCoordinateQuad coordinateQuad,
+      objc.NSURL url) {
+    final _ret = _objc_msgSend_1d4cwk4(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_coordinateQuad_URL_,
+        identifier.ref.pointer,
+        coordinateQuad,
+        url.ref.pointer);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a georeferenced image source with an identifier, coordinates and an image.
+  ///
+  /// @param identifier A string that uniquely identifies the source.
+  /// @param coordinateQuad The top left, top right, bottom right, and bottom left coordinates for the
+  /// image.
+  /// @param image The image to display for the source.
+  /// @return An initialized shape source.
+  MLNImageSource initWithIdentifier_coordinateQuad_image_(
+      objc.NSString identifier,
+      MLNCoordinateQuad coordinateQuad,
+      NSImage image) {
+    final _ret = _objc_msgSend_1d4cwk4(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_coordinateQuad_image_,
+        identifier.ref.pointer,
+        coordinateQuad,
+        image.ref.pointer);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// The URL to the source image.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:coordinateQuad:image:` or
+  /// the `image` property is set, this property is set to `nil`.
+  objc.NSURL? get URL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_URL);
+    return _ret.address == 0
+        ? null
+        : objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The URL to the source image.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:coordinateQuad:image:` or
+  /// the `image` property is set, this property is set to `nil`.
+  set URL(objc.NSURL? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The source image.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:coordinateQuad:URL:` or if the `URL`
+  /// property is set, this property is set to `nil`.
+  NSImage? get image {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_image);
+    return _ret.address == 0
+        ? null
+        : NSImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The source image.
+  ///
+  /// If the receiver was initialized using `-initWithIdentifier:coordinateQuad:URL:` or if the `URL`
+  /// property is set, this property is set to `nil`.
+  set image(NSImage? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setImage_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The coordinates at which the corners of the source image will be placed.
+  MLNCoordinateQuad get coordinates {
+    final _ptr = pkg_ffi.calloc<MLNCoordinateQuad>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_1ua371cStret(_ptr, this.ref.pointer, _sel_coordinates)
+        : _ptr.ref = _objc_msgSend_1ua371c(this.ref.pointer, _sel_coordinates);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNCoordinateQuad>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNCoordinateQuad>(_finalizable);
+  }
+
+  /// The coordinates at which the corners of the source image will be placed.
+  set coordinates(MLNCoordinateQuad value) {
+    return _objc_msgSend_1wvd2xm(this.ref.pointer, _sel_setCoordinates_, value);
+  }
+
+  /// init
+  MLNImageSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNImageSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNImageSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNImageSource, _sel_new);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNImageSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNImageSource, _sel_allocWithZone_, zone);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNImageSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNImageSource, _sel_alloc);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNImageSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNImageSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNImageSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNImageSource.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNImageSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNImageSource.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_MLNRasterTileSource = objc.getClass("MLNRasterTileSource");
+late final _sel_initWithIdentifier_configurationURL_tileSize_ =
+    objc.registerName("initWithIdentifier:configurationURL:tileSize:");
+final _objc_msgSend_1xdeq9e = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Double)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            double)>();
+
+/// ``MLNRasterTileSource`` is a map content source that supplies raster image tiles
+/// to be shown on the map. The location of and metadata about the tiles are
+/// defined either by an option dictionary or by an external file that conforms to
+/// the
+/// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+/// A raster tile source is added to an ``MLNStyle`` object along with one or more
+/// ``MLNRasterStyleLayer`` objects. Use a raster style layer to control the
+/// appearance of content supplied by the raster tile source.
+///
+/// Each
+/// <a href="https://maplibre.org/maplibre-style-spec/#sources-raster"><code>raster</code></a>
+/// source defined by the style JSON file is represented at runtime by an
+/// ``MLNRasterTileSource`` object that you can use to initialize new style layers. You
+/// can also add and remove sources dynamically using methods such as
+/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``.
+///
+/// ### Example
+///
+/// ```swift
+/// let source = MLNRasterTileSource(identifier: "clouds", tileURLTemplates:
+/// ["https://example.com/raster-tiles/{z}/{x}/{y}.png"], options: [ .minimumZoomLevel: 9,
+/// .maximumZoomLevel: 16,
+/// .tileSize: 512,
+/// .attributionInfos: [
+/// MLNAttributionInfo(title: NSAttributedString(string: "© Mapbox"), url: URL(string:
+/// "https://mapbox.com"))
+/// ]
+/// ])
+/// mapView.style?.addSource(source)
+/// ```
+///
+/// #### Related examples
+/// TODO: Add raster imagery, learn how to add a ``MLNRasterStyleLayer``
+/// to your map using an ``MLNRasterTileSource``.
+class MLNRasterTileSource extends MLNTileSource {
+  MLNRasterTileSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNRasterTileSource] that points to the same underlying object as [other].
+  MLNRasterTileSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNRasterTileSource] that wraps the given raw object pointer.
+  MLNRasterTileSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNRasterTileSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterTileSource);
+  }
+
+  /// Returns a raster tile source initialized with an identifier and configuration
+  /// URL.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or canonical URL. The URL should
+  /// point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// If a Mapbox URL is specified, this source uses a tile size of 256. For all
+  /// other tilesets, the default value is 512. (See the
+  /// ``MLNTileSourceOptionTileSize`` documentation for more information about tile
+  /// sizes.) If you need to use a tile size other than the default, use the
+  /// `-initWithIdentifier:configurationURL:tileSize:` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURL A URL to a TileJSON configuration file describing the
+  /// source’s contents and other metadata.
+  /// @return An initialized raster tile source.
+  MLNRasterTileSource initWithIdentifier_configurationURL_(
+      objc.NSString identifier, objc.NSURL configurationURL) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURL_,
+        identifier.ref.pointer,
+        configurationURL.ref.pointer);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a raster tile source initialized with an identifier, configuration URL,
+  /// and tile size.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or, canonical URL. The URL should
+  /// point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURL A URL to a TileJSON configuration file describing the
+  /// source’s contents and other metadata.
+  /// @param tileSize The width and height (measured in points) of each tiled image
+  /// in the raster tile source. See the ``MLNTileSourceOptionTileSize``
+  /// documentation for details.
+  /// @return An initialized raster tile source.
+  MLNRasterTileSource initWithIdentifier_configurationURL_tileSize_(
+      objc.NSString identifier, objc.NSURL configurationURL, double tileSize) {
+    final _ret = _objc_msgSend_1xdeq9e(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURL_tileSize_,
+        identifier.ref.pointer,
+        configurationURL.ref.pointer,
+        tileSize);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a raster tile source initialized an identifier, tile URL templates, and
+  /// options.
+  ///
+  /// Tile URL templates are strings that specify the URLs of the raster tile images
+  /// to load. See the “<a href="../tile-url-templates.html">Tile URL Templates</a>”
+  /// guide for information about the format of a tile URL template.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param tileURLTemplates An array of tile URL template strings. Only the first
+  /// string is used; any additional strings are ignored.
+  /// @param options A dictionary containing configuration options. See
+  /// ``MLNTileSourceOption`` for available keys and values. Pass in `nil` to use
+  /// the default values.
+  /// @return An initialized tile source.
+  MLNRasterTileSource initWithIdentifier_tileURLTemplates_options_(
+      objc.NSString identifier,
+      objc.NSArray tileURLTemplates,
+      objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_tileURLTemplates_options_,
+        identifier.ref.pointer,
+        tileURLTemplates.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// init
+  MLNRasterTileSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNRasterTileSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNRasterTileSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNRasterTileSource, _sel_new);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNRasterTileSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNRasterTileSource, _sel_allocWithZone_, zone);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNRasterTileSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNRasterTileSource, _sel_alloc);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNRasterTileSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// retain
+  MLNRasterTileSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNRasterTileSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNRasterTileSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+}
+
+late final _class_MLNRasterDEMSource = objc.getClass("MLNRasterDEMSource");
+
+/// ``MLNRasterDEMSource`` is a map content source that supplies rasterized
+/// <a href="https://en.wikipedia.org/wiki/Digital_elevation_model">digital elevation model</a>
+/// (DEM) tiles to be shown on the map. The location of and metadata about the
+/// tiles are defined either by an option dictionary or by an external file that
+/// conforms to the
+/// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+/// A raster DEM source is added to an ``MLNStyle`` object along with one or more
+/// ``MLNHillshadeStyleLayer`` objects. Use a hillshade style layer to control the
+/// appearance of content supplied by the raster DEM source.
+///
+/// Each
+/// <a href="https://maplibre.org/maplibre-style-spec/#sources-raster-dem"><code>raster-dem</code></a>
+/// source defined by the style JSON file is represented at runtime by an
+/// ``MLNRasterDEMSource`` object that you can use to initialize new style layers.
+/// You can also add and remove sources dynamically using methods such as
+/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``.
+///
+/// Currently, raster DEM sources only support the format used by
+/// <a
+/// href="https://docs.mapbox.com/help/troubleshooting/access-elevation-data/#mapbox-terrain-rgb">Mapbox
+/// Terrain-RGB</a>.
+///
+/// ### Example
+///
+/// ```swift
+/// let terrainRGBURL = URL(string: "maptiler://sources/terrain-rgb")!
+/// let source = MLNRasterDEMSource(identifier: "hills", configurationURL: terrainRGBURL)
+/// mapView.style?.addSource(source)
+/// ```
+class MLNRasterDEMSource extends MLNRasterTileSource {
+  MLNRasterDEMSource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNRasterDEMSource] that points to the same underlying object as [other].
+  MLNRasterDEMSource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNRasterDEMSource] that wraps the given raw object pointer.
+  MLNRasterDEMSource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNRasterDEMSource].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterDEMSource);
+  }
+
+  /// Returns a raster tile source initialized with an identifier and configuration
+  /// URL.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or canonical URL. The URL should
+  /// point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// If a Mapbox URL is specified, this source uses a tile size of 256. For all
+  /// other tilesets, the default value is 512. (See the
+  /// ``MLNTileSourceOptionTileSize`` documentation for more information about tile
+  /// sizes.) If you need to use a tile size other than the default, use the
+  /// `-initWithIdentifier:configurationURL:tileSize:` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURL A URL to a TileJSON configuration file describing the
+  /// source’s contents and other metadata.
+  /// @return An initialized raster tile source.
+  MLNRasterDEMSource initWithIdentifier_configurationURL_(
+      objc.NSString identifier, objc.NSURL configurationURL) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURL_,
+        identifier.ref.pointer,
+        configurationURL.ref.pointer);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a raster tile source initialized with an identifier, configuration URL,
+  /// and tile size.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or, canonical URL. The URL should
+  /// point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURL A URL to a TileJSON configuration file describing the
+  /// source’s contents and other metadata.
+  /// @param tileSize The width and height (measured in points) of each tiled image
+  /// in the raster tile source. See the ``MLNTileSourceOptionTileSize``
+  /// documentation for details.
+  /// @return An initialized raster tile source.
+  MLNRasterDEMSource initWithIdentifier_configurationURL_tileSize_(
+      objc.NSString identifier, objc.NSURL configurationURL, double tileSize) {
+    final _ret = _objc_msgSend_1xdeq9e(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURL_tileSize_,
+        identifier.ref.pointer,
+        configurationURL.ref.pointer,
+        tileSize);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a raster tile source initialized an identifier, tile URL templates, and
+  /// options.
+  ///
+  /// Tile URL templates are strings that specify the URLs of the raster tile images
+  /// to load. See the “<a href="../tile-url-templates.html">Tile URL Templates</a>”
+  /// guide for information about the format of a tile URL template.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param tileURLTemplates An array of tile URL template strings. Only the first
+  /// string is used; any additional strings are ignored.
+  /// @param options A dictionary containing configuration options. See
+  /// ``MLNTileSourceOption`` for available keys and values. Pass in `nil` to use
+  /// the default values.
+  /// @return An initialized tile source.
+  MLNRasterDEMSource initWithIdentifier_tileURLTemplates_options_(
+      objc.NSString identifier,
+      objc.NSArray tileURLTemplates,
+      objc.NSDictionary? options) {
+    final _ret = _objc_msgSend_582s3n(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_tileURLTemplates_options_,
+        identifier.ref.pointer,
+        tileURLTemplates.ref.pointer,
+        options?.ref.pointer ?? ffi.nullptr);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// init
+  MLNRasterDEMSource init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a source initialized with an identifier.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @return An initialized source.
+  MLNRasterDEMSource initWithIdentifier_(objc.NSString identifier) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_, identifier.ref.pointer);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNRasterDEMSource new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNRasterDEMSource, _sel_new);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNRasterDEMSource allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNRasterDEMSource, _sel_allocWithZone_, zone);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNRasterDEMSource alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNRasterDEMSource, _sel_alloc);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNRasterDEMSource self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// retain
+  MLNRasterDEMSource retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNRasterDEMSource autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNRasterDEMSource.castFromPointer(_ret,
+        retain: true, release: true);
   }
 }

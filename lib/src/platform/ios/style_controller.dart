@@ -19,77 +19,116 @@ class StyleControllerIos implements StyleController {
     // TODO: use FFI for this method
     await switch (layer) {
       FillStyleLayer() => _hostApi.addFillLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       CircleStyleLayer() => _hostApi.addCircleLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-        id: layer.id,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       LineStyleLayer() => _hostApi.addLineLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       RasterStyleLayer() => _hostApi.addRasterLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       SymbolStyleLayer() => _hostApi.addSymbolLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        ),
       _ => throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      ),
+          'The Layer is not supported: ${layer.runtimeType}',
+        ),
     };
   }
 
   @override
   Future<void> addSource(Source source) async {
-    // TODO: implement addSource
-    throw UnimplementedError();
+    final MLNSource ffiSource;
+    switch (source) {
+      case GeoJsonSource():
+        final shapeSource =
+            ffiSource = MLNShapeSource.new1()..identifier = NSString(source.id);
+        final data = NSString(source.data);
+        if (source.data.startsWith('{')) {
+          shapeSource.shape = MLNShape.shapeWithData_encoding_error_(
+            data,
+            String.Encoding.utf8.rawValue,
+          );
+        } else {
+          shapeSource.URL = NSURL.URLWithString_(data);
+        }
+      case RasterDemSource():
+        final demSource = ffiSource = MLNRasterDEMSource.new1()
+          ..identifier = NSString(source.id);
+      case RasterSource():
+        final rasterSource = ffiSource = MLNRasterTileSource.new1()
+          ..identifier = NSString(source.id);
+      case VectorSource():
+        final vectorSource = ffiSource = MLNVectorTileSource.new1()
+          ..identifier = NSString(source.id);
+      case ImageSource():
+        final coordinates = Struct.create<MLNCoordinateQuad>()
+        ..bottomLeft = source.coordinates[0].toCLLocationCoordinate2D()
+        ..bottomLeft = source.coordinates[1].toCLLocationCoordinate2D()
+        ..bottomLeft = source.coordinates[2].toCLLocationCoordinate2D()
+        ..bottomLeft = source.coordinates[3].toCLLocationCoordinate2D();
+        ffiSource = MLNImageSource.new1()
+          ..identifier = NSString(source.id)
+          ..URL = NSURL.URLWithString_(NSString(source.url))
+          ..coordinates = coordinates;
+      case VideoSource():
+        throw UnimplementedError('Video source is only supported on web.');
+      default:
+        throw UnimplementedError(
+          'The Source is not supported: ${source.runtimeType}',
+        );
+    }
+    _ffiStyle.addSource_(ffiSource);
   }
 
   @override
@@ -129,7 +168,8 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  Future<void> updateGeoJsonSource({required String id, required String data}) async {
+  Future<void> updateGeoJsonSource(
+      {required String id, required String data}) async {
     // TODO: implement updateGeoJsonSource
     throw UnimplementedError();
   }
