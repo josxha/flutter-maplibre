@@ -128,11 +128,12 @@ class StyleControllerAndroid implements StyleController {
           // TODO apply other properties
           jniSource.setVolatile(source.volatile.toJBoolean());
         case ImageSource():
+          // https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.geometry/-lat-lng-quad/index.html
           final jniQuad = jni.LatLngQuad(
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
+            source.coordinates.topLeft.toLatLng(),
+            source.coordinates.topRight.toLatLng(),
+            source.coordinates.bottomRight.toLatLng(),
+            source.coordinates.bottomLeft.toLatLng(),
           );
           final jniUri = jni.URI(source.url.toJString());
           jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);

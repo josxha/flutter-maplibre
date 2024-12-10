@@ -266,7 +266,12 @@ void main() {
       id: '1',
       url:
           'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
-      coordinates: [Position(0, 0), Position(1, 1)],
+      coordinates: LngLatQuad(
+        bottomLeft: Position(0, 0),
+        bottomRight: Position(1, 0),
+        topLeft: Position(0, 1),
+        topRight: Position(1, 1),
+      ),
     );
     await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();

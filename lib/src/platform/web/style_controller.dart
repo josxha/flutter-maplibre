@@ -212,12 +212,27 @@ class StyleControllerWeb implements StyleController {
           interop.SourceSpecification.image(
             type: 'image',
             url: source.url,
-            coordinates: source.coordinates
-                .map(
-                  (e) => [e.lng, e.lat],
-                )
-                .toList(growable: false)
-                .jsify()!,
+            // The coordinates start at the top left corner of the image and
+            // proceed in clockwise order.
+            // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
+            coordinates: [
+              [
+                source.coordinates.topLeft.lng,
+                source.coordinates.topLeft.lat,
+              ],
+              [
+                source.coordinates.topRight.lng,
+                source.coordinates.topRight.lat,
+              ],
+              [
+                source.coordinates.bottomRight.lng,
+                source.coordinates.bottomRight.lat,
+              ],
+              [
+                source.coordinates.bottomLeft.lng,
+                source.coordinates.bottomLeft.lat,
+              ],
+            ].jsify()!,
           ),
         );
       case VideoSource():
