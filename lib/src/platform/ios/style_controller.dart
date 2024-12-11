@@ -16,74 +16,92 @@ class StyleControllerIos implements StyleController {
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
-    // TODO: use FFI for this method
-    await switch (layer) {
-      FillStyleLayer() => _hostApi.addFillLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      CircleStyleLayer() => _hostApi.addCircleLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-          id: layer.id,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      LineStyleLayer() => _hostApi.addLineLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      RasterStyleLayer() => _hostApi.addRasterLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      SymbolStyleLayer() => _hostApi.addSymbolLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      _ => throw UnimplementedError(
-          'The Layer is not supported: ${layer.runtimeType}',
-        ),
-    };
+    MLNStyleLayer? ffiStyleLayer;
+    switch (layer) {
+      case BackgroundStyleLayer():
+        final ffiLayer = ffiStyleLayer = MLNBackgroundStyleLayer.new1()
+          ..initWithIdentifier_(layer.id.toNSString());
+      // TODO add paint and layout properties
+      case StyleLayerWithSource():
+        final ffiSource =
+            _ffiStyle.sourceWithIdentifier_(layer.sourceId.toNSString());
+        if (ffiSource == null) {
+          throw Exception('Source "${layer.sourceId}" does not exist.');
+        }
+        switch (layer) {
+          case FillStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNFillStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          //for (final entry in layer.paint.entries) {}
+          //NSExpression.expressionWithFormat_(expressionFormat);
+          case CircleStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case FillExtrusionStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case HeatmapStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case HillshadeStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNHillshadeStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case LineStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNLineStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case RasterStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNRasterStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+          case SymbolStyleLayer():
+            final ffiLayer = ffiStyleLayer = MLNSymbolStyleLayer.new1()
+              ..initWithIdentifier_source_(
+                layer.id.toNSString(),
+                ffiSource,
+              );
+          // TODO add paint and layout properties
+        }
+    }
+
+    if (ffiStyleLayer == null) {
+      throw UnimplementedError(
+        'The Layer is not supported: ${layer.runtimeType}',
+      );
+    }
+    if (layer.minZoom case final double minZoom) {
+      ffiStyleLayer.minimumZoomLevel = minZoom;
+    }
+    if (layer.maxZoom case final double maxZoom) {
+      ffiStyleLayer.maximumZoomLevel = maxZoom;
+    }
+    _ffiStyle.addLayer_(ffiStyleLayer);
   }
 
   @override

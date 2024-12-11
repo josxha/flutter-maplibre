@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/layer/extensions.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
