@@ -9,9 +9,16 @@ class StyleControllerIos implements StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    //_ffiStyle.setImage_forName_(ffi.NSImage(), NSString(id));
-    // TODO: implement addImage
-    throw UnimplementedError();
+    // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
+    _ffiStyle.setImage_forName_(
+      NSImage.objectWithItemProviderData_typeIdentifier_error_(
+        bytes.toNSData(),
+        // The uniform type identifier (UTI) representing the data type of data.
+        'public.image'.toNSString(),
+        nullptr,
+      )!,
+      id.toNSString(),
+    );
   }
 
   @override
