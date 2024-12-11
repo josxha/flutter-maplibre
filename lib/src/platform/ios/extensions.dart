@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
 
@@ -48,6 +49,14 @@ extension StringExt on String {
   NSData? toNSDataUTF8() => toNSString().dataUsingEncoding_(
         nsUTF8StringEncoding,
       );
+}
+
+/// Internal extensions on [Object].
+extension ObjectExt on Object {
+  /// Convert to a [NSExpression].
+  NSExpression toNSExpression() => NSExpression.expressionWithFormat_(
+    jsonEncode(this).toNSString(),
+  );
 }
 
 /// UTF8 Encoding

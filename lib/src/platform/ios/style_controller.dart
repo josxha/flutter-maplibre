@@ -26,8 +26,11 @@ class StyleControllerIos implements StyleController {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        final ffiLayer = ffiStyleLayer = MLNBackgroundStyleLayer.new1()
-          ..initWithIdentifier_(layer.id.toNSString());
+        ffiStyleLayer = MLNBackgroundStyleLayer.new1()
+          ..initWithIdentifier_(layer.id.toNSString())
+          ..backgroundColor = NSExpression.expressionWithFormat_(
+            layer.color.toHexStringNoOpacity().toNSString(),
+          );
       // TODO add paint and layout properties
       case StyleLayerWithSource():
         final ffiSource =
@@ -42,9 +45,33 @@ class StyleControllerIos implements StyleController {
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
-          //for (final entry in layer.paint.entries) {}
-          //NSExpression.expressionWithFormat_(expressionFormat);
+          /*if (layer.paint['visibility'] == 'none') {
+              ffiLayer.visible = false;
+            }
+            if (layer.paint['fill-antialias'] case final Object value) {
+              ffiLayer.fillAntialias = value.toNSExpression();
+            }
+            if (layer.paint['fill-opacity'] case final Object value) {
+              ffiLayer.fillOpacity = value.toNSExpression();
+            }
+            if (layer.paint['fill-opacity'] case final Object value) {
+              ffiLayer.fillOpacity = value.toNSExpression();
+            }
+            if (layer.paint['fill-color'] case final Object value) {
+              ffiLayer.fillColor = value.toNSExpression();
+            }
+            if (layer.paint['fill-outline-color'] case final Object value) {
+              ffiLayer.fillOutlineColor = value.toNSExpression();
+            }
+            if (layer.paint['fill-translate'] case final Object value) {
+              ffiLayer.fillTranslate = value.toNSExpression();
+            }
+            if (layer.paint['fill-translate-anchor'] case final Object value) {
+              ffiLayer.fillTranslateAnchor = value.toNSExpression();
+            }
+            if (layer.paint['fill-pattern'] case final Object value) {
+              ffiLayer.fillPattern = value.toNSExpression();
+            }*/
           case CircleStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
               ..initWithIdentifier_source_(
@@ -58,7 +85,44 @@ class StyleControllerIos implements StyleController {
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            if (layer.paint['visibility'] == 'none') {
+              ffiLayer.visible = false;
+            }
+            if (layer.paint['fill-extrusion-opacity'] case final Object value) {
+              ffiLayer.fillExtrusionOpacity = value.toNSExpression();
+            }
+            print(layer.paint['fill-extrusion-color']);
+            if (layer.paint['fill-extrusion-color'] case final Object value) {
+              //final tmp = value.toNSExpression();
+              final tmp2 = NSExpression.expressionForConstantValue_(
+                '#0000FF'.toNSString(),
+              );
+              //ffiLayer.fillExtrusionColor = tmp2;
+              // TODO make this work
+            }
+            if (layer.paint['fill-extrusion-translate']
+                case final Object value) {
+              ffiLayer.fillExtrusionTranslate = value.toNSExpression();
+            }
+            if (layer.paint['fill-extrusion-translate-anchor']
+                case final Object value) {
+              ffiLayer.fillExtrusionTranslateAnchor = value.toNSExpression();
+            }
+            if (layer.paint['fill-extrusion-pattern'] case final Object value) {
+              ffiLayer.fillExtrusionPattern = value.toNSExpression();
+            }
+            /*if (layer.paint['fill-extrusion-height']
+                case final Object value) {
+              ffiLayer.fillExtrusionHeight = value.toNSExpression();
+            }*/
+            /*if (layer.paint['fill-extrusion-base']
+                case final Object value) {
+              ffiLayer.fillExtrusionBase = value.toNSExpression();
+            }*/
+            if (layer.paint['fill-extrusion-vertical-gradient']
+                case final Object value) {
+              ffiLayer.fillExtrusionVerticalGradient = value.toNSExpression();
+            }
           case HeatmapStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
               ..initWithIdentifier_source_(
