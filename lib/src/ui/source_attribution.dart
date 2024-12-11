@@ -68,53 +68,57 @@ class _SourceAttributionState extends State<SourceAttribution> {
           debugPrintStack(stackTrace: snapshot.stackTrace);
         }
         final attributions = snapshot.data ?? const [];
-        return Container(
-          alignment: widget.alignment,
-          padding: widget.padding,
-          child: PointerInterceptor(
-            child: Container(
-              decoration: BoxDecoration(
-                color: theme.scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (_expanded) ...[
-                      if (widget.showMapLibre) ...[
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 8,
-                            right: attributions.isEmpty ? 0 : 4,
-                          ),
-                          child: InkWell(
-                            child: Text(
-                              'MapLibre${attributions.isEmpty ? '' : ' |'}',
-                              style: theme.textTheme.bodySmall,
+        // Use a SafeArea to ensure the widget is completely visible on devices
+        // with rounded edges like iOS.
+        return SafeArea(
+          child: Container(
+            alignment: widget.alignment,
+            padding: widget.padding,
+            child: PointerInterceptor(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: theme.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_expanded) ...[
+                        if (widget.showMapLibre) ...[
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 8,
+                              right: attributions.isEmpty ? 0 : 4,
                             ),
-                            onTap: () =>
-                                launchUrl(Uri.parse('https://maplibre.org/')),
+                            child: InkWell(
+                              child: Text(
+                                'MapLibre${attributions.isEmpty ? '' : ' |'}',
+                                style: theme.textTheme.bodySmall,
+                              ),
+                              onTap: () =>
+                                  launchUrl(Uri.parse('https://maplibre.org/')),
+                            ),
                           ),
-                        ),
+                        ],
+                        ...attributions.map(_HtmlWidget.new),
                       ],
-                      ...attributions.map(_HtmlWidget.new),
-                    ],
-                    // The SizedBox enforces the height on android (web works without it).
-                    SizedBox.square(
-                      dimension: 30,
-                      child: IconButton(
-                        onPressed: () => setState(() {
-                          _initMapCamera = null;
-                          _expanded = !_expanded;
-                        }),
-                        icon: const Icon(Icons.info, size: 18),
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
+                      // The SizedBox enforces the height on android (web works without it).
+                      SizedBox.square(
+                        dimension: 30,
+                        child: IconButton(
+                          onPressed: () => setState(() {
+                            _initMapCamera = null;
+                            _expanded = !_expanded;
+                          }),
+                          icon: const Icon(Icons.info, size: 18),
+                          padding: const EdgeInsets.all(4),
+                          constraints: const BoxConstraints(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
