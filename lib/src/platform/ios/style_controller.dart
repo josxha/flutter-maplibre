@@ -45,119 +45,64 @@ class StyleControllerIos implements StyleController {
                 layer.id.toNSString(),
                 ffiSource,
               );
-          /*if (layer.paint['visibility'] == 'none') {
-              ffiLayer.visible = false;
-            }
-            if (layer.paint['fill-antialias'] case final Object value) {
-              ffiLayer.fillAntialias = value.toNSExpression();
-            }
-            if (layer.paint['fill-opacity'] case final Object value) {
-              ffiLayer.fillOpacity = value.toNSExpression();
-            }
-            if (layer.paint['fill-opacity'] case final Object value) {
-              ffiLayer.fillOpacity = value.toNSExpression();
-            }
-            if (layer.paint['fill-color'] case final Object value) {
-              ffiLayer.fillColor = value.toNSExpression();
-            }
-            if (layer.paint['fill-outline-color'] case final Object value) {
-              ffiLayer.fillOutlineColor = value.toNSExpression();
-            }
-            if (layer.paint['fill-translate'] case final Object value) {
-              ffiLayer.fillTranslate = value.toNSExpression();
-            }
-            if (layer.paint['fill-translate-anchor'] case final Object value) {
-              ffiLayer.fillTranslateAnchor = value.toNSExpression();
-            }
-            if (layer.paint['fill-pattern'] case final Object value) {
-              ffiLayer.fillPattern = value.toNSExpression();
-            }*/
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case CircleStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case FillExtrusionStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            if (layer.paint['visibility'] == 'none') {
-              ffiLayer.visible = false;
-            }
-            if (layer.paint['fill-extrusion-opacity'] case final Object value) {
-              ffiLayer.fillExtrusionOpacity = value.toNSExpression();
-            }
-            print(layer.paint['fill-extrusion-color']);
-            if (layer.paint['fill-extrusion-color'] case final Object value) {
-              //final tmp = value.toNSExpression();
-              final tmp2 = NSExpression.expressionForConstantValue_(
-                '#0000FF'.toNSString(),
-              );
-              //ffiLayer.fillExtrusionColor = tmp2;
-              // TODO make this work
-            }
-            if (layer.paint['fill-extrusion-translate']
-                case final Object value) {
-              ffiLayer.fillExtrusionTranslate = value.toNSExpression();
-            }
-            if (layer.paint['fill-extrusion-translate-anchor']
-                case final Object value) {
-              ffiLayer.fillExtrusionTranslateAnchor = value.toNSExpression();
-            }
-            if (layer.paint['fill-extrusion-pattern'] case final Object value) {
-              ffiLayer.fillExtrusionPattern = value.toNSExpression();
-            }
-            /*if (layer.paint['fill-extrusion-height']
-                case final Object value) {
-              ffiLayer.fillExtrusionHeight = value.toNSExpression();
-            }*/
-            /*if (layer.paint['fill-extrusion-base']
-                case final Object value) {
-              ffiLayer.fillExtrusionBase = value.toNSExpression();
-            }*/
-            if (layer.paint['fill-extrusion-vertical-gradient']
-                case final Object value) {
-              ffiLayer.fillExtrusionVerticalGradient = value.toNSExpression();
-            }
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case HeatmapStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case HillshadeStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNHillshadeStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case LineStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNLineStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case RasterStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNRasterStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case SymbolStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNSymbolStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
         }
     }
 

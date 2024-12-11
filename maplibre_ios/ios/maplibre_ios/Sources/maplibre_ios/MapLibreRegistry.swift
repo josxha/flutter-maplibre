@@ -24,3 +24,9 @@ import Foundation
     // Warning: Storing Context in a static field may lead to memory leaks.
     @objc public static var context: AnyObject?
 }
+
+@objc public class Helpers : NSObject {
+    @objc public static func setExpression(target: NSObject, field: String, expression: NSExpression) -> Void {
+        target.setValue(expression, forKey: field)
+    }
+}

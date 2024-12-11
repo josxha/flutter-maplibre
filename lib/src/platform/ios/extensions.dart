@@ -49,14 +49,53 @@ extension StringExt on String {
   NSData? toNSDataUTF8() => toNSString().dataUsingEncoding_(
         nsUTF8StringEncoding,
       );
+
+  /// Convert a dashed separated name to camel case.
+  String dashedToCamelCase() => split('-').indexed.map((entry) {
+        final index = entry.$1;
+        final word = entry.$2;
+        // Keep the first word in lowercase
+        if (index == 0) return word;
+        return word[0].toUpperCase() + word.substring(1);
+      }).join();
 }
 
 /// Internal extensions on [Object].
 extension ObjectExt on Object {
   /// Convert to a [NSExpression].
   NSExpression toNSExpression() => NSExpression.expressionWithFormat_(
-    jsonEncode(this).toNSString(),
-  );
+        jsonEncode(this).toNSString(),
+      );
+}
+
+/// Internal extensions on [MLNStyleLayer].
+extension MLNStyleLayerExt on MLNStyleLayer {
+  /// Set a layout or paint property for a [MLNStyleLayer].
+  void setProperty(String key, Object value) {
+    Helpers.setExpressionWithTarget_field_expression_(
+      this,
+      key.dashedToCamelCase().toNSString(),
+      value.toNSExpression(),
+    );
+  }
+
+  /// Apply all paint or layout properties on the [MLNStyleLayer].
+  void setProperties(Map<String, Object> properties) {
+    for (final property in properties.entries) {
+      switch (property.key) {
+        case 'visibility':
+          visible = property.value == 'none';
+          continue;
+        // TODO some properties cause currently a crash, skip them here
+        case 'fill-extrusion-color':
+        case 'fill-extrusion-height':
+        case 'fill-extrusion-base':
+          continue;
+        default:
+          setProperty(property.key.dashedToCamelCase(), property.value);
+      }
+    }
+  }
 }
 
 /// UTF8 Encoding
