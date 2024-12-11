@@ -1,7 +1,7 @@
 import Flutter
 import MapLibre
 
-class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi {
+class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi, UIGestureRecognizerDelegate {
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
     private var _viewId: Int64
@@ -10,8 +10,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
     init(
         frame _: CGRect,
-        viewId viewId: Int64,
-        binaryMessenger binaryMessenger: FlutterBinaryMessenger
+        viewId: Int64,
+        binaryMessenger: FlutterBinaryMessenger
     ) {
         var channelSuffix = String(viewId)
         _viewId = viewId
@@ -19,10 +19,15 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         super.init() // self can be used after calling super.init()
         MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
         _mapView = MLNMapView(frame: _view.bounds)
-        // TODO: apply MapOptions
+        MapLibreRegistry.addMap(viewId: viewId, map: _mapView)
         _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         _view.addSubview(_mapView)
         _mapView.delegate = self
+        // disable the default UI because they are rebuilt in Flutter
+        _mapView.compassView.isHidden = true
+        _mapView.attributionButton.isHidden = true
+        _mapView.logoView.isHidden = true
+        // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
             case let .success(mapOptions):
@@ -45,34 +50,52 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 print(error)
             }
         }
-        // self._mapView.addGestureRecognizer(UIPanGestureRecognizer(target: self._view, action: #selector(onPan)))
-        // self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self._view, action: #selector(onTap)))
+        self._flutterApi.onMapReady { _ in }
+        // tap gestures
+        self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(sender:))))
+        self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(sender:))))
     }
 
-    @objc func onPan() {
-        var mlnCamera = _mapView.camera
-        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
-        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in
-            // do nothig
-        }
+    @objc func onTap(sender: UITapGestureRecognizer) {
+        var screenPosition = sender.location(in: _mapView)
+        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+        _flutterApi.onClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
     }
 
-    @objc func onTap() {
-        var mlnCamera = _mapView.camera
-        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        _flutterApi.onClick(point: center) { _ in
-            // do nothig
-        }
+    @objc func onLongPress(sender: UILongPressGestureRecognizer) {
+        var screenPosition = sender.location(in: _mapView)
+        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+        _flutterApi.onLongClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
     }
 
     func view() -> UIView {
         return _view
     }
-
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Do not override the default behavior
+        return true
+    }
+    
     // MLNMapViewDelegate method called when map has finished loading
-    func mapView(mapView: MLNMapView, didFinishLoading _: MLNStyle) {
+    func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
         _mapView = mapView
+        _flutterApi.onStyleLoaded() { _ in }
+    }
+    
+    func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
+        onCameraMoved()
+    }
+    
+    func mapViewRegionIsChanging(_ mapView: MLNMapView) {
+        onCameraMoved()
+    }
+    
+    func onCameraMoved() {
+        var mlnCamera = _mapView.camera
+        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
+        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
+        _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
     func addFillLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}

@@ -36,10 +36,14 @@ class MapScalebar extends StatelessWidget {
 
     Widget buildChild(double metersPerPixel) {
       final painter = _ScaleBarPainter(metersPerPixel, theme);
-      return Container(
-        alignment: alignment,
-        padding: padding,
-        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+      // Use a SafeArea to ensure the widget is completely visible on devices
+      // with rounded edges like iOS.
+      return SafeArea(
+        child: Container(
+          alignment: alignment,
+          padding: padding,
+          child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+        ),
       );
     }
 
@@ -135,7 +139,7 @@ class _ScaleBarPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         style: theme.textTheme.bodySmall?.copyWith(color: Colors.black),
-        text: '${meters / unit.meters} ${unit.abbreviation}',
+        text: '${(meters / unit.meters).toInt()} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
