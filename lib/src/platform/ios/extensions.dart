@@ -82,11 +82,16 @@ extension MLNStyleLayerExt on MLNStyleLayer {
   /// Apply all paint or layout properties on the [MLNStyleLayer].
   void setProperties(Map<String, Object> properties) {
     for (final property in properties.entries) {
+      print(property);
       switch (property.key) {
         case 'visibility':
           visible = property.value == 'none';
           continue;
         // TODO some properties cause currently a crash, skip them here
+        case 'circle-radius':
+        case 'circle-color':
+        case 'circle-stroke-color':
+        case 'circle-opacity':
         case 'fill-extrusion-color':
         case 'fill-extrusion-height':
         case 'fill-extrusion-base':
