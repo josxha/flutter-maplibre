@@ -300,6 +300,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 #if defined(__OBJC__)
+@class NSString;
+@class NSExpression;
+
+SWIFT_CLASS("_TtC12maplibre_ios7Helpers")
+@interface Helpers : NSObject
++ (void)setExpressionWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS("_TtC12maplibre_ios16MapLibreRegistry")
 @interface MapLibreRegistry : NSObject

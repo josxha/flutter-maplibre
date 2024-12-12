@@ -26,8 +26,11 @@ class StyleControllerIos implements StyleController {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        final ffiLayer = ffiStyleLayer = MLNBackgroundStyleLayer.new1()
-          ..initWithIdentifier_(layer.id.toNSString());
+        ffiStyleLayer = MLNBackgroundStyleLayer.new1()
+          ..initWithIdentifier_(layer.id.toNSString())
+          ..backgroundColor = NSExpression.expressionWithFormat_(
+            layer.color.toHexStringNoOpacity().toNSString(),
+          );
       // TODO add paint and layout properties
       case StyleLayerWithSource():
         final ffiSource =
@@ -42,58 +45,64 @@ class StyleControllerIos implements StyleController {
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
-          //for (final entry in layer.paint.entries) {}
-          //NSExpression.expressionWithFormat_(expressionFormat);
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case CircleStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case FillExtrusionStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case HeatmapStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case HillshadeStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNHillshadeStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case LineStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNLineStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case RasterStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNRasterStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
           case SymbolStyleLayer():
             final ffiLayer = ffiStyleLayer = MLNSymbolStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
+            ffiLayer.setProperties(layer.paint);
+            ffiLayer.setProperties(layer.layout);
         }
     }
 

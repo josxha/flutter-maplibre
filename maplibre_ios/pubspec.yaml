@@ -60,14 +60,17 @@ ffigen:
       - 'MLNRasterDEMSource'
       - 'NSImage'
       - 'NSExpression'
+      - 'Helpers'
     module:
       'MapLibreRegistry': 'maplibre_ios'
+      'Helpers': 'maplibre_ios'
       'MLNMapView': 'MapLibre'
       'MLNMapCamera': 'MapLibre'
       'MLNVectorTileSource': 'MapLibre'
   headers:
     entry-points:
       - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
+      - 'ios/maplibre_ios/Sources/maplibre_ios/Helpers.h'
       # using the MapLibre.h file doesn't seem to work
       # TODO find a better solution for the entry points
       #- '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.8.1-46c5f/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MapLibre.h'
