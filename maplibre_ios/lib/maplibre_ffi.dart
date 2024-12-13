@@ -2110,6 +2110,8 @@ final _objc_msgSend_1hcfngn = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_parseExpressionWithPropertyName_expression_ =
+    objc.registerName("parseExpressionWithPropertyName:expression:");
 
 /// Helpers
 class Helpers extends objc.NSObject {
@@ -2141,6 +2143,19 @@ class Helpers extends objc.NSObject {
         target.ref.pointer,
         field.ref.pointer,
         expression.ref.pointer);
+  }
+
+  /// parseExpressionWithPropertyName:expression:
+  static NSExpression? parseExpressionWithPropertyName_expression_(
+      objc.NSString propertyName, objc.NSString expression) {
+    final _ret = _objc_msgSend_rsfdlh(
+        _class_Helpers,
+        _sel_parseExpressionWithPropertyName_expression_,
+        propertyName.ref.pointer,
+        expression.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : NSExpression.castFromPointer(_ret, retain: true, release: true);
   }
 
   /// init

@@ -306,6 +306,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 SWIFT_CLASS("_TtC12maplibre_ios7Helpers")
 @interface Helpers : NSObject
 + (void)setExpressionWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
++ (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

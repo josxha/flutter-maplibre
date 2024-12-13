@@ -60,13 +60,12 @@ extension StringExt on String {
       }).join();
 }
 
-/// Internal extensions on [Object].
-extension ObjectExt on Object {
-  /// Convert to a [NSExpression].
-  NSExpression toNSExpression() => NSExpression.expressionWithFormat_(
-        jsonEncode(this).toNSString(),
-      );
-}
+/// Convert a raw String to a [NSExpression].
+NSExpression? parseNSExpression(String propertyName, String json) =>
+    Helpers.parseExpressionWithPropertyName_expression_(
+      propertyName.toNSString(),
+      json.toNSString(),
+    );
 
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
@@ -75,7 +74,7 @@ extension MLNStyleLayerExt on MLNStyleLayer {
     Helpers.setExpressionWithTarget_field_expression_(
       this,
       key.dashedToCamelCase().toNSString(),
-      value.toNSExpression(),
+      parseNSExpression(key, jsonEncode(value))!,
     );
   }
 
@@ -88,10 +87,10 @@ extension MLNStyleLayerExt on MLNStyleLayer {
           visible = property.value == 'none';
           continue;
         // TODO some properties cause currently a crash, skip them here
-        case 'circle-radius':
+        /*case 'circle-radius':
         case 'circle-color':
         case 'circle-stroke-color':
-        case 'circle-opacity':
+        case 'circle-opacity':*/
         case 'fill-extrusion-color':
         case 'fill-extrusion-height':
         case 'fill-extrusion-base':
