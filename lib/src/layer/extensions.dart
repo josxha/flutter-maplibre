@@ -10,8 +10,8 @@ extension ColorExt on Color {
     final blueStr = (b * 255).toInt().toRadixString(16).padLeft(2, '0');
 
     return '${hashSign ? '#' : ''}'
-        '${alpha ? alphaStr : ''}'
-        '$redStr$greenStr$blueStr'
+            '${alpha ? alphaStr : ''}'
+            '$redStr$greenStr$blueStr'
         .toUpperCase();
   }
 }
