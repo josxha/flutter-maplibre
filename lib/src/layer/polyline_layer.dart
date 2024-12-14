@@ -19,7 +19,7 @@ class PolylineLayer extends Layer<LineString> {
   final Color color;
 
   /// The opacity at which the polyline will be drawn.
-  double get opacity => color.opacity;
+  double get opacity => color.a;
 
   /// Stroke thickness.
   final int width;
@@ -36,7 +36,7 @@ class PolylineLayer extends Layer<LineString> {
 
   @override
   Map<String, Object> getPaint() => {
-        'line-color': color.toHexStringNoOpacity(),
+        'line-color': color.toHexString(alpha: false),
         'line-opacity': opacity,
         'line-width': width,
         'line-gap-width': gapWidth,
