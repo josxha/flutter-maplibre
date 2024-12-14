@@ -48,7 +48,6 @@ import UIKit
                             if let x = vector.first as? Double, let y = vector.last as? Double {
                                 return NSExpression(forConstantValue: NSValue(cgVector: CGVector(dx: x, dy: y)))
                             }
-                    
                         }
                     }
                 }

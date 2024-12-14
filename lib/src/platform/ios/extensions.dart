@@ -71,11 +71,19 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 extension MLNStyleLayerExt on MLNStyleLayer {
   /// Set a layout or paint property for a [MLNStyleLayer].
   void setProperty(String key, Object value) {
-    Helpers.setExpressionWithTarget_field_expression_(
-      this,
-      key.dashedToCamelCase().toNSString(),
-      parseNSExpression(key, jsonEncode(value))!,
-    );
+    final rawValue = switch (value) {
+      List() || Map() => jsonEncode(value),
+      _ => value.toString(),
+    };
+    final expression = parseNSExpression(key, rawValue);
+    print(expression);
+    if (expression != null) {
+      Helpers.setExpressionWithTarget_field_expression_(
+        this,
+        key.dashedToCamelCase().toNSString(),
+        expression,
+      );
+    }
   }
 
   /// Apply all paint or layout properties on the [MLNStyleLayer].
