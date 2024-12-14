@@ -29,7 +29,7 @@ class StyleControllerIos implements StyleController {
         ffiStyleLayer = MLNBackgroundStyleLayer.new1()
           ..initWithIdentifier_(layer.id.toNSString())
           ..backgroundColor = NSExpression.expressionWithFormat_(
-            layer.color.toHexStringNoOpacity().toNSString(),
+            layer.color.toHexString(alpha: false).toNSString(),
           );
       // TODO add paint and layout properties
       case StyleLayerWithSource():
