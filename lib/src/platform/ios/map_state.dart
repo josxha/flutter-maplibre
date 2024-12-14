@@ -180,7 +180,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
-    for (var i = layers.count-1; i >= 0; i--) {
+    for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers.objectAtIndex_(i);
       print(layer.ref.runtimeType);
       final features =
@@ -246,13 +246,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
     if (!trackLocation) {
-      _mapView.userTrackingMode =
-          MLNUserTrackingMode.MLNUserTrackingModeNone;
+      _mapView.userTrackingMode = MLNUserTrackingMode.MLNUserTrackingModeNone;
       return;
     }
     _mapView.userTrackingMode = switch (trackBearing) {
-      BearingTrackMode.none =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollow,
+      BearingTrackMode.none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
       BearingTrackMode.compass =>
         MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
       BearingTrackMode.gps =>
