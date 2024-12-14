@@ -81,7 +81,8 @@ class _SourceAttributionState extends State<SourceAttribution> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
