@@ -8,8 +8,8 @@ description: 'Add Polylines to the map.'
 
 Polylines are way to show paths or similar on the map.
 
-<a href="/demo/#/annotations/polyline">
-<img src="/img/annotations/annotations-polyline.jpg" 
+<a href="/demo/#/layers/polyline">
+<img src="/img/layers/annotations-polyline.jpg" 
      alt="Polylines" />
 </a>
 
@@ -22,7 +22,7 @@ Widget build(BuildContext context) {
     options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
     layers: [
       // highlight-start
-      PolylineAnnotationLayer(
+      PolylineLayer(
         polylines: <LineString>[
           LineString(
             coordinates: [
@@ -43,7 +43,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-That's it! You can add multiple `PolylineAnnotationLayer`s with different
+That's it! You can add multiple `PolylineLayer`s with different
 properties.
 
 ## Update
@@ -52,12 +52,12 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/annotations_polyline_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_polyline_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout
 
-The `PolylineAnnotationLayer` has a lot of parameters you can use for styling.
+The `PolylineLayer` has a lot of parameters you can use for styling.
 
 If you need more powerful customizations for your Polylines, you can use the more
-low level [LineLayer](../layers/line-layer).
+low level [LineLayer](../style-layers/line-layer).

@@ -6,6 +6,8 @@ import 'package:maplibre/maplibre.dart';
 
 /// Display a scalebar to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
+///
+/// {@category UI}
 @immutable
 class MapScalebar extends StatelessWidget {
   /// Display a scalebar to the [MapLibreMap] by using it in
@@ -133,7 +135,7 @@ class _ScaleBarPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         style: theme.textTheme.bodySmall?.copyWith(color: Colors.black),
-        text: '${meters / unit.meters} ${unit.abbreviation}',
+        text: '${(meters / unit.meters).toInt()} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,

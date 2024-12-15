@@ -10,12 +10,13 @@ MapLibre Native and MapLibre-GL-JS.
 
 Here is an overview what you can find in this documentation:
 
-- [Getting started](../getting-started/add-dependency) helps you to integrate the
+- [Getting started](../getting-started/add-dependency) helps you to integrate
+  the
   package into your project.
 - [Styles](../styles) can be used to customize the design of the map.
 - [User Interface](../ui) provides easy to use controls and indicators.
-- [Annotations](../category/annotations) are an easy way to add Markers, Circles,
-  Polylines or Polygons to the map.
-- [Layers](../category/layers) are a powerful way to add or remove new layers to
-  the map.
+- [Layers](../category/layers) are an easy way to add annotations such as
+  Markers, Circles, Polylines or Polygons to the map.
+- [Style Layers](../category/style-layers) are a powerful way to add or remove
+  new layers to the map.
 - [Events](../events) are a way to listen to something like a click on the map.

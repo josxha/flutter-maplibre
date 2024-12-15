@@ -4,12 +4,12 @@ title: 'Symbol'
 description: 'Add Markers to the map.'
 ---
 
-# Symbol Layer
+# Symbol Style Layer
 
-The `SymbolLayer` is either used by the map style or can be added to the map
+The `SymbolStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Symbol Layer](/img/layers/symbol_layer.jpg)](/demo/#/layers/symbol)
+[![Symbol Style Layer](/img/layers/symbol_layer.jpg)](/demo/#/style-layers/symbol)
 
 ## Basic Usage
 
@@ -21,17 +21,17 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         // load the image data
-        final response = await http.get(Uri.parse(LayersSymbolPage.imageUrl));
+        final response = await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
         final bytes = response.bodyBytes;
 
         // add the image to the map
-        await _controller.addImage('marker', bytes);
+        await style.addImage('marker', bytes);
 
         // add some points as GeoJSON source to the map
-        await _controller.addSource(
+        await style.addSource(
           const GeoJsonSource(
             id: 'points',
             data: _geoJsonString,
@@ -39,8 +39,8 @@ Widget build(BuildContext context) {
         );
 
         // display the image on the map
-        await _controller.addLayer(
-          const SymbolLayer(
+        await style.addLayer(
+          const SymbolStyleLayer(
             id: 'images',
             sourceId: 'points',
             layout: {
@@ -58,7 +58,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_symbol_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_symbol_page.dart)
 to learn more.
 
 ## Style & Layout

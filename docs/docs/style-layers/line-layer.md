@@ -4,12 +4,12 @@ title: 'Line'
 description: 'Add Lines to the map.'
 ---
 
-# Line Layer
+# Line Style Layer
 
-The `LineLayer` is either used by the map style or can be added to the map
+The `LineStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Line Layer](/img/layers/line_layer.jpg)](/demo/#/layers/line)
+[![Line Style Layer](/img/layers/line_layer.jpg)](/demo/#/style-layers/line)
 
 ## Basic Usage
 
@@ -21,14 +21,14 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
-        await _controller.addSource(
+        await style.addSource(
           GeoJsonSource(id: 'Path', data: geojsonLine),
         );
-        await _controller.addLayer(
-          const LineLayer(
+        await style.addLayer(
+          const LineStyleLayer(
             id: 'geojson-line',
             sourceId: 'Path',
             paint: {'line-color': '#F00', 'line-width': 3},
@@ -41,7 +41,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_line_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_line_page.dart)
 to learn more.
 
 ## Style & Layout

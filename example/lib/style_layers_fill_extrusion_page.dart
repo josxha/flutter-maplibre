@@ -19,8 +19,6 @@ const _sourceId = 'floorplan';
 
 class _StyleLayersFillExtrusionPageState
     extends State<StyleLayersFillExtrusionPage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,21 +31,20 @@ class _StyleLayersFillExtrusionPageState
           initBearing: 20,
           initStyle: StyledMapPage.styleUrl,
         ),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
-    await _controller.addSource(
+  Future<void> _onStyleLoaded(StyleController style) async {
+    await style.addSource(
       const GeoJsonSource(
         id: _sourceId,
         data:
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
-    await _controller.addLayer(_fillExtrusionStyleLayer);
+    await style.addLayer(_fillExtrusionStyleLayer);
   }
 }
 

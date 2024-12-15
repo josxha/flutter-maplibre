@@ -3,6 +3,8 @@ import 'package:maplibre/maplibre.dart';
 
 /// This model class is used to stream the download progress in
 /// [OfflineManager.downloadRegion].
+///
+/// {@category Offline}
 @immutable
 class DownloadProgress {
   /// Create a new [DownloadProgress] instance.

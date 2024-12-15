@@ -69,7 +69,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.0', '' ]
+        sdk: [ '3.27.0', '' ]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -162,7 +162,9 @@ jobs:
         with:
           cache: true
       - name: Install pana
-        run: dart pub global activate pana
+        run: |
+          sudo apt-get install webp && \
+          dart pub global activate pana
       - name: Check package score
         run: pana --exit-code-threshold 0 --no-dartdoc .
   build-android:
@@ -174,7 +176,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.0', '' ]
+        sdk: [ '3.27.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -206,7 +208,7 @@ jobs:
 #    strategy:
 #      fail-fast: false
 #      matrix:
-#        sdk: [ '3.24.0', '' ]
+#        sdk: [ '3.27.0', '' ]
 #    steps:
 #      - uses: actions/checkout@v4
 #      - uses: subosito/flutter-action@v2
@@ -235,7 +237,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.0', '' ]
+        sdk: [ '3.27.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -255,7 +257,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.24.0', '' ]
+        sdk: [ '3.27.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2

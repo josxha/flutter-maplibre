@@ -1,11 +1,11 @@
-import 'dart:typed_data';
-
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 
 /// The [MapController] can be used to control, update and manipulate a
 /// rendered [MapLibreMap].
+///
+/// {@category Basic}
 abstract interface class MapController {
   /// Find the [MapController] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].
@@ -21,20 +21,24 @@ abstract interface class MapController {
   /// Get the [MapOptions] from [MapLibreMap.options].
   MapOptions get options;
 
+  /// Get the [StyleController] for the map. It returns null null if
+  /// accessed before [MapLibreMap.onStyleLoaded] has been called.
+  StyleController? get style;
+
   /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Offset> toScreenLocation(Position lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Position> toLngLat(Offset screenLocation);
 
   /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Offset>> toScreenLocations(List<Position> lngLats);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Position>> toLngLats(List<Offset> screenLocations);
 
   /// Convert a latitude/longitude coordinate to a screen location.
@@ -90,27 +94,6 @@ abstract interface class MapController {
     EdgeInsets padding = EdgeInsets.zero,
   });
 
-  /// Add a new source to the map.
-  Future<void> addSource(Source source);
-
-  /// Add a new layer to the map. The source must be added before adding it to
-  /// the map.
-  ///
-  /// `belowLayerId` The ID of an existing layer to insert the new layer before,
-  /// resulting in the new layer appearing visually beneath the existing layer.
-  /// If this argument is not specified, the layer will be appended to the end
-  /// of the layers array and appear visually above all other layers.
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId});
-
-  /// Update the data of a GeoJSON source.
-  Future<void> updateGeoJsonSource({required String id, required String data});
-
-  /// Removes the layer with the given ID from the map's style.
-  Future<void> removeLayer(String id);
-
-  /// Removes the source with the given ID from the map's style.
-  Future<void> removeSource(String id);
-
   /// Get the current camera position on the map.
   MapCamera getCamera();
 
@@ -123,11 +106,11 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<double> getMetersPerPixelAtLatitude(double latitude);
 
   /// The smallest bounding box that includes the visible region.
-  // TODO: can be made sync when flutter raster and ui thread are merged
+  // TODO: can be made sync when flutter platform and ui thread are merged
   Future<LngLatBounds> getVisibleRegion();
 
   /// Returns the distance spanned by one pixel at the specified latitude and
@@ -144,15 +127,6 @@ abstract interface class MapController {
   ///
   /// Only supported on web.
   LngLatBounds getVisibleRegionSync();
-
-  /// Get a list of all attributions from the map style.
-  Future<List<String>> getAttributions();
-
-  /// Add an image to the map.
-  Future<void> addImage(String id, Uint8List bytes);
-
-  /// Removes an image from the map
-  Future<void> removeImage(String id);
 
   /// Queries the map for rendered features.
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
@@ -182,6 +156,8 @@ abstract interface class MapController {
 
 /// The mode how the bearing should get tracked on the map.
 /// Used in [MapController.trackLocation].
+///
+/// {@category Basic}
 enum BearingTrackMode {
   /// No bearing tracking.
   none,
@@ -195,6 +171,8 @@ enum BearingTrackMode {
 
 /// The mode how render the location on the map.
 /// Used in [MapController.enableLocation].
+///
+/// {@category Basic}
 enum BearingRenderMode {
   /// Do not display the current bearing.
   none,

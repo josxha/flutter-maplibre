@@ -5,6 +5,9 @@ part of 'source.dart';
 /// must be on the same domain as the map or served with CORS headers.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#geojson
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
 final class GeoJsonSource extends Source {
   /// The default constructor for a [GeoJsonSource] object.
   const GeoJsonSource({

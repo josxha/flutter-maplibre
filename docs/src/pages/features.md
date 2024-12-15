@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Supported Features
 
 This side provides a broad orientation about what functionality could and what
@@ -15,7 +11,7 @@ functionality is already added.
 
 ### Other Platforms
 
-iOS support is planned but there is currently no ETA.
+iOS support is worked on. See the current progress in [#26](https://github.com/josxha/flutter-maplibre/issues/26).
 
 Support for windows, macOS and linux is currently not possible because of the
 lack of platform views of these platforms.
@@ -26,15 +22,20 @@ lack of platform views of these platforms.
 
 ### General Functionality
 
+| Feature             | web | android | iOS | windows | macOS | linux |
+|---------------------|-----|---------|-----|---------|-------|-------|
+| Map                 | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| MapController       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| UI Controls for web | ✅   | ✅       | ➖   | ➖       | ➖     | ➖     |
+| Offline             | ➖   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Events              | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Snapshotter         | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| Annotations         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+
+### Style Layers
+
 | Feature              | web | android | iOS | windows | macOS | linux |
 |----------------------|-----|---------|-----|---------|-------|-------|
-| Map                  | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| MapController        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| UI Controls for web  | ✅   | ➖       | ➖   | ➖       | ➖     | ➖     |
-| Offline              | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Events               | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| Snapshotter          | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Annotations          | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Circle Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Fill Layer           | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Fill Extrusion Layer | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
@@ -44,16 +45,14 @@ lack of platform views of these platforms.
 | Raster Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Symbol Layer         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 
-### Gestures and other Callbacks
+### User Gestures
 
-| Feature          | web | android | iOS | windows | macOS | linux |
-|------------------|-----|---------|-----|---------|-------|-------|
-| onMapCreated     | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| onStyleLoaded    | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| onClick          | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| onDoubleClick    | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| onSecondaryClick | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| onLongClick      | ❌   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Feature         | web | android | iOS | windows | macOS | linux |
+|-----------------|-----|---------|-----|---------|-------|-------|
+| click           | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| double click    | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| secondary click | ✅   | ❌       | ❌   | ➖       | ➖     | ➖     |
+| long click      | ❌   | ✅       | ❌   | ➖       | ➖     | ➖     |
 
 ### Programmatic Control
 
@@ -65,7 +64,6 @@ lack of platform views of these platforms.
 | Add or remove a Map Layer              | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Show the User Location                 | ❌   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Track the User Location                | ❌   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| Set the Language of the Map            | ❌   | ❌       | ❌   | ➖       | ➖     | ➖     |
 | Convert Coordinates to Screen Position | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Convert Screen Position to Coordinates | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
 | Get Meters per Pixel                   | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |

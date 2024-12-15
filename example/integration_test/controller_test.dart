@@ -152,11 +152,11 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       // ensure no crash if a layer does not exist
-      await ctrl.removeLayer('notExisting');
+      await ctrl.style?.removeLayer('notExisting');
 
       const layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
-      await ctrl.addLayer(layer);
-      await ctrl.removeLayer(layer.id);
+      await ctrl.style?.addLayer(layer);
+      await ctrl.style?.removeLayer(layer.id);
     });
 
     testWidgets('removeSource', (tester) async {
@@ -169,11 +169,11 @@ void main() {
       final ctrl = await ctrlCompleter.future;
 
       // ensure no crash if a source does not exist
-      await ctrl.removeSource('notExisting');
+      await ctrl.style?.removeSource('notExisting');
 
       const source = GeoJsonSource(id: 'source', data: '{}');
-      await ctrl.addSource(source);
-      await ctrl.removeSource(source.id);
+      await ctrl.style?.addSource(source);
+      await ctrl.style?.removeSource(source.id);
     });
 
     testWidgets('updateGeoJsonSource', (tester) async {
@@ -186,8 +186,8 @@ void main() {
       final ctrl = await ctrlCompleter.future;
 
       const source = GeoJsonSource(id: '1', data: '{}');
-      await ctrl.addSource(source);
-      await ctrl.updateGeoJsonSource(
+      await ctrl.style?.addSource(source);
+      await ctrl.style?.updateGeoJsonSource(
         id: source.id,
         data: jsonEncode(
           GeometryCollection(geometries: [Point(coordinates: Position(0, 0))])
@@ -218,7 +218,7 @@ void main() {
 
     testWidgets('getAttributions', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final styleCompleter = Completer<void>();
+      final styleCompleter = Completer<StyleController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
         onStyleLoaded: styleCompleter.complete,
@@ -229,10 +229,9 @@ void main() {
         ),
       );
       await tester.pumpWidget(app);
-      final ctrl = await ctrlCompleter.future;
-      await styleCompleter.future;
+      final style = await styleCompleter.future;
 
-      final attributions = await ctrl.getAttributions();
+      final attributions = await style.getAttributions();
       expect(attributions, hasLength(1));
       expect(attributions.first, contains('OpenStreetMap'));
     });
@@ -267,9 +266,14 @@ void main() {
       id: '1',
       url:
           'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
-      coordinates: [Position(0, 0), Position(1, 1)],
+      coordinates: LngLatQuad(
+        bottomLeft: Position(0, 0),
+        bottomRight: Position(1, 0),
+        topLeft: Position(0, 1),
+        topRight: Position(1, 1),
+      ),
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -286,7 +290,7 @@ void main() {
         ).toJson(),
       ),
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -303,7 +307,7 @@ void main() {
         'https://file-examples.com/storage/fefd65c2506728a13a07e72/2017/04/file_example_MP4_480_1_5MG.mp4',
       ],
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -317,7 +321,7 @@ void main() {
       url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
       tileSize: 256,
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -334,7 +338,7 @@ void main() {
       attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -347,7 +351,7 @@ void main() {
       id: '1',
       url: 'https://demotiles.maplibre.org/tiles/tiles.json',
     );
-    await ctrl.addSource(source);
+    await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
   });
 
@@ -357,7 +361,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = BackgroundStyleLayer(id: '1', color: Colors.black);
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add FillLayer', (tester) async {
@@ -366,7 +370,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = FillStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add CircleLayer', (tester) async {
@@ -375,7 +379,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = CircleStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add FillExtrusionLayer', (tester) async {
@@ -384,7 +388,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add HeatmapLayer', (tester) async {
@@ -393,7 +397,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add HillshadeLayer', (tester) async {
@@ -402,7 +406,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add LineLayer', (tester) async {
@@ -411,7 +415,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = LineStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add RasterLayer', (tester) async {
@@ -420,7 +424,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = RasterStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add SymbolLayer', (tester) async {
@@ -429,7 +433,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
   testWidgets('add unknown Layer', (tester) async {
@@ -438,7 +442,7 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
-    await ctrl.addLayer(layer);
+    await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
 }

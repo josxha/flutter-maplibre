@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Model class that represents a map region for offline usage.
+///
+/// {@category Offline}
 @immutable
 class OfflineRegion {
   /// Create a new [OfflineRegion] instance.

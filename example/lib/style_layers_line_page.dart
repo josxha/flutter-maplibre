@@ -13,26 +13,23 @@ class StyleLayersLinePage extends StatefulWidget {
 }
 
 class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
-  late final MapController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Line Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
-    await _controller.addSource(
+    await style.addSource(
       GeoJsonSource(id: 'Path', data: geojsonLine),
     );
-    await _controller.addLayer(
+    await style.addLayer(
       const LineStyleLayer(
         id: 'geojson-line',
         sourceId: 'Path',

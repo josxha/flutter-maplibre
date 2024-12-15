@@ -15,8 +15,6 @@ const _layerId = 'showcaseLayer';
 const _sourceId = 'openStreetMap';
 
 class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
-  late final MapController _controller;
-
   // If you are looking for just a way how to display OpenStreetMap on the
   // map then this is NOT the right approach. You can create a Style JSON that
   // contains only a raster source for the OpenStreetMap tile server and one
@@ -28,13 +26,12 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
       appBar: AppBar(title: const Text('Raster Style Layer')),
       body: MapLibreMap(
         options: MapOptions(initCenter: Position(9, 48), initZoom: 7),
-        onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
       ),
     );
   }
 
-  Future<void> _onStyleLoaded() async {
+  Future<void> _onStyleLoaded(StyleController style) async {
     const openStreetMap = RasterSource(
       id: _sourceId,
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
@@ -43,8 +40,8 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
       attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
-    await _controller.addSource(openStreetMap);
-    await _controller.addLayer(_rasterStyleLayer);
+    await style.addSource(openStreetMap);
+    await style.addLayer(_rasterStyleLayer);
   }
 }
 

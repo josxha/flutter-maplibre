@@ -9,24 +9,24 @@ import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
+import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
+
+part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapState
-    implements pigeon.MapLibreFlutterApi {
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
-  jni.Style? _cachedJniStyle;
-  LayerManager? _annotationManager;
 
-  MapOptions get _options => widget.options;
+  @override
+  StyleControllerAndroid? style;
 
   jni.MapLibreMap get _jniMapLibreMap =>
       _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
@@ -34,20 +34,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   jni.Projection get _jniProjection =>
       _cachedJniProjection ??= _jniMapLibreMap.getProjection();
 
-  jni.Style? get _jniStyle {
-    if (_cachedJniStyle != null) return _cachedJniStyle;
-    final style = _jniMapLibreMap.getStyle$1();
-    if (style.isNull) return null;
-    return _cachedJniStyle ??= style;
-  }
-
   jni.LocationComponent get _locationComponent =>
       _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
     const viewType = 'plugins.flutter.io/maplibre';
-    final mode = _options.androidMode;
+    final mode = options.androidMode;
     if (mode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
         viewType: viewType,
@@ -123,25 +116,14 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  void onMapReady() {
-    widget.onEvent?.call(MapEventMapCreated(mapController: this));
-    widget.onMapCreated?.call(this);
-    setState(() {
-      camera = getCamera();
-      isInitialized = true;
-    });
-  }
-
-  @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
-    _annotationManager?.updateLayers(widget.layers);
+    layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    _cachedJniStyle?.release();
     _cachedJniProjection?.release();
     _cachedJniMapLibreMap?.release();
     _cachedLocationComponent?.release();
@@ -154,7 +136,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     if (jniMap.isNull) return;
 
     final oldOptions = oldWidget.options;
-    final options = _options;
+    final options = this.options;
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
       jniMap.setMaxZoomPreference(options.maxZoom);
@@ -194,32 +176,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       uiSettings.release();
     });
   }
-
-  @override
-  pigeon.MapOptions getOptions() => pigeon.MapOptions(
-        style: _options.initStyle,
-        bearing: _options.initBearing,
-        zoom: _options.initZoom,
-        pitch: _options.initPitch,
-        center: _options.initCenter == null
-            ? null
-            : pigeon.LngLat(
-                lng: _options.initCenter!.lng.toDouble(),
-                lat: _options.initCenter!.lat.toDouble(),
-              ),
-        minZoom: _options.minZoom,
-        maxZoom: _options.maxZoom,
-        minPitch: _options.minPitch,
-        maxPitch: _options.maxPitch,
-        maxBounds: _options.maxBounds?.toLngLatBounds(),
-        gestures: pigeon.MapGestures(
-          rotate: _options.gestures.rotate,
-          pan: _options.gestures.pan,
-          zoom: _options.gestures.zoom,
-          tilt: _options.gestures.pitch,
-        ),
-        androidTextureMode: _options.androidTextureMode,
-      );
 
   @override
   Future<Position> toLngLat(Offset screenLocation) async {
@@ -421,212 +377,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
-    // TODO: use JNI for this method
-    await switch (layer) {
-      FillStyleLayer() => _hostApi.addFillLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      CircleStyleLayer() => _hostApi.addCircleLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-          id: layer.id,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      LineStyleLayer() => _hostApi.addLineLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      RasterStyleLayer() => _hostApi.addRasterLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      SymbolStyleLayer() => _hostApi.addSymbolLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      _ => throw UnimplementedError(
-          'The Layer is not supported: ${layer.runtimeType}',
-        ),
-    };
-  }
-
-  @override
-  Future<void> addSource(Source source) async {
-    final jniStyle = _jniStyle;
-    final jniId = source.id.toJString();
-    await runOnPlatformThread(() {
-      final jni.Source jniSource;
-      switch (source) {
-        case GeoJsonSource():
-          final jniOptions = jni.GeoJsonOptions();
-          final jniData = source.data.toJString();
-          if (source.data.startsWith('{')) {
-            jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
-          } else {
-            final jniUri = jni.URI.create(jniData);
-            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
-            jniUri.release();
-          }
-          jniOptions.release();
-        case RasterDemSource():
-          jniSource = jni.RasterDemSource.new$4(
-            jniId,
-            source.url!.toJString(),
-            source.tileSize,
-          );
-          // TODO apply other properties
-          jniSource.setVolatile(source.volatile.toJBoolean());
-        case RasterSource():
-          if (source.url case final String url) {
-            jniSource =
-                jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
-          } else {
-            final tilesArray = JArray(JString.type, source.tiles!.length);
-            for (var i = 0; i < source.tiles!.length; i++) {
-              tilesArray[i] = source.tiles![i].toJString();
-            }
-            final tileSet = jni.TileSet('{}'.toJString(), tilesArray)
-              ..setMaxZoom(source.maxZoom)
-              ..setMinZoom(source.minZoom);
-            jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
-            tilesArray.release();
-            tileSet.release();
-          }
-          // TODO apply other properties
-          jniSource.setVolatile(source.volatile.toJBoolean());
-        case VectorSource():
-          jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
-          // TODO apply other properties
-          jniSource.setVolatile(source.volatile.toJBoolean());
-        case ImageSource():
-          final jniQuad = jni.LatLngQuad(
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
-            source.coordinates[0].toLatLng(),
-          );
-          final jniUri = jni.URI(source.url.toJString());
-          jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
-          jniUri.release();
-          jniQuad.release();
-        case VideoSource():
-          throw UnimplementedError('Video source is only supported on web.');
-        default:
-          throw UnimplementedError(
-            'The Source is not supported: ${source.runtimeType}',
-          );
-      }
-      jniStyle?.addSource(jniSource);
-      jniSource.release();
-    });
-  }
-
-  @override
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
-    if (_cachedJniStyle?.isNull ?? false) _cachedJniStyle?.release();
-    _cachedJniStyle = _jniMapLibreMap.getStyle$1();
+    style?.dispose();
+    final styleCtrl = StyleControllerAndroid._(
+      _jniMapLibreMap.getStyle$1(),
+      _hostApi,
+    );
+    style = styleCtrl;
 
-    widget.onEvent?.call(const MapEventStyleLoaded());
-    widget.onStyleLoaded?.call();
-    _annotationManager = LayerManager(this, widget.layers);
+    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
+    widget.onStyleLoaded?.call(styleCtrl);
+    layerManager = LayerManager(styleCtrl, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
-  }
-
-  @override
-  void onMoveCamera(pigeon.MapCamera camera) {
-    final mapCamera = MapCamera(
-      center: camera.center.toPosition(),
-      zoom: camera.zoom,
-      pitch: camera.pitch,
-      bearing: camera.bearing,
-    );
-    setState(() => this.camera = mapCamera);
-    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
-  }
-
-  @override
-  void onStartMoveCamera(pigeon.CameraChangeReason reason) {
-    final changeReason = switch (reason) {
-      pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
-      pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
-      pigeon.CameraChangeReason.developerAnimation =>
-        CameraChangeReason.developerAnimation,
-    };
-    widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
-  }
-
-  @override
-  void onIdle() => widget.onEvent?.call(const MapEventIdle());
-
-  @override
-  void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
-
-  @override
-  void onDoubleClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onSecondaryClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
-  }
-
-  @override
-  void onLongClick(pigeon.LngLat point) {
-    final position = point.toPosition();
-    widget.onEvent?.call(MapEventLongClick(point: position));
   }
 
   @override
@@ -667,43 +431,14 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Future<void> removeLayer(String id) async {
-    final jniStyle = _jniStyle;
-    await runOnPlatformThread(() {
-      jniStyle?.removeLayer(id.toJString());
-    });
-  }
-
-  @override
-  Future<void> removeSource(String id) async {
-    final jniStyle = _jniStyle;
-    await runOnPlatformThread(() {
-      jniStyle?.removeSource(id.toJString());
-    });
-  }
-
-  @override
-  Future<void> addImage(String id, Uint8List bytes) =>
-      // TODO: use JNI for this method
-      _hostApi.addImage(id, bytes);
-
-  @override
-  Future<void> removeImage(String id) async {
-    final jniStyle = _jniStyle;
-    await runOnPlatformThread(() {
-      jniStyle?.removeImage(id.toJString());
-    });
-  }
-
-  @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
     // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
     final jniMapLibreMap = _jniMapLibreMap;
-    final jniStyle = _jniStyle;
-    if (jniStyle == null) return [];
+    final style = this.style;
+    if (style == null) return [];
 
     final result = await runOnPlatformThread<List<QueriedLayer>>(() {
-      final jniLayers = jniStyle.getLayers();
+      final jniLayers = style._getLayers();
       final queriedLayers = <QueriedLayer>[];
       for (var i = jniLayers.length - 1; i >= 0; i--) {
         final jniLayer = jniLayers[i];
@@ -755,20 +490,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Future<void> updateGeoJsonSource({
-    required String id,
-    required String data,
-  }) async {
-    final jniStyle = _jniStyle;
-    if (jniStyle == null) return;
-    await runOnPlatformThread(() {
-      final source =
-          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
-      source.setGeoJson$3(data.toJString());
-    });
-  }
-
-  @override
   Future<void> enableLocation({
     Duration fastestInterval = const Duration(milliseconds: 750),
     Duration maxWaitTime = const Duration(seconds: 1),
@@ -780,8 +501,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }) async {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final locationComponent = _locationComponent;
-    final jniStyle = _jniStyle;
-    if (jniStyle == null) return;
+    final style = this.style;
+    if (style == null) return;
 
     final bearing = switch (bearingRenderMode) {
       BearingRenderMode.none => jni.RenderMode.NORMAL,
@@ -802,12 +523,14 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
             .setMaxWaitTime(maxWaitTime.inMilliseconds)
             .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
     final locationEngineRequest = locationEngineRequestBuilder.build();
-    final activationOptions =
-        jni.LocationComponentActivationOptions.builder(jniContext, jniStyle)
-            .locationComponentOptions(locationComponentOptions)
-            .useDefaultLocationEngine(true)
-            .locationEngineRequest(locationEngineRequest)
-            .build();
+    final activationOptions = jni.LocationComponentActivationOptions.builder(
+      jniContext,
+      style._jniStyle,
+    )
+        .locationComponentOptions(locationComponentOptions)
+        .useDefaultLocationEngine(true)
+        .locationEngineRequest(locationEngineRequest)
+        .build();
 
     await runOnPlatformThread(() {
       locationComponent.activateLocationComponent(activationOptions);
@@ -844,53 +567,4 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       locationComponent.setCameraMode(mode);
     });
   }
-
-  @override
-  Future<List<String>> getAttributions() async {
-    // style can be null when the map hasn't finished initializing.
-    final style = _jniStyle;
-    if (style == null) return const [];
-
-    return runOnPlatformThread<List<String>>(() {
-      final jSources = style.getSources();
-      final attributions = <String>[];
-      for (final jSource in jSources) {
-        final jniAttribution = jSource.getAttribution();
-        if (jniAttribution.isNull) continue;
-        final attribution = jniAttribution.toDartString(releaseOriginal: true);
-        if (attribution.trim().isEmpty) continue;
-        attributions.add(attribution);
-      }
-      jSources.release();
-      return attributions;
-    });
-  }
-
-  @override
-  Position toLngLatSync(Offset screenLocation) =>
-      throw UnimplementedError('toLngLatSync is only supported on web');
-
-  @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
-      throw UnimplementedError('toLngLatsSync is only supported on web');
-
-  @override
-  Offset toScreenLocationSync(Position lngLat) =>
-      throw UnimplementedError('toScreenLocationSync is only supported on web');
-
-  @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
-      throw UnimplementedError(
-        'toScreenLocationsSync is only supported on web',
-      );
-
-  @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) =>
-      throw UnimplementedError(
-        'getMetersPerPixelAtLatitudeSync is only supported on web',
-      );
-
-  @override
-  LngLatBounds getVisibleRegionSync() =>
-      throw UnimplementedError('getVisibleRegionSync is only supported on web');
 }

@@ -16,8 +16,8 @@ platforms:
   web:
 
 environment:
-  sdk: '>=3.5.0 <4.0.0'
-  flutter: '>=3.24.0' # jni >=0.12.0 depends on meta ^1.15.0
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: '>=3.27.0'
 
 dependencies:
   flutter:
@@ -39,6 +39,10 @@ dev_dependencies:
   mocktail: ^1.0.4
   pigeon: ^22.0.0
   very_good_analysis: ^6.0.0
+
+screenshots:
+  - description: 'MapLibre Logo'
+    path: 'logo.png'
 
 flutter:
   plugin:

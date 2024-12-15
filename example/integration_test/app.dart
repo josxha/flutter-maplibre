@@ -17,7 +17,7 @@ class App extends StatelessWidget {
   final MapOptions? options;
   final MapCreatedCallback? onMapCreated;
   final MapEventCallback? onEvent;
-  final VoidCallback? onStyleLoaded;
+  final StyleLoadedCallback? onStyleLoaded;
 
   @override
   Widget build(BuildContext context) {

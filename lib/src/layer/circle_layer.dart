@@ -1,6 +1,8 @@
 part of 'layer.dart';
 
 /// A [Point] layer.
+///
+/// {@category Layers}
 @immutable
 class CircleLayer extends Layer<Point> {
   /// Create a new [CircleLayer] instance.
@@ -24,7 +26,7 @@ class CircleLayer extends Layer<Point> {
   final double blur;
 
   /// The opacity at which the circle will be drawn.
-  double get opacity => color.opacity;
+  double get opacity => color.a;
 
   /// The outline width
   final int strokeWidth;
@@ -33,7 +35,7 @@ class CircleLayer extends Layer<Point> {
   final Color strokeColor;
 
   /// The opacity of the circle's stroke.
-  double get strokeOpacity => strokeColor.opacity;
+  double get strokeOpacity => strokeColor.a;
 
   @override
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
@@ -46,11 +48,11 @@ class CircleLayer extends Layer<Point> {
   @override
   Map<String, Object> getPaint() => {
         'circle-radius': radius,
-        'circle-color': color.toHexStringNoOpacity(),
+        'circle-color': color.toHexString(alpha: false),
         'circle-blur': blur,
         'circle-opacity': opacity,
         'circle-stroke-width': strokeWidth,
-        'circle-stroke-color': strokeColor.toHexStringNoOpacity(),
+        'circle-stroke-color': strokeColor.toHexString(alpha: false),
         'circle-stroke-opacity': strokeOpacity,
       };
 

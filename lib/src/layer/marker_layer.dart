@@ -1,6 +1,8 @@
 part of 'layer.dart';
 
 /// A [Point] layer.
+///
+/// {@category Layers}
 @immutable
 class MarkerLayer extends Layer<Point> {
   /// Create a new [MarkerLayer] instance.
@@ -188,11 +190,11 @@ class MarkerLayer extends Layer<Point> {
   Map<String, Object> getPaint() => {
         'icon-opacity': iconOpacity,
         'icon-color': iconColor.toHexString(),
-        'icon-halo-color': iconHaloColor.toHexStringNoOpacity(),
+        'icon-halo-color': iconHaloColor.toHexString(alpha: false),
         'icon-halo-width': iconHaloWidth,
         'icon-halo-blur': iconHaloBlur,
         'text-opacity': iconOpacity,
-        'text-color': textColor.toHexStringNoOpacity(),
+        'text-color': textColor.toHexString(alpha: false),
         'text-halo-color': textHaloColor.toHexString(),
         'text-halo-width': textHaloWidth,
         'text-halo-blur': textHaloBlur,
