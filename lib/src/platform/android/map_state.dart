@@ -242,29 +242,29 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     // only allow one pending call
     if (_moveCameraLock != null) return;
     _moveCameraLock = Completer();
-
     final jniMap = _jniMapLibreMap;
-    final cameraPositionBuilder = jni.CameraPosition_Builder();
-    if (_moveCameraCenter case final Position center) {
-      cameraPositionBuilder.target(center.toLatLng());
-    }
-    if (_moveCameraZoom case final double zoom) {
-      cameraPositionBuilder.zoom(zoom);
-    }
-    if (_moveCameraPitch case final double pitch) {
-      cameraPositionBuilder.tilt(pitch);
-    }
-    if (_moveCameraBearing case final double bearing) {
-      cameraPositionBuilder.bearing(bearing);
-    }
 
-    final cameraPosition = cameraPositionBuilder.build();
-    cameraPositionBuilder.release();
-    final cameraUpdate =
-        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
     await runOnPlatformThread(() {
+      final cameraPositionBuilder = jni.CameraPosition_Builder();
+      if (_moveCameraCenter case final Position center) {
+        cameraPositionBuilder.target(center.toLatLng());
+      }
+      if (_moveCameraZoom case final double zoom) {
+        cameraPositionBuilder.zoom(zoom);
+      }
+      if (_moveCameraPitch case final double pitch) {
+        cameraPositionBuilder.tilt(pitch);
+      }
+      if (_moveCameraBearing case final double bearing) {
+        cameraPositionBuilder.bearing(bearing);
+      }
+
+      final cameraPosition = cameraPositionBuilder.build();
+      cameraPositionBuilder.release();
+      final cameraUpdate =
+      jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+
       jniMap.moveCamera(cameraUpdate);
-      // TODO: jni causes sometimes a deadlock, complete immediately for now
       /*jniMap.moveCamera$1(
         cameraUpdate,
         jni.MapLibreMap_CancelableCallback.implement(
@@ -277,8 +277,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
           ),
         ),
       );*/
+      cameraUpdate.release();
     });
-    cameraUpdate.release();
     _moveCameraLock?.complete();
   }
 
