@@ -13,8 +13,26 @@ void main() {
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('ImageSource', () {
-      final o = ImageSource(id: '12', url: '', coordinates: [Position(2, 3)]);
-      final o2 = ImageSource(id: '13', url: '', coordinates: [Position(3, 3)]);
+      final o = ImageSource(
+        id: '12',
+        url: '',
+        coordinates: LngLatQuad(
+          bottomLeft: Position(0, 0),
+          bottomRight: Position(1, 0),
+          topLeft: Position(0, 1),
+          topRight: Position(1, 1),
+        ),
+      );
+      final o2 = ImageSource(
+        id: '13',
+        url: '',
+        coordinates: LngLatQuad(
+          bottomLeft: Position(0, 0),
+          bottomRight: Position(1, 0),
+          topLeft: Position(0, 1),
+          topRight: Position(1, 1),
+        ),
+      );
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
