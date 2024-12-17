@@ -239,6 +239,6 @@ extension type ImageSpecification._(JSObject _) implements JSObject {
 extension type FilterSpecification._(JSObject _) implements JSObject {
   /// Create a new [FilterSpecification] object.
   external FilterSpecification({
-    required List<dynamic> filter,
+    required JSArray filter,
   });
 }

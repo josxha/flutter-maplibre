@@ -4,14 +4,14 @@ part of 'interop.dart';
 extension type QueryRenderedFeaturesOptions._(JSObject _) implements JSObject {
   /// Create a new JS [QueryRenderedFeaturesOptions].
   external const QueryRenderedFeaturesOptions({
-    List<String>? layers,
+    JSArray<JSString>? layers,
     FilterSpecification? filter,
-    List<String>? availableImages,
+    JSArray<JSString>? availableImages,
     bool? validate,
   });
 
-  external List<String>? layers;
+  external JSArray<JSString> layers;
   external FilterSpecification? filter;
-  external List<String>? availableImages;
+  external JSArray<JSString>? availableImages;
   external bool? validate;
 }
