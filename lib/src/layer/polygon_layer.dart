@@ -43,9 +43,7 @@ class PolygonLayer extends Layer<Polygon> {
   bool operator ==(covariant PolygonLayer other) {
     if (identical(this, other)) return true;
 
-    return 
-      other.color == color &&
-      other.outlineColor == outlineColor;
+    return other.color == color && other.outlineColor == outlineColor;
   }
 
   @override

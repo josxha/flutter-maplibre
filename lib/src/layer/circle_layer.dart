@@ -63,8 +63,7 @@ class CircleLayer extends Layer<Point> {
   bool operator ==(covariant CircleLayer other) {
     if (identical(this, other)) return true;
 
-    return 
-      other.radius == radius &&
+    return other.radius == radius &&
         other.color == color &&
         other.blur == blur &&
         other.strokeWidth == strokeWidth &&

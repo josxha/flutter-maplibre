@@ -1,15 +1,15 @@
 ---
 sidebar_position: 1
-title: 'Fill'
-description: 'Add Polygons to the map.'
+title: 'Circle'
+description: 'Add Circles to the map.'
 ---
 
-# Fill Layer
+# Circle Style Layer
 
-The `FillLayer` is either used by the map style or can be added to the map
+The `CircleStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Fill Layer](/img/layers/fill_layer.jpg)](/demo/#/layers/fill)
+[![Circle Style Layer](/img/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
 
 ## Basic Usage
 
@@ -21,20 +21,19 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
-        final geojsonPolygon =
-        await rootBundle.loadString('assets/geojson/lake-constance.json');
-        await _controller.addSource(
-          GeoJsonSource(id: 'LakeConstance', data: geojsonPolygon),
+        // add the source
+        const earthquakes = GeoJsonSource(
+          id: _sourceId,
+          data:
+          'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
-        await _controller.addLayer(
-          const FillLayer(
-            id: 'geojson-fill',
-            sourceId: 'LakeConstance',
-            paint: {'fill-color': '#429ef5'},
-          ),
-        );
+        await style.addSource(earthquakes);
+
+        // add the source with a layer on the map
+        const layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
+        await style.addLayer(layer);
         // highlight-end
       }
   );

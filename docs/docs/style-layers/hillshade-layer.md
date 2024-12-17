@@ -4,13 +4,13 @@ title: 'Hillshade'
 description: 'Render elevation on the map.'
 ---
 
-# Hillshade Layer
+# Hillshade Style Layer
 
-The `HillshadeLayer` is either used by the map style or can be added to the map
+The `HillshadeStyleLayer` is either used by the map style or can be added to the map
 programmatically to use DEM tiles. Those tiles are used to render elevation on 
 the map.
 
-[![Hillshade Layer](/img/layers/hillshade_layer.jpg)](/demo/#/layers/hillshade)
+[![Hillshade Style Layer](/img/layers/hillshade_layer.jpg)](/demo/#/style-layers/hillshade)
 
 ## Basic Usage
 
@@ -22,20 +22,20 @@ Widget build(BuildContext context) {
   return MapLibreMap(
       options: MapOptions(center: Position(9.17, 47.68)),
       onMapCreated: (controller) => _controller = controller,
-      onStyleLoaded: () async {
+      onStyleLoaded: (style) async {
         // highlight-start
         const hillshade = RasterDemSource(
           id: _sourceId,
           url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
           tileSize: 256,
         );
-        await _controller.addSource(hillshade);
-        const layer = HillshadeLayer(
+        await style.addSource(hillshade);
+        const layer = HillshadeStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
           paint: {'hillshade-shadow-color': '#473B24'},
         );
-        await _controller.addLayer(layer);
+        await style.addLayer(layer);
         // highlight-end
       }
   );

@@ -380,9 +380,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     }
     if (gestures.rotate) {
       _map.dragRotate.enable();
-      _map.touchZoomRotate.disableRotation();
-    } else {
       _map.touchZoomRotate.enableRotation();
+    } else {
+      _map.touchZoomRotate.disableRotation();
       _map.dragRotate.disable();
     }
     if (gestures.pitch) {

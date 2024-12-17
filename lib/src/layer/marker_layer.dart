@@ -242,8 +242,7 @@ class MarkerLayer extends Layer<Point> {
   bool operator ==(covariant MarkerLayer other) {
     if (identical(this, other)) return true;
 
-    return 
-      other.iconAllowOverlap == iconAllowOverlap &&
+    return other.iconAllowOverlap == iconAllowOverlap &&
         other.iconIgnorePlacement == iconIgnorePlacement &&
         other.iconOptional == iconOptional &&
         other.iconSize == iconSize &&

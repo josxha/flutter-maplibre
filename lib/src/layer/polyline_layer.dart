@@ -59,8 +59,7 @@ class PolylineLayer extends Layer<LineString> {
   bool operator ==(covariant PolylineLayer other) {
     if (identical(this, other)) return true;
 
-    return 
-      other.color == color &&
+    return other.color == color &&
         other.width == width &&
         other.gapWidth == gapWidth &&
         other.blur == blur &&

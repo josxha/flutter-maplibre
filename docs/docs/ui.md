@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
     children: <Widget>[
       MapScalebar(),
       SourceAttribution(),
-      MapZoomButtons(),
+      MapControlButtons(),
       MapCompass(),
     ],
   );
@@ -62,10 +62,15 @@ current latitude and zoom level.
 
 ![Scalebar](/img/ui/scalebar.jpg)
 
-## Map Zoom Buttons
+## Map Control Buttons
 
-Zoom buttons are great for accessability reasons and great for non tech savvy
-users to navigate the map. You can use the `MapZoomButtons` widget to render the
-default zoom buttons on the map.
+Zoom buttons are great for accessibility reasons and great for non-tech-savvy
+users to navigate the map. You can use the `MapControlButtons` widget to render
+the default zoom buttons on the map.
 
-![Zoom Buttons](/img/ui/zoom-buttons.jpg)
+You are able to toggle an optional `showTrackLocation` flag to display an
+additional button to let the user display and track its own position.
+The `showTrackLocation` flag will be ignored on web as web has currently not the
+same location functionality as other platforms provide.
+
+![Zoom Control Buttons](/img/ui/zoom-buttons.jpg)

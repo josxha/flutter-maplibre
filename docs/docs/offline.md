@@ -2,7 +2,13 @@
 sidebar_position: 45
 ---
 
-# Offline
+# Offline & Cache
+
+:::warning
+
+The `OfflineManager` is not available on web.
+
+:::
 
 The `OfflineManager` provides a set of tools to manage the cache and handle
 offline maps. It enables users to download and interact with map data in areas
@@ -14,6 +20,7 @@ using `OfflineManager.createInstance()`. You can store the instance for later
 use.
 
 ```dart
+
 Future<OfflineManager> futureManager = OfflineManager.createInstance();
 ```
 
@@ -28,6 +35,13 @@ void dispose() {
   super.dispose();
 }
 ```
+
+## Cache Management
+
+There are mutliple methods to manage and control the cache, ensuring efficient
+use of storage. Head over to
+the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/OfflineManager-class.html)
+to learn more.
 
 ## Downloading Map Regions
 
@@ -76,10 +90,3 @@ useful for managing or displaying region-specific data.
 Merge an offline region from an MBTiles database into the MapLibre tile cache by
 using `manager.mergeOfflineRegions(path: 'path/to/mbtiles')`. Ensure that the
 app has permission to read the directory.
-
-### Cache Management
-
-There are mutliple methods to manage and control the cache, ensuring efficient
-use of storage. Head over to
-the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/OfflineManager-class.html)
-to learn more.
