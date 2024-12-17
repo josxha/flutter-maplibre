@@ -128,14 +128,14 @@ extension FeatureExt on jni_geojson.Feature {
   }
 }
 
-/// Extension methods for the [pigeon.PointerEventType] class. Not exported publicly.
-extension PointerEventTypeExt on pigeon.PointerEventType {
-  /// Convert a [pigeon.PointerEventType] to a [PointerEventType].
-  PointerEventType toPointerEventType() {
+/// Extension methods for the [pigeon.LongPressEventType] class. Not exported publicly.
+extension LongPressEventTypeExt on pigeon.LongPressEventType {
+  /// Convert a [pigeon.LongPressEventType] to a [LongPressEventType].
+  LongPressEventType toLongPressEventType() {
     return switch (this) {
-      pigeon.PointerEventType.up => PointerEventType.up,
-      pigeon.PointerEventType.move => PointerEventType.move,
-      pigeon.PointerEventType.down => PointerEventType.down,
+      pigeon.LongPressEventType.begin => LongPressEventType.begin,
+      pigeon.LongPressEventType.move => LongPressEventType.move,
+      pigeon.LongPressEventType.end => LongPressEventType.end,
     };
   }
 }

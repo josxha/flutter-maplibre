@@ -2,7 +2,7 @@
 
 packages=$(flutter pub global list)
 if echo "$packages" | grep -q "pigeon"; then
-    echo "pigeon installed"
+  echo "pigeon installed"
 else
   flutter pub global activate pigeon # only once
 fi

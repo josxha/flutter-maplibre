@@ -60,16 +60,16 @@ enum CameraChangeReason {
   apiGesture,
 }
 
-/// The pointer events that can be performed by a user.
-enum PointerEventType {
-  /// The user pressed down on the screen.
-  down,
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType {
+  /// The user pressed down on the screen and started to move the pointer.
+  begin,
 
   /// The user is moving the pointer.
   move,
 
   /// The user released the pointer.
-  up,
+  end,
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -393,7 +393,7 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is CameraChangeReason) {
       buffer.putUint8(131);
       writeValue(buffer, value.index);
-    } else if (value is PointerEventType) {
+    } else if (value is LongPressEventType) {
       buffer.putUint8(132);
       writeValue(buffer, value.index);
     } else if (value is MapOptions) {
@@ -436,7 +436,7 @@ class _PigeonCodec extends StandardMessageCodec {
         return value == null ? null : CameraChangeReason.values[value];
       case 132:
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : PointerEventType.values[value];
+        return value == null ? null : LongPressEventType.values[value];
       case 133:
         return MapOptions.decode(readValue(buffer)!);
       case 134:
@@ -814,10 +814,10 @@ class MapLibreHostApi {
     }
   }
 
-  /// Enable or disable the pointer events listener on the view.
-  Future<void> setPointerListenerEnabled({required bool enabled}) async {
+  /// Enable or disable the move gestures after a long press.
+  Future<void> toggleLongPressMove({required bool enabled}) async {
     final String pigeonVar_channelName =
-        'dev.flutter.pigeon.maplibre.MapLibreHostApi.setPointerListenerEnabled$pigeonVar_messageChannelSuffix';
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel =
         BasicMessageChannel<Object?>(
       pigeonVar_channelName,
@@ -871,8 +871,8 @@ abstract class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  /// Callback when the user performs a pointer event.
-  void onPointerEvent(PointerEventType event, LngLat position);
+  /// Callback when the user performs a move event after a long lasting click.
+  void onLongPressMove(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -1122,7 +1122,7 @@ abstract class MapLibreFlutterApi {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent$messageChannelSuffix',
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove$messageChannelSuffix',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -1130,16 +1130,17 @@ abstract class MapLibreFlutterApi {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent was null.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null.');
           final List<Object?> args = (message as List<Object?>?)!;
-          final PointerEventType? arg_event = (args[0] as PointerEventType?);
+          final LongPressEventType? arg_event =
+              (args[0] as LongPressEventType?);
           assert(arg_event != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent was null, expected non-null PointerEventType.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null, expected non-null LongPressEventType.');
           final LngLat? arg_position = (args[1] as LngLat?);
           assert(arg_position != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent was null, expected non-null LngLat.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null, expected non-null LngLat.');
           try {
-            api.onPointerEvent(arg_event!, arg_position!);
+            api.onLongPressMove(arg_event!, arg_position!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

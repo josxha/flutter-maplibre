@@ -97,14 +97,14 @@ enum CameraChangeReason: Int {
   case apiGesture = 2
 }
 
-/// The pointer events that can be performed by a user.
-enum PointerEventType: Int {
-  /// The user pressed down on the screen.
-  case down = 0
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType: Int {
+  /// The user pressed down on the screen and started to move the pointer.
+  case begin = 0
   /// The user is moving the pointer.
   case move = 1
   /// The user released the pointer.
-  case up = 2
+  case end = 2
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -417,7 +417,7 @@ private class PigeonPigeonCodecReader: FlutterStandardReader {
     case 132:
       let enumResultAsInt: Int? = nilOrValue(self.readValue() as! Int?)
       if let enumResultAsInt = enumResultAsInt {
-        return PointerEventType(rawValue: enumResultAsInt)
+        return LongPressEventType(rawValue: enumResultAsInt)
       }
       return nil
     case 133:
@@ -451,7 +451,7 @@ private class PigeonPigeonCodecWriter: FlutterStandardWriter {
     } else if let value = value as? CameraChangeReason {
       super.writeByte(131)
       super.writeValue(value.rawValue)
-    } else if let value = value as? PointerEventType {
+    } else if let value = value as? LongPressEventType {
       super.writeByte(132)
       super.writeValue(value.rawValue)
     } else if let value = value as? MapOptions {
@@ -521,8 +521,8 @@ protocol MapLibreHostApi {
   func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
   /// Add an image to the map.
   func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void)
-  /// Enable or disable the pointer events listener on the view.
-  func setPointerListenerEnabled(enabled: Bool) throws
+  /// Enable or disable the move gestures after a long press.
+  func toggleLongPressMove(enabled: Bool) throws
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -766,21 +766,21 @@ class MapLibreHostApiSetup {
     } else {
       addImageChannel.setMessageHandler(nil)
     }
-    /// Enable or disable the pointer events listener on the view.
-    let setPointerListenerEnabledChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.setPointerListenerEnabled\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    /// Enable or disable the move gestures after a long press.
+    let toggleLongPressMoveChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      setPointerListenerEnabledChannel.setMessageHandler { message, reply in
+      toggleLongPressMoveChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let enabledArg = args[0] as! Bool
         do {
-          try api.setPointerListenerEnabled(enabled: enabledArg)
+          try api.toggleLongPressMove(enabled: enabledArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      setPointerListenerEnabledChannel.setMessageHandler(nil)
+      toggleLongPressMoveChannel.setMessageHandler(nil)
     }
   }
 }
@@ -805,8 +805,8 @@ protocol MapLibreFlutterApiProtocol {
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
-  /// Callback when the user performs a pointer event.
-  func onPointerEvent(event eventArg: PointerEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user performs a move event after a long lasting click.
+  func onLongPressMove(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera changes.
   func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera starts changing.
@@ -997,9 +997,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
-  /// Callback when the user performs a pointer event.
-  func onPointerEvent(event eventArg: PointerEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent\(messageChannelSuffix)"
+  /// Callback when the user performs a move event after a long lasting click.
+  func onLongPressMove(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([eventArg, positionArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {

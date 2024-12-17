@@ -73,13 +73,13 @@ class LayerManager {
   }
 
   /// Called when the user interacts with the map in any way.
-  Future<void> onFeatureDrag(MapEventFeatureDragged event) async {
-    switch (event.eventType) {
-      case PointerEventType.down:
-        dragFeature = event.feature;
-      case PointerEventType.move:
+  Future<void> onFeatureDrag(MapEventFeatureDrag mapEvent) async {
+    switch (mapEvent.event) {
+      case LongPressEventType.begin:
+        dragFeature = mapEvent.feature;
+      case LongPressEventType.move:
         break;
-      case PointerEventType.up:
+      case LongPressEventType.end:
         dragFeature = null;
     }
   }

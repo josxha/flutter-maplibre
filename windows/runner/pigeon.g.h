@@ -87,14 +87,14 @@ enum class CameraChangeReason {
   kApiGesture = 2
 };
 
-// The pointer events that can be performed by a user.
-enum class PointerEventType {
-  // The user pressed down on the screen.
-  kDown = 0,
+// The pointer events that can be performed by a user after a long press.
+enum class LongPressEventType {
+  // The user pressed down on the screen and started to move the pointer.
+  kBegin = 0,
   // The user is moving the pointer.
   kMove = 1,
   // The user released the pointer.
-  kUp = 2
+  kEnd = 2
 };
 
 
@@ -559,8 +559,8 @@ class MapLibreHostApi {
     const std::string& id,
     const std::vector<uint8_t>& bytes,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Enable or disable the pointer events listener on the view.
-  virtual std::optional<FlutterError> SetPointerListenerEnabled(bool enabled) = 0;
+  // Enable or disable the move gestures after a long press.
+  virtual std::optional<FlutterError> ToggleLongPressMove(bool enabled) = 0;
 
   // The codec used by MapLibreHostApi.
   static const flutter::StandardMessageCodec& GetCodec();
@@ -628,9 +628,9 @@ class MapLibreFlutterApi {
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user performs a pointer event.
-  void OnPointerEvent(
-    const PointerEventType& event,
+  // Callback when the user performs a move event after a long lasting click.
+  void OnLongPressMove(
+    const LongPressEventType& event,
     const LngLat& position,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);

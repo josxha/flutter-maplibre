@@ -667,7 +667,7 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
     case 132: {
         const auto& encodable_enum_arg = ReadValue(stream);
         const int64_t enum_arg_value = encodable_enum_arg.IsNull() ? 0 : encodable_enum_arg.LongValue();
-        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<PointerEventType>(enum_arg_value));
+        return encodable_enum_arg.IsNull() ? EncodableValue() : CustomEncodableValue(static_cast<LongPressEventType>(enum_arg_value));
       }
     case 133: {
         return CustomEncodableValue(MapOptions::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
@@ -714,9 +714,9 @@ void PigeonInternalCodecSerializer::WriteValue(
       WriteValue(EncodableValue(static_cast<int>(std::any_cast<CameraChangeReason>(*custom_value))), stream);
       return;
     }
-    if (custom_value->type() == typeid(PointerEventType)) {
+    if (custom_value->type() == typeid(LongPressEventType)) {
       stream->WriteByte(132);
-      WriteValue(EncodableValue(static_cast<int>(std::any_cast<PointerEventType>(*custom_value))), stream);
+      WriteValue(EncodableValue(static_cast<int>(std::any_cast<LongPressEventType>(*custom_value))), stream);
       return;
     }
     if (custom_value->type() == typeid(MapOptions)) {
@@ -1275,7 +1275,7 @@ void MapLibreHostApi::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.setPointerListenerEnabled" + prepended_suffix, &GetCodec());
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
         try {
@@ -1286,7 +1286,7 @@ void MapLibreHostApi::SetUp(
             return;
           }
           const auto& enabled_arg = std::get<bool>(encodable_enabled_arg);
-          std::optional<FlutterError> output = api->SetPointerListenerEnabled(enabled_arg);
+          std::optional<FlutterError> output = api->ToggleLongPressMove(enabled_arg);
           if (output.has_value()) {
             reply(WrapError(output.value()));
             return;
@@ -1546,12 +1546,12 @@ void MapLibreFlutterApi::OnLongClick(
   });
 }
 
-void MapLibreFlutterApi::OnPointerEvent(
-  const PointerEventType& event_arg,
+void MapLibreFlutterApi::OnLongPressMove(
+  const LongPressEventType& event_arg,
   const LngLat& position_arg,
   std::function<void(void)>&& on_success,
   std::function<void(const FlutterError&)>&& on_error) {
-  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent" + message_channel_suffix_;
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove" + message_channel_suffix_;
   BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
   EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
     CustomEncodableValue(event_arg),

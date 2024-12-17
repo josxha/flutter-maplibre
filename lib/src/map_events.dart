@@ -66,29 +66,29 @@ enum CameraChangeReason {
   apiGesture;
 }
 
-/// Emitted when the user interacts with the map in any way.
-sealed class MapEventPointer extends MapEvent {
-  /// Create a new [MapEventPointer] object.
-  const MapEventPointer({
+/// Emitted when the user interacts with the map in any way after a long press.
+sealed class MapEventLongPress extends MapEvent {
+  /// Create a new [MapEventLongPress] object.
+  const MapEventLongPress({
     required this.point,
-    required this.eventType,
+    required this.event,
   });
 
-  /// The [Position] of where the user clicked at.
+  /// The [Position] of where the user is pressing at.
   final Position point;
 
-  /// The type of the pointer event.
-  final PointerEventType eventType;
+  /// The type of move gesture that is being performed.
+  final LongPressEventType event;
 
   @override
-  String toString() => 'MapEventPointer(event: $eventType, point: $point)';
+  String toString() => 'MapEventLongPress(event: $event, point: $point)';
 }
 
-/// Emitted when the user interact with an interactive feature on the map.
-final class MapEventFeatureDragged extends MapEventPointer {
-  /// Create a new [MapEventFeatureDragged] object.
-  const MapEventFeatureDragged({
-    required super.eventType,
+/// Emitted when the user is dragging a feature on the map.
+final class MapEventFeatureDrag extends MapEventLongPress {
+  /// Create a new [MapEventFeatureDrag] object.
+  const MapEventFeatureDrag({
+    required super.event,
     required super.point,
     required this.feature,
   });
@@ -98,31 +98,31 @@ final class MapEventFeatureDragged extends MapEventPointer {
 
   @override
   String toString() =>
-      'MapEventFeatureDragged(event: $eventType, feature: $feature, point: $point)';
+      'MapEventFeatureDragged(event: $event, feature: $feature, point: $point)';
 }
 
-/// Emitted when the user interact with the map using pointer events.
-final class MapEventPointerInput extends MapEventPointer {
-  /// Create a new [MapEventPointerInput] object.
-  const MapEventPointerInput({
-    required super.eventType,
+/// Emitted when the user moves the pointer after a long press.
+final class MapEventLongPressMove extends MapEventLongPress {
+  /// Create a new [MapEventLongPressMove] object.
+  const MapEventLongPressMove({
+    required super.event,
     required super.point,
   });
 
   @override
-  String toString() => 'MapEventPointerInput(event: $eventType, point: $point)';
+  String toString() => 'MapEventLongPressMove(event: $event, point: $point)';
 }
 
-/// The pointer events that can be performed by a user.
-enum PointerEventType {
-  /// The user pressed down on the screen.
-  down,
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType {
+  /// The user pressed down on the screen and started to move the pointer.
+  begin,
 
   /// The user is moving the pointer.
   move,
 
   /// The user released the pointer.
-  up,
+  end,
 }
 
 /// Emitted when the user interacts with the map in any way. Use this class if

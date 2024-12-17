@@ -95,17 +95,17 @@ enum class CameraChangeReason(val raw: Int) {
   }
 }
 
-/** The pointer events that can be performed by a user. */
-enum class PointerEventType(val raw: Int) {
-  /** The user pressed down on the screen. */
-  DOWN(0),
+/** The pointer events that can be performed by a user after a long press. */
+enum class LongPressEventType(val raw: Int) {
+  /** The user pressed down on the screen and started to move the pointer. */
+  BEGIN(0),
   /** The user is moving the pointer. */
   MOVE(1),
   /** The user released the pointer. */
-  UP(2);
+  END(2);
 
   companion object {
-    fun ofRaw(raw: Int): PointerEventType? {
+    fun ofRaw(raw: Int): LongPressEventType? {
       return values().firstOrNull { it.raw == raw }
     }
   }
@@ -383,7 +383,7 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
       }
       132.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          PointerEventType.ofRaw(it.toInt())
+          LongPressEventType.ofRaw(it.toInt())
         }
       }
       133.toByte() -> {
@@ -438,7 +438,7 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(131)
         writeValue(stream, value.raw)
       }
-      is PointerEventType -> {
+      is LongPressEventType -> {
         stream.write(132)
         writeValue(stream, value.raw)
       }
@@ -503,8 +503,8 @@ interface MapLibreHostApi {
   fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
   /** Add an image to the map. */
   fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
-  /** Enable or disable the pointer events listener on the view. */
-  fun setPointerListenerEnabled(enabled: Boolean)
+  /** Enable or disable the move gestures after a long press. */
+  fun toggleLongPressMove(enabled: Boolean)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -762,13 +762,13 @@ interface MapLibreHostApi {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.setPointerListenerEnabled$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val enabledArg = args[0] as Boolean
             val wrapped: List<Any?> = try {
-              api.setPointerListenerEnabled(enabledArg)
+              api.toggleLongPressMove(enabledArg)
               listOf(null)
             } catch (exception: Throwable) {
               wrapError(exception)
@@ -958,11 +958,11 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
-  /** Callback when the user performs a pointer event. */
-  fun onPointerEvent(eventArg: PointerEventType, positionArg: LngLat, callback: (Result<Unit>) -> Unit)
+  /** Callback when the user performs a move event after a long lasting click. */
+  fun onLongPressMove(eventArg: LongPressEventType, positionArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onPointerEvent$separatedMessageChannelSuffix"
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(eventArg, positionArg)) {
       if (it is List<*>) {

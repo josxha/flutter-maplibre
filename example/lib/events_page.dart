@@ -57,33 +57,32 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  void _onEvent(MapEvent event) => switch (event) {
+  void _onEvent(MapEvent mapEvent) => switch (mapEvent) {
         MapEventMapCreated() => _print('map created'),
         MapEventStyleLoaded() => _print('style loaded'),
         MapEventMoveCamera() => _print(
-            'move camera: center ${_formatPosition(event.camera.center)}, '
-            'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
-            'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
-            'bearing ${event.camera.bearing.toStringAsFixed(2)}',
+            'move camera: center ${_formatPosition(mapEvent.camera.center)}, '
+            'zoom ${mapEvent.camera.zoom.toStringAsFixed(2)}, '
+            'pitch ${mapEvent.camera.pitch.toStringAsFixed(2)}, '
+            'bearing ${mapEvent.camera.bearing.toStringAsFixed(2)}',
           ),
         MapEventStartMoveCamera() =>
-          _print('start move camera, reason: ${event.reason.name}'),
-        MapEventClick() => _print('clicked: ${_formatPosition(event.point)}'),
+          _print('start move camera, reason: ${mapEvent.reason.name}'),
+        MapEventClick() =>
+          _print('clicked: ${_formatPosition(mapEvent.point)}'),
         MapEventDoubleClick() =>
-          _print('double clicked: ${_formatPosition(event.point)}'),
+          _print('double clicked: ${_formatPosition(mapEvent.point)}'),
         MapEventLongClick() =>
-          _print('long clicked: ${_formatPosition(event.point)}'),
+          _print('long clicked: ${_formatPosition(mapEvent.point)}'),
         MapEventSecondaryClick() =>
-          _print('secondary clicked: ${_formatPosition(event.point)}'),
+          _print('secondary clicked: ${_formatPosition(mapEvent.point)}'),
         MapEventIdle() => _print('idle'),
         MapEventCameraIdle() => _print('camera idle'),
-        MapEventPointerInput() => !dragEnabled
-            ? _print(
-                'pointer ${event.eventType.name} at: ${_formatPosition(event.point)}',
-              )
-            : {},
-        MapEventFeatureDragged() => _print(
-            '${event.eventType} ${event.feature} at: ${_formatPosition(event.point)}',
+        MapEventLongPressMove() => _print(
+            'long press ${mapEvent.event.name}: ${_formatPosition(mapEvent.point)}',
+          ),
+        MapEventFeatureDrag() => _print(
+            '${mapEvent.event.name} feature ${mapEvent.feature.id} at: ${_formatPosition(mapEvent.point)}',
           ),
       };
 

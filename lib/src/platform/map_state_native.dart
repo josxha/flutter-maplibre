@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
@@ -110,16 +111,16 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
   }
 
   @override
-  Future<void> onPointerEvent(
-    pigeon.PointerEventType event,
+  Future<void> onLongPressMove(
+    pigeon.LongPressEventType event,
     pigeon.LngLat point,
   ) async {
-    final pointerEventType = event.toPointerEventType();
+    final longPressEventType = event.toLongPressEventType();
     final position = point.toPosition();
 
     widget.onEvent?.call(
-      MapEventPointerInput(
-        eventType: pointerEventType,
+      MapEventLongPressMove(
+        event: longPressEventType,
         point: position,
       ),
     );
@@ -129,14 +130,14 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
     final isDragging = layerManager!.dragFeature != null;
     Feature? feature;
 
-    if (event == pigeon.PointerEventType.down && !isDragging) {
+    if (event == pigeon.LongPressEventType.begin && !isDragging) {
       final screenLoc = await toScreenLocation(point.toPosition());
       final features = await queryRenderedFeatures(screenLoc);
       if (features.isEmpty) return;
       feature = features.first;
 
-      final featureDragEvent = MapEventFeatureDragged(
-        eventType: event.toPointerEventType(),
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toLongPressEventType(),
         point: point.toPosition(),
         feature: feature,
       );
@@ -146,8 +147,8 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
     }
 
     if (isDragging) {
-      final featureDragEvent = MapEventFeatureDragged(
-        eventType: event.toPointerEventType(),
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toLongPressEventType(),
         point: point.toPosition(),
         feature: layerManager!.dragFeature!,
       );

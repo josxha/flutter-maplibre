@@ -137,6 +137,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final oldOptions = oldWidget.options;
     final options = this.options;
+
+    if (options.gestures.drag != oldOptions.gestures.drag) {
+      await _hostApi.toggleLongPressMove(
+        enabled: options.gestures.drag,
+      );
+    }
+
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
       jniMap.setMaxZoomPreference(options.maxZoom);

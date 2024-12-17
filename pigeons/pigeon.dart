@@ -121,8 +121,8 @@ abstract interface class MapLibreHostApi {
   @async
   void addImage(String id, Uint8List bytes);
 
-  /// Enable or disable the pointer events listener on the view.
-  void setPointerListenerEnabled({required bool enabled});
+  /// Enable or disable the move gestures after a long press.
+  void toggleLongPressMove({required bool enabled});
 }
 
 @FlutterApi()
@@ -155,8 +155,8 @@ abstract interface class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  /// Callback when the user performs a pointer event.
-  void onPointerEvent(PointerEventType event, LngLat position);
+  /// Callback when the user performs a move event after a long lasting click.
+  void onLongPressMove(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -357,14 +357,14 @@ enum CameraChangeReason {
   apiGesture;
 }
 
-/// The pointer events that can be performed by a user.
-enum PointerEventType {
-  /// The user pressed down on the screen.
-  down,
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType {
+  /// The user pressed down on the screen and started to move the pointer.
+  begin,
 
   /// The user is moving the pointer.
   move,
 
   /// The user released the pointer.
-  up,
+  end,
 }
