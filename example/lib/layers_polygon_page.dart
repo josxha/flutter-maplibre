@@ -43,7 +43,7 @@ class _LayersPolygonPageState extends State<LayersPolygonPage> {
         layers: [
           PolygonLayer(
             polygons: Layer.generateFeatureList(_polygons),
-            color: Colors.lightBlueAccent.withOpacity(0.6),
+            color: Colors.lightBlueAccent.withValues(alpha: 0.6),
             outlineColor: Colors.blue,
           ),
         ],

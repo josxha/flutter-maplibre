@@ -16,16 +16,16 @@ class PolygonLayer extends Layer<Polygon> {
   final Color color;
 
   /// The opacity at which the polygon will be drawn.
-  double get opacity => color.opacity;
+  double get opacity => color.a;
 
   /// The outline color
   final Color outlineColor;
 
   @override
   Map<String, Object> getPaint() => {
-        'fill-color': color.toHexStringNoOpacity(),
+        'fill-color': color.toHexString(alpha: false),
         'fill-opacity': opacity,
-        'fill-outline-color': outlineColor.toHexStringNoOpacity(),
+        'fill-outline-color': outlineColor.toHexString(alpha: false),
       };
 
   @override

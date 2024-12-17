@@ -2,9 +2,16 @@ import 'dart:ui';
 
 /// Extension methods on [Color].
 extension ColorExt on Color {
-  /// Convert the [Color] object to an hex string without the opacity.
-  String toHexStringNoOpacity() => '#${value.toRadixString(16).substring(2)}';
+  /// Convert the [Color] object to an hex string without an optional opacity.
+  String toHexString({bool hashSign = true, bool alpha = true}) {
+    final alphaStr = (a * 255).toInt().toRadixString(16).padLeft(2, '0');
+    final redStr = (r * 255).toInt().toRadixString(16).padLeft(2, '0');
+    final greenStr = (g * 255).toInt().toRadixString(16).padLeft(2, '0');
+    final blueStr = (b * 255).toInt().toRadixString(16).padLeft(2, '0');
 
-  /// Convert the [Color] object to an hex string.
-  String toHexString() => '#${value.toRadixString(16)}';
+    return '${hashSign ? '#' : ''}'
+            '${alpha ? alphaStr : ''}'
+            '$redStr$greenStr$blueStr'
+        .toUpperCase();
+  }
 }

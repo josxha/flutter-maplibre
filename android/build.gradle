@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("com.android.tools.build:gradle:8.6.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         // noinspection GradleDynamicVersion
         classpath("org.jlleitschuh.gradle:ktlint-gradle:12.1.+")
@@ -67,7 +67,7 @@ android {
 
     dependencies {
         // noinspection GradleDynamicVersion
-        implementation 'org.maplibre.gl:android-sdk:11.6.+' // JNIGEN
+       implementation 'org.maplibre.gl:android-sdk:11.7.+' // JNIGEN
 // JNIGEN       implementation project(":MapLibreAndroid")
 // JNIGEN        implementation 'com.google.code.gson:gson:2.11.0'
 // JNIGEN        implementation 'org.maplibre.gl:maplibre-android-gestures:0.0.3'

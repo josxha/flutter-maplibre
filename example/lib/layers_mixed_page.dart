@@ -21,7 +21,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
     Point(coordinates: Position(9, 48)),
     Point(coordinates: Position(9.5, 48)),
   ];
-  Color _circleColor = Colors.orange.withOpacity(0.5);
+  Color _circleColor = Colors.orange.withValues(alpha: 0.5);
   PolylineLayer? _polylineLayer;
 
   @override

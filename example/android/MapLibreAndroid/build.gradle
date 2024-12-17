@@ -1,2 +1,2 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file('android-sdk-11.6.0.aar'))
+artifacts.add("default", file('android-sdk-11.7.0.aar'))

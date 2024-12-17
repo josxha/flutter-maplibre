@@ -35,7 +35,7 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
         layers: [
           CircleLayer(
             circles: Layer.generateFeatureList(_points),
-            color: Colors.orange.withOpacity(0.5),
+            color: Colors.orange.withValues(alpha: 0.5),
             radius: 20,
             strokeColor: Colors.red,
             strokeWidth: 2,
