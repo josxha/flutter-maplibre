@@ -128,8 +128,15 @@ abstract interface class MapController {
   /// Only supported on web.
   LngLatBounds getVisibleRegionSync();
 
-  /// Queries the map for rendered features.
+  /// Queries the map for rendered layers.
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+
+  /// Queries the map for rendered features.
+  /// Optionally filter the results by layer IDs.
+  Future<List<Feature>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  });
 
   /// Show the user location on the map
   Future<void> enableLocation({

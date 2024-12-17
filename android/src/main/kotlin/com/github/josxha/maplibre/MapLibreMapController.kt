@@ -3,12 +3,12 @@ package com.github.josxha.maplibre
 // if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
 
 import CameraChangeReason
-import PointerEventType
 import LngLat
 import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import PointerEventType
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -19,6 +19,8 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
+import java.io.IOException
+import java.net.URL
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.geometry.LatLng
@@ -43,8 +45,6 @@ import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
-import java.io.IOException
-import java.net.URL
 
 class MapLibreMapController(
     private val viewId: Int,
@@ -398,10 +398,10 @@ class MapLibreMapController(
     override fun setPointerListenerEnabled(enabled: Boolean) {
         mapView.setOnTouchListener { _, event ->
             if (enabled) {
-                val positionLatLng = mapLibreMap.projection.fromScreenLocation(PointF(event.x, event.y))
-                val position = LngLat(positionLatLng.longitude, positionLatLng.latitude)
+                val pointLatLng = mapLibreMap.projection.fromScreenLocation(PointF(event.x, event.y))
+                val point = LngLat(pointLatLng.longitude, pointLatLng.latitude)
 
-                val event = 
+                val event =
                     when (event.action) {
                         MotionEvent.ACTION_DOWN -> PointerEventType.DOWN
                         MotionEvent.ACTION_MOVE -> PointerEventType.MOVE
@@ -409,7 +409,7 @@ class MapLibreMapController(
                         else -> null
                     }
 
-                if (event != null) flutterApi.onPointerEvent(event, position) { }
+                if (event != null) flutterApi.onPointerEvent(event, point) { }
             }
             false
         }

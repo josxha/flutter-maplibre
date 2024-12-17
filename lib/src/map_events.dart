@@ -66,19 +66,51 @@ enum CameraChangeReason {
   apiGesture;
 }
 
-/// Emitted when the user interact with the map using pointer events.
-final class MapEventUserPointerInput extends MapEvent {
-  /// Create a new [MapEventUserPointerInput] object.
-  const MapEventUserPointerInput({
+/// Emitted when the user interacts with the map in any way.
+sealed class MapEventPointer extends MapEvent {
+  /// Create a new [MapEventPointer] object.
+  const MapEventPointer({
+    required this.point,
     required this.eventType,
-    required this.position,
   });
 
-  /// The type of the drag event.
+  /// The [Position] of where the user clicked at.
+  final Position point;
+
+  /// The type of the pointer event.
   final PointerEventType eventType;
 
-  /// The position of the drag event.
-  final Position position;
+  @override
+  String toString() => 'MapEventPointer(event: $eventType, point: $point)';
+}
+
+/// Emitted when the user interact with an interactive feature on the map.
+final class MapEventFeatureDragged extends MapEventPointer {
+  /// Create a new [MapEventFeatureDragged] object.
+  const MapEventFeatureDragged({
+    required super.eventType,
+    required super.point,
+    required this.feature,
+  });
+
+  /// The feature that has been dragged.
+  final Feature feature;
+
+  @override
+  String toString() =>
+      'MapEventFeatureDragged(event: $eventType, feature: $feature, point: $point)';
+}
+
+/// Emitted when the user interact with the map using pointer events.
+final class MapEventPointerInput extends MapEventPointer {
+  /// Create a new [MapEventPointerInput] object.
+  const MapEventPointerInput({
+    required super.eventType,
+    required super.point,
+  });
+
+  @override
+  String toString() => 'MapEventPointerInput(event: $eventType, point: $point)';
 }
 
 /// The pointer events that can be performed by a user.

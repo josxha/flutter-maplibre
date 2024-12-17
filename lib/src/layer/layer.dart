@@ -14,7 +14,7 @@ part 'polyline_layer.dart';
 ///
 /// {@category Layers}
 @immutable
-sealed class Layer<G extends GeometryType<Object>> {
+sealed class Layer<G extends GeometryObject> {
   const Layer._({
     required this.list,
   });
@@ -38,7 +38,7 @@ sealed class Layer<G extends GeometryType<Object>> {
   StyleLayer createStyleLayer(int index);
 
   /// Create a [Feature] list from a list of [G]s.
-  static List<Feature<G>> generateFeatureList<G extends GeometryType<Object>>(
+  static List<Feature<G>> generateFeatureList<G extends GeometryObject>(
     List<G> geometries,
   ) {
     final list = <Feature<G>>[];

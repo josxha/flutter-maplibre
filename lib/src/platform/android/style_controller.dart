@@ -218,4 +218,47 @@ class StyleControllerAndroid implements StyleController {
   }
 
   JList<jni.Layer> _getLayers() => _jniStyle.getLayers();
+
+  JArray<JString> _getLayersIds() => _getQueryLayerIds(_getLayers());
+
+  JArray<JString> _getQueryLayerIds(JList jniLayers) {
+    // Use a list to temporary store the layer ids and avoid null values.
+    final queryLayerIds = JList.array(JString.type);
+
+    for (var i = jniLayers.length - 1; i >= 0; i--) {
+      final jniLayer = jniLayers[i];
+      JString? jLayerId;
+
+      switch (jniLayer.jClass.toString()) {
+        case 'class org.maplibre.android.style.layers.LineLayer':
+          final layer = jniLayer.as(jni.LineLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.FillLayer':
+          final layer = jniLayer.as(jni.FillLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.SymbolLayer':
+          final layer = jniLayer.as(jni.SymbolLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.CircleLayer':
+          final layer = jniLayer.as(jni.CircleLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+      }
+      jniLayer.release();
+      if (jLayerId != null) {
+        queryLayerIds.add(jLayerId);
+      }
+    }
+
+    final resultArray = JArray<JString>(JString.type, queryLayerIds.length);
+    for (var i = 0; i < queryLayerIds.length; i++) {
+      resultArray[i] = queryLayerIds[i];
+    }
+    queryLayerIds.release();
+
+    return resultArray;
+  }
 }

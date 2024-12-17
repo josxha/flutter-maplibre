@@ -22,7 +22,7 @@ class _EventsPageState extends State<EventsPage> {
         title: const Text('Events'),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 16),
             child: ChoiceChip(
               label: const Text('Drag'),
               selected: dragEnabled,
@@ -77,8 +77,13 @@ class _EventsPageState extends State<EventsPage> {
           _print('secondary clicked: ${_formatPosition(event.point)}'),
         MapEventIdle() => _print('idle'),
         MapEventCameraIdle() => _print('camera idle'),
-        MapEventUserPointerInput() => _print(
-            'pointer ${event.eventType.name} at position: ${_formatPosition(event.position)}',
+        MapEventPointerInput() => !dragEnabled
+            ? _print(
+                'pointer ${event.eventType.name} at: ${_formatPosition(event.point)}',
+              )
+            : {},
+        MapEventFeatureDragged() => _print(
+            '${event.eventType} ${event.feature} at: ${_formatPosition(event.point)}',
           ),
       };
 

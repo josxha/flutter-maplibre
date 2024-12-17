@@ -59,26 +59,24 @@ class CircleLayer extends Layer<Point> {
   @override
   Map<String, Object> getLayout() => {};
 
-
-
   @override
   bool operator ==(covariant CircleLayer other) {
     if (identical(this, other)) return true;
-  
+
     return 
       other.radius == radius &&
-      other.color == color &&
-      other.blur == blur &&
-      other.strokeWidth == strokeWidth &&
-      other.strokeColor == strokeColor;
+        other.color == color &&
+        other.blur == blur &&
+        other.strokeWidth == strokeWidth &&
+        other.strokeColor == strokeColor;
   }
 
   @override
   int get hashCode {
     return radius.hashCode ^
-      color.hashCode ^
-      blur.hashCode ^
-      strokeWidth.hashCode ^
-      strokeColor.hashCode;
+        color.hashCode ^
+        blur.hashCode ^
+        strokeWidth.hashCode ^
+        strokeColor.hashCode;
   }
 }

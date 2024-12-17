@@ -58,21 +58,21 @@ class PolylineLayer extends Layer<LineString> {
   @override
   bool operator ==(covariant PolylineLayer other) {
     if (identical(this, other)) return true;
-  
+
     return 
       other.color == color &&
-      other.width == width &&
-      other.gapWidth == gapWidth &&
-      other.blur == blur &&
-      listEquals(other.dashArray, dashArray);
+        other.width == width &&
+        other.gapWidth == gapWidth &&
+        other.blur == blur &&
+        listEquals(other.dashArray, dashArray);
   }
 
   @override
   int get hashCode {
     return color.hashCode ^
-      width.hashCode ^
-      gapWidth.hashCode ^
-      blur.hashCode ^
-      dashArray.hashCode;
+        width.hashCode ^
+        gapWidth.hashCode ^
+        blur.hashCode ^
+        dashArray.hashCode;
   }
 }

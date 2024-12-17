@@ -25,7 +25,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
   jni.LocationComponent? _cachedLocationComponent;
-  LayerManager? _annotationManager;
+  LayerManager? _layerManager;
 
   MapOptions get _options => widget.options;
 
@@ -132,7 +132,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
-    _annotationManager?.updateLayers(widget.layers);
+    _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -416,7 +416,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
-    _annotationManager = LayerManager(styleCtrl, widget.layers);
+    _layerManager = LayerManager(styleCtrl, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }
@@ -477,14 +477,49 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   @override
   Future<void> onPointerEvent(
     pigeon.PointerEventType event,
-    pigeon.LngLat position,
+    pigeon.LngLat point,
   ) async {
+    final pointerEventType = event.toPointerEventType();
+    final position = point.toPosition();
+
     widget.onEvent?.call(
-      MapEventUserPointerInput(
-        eventType: event.toPointerEventType(),
-        position: position.toPosition(),
+      MapEventPointerInput(
+        eventType: pointerEventType,
+        point: position,
       ),
     );
+
+    // If the layer manager is null, we can't handle any feature drag events.
+    if (_layerManager == null) return;
+    final isDragging = _layerManager!.dragFeature != null;
+    Feature? feature;
+
+    if (event == pigeon.PointerEventType.down && !isDragging) {
+      final screenLoc = await toScreenLocation(point.toPosition());
+      final features = await queryRenderedFeatures(screenLoc);
+      if (features.isEmpty) return;
+      feature = features.first;
+
+      final featureDragEvent = MapEventFeatureDragged(
+        eventType: event.toPointerEventType(),
+        point: point.toPosition(),
+        feature: feature,
+      );
+
+      await _layerManager?.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
+
+    if (isDragging) {
+      final featureDragEvent = MapEventFeatureDragged(
+        eventType: event.toPointerEventType(),
+        point: point.toPosition(),
+        feature: _layerManager!.dragFeature!,
+      );
+
+      await _layerManager?.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
   }
 
   @override
@@ -579,6 +614,46 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
         queriedLayers.add(queriedLayer);
       }
       return queriedLayers;
+    });
+    return result;
+  }
+
+  @override
+  Future<List<Feature>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  }) async {
+    final jniMapLibreMap = _jniMapLibreMap;
+    final style = this.style;
+    if (style == null) return [];
+
+    final result = await runOnPlatformThread<List<Feature>>(() {
+      final queryLayerIds = layerIdsFilter != null
+          ? JArray(JString.type, layerIdsFilter.length)
+          : style._getLayersIds();
+
+      if (layerIdsFilter != null) {
+        for (final (i, layer) in layerIdsFilter.indexed) {
+          queryLayerIds[i] = layer.toJString();
+        }
+      }
+
+      final queryResultsFeatures = jniMapLibreMap.queryRenderedFeatures(
+        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+        queryLayerIds,
+      );
+
+      queryLayerIds.release();
+
+      if (queryResultsFeatures.isEmpty) {
+        queryResultsFeatures.release();
+        return [];
+      }
+
+      final features = queryResultsFeatures.map((f) => f.toFeature()).toList();
+      queryResultsFeatures.release();
+
+      return features;
     });
     return result;
   }

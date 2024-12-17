@@ -31,7 +31,7 @@ class LayerManager {
   late List<Layer> _oldLayers;
 
   /// The feature that is currently being dragged by the user.
-  late Feature? _dragFeature;
+  Feature? dragFeature;
 
   /// Called when `setState()` gets called and the widget rebuilds. This method
   /// translates the declarative layer definition of [MapLibreMap.layers] to
@@ -72,30 +72,15 @@ class LayerManager {
     _oldLayers = layers;
   }
 
-  void onFeatureDrag(MapEventFeatureDragged event) {
+  /// Called when the user interacts with the map in any way.
+  Future<void> onFeatureDrag(MapEventFeatureDragged event) async {
     switch (event.eventType) {
       case PointerEventType.down:
-      // c
+        dragFeature = event.feature;
       case PointerEventType.move:
+        break;
       case PointerEventType.up:
+        dragFeature = null;
     }
-  }
-
-  void _onDrag(
-    dynamic id, {
-    required Point origin,
-    required Point current,
-  }) {}
-
-  void _updateGeometryInLayer(
-    Layer layer,
-    GeometryType<Object> geometry,
-    int index,
-  ) {
-    layer.list[index].geometry = geometry;
-    style.updateGeoJsonSource(
-      id: layer.getSourceId(index),
-      data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
-    );
   }
 }

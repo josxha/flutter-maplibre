@@ -241,86 +241,86 @@ class MarkerLayer extends Layer<Point> {
   @override
   bool operator ==(covariant MarkerLayer other) {
     if (identical(this, other)) return true;
-  
+
     return 
       other.iconAllowOverlap == iconAllowOverlap &&
-      other.iconIgnorePlacement == iconIgnorePlacement &&
-      other.iconOptional == iconOptional &&
-      other.iconSize == iconSize &&
-      other.iconImage == iconImage &&
-      other.iconRotate == iconRotate &&
-      other.iconPadding == iconPadding &&
-      other.iconKeepUpright == iconKeepUpright &&
-      listEquals(other.iconOffset, iconOffset) &&
-      other.textField == textField &&
-      listEquals(other.textFont, textFont) &&
-      other.textSize == textSize &&
-      other.textMaxWidth == textMaxWidth &&
-      other.textLineHeight == textLineHeight &&
-      other.textLetterSpacing == textLetterSpacing &&
-      other.textRadialOffset == textRadialOffset &&
-      other.textMaxAngle == textMaxAngle &&
-      other.textRotate == textRotate &&
-      other.textPadding == textPadding &&
-      other.textKeepUpright == textKeepUpright &&
-      listEquals(other.textOffset, textOffset) &&
-      other.textAllowOverlap == textAllowOverlap &&
-      other.textIgnorePlacement == textIgnorePlacement &&
-      other.textOptional == textOptional &&
-      other.iconOpacity == iconOpacity &&
-      other.iconColor == iconColor &&
-      other.iconHaloColor == iconHaloColor &&
-      other.iconHaloWidth == iconHaloWidth &&
-      other.iconHaloBlur == iconHaloBlur &&
-      listEquals(other.iconTranslate, iconTranslate) &&
-      other.textOpacity == textOpacity &&
-      other.textColor == textColor &&
-      other.textHaloColor == textHaloColor &&
-      other.textHaloWidth == textHaloWidth &&
-      other.textHaloBlur == textHaloBlur &&
-      listEquals(other.textTranslate, textTranslate) &&
-      other.iconAnchor == iconAnchor;
+        other.iconIgnorePlacement == iconIgnorePlacement &&
+        other.iconOptional == iconOptional &&
+        other.iconSize == iconSize &&
+        other.iconImage == iconImage &&
+        other.iconRotate == iconRotate &&
+        other.iconPadding == iconPadding &&
+        other.iconKeepUpright == iconKeepUpright &&
+        listEquals(other.iconOffset, iconOffset) &&
+        other.textField == textField &&
+        listEquals(other.textFont, textFont) &&
+        other.textSize == textSize &&
+        other.textMaxWidth == textMaxWidth &&
+        other.textLineHeight == textLineHeight &&
+        other.textLetterSpacing == textLetterSpacing &&
+        other.textRadialOffset == textRadialOffset &&
+        other.textMaxAngle == textMaxAngle &&
+        other.textRotate == textRotate &&
+        other.textPadding == textPadding &&
+        other.textKeepUpright == textKeepUpright &&
+        listEquals(other.textOffset, textOffset) &&
+        other.textAllowOverlap == textAllowOverlap &&
+        other.textIgnorePlacement == textIgnorePlacement &&
+        other.textOptional == textOptional &&
+        other.iconOpacity == iconOpacity &&
+        other.iconColor == iconColor &&
+        other.iconHaloColor == iconHaloColor &&
+        other.iconHaloWidth == iconHaloWidth &&
+        other.iconHaloBlur == iconHaloBlur &&
+        listEquals(other.iconTranslate, iconTranslate) &&
+        other.textOpacity == textOpacity &&
+        other.textColor == textColor &&
+        other.textHaloColor == textHaloColor &&
+        other.textHaloWidth == textHaloWidth &&
+        other.textHaloBlur == textHaloBlur &&
+        listEquals(other.textTranslate, textTranslate) &&
+        other.iconAnchor == iconAnchor;
   }
 
   @override
   int get hashCode {
     return iconAllowOverlap.hashCode ^
-      iconIgnorePlacement.hashCode ^
-      iconOptional.hashCode ^
-      iconSize.hashCode ^
-      iconImage.hashCode ^
-      iconRotate.hashCode ^
-      iconPadding.hashCode ^
-      iconKeepUpright.hashCode ^
-      iconOffset.hashCode ^
-      textField.hashCode ^
-      textFont.hashCode ^
-      textSize.hashCode ^
-      textMaxWidth.hashCode ^
-      textLineHeight.hashCode ^
-      textLetterSpacing.hashCode ^
-      textRadialOffset.hashCode ^
-      textMaxAngle.hashCode ^
-      textRotate.hashCode ^
-      textPadding.hashCode ^
-      textKeepUpright.hashCode ^
-      textOffset.hashCode ^
-      textAllowOverlap.hashCode ^
-      textIgnorePlacement.hashCode ^
-      textOptional.hashCode ^
-      iconOpacity.hashCode ^
-      iconColor.hashCode ^
-      iconHaloColor.hashCode ^
-      iconHaloWidth.hashCode ^
-      iconHaloBlur.hashCode ^
-      iconTranslate.hashCode ^
-      textOpacity.hashCode ^
-      textColor.hashCode ^
-      textHaloColor.hashCode ^
-      textHaloWidth.hashCode ^
-      textHaloBlur.hashCode ^
-      textTranslate.hashCode ^
-      iconAnchor.hashCode;
+        iconIgnorePlacement.hashCode ^
+        iconOptional.hashCode ^
+        iconSize.hashCode ^
+        iconImage.hashCode ^
+        iconRotate.hashCode ^
+        iconPadding.hashCode ^
+        iconKeepUpright.hashCode ^
+        iconOffset.hashCode ^
+        textField.hashCode ^
+        textFont.hashCode ^
+        textSize.hashCode ^
+        textMaxWidth.hashCode ^
+        textLineHeight.hashCode ^
+        textLetterSpacing.hashCode ^
+        textRadialOffset.hashCode ^
+        textMaxAngle.hashCode ^
+        textRotate.hashCode ^
+        textPadding.hashCode ^
+        textKeepUpright.hashCode ^
+        textOffset.hashCode ^
+        textAllowOverlap.hashCode ^
+        textIgnorePlacement.hashCode ^
+        textOptional.hashCode ^
+        iconOpacity.hashCode ^
+        iconColor.hashCode ^
+        iconHaloColor.hashCode ^
+        iconHaloWidth.hashCode ^
+        iconHaloBlur.hashCode ^
+        iconTranslate.hashCode ^
+        textOpacity.hashCode ^
+        textColor.hashCode ^
+        textHaloColor.hashCode ^
+        textHaloWidth.hashCode ^
+        textHaloBlur.hashCode ^
+        textTranslate.hashCode ^
+        iconAnchor.hashCode;
   }
 }
 
