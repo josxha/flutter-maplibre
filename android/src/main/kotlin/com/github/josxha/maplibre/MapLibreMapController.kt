@@ -8,21 +8,29 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import LongPressEventType
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.PointF
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
+import java.io.IOException
+import java.net.URL
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.gestures.AndroidGesturesManager
+import org.maplibre.android.gestures.MoveGestureDetector
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_ANIMATION
 import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_API_GESTURE
 import org.maplibre.android.maps.MapLibreMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION
+import org.maplibre.android.maps.MapLibreMap.OnMoveListener
 import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.OnMapReadyCallback
@@ -40,8 +48,6 @@ import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
-import java.io.IOException
-import java.net.URL
 
 class MapLibreMapController(
     private val viewId: Int,
@@ -58,6 +64,9 @@ class MapLibreMapController(
     private val flutterApi: MapLibreFlutterApi
     private lateinit var mapOptions: MapOptions
     private var style: Style? = null
+    private var gesturesManager: AndroidGesturesManager? = null
+    private lateinit var defaultGesturesManager: AndroidGesturesManager
+    private var dragGesturesEnabled: Boolean = false
 
     init {
         val channelSuffix = viewId.toString()
@@ -104,6 +113,7 @@ class MapLibreMapController(
             lifecycleProvider.getLifecycle()?.addObserver(this)
             mapView.getMapAsync(this)
             mapViewContainer.addView(mapView)
+            toggleLongPressMove(mapOptions.gestures.drag)
         }
     }
 
@@ -112,12 +122,20 @@ class MapLibreMapController(
     override fun onMapReady(mapLibreMap: MapLibreMap) {
         this.mapLibreMap = mapLibreMap
         MapLibreRegistry.addMap(viewId, mapLibreMap)
+        
+        gesturesManager = this.mapLibreMap.getGesturesManager()
+        defaultGesturesManager = gesturesManager!!
+
         this.mapLibreMap.addOnMapClickListener { latLng ->
             flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }
             true
         }
         this.mapLibreMap.addOnMapLongClickListener { latLng ->
             flutterApi.onLongClick(LngLat(latLng.longitude, latLng.latitude)) { }
+            if (dragGesturesEnabled) {
+                gesturesManager?.setMoveGestureListener(LongPressMoveGestureListener())
+                mapLibreMap.uiSettings.setAllGesturesEnabled(false)
+            }
             true
         }
         this.mapLibreMap.addOnCameraMoveListener {
@@ -156,7 +174,7 @@ class MapLibreMapController(
     private fun parsePaintProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
         entries
             .map { entry ->
-//                println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
                 when (entry.value) {
                     is ArrayList<*> -> {
                         val value = entry.value as ArrayList<*>
@@ -183,7 +201,7 @@ class MapLibreMapController(
     private fun parseLayoutProperties(entries: Map<String, Any>): Array<PropertyValue<*>> =
         entries
             .map { entry ->
-//                println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
+                // println("${entry.key}; ${entry.value::class.java.typeName}; ${entry.value}")
                 when (entry.value) {
                     is ArrayList<*> -> {
                         val value = entry.value as ArrayList<*>
@@ -341,7 +359,7 @@ class MapLibreMapController(
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = RasterLayer(id, sourceId)
-//        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
+        // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
         if (belowLayerId == null) {
             mapLibreMap.style?.addLayer(layer)
         } else {
@@ -388,5 +406,47 @@ class MapLibreMapController(
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
         callback(Result.success(Unit))
+    }
+
+    override fun toggleLongPressMove(enabled: Boolean) {
+        dragGesturesEnabled = enabled
+    }
+
+    inner class LongPressMoveGestureListener : MoveGestureDetector.OnMoveGestureListener {
+        override fun onMoveBegin(detector: MoveGestureDetector): Boolean {
+            val pointLatLng = motionEventToLngLat(detector.currentEvent)
+            flutterApi.onLongPressMove(LongPressEventType.BEGIN, pointLatLng) { }
+            return true
+        }
+
+        override fun onMove(detector: MoveGestureDetector, distanceX: Float, distanceY: Float): Boolean {
+            val pointLatLng = motionEventToLngLat(detector.currentEvent)
+            if (detector.pointersCount > 1) {
+                stopDragging(pointLatLng)
+                return true
+            }
+
+            flutterApi.onLongPressMove(LongPressEventType.MOVE, pointLatLng) { }
+            return true;
+        }
+
+        override fun onMoveEnd(detector: MoveGestureDetector, velocityX: Float, velocityY: Float) {
+            val pointLatLng = motionEventToLngLat(detector.currentEvent)
+            stopDragging(pointLatLng);
+        }
+
+        private fun stopDragging(point: LngLat) {
+            flutterApi.onLongPressMove(LongPressEventType.END, point) { }
+
+            // Reset the move gesture listener to the default one.
+            mapLibreMap.setGesturesManager(defaultGesturesManager, true, true)
+            mapLibreMap.uiSettings.setAllGesturesEnabled(true);
+        }
+
+        private fun motionEventToLngLat(event: MotionEvent): LngLat {
+            val point = PointF(event.x, event.y)
+            val latLng = mapLibreMap.projection.fromScreenLocation(point)
+            return LngLat(latLng.longitude, latLng.latitude)
+        }
     }
 }

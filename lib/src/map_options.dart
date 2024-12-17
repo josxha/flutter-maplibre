@@ -21,7 +21,7 @@ class MapOptions {
     this.minPitch = 0,
     this.maxPitch = 60,
     this.maxBounds,
-    this.gestures = const MapGestures.all(),
+    this.gestures = const MapGestures.all(drag: false),
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
   }) : initPitch = pitch ?? initPitch;
@@ -76,6 +76,8 @@ class MapOptions {
   final LngLatBounds? maxBounds;
 
   /// Enable and disable some or all map gestures.
+  ///
+  /// Drag is disabled by default to prevent performance issues.
   final MapGestures gestures;
 
   /// The platform view type used on android.

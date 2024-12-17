@@ -11,6 +11,7 @@ part 'events.dart';
 part 'gesture_handlers.dart';
 part 'map.dart';
 part 'map_geojson_feature.dart';
+part 'query_rendered_features_options.dart';
 part 'style_specification.dart';
 part 'marker.dart';
 

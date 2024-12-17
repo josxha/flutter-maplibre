@@ -344,17 +344,19 @@ class _OfflineMapPage extends StatelessWidget {
           PolylineLayer(
             color: Colors.red,
             width: 3,
-            polylines: [
-              LineString(
-                coordinates: [
-                  Position(bounds.longitudeWest, bounds.latitudeSouth),
-                  Position(bounds.longitudeWest, bounds.latitudeNorth),
-                  Position(bounds.longitudeEast, bounds.latitudeNorth),
-                  Position(bounds.longitudeEast, bounds.latitudeSouth),
-                  Position(bounds.longitudeWest, bounds.latitudeSouth),
-                ],
-              ),
-            ],
+            polylines: Layer.generateFeatureList(
+              [
+                LineString(
+                  coordinates: [
+                    Position(bounds.longitudeWest, bounds.latitudeSouth),
+                    Position(bounds.longitudeWest, bounds.latitudeNorth),
+                    Position(bounds.longitudeEast, bounds.latitudeNorth),
+                    Position(bounds.longitudeEast, bounds.latitudeSouth),
+                    Position(bounds.longitudeWest, bounds.latitudeSouth),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

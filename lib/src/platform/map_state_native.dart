@@ -51,6 +51,7 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
           pan: options.gestures.pan,
           zoom: options.gestures.zoom,
           tilt: options.gestures.pitch,
+          drag: options.gestures.drag,
         ),
         androidTextureMode: options.androidTextureMode,
       );
@@ -106,6 +107,54 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
   void onLongClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventLongClick(point: position));
+  }
+
+  @override
+  Future<void> onLongPressMove(
+    pigeon.LongPressEventType event,
+    pigeon.LngLat point,
+  ) async {
+    final longPressEventType = event.toLongPressEventType();
+    final position = point.toPosition();
+
+    widget.onEvent?.call(
+      MapEventLongPressMove(
+        event: longPressEventType,
+        point: position,
+      ),
+    );
+
+    // If the layer manager is null, we can't handle any feature drag events.
+    if (layerManager == null) return;
+    final isDragging = layerManager!.dragFeature != null;
+    Feature? feature;
+
+    if (event == pigeon.LongPressEventType.begin && !isDragging) {
+      final screenLoc = await toScreenLocation(point.toPosition());
+      final features = await queryRenderedFeatures(screenLoc);
+      if (features.isEmpty) return;
+      feature = features.first;
+
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toLongPressEventType(),
+        point: point.toPosition(),
+        feature: feature,
+      );
+
+      await layerManager?.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
+
+    if (isDragging) {
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toLongPressEventType(),
+        point: point.toPosition(),
+        feature: layerManager!.dragFeature!,
+      );
+
+      await layerManager?.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
   }
 
   @override

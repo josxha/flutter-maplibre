@@ -6,18 +6,20 @@ void main() {
   group('Annotation Model Classes', () {
     test('CircleAnnotationLayer', () {
       final o = CircleLayer(
-        points: [
-          Point(coordinates: Position(0, 0)),
-          Point(coordinates: Position(12.4, -4)),
-        ],
+        circles: Layer.generateFeatureList(
+          [
+            Point(coordinates: Position(0, 0)),
+            Point(coordinates: Position(12.4, -4)),
+          ],
+        ),
         color: Colors.purple,
         strokeWidth: 5,
         blur: 2.4,
         strokeColor: Colors.greenAccent,
         radius: 10,
       );
-      const o2 = CircleLayer(points: []);
-      const o3 = CircleLayer(points: []);
+      final o2 = CircleLayer(circles: Layer.generateFeatureList([]));
+      final o3 = CircleLayer(circles: Layer.generateFeatureList([]));
       expect(o, equals(o));
       expect(o2, equals(o3));
       expect(o2.hashCode, equals(o3.hashCode));
@@ -33,10 +35,12 @@ void main() {
     });
     test('MarkerAnnotationLayer', () {
       final o = MarkerLayer(
-        points: [
-          Point(coordinates: Position(0, 0)),
-          Point(coordinates: Position(12.4, -4)),
-        ],
+        markers: Layer.generateFeatureList(
+          [
+            Point(coordinates: Position(0, 0)),
+            Point(coordinates: Position(12.4, -4)),
+          ],
+        ),
         textColor: Colors.purple,
         textHaloColor: Colors.greenAccent,
         iconHaloColor: Colors.amber,
@@ -46,11 +50,11 @@ void main() {
         textAllowOverlap: true,
         textSize: 23,
       );
-      const o2 = MarkerLayer(
-        points: [],
+      final o2 = MarkerLayer(
+        markers: Layer.generateFeatureList([]),
       );
-      const o3 = MarkerLayer(
-        points: [],
+      final o3 = MarkerLayer(
+        markers: Layer.generateFeatureList([]),
       );
       expect(o, equals(o));
       expect(o2, equals(o2));
@@ -67,23 +71,27 @@ void main() {
     });
     test('PolygonAnnotationLayer', () {
       final o = PolygonLayer(
-        polygons: [
-          Polygon(
-            coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
-            ],
-          ),
-        ],
+        polygons: Layer.generateFeatureList(
+          [
+            Polygon(
+              coordinates: [
+                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+                [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
+              ],
+            ),
+          ],
+        ),
       );
       final o2 = PolygonLayer(
-        polygons: [
-          Polygon(
-            coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-            ],
-          ),
-        ],
+        polygons: Layer.generateFeatureList(
+          [
+            Polygon(
+              coordinates: [
+                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+              ],
+            ),
+          ],
+        ),
       );
       /*final o3 = PolygonAnnotationLayer(
         polygons: [
@@ -109,25 +117,29 @@ void main() {
     });
     test('PolylineAnnotationLayer', () {
       final o = PolylineLayer(
-        polylines: [
-          LineString(
-            coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-            ],
-          ),
-        ],
+        polylines: Layer.generateFeatureList(
+          [
+            LineString(
+              coordinates: [
+                Position(2, 23.4),
+                Position(5.2, 32),
+              ],
+            ),
+          ],
+        ),
       );
       final o2 = PolylineLayer(
-        polylines: [
-          LineString(
-            coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-              Position(53, 2),
-            ],
-          ),
-        ],
+        polylines: Layer.generateFeatureList(
+          [
+            LineString(
+              coordinates: [
+                Position(2, 23.4),
+                Position(5.2, 32),
+                Position(53, 2),
+              ],
+            ),
+          ],
+        ),
       );
       /*final o3 = PolylineAnnotationLayer(
         polylines: [
