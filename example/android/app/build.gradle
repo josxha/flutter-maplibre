@@ -50,7 +50,7 @@ android {
     }
 
     dependencies {
-// JNIGEN       implementation project(":MapLibreAndroid")
+       implementation project(":MapLibreAndroid")
     }
 }
 
