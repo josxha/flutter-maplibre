@@ -42,7 +42,7 @@ dev_dependencies:
 
 screenshots:
   - description: 'MapLibre Logo'
-    path: 'logo.png'
+    path: 'doc/logo.png'
 
 flutter:
   plugin:
