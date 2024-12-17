@@ -5702,6 +5702,60 @@ class MapLibreMap extends _$jni.JObject {
         .check();
   }
 
+  static final _id_getZoom = _class.instanceMethodId(
+    r'getZoom',
+    r'()D',
+  );
+
+  static final _getZoom = _$jni.ProtectedJniExtensions.lookup<
+          _$jni.NativeFunction<
+              _$jni.JniResult Function(
+                _$jni.Pointer<_$jni.Void>,
+                _$jni.JMethodIDPtr,
+              )>>('globalEnv_CallDoubleMethod')
+      .asFunction<
+          _$jni.JniResult Function(
+            _$jni.Pointer<_$jni.Void>,
+            _$jni.JMethodIDPtr,
+          )>();
+
+  /// from: `public double getZoom()`
+  double getZoom() {
+    return _getZoom(reference.pointer, _id_getZoom as _$jni.JMethodIDPtr)
+        .doubleFloat;
+  }
+
+  static final _id_setZoom = _class.instanceMethodId(
+    r'setZoom',
+    r'(DLandroid/graphics/PointF;J)V',
+  );
+
+  static final _setZoom = _$jni.ProtectedJniExtensions.lookup<
+          _$jni.NativeFunction<
+              _$jni.JThrowablePtr Function(
+                  _$jni.Pointer<_$jni.Void>,
+                  _$jni.JMethodIDPtr,
+                  _$jni.VarArgs<
+                      (
+                        _$jni.Double,
+                        _$jni.Pointer<_$jni.Void>,
+                        _$jni.Int64
+                      )>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
+              _$jni.JMethodIDPtr, double, _$jni.Pointer<_$jni.Void>, int)>();
+
+  /// from: `public void setZoom(double d, android.graphics.PointF pointF, long j)`
+  void setZoom(
+    double d,
+    pointf_.PointF pointF,
+    int j,
+  ) {
+    _setZoom(reference.pointer, _id_setZoom as _$jni.JMethodIDPtr, d,
+            pointF.reference.pointer, j)
+        .check();
+  }
+
   static final _id_resetNorth = _class.instanceMethodId(
     r'resetNorth',
     r'()V',

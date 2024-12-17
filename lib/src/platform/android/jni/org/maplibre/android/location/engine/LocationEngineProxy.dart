@@ -107,7 +107,8 @@ class LocationEngineProxy<$T extends _$jni.JObject> extends _$jni.JObject {
     _$jni.JObjType<$T>? T,
   }) {
     T ??= _$jni.lowestCommonSuperType([
-      (locationEngineImpl.$type as locationengineimpl_.$LocationEngineImpl$Type)
+      (locationEngineImpl.$type
+              as locationengineimpl_.$LocationEngineImpl$Type<_$core.dynamic>)
           .T,
     ]) as _$jni.JObjType<$T>;
     return LocationEngineProxy.fromReference(
