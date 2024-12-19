@@ -32,15 +32,18 @@ import UIKit
     }
     
     @objc public static func parseExpression(propertyName: String, expression: String) -> NSExpression? {
+        print(propertyName + "     " + expression)
         do {
-            let json = try JSONSerialization.jsonObject(with: expression.data(using: .utf8)!, options: .fragmentsAllowed)
             // can't create an Expression using the default method if the data is a hex string
-            if propertyName.contains("color") {
-                if let color = json as? String {
-                    return NSExpression(forConstantValue: UIColor(named: color))
-                }
+            //if (propertyName.lowercased().contains("color") && expression.first != "[") {
+            if (propertyName == "circleStrokeColor") {
+                print("##### circleStrokeColor")
+                //var color = UIColor(named: expression)
+                //return NSExpression(forConstantValue: UIColor(red: 255, green: 0, blue: 0, alpha: 1))
+                return NSExpression(mglJSONObject: "[\"literal\", \"#FF0000\"]")
             }
             // can't create an Expression if the data of a literal is an array
+            let json = try JSONSerialization.jsonObject(with: expression.data(using: .utf8)!, options: .fragmentsAllowed)
             if let offset = json as? [Any] {
                 if offset.count == 2 && offset.first is String && offset.first as? String == "literal" {
                     if let vector = offset.last as? [Any] {

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:geotypes/geotypes.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart';
@@ -71,38 +72,34 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 extension MLNStyleLayerExt on MLNStyleLayer {
   /// Set a layout or paint property for a [MLNStyleLayer].
   void setProperty(String key, Object value) {
-    final rawValue = switch (value) {
-      List() || Map() => jsonEncode(value),
-      _ => value.toString(),
-    };
-    final expression = parseNSExpression(key, rawValue);
-    print(expression);
-    if (expression != null) {
-      Helpers.setExpressionWithTarget_field_expression_(
-        this,
-        key.dashedToCamelCase().toNSString(),
-        expression,
-      );
+    try {
+      final rawValue = switch (value) {
+        List() || Map() => jsonEncode(value),
+        String() => value,
+        _ => value.toString(),
+      };
+      final expression = parseNSExpression(key, rawValue);
+      print('${expression?.description1 ?? 'no expression!'}');
+      if (expression != null) {
+        Helpers.setExpressionWithTarget_field_expression_(
+          this,
+          key.dashedToCamelCase().toNSString(),
+          expression,
+        );
+      }
+    } catch (error, stacktrace) {
+      debugPrint(error.toString());
+      debugPrintStack(stackTrace: stacktrace);
     }
   }
 
   /// Apply all paint or layout properties on the [MLNStyleLayer].
   void setProperties(Map<String, Object> properties) {
     for (final property in properties.entries) {
-      print(property);
+      print('${property.key}   ${jsonEncode(property.value)}');
       switch (property.key) {
         case 'visibility':
           visible = property.value == 'none';
-          continue;
-        // TODO some properties cause currently a crash, skip them here
-        /*case 'circle-radius':
-        case 'circle-color':
-        case 'circle-stroke-color':
-        case 'circle-opacity':*/
-        case 'fill-extrusion-color':
-        case 'fill-extrusion-height':
-        case 'fill-extrusion-base':
-          continue;
         default:
           setProperty(property.key.dashedToCamelCase(), property.value);
       }
