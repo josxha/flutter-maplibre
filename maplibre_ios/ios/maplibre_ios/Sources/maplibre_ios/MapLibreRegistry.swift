@@ -28,22 +28,24 @@ import UIKit
 
 @objc public class Helpers : NSObject {
     @objc public static func setExpression(target: NSObject, field: String, expression: NSExpression) -> Void {
-        target.setValue(expression, forKey: field)
+        do {
+            target.setValue(expression, forKey: field)
+        } catch {
+            print("Couldn't set expression in Helpers.setExpression()")
+        }
     }
     
     @objc public static func parseExpression(propertyName: String, expression: String) -> NSExpression? {
-        print(propertyName + "     " + expression)
+        print("\(propertyName): \(expression)")
         do {
             // can't create an Expression using the default method if the data is a hex string
-            //if (propertyName.lowercased().contains("color") && expression.first != "[") {
-            if (propertyName == "circleStrokeColor") {
-                print("##### circleStrokeColor")
-                //var color = UIColor(named: expression)
-                //return NSExpression(forConstantValue: UIColor(red: 255, green: 0, blue: 0, alpha: 1))
-                return NSExpression(mglJSONObject: "[\"literal\", \"#FF0000\"]")
+            if (propertyName.lowercased().contains("color") && expression.first == "#") {
+                var color = UIColor(hexString: expression)
+                return NSExpression(forConstantValue: color)
             }
             // can't create an Expression if the data of a literal is an array
             let json = try JSONSerialization.jsonObject(with: expression.data(using: .utf8)!, options: .fragmentsAllowed)
+            print("json: \(json)")
             if let offset = json as? [Any] {
                 if offset.count == 2 && offset.first is String && offset.first as? String == "literal" {
                     if let vector = offset.last as? [Any] {
