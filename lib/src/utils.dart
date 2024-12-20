@@ -24,6 +24,5 @@ const htmlColorNames = <String, String>{
   'navy': '#000080',
   'blue': '#0000FF',
   'teal': '#008080',
-  'aqua': '#00FFFF'
+  'aqua': '#00FFFF',
 };
-

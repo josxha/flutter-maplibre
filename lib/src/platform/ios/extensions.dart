@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:geotypes/geotypes.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart';
