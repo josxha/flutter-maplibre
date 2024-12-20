@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:geotypes/geotypes.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart';
 
@@ -70,29 +71,6 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
-  /// Set a layout or paint property for a [MLNStyleLayer].
-  void setProperty(String key, Object value) {
-    try {
-      final rawValue = switch (value) {
-        List() || Map() => jsonEncode(value),
-        String() => value,
-        _ => value.toString(),
-      };
-      final expression = parseNSExpression(key, rawValue);
-      print('${expression?.description1 ?? 'no expression!'}');
-      if (expression != null) {
-        Helpers.setExpressionWithTarget_field_expression_(
-          this,
-          key.dashedToCamelCase().toNSString(),
-          expression,
-        );
-      }
-    } catch (error, stacktrace) {
-      debugPrint(error.toString());
-      debugPrintStack(stackTrace: stacktrace);
-    }
-  }
-
   /// Apply all paint or layout properties on the [MLNStyleLayer].
   void setProperties(Map<String, Object> properties) {
     for (final property in properties.entries) {
@@ -101,8 +79,37 @@ extension MLNStyleLayerExt on MLNStyleLayer {
         case 'visibility':
           visible = property.value == 'none';
         default:
-          setProperty(property.key.dashedToCamelCase(), property.value);
+          setProperty(property.key, property.value);
       }
+    }
+  }
+
+  /// Set a layout or paint property for a [MLNStyleLayer].
+  void setProperty(String key, Object value) {
+    final keyCamelCase = key.dashedToCamelCase();
+    try {
+      // convert to a String
+      var rawValue = switch (value) {
+        List() || Map() => jsonEncode(value),
+        String() => value,
+        _ => value.toString(),
+      };
+      // convert html color names to hex strings
+      if (key.contains('color')) {
+        rawValue = htmlColorNames[rawValue] ?? rawValue;
+      }
+      final expression = parseNSExpression(keyCamelCase, rawValue);
+      print('${expression?.description1 ?? 'no expression!'}');
+      if (expression != null) {
+        Helpers.setExpressionWithTarget_field_expression_(
+          this,
+          keyCamelCase.toNSString(),
+          expression,
+        );
+      }
+    } catch (error, stacktrace) {
+      debugPrint(error.toString());
+      debugPrintStack(stackTrace: stacktrace);
     }
   }
 }
