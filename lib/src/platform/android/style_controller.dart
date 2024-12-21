@@ -94,7 +94,7 @@ class StyleControllerAndroid implements StyleController {
           } else {
             final jniUri = jni.URI.create(jniData);
             jniSource = jni.GeoJsonSource.new$8(jniId, jniUri!, jniOptions);
-            jniUri?.release();
+            jniUri.release();
           }
           jniOptions.release();
         case RasterDemSource():

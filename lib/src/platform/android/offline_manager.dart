@@ -195,18 +195,26 @@ class OfflineManagerAndroid implements OfflineManager {
     final stream = StreamController<DownloadProgress>();
     final jMapStyleUrl = mapStyleUrl.toJString();
     final jBounds = bounds.toLatLngBounds();
-    final jDefinition = jni.OfflineTilePyramidRegionDefinition(
+    /*final jDefinition = jni.OfflineTilePyramidRegionDefinition(
       jMapStyleUrl,
       jBounds,
       minZoom,
       maxZoom,
       pixelDensity,
-    );
+    );*/
+    final jDefinition =
+        jni.Helpers.INSTANCE!.createOfflineTilePyramidRegionDefinition(
+      jMapStyleUrl,
+      jBounds,
+      minZoom,
+      maxZoom,
+      pixelDensity,
+    )!;
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);
     final metadataBytes = utf8.encode(metadataJson);
-    final jMetadata = JArray(jbyte.type, metadataBytes.length);
+    final jMetadata = JByteArray(metadataBytes.length);
     for (var i = 0; i < metadataBytes.length; i++) {
       jMetadata[i] = metadataBytes[i];
     }
