@@ -102,7 +102,7 @@ jobs:
           cache: true
       - uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
       - name: "Get Flutter dependencies"
@@ -185,7 +185,7 @@ jobs:
           cache: true
       - uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
       - name: "Get Flutter dependencies"
