@@ -52,6 +52,10 @@ import 'package:jni/jni.dart' as jni$_;
 
 import 'OfflineRegionDefinition.dart' as offlineregiondefinition$_;
 
+import 'OfflineRegionError.dart' as offlineregionerror$_;
+
+import 'OfflineRegionStatus.dart' as offlineregionstatus$_;
+
 /// from: `org.maplibre.android.offline.OfflineRegion$Companion`
 class OfflineRegion$Companion extends jni$_.JObject {
   @jni$_.internal
@@ -948,7 +952,7 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
 
   /// from: `public abstract void onStatusChanged(org.maplibre.android.offline.OfflineRegionStatus offlineRegionStatus)`
   void onStatusChanged(
-    jni$_.JObject offlineRegionStatus,
+    offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus,
   ) {
     final _$offlineRegionStatus = offlineRegionStatus.reference;
     _onStatusChanged(
@@ -976,7 +980,7 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
 
   /// from: `public abstract void onError(org.maplibre.android.offline.OfflineRegionError offlineRegionError)`
   void onError(
-    jni$_.JObject offlineRegionError,
+    offlineregionerror$_.OfflineRegionError offlineRegionError,
   ) {
     final _$offlineRegionError = offlineRegionError.reference;
     _onError(reference.pointer, _id_onError as jni$_.JMethodIDPtr,
@@ -1042,14 +1046,16 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
       if ($d ==
           r'onStatusChanged(Lorg/maplibre/android/offline/OfflineRegionStatus;)V') {
         _$impls[$p]!.onStatusChanged(
-          $a![0]!.as(const jni$_.JObjectType(), releaseOriginal: true),
+          $a![0]!.as(const offlineregionstatus$_.$OfflineRegionStatus$Type(),
+              releaseOriginal: true),
         );
         return jni$_.nullptr;
       }
       if ($d ==
           r'onError(Lorg/maplibre/android/offline/OfflineRegionError;)V') {
         _$impls[$p]!.onError(
-          $a![0]!.as(const jni$_.JObjectType(), releaseOriginal: true),
+          $a![0]!.as(const offlineregionerror$_.$OfflineRegionError$Type(),
+              releaseOriginal: true),
         );
         return jni$_.nullptr;
       }
@@ -1112,17 +1118,22 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
 
 abstract base mixin class $OfflineRegion$OfflineRegionObserver {
   factory $OfflineRegion$OfflineRegionObserver({
-    required void Function(jni$_.JObject offlineRegionStatus) onStatusChanged,
+    required void Function(
+            offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus)
+        onStatusChanged,
     bool onStatusChanged$async,
-    required void Function(jni$_.JObject offlineRegionError) onError,
+    required void Function(
+            offlineregionerror$_.OfflineRegionError offlineRegionError)
+        onError,
     bool onError$async,
     required void Function(int j) mapboxTileCountLimitExceeded,
     bool mapboxTileCountLimitExceeded$async,
   }) = _$OfflineRegion$OfflineRegionObserver;
 
-  void onStatusChanged(jni$_.JObject offlineRegionStatus);
+  void onStatusChanged(
+      offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus);
   bool get onStatusChanged$async => false;
-  void onError(jni$_.JObject offlineRegionError);
+  void onError(offlineregionerror$_.OfflineRegionError offlineRegionError);
   bool get onError$async => false;
   void mapboxTileCountLimitExceeded(int j);
   bool get mapboxTileCountLimitExceeded$async => false;
@@ -1131,9 +1142,13 @@ abstract base mixin class $OfflineRegion$OfflineRegionObserver {
 final class _$OfflineRegion$OfflineRegionObserver
     with $OfflineRegion$OfflineRegionObserver {
   _$OfflineRegion$OfflineRegionObserver({
-    required void Function(jni$_.JObject offlineRegionStatus) onStatusChanged,
+    required void Function(
+            offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus)
+        onStatusChanged,
     this.onStatusChanged$async = false,
-    required void Function(jni$_.JObject offlineRegionError) onError,
+    required void Function(
+            offlineregionerror$_.OfflineRegionError offlineRegionError)
+        onError,
     this.onError$async = false,
     required void Function(int j) mapboxTileCountLimitExceeded,
     this.mapboxTileCountLimitExceeded$async = false,
@@ -1141,18 +1156,22 @@ final class _$OfflineRegion$OfflineRegionObserver
         _onError = onError,
         _mapboxTileCountLimitExceeded = mapboxTileCountLimitExceeded;
 
-  final void Function(jni$_.JObject offlineRegionStatus) _onStatusChanged;
+  final void Function(
+          offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus)
+      _onStatusChanged;
   final bool onStatusChanged$async;
-  final void Function(jni$_.JObject offlineRegionError) _onError;
+  final void Function(
+      offlineregionerror$_.OfflineRegionError offlineRegionError) _onError;
   final bool onError$async;
   final void Function(int j) _mapboxTileCountLimitExceeded;
   final bool mapboxTileCountLimitExceeded$async;
 
-  void onStatusChanged(jni$_.JObject offlineRegionStatus) {
+  void onStatusChanged(
+      offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus) {
     return _onStatusChanged(offlineRegionStatus);
   }
 
-  void onError(jni$_.JObject offlineRegionError) {
+  void onError(offlineregionerror$_.OfflineRegionError offlineRegionError) {
     return _onError(offlineRegionError);
   }
 
@@ -1281,7 +1300,7 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
 
   /// from: `public abstract void onStatus(org.maplibre.android.offline.OfflineRegionStatus offlineRegionStatus)`
   void onStatus(
-    jni$_.JObject? offlineRegionStatus,
+    offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus,
   ) {
     final _$offlineRegionStatus =
         offlineRegionStatus?.reference ?? jni$_.jNullReference;
@@ -1350,7 +1369,8 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
       if ($d ==
           r'onStatus(Lorg/maplibre/android/offline/OfflineRegionStatus;)V') {
         _$impls[$p]!.onStatus(
-          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const offlineregionstatus$_.$OfflineRegionStatus$Type(),
+              releaseOriginal: true),
         );
         return jni$_.nullptr;
       }
@@ -1408,13 +1428,15 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
 
 abstract base mixin class $OfflineRegion$OfflineRegionStatusCallback {
   factory $OfflineRegion$OfflineRegionStatusCallback({
-    required void Function(jni$_.JObject? offlineRegionStatus) onStatus,
+    required void Function(
+            offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus)
+        onStatus,
     bool onStatus$async,
     required void Function(jni$_.JString? string) onError,
     bool onError$async,
   }) = _$OfflineRegion$OfflineRegionStatusCallback;
 
-  void onStatus(jni$_.JObject? offlineRegionStatus);
+  void onStatus(offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus);
   bool get onStatus$async => false;
   void onError(jni$_.JString? string);
   bool get onError$async => false;
@@ -1423,19 +1445,23 @@ abstract base mixin class $OfflineRegion$OfflineRegionStatusCallback {
 final class _$OfflineRegion$OfflineRegionStatusCallback
     with $OfflineRegion$OfflineRegionStatusCallback {
   _$OfflineRegion$OfflineRegionStatusCallback({
-    required void Function(jni$_.JObject? offlineRegionStatus) onStatus,
+    required void Function(
+            offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus)
+        onStatus,
     this.onStatus$async = false,
     required void Function(jni$_.JString? string) onError,
     this.onError$async = false,
   })  : _onStatus = onStatus,
         _onError = onError;
 
-  final void Function(jni$_.JObject? offlineRegionStatus) _onStatus;
+  final void Function(
+      offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus) _onStatus;
   final bool onStatus$async;
   final void Function(jni$_.JString? string) _onError;
   final bool onError$async;
 
-  void onStatus(jni$_.JObject? offlineRegionStatus) {
+  void onStatus(
+      offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus) {
     return _onStatus(offlineRegionStatus);
   }
 

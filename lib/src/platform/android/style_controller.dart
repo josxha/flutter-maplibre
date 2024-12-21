@@ -93,7 +93,7 @@ class StyleControllerAndroid implements StyleController {
             jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
           } else {
             final jniUri = jni.URI.create(jniData);
-            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri!, jniOptions);
             jniUri?.release();
           }
           jniOptions.release();
@@ -221,5 +221,5 @@ class StyleControllerAndroid implements StyleController {
     }
   }
 
-  JList<jni.Layer> _getLayers() => _jniStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers()!;
 }

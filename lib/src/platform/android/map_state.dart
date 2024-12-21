@@ -420,7 +420,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       final jniLayers = style._getLayers();
       final queriedLayers = <QueriedLayer>[];
       for (var i = jniLayers.length - 1; i >= 0; i--) {
-        final jniLayer = jniLayers[i];
+        final jniLayer = jniLayers[i]!;
         JString? jLayerId;
         late final JString jSourceId;
         late final JString jSourceLayer;
