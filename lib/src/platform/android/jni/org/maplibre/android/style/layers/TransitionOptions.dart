@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,42 +45,43 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.style.layers.TransitionOptions`
-class TransitionOptions extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<TransitionOptions> $type;
+class TransitionOptions extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<TransitionOptions> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   TransitionOptions.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/TransitionOptions');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $TransitionOptions$NullableType();
   static const type = $TransitionOptions$Type();
   static final _id_new$ = _class.constructorId(
     r'(JJ)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Int64, _$jni.Int64)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
   /// from: `public void <init>(long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -88,7 +90,7 @@ class TransitionOptions extends _$jni.JObject {
     int j1,
   ) {
     return TransitionOptions.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr, j, j1)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j, j1)
             .reference);
   }
 
@@ -96,16 +98,16 @@ class TransitionOptions extends _$jni.JObject {
     r'(JJZ)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Int64, _$jni.Int64, _$jni.Int32)>)>>(
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int64, jni$_.Int64, jni$_.Int32)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int, int)>();
 
   /// from: `public void <init>(long j, long j1, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -115,7 +117,7 @@ class TransitionOptions extends _$jni.JObject {
     bool z,
   ) {
     return TransitionOptions.fromReference(_new$1(_class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr, j, j1, z ? 1 : 0)
+            _id_new$1 as jni$_.JMethodIDPtr, j, j1, z ? 1 : 0)
         .reference);
   }
 
@@ -124,26 +126,26 @@ class TransitionOptions extends _$jni.JObject {
     r'(JJ)Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _fromTransitionOptions = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Int64, _$jni.Int64)>)>>(
+  static final _fromTransitionOptions = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.TransitionOptions fromTransitionOptions(long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static TransitionOptions fromTransitionOptions(
+  static TransitionOptions? fromTransitionOptions(
     int j,
     int j1,
   ) {
     return _fromTransitionOptions(_class.reference.pointer,
-            _id_fromTransitionOptions as _$jni.JMethodIDPtr, j, j1)
-        .object(const $TransitionOptions$Type());
+            _id_fromTransitionOptions as jni$_.JMethodIDPtr, j, j1)
+        .object<TransitionOptions?>(const $TransitionOptions$NullableType());
   }
 
   static final _id_getDuration = _class.instanceMethodId(
@@ -151,22 +153,22 @@ class TransitionOptions extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getDuration = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getDuration = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getDuration()`
   int getDuration() {
     return _getDuration(
-            reference.pointer, _id_getDuration as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getDuration as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -175,21 +177,21 @@ class TransitionOptions extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getDelay = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getDelay = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getDelay()`
   int getDelay() {
-    return _getDelay(reference.pointer, _id_getDelay as _$jni.JMethodIDPtr)
+    return _getDelay(reference.pointer, _id_getDelay as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -199,22 +201,22 @@ class TransitionOptions extends _$jni.JObject {
   );
 
   static final _isEnablePlacementTransitions =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public boolean isEnablePlacementTransitions()`
   bool isEnablePlacementTransitions() {
     return _isEnablePlacementTransitions(reference.pointer,
-            _id_isEnablePlacementTransitions as _$jni.JMethodIDPtr)
+            _id_isEnablePlacementTransitions as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -223,23 +225,24 @@ class TransitionOptions extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    _$jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
@@ -248,21 +251,21 @@ class TransitionOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -271,52 +274,98 @@ class TransitionOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? toString$1() {
+    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $TransitionOptions$Type extends _$jni.JObjType<TransitionOptions> {
-  @_$jni.internal
-  const $TransitionOptions$Type();
+final class $TransitionOptions$NullableType
+    extends jni$_.JObjType<TransitionOptions?> {
+  @jni$_.internal
+  const $TransitionOptions$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/TransitionOptions;';
 
-  @_$jni.internal
-  @_$core.override
-  TransitionOptions fromReference(_$jni.JReference reference) =>
-      TransitionOptions.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  TransitionOptions? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : TransitionOptions.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<TransitionOptions?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($TransitionOptions$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($TransitionOptions$NullableType) &&
+        other is $TransitionOptions$NullableType;
+  }
+}
+
+final class $TransitionOptions$Type extends jni$_.JObjType<TransitionOptions> {
+  @jni$_.internal
+  const $TransitionOptions$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/TransitionOptions;';
+
+  @jni$_.internal
+  @core$_.override
+  TransitionOptions fromReference(jni$_.JReference reference) =>
+      TransitionOptions.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<TransitionOptions?> get nullableType =>
+      const $TransitionOptions$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($TransitionOptions$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($TransitionOptions$Type) &&
         other is $TransitionOptions$Type;

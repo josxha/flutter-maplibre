@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,27 +45,28 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.constants.GeometryConstants`
-class GeometryConstants extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<GeometryConstants> $type;
+class GeometryConstants extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<GeometryConstants> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   GeometryConstants.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/constants/GeometryConstants');
+      jni$_.JClass.forName(r'org/maplibre/android/constants/GeometryConstants');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $GeometryConstants$NullableType();
   static const type = $GeometryConstants$Type();
 
   /// from: `static public final int RADIUS_EARTH_METERS`
@@ -101,31 +103,76 @@ class GeometryConstants extends _$jni.JObject {
   static const MIN_MERCATOR_LATITUDE = -85.05112877980659;
 }
 
-final class $GeometryConstants$Type extends _$jni.JObjType<GeometryConstants> {
-  @_$jni.internal
-  const $GeometryConstants$Type();
+final class $GeometryConstants$NullableType
+    extends jni$_.JObjType<GeometryConstants?> {
+  @jni$_.internal
+  const $GeometryConstants$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/constants/GeometryConstants;';
 
-  @_$jni.internal
-  @_$core.override
-  GeometryConstants fromReference(_$jni.JReference reference) =>
-      GeometryConstants.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  GeometryConstants? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : GeometryConstants.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<GeometryConstants?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($GeometryConstants$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($GeometryConstants$NullableType) &&
+        other is $GeometryConstants$NullableType;
+  }
+}
+
+final class $GeometryConstants$Type extends jni$_.JObjType<GeometryConstants> {
+  @jni$_.internal
+  const $GeometryConstants$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/constants/GeometryConstants;';
+
+  @jni$_.internal
+  @core$_.override
+  GeometryConstants fromReference(jni$_.JReference reference) =>
+      GeometryConstants.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<GeometryConstants?> get nullableType =>
+      const $GeometryConstants$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($GeometryConstants$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($GeometryConstants$Type) &&
         other is $GeometryConstants$Type;

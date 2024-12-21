@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,66 +45,66 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'Layer.dart' as layer_;
+import 'Layer.dart' as layer$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
-import 'TransitionOptions.dart' as transitionoptions_;
+import 'TransitionOptions.dart' as transitionoptions$_;
 
 /// from: `org.maplibre.android.style.layers.HillshadeLayer`
-class HillshadeLayer extends layer_.Layer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<HillshadeLayer> $type;
+class HillshadeLayer extends layer$_.Layer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<HillshadeLayer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   HillshadeLayer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/layers/HillshadeLayer');
+      jni$_.JClass.forName(r'org/maplibre/android/style/layers/HillshadeLayer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $HillshadeLayer$NullableType();
   static const type = $HillshadeLayer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory HillshadeLayer(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return HillshadeLayer.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return HillshadeLayer.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
         .reference);
   }
 
@@ -112,23 +113,24 @@ class HillshadeLayer extends layer_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
   void setSourceLayer(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 
@@ -137,25 +139,26 @@ class HillshadeLayer extends layer_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/HillshadeLayer;',
   );
 
-  static final _withSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.HillshadeLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  HillshadeLayer withSourceLayer(
-    _$jni.JString string,
+  HillshadeLayer? withSourceLayer(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $HillshadeLayer$Type());
+            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<HillshadeLayer?>(const $HillshadeLayer$NullableType());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -163,24 +166,24 @@ class HillshadeLayer extends layer_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getSourceId() {
+  jni$_.JString? getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -188,27 +191,27 @@ class HillshadeLayer extends layer_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/HillshadeLayer;',
   );
 
-  static final _withProperties = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.HillshadeLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
-  HillshadeLayer withProperties(
-    _$jni.JArray<propertyvalue_.PropertyValue<_$jni.JObject>> propertyValues,
+  HillshadeLayer? withProperties(
+    jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?>?
+        propertyValues,
   ) {
-    return _withProperties(
-            reference.pointer,
-            _id_withProperties as _$jni.JMethodIDPtr,
-            propertyValues.reference.pointer)
-        .object(const $HillshadeLayer$Type());
+    final _$propertyValues = propertyValues?.reference ?? jni$_.jNullReference;
+    return _withProperties(reference.pointer,
+            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
+        .object<HillshadeLayer?>(const $HillshadeLayer$NullableType());
   }
 
   static final _id_getHillshadeIlluminationDirection = _class.instanceMethodId(
@@ -217,25 +220,27 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeIlluminationDirection =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeIlluminationDirection()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat>
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>?
       getHillshadeIlluminationDirection() {
     return _getHillshadeIlluminationDirection(reference.pointer,
-            _id_getHillshadeIlluminationDirection as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_getHillshadeIlluminationDirection as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHillshadeIlluminationAnchor = _class.instanceMethodId(
@@ -244,24 +249,27 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeIlluminationAnchor =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeIlluminationAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getHillshadeIlluminationAnchor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>?
+      getHillshadeIlluminationAnchor() {
     return _getHillshadeIlluminationAnchor(reference.pointer,
-            _id_getHillshadeIlluminationAnchor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_getHillshadeIlluminationAnchor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getHillshadeExaggeration = _class.instanceMethodId(
@@ -269,24 +277,26 @@ class HillshadeLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHillshadeExaggeration = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHillshadeExaggeration = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeExaggeration()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getHillshadeExaggeration() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getHillshadeExaggeration() {
     return _getHillshadeExaggeration(reference.pointer,
-            _id_getHillshadeExaggeration as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_getHillshadeExaggeration as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHillshadeExaggerationTransition = _class.instanceMethodId(
@@ -295,24 +305,25 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeExaggerationTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHillshadeExaggerationTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHillshadeExaggerationTransition() {
+  transitionoptions$_.TransitionOptions? getHillshadeExaggerationTransition() {
     return _getHillshadeExaggerationTransition(reference.pointer,
-            _id_getHillshadeExaggerationTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHillshadeExaggerationTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHillshadeExaggerationTransition = _class.instanceMethodId(
@@ -321,25 +332,27 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _setHillshadeExaggerationTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHillshadeExaggerationTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHillshadeExaggerationTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHillshadeExaggerationTransition(
             reference.pointer,
-            _id_setHillshadeExaggerationTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHillshadeExaggerationTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -348,24 +361,26 @@ class HillshadeLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHillshadeShadowColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHillshadeShadowColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeShadowColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getHillshadeShadowColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getHillshadeShadowColor() {
     return _getHillshadeShadowColor(reference.pointer,
-            _id_getHillshadeShadowColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_getHillshadeShadowColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getHillshadeShadowColorAsInt = _class.instanceMethodId(
@@ -374,22 +389,22 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeShadowColorAsInt =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallIntMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public int getHillshadeShadowColorAsInt()`
   int getHillshadeShadowColorAsInt() {
     return _getHillshadeShadowColorAsInt(reference.pointer,
-            _id_getHillshadeShadowColorAsInt as _$jni.JMethodIDPtr)
+            _id_getHillshadeShadowColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -399,24 +414,25 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeShadowColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHillshadeShadowColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHillshadeShadowColorTransition() {
+  transitionoptions$_.TransitionOptions? getHillshadeShadowColorTransition() {
     return _getHillshadeShadowColorTransition(reference.pointer,
-            _id_getHillshadeShadowColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHillshadeShadowColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHillshadeShadowColorTransition = _class.instanceMethodId(
@@ -425,25 +441,27 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _setHillshadeShadowColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHillshadeShadowColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHillshadeShadowColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHillshadeShadowColorTransition(
             reference.pointer,
-            _id_setHillshadeShadowColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHillshadeShadowColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -453,24 +471,26 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeHighlightColor =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeHighlightColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getHillshadeHighlightColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getHillshadeHighlightColor() {
     return _getHillshadeHighlightColor(reference.pointer,
-            _id_getHillshadeHighlightColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_getHillshadeHighlightColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getHillshadeHighlightColorAsInt = _class.instanceMethodId(
@@ -479,22 +499,22 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeHighlightColorAsInt =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallIntMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public int getHillshadeHighlightColorAsInt()`
   int getHillshadeHighlightColorAsInt() {
     return _getHillshadeHighlightColorAsInt(reference.pointer,
-            _id_getHillshadeHighlightColorAsInt as _$jni.JMethodIDPtr)
+            _id_getHillshadeHighlightColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -505,24 +525,26 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeHighlightColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHillshadeHighlightColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHillshadeHighlightColorTransition() {
+  transitionoptions$_.TransitionOptions?
+      getHillshadeHighlightColorTransition() {
     return _getHillshadeHighlightColorTransition(reference.pointer,
-            _id_getHillshadeHighlightColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHillshadeHighlightColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHillshadeHighlightColorTransition =
@@ -532,25 +554,27 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _setHillshadeHighlightColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHillshadeHighlightColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHillshadeHighlightColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHillshadeHighlightColorTransition(
             reference.pointer,
-            _id_setHillshadeHighlightColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHillshadeHighlightColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -559,24 +583,26 @@ class HillshadeLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHillshadeAccentColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHillshadeAccentColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHillshadeAccentColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getHillshadeAccentColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getHillshadeAccentColor() {
     return _getHillshadeAccentColor(reference.pointer,
-            _id_getHillshadeAccentColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_getHillshadeAccentColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getHillshadeAccentColorAsInt = _class.instanceMethodId(
@@ -585,22 +611,22 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeAccentColorAsInt =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallIntMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public int getHillshadeAccentColorAsInt()`
   int getHillshadeAccentColorAsInt() {
     return _getHillshadeAccentColorAsInt(reference.pointer,
-            _id_getHillshadeAccentColorAsInt as _$jni.JMethodIDPtr)
+            _id_getHillshadeAccentColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -610,24 +636,25 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _getHillshadeAccentColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHillshadeAccentColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHillshadeAccentColorTransition() {
+  transitionoptions$_.TransitionOptions? getHillshadeAccentColorTransition() {
     return _getHillshadeAccentColorTransition(reference.pointer,
-            _id_getHillshadeAccentColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHillshadeAccentColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHillshadeAccentColorTransition = _class.instanceMethodId(
@@ -636,54 +663,100 @@ class HillshadeLayer extends layer_.Layer {
   );
 
   static final _setHillshadeAccentColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHillshadeAccentColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHillshadeAccentColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHillshadeAccentColorTransition(
             reference.pointer,
-            _id_setHillshadeAccentColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHillshadeAccentColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 }
 
-final class $HillshadeLayer$Type extends _$jni.JObjType<HillshadeLayer> {
-  @_$jni.internal
-  const $HillshadeLayer$Type();
+final class $HillshadeLayer$NullableType
+    extends jni$_.JObjType<HillshadeLayer?> {
+  @jni$_.internal
+  const $HillshadeLayer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/layers/HillshadeLayer;';
 
-  @_$jni.internal
-  @_$core.override
-  HillshadeLayer fromReference(_$jni.JReference reference) =>
-      HillshadeLayer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  HillshadeLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HillshadeLayer.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const layer_.$Layer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HillshadeLayer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($HillshadeLayer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($HillshadeLayer$NullableType) &&
+        other is $HillshadeLayer$NullableType;
+  }
+}
+
+final class $HillshadeLayer$Type extends jni$_.JObjType<HillshadeLayer> {
+  @jni$_.internal
+  const $HillshadeLayer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/layers/HillshadeLayer;';
+
+  @jni$_.internal
+  @core$_.override
+  HillshadeLayer fromReference(jni$_.JReference reference) =>
+      HillshadeLayer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HillshadeLayer?> get nullableType =>
+      const $HillshadeLayer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($HillshadeLayer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($HillshadeLayer$Type) &&
         other is $HillshadeLayer$Type;

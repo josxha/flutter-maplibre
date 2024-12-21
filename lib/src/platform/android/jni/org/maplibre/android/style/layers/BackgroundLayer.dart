@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,56 +45,58 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'Layer.dart' as layer_;
+import 'Layer.dart' as layer$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
-import 'TransitionOptions.dart' as transitionoptions_;
+import 'TransitionOptions.dart' as transitionoptions$_;
 
 /// from: `org.maplibre.android.style.layers.BackgroundLayer`
-class BackgroundLayer extends layer_.Layer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<BackgroundLayer> $type;
+class BackgroundLayer extends layer$_.Layer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<BackgroundLayer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   BackgroundLayer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/BackgroundLayer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $BackgroundLayer$NullableType();
   static const type = $BackgroundLayer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory BackgroundLayer(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return BackgroundLayer.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr, string.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer)
         .reference);
   }
 
@@ -102,27 +105,27 @@ class BackgroundLayer extends layer_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/BackgroundLayer;',
   );
 
-  static final _withProperties = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.BackgroundLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
-  BackgroundLayer withProperties(
-    _$jni.JArray<propertyvalue_.PropertyValue<_$jni.JObject>> propertyValues,
+  BackgroundLayer? withProperties(
+    jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?>?
+        propertyValues,
   ) {
-    return _withProperties(
-            reference.pointer,
-            _id_withProperties as _$jni.JMethodIDPtr,
-            propertyValues.reference.pointer)
-        .object(const $BackgroundLayer$Type());
+    final _$propertyValues = propertyValues?.reference ?? jni$_.jNullReference;
+    return _withProperties(reference.pointer,
+            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
+        .object<BackgroundLayer?>(const $BackgroundLayer$NullableType());
   }
 
   static final _id_getBackgroundColor = _class.instanceMethodId(
@@ -130,24 +133,26 @@ class BackgroundLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getBackgroundColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBackgroundColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getBackgroundColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getBackgroundColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getBackgroundColor() {
     return _getBackgroundColor(
-            reference.pointer, _id_getBackgroundColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getBackgroundColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getBackgroundColorAsInt = _class.instanceMethodId(
@@ -155,22 +160,22 @@ class BackgroundLayer extends layer_.Layer {
     r'()I',
   );
 
-  static final _getBackgroundColorAsInt = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBackgroundColorAsInt = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int getBackgroundColorAsInt()`
   int getBackgroundColorAsInt() {
     return _getBackgroundColorAsInt(reference.pointer,
-            _id_getBackgroundColorAsInt as _$jni.JMethodIDPtr)
+            _id_getBackgroundColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -180,24 +185,25 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _getBackgroundColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getBackgroundColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getBackgroundColorTransition() {
+  transitionoptions$_.TransitionOptions? getBackgroundColorTransition() {
     return _getBackgroundColorTransition(reference.pointer,
-            _id_getBackgroundColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getBackgroundColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setBackgroundColorTransition = _class.instanceMethodId(
@@ -206,25 +212,27 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _setBackgroundColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setBackgroundColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setBackgroundColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setBackgroundColorTransition(
             reference.pointer,
-            _id_setBackgroundColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setBackgroundColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -233,24 +241,26 @@ class BackgroundLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getBackgroundPattern = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBackgroundPattern = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getBackgroundPattern()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getBackgroundPattern() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getBackgroundPattern() {
     return _getBackgroundPattern(
-            reference.pointer, _id_getBackgroundPattern as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getBackgroundPattern as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getBackgroundPatternTransition = _class.instanceMethodId(
@@ -259,24 +269,25 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _getBackgroundPatternTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getBackgroundPatternTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getBackgroundPatternTransition() {
+  transitionoptions$_.TransitionOptions? getBackgroundPatternTransition() {
     return _getBackgroundPatternTransition(reference.pointer,
-            _id_getBackgroundPatternTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getBackgroundPatternTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setBackgroundPatternTransition = _class.instanceMethodId(
@@ -285,25 +296,27 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _setBackgroundPatternTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setBackgroundPatternTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setBackgroundPatternTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setBackgroundPatternTransition(
             reference.pointer,
-            _id_setBackgroundPatternTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setBackgroundPatternTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -312,24 +325,26 @@ class BackgroundLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getBackgroundOpacity = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBackgroundOpacity = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getBackgroundOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getBackgroundOpacity() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getBackgroundOpacity() {
     return _getBackgroundOpacity(
-            reference.pointer, _id_getBackgroundOpacity as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getBackgroundOpacity as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getBackgroundOpacityTransition = _class.instanceMethodId(
@@ -338,24 +353,25 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _getBackgroundOpacityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getBackgroundOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getBackgroundOpacityTransition() {
+  transitionoptions$_.TransitionOptions? getBackgroundOpacityTransition() {
     return _getBackgroundOpacityTransition(reference.pointer,
-            _id_getBackgroundOpacityTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getBackgroundOpacityTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setBackgroundOpacityTransition = _class.instanceMethodId(
@@ -364,55 +380,102 @@ class BackgroundLayer extends layer_.Layer {
   );
 
   static final _setBackgroundOpacityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setBackgroundOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setBackgroundOpacityTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setBackgroundOpacityTransition(
             reference.pointer,
-            _id_setBackgroundOpacityTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setBackgroundOpacityTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 }
 
-final class $BackgroundLayer$Type extends _$jni.JObjType<BackgroundLayer> {
-  @_$jni.internal
-  const $BackgroundLayer$Type();
+final class $BackgroundLayer$NullableType
+    extends jni$_.JObjType<BackgroundLayer?> {
+  @jni$_.internal
+  const $BackgroundLayer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/BackgroundLayer;';
 
-  @_$jni.internal
-  @_$core.override
-  BackgroundLayer fromReference(_$jni.JReference reference) =>
-      BackgroundLayer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  BackgroundLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : BackgroundLayer.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const layer_.$Layer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<BackgroundLayer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($BackgroundLayer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BackgroundLayer$NullableType) &&
+        other is $BackgroundLayer$NullableType;
+  }
+}
+
+final class $BackgroundLayer$Type extends jni$_.JObjType<BackgroundLayer> {
+  @jni$_.internal
+  const $BackgroundLayer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/BackgroundLayer;';
+
+  @jni$_.internal
+  @core$_.override
+  BackgroundLayer fromReference(jni$_.JReference reference) =>
+      BackgroundLayer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<BackgroundLayer?> get nullableType =>
+      const $BackgroundLayer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($BackgroundLayer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($BackgroundLayer$Type) &&
         other is $BackgroundLayer$Type;

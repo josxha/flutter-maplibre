@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.PaddingEvaluator`
-class PaddingEvaluator extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<PaddingEvaluator> $type;
+class PaddingEvaluator extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<PaddingEvaluator> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   PaddingEvaluator.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/location/PaddingEvaluator');
+      jni$_.JClass.forName(r'org/maplibre/android/location/PaddingEvaluator');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $PaddingEvaluator$NullableType();
   static const type = $PaddingEvaluator$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory PaddingEvaluator() {
     return PaddingEvaluator.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -95,63 +97,110 @@ class PaddingEvaluator extends _$jni.JObject {
     r'(F[D[D)[D',
   );
 
-  static final _evaluate = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _evaluate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Double,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
               double,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public double[] evaluate(float f, double[] ds, double[] ds1)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JArray<_$jni.jdouble> evaluate(
+  jni$_.JDoubleArray evaluate(
     double f,
-    _$jni.JArray<_$jni.jdouble> ds,
-    _$jni.JArray<_$jni.jdouble> ds1,
+    jni$_.JDoubleArray ds,
+    jni$_.JDoubleArray ds1,
   ) {
-    return _evaluate(reference.pointer, _id_evaluate as _$jni.JMethodIDPtr, f,
-            ds.reference.pointer, ds1.reference.pointer)
-        .object(const _$jni.JArrayType(_$jni.jdoubleType()));
+    final _$ds = ds.reference;
+    final _$ds1 = ds1.reference;
+    return _evaluate(reference.pointer, _id_evaluate as jni$_.JMethodIDPtr, f,
+            _$ds.pointer, _$ds1.pointer)
+        .object<jni$_.JDoubleArray>(const jni$_.JDoubleArrayType());
   }
 }
 
-final class $PaddingEvaluator$Type extends _$jni.JObjType<PaddingEvaluator> {
-  @_$jni.internal
-  const $PaddingEvaluator$Type();
+final class $PaddingEvaluator$NullableType
+    extends jni$_.JObjType<PaddingEvaluator?> {
+  @jni$_.internal
+  const $PaddingEvaluator$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/location/PaddingEvaluator;';
 
-  @_$jni.internal
-  @_$core.override
-  PaddingEvaluator fromReference(_$jni.JReference reference) =>
-      PaddingEvaluator.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  PaddingEvaluator? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : PaddingEvaluator.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PaddingEvaluator?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($PaddingEvaluator$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PaddingEvaluator$NullableType) &&
+        other is $PaddingEvaluator$NullableType;
+  }
+}
+
+final class $PaddingEvaluator$Type extends jni$_.JObjType<PaddingEvaluator> {
+  @jni$_.internal
+  const $PaddingEvaluator$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/location/PaddingEvaluator;';
+
+  @jni$_.internal
+  @core$_.override
+  PaddingEvaluator fromReference(jni$_.JReference reference) =>
+      PaddingEvaluator.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PaddingEvaluator?> get nullableType =>
+      const $PaddingEvaluator$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($PaddingEvaluator$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($PaddingEvaluator$Type) &&
         other is $PaddingEvaluator$Type;

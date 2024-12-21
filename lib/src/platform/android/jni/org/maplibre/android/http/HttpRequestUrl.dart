@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,98 +45,145 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.http.HttpRequestUrl`
-class HttpRequestUrl extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<HttpRequestUrl> $type;
+class HttpRequestUrl extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<HttpRequestUrl> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   HttpRequestUrl.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/http/HttpRequestUrl');
+      jni$_.JClass.forName(r'org/maplibre/android/http/HttpRequestUrl');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $HttpRequestUrl$NullableType();
   static const type = $HttpRequestUrl$Type();
   static final _id_buildResourceUrl = _class.staticMethodId(
     r'buildResourceUrl',
     r'(Ljava/lang/String;Ljava/lang/String;IZ)Ljava/lang/String;',
   );
 
-  static final _buildResourceUrl = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _buildResourceUrl = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int)>();
 
   /// from: `static public java.lang.String buildResourceUrl(java.lang.String string, java.lang.String string1, int i, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString buildResourceUrl(
-    _$jni.JString string,
-    _$jni.JString string1,
+  static jni$_.JString? buildResourceUrl(
+    jni$_.JString? string,
+    jni$_.JString? string1,
     int i,
     bool z,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return _buildResourceUrl(
             _class.reference.pointer,
-            _id_buildResourceUrl as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer,
+            _id_buildResourceUrl as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer,
             i,
             z ? 1 : 0)
-        .object(const _$jni.JStringType());
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $HttpRequestUrl$Type extends _$jni.JObjType<HttpRequestUrl> {
-  @_$jni.internal
-  const $HttpRequestUrl$Type();
+final class $HttpRequestUrl$NullableType
+    extends jni$_.JObjType<HttpRequestUrl?> {
+  @jni$_.internal
+  const $HttpRequestUrl$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/http/HttpRequestUrl;';
 
-  @_$jni.internal
-  @_$core.override
-  HttpRequestUrl fromReference(_$jni.JReference reference) =>
-      HttpRequestUrl.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  HttpRequestUrl? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpRequestUrl.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpRequestUrl?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($HttpRequestUrl$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($HttpRequestUrl$NullableType) &&
+        other is $HttpRequestUrl$NullableType;
+  }
+}
+
+final class $HttpRequestUrl$Type extends jni$_.JObjType<HttpRequestUrl> {
+  @jni$_.internal
+  const $HttpRequestUrl$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/http/HttpRequestUrl;';
+
+  @jni$_.internal
+  @core$_.override
+  HttpRequestUrl fromReference(jni$_.JReference reference) =>
+      HttpRequestUrl.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpRequestUrl?> get nullableType =>
+      const $HttpRequestUrl$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($HttpRequestUrl$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($HttpRequestUrl$Type) &&
         other is $HttpRequestUrl$Type;

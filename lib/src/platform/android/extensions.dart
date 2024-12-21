@@ -66,7 +66,7 @@ extension LngLatBoundsExt on LngLatBounds {
         longitudeEast,
         latitudeSouth,
         longitudeWest,
-      );
+      )!;
 }
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
@@ -103,11 +103,11 @@ extension OfflineRegionExt on jni.OfflineRegion {
     // TODO add getMetadata();
     final region = OfflineRegion(
       id: getId(),
-      bounds: jDefinition.getBounds().toLngLatBounds(releaseOriginal: true),
+      bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
       minZoom: jDefinition.getMinZoom(),
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),
-      styleUrl: jDefinition.getStyleURL().toDartString(releaseOriginal: true),
+      styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
     );
     jDefinition.release();
     return region;

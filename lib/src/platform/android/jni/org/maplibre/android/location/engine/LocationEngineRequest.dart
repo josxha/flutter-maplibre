@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.engine.LocationEngineRequest$Builder`
-class LocationEngineRequest_Builder extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationEngineRequest_Builder> $type;
+class LocationEngineRequest$Builder extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationEngineRequest$Builder> $type;
 
-  @_$jni.internal
-  LocationEngineRequest_Builder.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  LocationEngineRequest$Builder.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/engine/LocationEngineRequest$Builder');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $LocationEngineRequest_Builder$Type();
+  static const nullableType = $LocationEngineRequest$Builder$NullableType();
+  static const type = $LocationEngineRequest$Builder$Type();
   static final _id_new$ = _class.constructorId(
     r'(J)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_NewObject')
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LocationEngineRequest_Builder(
+  factory LocationEngineRequest$Builder(
     int j,
   ) {
-    return LocationEngineRequest_Builder.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr, j)
+    return LocationEngineRequest$Builder.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
             .reference);
   }
 
@@ -95,24 +97,25 @@ class LocationEngineRequest_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;',
   );
 
-  static final _setPriority = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _setPriority = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setPriority(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest_Builder setPriority(
+  LocationEngineRequest$Builder? setPriority(
     int i,
   ) {
     return _setPriority(
-            reference.pointer, _id_setPriority as _$jni.JMethodIDPtr, i)
-        .object(const $LocationEngineRequest_Builder$Type());
+            reference.pointer, _id_setPriority as jni$_.JMethodIDPtr, i)
+        .object<LocationEngineRequest$Builder?>(
+            const $LocationEngineRequest$Builder$NullableType());
   }
 
   static final _id_setDisplacement = _class.instanceMethodId(
@@ -120,25 +123,26 @@ class LocationEngineRequest_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;',
   );
 
-  static final _setDisplacement = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _setDisplacement = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setDisplacement(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest_Builder setDisplacement(
+  LocationEngineRequest$Builder? setDisplacement(
     double f,
   ) {
     return _setDisplacement(
-            reference.pointer, _id_setDisplacement as _$jni.JMethodIDPtr, f)
-        .object(const $LocationEngineRequest_Builder$Type());
+            reference.pointer, _id_setDisplacement as jni$_.JMethodIDPtr, f)
+        .object<LocationEngineRequest$Builder?>(
+            const $LocationEngineRequest$Builder$NullableType());
   }
 
   static final _id_setMaxWaitTime = _class.instanceMethodId(
@@ -146,24 +150,25 @@ class LocationEngineRequest_Builder extends _$jni.JObject {
     r'(J)Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;',
   );
 
-  static final _setMaxWaitTime = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_CallObjectMethod')
+  static final _setMaxWaitTime = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setMaxWaitTime(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest_Builder setMaxWaitTime(
+  LocationEngineRequest$Builder? setMaxWaitTime(
     int j,
   ) {
     return _setMaxWaitTime(
-            reference.pointer, _id_setMaxWaitTime as _$jni.JMethodIDPtr, j)
-        .object(const $LocationEngineRequest_Builder$Type());
+            reference.pointer, _id_setMaxWaitTime as jni$_.JMethodIDPtr, j)
+        .object<LocationEngineRequest$Builder?>(
+            const $LocationEngineRequest$Builder$NullableType());
   }
 
   static final _id_setFastestInterval = _class.instanceMethodId(
@@ -171,24 +176,25 @@ class LocationEngineRequest_Builder extends _$jni.JObject {
     r'(J)Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;',
   );
 
-  static final _setFastestInterval = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_CallObjectMethod')
+  static final _setFastestInterval = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setFastestInterval(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest_Builder setFastestInterval(
+  LocationEngineRequest$Builder? setFastestInterval(
     int j,
   ) {
     return _setFastestInterval(
-            reference.pointer, _id_setFastestInterval as _$jni.JMethodIDPtr, j)
-        .object(const $LocationEngineRequest_Builder$Type());
+            reference.pointer, _id_setFastestInterval as jni$_.JMethodIDPtr, j)
+        .object<LocationEngineRequest$Builder?>(
+            const $LocationEngineRequest$Builder$NullableType());
   }
 
   static final _id_build = _class.instanceMethodId(
@@ -196,75 +202,123 @@ class LocationEngineRequest_Builder extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/engine/LocationEngineRequest;',
   );
 
-  static final _build = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _build = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest build()`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest build() {
-    return _build(reference.pointer, _id_build as _$jni.JMethodIDPtr)
-        .object(const $LocationEngineRequest$Type());
+  LocationEngineRequest? build() {
+    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
+        .object<LocationEngineRequest?>(
+            const $LocationEngineRequest$NullableType());
   }
 }
 
-final class $LocationEngineRequest_Builder$Type
-    extends _$jni.JObjType<LocationEngineRequest_Builder> {
-  @_$jni.internal
-  const $LocationEngineRequest_Builder$Type();
+final class $LocationEngineRequest$Builder$NullableType
+    extends jni$_.JObjType<LocationEngineRequest$Builder?> {
+  @jni$_.internal
+  const $LocationEngineRequest$Builder$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationEngineRequest_Builder fromReference(_$jni.JReference reference) =>
-      LocationEngineRequest_Builder.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationEngineRequest$Builder? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationEngineRequest$Builder.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineRequest$Builder?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($LocationEngineRequest_Builder$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($LocationEngineRequest$Builder$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($LocationEngineRequest_Builder$Type) &&
-        other is $LocationEngineRequest_Builder$Type;
+    return other.runtimeType == ($LocationEngineRequest$Builder$NullableType) &&
+        other is $LocationEngineRequest$Builder$NullableType;
+  }
+}
+
+final class $LocationEngineRequest$Builder$Type
+    extends jni$_.JObjType<LocationEngineRequest$Builder> {
+  @jni$_.internal
+  const $LocationEngineRequest$Builder$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/engine/LocationEngineRequest$Builder;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationEngineRequest$Builder fromReference(jni$_.JReference reference) =>
+      LocationEngineRequest$Builder.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineRequest$Builder?> get nullableType =>
+      const $LocationEngineRequest$Builder$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($LocationEngineRequest$Builder$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocationEngineRequest$Builder$Type) &&
+        other is $LocationEngineRequest$Builder$Type;
   }
 }
 
 /// from: `org.maplibre.android.location.engine.LocationEngineRequest`
-class LocationEngineRequest extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationEngineRequest> $type;
+class LocationEngineRequest extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationEngineRequest> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LocationEngineRequest.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/engine/LocationEngineRequest');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $LocationEngineRequest$NullableType();
   static const type = $LocationEngineRequest$Type();
 
   /// from: `static public final int PRIORITY_HIGH_ACCURACY`
@@ -283,22 +337,22 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getInterval = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getInterval = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getInterval()`
   int getInterval() {
     return _getInterval(
-            reference.pointer, _id_getInterval as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getInterval as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -307,22 +361,22 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()I',
   );
 
-  static final _getPriority = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getPriority = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int getPriority()`
   int getPriority() {
     return _getPriority(
-            reference.pointer, _id_getPriority as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getPriority as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -331,22 +385,22 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()F',
   );
 
-  static final _getDisplacement = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getDisplacement = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float getDisplacement()`
   double getDisplacement() {
     return _getDisplacement(
-            reference.pointer, _id_getDisplacement as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getDisplacement as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -355,22 +409,22 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getMaxWaitTime = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getMaxWaitTime = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getMaxWaitTime()`
   int getMaxWaitTime() {
     return _getMaxWaitTime(
-            reference.pointer, _id_getMaxWaitTime as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getMaxWaitTime as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -379,22 +433,22 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getFastestInterval = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFastestInterval = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getFastestInterval()`
   int getFastestInterval() {
     return _getFastestInterval(
-            reference.pointer, _id_getFastestInterval as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getFastestInterval as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -403,23 +457,24 @@ class LocationEngineRequest extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    _$jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
@@ -428,52 +483,98 @@ class LocationEngineRequest extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 }
 
-final class $LocationEngineRequest$Type
-    extends _$jni.JObjType<LocationEngineRequest> {
-  @_$jni.internal
-  const $LocationEngineRequest$Type();
+final class $LocationEngineRequest$NullableType
+    extends jni$_.JObjType<LocationEngineRequest?> {
+  @jni$_.internal
+  const $LocationEngineRequest$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/engine/LocationEngineRequest;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationEngineRequest fromReference(_$jni.JReference reference) =>
-      LocationEngineRequest.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationEngineRequest? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationEngineRequest.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineRequest?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($LocationEngineRequest$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocationEngineRequest$NullableType) &&
+        other is $LocationEngineRequest$NullableType;
+  }
+}
+
+final class $LocationEngineRequest$Type
+    extends jni$_.JObjType<LocationEngineRequest> {
+  @jni$_.internal
+  const $LocationEngineRequest$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/engine/LocationEngineRequest;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationEngineRequest fromReference(jni$_.JReference reference) =>
+      LocationEngineRequest.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineRequest?> get nullableType =>
+      const $LocationEngineRequest$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($LocationEngineRequest$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LocationEngineRequest$Type) &&
         other is $LocationEngineRequest$Type;

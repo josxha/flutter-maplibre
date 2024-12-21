@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,109 +45,157 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'LatLng.dart' as latlng_;
+import 'LatLng.dart' as latlng$_;
 
-import 'LatLngBounds.dart' as latlngbounds_;
+import 'LatLngBounds.dart' as latlngbounds$_;
 
 /// from: `org.maplibre.android.geometry.VisibleRegion$Companion`
-class VisibleRegion_Companion extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<VisibleRegion_Companion> $type;
+class VisibleRegion$Companion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<VisibleRegion$Companion> $type;
 
-  @_$jni.internal
-  VisibleRegion_Companion.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  VisibleRegion$Companion.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/geometry/VisibleRegion$Companion');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $VisibleRegion_Companion$Type();
+  static const nullableType = $VisibleRegion$Companion$NullableType();
+  static const type = $VisibleRegion$Companion$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VisibleRegion_Companion(
-    _$jni.JObject defaultConstructorMarker,
+  factory VisibleRegion$Companion(
+    jni$_.JObject? defaultConstructorMarker,
   ) {
-    return VisibleRegion_Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            defaultConstructorMarker.reference.pointer)
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return VisibleRegion$Companion.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$defaultConstructorMarker.pointer)
         .reference);
   }
 }
 
-final class $VisibleRegion_Companion$Type
-    extends _$jni.JObjType<VisibleRegion_Companion> {
-  @_$jni.internal
-  const $VisibleRegion_Companion$Type();
+final class $VisibleRegion$Companion$NullableType
+    extends jni$_.JObjType<VisibleRegion$Companion?> {
+  @jni$_.internal
+  const $VisibleRegion$Companion$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/geometry/VisibleRegion$Companion;';
 
-  @_$jni.internal
-  @_$core.override
-  VisibleRegion_Companion fromReference(_$jni.JReference reference) =>
-      VisibleRegion_Companion.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  VisibleRegion$Companion? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : VisibleRegion$Companion.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VisibleRegion$Companion?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($VisibleRegion_Companion$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($VisibleRegion$Companion$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($VisibleRegion_Companion$Type) &&
-        other is $VisibleRegion_Companion$Type;
+    return other.runtimeType == ($VisibleRegion$Companion$NullableType) &&
+        other is $VisibleRegion$Companion$NullableType;
+  }
+}
+
+final class $VisibleRegion$Companion$Type
+    extends jni$_.JObjType<VisibleRegion$Companion> {
+  @jni$_.internal
+  const $VisibleRegion$Companion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/geometry/VisibleRegion$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  VisibleRegion$Companion fromReference(jni$_.JReference reference) =>
+      VisibleRegion$Companion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VisibleRegion$Companion?> get nullableType =>
+      const $VisibleRegion$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($VisibleRegion$Companion$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($VisibleRegion$Companion$Type) &&
+        other is $VisibleRegion$Companion$Type;
   }
 }
 
 /// from: `org.maplibre.android.geometry.VisibleRegion`
-class VisibleRegion extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<VisibleRegion> $type;
+class VisibleRegion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<VisibleRegion> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   VisibleRegion.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/geometry/VisibleRegion');
+      jni$_.JClass.forName(r'org/maplibre/android/geometry/VisibleRegion');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $VisibleRegion$NullableType();
   static const type = $VisibleRegion$Type();
   static final _id_Companion = _class.staticFieldId(
     r'Companion',
@@ -155,8 +204,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `static public final org.maplibre.android.geometry.VisibleRegion$Companion Companion`
   /// The returned object must be released after use, by calling the [release] method.
-  static VisibleRegion_Companion get Companion =>
-      _id_Companion.get(_class, const $VisibleRegion_Companion$Type());
+  static VisibleRegion$Companion? get Companion =>
+      _id_Companion.get(_class, const $VisibleRegion$Companion$NullableType());
 
   static final _id_farLeft = _class.instanceFieldId(
     r'farLeft',
@@ -165,8 +214,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `public final org.maplibre.android.geometry.LatLng farLeft`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng get farLeft =>
-      _id_farLeft.get(this, const latlng_.$LatLng$Type());
+  latlng$_.LatLng? get farLeft =>
+      _id_farLeft.get(this, const latlng$_.$LatLng$NullableType());
 
   static final _id_farRight = _class.instanceFieldId(
     r'farRight',
@@ -175,8 +224,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `public final org.maplibre.android.geometry.LatLng farRight`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng get farRight =>
-      _id_farRight.get(this, const latlng_.$LatLng$Type());
+  latlng$_.LatLng? get farRight =>
+      _id_farRight.get(this, const latlng$_.$LatLng$NullableType());
 
   static final _id_nearLeft = _class.instanceFieldId(
     r'nearLeft',
@@ -185,8 +234,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `public final org.maplibre.android.geometry.LatLng nearLeft`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng get nearLeft =>
-      _id_nearLeft.get(this, const latlng_.$LatLng$Type());
+  latlng$_.LatLng? get nearLeft =>
+      _id_nearLeft.get(this, const latlng$_.$LatLng$NullableType());
 
   static final _id_nearRight = _class.instanceFieldId(
     r'nearRight',
@@ -195,8 +244,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `public final org.maplibre.android.geometry.LatLng nearRight`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng get nearRight =>
-      _id_nearRight.get(this, const latlng_.$LatLng$Type());
+  latlng$_.LatLng? get nearRight =>
+      _id_nearRight.get(this, const latlng$_.$LatLng$NullableType());
 
   static final _id_latLngBounds = _class.instanceFieldId(
     r'latLngBounds',
@@ -205,8 +254,8 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds latLngBounds`
   /// The returned object must be released after use, by calling the [release] method.
-  latlngbounds_.LatLngBounds get latLngBounds =>
-      _id_latLngBounds.get(this, const latlngbounds_.$LatLngBounds$Type());
+  latlngbounds$_.LatLngBounds get latLngBounds =>
+      _id_latLngBounds.get(this, const latlngbounds$_.$LatLngBounds$Type());
 
   static final _id_CREATOR = _class.staticFieldId(
     r'CREATOR',
@@ -215,53 +264,58 @@ class VisibleRegion extends _$jni.JObject {
 
   /// from: `static public final android.os.Parcelable$Creator CREATOR`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JObject get CREATOR =>
-      _id_CREATOR.get(_class, const _$jni.JObjectType());
+  static jni$_.JObject? get CREATOR =>
+      _id_CREATOR.get(_class, const jni$_.JObjectNullableType());
 
   static final _id_new$ = _class.constructorId(
     r'(Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLngBounds;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(org.maplibre.android.geometry.LatLng latLng, org.maplibre.android.geometry.LatLng latLng1, org.maplibre.android.geometry.LatLng latLng2, org.maplibre.android.geometry.LatLng latLng3, org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VisibleRegion(
-    latlng_.LatLng latLng,
-    latlng_.LatLng latLng1,
-    latlng_.LatLng latLng2,
-    latlng_.LatLng latLng3,
-    latlngbounds_.LatLngBounds latLngBounds,
+    latlng$_.LatLng latLng,
+    latlng$_.LatLng latLng1,
+    latlng$_.LatLng latLng2,
+    latlng$_.LatLng latLng3,
+    latlngbounds$_.LatLngBounds latLngBounds,
   ) {
+    final _$latLng = latLng.reference;
+    final _$latLng1 = latLng1.reference;
+    final _$latLng2 = latLng2.reference;
+    final _$latLng3 = latLng3.reference;
+    final _$latLngBounds = latLngBounds.reference;
     return VisibleRegion.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            latLng.reference.pointer,
-            latLng1.reference.pointer,
-            latLng2.reference.pointer,
-            latLng3.reference.pointer,
-            latLngBounds.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$latLng.pointer,
+            _$latLng1.pointer,
+            _$latLng2.pointer,
+            _$latLng3.pointer,
+            _$latLngBounds.pointer)
         .reference);
   }
 
@@ -270,23 +324,24 @@ class VisibleRegion extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    _$jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
@@ -295,23 +350,23 @@ class VisibleRegion extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString toString$1() {
+    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_hashCode$1 = _class.instanceMethodId(
@@ -319,21 +374,21 @@ class VisibleRegion extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -342,22 +397,22 @@ class VisibleRegion extends _$jni.JObject {
     r'()I',
   );
 
-  static final _describeContents = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as _$jni.JMethodIDPtr)
+            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -366,25 +421,26 @@ class VisibleRegion extends _$jni.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Int32)>)>>(
+  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
   void writeToParcel(
-    _$jni.JObject parcel,
+    jni$_.JObject parcel,
     int i,
   ) {
-    _writeToParcel(reference.pointer, _id_writeToParcel as _$jni.JMethodIDPtr,
-            parcel.reference.pointer, i)
+    final _$parcel = parcel.reference;
+    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
+            _$parcel.pointer, i)
         .check();
   }
 
@@ -392,63 +448,109 @@ class VisibleRegion extends _$jni.JObject {
     r'(Landroid/os/Parcel;Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `synthetic public void <init>(android.os.Parcel parcel, kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VisibleRegion.new$1(
-    _$jni.JObject parcel,
-    _$jni.JObject defaultConstructorMarker,
+    jni$_.JObject? parcel,
+    jni$_.JObject? defaultConstructorMarker,
   ) {
+    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return VisibleRegion.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            parcel.reference.pointer,
-            defaultConstructorMarker.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$parcel.pointer,
+            _$defaultConstructorMarker.pointer)
         .reference);
   }
 }
 
-final class $VisibleRegion$Type extends _$jni.JObjType<VisibleRegion> {
-  @_$jni.internal
-  const $VisibleRegion$Type();
+final class $VisibleRegion$NullableType extends jni$_.JObjType<VisibleRegion?> {
+  @jni$_.internal
+  const $VisibleRegion$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/geometry/VisibleRegion;';
 
-  @_$jni.internal
-  @_$core.override
-  VisibleRegion fromReference(_$jni.JReference reference) =>
-      VisibleRegion.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  VisibleRegion? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : VisibleRegion.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VisibleRegion?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($VisibleRegion$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($VisibleRegion$NullableType) &&
+        other is $VisibleRegion$NullableType;
+  }
+}
+
+final class $VisibleRegion$Type extends jni$_.JObjType<VisibleRegion> {
+  @jni$_.internal
+  const $VisibleRegion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/geometry/VisibleRegion;';
+
+  @jni$_.internal
+  @core$_.override
+  VisibleRegion fromReference(jni$_.JReference reference) =>
+      VisibleRegion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VisibleRegion?> get nullableType =>
+      const $VisibleRegion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($VisibleRegion$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($VisibleRegion$Type) &&
         other is $VisibleRegion$Type;

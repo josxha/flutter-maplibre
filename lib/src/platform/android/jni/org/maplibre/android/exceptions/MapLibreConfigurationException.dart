@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.exceptions.MapLibreConfigurationException`
-class MapLibreConfigurationException extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapLibreConfigurationException> $type;
+class MapLibreConfigurationException extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapLibreConfigurationException> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   MapLibreConfigurationException.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/exceptions/MapLibreConfigurationException');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $MapLibreConfigurationException$NullableType();
   static const type = $MapLibreConfigurationException$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreConfigurationException() {
     return MapLibreConfigurationException.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -94,57 +96,105 @@ class MapLibreConfigurationException extends _$jni.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreConfigurationException.new$1(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return MapLibreConfigurationException.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .reference);
   }
 }
 
-final class $MapLibreConfigurationException$Type
-    extends _$jni.JObjType<MapLibreConfigurationException> {
-  @_$jni.internal
-  const $MapLibreConfigurationException$Type();
+final class $MapLibreConfigurationException$NullableType
+    extends jni$_.JObjType<MapLibreConfigurationException?> {
+  @jni$_.internal
+  const $MapLibreConfigurationException$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/exceptions/MapLibreConfigurationException;';
 
-  @_$jni.internal
-  @_$core.override
-  MapLibreConfigurationException fromReference(_$jni.JReference reference) =>
-      MapLibreConfigurationException.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapLibreConfigurationException? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapLibreConfigurationException.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapLibreConfigurationException?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($MapLibreConfigurationException$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapLibreConfigurationException$NullableType) &&
+        other is $MapLibreConfigurationException$NullableType;
+  }
+}
+
+final class $MapLibreConfigurationException$Type
+    extends jni$_.JObjType<MapLibreConfigurationException> {
+  @jni$_.internal
+  const $MapLibreConfigurationException$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/exceptions/MapLibreConfigurationException;';
+
+  @jni$_.internal
+  @core$_.override
+  MapLibreConfigurationException fromReference(jni$_.JReference reference) =>
+      MapLibreConfigurationException.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapLibreConfigurationException?> get nullableType =>
+      const $MapLibreConfigurationException$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($MapLibreConfigurationException$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($MapLibreConfigurationException$Type) &&
         other is $MapLibreConfigurationException$Type;

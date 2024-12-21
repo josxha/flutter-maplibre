@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,39 +45,40 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.modes.RenderMode$Mode`
-class RenderMode_Mode extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<RenderMode_Mode> $type;
+class RenderMode$Mode extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<RenderMode$Mode> $type;
 
-  @_$jni.internal
-  RenderMode_Mode.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  RenderMode$Mode.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/modes/RenderMode$Mode');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $RenderMode_Mode$Type();
+  static const nullableType = $RenderMode$Mode$NullableType();
+  static const type = $RenderMode$Mode$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $RenderMode_Mode> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $RenderMode$Mode> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -84,39 +86,39 @@ class RenderMode_Mode extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $RenderMode_Mode $impl,
+    jni$_.JImplementer implementer,
+    $RenderMode$Mode $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.location.modes.RenderMode$Mode',
@@ -128,73 +130,119 @@ class RenderMode_Mode extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory RenderMode_Mode.implement(
-    $RenderMode_Mode $impl,
+  factory RenderMode$Mode.implement(
+    $RenderMode$Mode $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return RenderMode_Mode.fromReference(
+    return RenderMode$Mode.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $RenderMode_Mode {
-  factory $RenderMode_Mode() = _$RenderMode_Mode;
+abstract base mixin class $RenderMode$Mode {
+  factory $RenderMode$Mode() = _$RenderMode$Mode;
 }
 
-final class _$RenderMode_Mode with $RenderMode_Mode {
-  _$RenderMode_Mode();
+final class _$RenderMode$Mode with $RenderMode$Mode {
+  _$RenderMode$Mode();
 }
 
-final class $RenderMode_Mode$Type extends _$jni.JObjType<RenderMode_Mode> {
-  @_$jni.internal
-  const $RenderMode_Mode$Type();
+final class $RenderMode$Mode$NullableType
+    extends jni$_.JObjType<RenderMode$Mode?> {
+  @jni$_.internal
+  const $RenderMode$Mode$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/modes/RenderMode$Mode;';
 
-  @_$jni.internal
-  @_$core.override
-  RenderMode_Mode fromReference(_$jni.JReference reference) =>
-      RenderMode_Mode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  RenderMode$Mode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RenderMode$Mode.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RenderMode$Mode?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($RenderMode_Mode$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($RenderMode$Mode$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($RenderMode_Mode$Type) &&
-        other is $RenderMode_Mode$Type;
+    return other.runtimeType == ($RenderMode$Mode$NullableType) &&
+        other is $RenderMode$Mode$NullableType;
+  }
+}
+
+final class $RenderMode$Mode$Type extends jni$_.JObjType<RenderMode$Mode> {
+  @jni$_.internal
+  const $RenderMode$Mode$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/modes/RenderMode$Mode;';
+
+  @jni$_.internal
+  @core$_.override
+  RenderMode$Mode fromReference(jni$_.JReference reference) =>
+      RenderMode$Mode.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RenderMode$Mode?> get nullableType =>
+      const $RenderMode$Mode$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($RenderMode$Mode$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RenderMode$Mode$Type) &&
+        other is $RenderMode$Mode$Type;
   }
 }
 
 /// from: `org.maplibre.android.location.modes.RenderMode`
-class RenderMode extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<RenderMode> $type;
+class RenderMode extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<RenderMode> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   RenderMode.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/location/modes/RenderMode');
+      jni$_.JClass.forName(r'org/maplibre/android/location/modes/RenderMode');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $RenderMode$NullableType();
   static const type = $RenderMode$Type();
 
   /// from: `static public final int NORMAL`
@@ -207,31 +255,74 @@ class RenderMode extends _$jni.JObject {
   static const GPS = 8;
 }
 
-final class $RenderMode$Type extends _$jni.JObjType<RenderMode> {
-  @_$jni.internal
-  const $RenderMode$Type();
+final class $RenderMode$NullableType extends jni$_.JObjType<RenderMode?> {
+  @jni$_.internal
+  const $RenderMode$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/location/modes/RenderMode;';
 
-  @_$jni.internal
-  @_$core.override
-  RenderMode fromReference(_$jni.JReference reference) =>
-      RenderMode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  RenderMode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RenderMode.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RenderMode?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($RenderMode$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RenderMode$NullableType) &&
+        other is $RenderMode$NullableType;
+  }
+}
+
+final class $RenderMode$Type extends jni$_.JObjType<RenderMode> {
+  @jni$_.internal
+  const $RenderMode$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/location/modes/RenderMode;';
+
+  @jni$_.internal
+  @core$_.override
+  RenderMode fromReference(jni$_.JReference reference) =>
+      RenderMode.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RenderMode?> get nullableType =>
+      const $RenderMode$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($RenderMode$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($RenderMode$Type) && other is $RenderMode$Type;
   }

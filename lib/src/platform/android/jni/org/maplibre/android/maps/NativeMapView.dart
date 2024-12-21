@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,63 +45,64 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.maps.NativeMapView$ViewCallback`
-class NativeMapView_ViewCallback extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<NativeMapView_ViewCallback> $type;
+class JObject$ViewCallback extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<JObject$ViewCallback> $type;
 
-  @_$jni.internal
-  NativeMapView_ViewCallback.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  JObject$ViewCallback.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/NativeMapView$ViewCallback');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $NativeMapView_ViewCallback$Type();
+  static const nullableType = $JObject$ViewCallback$NullableType();
+  static const type = $JObject$ViewCallback$Type();
   static final _id_getViewContent = _class.instanceMethodId(
     r'getViewContent',
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getViewContent = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getViewContent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getViewContent() {
+  jni$_.JObject? getViewContent() {
     return _getViewContent(
-            reference.pointer, _id_getViewContent as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_getViewContent as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $NativeMapView_ViewCallback> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $JObject$ViewCallback> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -108,46 +110,47 @@ class NativeMapView_ViewCallback extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'getViewContent()Landroid/graphics/Bitmap;') {
         final $r = _$impls[$p]!.getViewContent();
-        return ($r as _$jni.JObject)
-            .as(const _$jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $NativeMapView_ViewCallback $impl,
+    jni$_.JImplementer implementer,
+    $JObject$ViewCallback $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.NativeMapView$ViewCallback',
@@ -159,66 +162,112 @@ class NativeMapView_ViewCallback extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory NativeMapView_ViewCallback.implement(
-    $NativeMapView_ViewCallback $impl,
+  factory JObject$ViewCallback.implement(
+    $JObject$ViewCallback $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return NativeMapView_ViewCallback.fromReference(
+    return JObject$ViewCallback.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $NativeMapView_ViewCallback {
-  factory $NativeMapView_ViewCallback({
-    required _$jni.JObject Function() getViewContent,
-  }) = _$NativeMapView_ViewCallback;
+abstract base mixin class $JObject$ViewCallback {
+  factory $JObject$ViewCallback({
+    required jni$_.JObject? Function() getViewContent,
+  }) = _$JObject$ViewCallback;
 
-  _$jni.JObject getViewContent();
+  jni$_.JObject? getViewContent();
 }
 
-final class _$NativeMapView_ViewCallback with $NativeMapView_ViewCallback {
-  _$NativeMapView_ViewCallback({
-    required _$jni.JObject Function() getViewContent,
+final class _$JObject$ViewCallback with $JObject$ViewCallback {
+  _$JObject$ViewCallback({
+    required jni$_.JObject? Function() getViewContent,
   }) : _getViewContent = getViewContent;
 
-  final _$jni.JObject Function() _getViewContent;
+  final jni$_.JObject? Function() _getViewContent;
 
-  _$jni.JObject getViewContent() {
+  jni$_.JObject? getViewContent() {
     return _getViewContent();
   }
 }
 
-final class $NativeMapView_ViewCallback$Type
-    extends _$jni.JObjType<NativeMapView_ViewCallback> {
-  @_$jni.internal
-  const $NativeMapView_ViewCallback$Type();
+final class $JObject$ViewCallback$NullableType
+    extends jni$_.JObjType<JObject$ViewCallback?> {
+  @jni$_.internal
+  const $JObject$ViewCallback$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/NativeMapView$ViewCallback;';
 
-  @_$jni.internal
-  @_$core.override
-  NativeMapView_ViewCallback fromReference(_$jni.JReference reference) =>
-      NativeMapView_ViewCallback.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  JObject$ViewCallback? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : JObject$ViewCallback.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<JObject$ViewCallback?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($NativeMapView_ViewCallback$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($JObject$ViewCallback$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($NativeMapView_ViewCallback$Type) &&
-        other is $NativeMapView_ViewCallback$Type;
+    return other.runtimeType == ($JObject$ViewCallback$NullableType) &&
+        other is $JObject$ViewCallback$NullableType;
+  }
+}
+
+final class $JObject$ViewCallback$Type
+    extends jni$_.JObjType<JObject$ViewCallback> {
+  @jni$_.internal
+  const $JObject$ViewCallback$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/NativeMapView$ViewCallback;';
+
+  @jni$_.internal
+  @core$_.override
+  JObject$ViewCallback fromReference(jni$_.JReference reference) =>
+      JObject$ViewCallback.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<JObject$ViewCallback?> get nullableType =>
+      const $JObject$ViewCallback$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($JObject$ViewCallback$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($JObject$ViewCallback$Type) &&
+        other is $JObject$ViewCallback$Type;
   }
 }

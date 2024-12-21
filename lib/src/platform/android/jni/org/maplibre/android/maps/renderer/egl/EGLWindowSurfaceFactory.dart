@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.maps.renderer.egl.EGLWindowSurfaceFactory`
-class EGLWindowSurfaceFactory extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<EGLWindowSurfaceFactory> $type;
+class EGLWindowSurfaceFactory extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<EGLWindowSurfaceFactory> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   EGLWindowSurfaceFactory.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/renderer/egl/EGLWindowSurfaceFactory');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $EGLWindowSurfaceFactory$NullableType();
   static const type = $EGLWindowSurfaceFactory$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory EGLWindowSurfaceFactory() {
     return EGLWindowSurfaceFactory.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -95,43 +97,47 @@ class EGLWindowSurfaceFactory extends _$jni.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;)Ljavax/microedition/khronos/egl/EGLSurface;',
   );
 
-  static final _createWindowSurface = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _createWindowSurface = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface createWindowSurface(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject createWindowSurface(
-    _$jni.JObject eGL10,
-    _$jni.JObject eGLDisplay,
-    _$jni.JObject eGLConfig,
-    _$jni.JObject object,
+  jni$_.JObject? createWindowSurface(
+    jni$_.JObject? eGL10,
+    jni$_.JObject? eGLDisplay,
+    jni$_.JObject? eGLConfig,
+    jni$_.JObject? object,
   ) {
+    final _$eGL10 = eGL10?.reference ?? jni$_.jNullReference;
+    final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
+    final _$eGLConfig = eGLConfig?.reference ?? jni$_.jNullReference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
     return _createWindowSurface(
             reference.pointer,
-            _id_createWindowSurface as _$jni.JMethodIDPtr,
-            eGL10.reference.pointer,
-            eGLDisplay.reference.pointer,
-            eGLConfig.reference.pointer,
-            object.reference.pointer)
-        .object(const _$jni.JObjectType());
+            _id_createWindowSurface as jni$_.JMethodIDPtr,
+            _$eGL10.pointer,
+            _$eGLDisplay.pointer,
+            _$eGLConfig.pointer,
+            _$object.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_destroySurface = _class.instanceMethodId(
@@ -139,68 +145,113 @@ class EGLWindowSurfaceFactory extends _$jni.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;)V',
   );
 
-  static final _destroySurface = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _destroySurface = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void destroySurface(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface)`
   void destroySurface(
-    _$jni.JObject eGL10,
-    _$jni.JObject eGLDisplay,
-    _$jni.JObject eGLSurface,
+    jni$_.JObject? eGL10,
+    jni$_.JObject? eGLDisplay,
+    jni$_.JObject? eGLSurface,
   ) {
-    _destroySurface(
-            reference.pointer,
-            _id_destroySurface as _$jni.JMethodIDPtr,
-            eGL10.reference.pointer,
-            eGLDisplay.reference.pointer,
-            eGLSurface.reference.pointer)
+    final _$eGL10 = eGL10?.reference ?? jni$_.jNullReference;
+    final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
+    final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
+    _destroySurface(reference.pointer, _id_destroySurface as jni$_.JMethodIDPtr,
+            _$eGL10.pointer, _$eGLDisplay.pointer, _$eGLSurface.pointer)
         .check();
   }
 }
 
-final class $EGLWindowSurfaceFactory$Type
-    extends _$jni.JObjType<EGLWindowSurfaceFactory> {
-  @_$jni.internal
-  const $EGLWindowSurfaceFactory$Type();
+final class $EGLWindowSurfaceFactory$NullableType
+    extends jni$_.JObjType<EGLWindowSurfaceFactory?> {
+  @jni$_.internal
+  const $EGLWindowSurfaceFactory$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/renderer/egl/EGLWindowSurfaceFactory;';
 
-  @_$jni.internal
-  @_$core.override
-  EGLWindowSurfaceFactory fromReference(_$jni.JReference reference) =>
-      EGLWindowSurfaceFactory.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  EGLWindowSurfaceFactory? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : EGLWindowSurfaceFactory.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<EGLWindowSurfaceFactory?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($EGLWindowSurfaceFactory$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($EGLWindowSurfaceFactory$NullableType) &&
+        other is $EGLWindowSurfaceFactory$NullableType;
+  }
+}
+
+final class $EGLWindowSurfaceFactory$Type
+    extends jni$_.JObjType<EGLWindowSurfaceFactory> {
+  @jni$_.internal
+  const $EGLWindowSurfaceFactory$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/renderer/egl/EGLWindowSurfaceFactory;';
+
+  @jni$_.internal
+  @core$_.override
+  EGLWindowSurfaceFactory fromReference(jni$_.JReference reference) =>
+      EGLWindowSurfaceFactory.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<EGLWindowSurfaceFactory?> get nullableType =>
+      const $EGLWindowSurfaceFactory$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($EGLWindowSurfaceFactory$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($EGLWindowSurfaceFactory$Type) &&
         other is $EGLWindowSurfaceFactory$Type;

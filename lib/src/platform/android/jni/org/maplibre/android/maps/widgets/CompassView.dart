@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,29 +45,30 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../MapLibreMap.dart' as maplibremap_;
+import '../MapLibreMap.dart' as maplibremap$_;
 
 /// from: `org.maplibre.android.maps.widgets.CompassView`
-class CompassView extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<CompassView> $type;
+class CompassView extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CompassView> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   CompassView.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/maps/widgets/CompassView');
+      jni$_.JClass.forName(r'org/maplibre/android/maps/widgets/CompassView');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $CompassView$NullableType();
   static const type = $CompassView$Type();
 
   /// from: `static public final long TIME_WAIT_IDLE`
@@ -78,24 +80,25 @@ class CompassView extends _$jni.JObject {
     r'(Landroid/content/Context;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView(
-    _$jni.JObject context,
+    jni$_.JObject? context,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return CompassView.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr, context.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr, _$context.pointer)
         .reference);
   }
 
@@ -103,34 +106,36 @@ class CompassView extends _$jni.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView.new$1(
-    _$jni.JObject context,
-    _$jni.JObject attributeSet,
+    jni$_.JObject? context,
+    jni$_.JObject? attributeSet,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return CompassView.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$attributeSet.pointer)
         .reference);
   }
 
@@ -138,37 +143,39 @@ class CompassView extends _$jni.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;I)V',
   );
 
-  static final _new$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView.new$2(
-    _$jni.JObject context,
-    _$jni.JObject attributeSet,
+    jni$_.JObject? context,
+    jni$_.JObject? attributeSet,
     int i,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return CompassView.fromReference(_new$2(
             _class.reference.pointer,
-            _id_new$2 as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer,
+            _id_new$2 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$attributeSet.pointer,
             i)
         .reference);
   }
@@ -179,26 +186,28 @@ class CompassView extends _$jni.JObject {
   );
 
   static final _injectCompassAnimationListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void injectCompassAnimationListener(org.maplibre.android.maps.MapLibreMap$OnCompassAnimationListener onCompassAnimationListener)`
   void injectCompassAnimationListener(
-    maplibremap_.MapLibreMap_OnCompassAnimationListener
+    maplibremap$_.MapLibreMap$OnCompassAnimationListener?
         onCompassAnimationListener,
   ) {
+    final _$onCompassAnimationListener =
+        onCompassAnimationListener?.reference ?? jni$_.jNullReference;
     _injectCompassAnimationListener(
             reference.pointer,
-            _id_injectCompassAnimationListener as _$jni.JMethodIDPtr,
-            onCompassAnimationListener.reference.pointer)
+            _id_injectCompassAnimationListener as jni$_.JMethodIDPtr,
+            _$onCompassAnimationListener.pointer)
         .check();
   }
 
@@ -207,22 +216,22 @@ class CompassView extends _$jni.JObject {
     r'(Z)V',
   );
 
-  static final _isAnimating = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _isAnimating = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void isAnimating(boolean z)`
   void isAnimating(
     bool z,
   ) {
     _isAnimating(
-            reference.pointer, _id_isAnimating as _$jni.JMethodIDPtr, z ? 1 : 0)
+            reference.pointer, _id_isAnimating as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
@@ -231,21 +240,21 @@ class CompassView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _resetAnimation = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _resetAnimation = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void resetAnimation()`
   void resetAnimation() {
-    _resetAnimation(reference.pointer, _id_resetAnimation as _$jni.JMethodIDPtr)
+    _resetAnimation(reference.pointer, _id_resetAnimation as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -254,21 +263,21 @@ class CompassView extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _isHidden = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isHidden = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean isHidden()`
   bool isHidden() {
-    return _isHidden(reference.pointer, _id_isHidden as _$jni.JMethodIDPtr)
+    return _isHidden(reference.pointer, _id_isHidden as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -277,22 +286,22 @@ class CompassView extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _isFacingNorth = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isFacingNorth = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean isFacingNorth()`
   bool isFacingNorth() {
     return _isFacingNorth(
-            reference.pointer, _id_isFacingNorth as _$jni.JMethodIDPtr)
+            reference.pointer, _id_isFacingNorth as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -301,22 +310,22 @@ class CompassView extends _$jni.JObject {
     r'(Z)V',
   );
 
-  static final _setEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _setEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void setEnabled(boolean z)`
   void setEnabled(
     bool z,
   ) {
     _setEnabled(
-            reference.pointer, _id_setEnabled as _$jni.JMethodIDPtr, z ? 1 : 0)
+            reference.pointer, _id_setEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
@@ -325,21 +334,21 @@ class CompassView extends _$jni.JObject {
     r'(D)V',
   );
 
-  static final _update = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Double,)>)>>('globalEnv_CallVoidMethod')
+  static final _update = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public void update(double d)`
   void update(
     double d,
   ) {
-    _update(reference.pointer, _id_update as _$jni.JMethodIDPtr, d).check();
+    _update(reference.pointer, _id_update as jni$_.JMethodIDPtr, d).check();
   }
 
   static final _id_fadeCompassViewFacingNorth = _class.instanceMethodId(
@@ -348,21 +357,21 @@ class CompassView extends _$jni.JObject {
   );
 
   static final _fadeCompassViewFacingNorth =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void fadeCompassViewFacingNorth(boolean z)`
   void fadeCompassViewFacingNorth(
     bool z,
   ) {
     _fadeCompassViewFacingNorth(reference.pointer,
-            _id_fadeCompassViewFacingNorth as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_fadeCompassViewFacingNorth as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
@@ -372,22 +381,22 @@ class CompassView extends _$jni.JObject {
   );
 
   static final _isFadeCompassViewFacingNorth =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public boolean isFadeCompassViewFacingNorth()`
   bool isFadeCompassViewFacingNorth() {
     return _isFadeCompassViewFacingNorth(reference.pointer,
-            _id_isFadeCompassViewFacingNorth as _$jni.JMethodIDPtr)
+            _id_isFadeCompassViewFacingNorth as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -396,25 +405,24 @@ class CompassView extends _$jni.JObject {
     r'(Landroid/graphics/drawable/Drawable;)V',
   );
 
-  static final _setCompassImage = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setCompassImage = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setCompassImage(android.graphics.drawable.Drawable drawable)`
   void setCompassImage(
-    _$jni.JObject drawable,
+    jni$_.JObject? drawable,
   ) {
-    _setCompassImage(
-            reference.pointer,
-            _id_setCompassImage as _$jni.JMethodIDPtr,
-            drawable.reference.pointer)
+    final _$drawable = drawable?.reference ?? jni$_.jNullReference;
+    _setCompassImage(reference.pointer,
+            _id_setCompassImage as jni$_.JMethodIDPtr, _$drawable.pointer)
         .check();
   }
 
@@ -423,24 +431,24 @@ class CompassView extends _$jni.JObject {
     r'()Landroid/graphics/drawable/Drawable;',
   );
 
-  static final _getCompassImage = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getCompassImage = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.graphics.drawable.Drawable getCompassImage()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getCompassImage() {
+  jni$_.JObject? getCompassImage() {
     return _getCompassImage(
-            reference.pointer, _id_getCompassImage as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_getCompassImage as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_run = _class.instanceMethodId(
@@ -448,49 +456,92 @@ class CompassView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _run = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _run = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void run()`
   void run() {
-    _run(reference.pointer, _id_run as _$jni.JMethodIDPtr).check();
+    _run(reference.pointer, _id_run as jni$_.JMethodIDPtr).check();
   }
 }
 
-final class $CompassView$Type extends _$jni.JObjType<CompassView> {
-  @_$jni.internal
-  const $CompassView$Type();
+final class $CompassView$NullableType extends jni$_.JObjType<CompassView?> {
+  @jni$_.internal
+  const $CompassView$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/maps/widgets/CompassView;';
 
-  @_$jni.internal
-  @_$core.override
-  CompassView fromReference(_$jni.JReference reference) =>
-      CompassView.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  CompassView? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CompassView.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CompassView?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($CompassView$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CompassView$NullableType) &&
+        other is $CompassView$NullableType;
+  }
+}
+
+final class $CompassView$Type extends jni$_.JObjType<CompassView> {
+  @jni$_.internal
+  const $CompassView$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/widgets/CompassView;';
+
+  @jni$_.internal
+  @core$_.override
+  CompassView fromReference(jni$_.JReference reference) =>
+      CompassView.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CompassView?> get nullableType =>
+      const $CompassView$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($CompassView$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($CompassView$Type) &&
         other is $CompassView$Type;

@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,50 +45,52 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.LocationComponentOptions$Builder`
-class LocationComponentOptions_Builder extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationComponentOptions_Builder> $type;
+class LocationComponentOptions$Builder extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationComponentOptions$Builder> $type;
 
-  @_$jni.internal
-  LocationComponentOptions_Builder.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  LocationComponentOptions$Builder.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/LocationComponentOptions$Builder');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $LocationComponentOptions_Builder$Type();
+  static const nullableType = $LocationComponentOptions$Builder$NullableType();
+  static const type = $LocationComponentOptions$Builder$Type();
   static final _id_build = _class.instanceMethodId(
     r'build',
     r'()Lorg/maplibre/android/location/LocationComponentOptions;',
   );
 
-  static final _build = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _build = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions build()`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions build() {
-    return _build(reference.pointer, _id_build as _$jni.JMethodIDPtr)
-        .object(const $LocationComponentOptions$Type());
+  LocationComponentOptions? build() {
+    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
+        .object<LocationComponentOptions?>(
+            const $LocationComponentOptions$NullableType());
   }
 
   static final _id_accuracyAlpha = _class.instanceMethodId(
@@ -95,25 +98,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _accuracyAlpha = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _accuracyAlpha = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyAlpha(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder accuracyAlpha(
+  LocationComponentOptions$Builder? accuracyAlpha(
     double f,
   ) {
     return _accuracyAlpha(
-            reference.pointer, _id_accuracyAlpha as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_accuracyAlpha as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_accuracyColor = _class.instanceMethodId(
@@ -121,24 +125,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _accuracyColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _accuracyColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder accuracyColor(
+  LocationComponentOptions$Builder? accuracyColor(
     int i,
   ) {
     return _accuracyColor(
-            reference.pointer, _id_accuracyColor as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_accuracyColor as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundDrawableStale = _class.instanceMethodId(
@@ -146,24 +151,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundDrawableStale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _backgroundDrawableStale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundDrawableStale(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundDrawableStale(
+  LocationComponentOptions$Builder? backgroundDrawableStale(
     int i,
   ) {
     return _backgroundDrawableStale(reference.pointer,
-            _id_backgroundDrawableStale as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_backgroundDrawableStale as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundStaleName = _class.instanceMethodId(
@@ -171,27 +177,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundStaleName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundStaleName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundStaleName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundStaleName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? backgroundStaleName(
+    jni$_.JString? string,
   ) {
-    return _backgroundStaleName(
-            reference.pointer,
-            _id_backgroundStaleName as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _backgroundStaleName(reference.pointer,
+            _id_backgroundStaleName as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundDrawableStale = _class.instanceMethodId(
@@ -199,24 +205,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundDrawableStale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _foregroundDrawableStale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundDrawableStale(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundDrawableStale(
+  LocationComponentOptions$Builder? foregroundDrawableStale(
     int i,
   ) {
     return _foregroundDrawableStale(reference.pointer,
-            _id_foregroundDrawableStale as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_foregroundDrawableStale as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundStaleName = _class.instanceMethodId(
@@ -224,27 +231,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundStaleName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _foregroundStaleName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundStaleName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundStaleName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? foregroundStaleName(
+    jni$_.JString? string,
   ) {
-    return _foregroundStaleName(
-            reference.pointer,
-            _id_foregroundStaleName as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _foregroundStaleName(reference.pointer,
+            _id_foregroundStaleName as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_gpsDrawable = _class.instanceMethodId(
@@ -252,24 +259,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _gpsDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _gpsDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder gpsDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder gpsDrawable(
+  LocationComponentOptions$Builder? gpsDrawable(
     int i,
   ) {
     return _gpsDrawable(
-            reference.pointer, _id_gpsDrawable as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_gpsDrawable as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_gpsName = _class.instanceMethodId(
@@ -277,25 +285,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _gpsName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _gpsName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder gpsName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder gpsName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? gpsName(
+    jni$_.JString? string,
   ) {
-    return _gpsName(reference.pointer, _id_gpsName as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _gpsName(reference.pointer, _id_gpsName as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundDrawable = _class.instanceMethodId(
@@ -303,24 +313,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _foregroundDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundDrawable(
+  LocationComponentOptions$Builder? foregroundDrawable(
     int i,
   ) {
     return _foregroundDrawable(
-            reference.pointer, _id_foregroundDrawable as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_foregroundDrawable as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundName = _class.instanceMethodId(
@@ -328,25 +339,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _foregroundName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? foregroundName(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _foregroundName(reference.pointer,
-            _id_foregroundName as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_foregroundName as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundDrawable = _class.instanceMethodId(
@@ -354,24 +367,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _backgroundDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundDrawable(
+  LocationComponentOptions$Builder? backgroundDrawable(
     int i,
   ) {
     return _backgroundDrawable(
-            reference.pointer, _id_backgroundDrawable as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_backgroundDrawable as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundName = _class.instanceMethodId(
@@ -379,25 +393,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? backgroundName(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _backgroundName(reference.pointer,
-            _id_backgroundName as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_backgroundName as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_bearingDrawable = _class.instanceMethodId(
@@ -405,24 +421,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _bearingDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _bearingDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder bearingDrawable(
+  LocationComponentOptions$Builder? bearingDrawable(
     int i,
   ) {
     return _bearingDrawable(
-            reference.pointer, _id_bearingDrawable as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_bearingDrawable as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_bearingName = _class.instanceMethodId(
@@ -430,25 +447,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _bearingName = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _bearingName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder bearingName(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? bearingName(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _bearingName(reference.pointer,
-            _id_bearingName as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_bearingName as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_bearingTintColor = _class.instanceMethodId(
@@ -456,27 +475,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Integer;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _bearingTintColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _bearingTintColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder bearingTintColor(
-    _$jni.JInteger integer,
+  LocationComponentOptions$Builder? bearingTintColor(
+    jni$_.JInteger? integer,
   ) {
-    return _bearingTintColor(
-            reference.pointer,
-            _id_bearingTintColor as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
+    return _bearingTintColor(reference.pointer,
+            _id_bearingTintColor as jni$_.JMethodIDPtr, _$integer.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundTintColor = _class.instanceMethodId(
@@ -484,27 +503,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Integer;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundTintColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _foregroundTintColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundTintColor(
-    _$jni.JInteger integer,
+  LocationComponentOptions$Builder? foregroundTintColor(
+    jni$_.JInteger? integer,
   ) {
-    return _foregroundTintColor(
-            reference.pointer,
-            _id_foregroundTintColor as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
+    return _foregroundTintColor(reference.pointer,
+            _id_foregroundTintColor as jni$_.JMethodIDPtr, _$integer.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundTintColor = _class.instanceMethodId(
@@ -512,27 +531,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Integer;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundTintColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundTintColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundTintColor(
-    _$jni.JInteger integer,
+  LocationComponentOptions$Builder? backgroundTintColor(
+    jni$_.JInteger? integer,
   ) {
-    return _backgroundTintColor(
-            reference.pointer,
-            _id_backgroundTintColor as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
+    return _backgroundTintColor(reference.pointer,
+            _id_backgroundTintColor as jni$_.JMethodIDPtr, _$integer.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_foregroundStaleTintColor = _class.instanceMethodId(
@@ -540,27 +559,29 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Integer;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _foregroundStaleTintColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _foregroundStaleTintColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundStaleTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder foregroundStaleTintColor(
-    _$jni.JInteger integer,
+  LocationComponentOptions$Builder? foregroundStaleTintColor(
+    jni$_.JInteger? integer,
   ) {
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
     return _foregroundStaleTintColor(
             reference.pointer,
-            _id_foregroundStaleTintColor as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_foregroundStaleTintColor as jni$_.JMethodIDPtr,
+            _$integer.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_backgroundStaleTintColor = _class.instanceMethodId(
@@ -568,27 +589,29 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Integer;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _backgroundStaleTintColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundStaleTintColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundStaleTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder backgroundStaleTintColor(
-    _$jni.JInteger integer,
+  LocationComponentOptions$Builder? backgroundStaleTintColor(
+    jni$_.JInteger? integer,
   ) {
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
     return _backgroundStaleTintColor(
             reference.pointer,
-            _id_backgroundStaleTintColor as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_backgroundStaleTintColor as jni$_.JMethodIDPtr,
+            _$integer.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_elevation = _class.instanceMethodId(
@@ -596,24 +619,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _elevation = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _elevation = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder elevation(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder elevation(
+  LocationComponentOptions$Builder? elevation(
     double f,
   ) {
-    return _elevation(reference.pointer, _id_elevation as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+    return _elevation(reference.pointer, _id_elevation as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_enableStaleState = _class.instanceMethodId(
@@ -621,24 +645,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _enableStaleState = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _enableStaleState = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder enableStaleState(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder enableStaleState(
+  LocationComponentOptions$Builder? enableStaleState(
     bool z,
   ) {
     return _enableStaleState(reference.pointer,
-            _id_enableStaleState as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_enableStaleState as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_staleStateTimeout = _class.instanceMethodId(
@@ -646,24 +671,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(J)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _staleStateTimeout = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_CallObjectMethod')
+  static final _staleStateTimeout = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder staleStateTimeout(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder staleStateTimeout(
+  LocationComponentOptions$Builder? staleStateTimeout(
     int j,
   ) {
     return _staleStateTimeout(
-            reference.pointer, _id_staleStateTimeout as _$jni.JMethodIDPtr, j)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_staleStateTimeout as jni$_.JMethodIDPtr, j)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_padding = _class.instanceMethodId(
@@ -671,25 +697,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'([I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _padding = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _padding = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder padding(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder padding(
-    _$jni.JArray<_$jni.jint> is$,
+  LocationComponentOptions$Builder? padding(
+    jni$_.JIntArray? is$,
   ) {
-    return _padding(reference.pointer, _id_padding as _$jni.JMethodIDPtr,
-            is$.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$is$ = is$?.reference ?? jni$_.jNullReference;
+    return _padding(
+            reference.pointer, _id_padding as jni$_.JMethodIDPtr, _$is$.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_maxZoomIconScale = _class.instanceMethodId(
@@ -697,25 +725,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _maxZoomIconScale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _maxZoomIconScale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder maxZoomIconScale(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder maxZoomIconScale(
+  LocationComponentOptions$Builder? maxZoomIconScale(
     double f,
   ) {
     return _maxZoomIconScale(
-            reference.pointer, _id_maxZoomIconScale as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_maxZoomIconScale as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_minZoomIconScale = _class.instanceMethodId(
@@ -723,25 +752,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _minZoomIconScale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _minZoomIconScale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder minZoomIconScale(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder minZoomIconScale(
+  LocationComponentOptions$Builder? minZoomIconScale(
     double f,
   ) {
     return _minZoomIconScale(
-            reference.pointer, _id_minZoomIconScale as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_minZoomIconScale as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_trackingGesturesManagement = _class.instanceMethodId(
@@ -750,23 +780,24 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
   );
 
   static final _trackingGesturesManagement =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingGesturesManagement(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder trackingGesturesManagement(
+  LocationComponentOptions$Builder? trackingGesturesManagement(
     bool z,
   ) {
     return _trackingGesturesManagement(reference.pointer,
-            _id_trackingGesturesManagement as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_trackingGesturesManagement as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_trackingInitialMoveThreshold = _class.instanceMethodId(
@@ -775,23 +806,24 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
   );
 
   static final _trackingInitialMoveThreshold =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Double,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingInitialMoveThreshold(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder trackingInitialMoveThreshold(
+  LocationComponentOptions$Builder? trackingInitialMoveThreshold(
     double f,
   ) {
     return _trackingInitialMoveThreshold(reference.pointer,
-            _id_trackingInitialMoveThreshold as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_trackingInitialMoveThreshold as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_trackingMultiFingerMoveThreshold = _class.instanceMethodId(
@@ -800,23 +832,24 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
   );
 
   static final _trackingMultiFingerMoveThreshold =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Double,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingMultiFingerMoveThreshold(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder trackingMultiFingerMoveThreshold(
+  LocationComponentOptions$Builder? trackingMultiFingerMoveThreshold(
     double f,
   ) {
     return _trackingMultiFingerMoveThreshold(reference.pointer,
-            _id_trackingMultiFingerMoveThreshold as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_trackingMultiFingerMoveThreshold as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_trackingMultiFingerProtectedMoveArea =
@@ -826,27 +859,29 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
   );
 
   static final _trackingMultiFingerProtectedMoveArea =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingMultiFingerProtectedMoveArea(android.graphics.RectF rectF)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder trackingMultiFingerProtectedMoveArea(
-    _$jni.JObject rectF,
+  LocationComponentOptions$Builder? trackingMultiFingerProtectedMoveArea(
+    jni$_.JObject? rectF,
   ) {
+    final _$rectF = rectF?.reference ?? jni$_.jNullReference;
     return _trackingMultiFingerProtectedMoveArea(
             reference.pointer,
-            _id_trackingMultiFingerProtectedMoveArea as _$jni.JMethodIDPtr,
-            rectF.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_trackingMultiFingerProtectedMoveArea as jni$_.JMethodIDPtr,
+            _$rectF.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_layerAbove = _class.instanceMethodId(
@@ -854,25 +889,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _layerAbove = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _layerAbove = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder layerAbove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder layerAbove(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? layerAbove(
+    jni$_.JString? string,
   ) {
-    return _layerAbove(reference.pointer, _id_layerAbove as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _layerAbove(reference.pointer, _id_layerAbove as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_layerBelow = _class.instanceMethodId(
@@ -880,25 +917,27 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _layerBelow = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _layerBelow = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder layerBelow(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder layerBelow(
-    _$jni.JString string,
+  LocationComponentOptions$Builder? layerBelow(
+    jni$_.JString? string,
   ) {
-    return _layerBelow(reference.pointer, _id_layerBelow as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _layerBelow(reference.pointer, _id_layerBelow as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_trackingAnimationDurationMultiplier =
@@ -908,23 +947,24 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
   );
 
   static final _trackingAnimationDurationMultiplier =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Double,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingAnimationDurationMultiplier(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder trackingAnimationDurationMultiplier(
+  LocationComponentOptions$Builder? trackingAnimationDurationMultiplier(
     double f,
   ) {
     return _trackingAnimationDurationMultiplier(reference.pointer,
-            _id_trackingAnimationDurationMultiplier as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_trackingAnimationDurationMultiplier as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_compassAnimationEnabled = _class.instanceMethodId(
@@ -932,27 +972,29 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _compassAnimationEnabled = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _compassAnimationEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder compassAnimationEnabled(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder compassAnimationEnabled(
-    _$jni.JBoolean boolean,
+  LocationComponentOptions$Builder? compassAnimationEnabled(
+    jni$_.JBoolean? boolean,
   ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _compassAnimationEnabled(
             reference.pointer,
-            _id_compassAnimationEnabled as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_compassAnimationEnabled as jni$_.JMethodIDPtr,
+            _$boolean.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_accuracyAnimationEnabled = _class.instanceMethodId(
@@ -960,24 +1002,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _accuracyAnimationEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _accuracyAnimationEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyAnimationEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder accuracyAnimationEnabled(
+  LocationComponentOptions$Builder? accuracyAnimationEnabled(
     bool z,
   ) {
     return _accuracyAnimationEnabled(reference.pointer,
-            _id_accuracyAnimationEnabled as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_accuracyAnimationEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseEnabled = _class.instanceMethodId(
@@ -985,24 +1028,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseEnabled(
+  LocationComponentOptions$Builder? pulseEnabled(
     bool z,
   ) {
     return _pulseEnabled(reference.pointer,
-            _id_pulseEnabled as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_pulseEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseFadeEnabled = _class.instanceMethodId(
@@ -1010,24 +1054,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseFadeEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseFadeEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseFadeEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseFadeEnabled(
+  LocationComponentOptions$Builder? pulseFadeEnabled(
     bool z,
   ) {
     return _pulseFadeEnabled(reference.pointer,
-            _id_pulseFadeEnabled as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentOptions_Builder$Type());
+            _id_pulseFadeEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseColor = _class.instanceMethodId(
@@ -1035,24 +1080,25 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseColor(
+  LocationComponentOptions$Builder? pulseColor(
     int i,
   ) {
     return _pulseColor(
-            reference.pointer, _id_pulseColor as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_pulseColor as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseSingleDuration = _class.instanceMethodId(
@@ -1060,25 +1106,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseSingleDuration = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseSingleDuration = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseSingleDuration(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseSingleDuration(
+  LocationComponentOptions$Builder? pulseSingleDuration(
     double f,
   ) {
     return _pulseSingleDuration(
-            reference.pointer, _id_pulseSingleDuration as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_pulseSingleDuration as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseMaxRadius = _class.instanceMethodId(
@@ -1086,25 +1133,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseMaxRadius = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseMaxRadius = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseMaxRadius(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseMaxRadius(
+  LocationComponentOptions$Builder? pulseMaxRadius(
     double f,
   ) {
     return _pulseMaxRadius(
-            reference.pointer, _id_pulseMaxRadius as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_pulseMaxRadius as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseAlpha = _class.instanceMethodId(
@@ -1112,25 +1160,26 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(F)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseAlpha = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni
-                      .VarArgs<(_$jni.Double,)>)>>('globalEnv_CallObjectMethod')
+  static final _pulseAlpha = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseAlpha(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseAlpha(
+  LocationComponentOptions$Builder? pulseAlpha(
     double f,
   ) {
     return _pulseAlpha(
-            reference.pointer, _id_pulseAlpha as _$jni.JMethodIDPtr, f)
-        .object(const $LocationComponentOptions_Builder$Type());
+            reference.pointer, _id_pulseAlpha as jni$_.JMethodIDPtr, f)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_pulseInterpolator = _class.instanceMethodId(
@@ -1138,79 +1187,127 @@ class LocationComponentOptions_Builder extends _$jni.JObject {
     r'(Landroid/view/animation/Interpolator;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _pulseInterpolator = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _pulseInterpolator = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseInterpolator(android.view.animation.Interpolator interpolator)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder pulseInterpolator(
-    _$jni.JObject interpolator,
+  LocationComponentOptions$Builder? pulseInterpolator(
+    jni$_.JObject? interpolator,
   ) {
-    return _pulseInterpolator(
-            reference.pointer,
-            _id_pulseInterpolator as _$jni.JMethodIDPtr,
-            interpolator.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$interpolator = interpolator?.reference ?? jni$_.jNullReference;
+    return _pulseInterpolator(reference.pointer,
+            _id_pulseInterpolator as jni$_.JMethodIDPtr, _$interpolator.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 }
 
-final class $LocationComponentOptions_Builder$Type
-    extends _$jni.JObjType<LocationComponentOptions_Builder> {
-  @_$jni.internal
-  const $LocationComponentOptions_Builder$Type();
+final class $LocationComponentOptions$Builder$NullableType
+    extends jni$_.JObjType<LocationComponentOptions$Builder?> {
+  @jni$_.internal
+  const $LocationComponentOptions$Builder$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/LocationComponentOptions$Builder;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationComponentOptions_Builder fromReference(_$jni.JReference reference) =>
-      LocationComponentOptions_Builder.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationComponentOptions$Builder? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationComponentOptions$Builder.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentOptions$Builder?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($LocationComponentOptions_Builder$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($LocationComponentOptions$Builder$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($LocationComponentOptions_Builder$Type) &&
-        other is $LocationComponentOptions_Builder$Type;
+    return other.runtimeType ==
+            ($LocationComponentOptions$Builder$NullableType) &&
+        other is $LocationComponentOptions$Builder$NullableType;
+  }
+}
+
+final class $LocationComponentOptions$Builder$Type
+    extends jni$_.JObjType<LocationComponentOptions$Builder> {
+  @jni$_.internal
+  const $LocationComponentOptions$Builder$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/LocationComponentOptions$Builder;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationComponentOptions$Builder fromReference(jni$_.JReference reference) =>
+      LocationComponentOptions$Builder.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentOptions$Builder?> get nullableType =>
+      const $LocationComponentOptions$Builder$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($LocationComponentOptions$Builder$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocationComponentOptions$Builder$Type) &&
+        other is $LocationComponentOptions$Builder$Type;
   }
 }
 
 /// from: `org.maplibre.android.location.LocationComponentOptions`
-class LocationComponentOptions extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationComponentOptions> $type;
+class LocationComponentOptions extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationComponentOptions> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LocationComponentOptions.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/LocationComponentOptions');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $LocationComponentOptions$NullableType();
   static const type = $LocationComponentOptions$Type();
 
   /// from: `static public final float CIRCLE_PULSING_MAX_RADIUS_DEFAULT`
@@ -1222,107 +1319,107 @@ class LocationComponentOptions extends _$jni.JObject {
 
   /// from: `static public final android.os.Parcelable$Creator CREATOR`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JObject get CREATOR =>
-      _id_CREATOR.get(_class, const _$jni.JObjectType());
+  static jni$_.JObject? get CREATOR =>
+      _id_CREATOR.get(_class, const jni$_.JObjectNullableType());
 
   static final _id_new$ = _class.constructorId(
     r'(FIILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;FZJ[IFFZFFLandroid/graphics/RectF;Ljava/lang/String;Ljava/lang/String;FZZLjava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;FFFLandroid/view/animation/Interpolator;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Double,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Int32,
-                        _$jni.Int64,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Double,
-                        _$jni.Int32,
-                        _$jni.Double,
-                        _$jni.Double,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Double,
-                        _$jni.Double,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Double,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Int32,
+                        jni$_.Int64,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Double,
+                        jni$_.Int32,
+                        jni$_.Double,
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Double,
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
               double,
               int,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               double,
               int,
               int,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               double,
               double,
               int,
               double,
               double,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               double,
               int,
               int,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               double,
               double,
               double,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(float f, int i, int i1, java.lang.String string, int i2, java.lang.String string1, int i3, java.lang.String string2, int i4, java.lang.String string3, int i5, java.lang.String string4, int i6, java.lang.String string5, java.lang.Integer integer, java.lang.Integer integer1, java.lang.Integer integer2, java.lang.Integer integer3, java.lang.Integer integer4, float f1, boolean z, long j, int[] is, float f2, float f3, boolean z1, float f4, float f5, android.graphics.RectF rectF, java.lang.String string6, java.lang.String string7, float f6, boolean z2, boolean z3, java.lang.Boolean boolean, java.lang.Boolean boolean1, java.lang.Integer integer5, float f7, float f8, float f9, android.view.animation.Interpolator interpolator)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1330,89 +1427,108 @@ class LocationComponentOptions extends _$jni.JObject {
     double f,
     int i,
     int i1,
-    _$jni.JString string,
+    jni$_.JString? string,
     int i2,
-    _$jni.JString string1,
+    jni$_.JString? string1,
     int i3,
-    _$jni.JString string2,
+    jni$_.JString? string2,
     int i4,
-    _$jni.JString string3,
+    jni$_.JString? string3,
     int i5,
-    _$jni.JString string4,
+    jni$_.JString? string4,
     int i6,
-    _$jni.JString string5,
-    _$jni.JInteger integer,
-    _$jni.JInteger integer1,
-    _$jni.JInteger integer2,
-    _$jni.JInteger integer3,
-    _$jni.JInteger integer4,
+    jni$_.JString? string5,
+    jni$_.JInteger? integer,
+    jni$_.JInteger? integer1,
+    jni$_.JInteger? integer2,
+    jni$_.JInteger? integer3,
+    jni$_.JInteger? integer4,
     double f1,
     bool z,
     int j,
-    _$jni.JArray<_$jni.jint> is$,
+    jni$_.JIntArray? is$,
     double f2,
     double f3,
     bool z1,
     double f4,
     double f5,
-    _$jni.JObject rectF,
-    _$jni.JString string6,
-    _$jni.JString string7,
+    jni$_.JObject? rectF,
+    jni$_.JString? string6,
+    jni$_.JString? string7,
     double f6,
     bool z2,
     bool z3,
-    _$jni.JBoolean boolean,
-    _$jni.JBoolean boolean1,
-    _$jni.JInteger integer5,
+    jni$_.JBoolean? boolean,
+    jni$_.JBoolean? boolean1,
+    jni$_.JInteger? integer5,
     double f7,
     double f8,
     double f9,
-    _$jni.JObject interpolator,
+    jni$_.JObject? interpolator,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$string2 = string2?.reference ?? jni$_.jNullReference;
+    final _$string3 = string3?.reference ?? jni$_.jNullReference;
+    final _$string4 = string4?.reference ?? jni$_.jNullReference;
+    final _$string5 = string5?.reference ?? jni$_.jNullReference;
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
+    final _$integer1 = integer1?.reference ?? jni$_.jNullReference;
+    final _$integer2 = integer2?.reference ?? jni$_.jNullReference;
+    final _$integer3 = integer3?.reference ?? jni$_.jNullReference;
+    final _$integer4 = integer4?.reference ?? jni$_.jNullReference;
+    final _$is$ = is$?.reference ?? jni$_.jNullReference;
+    final _$rectF = rectF?.reference ?? jni$_.jNullReference;
+    final _$string6 = string6?.reference ?? jni$_.jNullReference;
+    final _$string7 = string7?.reference ?? jni$_.jNullReference;
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    final _$boolean1 = boolean1?.reference ?? jni$_.jNullReference;
+    final _$integer5 = integer5?.reference ?? jni$_.jNullReference;
+    final _$interpolator = interpolator?.reference ?? jni$_.jNullReference;
     return LocationComponentOptions.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
+            _id_new$ as jni$_.JMethodIDPtr,
             f,
             i,
             i1,
-            string.reference.pointer,
+            _$string.pointer,
             i2,
-            string1.reference.pointer,
+            _$string1.pointer,
             i3,
-            string2.reference.pointer,
+            _$string2.pointer,
             i4,
-            string3.reference.pointer,
+            _$string3.pointer,
             i5,
-            string4.reference.pointer,
+            _$string4.pointer,
             i6,
-            string5.reference.pointer,
-            integer.reference.pointer,
-            integer1.reference.pointer,
-            integer2.reference.pointer,
-            integer3.reference.pointer,
-            integer4.reference.pointer,
+            _$string5.pointer,
+            _$integer.pointer,
+            _$integer1.pointer,
+            _$integer2.pointer,
+            _$integer3.pointer,
+            _$integer4.pointer,
             f1,
             z ? 1 : 0,
             j,
-            is$.reference.pointer,
+            _$is$.pointer,
             f2,
             f3,
             z1 ? 1 : 0,
             f4,
             f5,
-            rectF.reference.pointer,
-            string6.reference.pointer,
-            string7.reference.pointer,
+            _$rectF.pointer,
+            _$string6.pointer,
+            _$string7.pointer,
             f6,
             z2 ? 1 : 0,
             z3 ? 1 : 0,
-            boolean.reference.pointer,
-            boolean1.reference.pointer,
-            integer5.reference.pointer,
+            _$boolean.pointer,
+            _$boolean1.pointer,
+            _$integer5.pointer,
             f7,
             f8,
             f9,
-            interpolator.reference.pointer)
+            _$interpolator.pointer)
         .reference);
   }
 
@@ -1421,30 +1537,32 @@ class LocationComponentOptions extends _$jni.JObject {
     r'(Landroid/content/Context;I)Lorg/maplibre/android/location/LocationComponentOptions;',
   );
 
-  static final _createFromAttributes = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Int32)>)>>(
+  static final _createFromAttributes = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
   /// from: `static public org.maplibre.android.location.LocationComponentOptions createFromAttributes(android.content.Context context, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationComponentOptions createFromAttributes(
-    _$jni.JObject context,
+  static LocationComponentOptions? createFromAttributes(
+    jni$_.JObject? context,
     int i,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return _createFromAttributes(
             _class.reference.pointer,
-            _id_createFromAttributes as _$jni.JMethodIDPtr,
-            context.reference.pointer,
+            _id_createFromAttributes as jni$_.JMethodIDPtr,
+            _$context.pointer,
             i)
-        .object(const $LocationComponentOptions$Type());
+        .object<LocationComponentOptions?>(
+            const $LocationComponentOptions$NullableType());
   }
 
   static final _id_toBuilder = _class.instanceMethodId(
@@ -1452,23 +1570,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _toBuilder = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toBuilder = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder toBuilder()`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions_Builder toBuilder() {
-    return _toBuilder(reference.pointer, _id_toBuilder as _$jni.JMethodIDPtr)
-        .object(const $LocationComponentOptions_Builder$Type());
+  LocationComponentOptions$Builder? toBuilder() {
+    return _toBuilder(reference.pointer, _id_toBuilder as jni$_.JMethodIDPtr)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_builder = _class.staticMethodId(
@@ -1476,25 +1595,27 @@ class LocationComponentOptions extends _$jni.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
   );
 
-  static final _builder = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _builder = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.location.LocationComponentOptions$Builder builder(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationComponentOptions_Builder builder(
-    _$jni.JObject context,
+  static LocationComponentOptions$Builder? builder(
+    jni$_.JObject? context,
   ) {
-    return _builder(_class.reference.pointer, _id_builder as _$jni.JMethodIDPtr,
-            context.reference.pointer)
-        .object(const $LocationComponentOptions_Builder$Type());
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return _builder(_class.reference.pointer, _id_builder as jni$_.JMethodIDPtr,
+            _$context.pointer)
+        .object<LocationComponentOptions$Builder?>(
+            const $LocationComponentOptions$Builder$NullableType());
   }
 
   static final _id_accuracyAlpha = _class.instanceMethodId(
@@ -1502,22 +1623,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _accuracyAlpha = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _accuracyAlpha = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float accuracyAlpha()`
   double accuracyAlpha() {
     return _accuracyAlpha(
-            reference.pointer, _id_accuracyAlpha as _$jni.JMethodIDPtr)
+            reference.pointer, _id_accuracyAlpha as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -1526,22 +1647,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _accuracyColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _accuracyColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int accuracyColor()`
   int accuracyColor() {
     return _accuracyColor(
-            reference.pointer, _id_accuracyColor as _$jni.JMethodIDPtr)
+            reference.pointer, _id_accuracyColor as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1550,22 +1671,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _backgroundDrawableStale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundDrawableStale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int backgroundDrawableStale()`
   int backgroundDrawableStale() {
     return _backgroundDrawableStale(reference.pointer,
-            _id_backgroundDrawableStale as _$jni.JMethodIDPtr)
+            _id_backgroundDrawableStale as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1574,24 +1695,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _backgroundStaleName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundStaleName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String backgroundStaleName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString backgroundStaleName() {
+  jni$_.JString? backgroundStaleName() {
     return _backgroundStaleName(
-            reference.pointer, _id_backgroundStaleName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_backgroundStaleName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_foregroundDrawableStale = _class.instanceMethodId(
@@ -1599,22 +1720,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _foregroundDrawableStale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundDrawableStale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int foregroundDrawableStale()`
   int foregroundDrawableStale() {
     return _foregroundDrawableStale(reference.pointer,
-            _id_foregroundDrawableStale as _$jni.JMethodIDPtr)
+            _id_foregroundDrawableStale as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1623,24 +1744,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _foregroundStaleName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundStaleName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String foregroundStaleName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString foregroundStaleName() {
+  jni$_.JString? foregroundStaleName() {
     return _foregroundStaleName(
-            reference.pointer, _id_foregroundStaleName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_foregroundStaleName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_gpsDrawable = _class.instanceMethodId(
@@ -1648,22 +1769,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _gpsDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _gpsDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int gpsDrawable()`
   int gpsDrawable() {
     return _gpsDrawable(
-            reference.pointer, _id_gpsDrawable as _$jni.JMethodIDPtr)
+            reference.pointer, _id_gpsDrawable as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1672,23 +1793,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _gpsName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _gpsName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String gpsName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString gpsName() {
-    return _gpsName(reference.pointer, _id_gpsName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? gpsName() {
+    return _gpsName(reference.pointer, _id_gpsName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_foregroundDrawable = _class.instanceMethodId(
@@ -1696,22 +1817,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _foregroundDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int foregroundDrawable()`
   int foregroundDrawable() {
     return _foregroundDrawable(
-            reference.pointer, _id_foregroundDrawable as _$jni.JMethodIDPtr)
+            reference.pointer, _id_foregroundDrawable as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1720,24 +1841,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _foregroundName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String foregroundName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString foregroundName() {
+  jni$_.JString? foregroundName() {
     return _foregroundName(
-            reference.pointer, _id_foregroundName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_foregroundName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_backgroundDrawable = _class.instanceMethodId(
@@ -1745,22 +1866,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _backgroundDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int backgroundDrawable()`
   int backgroundDrawable() {
     return _backgroundDrawable(
-            reference.pointer, _id_backgroundDrawable as _$jni.JMethodIDPtr)
+            reference.pointer, _id_backgroundDrawable as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1769,24 +1890,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _backgroundName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String backgroundName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString backgroundName() {
+  jni$_.JString? backgroundName() {
     return _backgroundName(
-            reference.pointer, _id_backgroundName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_backgroundName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_bearingDrawable = _class.instanceMethodId(
@@ -1794,22 +1915,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _bearingDrawable = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _bearingDrawable = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int bearingDrawable()`
   int bearingDrawable() {
     return _bearingDrawable(
-            reference.pointer, _id_bearingDrawable as _$jni.JMethodIDPtr)
+            reference.pointer, _id_bearingDrawable as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -1818,24 +1939,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _bearingName = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _bearingName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String bearingName()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString bearingName() {
+  jni$_.JString? bearingName() {
     return _bearingName(
-            reference.pointer, _id_bearingName as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_bearingName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_bearingTintColor = _class.instanceMethodId(
@@ -1843,24 +1964,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _bearingTintColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _bearingTintColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer bearingTintColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger bearingTintColor() {
+  jni$_.JInteger? bearingTintColor() {
     return _bearingTintColor(
-            reference.pointer, _id_bearingTintColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            reference.pointer, _id_bearingTintColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_foregroundTintColor = _class.instanceMethodId(
@@ -1868,24 +1989,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _foregroundTintColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundTintColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer foregroundTintColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger foregroundTintColor() {
+  jni$_.JInteger? foregroundTintColor() {
     return _foregroundTintColor(
-            reference.pointer, _id_foregroundTintColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            reference.pointer, _id_foregroundTintColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_backgroundTintColor = _class.instanceMethodId(
@@ -1893,24 +2014,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _backgroundTintColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundTintColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer backgroundTintColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger backgroundTintColor() {
+  jni$_.JInteger? backgroundTintColor() {
     return _backgroundTintColor(
-            reference.pointer, _id_backgroundTintColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            reference.pointer, _id_backgroundTintColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_foregroundStaleTintColor = _class.instanceMethodId(
@@ -1918,24 +2039,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _foregroundStaleTintColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _foregroundStaleTintColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer foregroundStaleTintColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger foregroundStaleTintColor() {
+  jni$_.JInteger? foregroundStaleTintColor() {
     return _foregroundStaleTintColor(reference.pointer,
-            _id_foregroundStaleTintColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            _id_foregroundStaleTintColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_backgroundStaleTintColor = _class.instanceMethodId(
@@ -1943,24 +2064,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _backgroundStaleTintColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _backgroundStaleTintColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer backgroundStaleTintColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger backgroundStaleTintColor() {
+  jni$_.JInteger? backgroundStaleTintColor() {
     return _backgroundStaleTintColor(reference.pointer,
-            _id_backgroundStaleTintColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            _id_backgroundStaleTintColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_elevation = _class.instanceMethodId(
@@ -1968,21 +2089,21 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _elevation = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _elevation = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float elevation()`
   double elevation() {
-    return _elevation(reference.pointer, _id_elevation as _$jni.JMethodIDPtr)
+    return _elevation(reference.pointer, _id_elevation as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -1991,22 +2112,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _enableStaleState = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _enableStaleState = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean enableStaleState()`
   bool enableStaleState() {
     return _enableStaleState(
-            reference.pointer, _id_enableStaleState as _$jni.JMethodIDPtr)
+            reference.pointer, _id_enableStaleState as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -2015,22 +2136,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()J',
   );
 
-  static final _staleStateTimeout = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _staleStateTimeout = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long staleStateTimeout()`
   int staleStateTimeout() {
     return _staleStateTimeout(
-            reference.pointer, _id_staleStateTimeout as _$jni.JMethodIDPtr)
+            reference.pointer, _id_staleStateTimeout as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -2039,23 +2160,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()[I',
   );
 
-  static final _padding = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _padding = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int[] padding()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JArray<_$jni.jint> padding() {
-    return _padding(reference.pointer, _id_padding as _$jni.JMethodIDPtr)
-        .object(const _$jni.JArrayType(_$jni.jintType()));
+  jni$_.JIntArray? padding() {
+    return _padding(reference.pointer, _id_padding as jni$_.JMethodIDPtr)
+        .object<jni$_.JIntArray?>(const jni$_.JIntArrayNullableType());
   }
 
   static final _id_maxZoomIconScale = _class.instanceMethodId(
@@ -2063,22 +2184,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _maxZoomIconScale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _maxZoomIconScale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float maxZoomIconScale()`
   double maxZoomIconScale() {
     return _maxZoomIconScale(
-            reference.pointer, _id_maxZoomIconScale as _$jni.JMethodIDPtr)
+            reference.pointer, _id_maxZoomIconScale as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2087,22 +2208,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _minZoomIconScale = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _minZoomIconScale = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float minZoomIconScale()`
   double minZoomIconScale() {
     return _minZoomIconScale(
-            reference.pointer, _id_minZoomIconScale as _$jni.JMethodIDPtr)
+            reference.pointer, _id_minZoomIconScale as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2112,22 +2233,22 @@ class LocationComponentOptions extends _$jni.JObject {
   );
 
   static final _trackingGesturesManagement =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public boolean trackingGesturesManagement()`
   bool trackingGesturesManagement() {
     return _trackingGesturesManagement(reference.pointer,
-            _id_trackingGesturesManagement as _$jni.JMethodIDPtr)
+            _id_trackingGesturesManagement as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -2137,22 +2258,22 @@ class LocationComponentOptions extends _$jni.JObject {
   );
 
   static final _trackingInitialMoveThreshold =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallFloatMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public float trackingInitialMoveThreshold()`
   double trackingInitialMoveThreshold() {
     return _trackingInitialMoveThreshold(reference.pointer,
-            _id_trackingInitialMoveThreshold as _$jni.JMethodIDPtr)
+            _id_trackingInitialMoveThreshold as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2162,22 +2283,22 @@ class LocationComponentOptions extends _$jni.JObject {
   );
 
   static final _trackingMultiFingerMoveThreshold =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallFloatMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public float trackingMultiFingerMoveThreshold()`
   double trackingMultiFingerMoveThreshold() {
     return _trackingMultiFingerMoveThreshold(reference.pointer,
-            _id_trackingMultiFingerMoveThreshold as _$jni.JMethodIDPtr)
+            _id_trackingMultiFingerMoveThreshold as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2188,24 +2309,24 @@ class LocationComponentOptions extends _$jni.JObject {
   );
 
   static final _trackingMultiFingerProtectedMoveArea =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public android.graphics.RectF trackingMultiFingerProtectedMoveArea()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject trackingMultiFingerProtectedMoveArea() {
+  jni$_.JObject? trackingMultiFingerProtectedMoveArea() {
     return _trackingMultiFingerProtectedMoveArea(reference.pointer,
-            _id_trackingMultiFingerProtectedMoveArea as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            _id_trackingMultiFingerProtectedMoveArea as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_layerAbove = _class.instanceMethodId(
@@ -2213,23 +2334,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _layerAbove = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _layerAbove = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String layerAbove()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString layerAbove() {
-    return _layerAbove(reference.pointer, _id_layerAbove as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? layerAbove() {
+    return _layerAbove(reference.pointer, _id_layerAbove as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_layerBelow = _class.instanceMethodId(
@@ -2237,23 +2358,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _layerBelow = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _layerBelow = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String layerBelow()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString layerBelow() {
-    return _layerBelow(reference.pointer, _id_layerBelow as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? layerBelow() {
+    return _layerBelow(reference.pointer, _id_layerBelow as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_trackingAnimationDurationMultiplier =
@@ -2263,22 +2384,22 @@ class LocationComponentOptions extends _$jni.JObject {
   );
 
   static final _trackingAnimationDurationMultiplier =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallFloatMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public float trackingAnimationDurationMultiplier()`
   double trackingAnimationDurationMultiplier() {
     return _trackingAnimationDurationMultiplier(reference.pointer,
-            _id_trackingAnimationDurationMultiplier as _$jni.JMethodIDPtr)
+            _id_trackingAnimationDurationMultiplier as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2287,22 +2408,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _compassAnimationEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _compassAnimationEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean compassAnimationEnabled()`
   bool compassAnimationEnabled() {
     return _compassAnimationEnabled(reference.pointer,
-            _id_compassAnimationEnabled as _$jni.JMethodIDPtr)
+            _id_compassAnimationEnabled as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -2311,22 +2432,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _accuracyAnimationEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _accuracyAnimationEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean accuracyAnimationEnabled()`
   bool accuracyAnimationEnabled() {
     return _accuracyAnimationEnabled(reference.pointer,
-            _id_accuracyAnimationEnabled as _$jni.JMethodIDPtr)
+            _id_accuracyAnimationEnabled as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -2335,24 +2456,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Boolean;',
   );
 
-  static final _pulseEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Boolean pulseEnabled()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JBoolean pulseEnabled() {
+  jni$_.JBoolean? pulseEnabled() {
     return _pulseEnabled(
-            reference.pointer, _id_pulseEnabled as _$jni.JMethodIDPtr)
-        .object(const _$jni.JBooleanType());
+            reference.pointer, _id_pulseEnabled as jni$_.JMethodIDPtr)
+        .object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
   }
 
   static final _id_pulseFadeEnabled = _class.instanceMethodId(
@@ -2360,24 +2481,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Boolean;',
   );
 
-  static final _pulseFadeEnabled = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseFadeEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Boolean pulseFadeEnabled()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JBoolean pulseFadeEnabled() {
+  jni$_.JBoolean? pulseFadeEnabled() {
     return _pulseFadeEnabled(
-            reference.pointer, _id_pulseFadeEnabled as _$jni.JMethodIDPtr)
-        .object(const _$jni.JBooleanType());
+            reference.pointer, _id_pulseFadeEnabled as jni$_.JMethodIDPtr)
+        .object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
   }
 
   static final _id_pulseColor = _class.instanceMethodId(
@@ -2385,23 +2506,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _pulseColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer pulseColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger pulseColor() {
-    return _pulseColor(reference.pointer, _id_pulseColor as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+  jni$_.JInteger? pulseColor() {
+    return _pulseColor(reference.pointer, _id_pulseColor as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_pulseSingleDuration = _class.instanceMethodId(
@@ -2409,22 +2530,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _pulseSingleDuration = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseSingleDuration = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float pulseSingleDuration()`
   double pulseSingleDuration() {
     return _pulseSingleDuration(
-            reference.pointer, _id_pulseSingleDuration as _$jni.JMethodIDPtr)
+            reference.pointer, _id_pulseSingleDuration as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2433,22 +2554,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _pulseMaxRadius = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseMaxRadius = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float pulseMaxRadius()`
   double pulseMaxRadius() {
     return _pulseMaxRadius(
-            reference.pointer, _id_pulseMaxRadius as _$jni.JMethodIDPtr)
+            reference.pointer, _id_pulseMaxRadius as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2457,21 +2578,21 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()F',
   );
 
-  static final _pulseAlpha = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseAlpha = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float pulseAlpha()`
   double pulseAlpha() {
-    return _pulseAlpha(reference.pointer, _id_pulseAlpha as _$jni.JMethodIDPtr)
+    return _pulseAlpha(reference.pointer, _id_pulseAlpha as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -2480,24 +2601,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Landroid/view/animation/Interpolator;',
   );
 
-  static final _pulseInterpolator = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _pulseInterpolator = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.view.animation.Interpolator pulseInterpolator()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject pulseInterpolator() {
+  jni$_.JObject? pulseInterpolator() {
     return _pulseInterpolator(
-            reference.pointer, _id_pulseInterpolator as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_pulseInterpolator as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -2505,23 +2626,23 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? toString$1() {
+    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -2529,23 +2650,24 @@ class LocationComponentOptions extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    _$jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
@@ -2554,21 +2676,21 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -2577,22 +2699,22 @@ class LocationComponentOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _describeContents = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as _$jni.JMethodIDPtr)
+            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -2601,56 +2723,103 @@ class LocationComponentOptions extends _$jni.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Int32)>)>>(
+  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
   void writeToParcel(
-    _$jni.JObject parcel,
+    jni$_.JObject? parcel,
     int i,
   ) {
-    _writeToParcel(reference.pointer, _id_writeToParcel as _$jni.JMethodIDPtr,
-            parcel.reference.pointer, i)
+    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
+    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
+            _$parcel.pointer, i)
         .check();
   }
 }
 
-final class $LocationComponentOptions$Type
-    extends _$jni.JObjType<LocationComponentOptions> {
-  @_$jni.internal
-  const $LocationComponentOptions$Type();
+final class $LocationComponentOptions$NullableType
+    extends jni$_.JObjType<LocationComponentOptions?> {
+  @jni$_.internal
+  const $LocationComponentOptions$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/LocationComponentOptions;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationComponentOptions fromReference(_$jni.JReference reference) =>
-      LocationComponentOptions.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationComponentOptions? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationComponentOptions.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentOptions?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($LocationComponentOptions$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocationComponentOptions$NullableType) &&
+        other is $LocationComponentOptions$NullableType;
+  }
+}
+
+final class $LocationComponentOptions$Type
+    extends jni$_.JObjType<LocationComponentOptions> {
+  @jni$_.internal
+  const $LocationComponentOptions$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/LocationComponentOptions;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationComponentOptions fromReference(jni$_.JReference reference) =>
+      LocationComponentOptions.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentOptions?> get nullableType =>
+      const $LocationComponentOptions$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($LocationComponentOptions$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LocationComponentOptions$Type) &&
         other is $LocationComponentOptions$Type;

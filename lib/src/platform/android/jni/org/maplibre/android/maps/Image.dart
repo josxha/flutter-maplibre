@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,53 +45,54 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.maps.Image`
-class Image extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Image> $type;
+class Image extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Image> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Image.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/maps/Image');
+      jni$_.JClass.forName(r'org/maplibre/android/maps/Image');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Image$NullableType();
   static const type = $Image$Type();
   static final _id_new$ = _class.constructorId(
     r'([BFLjava/lang/String;IIZ)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
               double,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int,
               int)>();
@@ -98,19 +100,21 @@ class Image extends _$jni.JObject {
   /// from: `public void <init>(byte[] bs, float f, java.lang.String string, int i, int i1, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
   factory Image(
-    _$jni.JArray<_$jni.jbyte> bs,
+    jni$_.JByteArray? bs,
     double f,
-    _$jni.JString string,
+    jni$_.JString? string,
     int i,
     int i1,
     bool z,
   ) {
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return Image.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            bs.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$bs.pointer,
             f,
-            string.reference.pointer,
+            _$string.pointer,
             i,
             i1,
             z ? 1 : 0)
@@ -121,91 +125,137 @@ class Image extends _$jni.JObject {
     r'([BFLjava/lang/String;IIZ[F[F[F)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Double,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
               double,
-              _$jni.Pointer<_$jni.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int,
               int,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(byte[] bs, float f, java.lang.String string, int i, int i1, boolean z, float[] fs, float[] fs1, float[] fs2)`
   /// The returned object must be released after use, by calling the [release] method.
   factory Image.new$1(
-    _$jni.JArray<_$jni.jbyte> bs,
+    jni$_.JByteArray? bs,
     double f,
-    _$jni.JString string,
+    jni$_.JString? string,
     int i,
     int i1,
     bool z,
-    _$jni.JArray<_$jni.jfloat> fs,
-    _$jni.JArray<_$jni.jfloat> fs1,
-    _$jni.JArray<_$jni.jfloat> fs2,
+    jni$_.JFloatArray? fs,
+    jni$_.JFloatArray? fs1,
+    jni$_.JFloatArray? fs2,
   ) {
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$fs = fs?.reference ?? jni$_.jNullReference;
+    final _$fs1 = fs1?.reference ?? jni$_.jNullReference;
+    final _$fs2 = fs2?.reference ?? jni$_.jNullReference;
     return Image.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            bs.reference.pointer,
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$bs.pointer,
             f,
-            string.reference.pointer,
+            _$string.pointer,
             i,
             i1,
             z ? 1 : 0,
-            fs.reference.pointer,
-            fs1.reference.pointer,
-            fs2.reference.pointer)
+            _$fs.pointer,
+            _$fs1.pointer,
+            _$fs2.pointer)
         .reference);
   }
 }
 
-final class $Image$Type extends _$jni.JObjType<Image> {
-  @_$jni.internal
-  const $Image$Type();
+final class $Image$NullableType extends jni$_.JObjType<Image?> {
+  @jni$_.internal
+  const $Image$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/maps/Image;';
 
-  @_$jni.internal
-  @_$core.override
-  Image fromReference(_$jni.JReference reference) =>
-      Image.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Image? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Image.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Image$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Image$NullableType) &&
+        other is $Image$NullableType;
+  }
+}
+
+final class $Image$Type extends jni$_.JObjType<Image> {
+  @jni$_.internal
+  const $Image$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/Image;';
+
+  @jni$_.internal
+  @core$_.override
+  Image fromReference(jni$_.JReference reference) => Image.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image?> get nullableType => const $Image$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Image$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Image$Type) && other is $Image$Type;
   }

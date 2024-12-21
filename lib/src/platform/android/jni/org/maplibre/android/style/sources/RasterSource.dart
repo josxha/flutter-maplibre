@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,113 +45,161 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../../../../../java/net/URI.dart' as uri_;
+import '../../../../../java/net/URI.dart' as uri$_;
 
-import '../../../../../java/net/URL.dart' as url_;
+import '../../../../../java/net/URL.dart' as url$_;
 
-import 'Source.dart' as source_;
+import 'Source.dart' as source$_;
 
-import 'TileSet.dart' as tileset_;
+import 'TileSet.dart' as tileset$_;
 
 /// from: `org.maplibre.android.style.sources.RasterSource$Companion`
-class RasterSource_Companion extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<RasterSource_Companion> $type;
+class RasterSource$Companion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<RasterSource$Companion> $type;
 
-  @_$jni.internal
-  RasterSource_Companion.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  RasterSource$Companion.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/sources/RasterSource$Companion');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $RasterSource_Companion$Type();
+  static const nullableType = $RasterSource$Companion$NullableType();
+  static const type = $RasterSource$Companion$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource_Companion(
-    _$jni.JObject defaultConstructorMarker,
+  factory RasterSource$Companion(
+    jni$_.JObject? defaultConstructorMarker,
   ) {
-    return RasterSource_Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            defaultConstructorMarker.reference.pointer)
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return RasterSource$Companion.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$defaultConstructorMarker.pointer)
         .reference);
   }
 }
 
-final class $RasterSource_Companion$Type
-    extends _$jni.JObjType<RasterSource_Companion> {
-  @_$jni.internal
-  const $RasterSource_Companion$Type();
+final class $RasterSource$Companion$NullableType
+    extends jni$_.JObjType<RasterSource$Companion?> {
+  @jni$_.internal
+  const $RasterSource$Companion$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/sources/RasterSource$Companion;';
 
-  @_$jni.internal
-  @_$core.override
-  RasterSource_Companion fromReference(_$jni.JReference reference) =>
-      RasterSource_Companion.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  RasterSource$Companion? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : RasterSource$Companion.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RasterSource$Companion?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($RasterSource_Companion$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($RasterSource$Companion$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($RasterSource_Companion$Type) &&
-        other is $RasterSource_Companion$Type;
+    return other.runtimeType == ($RasterSource$Companion$NullableType) &&
+        other is $RasterSource$Companion$NullableType;
+  }
+}
+
+final class $RasterSource$Companion$Type
+    extends jni$_.JObjType<RasterSource$Companion> {
+  @jni$_.internal
+  const $RasterSource$Companion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/RasterSource$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  RasterSource$Companion fromReference(jni$_.JReference reference) =>
+      RasterSource$Companion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RasterSource$Companion?> get nullableType =>
+      const $RasterSource$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($RasterSource$Companion$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RasterSource$Companion$Type) &&
+        other is $RasterSource$Companion$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.sources.RasterSource`
-class RasterSource extends source_.Source {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<RasterSource> $type;
+class RasterSource extends source$_.Source {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<RasterSource> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   RasterSource.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/sources/RasterSource');
+      jni$_.JClass.forName(r'org/maplibre/android/style/sources/RasterSource');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $RasterSource$NullableType();
   static const type = $RasterSource$Type();
   static final _id_Companion = _class.staticFieldId(
     r'Companion',
@@ -159,8 +208,8 @@ class RasterSource extends source_.Source {
 
   /// from: `static public final org.maplibre.android.style.sources.RasterSource$Companion Companion`
   /// The returned object must be released after use, by calling the [release] method.
-  static RasterSource_Companion get Companion =>
-      _id_Companion.get(_class, const $RasterSource_Companion$Type());
+  static RasterSource$Companion? get Companion =>
+      _id_Companion.get(_class, const $RasterSource$Companion$NullableType());
 
   /// from: `static public final int DEFAULT_TILE_SIZE`
   static const DEFAULT_TILE_SIZE = 512;
@@ -168,15 +217,15 @@ class RasterSource extends source_.Source {
     r'(J)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_NewObject')
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -184,7 +233,7 @@ class RasterSource extends source_.Source {
     int j,
   ) {
     return RasterSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr, j)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
             .reference);
   }
 
@@ -192,34 +241,33 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/net/URL;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$1(
-    _$jni.JString string,
-    url_.URL uRL,
+    jni$_.JString? string,
+    url$_.URL uRL,
   ) {
-    return RasterSource.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            uRL.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$uRL = uRL.reference;
+    return RasterSource.fromReference(_new$1(_class.reference.pointer,
+            _id_new$1 as jni$_.JMethodIDPtr, _$string.pointer, _$uRL.pointer)
         .reference);
   }
 
@@ -227,34 +275,33 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/net/URI;)V',
   );
 
-  static final _new$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$2(
-    _$jni.JString string,
-    uri_.URI uRI,
+    jni$_.JString? string,
+    uri$_.URI uRI,
   ) {
-    return RasterSource.fromReference(_new$2(
-            _class.reference.pointer,
-            _id_new$2 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            uRI.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$uRI = uRI.reference;
+    return RasterSource.fromReference(_new$2(_class.reference.pointer,
+            _id_new$2 as jni$_.JMethodIDPtr, _$string.pointer, _$uRI.pointer)
         .reference);
   }
 
@@ -262,34 +309,36 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$3 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$3(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return RasterSource.fromReference(_new$3(
             _class.reference.pointer,
-            _id_new$3 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+            _id_new$3 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer)
         .reference);
   }
 
@@ -297,37 +346,39 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/lang/String;I)V',
   );
 
-  static final _new$4 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$4 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$4(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
     int i,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return RasterSource.fromReference(_new$4(
             _class.reference.pointer,
-            _id_new$4 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer,
+            _id_new$4 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer,
             i)
         .reference);
   }
@@ -336,34 +387,36 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/TileSet;)V',
   );
 
-  static final _new$5 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$5 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$5(
-    _$jni.JString string,
-    tileset_.TileSet tileSet,
+    jni$_.JString? string,
+    tileset$_.TileSet tileSet,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$tileSet = tileSet.reference;
     return RasterSource.fromReference(_new$5(
             _class.reference.pointer,
-            _id_new$5 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            tileSet.reference.pointer)
+            _id_new$5 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$tileSet.pointer)
         .reference);
   }
 
@@ -371,37 +424,39 @@ class RasterSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/TileSet;I)V',
   );
 
-  static final _new$6 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$6 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory RasterSource.new$6(
-    _$jni.JString string,
-    tileset_.TileSet tileSet,
+    jni$_.JString? string,
+    tileset$_.TileSet tileSet,
     int i,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$tileSet = tileSet.reference;
     return RasterSource.fromReference(_new$6(
             _class.reference.pointer,
-            _id_new$6 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            tileSet.reference.pointer,
+            _id_new$6 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$tileSet.pointer,
             i)
         .reference);
   }
@@ -411,23 +466,23 @@ class RasterSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUrl() {
+    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -435,51 +490,94 @@ class RasterSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUri() {
-    return _getUri(reference.pointer, _id_getUri as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUri() {
+    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $RasterSource$Type extends _$jni.JObjType<RasterSource> {
-  @_$jni.internal
-  const $RasterSource$Type();
+final class $RasterSource$NullableType extends jni$_.JObjType<RasterSource?> {
+  @jni$_.internal
+  const $RasterSource$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/sources/RasterSource;';
 
-  @_$jni.internal
-  @_$core.override
-  RasterSource fromReference(_$jni.JReference reference) =>
-      RasterSource.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  RasterSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RasterSource.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const source_.$Source$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RasterSource?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($RasterSource$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RasterSource$NullableType) &&
+        other is $RasterSource$NullableType;
+  }
+}
+
+final class $RasterSource$Type extends jni$_.JObjType<RasterSource> {
+  @jni$_.internal
+  const $RasterSource$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/RasterSource;';
+
+  @jni$_.internal
+  @core$_.override
+  RasterSource fromReference(jni$_.JReference reference) =>
+      RasterSource.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<RasterSource?> get nullableType =>
+      const $RasterSource$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($RasterSource$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($RasterSource$Type) &&
         other is $RasterSource$Type;

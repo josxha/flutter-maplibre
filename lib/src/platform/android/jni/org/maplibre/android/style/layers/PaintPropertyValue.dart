@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,38 +45,47 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
 /// from: `org.maplibre.android.style.layers.PaintPropertyValue`
-class PaintPropertyValue<$T extends _$jni.JObject>
-    extends propertyvalue_.PropertyValue<$T> {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<PaintPropertyValue<$T>> $type;
+class PaintPropertyValue<$T extends jni$_.JObject?>
+    extends propertyvalue$_.PropertyValue<$T?> {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<PaintPropertyValue<$T>> $type;
 
-  @_$jni.internal
-  final _$jni.JObjType<$T> T;
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  @_$jni.internal
+  @jni$_.internal
   PaintPropertyValue.fromReference(
     this.T,
-    _$jni.JReference reference,
-  )   : $type = type(T),
-        super.fromReference(T, reference);
+    jni$_.JReference reference,
+  )   : $type = type<$T>(T),
+        super.fromReference(T.nullableType, reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/PaintPropertyValue');
 
   /// The type which includes information such as the signature of this class.
-  static $PaintPropertyValue$Type<$T> type<$T extends _$jni.JObject>(
-    _$jni.JObjType<$T> T,
+  static $PaintPropertyValue$NullableType<$T>
+      nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
   ) {
-    return $PaintPropertyValue$Type(
+    return $PaintPropertyValue$NullableType<$T>(
+      T,
+    );
+  }
+
+  static $PaintPropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $PaintPropertyValue$Type<$T>(
       T,
     );
   }
@@ -84,73 +94,128 @@ class PaintPropertyValue<$T extends _$jni.JObject>
     r'(Ljava/lang/String;Ljava/lang/Object;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, T object)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PaintPropertyValue(
-    _$jni.JString string,
-    $T object, {
-    _$jni.JObjType<$T>? T,
+    jni$_.JString? string,
+    $T? object, {
+    required jni$_.JObjType<$T> T,
   }) {
-    T ??= _$jni.lowestCommonSuperType([
-      object.$type,
-    ]) as _$jni.JObjType<$T>;
-    return PaintPropertyValue.fromReference(
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return PaintPropertyValue<$T>.fromReference(
         T,
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr,
-                string.reference.pointer, object.reference.pointer)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr,
+                _$string.pointer, _$object.pointer)
             .reference);
   }
 }
 
-final class $PaintPropertyValue$Type<$T extends _$jni.JObject>
-    extends _$jni.JObjType<PaintPropertyValue<$T>> {
-  @_$jni.internal
-  final _$jni.JObjType<$T> T;
+final class $PaintPropertyValue$NullableType<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<PaintPropertyValue<$T>?> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  @_$jni.internal
+  @jni$_.internal
+  const $PaintPropertyValue$NullableType(
+    this.T,
+  );
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/PaintPropertyValue;';
+
+  @jni$_.internal
+  @core$_.override
+  PaintPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : PaintPropertyValue<$T>.fromReference(
+              T,
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      propertyvalue$_.$PropertyValue$NullableType<$T?>(T.nullableType);
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PaintPropertyValue<$T>?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
+  int get hashCode => Object.hash($PaintPropertyValue$NullableType, T);
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PaintPropertyValue$NullableType<$T>) &&
+        other is $PaintPropertyValue$NullableType<$T> &&
+        T == other.T;
+  }
+}
+
+final class $PaintPropertyValue$Type<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<PaintPropertyValue<$T>> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
+
+  @jni$_.internal
   const $PaintPropertyValue$Type(
     this.T,
   );
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/PaintPropertyValue;';
 
-  @_$jni.internal
-  @_$core.override
-  PaintPropertyValue<$T> fromReference(_$jni.JReference reference) =>
-      PaintPropertyValue.fromReference(T, reference);
+  @jni$_.internal
+  @core$_.override
+  PaintPropertyValue<$T> fromReference(jni$_.JReference reference) =>
+      PaintPropertyValue<$T>.fromReference(
+        T,
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      propertyvalue$_.$PropertyValue$NullableType<$T?>(T.nullableType);
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => propertyvalue_.$PropertyValue$Type(T);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PaintPropertyValue<$T>?> get nullableType =>
+      $PaintPropertyValue$NullableType<$T>(T);
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => Object.hash($PaintPropertyValue$Type, T);
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($PaintPropertyValue$Type<$T>) &&
         other is $PaintPropertyValue$Type<$T> &&

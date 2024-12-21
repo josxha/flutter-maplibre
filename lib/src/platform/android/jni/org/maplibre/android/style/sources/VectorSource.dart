@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../../../../../java/net/URL.dart' as url_;
+import '../../../../../java/net/URL.dart' as url$_;
 
-import '../../../geojson/Feature.dart' as feature_;
+import '../../../geojson/Feature.dart' as feature$_;
 
-import 'Source.dart' as source_;
+import 'Source.dart' as source$_;
 
-import 'TileSet.dart' as tileset_;
+import 'TileSet.dart' as tileset$_;
 
 /// from: `org.maplibre.android.style.sources.VectorSource`
-class VectorSource extends source_.Source {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<VectorSource> $type;
+class VectorSource extends source$_.Source {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<VectorSource> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   VectorSource.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/sources/VectorSource');
+      jni$_.JClass.forName(r'org/maplibre/android/style/sources/VectorSource');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $VectorSource$NullableType();
   static const type = $VectorSource$Type();
   static final _id_new$ = _class.constructorId(
     r'(J)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_NewObject')
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -94,7 +96,7 @@ class VectorSource extends source_.Source {
     int j,
   ) {
     return VectorSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr, j)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
             .reference);
   }
 
@@ -102,34 +104,33 @@ class VectorSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/net/URL;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VectorSource.new$1(
-    _$jni.JString string,
-    url_.URL uRL,
+    jni$_.JString? string,
+    url$_.URL uRL,
   ) {
-    return VectorSource.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            uRL.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$uRL = uRL.reference;
+    return VectorSource.fromReference(_new$1(_class.reference.pointer,
+            _id_new$1 as jni$_.JMethodIDPtr, _$string.pointer, _$uRL.pointer)
         .reference);
   }
 
@@ -137,34 +138,33 @@ class VectorSource extends source_.Source {
     r'(Ljava/lang/String;Landroid/net/Uri;)V',
   );
 
-  static final _new$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VectorSource.new$2(
-    _$jni.JString string,
-    _$jni.JObject uri,
+    jni$_.JString? string,
+    jni$_.JObject uri,
   ) {
-    return VectorSource.fromReference(_new$2(
-            _class.reference.pointer,
-            _id_new$2 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            uri.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$uri = uri.reference;
+    return VectorSource.fromReference(_new$2(_class.reference.pointer,
+            _id_new$2 as jni$_.JMethodIDPtr, _$string.pointer, _$uri.pointer)
         .reference);
   }
 
@@ -172,34 +172,36 @@ class VectorSource extends source_.Source {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$3 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VectorSource.new$3(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return VectorSource.fromReference(_new$3(
             _class.reference.pointer,
-            _id_new$3 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+            _id_new$3 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer)
         .reference);
   }
 
@@ -207,34 +209,36 @@ class VectorSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/TileSet;)V',
   );
 
-  static final _new$4 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$4 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory VectorSource.new$4(
-    _$jni.JString string,
-    tileset_.TileSet tileSet,
+    jni$_.JString? string,
+    tileset$_.TileSet tileSet,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$tileSet = tileSet.reference;
     return VectorSource.fromReference(_new$4(
             _class.reference.pointer,
-            _id_new$4 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            tileSet.reference.pointer)
+            _id_new$4 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$tileSet.pointer)
         .reference);
   }
 
@@ -243,35 +247,39 @@ class VectorSource extends source_.Source {
     r'([Ljava/lang/String;Lorg/maplibre/android/style/expressions/Expression;)Ljava/util/List;',
   );
 
-  static final _querySourceFeatures = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _querySourceFeatures = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final java.util.List querySourceFeatures(java.lang.Object[] strings, org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JList<feature_.Feature> querySourceFeatures(
-    _$jni.JArray<_$jni.JString> strings,
-    _$jni.JObject expression,
+  jni$_.JList<feature$_.Feature> querySourceFeatures(
+    jni$_.JArray<jni$_.JString> strings,
+    jni$_.JObject? expression,
   ) {
+    final _$strings = strings.reference;
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _querySourceFeatures(
             reference.pointer,
-            _id_querySourceFeatures as _$jni.JMethodIDPtr,
-            strings.reference.pointer,
-            expression.reference.pointer)
-        .object(const _$jni.JListType(feature_.$Feature$Type()));
+            _id_querySourceFeatures as jni$_.JMethodIDPtr,
+            _$strings.pointer,
+            _$expression.pointer)
+        .object<jni$_.JList<feature$_.Feature>>(
+            const jni$_.JListType<feature$_.Feature>(
+                feature$_.$Feature$Type()));
   }
 
   static final _id_getUrl = _class.instanceMethodId(
@@ -279,23 +287,23 @@ class VectorSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUrl() {
+    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -303,51 +311,94 @@ class VectorSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUri() {
-    return _getUri(reference.pointer, _id_getUri as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUri() {
+    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $VectorSource$Type extends _$jni.JObjType<VectorSource> {
-  @_$jni.internal
-  const $VectorSource$Type();
+final class $VectorSource$NullableType extends jni$_.JObjType<VectorSource?> {
+  @jni$_.internal
+  const $VectorSource$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/sources/VectorSource;';
 
-  @_$jni.internal
-  @_$core.override
-  VectorSource fromReference(_$jni.JReference reference) =>
-      VectorSource.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  VectorSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : VectorSource.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const source_.$Source$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VectorSource?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($VectorSource$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($VectorSource$NullableType) &&
+        other is $VectorSource$NullableType;
+  }
+}
+
+final class $VectorSource$Type extends jni$_.JObjType<VectorSource> {
+  @jni$_.internal
+  const $VectorSource$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/VectorSource;';
+
+  @jni$_.internal
+  @core$_.override
+  VectorSource fromReference(jni$_.JReference reference) =>
+      VectorSource.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<VectorSource?> get nullableType =>
+      const $VectorSource$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($VectorSource$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($VectorSource$Type) &&
         other is $VectorSource$Type;

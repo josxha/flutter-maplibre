@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,79 +45,124 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.http.HttpIdentifier`
-class HttpIdentifier extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<HttpIdentifier> $type;
+class HttpIdentifier extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<HttpIdentifier> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   HttpIdentifier.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/http/HttpIdentifier');
+      jni$_.JClass.forName(r'org/maplibre/android/http/HttpIdentifier');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $HttpIdentifier$NullableType();
   static const type = $HttpIdentifier$Type();
   static final _id_getIdentifier = _class.staticMethodId(
     r'getIdentifier',
     r'()Ljava/lang/String;',
   );
 
-  static final _getIdentifier = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getIdentifier = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `static public java.lang.String getIdentifier()`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString getIdentifier() {
+  static jni$_.JString? getIdentifier() {
     return _getIdentifier(
-            _class.reference.pointer, _id_getIdentifier as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            _class.reference.pointer, _id_getIdentifier as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $HttpIdentifier$Type extends _$jni.JObjType<HttpIdentifier> {
-  @_$jni.internal
-  const $HttpIdentifier$Type();
+final class $HttpIdentifier$NullableType
+    extends jni$_.JObjType<HttpIdentifier?> {
+  @jni$_.internal
+  const $HttpIdentifier$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/http/HttpIdentifier;';
 
-  @_$jni.internal
-  @_$core.override
-  HttpIdentifier fromReference(_$jni.JReference reference) =>
-      HttpIdentifier.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  HttpIdentifier? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpIdentifier.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpIdentifier?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($HttpIdentifier$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($HttpIdentifier$NullableType) &&
+        other is $HttpIdentifier$NullableType;
+  }
+}
+
+final class $HttpIdentifier$Type extends jni$_.JObjType<HttpIdentifier> {
+  @jni$_.internal
+  const $HttpIdentifier$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/http/HttpIdentifier;';
+
+  @jni$_.internal
+  @core$_.override
+  HttpIdentifier fromReference(jni$_.JReference reference) =>
+      HttpIdentifier.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpIdentifier?> get nullableType =>
+      const $HttpIdentifier$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($HttpIdentifier$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($HttpIdentifier$Type) &&
         other is $HttpIdentifier$Type;

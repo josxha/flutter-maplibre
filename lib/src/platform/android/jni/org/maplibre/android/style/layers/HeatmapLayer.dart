@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,66 +45,66 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'Layer.dart' as layer_;
+import 'Layer.dart' as layer$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
-import 'TransitionOptions.dart' as transitionoptions_;
+import 'TransitionOptions.dart' as transitionoptions$_;
 
 /// from: `org.maplibre.android.style.layers.HeatmapLayer`
-class HeatmapLayer extends layer_.Layer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<HeatmapLayer> $type;
+class HeatmapLayer extends layer$_.Layer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<HeatmapLayer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   HeatmapLayer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/layers/HeatmapLayer');
+      jni$_.JClass.forName(r'org/maplibre/android/style/layers/HeatmapLayer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $HeatmapLayer$NullableType();
   static const type = $HeatmapLayer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory HeatmapLayer(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return HeatmapLayer.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return HeatmapLayer.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
         .reference);
   }
 
@@ -112,23 +113,24 @@ class HeatmapLayer extends layer_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
   void setSourceLayer(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 
@@ -137,25 +139,26 @@ class HeatmapLayer extends layer_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/HeatmapLayer;',
   );
 
-  static final _withSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.HeatmapLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  HeatmapLayer withSourceLayer(
-    _$jni.JString string,
+  HeatmapLayer? withSourceLayer(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $HeatmapLayer$Type());
+            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<HeatmapLayer?>(const $HeatmapLayer$NullableType());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -163,24 +166,24 @@ class HeatmapLayer extends layer_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getSourceId() {
+  jni$_.JString? getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getSourceLayer = _class.instanceMethodId(
@@ -188,24 +191,24 @@ class HeatmapLayer extends layer_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getSourceLayer()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getSourceLayer() {
+  jni$_.JString? getSourceLayer() {
     return _getSourceLayer(
-            reference.pointer, _id_getSourceLayer as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getSourceLayer as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setFilter = _class.instanceMethodId(
@@ -213,23 +216,24 @@ class HeatmapLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)V',
   );
 
-  static final _setFilter = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setFilter = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
   void setFilter(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
-    _setFilter(reference.pointer, _id_setFilter as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    _setFilter(reference.pointer, _id_setFilter as jni$_.JMethodIDPtr,
+            _$expression.pointer)
         .check();
   }
 
@@ -238,25 +242,26 @@ class HeatmapLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/HeatmapLayer;',
   );
 
-  static final _withFilter = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withFilter = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.HeatmapLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  HeatmapLayer withFilter(
-    _$jni.JObject expression,
+  HeatmapLayer? withFilter(
+    jni$_.JObject? expression,
   ) {
-    return _withFilter(reference.pointer, _id_withFilter as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const $HeatmapLayer$Type());
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _withFilter(reference.pointer, _id_withFilter as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<HeatmapLayer?>(const $HeatmapLayer$NullableType());
   }
 
   static final _id_getFilter = _class.instanceMethodId(
@@ -264,23 +269,23 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getFilter = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFilter = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getFilter()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getFilter() {
-    return _getFilter(reference.pointer, _id_getFilter as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? getFilter() {
+    return _getFilter(reference.pointer, _id_getFilter as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -288,27 +293,27 @@ class HeatmapLayer extends layer_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/HeatmapLayer;',
   );
 
-  static final _withProperties = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.HeatmapLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
-  HeatmapLayer withProperties(
-    _$jni.JArray<propertyvalue_.PropertyValue<_$jni.JObject>> propertyValues,
+  HeatmapLayer? withProperties(
+    jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?>?
+        propertyValues,
   ) {
-    return _withProperties(
-            reference.pointer,
-            _id_withProperties as _$jni.JMethodIDPtr,
-            propertyValues.reference.pointer)
-        .object(const $HeatmapLayer$Type());
+    final _$propertyValues = propertyValues?.reference ?? jni$_.jNullReference;
+    return _withProperties(reference.pointer,
+            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
+        .object<HeatmapLayer?>(const $HeatmapLayer$NullableType());
   }
 
   static final _id_getHeatmapRadius = _class.instanceMethodId(
@@ -316,24 +321,26 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHeatmapRadius = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapRadius = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHeatmapRadius()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getHeatmapRadius() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getHeatmapRadius() {
     return _getHeatmapRadius(
-            reference.pointer, _id_getHeatmapRadius as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getHeatmapRadius as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHeatmapRadiusTransition = _class.instanceMethodId(
@@ -342,24 +349,25 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _getHeatmapRadiusTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHeatmapRadiusTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHeatmapRadiusTransition() {
+  transitionoptions$_.TransitionOptions? getHeatmapRadiusTransition() {
     return _getHeatmapRadiusTransition(reference.pointer,
-            _id_getHeatmapRadiusTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHeatmapRadiusTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHeatmapRadiusTransition = _class.instanceMethodId(
@@ -368,25 +376,27 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _setHeatmapRadiusTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHeatmapRadiusTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHeatmapRadiusTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHeatmapRadiusTransition(
             reference.pointer,
-            _id_setHeatmapRadiusTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHeatmapRadiusTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -395,24 +405,26 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHeatmapWeight = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapWeight = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHeatmapWeight()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getHeatmapWeight() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getHeatmapWeight() {
     return _getHeatmapWeight(
-            reference.pointer, _id_getHeatmapWeight as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getHeatmapWeight as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHeatmapIntensity = _class.instanceMethodId(
@@ -420,24 +432,26 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHeatmapIntensity = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapIntensity = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHeatmapIntensity()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getHeatmapIntensity() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getHeatmapIntensity() {
     return _getHeatmapIntensity(
-            reference.pointer, _id_getHeatmapIntensity as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getHeatmapIntensity as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHeatmapIntensityTransition = _class.instanceMethodId(
@@ -446,24 +460,25 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _getHeatmapIntensityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHeatmapIntensityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHeatmapIntensityTransition() {
+  transitionoptions$_.TransitionOptions? getHeatmapIntensityTransition() {
     return _getHeatmapIntensityTransition(reference.pointer,
-            _id_getHeatmapIntensityTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHeatmapIntensityTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHeatmapIntensityTransition = _class.instanceMethodId(
@@ -472,25 +487,27 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _setHeatmapIntensityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHeatmapIntensityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHeatmapIntensityTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHeatmapIntensityTransition(
             reference.pointer,
-            _id_setHeatmapIntensityTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHeatmapIntensityTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -499,24 +516,26 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHeatmapColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHeatmapColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getHeatmapColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getHeatmapColor() {
     return _getHeatmapColor(
-            reference.pointer, _id_getHeatmapColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getHeatmapColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getHeatmapColorAsInt = _class.instanceMethodId(
@@ -524,22 +543,22 @@ class HeatmapLayer extends layer_.Layer {
     r'()I',
   );
 
-  static final _getHeatmapColorAsInt = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapColorAsInt = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int getHeatmapColorAsInt()`
   int getHeatmapColorAsInt() {
     return _getHeatmapColorAsInt(
-            reference.pointer, _id_getHeatmapColorAsInt as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getHeatmapColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -548,24 +567,26 @@ class HeatmapLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getHeatmapOpacity = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getHeatmapOpacity = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getHeatmapOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getHeatmapOpacity() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getHeatmapOpacity() {
     return _getHeatmapOpacity(
-            reference.pointer, _id_getHeatmapOpacity as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getHeatmapOpacity as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getHeatmapOpacityTransition = _class.instanceMethodId(
@@ -574,24 +595,25 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _getHeatmapOpacityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getHeatmapOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getHeatmapOpacityTransition() {
+  transitionoptions$_.TransitionOptions? getHeatmapOpacityTransition() {
     return _getHeatmapOpacityTransition(reference.pointer,
-            _id_getHeatmapOpacityTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getHeatmapOpacityTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setHeatmapOpacityTransition = _class.instanceMethodId(
@@ -600,54 +622,99 @@ class HeatmapLayer extends layer_.Layer {
   );
 
   static final _setHeatmapOpacityTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setHeatmapOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setHeatmapOpacityTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setHeatmapOpacityTransition(
             reference.pointer,
-            _id_setHeatmapOpacityTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setHeatmapOpacityTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 }
 
-final class $HeatmapLayer$Type extends _$jni.JObjType<HeatmapLayer> {
-  @_$jni.internal
-  const $HeatmapLayer$Type();
+final class $HeatmapLayer$NullableType extends jni$_.JObjType<HeatmapLayer?> {
+  @jni$_.internal
+  const $HeatmapLayer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/layers/HeatmapLayer;';
 
-  @_$jni.internal
-  @_$core.override
-  HeatmapLayer fromReference(_$jni.JReference reference) =>
-      HeatmapLayer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  HeatmapLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HeatmapLayer.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const layer_.$Layer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HeatmapLayer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($HeatmapLayer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($HeatmapLayer$NullableType) &&
+        other is $HeatmapLayer$NullableType;
+  }
+}
+
+final class $HeatmapLayer$Type extends jni$_.JObjType<HeatmapLayer> {
+  @jni$_.internal
+  const $HeatmapLayer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/layers/HeatmapLayer;';
+
+  @jni$_.internal
+  @core$_.override
+  HeatmapLayer fromReference(jni$_.JReference reference) =>
+      HeatmapLayer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HeatmapLayer?> get nullableType =>
+      const $HeatmapLayer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($HeatmapLayer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($HeatmapLayer$Type) &&
         other is $HeatmapLayer$Type;

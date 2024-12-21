@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,43 +45,44 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.Utils`
-class Utils extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Utils> $type;
+class Utils extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Utils> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Utils.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/location/Utils');
+      jni$_.JClass.forName(r'org/maplibre/android/location/Utils');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Utils$NullableType();
   static const type = $Utils$Type();
   static final _id_shortestRotation = _class.staticMethodId(
     r'shortestRotation',
     r'(FF)F',
   );
 
-  static final _shortestRotation = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Double, _$jni.Double)>)>>(
+  static final _shortestRotation = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
           'globalEnv_CallStaticFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
 
   /// from: `static public float shortestRotation(float f, float f1)`
   static double shortestRotation(
@@ -88,7 +90,7 @@ class Utils extends _$jni.JObject {
     double f1,
   ) {
     return _shortestRotation(_class.reference.pointer,
-            _id_shortestRotation as _$jni.JMethodIDPtr, f, f1)
+            _id_shortestRotation as jni$_.JMethodIDPtr, f, f1)
         .float;
   }
 
@@ -97,50 +99,91 @@ class Utils extends _$jni.JObject {
     r'(F)F',
   );
 
-  static final _normalize = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Double,)>)>>(
+  static final _normalize = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
           'globalEnv_CallStaticFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `static public float normalize(float f)`
   static double normalize(
     double f,
   ) {
     return _normalize(
-            _class.reference.pointer, _id_normalize as _$jni.JMethodIDPtr, f)
+            _class.reference.pointer, _id_normalize as jni$_.JMethodIDPtr, f)
         .float;
   }
 }
 
-final class $Utils$Type extends _$jni.JObjType<Utils> {
-  @_$jni.internal
-  const $Utils$Type();
+final class $Utils$NullableType extends jni$_.JObjType<Utils?> {
+  @jni$_.internal
+  const $Utils$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/location/Utils;';
 
-  @_$jni.internal
-  @_$core.override
-  Utils fromReference(_$jni.JReference reference) =>
-      Utils.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Utils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Utils.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Utils?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Utils$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Utils$NullableType) &&
+        other is $Utils$NullableType;
+  }
+}
+
+final class $Utils$Type extends jni$_.JObjType<Utils> {
+  @jni$_.internal
+  const $Utils$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/location/Utils;';
+
+  @jni$_.internal
+  @core$_.override
+  Utils fromReference(jni$_.JReference reference) => Utils.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Utils?> get nullableType => const $Utils$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Utils$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Utils$Type) && other is $Utils$Type;
   }

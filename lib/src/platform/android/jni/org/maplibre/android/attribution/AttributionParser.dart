@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,54 +45,56 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'Attribution.dart' as attribution_;
+import 'Attribution.dart' as attribution$_;
 
 /// from: `org.maplibre.android.attribution.AttributionParser$Options`
-class AttributionParser_Options extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<AttributionParser_Options> $type;
+class AttributionParser$Options extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<AttributionParser$Options> $type;
 
-  @_$jni.internal
-  AttributionParser_Options.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  AttributionParser$Options.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/attribution/AttributionParser$Options');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $AttributionParser_Options$Type();
+  static const nullableType = $AttributionParser$Options$NullableType();
+  static const type = $AttributionParser$Options$Type();
   static final _id_new$ = _class.constructorId(
     r'(Landroid/content/Context;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory AttributionParser_Options(
-    _$jni.JObject context,
+  factory AttributionParser$Options(
+    jni$_.JObject? context,
   ) {
-    return AttributionParser_Options.fromReference(_new$(
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return AttributionParser$Options.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            context.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$context.pointer)
         .reference);
   }
 
@@ -100,27 +103,27 @@ class AttributionParser_Options extends _$jni.JObject {
     r'([Ljava/lang/String;)Lorg/maplibre/android/attribution/AttributionParser$Options;',
   );
 
-  static final _withAttributionData = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withAttributionData = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withAttributionData(java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser_Options withAttributionData(
-    _$jni.JArray<_$jni.JString> strings,
+  AttributionParser$Options? withAttributionData(
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _withAttributionData(
-            reference.pointer,
-            _id_withAttributionData as _$jni.JMethodIDPtr,
-            strings.reference.pointer)
-        .object(const $AttributionParser_Options$Type());
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _withAttributionData(reference.pointer,
+            _id_withAttributionData as jni$_.JMethodIDPtr, _$strings.pointer)
+        .object<AttributionParser$Options?>(
+            const $AttributionParser$Options$NullableType());
   }
 
   static final _id_withImproveMap = _class.instanceMethodId(
@@ -128,24 +131,25 @@ class AttributionParser_Options extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/attribution/AttributionParser$Options;',
   );
 
-  static final _withImproveMap = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _withImproveMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withImproveMap(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser_Options withImproveMap(
+  AttributionParser$Options? withImproveMap(
     bool z,
   ) {
     return _withImproveMap(reference.pointer,
-            _id_withImproveMap as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $AttributionParser_Options$Type());
+            _id_withImproveMap as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<AttributionParser$Options?>(
+            const $AttributionParser$Options$NullableType());
   }
 
   static final _id_withCopyrightSign = _class.instanceMethodId(
@@ -153,24 +157,25 @@ class AttributionParser_Options extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/attribution/AttributionParser$Options;',
   );
 
-  static final _withCopyrightSign = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _withCopyrightSign = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withCopyrightSign(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser_Options withCopyrightSign(
+  AttributionParser$Options? withCopyrightSign(
     bool z,
   ) {
     return _withCopyrightSign(reference.pointer,
-            _id_withCopyrightSign as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $AttributionParser_Options$Type());
+            _id_withCopyrightSign as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<AttributionParser$Options?>(
+            const $AttributionParser$Options$NullableType());
   }
 
   static final _id_withMapboxAttribution = _class.instanceMethodId(
@@ -178,24 +183,25 @@ class AttributionParser_Options extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/attribution/AttributionParser$Options;',
   );
 
-  static final _withMapboxAttribution = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _withMapboxAttribution = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withMapboxAttribution(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser_Options withMapboxAttribution(
+  AttributionParser$Options? withMapboxAttribution(
     bool z,
   ) {
     return _withMapboxAttribution(reference.pointer,
-            _id_withMapboxAttribution as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $AttributionParser_Options$Type());
+            _id_withMapboxAttribution as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<AttributionParser$Options?>(
+            const $AttributionParser$Options$NullableType());
   }
 
   static final _id_build = _class.instanceMethodId(
@@ -203,99 +209,148 @@ class AttributionParser_Options extends _$jni.JObject {
     r'()Lorg/maplibre/android/attribution/AttributionParser;',
   );
 
-  static final _build = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _build = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.attribution.AttributionParser build()`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser build() {
-    return _build(reference.pointer, _id_build as _$jni.JMethodIDPtr)
-        .object(const $AttributionParser$Type());
+  AttributionParser? build() {
+    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
+        .object<AttributionParser?>(const $AttributionParser$NullableType());
   }
 }
 
-final class $AttributionParser_Options$Type
-    extends _$jni.JObjType<AttributionParser_Options> {
-  @_$jni.internal
-  const $AttributionParser_Options$Type();
+final class $AttributionParser$Options$NullableType
+    extends jni$_.JObjType<AttributionParser$Options?> {
+  @jni$_.internal
+  const $AttributionParser$Options$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/attribution/AttributionParser$Options;';
 
-  @_$jni.internal
-  @_$core.override
-  AttributionParser_Options fromReference(_$jni.JReference reference) =>
-      AttributionParser_Options.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  AttributionParser$Options? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : AttributionParser$Options.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<AttributionParser$Options?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($AttributionParser_Options$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($AttributionParser$Options$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($AttributionParser_Options$Type) &&
-        other is $AttributionParser_Options$Type;
+    return other.runtimeType == ($AttributionParser$Options$NullableType) &&
+        other is $AttributionParser$Options$NullableType;
+  }
+}
+
+final class $AttributionParser$Options$Type
+    extends jni$_.JObjType<AttributionParser$Options> {
+  @jni$_.internal
+  const $AttributionParser$Options$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/attribution/AttributionParser$Options;';
+
+  @jni$_.internal
+  @core$_.override
+  AttributionParser$Options fromReference(jni$_.JReference reference) =>
+      AttributionParser$Options.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<AttributionParser$Options?> get nullableType =>
+      const $AttributionParser$Options$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($AttributionParser$Options$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($AttributionParser$Options$Type) &&
+        other is $AttributionParser$Options$Type;
   }
 }
 
 /// from: `org.maplibre.android.attribution.AttributionParser`
-class AttributionParser extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<AttributionParser> $type;
+class AttributionParser extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<AttributionParser> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   AttributionParser.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/attribution/AttributionParser');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $AttributionParser$NullableType();
   static const type = $AttributionParser$Type();
   static final _id_getAttributions = _class.instanceMethodId(
     r'getAttributions',
     r'()Ljava/util/Set;',
   );
 
-  static final _getAttributions = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getAttributions = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.util.Set getAttributions()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JSet<attribution_.Attribution> getAttributions() {
+  jni$_.JSet<attribution$_.Attribution?>? getAttributions() {
     return _getAttributions(
-            reference.pointer, _id_getAttributions as _$jni.JMethodIDPtr)
-        .object(const _$jni.JSetType(attribution_.$Attribution$Type()));
+            reference.pointer, _id_getAttributions as jni$_.JMethodIDPtr)
+        .object<jni$_.JSet<attribution$_.Attribution?>?>(
+            const jni$_.JSetNullableType<attribution$_.Attribution?>(
+                attribution$_.$Attribution$NullableType()));
   }
 
   static final _id_createAttributionString = _class.instanceMethodId(
@@ -303,24 +358,24 @@ class AttributionParser extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _createAttributionString = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _createAttributionString = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String createAttributionString()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString createAttributionString() {
+  jni$_.JString? createAttributionString() {
     return _createAttributionString(reference.pointer,
-            _id_createAttributionString as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            _id_createAttributionString as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_createAttributionString$1 = _class.instanceMethodId(
@@ -328,53 +383,99 @@ class AttributionParser extends _$jni.JObject {
     r'(Z)Ljava/lang/String;',
   );
 
-  static final _createAttributionString$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _createAttributionString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public java.lang.String createAttributionString(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString createAttributionString$1(
+  jni$_.JString? createAttributionString$1(
     bool z,
   ) {
     return _createAttributionString$1(reference.pointer,
-            _id_createAttributionString$1 as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const _$jni.JStringType());
+            _id_createAttributionString$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $AttributionParser$Type extends _$jni.JObjType<AttributionParser> {
-  @_$jni.internal
-  const $AttributionParser$Type();
+final class $AttributionParser$NullableType
+    extends jni$_.JObjType<AttributionParser?> {
+  @jni$_.internal
+  const $AttributionParser$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/attribution/AttributionParser;';
 
-  @_$jni.internal
-  @_$core.override
-  AttributionParser fromReference(_$jni.JReference reference) =>
-      AttributionParser.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  AttributionParser? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : AttributionParser.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<AttributionParser?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($AttributionParser$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($AttributionParser$NullableType) &&
+        other is $AttributionParser$NullableType;
+  }
+}
+
+final class $AttributionParser$Type extends jni$_.JObjType<AttributionParser> {
+  @jni$_.internal
+  const $AttributionParser$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/attribution/AttributionParser;';
+
+  @jni$_.internal
+  @core$_.override
+  AttributionParser fromReference(jni$_.JReference reference) =>
+      AttributionParser.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<AttributionParser?> get nullableType =>
+      const $AttributionParser$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($AttributionParser$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($AttributionParser$Type) &&
         other is $AttributionParser$Type;

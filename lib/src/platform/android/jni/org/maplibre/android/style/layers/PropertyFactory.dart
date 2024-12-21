@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,53 +45,54 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../types/Formatted.dart' as formatted_;
+import '../types/Formatted.dart' as formatted$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
 /// from: `org.maplibre.android.style.layers.PropertyFactory`
-class PropertyFactory extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<PropertyFactory> $type;
+class PropertyFactory extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<PropertyFactory> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   PropertyFactory.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/PropertyFactory');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $PropertyFactory$NullableType();
   static const type = $PropertyFactory$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory PropertyFactory() {
     return PropertyFactory.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -99,25 +101,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _visibility = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _visibility = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue visibility(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> visibility(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? visibility(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _visibility(_class.reference.pointer,
-            _id_visibility as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_visibility as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillAntialias = _class.staticMethodId(
@@ -125,25 +130,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillAntialias = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillAntialias = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillAntialias(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> fillAntialias(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? fillAntialias(
+    jni$_.JBoolean? boolean,
   ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _fillAntialias(_class.reference.pointer,
-            _id_fillAntialias as _$jni.JMethodIDPtr, boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+            _id_fillAntialias as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_fillAntialias$1 = _class.staticMethodId(
@@ -151,27 +159,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillAntialias$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillAntialias$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillAntialias(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillAntialias$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillAntialias$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillAntialias$1(
-            _class.reference.pointer,
-            _id_fillAntialias$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillAntialias$1(_class.reference.pointer,
+            _id_fillAntialias$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillOpacity = _class.staticMethodId(
@@ -179,25 +188,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> fillOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? fillOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _fillOpacity(_class.reference.pointer,
-            _id_fillOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_fillOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_fillOpacity$1 = _class.staticMethodId(
@@ -205,27 +217,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillOpacity$1(
-            _class.reference.pointer,
-            _id_fillOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillOpacity$1(_class.reference.pointer,
+            _id_fillOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillColor = _class.staticMethodId(
@@ -233,23 +246,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _fillColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillColor(
     int i,
   ) {
     return _fillColor(
-            _class.reference.pointer, _id_fillColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_fillColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillColor$1 = _class.staticMethodId(
@@ -257,25 +272,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _fillColor$1(_class.reference.pointer,
-            _id_fillColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_fillColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillColor$2 = _class.staticMethodId(
@@ -283,25 +301,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillColor$2(_class.reference.pointer,
-            _id_fillColor$2 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillOutlineColor = _class.staticMethodId(
@@ -309,23 +330,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillOutlineColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _fillOutlineColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillOutlineColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillOutlineColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillOutlineColor(
     int i,
   ) {
     return _fillOutlineColor(_class.reference.pointer,
-            _id_fillOutlineColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_fillOutlineColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillOutlineColor$1 = _class.staticMethodId(
@@ -333,27 +356,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillOutlineColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillOutlineColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillOutlineColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillOutlineColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillOutlineColor$1(
+    jni$_.JString? string,
   ) {
-    return _fillOutlineColor$1(
-            _class.reference.pointer,
-            _id_fillOutlineColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _fillOutlineColor$1(_class.reference.pointer,
+            _id_fillOutlineColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillOutlineColor$2 = _class.staticMethodId(
@@ -361,27 +385,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillOutlineColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillOutlineColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillOutlineColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillOutlineColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillOutlineColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _fillOutlineColor$2(
-            _class.reference.pointer,
-            _id_fillOutlineColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillOutlineColor$2(_class.reference.pointer,
+            _id_fillOutlineColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillTranslate = _class.staticMethodId(
@@ -389,26 +414,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> fillTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      fillTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _fillTranslate(_class.reference.pointer,
-            _id_fillTranslate as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_fillTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_fillTranslate$1 = _class.staticMethodId(
@@ -416,27 +446,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillTranslate$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillTranslate$1(
-            _class.reference.pointer,
-            _id_fillTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillTranslate$1(_class.reference.pointer,
+            _id_fillTranslate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillTranslateAnchor = _class.staticMethodId(
@@ -444,27 +475,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillTranslateAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillTranslateAnchor(
+    jni$_.JString? string,
   ) {
-    return _fillTranslateAnchor(
-            _class.reference.pointer,
-            _id_fillTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _fillTranslateAnchor(_class.reference.pointer,
+            _id_fillTranslateAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillTranslateAnchor$1 = _class.staticMethodId(
@@ -472,27 +504,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillTranslateAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillTranslateAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillTranslateAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillTranslateAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillTranslateAnchor$1(
             _class.reference.pointer,
-            _id_fillTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillPattern = _class.staticMethodId(
@@ -500,25 +535,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillPattern = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillPattern = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillPattern(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillPattern(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillPattern(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _fillPattern(_class.reference.pointer,
-            _id_fillPattern as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_fillPattern as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillPattern$1 = _class.staticMethodId(
@@ -526,27 +564,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillPattern$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillPattern$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillPattern(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillPattern$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillPattern$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillPattern$1(
-            _class.reference.pointer,
-            _id_fillPattern$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillPattern$1(_class.reference.pointer,
+            _id_fillPattern$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineOpacity = _class.staticMethodId(
@@ -554,25 +593,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineOpacity(_class.reference.pointer,
-            _id_lineOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineOpacity$1 = _class.staticMethodId(
@@ -580,27 +622,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineOpacity$1(
-            _class.reference.pointer,
-            _id_lineOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineOpacity$1(_class.reference.pointer,
+            _id_lineOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineColor = _class.staticMethodId(
@@ -608,23 +651,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _lineColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineColor(
     int i,
   ) {
     return _lineColor(
-            _class.reference.pointer, _id_lineColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_lineColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineColor$1 = _class.staticMethodId(
@@ -632,25 +677,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _lineColor$1(_class.reference.pointer,
-            _id_lineColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_lineColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineColor$2 = _class.staticMethodId(
@@ -658,25 +706,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineColor$2(_class.reference.pointer,
-            _id_lineColor$2 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineTranslate = _class.staticMethodId(
@@ -684,26 +735,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> lineTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      lineTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _lineTranslate(_class.reference.pointer,
-            _id_lineTranslate as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_lineTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_lineTranslate$1 = _class.staticMethodId(
@@ -711,27 +767,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineTranslate$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineTranslate$1(
-            _class.reference.pointer,
-            _id_lineTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineTranslate$1(_class.reference.pointer,
+            _id_lineTranslate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineTranslateAnchor = _class.staticMethodId(
@@ -739,27 +796,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineTranslateAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineTranslateAnchor(
+    jni$_.JString? string,
   ) {
-    return _lineTranslateAnchor(
-            _class.reference.pointer,
-            _id_lineTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _lineTranslateAnchor(_class.reference.pointer,
+            _id_lineTranslateAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineTranslateAnchor$1 = _class.staticMethodId(
@@ -767,27 +825,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineTranslateAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineTranslateAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineTranslateAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineTranslateAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineTranslateAnchor$1(
             _class.reference.pointer,
-            _id_lineTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineWidth = _class.staticMethodId(
@@ -795,25 +856,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineWidth(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineWidth(_class.reference.pointer,
-            _id_lineWidth as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineWidth$1 = _class.staticMethodId(
@@ -821,25 +885,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineWidth$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineWidth$1(_class.reference.pointer,
-            _id_lineWidth$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineGapWidth = _class.staticMethodId(
@@ -847,25 +914,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineGapWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineGapWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineGapWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineGapWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineGapWidth(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineGapWidth(_class.reference.pointer,
-            _id_lineGapWidth as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineGapWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineGapWidth$1 = _class.staticMethodId(
@@ -873,27 +943,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineGapWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineGapWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineGapWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineGapWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineGapWidth$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineGapWidth$1(
-            _class.reference.pointer,
-            _id_lineGapWidth$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineGapWidth$1(_class.reference.pointer,
+            _id_lineGapWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineOffset = _class.staticMethodId(
@@ -901,25 +972,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineOffset = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineOffset = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineOffset(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineOffset(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineOffset(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineOffset(_class.reference.pointer,
-            _id_lineOffset as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineOffset as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineOffset$1 = _class.staticMethodId(
@@ -927,27 +1001,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineOffset$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineOffset$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineOffset$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineOffset$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineOffset$1(
-            _class.reference.pointer,
-            _id_lineOffset$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineOffset$1(_class.reference.pointer,
+            _id_lineOffset$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineBlur = _class.staticMethodId(
@@ -955,25 +1030,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineBlur = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineBlur = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineBlur(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineBlur(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineBlur(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineBlur(_class.reference.pointer,
-            _id_lineBlur as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineBlur as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineBlur$1 = _class.staticMethodId(
@@ -981,25 +1059,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineBlur$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineBlur$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineBlur(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineBlur$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineBlur$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineBlur$1(_class.reference.pointer,
-            _id_lineBlur$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineBlur$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineDasharray = _class.staticMethodId(
@@ -1007,26 +1088,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineDasharray = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineDasharray = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineDasharray(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> lineDasharray(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      lineDasharray(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _lineDasharray(_class.reference.pointer,
-            _id_lineDasharray as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_lineDasharray as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_lineDasharray$1 = _class.staticMethodId(
@@ -1034,27 +1120,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineDasharray$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineDasharray$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineDasharray(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineDasharray$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineDasharray$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineDasharray$1(
-            _class.reference.pointer,
-            _id_lineDasharray$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineDasharray$1(_class.reference.pointer,
+            _id_lineDasharray$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_linePattern = _class.staticMethodId(
@@ -1062,25 +1149,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _linePattern = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _linePattern = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue linePattern(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> linePattern(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? linePattern(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _linePattern(_class.reference.pointer,
-            _id_linePattern as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_linePattern as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_linePattern$1 = _class.staticMethodId(
@@ -1088,27 +1178,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _linePattern$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _linePattern$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue linePattern(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> linePattern$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? linePattern$1(
+    jni$_.JObject? expression,
   ) {
-    return _linePattern$1(
-            _class.reference.pointer,
-            _id_linePattern$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _linePattern$1(_class.reference.pointer,
+            _id_linePattern$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineGradient = _class.staticMethodId(
@@ -1116,23 +1207,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineGradient = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _lineGradient = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineGradient(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineGradient(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineGradient(
     int i,
   ) {
     return _lineGradient(
-            _class.reference.pointer, _id_lineGradient as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_lineGradient as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineGradient$1 = _class.staticMethodId(
@@ -1140,25 +1233,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineGradient$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineGradient$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineGradient(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineGradient$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineGradient$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _lineGradient$1(_class.reference.pointer,
-            _id_lineGradient$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_lineGradient$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineGradient$2 = _class.staticMethodId(
@@ -1166,27 +1262,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineGradient$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineGradient$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineGradient(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineGradient$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineGradient$2(
+    jni$_.JObject? expression,
   ) {
-    return _lineGradient$2(
-            _class.reference.pointer,
-            _id_lineGradient$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineGradient$2(_class.reference.pointer,
+            _id_lineGradient$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconOpacity = _class.staticMethodId(
@@ -1194,25 +1291,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconOpacity(_class.reference.pointer,
-            _id_iconOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconOpacity$1 = _class.staticMethodId(
@@ -1220,27 +1320,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconOpacity$1(
-            _class.reference.pointer,
-            _id_iconOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconOpacity$1(_class.reference.pointer,
+            _id_iconOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconColor = _class.staticMethodId(
@@ -1248,23 +1349,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _iconColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconColor(
     int i,
   ) {
     return _iconColor(
-            _class.reference.pointer, _id_iconColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_iconColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconColor$1 = _class.staticMethodId(
@@ -1272,25 +1375,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _iconColor$1(_class.reference.pointer,
-            _id_iconColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconColor$2 = _class.staticMethodId(
@@ -1298,25 +1404,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconColor$2(_class.reference.pointer,
-            _id_iconColor$2 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconHaloColor = _class.staticMethodId(
@@ -1324,23 +1433,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _iconHaloColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconHaloColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconHaloColor(
     int i,
   ) {
     return _iconHaloColor(_class.reference.pointer,
-            _id_iconHaloColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconHaloColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconHaloColor$1 = _class.staticMethodId(
@@ -1348,25 +1459,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconHaloColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconHaloColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _iconHaloColor$1(_class.reference.pointer,
-            _id_iconHaloColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconHaloColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconHaloColor$2 = _class.staticMethodId(
@@ -1374,27 +1488,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconHaloColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconHaloColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _iconHaloColor$2(
-            _class.reference.pointer,
-            _id_iconHaloColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconHaloColor$2(_class.reference.pointer,
+            _id_iconHaloColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconHaloWidth = _class.staticMethodId(
@@ -1402,25 +1517,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconHaloWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconHaloWidth(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconHaloWidth(_class.reference.pointer,
-            _id_iconHaloWidth as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconHaloWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconHaloWidth$1 = _class.staticMethodId(
@@ -1428,27 +1546,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconHaloWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconHaloWidth$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconHaloWidth$1(
-            _class.reference.pointer,
-            _id_iconHaloWidth$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconHaloWidth$1(_class.reference.pointer,
+            _id_iconHaloWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconHaloBlur = _class.staticMethodId(
@@ -1456,25 +1575,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloBlur = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloBlur = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloBlur(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconHaloBlur(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconHaloBlur(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconHaloBlur(_class.reference.pointer,
-            _id_iconHaloBlur as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconHaloBlur as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconHaloBlur$1 = _class.staticMethodId(
@@ -1482,27 +1604,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconHaloBlur$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconHaloBlur$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconHaloBlur(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconHaloBlur$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconHaloBlur$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconHaloBlur$1(
-            _class.reference.pointer,
-            _id_iconHaloBlur$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconHaloBlur$1(_class.reference.pointer,
+            _id_iconHaloBlur$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconTranslate = _class.staticMethodId(
@@ -1510,26 +1633,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> iconTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      iconTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconTranslate(_class.reference.pointer,
-            _id_iconTranslate as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_iconTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_iconTranslate$1 = _class.staticMethodId(
@@ -1537,27 +1665,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconTranslate$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconTranslate$1(
-            _class.reference.pointer,
-            _id_iconTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconTranslate$1(_class.reference.pointer,
+            _id_iconTranslate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconTranslateAnchor = _class.staticMethodId(
@@ -1565,27 +1694,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconTranslateAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconTranslateAnchor(
+    jni$_.JString? string,
   ) {
-    return _iconTranslateAnchor(
-            _class.reference.pointer,
-            _id_iconTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _iconTranslateAnchor(_class.reference.pointer,
+            _id_iconTranslateAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconTranslateAnchor$1 = _class.staticMethodId(
@@ -1593,27 +1723,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTranslateAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTranslateAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconTranslateAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconTranslateAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconTranslateAnchor$1(
             _class.reference.pointer,
-            _id_iconTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textOpacity = _class.staticMethodId(
@@ -1621,25 +1754,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textOpacity(_class.reference.pointer,
-            _id_textOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textOpacity$1 = _class.staticMethodId(
@@ -1647,27 +1783,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _textOpacity$1(
-            _class.reference.pointer,
-            _id_textOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textOpacity$1(_class.reference.pointer,
+            _id_textOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textColor = _class.staticMethodId(
@@ -1675,23 +1812,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _textColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textColor(
     int i,
   ) {
     return _textColor(
-            _class.reference.pointer, _id_textColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_textColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textColor$1 = _class.staticMethodId(
@@ -1699,25 +1838,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textColor$1(_class.reference.pointer,
-            _id_textColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textColor$2 = _class.staticMethodId(
@@ -1725,25 +1867,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textColor$2(_class.reference.pointer,
-            _id_textColor$2 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textHaloColor = _class.staticMethodId(
@@ -1751,23 +1896,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _textHaloColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textHaloColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textHaloColor(
     int i,
   ) {
     return _textHaloColor(_class.reference.pointer,
-            _id_textHaloColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textHaloColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textHaloColor$1 = _class.staticMethodId(
@@ -1775,25 +1922,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textHaloColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textHaloColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textHaloColor$1(_class.reference.pointer,
-            _id_textHaloColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textHaloColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textHaloColor$2 = _class.staticMethodId(
@@ -1801,27 +1951,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textHaloColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textHaloColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _textHaloColor$2(
-            _class.reference.pointer,
-            _id_textHaloColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textHaloColor$2(_class.reference.pointer,
+            _id_textHaloColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textHaloWidth = _class.staticMethodId(
@@ -1829,25 +1980,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textHaloWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textHaloWidth(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textHaloWidth(_class.reference.pointer,
-            _id_textHaloWidth as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textHaloWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textHaloWidth$1 = _class.staticMethodId(
@@ -1855,27 +2009,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textHaloWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textHaloWidth$1(
+    jni$_.JObject? expression,
   ) {
-    return _textHaloWidth$1(
-            _class.reference.pointer,
-            _id_textHaloWidth$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textHaloWidth$1(_class.reference.pointer,
+            _id_textHaloWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textHaloBlur = _class.staticMethodId(
@@ -1883,25 +2038,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloBlur = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloBlur = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloBlur(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textHaloBlur(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textHaloBlur(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textHaloBlur(_class.reference.pointer,
-            _id_textHaloBlur as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textHaloBlur as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textHaloBlur$1 = _class.staticMethodId(
@@ -1909,27 +2067,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textHaloBlur$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textHaloBlur$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textHaloBlur(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textHaloBlur$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textHaloBlur$1(
+    jni$_.JObject? expression,
   ) {
-    return _textHaloBlur$1(
-            _class.reference.pointer,
-            _id_textHaloBlur$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textHaloBlur$1(_class.reference.pointer,
+            _id_textHaloBlur$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textTranslate = _class.staticMethodId(
@@ -1937,26 +2096,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> textTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      textTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _textTranslate(_class.reference.pointer,
-            _id_textTranslate as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_textTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_textTranslate$1 = _class.staticMethodId(
@@ -1964,27 +2128,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textTranslate$1(
+    jni$_.JObject? expression,
   ) {
-    return _textTranslate$1(
-            _class.reference.pointer,
-            _id_textTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textTranslate$1(_class.reference.pointer,
+            _id_textTranslate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textTranslateAnchor = _class.staticMethodId(
@@ -1992,27 +2157,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textTranslateAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textTranslateAnchor(
+    jni$_.JString? string,
   ) {
-    return _textTranslateAnchor(
-            _class.reference.pointer,
-            _id_textTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _textTranslateAnchor(_class.reference.pointer,
+            _id_textTranslateAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textTranslateAnchor$1 = _class.staticMethodId(
@@ -2020,27 +2186,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTranslateAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTranslateAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textTranslateAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textTranslateAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textTranslateAnchor$1(
             _class.reference.pointer,
-            _id_textTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleRadius = _class.staticMethodId(
@@ -2048,25 +2217,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleRadius = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleRadius = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleRadius(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleRadius(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleRadius(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _circleRadius(_class.reference.pointer,
-            _id_circleRadius as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_circleRadius as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleRadius$1 = _class.staticMethodId(
@@ -2074,27 +2246,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleRadius$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleRadius$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleRadius(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleRadius$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleRadius$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleRadius$1(
-            _class.reference.pointer,
-            _id_circleRadius$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleRadius$1(_class.reference.pointer,
+            _id_circleRadius$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleColor = _class.staticMethodId(
@@ -2102,23 +2275,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _circleColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circleColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleColor(
     int i,
   ) {
     return _circleColor(
-            _class.reference.pointer, _id_circleColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_circleColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circleColor$1 = _class.staticMethodId(
@@ -2126,25 +2301,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circleColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _circleColor$1(_class.reference.pointer,
-            _id_circleColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_circleColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circleColor$2 = _class.staticMethodId(
@@ -2152,27 +2330,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _circleColor$2(
-            _class.reference.pointer,
-            _id_circleColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleColor$2(_class.reference.pointer,
+            _id_circleColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleBlur = _class.staticMethodId(
@@ -2180,25 +2359,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleBlur = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleBlur = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleBlur(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleBlur(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleBlur(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _circleBlur(_class.reference.pointer,
-            _id_circleBlur as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_circleBlur as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleBlur$1 = _class.staticMethodId(
@@ -2206,27 +2388,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleBlur$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleBlur$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleBlur(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleBlur$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleBlur$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleBlur$1(
-            _class.reference.pointer,
-            _id_circleBlur$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleBlur$1(_class.reference.pointer,
+            _id_circleBlur$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleOpacity = _class.staticMethodId(
@@ -2234,25 +2417,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _circleOpacity(_class.reference.pointer,
-            _id_circleOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_circleOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleOpacity$1 = _class.staticMethodId(
@@ -2260,27 +2446,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleOpacity$1(
-            _class.reference.pointer,
-            _id_circleOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleOpacity$1(_class.reference.pointer,
+            _id_circleOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleTranslate = _class.staticMethodId(
@@ -2288,27 +2475,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
       circleTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _circleTranslate(_class.reference.pointer,
-            _id_circleTranslate as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_circleTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_circleTranslate$1 = _class.staticMethodId(
@@ -2316,27 +2507,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleTranslate$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleTranslate$1(
-            _class.reference.pointer,
-            _id_circleTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleTranslate$1(_class.reference.pointer,
+            _id_circleTranslate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleTranslateAnchor = _class.staticMethodId(
@@ -2344,27 +2536,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circleTranslateAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleTranslateAnchor(
+    jni$_.JString? string,
   ) {
-    return _circleTranslateAnchor(
-            _class.reference.pointer,
-            _id_circleTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _circleTranslateAnchor(_class.reference.pointer,
+            _id_circleTranslateAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circleTranslateAnchor$1 = _class.staticMethodId(
@@ -2372,27 +2565,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleTranslateAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleTranslateAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleTranslateAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleTranslateAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _circleTranslateAnchor$1(
             _class.reference.pointer,
-            _id_circleTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_circleTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circlePitchScale = _class.staticMethodId(
@@ -2400,27 +2596,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circlePitchScale = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circlePitchScale = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circlePitchScale(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circlePitchScale(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circlePitchScale(
+    jni$_.JString? string,
   ) {
-    return _circlePitchScale(
-            _class.reference.pointer,
-            _id_circlePitchScale as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _circlePitchScale(_class.reference.pointer,
+            _id_circlePitchScale as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circlePitchScale$1 = _class.staticMethodId(
@@ -2428,27 +2625,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circlePitchScale$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circlePitchScale$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circlePitchScale(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circlePitchScale$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circlePitchScale$1(
+    jni$_.JObject? expression,
   ) {
-    return _circlePitchScale$1(
-            _class.reference.pointer,
-            _id_circlePitchScale$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circlePitchScale$1(_class.reference.pointer,
+            _id_circlePitchScale$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circlePitchAlignment = _class.staticMethodId(
@@ -2456,27 +2654,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circlePitchAlignment = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circlePitchAlignment = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circlePitchAlignment(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circlePitchAlignment(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circlePitchAlignment(
+    jni$_.JString? string,
   ) {
-    return _circlePitchAlignment(
-            _class.reference.pointer,
-            _id_circlePitchAlignment as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _circlePitchAlignment(_class.reference.pointer,
+            _id_circlePitchAlignment as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circlePitchAlignment$1 = _class.staticMethodId(
@@ -2484,27 +2683,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circlePitchAlignment$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circlePitchAlignment$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circlePitchAlignment(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circlePitchAlignment$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circlePitchAlignment$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _circlePitchAlignment$1(
             _class.reference.pointer,
-            _id_circlePitchAlignment$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_circlePitchAlignment$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleStrokeWidth = _class.staticMethodId(
@@ -2512,27 +2714,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleStrokeWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleStrokeWidth(
+    jni$_.JFloat? float,
   ) {
-    return _circleStrokeWidth(
-            _class.reference.pointer,
-            _id_circleStrokeWidth as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _circleStrokeWidth(_class.reference.pointer,
+            _id_circleStrokeWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleStrokeWidth$1 = _class.staticMethodId(
@@ -2540,27 +2743,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleStrokeWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleStrokeWidth$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleStrokeWidth$1(
-            _class.reference.pointer,
-            _id_circleStrokeWidth$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleStrokeWidth$1(_class.reference.pointer,
+            _id_circleStrokeWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleStrokeColor = _class.staticMethodId(
@@ -2568,23 +2772,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _circleStrokeColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circleStrokeColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleStrokeColor(
     int i,
   ) {
     return _circleStrokeColor(_class.reference.pointer,
-            _id_circleStrokeColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_circleStrokeColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circleStrokeColor$1 = _class.staticMethodId(
@@ -2592,27 +2798,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> circleStrokeColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleStrokeColor$1(
+    jni$_.JString? string,
   ) {
-    return _circleStrokeColor$1(
-            _class.reference.pointer,
-            _id_circleStrokeColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _circleStrokeColor$1(_class.reference.pointer,
+            _id_circleStrokeColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_circleStrokeColor$2 = _class.staticMethodId(
@@ -2620,27 +2827,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleStrokeColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleStrokeColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _circleStrokeColor$2(
-            _class.reference.pointer,
-            _id_circleStrokeColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleStrokeColor$2(_class.reference.pointer,
+            _id_circleStrokeColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleStrokeOpacity = _class.staticMethodId(
@@ -2648,27 +2856,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleStrokeOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleStrokeOpacity(
+    jni$_.JFloat? float,
   ) {
-    return _circleStrokeOpacity(
-            _class.reference.pointer,
-            _id_circleStrokeOpacity as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _circleStrokeOpacity(_class.reference.pointer,
+            _id_circleStrokeOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleStrokeOpacity$1 = _class.staticMethodId(
@@ -2676,27 +2885,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleStrokeOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleStrokeOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleStrokeOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleStrokeOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleStrokeOpacity$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _circleStrokeOpacity$1(
             _class.reference.pointer,
-            _id_circleStrokeOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_circleStrokeOpacity$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_heatmapRadius = _class.staticMethodId(
@@ -2704,25 +2916,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapRadius = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapRadius = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapRadius(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> heatmapRadius(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? heatmapRadius(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _heatmapRadius(_class.reference.pointer,
-            _id_heatmapRadius as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_heatmapRadius as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_heatmapRadius$1 = _class.staticMethodId(
@@ -2730,27 +2945,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapRadius$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapRadius$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapRadius(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> heatmapRadius$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? heatmapRadius$1(
+    jni$_.JObject? expression,
   ) {
-    return _heatmapRadius$1(
-            _class.reference.pointer,
-            _id_heatmapRadius$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _heatmapRadius$1(_class.reference.pointer,
+            _id_heatmapRadius$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_heatmapWeight = _class.staticMethodId(
@@ -2758,25 +2974,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapWeight = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapWeight = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapWeight(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> heatmapWeight(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? heatmapWeight(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _heatmapWeight(_class.reference.pointer,
-            _id_heatmapWeight as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_heatmapWeight as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_heatmapWeight$1 = _class.staticMethodId(
@@ -2784,27 +3003,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapWeight$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapWeight$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapWeight(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> heatmapWeight$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? heatmapWeight$1(
+    jni$_.JObject? expression,
   ) {
-    return _heatmapWeight$1(
-            _class.reference.pointer,
-            _id_heatmapWeight$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _heatmapWeight$1(_class.reference.pointer,
+            _id_heatmapWeight$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_heatmapIntensity = _class.staticMethodId(
@@ -2812,25 +3032,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapIntensity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapIntensity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapIntensity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> heatmapIntensity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? heatmapIntensity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _heatmapIntensity(_class.reference.pointer,
-            _id_heatmapIntensity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_heatmapIntensity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_heatmapIntensity$1 = _class.staticMethodId(
@@ -2838,27 +3061,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapIntensity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapIntensity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapIntensity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> heatmapIntensity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? heatmapIntensity$1(
+    jni$_.JObject? expression,
   ) {
-    return _heatmapIntensity$1(
-            _class.reference.pointer,
-            _id_heatmapIntensity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _heatmapIntensity$1(_class.reference.pointer,
+            _id_heatmapIntensity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_heatmapColor = _class.staticMethodId(
@@ -2866,23 +3090,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _heatmapColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> heatmapColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? heatmapColor(
     int i,
   ) {
     return _heatmapColor(
-            _class.reference.pointer, _id_heatmapColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _class.reference.pointer, _id_heatmapColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_heatmapColor$1 = _class.staticMethodId(
@@ -2890,25 +3116,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> heatmapColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? heatmapColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _heatmapColor$1(_class.reference.pointer,
-            _id_heatmapColor$1 as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_heatmapColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_heatmapColor$2 = _class.staticMethodId(
@@ -2916,27 +3145,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> heatmapColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? heatmapColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _heatmapColor$2(
-            _class.reference.pointer,
-            _id_heatmapColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _heatmapColor$2(_class.reference.pointer,
+            _id_heatmapColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_heatmapOpacity = _class.staticMethodId(
@@ -2944,25 +3174,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> heatmapOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? heatmapOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _heatmapOpacity(_class.reference.pointer,
-            _id_heatmapOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_heatmapOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_heatmapOpacity$1 = _class.staticMethodId(
@@ -2970,27 +3203,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _heatmapOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _heatmapOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue heatmapOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> heatmapOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? heatmapOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _heatmapOpacity$1(
-            _class.reference.pointer,
-            _id_heatmapOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _heatmapOpacity$1(_class.reference.pointer,
+            _id_heatmapOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionOpacity = _class.staticMethodId(
@@ -2998,27 +3232,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> fillExtrusionOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? fillExtrusionOpacity(
+    jni$_.JFloat? float,
   ) {
-    return _fillExtrusionOpacity(
-            _class.reference.pointer,
-            _id_fillExtrusionOpacity as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionOpacity(_class.reference.pointer,
+            _id_fillExtrusionOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_fillExtrusionOpacity$1 = _class.staticMethodId(
@@ -3026,27 +3261,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillExtrusionOpacity$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionOpacity$1(
             _class.reference.pointer,
-            _id_fillExtrusionOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionOpacity$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionColor = _class.staticMethodId(
@@ -3054,23 +3292,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _fillExtrusionColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillExtrusionColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillExtrusionColor(
     int i,
   ) {
     return _fillExtrusionColor(_class.reference.pointer,
-            _id_fillExtrusionColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_fillExtrusionColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillExtrusionColor$1 = _class.staticMethodId(
@@ -3078,27 +3318,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillExtrusionColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillExtrusionColor$1(
+    jni$_.JString? string,
   ) {
-    return _fillExtrusionColor$1(
-            _class.reference.pointer,
-            _id_fillExtrusionColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionColor$1(_class.reference.pointer,
+            _id_fillExtrusionColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillExtrusionColor$2 = _class.staticMethodId(
@@ -3106,27 +3347,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillExtrusionColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionColor$2(
             _class.reference.pointer,
-            _id_fillExtrusionColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionColor$2 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionTranslate = _class.staticMethodId(
@@ -3134,29 +3378,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionTranslate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionTranslate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionTranslate(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
       fillExtrusionTranslate(
-    _$jni.JArray<_$jni.JFloat> floats,
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
-    return _fillExtrusionTranslate(
-            _class.reference.pointer,
-            _id_fillExtrusionTranslate as _$jni.JMethodIDPtr,
-            floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionTranslate(_class.reference.pointer,
+            _id_fillExtrusionTranslate as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_fillExtrusionTranslate$1 = _class.staticMethodId(
@@ -3164,27 +3410,31 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionTranslate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionTranslate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionTranslate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
+      fillExtrusionTranslate$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslate$1(
             _class.reference.pointer,
-            _id_fillExtrusionTranslate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionTranslate$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionTranslateAnchor = _class.staticMethodId(
@@ -3193,28 +3443,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _fillExtrusionTranslateAnchor =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString>
+  static propertyvalue$_.PropertyValue<jni$_.JString?>?
       fillExtrusionTranslateAnchor(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslateAnchor(
             _class.reference.pointer,
-            _id_fillExtrusionTranslateAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_fillExtrusionTranslateAnchor as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillExtrusionTranslateAnchor$1 = _class.staticMethodId(
@@ -3223,28 +3476,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _fillExtrusionTranslateAnchor$1 =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject>
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
       fillExtrusionTranslateAnchor$1(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslateAnchor$1(
             _class.reference.pointer,
-            _id_fillExtrusionTranslateAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionTranslateAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionPattern = _class.staticMethodId(
@@ -3252,27 +3508,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionPattern = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionPattern = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionPattern(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> fillExtrusionPattern(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillExtrusionPattern(
+    jni$_.JString? string,
   ) {
-    return _fillExtrusionPattern(
-            _class.reference.pointer,
-            _id_fillExtrusionPattern as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionPattern(_class.reference.pointer,
+            _id_fillExtrusionPattern as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_fillExtrusionPattern$1 = _class.staticMethodId(
@@ -3280,27 +3537,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionPattern$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionPattern$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionPattern(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionPattern$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillExtrusionPattern$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionPattern$1(
             _class.reference.pointer,
-            _id_fillExtrusionPattern$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionPattern$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionHeight = _class.staticMethodId(
@@ -3308,27 +3568,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionHeight = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionHeight = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionHeight(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> fillExtrusionHeight(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? fillExtrusionHeight(
+    jni$_.JFloat? float,
   ) {
-    return _fillExtrusionHeight(
-            _class.reference.pointer,
-            _id_fillExtrusionHeight as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionHeight(_class.reference.pointer,
+            _id_fillExtrusionHeight as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_fillExtrusionHeight$1 = _class.staticMethodId(
@@ -3336,27 +3597,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionHeight$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionHeight$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionHeight(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionHeight$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillExtrusionHeight$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionHeight$1(
             _class.reference.pointer,
-            _id_fillExtrusionHeight$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionHeight$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionBase = _class.staticMethodId(
@@ -3364,27 +3628,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionBase = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionBase = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionBase(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> fillExtrusionBase(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? fillExtrusionBase(
+    jni$_.JFloat? float,
   ) {
-    return _fillExtrusionBase(
-            _class.reference.pointer,
-            _id_fillExtrusionBase as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionBase(_class.reference.pointer,
+            _id_fillExtrusionBase as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_fillExtrusionBase$1 = _class.staticMethodId(
@@ -3392,27 +3657,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillExtrusionBase$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillExtrusionBase$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionBase(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillExtrusionBase$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillExtrusionBase$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillExtrusionBase$1(
-            _class.reference.pointer,
-            _id_fillExtrusionBase$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionBase$1(_class.reference.pointer,
+            _id_fillExtrusionBase$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillExtrusionVerticalGradient = _class.staticMethodId(
@@ -3421,28 +3687,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _fillExtrusionVerticalGradient =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionVerticalGradient(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean>
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>?
       fillExtrusionVerticalGradient(
-    _$jni.JBoolean boolean,
+    jni$_.JBoolean? boolean,
   ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _fillExtrusionVerticalGradient(
             _class.reference.pointer,
-            _id_fillExtrusionVerticalGradient as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+            _id_fillExtrusionVerticalGradient as jni$_.JMethodIDPtr,
+            _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_fillExtrusionVerticalGradient$1 = _class.staticMethodId(
@@ -3451,28 +3720,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _fillExtrusionVerticalGradient$1 =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillExtrusionVerticalGradient(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject>
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
       fillExtrusionVerticalGradient$1(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionVerticalGradient$1(
             _class.reference.pointer,
-            _id_fillExtrusionVerticalGradient$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_fillExtrusionVerticalGradient$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterOpacity = _class.staticMethodId(
@@ -3480,25 +3752,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterOpacity(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _rasterOpacity(_class.reference.pointer,
-            _id_rasterOpacity as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_rasterOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterOpacity$1 = _class.staticMethodId(
@@ -3506,27 +3781,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _rasterOpacity$1(
-            _class.reference.pointer,
-            _id_rasterOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _rasterOpacity$1(_class.reference.pointer,
+            _id_rasterOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterHueRotate = _class.staticMethodId(
@@ -3534,25 +3810,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterHueRotate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterHueRotate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterHueRotate(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterHueRotate(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterHueRotate(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _rasterHueRotate(_class.reference.pointer,
-            _id_rasterHueRotate as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_rasterHueRotate as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterHueRotate$1 = _class.staticMethodId(
@@ -3560,27 +3839,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterHueRotate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterHueRotate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterHueRotate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterHueRotate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterHueRotate$1(
+    jni$_.JObject? expression,
   ) {
-    return _rasterHueRotate$1(
-            _class.reference.pointer,
-            _id_rasterHueRotate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _rasterHueRotate$1(_class.reference.pointer,
+            _id_rasterHueRotate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterBrightnessMin = _class.staticMethodId(
@@ -3588,27 +3868,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterBrightnessMin = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterBrightnessMin = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterBrightnessMin(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterBrightnessMin(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterBrightnessMin(
+    jni$_.JFloat? float,
   ) {
-    return _rasterBrightnessMin(
-            _class.reference.pointer,
-            _id_rasterBrightnessMin as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _rasterBrightnessMin(_class.reference.pointer,
+            _id_rasterBrightnessMin as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterBrightnessMin$1 = _class.staticMethodId(
@@ -3616,27 +3897,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterBrightnessMin$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterBrightnessMin$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterBrightnessMin(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterBrightnessMin$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterBrightnessMin$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _rasterBrightnessMin$1(
             _class.reference.pointer,
-            _id_rasterBrightnessMin$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_rasterBrightnessMin$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterBrightnessMax = _class.staticMethodId(
@@ -3644,27 +3928,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterBrightnessMax = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterBrightnessMax = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterBrightnessMax(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterBrightnessMax(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterBrightnessMax(
+    jni$_.JFloat? float,
   ) {
-    return _rasterBrightnessMax(
-            _class.reference.pointer,
-            _id_rasterBrightnessMax as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _rasterBrightnessMax(_class.reference.pointer,
+            _id_rasterBrightnessMax as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterBrightnessMax$1 = _class.staticMethodId(
@@ -3672,27 +3957,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterBrightnessMax$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterBrightnessMax$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterBrightnessMax(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterBrightnessMax$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterBrightnessMax$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _rasterBrightnessMax$1(
             _class.reference.pointer,
-            _id_rasterBrightnessMax$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_rasterBrightnessMax$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterSaturation = _class.staticMethodId(
@@ -3700,25 +3988,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterSaturation = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterSaturation = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterSaturation(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterSaturation(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterSaturation(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _rasterSaturation(_class.reference.pointer,
-            _id_rasterSaturation as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_rasterSaturation as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterSaturation$1 = _class.staticMethodId(
@@ -3726,27 +4017,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterSaturation$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterSaturation$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterSaturation(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterSaturation$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterSaturation$1(
+    jni$_.JObject? expression,
   ) {
-    return _rasterSaturation$1(
-            _class.reference.pointer,
-            _id_rasterSaturation$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _rasterSaturation$1(_class.reference.pointer,
+            _id_rasterSaturation$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterContrast = _class.staticMethodId(
@@ -3754,25 +4046,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterContrast = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterContrast = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterContrast(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterContrast(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterContrast(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _rasterContrast(_class.reference.pointer,
-            _id_rasterContrast as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_rasterContrast as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterContrast$1 = _class.staticMethodId(
@@ -3780,27 +4075,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterContrast$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterContrast$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterContrast(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterContrast$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterContrast$1(
+    jni$_.JObject? expression,
   ) {
-    return _rasterContrast$1(
-            _class.reference.pointer,
-            _id_rasterContrast$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _rasterContrast$1(_class.reference.pointer,
+            _id_rasterContrast$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterResampling = _class.staticMethodId(
@@ -3808,27 +4104,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterResampling = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterResampling = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterResampling(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> rasterResampling(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? rasterResampling(
+    jni$_.JString? string,
   ) {
-    return _rasterResampling(
-            _class.reference.pointer,
-            _id_rasterResampling as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _rasterResampling(_class.reference.pointer,
+            _id_rasterResampling as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_rasterResampling$1 = _class.staticMethodId(
@@ -3836,27 +4133,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterResampling$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterResampling$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterResampling(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterResampling$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterResampling$1(
+    jni$_.JObject? expression,
   ) {
-    return _rasterResampling$1(
-            _class.reference.pointer,
-            _id_rasterResampling$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _rasterResampling$1(_class.reference.pointer,
+            _id_rasterResampling$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_rasterFadeDuration = _class.staticMethodId(
@@ -3864,27 +4162,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterFadeDuration = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterFadeDuration = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterFadeDuration(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> rasterFadeDuration(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? rasterFadeDuration(
+    jni$_.JFloat? float,
   ) {
-    return _rasterFadeDuration(
-            _class.reference.pointer,
-            _id_rasterFadeDuration as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _rasterFadeDuration(_class.reference.pointer,
+            _id_rasterFadeDuration as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_rasterFadeDuration$1 = _class.staticMethodId(
@@ -3892,27 +4191,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _rasterFadeDuration$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _rasterFadeDuration$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue rasterFadeDuration(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> rasterFadeDuration$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? rasterFadeDuration$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _rasterFadeDuration$1(
             _class.reference.pointer,
-            _id_rasterFadeDuration$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_rasterFadeDuration$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeIlluminationDirection = _class.staticMethodId(
@@ -3921,28 +4223,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _hillshadeIlluminationDirection =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeIlluminationDirection(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat>
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>?
       hillshadeIlluminationDirection(
-    _$jni.JFloat float,
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationDirection(
             _class.reference.pointer,
-            _id_hillshadeIlluminationDirection as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_hillshadeIlluminationDirection as jni$_.JMethodIDPtr,
+            _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_hillshadeIlluminationDirection$1 = _class.staticMethodId(
@@ -3951,28 +4256,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _hillshadeIlluminationDirection$1 =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeIlluminationDirection(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject>
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
       hillshadeIlluminationDirection$1(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationDirection$1(
             _class.reference.pointer,
-            _id_hillshadeIlluminationDirection$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeIlluminationDirection$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeIlluminationAnchor = _class.staticMethodId(
@@ -3981,28 +4289,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _hillshadeIlluminationAnchor =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeIlluminationAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString>
+  static propertyvalue$_.PropertyValue<jni$_.JString?>?
       hillshadeIlluminationAnchor(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationAnchor(
             _class.reference.pointer,
-            _id_hillshadeIlluminationAnchor as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_hillshadeIlluminationAnchor as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeIlluminationAnchor$1 = _class.staticMethodId(
@@ -4011,28 +4322,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _hillshadeIlluminationAnchor$1 =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeIlluminationAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject>
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
       hillshadeIlluminationAnchor$1(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationAnchor$1(
             _class.reference.pointer,
-            _id_hillshadeIlluminationAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeIlluminationAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeExaggeration = _class.staticMethodId(
@@ -4040,27 +4354,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeExaggeration = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeExaggeration = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeExaggeration(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> hillshadeExaggeration(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? hillshadeExaggeration(
+    jni$_.JFloat? float,
   ) {
-    return _hillshadeExaggeration(
-            _class.reference.pointer,
-            _id_hillshadeExaggeration as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _hillshadeExaggeration(_class.reference.pointer,
+            _id_hillshadeExaggeration as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_hillshadeExaggeration$1 = _class.staticMethodId(
@@ -4068,27 +4383,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeExaggeration$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeExaggeration$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeExaggeration(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> hillshadeExaggeration$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? hillshadeExaggeration$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeExaggeration$1(
             _class.reference.pointer,
-            _id_hillshadeExaggeration$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeExaggeration$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeShadowColor = _class.staticMethodId(
@@ -4096,23 +4414,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeShadowColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _hillshadeShadowColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeShadowColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeShadowColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? hillshadeShadowColor(
     int i,
   ) {
     return _hillshadeShadowColor(_class.reference.pointer,
-            _id_hillshadeShadowColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_hillshadeShadowColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeShadowColor$1 = _class.staticMethodId(
@@ -4120,27 +4440,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeShadowColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeShadowColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeShadowColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeShadowColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? hillshadeShadowColor$1(
+    jni$_.JString? string,
   ) {
-    return _hillshadeShadowColor$1(
-            _class.reference.pointer,
-            _id_hillshadeShadowColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _hillshadeShadowColor$1(_class.reference.pointer,
+            _id_hillshadeShadowColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeShadowColor$2 = _class.staticMethodId(
@@ -4148,27 +4469,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeShadowColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeShadowColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeShadowColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> hillshadeShadowColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? hillshadeShadowColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeShadowColor$2(
             _class.reference.pointer,
-            _id_hillshadeShadowColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeShadowColor$2 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeHighlightColor = _class.staticMethodId(
@@ -4176,23 +4500,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeHighlightColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _hillshadeHighlightColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeHighlightColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeHighlightColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? hillshadeHighlightColor(
     int i,
   ) {
     return _hillshadeHighlightColor(_class.reference.pointer,
-            _id_hillshadeHighlightColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_hillshadeHighlightColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeHighlightColor$1 = _class.staticMethodId(
@@ -4200,27 +4526,31 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeHighlightColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeHighlightColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeHighlightColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeHighlightColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>?
+      hillshadeHighlightColor$1(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _hillshadeHighlightColor$1(
             _class.reference.pointer,
-            _id_hillshadeHighlightColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_hillshadeHighlightColor$1 as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeHighlightColor$2 = _class.staticMethodId(
@@ -4228,27 +4558,31 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeHighlightColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeHighlightColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeHighlightColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> hillshadeHighlightColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
+      hillshadeHighlightColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeHighlightColor$2(
             _class.reference.pointer,
-            _id_hillshadeHighlightColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeHighlightColor$2 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_hillshadeAccentColor = _class.staticMethodId(
@@ -4256,23 +4590,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeAccentColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _hillshadeAccentColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeAccentColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeAccentColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? hillshadeAccentColor(
     int i,
   ) {
     return _hillshadeAccentColor(_class.reference.pointer,
-            _id_hillshadeAccentColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_hillshadeAccentColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeAccentColor$1 = _class.staticMethodId(
@@ -4280,27 +4616,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeAccentColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeAccentColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeAccentColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> hillshadeAccentColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? hillshadeAccentColor$1(
+    jni$_.JString? string,
   ) {
-    return _hillshadeAccentColor$1(
-            _class.reference.pointer,
-            _id_hillshadeAccentColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _hillshadeAccentColor$1(_class.reference.pointer,
+            _id_hillshadeAccentColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_hillshadeAccentColor$2 = _class.staticMethodId(
@@ -4308,27 +4645,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _hillshadeAccentColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hillshadeAccentColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue hillshadeAccentColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> hillshadeAccentColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? hillshadeAccentColor$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeAccentColor$2(
             _class.reference.pointer,
-            _id_hillshadeAccentColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_hillshadeAccentColor$2 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_backgroundColor = _class.staticMethodId(
@@ -4336,23 +4676,25 @@ class PropertyFactory extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundColor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _backgroundColor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> backgroundColor(
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? backgroundColor(
     int i,
   ) {
     return _backgroundColor(_class.reference.pointer,
-            _id_backgroundColor as _$jni.JMethodIDPtr, i)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_backgroundColor as jni$_.JMethodIDPtr, i)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_backgroundColor$1 = _class.staticMethodId(
@@ -4360,27 +4702,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundColor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundColor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> backgroundColor$1(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? backgroundColor$1(
+    jni$_.JString? string,
   ) {
-    return _backgroundColor$1(
-            _class.reference.pointer,
-            _id_backgroundColor$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _backgroundColor$1(_class.reference.pointer,
+            _id_backgroundColor$1 as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_backgroundColor$2 = _class.staticMethodId(
@@ -4388,27 +4731,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundColor$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundColor$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> backgroundColor$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? backgroundColor$2(
+    jni$_.JObject? expression,
   ) {
-    return _backgroundColor$2(
-            _class.reference.pointer,
-            _id_backgroundColor$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _backgroundColor$2(_class.reference.pointer,
+            _id_backgroundColor$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_backgroundPattern = _class.staticMethodId(
@@ -4416,27 +4760,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundPattern = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundPattern = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundPattern(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> backgroundPattern(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? backgroundPattern(
+    jni$_.JString? string,
   ) {
-    return _backgroundPattern(
-            _class.reference.pointer,
-            _id_backgroundPattern as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _backgroundPattern(_class.reference.pointer,
+            _id_backgroundPattern as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_backgroundPattern$1 = _class.staticMethodId(
@@ -4444,27 +4789,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundPattern$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundPattern$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundPattern(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> backgroundPattern$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? backgroundPattern$1(
+    jni$_.JObject? expression,
   ) {
-    return _backgroundPattern$1(
-            _class.reference.pointer,
-            _id_backgroundPattern$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _backgroundPattern$1(_class.reference.pointer,
+            _id_backgroundPattern$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_backgroundOpacity = _class.staticMethodId(
@@ -4472,27 +4818,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundOpacity = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundOpacity = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundOpacity(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> backgroundOpacity(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? backgroundOpacity(
+    jni$_.JFloat? float,
   ) {
-    return _backgroundOpacity(
-            _class.reference.pointer,
-            _id_backgroundOpacity as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _backgroundOpacity(_class.reference.pointer,
+            _id_backgroundOpacity as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_backgroundOpacity$1 = _class.staticMethodId(
@@ -4500,27 +4847,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _backgroundOpacity$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _backgroundOpacity$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue backgroundOpacity(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> backgroundOpacity$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? backgroundOpacity$1(
+    jni$_.JObject? expression,
   ) {
-    return _backgroundOpacity$1(
-            _class.reference.pointer,
-            _id_backgroundOpacity$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _backgroundOpacity$1(_class.reference.pointer,
+            _id_backgroundOpacity$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fillSortKey = _class.staticMethodId(
@@ -4528,25 +4876,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillSortKey = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillSortKey = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillSortKey(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> fillSortKey(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? fillSortKey(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _fillSortKey(_class.reference.pointer,
-            _id_fillSortKey as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_fillSortKey as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_fillSortKey$1 = _class.staticMethodId(
@@ -4554,27 +4905,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _fillSortKey$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fillSortKey$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue fillSortKey(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> fillSortKey$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? fillSortKey$1(
+    jni$_.JObject? expression,
   ) {
-    return _fillSortKey$1(
-            _class.reference.pointer,
-            _id_fillSortKey$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillSortKey$1(_class.reference.pointer,
+            _id_fillSortKey$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineCap = _class.staticMethodId(
@@ -4582,25 +4934,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineCap = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineCap = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineCap(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineCap(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineCap(
+    jni$_.JString? string,
   ) {
-    return _lineCap(_class.reference.pointer, _id_lineCap as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _lineCap(_class.reference.pointer, _id_lineCap as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineCap$1 = _class.staticMethodId(
@@ -4608,25 +4963,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineCap$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineCap$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineCap(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineCap$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineCap$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineCap$1(_class.reference.pointer,
-            _id_lineCap$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineCap$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineJoin = _class.staticMethodId(
@@ -4634,25 +4992,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineJoin = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineJoin = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineJoin(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> lineJoin(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineJoin(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _lineJoin(_class.reference.pointer,
-            _id_lineJoin as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_lineJoin as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_lineJoin$1 = _class.staticMethodId(
@@ -4660,25 +5021,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineJoin$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineJoin$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineJoin(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineJoin$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineJoin$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _lineJoin$1(_class.reference.pointer,
-            _id_lineJoin$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_lineJoin$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineMiterLimit = _class.staticMethodId(
@@ -4686,25 +5050,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineMiterLimit = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineMiterLimit = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineMiterLimit(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineMiterLimit(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineMiterLimit(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineMiterLimit(_class.reference.pointer,
-            _id_lineMiterLimit as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineMiterLimit as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineMiterLimit$1 = _class.staticMethodId(
@@ -4712,27 +5079,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineMiterLimit$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineMiterLimit$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineMiterLimit(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineMiterLimit$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineMiterLimit$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineMiterLimit$1(
-            _class.reference.pointer,
-            _id_lineMiterLimit$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineMiterLimit$1(_class.reference.pointer,
+            _id_lineMiterLimit$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineRoundLimit = _class.staticMethodId(
@@ -4740,25 +5108,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineRoundLimit = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineRoundLimit = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineRoundLimit(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineRoundLimit(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineRoundLimit(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineRoundLimit(_class.reference.pointer,
-            _id_lineRoundLimit as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineRoundLimit as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineRoundLimit$1 = _class.staticMethodId(
@@ -4766,27 +5137,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineRoundLimit$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineRoundLimit$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineRoundLimit(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineRoundLimit$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineRoundLimit$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineRoundLimit$1(
-            _class.reference.pointer,
-            _id_lineRoundLimit$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineRoundLimit$1(_class.reference.pointer,
+            _id_lineRoundLimit$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_lineSortKey = _class.staticMethodId(
@@ -4794,25 +5166,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineSortKey = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineSortKey = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineSortKey(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> lineSortKey(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? lineSortKey(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _lineSortKey(_class.reference.pointer,
-            _id_lineSortKey as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_lineSortKey as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_lineSortKey$1 = _class.staticMethodId(
@@ -4820,27 +5195,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _lineSortKey$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _lineSortKey$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue lineSortKey(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> lineSortKey$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? lineSortKey$1(
+    jni$_.JObject? expression,
   ) {
-    return _lineSortKey$1(
-            _class.reference.pointer,
-            _id_lineSortKey$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _lineSortKey$1(_class.reference.pointer,
+            _id_lineSortKey$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_symbolPlacement = _class.staticMethodId(
@@ -4848,25 +5224,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolPlacement = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolPlacement = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolPlacement(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> symbolPlacement(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? symbolPlacement(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _symbolPlacement(_class.reference.pointer,
-            _id_symbolPlacement as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_symbolPlacement as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_symbolPlacement$1 = _class.staticMethodId(
@@ -4874,27 +5253,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolPlacement$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolPlacement$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolPlacement(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> symbolPlacement$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolPlacement$1(
+    jni$_.JObject? expression,
   ) {
-    return _symbolPlacement$1(
-            _class.reference.pointer,
-            _id_symbolPlacement$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolPlacement$1(_class.reference.pointer,
+            _id_symbolPlacement$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_symbolSpacing = _class.staticMethodId(
@@ -4902,25 +5282,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolSpacing = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolSpacing = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolSpacing(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> symbolSpacing(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? symbolSpacing(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _symbolSpacing(_class.reference.pointer,
-            _id_symbolSpacing as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_symbolSpacing as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_symbolSpacing$1 = _class.staticMethodId(
@@ -4928,27 +5311,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolSpacing$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolSpacing$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolSpacing(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> symbolSpacing$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolSpacing$1(
+    jni$_.JObject? expression,
   ) {
-    return _symbolSpacing$1(
-            _class.reference.pointer,
-            _id_symbolSpacing$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolSpacing$1(_class.reference.pointer,
+            _id_symbolSpacing$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_symbolAvoidEdges = _class.staticMethodId(
@@ -4956,27 +5340,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolAvoidEdges = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolAvoidEdges = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolAvoidEdges(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> symbolAvoidEdges(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? symbolAvoidEdges(
+    jni$_.JBoolean? boolean,
   ) {
-    return _symbolAvoidEdges(
-            _class.reference.pointer,
-            _id_symbolAvoidEdges as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _symbolAvoidEdges(_class.reference.pointer,
+            _id_symbolAvoidEdges as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_symbolAvoidEdges$1 = _class.staticMethodId(
@@ -4984,27 +5369,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolAvoidEdges$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolAvoidEdges$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolAvoidEdges(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> symbolAvoidEdges$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolAvoidEdges$1(
+    jni$_.JObject? expression,
   ) {
-    return _symbolAvoidEdges$1(
-            _class.reference.pointer,
-            _id_symbolAvoidEdges$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolAvoidEdges$1(_class.reference.pointer,
+            _id_symbolAvoidEdges$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_symbolSortKey = _class.staticMethodId(
@@ -5012,25 +5398,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolSortKey = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolSortKey = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolSortKey(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> symbolSortKey(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? symbolSortKey(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _symbolSortKey(_class.reference.pointer,
-            _id_symbolSortKey as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_symbolSortKey as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_symbolSortKey$1 = _class.staticMethodId(
@@ -5038,27 +5427,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolSortKey$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolSortKey$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolSortKey(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> symbolSortKey$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolSortKey$1(
+    jni$_.JObject? expression,
   ) {
-    return _symbolSortKey$1(
-            _class.reference.pointer,
-            _id_symbolSortKey$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolSortKey$1(_class.reference.pointer,
+            _id_symbolSortKey$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_symbolZOrder = _class.staticMethodId(
@@ -5066,25 +5456,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolZOrder = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolZOrder = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolZOrder(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> symbolZOrder(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? symbolZOrder(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _symbolZOrder(_class.reference.pointer,
-            _id_symbolZOrder as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_symbolZOrder as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_symbolZOrder$1 = _class.staticMethodId(
@@ -5092,27 +5485,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _symbolZOrder$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _symbolZOrder$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue symbolZOrder(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> symbolZOrder$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolZOrder$1(
+    jni$_.JObject? expression,
   ) {
-    return _symbolZOrder$1(
-            _class.reference.pointer,
-            _id_symbolZOrder$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolZOrder$1(_class.reference.pointer,
+            _id_symbolZOrder$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconAllowOverlap = _class.staticMethodId(
@@ -5120,27 +5514,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconAllowOverlap = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconAllowOverlap = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconAllowOverlap(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> iconAllowOverlap(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? iconAllowOverlap(
+    jni$_.JBoolean? boolean,
   ) {
-    return _iconAllowOverlap(
-            _class.reference.pointer,
-            _id_iconAllowOverlap as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _iconAllowOverlap(_class.reference.pointer,
+            _id_iconAllowOverlap as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_iconAllowOverlap$1 = _class.staticMethodId(
@@ -5148,27 +5543,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconAllowOverlap$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconAllowOverlap$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconAllowOverlap(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconAllowOverlap$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconAllowOverlap$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconAllowOverlap$1(
-            _class.reference.pointer,
-            _id_iconAllowOverlap$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconAllowOverlap$1(_class.reference.pointer,
+            _id_iconAllowOverlap$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconIgnorePlacement = _class.staticMethodId(
@@ -5176,27 +5572,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconIgnorePlacement = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconIgnorePlacement = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconIgnorePlacement(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> iconIgnorePlacement(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? iconIgnorePlacement(
+    jni$_.JBoolean? boolean,
   ) {
-    return _iconIgnorePlacement(
-            _class.reference.pointer,
-            _id_iconIgnorePlacement as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _iconIgnorePlacement(_class.reference.pointer,
+            _id_iconIgnorePlacement as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_iconIgnorePlacement$1 = _class.staticMethodId(
@@ -5204,27 +5601,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconIgnorePlacement$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconIgnorePlacement$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconIgnorePlacement(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconIgnorePlacement$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconIgnorePlacement$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconIgnorePlacement$1(
             _class.reference.pointer,
-            _id_iconIgnorePlacement$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconIgnorePlacement$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconOptional = _class.staticMethodId(
@@ -5232,25 +5632,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOptional = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOptional = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOptional(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> iconOptional(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? iconOptional(
+    jni$_.JBoolean? boolean,
   ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _iconOptional(_class.reference.pointer,
-            _id_iconOptional as _$jni.JMethodIDPtr, boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+            _id_iconOptional as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_iconOptional$1 = _class.staticMethodId(
@@ -5258,27 +5661,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOptional$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOptional$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOptional(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconOptional$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconOptional$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconOptional$1(
-            _class.reference.pointer,
-            _id_iconOptional$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconOptional$1(_class.reference.pointer,
+            _id_iconOptional$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconRotationAlignment = _class.staticMethodId(
@@ -5286,27 +5690,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconRotationAlignment = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconRotationAlignment = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconRotationAlignment(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconRotationAlignment(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconRotationAlignment(
+    jni$_.JString? string,
   ) {
-    return _iconRotationAlignment(
-            _class.reference.pointer,
-            _id_iconRotationAlignment as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _iconRotationAlignment(_class.reference.pointer,
+            _id_iconRotationAlignment as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconRotationAlignment$1 = _class.staticMethodId(
@@ -5314,27 +5719,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconRotationAlignment$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconRotationAlignment$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconRotationAlignment(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconRotationAlignment$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconRotationAlignment$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconRotationAlignment$1(
             _class.reference.pointer,
-            _id_iconRotationAlignment$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconRotationAlignment$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconSize = _class.staticMethodId(
@@ -5342,25 +5750,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconSize = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconSize = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconSize(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconSize(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconSize(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconSize(_class.reference.pointer,
-            _id_iconSize as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconSize as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconSize$1 = _class.staticMethodId(
@@ -5368,25 +5779,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconSize$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconSize$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconSize(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconSize$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconSize$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconSize$1(_class.reference.pointer,
-            _id_iconSize$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconSize$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconTextFit = _class.staticMethodId(
@@ -5394,25 +5808,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTextFit = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTextFit = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTextFit(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconTextFit(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconTextFit(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _iconTextFit(_class.reference.pointer,
-            _id_iconTextFit as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconTextFit as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconTextFit$1 = _class.staticMethodId(
@@ -5420,27 +5837,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTextFit$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTextFit$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTextFit(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconTextFit$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconTextFit$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconTextFit$1(
-            _class.reference.pointer,
-            _id_iconTextFit$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconTextFit$1(_class.reference.pointer,
+            _id_iconTextFit$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconTextFitPadding = _class.staticMethodId(
@@ -5448,29 +5866,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTextFitPadding = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTextFitPadding = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTextFitPadding(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
       iconTextFitPadding(
-    _$jni.JArray<_$jni.JFloat> floats,
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
-    return _iconTextFitPadding(
-            _class.reference.pointer,
-            _id_iconTextFitPadding as _$jni.JMethodIDPtr,
-            floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
+    return _iconTextFitPadding(_class.reference.pointer,
+            _id_iconTextFitPadding as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_iconTextFitPadding$1 = _class.staticMethodId(
@@ -5478,27 +5898,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconTextFitPadding$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconTextFitPadding$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconTextFitPadding(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconTextFitPadding$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconTextFitPadding$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconTextFitPadding$1(
             _class.reference.pointer,
-            _id_iconTextFitPadding$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconTextFitPadding$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconImage = _class.staticMethodId(
@@ -5506,25 +5929,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconImage = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconImage = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconImage(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconImage(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconImage(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _iconImage(_class.reference.pointer,
-            _id_iconImage as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconImage as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconImage$1 = _class.staticMethodId(
@@ -5532,25 +5958,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconImage$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconImage$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconImage(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconImage$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconImage$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconImage$1(_class.reference.pointer,
-            _id_iconImage$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconImage$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconRotate = _class.staticMethodId(
@@ -5558,25 +5987,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconRotate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconRotate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconRotate(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconRotate(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconRotate(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconRotate(_class.reference.pointer,
-            _id_iconRotate as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconRotate as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconRotate$1 = _class.staticMethodId(
@@ -5584,27 +6016,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconRotate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconRotate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconRotate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconRotate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconRotate$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconRotate$1(
-            _class.reference.pointer,
-            _id_iconRotate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconRotate$1(_class.reference.pointer,
+            _id_iconRotate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconPadding = _class.staticMethodId(
@@ -5612,25 +6045,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconPadding = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconPadding = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> iconPadding(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? iconPadding(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _iconPadding(_class.reference.pointer,
-            _id_iconPadding as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_iconPadding as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_iconPadding$1 = _class.staticMethodId(
@@ -5638,26 +6074,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconPadding$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconPadding$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> iconPadding$1(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      iconPadding$1(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconPadding$1(_class.reference.pointer,
-            _id_iconPadding$1 as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_iconPadding$1 as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_iconPadding$2 = _class.staticMethodId(
@@ -5665,27 +6106,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconPadding$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconPadding$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPadding(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconPadding$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconPadding$2(
+    jni$_.JObject? expression,
   ) {
-    return _iconPadding$2(
-            _class.reference.pointer,
-            _id_iconPadding$2 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconPadding$2(_class.reference.pointer,
+            _id_iconPadding$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconKeepUpright = _class.staticMethodId(
@@ -5693,27 +6135,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconKeepUpright = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconKeepUpright = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconKeepUpright(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> iconKeepUpright(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? iconKeepUpright(
+    jni$_.JBoolean? boolean,
   ) {
-    return _iconKeepUpright(
-            _class.reference.pointer,
-            _id_iconKeepUpright as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _iconKeepUpright(_class.reference.pointer,
+            _id_iconKeepUpright as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_iconKeepUpright$1 = _class.staticMethodId(
@@ -5721,27 +6164,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconKeepUpright$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconKeepUpright$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconKeepUpright(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconKeepUpright$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconKeepUpright$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconKeepUpright$1(
-            _class.reference.pointer,
-            _id_iconKeepUpright$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconKeepUpright$1(_class.reference.pointer,
+            _id_iconKeepUpright$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconOffset = _class.staticMethodId(
@@ -5749,26 +6193,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOffset = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOffset = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOffset(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> iconOffset(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      iconOffset(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconOffset(_class.reference.pointer,
-            _id_iconOffset as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_iconOffset as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_iconOffset$1 = _class.staticMethodId(
@@ -5776,27 +6225,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconOffset$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconOffset$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconOffset$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconOffset$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconOffset$1(
-            _class.reference.pointer,
-            _id_iconOffset$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconOffset$1(_class.reference.pointer,
+            _id_iconOffset$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconAnchor = _class.staticMethodId(
@@ -5804,25 +6254,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconAnchor(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _iconAnchor(_class.reference.pointer,
-            _id_iconAnchor as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_iconAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconAnchor$1 = _class.staticMethodId(
@@ -5830,27 +6283,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconAnchor$1(
+    jni$_.JObject? expression,
   ) {
-    return _iconAnchor$1(
-            _class.reference.pointer,
-            _id_iconAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _iconAnchor$1(_class.reference.pointer,
+            _id_iconAnchor$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_iconPitchAlignment = _class.staticMethodId(
@@ -5858,27 +6312,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconPitchAlignment = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconPitchAlignment = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPitchAlignment(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> iconPitchAlignment(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconPitchAlignment(
+    jni$_.JString? string,
   ) {
-    return _iconPitchAlignment(
-            _class.reference.pointer,
-            _id_iconPitchAlignment as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _iconPitchAlignment(_class.reference.pointer,
+            _id_iconPitchAlignment as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_iconPitchAlignment$1 = _class.staticMethodId(
@@ -5886,27 +6341,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _iconPitchAlignment$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _iconPitchAlignment$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue iconPitchAlignment(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> iconPitchAlignment$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? iconPitchAlignment$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _iconPitchAlignment$1(
             _class.reference.pointer,
-            _id_iconPitchAlignment$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_iconPitchAlignment$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textPitchAlignment = _class.staticMethodId(
@@ -5914,27 +6372,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textPitchAlignment = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textPitchAlignment = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textPitchAlignment(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textPitchAlignment(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textPitchAlignment(
+    jni$_.JString? string,
   ) {
-    return _textPitchAlignment(
-            _class.reference.pointer,
-            _id_textPitchAlignment as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _textPitchAlignment(_class.reference.pointer,
+            _id_textPitchAlignment as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textPitchAlignment$1 = _class.staticMethodId(
@@ -5942,27 +6401,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textPitchAlignment$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textPitchAlignment$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textPitchAlignment(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textPitchAlignment$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textPitchAlignment$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textPitchAlignment$1(
             _class.reference.pointer,
-            _id_textPitchAlignment$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textPitchAlignment$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textRotationAlignment = _class.staticMethodId(
@@ -5970,27 +6432,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRotationAlignment = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRotationAlignment = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRotationAlignment(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textRotationAlignment(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textRotationAlignment(
+    jni$_.JString? string,
   ) {
-    return _textRotationAlignment(
-            _class.reference.pointer,
-            _id_textRotationAlignment as _$jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _textRotationAlignment(_class.reference.pointer,
+            _id_textRotationAlignment as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textRotationAlignment$1 = _class.staticMethodId(
@@ -5998,27 +6461,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRotationAlignment$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRotationAlignment$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRotationAlignment(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textRotationAlignment$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textRotationAlignment$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textRotationAlignment$1(
             _class.reference.pointer,
-            _id_textRotationAlignment$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textRotationAlignment$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textField = _class.staticMethodId(
@@ -6026,25 +6492,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textField = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textField = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textField(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textField(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textField(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textField(_class.reference.pointer,
-            _id_textField as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textField as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textField$1 = _class.staticMethodId(
@@ -6052,26 +6521,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/types/Formatted;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textField$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textField$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textField(org.maplibre.android.style.types.Formatted formatted)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<formatted_.Formatted> textField$1(
-    formatted_.Formatted formatted,
+  static propertyvalue$_.PropertyValue<formatted$_.Formatted?>? textField$1(
+    formatted$_.Formatted? formatted,
   ) {
+    final _$formatted = formatted?.reference ?? jni$_.jNullReference;
     return _textField$1(_class.reference.pointer,
-            _id_textField$1 as _$jni.JMethodIDPtr, formatted.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            formatted_.$Formatted$Type()));
+            _id_textField$1 as jni$_.JMethodIDPtr, _$formatted.pointer)
+        .object<propertyvalue$_.PropertyValue<formatted$_.Formatted?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<
+                formatted$_.Formatted?>(formatted$_.$Formatted$NullableType()));
   }
 
   static final _id_textField$2 = _class.staticMethodId(
@@ -6079,25 +6550,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textField$2 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textField$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textField(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textField$2(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textField$2(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textField$2(_class.reference.pointer,
-            _id_textField$2 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textField$2 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textFont = _class.staticMethodId(
@@ -6105,26 +6579,30 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textFont = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textFont = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textFont(java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JString>> textFont(
-    _$jni.JArray<_$jni.JString> strings,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>? textFont(
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _textFont(_class.reference.pointer,
-            _id_textFont as _$jni.JMethodIDPtr, strings.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JStringType())));
+            _id_textFont as jni$_.JMethodIDPtr, _$strings.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JString?>?>(
+                jni$_.JArrayNullableType<jni$_.JString?>(
+                    jni$_.JStringNullableType())));
   }
 
   static final _id_textFont$1 = _class.staticMethodId(
@@ -6132,25 +6610,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textFont$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textFont$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textFont(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textFont$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textFont$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textFont$1(_class.reference.pointer,
-            _id_textFont$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textFont$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textSize = _class.staticMethodId(
@@ -6158,25 +6639,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textSize = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textSize = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textSize(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textSize(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textSize(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textSize(_class.reference.pointer,
-            _id_textSize as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textSize as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textSize$1 = _class.staticMethodId(
@@ -6184,25 +6668,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textSize$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textSize$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textSize(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textSize$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textSize$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textSize$1(_class.reference.pointer,
-            _id_textSize$1 as _$jni.JMethodIDPtr, expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textSize$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textMaxWidth = _class.staticMethodId(
@@ -6210,25 +6697,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textMaxWidth = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textMaxWidth = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textMaxWidth(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textMaxWidth(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textMaxWidth(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textMaxWidth(_class.reference.pointer,
-            _id_textMaxWidth as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textMaxWidth as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textMaxWidth$1 = _class.staticMethodId(
@@ -6236,27 +6726,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textMaxWidth$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textMaxWidth$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textMaxWidth(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textMaxWidth$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textMaxWidth$1(
+    jni$_.JObject? expression,
   ) {
-    return _textMaxWidth$1(
-            _class.reference.pointer,
-            _id_textMaxWidth$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textMaxWidth$1(_class.reference.pointer,
+            _id_textMaxWidth$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textLineHeight = _class.staticMethodId(
@@ -6264,25 +6755,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textLineHeight = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textLineHeight = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textLineHeight(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textLineHeight(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textLineHeight(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textLineHeight(_class.reference.pointer,
-            _id_textLineHeight as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textLineHeight as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textLineHeight$1 = _class.staticMethodId(
@@ -6290,27 +6784,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textLineHeight$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textLineHeight$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textLineHeight(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textLineHeight$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textLineHeight$1(
+    jni$_.JObject? expression,
   ) {
-    return _textLineHeight$1(
-            _class.reference.pointer,
-            _id_textLineHeight$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textLineHeight$1(_class.reference.pointer,
+            _id_textLineHeight$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textLetterSpacing = _class.staticMethodId(
@@ -6318,27 +6813,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textLetterSpacing = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textLetterSpacing = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textLetterSpacing(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textLetterSpacing(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textLetterSpacing(
+    jni$_.JFloat? float,
   ) {
-    return _textLetterSpacing(
-            _class.reference.pointer,
-            _id_textLetterSpacing as _$jni.JMethodIDPtr,
-            float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _textLetterSpacing(_class.reference.pointer,
+            _id_textLetterSpacing as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textLetterSpacing$1 = _class.staticMethodId(
@@ -6346,27 +6842,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textLetterSpacing$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textLetterSpacing$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textLetterSpacing(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textLetterSpacing$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textLetterSpacing$1(
+    jni$_.JObject? expression,
   ) {
-    return _textLetterSpacing$1(
-            _class.reference.pointer,
-            _id_textLetterSpacing$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textLetterSpacing$1(_class.reference.pointer,
+            _id_textLetterSpacing$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textJustify = _class.staticMethodId(
@@ -6374,25 +6871,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textJustify = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textJustify = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textJustify(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textJustify(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textJustify(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textJustify(_class.reference.pointer,
-            _id_textJustify as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textJustify as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textJustify$1 = _class.staticMethodId(
@@ -6400,27 +6900,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textJustify$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textJustify$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textJustify(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textJustify$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textJustify$1(
+    jni$_.JObject? expression,
   ) {
-    return _textJustify$1(
-            _class.reference.pointer,
-            _id_textJustify$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textJustify$1(_class.reference.pointer,
+            _id_textJustify$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textRadialOffset = _class.staticMethodId(
@@ -6428,25 +6929,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRadialOffset = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRadialOffset = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRadialOffset(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textRadialOffset(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textRadialOffset(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textRadialOffset(_class.reference.pointer,
-            _id_textRadialOffset as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textRadialOffset as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textRadialOffset$1 = _class.staticMethodId(
@@ -6454,27 +6958,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRadialOffset$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRadialOffset$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRadialOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textRadialOffset$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textRadialOffset$1(
+    jni$_.JObject? expression,
   ) {
-    return _textRadialOffset$1(
-            _class.reference.pointer,
-            _id_textRadialOffset$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textRadialOffset$1(_class.reference.pointer,
+            _id_textRadialOffset$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textVariableAnchor = _class.staticMethodId(
@@ -6482,29 +6987,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textVariableAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textVariableAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchor(java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JString>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?
       textVariableAnchor(
-    _$jni.JArray<_$jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _textVariableAnchor(
-            _class.reference.pointer,
-            _id_textVariableAnchor as _$jni.JMethodIDPtr,
-            strings.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JStringType())));
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _textVariableAnchor(_class.reference.pointer,
+            _id_textVariableAnchor as jni$_.JMethodIDPtr, _$strings.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JString?>?>(
+                jni$_.JArrayNullableType<jni$_.JString?>(
+                    jni$_.JStringNullableType())));
   }
 
   static final _id_textVariableAnchor$1 = _class.staticMethodId(
@@ -6512,27 +7019,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textVariableAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textVariableAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textVariableAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textVariableAnchor$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textVariableAnchor$1(
             _class.reference.pointer,
-            _id_textVariableAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textVariableAnchor$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textVariableAnchorOffset = _class.staticMethodId(
@@ -6540,29 +7050,33 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Object;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textVariableAnchorOffset = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textVariableAnchorOffset = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchorOffset(java.lang.Object[] objects)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JObject>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>?
       textVariableAnchorOffset(
-    _$jni.JArray<_$jni.JObject> objects,
+    jni$_.JArray<jni$_.JObject?>? objects,
   ) {
+    final _$objects = objects?.reference ?? jni$_.jNullReference;
     return _textVariableAnchorOffset(
             _class.reference.pointer,
-            _id_textVariableAnchorOffset as _$jni.JMethodIDPtr,
-            objects.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JObjectType())));
+            _id_textVariableAnchorOffset as jni$_.JMethodIDPtr,
+            _$objects.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JObject?>?>(
+                jni$_.JArrayNullableType<jni$_.JObject?>(
+                    jni$_.JObjectNullableType())));
   }
 
   static final _id_textVariableAnchorOffset$1 = _class.staticMethodId(
@@ -6571,27 +7085,31 @@ class PropertyFactory extends _$jni.JObject {
   );
 
   static final _textVariableAnchorOffset$1 =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallStaticObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textVariableAnchorOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textVariableAnchorOffset$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>?
+      textVariableAnchorOffset$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textVariableAnchorOffset$1(
             _class.reference.pointer,
-            _id_textVariableAnchorOffset$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textVariableAnchorOffset$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textAnchor = _class.staticMethodId(
@@ -6599,25 +7117,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textAnchor = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textAnchor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textAnchor(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textAnchor(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textAnchor(_class.reference.pointer,
-            _id_textAnchor as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textAnchor as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textAnchor$1 = _class.staticMethodId(
@@ -6625,27 +7146,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textAnchor$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textAnchor$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textAnchor$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textAnchor$1(
+    jni$_.JObject? expression,
   ) {
-    return _textAnchor$1(
-            _class.reference.pointer,
-            _id_textAnchor$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textAnchor$1(_class.reference.pointer,
+            _id_textAnchor$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textMaxAngle = _class.staticMethodId(
@@ -6653,25 +7175,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textMaxAngle = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textMaxAngle = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textMaxAngle(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textMaxAngle(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textMaxAngle(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textMaxAngle(_class.reference.pointer,
-            _id_textMaxAngle as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textMaxAngle as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textMaxAngle$1 = _class.staticMethodId(
@@ -6679,27 +7204,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textMaxAngle$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textMaxAngle$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textMaxAngle(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textMaxAngle$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textMaxAngle$1(
+    jni$_.JObject? expression,
   ) {
-    return _textMaxAngle$1(
-            _class.reference.pointer,
-            _id_textMaxAngle$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textMaxAngle$1(_class.reference.pointer,
+            _id_textMaxAngle$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textWritingMode = _class.staticMethodId(
@@ -6707,29 +7233,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textWritingMode = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textWritingMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textWritingMode(java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JString>>
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?
       textWritingMode(
-    _$jni.JArray<_$jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _textWritingMode(
-            _class.reference.pointer,
-            _id_textWritingMode as _$jni.JMethodIDPtr,
-            strings.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JStringType())));
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _textWritingMode(_class.reference.pointer,
+            _id_textWritingMode as jni$_.JMethodIDPtr, _$strings.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JString?>?>(
+                jni$_.JArrayNullableType<jni$_.JString?>(
+                    jni$_.JStringNullableType())));
   }
 
   static final _id_textWritingMode$1 = _class.staticMethodId(
@@ -6737,27 +7265,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textWritingMode$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textWritingMode$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textWritingMode(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textWritingMode$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textWritingMode$1(
+    jni$_.JObject? expression,
   ) {
-    return _textWritingMode$1(
-            _class.reference.pointer,
-            _id_textWritingMode$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textWritingMode$1(_class.reference.pointer,
+            _id_textWritingMode$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textRotate = _class.staticMethodId(
@@ -6765,25 +7294,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRotate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRotate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRotate(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textRotate(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textRotate(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textRotate(_class.reference.pointer,
-            _id_textRotate as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textRotate as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textRotate$1 = _class.staticMethodId(
@@ -6791,27 +7323,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textRotate$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textRotate$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textRotate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textRotate$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textRotate$1(
+    jni$_.JObject? expression,
   ) {
-    return _textRotate$1(
-            _class.reference.pointer,
-            _id_textRotate$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textRotate$1(_class.reference.pointer,
+            _id_textRotate$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textPadding = _class.staticMethodId(
@@ -6819,25 +7352,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textPadding = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textPadding = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textPadding(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> textPadding(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? textPadding(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _textPadding(_class.reference.pointer,
-            _id_textPadding as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_textPadding as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_textPadding$1 = _class.staticMethodId(
@@ -6845,27 +7381,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textPadding$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textPadding$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textPadding(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textPadding$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textPadding$1(
+    jni$_.JObject? expression,
   ) {
-    return _textPadding$1(
-            _class.reference.pointer,
-            _id_textPadding$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textPadding$1(_class.reference.pointer,
+            _id_textPadding$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textKeepUpright = _class.staticMethodId(
@@ -6873,27 +7410,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textKeepUpright = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textKeepUpright = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textKeepUpright(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> textKeepUpright(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? textKeepUpright(
+    jni$_.JBoolean? boolean,
   ) {
-    return _textKeepUpright(
-            _class.reference.pointer,
-            _id_textKeepUpright as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _textKeepUpright(_class.reference.pointer,
+            _id_textKeepUpright as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_textKeepUpright$1 = _class.staticMethodId(
@@ -6901,27 +7439,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textKeepUpright$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textKeepUpright$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textKeepUpright(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textKeepUpright$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textKeepUpright$1(
+    jni$_.JObject? expression,
   ) {
-    return _textKeepUpright$1(
-            _class.reference.pointer,
-            _id_textKeepUpright$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textKeepUpright$1(_class.reference.pointer,
+            _id_textKeepUpright$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textTransform = _class.staticMethodId(
@@ -6929,25 +7468,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTransform = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTransform = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTransform(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JString> textTransform(
-    _$jni.JString string,
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textTransform(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _textTransform(_class.reference.pointer,
-            _id_textTransform as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            _id_textTransform as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_textTransform$1 = _class.staticMethodId(
@@ -6955,27 +7497,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textTransform$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textTransform$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textTransform(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textTransform$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textTransform$1(
+    jni$_.JObject? expression,
   ) {
-    return _textTransform$1(
-            _class.reference.pointer,
-            _id_textTransform$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textTransform$1(_class.reference.pointer,
+            _id_textTransform$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textOffset = _class.staticMethodId(
@@ -6983,26 +7526,31 @@ class PropertyFactory extends _$jni.JObject {
     r'([Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOffset = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOffset = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOffset(java.lang.Object[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> textOffset(
-    _$jni.JArray<_$jni.JFloat> floats,
+  static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      textOffset(
+    jni$_.JArray<jni$_.JFloat?>? floats,
   ) {
+    final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _textOffset(_class.reference.pointer,
-            _id_textOffset as _$jni.JMethodIDPtr, floats.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            _id_textOffset as jni$_.JMethodIDPtr, _$floats.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_textOffset$1 = _class.staticMethodId(
@@ -7010,27 +7558,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOffset$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOffset$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textOffset$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textOffset$1(
+    jni$_.JObject? expression,
   ) {
-    return _textOffset$1(
-            _class.reference.pointer,
-            _id_textOffset$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textOffset$1(_class.reference.pointer,
+            _id_textOffset$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textAllowOverlap = _class.staticMethodId(
@@ -7038,27 +7587,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textAllowOverlap = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textAllowOverlap = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textAllowOverlap(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> textAllowOverlap(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? textAllowOverlap(
+    jni$_.JBoolean? boolean,
   ) {
-    return _textAllowOverlap(
-            _class.reference.pointer,
-            _id_textAllowOverlap as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _textAllowOverlap(_class.reference.pointer,
+            _id_textAllowOverlap as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_textAllowOverlap$1 = _class.staticMethodId(
@@ -7066,27 +7616,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textAllowOverlap$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textAllowOverlap$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textAllowOverlap(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textAllowOverlap$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textAllowOverlap$1(
+    jni$_.JObject? expression,
   ) {
-    return _textAllowOverlap$1(
-            _class.reference.pointer,
-            _id_textAllowOverlap$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textAllowOverlap$1(_class.reference.pointer,
+            _id_textAllowOverlap$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textIgnorePlacement = _class.staticMethodId(
@@ -7094,27 +7645,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textIgnorePlacement = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textIgnorePlacement = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textIgnorePlacement(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> textIgnorePlacement(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? textIgnorePlacement(
+    jni$_.JBoolean? boolean,
   ) {
-    return _textIgnorePlacement(
-            _class.reference.pointer,
-            _id_textIgnorePlacement as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _textIgnorePlacement(_class.reference.pointer,
+            _id_textIgnorePlacement as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_textIgnorePlacement$1 = _class.staticMethodId(
@@ -7122,27 +7674,30 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textIgnorePlacement$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textIgnorePlacement$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textIgnorePlacement(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textIgnorePlacement$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textIgnorePlacement$1(
+    jni$_.JObject? expression,
   ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textIgnorePlacement$1(
             _class.reference.pointer,
-            _id_textIgnorePlacement$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+            _id_textIgnorePlacement$1 as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_textOptional = _class.staticMethodId(
@@ -7150,25 +7705,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOptional = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOptional = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOptional(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JBoolean> textOptional(
-    _$jni.JBoolean boolean,
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? textOptional(
+    jni$_.JBoolean? boolean,
   ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _textOptional(_class.reference.pointer,
-            _id_textOptional as _$jni.JMethodIDPtr, boolean.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+            _id_textOptional as jni$_.JMethodIDPtr, _$boolean.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_textOptional$1 = _class.staticMethodId(
@@ -7176,27 +7734,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _textOptional$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _textOptional$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue textOptional(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> textOptional$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textOptional$1(
+    jni$_.JObject? expression,
   ) {
-    return _textOptional$1(
-            _class.reference.pointer,
-            _id_textOptional$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _textOptional$1(_class.reference.pointer,
+            _id_textOptional$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_circleSortKey = _class.staticMethodId(
@@ -7204,25 +7763,28 @@ class PropertyFactory extends _$jni.JObject {
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleSortKey = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleSortKey = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleSortKey(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JFloat> circleSortKey(
-    _$jni.JFloat float,
+  static propertyvalue$_.PropertyValue<jni$_.JFloat?>? circleSortKey(
+    jni$_.JFloat? float,
   ) {
+    final _$float = float?.reference ?? jni$_.jNullReference;
     return _circleSortKey(_class.reference.pointer,
-            _id_circleSortKey as _$jni.JMethodIDPtr, float.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            _id_circleSortKey as jni$_.JMethodIDPtr, _$float.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_circleSortKey$1 = _class.staticMethodId(
@@ -7230,56 +7792,102 @@ class PropertyFactory extends _$jni.JObject {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _circleSortKey$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _circleSortKey$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue circleSortKey(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue_.PropertyValue<_$jni.JObject> circleSortKey$1(
-    _$jni.JObject expression,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? circleSortKey$1(
+    jni$_.JObject? expression,
   ) {
-    return _circleSortKey$1(
-            _class.reference.pointer,
-            _id_circleSortKey$1 as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JObjectType()));
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _circleSortKey$1(_class.reference.pointer,
+            _id_circleSortKey$1 as jni$_.JMethodIDPtr, _$expression.pointer)
+        .object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 }
 
-final class $PropertyFactory$Type extends _$jni.JObjType<PropertyFactory> {
-  @_$jni.internal
-  const $PropertyFactory$Type();
+final class $PropertyFactory$NullableType
+    extends jni$_.JObjType<PropertyFactory?> {
+  @jni$_.internal
+  const $PropertyFactory$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/PropertyFactory;';
 
-  @_$jni.internal
-  @_$core.override
-  PropertyFactory fromReference(_$jni.JReference reference) =>
-      PropertyFactory.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  PropertyFactory? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : PropertyFactory.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PropertyFactory?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($PropertyFactory$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PropertyFactory$NullableType) &&
+        other is $PropertyFactory$NullableType;
+  }
+}
+
+final class $PropertyFactory$Type extends jni$_.JObjType<PropertyFactory> {
+  @jni$_.internal
+  const $PropertyFactory$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/PropertyFactory;';
+
+  @jni$_.internal
+  @core$_.override
+  PropertyFactory fromReference(jni$_.JReference reference) =>
+      PropertyFactory.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PropertyFactory?> get nullableType =>
+      const $PropertyFactory$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($PropertyFactory$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($PropertyFactory$Type) &&
         other is $PropertyFactory$Type;

@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,29 +45,30 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'LocationEngine.dart' as locationengine_;
+import 'LocationEngine.dart' as locationengine$_;
 
 /// from: `org.maplibre.android.location.engine.LocationEngineDefault`
-class LocationEngineDefault extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationEngineDefault> $type;
+class LocationEngineDefault extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationEngineDefault> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LocationEngineDefault.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/engine/LocationEngineDefault');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $LocationEngineDefault$NullableType();
   static const type = $LocationEngineDefault$Type();
   static final _id_INSTANCE = _class.staticFieldId(
     r'INSTANCE',
@@ -75,65 +77,113 @@ class LocationEngineDefault extends _$jni.JObject {
 
   /// from: `static public final org.maplibre.android.location.engine.LocationEngineDefault INSTANCE`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationEngineDefault get INSTANCE =>
-      _id_INSTANCE.get(_class, const $LocationEngineDefault$Type());
+  static LocationEngineDefault? get INSTANCE =>
+      _id_INSTANCE.get(_class, const $LocationEngineDefault$NullableType());
 
   static final _id_getDefaultLocationEngine = _class.instanceMethodId(
     r'getDefaultLocationEngine',
     r'(Landroid/content/Context;)Lorg/maplibre/android/location/engine/LocationEngine;',
   );
 
-  static final _getDefaultLocationEngine = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getDefaultLocationEngine = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final org.maplibre.android.location.engine.LocationEngine getDefaultLocationEngine(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  locationengine_.LocationEngine getDefaultLocationEngine(
-    _$jni.JObject context,
+  locationengine$_.LocationEngine getDefaultLocationEngine(
+    jni$_.JObject context,
   ) {
+    final _$context = context.reference;
     return _getDefaultLocationEngine(
             reference.pointer,
-            _id_getDefaultLocationEngine as _$jni.JMethodIDPtr,
-            context.reference.pointer)
-        .object(const locationengine_.$LocationEngine$Type());
+            _id_getDefaultLocationEngine as jni$_.JMethodIDPtr,
+            _$context.pointer)
+        .object<locationengine$_.LocationEngine>(
+            const locationengine$_.$LocationEngine$Type());
+  }
+}
+
+final class $LocationEngineDefault$NullableType
+    extends jni$_.JObjType<LocationEngineDefault?> {
+  @jni$_.internal
+  const $LocationEngineDefault$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/engine/LocationEngineDefault;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationEngineDefault? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationEngineDefault.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineDefault?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($LocationEngineDefault$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocationEngineDefault$NullableType) &&
+        other is $LocationEngineDefault$NullableType;
   }
 }
 
 final class $LocationEngineDefault$Type
-    extends _$jni.JObjType<LocationEngineDefault> {
-  @_$jni.internal
+    extends jni$_.JObjType<LocationEngineDefault> {
+  @jni$_.internal
   const $LocationEngineDefault$Type();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/engine/LocationEngineDefault;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationEngineDefault fromReference(_$jni.JReference reference) =>
-      LocationEngineDefault.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationEngineDefault fromReference(jni$_.JReference reference) =>
+      LocationEngineDefault.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationEngineDefault?> get nullableType =>
+      const $LocationEngineDefault$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => ($LocationEngineDefault$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LocationEngineDefault$Type) &&
         other is $LocationEngineDefault$Type;

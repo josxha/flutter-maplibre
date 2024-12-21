@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,50 +45,51 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.style.sources.Source`
-class Source extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Source> $type;
+class Source extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Source> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Source.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/sources/Source');
+      jni$_.JClass.forName(r'org/maplibre/android/style/sources/Source');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Source$NullableType();
   static const type = $Source$Type();
   static final _id_getId = _class.instanceMethodId(
     r'getId',
     r'()Ljava/lang/String;',
   );
 
-  static final _getId = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getId()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getId() {
-    return _getId(reference.pointer, _id_getId as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getId() {
+    return _getId(reference.pointer, _id_getId as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getAttribution = _class.instanceMethodId(
@@ -95,24 +97,24 @@ class Source extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getAttribution = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getAttribution = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getAttribution()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getAttribution() {
+  jni$_.JString? getAttribution() {
     return _getAttribution(
-            reference.pointer, _id_getAttribution as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getAttribution as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getPrefetchZoomDelta = _class.instanceMethodId(
@@ -120,24 +122,24 @@ class Source extends _$jni.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _getPrefetchZoomDelta = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getPrefetchZoomDelta = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Integer getPrefetchZoomDelta()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger getPrefetchZoomDelta() {
+  jni$_.JInteger? getPrefetchZoomDelta() {
     return _getPrefetchZoomDelta(
-            reference.pointer, _id_getPrefetchZoomDelta as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            reference.pointer, _id_getPrefetchZoomDelta as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_setPrefetchZoomDelta = _class.instanceMethodId(
@@ -145,25 +147,24 @@ class Source extends _$jni.JObject {
     r'(Ljava/lang/Integer;)V',
   );
 
-  static final _setPrefetchZoomDelta = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setPrefetchZoomDelta = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setPrefetchZoomDelta(java.lang.Integer integer)`
   void setPrefetchZoomDelta(
-    _$jni.JInteger integer,
+    jni$_.JInteger? integer,
   ) {
-    _setPrefetchZoomDelta(
-            reference.pointer,
-            _id_setPrefetchZoomDelta as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
+    _setPrefetchZoomDelta(reference.pointer,
+            _id_setPrefetchZoomDelta as jni$_.JMethodIDPtr, _$integer.pointer)
         .check();
   }
 
@@ -174,25 +175,26 @@ class Source extends _$jni.JObject {
   );
 
   static final _setMaxOverscaleFactorForParentTiles =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setMaxOverscaleFactorForParentTiles(java.lang.Integer integer)`
   void setMaxOverscaleFactorForParentTiles(
-    _$jni.JInteger integer,
+    jni$_.JInteger? integer,
   ) {
+    final _$integer = integer?.reference ?? jni$_.jNullReference;
     _setMaxOverscaleFactorForParentTiles(
             reference.pointer,
-            _id_setMaxOverscaleFactorForParentTiles as _$jni.JMethodIDPtr,
-            integer.reference.pointer)
+            _id_setMaxOverscaleFactorForParentTiles as jni$_.JMethodIDPtr,
+            _$integer.pointer)
         .check();
   }
 
@@ -203,24 +205,24 @@ class Source extends _$jni.JObject {
   );
 
   static final _getMaxOverscaleFactorForParentTiles =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public java.lang.Integer getMaxOverscaleFactorForParentTiles()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JInteger getMaxOverscaleFactorForParentTiles() {
+  jni$_.JInteger? getMaxOverscaleFactorForParentTiles() {
     return _getMaxOverscaleFactorForParentTiles(reference.pointer,
-            _id_getMaxOverscaleFactorForParentTiles as _$jni.JMethodIDPtr)
-        .object(const _$jni.JIntegerType());
+            _id_getMaxOverscaleFactorForParentTiles as jni$_.JMethodIDPtr)
+        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_isVolatile = _class.instanceMethodId(
@@ -228,23 +230,23 @@ class Source extends _$jni.JObject {
     r'()Ljava/lang/Boolean;',
   );
 
-  static final _isVolatile = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isVolatile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.Boolean isVolatile()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JBoolean isVolatile() {
-    return _isVolatile(reference.pointer, _id_isVolatile as _$jni.JMethodIDPtr)
-        .object(const _$jni.JBooleanType());
+  jni$_.JBoolean? isVolatile() {
+    return _isVolatile(reference.pointer, _id_isVolatile as jni$_.JMethodIDPtr)
+        .object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
   }
 
   static final _id_setVolatile = _class.instanceMethodId(
@@ -252,23 +254,24 @@ class Source extends _$jni.JObject {
     r'(Ljava/lang/Boolean;)V',
   );
 
-  static final _setVolatile = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setVolatile = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setVolatile(java.lang.Boolean boolean)`
   void setVolatile(
-    _$jni.JBoolean boolean,
+    jni$_.JBoolean? boolean,
   ) {
-    _setVolatile(reference.pointer, _id_setVolatile as _$jni.JMethodIDPtr,
-            boolean.reference.pointer)
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    _setVolatile(reference.pointer, _id_setVolatile as jni$_.JMethodIDPtr,
+            _$boolean.pointer)
         .check();
   }
 
@@ -278,25 +281,26 @@ class Source extends _$jni.JObject {
   );
 
   static final _setMinimumTileUpdateInterval =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setMinimumTileUpdateInterval(java.lang.Long long)`
   void setMinimumTileUpdateInterval(
-    _$jni.JLong long,
+    jni$_.JLong? long,
   ) {
+    final _$long = long?.reference ?? jni$_.jNullReference;
     _setMinimumTileUpdateInterval(
             reference.pointer,
-            _id_setMinimumTileUpdateInterval as _$jni.JMethodIDPtr,
-            long.reference.pointer)
+            _id_setMinimumTileUpdateInterval as jni$_.JMethodIDPtr,
+            _$long.pointer)
         .check();
   }
 
@@ -306,24 +310,24 @@ class Source extends _$jni.JObject {
   );
 
   static final _getMinimumTileUpdateInterval =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public java.lang.Long getMinimumTileUpdateInterval()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JLong getMinimumTileUpdateInterval() {
+  jni$_.JLong? getMinimumTileUpdateInterval() {
     return _getMinimumTileUpdateInterval(reference.pointer,
-            _id_getMinimumTileUpdateInterval as _$jni.JMethodIDPtr)
-        .object(const _$jni.JLongType());
+            _id_getMinimumTileUpdateInterval as jni$_.JMethodIDPtr)
+        .object<jni$_.JLong?>(const jni$_.JLongNullableType());
   }
 
   static final _id_getNativePtr = _class.instanceMethodId(
@@ -331,22 +335,22 @@ class Source extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getNativePtr = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getNativePtr = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getNativePtr()`
   int getNativePtr() {
     return _getNativePtr(
-            reference.pointer, _id_getNativePtr as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getNativePtr as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -355,50 +359,91 @@ class Source extends _$jni.JObject {
     r'()V',
   );
 
-  static final _setDetached = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _setDetached = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void setDetached()`
   void setDetached() {
-    _setDetached(reference.pointer, _id_setDetached as _$jni.JMethodIDPtr)
+    _setDetached(reference.pointer, _id_setDetached as jni$_.JMethodIDPtr)
         .check();
   }
 }
 
-final class $Source$Type extends _$jni.JObjType<Source> {
-  @_$jni.internal
-  const $Source$Type();
+final class $Source$NullableType extends jni$_.JObjType<Source?> {
+  @jni$_.internal
+  const $Source$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/sources/Source;';
 
-  @_$jni.internal
-  @_$core.override
-  Source fromReference(_$jni.JReference reference) =>
-      Source.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Source? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Source.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Source?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Source$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Source$NullableType) &&
+        other is $Source$NullableType;
+  }
+}
+
+final class $Source$Type extends jni$_.JObjType<Source> {
+  @jni$_.internal
+  const $Source$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/Source;';
+
+  @jni$_.internal
+  @core$_.override
+  Source fromReference(jni$_.JReference reference) => Source.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Source?> get nullableType => const $Source$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Source$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Source$Type) && other is $Source$Type;
   }

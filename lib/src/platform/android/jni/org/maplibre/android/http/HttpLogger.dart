@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,27 +45,28 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.http.HttpLogger`
-class HttpLogger extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<HttpLogger> $type;
+class HttpLogger extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<HttpLogger> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   HttpLogger.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/http/HttpLogger');
+      jni$_.JClass.forName(r'org/maplibre/android/http/HttpLogger');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $HttpLogger$NullableType();
   static const type = $HttpLogger$Type();
   static final _id_logRequestUrl = _class.staticFieldId(
     r'logRequestUrl',
@@ -73,11 +75,11 @@ class HttpLogger extends _$jni.JObject {
 
   /// from: `static public boolean logRequestUrl`
   static bool get logRequestUrl =>
-      _id_logRequestUrl.get(_class, const _$jni.jbooleanType());
+      _id_logRequestUrl.get(_class, const jni$_.jbooleanType());
 
   /// from: `static public boolean logRequestUrl`
   static set logRequestUrl(bool value) =>
-      _id_logRequestUrl.set(_class, const _$jni.jbooleanType(), value);
+      _id_logRequestUrl.set(_class, const jni$_.jbooleanType(), value);
 
   static final _id_logEnabled = _class.staticFieldId(
     r'logEnabled',
@@ -86,44 +88,46 @@ class HttpLogger extends _$jni.JObject {
 
   /// from: `static public boolean logEnabled`
   static bool get logEnabled =>
-      _id_logEnabled.get(_class, const _$jni.jbooleanType());
+      _id_logEnabled.get(_class, const jni$_.jbooleanType());
 
   /// from: `static public boolean logEnabled`
   static set logEnabled(bool value) =>
-      _id_logEnabled.set(_class, const _$jni.jbooleanType(), value);
+      _id_logEnabled.set(_class, const jni$_.jbooleanType(), value);
 
   static final _id_logFailure = _class.staticMethodId(
     r'logFailure',
     r'(ILjava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _logFailure = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _logFailure = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
               int,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public void logFailure(int i, java.lang.String string, java.lang.String string1)`
   static void logFailure(
     int i,
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    _logFailure(_class.reference.pointer, _id_logFailure as _$jni.JMethodIDPtr,
-            i, string.reference.pointer, string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    _logFailure(_class.reference.pointer, _id_logFailure as jni$_.JMethodIDPtr,
+            i, _$string.pointer, _$string1.pointer)
         .check();
   }
 
@@ -132,54 +136,98 @@ class HttpLogger extends _$jni.JObject {
     r'(ILjava/lang/String;)V',
   );
 
-  static final _log = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Int32, _$jni.Pointer<_$jni.Void>)>)>>(
+  static final _log = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public void log(int i, java.lang.String string)`
   static void log(
     int i,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _log(_class.reference.pointer, _id_log as _$jni.JMethodIDPtr, i,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _log(_class.reference.pointer, _id_log as jni$_.JMethodIDPtr, i,
+            _$string.pointer)
         .check();
   }
 }
 
-final class $HttpLogger$Type extends _$jni.JObjType<HttpLogger> {
-  @_$jni.internal
-  const $HttpLogger$Type();
+final class $HttpLogger$NullableType extends jni$_.JObjType<HttpLogger?> {
+  @jni$_.internal
+  const $HttpLogger$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/http/HttpLogger;';
 
-  @_$jni.internal
-  @_$core.override
-  HttpLogger fromReference(_$jni.JReference reference) =>
-      HttpLogger.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  HttpLogger? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpLogger.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpLogger?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($HttpLogger$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($HttpLogger$NullableType) &&
+        other is $HttpLogger$NullableType;
+  }
+}
+
+final class $HttpLogger$Type extends jni$_.JObjType<HttpLogger> {
+  @jni$_.internal
+  const $HttpLogger$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/http/HttpLogger;';
+
+  @jni$_.internal
+  @core$_.override
+  HttpLogger fromReference(jni$_.JReference reference) =>
+      HttpLogger.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<HttpLogger?> get nullableType =>
+      const $HttpLogger$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($HttpLogger$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($HttpLogger$Type) && other is $HttpLogger$Type;
   }

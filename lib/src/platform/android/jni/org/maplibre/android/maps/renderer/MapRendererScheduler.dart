@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,48 +45,49 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.maps.renderer.MapRendererScheduler`
-class MapRendererScheduler extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapRendererScheduler> $type;
+class MapRendererScheduler extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapRendererScheduler> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   MapRendererScheduler.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/renderer/MapRendererScheduler');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $MapRendererScheduler$NullableType();
   static const type = $MapRendererScheduler$Type();
   static final _id_requestRender = _class.instanceMethodId(
     r'requestRender',
     r'()V',
   );
 
-  static final _requestRender = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _requestRender = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void requestRender()`
   void requestRender() {
-    _requestRender(reference.pointer, _id_requestRender as _$jni.JMethodIDPtr)
+    _requestRender(reference.pointer, _id_requestRender as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -94,23 +96,24 @@ class MapRendererScheduler extends _$jni.JObject {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void queueEvent(java.lang.Runnable runnable)`
   void queueEvent(
-    _$jni.JObject runnable,
+    jni$_.JObject? runnable,
   ) {
-    _queueEvent(reference.pointer, _id_queueEvent as _$jni.JMethodIDPtr,
-            runnable.reference.pointer)
+    final _$runnable = runnable?.reference ?? jni$_.jNullReference;
+    _queueEvent(reference.pointer, _id_queueEvent as jni$_.JMethodIDPtr,
+            _$runnable.pointer)
         .check();
   }
 
@@ -119,34 +122,34 @@ class MapRendererScheduler extends _$jni.JObject {
     r'()V',
   );
 
-  static final _waitForEmpty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _waitForEmpty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void waitForEmpty()`
   void waitForEmpty() {
-    _waitForEmpty(reference.pointer, _id_waitForEmpty as _$jni.JMethodIDPtr)
+    _waitForEmpty(reference.pointer, _id_waitForEmpty as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapRendererScheduler> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapRendererScheduler> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -154,53 +157,53 @@ class MapRendererScheduler extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'requestRender()V') {
         _$impls[$p]!.requestRender();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'queueEvent(Ljava/lang/Runnable;)V') {
         _$impls[$p]!.queueEvent(
-          $a[0].as(const _$jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'waitForEmpty()V') {
         _$impls[$p]!.waitForEmpty();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
+    jni$_.JImplementer implementer,
     $MapRendererScheduler $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.renderer.MapRendererScheduler',
@@ -219,7 +222,7 @@ class MapRendererScheduler extends _$jni.JObject {
   factory MapRendererScheduler.implement(
     $MapRendererScheduler $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return MapRendererScheduler.fromReference(
       $i.implementReference(),
@@ -231,7 +234,7 @@ abstract base mixin class $MapRendererScheduler {
   factory $MapRendererScheduler({
     required void Function() requestRender,
     bool requestRender$async,
-    required void Function(_$jni.JObject runnable) queueEvent,
+    required void Function(jni$_.JObject? runnable) queueEvent,
     bool queueEvent$async,
     required void Function() waitForEmpty,
     bool waitForEmpty$async,
@@ -239,7 +242,7 @@ abstract base mixin class $MapRendererScheduler {
 
   void requestRender();
   bool get requestRender$async => false;
-  void queueEvent(_$jni.JObject runnable);
+  void queueEvent(jni$_.JObject? runnable);
   bool get queueEvent$async => false;
   void waitForEmpty();
   bool get waitForEmpty$async => false;
@@ -249,7 +252,7 @@ final class _$MapRendererScheduler with $MapRendererScheduler {
   _$MapRendererScheduler({
     required void Function() requestRender,
     this.requestRender$async = false,
-    required void Function(_$jni.JObject runnable) queueEvent,
+    required void Function(jni$_.JObject? runnable) queueEvent,
     this.queueEvent$async = false,
     required void Function() waitForEmpty,
     this.waitForEmpty$async = false,
@@ -259,7 +262,7 @@ final class _$MapRendererScheduler with $MapRendererScheduler {
 
   final void Function() _requestRender;
   final bool requestRender$async;
-  final void Function(_$jni.JObject runnable) _queueEvent;
+  final void Function(jni$_.JObject? runnable) _queueEvent;
   final bool queueEvent$async;
   final void Function() _waitForEmpty;
   final bool waitForEmpty$async;
@@ -268,7 +271,7 @@ final class _$MapRendererScheduler with $MapRendererScheduler {
     return _requestRender();
   }
 
-  void queueEvent(_$jni.JObject runnable) {
+  void queueEvent(jni$_.JObject? runnable) {
     return _queueEvent(runnable);
   }
 
@@ -277,33 +280,79 @@ final class _$MapRendererScheduler with $MapRendererScheduler {
   }
 }
 
-final class $MapRendererScheduler$Type
-    extends _$jni.JObjType<MapRendererScheduler> {
-  @_$jni.internal
-  const $MapRendererScheduler$Type();
+final class $MapRendererScheduler$NullableType
+    extends jni$_.JObjType<MapRendererScheduler?> {
+  @jni$_.internal
+  const $MapRendererScheduler$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/renderer/MapRendererScheduler;';
 
-  @_$jni.internal
-  @_$core.override
-  MapRendererScheduler fromReference(_$jni.JReference reference) =>
-      MapRendererScheduler.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapRendererScheduler? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapRendererScheduler.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapRendererScheduler?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($MapRendererScheduler$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapRendererScheduler$NullableType) &&
+        other is $MapRendererScheduler$NullableType;
+  }
+}
+
+final class $MapRendererScheduler$Type
+    extends jni$_.JObjType<MapRendererScheduler> {
+  @jni$_.internal
+  const $MapRendererScheduler$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/renderer/MapRendererScheduler;';
+
+  @jni$_.internal
+  @core$_.override
+  MapRendererScheduler fromReference(jni$_.JReference reference) =>
+      MapRendererScheduler.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapRendererScheduler?> get nullableType =>
+      const $MapRendererScheduler$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($MapRendererScheduler$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($MapRendererScheduler$Type) &&
         other is $MapRendererScheduler$Type;

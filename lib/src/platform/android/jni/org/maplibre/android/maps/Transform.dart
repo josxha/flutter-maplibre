@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,57 +45,59 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../camera/CameraPosition.dart' as cameraposition_;
+import '../camera/CameraPosition.dart' as cameraposition$_;
 
-import '../camera/CameraUpdate.dart' as cameraupdate_;
+import '../camera/CameraUpdate.dart' as cameraupdate$_;
 
-import 'MapLibreMap.dart' as maplibremap_;
+import 'MapLibreMap.dart' as maplibremap$_;
 
 /// from: `org.maplibre.android.maps.Transform`
-class Transform extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Transform> $type;
+class Transform extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Transform> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Transform.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/maps/Transform');
+      jni$_.JClass.forName(r'org/maplibre/android/maps/Transform');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Transform$NullableType();
   static const type = $Transform$Type();
   static final _id_getCameraPosition = _class.instanceMethodId(
     r'getCameraPosition',
     r'()Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final org.maplibre.android.camera.CameraPosition getCameraPosition()`
   /// The returned object must be released after use, by calling the [release] method.
-  cameraposition_.CameraPosition getCameraPosition() {
+  cameraposition$_.CameraPosition? getCameraPosition() {
     return _getCameraPosition(
-            reference.pointer, _id_getCameraPosition as _$jni.JMethodIDPtr)
-        .object(const cameraposition_.$CameraPosition$Type());
+            reference.pointer, _id_getCameraPosition as jni$_.JMethodIDPtr)
+        .object<cameraposition$_.CameraPosition?>(
+            const cameraposition$_.$CameraPosition$NullableType());
   }
 
   static final _id_onCameraDidChange = _class.instanceMethodId(
@@ -102,22 +105,22 @@ class Transform extends _$jni.JObject {
     r'(Z)V',
   );
 
-  static final _onCameraDidChange = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _onCameraDidChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void onCameraDidChange(boolean z)`
   void onCameraDidChange(
     bool z,
   ) {
     _onCameraDidChange(reference.pointer,
-            _id_onCameraDidChange as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_onCameraDidChange as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
@@ -126,37 +129,41 @@ class Transform extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;Lorg/maplibre/android/camera/CameraUpdate;Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _moveCamera = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _moveCamera = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void moveCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void moveCamera(
-    maplibremap_.MapLibreMap mapLibreMap,
-    cameraupdate_.CameraUpdate cameraUpdate,
-    maplibremap_.MapLibreMap_CancelableCallback cancelableCallback,
+    maplibremap$_.MapLibreMap? mapLibreMap,
+    cameraupdate$_.CameraUpdate? cameraUpdate,
+    maplibremap$_.MapLibreMap$CancelableCallback? cancelableCallback,
   ) {
+    final _$mapLibreMap = mapLibreMap?.reference ?? jni$_.jNullReference;
+    final _$cameraUpdate = cameraUpdate?.reference ?? jni$_.jNullReference;
+    final _$cancelableCallback =
+        cancelableCallback?.reference ?? jni$_.jNullReference;
     _moveCamera(
             reference.pointer,
-            _id_moveCamera as _$jni.JMethodIDPtr,
-            mapLibreMap.reference.pointer,
-            cameraUpdate.reference.pointer,
-            cancelableCallback.reference.pointer)
+            _id_moveCamera as jni$_.JMethodIDPtr,
+            _$mapLibreMap.pointer,
+            _$cameraUpdate.pointer,
+            _$cancelableCallback.pointer)
         .check();
   }
 
@@ -165,70 +172,117 @@ class Transform extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;Lorg/maplibre/android/camera/CameraUpdate;ILorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _animateCamera = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _animateCamera = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void animateCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera(
-    maplibremap_.MapLibreMap mapLibreMap,
-    cameraupdate_.CameraUpdate cameraUpdate,
+    maplibremap$_.MapLibreMap? mapLibreMap,
+    cameraupdate$_.CameraUpdate? cameraUpdate,
     int i,
-    maplibremap_.MapLibreMap_CancelableCallback cancelableCallback,
+    maplibremap$_.MapLibreMap$CancelableCallback? cancelableCallback,
   ) {
+    final _$mapLibreMap = mapLibreMap?.reference ?? jni$_.jNullReference;
+    final _$cameraUpdate = cameraUpdate?.reference ?? jni$_.jNullReference;
+    final _$cancelableCallback =
+        cancelableCallback?.reference ?? jni$_.jNullReference;
     _animateCamera(
             reference.pointer,
-            _id_animateCamera as _$jni.JMethodIDPtr,
-            mapLibreMap.reference.pointer,
-            cameraUpdate.reference.pointer,
+            _id_animateCamera as jni$_.JMethodIDPtr,
+            _$mapLibreMap.pointer,
+            _$cameraUpdate.pointer,
             i,
-            cancelableCallback.reference.pointer)
+            _$cancelableCallback.pointer)
         .check();
   }
 }
 
-final class $Transform$Type extends _$jni.JObjType<Transform> {
-  @_$jni.internal
-  const $Transform$Type();
+final class $Transform$NullableType extends jni$_.JObjType<Transform?> {
+  @jni$_.internal
+  const $Transform$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/maps/Transform;';
 
-  @_$jni.internal
-  @_$core.override
-  Transform fromReference(_$jni.JReference reference) =>
-      Transform.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Transform? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Transform.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Transform?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Transform$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Transform$NullableType) &&
+        other is $Transform$NullableType;
+  }
+}
+
+final class $Transform$Type extends jni$_.JObjType<Transform> {
+  @jni$_.internal
+  const $Transform$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/Transform;';
+
+  @jni$_.internal
+  @core$_.override
+  Transform fromReference(jni$_.JReference reference) =>
+      Transform.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Transform?> get nullableType =>
+      const $Transform$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Transform$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Transform$Type) && other is $Transform$Type;
   }
