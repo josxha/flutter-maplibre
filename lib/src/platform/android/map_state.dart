@@ -29,13 +29,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   StyleControllerAndroid? style;
 
   jni.MapLibreMap get _jniMapLibreMap =>
-      _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
+      _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE!.getMap(_viewId)!;
 
   jni.Projection get _jniProjection =>
-      _cachedJniProjection ??= _jniMapLibreMap.getProjection();
+      _cachedJniProjection ??= _jniMapLibreMap.getProjection()!;
 
   jni.LocationComponent get _locationComponent =>
-      _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent();
+      _cachedLocationComponent ??= _jniMapLibreMap.getLocationComponent()!;
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
@@ -173,7 +173,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       if (options.gestures.pitch != oldOptions.gestures.pitch) {
         uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
       }
-      uiSettings.release();
+      uiSettings?.release();
     });
   }
 
@@ -229,7 +229,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double? pitch,
   }) async {
     final jniMap = _jniMapLibreMap;
-    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    final cameraPositionBuilder = jni.CameraPosition$Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
     if (pitch != null) cameraPositionBuilder.tilt(pitch);
@@ -272,7 +272,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     Duration? webMaxDuration,
   }) async {
     final jniMap = _jniMapLibreMap;
-    final cameraPositionBuilder = jni.CameraPosition_Builder();
+    final cameraPositionBuilder = jni.CameraPosition$Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
     if (pitch != null) cameraPositionBuilder.tilt(pitch);
@@ -383,8 +383,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       bearing: jniCamera.bearing,
     );
     // camera = mapCamera;
-    jniTarget.release();
-    jniCamera.release();
+    jniTarget?.release();
+    jniCamera?.release();
     return mapCamera;
   }
 
@@ -454,7 +454,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         );
         queryLayerIds.release();
         if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
-        jniFeatures.release();
+        jniFeatures?.release();
         final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
         final queriedLayer = QueriedLayer(
           layerId: jLayerId.toDartString(releaseOriginal: true),
@@ -497,7 +497,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             .pulseEnabled(pulse);
     final locationComponentOptions = locationComponentOptionsBuilder.build();
     final locationEngineRequestBuilder =
-        jni.LocationEngineRequest_Builder(750) // TODO integrate as parameter
+        jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
             .setFastestInterval(fastestInterval.inMilliseconds)
             .setMaxWaitTime(maxWaitTime.inMilliseconds)
             .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY);
@@ -517,12 +517,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       locationComponent.setLocationComponentEnabled(true);
     });
 
-    locationComponentOptionsBuilder.release();
-    locationComponentOptions.release();
-    locationEngineRequestBuilder.release();
-    locationEngineRequest.release();
-    activationOptions.release();
-    jniContext.release();
+    locationComponentOptionsBuilder?.release();
+    locationComponentOptions?.release();
+    locationEngineRequestBuilder?.release();
+    locationEngineRequest?.release();
+    activationOptions?.release();
+    jniContext?.release();
   }
 
   @override

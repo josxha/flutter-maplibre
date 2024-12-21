@@ -36,8 +36,8 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<List<OfflineRegion>>();
     _jManager.mergeOfflineRegions(
       jPath,
-      jni.OfflineManager_MergeOfflineRegionsCallback.implement(
-        jni.$OfflineManager_MergeOfflineRegionsCallback(
+      jni.OfflineManager$MergeOfflineRegionsCallback.implement(
+        jni.$OfflineManager$MergeOfflineRegionsCallback(
           onMerge: (jRegions) {
             final regions = List.generate(
               jRegions.length,
@@ -59,8 +59,8 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<OfflineRegion>();
     _jManager.getOfflineRegion(
       regionId,
-      jni.OfflineManager_GetOfflineRegionCallback.implement(
-        jni.$OfflineManager_GetOfflineRegionCallback(
+      jni.OfflineManager$GetOfflineRegionCallback.implement(
+        jni.$OfflineManager$GetOfflineRegionCallback(
           onRegion: (region) => completer.complete(region.toOfflineRegion()),
           onRegionNotFound: () {
             completer.completeError(Exception('Region not found'));
@@ -85,8 +85,8 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<void>();
     _jManager.setMaximumAmbientCacheSize(
       bytes,
-      jni.OfflineManager_FileSourceCallback.implement(
-        jni.$OfflineManager_FileSourceCallback(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
         ),
@@ -99,8 +99,8 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
     _jManager.clearAmbientCache(
-      jni.OfflineManager_FileSourceCallback.implement(
-        jni.$OfflineManager_FileSourceCallback(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
         ),
@@ -113,8 +113,8 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
     _jManager.invalidateAmbientCache(
-      jni.OfflineManager_FileSourceCallback.implement(
-        jni.$OfflineManager_FileSourceCallback(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
         ),
@@ -127,8 +127,8 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<void> packDatabase() async {
     final completer = Completer<void>();
     _jManager.packDatabase(
-      jni.OfflineManager_FileSourceCallback.implement(
-        jni.$OfflineManager_FileSourceCallback(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
         ),
@@ -141,8 +141,8 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
     _jManager.resetDatabase(
-      jni.OfflineManager_FileSourceCallback.implement(
-        jni.$OfflineManager_FileSourceCallback(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
         ),
@@ -159,8 +159,8 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<List<OfflineRegion>> listOfflineRegions() async {
     final completer = Completer<List<OfflineRegion>>();
     _jManager.listOfflineRegions(
-      jni.OfflineManager_ListOfflineRegionsCallback.implement(
-        jni.$OfflineManager_ListOfflineRegionsCallback(
+      jni.OfflineManager$ListOfflineRegionsCallback.implement(
+        jni.$OfflineManager$ListOfflineRegionsCallback(
           onList: (jRegions) {
             final list = List.generate(
               jRegions.length,
@@ -206,14 +206,13 @@ class OfflineManagerAndroid implements OfflineManager {
     _jManager.createOfflineRegion(
       jDefinition.as(jni.OfflineRegionDefinition.type),
       jMetadata,
-      jni.OfflineManager_CreateOfflineRegionCallback.implement(
-        jni.$OfflineManager_CreateOfflineRegionCallback(
+      jni.OfflineManager$CreateOfflineRegionCallback.implement(
+        jni.$OfflineManager$CreateOfflineRegionCallback(
           onCreate: (jRegion) {
             final region = jRegion.toOfflineRegion();
-            final jObserver = jni.OfflineRegion_OfflineRegionObserver.implement(
-              jni.$OfflineRegion_OfflineRegionObserver(
+            final jObserver = jni.OfflineRegion$OfflineRegionObserver.implement(
+              jni.$OfflineRegion$OfflineRegionObserver(
                 onStatusChanged: (status) {
-                  // send update to stream
                   if (!stream.isClosed) {
                     stream.add(
                       DownloadProgress(
