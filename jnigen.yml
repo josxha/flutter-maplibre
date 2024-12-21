@@ -30,8 +30,8 @@ classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
   - 'android.graphics.PointF'
   - 'android.location.Location'
-  - 'com.github.josxha.maplibre.MapLibreRegistry'
   - 'com.github.josxha.maplibre.Helpers'
+  - 'com.github.josxha.maplibre.MapLibreRegistry'
   - 'java.net.URI'
   - 'java.net.URL'
   - 'io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding'
