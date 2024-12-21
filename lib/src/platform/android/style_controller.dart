@@ -4,7 +4,7 @@ part of 'map_state.dart';
 class StyleControllerAndroid implements StyleController {
   const StyleControllerAndroid._(this._jniStyle, this._hostApi);
 
-  final jni.Style? _jniStyle;
+  final jni.Style _jniStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
   @override
@@ -188,7 +188,7 @@ class StyleControllerAndroid implements StyleController {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       final source =
-          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
       source.setGeoJson$3(data.toJString());
     });
   }
@@ -199,23 +199,24 @@ class StyleControllerAndroid implements StyleController {
     final style = _jniStyle;
 
     return runOnPlatformThread<List<String>>(() {
-      final jSources = style?.getSources();
+      final jSources = style.getSources();
+      if (jSources == null) return [];
       final attributions = <String>[];
       for (final jSource in jSources) {
-        final jniAttribution = jSource.getAttribution();
+        final jniAttribution = jSource?.getAttribution();
         if (jniAttribution == null) continue;
         final attribution = jniAttribution.toDartString(releaseOriginal: true);
         if (attribution.trim().isEmpty) continue;
         attributions.add(attribution);
       }
-      jSources?.release();
+      jSources.release();
       return attributions;
     });
   }
 
   @override
   void dispose() {
-    if (_jniStyle != null && !_jniStyle.isReleased) {
+    if (!_jniStyle.isReleased) {
       _jniStyle.release();
     }
   }

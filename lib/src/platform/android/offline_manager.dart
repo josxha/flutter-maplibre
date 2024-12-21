@@ -15,11 +15,11 @@ class OfflineManagerAndroid implements OfflineManager {
 
   /// Create a new [OfflineManager].
   static Future<OfflineManager> createInstance() async {
-    final jContext = jni.MapLibreRegistry.INSTANCE.getContext();
+    final jContext = jni.MapLibreRegistry.INSTANCE!.getContext();
     await runOnPlatformThread(() {
       jni.MapLibre.getInstance(jContext);
     });
-    final jManager = jni.OfflineManager.getInstance(jContext);
+    final jManager = jni.OfflineManager.getInstance(jContext)!;
     return OfflineManagerAndroid._(jManager);
   }
 
@@ -39,6 +39,10 @@ class OfflineManagerAndroid implements OfflineManager {
       jni.OfflineManager$MergeOfflineRegionsCallback.implement(
         jni.$OfflineManager$MergeOfflineRegionsCallback(
           onMerge: (jRegions) {
+            if (jRegions == null) {
+              completer.complete([]);
+              return;
+            }
             final regions = List.generate(
               jRegions.length,
               (index) => jRegions[index].toOfflineRegion(),
@@ -162,6 +166,10 @@ class OfflineManagerAndroid implements OfflineManager {
       jni.OfflineManager$ListOfflineRegionsCallback.implement(
         jni.$OfflineManager$ListOfflineRegionsCallback(
           onList: (jRegions) {
+            if (jRegions == null) {
+              completer.complete([]);
+              return;
+            }
             final list = List.generate(
               jRegions.length,
               (index) => jRegions[index].toOfflineRegion(),
