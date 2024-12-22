@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,64 +45,65 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.http.LocalRequestTask$OnLocalRequestResponse`
-class LocalRequestTask_OnLocalRequestResponse extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocalRequestTask_OnLocalRequestResponse> $type;
+class JObject$OnLocalRequestResponse extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<JObject$OnLocalRequestResponse> $type;
 
-  @_$jni.internal
-  LocalRequestTask_OnLocalRequestResponse.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  JObject$OnLocalRequestResponse.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/http/LocalRequestTask$OnLocalRequestResponse');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $LocalRequestTask_OnLocalRequestResponse$Type();
+  static const nullableType = $JObject$OnLocalRequestResponse$NullableType();
+  static const type = $JObject$OnLocalRequestResponse$Type();
   static final _id_onResponse = _class.instanceMethodId(
     r'onResponse',
     r'([B)V',
   );
 
-  static final _onResponse = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onResponse = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onResponse(byte[] bs)`
   void onResponse(
-    _$jni.JArray<_$jni.jbyte> bs,
+    jni$_.JByteArray? bs,
   ) {
-    _onResponse(reference.pointer, _id_onResponse as _$jni.JMethodIDPtr,
-            bs.reference.pointer)
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
+    _onResponse(reference.pointer, _id_onResponse as jni$_.JMethodIDPtr,
+            _$bs.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $LocalRequestTask_OnLocalRequestResponse>
-      _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $JObject$OnLocalRequestResponse> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -109,46 +111,45 @@ class LocalRequestTask_OnLocalRequestResponse extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onResponse([B)V') {
         _$impls[$p]!.onResponse(
-          $a[0].as(const _$jni.JArrayType(_$jni.jbyteType()),
-              releaseOriginal: true),
+          $a![0]?.as(const jni$_.JByteArrayType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $LocalRequestTask_OnLocalRequestResponse $impl,
+    jni$_.JImplementer implementer,
+    $JObject$OnLocalRequestResponse $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.http.LocalRequestTask$OnLocalRequestResponse',
@@ -162,73 +163,118 @@ class LocalRequestTask_OnLocalRequestResponse extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LocalRequestTask_OnLocalRequestResponse.implement(
-    $LocalRequestTask_OnLocalRequestResponse $impl,
+  factory JObject$OnLocalRequestResponse.implement(
+    $JObject$OnLocalRequestResponse $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return LocalRequestTask_OnLocalRequestResponse.fromReference(
+    return JObject$OnLocalRequestResponse.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $LocalRequestTask_OnLocalRequestResponse {
-  factory $LocalRequestTask_OnLocalRequestResponse({
-    required void Function(_$jni.JArray<_$jni.jbyte> bs) onResponse,
+abstract base mixin class $JObject$OnLocalRequestResponse {
+  factory $JObject$OnLocalRequestResponse({
+    required void Function(jni$_.JByteArray? bs) onResponse,
     bool onResponse$async,
-  }) = _$LocalRequestTask_OnLocalRequestResponse;
+  }) = _$JObject$OnLocalRequestResponse;
 
-  void onResponse(_$jni.JArray<_$jni.jbyte> bs);
+  void onResponse(jni$_.JByteArray? bs);
   bool get onResponse$async => false;
 }
 
-final class _$LocalRequestTask_OnLocalRequestResponse
-    with $LocalRequestTask_OnLocalRequestResponse {
-  _$LocalRequestTask_OnLocalRequestResponse({
-    required void Function(_$jni.JArray<_$jni.jbyte> bs) onResponse,
+final class _$JObject$OnLocalRequestResponse
+    with $JObject$OnLocalRequestResponse {
+  _$JObject$OnLocalRequestResponse({
+    required void Function(jni$_.JByteArray? bs) onResponse,
     this.onResponse$async = false,
   }) : _onResponse = onResponse;
 
-  final void Function(_$jni.JArray<_$jni.jbyte> bs) _onResponse;
+  final void Function(jni$_.JByteArray? bs) _onResponse;
   final bool onResponse$async;
 
-  void onResponse(_$jni.JArray<_$jni.jbyte> bs) {
+  void onResponse(jni$_.JByteArray? bs) {
     return _onResponse(bs);
   }
 }
 
-final class $LocalRequestTask_OnLocalRequestResponse$Type
-    extends _$jni.JObjType<LocalRequestTask_OnLocalRequestResponse> {
-  @_$jni.internal
-  const $LocalRequestTask_OnLocalRequestResponse$Type();
+final class $JObject$OnLocalRequestResponse$NullableType
+    extends jni$_.JObjType<JObject$OnLocalRequestResponse?> {
+  @jni$_.internal
+  const $JObject$OnLocalRequestResponse$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/http/LocalRequestTask$OnLocalRequestResponse;';
 
-  @_$jni.internal
-  @_$core.override
-  LocalRequestTask_OnLocalRequestResponse fromReference(
-          _$jni.JReference reference) =>
-      LocalRequestTask_OnLocalRequestResponse.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  JObject$OnLocalRequestResponse? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : JObject$OnLocalRequestResponse.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<JObject$OnLocalRequestResponse?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($LocalRequestTask_OnLocalRequestResponse$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($JObject$OnLocalRequestResponse$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($LocalRequestTask_OnLocalRequestResponse$Type) &&
-        other is $LocalRequestTask_OnLocalRequestResponse$Type;
+            ($JObject$OnLocalRequestResponse$NullableType) &&
+        other is $JObject$OnLocalRequestResponse$NullableType;
+  }
+}
+
+final class $JObject$OnLocalRequestResponse$Type
+    extends jni$_.JObjType<JObject$OnLocalRequestResponse> {
+  @jni$_.internal
+  const $JObject$OnLocalRequestResponse$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/http/LocalRequestTask$OnLocalRequestResponse;';
+
+  @jni$_.internal
+  @core$_.override
+  JObject$OnLocalRequestResponse fromReference(jni$_.JReference reference) =>
+      JObject$OnLocalRequestResponse.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<JObject$OnLocalRequestResponse?> get nullableType =>
+      const $JObject$OnLocalRequestResponse$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($JObject$OnLocalRequestResponse$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($JObject$OnLocalRequestResponse$Type) &&
+        other is $JObject$OnLocalRequestResponse$Type;
   }
 }

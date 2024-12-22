@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,39 +45,40 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.storage.Resource$Kind`
-class Resource_Kind extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Resource_Kind> $type;
+class Resource$Kind extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Resource$Kind> $type;
 
-  @_$jni.internal
-  Resource_Kind.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Resource$Kind.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/storage/Resource$Kind');
+      jni$_.JClass.forName(r'org/maplibre/android/storage/Resource$Kind');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Resource_Kind$Type();
+  static const nullableType = $Resource$Kind$NullableType();
+  static const type = $Resource$Kind$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Resource_Kind> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Resource$Kind> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -84,39 +86,39 @@ class Resource_Kind extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Resource_Kind $impl,
+    jni$_.JImplementer implementer,
+    $Resource$Kind $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.storage.Resource$Kind',
@@ -128,72 +130,116 @@ class Resource_Kind extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Resource_Kind.implement(
-    $Resource_Kind $impl,
+  factory Resource$Kind.implement(
+    $Resource$Kind $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Resource_Kind.fromReference(
+    return Resource$Kind.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Resource_Kind {
-  factory $Resource_Kind() = _$Resource_Kind;
+abstract base mixin class $Resource$Kind {
+  factory $Resource$Kind() = _$Resource$Kind;
 }
 
-final class _$Resource_Kind with $Resource_Kind {
-  _$Resource_Kind();
+final class _$Resource$Kind with $Resource$Kind {
+  _$Resource$Kind();
 }
 
-final class $Resource_Kind$Type extends _$jni.JObjType<Resource_Kind> {
-  @_$jni.internal
-  const $Resource_Kind$Type();
+final class $Resource$Kind$NullableType extends jni$_.JObjType<Resource$Kind?> {
+  @jni$_.internal
+  const $Resource$Kind$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/storage/Resource$Kind;';
 
-  @_$jni.internal
-  @_$core.override
-  Resource_Kind fromReference(_$jni.JReference reference) =>
-      Resource_Kind.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Resource$Kind? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Resource$Kind.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Resource$Kind?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Resource_Kind$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Resource$Kind$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Resource_Kind$Type) &&
-        other is $Resource_Kind$Type;
+    return other.runtimeType == ($Resource$Kind$NullableType) &&
+        other is $Resource$Kind$NullableType;
+  }
+}
+
+final class $Resource$Kind$Type extends jni$_.JObjType<Resource$Kind> {
+  @jni$_.internal
+  const $Resource$Kind$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/storage/Resource$Kind;';
+
+  @jni$_.internal
+  @core$_.override
+  Resource$Kind fromReference(jni$_.JReference reference) =>
+      Resource$Kind.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Resource$Kind?> get nullableType =>
+      const $Resource$Kind$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Resource$Kind$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Resource$Kind$Type) &&
+        other is $Resource$Kind$Type;
   }
 }
 
 /// from: `org.maplibre.android.storage.Resource`
-class Resource extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Resource> $type;
+class Resource extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Resource> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Resource.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/storage/Resource');
+      jni$_.JClass.forName(r'org/maplibre/android/storage/Resource');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Resource$NullableType();
   static const type = $Resource$Type();
 
   /// from: `static public final int UNKNOWN`
@@ -220,52 +266,93 @@ class Resource extends _$jni.JObject {
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory Resource() {
     return Resource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $Resource$Type extends _$jni.JObjType<Resource> {
-  @_$jni.internal
-  const $Resource$Type();
+final class $Resource$NullableType extends jni$_.JObjType<Resource?> {
+  @jni$_.internal
+  const $Resource$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/storage/Resource;';
 
-  @_$jni.internal
-  @_$core.override
-  Resource fromReference(_$jni.JReference reference) =>
-      Resource.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Resource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Resource.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Resource?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Resource$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Resource$NullableType) &&
+        other is $Resource$NullableType;
+  }
+}
+
+final class $Resource$Type extends jni$_.JObjType<Resource> {
+  @jni$_.internal
+  const $Resource$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/storage/Resource;';
+
+  @jni$_.internal
+  @core$_.override
+  Resource fromReference(jni$_.JReference reference) => Resource.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Resource?> get nullableType => const $Resource$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Resource$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Resource$Type) && other is $Resource$Type;
   }

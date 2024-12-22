@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,56 +45,102 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.text.LocalGlyphRasterizer`
-class LocalGlyphRasterizer extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocalGlyphRasterizer> $type;
+class LocalGlyphRasterizer extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocalGlyphRasterizer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LocalGlyphRasterizer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/text/LocalGlyphRasterizer');
+      jni$_.JClass.forName(r'org/maplibre/android/text/LocalGlyphRasterizer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $LocalGlyphRasterizer$NullableType();
   static const type = $LocalGlyphRasterizer$Type();
 }
 
-final class $LocalGlyphRasterizer$Type
-    extends _$jni.JObjType<LocalGlyphRasterizer> {
-  @_$jni.internal
-  const $LocalGlyphRasterizer$Type();
+final class $LocalGlyphRasterizer$NullableType
+    extends jni$_.JObjType<LocalGlyphRasterizer?> {
+  @jni$_.internal
+  const $LocalGlyphRasterizer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/text/LocalGlyphRasterizer;';
 
-  @_$jni.internal
-  @_$core.override
-  LocalGlyphRasterizer fromReference(_$jni.JReference reference) =>
-      LocalGlyphRasterizer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocalGlyphRasterizer? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocalGlyphRasterizer.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocalGlyphRasterizer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($LocalGlyphRasterizer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LocalGlyphRasterizer$NullableType) &&
+        other is $LocalGlyphRasterizer$NullableType;
+  }
+}
+
+final class $LocalGlyphRasterizer$Type
+    extends jni$_.JObjType<LocalGlyphRasterizer> {
+  @jni$_.internal
+  const $LocalGlyphRasterizer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/text/LocalGlyphRasterizer;';
+
+  @jni$_.internal
+  @core$_.override
+  LocalGlyphRasterizer fromReference(jni$_.JReference reference) =>
+      LocalGlyphRasterizer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocalGlyphRasterizer?> get nullableType =>
+      const $LocalGlyphRasterizer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($LocalGlyphRasterizer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LocalGlyphRasterizer$Type) &&
         other is $LocalGlyphRasterizer$Type;

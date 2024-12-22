@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,68 +45,72 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../maps/Style.dart' as style_;
+import '../maps/Style.dart' as style$_;
 
-import 'LocationComponentOptions.dart' as locationcomponentoptions_;
+import 'LocationComponentOptions.dart' as locationcomponentoptions$_;
 
-import 'engine/LocationEngine.dart' as locationengine_;
+import 'engine/LocationEngine.dart' as locationengine$_;
 
-import 'engine/LocationEngineRequest.dart' as locationenginerequest_;
+import 'engine/LocationEngineRequest.dart' as locationenginerequest$_;
 
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions$Builder`
-class LocationComponentActivationOptions_Builder extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationComponentActivationOptions_Builder> $type;
+class LocationComponentActivationOptions$Builder extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationComponentActivationOptions$Builder> $type;
 
-  @_$jni.internal
-  LocationComponentActivationOptions_Builder.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  LocationComponentActivationOptions$Builder.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/LocationComponentActivationOptions$Builder');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $LocationComponentActivationOptions_Builder$Type();
+  static const nullableType =
+      $LocationComponentActivationOptions$Builder$NullableType();
+  static const type = $LocationComponentActivationOptions$Builder$Type();
   static final _id_new$ = _class.constructorId(
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/Style;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.Style style)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LocationComponentActivationOptions_Builder(
-    _$jni.JObject context,
-    style_.Style style,
+  factory LocationComponentActivationOptions$Builder(
+    jni$_.JObject? context,
+    style$_.Style? style,
   ) {
-    return LocationComponentActivationOptions_Builder.fromReference(_new$(
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$style = style?.reference ?? jni$_.jNullReference;
+    return LocationComponentActivationOptions$Builder.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            style.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$style.pointer)
         .reference);
   }
 
@@ -114,27 +119,27 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngine;)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _locationEngine = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _locationEngine = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder locationEngine(org.maplibre.android.location.engine.LocationEngine locationEngine)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder locationEngine(
-    locationengine_.LocationEngine locationEngine,
+  LocationComponentActivationOptions$Builder? locationEngine(
+    locationengine$_.LocationEngine? locationEngine,
   ) {
-    return _locationEngine(
-            reference.pointer,
-            _id_locationEngine as _$jni.JMethodIDPtr,
-            locationEngine.reference.pointer)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+    final _$locationEngine = locationEngine?.reference ?? jni$_.jNullReference;
+    return _locationEngine(reference.pointer,
+            _id_locationEngine as jni$_.JMethodIDPtr, _$locationEngine.pointer)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_locationEngineRequest = _class.instanceMethodId(
@@ -142,27 +147,30 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _locationEngineRequest = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _locationEngineRequest = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder locationEngineRequest(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder locationEngineRequest(
-    locationenginerequest_.LocationEngineRequest locationEngineRequest,
+  LocationComponentActivationOptions$Builder? locationEngineRequest(
+    locationenginerequest$_.LocationEngineRequest? locationEngineRequest,
   ) {
+    final _$locationEngineRequest =
+        locationEngineRequest?.reference ?? jni$_.jNullReference;
     return _locationEngineRequest(
             reference.pointer,
-            _id_locationEngineRequest as _$jni.JMethodIDPtr,
-            locationEngineRequest.reference.pointer)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+            _id_locationEngineRequest as jni$_.JMethodIDPtr,
+            _$locationEngineRequest.pointer)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_locationComponentOptions = _class.instanceMethodId(
@@ -170,27 +178,31 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'(Lorg/maplibre/android/location/LocationComponentOptions;)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _locationComponentOptions = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _locationComponentOptions = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder locationComponentOptions(org.maplibre.android.location.LocationComponentOptions locationComponentOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder locationComponentOptions(
-    locationcomponentoptions_.LocationComponentOptions locationComponentOptions,
+  LocationComponentActivationOptions$Builder? locationComponentOptions(
+    locationcomponentoptions$_.LocationComponentOptions?
+        locationComponentOptions,
   ) {
+    final _$locationComponentOptions =
+        locationComponentOptions?.reference ?? jni$_.jNullReference;
     return _locationComponentOptions(
             reference.pointer,
-            _id_locationComponentOptions as _$jni.JMethodIDPtr,
-            locationComponentOptions.reference.pointer)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+            _id_locationComponentOptions as jni$_.JMethodIDPtr,
+            _$locationComponentOptions.pointer)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_styleRes = _class.instanceMethodId(
@@ -198,23 +210,24 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'(I)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _styleRes = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _styleRes = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder styleRes(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder styleRes(
+  LocationComponentActivationOptions$Builder? styleRes(
     int i,
   ) {
-    return _styleRes(reference.pointer, _id_styleRes as _$jni.JMethodIDPtr, i)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+    return _styleRes(reference.pointer, _id_styleRes as jni$_.JMethodIDPtr, i)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_useDefaultLocationEngine = _class.instanceMethodId(
@@ -222,24 +235,25 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'(Z)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _useDefaultLocationEngine = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _useDefaultLocationEngine = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder useDefaultLocationEngine(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder useDefaultLocationEngine(
+  LocationComponentActivationOptions$Builder? useDefaultLocationEngine(
     bool z,
   ) {
     return _useDefaultLocationEngine(reference.pointer,
-            _id_useDefaultLocationEngine as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+            _id_useDefaultLocationEngine as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_useSpecializedLocationLayer = _class.instanceMethodId(
@@ -248,23 +262,24 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
   );
 
   static final _useSpecializedLocationLayer =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
               'globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder useSpecializedLocationLayer(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions_Builder useSpecializedLocationLayer(
+  LocationComponentActivationOptions$Builder? useSpecializedLocationLayer(
     bool z,
   ) {
     return _useSpecializedLocationLayer(reference.pointer,
-            _id_useSpecializedLocationLayer as _$jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+            _id_useSpecializedLocationLayer as jni$_.JMethodIDPtr, z ? 1 : 0)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_build = _class.instanceMethodId(
@@ -272,110 +287,167 @@ class LocationComponentActivationOptions_Builder extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/LocationComponentActivationOptions;',
   );
 
-  static final _build = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _build = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions build()`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions build() {
-    return _build(reference.pointer, _id_build as _$jni.JMethodIDPtr)
-        .object(const $LocationComponentActivationOptions$Type());
+  LocationComponentActivationOptions? build() {
+    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
+        .object<LocationComponentActivationOptions?>(
+            const $LocationComponentActivationOptions$NullableType());
   }
 }
 
-final class $LocationComponentActivationOptions_Builder$Type
-    extends _$jni.JObjType<LocationComponentActivationOptions_Builder> {
-  @_$jni.internal
-  const $LocationComponentActivationOptions_Builder$Type();
+final class $LocationComponentActivationOptions$Builder$NullableType
+    extends jni$_.JObjType<LocationComponentActivationOptions$Builder?> {
+  @jni$_.internal
+  const $LocationComponentActivationOptions$Builder$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationComponentActivationOptions_Builder fromReference(
-          _$jni.JReference reference) =>
-      LocationComponentActivationOptions_Builder.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationComponentActivationOptions$Builder? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationComponentActivationOptions$Builder.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentActivationOptions$Builder?>
+      get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($LocationComponentActivationOptions_Builder$Type).hashCode;
+      ($LocationComponentActivationOptions$Builder$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($LocationComponentActivationOptions_Builder$Type) &&
-        other is $LocationComponentActivationOptions_Builder$Type;
+            ($LocationComponentActivationOptions$Builder$NullableType) &&
+        other is $LocationComponentActivationOptions$Builder$NullableType;
+  }
+}
+
+final class $LocationComponentActivationOptions$Builder$Type
+    extends jni$_.JObjType<LocationComponentActivationOptions$Builder> {
+  @jni$_.internal
+  const $LocationComponentActivationOptions$Builder$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationComponentActivationOptions$Builder fromReference(
+          jni$_.JReference reference) =>
+      LocationComponentActivationOptions$Builder.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentActivationOptions$Builder?>
+      get nullableType =>
+          const $LocationComponentActivationOptions$Builder$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($LocationComponentActivationOptions$Builder$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($LocationComponentActivationOptions$Builder$Type) &&
+        other is $LocationComponentActivationOptions$Builder$Type;
   }
 }
 
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions`
-class LocationComponentActivationOptions extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LocationComponentActivationOptions> $type;
+class LocationComponentActivationOptions extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LocationComponentActivationOptions> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LocationComponentActivationOptions.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/LocationComponentActivationOptions');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType =
+      $LocationComponentActivationOptions$NullableType();
   static const type = $LocationComponentActivationOptions$Type();
   static final _id_builder = _class.staticMethodId(
     r'builder',
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/Style;)Lorg/maplibre/android/location/LocationComponentActivationOptions$Builder;',
   );
 
-  static final _builder = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _builder = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.android.location.LocationComponentActivationOptions$Builder builder(android.content.Context context, org.maplibre.android.maps.Style style)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationComponentActivationOptions_Builder builder(
-    _$jni.JObject context,
-    style_.Style style,
+  static LocationComponentActivationOptions$Builder? builder(
+    jni$_.JObject? context,
+    style$_.Style? style,
   ) {
-    return _builder(_class.reference.pointer, _id_builder as _$jni.JMethodIDPtr,
-            context.reference.pointer, style.reference.pointer)
-        .object(const $LocationComponentActivationOptions_Builder$Type());
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$style = style?.reference ?? jni$_.jNullReference;
+    return _builder(_class.reference.pointer, _id_builder as jni$_.JMethodIDPtr,
+            _$context.pointer, _$style.pointer)
+        .object<LocationComponentActivationOptions$Builder?>(
+            const $LocationComponentActivationOptions$Builder$NullableType());
   }
 
   static final _id_context = _class.instanceMethodId(
@@ -383,23 +455,23 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Landroid/content/Context;',
   );
 
-  static final _context = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _context = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.content.Context context()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject context() {
-    return _context(reference.pointer, _id_context as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? context() {
+    return _context(reference.pointer, _id_context as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_style = _class.instanceMethodId(
@@ -407,23 +479,23 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Lorg/maplibre/android/maps/Style;',
   );
 
-  static final _style = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _style = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.maps.Style style()`
   /// The returned object must be released after use, by calling the [release] method.
-  style_.Style style() {
-    return _style(reference.pointer, _id_style as _$jni.JMethodIDPtr)
-        .object(const style_.$Style$Type());
+  style$_.Style? style() {
+    return _style(reference.pointer, _id_style as jni$_.JMethodIDPtr)
+        .object<style$_.Style?>(const style$_.$Style$NullableType());
   }
 
   static final _id_locationEngine = _class.instanceMethodId(
@@ -431,24 +503,25 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/engine/LocationEngine;',
   );
 
-  static final _locationEngine = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _locationEngine = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngine locationEngine()`
   /// The returned object must be released after use, by calling the [release] method.
-  locationengine_.LocationEngine locationEngine() {
+  locationengine$_.LocationEngine? locationEngine() {
     return _locationEngine(
-            reference.pointer, _id_locationEngine as _$jni.JMethodIDPtr)
-        .object(const locationengine_.$LocationEngine$Type());
+            reference.pointer, _id_locationEngine as jni$_.JMethodIDPtr)
+        .object<locationengine$_.LocationEngine?>(
+            const locationengine$_.$LocationEngine$NullableType());
   }
 
   static final _id_locationEngineRequest = _class.instanceMethodId(
@@ -456,24 +529,26 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/engine/LocationEngineRequest;',
   );
 
-  static final _locationEngineRequest = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _locationEngineRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest()`
   /// The returned object must be released after use, by calling the [release] method.
-  locationenginerequest_.LocationEngineRequest locationEngineRequest() {
+  locationenginerequest$_.LocationEngineRequest? locationEngineRequest() {
     return _locationEngineRequest(
-            reference.pointer, _id_locationEngineRequest as _$jni.JMethodIDPtr)
-        .object(const locationenginerequest_.$LocationEngineRequest$Type());
+            reference.pointer, _id_locationEngineRequest as jni$_.JMethodIDPtr)
+        .object<locationenginerequest$_.LocationEngineRequest?>(
+            const locationenginerequest$_
+                .$LocationEngineRequest$NullableType());
   }
 
   static final _id_locationComponentOptions = _class.instanceMethodId(
@@ -481,26 +556,27 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Lorg/maplibre/android/location/LocationComponentOptions;',
   );
 
-  static final _locationComponentOptions = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _locationComponentOptions = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions locationComponentOptions()`
   /// The returned object must be released after use, by calling the [release] method.
-  locationcomponentoptions_.LocationComponentOptions
+  locationcomponentoptions$_.LocationComponentOptions?
       locationComponentOptions() {
     return _locationComponentOptions(reference.pointer,
-            _id_locationComponentOptions as _$jni.JMethodIDPtr)
-        .object(
-            const locationcomponentoptions_.$LocationComponentOptions$Type());
+            _id_locationComponentOptions as jni$_.JMethodIDPtr)
+        .object<locationcomponentoptions$_.LocationComponentOptions?>(
+            const locationcomponentoptions$_
+                .$LocationComponentOptions$NullableType());
   }
 
   static final _id_styleRes = _class.instanceMethodId(
@@ -508,21 +584,21 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()I',
   );
 
-  static final _styleRes = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _styleRes = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int styleRes()`
   int styleRes() {
-    return _styleRes(reference.pointer, _id_styleRes as _$jni.JMethodIDPtr)
+    return _styleRes(reference.pointer, _id_styleRes as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -531,22 +607,22 @@ class LocationComponentActivationOptions extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _useDefaultLocationEngine = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _useDefaultLocationEngine = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean useDefaultLocationEngine()`
   bool useDefaultLocationEngine() {
     return _useDefaultLocationEngine(reference.pointer,
-            _id_useDefaultLocationEngine as _$jni.JMethodIDPtr)
+            _id_useDefaultLocationEngine as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -556,54 +632,103 @@ class LocationComponentActivationOptions extends _$jni.JObject {
   );
 
   static final _useSpecializedLocationLayer =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public boolean useSpecializedLocationLayer()`
   bool useSpecializedLocationLayer() {
     return _useSpecializedLocationLayer(reference.pointer,
-            _id_useSpecializedLocationLayer as _$jni.JMethodIDPtr)
+            _id_useSpecializedLocationLayer as jni$_.JMethodIDPtr)
         .boolean;
   }
 }
 
-final class $LocationComponentActivationOptions$Type
-    extends _$jni.JObjType<LocationComponentActivationOptions> {
-  @_$jni.internal
-  const $LocationComponentActivationOptions$Type();
+final class $LocationComponentActivationOptions$NullableType
+    extends jni$_.JObjType<LocationComponentActivationOptions?> {
+  @jni$_.internal
+  const $LocationComponentActivationOptions$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/LocationComponentActivationOptions;';
 
-  @_$jni.internal
-  @_$core.override
-  LocationComponentActivationOptions fromReference(
-          _$jni.JReference reference) =>
-      LocationComponentActivationOptions.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LocationComponentActivationOptions? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LocationComponentActivationOptions.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentActivationOptions?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode =>
+      ($LocationComponentActivationOptions$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($LocationComponentActivationOptions$NullableType) &&
+        other is $LocationComponentActivationOptions$NullableType;
+  }
+}
+
+final class $LocationComponentActivationOptions$Type
+    extends jni$_.JObjType<LocationComponentActivationOptions> {
+  @jni$_.internal
+  const $LocationComponentActivationOptions$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/LocationComponentActivationOptions;';
+
+  @jni$_.internal
+  @core$_.override
+  LocationComponentActivationOptions fromReference(
+          jni$_.JReference reference) =>
+      LocationComponentActivationOptions.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LocationComponentActivationOptions?> get nullableType =>
+      const $LocationComponentActivationOptions$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($LocationComponentActivationOptions$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LocationComponentActivationOptions$Type) &&
         other is $LocationComponentActivationOptions$Type;

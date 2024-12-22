@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,210 +45,320 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.utils.FileUtils$CheckFileReadPermissionTask`
-class FileUtils_CheckFileReadPermissionTask extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FileUtils_CheckFileReadPermissionTask> $type;
+class FileUtils$CheckFileReadPermissionTask extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FileUtils$CheckFileReadPermissionTask> $type;
 
-  @_$jni.internal
-  FileUtils_CheckFileReadPermissionTask.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  FileUtils$CheckFileReadPermissionTask.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/utils/FileUtils$CheckFileReadPermissionTask');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $FileUtils_CheckFileReadPermissionTask$Type();
+  static const nullableType =
+      $FileUtils$CheckFileReadPermissionTask$NullableType();
+  static const type = $FileUtils$CheckFileReadPermissionTask$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lorg/maplibre/android/utils/FileUtils$OnCheckFileReadPermissionListener;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(org.maplibre.android.utils.FileUtils$OnCheckFileReadPermissionListener onCheckFileReadPermissionListener)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FileUtils_CheckFileReadPermissionTask(
-    FileUtils_OnCheckFileReadPermissionListener
+  factory FileUtils$CheckFileReadPermissionTask(
+    FileUtils$OnCheckFileReadPermissionListener?
         onCheckFileReadPermissionListener,
   ) {
-    return FileUtils_CheckFileReadPermissionTask.fromReference(_new$(
+    final _$onCheckFileReadPermissionListener =
+        onCheckFileReadPermissionListener?.reference ?? jni$_.jNullReference;
+    return FileUtils$CheckFileReadPermissionTask.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            onCheckFileReadPermissionListener.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$onCheckFileReadPermissionListener.pointer)
         .reference);
   }
 }
 
-final class $FileUtils_CheckFileReadPermissionTask$Type
-    extends _$jni.JObjType<FileUtils_CheckFileReadPermissionTask> {
-  @_$jni.internal
-  const $FileUtils_CheckFileReadPermissionTask$Type();
+final class $FileUtils$CheckFileReadPermissionTask$NullableType
+    extends jni$_.JObjType<FileUtils$CheckFileReadPermissionTask?> {
+  @jni$_.internal
+  const $FileUtils$CheckFileReadPermissionTask$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/utils/FileUtils$CheckFileReadPermissionTask;';
 
-  @_$jni.internal
-  @_$core.override
-  FileUtils_CheckFileReadPermissionTask fromReference(
-          _$jni.JReference reference) =>
-      FileUtils_CheckFileReadPermissionTask.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FileUtils$CheckFileReadPermissionTask? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : FileUtils$CheckFileReadPermissionTask.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$CheckFileReadPermissionTask?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($FileUtils_CheckFileReadPermissionTask$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($FileUtils$CheckFileReadPermissionTask$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($FileUtils_CheckFileReadPermissionTask$Type) &&
-        other is $FileUtils_CheckFileReadPermissionTask$Type;
+    return other.runtimeType ==
+            ($FileUtils$CheckFileReadPermissionTask$NullableType) &&
+        other is $FileUtils$CheckFileReadPermissionTask$NullableType;
+  }
+}
+
+final class $FileUtils$CheckFileReadPermissionTask$Type
+    extends jni$_.JObjType<FileUtils$CheckFileReadPermissionTask> {
+  @jni$_.internal
+  const $FileUtils$CheckFileReadPermissionTask$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/utils/FileUtils$CheckFileReadPermissionTask;';
+
+  @jni$_.internal
+  @core$_.override
+  FileUtils$CheckFileReadPermissionTask fromReference(
+          jni$_.JReference reference) =>
+      FileUtils$CheckFileReadPermissionTask.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$CheckFileReadPermissionTask?> get nullableType =>
+      const $FileUtils$CheckFileReadPermissionTask$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($FileUtils$CheckFileReadPermissionTask$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FileUtils$CheckFileReadPermissionTask$Type) &&
+        other is $FileUtils$CheckFileReadPermissionTask$Type;
   }
 }
 
 /// from: `org.maplibre.android.utils.FileUtils$CheckFileWritePermissionTask`
-class FileUtils_CheckFileWritePermissionTask extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FileUtils_CheckFileWritePermissionTask> $type;
+class FileUtils$CheckFileWritePermissionTask extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FileUtils$CheckFileWritePermissionTask> $type;
 
-  @_$jni.internal
-  FileUtils_CheckFileWritePermissionTask.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  FileUtils$CheckFileWritePermissionTask.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/utils/FileUtils$CheckFileWritePermissionTask');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $FileUtils_CheckFileWritePermissionTask$Type();
+  static const nullableType =
+      $FileUtils$CheckFileWritePermissionTask$NullableType();
+  static const type = $FileUtils$CheckFileWritePermissionTask$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lorg/maplibre/android/utils/FileUtils$OnCheckFileWritePermissionListener;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(org.maplibre.android.utils.FileUtils$OnCheckFileWritePermissionListener onCheckFileWritePermissionListener)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FileUtils_CheckFileWritePermissionTask(
-    FileUtils_OnCheckFileWritePermissionListener
+  factory FileUtils$CheckFileWritePermissionTask(
+    FileUtils$OnCheckFileWritePermissionListener?
         onCheckFileWritePermissionListener,
   ) {
-    return FileUtils_CheckFileWritePermissionTask.fromReference(_new$(
+    final _$onCheckFileWritePermissionListener =
+        onCheckFileWritePermissionListener?.reference ?? jni$_.jNullReference;
+    return FileUtils$CheckFileWritePermissionTask.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            onCheckFileWritePermissionListener.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$onCheckFileWritePermissionListener.pointer)
         .reference);
   }
 }
 
-final class $FileUtils_CheckFileWritePermissionTask$Type
-    extends _$jni.JObjType<FileUtils_CheckFileWritePermissionTask> {
-  @_$jni.internal
-  const $FileUtils_CheckFileWritePermissionTask$Type();
+final class $FileUtils$CheckFileWritePermissionTask$NullableType
+    extends jni$_.JObjType<FileUtils$CheckFileWritePermissionTask?> {
+  @jni$_.internal
+  const $FileUtils$CheckFileWritePermissionTask$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/utils/FileUtils$CheckFileWritePermissionTask;';
 
-  @_$jni.internal
-  @_$core.override
-  FileUtils_CheckFileWritePermissionTask fromReference(
-          _$jni.JReference reference) =>
-      FileUtils_CheckFileWritePermissionTask.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FileUtils$CheckFileWritePermissionTask? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : FileUtils$CheckFileWritePermissionTask.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$CheckFileWritePermissionTask?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($FileUtils_CheckFileWritePermissionTask$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($FileUtils$CheckFileWritePermissionTask$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($FileUtils_CheckFileWritePermissionTask$Type) &&
-        other is $FileUtils_CheckFileWritePermissionTask$Type;
+            ($FileUtils$CheckFileWritePermissionTask$NullableType) &&
+        other is $FileUtils$CheckFileWritePermissionTask$NullableType;
+  }
+}
+
+final class $FileUtils$CheckFileWritePermissionTask$Type
+    extends jni$_.JObjType<FileUtils$CheckFileWritePermissionTask> {
+  @jni$_.internal
+  const $FileUtils$CheckFileWritePermissionTask$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/utils/FileUtils$CheckFileWritePermissionTask;';
+
+  @jni$_.internal
+  @core$_.override
+  FileUtils$CheckFileWritePermissionTask fromReference(
+          jni$_.JReference reference) =>
+      FileUtils$CheckFileWritePermissionTask.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$CheckFileWritePermissionTask?> get nullableType =>
+      const $FileUtils$CheckFileWritePermissionTask$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($FileUtils$CheckFileWritePermissionTask$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($FileUtils$CheckFileWritePermissionTask$Type) &&
+        other is $FileUtils$CheckFileWritePermissionTask$Type;
   }
 }
 
 /// from: `org.maplibre.android.utils.FileUtils$OnCheckFileReadPermissionListener`
-class FileUtils_OnCheckFileReadPermissionListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FileUtils_OnCheckFileReadPermissionListener> $type;
+class FileUtils$OnCheckFileReadPermissionListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FileUtils$OnCheckFileReadPermissionListener> $type;
 
-  @_$jni.internal
-  FileUtils_OnCheckFileReadPermissionListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  FileUtils$OnCheckFileReadPermissionListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/utils/FileUtils$OnCheckFileReadPermissionListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $FileUtils_OnCheckFileReadPermissionListener$Type();
+  static const nullableType =
+      $FileUtils$OnCheckFileReadPermissionListener$NullableType();
+  static const type = $FileUtils$OnCheckFileReadPermissionListener$Type();
   static final _id_onReadPermissionGranted = _class.instanceMethodId(
     r'onReadPermissionGranted',
     r'()V',
   );
 
-  static final _onReadPermissionGranted = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onReadPermissionGranted = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onReadPermissionGranted()`
   void onReadPermissionGranted() {
     _onReadPermissionGranted(reference.pointer,
-            _id_onReadPermissionGranted as _$jni.JMethodIDPtr)
+            _id_onReadPermissionGranted as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -256,34 +367,34 @@ class FileUtils_OnCheckFileReadPermissionListener extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onError = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onError()`
   void onError() {
-    _onError(reference.pointer, _id_onError as _$jni.JMethodIDPtr).check();
+    _onError(reference.pointer, _id_onError as jni$_.JMethodIDPtr).check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $FileUtils_OnCheckFileReadPermissionListener>
+  static final core$_.Map<int, $FileUtils$OnCheckFileReadPermissionListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -291,47 +402,47 @@ class FileUtils_OnCheckFileReadPermissionListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onReadPermissionGranted()V') {
         _$impls[$p]!.onReadPermissionGranted();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'onError()V') {
         _$impls[$p]!.onError();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $FileUtils_OnCheckFileReadPermissionListener $impl,
+    jni$_.JImplementer implementer,
+    $FileUtils$OnCheckFileReadPermissionListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.utils.FileUtils$OnCheckFileReadPermissionListener',
@@ -346,24 +457,24 @@ class FileUtils_OnCheckFileReadPermissionListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory FileUtils_OnCheckFileReadPermissionListener.implement(
-    $FileUtils_OnCheckFileReadPermissionListener $impl,
+  factory FileUtils$OnCheckFileReadPermissionListener.implement(
+    $FileUtils$OnCheckFileReadPermissionListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return FileUtils_OnCheckFileReadPermissionListener.fromReference(
+    return FileUtils$OnCheckFileReadPermissionListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $FileUtils_OnCheckFileReadPermissionListener {
-  factory $FileUtils_OnCheckFileReadPermissionListener({
+abstract base mixin class $FileUtils$OnCheckFileReadPermissionListener {
+  factory $FileUtils$OnCheckFileReadPermissionListener({
     required void Function() onReadPermissionGranted,
     bool onReadPermissionGranted$async,
     required void Function() onError,
     bool onError$async,
-  }) = _$FileUtils_OnCheckFileReadPermissionListener;
+  }) = _$FileUtils$OnCheckFileReadPermissionListener;
 
   void onReadPermissionGranted();
   bool get onReadPermissionGranted$async => false;
@@ -371,9 +482,9 @@ abstract base mixin class $FileUtils_OnCheckFileReadPermissionListener {
   bool get onError$async => false;
 }
 
-final class _$FileUtils_OnCheckFileReadPermissionListener
-    with $FileUtils_OnCheckFileReadPermissionListener {
-  _$FileUtils_OnCheckFileReadPermissionListener({
+final class _$FileUtils$OnCheckFileReadPermissionListener
+    with $FileUtils$OnCheckFileReadPermissionListener {
+  _$FileUtils$OnCheckFileReadPermissionListener({
     required void Function() onReadPermissionGranted,
     this.onReadPermissionGranted$async = false,
     required void Function() onError,
@@ -395,80 +506,133 @@ final class _$FileUtils_OnCheckFileReadPermissionListener
   }
 }
 
-final class $FileUtils_OnCheckFileReadPermissionListener$Type
-    extends _$jni.JObjType<FileUtils_OnCheckFileReadPermissionListener> {
-  @_$jni.internal
-  const $FileUtils_OnCheckFileReadPermissionListener$Type();
+final class $FileUtils$OnCheckFileReadPermissionListener$NullableType
+    extends jni$_.JObjType<FileUtils$OnCheckFileReadPermissionListener?> {
+  @jni$_.internal
+  const $FileUtils$OnCheckFileReadPermissionListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/utils/FileUtils$OnCheckFileReadPermissionListener;';
 
-  @_$jni.internal
-  @_$core.override
-  FileUtils_OnCheckFileReadPermissionListener fromReference(
-          _$jni.JReference reference) =>
-      FileUtils_OnCheckFileReadPermissionListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FileUtils$OnCheckFileReadPermissionListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : FileUtils$OnCheckFileReadPermissionListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$OnCheckFileReadPermissionListener?>
+      get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($FileUtils_OnCheckFileReadPermissionListener$Type).hashCode;
+      ($FileUtils$OnCheckFileReadPermissionListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($FileUtils_OnCheckFileReadPermissionListener$Type) &&
-        other is $FileUtils_OnCheckFileReadPermissionListener$Type;
+            ($FileUtils$OnCheckFileReadPermissionListener$NullableType) &&
+        other is $FileUtils$OnCheckFileReadPermissionListener$NullableType;
+  }
+}
+
+final class $FileUtils$OnCheckFileReadPermissionListener$Type
+    extends jni$_.JObjType<FileUtils$OnCheckFileReadPermissionListener> {
+  @jni$_.internal
+  const $FileUtils$OnCheckFileReadPermissionListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/utils/FileUtils$OnCheckFileReadPermissionListener;';
+
+  @jni$_.internal
+  @core$_.override
+  FileUtils$OnCheckFileReadPermissionListener fromReference(
+          jni$_.JReference reference) =>
+      FileUtils$OnCheckFileReadPermissionListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$OnCheckFileReadPermissionListener?>
+      get nullableType =>
+          const $FileUtils$OnCheckFileReadPermissionListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($FileUtils$OnCheckFileReadPermissionListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($FileUtils$OnCheckFileReadPermissionListener$Type) &&
+        other is $FileUtils$OnCheckFileReadPermissionListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.utils.FileUtils$OnCheckFileWritePermissionListener`
-class FileUtils_OnCheckFileWritePermissionListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FileUtils_OnCheckFileWritePermissionListener> $type;
+class FileUtils$OnCheckFileWritePermissionListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FileUtils$OnCheckFileWritePermissionListener> $type;
 
-  @_$jni.internal
-  FileUtils_OnCheckFileWritePermissionListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  FileUtils$OnCheckFileWritePermissionListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/utils/FileUtils$OnCheckFileWritePermissionListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $FileUtils_OnCheckFileWritePermissionListener$Type();
+  static const nullableType =
+      $FileUtils$OnCheckFileWritePermissionListener$NullableType();
+  static const type = $FileUtils$OnCheckFileWritePermissionListener$Type();
   static final _id_onWritePermissionGranted = _class.instanceMethodId(
     r'onWritePermissionGranted',
     r'()V',
   );
 
-  static final _onWritePermissionGranted = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onWritePermissionGranted = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onWritePermissionGranted()`
   void onWritePermissionGranted() {
     _onWritePermissionGranted(reference.pointer,
-            _id_onWritePermissionGranted as _$jni.JMethodIDPtr)
+            _id_onWritePermissionGranted as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -477,34 +641,34 @@ class FileUtils_OnCheckFileWritePermissionListener extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onError = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onError()`
   void onError() {
-    _onError(reference.pointer, _id_onError as _$jni.JMethodIDPtr).check();
+    _onError(reference.pointer, _id_onError as jni$_.JMethodIDPtr).check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $FileUtils_OnCheckFileWritePermissionListener>
+  static final core$_.Map<int, $FileUtils$OnCheckFileWritePermissionListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -512,47 +676,47 @@ class FileUtils_OnCheckFileWritePermissionListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onWritePermissionGranted()V') {
         _$impls[$p]!.onWritePermissionGranted();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'onError()V') {
         _$impls[$p]!.onError();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $FileUtils_OnCheckFileWritePermissionListener $impl,
+    jni$_.JImplementer implementer,
+    $FileUtils$OnCheckFileWritePermissionListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.utils.FileUtils$OnCheckFileWritePermissionListener',
@@ -568,24 +732,24 @@ class FileUtils_OnCheckFileWritePermissionListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory FileUtils_OnCheckFileWritePermissionListener.implement(
-    $FileUtils_OnCheckFileWritePermissionListener $impl,
+  factory FileUtils$OnCheckFileWritePermissionListener.implement(
+    $FileUtils$OnCheckFileWritePermissionListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return FileUtils_OnCheckFileWritePermissionListener.fromReference(
+    return FileUtils$OnCheckFileWritePermissionListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $FileUtils_OnCheckFileWritePermissionListener {
-  factory $FileUtils_OnCheckFileWritePermissionListener({
+abstract base mixin class $FileUtils$OnCheckFileWritePermissionListener {
+  factory $FileUtils$OnCheckFileWritePermissionListener({
     required void Function() onWritePermissionGranted,
     bool onWritePermissionGranted$async,
     required void Function() onError,
     bool onError$async,
-  }) = _$FileUtils_OnCheckFileWritePermissionListener;
+  }) = _$FileUtils$OnCheckFileWritePermissionListener;
 
   void onWritePermissionGranted();
   bool get onWritePermissionGranted$async => false;
@@ -593,9 +757,9 @@ abstract base mixin class $FileUtils_OnCheckFileWritePermissionListener {
   bool get onError$async => false;
 }
 
-final class _$FileUtils_OnCheckFileWritePermissionListener
-    with $FileUtils_OnCheckFileWritePermissionListener {
-  _$FileUtils_OnCheckFileWritePermissionListener({
+final class _$FileUtils$OnCheckFileWritePermissionListener
+    with $FileUtils$OnCheckFileWritePermissionListener {
+  _$FileUtils$OnCheckFileWritePermissionListener({
     required void Function() onWritePermissionGranted,
     this.onWritePermissionGranted$async = false,
     required void Function() onError,
@@ -617,80 +781,132 @@ final class _$FileUtils_OnCheckFileWritePermissionListener
   }
 }
 
-final class $FileUtils_OnCheckFileWritePermissionListener$Type
-    extends _$jni.JObjType<FileUtils_OnCheckFileWritePermissionListener> {
-  @_$jni.internal
-  const $FileUtils_OnCheckFileWritePermissionListener$Type();
+final class $FileUtils$OnCheckFileWritePermissionListener$NullableType
+    extends jni$_.JObjType<FileUtils$OnCheckFileWritePermissionListener?> {
+  @jni$_.internal
+  const $FileUtils$OnCheckFileWritePermissionListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/utils/FileUtils$OnCheckFileWritePermissionListener;';
 
-  @_$jni.internal
-  @_$core.override
-  FileUtils_OnCheckFileWritePermissionListener fromReference(
-          _$jni.JReference reference) =>
-      FileUtils_OnCheckFileWritePermissionListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FileUtils$OnCheckFileWritePermissionListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : FileUtils$OnCheckFileWritePermissionListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$OnCheckFileWritePermissionListener?>
+      get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($FileUtils_OnCheckFileWritePermissionListener$Type).hashCode;
+      ($FileUtils$OnCheckFileWritePermissionListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($FileUtils_OnCheckFileWritePermissionListener$Type) &&
-        other is $FileUtils_OnCheckFileWritePermissionListener$Type;
+            ($FileUtils$OnCheckFileWritePermissionListener$NullableType) &&
+        other is $FileUtils$OnCheckFileWritePermissionListener$NullableType;
+  }
+}
+
+final class $FileUtils$OnCheckFileWritePermissionListener$Type
+    extends jni$_.JObjType<FileUtils$OnCheckFileWritePermissionListener> {
+  @jni$_.internal
+  const $FileUtils$OnCheckFileWritePermissionListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/utils/FileUtils$OnCheckFileWritePermissionListener;';
+
+  @jni$_.internal
+  @core$_.override
+  FileUtils$OnCheckFileWritePermissionListener fromReference(
+          jni$_.JReference reference) =>
+      FileUtils$OnCheckFileWritePermissionListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils$OnCheckFileWritePermissionListener?>
+      get nullableType =>
+          const $FileUtils$OnCheckFileWritePermissionListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($FileUtils$OnCheckFileWritePermissionListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($FileUtils$OnCheckFileWritePermissionListener$Type) &&
+        other is $FileUtils$OnCheckFileWritePermissionListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.utils.FileUtils`
-class FileUtils extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FileUtils> $type;
+class FileUtils extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FileUtils> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   FileUtils.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/utils/FileUtils');
+      jni$_.JClass.forName(r'org/maplibre/android/utils/FileUtils');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $FileUtils$NullableType();
   static const type = $FileUtils$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory FileUtils() {
     return FileUtils.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -699,52 +915,96 @@ class FileUtils extends _$jni.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _deleteFile = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _deleteFile = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public void deleteFile(java.lang.String string)`
   static void deleteFile(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _deleteFile(_class.reference.pointer, _id_deleteFile as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _deleteFile(_class.reference.pointer, _id_deleteFile as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 }
 
-final class $FileUtils$Type extends _$jni.JObjType<FileUtils> {
-  @_$jni.internal
-  const $FileUtils$Type();
+final class $FileUtils$NullableType extends jni$_.JObjType<FileUtils?> {
+  @jni$_.internal
+  const $FileUtils$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/utils/FileUtils;';
 
-  @_$jni.internal
-  @_$core.override
-  FileUtils fromReference(_$jni.JReference reference) =>
-      FileUtils.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FileUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : FileUtils.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($FileUtils$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FileUtils$NullableType) &&
+        other is $FileUtils$NullableType;
+  }
+}
+
+final class $FileUtils$Type extends jni$_.JObjType<FileUtils> {
+  @jni$_.internal
+  const $FileUtils$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/utils/FileUtils;';
+
+  @jni$_.internal
+  @core$_.override
+  FileUtils fromReference(jni$_.JReference reference) =>
+      FileUtils.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FileUtils?> get nullableType =>
+      const $FileUtils$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($FileUtils$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($FileUtils$Type) && other is $FileUtils$Type;
   }
