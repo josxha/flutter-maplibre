@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,91 +45,140 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.PulsingLocationCircleAnimator`
-class PulsingLocationCircleAnimator extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<PulsingLocationCircleAnimator> $type;
+class PulsingLocationCircleAnimator extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<PulsingLocationCircleAnimator> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   PulsingLocationCircleAnimator.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/PulsingLocationCircleAnimator');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $PulsingLocationCircleAnimator$NullableType();
   static const type = $PulsingLocationCircleAnimator$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lorg/maplibre/android/location/MapLibreAnimator$AnimationsValueChangeListener;IF)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Double
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Double
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int, double)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, double)>();
 
   /// from: `public void <init>(org.maplibre.android.location.MapLibreAnimator$AnimationsValueChangeListener animationsValueChangeListener, int i, float f)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PulsingLocationCircleAnimator(
-    _$jni.JObject animationsValueChangeListener,
+    jni$_.JObject? animationsValueChangeListener,
     int i,
     double f,
   ) {
+    final _$animationsValueChangeListener =
+        animationsValueChangeListener?.reference ?? jni$_.jNullReference;
     return PulsingLocationCircleAnimator.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            animationsValueChangeListener.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$animationsValueChangeListener.pointer,
             i,
             f)
         .reference);
   }
 }
 
-final class $PulsingLocationCircleAnimator$Type
-    extends _$jni.JObjType<PulsingLocationCircleAnimator> {
-  @_$jni.internal
-  const $PulsingLocationCircleAnimator$Type();
+final class $PulsingLocationCircleAnimator$NullableType
+    extends jni$_.JObjType<PulsingLocationCircleAnimator?> {
+  @jni$_.internal
+  const $PulsingLocationCircleAnimator$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/PulsingLocationCircleAnimator;';
 
-  @_$jni.internal
-  @_$core.override
-  PulsingLocationCircleAnimator fromReference(_$jni.JReference reference) =>
-      PulsingLocationCircleAnimator.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  PulsingLocationCircleAnimator? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : PulsingLocationCircleAnimator.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PulsingLocationCircleAnimator?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($PulsingLocationCircleAnimator$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PulsingLocationCircleAnimator$NullableType) &&
+        other is $PulsingLocationCircleAnimator$NullableType;
+  }
+}
+
+final class $PulsingLocationCircleAnimator$Type
+    extends jni$_.JObjType<PulsingLocationCircleAnimator> {
+  @jni$_.internal
+  const $PulsingLocationCircleAnimator$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/PulsingLocationCircleAnimator;';
+
+  @jni$_.internal
+  @core$_.override
+  PulsingLocationCircleAnimator fromReference(jni$_.JReference reference) =>
+      PulsingLocationCircleAnimator.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PulsingLocationCircleAnimator?> get nullableType =>
+      const $PulsingLocationCircleAnimator$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($PulsingLocationCircleAnimator$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($PulsingLocationCircleAnimator$Type) &&
         other is $PulsingLocationCircleAnimator$Type;

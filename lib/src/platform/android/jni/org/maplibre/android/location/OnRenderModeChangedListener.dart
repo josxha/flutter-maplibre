@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,62 +45,63 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.OnRenderModeChangedListener`
-class OnRenderModeChangedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<OnRenderModeChangedListener> $type;
+class OnRenderModeChangedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<OnRenderModeChangedListener> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   OnRenderModeChangedListener.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/OnRenderModeChangedListener');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $OnRenderModeChangedListener$NullableType();
   static const type = $OnRenderModeChangedListener$Type();
   static final _id_onRenderModeChanged = _class.instanceMethodId(
     r'onRenderModeChanged',
     r'(I)V',
   );
 
-  static final _onRenderModeChanged = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _onRenderModeChanged = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public abstract void onRenderModeChanged(int i)`
   void onRenderModeChanged(
     int i,
   ) {
     _onRenderModeChanged(
-            reference.pointer, _id_onRenderModeChanged as _$jni.JMethodIDPtr, i)
+            reference.pointer, _id_onRenderModeChanged as jni$_.JMethodIDPtr, i)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $OnRenderModeChangedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $OnRenderModeChangedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -107,47 +109,47 @@ class OnRenderModeChangedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onRenderModeChanged(I)V') {
         _$impls[$p]!.onRenderModeChanged(
-          $a[0]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
+    jni$_.JImplementer implementer,
     $OnRenderModeChangedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.location.OnRenderModeChangedListener',
@@ -164,7 +166,7 @@ class OnRenderModeChangedListener extends _$jni.JObject {
   factory OnRenderModeChangedListener.implement(
     $OnRenderModeChangedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return OnRenderModeChangedListener.fromReference(
       $i.implementReference(),
@@ -196,33 +198,79 @@ final class _$OnRenderModeChangedListener with $OnRenderModeChangedListener {
   }
 }
 
-final class $OnRenderModeChangedListener$Type
-    extends _$jni.JObjType<OnRenderModeChangedListener> {
-  @_$jni.internal
-  const $OnRenderModeChangedListener$Type();
+final class $OnRenderModeChangedListener$NullableType
+    extends jni$_.JObjType<OnRenderModeChangedListener?> {
+  @jni$_.internal
+  const $OnRenderModeChangedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/OnRenderModeChangedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  OnRenderModeChangedListener fromReference(_$jni.JReference reference) =>
-      OnRenderModeChangedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  OnRenderModeChangedListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : OnRenderModeChangedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<OnRenderModeChangedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($OnRenderModeChangedListener$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnRenderModeChangedListener$NullableType) &&
+        other is $OnRenderModeChangedListener$NullableType;
+  }
+}
+
+final class $OnRenderModeChangedListener$Type
+    extends jni$_.JObjType<OnRenderModeChangedListener> {
+  @jni$_.internal
+  const $OnRenderModeChangedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/OnRenderModeChangedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  OnRenderModeChangedListener fromReference(jni$_.JReference reference) =>
+      OnRenderModeChangedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<OnRenderModeChangedListener?> get nullableType =>
+      const $OnRenderModeChangedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($OnRenderModeChangedListener$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($OnRenderModeChangedListener$Type) &&
         other is $OnRenderModeChangedListener$Type;

@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,69 +45,73 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../MapRenderer.dart' as maprenderer_;
+import '../MapRenderer.dart' as maprenderer$_;
 
 /// from: `org.maplibre.android.maps.renderer.textureview.TextureViewMapRenderer`
-class TextureViewMapRenderer extends maprenderer_.MapRenderer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<TextureViewMapRenderer> $type;
+class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<TextureViewMapRenderer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   TextureViewMapRenderer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $TextureViewMapRenderer$NullableType();
   static const type = $TextureViewMapRenderer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Landroid/content/Context;Landroid/view/TextureView;Ljava/lang/String;Z)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(android.content.Context context, android.view.TextureView textureView, java.lang.String string, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
   factory TextureViewMapRenderer(
-    _$jni.JObject context,
-    _$jni.JObject textureView,
-    _$jni.JString string,
+    jni$_.JObject? context,
+    jni$_.JObject? textureView,
+    jni$_.JString? string,
     bool z,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$textureView = textureView?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return TextureViewMapRenderer.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            textureView.reference.pointer,
-            string.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$textureView.pointer,
+            _$string.pointer,
             z ? 1 : 0)
         .reference);
   }
@@ -116,25 +121,27 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Lorg/maplibre/android/maps/renderer/textureview/TextureViewRenderThread;)V',
   );
 
-  static final _setRenderThread = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setRenderThread = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setRenderThread(org.maplibre.android.maps.renderer.textureview.TextureViewRenderThread textureViewRenderThread)`
   void setRenderThread(
-    _$jni.JObject textureViewRenderThread,
+    jni$_.JObject? textureViewRenderThread,
   ) {
+    final _$textureViewRenderThread =
+        textureViewRenderThread?.reference ?? jni$_.jNullReference;
     _setRenderThread(
             reference.pointer,
-            _id_setRenderThread as _$jni.JMethodIDPtr,
-            textureViewRenderThread.reference.pointer)
+            _id_setRenderThread as jni$_.JMethodIDPtr,
+            _$textureViewRenderThread.pointer)
         .check();
   }
 
@@ -143,23 +150,23 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()Landroid/view/View;',
   );
 
-  static final _getView = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getView = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.view.View getView()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getView() {
-    return _getView(reference.pointer, _id_getView as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? getView() {
+    return _getView(reference.pointer, _id_getView as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_requestRender = _class.instanceMethodId(
@@ -167,21 +174,21 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _requestRender = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _requestRender = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void requestRender()`
   void requestRender() {
-    _requestRender(reference.pointer, _id_requestRender as _$jni.JMethodIDPtr)
+    _requestRender(reference.pointer, _id_requestRender as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -190,23 +197,24 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
   void queueEvent(
-    _$jni.JObject runnable,
+    jni$_.JObject? runnable,
   ) {
-    _queueEvent(reference.pointer, _id_queueEvent as _$jni.JMethodIDPtr,
-            runnable.reference.pointer)
+    final _$runnable = runnable?.reference ?? jni$_.jNullReference;
+    _queueEvent(reference.pointer, _id_queueEvent as jni$_.JMethodIDPtr,
+            _$runnable.pointer)
         .check();
   }
 
@@ -215,21 +223,21 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _waitForEmpty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _waitForEmpty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void waitForEmpty()`
   void waitForEmpty() {
-    _waitForEmpty(reference.pointer, _id_waitForEmpty as _$jni.JMethodIDPtr)
+    _waitForEmpty(reference.pointer, _id_waitForEmpty as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -238,21 +246,21 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onStop = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStop()`
   void onStop() {
-    _onStop(reference.pointer, _id_onStop as _$jni.JMethodIDPtr).check();
+    _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onStart = _class.instanceMethodId(
@@ -260,21 +268,21 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onStart = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStart()`
   void onStart() {
-    _onStart(reference.pointer, _id_onStart as _$jni.JMethodIDPtr).check();
+    _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onDestroy = _class.instanceMethodId(
@@ -282,21 +290,21 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onDestroy = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
-    _onDestroy(reference.pointer, _id_onDestroy as _$jni.JMethodIDPtr).check();
+    _onDestroy(reference.pointer, _id_onDestroy as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_isTranslucentSurface = _class.instanceMethodId(
@@ -304,22 +312,22 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()Z',
   );
 
-  static final _isTranslucentSurface = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isTranslucentSurface = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean isTranslucentSurface()`
   bool isTranslucentSurface() {
     return _isTranslucentSurface(
-            reference.pointer, _id_isTranslucentSurface as _$jni.JMethodIDPtr)
+            reference.pointer, _id_isTranslucentSurface as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -328,25 +336,27 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
   );
 
-  static final _setRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setRenderingRefreshMode(org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode renderingRefreshMode)`
   void setRenderingRefreshMode(
-    maprenderer_.MapRenderer_RenderingRefreshMode renderingRefreshMode,
+    maprenderer$_.MapRenderer$RenderingRefreshMode? renderingRefreshMode,
   ) {
+    final _$renderingRefreshMode =
+        renderingRefreshMode?.reference ?? jni$_.jNullReference;
     _setRenderingRefreshMode(
             reference.pointer,
-            _id_setRenderingRefreshMode as _$jni.JMethodIDPtr,
-            renderingRefreshMode.reference.pointer)
+            _id_setRenderingRefreshMode as jni$_.JMethodIDPtr,
+            _$renderingRefreshMode.pointer)
         .check();
   }
 
@@ -355,54 +365,104 @@ class TextureViewMapRenderer extends maprenderer_.MapRenderer {
     r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _getRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode getRenderingRefreshMode()`
   /// The returned object must be released after use, by calling the [release] method.
-  maprenderer_.MapRenderer_RenderingRefreshMode getRenderingRefreshMode() {
+  maprenderer$_.MapRenderer$RenderingRefreshMode? getRenderingRefreshMode() {
     return _getRenderingRefreshMode(reference.pointer,
-            _id_getRenderingRefreshMode as _$jni.JMethodIDPtr)
-        .object(const maprenderer_.$MapRenderer_RenderingRefreshMode$Type());
+            _id_getRenderingRefreshMode as jni$_.JMethodIDPtr)
+        .object<maprenderer$_.MapRenderer$RenderingRefreshMode?>(
+            const maprenderer$_
+                .$MapRenderer$RenderingRefreshMode$NullableType());
+  }
+}
+
+final class $TextureViewMapRenderer$NullableType
+    extends jni$_.JObjType<TextureViewMapRenderer?> {
+  @jni$_.internal
+  const $TextureViewMapRenderer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer;';
+
+  @jni$_.internal
+  @core$_.override
+  TextureViewMapRenderer? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : TextureViewMapRenderer.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maprenderer$_.$MapRenderer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<TextureViewMapRenderer?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
+  int get hashCode => ($TextureViewMapRenderer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($TextureViewMapRenderer$NullableType) &&
+        other is $TextureViewMapRenderer$NullableType;
   }
 }
 
 final class $TextureViewMapRenderer$Type
-    extends _$jni.JObjType<TextureViewMapRenderer> {
-  @_$jni.internal
+    extends jni$_.JObjType<TextureViewMapRenderer> {
+  @jni$_.internal
   const $TextureViewMapRenderer$Type();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer;';
 
-  @_$jni.internal
-  @_$core.override
-  TextureViewMapRenderer fromReference(_$jni.JReference reference) =>
-      TextureViewMapRenderer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  TextureViewMapRenderer fromReference(jni$_.JReference reference) =>
+      TextureViewMapRenderer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maprenderer$_.$MapRenderer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const maprenderer_.$MapRenderer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<TextureViewMapRenderer?> get nullableType =>
+      const $TextureViewMapRenderer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => ($TextureViewMapRenderer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($TextureViewMapRenderer$Type) &&
         other is $TextureViewMapRenderer$Type;

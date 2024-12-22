@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,38 +45,47 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
 /// from: `org.maplibre.android.style.layers.LayoutPropertyValue`
-class LayoutPropertyValue<$T extends _$jni.JObject>
-    extends propertyvalue_.PropertyValue<$T> {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LayoutPropertyValue<$T>> $type;
+class LayoutPropertyValue<$T extends jni$_.JObject?>
+    extends propertyvalue$_.PropertyValue<$T?> {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LayoutPropertyValue<$T>> $type;
 
-  @_$jni.internal
-  final _$jni.JObjType<$T> T;
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  @_$jni.internal
+  @jni$_.internal
   LayoutPropertyValue.fromReference(
     this.T,
-    _$jni.JReference reference,
-  )   : $type = type(T),
-        super.fromReference(T, reference);
+    jni$_.JReference reference,
+  )   : $type = type<$T>(T),
+        super.fromReference(T.nullableType, reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/LayoutPropertyValue');
 
   /// The type which includes information such as the signature of this class.
-  static $LayoutPropertyValue$Type<$T> type<$T extends _$jni.JObject>(
-    _$jni.JObjType<$T> T,
+  static $LayoutPropertyValue$NullableType<$T>
+      nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
   ) {
-    return $LayoutPropertyValue$Type(
+    return $LayoutPropertyValue$NullableType<$T>(
+      T,
+    );
+  }
+
+  static $LayoutPropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LayoutPropertyValue$Type<$T>(
       T,
     );
   }
@@ -84,73 +94,128 @@ class LayoutPropertyValue<$T extends _$jni.JObject>
     r'(Ljava/lang/String;Ljava/lang/Object;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, T object)`
   /// The returned object must be released after use, by calling the [release] method.
   factory LayoutPropertyValue(
-    _$jni.JString string,
-    $T object, {
-    _$jni.JObjType<$T>? T,
+    jni$_.JString? string,
+    $T? object, {
+    required jni$_.JObjType<$T> T,
   }) {
-    T ??= _$jni.lowestCommonSuperType([
-      object.$type,
-    ]) as _$jni.JObjType<$T>;
-    return LayoutPropertyValue.fromReference(
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return LayoutPropertyValue<$T>.fromReference(
         T,
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr,
-                string.reference.pointer, object.reference.pointer)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr,
+                _$string.pointer, _$object.pointer)
             .reference);
   }
 }
 
-final class $LayoutPropertyValue$Type<$T extends _$jni.JObject>
-    extends _$jni.JObjType<LayoutPropertyValue<$T>> {
-  @_$jni.internal
-  final _$jni.JObjType<$T> T;
+final class $LayoutPropertyValue$NullableType<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<LayoutPropertyValue<$T>?> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  @_$jni.internal
+  @jni$_.internal
+  const $LayoutPropertyValue$NullableType(
+    this.T,
+  );
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/LayoutPropertyValue;';
+
+  @jni$_.internal
+  @core$_.override
+  LayoutPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LayoutPropertyValue<$T>.fromReference(
+              T,
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      propertyvalue$_.$PropertyValue$NullableType<$T?>(T.nullableType);
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LayoutPropertyValue<$T>?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
+  int get hashCode => Object.hash($LayoutPropertyValue$NullableType, T);
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LayoutPropertyValue$NullableType<$T>) &&
+        other is $LayoutPropertyValue$NullableType<$T> &&
+        T == other.T;
+  }
+}
+
+final class $LayoutPropertyValue$Type<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<LayoutPropertyValue<$T>> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
+
+  @jni$_.internal
   const $LayoutPropertyValue$Type(
     this.T,
   );
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/LayoutPropertyValue;';
 
-  @_$jni.internal
-  @_$core.override
-  LayoutPropertyValue<$T> fromReference(_$jni.JReference reference) =>
-      LayoutPropertyValue.fromReference(T, reference);
+  @jni$_.internal
+  @core$_.override
+  LayoutPropertyValue<$T> fromReference(jni$_.JReference reference) =>
+      LayoutPropertyValue<$T>.fromReference(
+        T,
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      propertyvalue$_.$PropertyValue$NullableType<$T?>(T.nullableType);
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => propertyvalue_.$PropertyValue$Type(T);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LayoutPropertyValue<$T>?> get nullableType =>
+      $LayoutPropertyValue$NullableType<$T>(T);
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => Object.hash($LayoutPropertyValue$Type, T);
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LayoutPropertyValue$Type<$T>) &&
         other is $LayoutPropertyValue$Type<$T> &&

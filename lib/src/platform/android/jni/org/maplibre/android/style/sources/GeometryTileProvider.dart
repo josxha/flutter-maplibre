@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,71 +45,73 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../../geometry/LatLngBounds.dart' as latlngbounds_;
+import '../../geometry/LatLngBounds.dart' as latlngbounds$_;
 
 /// from: `org.maplibre.android.style.sources.GeometryTileProvider`
-class GeometryTileProvider extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<GeometryTileProvider> $type;
+class GeometryTileProvider extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<GeometryTileProvider> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   GeometryTileProvider.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/sources/GeometryTileProvider');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $GeometryTileProvider$NullableType();
   static const type = $GeometryTileProvider$Type();
   static final _id_getFeaturesForBounds = _class.instanceMethodId(
     r'getFeaturesForBounds',
     r'(Lorg/maplibre/android/geometry/LatLngBounds;I)Lorg/maplibre/geojson/FeatureCollection;',
   );
 
-  static final _getFeaturesForBounds = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Int32)>)>>(
+  static final _getFeaturesForBounds = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
   /// from: `public abstract org.maplibre.geojson.FeatureCollection getFeaturesForBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getFeaturesForBounds(
-    latlngbounds_.LatLngBounds latLngBounds,
+  jni$_.JObject getFeaturesForBounds(
+    latlngbounds$_.LatLngBounds latLngBounds,
     int i,
   ) {
+    final _$latLngBounds = latLngBounds.reference;
     return _getFeaturesForBounds(
             reference.pointer,
-            _id_getFeaturesForBounds as _$jni.JMethodIDPtr,
-            latLngBounds.reference.pointer,
+            _id_getFeaturesForBounds as jni$_.JMethodIDPtr,
+            _$latLngBounds.pointer,
             i)
-        .object(const _$jni.JObjectType());
+        .object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $GeometryTileProvider> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $GeometryTileProvider> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -116,15 +119,15 @@ class GeometryTileProvider extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
@@ -132,37 +135,38 @@ class GeometryTileProvider extends _$jni.JObject {
       if ($d ==
           r'getFeaturesForBounds(Lorg/maplibre/android/geometry/LatLngBounds;I)Lorg/maplibre/geojson/FeatureCollection;') {
         final $r = _$impls[$p]!.getFeaturesForBounds(
-          $a[0].as(const latlngbounds_.$LatLngBounds$Type(),
+          $a![0]!.as(const latlngbounds$_.$LatLngBounds$Type(),
               releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return ($r as _$jni.JObject)
-            .as(const _$jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
+    jni$_.JImplementer implementer,
     $GeometryTileProvider $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.sources.GeometryTileProvider',
@@ -177,7 +181,7 @@ class GeometryTileProvider extends _$jni.JObject {
   factory GeometryTileProvider.implement(
     $GeometryTileProvider $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return GeometryTileProvider.fromReference(
       $i.implementReference(),
@@ -187,58 +191,104 @@ class GeometryTileProvider extends _$jni.JObject {
 
 abstract base mixin class $GeometryTileProvider {
   factory $GeometryTileProvider({
-    required _$jni.JObject Function(
-            latlngbounds_.LatLngBounds latLngBounds, int i)
+    required jni$_.JObject Function(
+            latlngbounds$_.LatLngBounds latLngBounds, int i)
         getFeaturesForBounds,
   }) = _$GeometryTileProvider;
 
-  _$jni.JObject getFeaturesForBounds(
-      latlngbounds_.LatLngBounds latLngBounds, int i);
+  jni$_.JObject getFeaturesForBounds(
+      latlngbounds$_.LatLngBounds latLngBounds, int i);
 }
 
 final class _$GeometryTileProvider with $GeometryTileProvider {
   _$GeometryTileProvider({
-    required _$jni.JObject Function(
-            latlngbounds_.LatLngBounds latLngBounds, int i)
+    required jni$_.JObject Function(
+            latlngbounds$_.LatLngBounds latLngBounds, int i)
         getFeaturesForBounds,
   }) : _getFeaturesForBounds = getFeaturesForBounds;
 
-  final _$jni.JObject Function(latlngbounds_.LatLngBounds latLngBounds, int i)
+  final jni$_.JObject Function(latlngbounds$_.LatLngBounds latLngBounds, int i)
       _getFeaturesForBounds;
 
-  _$jni.JObject getFeaturesForBounds(
-      latlngbounds_.LatLngBounds latLngBounds, int i) {
+  jni$_.JObject getFeaturesForBounds(
+      latlngbounds$_.LatLngBounds latLngBounds, int i) {
     return _getFeaturesForBounds(latLngBounds, i);
   }
 }
 
-final class $GeometryTileProvider$Type
-    extends _$jni.JObjType<GeometryTileProvider> {
-  @_$jni.internal
-  const $GeometryTileProvider$Type();
+final class $GeometryTileProvider$NullableType
+    extends jni$_.JObjType<GeometryTileProvider?> {
+  @jni$_.internal
+  const $GeometryTileProvider$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/sources/GeometryTileProvider;';
 
-  @_$jni.internal
-  @_$core.override
-  GeometryTileProvider fromReference(_$jni.JReference reference) =>
-      GeometryTileProvider.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  GeometryTileProvider? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : GeometryTileProvider.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<GeometryTileProvider?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($GeometryTileProvider$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($GeometryTileProvider$NullableType) &&
+        other is $GeometryTileProvider$NullableType;
+  }
+}
+
+final class $GeometryTileProvider$Type
+    extends jni$_.JObjType<GeometryTileProvider> {
+  @jni$_.internal
+  const $GeometryTileProvider$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/GeometryTileProvider;';
+
+  @jni$_.internal
+  @core$_.override
+  GeometryTileProvider fromReference(jni$_.JReference reference) =>
+      GeometryTileProvider.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<GeometryTileProvider?> get nullableType =>
+      const $GeometryTileProvider$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($GeometryTileProvider$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($GeometryTileProvider$Type) &&
         other is $GeometryTileProvider$Type;

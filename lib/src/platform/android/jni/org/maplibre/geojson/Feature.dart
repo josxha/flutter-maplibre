@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,10 +45,10 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.geojson.Feature`
 ///
@@ -78,36 +79,37 @@ import 'package:jni/jni.dart' as _$jni;
 ///   }
 /// </pre>
 ///@since 1.0.0
-class Feature extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Feature> $type;
+class Feature extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Feature> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Feature.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(r'org/maplibre/geojson/Feature');
+  static final _class = jni$_.JClass.forName(r'org/maplibre/geojson/Feature');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Feature$NullableType();
   static const type = $Feature$Type();
   static final _id_fromJson = _class.staticMethodId(
     r'fromJson',
     r'(Ljava/lang/String;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromJson = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fromJson = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromJson(java.lang.String json)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -119,12 +121,13 @@ class Feature extends _$jni.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature fromJson(
-    _$jni.JString json,
+  static Feature? fromJson(
+    jni$_.JString? json,
   ) {
+    final _$json = json?.reference ?? jni$_.jNullReference;
     return _fromJson(_class.reference.pointer,
-            _id_fromJson as _$jni.JMethodIDPtr, json.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromJson as jni$_.JMethodIDPtr, _$json.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry = _class.staticMethodId(
@@ -132,16 +135,16 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _fromGeometry = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -151,12 +154,13 @@ class Feature extends _$jni.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature fromGeometry(
-    _$jni.JObject geometry,
+  static Feature? fromGeometry(
+    jni$_.JObject? geometry,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     return _fromGeometry(_class.reference.pointer,
-            _id_fromGeometry as _$jni.JMethodIDPtr, geometry.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry as jni$_.JMethodIDPtr, _$geometry.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry$1 = _class.staticMethodId(
@@ -164,22 +168,22 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;Lorg/maplibre/geojson/BoundingBox;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _fromGeometry$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry, org.maplibre.geojson.BoundingBox bbox)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -191,16 +195,18 @@ class Feature extends _$jni.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature fromGeometry$1(
-    _$jni.JObject geometry,
-    _$jni.JObject bbox,
+  static Feature? fromGeometry$1(
+    jni$_.JObject? geometry,
+    jni$_.JObject? bbox,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    final _$bbox = bbox?.reference ?? jni$_.jNullReference;
     return _fromGeometry$1(
             _class.reference.pointer,
-            _id_fromGeometry$1 as _$jni.JMethodIDPtr,
-            geometry.reference.pointer,
-            bbox.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry$1 as jni$_.JMethodIDPtr,
+            _$geometry.pointer,
+            _$bbox.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry$2 = _class.staticMethodId(
@@ -208,22 +214,22 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;Lcom/google/gson/JsonObject;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _fromGeometry$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry, com.google.gson.JsonObject properties)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -235,16 +241,18 @@ class Feature extends _$jni.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature fromGeometry$2(
-    _$jni.JObject geometry,
-    _$jni.JObject properties,
+  static Feature? fromGeometry$2(
+    jni$_.JObject? geometry,
+    jni$_.JObject? properties,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    final _$properties = properties?.reference ?? jni$_.jNullReference;
     return _fromGeometry$2(
             _class.reference.pointer,
-            _id_fromGeometry$2 as _$jni.JMethodIDPtr,
-            geometry.reference.pointer,
-            properties.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry$2 as jni$_.JMethodIDPtr,
+            _$geometry.pointer,
+            _$properties.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry$3 = _class.staticMethodId(
@@ -252,24 +260,24 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;Lcom/google/gson/JsonObject;Lorg/maplibre/geojson/BoundingBox;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry$3 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _fromGeometry$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry, com.google.gson.JsonObject properties, org.maplibre.geojson.BoundingBox bbox)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -282,18 +290,21 @@ class Feature extends _$jni.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature fromGeometry$3(
-    _$jni.JObject geometry,
-    _$jni.JObject properties,
-    _$jni.JObject bbox,
+  static Feature? fromGeometry$3(
+    jni$_.JObject? geometry,
+    jni$_.JObject? properties,
+    jni$_.JObject? bbox,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    final _$properties = properties?.reference ?? jni$_.jNullReference;
+    final _$bbox = bbox?.reference ?? jni$_.jNullReference;
     return _fromGeometry$3(
             _class.reference.pointer,
-            _id_fromGeometry$3 as _$jni.JMethodIDPtr,
-            geometry.reference.pointer,
-            properties.reference.pointer,
-            bbox.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry$3 as jni$_.JMethodIDPtr,
+            _$geometry.pointer,
+            _$properties.pointer,
+            _$bbox.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry$4 = _class.staticMethodId(
@@ -301,24 +312,24 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;Lcom/google/gson/JsonObject;Ljava/lang/String;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry$4 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _fromGeometry$4 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry, com.google.gson.JsonObject properties, java.lang.String id)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -330,18 +341,21 @@ class Feature extends _$jni.JObject {
   ///@param id common identifier of this feature
   ///@return Feature
   ///@since 1.0.0
-  static Feature fromGeometry$4(
-    _$jni.JObject geometry,
-    _$jni.JObject properties,
-    _$jni.JString id,
+  static Feature? fromGeometry$4(
+    jni$_.JObject? geometry,
+    jni$_.JObject? properties,
+    jni$_.JString? id,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    final _$properties = properties?.reference ?? jni$_.jNullReference;
+    final _$id = id?.reference ?? jni$_.jNullReference;
     return _fromGeometry$4(
             _class.reference.pointer,
-            _id_fromGeometry$4 as _$jni.JMethodIDPtr,
-            geometry.reference.pointer,
-            properties.reference.pointer,
-            id.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry$4 as jni$_.JMethodIDPtr,
+            _$geometry.pointer,
+            _$properties.pointer,
+            _$id.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_fromGeometry$5 = _class.staticMethodId(
@@ -349,26 +363,26 @@ class Feature extends _$jni.JObject {
     r'(Lorg/maplibre/geojson/Geometry;Lcom/google/gson/JsonObject;Ljava/lang/String;Lorg/maplibre/geojson/BoundingBox;)Lorg/maplibre/geojson/Feature;',
   );
 
-  static final _fromGeometry$5 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _fromGeometry$5 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public org.maplibre.geojson.Feature fromGeometry(org.maplibre.geojson.Geometry geometry, com.google.gson.JsonObject properties, java.lang.String id, org.maplibre.geojson.BoundingBox bbox)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -381,20 +395,24 @@ class Feature extends _$jni.JObject {
   ///@param id common identifier of this feature
   ///@return Feature
   ///@since 1.0.0
-  static Feature fromGeometry$5(
-    _$jni.JObject geometry,
-    _$jni.JObject properties,
-    _$jni.JString id,
-    _$jni.JObject bbox,
+  static Feature? fromGeometry$5(
+    jni$_.JObject? geometry,
+    jni$_.JObject? properties,
+    jni$_.JString? id,
+    jni$_.JObject? bbox,
   ) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    final _$properties = properties?.reference ?? jni$_.jNullReference;
+    final _$id = id?.reference ?? jni$_.jNullReference;
+    final _$bbox = bbox?.reference ?? jni$_.jNullReference;
     return _fromGeometry$5(
             _class.reference.pointer,
-            _id_fromGeometry$5 as _$jni.JMethodIDPtr,
-            geometry.reference.pointer,
-            properties.reference.pointer,
-            id.reference.pointer,
-            bbox.reference.pointer)
-        .object(const $Feature$Type());
+            _id_fromGeometry$5 as jni$_.JMethodIDPtr,
+            _$geometry.pointer,
+            _$properties.pointer,
+            _$id.pointer,
+            _$bbox.pointer)
+        .object<Feature?>(const $Feature$NullableType());
   }
 
   static final _id_type$1 = _class.instanceMethodId(
@@ -402,16 +420,16 @@ class Feature extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _type$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _type$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String type()`
@@ -422,9 +440,9 @@ class Feature extends _$jni.JObject {
   ///@return a String which describes the TYPE of geometry, for this object it will always return
   ///   {@code Feature}
   ///@since 1.0.0
-  _$jni.JString type$1() {
-    return _type$1(reference.pointer, _id_type$1 as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? type$1() {
+    return _type$1(reference.pointer, _id_type$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_bbox = _class.instanceMethodId(
@@ -432,16 +450,16 @@ class Feature extends _$jni.JObject {
     r'()Lorg/maplibre/geojson/BoundingBox;',
   );
 
-  static final _bbox = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _bbox = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.geojson.BoundingBox bbox()`
@@ -454,9 +472,9 @@ class Feature extends _$jni.JObject {
   /// point. The axes order of a bbox follows the axes order of geometries.
   ///@return a list of double coordinate values describing a bounding box
   ///@since 3.0.0
-  _$jni.JObject bbox() {
-    return _bbox(reference.pointer, _id_bbox as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? bbox() {
+    return _bbox(reference.pointer, _id_bbox as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_id = _class.instanceMethodId(
@@ -464,16 +482,16 @@ class Feature extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _id = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _id = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String id()`
@@ -483,9 +501,9 @@ class Feature extends _$jni.JObject {
   ///@return a String containing this features unique identification or null if one wasn't given
   ///   during creation.
   ///@since 1.0.0
-  _$jni.JString id() {
-    return _id(reference.pointer, _id_id as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? id() {
+    return _id(reference.pointer, _id_id as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_geometry = _class.instanceMethodId(
@@ -493,16 +511,16 @@ class Feature extends _$jni.JObject {
     r'()Lorg/maplibre/geojson/Geometry;',
   );
 
-  static final _geometry = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _geometry = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.geojson.Geometry geometry()`
@@ -513,9 +531,9 @@ class Feature extends _$jni.JObject {
   /// passed in through one of the static factory methods.
   ///@return a single defined Geometry which makes this feature spatially aware
   ///@since 1.0.0
-  _$jni.JObject geometry() {
-    return _geometry(reference.pointer, _id_geometry as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? geometry() {
+    return _geometry(reference.pointer, _id_geometry as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_properties = _class.instanceMethodId(
@@ -523,16 +541,16 @@ class Feature extends _$jni.JObject {
     r'()Lcom/google/gson/JsonObject;',
   );
 
-  static final _properties = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _properties = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public com.google.gson.JsonObject properties()`
@@ -542,9 +560,9 @@ class Feature extends _$jni.JObject {
   /// member is a JsonObject and might be empty if no properties are provided.
   ///@return a JsonObject which holds this features current properties
   ///@since 1.0.0
-  _$jni.JObject properties() {
-    return _properties(reference.pointer, _id_properties as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? properties() {
+    return _properties(reference.pointer, _id_properties as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_toJson = _class.instanceMethodId(
@@ -552,16 +570,16 @@ class Feature extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toJson = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toJson = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String toJson()`
@@ -571,9 +589,9 @@ class Feature extends _$jni.JObject {
   /// string.
   ///@return a JSON string which represents this Feature
   ///@since 1.0.0
-  _$jni.JString toJson() {
-    return _toJson(reference.pointer, _id_toJson as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? toJson() {
+    return _toJson(reference.pointer, _id_toJson as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_typeAdapter = _class.staticMethodId(
@@ -581,16 +599,16 @@ class Feature extends _$jni.JObject {
     r'(Lcom/google/gson/Gson;)Lcom/google/gson/TypeAdapter;',
   );
 
-  static final _typeAdapter = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _typeAdapter = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `static public com.google.gson.TypeAdapter<org.maplibre.geojson.Feature> typeAdapter(com.google.gson.Gson gson)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -599,12 +617,13 @@ class Feature extends _$jni.JObject {
   ///@param gson the built Gson object
   ///@return the TYPE adapter for this class
   ///@since 3.0.0
-  static _$jni.JObject typeAdapter(
-    _$jni.JObject gson,
+  static jni$_.JObject? typeAdapter(
+    jni$_.JObject? gson,
   ) {
+    final _$gson = gson?.reference ?? jni$_.jNullReference;
     return _typeAdapter(_class.reference.pointer,
-            _id_typeAdapter as _$jni.JMethodIDPtr, gson.reference.pointer)
-        .object(const _$jni.JObjectType());
+            _id_typeAdapter as jni$_.JMethodIDPtr, _$gson.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_addStringProperty = _class.instanceMethodId(
@@ -612,22 +631,22 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _addStringProperty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _addStringProperty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addStringProperty(java.lang.String key, java.lang.String value)`
   ///
@@ -636,14 +655,16 @@ class Feature extends _$jni.JObject {
   ///@param value the String value associated with the member
   ///@since 1.0.0
   void addStringProperty(
-    _$jni.JString key,
-    _$jni.JString value,
+    jni$_.JString? key,
+    jni$_.JString? value,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    final _$value = value?.reference ?? jni$_.jNullReference;
     _addStringProperty(
             reference.pointer,
-            _id_addStringProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer,
-            value.reference.pointer)
+            _id_addStringProperty as jni$_.JMethodIDPtr,
+            _$key.pointer,
+            _$value.pointer)
         .check();
   }
 
@@ -652,22 +673,22 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;Ljava/lang/Number;)V',
   );
 
-  static final _addNumberProperty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _addNumberProperty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addNumberProperty(java.lang.String key, java.lang.Number value)`
   ///
@@ -676,14 +697,16 @@ class Feature extends _$jni.JObject {
   ///@param value the Number value associated with the member
   ///@since 1.0.0
   void addNumberProperty(
-    _$jni.JString key,
-    _$jni.JNumber value,
+    jni$_.JString? key,
+    jni$_.JNumber? value,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    final _$value = value?.reference ?? jni$_.jNullReference;
     _addNumberProperty(
             reference.pointer,
-            _id_addNumberProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer,
-            value.reference.pointer)
+            _id_addNumberProperty as jni$_.JMethodIDPtr,
+            _$key.pointer,
+            _$value.pointer)
         .check();
   }
 
@@ -692,22 +715,22 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;Ljava/lang/Boolean;)V',
   );
 
-  static final _addBooleanProperty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _addBooleanProperty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addBooleanProperty(java.lang.String key, java.lang.Boolean value)`
   ///
@@ -716,14 +739,16 @@ class Feature extends _$jni.JObject {
   ///@param value the Boolean value associated with the member
   ///@since 1.0.0
   void addBooleanProperty(
-    _$jni.JString key,
-    _$jni.JBoolean value,
+    jni$_.JString? key,
+    jni$_.JBoolean? value,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    final _$value = value?.reference ?? jni$_.jNullReference;
     _addBooleanProperty(
             reference.pointer,
-            _id_addBooleanProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer,
-            value.reference.pointer)
+            _id_addBooleanProperty as jni$_.JMethodIDPtr,
+            _$key.pointer,
+            _$value.pointer)
         .check();
   }
 
@@ -732,22 +757,22 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;Ljava/lang/Character;)V',
   );
 
-  static final _addCharacterProperty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _addCharacterProperty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addCharacterProperty(java.lang.String key, java.lang.Character value)`
   ///
@@ -756,14 +781,16 @@ class Feature extends _$jni.JObject {
   ///@param value the Character value associated with the member
   ///@since 1.0.0
   void addCharacterProperty(
-    _$jni.JString key,
-    _$jni.JCharacter value,
+    jni$_.JString? key,
+    jni$_.JCharacter? value,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    final _$value = value?.reference ?? jni$_.jNullReference;
     _addCharacterProperty(
             reference.pointer,
-            _id_addCharacterProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer,
-            value.reference.pointer)
+            _id_addCharacterProperty as jni$_.JMethodIDPtr,
+            _$key.pointer,
+            _$value.pointer)
         .check();
   }
 
@@ -772,22 +799,22 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;Lcom/google/gson/JsonElement;)V',
   );
 
-  static final _addProperty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _addProperty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addProperty(java.lang.String key, com.google.gson.JsonElement value)`
   ///
@@ -796,11 +823,13 @@ class Feature extends _$jni.JObject {
   ///@param value the JsonElement value associated with the member
   ///@since 1.0.0
   void addProperty(
-    _$jni.JString key,
-    _$jni.JObject value,
+    jni$_.JString? key,
+    jni$_.JObject? value,
   ) {
-    _addProperty(reference.pointer, _id_addProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer, value.reference.pointer)
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    final _$value = value?.reference ?? jni$_.jNullReference;
+    _addProperty(reference.pointer, _id_addProperty as jni$_.JMethodIDPtr,
+            _$key.pointer, _$value.pointer)
         .check();
   }
 
@@ -809,16 +838,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _getStringProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getStringProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public java.lang.String getStringProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -827,12 +856,13 @@ class Feature extends _$jni.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  _$jni.JString getStringProperty(
-    _$jni.JString key,
+  jni$_.JString? getStringProperty(
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _getStringProperty(reference.pointer,
-            _id_getStringProperty as _$jni.JMethodIDPtr, key.reference.pointer)
-        .object(const _$jni.JStringType());
+            _id_getStringProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getNumberProperty = _class.instanceMethodId(
@@ -840,16 +870,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Number;',
   );
 
-  static final _getNumberProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getNumberProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public java.lang.Number getNumberProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -858,12 +888,13 @@ class Feature extends _$jni.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  _$jni.JNumber getNumberProperty(
-    _$jni.JString key,
+  jni$_.JNumber? getNumberProperty(
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _getNumberProperty(reference.pointer,
-            _id_getNumberProperty as _$jni.JMethodIDPtr, key.reference.pointer)
-        .object(const _$jni.JNumberType());
+            _id_getNumberProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JNumber?>(const jni$_.JNumberNullableType());
   }
 
   static final _id_getBooleanProperty = _class.instanceMethodId(
@@ -871,16 +902,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Boolean;',
   );
 
-  static final _getBooleanProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getBooleanProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public java.lang.Boolean getBooleanProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -889,12 +920,13 @@ class Feature extends _$jni.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  _$jni.JBoolean getBooleanProperty(
-    _$jni.JString key,
+  jni$_.JBoolean? getBooleanProperty(
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _getBooleanProperty(reference.pointer,
-            _id_getBooleanProperty as _$jni.JMethodIDPtr, key.reference.pointer)
-        .object(const _$jni.JBooleanType());
+            _id_getBooleanProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
   }
 
   static final _id_getCharacterProperty = _class.instanceMethodId(
@@ -902,16 +934,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Character;',
   );
 
-  static final _getCharacterProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getCharacterProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public java.lang.Character getCharacterProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -923,14 +955,13 @@ class Feature extends _$jni.JObject {
   ///@deprecated This method was passing the call to JsonElement::getAsCharacter()
   ///   which is in turn deprecated because of misleading nature, as it
   ///   does not get this element as a char but rather as a string's first character.
-  _$jni.JCharacter getCharacterProperty(
-    _$jni.JString key,
+  jni$_.JCharacter? getCharacterProperty(
+    jni$_.JString? key,
   ) {
-    return _getCharacterProperty(
-            reference.pointer,
-            _id_getCharacterProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer)
-        .object(const _$jni.JCharacterType());
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    return _getCharacterProperty(reference.pointer,
+            _id_getCharacterProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JCharacter?>(const jni$_.JCharacterNullableType());
   }
 
   static final _id_getProperty = _class.instanceMethodId(
@@ -938,16 +969,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Lcom/google/gson/JsonElement;',
   );
 
-  static final _getProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public com.google.gson.JsonElement getProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -956,12 +987,13 @@ class Feature extends _$jni.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  _$jni.JObject getProperty(
-    _$jni.JString key,
+  jni$_.JObject? getProperty(
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _getProperty(reference.pointer,
-            _id_getProperty as _$jni.JMethodIDPtr, key.reference.pointer)
-        .object(const _$jni.JObjectType());
+            _id_getProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_removeProperty = _class.instanceMethodId(
@@ -969,16 +1001,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Lcom/google/gson/JsonElement;',
   );
 
-  static final _removeProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _removeProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public com.google.gson.JsonElement removeProperty(java.lang.String key)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -987,12 +1019,13 @@ class Feature extends _$jni.JObject {
   ///@param key name of the member
   ///@return Removed {@code property} from the key string passed in through the parameter.
   ///@since 1.0.0
-  _$jni.JObject removeProperty(
-    _$jni.JString key,
+  jni$_.JObject? removeProperty(
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _removeProperty(reference.pointer,
-            _id_removeProperty as _$jni.JMethodIDPtr, key.reference.pointer)
-        .object(const _$jni.JObjectType());
+            _id_removeProperty as jni$_.JMethodIDPtr, _$key.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_hasProperty = _class.instanceMethodId(
@@ -1000,16 +1033,16 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/String;)Z',
   );
 
-  static final _hasProperty = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _hasProperty = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean hasProperty(java.lang.String key)`
   ///
@@ -1018,10 +1051,11 @@ class Feature extends _$jni.JObject {
   ///@return true if there is the member has the specified name, false otherwise.
   ///@since 1.0.0
   bool hasProperty(
-    _$jni.JString key,
+    jni$_.JString? key,
   ) {
+    final _$key = key?.reference ?? jni$_.jNullReference;
     return _hasProperty(reference.pointer,
-            _id_hasProperty as _$jni.JMethodIDPtr, key.reference.pointer)
+            _id_hasProperty as jni$_.JMethodIDPtr, _$key.pointer)
         .boolean;
   }
 
@@ -1031,16 +1065,16 @@ class Feature extends _$jni.JObject {
   );
 
   static final _hasNonNullValueForProperty =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean hasNonNullValueForProperty(java.lang.String key)`
   ///
@@ -1049,12 +1083,11 @@ class Feature extends _$jni.JObject {
   ///@return true if member is present with non-null value, false otherwise.
   ///@since 1.3.0
   bool hasNonNullValueForProperty(
-    _$jni.JString key,
+    jni$_.JString? key,
   ) {
-    return _hasNonNullValueForProperty(
-            reference.pointer,
-            _id_hasNonNullValueForProperty as _$jni.JMethodIDPtr,
-            key.reference.pointer)
+    final _$key = key?.reference ?? jni$_.jNullReference;
+    return _hasNonNullValueForProperty(reference.pointer,
+            _id_hasNonNullValueForProperty as jni$_.JMethodIDPtr, _$key.pointer)
         .boolean;
   }
 
@@ -1063,23 +1096,23 @@ class Feature extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? toString$1() {
+    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -1087,23 +1120,24 @@ class Feature extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object obj)`
   bool equals(
-    _$jni.JObject obj,
+    jni$_.JObject? obj,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            obj.reference.pointer)
+    final _$obj = obj?.reference ?? jni$_.jNullReference;
+    return _equals(
+            reference.pointer, _id_equals as jni$_.JMethodIDPtr, _$obj.pointer)
         .boolean;
   }
 
@@ -1112,50 +1146,91 @@ class Feature extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 }
 
-final class $Feature$Type extends _$jni.JObjType<Feature> {
-  @_$jni.internal
-  const $Feature$Type();
+final class $Feature$NullableType extends jni$_.JObjType<Feature?> {
+  @jni$_.internal
+  const $Feature$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/geojson/Feature;';
 
-  @_$jni.internal
-  @_$core.override
-  Feature fromReference(_$jni.JReference reference) =>
-      Feature.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Feature? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Feature.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Feature?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Feature$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Feature$NullableType) &&
+        other is $Feature$NullableType;
+  }
+}
+
+final class $Feature$Type extends jni$_.JObjType<Feature> {
+  @jni$_.internal
+  const $Feature$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/geojson/Feature;';
+
+  @jni$_.internal
+  @core$_.override
+  Feature fromReference(jni$_.JReference reference) => Feature.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Feature?> get nullableType => const $Feature$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Feature$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Feature$Type) && other is $Feature$Type;
   }
