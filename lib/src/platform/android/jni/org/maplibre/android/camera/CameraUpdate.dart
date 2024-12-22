@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,70 +45,71 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../maps/MapLibreMap.dart' as maplibremap_;
+import '../maps/MapLibreMap.dart' as maplibremap$_;
 
-import 'CameraPosition.dart' as cameraposition_;
+import 'CameraPosition.dart' as cameraposition$_;
 
 /// from: `org.maplibre.android.camera.CameraUpdate`
-class CameraUpdate extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<CameraUpdate> $type;
+class CameraUpdate extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CameraUpdate> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   CameraUpdate.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/camera/CameraUpdate');
+      jni$_.JClass.forName(r'org/maplibre/android/camera/CameraUpdate');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $CameraUpdate$NullableType();
   static const type = $CameraUpdate$Type();
   static final _id_getCameraPosition = _class.instanceMethodId(
     r'getCameraPosition',
     r'(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract org.maplibre.android.camera.CameraPosition getCameraPosition(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
-  cameraposition_.CameraPosition getCameraPosition(
-    maplibremap_.MapLibreMap mapLibreMap,
+  cameraposition$_.CameraPosition? getCameraPosition(
+    maplibremap$_.MapLibreMap mapLibreMap,
   ) {
-    return _getCameraPosition(
-            reference.pointer,
-            _id_getCameraPosition as _$jni.JMethodIDPtr,
-            mapLibreMap.reference.pointer)
-        .object(const cameraposition_.$CameraPosition$Type());
+    final _$mapLibreMap = mapLibreMap.reference;
+    return _getCameraPosition(reference.pointer,
+            _id_getCameraPosition as jni$_.JMethodIDPtr, _$mapLibreMap.pointer)
+        .object<cameraposition$_.CameraPosition?>(
+            const cameraposition$_.$CameraPosition$NullableType());
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $CameraUpdate> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $CameraUpdate> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -115,15 +117,15 @@ class CameraUpdate extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
@@ -131,34 +133,35 @@ class CameraUpdate extends _$jni.JObject {
       if ($d ==
           r'getCameraPosition(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;') {
         final $r = _$impls[$p]!.getCameraPosition(
-          $a[0].as(const maplibremap_.$MapLibreMap$Type(),
+          $a![0]!.as(const maplibremap$_.$MapLibreMap$Type(),
               releaseOriginal: true),
         );
-        return ($r as _$jni.JObject)
-            .as(const _$jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
+    jni$_.JImplementer implementer,
     $CameraUpdate $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.camera.CameraUpdate',
@@ -173,7 +176,7 @@ class CameraUpdate extends _$jni.JObject {
   factory CameraUpdate.implement(
     $CameraUpdate $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return CameraUpdate.fromReference(
       $i.implementReference(),
@@ -183,56 +186,99 @@ class CameraUpdate extends _$jni.JObject {
 
 abstract base mixin class $CameraUpdate {
   factory $CameraUpdate({
-    required cameraposition_.CameraPosition Function(
-            maplibremap_.MapLibreMap mapLibreMap)
+    required cameraposition$_.CameraPosition? Function(
+            maplibremap$_.MapLibreMap mapLibreMap)
         getCameraPosition,
   }) = _$CameraUpdate;
 
-  cameraposition_.CameraPosition getCameraPosition(
-      maplibremap_.MapLibreMap mapLibreMap);
+  cameraposition$_.CameraPosition? getCameraPosition(
+      maplibremap$_.MapLibreMap mapLibreMap);
 }
 
 final class _$CameraUpdate with $CameraUpdate {
   _$CameraUpdate({
-    required cameraposition_.CameraPosition Function(
-            maplibremap_.MapLibreMap mapLibreMap)
+    required cameraposition$_.CameraPosition? Function(
+            maplibremap$_.MapLibreMap mapLibreMap)
         getCameraPosition,
   }) : _getCameraPosition = getCameraPosition;
 
-  final cameraposition_.CameraPosition Function(
-      maplibremap_.MapLibreMap mapLibreMap) _getCameraPosition;
+  final cameraposition$_.CameraPosition? Function(
+      maplibremap$_.MapLibreMap mapLibreMap) _getCameraPosition;
 
-  cameraposition_.CameraPosition getCameraPosition(
-      maplibremap_.MapLibreMap mapLibreMap) {
+  cameraposition$_.CameraPosition? getCameraPosition(
+      maplibremap$_.MapLibreMap mapLibreMap) {
     return _getCameraPosition(mapLibreMap);
   }
 }
 
-final class $CameraUpdate$Type extends _$jni.JObjType<CameraUpdate> {
-  @_$jni.internal
-  const $CameraUpdate$Type();
+final class $CameraUpdate$NullableType extends jni$_.JObjType<CameraUpdate?> {
+  @jni$_.internal
+  const $CameraUpdate$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/camera/CameraUpdate;';
 
-  @_$jni.internal
-  @_$core.override
-  CameraUpdate fromReference(_$jni.JReference reference) =>
-      CameraUpdate.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  CameraUpdate? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraUpdate.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraUpdate?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($CameraUpdate$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraUpdate$NullableType) &&
+        other is $CameraUpdate$NullableType;
+  }
+}
+
+final class $CameraUpdate$Type extends jni$_.JObjType<CameraUpdate> {
+  @jni$_.internal
+  const $CameraUpdate$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/camera/CameraUpdate;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraUpdate fromReference(jni$_.JReference reference) =>
+      CameraUpdate.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraUpdate?> get nullableType =>
+      const $CameraUpdate$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($CameraUpdate$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($CameraUpdate$Type) &&
         other is $CameraUpdate$Type;

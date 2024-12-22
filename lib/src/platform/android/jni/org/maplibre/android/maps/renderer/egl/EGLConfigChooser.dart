@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.maps.renderer.egl.EGLConfigChooser`
-class EGLConfigChooser extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<EGLConfigChooser> $type;
+class EGLConfigChooser extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<EGLConfigChooser> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   EGLConfigChooser.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/renderer/egl/EGLConfigChooser');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $EGLConfigChooser$NullableType();
   static const type = $EGLConfigChooser$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory EGLConfigChooser() {
     return EGLConfigChooser.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -94,15 +96,15 @@ class EGLConfigChooser extends _$jni.JObject {
     r'(Z)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_NewObject')
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void <init>(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -110,7 +112,7 @@ class EGLConfigChooser extends _$jni.JObject {
     bool z,
   ) {
     return EGLConfigChooser.fromReference(_new$1(_class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_new$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
         .reference);
   }
 
@@ -119,64 +121,112 @@ class EGLConfigChooser extends _$jni.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;)Ljavax/microedition/khronos/egl/EGLConfig;',
   );
 
-  static final _chooseConfig = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _chooseConfig = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public javax.microedition.khronos.egl.EGLConfig chooseConfig(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay)`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject chooseConfig(
-    _$jni.JObject eGL10,
-    _$jni.JObject eGLDisplay,
+  jni$_.JObject? chooseConfig(
+    jni$_.JObject? eGL10,
+    jni$_.JObject? eGLDisplay,
   ) {
+    final _$eGL10 = eGL10?.reference ?? jni$_.jNullReference;
+    final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     return _chooseConfig(
             reference.pointer,
-            _id_chooseConfig as _$jni.JMethodIDPtr,
-            eGL10.reference.pointer,
-            eGLDisplay.reference.pointer)
-        .object(const _$jni.JObjectType());
+            _id_chooseConfig as jni$_.JMethodIDPtr,
+            _$eGL10.pointer,
+            _$eGLDisplay.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 }
 
-final class $EGLConfigChooser$Type extends _$jni.JObjType<EGLConfigChooser> {
-  @_$jni.internal
-  const $EGLConfigChooser$Type();
+final class $EGLConfigChooser$NullableType
+    extends jni$_.JObjType<EGLConfigChooser?> {
+  @jni$_.internal
+  const $EGLConfigChooser$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/renderer/egl/EGLConfigChooser;';
 
-  @_$jni.internal
-  @_$core.override
-  EGLConfigChooser fromReference(_$jni.JReference reference) =>
-      EGLConfigChooser.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  EGLConfigChooser? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : EGLConfigChooser.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<EGLConfigChooser?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($EGLConfigChooser$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($EGLConfigChooser$NullableType) &&
+        other is $EGLConfigChooser$NullableType;
+  }
+}
+
+final class $EGLConfigChooser$Type extends jni$_.JObjType<EGLConfigChooser> {
+  @jni$_.internal
+  const $EGLConfigChooser$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/renderer/egl/EGLConfigChooser;';
+
+  @jni$_.internal
+  @core$_.override
+  EGLConfigChooser fromReference(jni$_.JReference reference) =>
+      EGLConfigChooser.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<EGLConfigChooser?> get nullableType =>
+      const $EGLConfigChooser$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($EGLConfigChooser$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($EGLConfigChooser$Type) &&
         other is $EGLConfigChooser$Type;

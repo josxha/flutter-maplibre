@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,39 +45,40 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.location.modes.CameraMode$Mode`
-class CameraMode_Mode extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<CameraMode_Mode> $type;
+class CameraMode$Mode extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CameraMode$Mode> $type;
 
-  @_$jni.internal
-  CameraMode_Mode.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  CameraMode$Mode.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/modes/CameraMode$Mode');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $CameraMode_Mode$Type();
+  static const nullableType = $CameraMode$Mode$NullableType();
+  static const type = $CameraMode$Mode$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $CameraMode_Mode> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $CameraMode$Mode> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -84,39 +86,39 @@ class CameraMode_Mode extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $CameraMode_Mode $impl,
+    jni$_.JImplementer implementer,
+    $CameraMode$Mode $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.location.modes.CameraMode$Mode',
@@ -128,73 +130,119 @@ class CameraMode_Mode extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory CameraMode_Mode.implement(
-    $CameraMode_Mode $impl,
+  factory CameraMode$Mode.implement(
+    $CameraMode$Mode $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return CameraMode_Mode.fromReference(
+    return CameraMode$Mode.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $CameraMode_Mode {
-  factory $CameraMode_Mode() = _$CameraMode_Mode;
+abstract base mixin class $CameraMode$Mode {
+  factory $CameraMode$Mode() = _$CameraMode$Mode;
 }
 
-final class _$CameraMode_Mode with $CameraMode_Mode {
-  _$CameraMode_Mode();
+final class _$CameraMode$Mode with $CameraMode$Mode {
+  _$CameraMode$Mode();
 }
 
-final class $CameraMode_Mode$Type extends _$jni.JObjType<CameraMode_Mode> {
-  @_$jni.internal
-  const $CameraMode_Mode$Type();
+final class $CameraMode$Mode$NullableType
+    extends jni$_.JObjType<CameraMode$Mode?> {
+  @jni$_.internal
+  const $CameraMode$Mode$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/modes/CameraMode$Mode;';
 
-  @_$jni.internal
-  @_$core.override
-  CameraMode_Mode fromReference(_$jni.JReference reference) =>
-      CameraMode_Mode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  CameraMode$Mode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraMode$Mode.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraMode$Mode?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($CameraMode_Mode$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($CameraMode$Mode$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($CameraMode_Mode$Type) &&
-        other is $CameraMode_Mode$Type;
+    return other.runtimeType == ($CameraMode$Mode$NullableType) &&
+        other is $CameraMode$Mode$NullableType;
+  }
+}
+
+final class $CameraMode$Mode$Type extends jni$_.JObjType<CameraMode$Mode> {
+  @jni$_.internal
+  const $CameraMode$Mode$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/modes/CameraMode$Mode;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraMode$Mode fromReference(jni$_.JReference reference) =>
+      CameraMode$Mode.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraMode$Mode?> get nullableType =>
+      const $CameraMode$Mode$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($CameraMode$Mode$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraMode$Mode$Type) &&
+        other is $CameraMode$Mode$Type;
   }
 }
 
 /// from: `org.maplibre.android.location.modes.CameraMode`
-class CameraMode extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<CameraMode> $type;
+class CameraMode extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CameraMode> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   CameraMode.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/location/modes/CameraMode');
+      jni$_.JClass.forName(r'org/maplibre/android/location/modes/CameraMode');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $CameraMode$NullableType();
   static const type = $CameraMode$Type();
 
   /// from: `static public final int NONE`
@@ -219,31 +267,74 @@ class CameraMode extends _$jni.JObject {
   static const TRACKING_GPS_NORTH = 36;
 }
 
-final class $CameraMode$Type extends _$jni.JObjType<CameraMode> {
-  @_$jni.internal
-  const $CameraMode$Type();
+final class $CameraMode$NullableType extends jni$_.JObjType<CameraMode?> {
+  @jni$_.internal
+  const $CameraMode$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/location/modes/CameraMode;';
 
-  @_$jni.internal
-  @_$core.override
-  CameraMode fromReference(_$jni.JReference reference) =>
-      CameraMode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  CameraMode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraMode.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraMode?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($CameraMode$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraMode$NullableType) &&
+        other is $CameraMode$NullableType;
+  }
+}
+
+final class $CameraMode$Type extends jni$_.JObjType<CameraMode> {
+  @jni$_.internal
+  const $CameraMode$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/location/modes/CameraMode;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraMode fromReference(jni$_.JReference reference) =>
+      CameraMode.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraMode?> get nullableType =>
+      const $CameraMode$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($CameraMode$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($CameraMode$Type) && other is $CameraMode$Type;
   }

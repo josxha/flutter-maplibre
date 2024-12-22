@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,70 +45,75 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../maps/MapLibreMap.dart' as maplibremap_;
+import '../maps/MapLibreMap.dart' as maplibremap$_;
 
-import 'MapLibreAnimator.dart' as maplibreanimator_;
+import 'MapLibreAnimator.dart' as maplibreanimator$_;
 
 /// from: `org.maplibre.android.location.MapLibrePaddingAnimator`
 class MapLibrePaddingAnimator
-    extends maplibreanimator_.MapLibreAnimator<_$jni.JArray<_$jni.jdouble>> {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapLibrePaddingAnimator> $type;
+    extends maplibreanimator$_.MapLibreAnimator<jni$_.JDoubleArray> {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapLibrePaddingAnimator> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   MapLibrePaddingAnimator.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
-        super.fromReference(
-            const _$jni.JArrayType(_$jni.jdoubleType()), reference);
+        super.fromReference(const jni$_.JDoubleArrayType(), reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/location/MapLibrePaddingAnimator');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $MapLibrePaddingAnimator$NullableType();
   static const type = $MapLibrePaddingAnimator$Type();
   static final _id_new$ = _class.constructorId(
     r'([[DLorg/maplibre/android/location/MapLibreAnimator$AnimationsValueChangeListener;Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.Object[] ds, org.maplibre.android.location.MapLibreAnimator$AnimationsValueChangeListener animationsValueChangeListener, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibrePaddingAnimator(
-    _$jni.JArray<_$jni.JArray<_$jni.jdouble>> ds,
-    _$jni.JObject animationsValueChangeListener,
-    maplibremap_.MapLibreMap_CancelableCallback cancelableCallback,
+    jni$_.JArray<jni$_.JDoubleArray> ds,
+    jni$_.JObject animationsValueChangeListener,
+    maplibremap$_.MapLibreMap$CancelableCallback? cancelableCallback,
   ) {
+    final _$ds = ds.reference;
+    final _$animationsValueChangeListener =
+        animationsValueChangeListener.reference;
+    final _$cancelableCallback =
+        cancelableCallback?.reference ?? jni$_.jNullReference;
     return MapLibrePaddingAnimator.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            ds.reference.pointer,
-            animationsValueChangeListener.reference.pointer,
-            cancelableCallback.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$ds.pointer,
+            _$animationsValueChangeListener.pointer,
+            _$cancelableCallback.pointer)
         .reference);
   }
 
@@ -116,56 +122,104 @@ class MapLibrePaddingAnimator
     r'()Landroid/animation/TypeEvaluator;',
   );
 
-  static final _provideEvaluator = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _provideEvaluator = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.animation.TypeEvaluator provideEvaluator()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject provideEvaluator() {
+  jni$_.JObject provideEvaluator() {
     return _provideEvaluator(
-            reference.pointer, _id_provideEvaluator as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_provideEvaluator as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+  }
+}
+
+final class $MapLibrePaddingAnimator$NullableType
+    extends jni$_.JObjType<MapLibrePaddingAnimator?> {
+  @jni$_.internal
+  const $MapLibrePaddingAnimator$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/location/MapLibrePaddingAnimator;';
+
+  @jni$_.internal
+  @core$_.override
+  MapLibrePaddingAnimator? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapLibrePaddingAnimator.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maplibreanimator$_.$MapLibreAnimator$Type<jni$_.JDoubleArray>(
+          jni$_.JDoubleArrayType());
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapLibrePaddingAnimator?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
+  int get hashCode => ($MapLibrePaddingAnimator$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapLibrePaddingAnimator$NullableType) &&
+        other is $MapLibrePaddingAnimator$NullableType;
   }
 }
 
 final class $MapLibrePaddingAnimator$Type
-    extends _$jni.JObjType<MapLibrePaddingAnimator> {
-  @_$jni.internal
+    extends jni$_.JObjType<MapLibrePaddingAnimator> {
+  @jni$_.internal
   const $MapLibrePaddingAnimator$Type();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/location/MapLibrePaddingAnimator;';
 
-  @_$jni.internal
-  @_$core.override
-  MapLibrePaddingAnimator fromReference(_$jni.JReference reference) =>
-      MapLibrePaddingAnimator.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapLibrePaddingAnimator fromReference(jni$_.JReference reference) =>
+      MapLibrePaddingAnimator.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maplibreanimator$_.$MapLibreAnimator$Type<jni$_.JDoubleArray>(
+          jni$_.JDoubleArrayType());
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType =>
-      const maplibreanimator_.$MapLibreAnimator$Type(
-          _$jni.JArrayType(_$jni.jdoubleType()));
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapLibrePaddingAnimator?> get nullableType =>
+      const $MapLibrePaddingAnimator$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => ($MapLibrePaddingAnimator$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($MapLibrePaddingAnimator$Type) &&
         other is $MapLibrePaddingAnimator$Type;

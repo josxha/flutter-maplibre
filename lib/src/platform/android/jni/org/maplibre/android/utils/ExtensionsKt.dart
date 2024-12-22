@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,40 +45,39 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 final _ExtensionsKtClass =
-    _$jni.JClass.forName(r'org/maplibre/android/utils/ExtensionsKt');
+    jni$_.JClass.forName(r'org/maplibre/android/utils/ExtensionsKt');
 
 final _id_isNaN = _ExtensionsKtClass.staticMethodId(
   r'isNaN',
   r'(Lkotlin/jvm/internal/DoubleCompanionObject;D)Z',
 );
 
-final _isNaN = _$jni.ProtectedJniExtensions.lookup<
-            _$jni.NativeFunction<
-                _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
-                    _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Double)>)>>(
+final _isNaN = jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+                jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>)>>(
         'globalEnv_CallStaticBooleanMethod')
     .asFunction<
-        _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr,
-            _$jni.Pointer<_$jni.Void>, double)>();
+        jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>, double)>();
 
 /// from: `static public final boolean isNaN(kotlin.jvm.internal.DoubleCompanionObject doubleCompanionObject, double d)`
 bool isNaN(
-  _$jni.JObject doubleCompanionObject,
+  jni$_.JObject? doubleCompanionObject,
   double d,
 ) {
-  return _isNaN(
-          _ExtensionsKtClass.reference.pointer,
-          _id_isNaN as _$jni.JMethodIDPtr,
-          doubleCompanionObject.reference.pointer,
-          d)
+  final _$doubleCompanionObject =
+      doubleCompanionObject?.reference ?? jni$_.jNullReference;
+  return _isNaN(_ExtensionsKtClass.reference.pointer,
+          _id_isNaN as jni$_.JMethodIDPtr, _$doubleCompanionObject.pointer, d)
       .boolean;
 }
 
@@ -86,27 +86,26 @@ final _id_isNaN$1 = _ExtensionsKtClass.staticMethodId(
   r'(Lkotlin/jvm/internal/FloatCompanionObject;F)Z',
 );
 
-final _isNaN$1 = _$jni.ProtectedJniExtensions.lookup<
-            _$jni.NativeFunction<
-                _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
-                    _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Double)>)>>(
+final _isNaN$1 = jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+                jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>)>>(
         'globalEnv_CallStaticBooleanMethod')
     .asFunction<
-        _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr,
-            _$jni.Pointer<_$jni.Void>, double)>();
+        jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>, double)>();
 
 /// from: `static public final boolean isNaN(kotlin.jvm.internal.FloatCompanionObject floatCompanionObject, float f)`
 bool isNaN$1(
-  _$jni.JObject floatCompanionObject,
+  jni$_.JObject? floatCompanionObject,
   double f,
 ) {
-  return _isNaN$1(
-          _ExtensionsKtClass.reference.pointer,
-          _id_isNaN$1 as _$jni.JMethodIDPtr,
-          floatCompanionObject.reference.pointer,
-          f)
+  final _$floatCompanionObject =
+      floatCompanionObject?.reference ?? jni$_.jNullReference;
+  return _isNaN$1(_ExtensionsKtClass.reference.pointer,
+          _id_isNaN$1 as jni$_.JMethodIDPtr, _$floatCompanionObject.pointer, f)
       .boolean;
 }
 
@@ -115,26 +114,28 @@ final _id_isInfinite = _ExtensionsKtClass.staticMethodId(
   r'(Lkotlin/jvm/internal/DoubleCompanionObject;D)Z',
 );
 
-final _isInfinite = _$jni.ProtectedJniExtensions.lookup<
-            _$jni.NativeFunction<
-                _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
-                    _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Double)>)>>(
+final _isInfinite = jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+                jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>)>>(
         'globalEnv_CallStaticBooleanMethod')
     .asFunction<
-        _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr,
-            _$jni.Pointer<_$jni.Void>, double)>();
+        jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>, double)>();
 
 /// from: `static public final boolean isInfinite(kotlin.jvm.internal.DoubleCompanionObject doubleCompanionObject, double d)`
 bool isInfinite(
-  _$jni.JObject doubleCompanionObject,
+  jni$_.JObject? doubleCompanionObject,
   double d,
 ) {
+  final _$doubleCompanionObject =
+      doubleCompanionObject?.reference ?? jni$_.jNullReference;
   return _isInfinite(
           _ExtensionsKtClass.reference.pointer,
-          _id_isInfinite as _$jni.JMethodIDPtr,
-          doubleCompanionObject.reference.pointer,
+          _id_isInfinite as jni$_.JMethodIDPtr,
+          _$doubleCompanionObject.pointer,
           d)
       .boolean;
 }
@@ -144,26 +145,28 @@ final _id_isInfinite$1 = _ExtensionsKtClass.staticMethodId(
   r'(Lkotlin/jvm/internal/FloatCompanionObject;D)Z',
 );
 
-final _isInfinite$1 = _$jni.ProtectedJniExtensions.lookup<
-            _$jni.NativeFunction<
-                _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
-                    _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Double)>)>>(
+final _isInfinite$1 = jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+                jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>)>>(
         'globalEnv_CallStaticBooleanMethod')
     .asFunction<
-        _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr,
-            _$jni.Pointer<_$jni.Void>, double)>();
+        jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>, double)>();
 
 /// from: `static public final boolean isInfinite(kotlin.jvm.internal.FloatCompanionObject floatCompanionObject, double d)`
 bool isInfinite$1(
-  _$jni.JObject floatCompanionObject,
+  jni$_.JObject? floatCompanionObject,
   double d,
 ) {
+  final _$floatCompanionObject =
+      floatCompanionObject?.reference ?? jni$_.jNullReference;
   return _isInfinite$1(
           _ExtensionsKtClass.reference.pointer,
-          _id_isInfinite$1 as _$jni.JMethodIDPtr,
-          floatCompanionObject.reference.pointer,
+          _id_isInfinite$1 as jni$_.JMethodIDPtr,
+          _$floatCompanionObject.pointer,
           d)
       .boolean;
 }

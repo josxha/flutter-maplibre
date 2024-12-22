@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,66 +45,66 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'Layer.dart' as layer_;
+import 'Layer.dart' as layer$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
-import 'TransitionOptions.dart' as transitionoptions_;
+import 'TransitionOptions.dart' as transitionoptions$_;
 
 /// from: `org.maplibre.android.style.layers.FillLayer`
-class FillLayer extends layer_.Layer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<FillLayer> $type;
+class FillLayer extends layer$_.Layer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<FillLayer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   FillLayer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/layers/FillLayer');
+      jni$_.JClass.forName(r'org/maplibre/android/style/layers/FillLayer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $FillLayer$NullableType();
   static const type = $FillLayer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory FillLayer(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return FillLayer.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return FillLayer.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
         .reference);
   }
 
@@ -112,23 +113,24 @@ class FillLayer extends layer_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
   void setSourceLayer(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 
@@ -137,25 +139,26 @@ class FillLayer extends layer_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/FillLayer;',
   );
 
-  static final _withSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.FillLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillLayer withSourceLayer(
-    _$jni.JString string,
+  FillLayer? withSourceLayer(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as _$jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $FillLayer$Type());
+            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<FillLayer?>(const $FillLayer$NullableType());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -163,24 +166,24 @@ class FillLayer extends layer_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getSourceId() {
+  jni$_.JString? getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getSourceLayer = _class.instanceMethodId(
@@ -188,24 +191,24 @@ class FillLayer extends layer_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceLayer = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getSourceLayer = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getSourceLayer()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getSourceLayer() {
+  jni$_.JString? getSourceLayer() {
     return _getSourceLayer(
-            reference.pointer, _id_getSourceLayer as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+            reference.pointer, _id_getSourceLayer as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setFilter = _class.instanceMethodId(
@@ -213,23 +216,24 @@ class FillLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)V',
   );
 
-  static final _setFilter = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setFilter = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
   void setFilter(
-    _$jni.JObject expression,
+    jni$_.JObject? expression,
   ) {
-    _setFilter(reference.pointer, _id_setFilter as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    _setFilter(reference.pointer, _id_setFilter as jni$_.JMethodIDPtr,
+            _$expression.pointer)
         .check();
   }
 
@@ -238,25 +242,26 @@ class FillLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/FillLayer;',
   );
 
-  static final _withFilter = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withFilter = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.FillLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillLayer withFilter(
-    _$jni.JObject expression,
+  FillLayer? withFilter(
+    jni$_.JObject? expression,
   ) {
-    return _withFilter(reference.pointer, _id_withFilter as _$jni.JMethodIDPtr,
-            expression.reference.pointer)
-        .object(const $FillLayer$Type());
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _withFilter(reference.pointer, _id_withFilter as jni$_.JMethodIDPtr,
+            _$expression.pointer)
+        .object<FillLayer?>(const $FillLayer$NullableType());
   }
 
   static final _id_getFilter = _class.instanceMethodId(
@@ -264,23 +269,23 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getFilter = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFilter = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getFilter()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getFilter() {
-    return _getFilter(reference.pointer, _id_getFilter as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? getFilter() {
+    return _getFilter(reference.pointer, _id_getFilter as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -288,27 +293,27 @@ class FillLayer extends layer_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/FillLayer;',
   );
 
-  static final _withProperties = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public org.maplibre.android.style.layers.FillLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillLayer withProperties(
-    _$jni.JArray<propertyvalue_.PropertyValue<_$jni.JObject>> propertyValues,
+  FillLayer? withProperties(
+    jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?>?
+        propertyValues,
   ) {
-    return _withProperties(
-            reference.pointer,
-            _id_withProperties as _$jni.JMethodIDPtr,
-            propertyValues.reference.pointer)
-        .object(const $FillLayer$Type());
+    final _$propertyValues = propertyValues?.reference ?? jni$_.jNullReference;
+    return _withProperties(reference.pointer,
+            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
+        .object<FillLayer?>(const $FillLayer$NullableType());
   }
 
   static final _id_getFillSortKey = _class.instanceMethodId(
@@ -316,24 +321,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillSortKey = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillSortKey = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillSortKey()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getFillSortKey() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getFillSortKey() {
     return _getFillSortKey(
-            reference.pointer, _id_getFillSortKey as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getFillSortKey as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getFillAntialias = _class.instanceMethodId(
@@ -341,24 +348,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillAntialias = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillAntialias = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillAntialias()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JBoolean> getFillAntialias() {
+  propertyvalue$_.PropertyValue<jni$_.JBoolean?>? getFillAntialias() {
     return _getFillAntialias(
-            reference.pointer, _id_getFillAntialias as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JBooleanType()));
+            reference.pointer, _id_getFillAntialias as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+                jni$_.JBooleanNullableType()));
   }
 
   static final _id_getFillOpacity = _class.instanceMethodId(
@@ -366,24 +375,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillOpacity = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillOpacity = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JFloat> getFillOpacity() {
+  propertyvalue$_.PropertyValue<jni$_.JFloat?>? getFillOpacity() {
     return _getFillOpacity(
-            reference.pointer, _id_getFillOpacity as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JFloatType()));
+            reference.pointer, _id_getFillOpacity as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JFloat?>(
+                jni$_.JFloatNullableType()));
   }
 
   static final _id_getFillOpacityTransition = _class.instanceMethodId(
@@ -391,24 +402,25 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getFillOpacityTransition = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getFillOpacityTransition() {
+  transitionoptions$_.TransitionOptions? getFillOpacityTransition() {
     return _getFillOpacityTransition(reference.pointer,
-            _id_getFillOpacityTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getFillOpacityTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setFillOpacityTransition = _class.instanceMethodId(
@@ -416,25 +428,27 @@ class FillLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setFillOpacityTransition = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setFillOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFillOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillOpacityTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setFillOpacityTransition(
             reference.pointer,
-            _id_setFillOpacityTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setFillOpacityTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -443,24 +457,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getFillColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getFillColor() {
     return _getFillColor(
-            reference.pointer, _id_getFillColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getFillColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getFillColorAsInt = _class.instanceMethodId(
@@ -468,22 +484,22 @@ class FillLayer extends layer_.Layer {
     r'()I',
   );
 
-  static final _getFillColorAsInt = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillColorAsInt = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int getFillColorAsInt()`
   int getFillColorAsInt() {
     return _getFillColorAsInt(
-            reference.pointer, _id_getFillColorAsInt as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getFillColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -492,24 +508,25 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getFillColorTransition = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillColorTransition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getFillColorTransition() {
+  transitionoptions$_.TransitionOptions? getFillColorTransition() {
     return _getFillColorTransition(
-            reference.pointer, _id_getFillColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            reference.pointer, _id_getFillColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setFillColorTransition = _class.instanceMethodId(
@@ -517,25 +534,27 @@ class FillLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setFillColorTransition = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setFillColorTransition = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFillColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setFillColorTransition(
             reference.pointer,
-            _id_setFillColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setFillColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -544,24 +563,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillOutlineColor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillOutlineColor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillOutlineColor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getFillOutlineColor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getFillOutlineColor() {
     return _getFillOutlineColor(
-            reference.pointer, _id_getFillOutlineColor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getFillOutlineColor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getFillOutlineColorAsInt = _class.instanceMethodId(
@@ -569,22 +590,22 @@ class FillLayer extends layer_.Layer {
     r'()I',
   );
 
-  static final _getFillOutlineColorAsInt = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillOutlineColorAsInt = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int getFillOutlineColorAsInt()`
   int getFillOutlineColorAsInt() {
     return _getFillOutlineColorAsInt(reference.pointer,
-            _id_getFillOutlineColorAsInt as _$jni.JMethodIDPtr)
+            _id_getFillOutlineColorAsInt as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -594,24 +615,25 @@ class FillLayer extends layer_.Layer {
   );
 
   static final _getFillOutlineColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillOutlineColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getFillOutlineColorTransition() {
+  transitionoptions$_.TransitionOptions? getFillOutlineColorTransition() {
     return _getFillOutlineColorTransition(reference.pointer,
-            _id_getFillOutlineColorTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getFillOutlineColorTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setFillOutlineColorTransition = _class.instanceMethodId(
@@ -620,25 +642,27 @@ class FillLayer extends layer_.Layer {
   );
 
   static final _setFillOutlineColorTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFillOutlineColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillOutlineColorTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setFillOutlineColorTransition(
             reference.pointer,
-            _id_setFillOutlineColorTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setFillOutlineColorTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -647,25 +671,29 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillTranslate = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillTranslate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillTranslate()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JArray<_$jni.JFloat>> getFillTranslate() {
+  propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
+      getFillTranslate() {
     return _getFillTranslate(
-            reference.pointer, _id_getFillTranslate as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(
-            _$jni.JArrayType(_$jni.JFloatType())));
+            reference.pointer, _id_getFillTranslate as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?>(
+            const propertyvalue$_
+                .$PropertyValue$NullableType<jni$_.JArray<jni$_.JFloat?>?>(
+                jni$_.JArrayNullableType<jni$_.JFloat?>(
+                    jni$_.JFloatNullableType())));
   }
 
   static final _id_getFillTranslateTransition = _class.instanceMethodId(
@@ -674,24 +702,25 @@ class FillLayer extends layer_.Layer {
   );
 
   static final _getFillTranslateTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                    _$jni.Pointer<_$jni.Void>,
-                    _$jni.JMethodIDPtr,
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
                   )>>('globalEnv_CallObjectMethod')
           .asFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillTranslateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getFillTranslateTransition() {
+  transitionoptions$_.TransitionOptions? getFillTranslateTransition() {
     return _getFillTranslateTransition(reference.pointer,
-            _id_getFillTranslateTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getFillTranslateTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setFillTranslateTransition = _class.instanceMethodId(
@@ -700,25 +729,27 @@ class FillLayer extends layer_.Layer {
   );
 
   static final _setFillTranslateTransition =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFillTranslateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillTranslateTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setFillTranslateTransition(
             reference.pointer,
-            _id_setFillTranslateTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setFillTranslateTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 
@@ -727,24 +758,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillTranslateAnchor = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillTranslateAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getFillTranslateAnchor() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getFillTranslateAnchor() {
     return _getFillTranslateAnchor(
-            reference.pointer, _id_getFillTranslateAnchor as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getFillTranslateAnchor as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getFillPattern = _class.instanceMethodId(
@@ -752,24 +785,26 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillPattern = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillPattern = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillPattern()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getFillPattern() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getFillPattern() {
     return _getFillPattern(
-            reference.pointer, _id_getFillPattern as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getFillPattern as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getFillPatternTransition = _class.instanceMethodId(
@@ -777,24 +812,25 @@ class FillLayer extends layer_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getFillPatternTransition = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getFillPatternTransition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillPatternTransition()`
   /// The returned object must be released after use, by calling the [release] method.
-  transitionoptions_.TransitionOptions getFillPatternTransition() {
+  transitionoptions$_.TransitionOptions? getFillPatternTransition() {
     return _getFillPatternTransition(reference.pointer,
-            _id_getFillPatternTransition as _$jni.JMethodIDPtr)
-        .object(const transitionoptions_.$TransitionOptions$Type());
+            _id_getFillPatternTransition as jni$_.JMethodIDPtr)
+        .object<transitionoptions$_.TransitionOptions?>(
+            const transitionoptions$_.$TransitionOptions$NullableType());
   }
 
   static final _id_setFillPatternTransition = _class.instanceMethodId(
@@ -802,54 +838,99 @@ class FillLayer extends layer_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setFillPatternTransition = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setFillPatternTransition = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setFillPatternTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillPatternTransition(
-    transitionoptions_.TransitionOptions transitionOptions,
+    transitionoptions$_.TransitionOptions? transitionOptions,
   ) {
+    final _$transitionOptions =
+        transitionOptions?.reference ?? jni$_.jNullReference;
     _setFillPatternTransition(
             reference.pointer,
-            _id_setFillPatternTransition as _$jni.JMethodIDPtr,
-            transitionOptions.reference.pointer)
+            _id_setFillPatternTransition as jni$_.JMethodIDPtr,
+            _$transitionOptions.pointer)
         .check();
   }
 }
 
-final class $FillLayer$Type extends _$jni.JObjType<FillLayer> {
-  @_$jni.internal
-  const $FillLayer$Type();
+final class $FillLayer$NullableType extends jni$_.JObjType<FillLayer?> {
+  @jni$_.internal
+  const $FillLayer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/layers/FillLayer;';
 
-  @_$jni.internal
-  @_$core.override
-  FillLayer fromReference(_$jni.JReference reference) =>
-      FillLayer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  FillLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : FillLayer.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const layer_.$Layer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FillLayer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($FillLayer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FillLayer$NullableType) &&
+        other is $FillLayer$NullableType;
+  }
+}
+
+final class $FillLayer$Type extends jni$_.JObjType<FillLayer> {
+  @jni$_.internal
+  const $FillLayer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/layers/FillLayer;';
+
+  @jni$_.internal
+  @core$_.override
+  FillLayer fromReference(jni$_.JReference reference) =>
+      FillLayer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<FillLayer?> get nullableType =>
+      const $FillLayer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($FillLayer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($FillLayer$Type) && other is $FillLayer$Type;
   }

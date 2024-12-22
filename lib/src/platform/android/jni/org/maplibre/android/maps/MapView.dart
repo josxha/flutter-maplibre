@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,68 +45,69 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'MapLibreMapOptions.dart' as maplibremapoptions_;
+import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
 
-import 'OnMapReadyCallback.dart' as onmapreadycallback_;
+import 'OnMapReadyCallback.dart' as onmapreadycallback$_;
 
-import 'renderer/MapRenderer.dart' as maprenderer_;
+import 'renderer/MapRenderer.dart' as maprenderer$_;
 
 /// from: `org.maplibre.android.maps.MapView$OnCameraDidChangeListener`
-class MapView_OnCameraDidChangeListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnCameraDidChangeListener> $type;
+class MapView$OnCameraDidChangeListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnCameraDidChangeListener> $type;
 
-  @_$jni.internal
-  MapView_OnCameraDidChangeListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnCameraDidChangeListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnCameraDidChangeListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnCameraDidChangeListener$Type();
+  static const nullableType = $MapView$OnCameraDidChangeListener$NullableType();
+  static const type = $MapView$OnCameraDidChangeListener$Type();
   static final _id_onCameraDidChange = _class.instanceMethodId(
     r'onCameraDidChange',
     r'(Z)V',
   );
 
-  static final _onCameraDidChange = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _onCameraDidChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public abstract void onCameraDidChange(boolean z)`
   void onCameraDidChange(
     bool z,
   ) {
     _onCameraDidChange(reference.pointer,
-            _id_onCameraDidChange as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_onCameraDidChange as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnCameraDidChangeListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnCameraDidChangeListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -113,47 +115,47 @@ class MapView_OnCameraDidChangeListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onCameraDidChange(Z)V') {
         _$impls[$p]!.onCameraDidChange(
-          $a[0]
-              .as(const _$jni.JBooleanType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JBooleanType(), releaseOriginal: true)
               .booleanValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnCameraDidChangeListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnCameraDidChangeListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnCameraDidChangeListener',
@@ -167,30 +169,30 @@ class MapView_OnCameraDidChangeListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnCameraDidChangeListener.implement(
-    $MapView_OnCameraDidChangeListener $impl,
+  factory MapView$OnCameraDidChangeListener.implement(
+    $MapView$OnCameraDidChangeListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnCameraDidChangeListener.fromReference(
+    return MapView$OnCameraDidChangeListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnCameraDidChangeListener {
-  factory $MapView_OnCameraDidChangeListener({
+abstract base mixin class $MapView$OnCameraDidChangeListener {
+  factory $MapView$OnCameraDidChangeListener({
     required void Function(bool z) onCameraDidChange,
     bool onCameraDidChange$async,
-  }) = _$MapView_OnCameraDidChangeListener;
+  }) = _$MapView$OnCameraDidChangeListener;
 
   void onCameraDidChange(bool z);
   bool get onCameraDidChange$async => false;
 }
 
-final class _$MapView_OnCameraDidChangeListener
-    with $MapView_OnCameraDidChangeListener {
-  _$MapView_OnCameraDidChangeListener({
+final class _$MapView$OnCameraDidChangeListener
+    with $MapView$OnCameraDidChangeListener {
+  _$MapView$OnCameraDidChangeListener({
     required void Function(bool z) onCameraDidChange,
     this.onCameraDidChange$async = false,
   }) : _onCameraDidChange = onCameraDidChange;
@@ -203,91 +205,142 @@ final class _$MapView_OnCameraDidChangeListener
   }
 }
 
-final class $MapView_OnCameraDidChangeListener$Type
-    extends _$jni.JObjType<MapView_OnCameraDidChangeListener> {
-  @_$jni.internal
-  const $MapView_OnCameraDidChangeListener$Type();
+final class $MapView$OnCameraDidChangeListener$NullableType
+    extends jni$_.JObjType<MapView$OnCameraDidChangeListener?> {
+  @jni$_.internal
+  const $MapView$OnCameraDidChangeListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnCameraDidChangeListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnCameraDidChangeListener fromReference(_$jni.JReference reference) =>
-      MapView_OnCameraDidChangeListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraDidChangeListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraDidChangeListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraDidChangeListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnCameraDidChangeListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnCameraDidChangeListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnCameraDidChangeListener$Type) &&
-        other is $MapView_OnCameraDidChangeListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnCameraDidChangeListener$NullableType) &&
+        other is $MapView$OnCameraDidChangeListener$NullableType;
+  }
+}
+
+final class $MapView$OnCameraDidChangeListener$Type
+    extends jni$_.JObjType<MapView$OnCameraDidChangeListener> {
+  @jni$_.internal
+  const $MapView$OnCameraDidChangeListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnCameraDidChangeListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraDidChangeListener fromReference(jni$_.JReference reference) =>
+      MapView$OnCameraDidChangeListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraDidChangeListener?> get nullableType =>
+      const $MapView$OnCameraDidChangeListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnCameraDidChangeListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnCameraDidChangeListener$Type) &&
+        other is $MapView$OnCameraDidChangeListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnCameraIsChangingListener`
-class MapView_OnCameraIsChangingListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnCameraIsChangingListener> $type;
+class MapView$OnCameraIsChangingListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnCameraIsChangingListener> $type;
 
-  @_$jni.internal
-  MapView_OnCameraIsChangingListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnCameraIsChangingListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnCameraIsChangingListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnCameraIsChangingListener$Type();
+  static const nullableType =
+      $MapView$OnCameraIsChangingListener$NullableType();
+  static const type = $MapView$OnCameraIsChangingListener$Type();
   static final _id_onCameraIsChanging = _class.instanceMethodId(
     r'onCameraIsChanging',
     r'()V',
   );
 
-  static final _onCameraIsChanging = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onCameraIsChanging = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onCameraIsChanging()`
   void onCameraIsChanging() {
     _onCameraIsChanging(
-            reference.pointer, _id_onCameraIsChanging as _$jni.JMethodIDPtr)
+            reference.pointer, _id_onCameraIsChanging as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnCameraIsChangingListener> _$impls =
+  static final core$_.Map<int, $MapView$OnCameraIsChangingListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -295,43 +348,43 @@ class MapView_OnCameraIsChangingListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onCameraIsChanging()V') {
         _$impls[$p]!.onCameraIsChanging();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnCameraIsChangingListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnCameraIsChangingListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnCameraIsChangingListener',
@@ -345,30 +398,30 @@ class MapView_OnCameraIsChangingListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnCameraIsChangingListener.implement(
-    $MapView_OnCameraIsChangingListener $impl,
+  factory MapView$OnCameraIsChangingListener.implement(
+    $MapView$OnCameraIsChangingListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnCameraIsChangingListener.fromReference(
+    return MapView$OnCameraIsChangingListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnCameraIsChangingListener {
-  factory $MapView_OnCameraIsChangingListener({
+abstract base mixin class $MapView$OnCameraIsChangingListener {
+  factory $MapView$OnCameraIsChangingListener({
     required void Function() onCameraIsChanging,
     bool onCameraIsChanging$async,
-  }) = _$MapView_OnCameraIsChangingListener;
+  }) = _$MapView$OnCameraIsChangingListener;
 
   void onCameraIsChanging();
   bool get onCameraIsChanging$async => false;
 }
 
-final class _$MapView_OnCameraIsChangingListener
-    with $MapView_OnCameraIsChangingListener {
-  _$MapView_OnCameraIsChangingListener({
+final class _$MapView$OnCameraIsChangingListener
+    with $MapView$OnCameraIsChangingListener {
+  _$MapView$OnCameraIsChangingListener({
     required void Function() onCameraIsChanging,
     this.onCameraIsChanging$async = false,
   }) : _onCameraIsChanging = onCameraIsChanging;
@@ -381,92 +434,143 @@ final class _$MapView_OnCameraIsChangingListener
   }
 }
 
-final class $MapView_OnCameraIsChangingListener$Type
-    extends _$jni.JObjType<MapView_OnCameraIsChangingListener> {
-  @_$jni.internal
-  const $MapView_OnCameraIsChangingListener$Type();
+final class $MapView$OnCameraIsChangingListener$NullableType
+    extends jni$_.JObjType<MapView$OnCameraIsChangingListener?> {
+  @jni$_.internal
+  const $MapView$OnCameraIsChangingListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnCameraIsChangingListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnCameraIsChangingListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnCameraIsChangingListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraIsChangingListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraIsChangingListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraIsChangingListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnCameraIsChangingListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnCameraIsChangingListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnCameraIsChangingListener$Type) &&
-        other is $MapView_OnCameraIsChangingListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnCameraIsChangingListener$NullableType) &&
+        other is $MapView$OnCameraIsChangingListener$NullableType;
+  }
+}
+
+final class $MapView$OnCameraIsChangingListener$Type
+    extends jni$_.JObjType<MapView$OnCameraIsChangingListener> {
+  @jni$_.internal
+  const $MapView$OnCameraIsChangingListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnCameraIsChangingListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraIsChangingListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnCameraIsChangingListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraIsChangingListener?> get nullableType =>
+      const $MapView$OnCameraIsChangingListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnCameraIsChangingListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnCameraIsChangingListener$Type) &&
+        other is $MapView$OnCameraIsChangingListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnCameraWillChangeListener`
-class MapView_OnCameraWillChangeListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnCameraWillChangeListener> $type;
+class MapView$OnCameraWillChangeListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnCameraWillChangeListener> $type;
 
-  @_$jni.internal
-  MapView_OnCameraWillChangeListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnCameraWillChangeListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnCameraWillChangeListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnCameraWillChangeListener$Type();
+  static const nullableType =
+      $MapView$OnCameraWillChangeListener$NullableType();
+  static const type = $MapView$OnCameraWillChangeListener$Type();
   static final _id_onCameraWillChange = _class.instanceMethodId(
     r'onCameraWillChange',
     r'(Z)V',
   );
 
-  static final _onCameraWillChange = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _onCameraWillChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public abstract void onCameraWillChange(boolean z)`
   void onCameraWillChange(
     bool z,
   ) {
     _onCameraWillChange(reference.pointer,
-            _id_onCameraWillChange as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_onCameraWillChange as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnCameraWillChangeListener> _$impls =
+  static final core$_.Map<int, $MapView$OnCameraWillChangeListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -474,47 +578,47 @@ class MapView_OnCameraWillChangeListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onCameraWillChange(Z)V') {
         _$impls[$p]!.onCameraWillChange(
-          $a[0]
-              .as(const _$jni.JBooleanType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JBooleanType(), releaseOriginal: true)
               .booleanValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnCameraWillChangeListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnCameraWillChangeListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnCameraWillChangeListener',
@@ -528,30 +632,30 @@ class MapView_OnCameraWillChangeListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnCameraWillChangeListener.implement(
-    $MapView_OnCameraWillChangeListener $impl,
+  factory MapView$OnCameraWillChangeListener.implement(
+    $MapView$OnCameraWillChangeListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnCameraWillChangeListener.fromReference(
+    return MapView$OnCameraWillChangeListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnCameraWillChangeListener {
-  factory $MapView_OnCameraWillChangeListener({
+abstract base mixin class $MapView$OnCameraWillChangeListener {
+  factory $MapView$OnCameraWillChangeListener({
     required void Function(bool z) onCameraWillChange,
     bool onCameraWillChange$async,
-  }) = _$MapView_OnCameraWillChangeListener;
+  }) = _$MapView$OnCameraWillChangeListener;
 
   void onCameraWillChange(bool z);
   bool get onCameraWillChange$async => false;
 }
 
-final class _$MapView_OnCameraWillChangeListener
-    with $MapView_OnCameraWillChangeListener {
-  _$MapView_OnCameraWillChangeListener({
+final class _$MapView$OnCameraWillChangeListener
+    with $MapView$OnCameraWillChangeListener {
+  _$MapView$OnCameraWillChangeListener({
     required void Function(bool z) onCameraWillChange,
     this.onCameraWillChange$async = false,
   }) : _onCameraWillChange = onCameraWillChange;
@@ -564,96 +668,148 @@ final class _$MapView_OnCameraWillChangeListener
   }
 }
 
-final class $MapView_OnCameraWillChangeListener$Type
-    extends _$jni.JObjType<MapView_OnCameraWillChangeListener> {
-  @_$jni.internal
-  const $MapView_OnCameraWillChangeListener$Type();
+final class $MapView$OnCameraWillChangeListener$NullableType
+    extends jni$_.JObjType<MapView$OnCameraWillChangeListener?> {
+  @jni$_.internal
+  const $MapView$OnCameraWillChangeListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnCameraWillChangeListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnCameraWillChangeListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnCameraWillChangeListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraWillChangeListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraWillChangeListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraWillChangeListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnCameraWillChangeListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnCameraWillChangeListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnCameraWillChangeListener$Type) &&
-        other is $MapView_OnCameraWillChangeListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnCameraWillChangeListener$NullableType) &&
+        other is $MapView$OnCameraWillChangeListener$NullableType;
+  }
+}
+
+final class $MapView$OnCameraWillChangeListener$Type
+    extends jni$_.JObjType<MapView$OnCameraWillChangeListener> {
+  @jni$_.internal
+  const $MapView$OnCameraWillChangeListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnCameraWillChangeListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCameraWillChangeListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnCameraWillChangeListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCameraWillChangeListener?> get nullableType =>
+      const $MapView$OnCameraWillChangeListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnCameraWillChangeListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnCameraWillChangeListener$Type) &&
+        other is $MapView$OnCameraWillChangeListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener`
-class MapView_OnCanRemoveUnusedStyleImageListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnCanRemoveUnusedStyleImageListener> $type;
+class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener> $type;
 
-  @_$jni.internal
-  MapView_OnCanRemoveUnusedStyleImageListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnCanRemoveUnusedStyleImageListener$Type();
+  static const nullableType =
+      $MapView$OnCanRemoveUnusedStyleImageListener$NullableType();
+  static const type = $MapView$OnCanRemoveUnusedStyleImageListener$Type();
   static final _id_onCanRemoveUnusedStyleImage = _class.instanceMethodId(
     r'onCanRemoveUnusedStyleImage',
     r'(Ljava/lang/String;)Z',
   );
 
   static final _onCanRemoveUnusedStyleImage =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JniResult Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallBooleanMethod')
           .asFunction<
-              _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract boolean onCanRemoveUnusedStyleImage(java.lang.String string)`
   bool onCanRemoveUnusedStyleImage(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _onCanRemoveUnusedStyleImage(
             reference.pointer,
-            _id_onCanRemoveUnusedStyleImage as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+            _id_onCanRemoveUnusedStyleImage as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .boolean;
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnCanRemoveUnusedStyleImageListener>
+  static final core$_.Map<int, $MapView$OnCanRemoveUnusedStyleImageListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -661,45 +817,45 @@ class MapView_OnCanRemoveUnusedStyleImageListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onCanRemoveUnusedStyleImage(Ljava/lang/String;)Z') {
         final $r = _$impls[$p]!.onCanRemoveUnusedStyleImage(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnCanRemoveUnusedStyleImageListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnCanRemoveUnusedStyleImageListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener',
@@ -711,125 +867,177 @@ class MapView_OnCanRemoveUnusedStyleImageListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnCanRemoveUnusedStyleImageListener.implement(
-    $MapView_OnCanRemoveUnusedStyleImageListener $impl,
+  factory MapView$OnCanRemoveUnusedStyleImageListener.implement(
+    $MapView$OnCanRemoveUnusedStyleImageListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnCanRemoveUnusedStyleImageListener.fromReference(
+    return MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnCanRemoveUnusedStyleImageListener {
-  factory $MapView_OnCanRemoveUnusedStyleImageListener({
-    required bool Function(_$jni.JString string) onCanRemoveUnusedStyleImage,
-  }) = _$MapView_OnCanRemoveUnusedStyleImageListener;
+abstract base mixin class $MapView$OnCanRemoveUnusedStyleImageListener {
+  factory $MapView$OnCanRemoveUnusedStyleImageListener({
+    required bool Function(jni$_.JString? string) onCanRemoveUnusedStyleImage,
+  }) = _$MapView$OnCanRemoveUnusedStyleImageListener;
 
-  bool onCanRemoveUnusedStyleImage(_$jni.JString string);
+  bool onCanRemoveUnusedStyleImage(jni$_.JString? string);
 }
 
-final class _$MapView_OnCanRemoveUnusedStyleImageListener
-    with $MapView_OnCanRemoveUnusedStyleImageListener {
-  _$MapView_OnCanRemoveUnusedStyleImageListener({
-    required bool Function(_$jni.JString string) onCanRemoveUnusedStyleImage,
+final class _$MapView$OnCanRemoveUnusedStyleImageListener
+    with $MapView$OnCanRemoveUnusedStyleImageListener {
+  _$MapView$OnCanRemoveUnusedStyleImageListener({
+    required bool Function(jni$_.JString? string) onCanRemoveUnusedStyleImage,
   }) : _onCanRemoveUnusedStyleImage = onCanRemoveUnusedStyleImage;
 
-  final bool Function(_$jni.JString string) _onCanRemoveUnusedStyleImage;
+  final bool Function(jni$_.JString? string) _onCanRemoveUnusedStyleImage;
 
-  bool onCanRemoveUnusedStyleImage(_$jni.JString string) {
+  bool onCanRemoveUnusedStyleImage(jni$_.JString? string) {
     return _onCanRemoveUnusedStyleImage(string);
   }
 }
 
-final class $MapView_OnCanRemoveUnusedStyleImageListener$Type
-    extends _$jni.JObjType<MapView_OnCanRemoveUnusedStyleImageListener> {
-  @_$jni.internal
-  const $MapView_OnCanRemoveUnusedStyleImageListener$Type();
+final class $MapView$OnCanRemoveUnusedStyleImageListener$NullableType
+    extends jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener?> {
+  @jni$_.internal
+  const $MapView$OnCanRemoveUnusedStyleImageListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnCanRemoveUnusedStyleImageListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnCanRemoveUnusedStyleImageListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCanRemoveUnusedStyleImageListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener?>
+      get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($MapView_OnCanRemoveUnusedStyleImageListener$Type).hashCode;
+      ($MapView$OnCanRemoveUnusedStyleImageListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnCanRemoveUnusedStyleImageListener$Type) &&
-        other is $MapView_OnCanRemoveUnusedStyleImageListener$Type;
+            ($MapView$OnCanRemoveUnusedStyleImageListener$NullableType) &&
+        other is $MapView$OnCanRemoveUnusedStyleImageListener$NullableType;
+  }
+}
+
+final class $MapView$OnCanRemoveUnusedStyleImageListener$Type
+    extends jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener> {
+  @jni$_.internal
+  const $MapView$OnCanRemoveUnusedStyleImageListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnCanRemoveUnusedStyleImageListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener?>
+      get nullableType =>
+          const $MapView$OnCanRemoveUnusedStyleImageListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnCanRemoveUnusedStyleImageListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnCanRemoveUnusedStyleImageListener$Type) &&
+        other is $MapView$OnCanRemoveUnusedStyleImageListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidBecomeIdleListener`
-class MapView_OnDidBecomeIdleListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidBecomeIdleListener> $type;
+class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidBecomeIdleListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidBecomeIdleListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidBecomeIdleListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidBecomeIdleListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidBecomeIdleListener$Type();
+  static const nullableType = $MapView$OnDidBecomeIdleListener$NullableType();
+  static const type = $MapView$OnDidBecomeIdleListener$Type();
   static final _id_onDidBecomeIdle = _class.instanceMethodId(
     r'onDidBecomeIdle',
     r'()V',
   );
 
-  static final _onDidBecomeIdle = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDidBecomeIdle = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onDidBecomeIdle()`
   void onDidBecomeIdle() {
     _onDidBecomeIdle(
-            reference.pointer, _id_onDidBecomeIdle as _$jni.JMethodIDPtr)
+            reference.pointer, _id_onDidBecomeIdle as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidBecomeIdleListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnDidBecomeIdleListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -837,43 +1045,43 @@ class MapView_OnDidBecomeIdleListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidBecomeIdle()V') {
         _$impls[$p]!.onDidBecomeIdle();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidBecomeIdleListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidBecomeIdleListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidBecomeIdleListener',
@@ -887,30 +1095,30 @@ class MapView_OnDidBecomeIdleListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidBecomeIdleListener.implement(
-    $MapView_OnDidBecomeIdleListener $impl,
+  factory MapView$OnDidBecomeIdleListener.implement(
+    $MapView$OnDidBecomeIdleListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidBecomeIdleListener.fromReference(
+    return MapView$OnDidBecomeIdleListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidBecomeIdleListener {
-  factory $MapView_OnDidBecomeIdleListener({
+abstract base mixin class $MapView$OnDidBecomeIdleListener {
+  factory $MapView$OnDidBecomeIdleListener({
     required void Function() onDidBecomeIdle,
     bool onDidBecomeIdle$async,
-  }) = _$MapView_OnDidBecomeIdleListener;
+  }) = _$MapView$OnDidBecomeIdleListener;
 
   void onDidBecomeIdle();
   bool get onDidBecomeIdle$async => false;
 }
 
-final class _$MapView_OnDidBecomeIdleListener
-    with $MapView_OnDidBecomeIdleListener {
-  _$MapView_OnDidBecomeIdleListener({
+final class _$MapView$OnDidBecomeIdleListener
+    with $MapView$OnDidBecomeIdleListener {
+  _$MapView$OnDidBecomeIdleListener({
     required void Function() onDidBecomeIdle,
     this.onDidBecomeIdle$async = false,
   }) : _onDidBecomeIdle = onDidBecomeIdle;
@@ -923,94 +1131,142 @@ final class _$MapView_OnDidBecomeIdleListener
   }
 }
 
-final class $MapView_OnDidBecomeIdleListener$Type
-    extends _$jni.JObjType<MapView_OnDidBecomeIdleListener> {
-  @_$jni.internal
-  const $MapView_OnDidBecomeIdleListener$Type();
+final class $MapView$OnDidBecomeIdleListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidBecomeIdleListener?> {
+  @jni$_.internal
+  const $MapView$OnDidBecomeIdleListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidBecomeIdleListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidBecomeIdleListener fromReference(_$jni.JReference reference) =>
-      MapView_OnDidBecomeIdleListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidBecomeIdleListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidBecomeIdleListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidBecomeIdleListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnDidBecomeIdleListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnDidBecomeIdleListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnDidBecomeIdleListener$Type) &&
-        other is $MapView_OnDidBecomeIdleListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnDidBecomeIdleListener$NullableType) &&
+        other is $MapView$OnDidBecomeIdleListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidBecomeIdleListener$Type
+    extends jni$_.JObjType<MapView$OnDidBecomeIdleListener> {
+  @jni$_.internal
+  const $MapView$OnDidBecomeIdleListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidBecomeIdleListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidBecomeIdleListener fromReference(jni$_.JReference reference) =>
+      MapView$OnDidBecomeIdleListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidBecomeIdleListener?> get nullableType =>
+      const $MapView$OnDidBecomeIdleListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnDidBecomeIdleListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnDidBecomeIdleListener$Type) &&
+        other is $MapView$OnDidBecomeIdleListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener`
-class MapView_OnDidFailLoadingMapListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidFailLoadingMapListener> $type;
+class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidFailLoadingMapListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidFailLoadingMapListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidFailLoadingMapListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidFailLoadingMapListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidFailLoadingMapListener$Type();
+  static const nullableType =
+      $MapView$OnDidFailLoadingMapListener$NullableType();
+  static const type = $MapView$OnDidFailLoadingMapListener$Type();
   static final _id_onDidFailLoadingMap = _class.instanceMethodId(
     r'onDidFailLoadingMap',
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onDidFailLoadingMap = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onDidFailLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onDidFailLoadingMap(java.lang.String string)`
   void onDidFailLoadingMap(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _onDidFailLoadingMap(
-            reference.pointer,
-            _id_onDidFailLoadingMap as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _onDidFailLoadingMap(reference.pointer,
+            _id_onDidFailLoadingMap as jni$_.JMethodIDPtr, _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidFailLoadingMapListener> _$impls =
+  static final core$_.Map<int, $MapView$OnDidFailLoadingMapListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1018,45 +1274,45 @@ class MapView_OnDidFailLoadingMapListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidFailLoadingMap(Ljava/lang/String;)V') {
         _$impls[$p]!.onDidFailLoadingMap(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidFailLoadingMapListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidFailLoadingMapListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener',
@@ -1071,128 +1327,179 @@ class MapView_OnDidFailLoadingMapListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidFailLoadingMapListener.implement(
-    $MapView_OnDidFailLoadingMapListener $impl,
+  factory MapView$OnDidFailLoadingMapListener.implement(
+    $MapView$OnDidFailLoadingMapListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidFailLoadingMapListener.fromReference(
+    return MapView$OnDidFailLoadingMapListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidFailLoadingMapListener {
-  factory $MapView_OnDidFailLoadingMapListener({
-    required void Function(_$jni.JString string) onDidFailLoadingMap,
+abstract base mixin class $MapView$OnDidFailLoadingMapListener {
+  factory $MapView$OnDidFailLoadingMapListener({
+    required void Function(jni$_.JString? string) onDidFailLoadingMap,
     bool onDidFailLoadingMap$async,
-  }) = _$MapView_OnDidFailLoadingMapListener;
+  }) = _$MapView$OnDidFailLoadingMapListener;
 
-  void onDidFailLoadingMap(_$jni.JString string);
+  void onDidFailLoadingMap(jni$_.JString? string);
   bool get onDidFailLoadingMap$async => false;
 }
 
-final class _$MapView_OnDidFailLoadingMapListener
-    with $MapView_OnDidFailLoadingMapListener {
-  _$MapView_OnDidFailLoadingMapListener({
-    required void Function(_$jni.JString string) onDidFailLoadingMap,
+final class _$MapView$OnDidFailLoadingMapListener
+    with $MapView$OnDidFailLoadingMapListener {
+  _$MapView$OnDidFailLoadingMapListener({
+    required void Function(jni$_.JString? string) onDidFailLoadingMap,
     this.onDidFailLoadingMap$async = false,
   }) : _onDidFailLoadingMap = onDidFailLoadingMap;
 
-  final void Function(_$jni.JString string) _onDidFailLoadingMap;
+  final void Function(jni$_.JString? string) _onDidFailLoadingMap;
   final bool onDidFailLoadingMap$async;
 
-  void onDidFailLoadingMap(_$jni.JString string) {
+  void onDidFailLoadingMap(jni$_.JString? string) {
     return _onDidFailLoadingMap(string);
   }
 }
 
-final class $MapView_OnDidFailLoadingMapListener$Type
-    extends _$jni.JObjType<MapView_OnDidFailLoadingMapListener> {
-  @_$jni.internal
-  const $MapView_OnDidFailLoadingMapListener$Type();
+final class $MapView$OnDidFailLoadingMapListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidFailLoadingMapListener?> {
+  @jni$_.internal
+  const $MapView$OnDidFailLoadingMapListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidFailLoadingMapListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidFailLoadingMapListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnDidFailLoadingMapListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFailLoadingMapListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFailLoadingMapListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFailLoadingMapListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnDidFailLoadingMapListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnDidFailLoadingMapListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnDidFailLoadingMapListener$Type) &&
-        other is $MapView_OnDidFailLoadingMapListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnDidFailLoadingMapListener$NullableType) &&
+        other is $MapView$OnDidFailLoadingMapListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidFailLoadingMapListener$Type
+    extends jni$_.JObjType<MapView$OnDidFailLoadingMapListener> {
+  @jni$_.internal
+  const $MapView$OnDidFailLoadingMapListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidFailLoadingMapListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFailLoadingMapListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnDidFailLoadingMapListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFailLoadingMapListener?> get nullableType =>
+      const $MapView$OnDidFailLoadingMapListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnDidFailLoadingMapListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnDidFailLoadingMapListener$Type) &&
+        other is $MapView$OnDidFailLoadingMapListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener`
-class MapView_OnDidFinishLoadingMapListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidFinishLoadingMapListener> $type;
+class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidFinishLoadingMapListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidFinishLoadingMapListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidFinishLoadingMapListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidFinishLoadingMapListener$Type();
+  static const nullableType =
+      $MapView$OnDidFinishLoadingMapListener$NullableType();
+  static const type = $MapView$OnDidFinishLoadingMapListener$Type();
   static final _id_onDidFinishLoadingMap = _class.instanceMethodId(
     r'onDidFinishLoadingMap',
     r'()V',
   );
 
-  static final _onDidFinishLoadingMap = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDidFinishLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onDidFinishLoadingMap()`
   void onDidFinishLoadingMap() {
     _onDidFinishLoadingMap(
-            reference.pointer, _id_onDidFinishLoadingMap as _$jni.JMethodIDPtr)
+            reference.pointer, _id_onDidFinishLoadingMap as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidFinishLoadingMapListener> _$impls =
+  static final core$_.Map<int, $MapView$OnDidFinishLoadingMapListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1200,43 +1507,43 @@ class MapView_OnDidFinishLoadingMapListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidFinishLoadingMap()V') {
         _$impls[$p]!.onDidFinishLoadingMap();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidFinishLoadingMapListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidFinishLoadingMapListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener',
@@ -1250,30 +1557,30 @@ class MapView_OnDidFinishLoadingMapListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidFinishLoadingMapListener.implement(
-    $MapView_OnDidFinishLoadingMapListener $impl,
+  factory MapView$OnDidFinishLoadingMapListener.implement(
+    $MapView$OnDidFinishLoadingMapListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidFinishLoadingMapListener.fromReference(
+    return MapView$OnDidFinishLoadingMapListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidFinishLoadingMapListener {
-  factory $MapView_OnDidFinishLoadingMapListener({
+abstract base mixin class $MapView$OnDidFinishLoadingMapListener {
+  factory $MapView$OnDidFinishLoadingMapListener({
     required void Function() onDidFinishLoadingMap,
     bool onDidFinishLoadingMap$async,
-  }) = _$MapView_OnDidFinishLoadingMapListener;
+  }) = _$MapView$OnDidFinishLoadingMapListener;
 
   void onDidFinishLoadingMap();
   bool get onDidFinishLoadingMap$async => false;
 }
 
-final class _$MapView_OnDidFinishLoadingMapListener
-    with $MapView_OnDidFinishLoadingMapListener {
-  _$MapView_OnDidFinishLoadingMapListener({
+final class _$MapView$OnDidFinishLoadingMapListener
+    with $MapView$OnDidFinishLoadingMapListener {
+  _$MapView$OnDidFinishLoadingMapListener({
     required void Function() onDidFinishLoadingMap,
     this.onDidFinishLoadingMap$async = false,
   }) : _onDidFinishLoadingMap = onDidFinishLoadingMap;
@@ -1286,92 +1593,144 @@ final class _$MapView_OnDidFinishLoadingMapListener
   }
 }
 
-final class $MapView_OnDidFinishLoadingMapListener$Type
-    extends _$jni.JObjType<MapView_OnDidFinishLoadingMapListener> {
-  @_$jni.internal
-  const $MapView_OnDidFinishLoadingMapListener$Type();
+final class $MapView$OnDidFinishLoadingMapListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidFinishLoadingMapListener?> {
+  @jni$_.internal
+  const $MapView$OnDidFinishLoadingMapListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidFinishLoadingMapListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnDidFinishLoadingMapListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishLoadingMapListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishLoadingMapListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishLoadingMapListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnDidFinishLoadingMapListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnDidFinishLoadingMapListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnDidFinishLoadingMapListener$Type) &&
-        other is $MapView_OnDidFinishLoadingMapListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnDidFinishLoadingMapListener$NullableType) &&
+        other is $MapView$OnDidFinishLoadingMapListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidFinishLoadingMapListener$Type
+    extends jni$_.JObjType<MapView$OnDidFinishLoadingMapListener> {
+  @jni$_.internal
+  const $MapView$OnDidFinishLoadingMapListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishLoadingMapListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnDidFinishLoadingMapListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishLoadingMapListener?> get nullableType =>
+      const $MapView$OnDidFinishLoadingMapListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnDidFinishLoadingMapListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnDidFinishLoadingMapListener$Type) &&
+        other is $MapView$OnDidFinishLoadingMapListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener`
-class MapView_OnDidFinishLoadingStyleListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidFinishLoadingStyleListener> $type;
+class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidFinishLoadingStyleListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidFinishLoadingStyleListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidFinishLoadingStyleListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidFinishLoadingStyleListener$Type();
+  static const nullableType =
+      $MapView$OnDidFinishLoadingStyleListener$NullableType();
+  static const type = $MapView$OnDidFinishLoadingStyleListener$Type();
   static final _id_onDidFinishLoadingStyle = _class.instanceMethodId(
     r'onDidFinishLoadingStyle',
     r'()V',
   );
 
-  static final _onDidFinishLoadingStyle = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDidFinishLoadingStyle = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onDidFinishLoadingStyle()`
   void onDidFinishLoadingStyle() {
     _onDidFinishLoadingStyle(reference.pointer,
-            _id_onDidFinishLoadingStyle as _$jni.JMethodIDPtr)
+            _id_onDidFinishLoadingStyle as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidFinishLoadingStyleListener>
+  static final core$_.Map<int, $MapView$OnDidFinishLoadingStyleListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1379,43 +1738,43 @@ class MapView_OnDidFinishLoadingStyleListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidFinishLoadingStyle()V') {
         _$impls[$p]!.onDidFinishLoadingStyle();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidFinishLoadingStyleListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidFinishLoadingStyleListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener',
@@ -1429,30 +1788,30 @@ class MapView_OnDidFinishLoadingStyleListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidFinishLoadingStyleListener.implement(
-    $MapView_OnDidFinishLoadingStyleListener $impl,
+  factory MapView$OnDidFinishLoadingStyleListener.implement(
+    $MapView$OnDidFinishLoadingStyleListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidFinishLoadingStyleListener.fromReference(
+    return MapView$OnDidFinishLoadingStyleListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidFinishLoadingStyleListener {
-  factory $MapView_OnDidFinishLoadingStyleListener({
+abstract base mixin class $MapView$OnDidFinishLoadingStyleListener {
+  factory $MapView$OnDidFinishLoadingStyleListener({
     required void Function() onDidFinishLoadingStyle,
     bool onDidFinishLoadingStyle$async,
-  }) = _$MapView_OnDidFinishLoadingStyleListener;
+  }) = _$MapView$OnDidFinishLoadingStyleListener;
 
   void onDidFinishLoadingStyle();
   bool get onDidFinishLoadingStyle$async => false;
 }
 
-final class _$MapView_OnDidFinishLoadingStyleListener
-    with $MapView_OnDidFinishLoadingStyleListener {
-  _$MapView_OnDidFinishLoadingStyleListener({
+final class _$MapView$OnDidFinishLoadingStyleListener
+    with $MapView$OnDidFinishLoadingStyleListener {
+  _$MapView$OnDidFinishLoadingStyleListener({
     required void Function() onDidFinishLoadingStyle,
     this.onDidFinishLoadingStyle$async = false,
   }) : _onDidFinishLoadingStyle = onDidFinishLoadingStyle;
@@ -1465,77 +1824,129 @@ final class _$MapView_OnDidFinishLoadingStyleListener
   }
 }
 
-final class $MapView_OnDidFinishLoadingStyleListener$Type
-    extends _$jni.JObjType<MapView_OnDidFinishLoadingStyleListener> {
-  @_$jni.internal
-  const $MapView_OnDidFinishLoadingStyleListener$Type();
+final class $MapView$OnDidFinishLoadingStyleListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidFinishLoadingStyleListener?> {
+  @jni$_.internal
+  const $MapView$OnDidFinishLoadingStyleListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidFinishLoadingStyleListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnDidFinishLoadingStyleListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishLoadingStyleListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishLoadingStyleListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishLoadingStyleListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnDidFinishLoadingStyleListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnDidFinishLoadingStyleListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnDidFinishLoadingStyleListener$Type) &&
-        other is $MapView_OnDidFinishLoadingStyleListener$Type;
+            ($MapView$OnDidFinishLoadingStyleListener$NullableType) &&
+        other is $MapView$OnDidFinishLoadingStyleListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidFinishLoadingStyleListener$Type
+    extends jni$_.JObjType<MapView$OnDidFinishLoadingStyleListener> {
+  @jni$_.internal
+  const $MapView$OnDidFinishLoadingStyleListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishLoadingStyleListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnDidFinishLoadingStyleListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishLoadingStyleListener?> get nullableType =>
+      const $MapView$OnDidFinishLoadingStyleListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnDidFinishLoadingStyleListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnDidFinishLoadingStyleListener$Type) &&
+        other is $MapView$OnDidFinishLoadingStyleListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener`
-class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidFinishRenderingFrameListener> $type;
+class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidFinishRenderingFrameListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidFinishRenderingFrameListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidFinishRenderingFrameListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidFinishRenderingFrameListener$Type();
+  static const nullableType =
+      $MapView$OnDidFinishRenderingFrameListener$NullableType();
+  static const type = $MapView$OnDidFinishRenderingFrameListener$Type();
   static final _id_onDidFinishRenderingFrame = _class.instanceMethodId(
     r'onDidFinishRenderingFrame',
     r'(ZDD)V',
   );
 
-  static final _onDidFinishRenderingFrame = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onDidFinishRenderingFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Double,
-                        _$jni.Double
+                        jni$_.Int32,
+                        jni$_.Double,
+                        jni$_.Double
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, double, double)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, double, double)>();
 
   /// from: `public abstract void onDidFinishRenderingFrame(boolean z, double d, double d1)`
   void onDidFinishRenderingFrame(
@@ -1545,7 +1956,7 @@ class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
   ) {
     _onDidFinishRenderingFrame(
             reference.pointer,
-            _id_onDidFinishRenderingFrame as _$jni.JMethodIDPtr,
+            _id_onDidFinishRenderingFrame as jni$_.JMethodIDPtr,
             z ? 1 : 0,
             d,
             d1)
@@ -1553,16 +1964,16 @@ class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidFinishRenderingFrameListener>
+  static final core$_.Map<int, $MapView$OnDidFinishRenderingFrameListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1570,53 +1981,53 @@ class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidFinishRenderingFrame(ZDD)V') {
         _$impls[$p]!.onDidFinishRenderingFrame(
-          $a[0]
-              .as(const _$jni.JBooleanType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JBooleanType(), releaseOriginal: true)
               .booleanValue(releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JDoubleType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JDoubleType(), releaseOriginal: true)
               .doubleValue(releaseOriginal: true),
-          $a[2]
-              .as(const _$jni.JDoubleType(), releaseOriginal: true)
+          $a![2]!
+              .as(const jni$_.JDoubleType(), releaseOriginal: true)
               .doubleValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidFinishRenderingFrameListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidFinishRenderingFrameListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener',
@@ -1631,31 +2042,31 @@ class MapView_OnDidFinishRenderingFrameListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidFinishRenderingFrameListener.implement(
-    $MapView_OnDidFinishRenderingFrameListener $impl,
+  factory MapView$OnDidFinishRenderingFrameListener.implement(
+    $MapView$OnDidFinishRenderingFrameListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidFinishRenderingFrameListener.fromReference(
+    return MapView$OnDidFinishRenderingFrameListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidFinishRenderingFrameListener {
-  factory $MapView_OnDidFinishRenderingFrameListener({
+abstract base mixin class $MapView$OnDidFinishRenderingFrameListener {
+  factory $MapView$OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
         onDidFinishRenderingFrame,
     bool onDidFinishRenderingFrame$async,
-  }) = _$MapView_OnDidFinishRenderingFrameListener;
+  }) = _$MapView$OnDidFinishRenderingFrameListener;
 
   void onDidFinishRenderingFrame(bool z, double d, double d1);
   bool get onDidFinishRenderingFrame$async => false;
 }
 
-final class _$MapView_OnDidFinishRenderingFrameListener
-    with $MapView_OnDidFinishRenderingFrameListener {
-  _$MapView_OnDidFinishRenderingFrameListener({
+final class _$MapView$OnDidFinishRenderingFrameListener
+    with $MapView$OnDidFinishRenderingFrameListener {
+  _$MapView$OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
         onDidFinishRenderingFrame,
     this.onDidFinishRenderingFrame$async = false,
@@ -1669,94 +2080,146 @@ final class _$MapView_OnDidFinishRenderingFrameListener
   }
 }
 
-final class $MapView_OnDidFinishRenderingFrameListener$Type
-    extends _$jni.JObjType<MapView_OnDidFinishRenderingFrameListener> {
-  @_$jni.internal
-  const $MapView_OnDidFinishRenderingFrameListener$Type();
+final class $MapView$OnDidFinishRenderingFrameListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidFinishRenderingFrameListener?> {
+  @jni$_.internal
+  const $MapView$OnDidFinishRenderingFrameListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidFinishRenderingFrameListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnDidFinishRenderingFrameListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishRenderingFrameListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishRenderingFrameListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishRenderingFrameListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($MapView_OnDidFinishRenderingFrameListener$Type).hashCode;
+      ($MapView$OnDidFinishRenderingFrameListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnDidFinishRenderingFrameListener$Type) &&
-        other is $MapView_OnDidFinishRenderingFrameListener$Type;
+            ($MapView$OnDidFinishRenderingFrameListener$NullableType) &&
+        other is $MapView$OnDidFinishRenderingFrameListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidFinishRenderingFrameListener$Type
+    extends jni$_.JObjType<MapView$OnDidFinishRenderingFrameListener> {
+  @jni$_.internal
+  const $MapView$OnDidFinishRenderingFrameListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishRenderingFrameListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnDidFinishRenderingFrameListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishRenderingFrameListener?> get nullableType =>
+      const $MapView$OnDidFinishRenderingFrameListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnDidFinishRenderingFrameListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnDidFinishRenderingFrameListener$Type) &&
+        other is $MapView$OnDidFinishRenderingFrameListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener`
-class MapView_OnDidFinishRenderingMapListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnDidFinishRenderingMapListener> $type;
+class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnDidFinishRenderingMapListener> $type;
 
-  @_$jni.internal
-  MapView_OnDidFinishRenderingMapListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnDidFinishRenderingMapListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnDidFinishRenderingMapListener$Type();
+  static const nullableType =
+      $MapView$OnDidFinishRenderingMapListener$NullableType();
+  static const type = $MapView$OnDidFinishRenderingMapListener$Type();
   static final _id_onDidFinishRenderingMap = _class.instanceMethodId(
     r'onDidFinishRenderingMap',
     r'(Z)V',
   );
 
-  static final _onDidFinishRenderingMap = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _onDidFinishRenderingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public abstract void onDidFinishRenderingMap(boolean z)`
   void onDidFinishRenderingMap(
     bool z,
   ) {
     _onDidFinishRenderingMap(reference.pointer,
-            _id_onDidFinishRenderingMap as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_onDidFinishRenderingMap as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnDidFinishRenderingMapListener>
+  static final core$_.Map<int, $MapView$OnDidFinishRenderingMapListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1764,47 +2227,47 @@ class MapView_OnDidFinishRenderingMapListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onDidFinishRenderingMap(Z)V') {
         _$impls[$p]!.onDidFinishRenderingMap(
-          $a[0]
-              .as(const _$jni.JBooleanType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JBooleanType(), releaseOriginal: true)
               .booleanValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnDidFinishRenderingMapListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnDidFinishRenderingMapListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener',
@@ -1818,30 +2281,30 @@ class MapView_OnDidFinishRenderingMapListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnDidFinishRenderingMapListener.implement(
-    $MapView_OnDidFinishRenderingMapListener $impl,
+  factory MapView$OnDidFinishRenderingMapListener.implement(
+    $MapView$OnDidFinishRenderingMapListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnDidFinishRenderingMapListener.fromReference(
+    return MapView$OnDidFinishRenderingMapListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnDidFinishRenderingMapListener {
-  factory $MapView_OnDidFinishRenderingMapListener({
+abstract base mixin class $MapView$OnDidFinishRenderingMapListener {
+  factory $MapView$OnDidFinishRenderingMapListener({
     required void Function(bool z) onDidFinishRenderingMap,
     bool onDidFinishRenderingMap$async,
-  }) = _$MapView_OnDidFinishRenderingMapListener;
+  }) = _$MapView$OnDidFinishRenderingMapListener;
 
   void onDidFinishRenderingMap(bool z);
   bool get onDidFinishRenderingMap$async => false;
 }
 
-final class _$MapView_OnDidFinishRenderingMapListener
-    with $MapView_OnDidFinishRenderingMapListener {
-  _$MapView_OnDidFinishRenderingMapListener({
+final class _$MapView$OnDidFinishRenderingMapListener
+    with $MapView$OnDidFinishRenderingMapListener {
+  _$MapView$OnDidFinishRenderingMapListener({
     required void Function(bool z) onDidFinishRenderingMap,
     this.onDidFinishRenderingMap$async = false,
   }) : _onDidFinishRenderingMap = onDidFinishRenderingMap;
@@ -1854,99 +2317,151 @@ final class _$MapView_OnDidFinishRenderingMapListener
   }
 }
 
-final class $MapView_OnDidFinishRenderingMapListener$Type
-    extends _$jni.JObjType<MapView_OnDidFinishRenderingMapListener> {
-  @_$jni.internal
-  const $MapView_OnDidFinishRenderingMapListener$Type();
+final class $MapView$OnDidFinishRenderingMapListener$NullableType
+    extends jni$_.JObjType<MapView$OnDidFinishRenderingMapListener?> {
+  @jni$_.internal
+  const $MapView$OnDidFinishRenderingMapListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnDidFinishRenderingMapListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnDidFinishRenderingMapListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishRenderingMapListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishRenderingMapListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishRenderingMapListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnDidFinishRenderingMapListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnDidFinishRenderingMapListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnDidFinishRenderingMapListener$Type) &&
-        other is $MapView_OnDidFinishRenderingMapListener$Type;
+            ($MapView$OnDidFinishRenderingMapListener$NullableType) &&
+        other is $MapView$OnDidFinishRenderingMapListener$NullableType;
+  }
+}
+
+final class $MapView$OnDidFinishRenderingMapListener$Type
+    extends jni$_.JObjType<MapView$OnDidFinishRenderingMapListener> {
+  @jni$_.internal
+  const $MapView$OnDidFinishRenderingMapListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnDidFinishRenderingMapListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnDidFinishRenderingMapListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnDidFinishRenderingMapListener?> get nullableType =>
+      const $MapView$OnDidFinishRenderingMapListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnDidFinishRenderingMapListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnDidFinishRenderingMapListener$Type) &&
+        other is $MapView$OnDidFinishRenderingMapListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnGlyphsErrorListener`
-class MapView_OnGlyphsErrorListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnGlyphsErrorListener> $type;
+class MapView$OnGlyphsErrorListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnGlyphsErrorListener> $type;
 
-  @_$jni.internal
-  MapView_OnGlyphsErrorListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnGlyphsErrorListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnGlyphsErrorListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnGlyphsErrorListener$Type();
+  static const nullableType = $MapView$OnGlyphsErrorListener$NullableType();
+  static const type = $MapView$OnGlyphsErrorListener$Type();
   static final _id_onGlyphsError = _class.instanceMethodId(
     r'onGlyphsError',
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsError = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onGlyphsError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
 
   /// from: `public abstract void onGlyphsError(java.lang.String[] strings, int i, int i1)`
   void onGlyphsError(
-    _$jni.JArray<_$jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
     int i,
     int i1,
   ) {
-    _onGlyphsError(reference.pointer, _id_onGlyphsError as _$jni.JMethodIDPtr,
-            strings.reference.pointer, i, i1)
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    _onGlyphsError(reference.pointer, _id_onGlyphsError as jni$_.JMethodIDPtr,
+            _$strings.pointer, i, i1)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnGlyphsErrorListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnGlyphsErrorListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1954,52 +2469,54 @@ class MapView_OnGlyphsErrorListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onGlyphsError([Ljava/lang/String;II)V') {
         _$impls[$p]!.onGlyphsError(
-          $a[0].as(const _$jni.JArrayType(_$jni.JStringType()),
+          $a![0]?.as(
+              const jni$_.JArrayType<jni$_.JString?>(
+                  jni$_.JStringNullableType()),
               releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![2]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnGlyphsErrorListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnGlyphsErrorListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnGlyphsErrorListener',
@@ -2013,136 +2530,184 @@ class MapView_OnGlyphsErrorListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnGlyphsErrorListener.implement(
-    $MapView_OnGlyphsErrorListener $impl,
+  factory MapView$OnGlyphsErrorListener.implement(
+    $MapView$OnGlyphsErrorListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnGlyphsErrorListener.fromReference(
+    return MapView$OnGlyphsErrorListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnGlyphsErrorListener {
-  factory $MapView_OnGlyphsErrorListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+abstract base mixin class $MapView$OnGlyphsErrorListener {
+  factory $MapView$OnGlyphsErrorListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsError,
     bool onGlyphsError$async,
-  }) = _$MapView_OnGlyphsErrorListener;
+  }) = _$MapView$OnGlyphsErrorListener;
 
-  void onGlyphsError(_$jni.JArray<_$jni.JString> strings, int i, int i1);
+  void onGlyphsError(jni$_.JArray<jni$_.JString?>? strings, int i, int i1);
   bool get onGlyphsError$async => false;
 }
 
-final class _$MapView_OnGlyphsErrorListener
-    with $MapView_OnGlyphsErrorListener {
-  _$MapView_OnGlyphsErrorListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+final class _$MapView$OnGlyphsErrorListener
+    with $MapView$OnGlyphsErrorListener {
+  _$MapView$OnGlyphsErrorListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsError,
     this.onGlyphsError$async = false,
   }) : _onGlyphsError = onGlyphsError;
 
-  final void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+  final void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
       _onGlyphsError;
   final bool onGlyphsError$async;
 
-  void onGlyphsError(_$jni.JArray<_$jni.JString> strings, int i, int i1) {
+  void onGlyphsError(jni$_.JArray<jni$_.JString?>? strings, int i, int i1) {
     return _onGlyphsError(strings, i, i1);
   }
 }
 
-final class $MapView_OnGlyphsErrorListener$Type
-    extends _$jni.JObjType<MapView_OnGlyphsErrorListener> {
-  @_$jni.internal
-  const $MapView_OnGlyphsErrorListener$Type();
+final class $MapView$OnGlyphsErrorListener$NullableType
+    extends jni$_.JObjType<MapView$OnGlyphsErrorListener?> {
+  @jni$_.internal
+  const $MapView$OnGlyphsErrorListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnGlyphsErrorListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnGlyphsErrorListener fromReference(_$jni.JReference reference) =>
-      MapView_OnGlyphsErrorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsErrorListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnGlyphsErrorListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsErrorListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnGlyphsErrorListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnGlyphsErrorListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnGlyphsErrorListener$Type) &&
-        other is $MapView_OnGlyphsErrorListener$Type;
+    return other.runtimeType == ($MapView$OnGlyphsErrorListener$NullableType) &&
+        other is $MapView$OnGlyphsErrorListener$NullableType;
+  }
+}
+
+final class $MapView$OnGlyphsErrorListener$Type
+    extends jni$_.JObjType<MapView$OnGlyphsErrorListener> {
+  @jni$_.internal
+  const $MapView$OnGlyphsErrorListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnGlyphsErrorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsErrorListener fromReference(jni$_.JReference reference) =>
+      MapView$OnGlyphsErrorListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsErrorListener?> get nullableType =>
+      const $MapView$OnGlyphsErrorListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnGlyphsErrorListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnGlyphsErrorListener$Type) &&
+        other is $MapView$OnGlyphsErrorListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnGlyphsLoadedListener`
-class MapView_OnGlyphsLoadedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnGlyphsLoadedListener> $type;
+class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnGlyphsLoadedListener> $type;
 
-  @_$jni.internal
-  MapView_OnGlyphsLoadedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnGlyphsLoadedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnGlyphsLoadedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnGlyphsLoadedListener$Type();
+  static const nullableType = $MapView$OnGlyphsLoadedListener$NullableType();
+  static const type = $MapView$OnGlyphsLoadedListener$Type();
   static final _id_onGlyphsLoaded = _class.instanceMethodId(
     r'onGlyphsLoaded',
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsLoaded = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onGlyphsLoaded = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
 
   /// from: `public abstract void onGlyphsLoaded(java.lang.String[] strings, int i, int i1)`
   void onGlyphsLoaded(
-    _$jni.JArray<_$jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
     int i,
     int i1,
   ) {
-    _onGlyphsLoaded(reference.pointer, _id_onGlyphsLoaded as _$jni.JMethodIDPtr,
-            strings.reference.pointer, i, i1)
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    _onGlyphsLoaded(reference.pointer, _id_onGlyphsLoaded as jni$_.JMethodIDPtr,
+            _$strings.pointer, i, i1)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnGlyphsLoadedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnGlyphsLoadedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2150,52 +2715,54 @@ class MapView_OnGlyphsLoadedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onGlyphsLoaded([Ljava/lang/String;II)V') {
         _$impls[$p]!.onGlyphsLoaded(
-          $a[0].as(const _$jni.JArrayType(_$jni.JStringType()),
+          $a![0]?.as(
+              const jni$_.JArrayType<jni$_.JString?>(
+                  jni$_.JStringNullableType()),
               releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![2]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnGlyphsLoadedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnGlyphsLoadedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnGlyphsLoadedListener',
@@ -2210,140 +2777,189 @@ class MapView_OnGlyphsLoadedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnGlyphsLoadedListener.implement(
-    $MapView_OnGlyphsLoadedListener $impl,
+  factory MapView$OnGlyphsLoadedListener.implement(
+    $MapView$OnGlyphsLoadedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnGlyphsLoadedListener.fromReference(
+    return MapView$OnGlyphsLoadedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnGlyphsLoadedListener {
-  factory $MapView_OnGlyphsLoadedListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+abstract base mixin class $MapView$OnGlyphsLoadedListener {
+  factory $MapView$OnGlyphsLoadedListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsLoaded,
     bool onGlyphsLoaded$async,
-  }) = _$MapView_OnGlyphsLoadedListener;
+  }) = _$MapView$OnGlyphsLoadedListener;
 
-  void onGlyphsLoaded(_$jni.JArray<_$jni.JString> strings, int i, int i1);
+  void onGlyphsLoaded(jni$_.JArray<jni$_.JString?>? strings, int i, int i1);
   bool get onGlyphsLoaded$async => false;
 }
 
-final class _$MapView_OnGlyphsLoadedListener
-    with $MapView_OnGlyphsLoadedListener {
-  _$MapView_OnGlyphsLoadedListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+final class _$MapView$OnGlyphsLoadedListener
+    with $MapView$OnGlyphsLoadedListener {
+  _$MapView$OnGlyphsLoadedListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsLoaded,
     this.onGlyphsLoaded$async = false,
   }) : _onGlyphsLoaded = onGlyphsLoaded;
 
-  final void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+  final void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
       _onGlyphsLoaded;
   final bool onGlyphsLoaded$async;
 
-  void onGlyphsLoaded(_$jni.JArray<_$jni.JString> strings, int i, int i1) {
+  void onGlyphsLoaded(jni$_.JArray<jni$_.JString?>? strings, int i, int i1) {
     return _onGlyphsLoaded(strings, i, i1);
   }
 }
 
-final class $MapView_OnGlyphsLoadedListener$Type
-    extends _$jni.JObjType<MapView_OnGlyphsLoadedListener> {
-  @_$jni.internal
-  const $MapView_OnGlyphsLoadedListener$Type();
+final class $MapView$OnGlyphsLoadedListener$NullableType
+    extends jni$_.JObjType<MapView$OnGlyphsLoadedListener?> {
+  @jni$_.internal
+  const $MapView$OnGlyphsLoadedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnGlyphsLoadedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnGlyphsLoadedListener fromReference(_$jni.JReference reference) =>
-      MapView_OnGlyphsLoadedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsLoadedListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnGlyphsLoadedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsLoadedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnGlyphsLoadedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnGlyphsLoadedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnGlyphsLoadedListener$Type) &&
-        other is $MapView_OnGlyphsLoadedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnGlyphsLoadedListener$NullableType) &&
+        other is $MapView$OnGlyphsLoadedListener$NullableType;
+  }
+}
+
+final class $MapView$OnGlyphsLoadedListener$Type
+    extends jni$_.JObjType<MapView$OnGlyphsLoadedListener> {
+  @jni$_.internal
+  const $MapView$OnGlyphsLoadedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnGlyphsLoadedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsLoadedListener fromReference(jni$_.JReference reference) =>
+      MapView$OnGlyphsLoadedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsLoadedListener?> get nullableType =>
+      const $MapView$OnGlyphsLoadedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnGlyphsLoadedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnGlyphsLoadedListener$Type) &&
+        other is $MapView$OnGlyphsLoadedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnGlyphsRequestedListener`
-class MapView_OnGlyphsRequestedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnGlyphsRequestedListener> $type;
+class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnGlyphsRequestedListener> $type;
 
-  @_$jni.internal
-  MapView_OnGlyphsRequestedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnGlyphsRequestedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnGlyphsRequestedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnGlyphsRequestedListener$Type();
+  static const nullableType = $MapView$OnGlyphsRequestedListener$NullableType();
+  static const type = $MapView$OnGlyphsRequestedListener$Type();
   static final _id_onGlyphsRequested = _class.instanceMethodId(
     r'onGlyphsRequested',
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsRequested = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onGlyphsRequested = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
 
   /// from: `public abstract void onGlyphsRequested(java.lang.String[] strings, int i, int i1)`
   void onGlyphsRequested(
-    _$jni.JArray<_$jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
     int i,
     int i1,
   ) {
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
     _onGlyphsRequested(
             reference.pointer,
-            _id_onGlyphsRequested as _$jni.JMethodIDPtr,
-            strings.reference.pointer,
+            _id_onGlyphsRequested as jni$_.JMethodIDPtr,
+            _$strings.pointer,
             i,
             i1)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnGlyphsRequestedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnGlyphsRequestedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2351,52 +2967,54 @@ class MapView_OnGlyphsRequestedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onGlyphsRequested([Ljava/lang/String;II)V') {
         _$impls[$p]!.onGlyphsRequested(
-          $a[0].as(const _$jni.JArrayType(_$jni.JStringType()),
+          $a![0]?.as(
+              const jni$_.JArrayType<jni$_.JString?>(
+                  jni$_.JStringNullableType()),
               releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![2]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnGlyphsRequestedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnGlyphsRequestedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnGlyphsRequestedListener',
@@ -2411,141 +3029,193 @@ class MapView_OnGlyphsRequestedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnGlyphsRequestedListener.implement(
-    $MapView_OnGlyphsRequestedListener $impl,
+  factory MapView$OnGlyphsRequestedListener.implement(
+    $MapView$OnGlyphsRequestedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnGlyphsRequestedListener.fromReference(
+    return MapView$OnGlyphsRequestedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnGlyphsRequestedListener {
-  factory $MapView_OnGlyphsRequestedListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+abstract base mixin class $MapView$OnGlyphsRequestedListener {
+  factory $MapView$OnGlyphsRequestedListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsRequested,
     bool onGlyphsRequested$async,
-  }) = _$MapView_OnGlyphsRequestedListener;
+  }) = _$MapView$OnGlyphsRequestedListener;
 
-  void onGlyphsRequested(_$jni.JArray<_$jni.JString> strings, int i, int i1);
+  void onGlyphsRequested(jni$_.JArray<jni$_.JString?>? strings, int i, int i1);
   bool get onGlyphsRequested$async => false;
 }
 
-final class _$MapView_OnGlyphsRequestedListener
-    with $MapView_OnGlyphsRequestedListener {
-  _$MapView_OnGlyphsRequestedListener({
-    required void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+final class _$MapView$OnGlyphsRequestedListener
+    with $MapView$OnGlyphsRequestedListener {
+  _$MapView$OnGlyphsRequestedListener({
+    required void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
         onGlyphsRequested,
     this.onGlyphsRequested$async = false,
   }) : _onGlyphsRequested = onGlyphsRequested;
 
-  final void Function(_$jni.JArray<_$jni.JString> strings, int i, int i1)
+  final void Function(jni$_.JArray<jni$_.JString?>? strings, int i, int i1)
       _onGlyphsRequested;
   final bool onGlyphsRequested$async;
 
-  void onGlyphsRequested(_$jni.JArray<_$jni.JString> strings, int i, int i1) {
+  void onGlyphsRequested(jni$_.JArray<jni$_.JString?>? strings, int i, int i1) {
     return _onGlyphsRequested(strings, i, i1);
   }
 }
 
-final class $MapView_OnGlyphsRequestedListener$Type
-    extends _$jni.JObjType<MapView_OnGlyphsRequestedListener> {
-  @_$jni.internal
-  const $MapView_OnGlyphsRequestedListener$Type();
+final class $MapView$OnGlyphsRequestedListener$NullableType
+    extends jni$_.JObjType<MapView$OnGlyphsRequestedListener?> {
+  @jni$_.internal
+  const $MapView$OnGlyphsRequestedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnGlyphsRequestedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnGlyphsRequestedListener fromReference(_$jni.JReference reference) =>
-      MapView_OnGlyphsRequestedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsRequestedListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnGlyphsRequestedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsRequestedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnGlyphsRequestedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnGlyphsRequestedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnGlyphsRequestedListener$Type) &&
-        other is $MapView_OnGlyphsRequestedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnGlyphsRequestedListener$NullableType) &&
+        other is $MapView$OnGlyphsRequestedListener$NullableType;
+  }
+}
+
+final class $MapView$OnGlyphsRequestedListener$Type
+    extends jni$_.JObjType<MapView$OnGlyphsRequestedListener> {
+  @jni$_.internal
+  const $MapView$OnGlyphsRequestedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnGlyphsRequestedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnGlyphsRequestedListener fromReference(jni$_.JReference reference) =>
+      MapView$OnGlyphsRequestedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnGlyphsRequestedListener?> get nullableType =>
+      const $MapView$OnGlyphsRequestedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnGlyphsRequestedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnGlyphsRequestedListener$Type) &&
+        other is $MapView$OnGlyphsRequestedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnPostCompileShaderListener`
-class MapView_OnPostCompileShaderListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnPostCompileShaderListener> $type;
+class MapView$OnPostCompileShaderListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnPostCompileShaderListener> $type;
 
-  @_$jni.internal
-  MapView_OnPostCompileShaderListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnPostCompileShaderListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnPostCompileShaderListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnPostCompileShaderListener$Type();
+  static const nullableType =
+      $MapView$OnPostCompileShaderListener$NullableType();
+  static const type = $MapView$OnPostCompileShaderListener$Type();
   static final _id_onPostCompileShader = _class.instanceMethodId(
     r'onPostCompileShader',
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onPostCompileShader = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onPostCompileShader = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onPostCompileShader(int i, int i1, java.lang.String string)`
   void onPostCompileShader(
     int i,
     int i1,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     _onPostCompileShader(
             reference.pointer,
-            _id_onPostCompileShader as _$jni.JMethodIDPtr,
+            _id_onPostCompileShader as jni$_.JMethodIDPtr,
             i,
             i1,
-            string.reference.pointer)
+            _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnPostCompileShaderListener> _$impls =
+  static final core$_.Map<int, $MapView$OnPostCompileShaderListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2553,51 +3223,51 @@ class MapView_OnPostCompileShaderListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onPostCompileShader(IILjava/lang/String;)V') {
         _$impls[$p]!.onPostCompileShader(
-          $a[0]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![2]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnPostCompileShaderListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnPostCompileShaderListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnPostCompileShaderListener',
@@ -2612,141 +3282,194 @@ class MapView_OnPostCompileShaderListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnPostCompileShaderListener.implement(
-    $MapView_OnPostCompileShaderListener $impl,
+  factory MapView$OnPostCompileShaderListener.implement(
+    $MapView$OnPostCompileShaderListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnPostCompileShaderListener.fromReference(
+    return MapView$OnPostCompileShaderListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnPostCompileShaderListener {
-  factory $MapView_OnPostCompileShaderListener({
-    required void Function(int i, int i1, _$jni.JString string)
+abstract base mixin class $MapView$OnPostCompileShaderListener {
+  factory $MapView$OnPostCompileShaderListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onPostCompileShader,
     bool onPostCompileShader$async,
-  }) = _$MapView_OnPostCompileShaderListener;
+  }) = _$MapView$OnPostCompileShaderListener;
 
-  void onPostCompileShader(int i, int i1, _$jni.JString string);
+  void onPostCompileShader(int i, int i1, jni$_.JString? string);
   bool get onPostCompileShader$async => false;
 }
 
-final class _$MapView_OnPostCompileShaderListener
-    with $MapView_OnPostCompileShaderListener {
-  _$MapView_OnPostCompileShaderListener({
-    required void Function(int i, int i1, _$jni.JString string)
+final class _$MapView$OnPostCompileShaderListener
+    with $MapView$OnPostCompileShaderListener {
+  _$MapView$OnPostCompileShaderListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onPostCompileShader,
     this.onPostCompileShader$async = false,
   }) : _onPostCompileShader = onPostCompileShader;
 
-  final void Function(int i, int i1, _$jni.JString string) _onPostCompileShader;
+  final void Function(int i, int i1, jni$_.JString? string)
+      _onPostCompileShader;
   final bool onPostCompileShader$async;
 
-  void onPostCompileShader(int i, int i1, _$jni.JString string) {
+  void onPostCompileShader(int i, int i1, jni$_.JString? string) {
     return _onPostCompileShader(i, i1, string);
   }
 }
 
-final class $MapView_OnPostCompileShaderListener$Type
-    extends _$jni.JObjType<MapView_OnPostCompileShaderListener> {
-  @_$jni.internal
-  const $MapView_OnPostCompileShaderListener$Type();
+final class $MapView$OnPostCompileShaderListener$NullableType
+    extends jni$_.JObjType<MapView$OnPostCompileShaderListener?> {
+  @jni$_.internal
+  const $MapView$OnPostCompileShaderListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnPostCompileShaderListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnPostCompileShaderListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnPostCompileShaderListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnPostCompileShaderListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnPostCompileShaderListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnPostCompileShaderListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnPostCompileShaderListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnPostCompileShaderListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnPostCompileShaderListener$Type) &&
-        other is $MapView_OnPostCompileShaderListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnPostCompileShaderListener$NullableType) &&
+        other is $MapView$OnPostCompileShaderListener$NullableType;
+  }
+}
+
+final class $MapView$OnPostCompileShaderListener$Type
+    extends jni$_.JObjType<MapView$OnPostCompileShaderListener> {
+  @jni$_.internal
+  const $MapView$OnPostCompileShaderListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnPostCompileShaderListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnPostCompileShaderListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnPostCompileShaderListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnPostCompileShaderListener?> get nullableType =>
+      const $MapView$OnPostCompileShaderListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnPostCompileShaderListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnPostCompileShaderListener$Type) &&
+        other is $MapView$OnPostCompileShaderListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnPreCompileShaderListener`
-class MapView_OnPreCompileShaderListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnPreCompileShaderListener> $type;
+class MapView$OnPreCompileShaderListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnPreCompileShaderListener> $type;
 
-  @_$jni.internal
-  MapView_OnPreCompileShaderListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnPreCompileShaderListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnPreCompileShaderListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnPreCompileShaderListener$Type();
+  static const nullableType =
+      $MapView$OnPreCompileShaderListener$NullableType();
+  static const type = $MapView$OnPreCompileShaderListener$Type();
   static final _id_onPreCompileShader = _class.instanceMethodId(
     r'onPreCompileShader',
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onPreCompileShader = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onPreCompileShader = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onPreCompileShader(int i, int i1, java.lang.String string)`
   void onPreCompileShader(
     int i,
     int i1,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     _onPreCompileShader(
             reference.pointer,
-            _id_onPreCompileShader as _$jni.JMethodIDPtr,
+            _id_onPreCompileShader as jni$_.JMethodIDPtr,
             i,
             i1,
-            string.reference.pointer)
+            _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnPreCompileShaderListener> _$impls =
+  static final core$_.Map<int, $MapView$OnPreCompileShaderListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2754,51 +3477,51 @@ class MapView_OnPreCompileShaderListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onPreCompileShader(IILjava/lang/String;)V') {
         _$impls[$p]!.onPreCompileShader(
-          $a[0]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![2]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnPreCompileShaderListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnPreCompileShaderListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnPreCompileShaderListener',
@@ -2813,141 +3536,193 @@ class MapView_OnPreCompileShaderListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnPreCompileShaderListener.implement(
-    $MapView_OnPreCompileShaderListener $impl,
+  factory MapView$OnPreCompileShaderListener.implement(
+    $MapView$OnPreCompileShaderListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnPreCompileShaderListener.fromReference(
+    return MapView$OnPreCompileShaderListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnPreCompileShaderListener {
-  factory $MapView_OnPreCompileShaderListener({
-    required void Function(int i, int i1, _$jni.JString string)
+abstract base mixin class $MapView$OnPreCompileShaderListener {
+  factory $MapView$OnPreCompileShaderListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onPreCompileShader,
     bool onPreCompileShader$async,
-  }) = _$MapView_OnPreCompileShaderListener;
+  }) = _$MapView$OnPreCompileShaderListener;
 
-  void onPreCompileShader(int i, int i1, _$jni.JString string);
+  void onPreCompileShader(int i, int i1, jni$_.JString? string);
   bool get onPreCompileShader$async => false;
 }
 
-final class _$MapView_OnPreCompileShaderListener
-    with $MapView_OnPreCompileShaderListener {
-  _$MapView_OnPreCompileShaderListener({
-    required void Function(int i, int i1, _$jni.JString string)
+final class _$MapView$OnPreCompileShaderListener
+    with $MapView$OnPreCompileShaderListener {
+  _$MapView$OnPreCompileShaderListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onPreCompileShader,
     this.onPreCompileShader$async = false,
   }) : _onPreCompileShader = onPreCompileShader;
 
-  final void Function(int i, int i1, _$jni.JString string) _onPreCompileShader;
+  final void Function(int i, int i1, jni$_.JString? string) _onPreCompileShader;
   final bool onPreCompileShader$async;
 
-  void onPreCompileShader(int i, int i1, _$jni.JString string) {
+  void onPreCompileShader(int i, int i1, jni$_.JString? string) {
     return _onPreCompileShader(i, i1, string);
   }
 }
 
-final class $MapView_OnPreCompileShaderListener$Type
-    extends _$jni.JObjType<MapView_OnPreCompileShaderListener> {
-  @_$jni.internal
-  const $MapView_OnPreCompileShaderListener$Type();
+final class $MapView$OnPreCompileShaderListener$NullableType
+    extends jni$_.JObjType<MapView$OnPreCompileShaderListener?> {
+  @jni$_.internal
+  const $MapView$OnPreCompileShaderListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnPreCompileShaderListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnPreCompileShaderListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnPreCompileShaderListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnPreCompileShaderListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnPreCompileShaderListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnPreCompileShaderListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnPreCompileShaderListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnPreCompileShaderListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnPreCompileShaderListener$Type) &&
-        other is $MapView_OnPreCompileShaderListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnPreCompileShaderListener$NullableType) &&
+        other is $MapView$OnPreCompileShaderListener$NullableType;
+  }
+}
+
+final class $MapView$OnPreCompileShaderListener$Type
+    extends jni$_.JObjType<MapView$OnPreCompileShaderListener> {
+  @jni$_.internal
+  const $MapView$OnPreCompileShaderListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnPreCompileShaderListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnPreCompileShaderListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnPreCompileShaderListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnPreCompileShaderListener?> get nullableType =>
+      const $MapView$OnPreCompileShaderListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnPreCompileShaderListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnPreCompileShaderListener$Type) &&
+        other is $MapView$OnPreCompileShaderListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnShaderCompileFailedListener`
-class MapView_OnShaderCompileFailedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnShaderCompileFailedListener> $type;
+class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnShaderCompileFailedListener> $type;
 
-  @_$jni.internal
-  MapView_OnShaderCompileFailedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnShaderCompileFailedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnShaderCompileFailedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnShaderCompileFailedListener$Type();
+  static const nullableType =
+      $MapView$OnShaderCompileFailedListener$NullableType();
+  static const type = $MapView$OnShaderCompileFailedListener$Type();
   static final _id_onShaderCompileFailed = _class.instanceMethodId(
     r'onShaderCompileFailed',
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onShaderCompileFailed = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onShaderCompileFailed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onShaderCompileFailed(int i, int i1, java.lang.String string)`
   void onShaderCompileFailed(
     int i,
     int i1,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     _onShaderCompileFailed(
             reference.pointer,
-            _id_onShaderCompileFailed as _$jni.JMethodIDPtr,
+            _id_onShaderCompileFailed as jni$_.JMethodIDPtr,
             i,
             i1,
-            string.reference.pointer)
+            _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnShaderCompileFailedListener> _$impls =
+  static final core$_.Map<int, $MapView$OnShaderCompileFailedListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2955,51 +3730,51 @@ class MapView_OnShaderCompileFailedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onShaderCompileFailed(IILjava/lang/String;)V') {
         _$impls[$p]!.onShaderCompileFailed(
-          $a[0]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![2]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnShaderCompileFailedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnShaderCompileFailedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnShaderCompileFailedListener',
@@ -3014,133 +3789,183 @@ class MapView_OnShaderCompileFailedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnShaderCompileFailedListener.implement(
-    $MapView_OnShaderCompileFailedListener $impl,
+  factory MapView$OnShaderCompileFailedListener.implement(
+    $MapView$OnShaderCompileFailedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnShaderCompileFailedListener.fromReference(
+    return MapView$OnShaderCompileFailedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnShaderCompileFailedListener {
-  factory $MapView_OnShaderCompileFailedListener({
-    required void Function(int i, int i1, _$jni.JString string)
+abstract base mixin class $MapView$OnShaderCompileFailedListener {
+  factory $MapView$OnShaderCompileFailedListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onShaderCompileFailed,
     bool onShaderCompileFailed$async,
-  }) = _$MapView_OnShaderCompileFailedListener;
+  }) = _$MapView$OnShaderCompileFailedListener;
 
-  void onShaderCompileFailed(int i, int i1, _$jni.JString string);
+  void onShaderCompileFailed(int i, int i1, jni$_.JString? string);
   bool get onShaderCompileFailed$async => false;
 }
 
-final class _$MapView_OnShaderCompileFailedListener
-    with $MapView_OnShaderCompileFailedListener {
-  _$MapView_OnShaderCompileFailedListener({
-    required void Function(int i, int i1, _$jni.JString string)
+final class _$MapView$OnShaderCompileFailedListener
+    with $MapView$OnShaderCompileFailedListener {
+  _$MapView$OnShaderCompileFailedListener({
+    required void Function(int i, int i1, jni$_.JString? string)
         onShaderCompileFailed,
     this.onShaderCompileFailed$async = false,
   }) : _onShaderCompileFailed = onShaderCompileFailed;
 
-  final void Function(int i, int i1, _$jni.JString string)
+  final void Function(int i, int i1, jni$_.JString? string)
       _onShaderCompileFailed;
   final bool onShaderCompileFailed$async;
 
-  void onShaderCompileFailed(int i, int i1, _$jni.JString string) {
+  void onShaderCompileFailed(int i, int i1, jni$_.JString? string) {
     return _onShaderCompileFailed(i, i1, string);
   }
 }
 
-final class $MapView_OnShaderCompileFailedListener$Type
-    extends _$jni.JObjType<MapView_OnShaderCompileFailedListener> {
-  @_$jni.internal
-  const $MapView_OnShaderCompileFailedListener$Type();
+final class $MapView$OnShaderCompileFailedListener$NullableType
+    extends jni$_.JObjType<MapView$OnShaderCompileFailedListener?> {
+  @jni$_.internal
+  const $MapView$OnShaderCompileFailedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnShaderCompileFailedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnShaderCompileFailedListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnShaderCompileFailedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnShaderCompileFailedListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnShaderCompileFailedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnShaderCompileFailedListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnShaderCompileFailedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnShaderCompileFailedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnShaderCompileFailedListener$Type) &&
-        other is $MapView_OnShaderCompileFailedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnShaderCompileFailedListener$NullableType) &&
+        other is $MapView$OnShaderCompileFailedListener$NullableType;
+  }
+}
+
+final class $MapView$OnShaderCompileFailedListener$Type
+    extends jni$_.JObjType<MapView$OnShaderCompileFailedListener> {
+  @jni$_.internal
+  const $MapView$OnShaderCompileFailedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnShaderCompileFailedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnShaderCompileFailedListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnShaderCompileFailedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnShaderCompileFailedListener?> get nullableType =>
+      const $MapView$OnShaderCompileFailedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnShaderCompileFailedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnShaderCompileFailedListener$Type) &&
+        other is $MapView$OnShaderCompileFailedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnSourceChangedListener`
-class MapView_OnSourceChangedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnSourceChangedListener> $type;
+class MapView$OnSourceChangedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnSourceChangedListener> $type;
 
-  @_$jni.internal
-  MapView_OnSourceChangedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnSourceChangedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnSourceChangedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnSourceChangedListener$Type();
+  static const nullableType = $MapView$OnSourceChangedListener$NullableType();
+  static const type = $MapView$OnSourceChangedListener$Type();
   static final _id_onSourceChangedListener = _class.instanceMethodId(
     r'onSourceChangedListener',
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onSourceChangedListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onSourceChangedListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onSourceChangedListener(java.lang.String string)`
   void onSourceChangedListener(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _onSourceChangedListener(
-            reference.pointer,
-            _id_onSourceChangedListener as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _onSourceChangedListener(reference.pointer,
+            _id_onSourceChangedListener as jni$_.JMethodIDPtr, _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnSourceChangedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnSourceChangedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3148,45 +3973,45 @@ class MapView_OnSourceChangedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onSourceChangedListener(Ljava/lang/String;)V') {
         _$impls[$p]!.onSourceChangedListener(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnSourceChangedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnSourceChangedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnSourceChangedListener',
@@ -3201,134 +4026,184 @@ class MapView_OnSourceChangedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnSourceChangedListener.implement(
-    $MapView_OnSourceChangedListener $impl,
+  factory MapView$OnSourceChangedListener.implement(
+    $MapView$OnSourceChangedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnSourceChangedListener.fromReference(
+    return MapView$OnSourceChangedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnSourceChangedListener {
-  factory $MapView_OnSourceChangedListener({
-    required void Function(_$jni.JString string) onSourceChangedListener,
+abstract base mixin class $MapView$OnSourceChangedListener {
+  factory $MapView$OnSourceChangedListener({
+    required void Function(jni$_.JString? string) onSourceChangedListener,
     bool onSourceChangedListener$async,
-  }) = _$MapView_OnSourceChangedListener;
+  }) = _$MapView$OnSourceChangedListener;
 
-  void onSourceChangedListener(_$jni.JString string);
+  void onSourceChangedListener(jni$_.JString? string);
   bool get onSourceChangedListener$async => false;
 }
 
-final class _$MapView_OnSourceChangedListener
-    with $MapView_OnSourceChangedListener {
-  _$MapView_OnSourceChangedListener({
-    required void Function(_$jni.JString string) onSourceChangedListener,
+final class _$MapView$OnSourceChangedListener
+    with $MapView$OnSourceChangedListener {
+  _$MapView$OnSourceChangedListener({
+    required void Function(jni$_.JString? string) onSourceChangedListener,
     this.onSourceChangedListener$async = false,
   }) : _onSourceChangedListener = onSourceChangedListener;
 
-  final void Function(_$jni.JString string) _onSourceChangedListener;
+  final void Function(jni$_.JString? string) _onSourceChangedListener;
   final bool onSourceChangedListener$async;
 
-  void onSourceChangedListener(_$jni.JString string) {
+  void onSourceChangedListener(jni$_.JString? string) {
     return _onSourceChangedListener(string);
   }
 }
 
-final class $MapView_OnSourceChangedListener$Type
-    extends _$jni.JObjType<MapView_OnSourceChangedListener> {
-  @_$jni.internal
-  const $MapView_OnSourceChangedListener$Type();
+final class $MapView$OnSourceChangedListener$NullableType
+    extends jni$_.JObjType<MapView$OnSourceChangedListener?> {
+  @jni$_.internal
+  const $MapView$OnSourceChangedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnSourceChangedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnSourceChangedListener fromReference(_$jni.JReference reference) =>
-      MapView_OnSourceChangedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSourceChangedListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnSourceChangedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSourceChangedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnSourceChangedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnSourceChangedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnSourceChangedListener$Type) &&
-        other is $MapView_OnSourceChangedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnSourceChangedListener$NullableType) &&
+        other is $MapView$OnSourceChangedListener$NullableType;
+  }
+}
+
+final class $MapView$OnSourceChangedListener$Type
+    extends jni$_.JObjType<MapView$OnSourceChangedListener> {
+  @jni$_.internal
+  const $MapView$OnSourceChangedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnSourceChangedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSourceChangedListener fromReference(jni$_.JReference reference) =>
+      MapView$OnSourceChangedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSourceChangedListener?> get nullableType =>
+      const $MapView$OnSourceChangedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnSourceChangedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnSourceChangedListener$Type) &&
+        other is $MapView$OnSourceChangedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnSpriteErrorListener`
-class MapView_OnSpriteErrorListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnSpriteErrorListener> $type;
+class MapView$OnSpriteErrorListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnSpriteErrorListener> $type;
 
-  @_$jni.internal
-  MapView_OnSpriteErrorListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnSpriteErrorListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnSpriteErrorListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnSpriteErrorListener$Type();
+  static const nullableType = $MapView$OnSpriteErrorListener$NullableType();
+  static const type = $MapView$OnSpriteErrorListener$Type();
   static final _id_onSpriteError = _class.instanceMethodId(
     r'onSpriteError',
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteError = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onSpriteError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onSpriteError(java.lang.String string, java.lang.String string1)`
   void onSpriteError(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    _onSpriteError(reference.pointer, _id_onSpriteError as _$jni.JMethodIDPtr,
-            string.reference.pointer, string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    _onSpriteError(reference.pointer, _id_onSpriteError as jni$_.JMethodIDPtr,
+            _$string.pointer, _$string1.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnSpriteErrorListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnSpriteErrorListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3336,46 +4211,46 @@ class MapView_OnSpriteErrorListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onSpriteError(Ljava/lang/String;Ljava/lang/String;)V') {
         _$impls[$p]!.onSpriteError(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
-          $a[1].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
+          $a![1]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnSpriteErrorListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnSpriteErrorListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnSpriteErrorListener',
@@ -3390,137 +4265,186 @@ class MapView_OnSpriteErrorListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnSpriteErrorListener.implement(
-    $MapView_OnSpriteErrorListener $impl,
+  factory MapView$OnSpriteErrorListener.implement(
+    $MapView$OnSpriteErrorListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnSpriteErrorListener.fromReference(
+    return MapView$OnSpriteErrorListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnSpriteErrorListener {
-  factory $MapView_OnSpriteErrorListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+abstract base mixin class $MapView$OnSpriteErrorListener {
+  factory $MapView$OnSpriteErrorListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteError,
     bool onSpriteError$async,
-  }) = _$MapView_OnSpriteErrorListener;
+  }) = _$MapView$OnSpriteErrorListener;
 
-  void onSpriteError(_$jni.JString string, _$jni.JString string1);
+  void onSpriteError(jni$_.JString? string, jni$_.JString? string1);
   bool get onSpriteError$async => false;
 }
 
-final class _$MapView_OnSpriteErrorListener
-    with $MapView_OnSpriteErrorListener {
-  _$MapView_OnSpriteErrorListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+final class _$MapView$OnSpriteErrorListener
+    with $MapView$OnSpriteErrorListener {
+  _$MapView$OnSpriteErrorListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteError,
     this.onSpriteError$async = false,
   }) : _onSpriteError = onSpriteError;
 
-  final void Function(_$jni.JString string, _$jni.JString string1)
+  final void Function(jni$_.JString? string, jni$_.JString? string1)
       _onSpriteError;
   final bool onSpriteError$async;
 
-  void onSpriteError(_$jni.JString string, _$jni.JString string1) {
+  void onSpriteError(jni$_.JString? string, jni$_.JString? string1) {
     return _onSpriteError(string, string1);
   }
 }
 
-final class $MapView_OnSpriteErrorListener$Type
-    extends _$jni.JObjType<MapView_OnSpriteErrorListener> {
-  @_$jni.internal
-  const $MapView_OnSpriteErrorListener$Type();
+final class $MapView$OnSpriteErrorListener$NullableType
+    extends jni$_.JObjType<MapView$OnSpriteErrorListener?> {
+  @jni$_.internal
+  const $MapView$OnSpriteErrorListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnSpriteErrorListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnSpriteErrorListener fromReference(_$jni.JReference reference) =>
-      MapView_OnSpriteErrorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteErrorListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnSpriteErrorListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteErrorListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnSpriteErrorListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnSpriteErrorListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnSpriteErrorListener$Type) &&
-        other is $MapView_OnSpriteErrorListener$Type;
+    return other.runtimeType == ($MapView$OnSpriteErrorListener$NullableType) &&
+        other is $MapView$OnSpriteErrorListener$NullableType;
+  }
+}
+
+final class $MapView$OnSpriteErrorListener$Type
+    extends jni$_.JObjType<MapView$OnSpriteErrorListener> {
+  @jni$_.internal
+  const $MapView$OnSpriteErrorListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnSpriteErrorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteErrorListener fromReference(jni$_.JReference reference) =>
+      MapView$OnSpriteErrorListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteErrorListener?> get nullableType =>
+      const $MapView$OnSpriteErrorListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnSpriteErrorListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnSpriteErrorListener$Type) &&
+        other is $MapView$OnSpriteErrorListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnSpriteLoadedListener`
-class MapView_OnSpriteLoadedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnSpriteLoadedListener> $type;
+class MapView$OnSpriteLoadedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnSpriteLoadedListener> $type;
 
-  @_$jni.internal
-  MapView_OnSpriteLoadedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnSpriteLoadedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnSpriteLoadedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnSpriteLoadedListener$Type();
+  static const nullableType = $MapView$OnSpriteLoadedListener$NullableType();
+  static const type = $MapView$OnSpriteLoadedListener$Type();
   static final _id_onSpriteLoaded = _class.instanceMethodId(
     r'onSpriteLoaded',
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteLoaded = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onSpriteLoaded = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onSpriteLoaded(java.lang.String string, java.lang.String string1)`
   void onSpriteLoaded(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    _onSpriteLoaded(reference.pointer, _id_onSpriteLoaded as _$jni.JMethodIDPtr,
-            string.reference.pointer, string1.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    _onSpriteLoaded(reference.pointer, _id_onSpriteLoaded as jni$_.JMethodIDPtr,
+            _$string.pointer, _$string1.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnSpriteLoadedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnSpriteLoadedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3528,46 +4452,46 @@ class MapView_OnSpriteLoadedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onSpriteLoaded(Ljava/lang/String;Ljava/lang/String;)V') {
         _$impls[$p]!.onSpriteLoaded(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
-          $a[1].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
+          $a![1]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnSpriteLoadedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnSpriteLoadedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnSpriteLoadedListener',
@@ -3582,140 +4506,190 @@ class MapView_OnSpriteLoadedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnSpriteLoadedListener.implement(
-    $MapView_OnSpriteLoadedListener $impl,
+  factory MapView$OnSpriteLoadedListener.implement(
+    $MapView$OnSpriteLoadedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnSpriteLoadedListener.fromReference(
+    return MapView$OnSpriteLoadedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnSpriteLoadedListener {
-  factory $MapView_OnSpriteLoadedListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+abstract base mixin class $MapView$OnSpriteLoadedListener {
+  factory $MapView$OnSpriteLoadedListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteLoaded,
     bool onSpriteLoaded$async,
-  }) = _$MapView_OnSpriteLoadedListener;
+  }) = _$MapView$OnSpriteLoadedListener;
 
-  void onSpriteLoaded(_$jni.JString string, _$jni.JString string1);
+  void onSpriteLoaded(jni$_.JString? string, jni$_.JString? string1);
   bool get onSpriteLoaded$async => false;
 }
 
-final class _$MapView_OnSpriteLoadedListener
-    with $MapView_OnSpriteLoadedListener {
-  _$MapView_OnSpriteLoadedListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+final class _$MapView$OnSpriteLoadedListener
+    with $MapView$OnSpriteLoadedListener {
+  _$MapView$OnSpriteLoadedListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteLoaded,
     this.onSpriteLoaded$async = false,
   }) : _onSpriteLoaded = onSpriteLoaded;
 
-  final void Function(_$jni.JString string, _$jni.JString string1)
+  final void Function(jni$_.JString? string, jni$_.JString? string1)
       _onSpriteLoaded;
   final bool onSpriteLoaded$async;
 
-  void onSpriteLoaded(_$jni.JString string, _$jni.JString string1) {
+  void onSpriteLoaded(jni$_.JString? string, jni$_.JString? string1) {
     return _onSpriteLoaded(string, string1);
   }
 }
 
-final class $MapView_OnSpriteLoadedListener$Type
-    extends _$jni.JObjType<MapView_OnSpriteLoadedListener> {
-  @_$jni.internal
-  const $MapView_OnSpriteLoadedListener$Type();
+final class $MapView$OnSpriteLoadedListener$NullableType
+    extends jni$_.JObjType<MapView$OnSpriteLoadedListener?> {
+  @jni$_.internal
+  const $MapView$OnSpriteLoadedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnSpriteLoadedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnSpriteLoadedListener fromReference(_$jni.JReference reference) =>
-      MapView_OnSpriteLoadedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteLoadedListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnSpriteLoadedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteLoadedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnSpriteLoadedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnSpriteLoadedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnSpriteLoadedListener$Type) &&
-        other is $MapView_OnSpriteLoadedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnSpriteLoadedListener$NullableType) &&
+        other is $MapView$OnSpriteLoadedListener$NullableType;
+  }
+}
+
+final class $MapView$OnSpriteLoadedListener$Type
+    extends jni$_.JObjType<MapView$OnSpriteLoadedListener> {
+  @jni$_.internal
+  const $MapView$OnSpriteLoadedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnSpriteLoadedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteLoadedListener fromReference(jni$_.JReference reference) =>
+      MapView$OnSpriteLoadedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteLoadedListener?> get nullableType =>
+      const $MapView$OnSpriteLoadedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnSpriteLoadedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnSpriteLoadedListener$Type) &&
+        other is $MapView$OnSpriteLoadedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnSpriteRequestedListener`
-class MapView_OnSpriteRequestedListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnSpriteRequestedListener> $type;
+class MapView$OnSpriteRequestedListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnSpriteRequestedListener> $type;
 
-  @_$jni.internal
-  MapView_OnSpriteRequestedListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnSpriteRequestedListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnSpriteRequestedListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnSpriteRequestedListener$Type();
+  static const nullableType = $MapView$OnSpriteRequestedListener$NullableType();
+  static const type = $MapView$OnSpriteRequestedListener$Type();
   static final _id_onSpriteRequested = _class.instanceMethodId(
     r'onSpriteRequested',
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteRequested = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onSpriteRequested = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onSpriteRequested(java.lang.String string, java.lang.String string1)`
   void onSpriteRequested(
-    _$jni.JString string,
-    _$jni.JString string1,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _onSpriteRequested(
             reference.pointer,
-            _id_onSpriteRequested as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+            _id_onSpriteRequested as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnSpriteRequestedListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnSpriteRequestedListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3723,46 +4697,46 @@ class MapView_OnSpriteRequestedListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onSpriteRequested(Ljava/lang/String;Ljava/lang/String;)V') {
         _$impls[$p]!.onSpriteRequested(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
-          $a[1].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
+          $a![1]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnSpriteRequestedListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnSpriteRequestedListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnSpriteRequestedListener',
@@ -3777,133 +4751,183 @@ class MapView_OnSpriteRequestedListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnSpriteRequestedListener.implement(
-    $MapView_OnSpriteRequestedListener $impl,
+  factory MapView$OnSpriteRequestedListener.implement(
+    $MapView$OnSpriteRequestedListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnSpriteRequestedListener.fromReference(
+    return MapView$OnSpriteRequestedListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnSpriteRequestedListener {
-  factory $MapView_OnSpriteRequestedListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+abstract base mixin class $MapView$OnSpriteRequestedListener {
+  factory $MapView$OnSpriteRequestedListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteRequested,
     bool onSpriteRequested$async,
-  }) = _$MapView_OnSpriteRequestedListener;
+  }) = _$MapView$OnSpriteRequestedListener;
 
-  void onSpriteRequested(_$jni.JString string, _$jni.JString string1);
+  void onSpriteRequested(jni$_.JString? string, jni$_.JString? string1);
   bool get onSpriteRequested$async => false;
 }
 
-final class _$MapView_OnSpriteRequestedListener
-    with $MapView_OnSpriteRequestedListener {
-  _$MapView_OnSpriteRequestedListener({
-    required void Function(_$jni.JString string, _$jni.JString string1)
+final class _$MapView$OnSpriteRequestedListener
+    with $MapView$OnSpriteRequestedListener {
+  _$MapView$OnSpriteRequestedListener({
+    required void Function(jni$_.JString? string, jni$_.JString? string1)
         onSpriteRequested,
     this.onSpriteRequested$async = false,
   }) : _onSpriteRequested = onSpriteRequested;
 
-  final void Function(_$jni.JString string, _$jni.JString string1)
+  final void Function(jni$_.JString? string, jni$_.JString? string1)
       _onSpriteRequested;
   final bool onSpriteRequested$async;
 
-  void onSpriteRequested(_$jni.JString string, _$jni.JString string1) {
+  void onSpriteRequested(jni$_.JString? string, jni$_.JString? string1) {
     return _onSpriteRequested(string, string1);
   }
 }
 
-final class $MapView_OnSpriteRequestedListener$Type
-    extends _$jni.JObjType<MapView_OnSpriteRequestedListener> {
-  @_$jni.internal
-  const $MapView_OnSpriteRequestedListener$Type();
+final class $MapView$OnSpriteRequestedListener$NullableType
+    extends jni$_.JObjType<MapView$OnSpriteRequestedListener?> {
+  @jni$_.internal
+  const $MapView$OnSpriteRequestedListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnSpriteRequestedListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnSpriteRequestedListener fromReference(_$jni.JReference reference) =>
-      MapView_OnSpriteRequestedListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteRequestedListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnSpriteRequestedListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteRequestedListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnSpriteRequestedListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnSpriteRequestedListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnSpriteRequestedListener$Type) &&
-        other is $MapView_OnSpriteRequestedListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnSpriteRequestedListener$NullableType) &&
+        other is $MapView$OnSpriteRequestedListener$NullableType;
+  }
+}
+
+final class $MapView$OnSpriteRequestedListener$Type
+    extends jni$_.JObjType<MapView$OnSpriteRequestedListener> {
+  @jni$_.internal
+  const $MapView$OnSpriteRequestedListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnSpriteRequestedListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnSpriteRequestedListener fromReference(jni$_.JReference reference) =>
+      MapView$OnSpriteRequestedListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnSpriteRequestedListener?> get nullableType =>
+      const $MapView$OnSpriteRequestedListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnSpriteRequestedListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnSpriteRequestedListener$Type) &&
+        other is $MapView$OnSpriteRequestedListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnStyleImageMissingListener`
-class MapView_OnStyleImageMissingListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnStyleImageMissingListener> $type;
+class MapView$OnStyleImageMissingListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnStyleImageMissingListener> $type;
 
-  @_$jni.internal
-  MapView_OnStyleImageMissingListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnStyleImageMissingListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnStyleImageMissingListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnStyleImageMissingListener$Type();
+  static const nullableType =
+      $MapView$OnStyleImageMissingListener$NullableType();
+  static const type = $MapView$OnStyleImageMissingListener$Type();
   static final _id_onStyleImageMissing = _class.instanceMethodId(
     r'onStyleImageMissing',
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onStyleImageMissing = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onStyleImageMissing = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onStyleImageMissing(java.lang.String string)`
   void onStyleImageMissing(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _onStyleImageMissing(
-            reference.pointer,
-            _id_onStyleImageMissing as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _onStyleImageMissing(reference.pointer,
+            _id_onStyleImageMissing as jni$_.JMethodIDPtr, _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnStyleImageMissingListener> _$impls =
+  static final core$_.Map<int, $MapView$OnStyleImageMissingListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3911,45 +4935,45 @@ class MapView_OnStyleImageMissingListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onStyleImageMissing(Ljava/lang/String;)V') {
         _$impls[$p]!.onStyleImageMissing(
-          $a[0].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnStyleImageMissingListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnStyleImageMissingListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnStyleImageMissingListener',
@@ -3964,158 +4988,202 @@ class MapView_OnStyleImageMissingListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnStyleImageMissingListener.implement(
-    $MapView_OnStyleImageMissingListener $impl,
+  factory MapView$OnStyleImageMissingListener.implement(
+    $MapView$OnStyleImageMissingListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnStyleImageMissingListener.fromReference(
+    return MapView$OnStyleImageMissingListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnStyleImageMissingListener {
-  factory $MapView_OnStyleImageMissingListener({
-    required void Function(_$jni.JString string) onStyleImageMissing,
+abstract base mixin class $MapView$OnStyleImageMissingListener {
+  factory $MapView$OnStyleImageMissingListener({
+    required void Function(jni$_.JString? string) onStyleImageMissing,
     bool onStyleImageMissing$async,
-  }) = _$MapView_OnStyleImageMissingListener;
+  }) = _$MapView$OnStyleImageMissingListener;
 
-  void onStyleImageMissing(_$jni.JString string);
+  void onStyleImageMissing(jni$_.JString? string);
   bool get onStyleImageMissing$async => false;
 }
 
-final class _$MapView_OnStyleImageMissingListener
-    with $MapView_OnStyleImageMissingListener {
-  _$MapView_OnStyleImageMissingListener({
-    required void Function(_$jni.JString string) onStyleImageMissing,
+final class _$MapView$OnStyleImageMissingListener
+    with $MapView$OnStyleImageMissingListener {
+  _$MapView$OnStyleImageMissingListener({
+    required void Function(jni$_.JString? string) onStyleImageMissing,
     this.onStyleImageMissing$async = false,
   }) : _onStyleImageMissing = onStyleImageMissing;
 
-  final void Function(_$jni.JString string) _onStyleImageMissing;
+  final void Function(jni$_.JString? string) _onStyleImageMissing;
   final bool onStyleImageMissing$async;
 
-  void onStyleImageMissing(_$jni.JString string) {
+  void onStyleImageMissing(jni$_.JString? string) {
     return _onStyleImageMissing(string);
   }
 }
 
-final class $MapView_OnStyleImageMissingListener$Type
-    extends _$jni.JObjType<MapView_OnStyleImageMissingListener> {
-  @_$jni.internal
-  const $MapView_OnStyleImageMissingListener$Type();
+final class $MapView$OnStyleImageMissingListener$NullableType
+    extends jni$_.JObjType<MapView$OnStyleImageMissingListener?> {
+  @jni$_.internal
+  const $MapView$OnStyleImageMissingListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnStyleImageMissingListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnStyleImageMissingListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnStyleImageMissingListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnStyleImageMissingListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnStyleImageMissingListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnStyleImageMissingListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnStyleImageMissingListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnStyleImageMissingListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnStyleImageMissingListener$Type) &&
-        other is $MapView_OnStyleImageMissingListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnStyleImageMissingListener$NullableType) &&
+        other is $MapView$OnStyleImageMissingListener$NullableType;
+  }
+}
+
+final class $MapView$OnStyleImageMissingListener$Type
+    extends jni$_.JObjType<MapView$OnStyleImageMissingListener> {
+  @jni$_.internal
+  const $MapView$OnStyleImageMissingListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnStyleImageMissingListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnStyleImageMissingListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnStyleImageMissingListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnStyleImageMissingListener?> get nullableType =>
+      const $MapView$OnStyleImageMissingListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnStyleImageMissingListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnStyleImageMissingListener$Type) &&
+        other is $MapView$OnStyleImageMissingListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnTileActionListener`
-class MapView_OnTileActionListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnTileActionListener> $type;
+class MapView$OnTileActionListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnTileActionListener> $type;
 
-  @_$jni.internal
-  MapView_OnTileActionListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnTileActionListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnTileActionListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnTileActionListener$Type();
+  static const nullableType = $MapView$OnTileActionListener$NullableType();
+  static const type = $MapView$OnTileActionListener$Type();
   static final _id_onTileAction = _class.instanceMethodId(
     r'onTileAction',
     r'(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V',
   );
 
-  static final _onTileAction = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onTileAction = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int,
               int,
               int,
               int,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onTileAction(org.maplibre.android.tile.TileOperation tileOperation, int i, int i1, int i2, int i3, int i4, java.lang.String string)`
   void onTileAction(
-    _$jni.JObject tileOperation,
+    jni$_.JObject? tileOperation,
     int i,
     int i1,
     int i2,
     int i3,
     int i4,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _onTileAction(
-            reference.pointer,
-            _id_onTileAction as _$jni.JMethodIDPtr,
-            tileOperation.reference.pointer,
-            i,
-            i1,
-            i2,
-            i3,
-            i4,
-            string.reference.pointer)
+    final _$tileOperation = tileOperation?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _onTileAction(reference.pointer, _id_onTileAction as jni$_.JMethodIDPtr,
+            _$tileOperation.pointer, i, i1, i2, i3, i4, _$string.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnTileActionListener> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MapView$OnTileActionListener> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -4123,15 +5191,15 @@ class MapView_OnTileActionListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
@@ -4139,46 +5207,46 @@ class MapView_OnTileActionListener extends _$jni.JObject {
       if ($d ==
           r'onTileAction(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V') {
         _$impls[$p]!.onTileAction(
-          $a[0].as(const _$jni.JObjectType(), releaseOriginal: true),
-          $a[1]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
+          $a![1]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[2]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![2]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[3]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![3]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[4]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![4]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[5]
-              .as(const _$jni.JIntegerType(), releaseOriginal: true)
+          $a![5]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[6].as(const _$jni.JStringType(), releaseOriginal: true),
+          $a![6]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnTileActionListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnTileActionListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnTileActionListener',
@@ -4193,133 +5261,181 @@ class MapView_OnTileActionListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnTileActionListener.implement(
-    $MapView_OnTileActionListener $impl,
+  factory MapView$OnTileActionListener.implement(
+    $MapView$OnTileActionListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnTileActionListener.fromReference(
+    return MapView$OnTileActionListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnTileActionListener {
-  factory $MapView_OnTileActionListener({
-    required void Function(_$jni.JObject tileOperation, int i, int i1, int i2,
-            int i3, int i4, _$jni.JString string)
+abstract base mixin class $MapView$OnTileActionListener {
+  factory $MapView$OnTileActionListener({
+    required void Function(jni$_.JObject? tileOperation, int i, int i1, int i2,
+            int i3, int i4, jni$_.JString? string)
         onTileAction,
     bool onTileAction$async,
-  }) = _$MapView_OnTileActionListener;
+  }) = _$MapView$OnTileActionListener;
 
-  void onTileAction(_$jni.JObject tileOperation, int i, int i1, int i2, int i3,
-      int i4, _$jni.JString string);
+  void onTileAction(jni$_.JObject? tileOperation, int i, int i1, int i2, int i3,
+      int i4, jni$_.JString? string);
   bool get onTileAction$async => false;
 }
 
-final class _$MapView_OnTileActionListener with $MapView_OnTileActionListener {
-  _$MapView_OnTileActionListener({
-    required void Function(_$jni.JObject tileOperation, int i, int i1, int i2,
-            int i3, int i4, _$jni.JString string)
+final class _$MapView$OnTileActionListener with $MapView$OnTileActionListener {
+  _$MapView$OnTileActionListener({
+    required void Function(jni$_.JObject? tileOperation, int i, int i1, int i2,
+            int i3, int i4, jni$_.JString? string)
         onTileAction,
     this.onTileAction$async = false,
   }) : _onTileAction = onTileAction;
 
-  final void Function(_$jni.JObject tileOperation, int i, int i1, int i2,
-      int i3, int i4, _$jni.JString string) _onTileAction;
+  final void Function(jni$_.JObject? tileOperation, int i, int i1, int i2,
+      int i3, int i4, jni$_.JString? string) _onTileAction;
   final bool onTileAction$async;
 
-  void onTileAction(_$jni.JObject tileOperation, int i, int i1, int i2, int i3,
-      int i4, _$jni.JString string) {
+  void onTileAction(jni$_.JObject? tileOperation, int i, int i1, int i2, int i3,
+      int i4, jni$_.JString? string) {
     return _onTileAction(tileOperation, i, i1, i2, i3, i4, string);
   }
 }
 
-final class $MapView_OnTileActionListener$Type
-    extends _$jni.JObjType<MapView_OnTileActionListener> {
-  @_$jni.internal
-  const $MapView_OnTileActionListener$Type();
+final class $MapView$OnTileActionListener$NullableType
+    extends jni$_.JObjType<MapView$OnTileActionListener?> {
+  @jni$_.internal
+  const $MapView$OnTileActionListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnTileActionListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnTileActionListener fromReference(_$jni.JReference reference) =>
-      MapView_OnTileActionListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnTileActionListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnTileActionListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnTileActionListener?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnTileActionListener$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($MapView$OnTileActionListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnTileActionListener$Type) &&
-        other is $MapView_OnTileActionListener$Type;
+    return other.runtimeType == ($MapView$OnTileActionListener$NullableType) &&
+        other is $MapView$OnTileActionListener$NullableType;
+  }
+}
+
+final class $MapView$OnTileActionListener$Type
+    extends jni$_.JObjType<MapView$OnTileActionListener> {
+  @jni$_.internal
+  const $MapView$OnTileActionListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnTileActionListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnTileActionListener fromReference(jni$_.JReference reference) =>
+      MapView$OnTileActionListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnTileActionListener?> get nullableType =>
+      const $MapView$OnTileActionListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnTileActionListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnTileActionListener$Type) &&
+        other is $MapView$OnTileActionListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener`
-class MapView_OnWillStartLoadingMapListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnWillStartLoadingMapListener> $type;
+class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnWillStartLoadingMapListener> $type;
 
-  @_$jni.internal
-  MapView_OnWillStartLoadingMapListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnWillStartLoadingMapListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnWillStartLoadingMapListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnWillStartLoadingMapListener$Type();
+  static const nullableType =
+      $MapView$OnWillStartLoadingMapListener$NullableType();
+  static const type = $MapView$OnWillStartLoadingMapListener$Type();
   static final _id_onWillStartLoadingMap = _class.instanceMethodId(
     r'onWillStartLoadingMap',
     r'()V',
   );
 
-  static final _onWillStartLoadingMap = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onWillStartLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onWillStartLoadingMap()`
   void onWillStartLoadingMap() {
     _onWillStartLoadingMap(
-            reference.pointer, _id_onWillStartLoadingMap as _$jni.JMethodIDPtr)
+            reference.pointer, _id_onWillStartLoadingMap as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnWillStartLoadingMapListener> _$impls =
+  static final core$_.Map<int, $MapView$OnWillStartLoadingMapListener> _$impls =
       {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -4327,43 +5443,43 @@ class MapView_OnWillStartLoadingMapListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onWillStartLoadingMap()V') {
         _$impls[$p]!.onWillStartLoadingMap();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnWillStartLoadingMapListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnWillStartLoadingMapListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener',
@@ -4377,30 +5493,30 @@ class MapView_OnWillStartLoadingMapListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnWillStartLoadingMapListener.implement(
-    $MapView_OnWillStartLoadingMapListener $impl,
+  factory MapView$OnWillStartLoadingMapListener.implement(
+    $MapView$OnWillStartLoadingMapListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnWillStartLoadingMapListener.fromReference(
+    return MapView$OnWillStartLoadingMapListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnWillStartLoadingMapListener {
-  factory $MapView_OnWillStartLoadingMapListener({
+abstract base mixin class $MapView$OnWillStartLoadingMapListener {
+  factory $MapView$OnWillStartLoadingMapListener({
     required void Function() onWillStartLoadingMap,
     bool onWillStartLoadingMap$async,
-  }) = _$MapView_OnWillStartLoadingMapListener;
+  }) = _$MapView$OnWillStartLoadingMapListener;
 
   void onWillStartLoadingMap();
   bool get onWillStartLoadingMap$async => false;
 }
 
-final class _$MapView_OnWillStartLoadingMapListener
-    with $MapView_OnWillStartLoadingMapListener {
-  _$MapView_OnWillStartLoadingMapListener({
+final class _$MapView$OnWillStartLoadingMapListener
+    with $MapView$OnWillStartLoadingMapListener {
+  _$MapView$OnWillStartLoadingMapListener({
     required void Function() onWillStartLoadingMap,
     this.onWillStartLoadingMap$async = false,
   }) : _onWillStartLoadingMap = onWillStartLoadingMap;
@@ -4413,92 +5529,144 @@ final class _$MapView_OnWillStartLoadingMapListener
   }
 }
 
-final class $MapView_OnWillStartLoadingMapListener$Type
-    extends _$jni.JObjType<MapView_OnWillStartLoadingMapListener> {
-  @_$jni.internal
-  const $MapView_OnWillStartLoadingMapListener$Type();
+final class $MapView$OnWillStartLoadingMapListener$NullableType
+    extends jni$_.JObjType<MapView$OnWillStartLoadingMapListener?> {
+  @jni$_.internal
+  const $MapView$OnWillStartLoadingMapListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnWillStartLoadingMapListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnWillStartLoadingMapListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnWillStartLoadingMapListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartLoadingMapListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartLoadingMapListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartLoadingMapListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnWillStartLoadingMapListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnWillStartLoadingMapListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MapView_OnWillStartLoadingMapListener$Type) &&
-        other is $MapView_OnWillStartLoadingMapListener$Type;
+    return other.runtimeType ==
+            ($MapView$OnWillStartLoadingMapListener$NullableType) &&
+        other is $MapView$OnWillStartLoadingMapListener$NullableType;
+  }
+}
+
+final class $MapView$OnWillStartLoadingMapListener$Type
+    extends jni$_.JObjType<MapView$OnWillStartLoadingMapListener> {
+  @jni$_.internal
+  const $MapView$OnWillStartLoadingMapListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnWillStartLoadingMapListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartLoadingMapListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnWillStartLoadingMapListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartLoadingMapListener?> get nullableType =>
+      const $MapView$OnWillStartLoadingMapListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnWillStartLoadingMapListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$OnWillStartLoadingMapListener$Type) &&
+        other is $MapView$OnWillStartLoadingMapListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener`
-class MapView_OnWillStartRenderingFrameListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnWillStartRenderingFrameListener> $type;
+class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnWillStartRenderingFrameListener> $type;
 
-  @_$jni.internal
-  MapView_OnWillStartRenderingFrameListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnWillStartRenderingFrameListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnWillStartRenderingFrameListener$Type();
+  static const nullableType =
+      $MapView$OnWillStartRenderingFrameListener$NullableType();
+  static const type = $MapView$OnWillStartRenderingFrameListener$Type();
   static final _id_onWillStartRenderingFrame = _class.instanceMethodId(
     r'onWillStartRenderingFrame',
     r'()V',
   );
 
-  static final _onWillStartRenderingFrame = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onWillStartRenderingFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onWillStartRenderingFrame()`
   void onWillStartRenderingFrame() {
     _onWillStartRenderingFrame(reference.pointer,
-            _id_onWillStartRenderingFrame as _$jni.JMethodIDPtr)
+            _id_onWillStartRenderingFrame as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnWillStartRenderingFrameListener>
+  static final core$_.Map<int, $MapView$OnWillStartRenderingFrameListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -4506,43 +5674,43 @@ class MapView_OnWillStartRenderingFrameListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onWillStartRenderingFrame()V') {
         _$impls[$p]!.onWillStartRenderingFrame();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnWillStartRenderingFrameListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnWillStartRenderingFrameListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener',
@@ -4557,30 +5725,30 @@ class MapView_OnWillStartRenderingFrameListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnWillStartRenderingFrameListener.implement(
-    $MapView_OnWillStartRenderingFrameListener $impl,
+  factory MapView$OnWillStartRenderingFrameListener.implement(
+    $MapView$OnWillStartRenderingFrameListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnWillStartRenderingFrameListener.fromReference(
+    return MapView$OnWillStartRenderingFrameListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnWillStartRenderingFrameListener {
-  factory $MapView_OnWillStartRenderingFrameListener({
+abstract base mixin class $MapView$OnWillStartRenderingFrameListener {
+  factory $MapView$OnWillStartRenderingFrameListener({
     required void Function() onWillStartRenderingFrame,
     bool onWillStartRenderingFrame$async,
-  }) = _$MapView_OnWillStartRenderingFrameListener;
+  }) = _$MapView$OnWillStartRenderingFrameListener;
 
   void onWillStartRenderingFrame();
   bool get onWillStartRenderingFrame$async => false;
 }
 
-final class _$MapView_OnWillStartRenderingFrameListener
-    with $MapView_OnWillStartRenderingFrameListener {
-  _$MapView_OnWillStartRenderingFrameListener({
+final class _$MapView$OnWillStartRenderingFrameListener
+    with $MapView$OnWillStartRenderingFrameListener {
+  _$MapView$OnWillStartRenderingFrameListener({
     required void Function() onWillStartRenderingFrame,
     this.onWillStartRenderingFrame$async = false,
   }) : _onWillStartRenderingFrame = onWillStartRenderingFrame;
@@ -4593,94 +5761,146 @@ final class _$MapView_OnWillStartRenderingFrameListener
   }
 }
 
-final class $MapView_OnWillStartRenderingFrameListener$Type
-    extends _$jni.JObjType<MapView_OnWillStartRenderingFrameListener> {
-  @_$jni.internal
-  const $MapView_OnWillStartRenderingFrameListener$Type();
+final class $MapView$OnWillStartRenderingFrameListener$NullableType
+    extends jni$_.JObjType<MapView$OnWillStartRenderingFrameListener?> {
+  @jni$_.internal
+  const $MapView$OnWillStartRenderingFrameListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnWillStartRenderingFrameListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnWillStartRenderingFrameListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartRenderingFrameListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartRenderingFrameListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartRenderingFrameListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
   int get hashCode =>
-      ($MapView_OnWillStartRenderingFrameListener$Type).hashCode;
+      ($MapView$OnWillStartRenderingFrameListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnWillStartRenderingFrameListener$Type) &&
-        other is $MapView_OnWillStartRenderingFrameListener$Type;
+            ($MapView$OnWillStartRenderingFrameListener$NullableType) &&
+        other is $MapView$OnWillStartRenderingFrameListener$NullableType;
+  }
+}
+
+final class $MapView$OnWillStartRenderingFrameListener$Type
+    extends jni$_.JObjType<MapView$OnWillStartRenderingFrameListener> {
+  @jni$_.internal
+  const $MapView$OnWillStartRenderingFrameListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartRenderingFrameListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnWillStartRenderingFrameListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartRenderingFrameListener?> get nullableType =>
+      const $MapView$OnWillStartRenderingFrameListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnWillStartRenderingFrameListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnWillStartRenderingFrameListener$Type) &&
+        other is $MapView$OnWillStartRenderingFrameListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener`
-class MapView_OnWillStartRenderingMapListener extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView_OnWillStartRenderingMapListener> $type;
+class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView$OnWillStartRenderingMapListener> $type;
 
-  @_$jni.internal
-  MapView_OnWillStartRenderingMapListener.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  MapView$OnWillStartRenderingMapListener.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/MapView$OnWillStartRenderingMapListener');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MapView_OnWillStartRenderingMapListener$Type();
+  static const nullableType =
+      $MapView$OnWillStartRenderingMapListener$NullableType();
+  static const type = $MapView$OnWillStartRenderingMapListener$Type();
   static final _id_onWillStartRenderingMap = _class.instanceMethodId(
     r'onWillStartRenderingMap',
     r'()V',
   );
 
-  static final _onWillStartRenderingMap = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onWillStartRenderingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public abstract void onWillStartRenderingMap()`
   void onWillStartRenderingMap() {
     _onWillStartRenderingMap(reference.pointer,
-            _id_onWillStartRenderingMap as _$jni.JMethodIDPtr)
+            _id_onWillStartRenderingMap as jni$_.JMethodIDPtr)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $MapView_OnWillStartRenderingMapListener>
+  static final core$_.Map<int, $MapView$OnWillStartRenderingMapListener>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -4688,43 +5908,43 @@ class MapView_OnWillStartRenderingMapListener extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onWillStartRenderingMap()V') {
         _$impls[$p]!.onWillStartRenderingMap();
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $MapView_OnWillStartRenderingMapListener $impl,
+    jni$_.JImplementer implementer,
+    $MapView$OnWillStartRenderingMapListener $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener',
@@ -4738,30 +5958,30 @@ class MapView_OnWillStartRenderingMapListener extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapView_OnWillStartRenderingMapListener.implement(
-    $MapView_OnWillStartRenderingMapListener $impl,
+  factory MapView$OnWillStartRenderingMapListener.implement(
+    $MapView$OnWillStartRenderingMapListener $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView_OnWillStartRenderingMapListener.fromReference(
+    return MapView$OnWillStartRenderingMapListener.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $MapView_OnWillStartRenderingMapListener {
-  factory $MapView_OnWillStartRenderingMapListener({
+abstract base mixin class $MapView$OnWillStartRenderingMapListener {
+  factory $MapView$OnWillStartRenderingMapListener({
     required void Function() onWillStartRenderingMap,
     bool onWillStartRenderingMap$async,
-  }) = _$MapView_OnWillStartRenderingMapListener;
+  }) = _$MapView$OnWillStartRenderingMapListener;
 
   void onWillStartRenderingMap();
   bool get onWillStartRenderingMap$async => false;
 }
 
-final class _$MapView_OnWillStartRenderingMapListener
-    with $MapView_OnWillStartRenderingMapListener {
-  _$MapView_OnWillStartRenderingMapListener({
+final class _$MapView$OnWillStartRenderingMapListener
+    with $MapView$OnWillStartRenderingMapListener {
+  _$MapView$OnWillStartRenderingMapListener({
     required void Function() onWillStartRenderingMap,
     this.onWillStartRenderingMap$async = false,
   }) : _onWillStartRenderingMap = onWillStartRenderingMap;
@@ -4774,80 +5994,132 @@ final class _$MapView_OnWillStartRenderingMapListener
   }
 }
 
-final class $MapView_OnWillStartRenderingMapListener$Type
-    extends _$jni.JObjType<MapView_OnWillStartRenderingMapListener> {
-  @_$jni.internal
-  const $MapView_OnWillStartRenderingMapListener$Type();
+final class $MapView$OnWillStartRenderingMapListener$NullableType
+    extends jni$_.JObjType<MapView$OnWillStartRenderingMapListener?> {
+  @jni$_.internal
+  const $MapView$OnWillStartRenderingMapListener$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnWillStartRenderingMapListener;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView_OnWillStartRenderingMapListener fromReference(
-          _$jni.JReference reference) =>
-      MapView_OnWillStartRenderingMapListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartRenderingMapListener? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartRenderingMapListener.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartRenderingMapListener?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($MapView_OnWillStartRenderingMapListener$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MapView$OnWillStartRenderingMapListener$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($MapView_OnWillStartRenderingMapListener$Type) &&
-        other is $MapView_OnWillStartRenderingMapListener$Type;
+            ($MapView$OnWillStartRenderingMapListener$NullableType) &&
+        other is $MapView$OnWillStartRenderingMapListener$NullableType;
+  }
+}
+
+final class $MapView$OnWillStartRenderingMapListener$Type
+    extends jni$_.JObjType<MapView$OnWillStartRenderingMapListener> {
+  @jni$_.internal
+  const $MapView$OnWillStartRenderingMapListener$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnWillStartRenderingMapListener;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView$OnWillStartRenderingMapListener fromReference(
+          jni$_.JReference reference) =>
+      MapView$OnWillStartRenderingMapListener.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView$OnWillStartRenderingMapListener?> get nullableType =>
+      const $MapView$OnWillStartRenderingMapListener$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MapView$OnWillStartRenderingMapListener$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MapView$OnWillStartRenderingMapListener$Type) &&
+        other is $MapView$OnWillStartRenderingMapListener$Type;
   }
 }
 
 /// from: `org.maplibre.android.maps.MapView`
-class MapView extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<MapView> $type;
+class MapView extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MapView> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   MapView.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/maps/MapView');
+      jni$_.JClass.forName(r'org/maplibre/android/maps/MapView');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $MapView$NullableType();
   static const type = $MapView$Type();
   static final _id_new$ = _class.constructorId(
     r'(Landroid/content/Context;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView(
-    _$jni.JObject context,
+    jni$_.JObject? context,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr, context.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr, _$context.pointer)
         .reference);
   }
 
@@ -4855,34 +6127,36 @@ class MapView extends _$jni.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$1(
-    _$jni.JObject context,
-    _$jni.JObject attributeSet,
+    jni$_.JObject? context,
+    jni$_.JObject? attributeSet,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$attributeSet.pointer)
         .reference);
   }
 
@@ -4890,37 +6164,39 @@ class MapView extends _$jni.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;I)V',
   );
 
-  static final _new$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$2(
-    _$jni.JObject context,
-    _$jni.JObject attributeSet,
+    jni$_.JObject? context,
+    jni$_.JObject? attributeSet,
     int i,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(_new$2(
             _class.reference.pointer,
-            _id_new$2 as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer,
+            _id_new$2 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$attributeSet.pointer,
             i)
         .reference);
   }
@@ -4929,34 +6205,37 @@ class MapView extends _$jni.JObject {
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/MapLibreMapOptions;)V',
   );
 
-  static final _new$3 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$3(
-    _$jni.JObject context,
-    maplibremapoptions_.MapLibreMapOptions mapLibreMapOptions,
+    jni$_.JObject? context,
+    maplibremapoptions$_.MapLibreMapOptions? mapLibreMapOptions,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$mapLibreMapOptions =
+        mapLibreMapOptions?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(_new$3(
             _class.reference.pointer,
-            _id_new$3 as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            mapLibreMapOptions.reference.pointer)
+            _id_new$3 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$mapLibreMapOptions.pointer)
         .reference);
   }
 
@@ -4965,23 +6244,24 @@ class MapView extends _$jni.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onCreate = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onCreate = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void onCreate(android.os.Bundle bundle)`
   void onCreate(
-    _$jni.JObject bundle,
+    jni$_.JObject? bundle,
   ) {
-    _onCreate(reference.pointer, _id_onCreate as _$jni.JMethodIDPtr,
-            bundle.reference.pointer)
+    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
+    _onCreate(reference.pointer, _id_onCreate as jni$_.JMethodIDPtr,
+            _$bundle.pointer)
         .check();
   }
 
@@ -4990,25 +6270,24 @@ class MapView extends _$jni.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onSaveInstanceState = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onSaveInstanceState = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void onSaveInstanceState(android.os.Bundle bundle)`
   void onSaveInstanceState(
-    _$jni.JObject bundle,
+    jni$_.JObject? bundle,
   ) {
-    _onSaveInstanceState(
-            reference.pointer,
-            _id_onSaveInstanceState as _$jni.JMethodIDPtr,
-            bundle.reference.pointer)
+    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
+    _onSaveInstanceState(reference.pointer,
+            _id_onSaveInstanceState as jni$_.JMethodIDPtr, _$bundle.pointer)
         .check();
   }
 
@@ -5017,21 +6296,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onStart = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStart()`
   void onStart() {
-    _onStart(reference.pointer, _id_onStart as _$jni.JMethodIDPtr).check();
+    _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onResume = _class.instanceMethodId(
@@ -5039,21 +6318,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onResume = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onResume = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onResume()`
   void onResume() {
-    _onResume(reference.pointer, _id_onResume as _$jni.JMethodIDPtr).check();
+    _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onPause = _class.instanceMethodId(
@@ -5061,21 +6340,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onPause = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onPause = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onPause()`
   void onPause() {
-    _onPause(reference.pointer, _id_onPause as _$jni.JMethodIDPtr).check();
+    _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onStop = _class.instanceMethodId(
@@ -5083,21 +6362,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onStop = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStop()`
   void onStop() {
-    _onStop(reference.pointer, _id_onStop as _$jni.JMethodIDPtr).check();
+    _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onDestroy = _class.instanceMethodId(
@@ -5105,21 +6384,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onDestroy = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
-    _onDestroy(reference.pointer, _id_onDestroy as _$jni.JMethodIDPtr).check();
+    _onDestroy(reference.pointer, _id_onDestroy as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_queueEvent = _class.instanceMethodId(
@@ -5127,23 +6406,24 @@ class MapView extends _$jni.JObject {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
   void queueEvent(
-    _$jni.JObject runnable,
+    jni$_.JObject? runnable,
   ) {
-    _queueEvent(reference.pointer, _id_queueEvent as _$jni.JMethodIDPtr,
-            runnable.reference.pointer)
+    final _$runnable = runnable?.reference ?? jni$_.jNullReference;
+    _queueEvent(reference.pointer, _id_queueEvent as jni$_.JMethodIDPtr,
+            _$runnable.pointer)
         .check();
   }
 
@@ -5152,22 +6432,22 @@ class MapView extends _$jni.JObject {
     r'(I)V',
   );
 
-  static final _setMaximumFps = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _setMaximumFps = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void setMaximumFps(int i)`
   void setMaximumFps(
     int i,
   ) {
     _setMaximumFps(
-            reference.pointer, _id_setMaximumFps as _$jni.JMethodIDPtr, i)
+            reference.pointer, _id_setMaximumFps as jni$_.JMethodIDPtr, i)
         .check();
   }
 
@@ -5176,25 +6456,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
   );
 
-  static final _setRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setRenderingRefreshMode(org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode renderingRefreshMode)`
   void setRenderingRefreshMode(
-    maprenderer_.MapRenderer_RenderingRefreshMode renderingRefreshMode,
+    maprenderer$_.MapRenderer$RenderingRefreshMode? renderingRefreshMode,
   ) {
+    final _$renderingRefreshMode =
+        renderingRefreshMode?.reference ?? jni$_.jNullReference;
     _setRenderingRefreshMode(
             reference.pointer,
-            _id_setRenderingRefreshMode as _$jni.JMethodIDPtr,
-            renderingRefreshMode.reference.pointer)
+            _id_setRenderingRefreshMode as jni$_.JMethodIDPtr,
+            _$renderingRefreshMode.pointer)
         .check();
   }
 
@@ -5203,24 +6485,26 @@ class MapView extends _$jni.JObject {
     r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _getRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode getRenderingRefreshMode()`
   /// The returned object must be released after use, by calling the [release] method.
-  maprenderer_.MapRenderer_RenderingRefreshMode getRenderingRefreshMode() {
+  maprenderer$_.MapRenderer$RenderingRefreshMode? getRenderingRefreshMode() {
     return _getRenderingRefreshMode(reference.pointer,
-            _id_getRenderingRefreshMode as _$jni.JMethodIDPtr)
-        .object(const maprenderer_.$MapRenderer_RenderingRefreshMode$Type());
+            _id_getRenderingRefreshMode as jni$_.JMethodIDPtr)
+        .object<maprenderer$_.MapRenderer$RenderingRefreshMode?>(
+            const maprenderer$_
+                .$MapRenderer$RenderingRefreshMode$NullableType());
   }
 
   static final _id_isDestroyed = _class.instanceMethodId(
@@ -5228,22 +6512,22 @@ class MapView extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _isDestroyed = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isDestroyed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean isDestroyed()`
   bool isDestroyed() {
     return _isDestroyed(
-            reference.pointer, _id_isDestroyed as _$jni.JMethodIDPtr)
+            reference.pointer, _id_isDestroyed as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -5252,24 +6536,24 @@ class MapView extends _$jni.JObject {
     r'()Landroid/view/View;',
   );
 
-  static final _getRenderView = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getRenderView = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.view.View getRenderView()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getRenderView() {
+  jni$_.JObject? getRenderView() {
     return _getRenderView(
-            reference.pointer, _id_getRenderView as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_getRenderView as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_onTouchEvent = _class.instanceMethodId(
@@ -5277,25 +6561,24 @@ class MapView extends _$jni.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onTouchEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onTouchEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onTouchEvent(android.view.MotionEvent motionEvent)`
   bool onTouchEvent(
-    _$jni.JObject motionEvent,
+    jni$_.JObject? motionEvent,
   ) {
-    return _onTouchEvent(
-            reference.pointer,
-            _id_onTouchEvent as _$jni.JMethodIDPtr,
-            motionEvent.reference.pointer)
+    final _$motionEvent = motionEvent?.reference ?? jni$_.jNullReference;
+    return _onTouchEvent(reference.pointer,
+            _id_onTouchEvent as jni$_.JMethodIDPtr, _$motionEvent.pointer)
         .boolean;
   }
 
@@ -5304,25 +6587,26 @@ class MapView extends _$jni.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyDown = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Int32, _$jni.Pointer<_$jni.Void>)>)>>(
+  static final _onKeyDown = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onKeyDown(int i, android.view.KeyEvent keyEvent)`
   bool onKeyDown(
     int i,
-    _$jni.JObject keyEvent,
+    jni$_.JObject? keyEvent,
   ) {
-    return _onKeyDown(reference.pointer, _id_onKeyDown as _$jni.JMethodIDPtr, i,
-            keyEvent.reference.pointer)
+    final _$keyEvent = keyEvent?.reference ?? jni$_.jNullReference;
+    return _onKeyDown(reference.pointer, _id_onKeyDown as jni$_.JMethodIDPtr, i,
+            _$keyEvent.pointer)
         .boolean;
   }
 
@@ -5331,28 +6615,26 @@ class MapView extends _$jni.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyLongPress = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Int32, _$jni.Pointer<_$jni.Void>)>)>>(
+  static final _onKeyLongPress = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onKeyLongPress(int i, android.view.KeyEvent keyEvent)`
   bool onKeyLongPress(
     int i,
-    _$jni.JObject keyEvent,
+    jni$_.JObject? keyEvent,
   ) {
-    return _onKeyLongPress(
-            reference.pointer,
-            _id_onKeyLongPress as _$jni.JMethodIDPtr,
-            i,
-            keyEvent.reference.pointer)
+    final _$keyEvent = keyEvent?.reference ?? jni$_.jNullReference;
+    return _onKeyLongPress(reference.pointer,
+            _id_onKeyLongPress as jni$_.JMethodIDPtr, i, _$keyEvent.pointer)
         .boolean;
   }
 
@@ -5361,25 +6643,26 @@ class MapView extends _$jni.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyUp = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Int32, _$jni.Pointer<_$jni.Void>)>)>>(
+  static final _onKeyUp = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onKeyUp(int i, android.view.KeyEvent keyEvent)`
   bool onKeyUp(
     int i,
-    _$jni.JObject keyEvent,
+    jni$_.JObject? keyEvent,
   ) {
-    return _onKeyUp(reference.pointer, _id_onKeyUp as _$jni.JMethodIDPtr, i,
-            keyEvent.reference.pointer)
+    final _$keyEvent = keyEvent?.reference ?? jni$_.jNullReference;
+    return _onKeyUp(reference.pointer, _id_onKeyUp as jni$_.JMethodIDPtr, i,
+            _$keyEvent.pointer)
         .boolean;
   }
 
@@ -5388,25 +6671,24 @@ class MapView extends _$jni.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onTrackballEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onTrackballEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onTrackballEvent(android.view.MotionEvent motionEvent)`
   bool onTrackballEvent(
-    _$jni.JObject motionEvent,
+    jni$_.JObject? motionEvent,
   ) {
-    return _onTrackballEvent(
-            reference.pointer,
-            _id_onTrackballEvent as _$jni.JMethodIDPtr,
-            motionEvent.reference.pointer)
+    final _$motionEvent = motionEvent?.reference ?? jni$_.jNullReference;
+    return _onTrackballEvent(reference.pointer,
+            _id_onTrackballEvent as jni$_.JMethodIDPtr, _$motionEvent.pointer)
         .boolean;
   }
 
@@ -5415,25 +6697,26 @@ class MapView extends _$jni.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onGenericMotionEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onGenericMotionEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean onGenericMotionEvent(android.view.MotionEvent motionEvent)`
   bool onGenericMotionEvent(
-    _$jni.JObject motionEvent,
+    jni$_.JObject? motionEvent,
   ) {
+    final _$motionEvent = motionEvent?.reference ?? jni$_.jNullReference;
     return _onGenericMotionEvent(
             reference.pointer,
-            _id_onGenericMotionEvent as _$jni.JMethodIDPtr,
-            motionEvent.reference.pointer)
+            _id_onGenericMotionEvent as jni$_.JMethodIDPtr,
+            _$motionEvent.pointer)
         .boolean;
   }
 
@@ -5442,21 +6725,21 @@ class MapView extends _$jni.JObject {
     r'()V',
   );
 
-  static final _onLowMemory = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onLowMemory = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onLowMemory()`
   void onLowMemory() {
-    _onLowMemory(reference.pointer, _id_onLowMemory as _$jni.JMethodIDPtr)
+    _onLowMemory(reference.pointer, _id_onLowMemory as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -5465,22 +6748,22 @@ class MapView extends _$jni.JObject {
     r'()F',
   );
 
-  static final _getPixelRatio = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getPixelRatio = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float getPixelRatio()`
   double getPixelRatio() {
     return _getPixelRatio(
-            reference.pointer, _id_getPixelRatio as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getPixelRatio as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -5489,24 +6772,24 @@ class MapView extends _$jni.JObject {
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getViewContent = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getViewContent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getViewContent() {
+  jni$_.JObject? getViewContent() {
     return _getViewContent(
-            reference.pointer, _id_getViewContent as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+            reference.pointer, _id_getViewContent as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_addOnCameraWillChangeListener = _class.instanceMethodId(
@@ -5515,25 +6798,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnCameraWillChangeListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnCameraWillChangeListener(org.maplibre.android.maps.MapView$OnCameraWillChangeListener onCameraWillChangeListener)`
   void addOnCameraWillChangeListener(
-    MapView_OnCameraWillChangeListener onCameraWillChangeListener,
+    MapView$OnCameraWillChangeListener? onCameraWillChangeListener,
   ) {
+    final _$onCameraWillChangeListener =
+        onCameraWillChangeListener?.reference ?? jni$_.jNullReference;
     _addOnCameraWillChangeListener(
             reference.pointer,
-            _id_addOnCameraWillChangeListener as _$jni.JMethodIDPtr,
-            onCameraWillChangeListener.reference.pointer)
+            _id_addOnCameraWillChangeListener as jni$_.JMethodIDPtr,
+            _$onCameraWillChangeListener.pointer)
         .check();
   }
 
@@ -5543,25 +6828,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnCameraWillChangeListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnCameraWillChangeListener(org.maplibre.android.maps.MapView$OnCameraWillChangeListener onCameraWillChangeListener)`
   void removeOnCameraWillChangeListener(
-    MapView_OnCameraWillChangeListener onCameraWillChangeListener,
+    MapView$OnCameraWillChangeListener? onCameraWillChangeListener,
   ) {
+    final _$onCameraWillChangeListener =
+        onCameraWillChangeListener?.reference ?? jni$_.jNullReference;
     _removeOnCameraWillChangeListener(
             reference.pointer,
-            _id_removeOnCameraWillChangeListener as _$jni.JMethodIDPtr,
-            onCameraWillChangeListener.reference.pointer)
+            _id_removeOnCameraWillChangeListener as jni$_.JMethodIDPtr,
+            _$onCameraWillChangeListener.pointer)
         .check();
   }
 
@@ -5571,25 +6858,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnCameraIsChangingListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnCameraIsChangingListener(org.maplibre.android.maps.MapView$OnCameraIsChangingListener onCameraIsChangingListener)`
   void addOnCameraIsChangingListener(
-    MapView_OnCameraIsChangingListener onCameraIsChangingListener,
+    MapView$OnCameraIsChangingListener? onCameraIsChangingListener,
   ) {
+    final _$onCameraIsChangingListener =
+        onCameraIsChangingListener?.reference ?? jni$_.jNullReference;
     _addOnCameraIsChangingListener(
             reference.pointer,
-            _id_addOnCameraIsChangingListener as _$jni.JMethodIDPtr,
-            onCameraIsChangingListener.reference.pointer)
+            _id_addOnCameraIsChangingListener as jni$_.JMethodIDPtr,
+            _$onCameraIsChangingListener.pointer)
         .check();
   }
 
@@ -5599,25 +6888,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnCameraIsChangingListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnCameraIsChangingListener(org.maplibre.android.maps.MapView$OnCameraIsChangingListener onCameraIsChangingListener)`
   void removeOnCameraIsChangingListener(
-    MapView_OnCameraIsChangingListener onCameraIsChangingListener,
+    MapView$OnCameraIsChangingListener? onCameraIsChangingListener,
   ) {
+    final _$onCameraIsChangingListener =
+        onCameraIsChangingListener?.reference ?? jni$_.jNullReference;
     _removeOnCameraIsChangingListener(
             reference.pointer,
-            _id_removeOnCameraIsChangingListener as _$jni.JMethodIDPtr,
-            onCameraIsChangingListener.reference.pointer)
+            _id_removeOnCameraIsChangingListener as jni$_.JMethodIDPtr,
+            _$onCameraIsChangingListener.pointer)
         .check();
   }
 
@@ -5627,25 +6918,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnCameraDidChangeListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnCameraDidChangeListener(org.maplibre.android.maps.MapView$OnCameraDidChangeListener onCameraDidChangeListener)`
   void addOnCameraDidChangeListener(
-    MapView_OnCameraDidChangeListener onCameraDidChangeListener,
+    MapView$OnCameraDidChangeListener? onCameraDidChangeListener,
   ) {
+    final _$onCameraDidChangeListener =
+        onCameraDidChangeListener?.reference ?? jni$_.jNullReference;
     _addOnCameraDidChangeListener(
             reference.pointer,
-            _id_addOnCameraDidChangeListener as _$jni.JMethodIDPtr,
-            onCameraDidChangeListener.reference.pointer)
+            _id_addOnCameraDidChangeListener as jni$_.JMethodIDPtr,
+            _$onCameraDidChangeListener.pointer)
         .check();
   }
 
@@ -5655,25 +6948,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnCameraDidChangeListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnCameraDidChangeListener(org.maplibre.android.maps.MapView$OnCameraDidChangeListener onCameraDidChangeListener)`
   void removeOnCameraDidChangeListener(
-    MapView_OnCameraDidChangeListener onCameraDidChangeListener,
+    MapView$OnCameraDidChangeListener? onCameraDidChangeListener,
   ) {
+    final _$onCameraDidChangeListener =
+        onCameraDidChangeListener?.reference ?? jni$_.jNullReference;
     _removeOnCameraDidChangeListener(
             reference.pointer,
-            _id_removeOnCameraDidChangeListener as _$jni.JMethodIDPtr,
-            onCameraDidChangeListener.reference.pointer)
+            _id_removeOnCameraDidChangeListener as jni$_.JMethodIDPtr,
+            _$onCameraDidChangeListener.pointer)
         .check();
   }
 
@@ -5683,25 +6978,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnWillStartLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnWillStartLoadingMapListener(org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener onWillStartLoadingMapListener)`
   void addOnWillStartLoadingMapListener(
-    MapView_OnWillStartLoadingMapListener onWillStartLoadingMapListener,
+    MapView$OnWillStartLoadingMapListener? onWillStartLoadingMapListener,
   ) {
+    final _$onWillStartLoadingMapListener =
+        onWillStartLoadingMapListener?.reference ?? jni$_.jNullReference;
     _addOnWillStartLoadingMapListener(
             reference.pointer,
-            _id_addOnWillStartLoadingMapListener as _$jni.JMethodIDPtr,
-            onWillStartLoadingMapListener.reference.pointer)
+            _id_addOnWillStartLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onWillStartLoadingMapListener.pointer)
         .check();
   }
 
@@ -5712,25 +7009,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnWillStartLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnWillStartLoadingMapListener(org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener onWillStartLoadingMapListener)`
   void removeOnWillStartLoadingMapListener(
-    MapView_OnWillStartLoadingMapListener onWillStartLoadingMapListener,
+    MapView$OnWillStartLoadingMapListener? onWillStartLoadingMapListener,
   ) {
+    final _$onWillStartLoadingMapListener =
+        onWillStartLoadingMapListener?.reference ?? jni$_.jNullReference;
     _removeOnWillStartLoadingMapListener(
             reference.pointer,
-            _id_removeOnWillStartLoadingMapListener as _$jni.JMethodIDPtr,
-            onWillStartLoadingMapListener.reference.pointer)
+            _id_removeOnWillStartLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onWillStartLoadingMapListener.pointer)
         .check();
   }
 
@@ -5740,25 +7039,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidFinishLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidFinishLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener onDidFinishLoadingMapListener)`
   void addOnDidFinishLoadingMapListener(
-    MapView_OnDidFinishLoadingMapListener onDidFinishLoadingMapListener,
+    MapView$OnDidFinishLoadingMapListener? onDidFinishLoadingMapListener,
   ) {
+    final _$onDidFinishLoadingMapListener =
+        onDidFinishLoadingMapListener?.reference ?? jni$_.jNullReference;
     _addOnDidFinishLoadingMapListener(
             reference.pointer,
-            _id_addOnDidFinishLoadingMapListener as _$jni.JMethodIDPtr,
-            onDidFinishLoadingMapListener.reference.pointer)
+            _id_addOnDidFinishLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFinishLoadingMapListener.pointer)
         .check();
   }
 
@@ -5769,25 +7070,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidFinishLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidFinishLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener onDidFinishLoadingMapListener)`
   void removeOnDidFinishLoadingMapListener(
-    MapView_OnDidFinishLoadingMapListener onDidFinishLoadingMapListener,
+    MapView$OnDidFinishLoadingMapListener? onDidFinishLoadingMapListener,
   ) {
+    final _$onDidFinishLoadingMapListener =
+        onDidFinishLoadingMapListener?.reference ?? jni$_.jNullReference;
     _removeOnDidFinishLoadingMapListener(
             reference.pointer,
-            _id_removeOnDidFinishLoadingMapListener as _$jni.JMethodIDPtr,
-            onDidFinishLoadingMapListener.reference.pointer)
+            _id_removeOnDidFinishLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFinishLoadingMapListener.pointer)
         .check();
   }
 
@@ -5797,25 +7100,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidFailLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidFailLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener onDidFailLoadingMapListener)`
   void addOnDidFailLoadingMapListener(
-    MapView_OnDidFailLoadingMapListener onDidFailLoadingMapListener,
+    MapView$OnDidFailLoadingMapListener? onDidFailLoadingMapListener,
   ) {
+    final _$onDidFailLoadingMapListener =
+        onDidFailLoadingMapListener?.reference ?? jni$_.jNullReference;
     _addOnDidFailLoadingMapListener(
             reference.pointer,
-            _id_addOnDidFailLoadingMapListener as _$jni.JMethodIDPtr,
-            onDidFailLoadingMapListener.reference.pointer)
+            _id_addOnDidFailLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFailLoadingMapListener.pointer)
         .check();
   }
 
@@ -5825,25 +7130,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidFailLoadingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidFailLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener onDidFailLoadingMapListener)`
   void removeOnDidFailLoadingMapListener(
-    MapView_OnDidFailLoadingMapListener onDidFailLoadingMapListener,
+    MapView$OnDidFailLoadingMapListener? onDidFailLoadingMapListener,
   ) {
+    final _$onDidFailLoadingMapListener =
+        onDidFailLoadingMapListener?.reference ?? jni$_.jNullReference;
     _removeOnDidFailLoadingMapListener(
             reference.pointer,
-            _id_removeOnDidFailLoadingMapListener as _$jni.JMethodIDPtr,
-            onDidFailLoadingMapListener.reference.pointer)
+            _id_removeOnDidFailLoadingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFailLoadingMapListener.pointer)
         .check();
   }
 
@@ -5854,25 +7161,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnWillStartRenderingFrameListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnWillStartRenderingFrameListener(org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener onWillStartRenderingFrameListener)`
   void addOnWillStartRenderingFrameListener(
-    MapView_OnWillStartRenderingFrameListener onWillStartRenderingFrameListener,
+    MapView$OnWillStartRenderingFrameListener?
+        onWillStartRenderingFrameListener,
   ) {
+    final _$onWillStartRenderingFrameListener =
+        onWillStartRenderingFrameListener?.reference ?? jni$_.jNullReference;
     _addOnWillStartRenderingFrameListener(
             reference.pointer,
-            _id_addOnWillStartRenderingFrameListener as _$jni.JMethodIDPtr,
-            onWillStartRenderingFrameListener.reference.pointer)
+            _id_addOnWillStartRenderingFrameListener as jni$_.JMethodIDPtr,
+            _$onWillStartRenderingFrameListener.pointer)
         .check();
   }
 
@@ -5883,25 +7193,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnWillStartRenderingFrameListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnWillStartRenderingFrameListener(org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener onWillStartRenderingFrameListener)`
   void removeOnWillStartRenderingFrameListener(
-    MapView_OnWillStartRenderingFrameListener onWillStartRenderingFrameListener,
+    MapView$OnWillStartRenderingFrameListener?
+        onWillStartRenderingFrameListener,
   ) {
+    final _$onWillStartRenderingFrameListener =
+        onWillStartRenderingFrameListener?.reference ?? jni$_.jNullReference;
     _removeOnWillStartRenderingFrameListener(
             reference.pointer,
-            _id_removeOnWillStartRenderingFrameListener as _$jni.JMethodIDPtr,
-            onWillStartRenderingFrameListener.reference.pointer)
+            _id_removeOnWillStartRenderingFrameListener as jni$_.JMethodIDPtr,
+            _$onWillStartRenderingFrameListener.pointer)
         .check();
   }
 
@@ -5912,25 +7225,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidFinishRenderingFrameListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener)`
   void addOnDidFinishRenderingFrameListener(
-    MapView_OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener,
+    MapView$OnDidFinishRenderingFrameListener?
+        onDidFinishRenderingFrameListener,
   ) {
+    final _$onDidFinishRenderingFrameListener =
+        onDidFinishRenderingFrameListener?.reference ?? jni$_.jNullReference;
     _addOnDidFinishRenderingFrameListener(
             reference.pointer,
-            _id_addOnDidFinishRenderingFrameListener as _$jni.JMethodIDPtr,
-            onDidFinishRenderingFrameListener.reference.pointer)
+            _id_addOnDidFinishRenderingFrameListener as jni$_.JMethodIDPtr,
+            _$onDidFinishRenderingFrameListener.pointer)
         .check();
   }
 
@@ -5941,25 +7257,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidFinishRenderingFrameListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener)`
   void removeOnDidFinishRenderingFrameListener(
-    MapView_OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener,
+    MapView$OnDidFinishRenderingFrameListener?
+        onDidFinishRenderingFrameListener,
   ) {
+    final _$onDidFinishRenderingFrameListener =
+        onDidFinishRenderingFrameListener?.reference ?? jni$_.jNullReference;
     _removeOnDidFinishRenderingFrameListener(
             reference.pointer,
-            _id_removeOnDidFinishRenderingFrameListener as _$jni.JMethodIDPtr,
-            onDidFinishRenderingFrameListener.reference.pointer)
+            _id_removeOnDidFinishRenderingFrameListener as jni$_.JMethodIDPtr,
+            _$onDidFinishRenderingFrameListener.pointer)
         .check();
   }
 
@@ -5969,25 +7288,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnWillStartRenderingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnWillStartRenderingMapListener(org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener onWillStartRenderingMapListener)`
   void addOnWillStartRenderingMapListener(
-    MapView_OnWillStartRenderingMapListener onWillStartRenderingMapListener,
+    MapView$OnWillStartRenderingMapListener? onWillStartRenderingMapListener,
   ) {
+    final _$onWillStartRenderingMapListener =
+        onWillStartRenderingMapListener?.reference ?? jni$_.jNullReference;
     _addOnWillStartRenderingMapListener(
             reference.pointer,
-            _id_addOnWillStartRenderingMapListener as _$jni.JMethodIDPtr,
-            onWillStartRenderingMapListener.reference.pointer)
+            _id_addOnWillStartRenderingMapListener as jni$_.JMethodIDPtr,
+            _$onWillStartRenderingMapListener.pointer)
         .check();
   }
 
@@ -5998,25 +7319,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnWillStartRenderingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnWillStartRenderingMapListener(org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener onWillStartRenderingMapListener)`
   void removeOnWillStartRenderingMapListener(
-    MapView_OnWillStartRenderingMapListener onWillStartRenderingMapListener,
+    MapView$OnWillStartRenderingMapListener? onWillStartRenderingMapListener,
   ) {
+    final _$onWillStartRenderingMapListener =
+        onWillStartRenderingMapListener?.reference ?? jni$_.jNullReference;
     _removeOnWillStartRenderingMapListener(
             reference.pointer,
-            _id_removeOnWillStartRenderingMapListener as _$jni.JMethodIDPtr,
-            onWillStartRenderingMapListener.reference.pointer)
+            _id_removeOnWillStartRenderingMapListener as jni$_.JMethodIDPtr,
+            _$onWillStartRenderingMapListener.pointer)
         .check();
   }
 
@@ -6026,25 +7349,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidFinishRenderingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidFinishRenderingMapListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener onDidFinishRenderingMapListener)`
   void addOnDidFinishRenderingMapListener(
-    MapView_OnDidFinishRenderingMapListener onDidFinishRenderingMapListener,
+    MapView$OnDidFinishRenderingMapListener? onDidFinishRenderingMapListener,
   ) {
+    final _$onDidFinishRenderingMapListener =
+        onDidFinishRenderingMapListener?.reference ?? jni$_.jNullReference;
     _addOnDidFinishRenderingMapListener(
             reference.pointer,
-            _id_addOnDidFinishRenderingMapListener as _$jni.JMethodIDPtr,
-            onDidFinishRenderingMapListener.reference.pointer)
+            _id_addOnDidFinishRenderingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFinishRenderingMapListener.pointer)
         .check();
   }
 
@@ -6055,25 +7380,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidFinishRenderingMapListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidFinishRenderingMapListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener onDidFinishRenderingMapListener)`
   void removeOnDidFinishRenderingMapListener(
-    MapView_OnDidFinishRenderingMapListener onDidFinishRenderingMapListener,
+    MapView$OnDidFinishRenderingMapListener? onDidFinishRenderingMapListener,
   ) {
+    final _$onDidFinishRenderingMapListener =
+        onDidFinishRenderingMapListener?.reference ?? jni$_.jNullReference;
     _removeOnDidFinishRenderingMapListener(
             reference.pointer,
-            _id_removeOnDidFinishRenderingMapListener as _$jni.JMethodIDPtr,
-            onDidFinishRenderingMapListener.reference.pointer)
+            _id_removeOnDidFinishRenderingMapListener as jni$_.JMethodIDPtr,
+            _$onDidFinishRenderingMapListener.pointer)
         .check();
   }
 
@@ -6083,25 +7410,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidBecomeIdleListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidBecomeIdleListener(org.maplibre.android.maps.MapView$OnDidBecomeIdleListener onDidBecomeIdleListener)`
   void addOnDidBecomeIdleListener(
-    MapView_OnDidBecomeIdleListener onDidBecomeIdleListener,
+    MapView$OnDidBecomeIdleListener? onDidBecomeIdleListener,
   ) {
+    final _$onDidBecomeIdleListener =
+        onDidBecomeIdleListener?.reference ?? jni$_.jNullReference;
     _addOnDidBecomeIdleListener(
             reference.pointer,
-            _id_addOnDidBecomeIdleListener as _$jni.JMethodIDPtr,
-            onDidBecomeIdleListener.reference.pointer)
+            _id_addOnDidBecomeIdleListener as jni$_.JMethodIDPtr,
+            _$onDidBecomeIdleListener.pointer)
         .check();
   }
 
@@ -6111,25 +7440,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidBecomeIdleListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidBecomeIdleListener(org.maplibre.android.maps.MapView$OnDidBecomeIdleListener onDidBecomeIdleListener)`
   void removeOnDidBecomeIdleListener(
-    MapView_OnDidBecomeIdleListener onDidBecomeIdleListener,
+    MapView$OnDidBecomeIdleListener? onDidBecomeIdleListener,
   ) {
+    final _$onDidBecomeIdleListener =
+        onDidBecomeIdleListener?.reference ?? jni$_.jNullReference;
     _removeOnDidBecomeIdleListener(
             reference.pointer,
-            _id_removeOnDidBecomeIdleListener as _$jni.JMethodIDPtr,
-            onDidBecomeIdleListener.reference.pointer)
+            _id_removeOnDidBecomeIdleListener as jni$_.JMethodIDPtr,
+            _$onDidBecomeIdleListener.pointer)
         .check();
   }
 
@@ -6139,25 +7470,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnDidFinishLoadingStyleListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnDidFinishLoadingStyleListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener)`
   void addOnDidFinishLoadingStyleListener(
-    MapView_OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener,
+    MapView$OnDidFinishLoadingStyleListener? onDidFinishLoadingStyleListener,
   ) {
+    final _$onDidFinishLoadingStyleListener =
+        onDidFinishLoadingStyleListener?.reference ?? jni$_.jNullReference;
     _addOnDidFinishLoadingStyleListener(
             reference.pointer,
-            _id_addOnDidFinishLoadingStyleListener as _$jni.JMethodIDPtr,
-            onDidFinishLoadingStyleListener.reference.pointer)
+            _id_addOnDidFinishLoadingStyleListener as jni$_.JMethodIDPtr,
+            _$onDidFinishLoadingStyleListener.pointer)
         .check();
   }
 
@@ -6168,25 +7501,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnDidFinishLoadingStyleListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnDidFinishLoadingStyleListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener)`
   void removeOnDidFinishLoadingStyleListener(
-    MapView_OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener,
+    MapView$OnDidFinishLoadingStyleListener? onDidFinishLoadingStyleListener,
   ) {
+    final _$onDidFinishLoadingStyleListener =
+        onDidFinishLoadingStyleListener?.reference ?? jni$_.jNullReference;
     _removeOnDidFinishLoadingStyleListener(
             reference.pointer,
-            _id_removeOnDidFinishLoadingStyleListener as _$jni.JMethodIDPtr,
-            onDidFinishLoadingStyleListener.reference.pointer)
+            _id_removeOnDidFinishLoadingStyleListener as jni$_.JMethodIDPtr,
+            _$onDidFinishLoadingStyleListener.pointer)
         .check();
   }
 
@@ -6196,25 +7531,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnSourceChangedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnSourceChangedListener(org.maplibre.android.maps.MapView$OnSourceChangedListener onSourceChangedListener)`
   void addOnSourceChangedListener(
-    MapView_OnSourceChangedListener onSourceChangedListener,
+    MapView$OnSourceChangedListener? onSourceChangedListener,
   ) {
+    final _$onSourceChangedListener =
+        onSourceChangedListener?.reference ?? jni$_.jNullReference;
     _addOnSourceChangedListener(
             reference.pointer,
-            _id_addOnSourceChangedListener as _$jni.JMethodIDPtr,
-            onSourceChangedListener.reference.pointer)
+            _id_addOnSourceChangedListener as jni$_.JMethodIDPtr,
+            _$onSourceChangedListener.pointer)
         .check();
   }
 
@@ -6224,25 +7561,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnSourceChangedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnSourceChangedListener(org.maplibre.android.maps.MapView$OnSourceChangedListener onSourceChangedListener)`
   void removeOnSourceChangedListener(
-    MapView_OnSourceChangedListener onSourceChangedListener,
+    MapView$OnSourceChangedListener? onSourceChangedListener,
   ) {
+    final _$onSourceChangedListener =
+        onSourceChangedListener?.reference ?? jni$_.jNullReference;
     _removeOnSourceChangedListener(
             reference.pointer,
-            _id_removeOnSourceChangedListener as _$jni.JMethodIDPtr,
-            onSourceChangedListener.reference.pointer)
+            _id_removeOnSourceChangedListener as jni$_.JMethodIDPtr,
+            _$onSourceChangedListener.pointer)
         .check();
   }
 
@@ -6252,25 +7591,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnStyleImageMissingListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnStyleImageMissingListener(org.maplibre.android.maps.MapView$OnStyleImageMissingListener onStyleImageMissingListener)`
   void addOnStyleImageMissingListener(
-    MapView_OnStyleImageMissingListener onStyleImageMissingListener,
+    MapView$OnStyleImageMissingListener? onStyleImageMissingListener,
   ) {
+    final _$onStyleImageMissingListener =
+        onStyleImageMissingListener?.reference ?? jni$_.jNullReference;
     _addOnStyleImageMissingListener(
             reference.pointer,
-            _id_addOnStyleImageMissingListener as _$jni.JMethodIDPtr,
-            onStyleImageMissingListener.reference.pointer)
+            _id_addOnStyleImageMissingListener as jni$_.JMethodIDPtr,
+            _$onStyleImageMissingListener.pointer)
         .check();
   }
 
@@ -6280,25 +7621,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnStyleImageMissingListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnStyleImageMissingListener(org.maplibre.android.maps.MapView$OnStyleImageMissingListener onStyleImageMissingListener)`
   void removeOnStyleImageMissingListener(
-    MapView_OnStyleImageMissingListener onStyleImageMissingListener,
+    MapView$OnStyleImageMissingListener? onStyleImageMissingListener,
   ) {
+    final _$onStyleImageMissingListener =
+        onStyleImageMissingListener?.reference ?? jni$_.jNullReference;
     _removeOnStyleImageMissingListener(
             reference.pointer,
-            _id_removeOnStyleImageMissingListener as _$jni.JMethodIDPtr,
-            onStyleImageMissingListener.reference.pointer)
+            _id_removeOnStyleImageMissingListener as jni$_.JMethodIDPtr,
+            _$onStyleImageMissingListener.pointer)
         .check();
   }
 
@@ -6309,26 +7652,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnCanRemoveUnusedStyleImageListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnCanRemoveUnusedStyleImageListener(org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener onCanRemoveUnusedStyleImageListener)`
   void addOnCanRemoveUnusedStyleImageListener(
-    MapView_OnCanRemoveUnusedStyleImageListener
+    MapView$OnCanRemoveUnusedStyleImageListener?
         onCanRemoveUnusedStyleImageListener,
   ) {
+    final _$onCanRemoveUnusedStyleImageListener =
+        onCanRemoveUnusedStyleImageListener?.reference ?? jni$_.jNullReference;
     _addOnCanRemoveUnusedStyleImageListener(
             reference.pointer,
-            _id_addOnCanRemoveUnusedStyleImageListener as _$jni.JMethodIDPtr,
-            onCanRemoveUnusedStyleImageListener.reference.pointer)
+            _id_addOnCanRemoveUnusedStyleImageListener as jni$_.JMethodIDPtr,
+            _$onCanRemoveUnusedStyleImageListener.pointer)
         .check();
   }
 
@@ -6339,26 +7684,28 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnCanRemoveUnusedStyleImageListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnCanRemoveUnusedStyleImageListener(org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener onCanRemoveUnusedStyleImageListener)`
   void removeOnCanRemoveUnusedStyleImageListener(
-    MapView_OnCanRemoveUnusedStyleImageListener
+    MapView$OnCanRemoveUnusedStyleImageListener?
         onCanRemoveUnusedStyleImageListener,
   ) {
+    final _$onCanRemoveUnusedStyleImageListener =
+        onCanRemoveUnusedStyleImageListener?.reference ?? jni$_.jNullReference;
     _removeOnCanRemoveUnusedStyleImageListener(
             reference.pointer,
-            _id_removeOnCanRemoveUnusedStyleImageListener as _$jni.JMethodIDPtr,
-            onCanRemoveUnusedStyleImageListener.reference.pointer)
+            _id_removeOnCanRemoveUnusedStyleImageListener as jni$_.JMethodIDPtr,
+            _$onCanRemoveUnusedStyleImageListener.pointer)
         .check();
   }
 
@@ -6368,25 +7715,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnPreCompileShaderListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnPreCompileShaderListener(org.maplibre.android.maps.MapView$OnPreCompileShaderListener onPreCompileShaderListener)`
   void addOnPreCompileShaderListener(
-    MapView_OnPreCompileShaderListener onPreCompileShaderListener,
+    MapView$OnPreCompileShaderListener? onPreCompileShaderListener,
   ) {
+    final _$onPreCompileShaderListener =
+        onPreCompileShaderListener?.reference ?? jni$_.jNullReference;
     _addOnPreCompileShaderListener(
             reference.pointer,
-            _id_addOnPreCompileShaderListener as _$jni.JMethodIDPtr,
-            onPreCompileShaderListener.reference.pointer)
+            _id_addOnPreCompileShaderListener as jni$_.JMethodIDPtr,
+            _$onPreCompileShaderListener.pointer)
         .check();
   }
 
@@ -6396,25 +7745,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnPreCompileShaderListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnPreCompileShaderListener(org.maplibre.android.maps.MapView$OnPreCompileShaderListener onPreCompileShaderListener)`
   void removeOnPreCompileShaderListener(
-    MapView_OnPreCompileShaderListener onPreCompileShaderListener,
+    MapView$OnPreCompileShaderListener? onPreCompileShaderListener,
   ) {
+    final _$onPreCompileShaderListener =
+        onPreCompileShaderListener?.reference ?? jni$_.jNullReference;
     _removeOnPreCompileShaderListener(
             reference.pointer,
-            _id_removeOnPreCompileShaderListener as _$jni.JMethodIDPtr,
-            onPreCompileShaderListener.reference.pointer)
+            _id_removeOnPreCompileShaderListener as jni$_.JMethodIDPtr,
+            _$onPreCompileShaderListener.pointer)
         .check();
   }
 
@@ -6424,25 +7775,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnPostCompileShaderListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnPostCompileShaderListener(org.maplibre.android.maps.MapView$OnPostCompileShaderListener onPostCompileShaderListener)`
   void addOnPostCompileShaderListener(
-    MapView_OnPostCompileShaderListener onPostCompileShaderListener,
+    MapView$OnPostCompileShaderListener? onPostCompileShaderListener,
   ) {
+    final _$onPostCompileShaderListener =
+        onPostCompileShaderListener?.reference ?? jni$_.jNullReference;
     _addOnPostCompileShaderListener(
             reference.pointer,
-            _id_addOnPostCompileShaderListener as _$jni.JMethodIDPtr,
-            onPostCompileShaderListener.reference.pointer)
+            _id_addOnPostCompileShaderListener as jni$_.JMethodIDPtr,
+            _$onPostCompileShaderListener.pointer)
         .check();
   }
 
@@ -6452,25 +7805,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnPostCompileShaderListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnPostCompileShaderListener(org.maplibre.android.maps.MapView$OnPostCompileShaderListener onPostCompileShaderListener)`
   void removeOnPostCompileShaderListener(
-    MapView_OnPostCompileShaderListener onPostCompileShaderListener,
+    MapView$OnPostCompileShaderListener? onPostCompileShaderListener,
   ) {
+    final _$onPostCompileShaderListener =
+        onPostCompileShaderListener?.reference ?? jni$_.jNullReference;
     _removeOnPostCompileShaderListener(
             reference.pointer,
-            _id_removeOnPostCompileShaderListener as _$jni.JMethodIDPtr,
-            onPostCompileShaderListener.reference.pointer)
+            _id_removeOnPostCompileShaderListener as jni$_.JMethodIDPtr,
+            _$onPostCompileShaderListener.pointer)
         .check();
   }
 
@@ -6480,25 +7835,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnShaderCompileFailedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnShaderCompileFailedListener(org.maplibre.android.maps.MapView$OnShaderCompileFailedListener onShaderCompileFailedListener)`
   void addOnShaderCompileFailedListener(
-    MapView_OnShaderCompileFailedListener onShaderCompileFailedListener,
+    MapView$OnShaderCompileFailedListener? onShaderCompileFailedListener,
   ) {
+    final _$onShaderCompileFailedListener =
+        onShaderCompileFailedListener?.reference ?? jni$_.jNullReference;
     _addOnShaderCompileFailedListener(
             reference.pointer,
-            _id_addOnShaderCompileFailedListener as _$jni.JMethodIDPtr,
-            onShaderCompileFailedListener.reference.pointer)
+            _id_addOnShaderCompileFailedListener as jni$_.JMethodIDPtr,
+            _$onShaderCompileFailedListener.pointer)
         .check();
   }
 
@@ -6509,25 +7866,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnShaderCompileFailedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnShaderCompileFailedListener(org.maplibre.android.maps.MapView$OnShaderCompileFailedListener onShaderCompileFailedListener)`
   void removeOnShaderCompileFailedListener(
-    MapView_OnShaderCompileFailedListener onShaderCompileFailedListener,
+    MapView$OnShaderCompileFailedListener? onShaderCompileFailedListener,
   ) {
+    final _$onShaderCompileFailedListener =
+        onShaderCompileFailedListener?.reference ?? jni$_.jNullReference;
     _removeOnShaderCompileFailedListener(
             reference.pointer,
-            _id_removeOnShaderCompileFailedListener as _$jni.JMethodIDPtr,
-            onShaderCompileFailedListener.reference.pointer)
+            _id_removeOnShaderCompileFailedListener as jni$_.JMethodIDPtr,
+            _$onShaderCompileFailedListener.pointer)
         .check();
   }
 
@@ -6536,25 +7895,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnGlyphsLoadedListener;)V',
   );
 
-  static final _addOnGlyphsLoadedListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _addOnGlyphsLoadedListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnGlyphsLoadedListener(org.maplibre.android.maps.MapView$OnGlyphsLoadedListener onGlyphsLoadedListener)`
   void addOnGlyphsLoadedListener(
-    MapView_OnGlyphsLoadedListener onGlyphsLoadedListener,
+    MapView$OnGlyphsLoadedListener? onGlyphsLoadedListener,
   ) {
+    final _$onGlyphsLoadedListener =
+        onGlyphsLoadedListener?.reference ?? jni$_.jNullReference;
     _addOnGlyphsLoadedListener(
             reference.pointer,
-            _id_addOnGlyphsLoadedListener as _$jni.JMethodIDPtr,
-            onGlyphsLoadedListener.reference.pointer)
+            _id_addOnGlyphsLoadedListener as jni$_.JMethodIDPtr,
+            _$onGlyphsLoadedListener.pointer)
         .check();
   }
 
@@ -6564,25 +7925,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnGlyphsLoadedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnGlyphsLoadedListener(org.maplibre.android.maps.MapView$OnGlyphsLoadedListener onGlyphsLoadedListener)`
   void removeOnGlyphsLoadedListener(
-    MapView_OnGlyphsLoadedListener onGlyphsLoadedListener,
+    MapView$OnGlyphsLoadedListener? onGlyphsLoadedListener,
   ) {
+    final _$onGlyphsLoadedListener =
+        onGlyphsLoadedListener?.reference ?? jni$_.jNullReference;
     _removeOnGlyphsLoadedListener(
             reference.pointer,
-            _id_removeOnGlyphsLoadedListener as _$jni.JMethodIDPtr,
-            onGlyphsLoadedListener.reference.pointer)
+            _id_removeOnGlyphsLoadedListener as jni$_.JMethodIDPtr,
+            _$onGlyphsLoadedListener.pointer)
         .check();
   }
 
@@ -6591,25 +7954,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnGlyphsErrorListener;)V',
   );
 
-  static final _addOnGlyphsErrorListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _addOnGlyphsErrorListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnGlyphsErrorListener(org.maplibre.android.maps.MapView$OnGlyphsErrorListener onGlyphsErrorListener)`
   void addOnGlyphsErrorListener(
-    MapView_OnGlyphsErrorListener onGlyphsErrorListener,
+    MapView$OnGlyphsErrorListener? onGlyphsErrorListener,
   ) {
+    final _$onGlyphsErrorListener =
+        onGlyphsErrorListener?.reference ?? jni$_.jNullReference;
     _addOnGlyphsErrorListener(
             reference.pointer,
-            _id_addOnGlyphsErrorListener as _$jni.JMethodIDPtr,
-            onGlyphsErrorListener.reference.pointer)
+            _id_addOnGlyphsErrorListener as jni$_.JMethodIDPtr,
+            _$onGlyphsErrorListener.pointer)
         .check();
   }
 
@@ -6619,25 +7984,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnGlyphsErrorListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnGlyphsErrorListener(org.maplibre.android.maps.MapView$OnGlyphsErrorListener onGlyphsErrorListener)`
   void removeOnGlyphsErrorListener(
-    MapView_OnGlyphsErrorListener onGlyphsErrorListener,
+    MapView$OnGlyphsErrorListener? onGlyphsErrorListener,
   ) {
+    final _$onGlyphsErrorListener =
+        onGlyphsErrorListener?.reference ?? jni$_.jNullReference;
     _removeOnGlyphsErrorListener(
             reference.pointer,
-            _id_removeOnGlyphsErrorListener as _$jni.JMethodIDPtr,
-            onGlyphsErrorListener.reference.pointer)
+            _id_removeOnGlyphsErrorListener as jni$_.JMethodIDPtr,
+            _$onGlyphsErrorListener.pointer)
         .check();
   }
 
@@ -6647,25 +8014,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnGlyphsRequestedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnGlyphsRequestedListener(org.maplibre.android.maps.MapView$OnGlyphsRequestedListener onGlyphsRequestedListener)`
   void addOnGlyphsRequestedListener(
-    MapView_OnGlyphsRequestedListener onGlyphsRequestedListener,
+    MapView$OnGlyphsRequestedListener? onGlyphsRequestedListener,
   ) {
+    final _$onGlyphsRequestedListener =
+        onGlyphsRequestedListener?.reference ?? jni$_.jNullReference;
     _addOnGlyphsRequestedListener(
             reference.pointer,
-            _id_addOnGlyphsRequestedListener as _$jni.JMethodIDPtr,
-            onGlyphsRequestedListener.reference.pointer)
+            _id_addOnGlyphsRequestedListener as jni$_.JMethodIDPtr,
+            _$onGlyphsRequestedListener.pointer)
         .check();
   }
 
@@ -6675,25 +8044,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnGlyphsRequestedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnGlyphsRequestedListener(org.maplibre.android.maps.MapView$OnGlyphsRequestedListener onGlyphsRequestedListener)`
   void removeOnGlyphsRequestedListener(
-    MapView_OnGlyphsRequestedListener onGlyphsRequestedListener,
+    MapView$OnGlyphsRequestedListener? onGlyphsRequestedListener,
   ) {
+    final _$onGlyphsRequestedListener =
+        onGlyphsRequestedListener?.reference ?? jni$_.jNullReference;
     _removeOnGlyphsRequestedListener(
             reference.pointer,
-            _id_removeOnGlyphsRequestedListener as _$jni.JMethodIDPtr,
-            onGlyphsRequestedListener.reference.pointer)
+            _id_removeOnGlyphsRequestedListener as jni$_.JMethodIDPtr,
+            _$onGlyphsRequestedListener.pointer)
         .check();
   }
 
@@ -6702,25 +8073,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnTileActionListener;)V',
   );
 
-  static final _addOnTileActionListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _addOnTileActionListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnTileActionListener(org.maplibre.android.maps.MapView$OnTileActionListener onTileActionListener)`
   void addOnTileActionListener(
-    MapView_OnTileActionListener onTileActionListener,
+    MapView$OnTileActionListener? onTileActionListener,
   ) {
+    final _$onTileActionListener =
+        onTileActionListener?.reference ?? jni$_.jNullReference;
     _addOnTileActionListener(
             reference.pointer,
-            _id_addOnTileActionListener as _$jni.JMethodIDPtr,
-            onTileActionListener.reference.pointer)
+            _id_addOnTileActionListener as jni$_.JMethodIDPtr,
+            _$onTileActionListener.pointer)
         .check();
   }
 
@@ -6730,25 +8103,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnTileActionListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnTileActionListener(org.maplibre.android.maps.MapView$OnTileActionListener onTileActionListener)`
   void removeOnTileActionListener(
-    MapView_OnTileActionListener onTileActionListener,
+    MapView$OnTileActionListener? onTileActionListener,
   ) {
+    final _$onTileActionListener =
+        onTileActionListener?.reference ?? jni$_.jNullReference;
     _removeOnTileActionListener(
             reference.pointer,
-            _id_removeOnTileActionListener as _$jni.JMethodIDPtr,
-            onTileActionListener.reference.pointer)
+            _id_removeOnTileActionListener as jni$_.JMethodIDPtr,
+            _$onTileActionListener.pointer)
         .check();
   }
 
@@ -6757,25 +8132,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnSpriteLoadedListener;)V',
   );
 
-  static final _addOnSpriteLoadedListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _addOnSpriteLoadedListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnSpriteLoadedListener(org.maplibre.android.maps.MapView$OnSpriteLoadedListener onSpriteLoadedListener)`
   void addOnSpriteLoadedListener(
-    MapView_OnSpriteLoadedListener onSpriteLoadedListener,
+    MapView$OnSpriteLoadedListener? onSpriteLoadedListener,
   ) {
+    final _$onSpriteLoadedListener =
+        onSpriteLoadedListener?.reference ?? jni$_.jNullReference;
     _addOnSpriteLoadedListener(
             reference.pointer,
-            _id_addOnSpriteLoadedListener as _$jni.JMethodIDPtr,
-            onSpriteLoadedListener.reference.pointer)
+            _id_addOnSpriteLoadedListener as jni$_.JMethodIDPtr,
+            _$onSpriteLoadedListener.pointer)
         .check();
   }
 
@@ -6785,25 +8162,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnSpriteLoadedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnSpriteLoadedListener(org.maplibre.android.maps.MapView$OnSpriteLoadedListener onSpriteLoadedListener)`
   void removeOnSpriteLoadedListener(
-    MapView_OnSpriteLoadedListener onSpriteLoadedListener,
+    MapView$OnSpriteLoadedListener? onSpriteLoadedListener,
   ) {
+    final _$onSpriteLoadedListener =
+        onSpriteLoadedListener?.reference ?? jni$_.jNullReference;
     _removeOnSpriteLoadedListener(
             reference.pointer,
-            _id_removeOnSpriteLoadedListener as _$jni.JMethodIDPtr,
-            onSpriteLoadedListener.reference.pointer)
+            _id_removeOnSpriteLoadedListener as jni$_.JMethodIDPtr,
+            _$onSpriteLoadedListener.pointer)
         .check();
   }
 
@@ -6812,25 +8191,27 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnSpriteErrorListener;)V',
   );
 
-  static final _addOnSpriteErrorListener = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _addOnSpriteErrorListener = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnSpriteErrorListener(org.maplibre.android.maps.MapView$OnSpriteErrorListener onSpriteErrorListener)`
   void addOnSpriteErrorListener(
-    MapView_OnSpriteErrorListener onSpriteErrorListener,
+    MapView$OnSpriteErrorListener? onSpriteErrorListener,
   ) {
+    final _$onSpriteErrorListener =
+        onSpriteErrorListener?.reference ?? jni$_.jNullReference;
     _addOnSpriteErrorListener(
             reference.pointer,
-            _id_addOnSpriteErrorListener as _$jni.JMethodIDPtr,
-            onSpriteErrorListener.reference.pointer)
+            _id_addOnSpriteErrorListener as jni$_.JMethodIDPtr,
+            _$onSpriteErrorListener.pointer)
         .check();
   }
 
@@ -6840,25 +8221,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnSpriteErrorListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnSpriteErrorListener(org.maplibre.android.maps.MapView$OnSpriteErrorListener onSpriteErrorListener)`
   void removeOnSpriteErrorListener(
-    MapView_OnSpriteErrorListener onSpriteErrorListener,
+    MapView$OnSpriteErrorListener? onSpriteErrorListener,
   ) {
+    final _$onSpriteErrorListener =
+        onSpriteErrorListener?.reference ?? jni$_.jNullReference;
     _removeOnSpriteErrorListener(
             reference.pointer,
-            _id_removeOnSpriteErrorListener as _$jni.JMethodIDPtr,
-            onSpriteErrorListener.reference.pointer)
+            _id_removeOnSpriteErrorListener as jni$_.JMethodIDPtr,
+            _$onSpriteErrorListener.pointer)
         .check();
   }
 
@@ -6868,25 +8251,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _addOnSpriteRequestedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void addOnSpriteRequestedListener(org.maplibre.android.maps.MapView$OnSpriteRequestedListener onSpriteRequestedListener)`
   void addOnSpriteRequestedListener(
-    MapView_OnSpriteRequestedListener onSpriteRequestedListener,
+    MapView$OnSpriteRequestedListener? onSpriteRequestedListener,
   ) {
+    final _$onSpriteRequestedListener =
+        onSpriteRequestedListener?.reference ?? jni$_.jNullReference;
     _addOnSpriteRequestedListener(
             reference.pointer,
-            _id_addOnSpriteRequestedListener as _$jni.JMethodIDPtr,
-            onSpriteRequestedListener.reference.pointer)
+            _id_addOnSpriteRequestedListener as jni$_.JMethodIDPtr,
+            _$onSpriteRequestedListener.pointer)
         .check();
   }
 
@@ -6896,25 +8281,27 @@ class MapView extends _$jni.JObject {
   );
 
   static final _removeOnSpriteRequestedListener =
-      _$jni.ProtectedJniExtensions.lookup<
-                  _$jni.NativeFunction<
-                      _$jni.JThrowablePtr Function(
-                          _$jni.Pointer<_$jni.Void>,
-                          _$jni.JMethodIDPtr,
-                          _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JThrowablePtr Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
               'globalEnv_CallVoidMethod')
           .asFunction<
-              _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void removeOnSpriteRequestedListener(org.maplibre.android.maps.MapView$OnSpriteRequestedListener onSpriteRequestedListener)`
   void removeOnSpriteRequestedListener(
-    MapView_OnSpriteRequestedListener onSpriteRequestedListener,
+    MapView$OnSpriteRequestedListener? onSpriteRequestedListener,
   ) {
+    final _$onSpriteRequestedListener =
+        onSpriteRequestedListener?.reference ?? jni$_.jNullReference;
     _removeOnSpriteRequestedListener(
             reference.pointer,
-            _id_removeOnSpriteRequestedListener as _$jni.JMethodIDPtr,
-            onSpriteRequestedListener.reference.pointer)
+            _id_removeOnSpriteRequestedListener as jni$_.JMethodIDPtr,
+            _$onSpriteRequestedListener.pointer)
         .check();
   }
 
@@ -6923,23 +8310,25 @@ class MapView extends _$jni.JObject {
     r'(Lorg/maplibre/android/maps/OnMapReadyCallback;)V',
   );
 
-  static final _getMapAsync = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _getMapAsync = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void getMapAsync(org.maplibre.android.maps.OnMapReadyCallback onMapReadyCallback)`
   void getMapAsync(
-    onmapreadycallback_.OnMapReadyCallback onMapReadyCallback,
+    onmapreadycallback$_.OnMapReadyCallback? onMapReadyCallback,
   ) {
-    _getMapAsync(reference.pointer, _id_getMapAsync as _$jni.JMethodIDPtr,
-            onMapReadyCallback.reference.pointer)
+    final _$onMapReadyCallback =
+        onMapReadyCallback?.reference ?? jni$_.jNullReference;
+    _getMapAsync(reference.pointer, _id_getMapAsync as jni$_.JMethodIDPtr,
+            _$onMapReadyCallback.pointer)
         .check();
   }
 
@@ -6948,50 +8337,91 @@ class MapView extends _$jni.JObject {
     r'(Z)V',
   );
 
-  static final _setMapStrictModeEnabled = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr, _$jni.VarArgs<(_$jni.Int32,)>)>>(
+  static final _setMapStrictModeEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `static public void setMapStrictModeEnabled(boolean z)`
   static void setMapStrictModeEnabled(
     bool z,
   ) {
     _setMapStrictModeEnabled(_class.reference.pointer,
-            _id_setMapStrictModeEnabled as _$jni.JMethodIDPtr, z ? 1 : 0)
+            _id_setMapStrictModeEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
         .check();
   }
 }
 
-final class $MapView$Type extends _$jni.JObjType<MapView> {
-  @_$jni.internal
-  const $MapView$Type();
+final class $MapView$NullableType extends jni$_.JObjType<MapView?> {
+  @jni$_.internal
+  const $MapView$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/maps/MapView;';
 
-  @_$jni.internal
-  @_$core.override
-  MapView fromReference(_$jni.JReference reference) =>
-      MapView.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MapView? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MapView.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($MapView$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MapView$NullableType) &&
+        other is $MapView$NullableType;
+  }
+}
+
+final class $MapView$Type extends jni$_.JObjType<MapView> {
+  @jni$_.internal
+  const $MapView$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/MapView;';
+
+  @jni$_.internal
+  @core$_.override
+  MapView fromReference(jni$_.JReference reference) => MapView.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MapView?> get nullableType => const $MapView$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($MapView$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($MapView$Type) && other is $MapView$Type;
   }
