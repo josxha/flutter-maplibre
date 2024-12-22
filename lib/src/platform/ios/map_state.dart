@@ -156,6 +156,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   void onStyleLoaded() {
+    print('onStyleLoaded: ${_mapView.styleURL.absoluteString}');
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);

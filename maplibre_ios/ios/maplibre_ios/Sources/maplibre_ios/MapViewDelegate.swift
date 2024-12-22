@@ -18,20 +18,22 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         _flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
         super.init() // self can be used after calling super.init()
         MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
-        _mapView = MLNMapView(frame: _view.bounds)
-        MapLibreRegistry.addMap(viewId: viewId, map: _mapView)
-        _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        _view.addSubview(_mapView)
-        _mapView.delegate = self
-        // disable the default UI because they are rebuilt in Flutter
-        _mapView.compassView.isHidden = true
-        _mapView.attributionButton.isHidden = true
-        _mapView.logoView.isHidden = true
         // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
             case let .success(mapOptions):
                 self._mapOptions = mapOptions
+                // init map view
+                self._mapView = MLNMapView(frame: self._view.bounds)
+                MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
+                self._mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                self._view.addSubview(self._mapView)
+                self._mapView.delegate = self
+                // disable the default UI because they are rebuilt in Flutter
+                self._mapView.compassView.isHidden = true
+                self._mapView.attributionButton.isHidden = true
+                self._mapView.logoView.isHidden = true
+                // set options
                 if let center = mapOptions.center {
                     var mapCenter = CLLocationCoordinate2D(latitude: center.lat, longitude: center.lng)
                     self._mapView.setCenter(mapCenter, zoomLevel: mapOptions.zoom, animated: false)
@@ -46,14 +48,14 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 self._mapView.allowsTilting = mapOptions.gestures.tilt
                 self._mapView.allowsScrolling = mapOptions.gestures.pan
                 self._mapView.styleURL = URL(string: mapOptions.style)
+                self._flutterApi.onMapReady { _ in }
+                // tap gestures
+                self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:))))
+                self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.onLongPress(sender:))))
             case let .failure(error):
                 print(error)
             }
         }
-        self._flutterApi.onMapReady { _ in }
-        // tap gestures
-        self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(sender:))))
-        self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(sender:))))
     }
 
     @objc func onTap(sender: UITapGestureRecognizer) {
