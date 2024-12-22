@@ -98,25 +98,52 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
-    func addFillLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addFillLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addCircleLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addCircleLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addBackgroundLayer(id _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addBackgroundLayer(id _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addFillExtrusionLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addFillExtrusionLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addHeatmapLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addHeatmapLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addHillshadeLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addHillshadeLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addLineLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addLineLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addRasterLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addRasterLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func addSymbolLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addSymbolLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(()))
+    }
 
-    func loadImage(url _: String, completion _: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {}
+    func loadImage(url _: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {
+        //completion(.success((bytes)))
+    }
 
-    func addImage(id _: String, bytes _: FlutterStandardTypedData, completion _: @escaping (Result<Void, Error>) -> Void) {}
+    func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void) {
+        // Main Thread Checker: UI API called on a background thread: -[UIView frame]
+        completion(.success(()))
+        DispatchQueue.main.async {
+            print("add image in main thread")
+            self.addImage(id: id, bytes: bytes) { _ in }
+        }
+    }
 }

@@ -2,15 +2,18 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerIos implements StyleController {
-  const StyleControllerIos._(this._ffiStyle, this._hostApi);
+  StyleControllerIos._(this._ffiStyle, this._hostApi);
 
   final MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
+  final ids =<String>{};
+
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
+    // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
     // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
-    _ffiStyle.setImage_forName_(
+    /*_ffiStyle.setImage_forName_(
       NSImage.objectWithItemProviderData_typeIdentifier_error_(
         bytes.toNSData(),
         // The uniform type identifier (UTI) representing the data type of data.
@@ -18,7 +21,13 @@ class StyleControllerIos implements StyleController {
         nullptr,
       )!,
       id.toNSString(),
-    );
+    );*/
+    if (ids.contains(id))  {
+      print('already contained');
+      return;
+    }
+    ids.add(id);
+    await _hostApi.addImage(id, bytes);
   }
 
   @override
