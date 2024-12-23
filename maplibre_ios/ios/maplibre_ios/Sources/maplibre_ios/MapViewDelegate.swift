@@ -13,6 +13,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         viewId: Int64,
         binaryMessenger: FlutterBinaryMessenger
     ) {
+        print("### init new MapViewDelegate ###")
         var channelSuffix = String(viewId)
         _viewId = viewId
         _flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
@@ -82,6 +83,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     // MLNMapViewDelegate method called when map has finished loading
     func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
         _mapView = mapView
+        print("mapView didFinishLoading, call onStyleLoaded")
         _flutterApi.onStyleLoaded() { _ in }
     }
     
@@ -142,10 +144,14 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
     func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void) {
         // Main Thread Checker: UI API called on a background thread: -[UIView frame]
+        //DispatchQueue.main.async {
+        print("addImage before")
+        var style = _mapView.style!
+        var imageData = bytes.data
+        var image = UIImage(data: imageData)!
+        style.setImage(image, forName: id)
+        print("addImage afters")
+        //}
         completion(.success(()))
-        DispatchQueue.main.async {
-            print("add image in main thread")
-            self.addImage(id: id, bytes: bytes) { _ in }
-        }
     }
 }
