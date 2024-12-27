@@ -15,7 +15,7 @@ class LayerManager {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
-        data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+        data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
       );
       style.addSource(source);
       style.addLayer(layer.createStyleLayer(index));
@@ -30,6 +30,9 @@ class LayerManager {
   /// layers get changed.
   late List<Layer> _oldLayers;
 
+  /// The feature that is currently being dragged by the user.
+  Feature? dragFeature;
+
   /// Called when `setState()` gets called and the widget rebuilds. This method
   /// translates the declarative layer definition of [MapLibreMap.layers] to
   /// imperative calls to the maps' [MapController].
@@ -42,12 +45,12 @@ class LayerManager {
       if (oldLayer case Layer()) {
         style.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: jsonEncode(FeatureCollection(features: layer.list).toJson()),
         );
         style.addSource(source);
       }
@@ -67,5 +70,17 @@ class LayerManager {
       style.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;
+  }
+
+  /// Called when the user interacts with the map in any way.
+  Future<void> onFeatureDrag(MapEventFeatureDrag mapEvent) async {
+    switch (mapEvent.event) {
+      case LongPressEventType.begin:
+        dragFeature = mapEvent.feature;
+      case LongPressEventType.move:
+        break;
+      case LongPressEventType.end:
+        dragFeature = null;
+    }
   }
 }

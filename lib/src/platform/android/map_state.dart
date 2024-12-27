@@ -137,6 +137,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final oldOptions = oldWidget.options;
     final options = this.options;
+
+    if (options.gestures.drag != oldOptions.gestures.drag) {
+      await _hostApi.toggleLongPressMove(
+        enabled: options.gestures.drag,
+      );
+    }
+
     await runOnPlatformThread(() {
       jniMap.setMinZoomPreference(options.minZoom);
       jniMap.setMaxZoomPreference(options.maxZoom);
@@ -465,6 +472,45 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         queriedLayers.add(queriedLayer);
       }
       return queriedLayers;
+    });
+    return result;
+  }
+
+  @override
+  Future<List<Feature>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  }) async {
+    final jniMapLibreMap = _jniMapLibreMap!;
+    final style = this.style;
+    if (style == null) return [];
+
+    final result = await runOnPlatformThread<List<Feature>>(() {
+      final queryLayerIds = layerIdsFilter != null
+          ? JArray(JString.type, layerIdsFilter.length)
+          : style._getLayersIds();
+
+      if (layerIdsFilter != null) {
+        for (final (i, layer) in layerIdsFilter.indexed) {
+          queryLayerIds[i] = layer.toJString();
+        }
+      }
+
+      final queryResultsFeatures = jniMapLibreMap.queryRenderedFeatures(
+        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+        queryLayerIds,
+      );
+      queryLayerIds.release();
+
+      if (queryResultsFeatures == null || queryResultsFeatures.isEmpty) {
+        queryResultsFeatures?.release();
+        return [];
+      }
+
+      final features = queryResultsFeatures.map((f) => f?.toFeature()).nonNulls.toList();
+      queryResultsFeatures.release();
+
+      return features;
     });
     return result;
   }
