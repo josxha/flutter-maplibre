@@ -7,8 +7,6 @@ class StyleControllerIos implements StyleController {
   final MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
-  final ids = <String>{};
-
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
     // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
@@ -22,11 +20,6 @@ class StyleControllerIos implements StyleController {
       )!,
       id.toNSString(),
     );*/
-    if (ids.contains(id)) {
-      print('already contained');
-      return;
-    }
-    ids.add(id);
     await _hostApi.addImage(id, bytes);
   }
 
