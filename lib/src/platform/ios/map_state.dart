@@ -30,7 +30,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    print('buildPlatformWidget');
+    // print('buildPlatformWidget');
     const viewType = 'plugins.flutter.io/maplibre';
     return UiKitView(
       viewType: viewType,

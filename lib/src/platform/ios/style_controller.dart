@@ -7,7 +7,7 @@ class StyleControllerIos implements StyleController {
   final MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
-  final ids =<String>{};
+  final ids = <String>{};
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
@@ -22,7 +22,7 @@ class StyleControllerIos implements StyleController {
       )!,
       id.toNSString(),
     );*/
-    if (ids.contains(id))  {
+    if (ids.contains(id)) {
       print('already contained');
       return;
     }
@@ -40,7 +40,6 @@ class StyleControllerIos implements StyleController {
           ..backgroundColor = NSExpression.expressionWithFormat_(
             layer.color.toHexString(alpha: false).toNSString(),
           );
-      // TODO add paint and layout properties
       case StyleLayerWithSource():
         final ffiSource =
             _ffiStyle.sourceWithIdentifier_(layer.sourceId.toNSString());

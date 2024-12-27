@@ -148,9 +148,10 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         print("addImage before")
         var style = _mapView.style!
         var imageData = bytes.data
-        var image = UIImage(data: imageData)!
+        var image = UIImage(data: imageData, scale: UIScreen.main.scale)!
         style.setImage(image, forName: id)
         print("addImage afters")
+        print("added image: \(style.image(forName: id))")
         //}
         completion(.success(()))
     }

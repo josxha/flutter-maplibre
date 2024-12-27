@@ -37,10 +37,19 @@ import UIKit
     }
     
     @objc public static func setExpression(target: NSObject, field: String, expression: NSExpression) -> Void {
-        do {
-            target.setValue(expression, forKey: field)
-        } catch {
-            print("Couldn't set expression in Helpers.setExpression()")
+        switch (field) {
+        case "iconImage":
+            (target as! MLNSymbolStyleLayer).iconImageName = expression
+        case "iconAllowOverlap":
+            (target as! MLNSymbolStyleLayer).iconAllowsOverlap = expression
+        case "iconSize":
+            (target as! MLNSymbolStyleLayer).iconScale = expression
+        default:
+            do {
+                try target.setValue(expression, forKey: field)
+            } catch {
+                print("Couldn't set expression in Helpers.setExpression()")
+            }
         }
     }
     
