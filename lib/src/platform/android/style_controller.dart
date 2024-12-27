@@ -93,7 +93,7 @@ class StyleControllerAndroid implements StyleController {
             jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
           } else {
             final jniUri = jni.URI.create(jniData);
-            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri, jniOptions);
+            jniSource = jni.GeoJsonSource.new$8(jniId, jniUri!, jniOptions);
             jniUri.release();
           }
           jniOptions.release();
@@ -188,7 +188,7 @@ class StyleControllerAndroid implements StyleController {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
       final source =
-          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type);
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
       source.setGeoJson$3(data.toJString());
     });
   }
@@ -200,10 +200,11 @@ class StyleControllerAndroid implements StyleController {
 
     return runOnPlatformThread<List<String>>(() {
       final jSources = style.getSources();
+      if (jSources == null) return [];
       final attributions = <String>[];
       for (final jSource in jSources) {
-        final jniAttribution = jSource.getAttribution();
-        if (jniAttribution.isNull) continue;
+        final jniAttribution = jSource?.getAttribution();
+        if (jniAttribution == null) continue;
         final attribution = jniAttribution.toDartString(releaseOriginal: true);
         if (attribution.trim().isEmpty) continue;
         attributions.add(attribution);
@@ -215,12 +216,12 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   void dispose() {
-    if (!_jniStyle.isNull && !_jniStyle.isReleased) {
+    if (!_jniStyle.isReleased) {
       _jniStyle.release();
     }
   }
 
-  JList<jni.Layer> _getLayers() => _jniStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers()!;
 
   JArray<JString> _getLayersIds() => _getQueryLayerIds(_getLayers());
 
@@ -229,7 +230,7 @@ class StyleControllerAndroid implements StyleController {
     final queryLayerIds = JList.array(JString.type);
 
     for (var i = jniLayers.length - 1; i >= 0; i--) {
-      final jniLayer = jniLayers[i];
+      final jniLayer = jniLayers[i]!;
       JString? jLayerId;
 
       switch (jniLayer.jClass.toString()) {

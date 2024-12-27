@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,49 +45,50 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../../../../../java/net/URI.dart' as uri_;
+import '../../../../../java/net/URI.dart' as uri$_;
 
-import '../../../../../java/net/URL.dart' as url_;
+import '../../../../../java/net/URL.dart' as url$_;
 
-import '../../geometry/LatLngQuad.dart' as latlngquad_;
+import '../../geometry/LatLngQuad.dart' as latlngquad$_;
 
-import 'Source.dart' as source_;
+import 'Source.dart' as source$_;
 
 /// from: `org.maplibre.android.style.sources.ImageSource`
-class ImageSource extends source_.Source {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<ImageSource> $type;
+class ImageSource extends source$_.Source {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<ImageSource> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   ImageSource.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/sources/ImageSource');
+      jni$_.JClass.forName(r'org/maplibre/android/style/sources/ImageSource');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $ImageSource$NullableType();
   static const type = $ImageSource$Type();
   static final _id_new$ = _class.constructorId(
     r'(J)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int64,)>)>>('globalEnv_NewObject')
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -94,7 +96,7 @@ class ImageSource extends source_.Source {
     int j,
   ) {
     return ImageSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr, j)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
             .reference);
   }
 
@@ -102,38 +104,41 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngQuad;Ljava/net/URL;)V',
   );
 
-  static final _new$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.geometry.LatLngQuad latLngQuad, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
   factory ImageSource.new$1(
-    _$jni.JString string,
-    latlngquad_.LatLngQuad latLngQuad,
-    url_.URL uRL,
+    jni$_.JString? string,
+    latlngquad$_.LatLngQuad? latLngQuad,
+    url$_.URL uRL,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
+    final _$uRL = uRL.reference;
     return ImageSource.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            latLngQuad.reference.pointer,
-            uRL.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$latLngQuad.pointer,
+            _$uRL.pointer)
         .reference);
   }
 
@@ -141,38 +146,41 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngQuad;Ljava/net/URI;)V',
   );
 
-  static final _new$2 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.geometry.LatLngQuad latLngQuad, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
   factory ImageSource.new$2(
-    _$jni.JString string,
-    latlngquad_.LatLngQuad latLngQuad,
-    uri_.URI uRI,
+    jni$_.JString? string,
+    latlngquad$_.LatLngQuad? latLngQuad,
+    uri$_.URI uRI,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
+    final _$uRI = uRI.reference;
     return ImageSource.fromReference(_new$2(
             _class.reference.pointer,
-            _id_new$2 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            latLngQuad.reference.pointer,
-            uRI.reference.pointer)
+            _id_new$2 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$latLngQuad.pointer,
+            _$uRI.pointer)
         .reference);
   }
 
@@ -180,38 +188,41 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngQuad;Landroid/graphics/Bitmap;)V',
   );
 
-  static final _new$3 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.geometry.LatLngQuad latLngQuad, android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
   factory ImageSource.new$3(
-    _$jni.JString string,
-    latlngquad_.LatLngQuad latLngQuad,
-    _$jni.JObject bitmap,
+    jni$_.JString? string,
+    latlngquad$_.LatLngQuad? latLngQuad,
+    jni$_.JObject bitmap,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
+    final _$bitmap = bitmap.reference;
     return ImageSource.fromReference(_new$3(
             _class.reference.pointer,
-            _id_new$3 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            latLngQuad.reference.pointer,
-            bitmap.reference.pointer)
+            _id_new$3 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$latLngQuad.pointer,
+            _$bitmap.pointer)
         .reference);
   }
 
@@ -219,37 +230,39 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngQuad;I)V',
   );
 
-  static final _new$4 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$4 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int)>();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.geometry.LatLngQuad latLngQuad, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory ImageSource.new$4(
-    _$jni.JString string,
-    latlngquad_.LatLngQuad latLngQuad,
+    jni$_.JString? string,
+    latlngquad$_.LatLngQuad? latLngQuad,
     int i,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
     return ImageSource.fromReference(_new$4(
             _class.reference.pointer,
-            _id_new$4 as _$jni.JMethodIDPtr,
-            string.reference.pointer,
-            latLngQuad.reference.pointer,
+            _id_new$4 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$latLngQuad.pointer,
             i)
         .reference);
   }
@@ -259,23 +272,23 @@ class ImageSource extends source_.Source {
     r'(Ljava/net/URL;)V',
   );
 
-  static final _setUrl = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setUrl = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setUrl(java.net.URL uRL)`
   void setUrl(
-    url_.URL uRL,
+    url$_.URL uRL,
   ) {
-    _setUrl(reference.pointer, _id_setUrl as _$jni.JMethodIDPtr,
-            uRL.reference.pointer)
+    final _$uRL = uRL.reference;
+    _setUrl(reference.pointer, _id_setUrl as jni$_.JMethodIDPtr, _$uRL.pointer)
         .check();
   }
 
@@ -284,23 +297,24 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setUrl$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setUrl$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setUrl(java.lang.String string)`
   void setUrl$1(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _setUrl$1(reference.pointer, _id_setUrl$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setUrl$1(reference.pointer, _id_setUrl$1 as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 
@@ -309,23 +323,23 @@ class ImageSource extends source_.Source {
     r'(Ljava/net/URI;)V',
   );
 
-  static final _setUri = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setUri(java.net.URI uRI)`
   void setUri(
-    uri_.URI uRI,
+    uri$_.URI uRI,
   ) {
-    _setUri(reference.pointer, _id_setUri as _$jni.JMethodIDPtr,
-            uRI.reference.pointer)
+    final _$uRI = uRI.reference;
+    _setUri(reference.pointer, _id_setUri as jni$_.JMethodIDPtr, _$uRI.pointer)
         .check();
   }
 
@@ -334,23 +348,24 @@ class ImageSource extends source_.Source {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setUri$1 = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setUri(java.lang.String string)`
   void setUri$1(
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _setUri$1(reference.pointer, _id_setUri$1 as _$jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setUri$1(reference.pointer, _id_setUri$1 as jni$_.JMethodIDPtr,
+            _$string.pointer)
         .check();
   }
 
@@ -359,23 +374,24 @@ class ImageSource extends source_.Source {
     r'(Landroid/graphics/Bitmap;)V',
   );
 
-  static final _setImage = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setImage = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setImage(android.graphics.Bitmap bitmap)`
   void setImage(
-    _$jni.JObject bitmap,
+    jni$_.JObject bitmap,
   ) {
-    _setImage(reference.pointer, _id_setImage as _$jni.JMethodIDPtr,
-            bitmap.reference.pointer)
+    final _$bitmap = bitmap.reference;
+    _setImage(reference.pointer, _id_setImage as jni$_.JMethodIDPtr,
+            _$bitmap.pointer)
         .check();
   }
 
@@ -384,21 +400,21 @@ class ImageSource extends source_.Source {
     r'(I)V',
   );
 
-  static final _setImage$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _setImage$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
   /// from: `public final void setImage(int i)`
   void setImage$1(
     int i,
   ) {
-    _setImage$1(reference.pointer, _id_setImage$1 as _$jni.JMethodIDPtr, i)
+    _setImage$1(reference.pointer, _id_setImage$1 as jni$_.JMethodIDPtr, i)
         .check();
   }
 
@@ -407,23 +423,23 @@ class ImageSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUrl() {
+    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -431,23 +447,23 @@ class ImageSource extends source_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getUri() {
-    return _getUri(reference.pointer, _id_getUri as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getUri() {
+    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setCoordinates = _class.instanceMethodId(
@@ -455,52 +471,96 @@ class ImageSource extends source_.Source {
     r'(Lorg/maplibre/android/geometry/LatLngQuad;)V',
   );
 
-  static final _setCoordinates = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setCoordinates = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public final void setCoordinates(org.maplibre.android.geometry.LatLngQuad latLngQuad)`
   void setCoordinates(
-    latlngquad_.LatLngQuad latLngQuad,
+    latlngquad$_.LatLngQuad? latLngQuad,
   ) {
-    _setCoordinates(reference.pointer, _id_setCoordinates as _$jni.JMethodIDPtr,
-            latLngQuad.reference.pointer)
+    final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
+    _setCoordinates(reference.pointer, _id_setCoordinates as jni$_.JMethodIDPtr,
+            _$latLngQuad.pointer)
         .check();
   }
 }
 
-final class $ImageSource$Type extends _$jni.JObjType<ImageSource> {
-  @_$jni.internal
-  const $ImageSource$Type();
+final class $ImageSource$NullableType extends jni$_.JObjType<ImageSource?> {
+  @jni$_.internal
+  const $ImageSource$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/sources/ImageSource;';
 
-  @_$jni.internal
-  @_$core.override
-  ImageSource fromReference(_$jni.JReference reference) =>
-      ImageSource.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  ImageSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ImageSource.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const source_.$Source$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<ImageSource?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($ImageSource$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ImageSource$NullableType) &&
+        other is $ImageSource$NullableType;
+  }
+}
+
+final class $ImageSource$Type extends jni$_.JObjType<ImageSource> {
+  @jni$_.internal
+  const $ImageSource$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/ImageSource;';
+
+  @jni$_.internal
+  @core$_.override
+  ImageSource fromReference(jni$_.JReference reference) =>
+      ImageSource.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const source$_.$Source$Type();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<ImageSource?> get nullableType =>
+      const $ImageSource$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
   int get hashCode => ($ImageSource$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($ImageSource$Type) &&
         other is $ImageSource$Type;

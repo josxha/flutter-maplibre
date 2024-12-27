@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,48 +45,49 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.http.NativeHttpRequest`
-class NativeHttpRequest extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<NativeHttpRequest> $type;
+class NativeHttpRequest extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<NativeHttpRequest> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   NativeHttpRequest.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/http/NativeHttpRequest');
+      jni$_.JClass.forName(r'org/maplibre/android/http/NativeHttpRequest');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $NativeHttpRequest$NullableType();
   static const type = $NativeHttpRequest$Type();
   static final _id_cancel = _class.instanceMethodId(
     r'cancel',
     r'()V',
   );
 
-  static final _cancel = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _cancel = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void cancel()`
   void cancel() {
-    _cancel(reference.pointer, _id_cancel as _$jni.JMethodIDPtr).check();
+    _cancel(reference.pointer, _id_cancel as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onResponse = _class.instanceMethodId(
@@ -93,57 +95,64 @@ class NativeHttpRequest extends _$jni.JObject {
     r'(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)V',
   );
 
-  static final _onResponse = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _onResponse = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Int32,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
               int,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void onResponse(int i, java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, byte[] bs)`
   void onResponse(
     int i,
-    _$jni.JString string,
-    _$jni.JString string1,
-    _$jni.JString string2,
-    _$jni.JString string3,
-    _$jni.JString string4,
-    _$jni.JString string5,
-    _$jni.JArray<_$jni.jbyte> bs,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    jni$_.JString? string4,
+    jni$_.JString? string5,
+    jni$_.JByteArray? bs,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$string2 = string2?.reference ?? jni$_.jNullReference;
+    final _$string3 = string3?.reference ?? jni$_.jNullReference;
+    final _$string4 = string4?.reference ?? jni$_.jNullReference;
+    final _$string5 = string5?.reference ?? jni$_.jNullReference;
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
     _onResponse(
             reference.pointer,
-            _id_onResponse as _$jni.JMethodIDPtr,
+            _id_onResponse as jni$_.JMethodIDPtr,
             i,
-            string.reference.pointer,
-            string1.reference.pointer,
-            string2.reference.pointer,
-            string3.reference.pointer,
-            string4.reference.pointer,
-            string5.reference.pointer,
-            bs.reference.pointer)
+            _$string.pointer,
+            _$string1.pointer,
+            _$string2.pointer,
+            _$string3.pointer,
+            _$string4.pointer,
+            _$string5.pointer,
+            _$bs.pointer)
         .check();
   }
 
@@ -152,54 +161,100 @@ class NativeHttpRequest extends _$jni.JObject {
     r'(ILjava/lang/String;)V',
   );
 
-  static final _handleFailure = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Int32, _$jni.Pointer<_$jni.Void>)>)>>(
+  static final _handleFailure = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, int, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void handleFailure(int i, java.lang.String string)`
   void handleFailure(
     int i,
-    _$jni.JString string,
+    jni$_.JString? string,
   ) {
-    _handleFailure(reference.pointer, _id_handleFailure as _$jni.JMethodIDPtr,
-            i, string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _handleFailure(reference.pointer, _id_handleFailure as jni$_.JMethodIDPtr,
+            i, _$string.pointer)
         .check();
   }
 }
 
-final class $NativeHttpRequest$Type extends _$jni.JObjType<NativeHttpRequest> {
-  @_$jni.internal
-  const $NativeHttpRequest$Type();
+final class $NativeHttpRequest$NullableType
+    extends jni$_.JObjType<NativeHttpRequest?> {
+  @jni$_.internal
+  const $NativeHttpRequest$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/http/NativeHttpRequest;';
 
-  @_$jni.internal
-  @_$core.override
-  NativeHttpRequest fromReference(_$jni.JReference reference) =>
-      NativeHttpRequest.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  NativeHttpRequest? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : NativeHttpRequest.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<NativeHttpRequest?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($NativeHttpRequest$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($NativeHttpRequest$NullableType) &&
+        other is $NativeHttpRequest$NullableType;
+  }
+}
+
+final class $NativeHttpRequest$Type extends jni$_.JObjType<NativeHttpRequest> {
+  @jni$_.internal
+  const $NativeHttpRequest$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/http/NativeHttpRequest;';
+
+  @jni$_.internal
+  @core$_.override
+  NativeHttpRequest fromReference(jni$_.JReference reference) =>
+      NativeHttpRequest.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<NativeHttpRequest?> get nullableType =>
+      const $NativeHttpRequest$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($NativeHttpRequest$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($NativeHttpRequest$Type) &&
         other is $NativeHttpRequest$Type;

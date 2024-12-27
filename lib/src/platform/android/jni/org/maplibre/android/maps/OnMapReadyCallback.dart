@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,65 +45,67 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'MapLibreMap.dart' as maplibremap_;
+import 'MapLibreMap.dart' as maplibremap$_;
 
 /// from: `org.maplibre.android.maps.OnMapReadyCallback`
-class OnMapReadyCallback extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<OnMapReadyCallback> $type;
+class OnMapReadyCallback extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<OnMapReadyCallback> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   OnMapReadyCallback.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/maps/OnMapReadyCallback');
+      jni$_.JClass.forName(r'org/maplibre/android/maps/OnMapReadyCallback');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $OnMapReadyCallback$NullableType();
   static const type = $OnMapReadyCallback$Type();
   static final _id_onMapReady = _class.instanceMethodId(
     r'onMapReady',
     r'(Lorg/maplibre/android/maps/MapLibreMap;)V',
   );
 
-  static final _onMapReady = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onMapReady = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public abstract void onMapReady(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   void onMapReady(
-    maplibremap_.MapLibreMap mapLibreMap,
+    maplibremap$_.MapLibreMap? mapLibreMap,
   ) {
-    _onMapReady(reference.pointer, _id_onMapReady as _$jni.JMethodIDPtr,
-            mapLibreMap.reference.pointer)
+    final _$mapLibreMap = mapLibreMap?.reference ?? jni$_.jNullReference;
+    _onMapReady(reference.pointer, _id_onMapReady as jni$_.JMethodIDPtr,
+            _$mapLibreMap.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $OnMapReadyCallback> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $OnMapReadyCallback> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -110,46 +113,46 @@ class OnMapReadyCallback extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onMapReady(Lorg/maplibre/android/maps/MapLibreMap;)V') {
         _$impls[$p]!.onMapReady(
-          $a[0].as(const maplibremap_.$MapLibreMap$Type(),
+          $a![0]?.as(const maplibremap$_.$MapLibreMap$Type(),
               releaseOriginal: true),
         );
-        return _$jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
+    jni$_.JImplementer implementer,
     $OnMapReadyCallback $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.maps.OnMapReadyCallback',
@@ -167,7 +170,7 @@ class OnMapReadyCallback extends _$jni.JObject {
   factory OnMapReadyCallback.implement(
     $OnMapReadyCallback $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return OnMapReadyCallback.fromReference(
       $i.implementReference(),
@@ -177,54 +180,99 @@ class OnMapReadyCallback extends _$jni.JObject {
 
 abstract base mixin class $OnMapReadyCallback {
   factory $OnMapReadyCallback({
-    required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
+    required void Function(maplibremap$_.MapLibreMap? mapLibreMap) onMapReady,
     bool onMapReady$async,
   }) = _$OnMapReadyCallback;
 
-  void onMapReady(maplibremap_.MapLibreMap mapLibreMap);
+  void onMapReady(maplibremap$_.MapLibreMap? mapLibreMap);
   bool get onMapReady$async => false;
 }
 
 final class _$OnMapReadyCallback with $OnMapReadyCallback {
   _$OnMapReadyCallback({
-    required void Function(maplibremap_.MapLibreMap mapLibreMap) onMapReady,
+    required void Function(maplibremap$_.MapLibreMap? mapLibreMap) onMapReady,
     this.onMapReady$async = false,
   }) : _onMapReady = onMapReady;
 
-  final void Function(maplibremap_.MapLibreMap mapLibreMap) _onMapReady;
+  final void Function(maplibremap$_.MapLibreMap? mapLibreMap) _onMapReady;
   final bool onMapReady$async;
 
-  void onMapReady(maplibremap_.MapLibreMap mapLibreMap) {
+  void onMapReady(maplibremap$_.MapLibreMap? mapLibreMap) {
     return _onMapReady(mapLibreMap);
   }
 }
 
-final class $OnMapReadyCallback$Type
-    extends _$jni.JObjType<OnMapReadyCallback> {
-  @_$jni.internal
-  const $OnMapReadyCallback$Type();
+final class $OnMapReadyCallback$NullableType
+    extends jni$_.JObjType<OnMapReadyCallback?> {
+  @jni$_.internal
+  const $OnMapReadyCallback$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/maps/OnMapReadyCallback;';
 
-  @_$jni.internal
-  @_$core.override
-  OnMapReadyCallback fromReference(_$jni.JReference reference) =>
-      OnMapReadyCallback.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  OnMapReadyCallback? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : OnMapReadyCallback.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<OnMapReadyCallback?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($OnMapReadyCallback$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnMapReadyCallback$NullableType) &&
+        other is $OnMapReadyCallback$NullableType;
+  }
+}
+
+final class $OnMapReadyCallback$Type
+    extends jni$_.JObjType<OnMapReadyCallback> {
+  @jni$_.internal
+  const $OnMapReadyCallback$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/OnMapReadyCallback;';
+
+  @jni$_.internal
+  @core$_.override
+  OnMapReadyCallback fromReference(jni$_.JReference reference) =>
+      OnMapReadyCallback.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<OnMapReadyCallback?> get nullableType =>
+      const $OnMapReadyCallback$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($OnMapReadyCallback$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($OnMapReadyCallback$Type) &&
         other is $OnMapReadyCallback$Type;

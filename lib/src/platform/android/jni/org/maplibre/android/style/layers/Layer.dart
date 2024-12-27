@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,52 +45,55 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'PropertyValue.dart' as propertyvalue_;
+import 'PropertyValue.dart' as propertyvalue$_;
 
 /// from: `org.maplibre.android.style.layers.Layer`
-class Layer extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Layer> $type;
+class Layer extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Layer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Layer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/layers/Layer');
+      jni$_.JClass.forName(r'org/maplibre/android/style/layers/Layer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Layer$NullableType();
   static const type = $Layer$Type();
   static final _id_setProperties = _class.instanceMethodId(
     r'setProperties',
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)V',
   );
 
-  static final _setProperties = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setProperties = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setProperties(java.lang.Object[] propertyValues)`
   void setProperties(
-    _$jni.JArray<propertyvalue_.PropertyValue<_$jni.JObject>> propertyValues,
+    jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?>?
+        propertyValues,
   ) {
-    _setProperties(reference.pointer, _id_setProperties as _$jni.JMethodIDPtr,
-            propertyValues.reference.pointer)
+    final _$propertyValues = propertyValues?.reference ?? jni$_.jNullReference;
+    _setProperties(reference.pointer, _id_setProperties as jni$_.JMethodIDPtr,
+            _$propertyValues.pointer)
         .check();
   }
 
@@ -98,23 +102,23 @@ class Layer extends _$jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getId = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public java.lang.String getId()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JString getId() {
-    return _getId(reference.pointer, _id_getId as _$jni.JMethodIDPtr)
-        .object(const _$jni.JStringType());
+  jni$_.JString? getId() {
+    return _getId(reference.pointer, _id_getId as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getVisibility = _class.instanceMethodId(
@@ -122,24 +126,26 @@ class Layer extends _$jni.JObject {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getVisibility = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getVisibility = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getVisibility()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue_.PropertyValue<_$jni.JString> getVisibility() {
+  propertyvalue$_.PropertyValue<jni$_.JString?>? getVisibility() {
     return _getVisibility(
-            reference.pointer, _id_getVisibility as _$jni.JMethodIDPtr)
-        .object(const propertyvalue_.$PropertyValue$Type(_$jni.JStringType()));
+            reference.pointer, _id_getVisibility as jni$_.JMethodIDPtr)
+        .object<propertyvalue$_.PropertyValue<jni$_.JString?>?>(
+            const propertyvalue$_.$PropertyValue$NullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getMinZoom = _class.instanceMethodId(
@@ -147,21 +153,21 @@ class Layer extends _$jni.JObject {
     r'()F',
   );
 
-  static final _getMinZoom = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getMinZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float getMinZoom()`
   double getMinZoom() {
-    return _getMinZoom(reference.pointer, _id_getMinZoom as _$jni.JMethodIDPtr)
+    return _getMinZoom(reference.pointer, _id_getMinZoom as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -170,21 +176,21 @@ class Layer extends _$jni.JObject {
     r'()F',
   );
 
-  static final _getMaxZoom = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getMaxZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallFloatMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public float getMaxZoom()`
   double getMaxZoom() {
-    return _getMaxZoom(reference.pointer, _id_getMaxZoom as _$jni.JMethodIDPtr)
+    return _getMaxZoom(reference.pointer, _id_getMaxZoom as jni$_.JMethodIDPtr)
         .float;
   }
 
@@ -193,21 +199,21 @@ class Layer extends _$jni.JObject {
     r'(F)V',
   );
 
-  static final _setMinZoom = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Double,)>)>>('globalEnv_CallVoidMethod')
+  static final _setMinZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public void setMinZoom(float f)`
   void setMinZoom(
     double f,
   ) {
-    _setMinZoom(reference.pointer, _id_setMinZoom as _$jni.JMethodIDPtr, f)
+    _setMinZoom(reference.pointer, _id_setMinZoom as jni$_.JMethodIDPtr, f)
         .check();
   }
 
@@ -216,21 +222,21 @@ class Layer extends _$jni.JObject {
     r'(F)V',
   );
 
-  static final _setMaxZoom = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<(_$jni.Double,)>)>>('globalEnv_CallVoidMethod')
+  static final _setMaxZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, double)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
 
   /// from: `public void setMaxZoom(float f)`
   void setMaxZoom(
     double f,
   ) {
-    _setMaxZoom(reference.pointer, _id_setMaxZoom as _$jni.JMethodIDPtr, f)
+    _setMaxZoom(reference.pointer, _id_setMaxZoom as jni$_.JMethodIDPtr, f)
         .check();
   }
 
@@ -239,22 +245,22 @@ class Layer extends _$jni.JObject {
     r'()J',
   );
 
-  static final _getNativePtr = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getNativePtr = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public long getNativePtr()`
   int getNativePtr() {
     return _getNativePtr(
-            reference.pointer, _id_getNativePtr as _$jni.JMethodIDPtr)
+            reference.pointer, _id_getNativePtr as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -263,21 +269,21 @@ class Layer extends _$jni.JObject {
     r'()V',
   );
 
-  static final _setDetached = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _setDetached = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void setDetached()`
   void setDetached() {
-    _setDetached(reference.pointer, _id_setDetached as _$jni.JMethodIDPtr)
+    _setDetached(reference.pointer, _id_setDetached as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -286,50 +292,91 @@ class Layer extends _$jni.JObject {
     r'()Z',
   );
 
-  static final _isDetached = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _isDetached = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public boolean isDetached()`
   bool isDetached() {
-    return _isDetached(reference.pointer, _id_isDetached as _$jni.JMethodIDPtr)
+    return _isDetached(reference.pointer, _id_isDetached as jni$_.JMethodIDPtr)
         .boolean;
   }
 }
 
-final class $Layer$Type extends _$jni.JObjType<Layer> {
-  @_$jni.internal
-  const $Layer$Type();
+final class $Layer$NullableType extends jni$_.JObjType<Layer?> {
+  @jni$_.internal
+  const $Layer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/layers/Layer;';
 
-  @_$jni.internal
-  @_$core.override
-  Layer fromReference(_$jni.JReference reference) =>
-      Layer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Layer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Layer.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Layer?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Layer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Layer$NullableType) &&
+        other is $Layer$NullableType;
+  }
+}
+
+final class $Layer$Type extends jni$_.JObjType<Layer> {
+  @jni$_.internal
+  const $Layer$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/layers/Layer;';
+
+  @jni$_.internal
+  @core$_.override
+  Layer fromReference(jni$_.JReference reference) => Layer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Layer?> get nullableType => const $Layer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Layer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Layer$Type) && other is $Layer$Type;
   }

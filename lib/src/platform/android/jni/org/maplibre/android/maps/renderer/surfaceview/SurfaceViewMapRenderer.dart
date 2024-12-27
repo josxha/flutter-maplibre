@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,68 +45,73 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../MapRenderer.dart' as maprenderer_;
+import '../MapRenderer.dart' as maprenderer$_;
 
-import 'MapLibreSurfaceView.dart' as maplibresurfaceview_;
+import 'MapLibreSurfaceView.dart' as maplibresurfaceview$_;
 
 /// from: `org.maplibre.android.maps.renderer.surfaceview.SurfaceViewMapRenderer`
-class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<SurfaceViewMapRenderer> $type;
+class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<SurfaceViewMapRenderer> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   SurfaceViewMapRenderer.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/maps/renderer/surfaceview/SurfaceViewMapRenderer');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $SurfaceViewMapRenderer$NullableType();
   static const type = $SurfaceViewMapRenderer$Type();
   static final _id_new$ = _class.constructorId(
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/renderer/surfaceview/MapLibreSurfaceView;Ljava/lang/String;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView mapLibreSurfaceView, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory SurfaceViewMapRenderer(
-    _$jni.JObject context,
-    maplibresurfaceview_.MapLibreSurfaceView mapLibreSurfaceView,
-    _$jni.JString string,
+    jni$_.JObject? context,
+    maplibresurfaceview$_.MapLibreSurfaceView? mapLibreSurfaceView,
+    jni$_.JString? string,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$mapLibreSurfaceView =
+        mapLibreSurfaceView?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return SurfaceViewMapRenderer.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            context.reference.pointer,
-            mapLibreSurfaceView.reference.pointer,
-            string.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$mapLibreSurfaceView.pointer,
+            _$string.pointer)
         .reference);
   }
 
@@ -114,23 +120,23 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()Landroid/view/View;',
   );
 
-  static final _getView = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getView = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public android.view.View getView()`
   /// The returned object must be released after use, by calling the [release] method.
-  _$jni.JObject getView() {
-    return _getView(reference.pointer, _id_getView as _$jni.JMethodIDPtr)
-        .object(const _$jni.JObjectType());
+  jni$_.JObject? getView() {
+    return _getView(reference.pointer, _id_getView as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_onStop = _class.instanceMethodId(
@@ -138,21 +144,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onStop = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStop()`
   void onStop() {
-    _onStop(reference.pointer, _id_onStop as _$jni.JMethodIDPtr).check();
+    _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onPause = _class.instanceMethodId(
@@ -160,21 +166,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onPause = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onPause = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onPause()`
   void onPause() {
-    _onPause(reference.pointer, _id_onPause as _$jni.JMethodIDPtr).check();
+    _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onDestroy = _class.instanceMethodId(
@@ -182,21 +188,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onDestroy = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
-    _onDestroy(reference.pointer, _id_onDestroy as _$jni.JMethodIDPtr).check();
+    _onDestroy(reference.pointer, _id_onDestroy as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onStart = _class.instanceMethodId(
@@ -204,21 +210,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onStart = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onStart()`
   void onStart() {
-    _onStart(reference.pointer, _id_onStart as _$jni.JMethodIDPtr).check();
+    _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onResume = _class.instanceMethodId(
@@ -226,21 +232,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onResume = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onResume = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onResume()`
   void onResume() {
-    _onResume(reference.pointer, _id_onResume as _$jni.JMethodIDPtr).check();
+    _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_onSurfaceCreated = _class.instanceMethodId(
@@ -248,25 +254,24 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Landroid/view/Surface;)V',
   );
 
-  static final _onSurfaceCreated = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _onSurfaceCreated = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void onSurfaceCreated(android.view.Surface surface)`
   void onSurfaceCreated(
-    _$jni.JObject surface,
+    jni$_.JObject? surface,
   ) {
-    _onSurfaceCreated(
-            reference.pointer,
-            _id_onSurfaceCreated as _$jni.JMethodIDPtr,
-            surface.reference.pointer)
+    final _$surface = surface?.reference ?? jni$_.jNullReference;
+    _onSurfaceCreated(reference.pointer,
+            _id_onSurfaceCreated as jni$_.JMethodIDPtr, _$surface.pointer)
         .check();
   }
 
@@ -275,22 +280,22 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onSurfaceDestroyed = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onSurfaceDestroyed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onSurfaceDestroyed()`
   void onSurfaceDestroyed() {
     _onSurfaceDestroyed(
-            reference.pointer, _id_onSurfaceDestroyed as _$jni.JMethodIDPtr)
+            reference.pointer, _id_onSurfaceDestroyed as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -299,16 +304,16 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'(II)V',
   );
 
-  static final _onSurfaceChanged = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Int32, _$jni.Int32)>)>>(
+  static final _onSurfaceChanged = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-              _$jni.Pointer<_$jni.Void>, _$jni.JMethodIDPtr, int, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
   /// from: `public void onSurfaceChanged(int i, int i1)`
   void onSurfaceChanged(
@@ -316,7 +321,7 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     int i1,
   ) {
     _onSurfaceChanged(reference.pointer,
-            _id_onSurfaceChanged as _$jni.JMethodIDPtr, i, i1)
+            _id_onSurfaceChanged as jni$_.JMethodIDPtr, i, i1)
         .check();
   }
 
@@ -325,21 +330,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _onDrawFrame = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _onDrawFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void onDrawFrame()`
   void onDrawFrame() {
-    _onDrawFrame(reference.pointer, _id_onDrawFrame as _$jni.JMethodIDPtr)
+    _onDrawFrame(reference.pointer, _id_onDrawFrame as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -348,21 +353,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _requestRender = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _requestRender = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void requestRender()`
   void requestRender() {
-    _requestRender(reference.pointer, _id_requestRender as _$jni.JMethodIDPtr)
+    _requestRender(reference.pointer, _id_requestRender as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -371,23 +376,24 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
   void queueEvent(
-    _$jni.JObject runnable,
+    jni$_.JObject? runnable,
   ) {
-    _queueEvent(reference.pointer, _id_queueEvent as _$jni.JMethodIDPtr,
-            runnable.reference.pointer)
+    final _$runnable = runnable?.reference ?? jni$_.jNullReference;
+    _queueEvent(reference.pointer, _id_queueEvent as jni$_.JMethodIDPtr,
+            _$runnable.pointer)
         .check();
   }
 
@@ -396,21 +402,21 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()V',
   );
 
-  static final _waitForEmpty = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JThrowablePtr Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _waitForEmpty = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void waitForEmpty()`
   void waitForEmpty() {
-    _waitForEmpty(reference.pointer, _id_waitForEmpty as _$jni.JMethodIDPtr)
+    _waitForEmpty(reference.pointer, _id_waitForEmpty as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -419,25 +425,27 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
   );
 
-  static final _setRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _setRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void setRenderingRefreshMode(org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode renderingRefreshMode)`
   void setRenderingRefreshMode(
-    maprenderer_.MapRenderer_RenderingRefreshMode renderingRefreshMode,
+    maprenderer$_.MapRenderer$RenderingRefreshMode? renderingRefreshMode,
   ) {
+    final _$renderingRefreshMode =
+        renderingRefreshMode?.reference ?? jni$_.jNullReference;
     _setRenderingRefreshMode(
             reference.pointer,
-            _id_setRenderingRefreshMode as _$jni.JMethodIDPtr,
-            renderingRefreshMode.reference.pointer)
+            _id_setRenderingRefreshMode as jni$_.JMethodIDPtr,
+            _$renderingRefreshMode.pointer)
         .check();
   }
 
@@ -446,54 +454,104 @@ class SurfaceViewMapRenderer extends maprenderer_.MapRenderer {
     r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _getRenderingRefreshMode = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode getRenderingRefreshMode()`
   /// The returned object must be released after use, by calling the [release] method.
-  maprenderer_.MapRenderer_RenderingRefreshMode getRenderingRefreshMode() {
+  maprenderer$_.MapRenderer$RenderingRefreshMode? getRenderingRefreshMode() {
     return _getRenderingRefreshMode(reference.pointer,
-            _id_getRenderingRefreshMode as _$jni.JMethodIDPtr)
-        .object(const maprenderer_.$MapRenderer_RenderingRefreshMode$Type());
+            _id_getRenderingRefreshMode as jni$_.JMethodIDPtr)
+        .object<maprenderer$_.MapRenderer$RenderingRefreshMode?>(
+            const maprenderer$_
+                .$MapRenderer$RenderingRefreshMode$NullableType());
+  }
+}
+
+final class $SurfaceViewMapRenderer$NullableType
+    extends jni$_.JObjType<SurfaceViewMapRenderer?> {
+  @jni$_.internal
+  const $SurfaceViewMapRenderer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/renderer/surfaceview/SurfaceViewMapRenderer;';
+
+  @jni$_.internal
+  @core$_.override
+  SurfaceViewMapRenderer? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : SurfaceViewMapRenderer.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maprenderer$_.$MapRenderer$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<SurfaceViewMapRenderer?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 2;
+
+  @core$_.override
+  int get hashCode => ($SurfaceViewMapRenderer$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($SurfaceViewMapRenderer$NullableType) &&
+        other is $SurfaceViewMapRenderer$NullableType;
   }
 }
 
 final class $SurfaceViewMapRenderer$Type
-    extends _$jni.JObjType<SurfaceViewMapRenderer> {
-  @_$jni.internal
+    extends jni$_.JObjType<SurfaceViewMapRenderer> {
+  @jni$_.internal
   const $SurfaceViewMapRenderer$Type();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/renderer/surfaceview/SurfaceViewMapRenderer;';
 
-  @_$jni.internal
-  @_$core.override
-  SurfaceViewMapRenderer fromReference(_$jni.JReference reference) =>
-      SurfaceViewMapRenderer.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  SurfaceViewMapRenderer fromReference(jni$_.JReference reference) =>
+      SurfaceViewMapRenderer.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType =>
+      const maprenderer$_.$MapRenderer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const maprenderer_.$MapRenderer$Type();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<SurfaceViewMapRenderer?> get nullableType =>
+      const $SurfaceViewMapRenderer$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 2;
 
-  @_$core.override
+  @core$_.override
   int get hashCode => ($SurfaceViewMapRenderer$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($SurfaceViewMapRenderer$Type) &&
         other is $SurfaceViewMapRenderer$Type;

@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,39 +45,40 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.style.layers.Property$ANCHOR`
-class Property_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ANCHOR> $type;
+class Property$ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ANCHOR> $type;
 
-  @_$jni.internal
-  Property_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ANCHOR$Type();
+  static const nullableType = $Property$ANCHOR$NullableType();
+  static const type = $Property$ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -84,39 +86,39 @@ class Property_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ANCHOR',
@@ -128,85 +130,131 @@ class Property_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ANCHOR.implement(
-    $Property_ANCHOR $impl,
+  factory Property$ANCHOR.implement(
+    $Property$ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ANCHOR.fromReference(
+    return Property$ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ANCHOR {
-  factory $Property_ANCHOR() = _$Property_ANCHOR;
+abstract base mixin class $Property$ANCHOR {
+  factory $Property$ANCHOR() = _$Property$ANCHOR;
 }
 
-final class _$Property_ANCHOR with $Property_ANCHOR {
-  _$Property_ANCHOR();
+final class _$Property$ANCHOR with $Property$ANCHOR {
+  _$Property$ANCHOR();
 }
 
-final class $Property_ANCHOR$Type extends _$jni.JObjType<Property_ANCHOR> {
-  @_$jni.internal
-  const $Property_ANCHOR$Type();
+final class $Property$ANCHOR$NullableType
+    extends jni$_.JObjType<Property$ANCHOR?> {
+  @jni$_.internal
+  const $Property$ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ANCHOR? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Property$ANCHOR.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ANCHOR$Type) &&
-        other is $Property_ANCHOR$Type;
+    return other.runtimeType == ($Property$ANCHOR$NullableType) &&
+        other is $Property$ANCHOR$NullableType;
+  }
+}
+
+final class $Property$ANCHOR$Type extends jni$_.JObjType<Property$ANCHOR> {
+  @jni$_.internal
+  const $Property$ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ANCHOR?> get nullableType =>
+      const $Property$ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ANCHOR$Type) &&
+        other is $Property$ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$CIRCLE_PITCH_ALIGNMENT`
-class Property_CIRCLE_PITCH_ALIGNMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_CIRCLE_PITCH_ALIGNMENT> $type;
+class Property$CIRCLE_PITCH_ALIGNMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT> $type;
 
-  @_$jni.internal
-  Property_CIRCLE_PITCH_ALIGNMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_ALIGNMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_CIRCLE_PITCH_ALIGNMENT$Type();
+  static const nullableType = $Property$CIRCLE_PITCH_ALIGNMENT$NullableType();
+  static const type = $Property$CIRCLE_PITCH_ALIGNMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_CIRCLE_PITCH_ALIGNMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$CIRCLE_PITCH_ALIGNMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -214,39 +262,39 @@ class Property_CIRCLE_PITCH_ALIGNMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_CIRCLE_PITCH_ALIGNMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$CIRCLE_PITCH_ALIGNMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$CIRCLE_PITCH_ALIGNMENT',
@@ -258,88 +306,136 @@ class Property_CIRCLE_PITCH_ALIGNMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_CIRCLE_PITCH_ALIGNMENT.implement(
-    $Property_CIRCLE_PITCH_ALIGNMENT $impl,
+  factory Property$CIRCLE_PITCH_ALIGNMENT.implement(
+    $Property$CIRCLE_PITCH_ALIGNMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_CIRCLE_PITCH_ALIGNMENT.fromReference(
+    return Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_CIRCLE_PITCH_ALIGNMENT {
-  factory $Property_CIRCLE_PITCH_ALIGNMENT() =
-      _$Property_CIRCLE_PITCH_ALIGNMENT;
+abstract base mixin class $Property$CIRCLE_PITCH_ALIGNMENT {
+  factory $Property$CIRCLE_PITCH_ALIGNMENT() =
+      _$Property$CIRCLE_PITCH_ALIGNMENT;
 }
 
-final class _$Property_CIRCLE_PITCH_ALIGNMENT
-    with $Property_CIRCLE_PITCH_ALIGNMENT {
-  _$Property_CIRCLE_PITCH_ALIGNMENT();
+final class _$Property$CIRCLE_PITCH_ALIGNMENT
+    with $Property$CIRCLE_PITCH_ALIGNMENT {
+  _$Property$CIRCLE_PITCH_ALIGNMENT();
 }
 
-final class $Property_CIRCLE_PITCH_ALIGNMENT$Type
-    extends _$jni.JObjType<Property_CIRCLE_PITCH_ALIGNMENT> {
-  @_$jni.internal
-  const $Property_CIRCLE_PITCH_ALIGNMENT$Type();
+final class $Property$CIRCLE_PITCH_ALIGNMENT$NullableType
+    extends jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT?> {
+  @jni$_.internal
+  const $Property$CIRCLE_PITCH_ALIGNMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$CIRCLE_PITCH_ALIGNMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_CIRCLE_PITCH_ALIGNMENT fromReference(_$jni.JReference reference) =>
-      Property_CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_CIRCLE_PITCH_ALIGNMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_PITCH_ALIGNMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_CIRCLE_PITCH_ALIGNMENT$Type) &&
-        other is $Property_CIRCLE_PITCH_ALIGNMENT$Type;
+    return other.runtimeType ==
+            ($Property$CIRCLE_PITCH_ALIGNMENT$NullableType) &&
+        other is $Property$CIRCLE_PITCH_ALIGNMENT$NullableType;
+  }
+}
+
+final class $Property$CIRCLE_PITCH_ALIGNMENT$Type
+    extends jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT> {
+  @jni$_.internal
+  const $Property$CIRCLE_PITCH_ALIGNMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$CIRCLE_PITCH_ALIGNMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
+      Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT?> get nullableType =>
+      const $Property$CIRCLE_PITCH_ALIGNMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_PITCH_ALIGNMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$CIRCLE_PITCH_ALIGNMENT$Type) &&
+        other is $Property$CIRCLE_PITCH_ALIGNMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$CIRCLE_PITCH_SCALE`
-class Property_CIRCLE_PITCH_SCALE extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_CIRCLE_PITCH_SCALE> $type;
+class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$CIRCLE_PITCH_SCALE> $type;
 
-  @_$jni.internal
-  Property_CIRCLE_PITCH_SCALE.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$CIRCLE_PITCH_SCALE.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_SCALE');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_CIRCLE_PITCH_SCALE$Type();
+  static const nullableType = $Property$CIRCLE_PITCH_SCALE$NullableType();
+  static const type = $Property$CIRCLE_PITCH_SCALE$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_CIRCLE_PITCH_SCALE> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$CIRCLE_PITCH_SCALE> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -347,39 +443,39 @@ class Property_CIRCLE_PITCH_SCALE extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_CIRCLE_PITCH_SCALE $impl,
+    jni$_.JImplementer implementer,
+    $Property$CIRCLE_PITCH_SCALE $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$CIRCLE_PITCH_SCALE',
@@ -391,86 +487,133 @@ class Property_CIRCLE_PITCH_SCALE extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_CIRCLE_PITCH_SCALE.implement(
-    $Property_CIRCLE_PITCH_SCALE $impl,
+  factory Property$CIRCLE_PITCH_SCALE.implement(
+    $Property$CIRCLE_PITCH_SCALE $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_CIRCLE_PITCH_SCALE.fromReference(
+    return Property$CIRCLE_PITCH_SCALE.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_CIRCLE_PITCH_SCALE {
-  factory $Property_CIRCLE_PITCH_SCALE() = _$Property_CIRCLE_PITCH_SCALE;
+abstract base mixin class $Property$CIRCLE_PITCH_SCALE {
+  factory $Property$CIRCLE_PITCH_SCALE() = _$Property$CIRCLE_PITCH_SCALE;
 }
 
-final class _$Property_CIRCLE_PITCH_SCALE with $Property_CIRCLE_PITCH_SCALE {
-  _$Property_CIRCLE_PITCH_SCALE();
+final class _$Property$CIRCLE_PITCH_SCALE with $Property$CIRCLE_PITCH_SCALE {
+  _$Property$CIRCLE_PITCH_SCALE();
 }
 
-final class $Property_CIRCLE_PITCH_SCALE$Type
-    extends _$jni.JObjType<Property_CIRCLE_PITCH_SCALE> {
-  @_$jni.internal
-  const $Property_CIRCLE_PITCH_SCALE$Type();
+final class $Property$CIRCLE_PITCH_SCALE$NullableType
+    extends jni$_.JObjType<Property$CIRCLE_PITCH_SCALE?> {
+  @jni$_.internal
+  const $Property$CIRCLE_PITCH_SCALE$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$CIRCLE_PITCH_SCALE;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_CIRCLE_PITCH_SCALE fromReference(_$jni.JReference reference) =>
-      Property_CIRCLE_PITCH_SCALE.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_PITCH_SCALE? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$CIRCLE_PITCH_SCALE.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_PITCH_SCALE?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_CIRCLE_PITCH_SCALE$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_PITCH_SCALE$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_CIRCLE_PITCH_SCALE$Type) &&
-        other is $Property_CIRCLE_PITCH_SCALE$Type;
+    return other.runtimeType == ($Property$CIRCLE_PITCH_SCALE$NullableType) &&
+        other is $Property$CIRCLE_PITCH_SCALE$NullableType;
+  }
+}
+
+final class $Property$CIRCLE_PITCH_SCALE$Type
+    extends jni$_.JObjType<Property$CIRCLE_PITCH_SCALE> {
+  @jni$_.internal
+  const $Property$CIRCLE_PITCH_SCALE$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$CIRCLE_PITCH_SCALE;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_PITCH_SCALE fromReference(jni$_.JReference reference) =>
+      Property$CIRCLE_PITCH_SCALE.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_PITCH_SCALE?> get nullableType =>
+      const $Property$CIRCLE_PITCH_SCALE$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_PITCH_SCALE$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$CIRCLE_PITCH_SCALE$Type) &&
+        other is $Property$CIRCLE_PITCH_SCALE$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$CIRCLE_TRANSLATE_ANCHOR`
-class Property_CIRCLE_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_CIRCLE_TRANSLATE_ANCHOR> $type;
+class Property$CIRCLE_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_CIRCLE_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$CIRCLE_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_CIRCLE_TRANSLATE_ANCHOR$Type();
+  static const nullableType = $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$CIRCLE_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_CIRCLE_TRANSLATE_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$CIRCLE_TRANSLATE_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -478,39 +621,39 @@ class Property_CIRCLE_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_CIRCLE_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$CIRCLE_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$CIRCLE_TRANSLATE_ANCHOR',
@@ -522,89 +665,138 @@ class Property_CIRCLE_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_CIRCLE_TRANSLATE_ANCHOR.implement(
-    $Property_CIRCLE_TRANSLATE_ANCHOR $impl,
+  factory Property$CIRCLE_TRANSLATE_ANCHOR.implement(
+    $Property$CIRCLE_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_CIRCLE_TRANSLATE_ANCHOR.fromReference(
+    return Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_CIRCLE_TRANSLATE_ANCHOR {
-  factory $Property_CIRCLE_TRANSLATE_ANCHOR() =
-      _$Property_CIRCLE_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$CIRCLE_TRANSLATE_ANCHOR {
+  factory $Property$CIRCLE_TRANSLATE_ANCHOR() =
+      _$Property$CIRCLE_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_CIRCLE_TRANSLATE_ANCHOR
-    with $Property_CIRCLE_TRANSLATE_ANCHOR {
-  _$Property_CIRCLE_TRANSLATE_ANCHOR();
+final class _$Property$CIRCLE_TRANSLATE_ANCHOR
+    with $Property$CIRCLE_TRANSLATE_ANCHOR {
+  _$Property$CIRCLE_TRANSLATE_ANCHOR();
 }
 
-final class $Property_CIRCLE_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_CIRCLE_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_CIRCLE_TRANSLATE_ANCHOR$Type();
+final class $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$CIRCLE_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_CIRCLE_TRANSLATE_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_CIRCLE_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_CIRCLE_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_CIRCLE_TRANSLATE_ANCHOR$Type;
+    return other.runtimeType ==
+            ($Property$CIRCLE_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$CIRCLE_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$CIRCLE_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$CIRCLE_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$CIRCLE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$CIRCLE_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$CIRCLE_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$CIRCLE_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$FILL_EXTRUSION_TRANSLATE_ANCHOR`
-class Property_FILL_EXTRUSION_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_FILL_EXTRUSION_TRANSLATE_ANCHOR> $type;
+class Property$FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$FILL_EXTRUSION_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$FILL_EXTRUSION_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type();
+  static const nullableType =
+      $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR>
+  static final core$_.Map<int, $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -612,39 +804,39 @@ class Property_FILL_EXTRUSION_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$FILL_EXTRUSION_TRANSLATE_ANCHOR',
@@ -656,90 +848,141 @@ class Property_FILL_EXTRUSION_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.implement(
-    $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR $impl,
+  factory Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.implement(
+    $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+    return Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
-  factory $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR() =
-      _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR {
+  factory $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR() =
+      _$Property$FILL_EXTRUSION_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR
-    with $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR {
-  _$Property_FILL_EXTRUSION_TRANSLATE_ANCHOR();
+final class _$Property$FILL_EXTRUSION_TRANSLATE_ANCHOR
+    with $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR {
+  _$Property$FILL_EXTRUSION_TRANSLATE_ANCHOR();
 }
 
-final class $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_FILL_EXTRUSION_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type();
+final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$FILL_EXTRUSION_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$FILL_EXTRUSION_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_FILL_EXTRUSION_TRANSLATE_ANCHOR fromReference(
-          _$jni.JReference reference) =>
-      Property_FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$FILL_EXTRUSION_TRANSLATE_ANCHOR? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$FILL_EXTRUSION_TRANSLATE_ANCHOR?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_FILL_EXTRUSION_TRANSLATE_ANCHOR$Type;
+            ($Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$FILL_EXTRUSION_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$FILL_EXTRUSION_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$FILL_EXTRUSION_TRANSLATE_ANCHOR fromReference(
+          jni$_.JReference reference) =>
+      Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$FILL_EXTRUSION_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$FILL_TRANSLATE_ANCHOR`
-class Property_FILL_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_FILL_TRANSLATE_ANCHOR> $type;
+class Property$FILL_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_FILL_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$FILL_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$FILL_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_FILL_TRANSLATE_ANCHOR$Type();
+  static const nullableType = $Property$FILL_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$FILL_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_FILL_TRANSLATE_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$FILL_TRANSLATE_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -747,39 +990,39 @@ class Property_FILL_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_FILL_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$FILL_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$FILL_TRANSLATE_ANCHOR',
@@ -791,88 +1034,137 @@ class Property_FILL_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_FILL_TRANSLATE_ANCHOR.implement(
-    $Property_FILL_TRANSLATE_ANCHOR $impl,
+  factory Property$FILL_TRANSLATE_ANCHOR.implement(
+    $Property$FILL_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_FILL_TRANSLATE_ANCHOR.fromReference(
+    return Property$FILL_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_FILL_TRANSLATE_ANCHOR {
-  factory $Property_FILL_TRANSLATE_ANCHOR() = _$Property_FILL_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$FILL_TRANSLATE_ANCHOR {
+  factory $Property$FILL_TRANSLATE_ANCHOR() = _$Property$FILL_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_FILL_TRANSLATE_ANCHOR
-    with $Property_FILL_TRANSLATE_ANCHOR {
-  _$Property_FILL_TRANSLATE_ANCHOR();
+final class _$Property$FILL_TRANSLATE_ANCHOR
+    with $Property$FILL_TRANSLATE_ANCHOR {
+  _$Property$FILL_TRANSLATE_ANCHOR();
 }
 
-final class $Property_FILL_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_FILL_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_FILL_TRANSLATE_ANCHOR$Type();
+final class $Property$FILL_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$FILL_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$FILL_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_FILL_TRANSLATE_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_FILL_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$FILL_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$FILL_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_FILL_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$FILL_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_FILL_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_FILL_TRANSLATE_ANCHOR$Type;
+    return other.runtimeType ==
+            ($Property$FILL_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$FILL_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$FILL_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$FILL_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$FILL_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$FILL_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$FILL_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$FILL_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$FILL_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$FILL_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$FILL_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$HILLSHADE_ILLUMINATION_ANCHOR`
-class Property_HILLSHADE_ILLUMINATION_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_HILLSHADE_ILLUMINATION_ANCHOR> $type;
+class Property$HILLSHADE_ILLUMINATION_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$HILLSHADE_ILLUMINATION_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$HILLSHADE_ILLUMINATION_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_HILLSHADE_ILLUMINATION_ANCHOR$Type();
+  static const nullableType =
+      $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType();
+  static const type = $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_HILLSHADE_ILLUMINATION_ANCHOR>
+  static final core$_.Map<int, $Property$HILLSHADE_ILLUMINATION_ANCHOR>
       _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -880,39 +1172,39 @@ class Property_HILLSHADE_ILLUMINATION_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_HILLSHADE_ILLUMINATION_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$HILLSHADE_ILLUMINATION_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$HILLSHADE_ILLUMINATION_ANCHOR',
@@ -924,90 +1216,141 @@ class Property_HILLSHADE_ILLUMINATION_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_HILLSHADE_ILLUMINATION_ANCHOR.implement(
-    $Property_HILLSHADE_ILLUMINATION_ANCHOR $impl,
+  factory Property$HILLSHADE_ILLUMINATION_ANCHOR.implement(
+    $Property$HILLSHADE_ILLUMINATION_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+    return Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_HILLSHADE_ILLUMINATION_ANCHOR {
-  factory $Property_HILLSHADE_ILLUMINATION_ANCHOR() =
-      _$Property_HILLSHADE_ILLUMINATION_ANCHOR;
+abstract base mixin class $Property$HILLSHADE_ILLUMINATION_ANCHOR {
+  factory $Property$HILLSHADE_ILLUMINATION_ANCHOR() =
+      _$Property$HILLSHADE_ILLUMINATION_ANCHOR;
 }
 
-final class _$Property_HILLSHADE_ILLUMINATION_ANCHOR
-    with $Property_HILLSHADE_ILLUMINATION_ANCHOR {
-  _$Property_HILLSHADE_ILLUMINATION_ANCHOR();
+final class _$Property$HILLSHADE_ILLUMINATION_ANCHOR
+    with $Property$HILLSHADE_ILLUMINATION_ANCHOR {
+  _$Property$HILLSHADE_ILLUMINATION_ANCHOR();
 }
 
-final class $Property_HILLSHADE_ILLUMINATION_ANCHOR$Type
-    extends _$jni.JObjType<Property_HILLSHADE_ILLUMINATION_ANCHOR> {
-  @_$jni.internal
-  const $Property_HILLSHADE_ILLUMINATION_ANCHOR$Type();
+final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$HILLSHADE_ILLUMINATION_ANCHOR?> {
+  @jni$_.internal
+  const $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$HILLSHADE_ILLUMINATION_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_HILLSHADE_ILLUMINATION_ANCHOR fromReference(
-          _$jni.JReference reference) =>
-      Property_HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$HILLSHADE_ILLUMINATION_ANCHOR? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$HILLSHADE_ILLUMINATION_ANCHOR?> get nullableType =>
+      this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_HILLSHADE_ILLUMINATION_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType ==
-            ($Property_HILLSHADE_ILLUMINATION_ANCHOR$Type) &&
-        other is $Property_HILLSHADE_ILLUMINATION_ANCHOR$Type;
+            ($Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType) &&
+        other is $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type
+    extends jni$_.JObjType<Property$HILLSHADE_ILLUMINATION_ANCHOR> {
+  @jni$_.internal
+  const $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$HILLSHADE_ILLUMINATION_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$HILLSHADE_ILLUMINATION_ANCHOR fromReference(
+          jni$_.JReference reference) =>
+      Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$HILLSHADE_ILLUMINATION_ANCHOR?> get nullableType =>
+      const $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$HILLSHADE_ILLUMINATION_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($Property$HILLSHADE_ILLUMINATION_ANCHOR$Type) &&
+        other is $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$ICON_ANCHOR`
-class Property_ICON_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ICON_ANCHOR> $type;
+class Property$ICON_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ICON_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_ICON_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ICON_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ICON_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ICON_ANCHOR$Type();
+  static const nullableType = $Property$ICON_ANCHOR$NullableType();
+  static const type = $Property$ICON_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ICON_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ICON_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1015,39 +1358,39 @@ class Property_ICON_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ICON_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$ICON_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ICON_ANCHOR',
@@ -1059,86 +1402,133 @@ class Property_ICON_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ICON_ANCHOR.implement(
-    $Property_ICON_ANCHOR $impl,
+  factory Property$ICON_ANCHOR.implement(
+    $Property$ICON_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ICON_ANCHOR.fromReference(
+    return Property$ICON_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ICON_ANCHOR {
-  factory $Property_ICON_ANCHOR() = _$Property_ICON_ANCHOR;
+abstract base mixin class $Property$ICON_ANCHOR {
+  factory $Property$ICON_ANCHOR() = _$Property$ICON_ANCHOR;
 }
 
-final class _$Property_ICON_ANCHOR with $Property_ICON_ANCHOR {
-  _$Property_ICON_ANCHOR();
+final class _$Property$ICON_ANCHOR with $Property$ICON_ANCHOR {
+  _$Property$ICON_ANCHOR();
 }
 
-final class $Property_ICON_ANCHOR$Type
-    extends _$jni.JObjType<Property_ICON_ANCHOR> {
-  @_$jni.internal
-  const $Property_ICON_ANCHOR$Type();
+final class $Property$ICON_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$ICON_ANCHOR?> {
+  @jni$_.internal
+  const $Property$ICON_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ICON_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ICON_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_ICON_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$ICON_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ICON_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ICON_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ICON_ANCHOR$Type) &&
-        other is $Property_ICON_ANCHOR$Type;
+    return other.runtimeType == ($Property$ICON_ANCHOR$NullableType) &&
+        other is $Property$ICON_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$ICON_ANCHOR$Type
+    extends jni$_.JObjType<Property$ICON_ANCHOR> {
+  @jni$_.internal
+  const $Property$ICON_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ICON_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$ICON_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_ANCHOR?> get nullableType =>
+      const $Property$ICON_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ICON_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ICON_ANCHOR$Type) &&
+        other is $Property$ICON_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$ICON_PITCH_ALIGNMENT`
-class Property_ICON_PITCH_ALIGNMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ICON_PITCH_ALIGNMENT> $type;
+class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT> $type;
 
-  @_$jni.internal
-  Property_ICON_PITCH_ALIGNMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ICON_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ICON_PITCH_ALIGNMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ICON_PITCH_ALIGNMENT$Type();
+  static const nullableType = $Property$ICON_PITCH_ALIGNMENT$NullableType();
+  static const type = $Property$ICON_PITCH_ALIGNMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ICON_PITCH_ALIGNMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ICON_PITCH_ALIGNMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1146,39 +1536,39 @@ class Property_ICON_PITCH_ALIGNMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ICON_PITCH_ALIGNMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$ICON_PITCH_ALIGNMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ICON_PITCH_ALIGNMENT',
@@ -1190,87 +1580,134 @@ class Property_ICON_PITCH_ALIGNMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ICON_PITCH_ALIGNMENT.implement(
-    $Property_ICON_PITCH_ALIGNMENT $impl,
+  factory Property$ICON_PITCH_ALIGNMENT.implement(
+    $Property$ICON_PITCH_ALIGNMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ICON_PITCH_ALIGNMENT.fromReference(
+    return Property$ICON_PITCH_ALIGNMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ICON_PITCH_ALIGNMENT {
-  factory $Property_ICON_PITCH_ALIGNMENT() = _$Property_ICON_PITCH_ALIGNMENT;
+abstract base mixin class $Property$ICON_PITCH_ALIGNMENT {
+  factory $Property$ICON_PITCH_ALIGNMENT() = _$Property$ICON_PITCH_ALIGNMENT;
 }
 
-final class _$Property_ICON_PITCH_ALIGNMENT
-    with $Property_ICON_PITCH_ALIGNMENT {
-  _$Property_ICON_PITCH_ALIGNMENT();
+final class _$Property$ICON_PITCH_ALIGNMENT
+    with $Property$ICON_PITCH_ALIGNMENT {
+  _$Property$ICON_PITCH_ALIGNMENT();
 }
 
-final class $Property_ICON_PITCH_ALIGNMENT$Type
-    extends _$jni.JObjType<Property_ICON_PITCH_ALIGNMENT> {
-  @_$jni.internal
-  const $Property_ICON_PITCH_ALIGNMENT$Type();
+final class $Property$ICON_PITCH_ALIGNMENT$NullableType
+    extends jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT?> {
+  @jni$_.internal
+  const $Property$ICON_PITCH_ALIGNMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ICON_PITCH_ALIGNMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ICON_PITCH_ALIGNMENT fromReference(_$jni.JReference reference) =>
-      Property_ICON_PITCH_ALIGNMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$ICON_PITCH_ALIGNMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ICON_PITCH_ALIGNMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ICON_PITCH_ALIGNMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ICON_PITCH_ALIGNMENT$Type) &&
-        other is $Property_ICON_PITCH_ALIGNMENT$Type;
+    return other.runtimeType == ($Property$ICON_PITCH_ALIGNMENT$NullableType) &&
+        other is $Property$ICON_PITCH_ALIGNMENT$NullableType;
+  }
+}
+
+final class $Property$ICON_PITCH_ALIGNMENT$Type
+    extends jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT> {
+  @jni$_.internal
+  const $Property$ICON_PITCH_ALIGNMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ICON_PITCH_ALIGNMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
+      Property$ICON_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT?> get nullableType =>
+      const $Property$ICON_PITCH_ALIGNMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ICON_PITCH_ALIGNMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ICON_PITCH_ALIGNMENT$Type) &&
+        other is $Property$ICON_PITCH_ALIGNMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$ICON_ROTATION_ALIGNMENT`
-class Property_ICON_ROTATION_ALIGNMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ICON_ROTATION_ALIGNMENT> $type;
+class Property$ICON_ROTATION_ALIGNMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT> $type;
 
-  @_$jni.internal
-  Property_ICON_ROTATION_ALIGNMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ICON_ROTATION_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ICON_ROTATION_ALIGNMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ICON_ROTATION_ALIGNMENT$Type();
+  static const nullableType = $Property$ICON_ROTATION_ALIGNMENT$NullableType();
+  static const type = $Property$ICON_ROTATION_ALIGNMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ICON_ROTATION_ALIGNMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ICON_ROTATION_ALIGNMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1278,39 +1715,39 @@ class Property_ICON_ROTATION_ALIGNMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ICON_ROTATION_ALIGNMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$ICON_ROTATION_ALIGNMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ICON_ROTATION_ALIGNMENT',
@@ -1322,88 +1759,136 @@ class Property_ICON_ROTATION_ALIGNMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ICON_ROTATION_ALIGNMENT.implement(
-    $Property_ICON_ROTATION_ALIGNMENT $impl,
+  factory Property$ICON_ROTATION_ALIGNMENT.implement(
+    $Property$ICON_ROTATION_ALIGNMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ICON_ROTATION_ALIGNMENT.fromReference(
+    return Property$ICON_ROTATION_ALIGNMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ICON_ROTATION_ALIGNMENT {
-  factory $Property_ICON_ROTATION_ALIGNMENT() =
-      _$Property_ICON_ROTATION_ALIGNMENT;
+abstract base mixin class $Property$ICON_ROTATION_ALIGNMENT {
+  factory $Property$ICON_ROTATION_ALIGNMENT() =
+      _$Property$ICON_ROTATION_ALIGNMENT;
 }
 
-final class _$Property_ICON_ROTATION_ALIGNMENT
-    with $Property_ICON_ROTATION_ALIGNMENT {
-  _$Property_ICON_ROTATION_ALIGNMENT();
+final class _$Property$ICON_ROTATION_ALIGNMENT
+    with $Property$ICON_ROTATION_ALIGNMENT {
+  _$Property$ICON_ROTATION_ALIGNMENT();
 }
 
-final class $Property_ICON_ROTATION_ALIGNMENT$Type
-    extends _$jni.JObjType<Property_ICON_ROTATION_ALIGNMENT> {
-  @_$jni.internal
-  const $Property_ICON_ROTATION_ALIGNMENT$Type();
+final class $Property$ICON_ROTATION_ALIGNMENT$NullableType
+    extends jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT?> {
+  @jni$_.internal
+  const $Property$ICON_ROTATION_ALIGNMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ICON_ROTATION_ALIGNMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ICON_ROTATION_ALIGNMENT fromReference(_$jni.JReference reference) =>
-      Property_ICON_ROTATION_ALIGNMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$ICON_ROTATION_ALIGNMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ICON_ROTATION_ALIGNMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ICON_ROTATION_ALIGNMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ICON_ROTATION_ALIGNMENT$Type) &&
-        other is $Property_ICON_ROTATION_ALIGNMENT$Type;
+    return other.runtimeType ==
+            ($Property$ICON_ROTATION_ALIGNMENT$NullableType) &&
+        other is $Property$ICON_ROTATION_ALIGNMENT$NullableType;
+  }
+}
+
+final class $Property$ICON_ROTATION_ALIGNMENT$Type
+    extends jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT> {
+  @jni$_.internal
+  const $Property$ICON_ROTATION_ALIGNMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ICON_ROTATION_ALIGNMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
+      Property$ICON_ROTATION_ALIGNMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT?> get nullableType =>
+      const $Property$ICON_ROTATION_ALIGNMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ICON_ROTATION_ALIGNMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ICON_ROTATION_ALIGNMENT$Type) &&
+        other is $Property$ICON_ROTATION_ALIGNMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$ICON_TEXT_FIT`
-class Property_ICON_TEXT_FIT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ICON_TEXT_FIT> $type;
+class Property$ICON_TEXT_FIT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ICON_TEXT_FIT> $type;
 
-  @_$jni.internal
-  Property_ICON_TEXT_FIT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ICON_TEXT_FIT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ICON_TEXT_FIT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ICON_TEXT_FIT$Type();
+  static const nullableType = $Property$ICON_TEXT_FIT$NullableType();
+  static const type = $Property$ICON_TEXT_FIT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ICON_TEXT_FIT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ICON_TEXT_FIT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1411,39 +1896,39 @@ class Property_ICON_TEXT_FIT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ICON_TEXT_FIT $impl,
+    jni$_.JImplementer implementer,
+    $Property$ICON_TEXT_FIT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ICON_TEXT_FIT',
@@ -1455,86 +1940,133 @@ class Property_ICON_TEXT_FIT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ICON_TEXT_FIT.implement(
-    $Property_ICON_TEXT_FIT $impl,
+  factory Property$ICON_TEXT_FIT.implement(
+    $Property$ICON_TEXT_FIT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ICON_TEXT_FIT.fromReference(
+    return Property$ICON_TEXT_FIT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ICON_TEXT_FIT {
-  factory $Property_ICON_TEXT_FIT() = _$Property_ICON_TEXT_FIT;
+abstract base mixin class $Property$ICON_TEXT_FIT {
+  factory $Property$ICON_TEXT_FIT() = _$Property$ICON_TEXT_FIT;
 }
 
-final class _$Property_ICON_TEXT_FIT with $Property_ICON_TEXT_FIT {
-  _$Property_ICON_TEXT_FIT();
+final class _$Property$ICON_TEXT_FIT with $Property$ICON_TEXT_FIT {
+  _$Property$ICON_TEXT_FIT();
 }
 
-final class $Property_ICON_TEXT_FIT$Type
-    extends _$jni.JObjType<Property_ICON_TEXT_FIT> {
-  @_$jni.internal
-  const $Property_ICON_TEXT_FIT$Type();
+final class $Property$ICON_TEXT_FIT$NullableType
+    extends jni$_.JObjType<Property$ICON_TEXT_FIT?> {
+  @jni$_.internal
+  const $Property$ICON_TEXT_FIT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ICON_TEXT_FIT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ICON_TEXT_FIT fromReference(_$jni.JReference reference) =>
-      Property_ICON_TEXT_FIT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_TEXT_FIT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$ICON_TEXT_FIT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_TEXT_FIT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ICON_TEXT_FIT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ICON_TEXT_FIT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ICON_TEXT_FIT$Type) &&
-        other is $Property_ICON_TEXT_FIT$Type;
+    return other.runtimeType == ($Property$ICON_TEXT_FIT$NullableType) &&
+        other is $Property$ICON_TEXT_FIT$NullableType;
+  }
+}
+
+final class $Property$ICON_TEXT_FIT$Type
+    extends jni$_.JObjType<Property$ICON_TEXT_FIT> {
+  @jni$_.internal
+  const $Property$ICON_TEXT_FIT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ICON_TEXT_FIT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_TEXT_FIT fromReference(jni$_.JReference reference) =>
+      Property$ICON_TEXT_FIT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_TEXT_FIT?> get nullableType =>
+      const $Property$ICON_TEXT_FIT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ICON_TEXT_FIT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ICON_TEXT_FIT$Type) &&
+        other is $Property$ICON_TEXT_FIT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$ICON_TRANSLATE_ANCHOR`
-class Property_ICON_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_ICON_TRANSLATE_ANCHOR> $type;
+class Property$ICON_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_ICON_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$ICON_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$ICON_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_ICON_TRANSLATE_ANCHOR$Type();
+  static const nullableType = $Property$ICON_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$ICON_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_ICON_TRANSLATE_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$ICON_TRANSLATE_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1542,39 +2074,39 @@ class Property_ICON_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_ICON_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$ICON_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$ICON_TRANSLATE_ANCHOR',
@@ -1586,87 +2118,135 @@ class Property_ICON_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_ICON_TRANSLATE_ANCHOR.implement(
-    $Property_ICON_TRANSLATE_ANCHOR $impl,
+  factory Property$ICON_TRANSLATE_ANCHOR.implement(
+    $Property$ICON_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_ICON_TRANSLATE_ANCHOR.fromReference(
+    return Property$ICON_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_ICON_TRANSLATE_ANCHOR {
-  factory $Property_ICON_TRANSLATE_ANCHOR() = _$Property_ICON_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$ICON_TRANSLATE_ANCHOR {
+  factory $Property$ICON_TRANSLATE_ANCHOR() = _$Property$ICON_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_ICON_TRANSLATE_ANCHOR
-    with $Property_ICON_TRANSLATE_ANCHOR {
-  _$Property_ICON_TRANSLATE_ANCHOR();
+final class _$Property$ICON_TRANSLATE_ANCHOR
+    with $Property$ICON_TRANSLATE_ANCHOR {
+  _$Property$ICON_TRANSLATE_ANCHOR();
 }
 
-final class $Property_ICON_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_ICON_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_ICON_TRANSLATE_ANCHOR$Type();
+final class $Property$ICON_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$ICON_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$ICON_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_ICON_TRANSLATE_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_ICON_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$ICON_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_ICON_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$ICON_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_ICON_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_ICON_TRANSLATE_ANCHOR$Type;
+    return other.runtimeType ==
+            ($Property$ICON_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$ICON_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$ICON_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$ICON_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$ICON_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$ICON_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$ICON_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$ICON_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$ICON_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$ICON_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$ICON_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$LINE_CAP`
-class Property_LINE_CAP extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_LINE_CAP> $type;
+class Property$LINE_CAP extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$LINE_CAP> $type;
 
-  @_$jni.internal
-  Property_LINE_CAP.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$LINE_CAP.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$LINE_CAP');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_LINE_CAP$Type();
+  static const nullableType = $Property$LINE_CAP$NullableType();
+  static const type = $Property$LINE_CAP$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_LINE_CAP> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$LINE_CAP> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1674,39 +2254,39 @@ class Property_LINE_CAP extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_LINE_CAP $impl,
+    jni$_.JImplementer implementer,
+    $Property$LINE_CAP $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$LINE_CAP',
@@ -1718,85 +2298,132 @@ class Property_LINE_CAP extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_LINE_CAP.implement(
-    $Property_LINE_CAP $impl,
+  factory Property$LINE_CAP.implement(
+    $Property$LINE_CAP $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_LINE_CAP.fromReference(
+    return Property$LINE_CAP.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_LINE_CAP {
-  factory $Property_LINE_CAP() = _$Property_LINE_CAP;
+abstract base mixin class $Property$LINE_CAP {
+  factory $Property$LINE_CAP() = _$Property$LINE_CAP;
 }
 
-final class _$Property_LINE_CAP with $Property_LINE_CAP {
-  _$Property_LINE_CAP();
+final class _$Property$LINE_CAP with $Property$LINE_CAP {
+  _$Property$LINE_CAP();
 }
 
-final class $Property_LINE_CAP$Type extends _$jni.JObjType<Property_LINE_CAP> {
-  @_$jni.internal
-  const $Property_LINE_CAP$Type();
+final class $Property$LINE_CAP$NullableType
+    extends jni$_.JObjType<Property$LINE_CAP?> {
+  @jni$_.internal
+  const $Property$LINE_CAP$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$LINE_CAP;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_LINE_CAP fromReference(_$jni.JReference reference) =>
-      Property_LINE_CAP.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_CAP? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$LINE_CAP.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_CAP?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_LINE_CAP$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$LINE_CAP$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_LINE_CAP$Type) &&
-        other is $Property_LINE_CAP$Type;
+    return other.runtimeType == ($Property$LINE_CAP$NullableType) &&
+        other is $Property$LINE_CAP$NullableType;
+  }
+}
+
+final class $Property$LINE_CAP$Type extends jni$_.JObjType<Property$LINE_CAP> {
+  @jni$_.internal
+  const $Property$LINE_CAP$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$LINE_CAP;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_CAP fromReference(jni$_.JReference reference) =>
+      Property$LINE_CAP.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_CAP?> get nullableType =>
+      const $Property$LINE_CAP$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$LINE_CAP$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$LINE_CAP$Type) &&
+        other is $Property$LINE_CAP$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$LINE_JOIN`
-class Property_LINE_JOIN extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_LINE_JOIN> $type;
+class Property$LINE_JOIN extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$LINE_JOIN> $type;
 
-  @_$jni.internal
-  Property_LINE_JOIN.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$LINE_JOIN.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$LINE_JOIN');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_LINE_JOIN$Type();
+  static const nullableType = $Property$LINE_JOIN$NullableType();
+  static const type = $Property$LINE_JOIN$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_LINE_JOIN> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$LINE_JOIN> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1804,39 +2431,39 @@ class Property_LINE_JOIN extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_LINE_JOIN $impl,
+    jni$_.JImplementer implementer,
+    $Property$LINE_JOIN $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$LINE_JOIN',
@@ -1848,86 +2475,133 @@ class Property_LINE_JOIN extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_LINE_JOIN.implement(
-    $Property_LINE_JOIN $impl,
+  factory Property$LINE_JOIN.implement(
+    $Property$LINE_JOIN $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_LINE_JOIN.fromReference(
+    return Property$LINE_JOIN.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_LINE_JOIN {
-  factory $Property_LINE_JOIN() = _$Property_LINE_JOIN;
+abstract base mixin class $Property$LINE_JOIN {
+  factory $Property$LINE_JOIN() = _$Property$LINE_JOIN;
 }
 
-final class _$Property_LINE_JOIN with $Property_LINE_JOIN {
-  _$Property_LINE_JOIN();
+final class _$Property$LINE_JOIN with $Property$LINE_JOIN {
+  _$Property$LINE_JOIN();
 }
 
-final class $Property_LINE_JOIN$Type
-    extends _$jni.JObjType<Property_LINE_JOIN> {
-  @_$jni.internal
-  const $Property_LINE_JOIN$Type();
+final class $Property$LINE_JOIN$NullableType
+    extends jni$_.JObjType<Property$LINE_JOIN?> {
+  @jni$_.internal
+  const $Property$LINE_JOIN$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$LINE_JOIN;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_LINE_JOIN fromReference(_$jni.JReference reference) =>
-      Property_LINE_JOIN.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_JOIN? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$LINE_JOIN.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_JOIN?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_LINE_JOIN$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$LINE_JOIN$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_LINE_JOIN$Type) &&
-        other is $Property_LINE_JOIN$Type;
+    return other.runtimeType == ($Property$LINE_JOIN$NullableType) &&
+        other is $Property$LINE_JOIN$NullableType;
+  }
+}
+
+final class $Property$LINE_JOIN$Type
+    extends jni$_.JObjType<Property$LINE_JOIN> {
+  @jni$_.internal
+  const $Property$LINE_JOIN$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$LINE_JOIN;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_JOIN fromReference(jni$_.JReference reference) =>
+      Property$LINE_JOIN.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_JOIN?> get nullableType =>
+      const $Property$LINE_JOIN$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$LINE_JOIN$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$LINE_JOIN$Type) &&
+        other is $Property$LINE_JOIN$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$LINE_TRANSLATE_ANCHOR`
-class Property_LINE_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_LINE_TRANSLATE_ANCHOR> $type;
+class Property$LINE_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_LINE_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$LINE_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$LINE_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_LINE_TRANSLATE_ANCHOR$Type();
+  static const nullableType = $Property$LINE_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$LINE_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_LINE_TRANSLATE_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$LINE_TRANSLATE_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1935,39 +2609,39 @@ class Property_LINE_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_LINE_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$LINE_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$LINE_TRANSLATE_ANCHOR',
@@ -1979,87 +2653,135 @@ class Property_LINE_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_LINE_TRANSLATE_ANCHOR.implement(
-    $Property_LINE_TRANSLATE_ANCHOR $impl,
+  factory Property$LINE_TRANSLATE_ANCHOR.implement(
+    $Property$LINE_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_LINE_TRANSLATE_ANCHOR.fromReference(
+    return Property$LINE_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_LINE_TRANSLATE_ANCHOR {
-  factory $Property_LINE_TRANSLATE_ANCHOR() = _$Property_LINE_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$LINE_TRANSLATE_ANCHOR {
+  factory $Property$LINE_TRANSLATE_ANCHOR() = _$Property$LINE_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_LINE_TRANSLATE_ANCHOR
-    with $Property_LINE_TRANSLATE_ANCHOR {
-  _$Property_LINE_TRANSLATE_ANCHOR();
+final class _$Property$LINE_TRANSLATE_ANCHOR
+    with $Property$LINE_TRANSLATE_ANCHOR {
+  _$Property$LINE_TRANSLATE_ANCHOR();
 }
 
-final class $Property_LINE_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_LINE_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_LINE_TRANSLATE_ANCHOR$Type();
+final class $Property$LINE_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$LINE_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$LINE_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_LINE_TRANSLATE_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_LINE_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$LINE_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_LINE_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$LINE_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_LINE_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_LINE_TRANSLATE_ANCHOR$Type;
+    return other.runtimeType ==
+            ($Property$LINE_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$LINE_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$LINE_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$LINE_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$LINE_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$LINE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$LINE_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$LINE_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$LINE_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$LINE_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$LINE_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$RASTER_RESAMPLING`
-class Property_RASTER_RESAMPLING extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_RASTER_RESAMPLING> $type;
+class Property$RASTER_RESAMPLING extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$RASTER_RESAMPLING> $type;
 
-  @_$jni.internal
-  Property_RASTER_RESAMPLING.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$RASTER_RESAMPLING.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$RASTER_RESAMPLING');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_RASTER_RESAMPLING$Type();
+  static const nullableType = $Property$RASTER_RESAMPLING$NullableType();
+  static const type = $Property$RASTER_RESAMPLING$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_RASTER_RESAMPLING> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$RASTER_RESAMPLING> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2067,39 +2789,39 @@ class Property_RASTER_RESAMPLING extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_RASTER_RESAMPLING $impl,
+    jni$_.JImplementer implementer,
+    $Property$RASTER_RESAMPLING $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$RASTER_RESAMPLING',
@@ -2111,86 +2833,133 @@ class Property_RASTER_RESAMPLING extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_RASTER_RESAMPLING.implement(
-    $Property_RASTER_RESAMPLING $impl,
+  factory Property$RASTER_RESAMPLING.implement(
+    $Property$RASTER_RESAMPLING $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_RASTER_RESAMPLING.fromReference(
+    return Property$RASTER_RESAMPLING.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_RASTER_RESAMPLING {
-  factory $Property_RASTER_RESAMPLING() = _$Property_RASTER_RESAMPLING;
+abstract base mixin class $Property$RASTER_RESAMPLING {
+  factory $Property$RASTER_RESAMPLING() = _$Property$RASTER_RESAMPLING;
 }
 
-final class _$Property_RASTER_RESAMPLING with $Property_RASTER_RESAMPLING {
-  _$Property_RASTER_RESAMPLING();
+final class _$Property$RASTER_RESAMPLING with $Property$RASTER_RESAMPLING {
+  _$Property$RASTER_RESAMPLING();
 }
 
-final class $Property_RASTER_RESAMPLING$Type
-    extends _$jni.JObjType<Property_RASTER_RESAMPLING> {
-  @_$jni.internal
-  const $Property_RASTER_RESAMPLING$Type();
+final class $Property$RASTER_RESAMPLING$NullableType
+    extends jni$_.JObjType<Property$RASTER_RESAMPLING?> {
+  @jni$_.internal
+  const $Property$RASTER_RESAMPLING$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$RASTER_RESAMPLING;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_RASTER_RESAMPLING fromReference(_$jni.JReference reference) =>
-      Property_RASTER_RESAMPLING.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$RASTER_RESAMPLING? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$RASTER_RESAMPLING.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$RASTER_RESAMPLING?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_RASTER_RESAMPLING$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$RASTER_RESAMPLING$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_RASTER_RESAMPLING$Type) &&
-        other is $Property_RASTER_RESAMPLING$Type;
+    return other.runtimeType == ($Property$RASTER_RESAMPLING$NullableType) &&
+        other is $Property$RASTER_RESAMPLING$NullableType;
+  }
+}
+
+final class $Property$RASTER_RESAMPLING$Type
+    extends jni$_.JObjType<Property$RASTER_RESAMPLING> {
+  @jni$_.internal
+  const $Property$RASTER_RESAMPLING$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$RASTER_RESAMPLING;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$RASTER_RESAMPLING fromReference(jni$_.JReference reference) =>
+      Property$RASTER_RESAMPLING.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$RASTER_RESAMPLING?> get nullableType =>
+      const $Property$RASTER_RESAMPLING$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$RASTER_RESAMPLING$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$RASTER_RESAMPLING$Type) &&
+        other is $Property$RASTER_RESAMPLING$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$SYMBOL_PLACEMENT`
-class Property_SYMBOL_PLACEMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_SYMBOL_PLACEMENT> $type;
+class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$SYMBOL_PLACEMENT> $type;
 
-  @_$jni.internal
-  Property_SYMBOL_PLACEMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$SYMBOL_PLACEMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$SYMBOL_PLACEMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_SYMBOL_PLACEMENT$Type();
+  static const nullableType = $Property$SYMBOL_PLACEMENT$NullableType();
+  static const type = $Property$SYMBOL_PLACEMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_SYMBOL_PLACEMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$SYMBOL_PLACEMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2198,39 +2967,39 @@ class Property_SYMBOL_PLACEMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_SYMBOL_PLACEMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$SYMBOL_PLACEMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$SYMBOL_PLACEMENT',
@@ -2242,86 +3011,133 @@ class Property_SYMBOL_PLACEMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_SYMBOL_PLACEMENT.implement(
-    $Property_SYMBOL_PLACEMENT $impl,
+  factory Property$SYMBOL_PLACEMENT.implement(
+    $Property$SYMBOL_PLACEMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_SYMBOL_PLACEMENT.fromReference(
+    return Property$SYMBOL_PLACEMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_SYMBOL_PLACEMENT {
-  factory $Property_SYMBOL_PLACEMENT() = _$Property_SYMBOL_PLACEMENT;
+abstract base mixin class $Property$SYMBOL_PLACEMENT {
+  factory $Property$SYMBOL_PLACEMENT() = _$Property$SYMBOL_PLACEMENT;
 }
 
-final class _$Property_SYMBOL_PLACEMENT with $Property_SYMBOL_PLACEMENT {
-  _$Property_SYMBOL_PLACEMENT();
+final class _$Property$SYMBOL_PLACEMENT with $Property$SYMBOL_PLACEMENT {
+  _$Property$SYMBOL_PLACEMENT();
 }
 
-final class $Property_SYMBOL_PLACEMENT$Type
-    extends _$jni.JObjType<Property_SYMBOL_PLACEMENT> {
-  @_$jni.internal
-  const $Property_SYMBOL_PLACEMENT$Type();
+final class $Property$SYMBOL_PLACEMENT$NullableType
+    extends jni$_.JObjType<Property$SYMBOL_PLACEMENT?> {
+  @jni$_.internal
+  const $Property$SYMBOL_PLACEMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$SYMBOL_PLACEMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_SYMBOL_PLACEMENT fromReference(_$jni.JReference reference) =>
-      Property_SYMBOL_PLACEMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$SYMBOL_PLACEMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$SYMBOL_PLACEMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$SYMBOL_PLACEMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_SYMBOL_PLACEMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$SYMBOL_PLACEMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_SYMBOL_PLACEMENT$Type) &&
-        other is $Property_SYMBOL_PLACEMENT$Type;
+    return other.runtimeType == ($Property$SYMBOL_PLACEMENT$NullableType) &&
+        other is $Property$SYMBOL_PLACEMENT$NullableType;
+  }
+}
+
+final class $Property$SYMBOL_PLACEMENT$Type
+    extends jni$_.JObjType<Property$SYMBOL_PLACEMENT> {
+  @jni$_.internal
+  const $Property$SYMBOL_PLACEMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$SYMBOL_PLACEMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$SYMBOL_PLACEMENT fromReference(jni$_.JReference reference) =>
+      Property$SYMBOL_PLACEMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$SYMBOL_PLACEMENT?> get nullableType =>
+      const $Property$SYMBOL_PLACEMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$SYMBOL_PLACEMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$SYMBOL_PLACEMENT$Type) &&
+        other is $Property$SYMBOL_PLACEMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$SYMBOL_Z_ORDER`
-class Property_SYMBOL_Z_ORDER extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_SYMBOL_Z_ORDER> $type;
+class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$SYMBOL_Z_ORDER> $type;
 
-  @_$jni.internal
-  Property_SYMBOL_Z_ORDER.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$SYMBOL_Z_ORDER.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$SYMBOL_Z_ORDER');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_SYMBOL_Z_ORDER$Type();
+  static const nullableType = $Property$SYMBOL_Z_ORDER$NullableType();
+  static const type = $Property$SYMBOL_Z_ORDER$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_SYMBOL_Z_ORDER> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$SYMBOL_Z_ORDER> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2329,39 +3145,39 @@ class Property_SYMBOL_Z_ORDER extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_SYMBOL_Z_ORDER $impl,
+    jni$_.JImplementer implementer,
+    $Property$SYMBOL_Z_ORDER $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$SYMBOL_Z_ORDER',
@@ -2373,86 +3189,133 @@ class Property_SYMBOL_Z_ORDER extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_SYMBOL_Z_ORDER.implement(
-    $Property_SYMBOL_Z_ORDER $impl,
+  factory Property$SYMBOL_Z_ORDER.implement(
+    $Property$SYMBOL_Z_ORDER $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_SYMBOL_Z_ORDER.fromReference(
+    return Property$SYMBOL_Z_ORDER.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_SYMBOL_Z_ORDER {
-  factory $Property_SYMBOL_Z_ORDER() = _$Property_SYMBOL_Z_ORDER;
+abstract base mixin class $Property$SYMBOL_Z_ORDER {
+  factory $Property$SYMBOL_Z_ORDER() = _$Property$SYMBOL_Z_ORDER;
 }
 
-final class _$Property_SYMBOL_Z_ORDER with $Property_SYMBOL_Z_ORDER {
-  _$Property_SYMBOL_Z_ORDER();
+final class _$Property$SYMBOL_Z_ORDER with $Property$SYMBOL_Z_ORDER {
+  _$Property$SYMBOL_Z_ORDER();
 }
 
-final class $Property_SYMBOL_Z_ORDER$Type
-    extends _$jni.JObjType<Property_SYMBOL_Z_ORDER> {
-  @_$jni.internal
-  const $Property_SYMBOL_Z_ORDER$Type();
+final class $Property$SYMBOL_Z_ORDER$NullableType
+    extends jni$_.JObjType<Property$SYMBOL_Z_ORDER?> {
+  @jni$_.internal
+  const $Property$SYMBOL_Z_ORDER$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$SYMBOL_Z_ORDER;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_SYMBOL_Z_ORDER fromReference(_$jni.JReference reference) =>
-      Property_SYMBOL_Z_ORDER.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$SYMBOL_Z_ORDER? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$SYMBOL_Z_ORDER.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$SYMBOL_Z_ORDER?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_SYMBOL_Z_ORDER$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$SYMBOL_Z_ORDER$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_SYMBOL_Z_ORDER$Type) &&
-        other is $Property_SYMBOL_Z_ORDER$Type;
+    return other.runtimeType == ($Property$SYMBOL_Z_ORDER$NullableType) &&
+        other is $Property$SYMBOL_Z_ORDER$NullableType;
+  }
+}
+
+final class $Property$SYMBOL_Z_ORDER$Type
+    extends jni$_.JObjType<Property$SYMBOL_Z_ORDER> {
+  @jni$_.internal
+  const $Property$SYMBOL_Z_ORDER$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$SYMBOL_Z_ORDER;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$SYMBOL_Z_ORDER fromReference(jni$_.JReference reference) =>
+      Property$SYMBOL_Z_ORDER.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$SYMBOL_Z_ORDER?> get nullableType =>
+      const $Property$SYMBOL_Z_ORDER$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$SYMBOL_Z_ORDER$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$SYMBOL_Z_ORDER$Type) &&
+        other is $Property$SYMBOL_Z_ORDER$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_ANCHOR`
-class Property_TEXT_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_ANCHOR> $type;
+class Property$TEXT_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_TEXT_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_ANCHOR$Type();
+  static const nullableType = $Property$TEXT_ANCHOR$NullableType();
+  static const type = $Property$TEXT_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2460,39 +3323,39 @@ class Property_TEXT_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_ANCHOR',
@@ -2504,86 +3367,133 @@ class Property_TEXT_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_ANCHOR.implement(
-    $Property_TEXT_ANCHOR $impl,
+  factory Property$TEXT_ANCHOR.implement(
+    $Property$TEXT_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_ANCHOR.fromReference(
+    return Property$TEXT_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_ANCHOR {
-  factory $Property_TEXT_ANCHOR() = _$Property_TEXT_ANCHOR;
+abstract base mixin class $Property$TEXT_ANCHOR {
+  factory $Property$TEXT_ANCHOR() = _$Property$TEXT_ANCHOR;
 }
 
-final class _$Property_TEXT_ANCHOR with $Property_TEXT_ANCHOR {
-  _$Property_TEXT_ANCHOR();
+final class _$Property$TEXT_ANCHOR with $Property$TEXT_ANCHOR {
+  _$Property$TEXT_ANCHOR();
 }
 
-final class $Property_TEXT_ANCHOR$Type
-    extends _$jni.JObjType<Property_TEXT_ANCHOR> {
-  @_$jni.internal
-  const $Property_TEXT_ANCHOR$Type();
+final class $Property$TEXT_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$TEXT_ANCHOR?> {
+  @jni$_.internal
+  const $Property$TEXT_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_TEXT_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_ANCHOR$Type) &&
-        other is $Property_TEXT_ANCHOR$Type;
+    return other.runtimeType == ($Property$TEXT_ANCHOR$NullableType) &&
+        other is $Property$TEXT_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$TEXT_ANCHOR$Type
+    extends jni$_.JObjType<Property$TEXT_ANCHOR> {
+  @jni$_.internal
+  const $Property$TEXT_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$TEXT_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_ANCHOR?> get nullableType =>
+      const $Property$TEXT_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_ANCHOR$Type) &&
+        other is $Property$TEXT_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_JUSTIFY`
-class Property_TEXT_JUSTIFY extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_JUSTIFY> $type;
+class Property$TEXT_JUSTIFY extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_JUSTIFY> $type;
 
-  @_$jni.internal
-  Property_TEXT_JUSTIFY.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_JUSTIFY.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_JUSTIFY');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_JUSTIFY$Type();
+  static const nullableType = $Property$TEXT_JUSTIFY$NullableType();
+  static const type = $Property$TEXT_JUSTIFY$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_JUSTIFY> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_JUSTIFY> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2591,39 +3501,39 @@ class Property_TEXT_JUSTIFY extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_JUSTIFY $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_JUSTIFY $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_JUSTIFY',
@@ -2635,86 +3545,133 @@ class Property_TEXT_JUSTIFY extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_JUSTIFY.implement(
-    $Property_TEXT_JUSTIFY $impl,
+  factory Property$TEXT_JUSTIFY.implement(
+    $Property$TEXT_JUSTIFY $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_JUSTIFY.fromReference(
+    return Property$TEXT_JUSTIFY.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_JUSTIFY {
-  factory $Property_TEXT_JUSTIFY() = _$Property_TEXT_JUSTIFY;
+abstract base mixin class $Property$TEXT_JUSTIFY {
+  factory $Property$TEXT_JUSTIFY() = _$Property$TEXT_JUSTIFY;
 }
 
-final class _$Property_TEXT_JUSTIFY with $Property_TEXT_JUSTIFY {
-  _$Property_TEXT_JUSTIFY();
+final class _$Property$TEXT_JUSTIFY with $Property$TEXT_JUSTIFY {
+  _$Property$TEXT_JUSTIFY();
 }
 
-final class $Property_TEXT_JUSTIFY$Type
-    extends _$jni.JObjType<Property_TEXT_JUSTIFY> {
-  @_$jni.internal
-  const $Property_TEXT_JUSTIFY$Type();
+final class $Property$TEXT_JUSTIFY$NullableType
+    extends jni$_.JObjType<Property$TEXT_JUSTIFY?> {
+  @jni$_.internal
+  const $Property$TEXT_JUSTIFY$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_JUSTIFY;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_JUSTIFY fromReference(_$jni.JReference reference) =>
-      Property_TEXT_JUSTIFY.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_JUSTIFY? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_JUSTIFY.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_JUSTIFY?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_JUSTIFY$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_JUSTIFY$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_JUSTIFY$Type) &&
-        other is $Property_TEXT_JUSTIFY$Type;
+    return other.runtimeType == ($Property$TEXT_JUSTIFY$NullableType) &&
+        other is $Property$TEXT_JUSTIFY$NullableType;
+  }
+}
+
+final class $Property$TEXT_JUSTIFY$Type
+    extends jni$_.JObjType<Property$TEXT_JUSTIFY> {
+  @jni$_.internal
+  const $Property$TEXT_JUSTIFY$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_JUSTIFY;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_JUSTIFY fromReference(jni$_.JReference reference) =>
+      Property$TEXT_JUSTIFY.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_JUSTIFY?> get nullableType =>
+      const $Property$TEXT_JUSTIFY$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_JUSTIFY$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_JUSTIFY$Type) &&
+        other is $Property$TEXT_JUSTIFY$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_PITCH_ALIGNMENT`
-class Property_TEXT_PITCH_ALIGNMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_PITCH_ALIGNMENT> $type;
+class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT> $type;
 
-  @_$jni.internal
-  Property_TEXT_PITCH_ALIGNMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_PITCH_ALIGNMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_PITCH_ALIGNMENT$Type();
+  static const nullableType = $Property$TEXT_PITCH_ALIGNMENT$NullableType();
+  static const type = $Property$TEXT_PITCH_ALIGNMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_PITCH_ALIGNMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_PITCH_ALIGNMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2722,39 +3679,39 @@ class Property_TEXT_PITCH_ALIGNMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_PITCH_ALIGNMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_PITCH_ALIGNMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_PITCH_ALIGNMENT',
@@ -2766,87 +3723,134 @@ class Property_TEXT_PITCH_ALIGNMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_PITCH_ALIGNMENT.implement(
-    $Property_TEXT_PITCH_ALIGNMENT $impl,
+  factory Property$TEXT_PITCH_ALIGNMENT.implement(
+    $Property$TEXT_PITCH_ALIGNMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_PITCH_ALIGNMENT.fromReference(
+    return Property$TEXT_PITCH_ALIGNMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_PITCH_ALIGNMENT {
-  factory $Property_TEXT_PITCH_ALIGNMENT() = _$Property_TEXT_PITCH_ALIGNMENT;
+abstract base mixin class $Property$TEXT_PITCH_ALIGNMENT {
+  factory $Property$TEXT_PITCH_ALIGNMENT() = _$Property$TEXT_PITCH_ALIGNMENT;
 }
 
-final class _$Property_TEXT_PITCH_ALIGNMENT
-    with $Property_TEXT_PITCH_ALIGNMENT {
-  _$Property_TEXT_PITCH_ALIGNMENT();
+final class _$Property$TEXT_PITCH_ALIGNMENT
+    with $Property$TEXT_PITCH_ALIGNMENT {
+  _$Property$TEXT_PITCH_ALIGNMENT();
 }
 
-final class $Property_TEXT_PITCH_ALIGNMENT$Type
-    extends _$jni.JObjType<Property_TEXT_PITCH_ALIGNMENT> {
-  @_$jni.internal
-  const $Property_TEXT_PITCH_ALIGNMENT$Type();
+final class $Property$TEXT_PITCH_ALIGNMENT$NullableType
+    extends jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT?> {
+  @jni$_.internal
+  const $Property$TEXT_PITCH_ALIGNMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_PITCH_ALIGNMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_PITCH_ALIGNMENT fromReference(_$jni.JReference reference) =>
-      Property_TEXT_PITCH_ALIGNMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_PITCH_ALIGNMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_PITCH_ALIGNMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_PITCH_ALIGNMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_PITCH_ALIGNMENT$Type) &&
-        other is $Property_TEXT_PITCH_ALIGNMENT$Type;
+    return other.runtimeType == ($Property$TEXT_PITCH_ALIGNMENT$NullableType) &&
+        other is $Property$TEXT_PITCH_ALIGNMENT$NullableType;
+  }
+}
+
+final class $Property$TEXT_PITCH_ALIGNMENT$Type
+    extends jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT> {
+  @jni$_.internal
+  const $Property$TEXT_PITCH_ALIGNMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_PITCH_ALIGNMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
+      Property$TEXT_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT?> get nullableType =>
+      const $Property$TEXT_PITCH_ALIGNMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_PITCH_ALIGNMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_PITCH_ALIGNMENT$Type) &&
+        other is $Property$TEXT_PITCH_ALIGNMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_ROTATION_ALIGNMENT`
-class Property_TEXT_ROTATION_ALIGNMENT extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_ROTATION_ALIGNMENT> $type;
+class Property$TEXT_ROTATION_ALIGNMENT extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT> $type;
 
-  @_$jni.internal
-  Property_TEXT_ROTATION_ALIGNMENT.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_ROTATION_ALIGNMENT');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_ROTATION_ALIGNMENT$Type();
+  static const nullableType = $Property$TEXT_ROTATION_ALIGNMENT$NullableType();
+  static const type = $Property$TEXT_ROTATION_ALIGNMENT$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_ROTATION_ALIGNMENT> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_ROTATION_ALIGNMENT> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2854,39 +3858,39 @@ class Property_TEXT_ROTATION_ALIGNMENT extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_ROTATION_ALIGNMENT $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_ROTATION_ALIGNMENT $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_ROTATION_ALIGNMENT',
@@ -2898,88 +3902,136 @@ class Property_TEXT_ROTATION_ALIGNMENT extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_ROTATION_ALIGNMENT.implement(
-    $Property_TEXT_ROTATION_ALIGNMENT $impl,
+  factory Property$TEXT_ROTATION_ALIGNMENT.implement(
+    $Property$TEXT_ROTATION_ALIGNMENT $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_ROTATION_ALIGNMENT.fromReference(
+    return Property$TEXT_ROTATION_ALIGNMENT.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_ROTATION_ALIGNMENT {
-  factory $Property_TEXT_ROTATION_ALIGNMENT() =
-      _$Property_TEXT_ROTATION_ALIGNMENT;
+abstract base mixin class $Property$TEXT_ROTATION_ALIGNMENT {
+  factory $Property$TEXT_ROTATION_ALIGNMENT() =
+      _$Property$TEXT_ROTATION_ALIGNMENT;
 }
 
-final class _$Property_TEXT_ROTATION_ALIGNMENT
-    with $Property_TEXT_ROTATION_ALIGNMENT {
-  _$Property_TEXT_ROTATION_ALIGNMENT();
+final class _$Property$TEXT_ROTATION_ALIGNMENT
+    with $Property$TEXT_ROTATION_ALIGNMENT {
+  _$Property$TEXT_ROTATION_ALIGNMENT();
 }
 
-final class $Property_TEXT_ROTATION_ALIGNMENT$Type
-    extends _$jni.JObjType<Property_TEXT_ROTATION_ALIGNMENT> {
-  @_$jni.internal
-  const $Property_TEXT_ROTATION_ALIGNMENT$Type();
+final class $Property$TEXT_ROTATION_ALIGNMENT$NullableType
+    extends jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT?> {
+  @jni$_.internal
+  const $Property$TEXT_ROTATION_ALIGNMENT$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_ROTATION_ALIGNMENT;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_ROTATION_ALIGNMENT fromReference(_$jni.JReference reference) =>
-      Property_TEXT_ROTATION_ALIGNMENT.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_ROTATION_ALIGNMENT$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_ROTATION_ALIGNMENT$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_ROTATION_ALIGNMENT$Type) &&
-        other is $Property_TEXT_ROTATION_ALIGNMENT$Type;
+    return other.runtimeType ==
+            ($Property$TEXT_ROTATION_ALIGNMENT$NullableType) &&
+        other is $Property$TEXT_ROTATION_ALIGNMENT$NullableType;
+  }
+}
+
+final class $Property$TEXT_ROTATION_ALIGNMENT$Type
+    extends jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT> {
+  @jni$_.internal
+  const $Property$TEXT_ROTATION_ALIGNMENT$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_ROTATION_ALIGNMENT;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
+      Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT?> get nullableType =>
+      const $Property$TEXT_ROTATION_ALIGNMENT$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_ROTATION_ALIGNMENT$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_ROTATION_ALIGNMENT$Type) &&
+        other is $Property$TEXT_ROTATION_ALIGNMENT$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_TRANSFORM`
-class Property_TEXT_TRANSFORM extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_TRANSFORM> $type;
+class Property$TEXT_TRANSFORM extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_TRANSFORM> $type;
 
-  @_$jni.internal
-  Property_TEXT_TRANSFORM.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_TRANSFORM.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_TRANSFORM');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_TRANSFORM$Type();
+  static const nullableType = $Property$TEXT_TRANSFORM$NullableType();
+  static const type = $Property$TEXT_TRANSFORM$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_TRANSFORM> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_TRANSFORM> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2987,39 +4039,39 @@ class Property_TEXT_TRANSFORM extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_TRANSFORM $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_TRANSFORM $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_TRANSFORM',
@@ -3031,86 +4083,133 @@ class Property_TEXT_TRANSFORM extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_TRANSFORM.implement(
-    $Property_TEXT_TRANSFORM $impl,
+  factory Property$TEXT_TRANSFORM.implement(
+    $Property$TEXT_TRANSFORM $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_TRANSFORM.fromReference(
+    return Property$TEXT_TRANSFORM.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_TRANSFORM {
-  factory $Property_TEXT_TRANSFORM() = _$Property_TEXT_TRANSFORM;
+abstract base mixin class $Property$TEXT_TRANSFORM {
+  factory $Property$TEXT_TRANSFORM() = _$Property$TEXT_TRANSFORM;
 }
 
-final class _$Property_TEXT_TRANSFORM with $Property_TEXT_TRANSFORM {
-  _$Property_TEXT_TRANSFORM();
+final class _$Property$TEXT_TRANSFORM with $Property$TEXT_TRANSFORM {
+  _$Property$TEXT_TRANSFORM();
 }
 
-final class $Property_TEXT_TRANSFORM$Type
-    extends _$jni.JObjType<Property_TEXT_TRANSFORM> {
-  @_$jni.internal
-  const $Property_TEXT_TRANSFORM$Type();
+final class $Property$TEXT_TRANSFORM$NullableType
+    extends jni$_.JObjType<Property$TEXT_TRANSFORM?> {
+  @jni$_.internal
+  const $Property$TEXT_TRANSFORM$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_TRANSFORM;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_TRANSFORM fromReference(_$jni.JReference reference) =>
-      Property_TEXT_TRANSFORM.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_TRANSFORM? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_TRANSFORM.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_TRANSFORM?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_TRANSFORM$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_TRANSFORM$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_TRANSFORM$Type) &&
-        other is $Property_TEXT_TRANSFORM$Type;
+    return other.runtimeType == ($Property$TEXT_TRANSFORM$NullableType) &&
+        other is $Property$TEXT_TRANSFORM$NullableType;
+  }
+}
+
+final class $Property$TEXT_TRANSFORM$Type
+    extends jni$_.JObjType<Property$TEXT_TRANSFORM> {
+  @jni$_.internal
+  const $Property$TEXT_TRANSFORM$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_TRANSFORM;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_TRANSFORM fromReference(jni$_.JReference reference) =>
+      Property$TEXT_TRANSFORM.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_TRANSFORM?> get nullableType =>
+      const $Property$TEXT_TRANSFORM$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_TRANSFORM$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_TRANSFORM$Type) &&
+        other is $Property$TEXT_TRANSFORM$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_TRANSLATE_ANCHOR`
-class Property_TEXT_TRANSLATE_ANCHOR extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_TRANSLATE_ANCHOR> $type;
+class Property$TEXT_TRANSLATE_ANCHOR extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR> $type;
 
-  @_$jni.internal
-  Property_TEXT_TRANSLATE_ANCHOR.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_TRANSLATE_ANCHOR');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_TRANSLATE_ANCHOR$Type();
+  static const nullableType = $Property$TEXT_TRANSLATE_ANCHOR$NullableType();
+  static const type = $Property$TEXT_TRANSLATE_ANCHOR$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_TRANSLATE_ANCHOR> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_TRANSLATE_ANCHOR> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3118,39 +4217,39 @@ class Property_TEXT_TRANSLATE_ANCHOR extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_TRANSLATE_ANCHOR $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_TRANSLATE_ANCHOR $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_TRANSLATE_ANCHOR',
@@ -3162,87 +4261,135 @@ class Property_TEXT_TRANSLATE_ANCHOR extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_TRANSLATE_ANCHOR.implement(
-    $Property_TEXT_TRANSLATE_ANCHOR $impl,
+  factory Property$TEXT_TRANSLATE_ANCHOR.implement(
+    $Property$TEXT_TRANSLATE_ANCHOR $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_TRANSLATE_ANCHOR.fromReference(
+    return Property$TEXT_TRANSLATE_ANCHOR.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_TRANSLATE_ANCHOR {
-  factory $Property_TEXT_TRANSLATE_ANCHOR() = _$Property_TEXT_TRANSLATE_ANCHOR;
+abstract base mixin class $Property$TEXT_TRANSLATE_ANCHOR {
+  factory $Property$TEXT_TRANSLATE_ANCHOR() = _$Property$TEXT_TRANSLATE_ANCHOR;
 }
 
-final class _$Property_TEXT_TRANSLATE_ANCHOR
-    with $Property_TEXT_TRANSLATE_ANCHOR {
-  _$Property_TEXT_TRANSLATE_ANCHOR();
+final class _$Property$TEXT_TRANSLATE_ANCHOR
+    with $Property$TEXT_TRANSLATE_ANCHOR {
+  _$Property$TEXT_TRANSLATE_ANCHOR();
 }
 
-final class $Property_TEXT_TRANSLATE_ANCHOR$Type
-    extends _$jni.JObjType<Property_TEXT_TRANSLATE_ANCHOR> {
-  @_$jni.internal
-  const $Property_TEXT_TRANSLATE_ANCHOR$Type();
+final class $Property$TEXT_TRANSLATE_ANCHOR$NullableType
+    extends jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR?> {
+  @jni$_.internal
+  const $Property$TEXT_TRANSLATE_ANCHOR$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_TRANSLATE_ANCHOR;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_TRANSLATE_ANCHOR fromReference(_$jni.JReference reference) =>
-      Property_TEXT_TRANSLATE_ANCHOR.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_TRANSLATE_ANCHOR$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_TRANSLATE_ANCHOR$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_TRANSLATE_ANCHOR$Type) &&
-        other is $Property_TEXT_TRANSLATE_ANCHOR$Type;
+    return other.runtimeType ==
+            ($Property$TEXT_TRANSLATE_ANCHOR$NullableType) &&
+        other is $Property$TEXT_TRANSLATE_ANCHOR$NullableType;
+  }
+}
+
+final class $Property$TEXT_TRANSLATE_ANCHOR$Type
+    extends jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR> {
+  @jni$_.internal
+  const $Property$TEXT_TRANSLATE_ANCHOR$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_TRANSLATE_ANCHOR;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
+      Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR?> get nullableType =>
+      const $Property$TEXT_TRANSLATE_ANCHOR$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_TRANSLATE_ANCHOR$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_TRANSLATE_ANCHOR$Type) &&
+        other is $Property$TEXT_TRANSLATE_ANCHOR$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$TEXT_WRITING_MODE`
-class Property_TEXT_WRITING_MODE extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_TEXT_WRITING_MODE> $type;
+class Property$TEXT_WRITING_MODE extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$TEXT_WRITING_MODE> $type;
 
-  @_$jni.internal
-  Property_TEXT_WRITING_MODE.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$TEXT_WRITING_MODE.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$TEXT_WRITING_MODE');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_TEXT_WRITING_MODE$Type();
+  static const nullableType = $Property$TEXT_WRITING_MODE$NullableType();
+  static const type = $Property$TEXT_WRITING_MODE$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_TEXT_WRITING_MODE> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$TEXT_WRITING_MODE> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3250,39 +4397,39 @@ class Property_TEXT_WRITING_MODE extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_TEXT_WRITING_MODE $impl,
+    jni$_.JImplementer implementer,
+    $Property$TEXT_WRITING_MODE $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$TEXT_WRITING_MODE',
@@ -3294,86 +4441,133 @@ class Property_TEXT_WRITING_MODE extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_TEXT_WRITING_MODE.implement(
-    $Property_TEXT_WRITING_MODE $impl,
+  factory Property$TEXT_WRITING_MODE.implement(
+    $Property$TEXT_WRITING_MODE $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_TEXT_WRITING_MODE.fromReference(
+    return Property$TEXT_WRITING_MODE.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_TEXT_WRITING_MODE {
-  factory $Property_TEXT_WRITING_MODE() = _$Property_TEXT_WRITING_MODE;
+abstract base mixin class $Property$TEXT_WRITING_MODE {
+  factory $Property$TEXT_WRITING_MODE() = _$Property$TEXT_WRITING_MODE;
 }
 
-final class _$Property_TEXT_WRITING_MODE with $Property_TEXT_WRITING_MODE {
-  _$Property_TEXT_WRITING_MODE();
+final class _$Property$TEXT_WRITING_MODE with $Property$TEXT_WRITING_MODE {
+  _$Property$TEXT_WRITING_MODE();
 }
 
-final class $Property_TEXT_WRITING_MODE$Type
-    extends _$jni.JObjType<Property_TEXT_WRITING_MODE> {
-  @_$jni.internal
-  const $Property_TEXT_WRITING_MODE$Type();
+final class $Property$TEXT_WRITING_MODE$NullableType
+    extends jni$_.JObjType<Property$TEXT_WRITING_MODE?> {
+  @jni$_.internal
+  const $Property$TEXT_WRITING_MODE$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$TEXT_WRITING_MODE;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_TEXT_WRITING_MODE fromReference(_$jni.JReference reference) =>
-      Property_TEXT_WRITING_MODE.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_WRITING_MODE? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$TEXT_WRITING_MODE.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_WRITING_MODE?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_TEXT_WRITING_MODE$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$TEXT_WRITING_MODE$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_TEXT_WRITING_MODE$Type) &&
-        other is $Property_TEXT_WRITING_MODE$Type;
+    return other.runtimeType == ($Property$TEXT_WRITING_MODE$NullableType) &&
+        other is $Property$TEXT_WRITING_MODE$NullableType;
+  }
+}
+
+final class $Property$TEXT_WRITING_MODE$Type
+    extends jni$_.JObjType<Property$TEXT_WRITING_MODE> {
+  @jni$_.internal
+  const $Property$TEXT_WRITING_MODE$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$TEXT_WRITING_MODE;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$TEXT_WRITING_MODE fromReference(jni$_.JReference reference) =>
+      Property$TEXT_WRITING_MODE.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$TEXT_WRITING_MODE?> get nullableType =>
+      const $Property$TEXT_WRITING_MODE$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$TEXT_WRITING_MODE$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$TEXT_WRITING_MODE$Type) &&
+        other is $Property$TEXT_WRITING_MODE$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property$VISIBILITY`
-class Property_VISIBILITY extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property_VISIBILITY> $type;
+class Property$VISIBILITY extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property$VISIBILITY> $type;
 
-  @_$jni.internal
-  Property_VISIBILITY.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  Property$VISIBILITY.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/style/layers/Property$VISIBILITY');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Property_VISIBILITY$Type();
+  static const nullableType = $Property$VISIBILITY$NullableType();
+  static const type = $Property$VISIBILITY$Type();
 
   /// Maps a specific port to the implemented interface.
-  static final _$core.Map<int, $Property_VISIBILITY> _$impls = {};
-  static _$jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Property$VISIBILITY> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    _$jni.JObjectPtr descriptor,
-    _$jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      _$jni.MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3381,39 +4575,39 @@ class Property_VISIBILITY extends _$jni.JObject {
     );
   }
 
-  static final _$jni.Pointer<
-          _$jni.NativeFunction<
-              _$jni.JObjectPtr Function(
-                  _$jni.Int64, _$jni.JObjectPtr, _$jni.JObjectPtr)>>
-      _$invokePointer = _$jni.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static _$jni.Pointer<_$jni.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    _$jni.MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return _$jni.ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return _$jni.nullptr;
+    return jni$_.nullptr;
   }
 
   static void implementIn(
-    _$jni.JImplementer implementer,
-    $Property_VISIBILITY $impl,
+    jni$_.JImplementer implementer,
+    $Property$VISIBILITY $impl,
   ) {
-    late final _$jni.RawReceivePort $p;
-    $p = _$jni.RawReceivePort(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = _$jni.MethodInvocation.fromMessage($m);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      _$jni.ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
       r'org.maplibre.android.style.layers.Property$VISIBILITY',
@@ -3425,74 +4619,121 @@ class Property_VISIBILITY extends _$jni.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property_VISIBILITY.implement(
-    $Property_VISIBILITY $impl,
+  factory Property$VISIBILITY.implement(
+    $Property$VISIBILITY $impl,
   ) {
-    final $i = _$jni.JImplementer();
+    final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property_VISIBILITY.fromReference(
+    return Property$VISIBILITY.fromReference(
       $i.implementReference(),
     );
   }
 }
 
-abstract base mixin class $Property_VISIBILITY {
-  factory $Property_VISIBILITY() = _$Property_VISIBILITY;
+abstract base mixin class $Property$VISIBILITY {
+  factory $Property$VISIBILITY() = _$Property$VISIBILITY;
 }
 
-final class _$Property_VISIBILITY with $Property_VISIBILITY {
-  _$Property_VISIBILITY();
+final class _$Property$VISIBILITY with $Property$VISIBILITY {
+  _$Property$VISIBILITY();
 }
 
-final class $Property_VISIBILITY$Type
-    extends _$jni.JObjType<Property_VISIBILITY> {
-  @_$jni.internal
-  const $Property_VISIBILITY$Type();
+final class $Property$VISIBILITY$NullableType
+    extends jni$_.JObjType<Property$VISIBILITY?> {
+  @jni$_.internal
+  const $Property$VISIBILITY$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/style/layers/Property$VISIBILITY;';
 
-  @_$jni.internal
-  @_$core.override
-  Property_VISIBILITY fromReference(_$jni.JReference reference) =>
-      Property_VISIBILITY.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property$VISIBILITY? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Property$VISIBILITY.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$VISIBILITY?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($Property_VISIBILITY$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($Property$VISIBILITY$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Property_VISIBILITY$Type) &&
-        other is $Property_VISIBILITY$Type;
+    return other.runtimeType == ($Property$VISIBILITY$NullableType) &&
+        other is $Property$VISIBILITY$NullableType;
+  }
+}
+
+final class $Property$VISIBILITY$Type
+    extends jni$_.JObjType<Property$VISIBILITY> {
+  @jni$_.internal
+  const $Property$VISIBILITY$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/layers/Property$VISIBILITY;';
+
+  @jni$_.internal
+  @core$_.override
+  Property$VISIBILITY fromReference(jni$_.JReference reference) =>
+      Property$VISIBILITY.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property$VISIBILITY?> get nullableType =>
+      const $Property$VISIBILITY$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Property$VISIBILITY$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$VISIBILITY$Type) &&
+        other is $Property$VISIBILITY$Type;
   }
 }
 
 /// from: `org.maplibre.android.style.layers.Property`
-class Property extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<Property> $type;
+class Property extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Property> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   Property.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/style/layers/Property');
+      jni$_.JClass.forName(r'org/maplibre/android/style/layers/Property');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $Property$NullableType();
   static const type = $Property$Type();
   static final _id_VISIBLE = _class.staticFieldId(
     r'VISIBLE',
@@ -3501,8 +4742,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String VISIBLE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get VISIBLE =>
-      _id_VISIBLE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get VISIBLE =>
+      _id_VISIBLE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NONE = _class.staticFieldId(
     r'NONE',
@@ -3511,8 +4752,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String NONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get NONE =>
-      _id_NONE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get NONE =>
+      _id_NONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_CAP_BUTT = _class.staticFieldId(
     r'LINE_CAP_BUTT',
@@ -3521,8 +4762,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_CAP_BUTT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_CAP_BUTT =>
-      _id_LINE_CAP_BUTT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_CAP_BUTT =>
+      _id_LINE_CAP_BUTT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_CAP_ROUND = _class.staticFieldId(
     r'LINE_CAP_ROUND',
@@ -3531,8 +4772,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_CAP_ROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_CAP_ROUND =>
-      _id_LINE_CAP_ROUND.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_CAP_ROUND =>
+      _id_LINE_CAP_ROUND.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_CAP_SQUARE = _class.staticFieldId(
     r'LINE_CAP_SQUARE',
@@ -3541,8 +4782,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_CAP_SQUARE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_CAP_SQUARE =>
-      _id_LINE_CAP_SQUARE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_CAP_SQUARE =>
+      _id_LINE_CAP_SQUARE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_JOIN_BEVEL = _class.staticFieldId(
     r'LINE_JOIN_BEVEL',
@@ -3551,8 +4792,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_JOIN_BEVEL`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_JOIN_BEVEL =>
-      _id_LINE_JOIN_BEVEL.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_JOIN_BEVEL =>
+      _id_LINE_JOIN_BEVEL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_JOIN_ROUND = _class.staticFieldId(
     r'LINE_JOIN_ROUND',
@@ -3561,8 +4802,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_JOIN_ROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_JOIN_ROUND =>
-      _id_LINE_JOIN_ROUND.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_JOIN_ROUND =>
+      _id_LINE_JOIN_ROUND.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LINE_JOIN_MITER = _class.staticFieldId(
     r'LINE_JOIN_MITER',
@@ -3571,8 +4812,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_JOIN_MITER`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_JOIN_MITER =>
-      _id_LINE_JOIN_MITER.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_JOIN_MITER =>
+      _id_LINE_JOIN_MITER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_PLACEMENT_POINT = _class.staticFieldId(
     r'SYMBOL_PLACEMENT_POINT',
@@ -3581,8 +4822,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_PLACEMENT_POINT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_PLACEMENT_POINT =>
-      _id_SYMBOL_PLACEMENT_POINT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_PLACEMENT_POINT =>
+      _id_SYMBOL_PLACEMENT_POINT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_PLACEMENT_LINE = _class.staticFieldId(
     r'SYMBOL_PLACEMENT_LINE',
@@ -3591,8 +4832,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_PLACEMENT_LINE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_PLACEMENT_LINE =>
-      _id_SYMBOL_PLACEMENT_LINE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_PLACEMENT_LINE =>
+      _id_SYMBOL_PLACEMENT_LINE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_PLACEMENT_LINE_CENTER = _class.staticFieldId(
     r'SYMBOL_PLACEMENT_LINE_CENTER',
@@ -3601,8 +4842,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_PLACEMENT_LINE_CENTER`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_PLACEMENT_LINE_CENTER =>
-      _id_SYMBOL_PLACEMENT_LINE_CENTER.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_PLACEMENT_LINE_CENTER =>
+      _id_SYMBOL_PLACEMENT_LINE_CENTER.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_Z_ORDER_AUTO = _class.staticFieldId(
     r'SYMBOL_Z_ORDER_AUTO',
@@ -3611,8 +4853,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_Z_ORDER_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_Z_ORDER_AUTO =>
-      _id_SYMBOL_Z_ORDER_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_Z_ORDER_AUTO =>
+      _id_SYMBOL_Z_ORDER_AUTO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_Z_ORDER_VIEWPORT_Y = _class.staticFieldId(
     r'SYMBOL_Z_ORDER_VIEWPORT_Y',
@@ -3621,8 +4863,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_Z_ORDER_VIEWPORT_Y`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_Z_ORDER_VIEWPORT_Y =>
-      _id_SYMBOL_Z_ORDER_VIEWPORT_Y.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_Z_ORDER_VIEWPORT_Y =>
+      _id_SYMBOL_Z_ORDER_VIEWPORT_Y.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SYMBOL_Z_ORDER_SOURCE = _class.staticFieldId(
     r'SYMBOL_Z_ORDER_SOURCE',
@@ -3631,8 +4874,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String SYMBOL_Z_ORDER_SOURCE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get SYMBOL_Z_ORDER_SOURCE =>
-      _id_SYMBOL_Z_ORDER_SOURCE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get SYMBOL_Z_ORDER_SOURCE =>
+      _id_SYMBOL_Z_ORDER_SOURCE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ROTATION_ALIGNMENT_MAP = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_MAP',
@@ -3641,8 +4884,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ROTATION_ALIGNMENT_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ROTATION_ALIGNMENT_MAP =>
-      _id_ICON_ROTATION_ALIGNMENT_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ROTATION_ALIGNMENT_MAP =>
+      _id_ICON_ROTATION_ALIGNMENT_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ROTATION_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_VIEWPORT',
@@ -3651,9 +4895,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ROTATION_ALIGNMENT_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ROTATION_ALIGNMENT_VIEWPORT =>
+  static jni$_.JString? get ICON_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_ICON_ROTATION_ALIGNMENT_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_AUTO',
@@ -3662,8 +4906,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ROTATION_ALIGNMENT_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ROTATION_ALIGNMENT_AUTO =>
-      _id_ICON_ROTATION_ALIGNMENT_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ROTATION_ALIGNMENT_AUTO =>
+      _id_ICON_ROTATION_ALIGNMENT_AUTO.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TEXT_FIT_NONE = _class.staticFieldId(
     r'ICON_TEXT_FIT_NONE',
@@ -3672,8 +4917,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TEXT_FIT_NONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TEXT_FIT_NONE =>
-      _id_ICON_TEXT_FIT_NONE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TEXT_FIT_NONE =>
+      _id_ICON_TEXT_FIT_NONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TEXT_FIT_WIDTH = _class.staticFieldId(
     r'ICON_TEXT_FIT_WIDTH',
@@ -3682,8 +4927,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TEXT_FIT_WIDTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TEXT_FIT_WIDTH =>
-      _id_ICON_TEXT_FIT_WIDTH.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TEXT_FIT_WIDTH =>
+      _id_ICON_TEXT_FIT_WIDTH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TEXT_FIT_HEIGHT = _class.staticFieldId(
     r'ICON_TEXT_FIT_HEIGHT',
@@ -3692,8 +4937,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TEXT_FIT_HEIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TEXT_FIT_HEIGHT =>
-      _id_ICON_TEXT_FIT_HEIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TEXT_FIT_HEIGHT =>
+      _id_ICON_TEXT_FIT_HEIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TEXT_FIT_BOTH = _class.staticFieldId(
     r'ICON_TEXT_FIT_BOTH',
@@ -3702,8 +4947,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TEXT_FIT_BOTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TEXT_FIT_BOTH =>
-      _id_ICON_TEXT_FIT_BOTH.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TEXT_FIT_BOTH =>
+      _id_ICON_TEXT_FIT_BOTH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_CENTER = _class.staticFieldId(
     r'ICON_ANCHOR_CENTER',
@@ -3712,8 +4957,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_CENTER`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_CENTER =>
-      _id_ICON_ANCHOR_CENTER.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_CENTER =>
+      _id_ICON_ANCHOR_CENTER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_LEFT = _class.staticFieldId(
     r'ICON_ANCHOR_LEFT',
@@ -3722,8 +4967,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_LEFT =>
-      _id_ICON_ANCHOR_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_LEFT =>
+      _id_ICON_ANCHOR_LEFT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_RIGHT = _class.staticFieldId(
     r'ICON_ANCHOR_RIGHT',
@@ -3732,8 +4977,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_RIGHT =>
-      _id_ICON_ANCHOR_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_RIGHT =>
+      _id_ICON_ANCHOR_RIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_TOP = _class.staticFieldId(
     r'ICON_ANCHOR_TOP',
@@ -3742,8 +4987,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_TOP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_TOP =>
-      _id_ICON_ANCHOR_TOP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_TOP =>
+      _id_ICON_ANCHOR_TOP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_BOTTOM = _class.staticFieldId(
     r'ICON_ANCHOR_BOTTOM',
@@ -3752,8 +4997,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_BOTTOM`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_BOTTOM =>
-      _id_ICON_ANCHOR_BOTTOM.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_BOTTOM =>
+      _id_ICON_ANCHOR_BOTTOM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_TOP_LEFT = _class.staticFieldId(
     r'ICON_ANCHOR_TOP_LEFT',
@@ -3762,8 +5007,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_TOP_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_TOP_LEFT =>
-      _id_ICON_ANCHOR_TOP_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_TOP_LEFT =>
+      _id_ICON_ANCHOR_TOP_LEFT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_TOP_RIGHT = _class.staticFieldId(
     r'ICON_ANCHOR_TOP_RIGHT',
@@ -3772,8 +5017,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_TOP_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_TOP_RIGHT =>
-      _id_ICON_ANCHOR_TOP_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_TOP_RIGHT =>
+      _id_ICON_ANCHOR_TOP_RIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_BOTTOM_LEFT = _class.staticFieldId(
     r'ICON_ANCHOR_BOTTOM_LEFT',
@@ -3782,8 +5027,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_BOTTOM_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_BOTTOM_LEFT =>
-      _id_ICON_ANCHOR_BOTTOM_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_BOTTOM_LEFT =>
+      _id_ICON_ANCHOR_BOTTOM_LEFT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_ANCHOR_BOTTOM_RIGHT = _class.staticFieldId(
     r'ICON_ANCHOR_BOTTOM_RIGHT',
@@ -3792,8 +5038,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_ANCHOR_BOTTOM_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_ANCHOR_BOTTOM_RIGHT =>
-      _id_ICON_ANCHOR_BOTTOM_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_ANCHOR_BOTTOM_RIGHT =>
+      _id_ICON_ANCHOR_BOTTOM_RIGHT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_MAP',
@@ -3802,8 +5049,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_PITCH_ALIGNMENT_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_PITCH_ALIGNMENT_MAP =>
-      _id_ICON_PITCH_ALIGNMENT_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_PITCH_ALIGNMENT_MAP =>
+      _id_ICON_PITCH_ALIGNMENT_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_VIEWPORT',
@@ -3812,8 +5060,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_PITCH_ALIGNMENT_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_PITCH_ALIGNMENT_VIEWPORT =>
-      _id_ICON_PITCH_ALIGNMENT_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_PITCH_ALIGNMENT_VIEWPORT =>
+      _id_ICON_PITCH_ALIGNMENT_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_PITCH_ALIGNMENT_AUTO = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_AUTO',
@@ -3822,8 +5071,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_PITCH_ALIGNMENT_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_PITCH_ALIGNMENT_AUTO =>
-      _id_ICON_PITCH_ALIGNMENT_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_PITCH_ALIGNMENT_AUTO =>
+      _id_ICON_PITCH_ALIGNMENT_AUTO.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_MAP',
@@ -3832,8 +5082,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_PITCH_ALIGNMENT_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_PITCH_ALIGNMENT_MAP =>
-      _id_TEXT_PITCH_ALIGNMENT_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_PITCH_ALIGNMENT_MAP =>
+      _id_TEXT_PITCH_ALIGNMENT_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_VIEWPORT',
@@ -3842,8 +5093,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_PITCH_ALIGNMENT_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_PITCH_ALIGNMENT_VIEWPORT =>
-      _id_TEXT_PITCH_ALIGNMENT_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_PITCH_ALIGNMENT_VIEWPORT =>
+      _id_TEXT_PITCH_ALIGNMENT_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_PITCH_ALIGNMENT_AUTO = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_AUTO',
@@ -3852,8 +5104,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_PITCH_ALIGNMENT_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_PITCH_ALIGNMENT_AUTO =>
-      _id_TEXT_PITCH_ALIGNMENT_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_PITCH_ALIGNMENT_AUTO =>
+      _id_TEXT_PITCH_ALIGNMENT_AUTO.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ROTATION_ALIGNMENT_MAP = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_MAP',
@@ -3862,8 +5115,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ROTATION_ALIGNMENT_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ROTATION_ALIGNMENT_MAP =>
-      _id_TEXT_ROTATION_ALIGNMENT_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_MAP =>
+      _id_TEXT_ROTATION_ALIGNMENT_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ROTATION_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_VIEWPORT',
@@ -3872,9 +5126,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ROTATION_ALIGNMENT_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ROTATION_ALIGNMENT_VIEWPORT =>
+  static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_TEXT_ROTATION_ALIGNMENT_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_AUTO',
@@ -3883,8 +5137,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ROTATION_ALIGNMENT_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ROTATION_ALIGNMENT_AUTO =>
-      _id_TEXT_ROTATION_ALIGNMENT_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_AUTO =>
+      _id_TEXT_ROTATION_ALIGNMENT_AUTO.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_JUSTIFY_AUTO = _class.staticFieldId(
     r'TEXT_JUSTIFY_AUTO',
@@ -3893,8 +5148,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_JUSTIFY_AUTO`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_JUSTIFY_AUTO =>
-      _id_TEXT_JUSTIFY_AUTO.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_JUSTIFY_AUTO =>
+      _id_TEXT_JUSTIFY_AUTO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_JUSTIFY_LEFT = _class.staticFieldId(
     r'TEXT_JUSTIFY_LEFT',
@@ -3903,8 +5158,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_JUSTIFY_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_JUSTIFY_LEFT =>
-      _id_TEXT_JUSTIFY_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_JUSTIFY_LEFT =>
+      _id_TEXT_JUSTIFY_LEFT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_JUSTIFY_CENTER = _class.staticFieldId(
     r'TEXT_JUSTIFY_CENTER',
@@ -3913,8 +5168,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_JUSTIFY_CENTER`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_JUSTIFY_CENTER =>
-      _id_TEXT_JUSTIFY_CENTER.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_JUSTIFY_CENTER =>
+      _id_TEXT_JUSTIFY_CENTER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_JUSTIFY_RIGHT = _class.staticFieldId(
     r'TEXT_JUSTIFY_RIGHT',
@@ -3923,8 +5178,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_JUSTIFY_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_JUSTIFY_RIGHT =>
-      _id_TEXT_JUSTIFY_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_JUSTIFY_RIGHT =>
+      _id_TEXT_JUSTIFY_RIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_CENTER = _class.staticFieldId(
     r'TEXT_ANCHOR_CENTER',
@@ -3933,8 +5188,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_CENTER`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_CENTER =>
-      _id_TEXT_ANCHOR_CENTER.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_CENTER =>
+      _id_TEXT_ANCHOR_CENTER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_LEFT = _class.staticFieldId(
     r'TEXT_ANCHOR_LEFT',
@@ -3943,8 +5198,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_LEFT =>
-      _id_TEXT_ANCHOR_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_LEFT =>
+      _id_TEXT_ANCHOR_LEFT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_RIGHT = _class.staticFieldId(
     r'TEXT_ANCHOR_RIGHT',
@@ -3953,8 +5208,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_RIGHT =>
-      _id_TEXT_ANCHOR_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_RIGHT =>
+      _id_TEXT_ANCHOR_RIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_TOP = _class.staticFieldId(
     r'TEXT_ANCHOR_TOP',
@@ -3963,8 +5218,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_TOP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_TOP =>
-      _id_TEXT_ANCHOR_TOP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_TOP =>
+      _id_TEXT_ANCHOR_TOP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_BOTTOM = _class.staticFieldId(
     r'TEXT_ANCHOR_BOTTOM',
@@ -3973,8 +5228,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_BOTTOM`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_BOTTOM =>
-      _id_TEXT_ANCHOR_BOTTOM.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_BOTTOM =>
+      _id_TEXT_ANCHOR_BOTTOM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_TOP_LEFT = _class.staticFieldId(
     r'TEXT_ANCHOR_TOP_LEFT',
@@ -3983,8 +5238,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_TOP_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_TOP_LEFT =>
-      _id_TEXT_ANCHOR_TOP_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_TOP_LEFT =>
+      _id_TEXT_ANCHOR_TOP_LEFT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_TOP_RIGHT = _class.staticFieldId(
     r'TEXT_ANCHOR_TOP_RIGHT',
@@ -3993,8 +5248,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_TOP_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_TOP_RIGHT =>
-      _id_TEXT_ANCHOR_TOP_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_TOP_RIGHT =>
+      _id_TEXT_ANCHOR_TOP_RIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_BOTTOM_LEFT = _class.staticFieldId(
     r'TEXT_ANCHOR_BOTTOM_LEFT',
@@ -4003,8 +5258,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_BOTTOM_LEFT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_BOTTOM_LEFT =>
-      _id_TEXT_ANCHOR_BOTTOM_LEFT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_BOTTOM_LEFT =>
+      _id_TEXT_ANCHOR_BOTTOM_LEFT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_ANCHOR_BOTTOM_RIGHT = _class.staticFieldId(
     r'TEXT_ANCHOR_BOTTOM_RIGHT',
@@ -4013,8 +5269,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_ANCHOR_BOTTOM_RIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_ANCHOR_BOTTOM_RIGHT =>
-      _id_TEXT_ANCHOR_BOTTOM_RIGHT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_ANCHOR_BOTTOM_RIGHT =>
+      _id_TEXT_ANCHOR_BOTTOM_RIGHT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_TRANSFORM_NONE = _class.staticFieldId(
     r'TEXT_TRANSFORM_NONE',
@@ -4023,8 +5280,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_TRANSFORM_NONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_TRANSFORM_NONE =>
-      _id_TEXT_TRANSFORM_NONE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_TRANSFORM_NONE =>
+      _id_TEXT_TRANSFORM_NONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_TRANSFORM_UPPERCASE = _class.staticFieldId(
     r'TEXT_TRANSFORM_UPPERCASE',
@@ -4033,8 +5290,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_TRANSFORM_UPPERCASE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_TRANSFORM_UPPERCASE =>
-      _id_TEXT_TRANSFORM_UPPERCASE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_TRANSFORM_UPPERCASE =>
+      _id_TEXT_TRANSFORM_UPPERCASE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_TRANSFORM_LOWERCASE = _class.staticFieldId(
     r'TEXT_TRANSFORM_LOWERCASE',
@@ -4043,8 +5301,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_TRANSFORM_LOWERCASE`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_TRANSFORM_LOWERCASE =>
-      _id_TEXT_TRANSFORM_LOWERCASE.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_TRANSFORM_LOWERCASE =>
+      _id_TEXT_TRANSFORM_LOWERCASE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FILL_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'FILL_TRANSLATE_ANCHOR_MAP',
@@ -4053,8 +5312,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String FILL_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get FILL_TRANSLATE_ANCHOR_MAP =>
-      _id_FILL_TRANSLATE_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get FILL_TRANSLATE_ANCHOR_MAP =>
+      _id_FILL_TRANSLATE_ANCHOR_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FILL_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'FILL_TRANSLATE_ANCHOR_VIEWPORT',
@@ -4063,8 +5323,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String FILL_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get FILL_TRANSLATE_ANCHOR_VIEWPORT =>
-      _id_FILL_TRANSLATE_ANCHOR_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get FILL_TRANSLATE_ANCHOR_VIEWPORT =>
+      _id_FILL_TRANSLATE_ANCHOR_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_LINE_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'LINE_TRANSLATE_ANCHOR_MAP',
@@ -4073,8 +5334,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_TRANSLATE_ANCHOR_MAP =>
-      _id_LINE_TRANSLATE_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_TRANSLATE_ANCHOR_MAP =>
+      _id_LINE_TRANSLATE_ANCHOR_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_LINE_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'LINE_TRANSLATE_ANCHOR_VIEWPORT',
@@ -4083,8 +5345,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String LINE_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get LINE_TRANSLATE_ANCHOR_VIEWPORT =>
-      _id_LINE_TRANSLATE_ANCHOR_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get LINE_TRANSLATE_ANCHOR_VIEWPORT =>
+      _id_LINE_TRANSLATE_ANCHOR_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'ICON_TRANSLATE_ANCHOR_MAP',
@@ -4093,8 +5356,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TRANSLATE_ANCHOR_MAP =>
-      _id_ICON_TRANSLATE_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TRANSLATE_ANCHOR_MAP =>
+      _id_ICON_TRANSLATE_ANCHOR_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ICON_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'ICON_TRANSLATE_ANCHOR_VIEWPORT',
@@ -4103,8 +5367,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ICON_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ICON_TRANSLATE_ANCHOR_VIEWPORT =>
-      _id_ICON_TRANSLATE_ANCHOR_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ICON_TRANSLATE_ANCHOR_VIEWPORT =>
+      _id_ICON_TRANSLATE_ANCHOR_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'TEXT_TRANSLATE_ANCHOR_MAP',
@@ -4113,8 +5378,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_TRANSLATE_ANCHOR_MAP =>
-      _id_TEXT_TRANSLATE_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_TRANSLATE_ANCHOR_MAP =>
+      _id_TEXT_TRANSLATE_ANCHOR_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'TEXT_TRANSLATE_ANCHOR_VIEWPORT',
@@ -4123,8 +5389,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_TRANSLATE_ANCHOR_VIEWPORT =>
-      _id_TEXT_TRANSLATE_ANCHOR_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_TRANSLATE_ANCHOR_VIEWPORT =>
+      _id_TEXT_TRANSLATE_ANCHOR_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'CIRCLE_TRANSLATE_ANCHOR_MAP',
@@ -4133,8 +5400,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_TRANSLATE_ANCHOR_MAP =>
-      _id_CIRCLE_TRANSLATE_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get CIRCLE_TRANSLATE_ANCHOR_MAP =>
+      _id_CIRCLE_TRANSLATE_ANCHOR_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'CIRCLE_TRANSLATE_ANCHOR_VIEWPORT',
@@ -4143,9 +5411,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_TRANSLATE_ANCHOR_VIEWPORT =>
+  static jni$_.JString? get CIRCLE_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_CIRCLE_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_PITCH_SCALE_MAP = _class.staticFieldId(
     r'CIRCLE_PITCH_SCALE_MAP',
@@ -4154,8 +5422,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_PITCH_SCALE_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_PITCH_SCALE_MAP =>
-      _id_CIRCLE_PITCH_SCALE_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get CIRCLE_PITCH_SCALE_MAP =>
+      _id_CIRCLE_PITCH_SCALE_MAP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_PITCH_SCALE_VIEWPORT = _class.staticFieldId(
     r'CIRCLE_PITCH_SCALE_VIEWPORT',
@@ -4164,8 +5432,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_PITCH_SCALE_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_PITCH_SCALE_VIEWPORT =>
-      _id_CIRCLE_PITCH_SCALE_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get CIRCLE_PITCH_SCALE_VIEWPORT =>
+      _id_CIRCLE_PITCH_SCALE_VIEWPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'CIRCLE_PITCH_ALIGNMENT_MAP',
@@ -4174,8 +5443,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_PITCH_ALIGNMENT_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_PITCH_ALIGNMENT_MAP =>
-      _id_CIRCLE_PITCH_ALIGNMENT_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get CIRCLE_PITCH_ALIGNMENT_MAP =>
+      _id_CIRCLE_PITCH_ALIGNMENT_MAP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CIRCLE_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'CIRCLE_PITCH_ALIGNMENT_VIEWPORT',
@@ -4184,9 +5454,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String CIRCLE_PITCH_ALIGNMENT_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get CIRCLE_PITCH_ALIGNMENT_VIEWPORT =>
+  static jni$_.JString? get CIRCLE_PITCH_ALIGNMENT_VIEWPORT =>
       _id_CIRCLE_PITCH_ALIGNMENT_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP',
@@ -4195,9 +5465,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP =>
+  static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =
       _class.staticFieldId(
@@ -4207,9 +5477,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =>
+  static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_RASTER_RESAMPLING_LINEAR = _class.staticFieldId(
     r'RASTER_RESAMPLING_LINEAR',
@@ -4218,8 +5488,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String RASTER_RESAMPLING_LINEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get RASTER_RESAMPLING_LINEAR =>
-      _id_RASTER_RESAMPLING_LINEAR.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get RASTER_RESAMPLING_LINEAR =>
+      _id_RASTER_RESAMPLING_LINEAR.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_RASTER_RESAMPLING_NEAREST = _class.staticFieldId(
     r'RASTER_RESAMPLING_NEAREST',
@@ -4228,8 +5499,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String RASTER_RESAMPLING_NEAREST`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get RASTER_RESAMPLING_NEAREST =>
-      _id_RASTER_RESAMPLING_NEAREST.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get RASTER_RESAMPLING_NEAREST =>
+      _id_RASTER_RESAMPLING_NEAREST.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_HILLSHADE_ILLUMINATION_ANCHOR_MAP = _class.staticFieldId(
     r'HILLSHADE_ILLUMINATION_ANCHOR_MAP',
@@ -4238,9 +5510,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String HILLSHADE_ILLUMINATION_ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get HILLSHADE_ILLUMINATION_ANCHOR_MAP =>
+  static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_MAP =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_MAP.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =
       _class.staticFieldId(
@@ -4250,9 +5522,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =>
+  static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT.get(
-          _class, const _$jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ANCHOR_MAP = _class.staticFieldId(
     r'ANCHOR_MAP',
@@ -4261,8 +5533,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ANCHOR_MAP`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ANCHOR_MAP =>
-      _id_ANCHOR_MAP.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ANCHOR_MAP =>
+      _id_ANCHOR_MAP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'ANCHOR_VIEWPORT',
@@ -4271,8 +5543,8 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get ANCHOR_VIEWPORT =>
-      _id_ANCHOR_VIEWPORT.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get ANCHOR_VIEWPORT =>
+      _id_ANCHOR_VIEWPORT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_WRITING_MODE_HORIZONTAL = _class.staticFieldId(
     r'TEXT_WRITING_MODE_HORIZONTAL',
@@ -4281,8 +5553,9 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_WRITING_MODE_HORIZONTAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_WRITING_MODE_HORIZONTAL =>
-      _id_TEXT_WRITING_MODE_HORIZONTAL.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_WRITING_MODE_HORIZONTAL =>
+      _id_TEXT_WRITING_MODE_HORIZONTAL.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_TEXT_WRITING_MODE_VERTICAL = _class.staticFieldId(
     r'TEXT_WRITING_MODE_VERTICAL',
@@ -4291,35 +5564,77 @@ class Property extends _$jni.JObject {
 
   /// from: `static public final java.lang.String TEXT_WRITING_MODE_VERTICAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JString get TEXT_WRITING_MODE_VERTICAL =>
-      _id_TEXT_WRITING_MODE_VERTICAL.get(_class, const _$jni.JStringType());
+  static jni$_.JString? get TEXT_WRITING_MODE_VERTICAL =>
+      _id_TEXT_WRITING_MODE_VERTICAL.get(
+          _class, const jni$_.JStringNullableType());
 }
 
-final class $Property$Type extends _$jni.JObjType<Property> {
-  @_$jni.internal
-  const $Property$Type();
+final class $Property$NullableType extends jni$_.JObjType<Property?> {
+  @jni$_.internal
+  const $Property$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/style/layers/Property;';
 
-  @_$jni.internal
-  @_$core.override
-  Property fromReference(_$jni.JReference reference) =>
-      Property.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Property? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Property.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($Property$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Property$NullableType) &&
+        other is $Property$NullableType;
+  }
+}
+
+final class $Property$Type extends jni$_.JObjType<Property> {
+  @jni$_.internal
+  const $Property$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/layers/Property;';
+
+  @jni$_.internal
+  @core$_.override
+  Property fromReference(jni$_.JReference reference) => Property.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Property?> get nullableType => const $Property$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($Property$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($Property$Type) && other is $Property$Type;
   }

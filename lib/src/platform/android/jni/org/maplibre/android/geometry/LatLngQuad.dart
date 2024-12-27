@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,107 +45,155 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'LatLng.dart' as latlng_;
+import 'LatLng.dart' as latlng$_;
 
 /// from: `org.maplibre.android.geometry.LatLngQuad$Companion`
-class LatLngQuad_Companion extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LatLngQuad_Companion> $type;
+class LatLngQuad$Companion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LatLngQuad$Companion> $type;
 
-  @_$jni.internal
-  LatLngQuad_Companion.fromReference(
-    _$jni.JReference reference,
+  @jni$_.internal
+  LatLngQuad$Companion.fromReference(
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/geometry/LatLngQuad$Companion');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $LatLngQuad_Companion$Type();
+  static const nullableType = $LatLngQuad$Companion$NullableType();
+  static const type = $LatLngQuad$Companion$Type();
   static final _id_new$ = _class.constructorId(
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngQuad_Companion(
-    _$jni.JObject defaultConstructorMarker,
+  factory LatLngQuad$Companion(
+    jni$_.JObject? defaultConstructorMarker,
   ) {
-    return LatLngQuad_Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            defaultConstructorMarker.reference.pointer)
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return LatLngQuad$Companion.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$defaultConstructorMarker.pointer)
         .reference);
   }
 }
 
-final class $LatLngQuad_Companion$Type
-    extends _$jni.JObjType<LatLngQuad_Companion> {
-  @_$jni.internal
-  const $LatLngQuad_Companion$Type();
+final class $LatLngQuad$Companion$NullableType
+    extends jni$_.JObjType<LatLngQuad$Companion?> {
+  @jni$_.internal
+  const $LatLngQuad$Companion$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/geometry/LatLngQuad$Companion;';
 
-  @_$jni.internal
-  @_$core.override
-  LatLngQuad_Companion fromReference(_$jni.JReference reference) =>
-      LatLngQuad_Companion.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LatLngQuad$Companion? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : LatLngQuad$Companion.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LatLngQuad$Companion?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
-  int get hashCode => ($LatLngQuad_Companion$Type).hashCode;
+  @core$_.override
+  int get hashCode => ($LatLngQuad$Companion$NullableType).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($LatLngQuad_Companion$Type) &&
-        other is $LatLngQuad_Companion$Type;
+    return other.runtimeType == ($LatLngQuad$Companion$NullableType) &&
+        other is $LatLngQuad$Companion$NullableType;
+  }
+}
+
+final class $LatLngQuad$Companion$Type
+    extends jni$_.JObjType<LatLngQuad$Companion> {
+  @jni$_.internal
+  const $LatLngQuad$Companion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/geometry/LatLngQuad$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  LatLngQuad$Companion fromReference(jni$_.JReference reference) =>
+      LatLngQuad$Companion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LatLngQuad$Companion?> get nullableType =>
+      const $LatLngQuad$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($LatLngQuad$Companion$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LatLngQuad$Companion$Type) &&
+        other is $LatLngQuad$Companion$Type;
   }
 }
 
 /// from: `org.maplibre.android.geometry.LatLngQuad`
-class LatLngQuad extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<LatLngQuad> $type;
+class LatLngQuad extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LatLngQuad> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   LatLngQuad.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
   static final _class =
-      _$jni.JClass.forName(r'org/maplibre/android/geometry/LatLngQuad');
+      jni$_.JClass.forName(r'org/maplibre/android/geometry/LatLngQuad');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $LatLngQuad$NullableType();
   static const type = $LatLngQuad$Type();
   static final _id_Companion = _class.staticFieldId(
     r'Companion',
@@ -153,8 +202,8 @@ class LatLngQuad extends _$jni.JObject {
 
   /// from: `static public final org.maplibre.android.geometry.LatLngQuad$Companion Companion`
   /// The returned object must be released after use, by calling the [release] method.
-  static LatLngQuad_Companion get Companion =>
-      _id_Companion.get(_class, const $LatLngQuad_Companion$Type());
+  static LatLngQuad$Companion? get Companion =>
+      _id_Companion.get(_class, const $LatLngQuad$Companion$NullableType());
 
   static final _id_CREATOR = _class.staticFieldId(
     r'CREATOR',
@@ -163,49 +212,53 @@ class LatLngQuad extends _$jni.JObject {
 
   /// from: `static public final android.os.Parcelable$Creator CREATOR`
   /// The returned object must be released after use, by calling the [release] method.
-  static _$jni.JObject get CREATOR =>
-      _id_CREATOR.get(_class, const _$jni.JObjectType());
+  static jni$_.JObject? get CREATOR =>
+      _id_CREATOR.get(_class, const jni$_.JObjectNullableType());
 
   static final _id_new$ = _class.constructorId(
     r'(Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;Lorg/maplibre/android/geometry/LatLng;)V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                  _$jni.Pointer<_$jni.Void>,
-                  _$jni.JMethodIDPtr,
-                  _$jni.VarArgs<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>,
-                        _$jni.Pointer<_$jni.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>,
-              _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public void <init>(org.maplibre.android.geometry.LatLng latLng, org.maplibre.android.geometry.LatLng latLng1, org.maplibre.android.geometry.LatLng latLng2, org.maplibre.android.geometry.LatLng latLng3)`
   /// The returned object must be released after use, by calling the [release] method.
   factory LatLngQuad(
-    latlng_.LatLng latLng,
-    latlng_.LatLng latLng1,
-    latlng_.LatLng latLng2,
-    latlng_.LatLng latLng3,
+    latlng$_.LatLng latLng,
+    latlng$_.LatLng latLng1,
+    latlng$_.LatLng latLng2,
+    latlng$_.LatLng latLng3,
   ) {
+    final _$latLng = latLng.reference;
+    final _$latLng1 = latLng1.reference;
+    final _$latLng2 = latLng2.reference;
+    final _$latLng3 = latLng3.reference;
     return LatLngQuad.fromReference(_new$(
             _class.reference.pointer,
-            _id_new$ as _$jni.JMethodIDPtr,
-            latLng.reference.pointer,
-            latLng1.reference.pointer,
-            latLng2.reference.pointer,
-            latLng3.reference.pointer)
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$latLng.pointer,
+            _$latLng1.pointer,
+            _$latLng2.pointer,
+            _$latLng3.pointer)
         .reference);
   }
 
@@ -214,23 +267,23 @@ class LatLngQuad extends _$jni.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getTopLeft = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getTopLeft = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getTopLeft()`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng getTopLeft() {
-    return _getTopLeft(reference.pointer, _id_getTopLeft as _$jni.JMethodIDPtr)
-        .object(const latlng_.$LatLng$Type());
+  latlng$_.LatLng getTopLeft() {
+    return _getTopLeft(reference.pointer, _id_getTopLeft as jni$_.JMethodIDPtr)
+        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getTopRight = _class.instanceMethodId(
@@ -238,24 +291,24 @@ class LatLngQuad extends _$jni.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getTopRight = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getTopRight = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getTopRight()`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng getTopRight() {
+  latlng$_.LatLng getTopRight() {
     return _getTopRight(
-            reference.pointer, _id_getTopRight as _$jni.JMethodIDPtr)
-        .object(const latlng_.$LatLng$Type());
+            reference.pointer, _id_getTopRight as jni$_.JMethodIDPtr)
+        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getBottomRight = _class.instanceMethodId(
@@ -263,24 +316,24 @@ class LatLngQuad extends _$jni.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getBottomRight = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBottomRight = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getBottomRight()`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng getBottomRight() {
+  latlng$_.LatLng getBottomRight() {
     return _getBottomRight(
-            reference.pointer, _id_getBottomRight as _$jni.JMethodIDPtr)
-        .object(const latlng_.$LatLng$Type());
+            reference.pointer, _id_getBottomRight as jni$_.JMethodIDPtr)
+        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getBottomLeft = _class.instanceMethodId(
@@ -288,24 +341,24 @@ class LatLngQuad extends _$jni.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getBottomLeft = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _getBottomLeft = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getBottomLeft()`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng_.LatLng getBottomLeft() {
+  latlng$_.LatLng getBottomLeft() {
     return _getBottomLeft(
-            reference.pointer, _id_getBottomLeft as _$jni.JMethodIDPtr)
-        .object(const latlng_.$LatLng$Type());
+            reference.pointer, _id_getBottomLeft as jni$_.JMethodIDPtr)
+        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -313,22 +366,22 @@ class LatLngQuad extends _$jni.JObject {
     r'()I',
   );
 
-  static final _describeContents = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as _$jni.JMethodIDPtr)
+            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -337,25 +390,26 @@ class LatLngQuad extends _$jni.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JThrowablePtr Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni
-                          .VarArgs<(_$jni.Pointer<_$jni.Void>, _$jni.Int32)>)>>(
+  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          _$jni.JThrowablePtr Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
   void writeToParcel(
-    _$jni.JObject parcel,
+    jni$_.JObject parcel,
     int i,
   ) {
-    _writeToParcel(reference.pointer, _id_writeToParcel as _$jni.JMethodIDPtr,
-            parcel.reference.pointer, i)
+    final _$parcel = parcel.reference;
+    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
+            _$parcel.pointer, i)
         .check();
   }
 
@@ -364,23 +418,24 @@ class LatLngQuad extends _$jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = _$jni.ProtectedJniExtensions.lookup<
-              _$jni.NativeFunction<
-                  _$jni.JniResult Function(
-                      _$jni.Pointer<_$jni.Void>,
-                      _$jni.JMethodIDPtr,
-                      _$jni.VarArgs<(_$jni.Pointer<_$jni.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          _$jni.JniResult Function(_$jni.Pointer<_$jni.Void>,
-              _$jni.JMethodIDPtr, _$jni.Pointer<_$jni.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
   /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    _$jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as _$jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
@@ -389,50 +444,93 @@ class LatLngQuad extends _$jni.JObject {
     r'()I',
   );
 
-  static final _hashCode$1 = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as _$jni.JMethodIDPtr)
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 }
 
-final class $LatLngQuad$Type extends _$jni.JObjType<LatLngQuad> {
-  @_$jni.internal
-  const $LatLngQuad$Type();
+final class $LatLngQuad$NullableType extends jni$_.JObjType<LatLngQuad?> {
+  @jni$_.internal
+  const $LatLngQuad$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Lorg/maplibre/android/geometry/LatLngQuad;';
 
-  @_$jni.internal
-  @_$core.override
-  LatLngQuad fromReference(_$jni.JReference reference) =>
-      LatLngQuad.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  LatLngQuad? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : LatLngQuad.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LatLngQuad?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($LatLngQuad$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LatLngQuad$NullableType) &&
+        other is $LatLngQuad$NullableType;
+  }
+}
+
+final class $LatLngQuad$Type extends jni$_.JObjType<LatLngQuad> {
+  @jni$_.internal
+  const $LatLngQuad$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/geometry/LatLngQuad;';
+
+  @jni$_.internal
+  @core$_.override
+  LatLngQuad fromReference(jni$_.JReference reference) =>
+      LatLngQuad.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LatLngQuad?> get nullableType =>
+      const $LatLngQuad$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($LatLngQuad$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($LatLngQuad$Type) && other is $LatLngQuad$Type;
   }

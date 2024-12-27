@@ -35,6 +35,7 @@
 // ignore_for_file: prefer_double_quotes
 // ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -44,80 +45,128 @@
 // ignore_for_file: use_super_parameters
 
 import 'dart:core' show Object, String, bool, double, int;
-import 'dart:core' as _$core;
+import 'dart:core' as core$_;
 
-import 'package:jni/_internal.dart' as _$jni;
-import 'package:jni/jni.dart' as _$jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
 /// from: `org.maplibre.android.exceptions.InvalidMarkerPositionException`
-class InvalidMarkerPositionException extends _$jni.JObject {
-  @_$jni.internal
-  @_$core.override
-  final _$jni.JObjType<InvalidMarkerPositionException> $type;
+class InvalidMarkerPositionException extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<InvalidMarkerPositionException> $type;
 
-  @_$jni.internal
+  @jni$_.internal
   InvalidMarkerPositionException.fromReference(
-    _$jni.JReference reference,
+    jni$_.JReference reference,
   )   : $type = type,
         super.fromReference(reference);
 
-  static final _class = _$jni.JClass.forName(
+  static final _class = jni$_.JClass.forName(
       r'org/maplibre/android/exceptions/InvalidMarkerPositionException');
 
   /// The type which includes information such as the signature of this class.
+  static const nullableType = $InvalidMarkerPositionException$NullableType();
   static const type = $InvalidMarkerPositionException$Type();
   static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new$ = _$jni.ProtectedJniExtensions.lookup<
-          _$jni.NativeFunction<
-              _$jni.JniResult Function(
-                _$jni.Pointer<_$jni.Void>,
-                _$jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          _$jni.JniResult Function(
-            _$jni.Pointer<_$jni.Void>,
-            _$jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory InvalidMarkerPositionException() {
     return InvalidMarkerPositionException.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as _$jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $InvalidMarkerPositionException$Type
-    extends _$jni.JObjType<InvalidMarkerPositionException> {
-  @_$jni.internal
-  const $InvalidMarkerPositionException$Type();
+final class $InvalidMarkerPositionException$NullableType
+    extends jni$_.JObjType<InvalidMarkerPositionException?> {
+  @jni$_.internal
+  const $InvalidMarkerPositionException$NullableType();
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/exceptions/InvalidMarkerPositionException;';
 
-  @_$jni.internal
-  @_$core.override
-  InvalidMarkerPositionException fromReference(_$jni.JReference reference) =>
-      InvalidMarkerPositionException.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  InvalidMarkerPositionException? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : InvalidMarkerPositionException.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @_$jni.internal
-  @_$core.override
-  _$jni.JObjType get superType => const _$jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<InvalidMarkerPositionException?> get nullableType => this;
 
-  @_$jni.internal
-  @_$core.override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @_$core.override
+  @core$_.override
+  int get hashCode => ($InvalidMarkerPositionException$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($InvalidMarkerPositionException$NullableType) &&
+        other is $InvalidMarkerPositionException$NullableType;
+  }
+}
+
+final class $InvalidMarkerPositionException$Type
+    extends jni$_.JObjType<InvalidMarkerPositionException> {
+  @jni$_.internal
+  const $InvalidMarkerPositionException$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/exceptions/InvalidMarkerPositionException;';
+
+  @jni$_.internal
+  @core$_.override
+  InvalidMarkerPositionException fromReference(jni$_.JReference reference) =>
+      InvalidMarkerPositionException.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<InvalidMarkerPositionException?> get nullableType =>
+      const $InvalidMarkerPositionException$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
   int get hashCode => ($InvalidMarkerPositionException$Type).hashCode;
 
-  @_$core.override
+  @core$_.override
   bool operator ==(Object other) {
     return other.runtimeType == ($InvalidMarkerPositionException$Type) &&
         other is $InvalidMarkerPositionException$Type;
