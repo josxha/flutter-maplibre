@@ -21,7 +21,6 @@ public extension UIColor {
                     self.init(red: r, green: g, blue: b, alpha: a)
                     return
                 }
-                break;
             case 8: // with alpha value e.g. FFFF0000
                 if scanner.scanHexInt64(&hexNumber) {
                     a = CGFloat((hexNumber & 0xFF00_0000) >> 24) / 255
@@ -31,7 +30,6 @@ public extension UIColor {
                     self.init(red: r, green: g, blue: b, alpha: a)
                     return
                 }
-                break;
             case 3: // short form e.g. "F00"
                 if scanner.scanHexInt64(&hexNumber) {
                     a = 255
@@ -41,9 +39,8 @@ public extension UIColor {
                     self.init(red: r, green: g, blue: b, alpha: a)
                     return
                 }
-                break;
             default:
-                break;
+                break
             }
         }
         return nil

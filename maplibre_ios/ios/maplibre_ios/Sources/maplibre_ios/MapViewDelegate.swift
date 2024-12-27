@@ -62,39 +62,39 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     @objc func onTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        _flutterApi.onClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
+        _flutterApi.onClick(point: LngLat(lng: point.longitude, lat: point.latitude)) { _ in }
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        _flutterApi.onLongClick(point: LngLat(lng:point.longitude, lat: point.latitude)) { _ in }
+        _flutterApi.onLongClick(point: LngLat(lng: point.longitude, lat: point.latitude)) { _ in }
     }
 
     func view() -> UIView {
         return _view
     }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
         // Do not override the default behavior
         return true
     }
-    
+
     // MLNMapViewDelegate method called when map has finished loading
-    func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
+    func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
         _mapView = mapView
         print("mapView didFinishLoading, call onStyleLoaded")
-        _flutterApi.onStyleLoaded() { _ in }
+        _flutterApi.onStyleLoaded { _ in }
     }
-    
-    func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
+
+    func mapView(_: MLNMapView, regionDidChangeAnimated _: Bool) {
         onCameraMoved()
     }
-    
-    func mapViewRegionIsChanging(_ mapView: MLNMapView) {
+
+    func mapViewRegionIsChanging(_: MLNMapView) {
         onCameraMoved()
     }
-    
+
     func onCameraMoved() {
         var mlnCamera = _mapView.camera
         var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
@@ -138,13 +138,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         completion(.success(()))
     }
 
-    func loadImage(url _: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {
-        //completion(.success((bytes)))
+    func loadImage(url _: String, completion _: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {
+        // completion(.success((bytes)))
     }
 
     func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void) {
         // Main Thread Checker: UI API called on a background thread: -[UIView frame]
-        //DispatchQueue.main.async {
+        // DispatchQueue.main.async {
         print("addImage before")
         var style = _mapView.style!
         var imageData = bytes.data
@@ -152,7 +152,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         style.setImage(image, forName: id)
         print("addImage afters")
         print("added image: \(style.image(forName: id))")
-        //}
+        // }
         completion(.success(()))
     }
 }
