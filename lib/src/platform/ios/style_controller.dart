@@ -2,15 +2,16 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerIos implements StyleController {
-  const StyleControllerIos._(this._ffiStyle, this._hostApi);
+  StyleControllerIos._(this._ffiStyle, this._hostApi);
 
   final MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
+    // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
     // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
-    _ffiStyle.setImage_forName_(
+    /*_ffiStyle.setImage_forName_(
       NSImage.objectWithItemProviderData_typeIdentifier_error_(
         bytes.toNSData(),
         // The uniform type identifier (UTI) representing the data type of data.
@@ -18,7 +19,8 @@ class StyleControllerIos implements StyleController {
         nullptr,
       )!,
       id.toNSString(),
-    );
+    );*/
+    await _hostApi.addImage(id, bytes);
   }
 
   @override
@@ -26,9 +28,11 @@ class StyleControllerIos implements StyleController {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        final ffiLayer = ffiStyleLayer = MLNBackgroundStyleLayer.new1()
-          ..initWithIdentifier_(layer.id.toNSString());
-      // TODO add paint and layout properties
+        ffiStyleLayer = MLNBackgroundStyleLayer.new1()
+          ..initWithIdentifier_(layer.id.toNSString())
+          ..backgroundColor = NSExpression.expressionWithFormat_(
+            layer.color.toHexString(alpha: false).toNSString(),
+          );
       case StyleLayerWithSource():
         final ffiSource =
             _ffiStyle.sourceWithIdentifier_(layer.sourceId.toNSString());
@@ -37,63 +41,53 @@ class StyleControllerIos implements StyleController {
         }
         switch (layer) {
           case FillStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNFillStyleLayer.new1()
+            ffiStyleLayer = MLNFillStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
-          //for (final entry in layer.paint.entries) {}
-          //NSExpression.expressionWithFormat_(expressionFormat);
           case CircleStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
+            ffiStyleLayer = MLNCircleStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case FillExtrusionStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
+            ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case HeatmapStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
+            ffiStyleLayer = MLNHeatmapStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case HillshadeStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNHillshadeStyleLayer.new1()
+            ffiStyleLayer = MLNHillshadeStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case LineStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNLineStyleLayer.new1()
+            ffiStyleLayer = MLNLineStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case RasterStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNRasterStyleLayer.new1()
+            ffiStyleLayer = MLNRasterStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
           case SymbolStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNSymbolStyleLayer.new1()
+            ffiStyleLayer = MLNSymbolStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-          // TODO add paint and layout properties
         }
     }
 
@@ -102,6 +96,8 @@ class StyleControllerIos implements StyleController {
         'The Layer is not supported: ${layer.runtimeType}',
       );
     }
+    ffiStyleLayer.setProperties(layer.paint);
+    ffiStyleLayer.setProperties(layer.layout);
     if (layer.minZoom case final double minZoom) {
       ffiStyleLayer.minimumZoomLevel = minZoom;
     }

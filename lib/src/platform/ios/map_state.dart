@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +30,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
+    // print('buildPlatformWidget');
     const viewType = 'plugins.flutter.io/maplibre';
     return UiKitView(
       viewType: viewType,
@@ -156,6 +156,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   void onStyleLoaded() {
+    print('onStyleLoaded: ${_mapView.styleURL.absoluteString}');
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);
@@ -171,6 +172,13 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   void dispose() {
     style?.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    //_updateOptions(oldWidget);
+    layerManager?.updateLayers(widget.layers);
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
