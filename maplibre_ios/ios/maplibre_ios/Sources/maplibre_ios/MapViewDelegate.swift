@@ -40,19 +40,19 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                     self._mapView.setCenter(mapCenter, zoomLevel: mapOptions.zoom, animated: false)
                 }
                 self._mapView.showAttribution(false)
-                
+
                 self._mapView.minimumZoomLevel = mapOptions.minZoom
                 self._mapView.maximumZoomLevel = mapOptions.maxZoom
                 self._mapView.minimumPitch = mapOptions.minPitch
                 self._mapView.maximumPitch = mapOptions.maxPitch
-                
+
                 self._mapView.styleURL = URL(string: mapOptions.style)
-                
+
                 self._mapView.allowsRotating = mapOptions.gestures.rotate
                 self._mapView.allowsScrolling = mapOptions.gestures.pan
                 self._mapView.allowsTilting = mapOptions.gestures.tilt
                 self._mapView.allowsZooming = mapOptions.gestures.zoom
-                
+
                 self._flutterApi.onMapReady { _ in }
                 // tap gestures
                 self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:))))
