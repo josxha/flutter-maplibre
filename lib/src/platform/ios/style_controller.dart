@@ -41,69 +41,53 @@ class StyleControllerIos implements StyleController {
         }
         switch (layer) {
           case FillStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNFillStyleLayer.new1()
+            ffiStyleLayer = MLNFillStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case CircleStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNCircleStyleLayer.new1()
+            ffiStyleLayer = MLNCircleStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case FillExtrusionStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
+            ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case HeatmapStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNHeatmapStyleLayer.new1()
+            ffiStyleLayer = MLNHeatmapStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case HillshadeStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNHillshadeStyleLayer.new1()
+            ffiStyleLayer = MLNHillshadeStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case LineStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNLineStyleLayer.new1()
+            ffiStyleLayer = MLNLineStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case RasterStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNRasterStyleLayer.new1()
+            ffiStyleLayer = MLNRasterStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
           case SymbolStyleLayer():
-            final ffiLayer = ffiStyleLayer = MLNSymbolStyleLayer.new1()
+            ffiStyleLayer = MLNSymbolStyleLayer.new1()
               ..initWithIdentifier_source_(
                 layer.id.toNSString(),
                 ffiSource,
               );
-            ffiLayer.setProperties(layer.paint);
-            ffiLayer.setProperties(layer.layout);
         }
     }
 
@@ -112,6 +96,8 @@ class StyleControllerIos implements StyleController {
         'The Layer is not supported: ${layer.runtimeType}',
       );
     }
+    ffiStyleLayer.setProperties(layer.paint);
+    ffiStyleLayer.setProperties(layer.layout);
     if (layer.minZoom case final double minZoom) {
       ffiStyleLayer.minimumZoomLevel = minZoom;
     }

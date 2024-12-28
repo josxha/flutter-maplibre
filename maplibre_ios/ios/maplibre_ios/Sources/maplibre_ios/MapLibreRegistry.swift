@@ -36,28 +36,19 @@ import UIKit
     }
 
     @objc public static func setExpression(target: NSObject, field: String, expression: NSExpression) {
-        switch field {
-        case "iconImage":
-            (target as! MLNSymbolStyleLayer).iconImageName = expression
-        case "iconAllowOverlap":
-            (target as! MLNSymbolStyleLayer).iconAllowsOverlap = expression
-        case "iconSize":
-            (target as! MLNSymbolStyleLayer).iconScale = expression
-        default:
-            do {
-                try target.setValue(expression, forKey: field)
-            } catch {
-                print("Couldn't set expression in Helpers.setExpression()")
-            }
+        do {
+            // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
+            try target.setValue(expression, forKey: field)
+        } catch {
+            print("Couldn't set expression in Helpers.setExpression()")
         }
     }
 
     @objc public static func parseExpression(propertyName: String, expression: String) -> NSExpression? {
         print("\(propertyName): \(expression)")
-        var propertyNameLower = propertyName.lowercased()
         do {
             // can't create an Expression using the default method if the data is a hex string
-            if propertyNameLower.contains("color") && expression.first == "#" {
+            if propertyName.contains("color") && expression.first == "#" {
                 var color = UIColor(hexString: expression)
                 return NSExpression(forConstantValue: color)
             }
