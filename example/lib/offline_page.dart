@@ -71,7 +71,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                       });
                                     }
                                   }
-                                } catch (error, stacktrace) {
+                                } on Exception catch (error, stacktrace) {
                                   _print(error.toString());
                                   debugPrintStack(stackTrace: stacktrace);
                                   setState(
@@ -133,7 +133,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                       });
                                     }
                                   }
-                                } catch (error, stacktrace) {
+                                }  on Exception catch (error, stacktrace) {
                                   _print(error.toString());
                                   debugPrintStack(stackTrace: stacktrace);
                                   setState(
@@ -172,7 +172,7 @@ class _OfflinePageState extends State<OfflinePage> {
                       _print(
                         'offline regions merged:\n${regions.join('\n')}',
                       );
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -185,7 +185,7 @@ class _OfflinePageState extends State<OfflinePage> {
                       final region =
                           await manager.getOfflineRegion(regionId: 1);
                       _print('offline region: $region');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -197,7 +197,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       manager.setOfflineTileCountLimit(amount: 5000);
                       _print('offline tile count limit set');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -209,7 +209,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       await manager.setMaximumAmbientCacheSize(bytes: 10000000);
                       _print('maximum ambient cache size set');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -221,7 +221,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       await manager.clearAmbientCache();
                       _print('ambient cache cleared');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -233,7 +233,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       await manager.invalidateAmbientCache();
                       _print('ambient cache invalidated');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -245,7 +245,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       final regions = await manager.listOfflineRegions();
                       _print('offline regions:\n${regions.join('\n')}');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -257,7 +257,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       await manager.packDatabase();
                       _print('database optimized');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -269,7 +269,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       await manager.resetDatabase();
                       _print('database reset');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }
@@ -281,7 +281,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     try {
                       manager.runPackDatabaseAutomatically(enabled: true);
                       _print('enable automatic database optimization');
-                    } catch (error, stacktrace) {
+                    }  on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
                     }

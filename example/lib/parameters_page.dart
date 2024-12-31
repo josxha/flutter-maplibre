@@ -108,7 +108,6 @@ class _SliderWidget extends StatelessWidget {
     required this.end,
     required this.max,
     required this.label,
-    // ignore: unused_element
     this.min = 0,
   });
 

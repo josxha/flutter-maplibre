@@ -52,7 +52,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
                   );
                   debugPrint('requestLocationPermissions granted: $granted');
                   setState(() {}); // refresh the screen
-                } catch (error, stacktrace) {
+                }  on Exception catch (error, stacktrace) {
                   debugPrint(error.toString());
                   debugPrintStack(stackTrace: stacktrace);
                 }
