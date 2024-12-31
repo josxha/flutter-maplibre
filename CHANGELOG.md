@@ -29,6 +29,7 @@ A big thanks to @gabbopalma for his contributions in this release.
 
 - Bump MapLibre Native on Android to 11.7.+.
 - Bump MapLibre GL JS on Web to version 5.
+- Add `style.setProjection()` to switch to globe projection programmatically.
 - Add a user location button to the `ControlButtons`.
 - Bump ktlint to 0.4.19 and gradle to 8.6.1.
 - Bump jni and jnigen to 0.13.0 and migrate bindings.
