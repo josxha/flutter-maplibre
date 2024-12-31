@@ -81,7 +81,7 @@ const config: Config = {
           label: 'Features',
         },
         {
-          href: '/peer-comparison/',
+          href: '/compare/',
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Compare',
