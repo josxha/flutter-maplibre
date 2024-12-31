@@ -1,5 +1,3 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/styled_map_page.dart';
@@ -65,6 +63,6 @@ const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
     'fill-extrusion-base': ['get', 'base_height'],
 
     // Make extrusions slightly opaque for see through indoor walls.
-    'fill-extrusion-opacity': 0.5
+    'fill-extrusion-opacity': 0.5,
   },
 );
