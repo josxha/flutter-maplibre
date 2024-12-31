@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 @immutable
 class UserLocationPage extends StatefulWidget {
@@ -68,7 +68,7 @@ class _UserLocationPageState extends State<UserLocationPage> {
               options: MapOptions(
                 initZoom: 1,
                 initCenter: Position(0, 0),
-                initStyle: StyledMapPage.styleUrl,
+                initStyle: MapStyles.protomapsLight,
               ),
               onMapCreated: (controller) => _controller = controller,
             ),

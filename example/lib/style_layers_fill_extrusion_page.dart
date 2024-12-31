@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 @immutable
 class StyleLayersFillExtrusionPage extends StatefulWidget {
@@ -27,7 +27,7 @@ class _StyleLayersFillExtrusionPageState
           initZoom: 15.99,
           initPitch: 40,
           initBearing: 20,
-          initStyle: StyledMapPage.styleUrl,
+          initStyle: MapStyles.protomapsLight,
         ),
         onStyleLoaded: _onStyleLoaded,
       ),

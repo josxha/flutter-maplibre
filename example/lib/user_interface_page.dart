@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 @immutable
 class UserInterfacePage extends StatefulWidget {
@@ -22,8 +22,8 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
           initZoom: 3,
           initCenter: Position(9.17, 47.68),
           initStyle: Theme.of(context).brightness == Brightness.light
-              ? StyledMapPage.styleUrl
-              : StyledMapPage.styleUrlDark,
+              ? MapStyles.protomapsLight
+              : MapStyles.protomapsDark,
         ),
         children: const [
           MapScalebar(),

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 import 'app.dart';
 
@@ -225,7 +225,7 @@ void main() {
         options: MapOptions(
           initCenter: Position(0, 0),
           initZoom: 10,
-          initStyle: StyledMapPage.styleUrl,
+          initStyle: MapStyles.protomapsLight,
         ),
       );
       await tester.pumpWidget(app);
