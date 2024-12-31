@@ -57,7 +57,7 @@ const _circleStyleLayer = CircleStyleLayer(
         1,
         1,
         6,
-        50
+        50,
       ]
     ],
     // Color circle by earthquake magnitude
@@ -76,7 +76,7 @@ const _circleStyleLayer = CircleStyleLayer(
       5,
       'rgb(239,138,98)',
       6,
-      'rgb(178,24,43)'
+      'rgb(178,24,43)',
     ],
     'circle-stroke-color': 'white',
     'circle-stroke-width': 1,
@@ -88,7 +88,7 @@ const _circleStyleLayer = CircleStyleLayer(
       7,
       0,
       8,
-      1
-    ]
+      1,
+    ],
   },
 );
