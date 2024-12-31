@@ -37,6 +37,22 @@ abstract interface class StyleController {
   /// Removes an image from the map
   Future<void> removeImage(String id);
 
+  /// Set the map projection.
+  ///
+  /// [MapProjection.globe] is currently on supported on web.
+  void setProjection(MapProjection projection);
+
   /// Clean up resources.
   void dispose();
+}
+
+/// The map projections.
+///
+/// https://maplibre.org/maplibre-style-spec/projection/
+enum MapProjection {
+  /// The default web mercator projection.
+  mercator,
+
+  /// Globe projection. Only supported on web.
+  globe;
 }

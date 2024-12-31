@@ -7,7 +7,7 @@ description: 'Paint and Layout properties can be used to style your layers and c
 # Paint & Layout Properties
 
 While the annotation [Layers](../category/layers) can use simple values for
-styling, [Layers](../category/layers) can use the powerful paint and layout
+styling, [Style Layers](../category/style-layers) can use the powerful paint and layout
 properties. See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers)
 for all available properties for the different layers.

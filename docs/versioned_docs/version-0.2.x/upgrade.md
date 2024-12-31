@@ -58,3 +58,23 @@ nullable `mapController.style` getter.
 
 The `onStyleLoaded` callback now returns the `StyleController` of the loaded
 style: `onStyleLoaded: (style) { ... }`
+
+### 4. Update your web integration
+
+maplibre 0.2.0
+uses [MapLibre GL JS version 5.0.0](https://github.com/maplibre/maplibre-gl-js/releases/tag/v5.0.0)
+onwards. Open your `web/index.html` file and update the used library version.
+
+```html title="web/index.html"
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- other html -->
+    <!-- highlight-start -->
+    <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
+          rel='stylesheet'/>
+    <!-- highlight-end -->
+</head>
+</html>
+```

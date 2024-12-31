@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 @immutable
 class OfflinePage extends StatefulWidget {
@@ -51,7 +51,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   minZoom: 0,
                                   maxZoom: 2,
                                   bounds: _boundsWorld,
-                                  mapStyleUrl: StyledMapPage.styleUrl,
+                                  mapStyleUrl: MapStyles.protomapsLight,
                                   pixelDensity: 1,
                                 );
                                 try {
@@ -113,7 +113,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   minZoom: 10,
                                   maxZoom: 14,
                                   bounds: _boundsBregenz,
-                                  mapStyleUrl: StyledMapPage.styleUrl,
+                                  mapStyleUrl: MapStyles.protomapsLight,
                                   pixelDensity: 1,
                                 );
                                 try {
@@ -334,7 +334,7 @@ class _OfflineMapPage extends StatelessWidget {
       appBar: AppBar(title: Text('Offline Map "$title"')),
       body: MapLibreMap(
         options: MapOptions(
-          initStyle: StyledMapPage.styleUrl,
+          initStyle: MapStyles.protomapsLight,
           maxBounds: bounds,
           initCenter: center,
           initZoom: zoom,
