@@ -1,3 +1,58 @@
+## 0.2.0
+
+This release is a collection of user affecting changes along a couple of new
+features and bug fixes.
+Head over to
+the [migration guide](https://flutter-maplibre.pages.dev/docs/upgrade) to learn
+more on how to update your implementation.
+
+A big thanks to @gabbopalma for his contributions in this release.
+
+### Breaking Changes
+
+- Rename the `Layer` postfix of the more low level style classes
+  to `StyleLayer`.
+- Remove web-only map controls (ScaleControl, GeolocateControl,
+  AttributionControl, FullscreenControl, LogoControl, NavigationControl,
+  TerrainControl).
+- Remove MapLibre Native specific User Interface options (logo, attribution,
+  compass).
+- Rename `ZoomButtons` to `ControlButtons`.
+- Move style related controller calls to the `StyleController` that can be
+  accessed via a nullable `mapController.style` field.
+- Return the `StyleController` in the `onStyleLoaded()` callback and in
+  the `MapEventStyleLoaded` event.
+- An `ImageSource` now requires a static typed `LngLatQuad` object.
+- Set the minimum required Flutter version to 3.27.
+
+### New Features
+
+- Bump MapLibre Native on Android to 11.7.+.
+- Bump MapLibre GL JS on Web to version 5.
+- Add `style.setProjection()` to switch to globe projection programmatically.
+- Add a user location button to the `ControlButtons`.
+- Bump ktlint to 0.4.19 and gradle to 8.6.1.
+- Bump jni and jnigen to 0.13.0 and migrate bindings.
+- Widen the gradle dependency constraints to allow patch updates.
+- Add logo as pub.dev screenshot.
+- Structure the API docs in topics.
+- Add an internal `WidgetStateNative` for better code reuse in the upcoming iOS
+  release.
+
+## Bug Fixes
+
+- Fix can't rotate with two fingers on web.
+- Fix text overflow in the scale bar widget.
+- Fix deprecations introduced in Flutter 3.27.
+
+## Misc
+
+- Enhance documentation.
+- Build example app with java 21
+
+Full
+Changelog: [v0.1.2...v0.2.0](https://github.com/josxha/flutter-maplibre/compare/v0.1.2...v0.2.0)
+
 ## 0.1.2
 
 This release adds the last missing features for Android and Web, that are were
@@ -18,12 +73,12 @@ before iOS gets added as a supported platform.
 - Add `MapOptions.of(context)` and `MapOptions.maybeOf(context)`.
 - Add `padding` and `alignment` parameters to the `MapScalebar` widget.
 
-## Bug Fixes
+### Bug Fixes
 
 - Fix WebAssembly builds.
 - Remove unused `flutter_markdown` package.
 
-## Misc
+### Misc
 
 - Add unit tests, add Android integration tests.
 - Use [codecov](https://app.codecov.io/gh/josxha/flutter-maplibre) to monitor

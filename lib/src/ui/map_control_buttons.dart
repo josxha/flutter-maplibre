@@ -153,7 +153,7 @@ class _MapControlButtonsState extends State<MapControlButtons> {
       setState(() => _trackState = _TrackLocationState.gpsFixed);
 
       if (trackLocation) await controller.trackLocation();
-    } catch (error) {
+    } on Exception {
       setState(() => _trackState = _TrackLocationState.gpsNotFixed);
     }
   }
