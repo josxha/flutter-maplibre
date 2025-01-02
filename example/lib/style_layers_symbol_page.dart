@@ -53,7 +53,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
                 },
               ),
             );
-          } catch (error, stacktrace) {
+          } on Exception catch (error, stacktrace) {
             debugPrint(error.toString());
             debugPrintStack(stackTrace: stacktrace);
           }
