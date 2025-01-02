@@ -264,4 +264,9 @@ class StyleControllerIos implements StyleController {
   }
 
   NSArray _getLayers() => _ffiStyle.layers;
+
+  @override
+  void setProjection(MapProjection projection) {
+    // no implementation needed, globe is not supported on web.
+  }
 }
