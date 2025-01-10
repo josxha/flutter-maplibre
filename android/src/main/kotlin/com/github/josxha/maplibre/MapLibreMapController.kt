@@ -2,13 +2,6 @@ package com.github.josxha.maplibre
 
 // if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
 
-import CameraChangeReason
-import LngLat
-import LongPressEventType
-import MapCamera
-import MapLibreFlutterApi
-import MapLibreHostApi
-import MapOptions
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -47,6 +40,13 @@ import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
+import CameraChangeReason
+import LngLat
+import LongPressEventType
+import MapCamera
+import MapLibreFlutterApi
+import MapLibreHostApi
+import MapOptions
 
 class MapLibreMapController(
     private val viewId: Int,
