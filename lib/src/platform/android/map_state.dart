@@ -507,7 +507,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         return [];
       }
 
-      final features = queryResultsFeatures.map((f) => f?.toFeature()).nonNulls.toList();
+      final features =
+          queryResultsFeatures.map((f) => f?.toFeature()).nonNulls.toList();
       queryResultsFeatures.release();
 
       return features;

@@ -278,7 +278,8 @@ class MarkerLayer extends Layer<Point> {
         other.textHaloWidth == textHaloWidth &&
         other.textHaloBlur == textHaloBlur &&
         listEquals(other.textTranslate, textTranslate) &&
-        other.iconAnchor == iconAnchor;
+        other.iconAnchor == iconAnchor &&
+        const DeepCollectionEquality().equals(other.list, list);
   }
 
   @override
@@ -319,7 +320,8 @@ class MarkerLayer extends Layer<Point> {
         textHaloWidth.hashCode ^
         textHaloBlur.hashCode ^
         textTranslate.hashCode ^
-        iconAnchor.hashCode;
+        iconAnchor.hashCode ^
+        const DeepCollectionEquality().hash(list);
   }
 }
 

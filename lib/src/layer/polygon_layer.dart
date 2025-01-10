@@ -43,9 +43,19 @@ class PolygonLayer extends Layer<Polygon> {
   bool operator ==(covariant PolygonLayer other) {
     if (identical(this, other)) return true;
 
-    return other.color == color && other.outlineColor == outlineColor;
+    return other.color == color &&
+        other.outlineColor == outlineColor &&
+        const DeepCollectionEquality().equals(
+          other.list.map((e) => e.geometry?.coordinates).toList(),
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
   }
 
   @override
-  int get hashCode => color.hashCode ^ outlineColor.hashCode;
+  int get hashCode {
+    return color.hashCode ^
+        outlineColor.hashCode ^
+        const DeepCollectionEquality()
+            .hash(list.map((e) => e.geometry?.coordinates).toList());
+  }
 }

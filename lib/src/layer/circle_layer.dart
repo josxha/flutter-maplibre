@@ -67,7 +67,8 @@ class CircleLayer extends Layer<Point> {
         other.color == color &&
         other.blur == blur &&
         other.strokeWidth == strokeWidth &&
-        other.strokeColor == strokeColor;
+        other.strokeColor == strokeColor &&
+        const DeepCollectionEquality().equals(other.list, list);
   }
 
   @override
@@ -76,6 +77,7 @@ class CircleLayer extends Layer<Point> {
         color.hashCode ^
         blur.hashCode ^
         strokeWidth.hashCode ^
-        strokeColor.hashCode;
+        strokeColor.hashCode ^
+        const DeepCollectionEquality().hash(list);
   }
 }

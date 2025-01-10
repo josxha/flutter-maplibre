@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/extensions.dart';
@@ -53,8 +54,8 @@ sealed class Layer<G extends GeometryObject> {
       identical(this, other) ||
       other is Layer &&
           runtimeType == other.runtimeType &&
-          listEquals(list, other.list);
+          const DeepCollectionEquality().equals(list, other.list);
 
   @override
-  int get hashCode => list.hashCode;
+  int get hashCode => const DeepCollectionEquality().hash(list);
 }

@@ -63,7 +63,11 @@ class PolylineLayer extends Layer<LineString> {
         other.width == width &&
         other.gapWidth == gapWidth &&
         other.blur == blur &&
-        listEquals(other.dashArray, dashArray);
+        listEquals(other.dashArray, dashArray) &&
+        const DeepCollectionEquality().equals(
+          other.list.map((e) => e.geometry?.coordinates).toList(),
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
   }
 
   @override
@@ -72,6 +76,8 @@ class PolylineLayer extends Layer<LineString> {
         width.hashCode ^
         gapWidth.hashCode ^
         blur.hashCode ^
-        dashArray.hashCode;
+        dashArray.hashCode ^
+        const DeepCollectionEquality()
+            .hash(list.map((e) => e.geometry?.coordinates).toList());
   }
 }
