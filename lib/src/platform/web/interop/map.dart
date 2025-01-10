@@ -87,6 +87,11 @@ extension type JsMap._(Camera _) implements Camera {
   /// Update the maximum bounding box of the map camera.
   external void setMaxBounds(LngLatBounds? maxBounds);
 
+  /// Update the used projection.
+  ///
+  /// https://maplibre.org/maplibre-style-spec/projection/
+  external void setProjection(ProjectionSpecification projection);
+
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
@@ -230,6 +235,20 @@ extension type ImageSpecification._(JSObject _) implements JSObject {
     required int width,
     required int height,
     required JSUint8Array data,
+  });
+}
+
+/// Projection used by [JsMap.setProjection].
+///
+/// Defaults to mercator. Supports interpolate expressions.
+@anonymous
+@JS()
+extension type ProjectionSpecification._(JSObject _) implements JSObject {
+  /// Create a new [ProjectionSpecification] object.
+  external ProjectionSpecification({
+    /// The projection definition type. Can be specified as a string, a
+    /// transition state, or an expression.
+    required String type,
   });
 }
 

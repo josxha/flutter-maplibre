@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/map_styles.dart';
 
 import 'app.dart';
 
@@ -16,7 +16,7 @@ void main() {
         maxZoom: 2,
         initZoom: 1,
         initCenter: Position(1, 2),
-        initStyle: StyledMapPage.styleUrlDark,
+        initStyle: MapStyles.protomapsLight,
       );
       final completer = Completer<MapController>();
       await tester.pumpWidget(

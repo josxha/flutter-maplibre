@@ -1,5 +1,3 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -51,7 +49,7 @@ const _heatmapStyleLayer = HeatmapStyleLayer(
       0,
       0,
       6,
-      1
+      1,
     ],
     // Increase the heatmap color weight weight by zoom level
     // heatmap-intensity is a multiplier on top of heatmap-weight
@@ -62,7 +60,7 @@ const _heatmapStyleLayer = HeatmapStyleLayer(
       0,
       1,
       9,
-      3
+      3,
     ],
     // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
     // Begin color ramp at 0-stop with a 0-transparency color
@@ -82,7 +80,7 @@ const _heatmapStyleLayer = HeatmapStyleLayer(
       0.8,
       'rgb(239,138,98)',
       1,
-      'rgb(178,24,43)'
+      'rgb(178,24,43)',
     ],
     // Adjust the heatmap radius by zoom level
     'heatmap-radius': [
@@ -92,7 +90,7 @@ const _heatmapStyleLayer = HeatmapStyleLayer(
       0,
       2,
       9,
-      20
+      20,
     ],
     // Transition from heatmap to circle layer by zoom level
     'heatmap-opacity': [
@@ -102,7 +100,7 @@ const _heatmapStyleLayer = HeatmapStyleLayer(
       7,
       1,
       9,
-      0
-    ]
+      0,
+    ],
   },
 );

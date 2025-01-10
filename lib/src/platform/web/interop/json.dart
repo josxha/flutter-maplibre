@@ -1,5 +1,5 @@
 @JS('JSON')
-library json;
+library;
 
 import 'dart:js_interop';
 

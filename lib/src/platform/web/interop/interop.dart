@@ -1,5 +1,5 @@
 @JS('maplibregl')
-library maplibre_gl;
+library;
 
 import 'dart:js_interop';
 

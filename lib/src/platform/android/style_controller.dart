@@ -223,6 +223,11 @@ class StyleControllerAndroid implements StyleController {
 
   JList<jni.Layer?> _getLayers() => _jniStyle.getLayers()!;
 
+  @override
+  void setProjection(MapProjection projection) {
+    // no implementation needed, globe is not supported on web.
+  }
+
   JArray<JString> _getLayersIds() => _getQueryLayerIds(_getLayers());
 
   JArray<JString> _getQueryLayerIds(JList jniLayers) {
