@@ -15,13 +15,13 @@ object Helpers {
         bounds: LatLngBounds,
         minZoom: Double,
         maxZoom: Double,
-        pixelRatio: Float,
+        pixelRatio: Float
     ): OfflineTilePyramidRegionDefinition =
         OfflineTilePyramidRegionDefinition(
             styleURL,
             bounds,
             minZoom,
             maxZoom,
-            pixelRatio,
+            pixelRatio
         )
 }
