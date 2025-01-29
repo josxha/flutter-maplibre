@@ -17,8 +17,6 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
-import java.io.IOException
-import java.net.URL
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.geometry.LatLng
@@ -45,6 +43,8 @@ import org.maplibre.android.style.layers.PaintPropertyValue
 import org.maplibre.android.style.layers.PropertyValue
 import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
+import java.io.IOException
+import java.net.URL
 
 class MapLibreMapController(
     private val viewId: Int,

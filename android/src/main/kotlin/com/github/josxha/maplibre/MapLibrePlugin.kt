@@ -38,7 +38,7 @@ class MapLibrePlugin :
                         override fun getLifecycle(): Lifecycle? = lifecycle
                     },
                     binaryMessenger = binding.binaryMessenger,
-                )
+                ),
             )
     }
 
