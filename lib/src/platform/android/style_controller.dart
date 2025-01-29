@@ -228,11 +228,11 @@ class StyleControllerAndroid implements StyleController {
     // no implementation needed, globe is not supported on web.
   }
 
-  JArray<JString> _getLayersIds() => _getQueryLayerIds(_getLayers());
+  JArray<JString?> _getLayersIds() => _getQueryLayerIds(_getLayers());
 
-  JArray<JString> _getQueryLayerIds(JList jniLayers) {
+  JArray<JString?> _getQueryLayerIds(JList jniLayers) {
     // Use a list to temporary store the layer ids and avoid null values.
-    final queryLayerIds = JList.array(JString.type);
+    final queryLayerIds = JList.array(JString.nullableType);
 
     for (var i = jniLayers.length - 1; i >= 0; i--) {
       final jniLayer = jniLayers[i]!;
@@ -262,9 +262,10 @@ class StyleControllerAndroid implements StyleController {
       }
     }
 
-    final resultArray = JArray<JString>(JString.type, queryLayerIds.length);
+    final resultArray =
+        JArray<JString?>(JString.nullableType, queryLayerIds.length);
     for (var i = 0; i < queryLayerIds.length; i++) {
-      resultArray[i] = queryLayerIds[i];
+      if (queryLayerIds[i] != null) resultArray[i] = queryLayerIds[i];
     }
     queryLayerIds.release();
 

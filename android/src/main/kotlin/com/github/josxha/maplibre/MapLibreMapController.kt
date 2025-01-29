@@ -52,7 +52,7 @@ class MapLibreMapController(
     private val viewId: Int,
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
-    binaryMessenger: BinaryMessenger
+    binaryMessenger: BinaryMessenger,
 ) : PlatformView,
     DefaultLifecycleObserver,
     OnMapReadyCallback,
@@ -83,7 +83,7 @@ class MapLibreMapController(
                 cameraBuilder.target(
                     LatLng(
                         mapOptions.center!!.lat,
-                        mapOptions.center!!.lng
+                        mapOptions.center!!.lng,
                     )
                 )
             }
@@ -230,7 +230,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -248,7 +248,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = CircleLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -265,7 +265,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = BackgroundLayer(id)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -283,7 +283,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillExtrusionLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -301,7 +301,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HeatmapLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -319,7 +319,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HillshadeLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -337,7 +337,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = LineLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -355,7 +355,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = RasterLayer(id, sourceId)
         // layer.setProperties(*parseProperties(paint), *parseProperties(layout))
@@ -373,7 +373,7 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val layer = SymbolLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
@@ -387,7 +387,7 @@ class MapLibreMapController(
 
     override fun loadImage(
         url: String,
-        callback: (Result<ByteArray>) -> Unit
+        callback: (Result<ByteArray>) -> Unit,
     ) {
         try {
             val bytes = URL(url).openConnection().getInputStream().readBytes()
@@ -400,7 +400,7 @@ class MapLibreMapController(
     override fun addImage(
         id: String,
         bytes: ByteArray,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<Unit>) -> Unit,
     ) {
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
@@ -421,7 +421,7 @@ class MapLibreMapController(
         override fun onMove(
             detector: MoveGestureDetector,
             distanceX: Float,
-            distanceY: Float
+            distanceY: Float,
         ): Boolean {
             val pointLatLng = motionEventToLngLat(detector.currentEvent)
             if (detector.pointersCount > 1) {
@@ -436,7 +436,7 @@ class MapLibreMapController(
         override fun onMoveEnd(
             detector: MoveGestureDetector,
             velocityX: Float,
-            velocityY: Float
+            velocityY: Float,
         ) {
             val pointLatLng = motionEventToLngLat(detector.currentEvent)
             stopDragging(pointLatLng)

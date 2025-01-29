@@ -37,7 +37,7 @@ class MapLibrePlugin :
                     object : LifecycleProvider {
                         override fun getLifecycle(): Lifecycle? = lifecycle
                     },
-                    binaryMessenger = binding.binaryMessenger
+                    binaryMessenger = binding.binaryMessenger,
                 )
             )
     }
@@ -66,7 +66,7 @@ class MapLibrePlugin :
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ): Boolean {
         permissionsManager?.onRequestPermissionsResult(requestCode, permissions, grantResults)
         return true
@@ -76,7 +76,7 @@ class MapLibrePlugin :
 
     override fun requestLocationPermissions(
         explanation: String,
-        callback: (Result<Boolean>) -> Unit
+        callback: (Result<Boolean>) -> Unit,
     ) {
         permissionsManager =
             PermissionsManager(
@@ -89,7 +89,7 @@ class MapLibrePlugin :
                     override fun onPermissionResult(granted: Boolean) {
                         callback(Result.success(granted))
                     }
-                }
+                },
             )
         permissionsManager?.requestLocationPermissions(MapLibreRegistry.activity)
     }
@@ -117,18 +117,18 @@ object FlutterLifecycleAdapter {
 
 class MapLibreMapFactory(
     private val lifecycleProvider: LifecycleProvider,
-    private val binaryMessenger: BinaryMessenger
+    private val binaryMessenger: BinaryMessenger,
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(
         context: Context,
         viewId: Int,
-        args: Any?
+        args: Any?,
     ): PlatformView =
         MapLibreMapController(
             viewId,
             context,
             lifecycleProvider,
-            binaryMessenger
+            binaryMessenger,
         )
 }
 

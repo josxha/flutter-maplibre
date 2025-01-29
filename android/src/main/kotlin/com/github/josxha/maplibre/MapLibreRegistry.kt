@@ -17,7 +17,7 @@ object MapLibreRegistry {
 
     fun addMap(
         viewId: Int,
-        map: MapLibreMap
+        map: MapLibreMap,
     ) {
         mapRegistry[viewId] = map
     }
