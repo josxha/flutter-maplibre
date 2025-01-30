@@ -12,7 +12,7 @@ class PermissionManagerAndroid implements PermissionManager {
 
   final _api = PermissionManagerHostApi();
 
-  static JObject? get _jContext => jni.MapLibreRegistry.INSTANCE!.getContext();
+  static JObject? get _jContext => jni.MapLibreRegistry.INSTANCE.getContext();
 
   @override
   bool get locationPermissionsGranted =>
