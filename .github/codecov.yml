@@ -12,3 +12,11 @@ ignore:
 
 github_checks:
   annotations: false
+
+coverage:
+  status:
+    project:
+      # default is the status check's name, not default settings
+      default:
+        target: 0
+        threshold: 0
