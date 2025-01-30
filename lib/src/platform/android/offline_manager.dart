@@ -15,11 +15,11 @@ class OfflineManagerAndroid implements OfflineManager {
 
   /// Create a new [OfflineManager].
   static Future<OfflineManager> createInstance() async {
-    final jContext = jni.MapLibreRegistry.INSTANCE!.getContext();
+    final jContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
     await runOnPlatformThread(() {
       jni.MapLibre.getInstance(jContext);
     });
-    final jManager = jni.OfflineManager.getInstance(jContext)!;
+    final jManager = jni.OfflineManager.getInstance(jContext);
     return OfflineManagerAndroid._(jManager);
   }
 
@@ -203,13 +203,13 @@ class OfflineManagerAndroid implements OfflineManager {
       pixelDensity,
     );*/
     final jDefinition =
-        jni.Helpers.INSTANCE!.createOfflineTilePyramidRegionDefinition(
+        jni.Helpers.INSTANCE.createOfflineTilePyramidRegionDefinition(
       jMapStyleUrl,
       jBounds,
       minZoom,
       maxZoom,
       pixelDensity,
-    )!;
+    );
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);
