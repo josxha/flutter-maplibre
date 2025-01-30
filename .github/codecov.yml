@@ -9,3 +9,6 @@ ignore:
   - "**/*.g.dart"
   - "lib/src/platform/android/jni/**"
   - "example/**"
+
+github_checks:
+  annotations: false
