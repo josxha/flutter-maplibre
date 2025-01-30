@@ -200,7 +200,6 @@ class StyleControllerAndroid implements StyleController {
 
     return runOnPlatformThread<List<String>>(() {
       final jSources = style.getSources();
-      if (jSources == null) return [];
       final attributions = <String>[];
       for (final jSource in jSources) {
         final jniAttribution = jSource?.getAttribution();
@@ -221,7 +220,7 @@ class StyleControllerAndroid implements StyleController {
     }
   }
 
-  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers()!;
+  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers();
 
   @override
   void setProjection(MapProjection projection) {
