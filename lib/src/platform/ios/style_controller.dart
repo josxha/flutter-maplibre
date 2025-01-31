@@ -212,9 +212,7 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  Future<void> dispose() async {
-    //_ffiStyle.release();
-  }
+  Future<void> dispose() async {}
 
   @override
   Future<List<String>> getAttributions() async {
@@ -254,13 +252,12 @@ class StyleControllerIos implements StyleController {
   }) async {
     final source =
         _ffiStyle.sourceWithIdentifier_(id.toNSString())! as MLNShapeSource;
+    // TODO: implement updateGeoJsonSource
     source.shape = MLNShape.shapeWithData_encoding_error_(
       data.toNSDataUTF8()!,
       4, // utf-8
       nullptr,
     );
-    // TODO: implement updateGeoJsonSource
-    throw UnimplementedError();
   }
 
   NSArray _getLayers() => _ffiStyle.layers;

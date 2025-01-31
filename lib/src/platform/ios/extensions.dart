@@ -34,6 +34,21 @@ extension OffsetExt on Offset {
   }
 }
 
+/// Internal extensions on [LngLatBounds].
+extension LngLatBoundsExt on LngLatBounds {
+  /// Convert a [LngLatBounds] to a [CGPoint].
+  MLNCoordinateBounds toMLNCoordinateBounds() {
+    final bounds = Struct.create<MLNCoordinateBounds>();
+    bounds.sw = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = longitudeWest
+      ..latitude = latitudeSouth;
+    bounds.ne = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = longitudeEast
+      ..latitude = latitudeNorth;
+    return bounds;
+  }
+}
+
 /// Internal extensions on [CGPoint].
 extension CGPointExt on CGPoint {
   /// Convert a [CGPoint] to a [Offset].

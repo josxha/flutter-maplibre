@@ -176,9 +176,43 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    //_updateOptions(oldWidget);
+    _updateOptions(oldWidget);
     layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
+  }
+
+  Future<void> _updateOptions(MapLibreMap oldWidget) async {
+    final oldOptions = oldWidget.options;
+    final options = this.options;
+    _mapView.minimumZoomLevel = options.minZoom;
+    _mapView.maximumZoomLevel = options.maxZoom;
+    _mapView.minimumPitch = options.minPitch;
+    _mapView.maximumPitch = options.maxPitch;
+
+    // map bounds
+    final oldBounds = oldOptions.maxBounds;
+    final newBounds = options.maxBounds;
+    if (oldBounds != null && newBounds == null) {
+      _mapView.maximumScreenBounds = Struct.create<MLNCoordinateBounds>();
+    } else if ((oldBounds == null && newBounds != null) ||
+        (newBounds != null && oldBounds != newBounds)) {
+      final bounds = newBounds.toMLNCoordinateBounds();
+      _mapView.maximumScreenBounds = bounds;
+    }
+
+    // gestures
+    if (options.gestures.rotate != oldOptions.gestures.rotate) {
+      _mapView.rotateEnabled = options.gestures.rotate;
+    }
+    if (options.gestures.pan != oldOptions.gestures.pan) {
+      _mapView.scrollEnabled = options.gestures.pan;
+    }
+    if (options.gestures.zoom != oldOptions.gestures.zoom) {
+      _mapView.zoomEnabled = options.gestures.zoom;
+    }
+    if (options.gestures.pitch != oldOptions.gestures.pitch) {
+      _mapView.pitchEnabled = options.gestures.pitch;
+    }
   }
 
   @override
@@ -198,7 +232,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
         NSSet.setWithObject_(layer), // TODO use layer.id
       );
       if (features.count == 0) continue;
-      /*final queriedLayer = QueriedLayer(
+      /* TODO final queriedLayer = QueriedLayer(
         layerId: jLayerId.toDartString(releaseOriginal: true),
         sourceId: jSourceId.toDartString(releaseOriginal: true),
         sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
