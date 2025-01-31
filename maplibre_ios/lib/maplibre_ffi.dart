@@ -7508,18 +7508,7 @@ final _objc_msgSend_ghxo7e = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, double, bool)>();
-late final _sel_direction = objc.registerName("direction");
-late final _sel_setDirection_ = objc.registerName("setDirection:");
-late final _sel_setDirection_animated_ =
-    objc.registerName("setDirection:animated:");
-late final _sel_minimumPitch = objc.registerName("minimumPitch");
-late final _sel_setMinimumPitch_ = objc.registerName("setMinimumPitch:");
-late final _sel_maximumPitch = objc.registerName("maximumPitch");
-late final _sel_setMaximumPitch_ = objc.registerName("setMaximumPitch:");
-late final _sel_resetNorth = objc.registerName("resetNorth");
-late final _sel_resetPosition = objc.registerName("resetPosition");
-late final _sel_visibleCoordinateBounds =
-    objc.registerName("visibleCoordinateBounds");
+late final _sel_maximumScreenBounds = objc.registerName("maximumScreenBounds");
 final _objc_msgSend_ygoa6a = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
@@ -7538,8 +7527,8 @@ final _objc_msgSend_ygoa6aStret = objc.msgSendStretPointer
     .asFunction<
         void Function(ffi.Pointer<MLNCoordinateBounds>,
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-late final _sel_setVisibleCoordinateBounds_ =
-    objc.registerName("setVisibleCoordinateBounds:");
+late final _sel_setMaximumScreenBounds_ =
+    objc.registerName("setMaximumScreenBounds:");
 final _objc_msgSend_9ay59k = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
@@ -7548,6 +7537,20 @@ final _objc_msgSend_9ay59k = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, MLNCoordinateBounds)>();
+late final _sel_direction = objc.registerName("direction");
+late final _sel_setDirection_ = objc.registerName("setDirection:");
+late final _sel_setDirection_animated_ =
+    objc.registerName("setDirection:animated:");
+late final _sel_minimumPitch = objc.registerName("minimumPitch");
+late final _sel_setMinimumPitch_ = objc.registerName("setMinimumPitch:");
+late final _sel_maximumPitch = objc.registerName("maximumPitch");
+late final _sel_setMaximumPitch_ = objc.registerName("setMaximumPitch:");
+late final _sel_resetNorth = objc.registerName("resetNorth");
+late final _sel_resetPosition = objc.registerName("resetPosition");
+late final _sel_visibleCoordinateBounds =
+    objc.registerName("visibleCoordinateBounds");
+late final _sel_setVisibleCoordinateBounds_ =
+    objc.registerName("setVisibleCoordinateBounds:");
 late final _sel_setVisibleCoordinateBounds_animated_ =
     objc.registerName("setVisibleCoordinateBounds:animated:");
 final _objc_msgSend_148tmbg = objc.msgSendPointer
@@ -10156,6 +10159,30 @@ class MLNMapView extends objc.ObjCObjectBase {
         this.ref.pointer, _sel_setMaximumZoomLevel_, value);
   }
 
+  /// The maximum bounds of the map that can be shown on screen.
+  ///
+  /// @param MLNCoordinateBounds the bounds to constrain the screen to.
+  MLNCoordinateBounds get maximumScreenBounds {
+    final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_ygoa6aStret(
+            _ptr, this.ref.pointer, _sel_maximumScreenBounds)
+        : _ptr.ref =
+            _objc_msgSend_ygoa6a(this.ref.pointer, _sel_maximumScreenBounds);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNCoordinateBounds>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNCoordinateBounds>(_finalizable);
+  }
+
+  /// The maximum bounds of the map that can be shown on screen.
+  ///
+  /// @param MLNCoordinateBounds the bounds to constrain the screen to.
+  set maximumScreenBounds(MLNCoordinateBounds value) {
+    return _objc_msgSend_9ay59k(
+        this.ref.pointer, _sel_setMaximumScreenBounds_, value);
+  }
+
   /// The heading of the map, measured in degrees clockwise from true north.
   ///
   /// The value `0` means that the top edge of the map view corresponds to true
@@ -10689,12 +10716,12 @@ class MLNMapView extends objc.ObjCObjectBase {
   /// the user find his or her bearings even after traversing a great distance.
   ///
   /// @param camera The new viewpoint.
+  /// @param insets The minimum padding (in screen points) that would be visible
+  /// around the returned camera object if it were set as the receiver's camera.
   /// @param duration The amount of time, measured in seconds, that the transition
   /// animation should take. Specify `0` to jump to the new viewpoint
   /// instantaneously. Specify a negative value to use the default duration, which
   /// is based on the length of the flight path.
-  /// @param edgePadding The minimum padding (in screen points) that would be visible
-  /// around the returned camera object if it were set as the receiver’s camera.
   /// @param completion The block to execute after the animation finishes.
   void flyToCamera_edgePadding_withDuration_completionHandler_(
       MLNMapCamera camera,

@@ -1,9 +1,9 @@
 PODS:
   - Flutter (1.0.0)
-  - MapLibre (6.8.1)
+  - MapLibre (6.10.0)
   - maplibre_ios (0.0.1):
     - Flutter
-    - MapLibre (~> 6.8)
+    - MapLibre (~> 6.10)
   - objective_c (0.0.1):
     - Flutter
 
@@ -26,8 +26,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  MapLibre: 46c5f2254df2ea03bcd097778bb19c92207d8c2a
-  maplibre_ios: 196f54c46d2d4bf24bc24216a81904cb372ec64c
+  MapLibre: d668ed038aa3d139c6a305753c87cc2f62245b72
+  maplibre_ios: 8bd861893ac0ee134c5b96b8cb56afd68d0ee032
   objective_c: 77e887b5ba1827970907e10e832eec1683f3431d
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5

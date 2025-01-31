@@ -13,7 +13,7 @@ let package = Package(
     ],
     dependencies: [
         // Needs to be the same version as in ../maplibre_ios.podspec
-        .package(url: "https://github.com/maplibre/maplibre-gl-native-distribution", .upToNextMinor(from: "6.8.1")),
+        .package(url: "https://github.com/maplibre/maplibre-gl-native-distribution", .upToNextMinor(from: "6.10.0")),
     ],
     targets: [
         .target(
