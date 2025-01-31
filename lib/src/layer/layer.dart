@@ -18,6 +18,7 @@ part 'polyline_layer.dart';
 sealed class Layer<G extends GeometryObject> {
   const Layer._({
     required this.list,
+    this.draggable = false,
   });
 
   /// The [List] of layers.
@@ -37,6 +38,10 @@ sealed class Layer<G extends GeometryObject> {
 
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
+
+  /// Whether the layer is draggable.
+  /// Default is `false` to prevent accidental dragging and performance issues.
+  final bool draggable;
 
   /// Create a [Feature] list from a list of [G]s.
   static List<Feature<G>> generateFeatureList<G extends GeometryObject>(

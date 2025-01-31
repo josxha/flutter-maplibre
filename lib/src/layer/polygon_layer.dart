@@ -10,6 +10,7 @@ class PolygonLayer extends Layer<Polygon> {
     required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
+    super.draggable = false,
   }) : super._(list: polygons);
 
   /// The color of the polygon. Defaults to black.
@@ -37,6 +38,7 @@ class PolygonLayer extends Layer<Polygon> {
         sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
+        draggable: draggable,
       );
 
   @override

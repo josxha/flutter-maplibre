@@ -22,6 +22,7 @@ interface class StyleLayer {
     required this.id,
     this.layout = const {},
     this.paint = const {},
+    this.draggable = false,
     this.metadata,
     this.minZoom,
     this.maxZoom,
@@ -30,6 +31,10 @@ interface class StyleLayer {
 
   /// Unique layer name.
   final String id;
+
+  /// Whether this layer is visible.
+  /// Default is `false` to prevent accidental dragging and performance issues.
+  final bool draggable;
 
   /// Arbitrary properties useful to track with the layer, but do not influence
   /// rendering. Properties should be prefixed to avoid collisions,
@@ -73,6 +78,7 @@ interface class StyleLayerWithSource extends StyleLayer {
     required this.sourceId,
     super.paint = const {},
     super.layout = const {},
+    super.draggable = false,
     super.metadata,
     super.minZoom,
     super.maxZoom,

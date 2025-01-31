@@ -13,6 +13,7 @@ class CircleLayer extends Layer<Point> {
     this.blur = 0,
     this.strokeWidth = 0,
     this.strokeColor = const Color(0xFF000000),
+    super.draggable = false,
   }) : super._(list: circles);
 
   /// Circle radius in pixels. Defaults to 5px.
@@ -43,6 +44,7 @@ class CircleLayer extends Layer<Point> {
         sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
+        draggable: draggable,
       );
 
   @override

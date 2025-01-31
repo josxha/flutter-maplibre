@@ -45,6 +45,7 @@ class MarkerLayer extends Layer<Point> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
+    super.draggable = false,
   }) : super._(list: markers);
 
   /// If true, the icon will be visible even if it collides with other
@@ -236,6 +237,7 @@ class MarkerLayer extends Layer<Point> {
         sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
+        draggable: draggable,
       );
 
   @override

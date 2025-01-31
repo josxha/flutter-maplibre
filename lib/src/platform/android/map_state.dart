@@ -487,7 +487,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final result = await runOnPlatformThread<List<Feature>>(() {
       final queryLayerIds = layerIdsFilter != null
-          ? JArray(JString.type, layerIdsFilter.length)
+          ? JArray(
+              JString.nullableType,
+              layerIdsFilter.length,
+            )
           : style._getLayersIds();
 
       if (layerIdsFilter != null) {

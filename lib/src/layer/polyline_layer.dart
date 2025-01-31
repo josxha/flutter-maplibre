@@ -13,6 +13,7 @@ class PolylineLayer extends Layer<LineString> {
     this.gapWidth = 0,
     this.blur = 0,
     this.dashArray,
+    super.draggable = false,
   }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
@@ -53,6 +54,7 @@ class PolylineLayer extends Layer<LineString> {
         sourceId: getSourceId(index),
         paint: getPaint(),
         layout: getLayout(),
+        draggable: draggable,
       );
 
   @override

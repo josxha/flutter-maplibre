@@ -3,9 +3,20 @@ part of 'map_state.dart';
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb implements StyleController {
   /// Create a new [StyleControllerWeb] instance.
-  const StyleControllerWeb(this._map);
+  StyleControllerWeb(this._map);
 
   final interop.JsMap _map;
+
+  final List<StyleLayer> _draggableLayers = [];
+
+  @override
+  List<StyleLayer> get draggableLayers => _draggableLayers;
+
+  @override
+  set draggableLayers(List<StyleLayer> layers) {
+    _draggableLayers.clear();
+    _draggableLayers.addAll(layers);
+  }
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {

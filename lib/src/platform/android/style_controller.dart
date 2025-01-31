@@ -2,81 +2,106 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle, this._hostApi);
+  StyleControllerAndroid._(this._jniStyle, this._hostApi);
 
   final jni.Style _jniStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
+  final List<StyleLayer> _draggableLayers = [];
+
+  @override
+  List<StyleLayer> get draggableLayers => _draggableLayers;
+
+  @override
+  set draggableLayers(List<StyleLayer> layers) {
+    _draggableLayers.clear();
+    _draggableLayers.addAll(layers);
+  }
+
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     // TODO: use JNI for this method
-    await switch (layer) {
-      FillStyleLayer() => _hostApi.addFillLayer(
+    switch (layer) {
+      case FillStyleLayer():
+        await _hostApi.addFillLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      CircleStyleLayer() => _hostApi.addCircleLayer(
+        );
+        if (layer.draggable) draggableLayers.add(layer);
+      case CircleStyleLayer():
+        await _hostApi.addCircleLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
+        );
+        if (layer.draggable) draggableLayers.add(layer);
+      case BackgroundStyleLayer():
+        await _hostApi.addBackgroundLayer(
           id: layer.id,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-          id: layer.id,
-          sourceId: layer.sourceId,
-          belowLayerId: belowLayerId,
-          layout: layer.layout,
-          paint: layer.paint,
-        ),
-      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
+        );
+      case FillExtrusionStyleLayer():
+        await _hostApi.addFillExtrusionLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
+        );
+      case HeatmapStyleLayer():
+        await _hostApi.addHeatmapLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      LineStyleLayer() => _hostApi.addLineLayer(
+        );
+      case HillshadeStyleLayer():
+        await _hostApi.addHillshadeLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      RasterStyleLayer() => _hostApi.addRasterLayer(
+        );
+      case LineStyleLayer():
+        await _hostApi.addLineLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      SymbolStyleLayer() => _hostApi.addSymbolLayer(
+        );
+        if (layer.draggable) draggableLayers.add(layer);
+      case RasterStyleLayer():
+        await _hostApi.addRasterLayer(
           id: layer.id,
           sourceId: layer.sourceId,
           belowLayerId: belowLayerId,
           layout: layer.layout,
           paint: layer.paint,
-        ),
-      _ => throw UnimplementedError(
+        );
+      case SymbolStyleLayer():
+        await _hostApi.addSymbolLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+        if (layer.draggable) draggableLayers.add(layer);
+      default:
+        throw UnimplementedError(
           'The Layer is not supported: ${layer.runtimeType}',
-        ),
-    };
+        );
+    }
   }
 
   @override
