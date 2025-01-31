@@ -66,7 +66,7 @@ extension LngLatBoundsExt on LngLatBounds {
         longitudeEast,
         latitudeSouth,
         longitudeWest,
-      )!;
+      );
 }
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
