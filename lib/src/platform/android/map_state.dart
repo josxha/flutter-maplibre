@@ -137,6 +137,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final oldOptions = oldWidget.options;
     final options = this.options;
+    if (this.options == oldOptions) return;
 
     if (options.gestures.drag != oldOptions.gestures.drag) {
       await _hostApi.toggleLongPressMove(
@@ -247,23 +248,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final cameraUpdate =
         jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
     await runOnPlatformThread(() {
-      final completer = Completer<void>();
       jniMap.moveCamera(cameraUpdate);
-      // TODO: jni causes sometimes a deadlock, complete immediately for now
-      completer.complete();
-      /*jniMap.moveCamera$1(
-        cameraUpdate,
-        jni.MapLibreMap_CancelableCallback.implement(
-          jni.$MapLibreMap_CancelableCallback(
-            onCancel: () =>
-                completer.completeError(Exception('Animation cancelled.')),
-            onFinish: completer.complete,
-            onFinish$async: true,
-            onCancel$async: true,
-          ),
-        ),
-      );*/
-      return completer.future;
     });
     cameraUpdate.release();
   }
