@@ -471,17 +471,19 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     if (style == null) return [];
 
     final result = await runOnPlatformThread<List<Feature>>(() {
-      final queryLayerIds = layerIdsFilter != null
-          ? JArray(
-              JString.nullableType,
-              layerIdsFilter.length,
-            )
-          : style._getLayersIds();
+      final JArray<JString?> queryLayerIds;
 
       if (layerIdsFilter != null) {
+        queryLayerIds = JArray(
+          JString.nullableType,
+          layerIdsFilter.length,
+        );
+
         for (final (i, layer) in layerIdsFilter.indexed) {
           queryLayerIds[i] = layer.toJString();
         }
+      } else {
+        queryLayerIds = style._getLayersIds();
       }
 
       final queryResultsFeatures = jniMapLibreMap.queryRenderedFeatures(
@@ -490,13 +492,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       );
       queryLayerIds.release();
 
-      if (queryResultsFeatures == null || queryResultsFeatures.isEmpty) {
-        queryResultsFeatures?.release();
-        return [];
-      }
-
       final features =
-          queryResultsFeatures.map((f) => f?.toFeature()).nonNulls.toList();
+          queryResultsFeatures.nonNulls.map((f) => f.toFeature()).toList();
       queryResultsFeatures.release();
 
       return features;
