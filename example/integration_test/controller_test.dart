@@ -91,7 +91,7 @@ void main() {
       expect(lngLat.lat, isNot(equals(0)));
     });
 
-    testWidgets('toLnLats', (tester) async {
+    testWidgets('toLngLats', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
@@ -214,6 +214,27 @@ void main() {
 
       layers = await ctrl.queryLayers(Offset.zero);
       expect(layers, hasLength(0));
+    });
+
+    testWidgets('queryRenderedFeatures', (tester) async {
+      final ctrlCompleter = Completer<MapController>();
+      final styleCompleter = Completer<void>();
+      final app = App(
+        onMapCreated: ctrlCompleter.complete,
+        onStyleLoaded: styleCompleter.complete,
+        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+      );
+      await tester.pumpWidget(app);
+      final ctrl = await ctrlCompleter.future;
+      await styleCompleter.future;
+      final size = tester.getSize(find.byType(MapLibreMap));
+
+      var features =
+          await ctrl.queryRenderedFeatures(Offset(size.width, size.height));
+      expect(features, hasLength(0));
+
+      features = await ctrl.queryRenderedFeatures(Offset.zero);
+      expect(features, hasLength(0));
     });
 
     testWidgets('getAttributions', (tester) async {

@@ -4,7 +4,7 @@ import 'package:maplibre/maplibre.dart';
 
 void main() {
   group('Annotation Model Classes', () {
-    test('CircleAnnotationLayer', () {
+    test('CircleLayer', () {
       final o = CircleLayer(
         circles: Layer.generateFeatureList(
           [
@@ -33,7 +33,7 @@ void main() {
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
-    test('MarkerAnnotationLayer', () {
+    test('MarkerLayer', () {
       final o = MarkerLayer(
         markers: Layer.generateFeatureList(
           [
@@ -57,10 +57,10 @@ void main() {
         markers: Layer.generateFeatureList([]),
       );
       expect(o, equals(o));
-      expect(o2, equals(o2));
-      expect(o, isNot(equals(o2)));
       expect(o2, equals(o3));
       expect(o2.hashCode, equals(o3.hashCode));
+      expect(o, isNot(equals(o2)));
+      expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
 
       expect(o.getSourceId(5123), contains(5123.toString()));
@@ -69,7 +69,7 @@ void main() {
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
-    test('PolygonAnnotationLayer', () {
+    test('PolygonLayer', () {
       final o = PolygonLayer(
         polygons: Layer.generateFeatureList(
           [
@@ -93,18 +93,20 @@ void main() {
           ],
         ),
       );
-      /*final o3 = PolygonAnnotationLayer(
-        polygons: [
-          Polygon(
-            coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-            ],
-          ),
-        ],
-      );*/
+      final o3 = PolygonLayer(
+        polygons: Layer.generateFeatureList(
+          [
+            Polygon(
+              coordinates: [
+                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+              ],
+            ),
+          ],
+        ),
+      );
       expect(o, equals(o));
-      // expect(o2, equals(o3));
-      // expect(o2.hashCode, equals(o3.hashCode));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));
@@ -115,7 +117,7 @@ void main() {
       expect(o.getLayout(), isA<Map<String, Object>>());
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
-    test('PolylineAnnotationLayer', () {
+    test('PolylineLayer', () {
       final o = PolylineLayer(
         polylines: Layer.generateFeatureList(
           [
@@ -141,20 +143,22 @@ void main() {
           ],
         ),
       );
-      /*final o3 = PolylineAnnotationLayer(
-        polylines: [
-          LineString(
-            coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-              Position(53, 2),
-            ],
-          ),
-        ],
-      );*/
+      final o3 = PolylineLayer(
+        polylines: Layer.generateFeatureList(
+          [
+            LineString(
+              coordinates: [
+                Position(2, 23.4),
+                Position(5.2, 32),
+                Position(53, 2),
+              ],
+            ),
+          ],
+        ),
+      );
       expect(o, equals(o));
-      // expect(o2, equals(o3));
-      // expect(o2.hashCode, equals(o3.hashCode));
+      expect(o2, equals(o3));
+      expect(o2.hashCode, equals(o3.hashCode));
       expect(o, isNot(equals(o2)));
       expect(o.hashCode, equals(o.hashCode));
       expect(o.hashCode, isNot(equals(o2.hashCode)));

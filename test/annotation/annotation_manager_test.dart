@@ -10,7 +10,7 @@ class MockSource extends Mock implements Source {}
 class MockStyleLayer extends Mock implements StyleLayer {}
 
 void main() {
-  group('AnnotationManager', () {
+  group('LayerManager', () {
     setUpAll(() {
       registerFallbackValue(MockSource());
       registerFallbackValue(MockStyleLayer());
@@ -60,6 +60,38 @@ void main() {
       verify(() => style.removeLayer(any())).called(1);
       verify(() => style.removeSource(any())).called(1);
       verifyNoMoreInteractions(style);
+    });
+
+    testWidgets('onFeatureDrag method', (tester) async {
+      final manager = LayerManager(style, []);
+      final feature = Feature(
+        id: 'feature1',
+        geometry: Point(coordinates: Position(0, 0)),
+      );
+      final mapEvent = MapEventFeatureDrag(
+        event: LongPressEventType.begin,
+        feature: feature,
+        point: Position(0, 0),
+      );
+
+      await manager.onFeatureDrag(mapEvent);
+      expect(manager.dragFeature, feature);
+
+      final moveEvent = MapEventFeatureDrag(
+        event: LongPressEventType.move,
+        feature: feature,
+        point: Position(0, 0),
+      );
+      await manager.onFeatureDrag(moveEvent);
+      expect(manager.dragFeature, feature);
+
+      final endEvent = MapEventFeatureDrag(
+        event: LongPressEventType.end,
+        feature: feature,
+        point: Position(0, 0),
+      );
+      await manager.onFeatureDrag(endEvent);
+      expect(manager.dragFeature, isNull);
     });
   });
 }

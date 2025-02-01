@@ -119,7 +119,7 @@ extension OfflineRegionExt on jni.OfflineRegion {
 }
 
 /// Extension method for the [jni_geojson.Feature] class. Not exported publicly.
-extension FeatureExt on jni_geojson.Feature {
+extension JniFeatureExt on jni_geojson.Feature {
   /// Convert a [jni_geojson.Feature] to a [Feature].
   Feature toFeature() {
     final json = toJson()!.toDartString();
