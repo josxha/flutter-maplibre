@@ -2322,6 +2322,25 @@ class MapLibreRegistry extends objc.NSObject {
   }
 }
 
+/// WARNING: MLNBackendResource is a stub. To generate bindings for this class, include
+/// MLNBackendResource in your config's objc-interfaces list.
+///
+/// MLNBackendResource
+class MLNBackendResource extends objc.NSObject {
+  MLNBackendResource._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNBackendResource] that points to the same underlying object as [other].
+  MLNBackendResource.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNBackendResource] that wraps the given raw object pointer.
+  MLNBackendResource.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+}
+
 final class CGContext extends ffi.Opaque {}
 
 final class CGColor extends ffi.Opaque {}
@@ -8808,6 +8827,8 @@ final _objc_msgSend_pisvbv = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_backendResource = objc.registerName("backendResource");
+late final _sel_triggerRepaint = objc.registerName("triggerRepaint");
 
 /// An interactive, customizable map view with an interface similar to the one
 /// provided by Apple’s MapKit.
@@ -11740,6 +11761,18 @@ class MLNMapView extends objc.ObjCObjectBase {
     return _objc_msgSend_pisvbv(
         this.ref.pointer, _sel_setDebugMask_, value.value);
   }
+
+  /// backendResource
+  MLNBackendResource backendResource() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_backendResource);
+    return MLNBackendResource.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// Triggers a repaint of the map.
+  void triggerRepaint() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_triggerRepaint);
+  }
 }
 
 /// WARNING: MLNPointAnnotation is a stub. To generate bindings for this class, include
@@ -11967,6 +12000,8 @@ late final _class_MLNVectorTileSource =
     objc.getClass("MapLibre.MLNVectorTileSource");
 late final _sel_initWithIdentifier_configurationURL_ =
     objc.registerName("initWithIdentifier:configurationURL:");
+late final _sel_initWithIdentifier_configurationURLString_ =
+    objc.registerName("initWithIdentifier:configurationURLString:");
 late final _sel_initWithIdentifier_tileURLTemplates_options_ =
     objc.registerName("initWithIdentifier:tileURLTemplates:options:");
 late final _sel_featuresInSourceLayersWithIdentifiers_predicate_ =
@@ -12067,6 +12102,36 @@ class MLNVectorTileSource extends MLNTileSource {
         _sel_initWithIdentifier_configurationURL_,
         identifier.ref.pointer,
         configurationURL.ref.pointer);
+    return MLNVectorTileSource.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Returns a vector tile source initialized with an identifier and a
+  /// string-based configuration URL.
+  ///
+  /// After initializing and configuring the source, add it to a map view’s style
+  /// using the ``MLNStyle/addSource:`` method.
+  ///
+  /// The string may be a full HTTP or HTTPS URL or a canonical URL. The string should
+  /// point to a JSON file that conforms to the
+  /// <a href="https://github.com/mapbox/tilejson-spec/">TileJSON specification</a>.
+  ///
+  /// This constructor can be used for URLs that cause problems with `NSURL`’s URL
+  /// parsing behavior. For example, URLs starting with `pmtiles://https://` were
+  /// not parsed correctly on iOS 17.
+  ///
+  /// @param identifier A string that uniquely identifies the source in the style to
+  /// which it is added.
+  /// @param configurationURLString A string to a TileJSON configuration file
+  /// describing the source’s contents and other metadata.
+  /// @return An initialized vector tile source.
+  MLNVectorTileSource initWithIdentifier_configurationURLString_(
+      objc.NSString identifier, objc.NSString configurationURLString) {
+    final _ret = _objc_msgSend_rsfdlh(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithIdentifier_configurationURLString_,
+        identifier.ref.pointer,
+        configurationURLString.ref.pointer);
     return MLNVectorTileSource.castFromPointer(_ret,
         retain: false, release: true);
   }

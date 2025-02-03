@@ -172,9 +172,9 @@ class StyleControllerIos implements StyleController {
       case VectorSource():
         final vectorSource = ffiSource = MLNVectorTileSource.new1();
         if (source.url case final String url) {
-          vectorSource.initWithIdentifier_configurationURL_(
+          vectorSource.initWithIdentifier_configurationURLString_(
             source.id.toNSString(),
-            url.toNSURL()!,
+            url.toNSString(),
           );
         } else {
           final ffiUrls = NSMutableArray.new1()..init();
