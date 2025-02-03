@@ -11,10 +11,17 @@ import 'package:maplibre/src/translucent_pointer.dart';
 /// {@category Layers}
 class WidgetLayer extends StatelessWidget {
   /// Create a new [WidgetLayer] widget.
-  const WidgetLayer({required this.markers, super.key});
+  const WidgetLayer({
+    required this.markers,
+    this.allowInteraction = false,
+    super.key,
+  });
 
   /// The list of [Marker]s.
   final List<Marker> markers;
+
+  /// Allow gestures on [Marker]s.
+  final bool allowInteraction;
 
   @override
   Widget build(BuildContext context) {
@@ -58,22 +65,31 @@ class WidgetLayer extends StatelessWidget {
       return buildChild(offsets);
     }
 
-    // Android needs a TranslucentPointer
-    return TranslucentPointer(
-      child: FutureBuilder<List<Offset>>(
-        future: controller.toScreenLocations(points),
-        builder: (context, snapshot) {
-          if (snapshot.data case final List<Offset> offsets) {
-            return buildChild(offsets);
-          }
-          if (snapshot.error case final Object error) {
-            debugPrint(error.toString());
-            debugPrintStack(stackTrace: snapshot.stackTrace);
-          }
-          return const SizedBox.shrink();
-        },
-      ),
-    );
+    Widget buildChildAsync(List<Position> points) =>
+        FutureBuilder<List<Offset>>(
+          future: controller.toScreenLocations(points),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.length == markers.length) {
+              final offsets = snapshot.data!;
+
+              return buildChild(offsets);
+            }
+            
+            if (snapshot.error case final Object error) {
+              debugPrint(error.toString());
+              debugPrintStack(stackTrace: snapshot.stackTrace);
+            }
+
+            return const SizedBox.shrink();
+          },
+        );
+
+    if (allowInteraction) {
+      return buildChildAsync(points);
+    } else {
+      // Android needs a TranslucentPointer
+      return TranslucentPointer(child: buildChildAsync(points));
+    }
   }
 }
 
