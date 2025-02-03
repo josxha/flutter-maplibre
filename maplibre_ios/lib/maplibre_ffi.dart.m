@@ -19,6 +19,7 @@
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h"
 
 #if !__has_feature(objc_arc)

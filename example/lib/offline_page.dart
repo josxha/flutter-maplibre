@@ -333,6 +333,7 @@ class _OfflineMapPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Offline Map "$title"')),
       body: MapLibreMap(
+        acceptLicense: true,
         options: MapOptions(
           initStyle: MapStyles.protomapsLight,
           maxBounds: bounds,

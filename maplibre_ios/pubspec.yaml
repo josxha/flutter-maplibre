@@ -93,6 +93,7 @@ ffigen:
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h'
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h'
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h'
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h'
     #include-directives:
       #- '~/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.10.0-d668e/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers'

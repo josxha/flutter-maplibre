@@ -18,6 +18,7 @@ class _UserInterfacePageState extends State<UserInterfacePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('User Interface')),
       body: MapLibreMap(
+        acceptLicense: true,
         options: MapOptions(
           initZoom: 3,
           initCenter: Position(9.17, 47.68),

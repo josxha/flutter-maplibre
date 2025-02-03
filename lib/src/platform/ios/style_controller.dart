@@ -216,8 +216,27 @@ class StyleControllerIos implements StyleController {
 
   @override
   Future<List<String>> getAttributions() async {
-    return [];
-    // TODO: implement getAttributions
+    final attributions = <String>[];
+    /*final sources = NSArray.arrayWithObject_(_ffiStyle.sources);
+    print(sources.count);
+    for (var i = 0; i < sources.count; i++) {
+      final source = MLNSource.castFrom(sources.objectAtIndex_(i));
+      print(source.debugDescription1);
+      print(source.runtimeType);
+      final tileSource = MLNVectorTileSource.castFrom(source);
+      print(tileSource.debugDescription1);
+      print(tileSource.runtimeType);
+      // TODO fix app crash when accessing attributionInfos:
+      final attrInfos = tileSource.attributionInfos;
+      print(attrInfos.debugDescription1);
+      for (var j = 0; j < attrInfos.count; j++) {
+        print(j);
+        final attribution = tileSource.attributionInfos.objectAtIndex_(j);
+        final attributionString = NSString.castFrom(attribution).toString();
+        attributions.add('attributionString: $attributionString');
+       }
+    }*/
+    return attributions;
   }
 
   @override
