@@ -24,6 +24,7 @@ import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
+import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -116,6 +117,11 @@ class MenuPage extends StatelessWidget {
                 label: 'Widgets',
                 iconData: Icons.location_on,
                 location: WidgetLayerPage.location,
+              ),
+              ItemCard(
+                label: 'Interactive Widgets',
+                iconData: Icons.location_on,
+                location: WidgetLayerInteractivePage.location,
               ),
               ItemCard(
                 label: 'Circles',
