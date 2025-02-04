@@ -269,10 +269,9 @@ class StyleControllerIos implements StyleController {
     required String id,
     required String data,
   }) async {
-    final source =
-        _ffiStyle.sourceWithIdentifier_(id.toNSString())! as MLNShapeSource;
-    // TODO: implement updateGeoJsonSource
-    source.shape = MLNShape.shapeWithData_encoding_error_(
+    final source = _ffiStyle.sourceWithIdentifier_(id.toNSString())!;
+    final shapeSource = MLNShapeSource.castFrom(source);
+    shapeSource.shape = MLNShape.shapeWithData_encoding_error_(
       data.toNSDataUTF8()!,
       4, // utf-8
       nullptr,
