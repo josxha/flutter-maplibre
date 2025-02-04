@@ -35,10 +35,12 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 self._mapView.attributionButton.isHidden = true
                 self._mapView.logoView.isHidden = true
                 // set options
-                if let center = mapOptions.center {
-                    var mapCenter = CLLocationCoordinate2D(latitude: center.lat, longitude: center.lng)
-                    self._mapView.setCenter(mapCenter, zoomLevel: mapOptions.zoom, animated: false)
+                DispatchQueue.main.async {
+                    var currentCenter = self._mapView.camera.centerCoordinate
+                    var center = CLLocationCoordinate2D(latitude: mapOptions.center?.lat ?? currentCenter.latitude, longitude: mapOptions.center?.lng ?? currentCenter.longitude)
+                    self._mapView.setCenter(center, zoomLevel: mapOptions.zoom, direction: mapOptions.bearing, animated: false)
                 }
+                
                 self._mapView.showAttribution(false)
 
                 self._mapView.minimumZoomLevel = mapOptions.minZoom
@@ -86,6 +88,11 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
     // MLNMapViewDelegate method called when map has finished loading
     func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
+        // setCamera() can only be used after the map did finish loading
+        var camera = self._mapView.camera;
+        camera.pitch = _mapOptions!.pitch
+        self._mapView.setCamera(camera, animated: false)
+        
         _mapView = mapView
         print("mapView didFinishLoading, call onStyleLoaded")
         _flutterApi.onStyleLoaded { _ in }
