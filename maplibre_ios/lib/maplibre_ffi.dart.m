@@ -21,6 +21,10 @@
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h"
 
 #if !__has_feature(objc_arc)
 #error "This file must be compiled with ARC enabled"
@@ -50,5 +54,21 @@ _ListenerTrampoline2 _MapLibreFFi_wrapListenerBlock_wjvic9(_ListenerTrampoline2 
   return ^void(id arg0, id arg1) {
     objc_retainBlock(block);
     block(objc_retain(arg0), objc_retain(arg1));
+  };
+}
+
+typedef void  (^_ListenerTrampoline3)(id arg0);
+_ListenerTrampoline3 _MapLibreFFi_wrapListenerBlock_1jdvcbf(_ListenerTrampoline3 block) NS_RETURNS_RETAINED {
+  return ^void(id arg0) {
+    objc_retainBlock(block);
+    block(objc_retain(arg0));
+  };
+}
+
+typedef void  (^_ListenerTrampoline4)(id arg0, id arg1, id arg2);
+_ListenerTrampoline4 _MapLibreFFi_wrapListenerBlock_1hcfngn(_ListenerTrampoline4 block) NS_RETURNS_RETAINED {
+  return ^void(id arg0, id arg1, id arg2) {
+    objc_retainBlock(block);
+    block(objc_retain(arg0), objc_retain(arg1), objc_retain(arg2));
   };
 }

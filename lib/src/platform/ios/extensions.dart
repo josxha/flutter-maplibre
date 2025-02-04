@@ -49,6 +49,17 @@ extension LngLatBoundsExt on LngLatBounds {
   }
 }
 
+/// Internal extensions on [MLNCoordinateBounds].
+extension MLNCoordinateBoundsExt on MLNCoordinateBounds {
+  /// Convert a [MLNCoordinateBounds] to a [LngLatBounds].
+  LngLatBounds toLngLatBounds() => LngLatBounds(
+        longitudeWest: sw.longitude,
+        longitudeEast: ne.longitude,
+        latitudeSouth: sw.latitude,
+        latitudeNorth: ne.latitude,
+      );
+}
+
 /// Internal extensions on [CGPoint].
 extension CGPointExt on CGPoint {
   /// Convert a [CGPoint] to a [Offset].

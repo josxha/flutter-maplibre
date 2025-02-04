@@ -28,6 +28,20 @@ external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_wjvic9(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
+@ffi.Native<
+    ffi.Pointer<objc.ObjCBlockImpl> Function(
+        ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1jdvcbf(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<
+    ffi.Pointer<objc.ObjCBlockImpl> Function(
+        ffi.Pointer<objc.ObjCBlockImpl>)>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1hcfngn(
+  ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
 final class CGPoint extends ffi.Struct {
   @ffi.Double()
   external double x;
@@ -26890,4 +26904,1972 @@ enum NSTextLayoutManagerSegmentOptions {
         _ => throw ArgumentError(
             "Unknown value for NSTextLayoutManagerSegmentOptions: $value"),
       };
+}
+
+late final _class_MLNOfflinePack = objc.getClass("MapLibre.MLNOfflinePack");
+late final _sel_region = objc.registerName("region");
+void _ObjCBlock_ffiVoid_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>>()
+        .asFunction<void Function(ffi.Pointer<objc.ObjCObject>)>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSError_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSError_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0) =>
+    (objc.getBlockClosure(block) as void Function(
+        ffi.Pointer<objc.ObjCObject>))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSError_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSError_closureTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSError_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0) {
+  (objc.getBlockClosure(block) as void Function(
+      ffi.Pointer<objc.ObjCObject>))(arg0);
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<
+        ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<objc.ObjCObject>)>
+    _ObjCBlock_ffiVoid_NSError_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<objc.ObjCObject>)>.listener(
+        _ObjCBlock_ffiVoid_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSError?)>`.
+abstract final class ObjCBlock_ffiVoid_NSError {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSError?)> castFromPointer(
+          ffi.Pointer<objc.ObjCBlockImpl> pointer,
+          {bool retain = false,
+          bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(pointer,
+          retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSError?)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>>
+              ptr) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
+          objc.newPointerBlock(
+              _ObjCBlock_ffiVoid_NSError_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSError?)> fromFunction(
+          void Function(objc.NSError?) fn) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
+          objc.newClosureBlock(
+              _ObjCBlock_ffiVoid_NSError_closureCallable,
+              (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0
+                  ? null
+                  : objc.NSError.castFromPointer(arg0,
+                      retain: true, release: true))),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSError?)> listener(
+      void Function(objc.NSError?) fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_NSError_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0
+            ? null
+            : objc.NSError.castFromPointer(arg0,
+                retain: false, release: true)));
+    final wrapper = _MapLibreFFi_wrapListenerBlock_1jdvcbf(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(objc.NSError?)>`.
+extension ObjCBlock_ffiVoid_NSError_CallExtension
+    on objc.ObjCBlock<ffi.Void Function(objc.NSError?)> {
+  void call(objc.NSError? arg0) => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<objc.ObjCObject> arg0)>>()
+          .asFunction<
+              void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>)>()(
+      ref.pointer, arg0?.ref.pointer ?? ffi.nullptr);
+}
+
+late final _sel_setContext_completionHandler_ =
+    objc.registerName("setContext:completionHandler:");
+
+/// The state an offline pack is currently in.
+enum MLNOfflinePackState {
+  /// It is unknown whether the pack is inactive, active, or complete.
+  ///
+  /// This is the initial state of a pack. The state of a pack becomes known by
+  /// the time the shared ``MLNOfflineStorage`` object sends the first
+  /// ``MLNOfflinePackProgressChangedNotification`` about the pack. For inactive
+  /// packs, you must explicitly request a progress update using the
+  /// ``MLNOfflinePack/requestProgress`` method.
+  ///
+  /// An invalid pack always has a state of ``MLNOfflinePackStateInvalid``, never
+  /// ``MLNOfflinePackState/MLNOfflinePackStateUnknown``.
+  MLNOfflinePackStateUnknown(0),
+
+  /// The pack is incomplete and is not currently downloading.
+  ///
+  /// This is the initial state of a pack that is created using the
+  /// ``MLNOfflineStorage/addPackForRegion:withContext:completionHandler:``
+  /// method, as well as after the ``MLNOfflinePack/suspend`` method is
+  /// called.
+  MLNOfflinePackStateInactive(1),
+
+  /// The pack is incomplete and is currently downloading.
+  ///
+  /// This is the state of a pack after the ``MLNOfflinePack/resume`` method is
+  /// called.
+  MLNOfflinePackStateActive(2),
+
+  /// The pack has downloaded to completion.
+  MLNOfflinePackStateComplete(3),
+
+  /// The pack has been removed using the
+  /// ``MLNOfflineStorage/removePack:withCompletionHandler:`` method. Sending
+  /// any message to the pack will raise an exception.
+  MLNOfflinePackStateInvalid(4);
+
+  final int value;
+  const MLNOfflinePackState(this.value);
+
+  static MLNOfflinePackState fromValue(int value) => switch (value) {
+        0 => MLNOfflinePackStateUnknown,
+        1 => MLNOfflinePackStateInactive,
+        2 => MLNOfflinePackStateActive,
+        3 => MLNOfflinePackStateComplete,
+        4 => MLNOfflinePackStateInvalid,
+        _ =>
+          throw ArgumentError("Unknown value for MLNOfflinePackState: $value"),
+      };
+}
+
+late final _sel_state = objc.registerName("state");
+final _objc_msgSend_6gfr3p = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Long Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+
+/// A structure containing information about an offline pack’s current download
+/// progress.
+final class MLNOfflinePackProgress extends ffi.Struct {
+  /// The number of resources, including tiles, that have been completely
+  /// downloaded and are ready to use offline.
+  @ffi.Uint64()
+  external int countOfResourcesCompleted;
+
+  /// The cumulative size of the downloaded resources on disk, including tiles,
+  /// measured in bytes.
+  @ffi.Uint64()
+  external int countOfBytesCompleted;
+
+  /// The number of tiles that have been completely downloaded and are ready
+  /// to use offline.
+  @ffi.Uint64()
+  external int countOfTilesCompleted;
+
+  /// The cumulative size of the downloaded tiles on disk, measured in bytes.
+  @ffi.Uint64()
+  external int countOfTileBytesCompleted;
+
+  /// The minimum number of resources that must be downloaded in order to view
+  /// the pack’s full region without any omissions.
+  ///
+  /// At the beginning of a download, this count is a lower bound; the number of
+  /// expected resources may increase as the download progresses.
+  @ffi.Uint64()
+  external int countOfResourcesExpected;
+
+  /// The maximum number of resources that must be downloaded in order to view
+  /// the pack’s full region without any omissions.
+  ///
+  /// At the beginning of a download, when the exact number of required resources
+  /// is unknown, this field is set to `UINT64_MAX`. Thus this count is always an
+  /// upper bound.
+  @ffi.Uint64()
+  external int maximumResourcesExpected;
+}
+
+late final _sel_progress = objc.registerName("progress");
+final _objc_msgSend_oftva = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            MLNOfflinePackProgress Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        MLNOfflinePackProgress Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+final _objc_msgSend_oftvaStret = objc.msgSendStretPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<MLNOfflinePackProgress>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<MLNOfflinePackProgress>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_resume = objc.registerName("resume");
+late final _sel_suspend = objc.registerName("suspend");
+late final _sel_requestProgress = objc.registerName("requestProgress");
+
+/// MLNOfflinePack
+class MLNOfflinePack extends objc.NSObject {
+  MLNOfflinePack._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNOfflinePack] that points to the same underlying object as [other].
+  MLNOfflinePack.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNOfflinePack] that wraps the given raw object pointer.
+  MLNOfflinePack.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNOfflinePack].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflinePack);
+  }
+
+  /// The region for which the pack manages resources.
+  objc.ObjCObjectBase get region {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_region);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// Arbitrary data stored alongside the downloaded resources.
+  ///
+  /// The context typically holds application-specific information for identifying
+  /// the pack, such as a user-selected name.
+  ///
+  /// To change the value of this property, use the `-setContext:completionHandler:`
+  /// method. If you access this property after calling that method but before its
+  /// completion handler is called, this property’s value may not reflect the new
+  /// value that you specify.
+  objc.NSData get context {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_context);
+    return objc.NSData.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Associates arbitrary contextual data with the offline pack, replacing any
+  /// context that was previously associated with the offline pack.
+  ///
+  /// Setting the context is asynchronous. The `context` property may not be updated
+  /// until the completion handler is called.
+  ///
+  /// @param context The new context to associate with the offline pack.
+  /// @param completion The completion handler to call when the context has been
+  /// updated. If there is an error setting the context, the error is passed into
+  /// the completion handler.
+  void setContext_completionHandler_(objc.NSData context,
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)>? completion) {
+    _objc_msgSend_14pxqbs(this.ref.pointer, _sel_setContext_completionHandler_,
+        context.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The pack’s current state.
+  ///
+  /// The state of an inactive or completed pack is computed lazily and is set to
+  /// ``MLNOfflinePackState/MLNOfflinePackStateUnknown`` by default. To request the pack’s status, use
+  /// the
+  /// `-requestProgress` method. To get notified when the state becomes known and
+  /// when it changes, observe KVO change notifications on this pack’s `state` key
+  /// path. Alternatively, you can add an observer for
+  /// ``MLNOfflinePackProgressChangedNotification``s about this pack that come from the
+  /// default notification center.
+  MLNOfflinePackState get state {
+    final _ret = _objc_msgSend_6gfr3p(this.ref.pointer, _sel_state);
+    return MLNOfflinePackState.fromValue(_ret);
+  }
+
+  /// The pack’s current progress.
+  ///
+  /// The progress of an inactive or completed pack is computed lazily, and all its
+  /// fields are set to 0 by default. To request the pack’s progress, use the
+  /// `-requestProgress` method. To get notified when the progress becomes
+  /// known and when it changes, observe KVO change notifications on this pack’s
+  /// `state` key path. Alternatively, you can add an observer for
+  /// ``MLNOfflinePackProgressChangedNotification``s about this pack that come from the
+  /// default notification center.
+  MLNOfflinePackProgress get progress {
+    final _ptr = pkg_ffi.calloc<MLNOfflinePackProgress>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_oftvaStret(_ptr, this.ref.pointer, _sel_progress)
+        : _ptr.ref = _objc_msgSend_oftva(this.ref.pointer, _sel_progress);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNOfflinePackProgress>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNOfflinePackProgress>(_finalizable);
+  }
+
+  /// Resumes downloading if the pack is inactive.
+  ///
+  /// When a pack resumes after being suspended, it may begin by iterating over the
+  /// already downloaded resources. As a result, the `progress` structure’s
+  /// `countOfResourcesCompleted` field may revert to 0 before rapidly returning to
+  /// the level of progress at the time the pack was suspended.
+  ///
+  /// To temporarily suspend downloading, call the `-suspend` method.
+  void resume() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_resume);
+  }
+
+  /// Temporarily stops downloading if the pack is active.
+  ///
+  /// A pack suspends asynchronously, so some network requests may be sent after this
+  /// method is called. Regardless, the `progress` property will not be updated until
+  /// `-resume` is called.
+  ///
+  /// If the pack previously reached a higher level of progress before being
+  /// suspended, it may wait to suspend until it returns to that level.
+  ///
+  /// To resume downloading, call the `-resume` method.
+  void suspend() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_suspend);
+  }
+
+  /// Request an asynchronous update to the pack’s `state` and `progress` properties.
+  ///
+  /// The state and progress of an inactive or completed pack are computed lazily. If
+  /// you need the state or progress of a pack whose `state` property is currently
+  /// set to ``MLNOfflinePackState/MLNOfflinePackStateUnknown``, observe KVO change notifications on this
+  /// pack’s `state` key path, then call this method. Alternatively, you can add an
+  /// observer for ``MLNOfflinePackProgressChangedNotification`` about this pack that
+  /// come from the default notification center.
+  void requestProgress() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_requestProgress);
+  }
+
+  /// init
+  MLNOfflinePack init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// new
+  static MLNOfflinePack new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNOfflinePack, _sel_new);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNOfflinePack allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_hzlb60(_class_MLNOfflinePack, _sel_allocWithZone_, zone);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNOfflinePack alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNOfflinePack, _sel_alloc);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// self
+  MLNOfflinePack self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNOfflinePack.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNOfflinePack retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNOfflinePack.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNOfflinePack autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNOfflinePack.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+ffi.Pointer<ffi.Void>
+    _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block,
+    ffi.Pointer<objc.ObjCObject> arg0,
+    ffi.Pointer<objc.ObjCObject> arg1) {
+  (objc.getBlockClosure(block) as void Function(
+      ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<
+        ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCObject>)>
+    _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerCallable = ffi
+        .NativeCallable<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>.listener(
+        _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>`.
+abstract final class ObjCBlock_ffiVoid_MLNOfflinePack_NSError {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>(
+              pointer,
+              retain: retain,
+              release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1)>>
+              ptr) =>
+      objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)> fromFunction(
+          void Function(MLNOfflinePack?, objc.NSError?) fn) =>
+      objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>(
+          objc.newClosureBlock(
+              _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureCallable,
+              (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                  arg0.address == 0
+                      ? null
+                      : MLNOfflinePack.castFromPointer(arg0,
+                          retain: true, release: true),
+                  arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>
+      listener(void Function(MLNOfflinePack?, objc.NSError?) fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerCallable
+            .nativeFunction
+            .cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0,
+                ffi.Pointer<objc.ObjCObject> arg1) =>
+            fn(
+                arg0.address == 0
+                    ? null
+                    : MLNOfflinePack.castFromPointer(arg0,
+                        retain: false, release: true),
+                arg1.address == 0
+                    ? null
+                    : objc.NSError.castFromPointer(arg1,
+                        retain: false, release: true)));
+    final wrapper = _MapLibreFFi_wrapListenerBlock_wjvic9(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>(
+        wrapper,
+        retain: false,
+        release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>`.
+extension ObjCBlock_ffiVoid_MLNOfflinePack_NSError_CallExtension
+    on objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)> {
+  void call(MLNOfflinePack? arg0, objc.NSError? arg1) => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              void Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>)>()(ref.pointer,
+      arg0?.ref.pointer ?? ffi.nullptr, arg1?.ref.pointer ?? ffi.nullptr);
+}
+
+void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1,
+        ffi.Pointer<objc.ObjCObject> arg2) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCObject> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2)>>()
+        .asFunction<
+            void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1, arg2);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1,
+        ffi.Pointer<objc.ObjCObject> arg2) =>
+    (objc.getBlockClosure(block) as void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>))(arg0, arg1, arg2);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block,
+    ffi.Pointer<objc.ObjCObject> arg0,
+    ffi.Pointer<objc.ObjCObject> arg1,
+    ffi.Pointer<objc.ObjCObject> arg2) {
+  (objc.getBlockClosure(block) as void Function(
+      ffi.Pointer<objc.ObjCObject>,
+      ffi.Pointer<objc.ObjCObject>,
+      ffi.Pointer<objc.ObjCObject>))(arg0, arg1, arg2);
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<
+        ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>)>
+    _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerCallable = ffi
+        .NativeCallable<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>.listener(
+        _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>`.
+abstract final class ObjCBlock_ffiVoid_NSURL_NSArray_NSError {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc
+      .ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<
+              ffi.Void Function(objc.NSURL, objc.NSArray?,
+                  objc.NSError?)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(
+                          ffi.Pointer<objc.ObjCObject> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1,
+                          ffi.Pointer<objc.ObjCObject> arg2)>>
+              ptr) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)> fromFunction(
+          void Function(objc.NSURL, objc.NSArray?, objc.NSError?) fn) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>(
+          objc.newClosureBlock(
+              _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureCallable,
+              (ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1,
+                      ffi.Pointer<objc.ObjCObject> arg2) =>
+                  fn(
+                      objc.NSURL.castFromPointer(arg0, retain: true, release: true),
+                      arg1.address == 0 ? null : objc.NSArray.castFromPointer(arg1, retain: true, release: true),
+                      arg2.address == 0 ? null : objc.NSError.castFromPointer(arg2, retain: true, release: true))),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc
+      .ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>
+      listener(void Function(objc.NSURL, objc.NSArray?, objc.NSError?) fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerCallable.nativeFunction
+            .cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1,
+                ffi.Pointer<objc.ObjCObject> arg2) =>
+            fn(
+                objc.NSURL.castFromPointer(arg0, retain: false, release: true),
+                arg1.address == 0
+                    ? null
+                    : objc.NSArray.castFromPointer(arg1,
+                        retain: false, release: true),
+                arg2.address == 0
+                    ? null
+                    : objc.NSError.castFromPointer(arg2,
+                        retain: false, release: true)));
+    final wrapper = _MapLibreFFi_wrapListenerBlock_1hcfngn(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<
+        ffi.Void Function(objc.NSURL, objc.NSArray?,
+            objc.NSError?)>(wrapper, retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>`.
+extension ObjCBlock_ffiVoid_NSURL_NSArray_NSError_CallExtension on objc
+    .ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)> {
+  void call(objc.NSURL arg0, objc.NSArray? arg1, objc.NSError? arg2) =>
+      ref.pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Void Function(
+                          ffi.Pointer<objc.ObjCBlockImpl> block,
+                          ffi.Pointer<objc.ObjCObject> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1,
+                          ffi.Pointer<objc.ObjCObject> arg2)>>()
+              .asFunction<
+                  void Function(
+                      ffi.Pointer<objc.ObjCBlockImpl>,
+                      ffi.Pointer<objc.ObjCObject>,
+                      ffi.Pointer<objc.ObjCObject>,
+                      ffi.Pointer<objc.ObjCObject>)>()(
+          ref.pointer,
+          arg0.ref.pointer,
+          arg1?.ref.pointer ?? ffi.nullptr,
+          arg2?.ref.pointer ?? ffi.nullptr);
+}
+
+void _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSURL_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSError_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Void Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>(
+            _ObjCBlock_ffiVoid_NSURL_NSError_closureTrampoline)
+        .cast();
+void _ObjCBlock_ffiVoid_NSURL_NSError_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block,
+    ffi.Pointer<objc.ObjCObject> arg0,
+    ffi.Pointer<objc.ObjCObject> arg1) {
+  (objc.getBlockClosure(block) as void Function(
+      ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+  objc.objectRelease(block.cast());
+}
+
+ffi.NativeCallable<
+        ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCObject>)>
+    _ObjCBlock_ffiVoid_NSURL_NSError_listenerCallable = ffi.NativeCallable<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>.listener(
+        _ObjCBlock_ffiVoid_NSURL_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>`.
+abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>(pointer,
+              retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)> fromFunctionPointer(
+          ffi.Pointer<
+                  ffi.NativeFunction<
+                      ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                          ffi.Pointer<objc.ObjCObject> arg1)>>
+              ptr) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>(
+          objc.newPointerBlock(_ObjCBlock_ffiVoid_NSURL_NSError_fnPtrCallable, ptr.cast()),
+          retain: false,
+          release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)> fromFunction(
+          void Function(objc.NSURL, objc.NSError?) fn) =>
+      objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>(
+          objc.newClosureBlock(
+              _ObjCBlock_ffiVoid_NSURL_NSError_closureCallable,
+              (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                  objc.NSURL.castFromPointer(arg0, retain: true, release: true),
+                  arg1.address == 0
+                      ? null
+                      : objc.NSError.castFromPointer(arg1,
+                          retain: true, release: true))),
+          retain: false,
+          release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  static objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)> listener(
+      void Function(objc.NSURL, objc.NSError?) fn) {
+    final raw = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_NSURL_NSError_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0,
+                ffi.Pointer<objc.ObjCObject> arg1) =>
+            fn(
+                objc.NSURL.castFromPointer(arg0, retain: false, release: true),
+                arg1.address == 0
+                    ? null
+                    : objc.NSError.castFromPointer(arg1,
+                        retain: false, release: true)));
+    final wrapper = _MapLibreFFi_wrapListenerBlock_wjvic9(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>(wrapper,
+        retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>`.
+extension ObjCBlock_ffiVoid_NSURL_NSError_CallExtension
+    on objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)> {
+  void call(objc.NSURL arg0, objc.NSError? arg1) => ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              void Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>)>()(
+      ref.pointer, arg0.ref.pointer, arg1?.ref.pointer ?? ffi.nullptr);
+}
+
+late final _class_MLNOfflineStorage = objc.getClass("MLNOfflineStorage");
+late final _sel_sharedOfflineStorage =
+    objc.registerName("sharedOfflineStorage");
+late final _sel_databasePath = objc.registerName("databasePath");
+late final _sel_databaseURL = objc.registerName("databaseURL");
+late final _sel_addContentsOfFile_withCompletionHandler_ =
+    objc.registerName("addContentsOfFile:withCompletionHandler:");
+late final _sel_addContentsOfURL_withCompletionHandler_ =
+    objc.registerName("addContentsOfURL:withCompletionHandler:");
+late final _sel_packs = objc.registerName("packs");
+late final _sel_addPackForRegion_withContext_completionHandler_ =
+    objc.registerName("addPackForRegion:withContext:completionHandler:");
+final _objc_msgSend_91c9gi = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_removePack_withCompletionHandler_ =
+    objc.registerName("removePack:withCompletionHandler:");
+late final _sel_invalidatePack_withCompletionHandler_ =
+    objc.registerName("invalidatePack:withCompletionHandler:");
+late final _sel_reloadPacks = objc.registerName("reloadPacks");
+late final _sel_setMaximumAllowedMapboxTiles_ =
+    objc.registerName("setMaximumAllowedMapboxTiles:");
+final _objc_msgSend_1xsl7ae = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Uint64)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_countOfBytesCompleted =
+    objc.registerName("countOfBytesCompleted");
+final _objc_msgSend_1p4gbjy = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLongLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setMaximumAmbientCacheSize_withCompletionHandler_ =
+    objc.registerName("setMaximumAmbientCacheSize:withCompletionHandler:");
+final _objc_msgSend_1sq2aut = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.UnsignedLong,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            int,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_invalidateAmbientCacheWithCompletionHandler_ =
+    objc.registerName("invalidateAmbientCacheWithCompletionHandler:");
+final _objc_msgSend_f167m6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlockImpl>)>();
+late final _sel_clearAmbientCacheWithCompletionHandler_ =
+    objc.registerName("clearAmbientCacheWithCompletionHandler:");
+late final _sel_resetDatabaseWithCompletionHandler_ =
+    objc.registerName("resetDatabaseWithCompletionHandler:");
+late final _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_ =
+    objc.registerName(
+        "preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:");
+final _objc_msgSend_1o4m53j = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool)>();
+late final _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_ =
+    objc.registerName(
+        "putResourceWithUrl:data:modified:expires:etag:mustRevalidate:");
+late final _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_completionHandler_ =
+    objc.registerName(
+        "preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:completionHandler:");
+final _objc_msgSend_1iw4tec = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Bool,
+                ffi.Pointer<objc.ObjCBlockImpl>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            bool,
+            ffi.Pointer<objc.ObjCBlockImpl>)>();
+
+/// MLNOfflineStorage implements a singleton (shared object) that manages offline
+/// packs and ambient caching. All of this class’s instance methods are asynchronous,
+/// reflecting the fact that offline resources are stored in a database. The shared
+/// object maintains a canonical collection of offline packs in its `packs` property.
+///
+/// Mapbox resources downloaded via this API are subject to separate Vector Tile and
+/// Raster Tile API pricing and are not included in the Maps SDK’s “unlimited” requests.
+/// See <a href="https://www.mapbox.com/pricing/">our pricing page</a> for more
+/// information.
+///
+/// #### Related examples
+/// - <doc:OfflinePackExample>
+/// - <doc:ManageOfflineRegionsExample>
+class MLNOfflineStorage extends objc.NSObject {
+  MLNOfflineStorage._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNOfflineStorage] that points to the same underlying object as [other].
+  MLNOfflineStorage.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNOfflineStorage] that wraps the given raw object pointer.
+  MLNOfflineStorage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNOfflineStorage].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(
+        obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflineStorage);
+  }
+
+  /// Returns the shared offline storage object.
+  static MLNOfflineStorage getSharedOfflineStorage() {
+    final _ret = _objc_msgSend_1x359cv(
+        _class_MLNOfflineStorage, _sel_sharedOfflineStorage);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The receiver’s delegate.
+  ///
+  /// An offline storage object sends messages to its delegate to allow it to
+  /// transform URLs before they are requested from the internet. This can be used
+  /// add or remove custom parameters, or reroute certain requests to other servers
+  /// or endpoints.
+  objc.ObjCObjectBase? get delegate {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_delegate);
+    return _ret.address == 0
+        ? null
+        : objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// The receiver’s delegate.
+  ///
+  /// An offline storage object sends messages to its delegate to allow it to
+  /// transform URLs before they are requested from the internet. This can be used
+  /// add or remove custom parameters, or reroute certain requests to other servers
+  /// or endpoints.
+  set delegate(objc.ObjCObjectBase? value) {
+    return _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_setDelegate_, value?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// The file path at which offline packs and the ambient cache are stored.
+  ///
+  /// To customize this path, specify the
+  /// `MLNOfflineStorageDatabasePath`
+  /// key in Info.plist, see <doc:Info.plist_Keys>.
+  objc.NSString get databasePath {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_databasePath);
+    return objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// The file URL at which offline packs and the ambient cache are stored.
+  ///
+  /// To customize this path, specify the
+  /// `MLNOfflineStorageDatabasePath` key in Info.plist, see <doc:Info.plist_Keys>.
+  objc.NSURL get databaseURL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_databaseURL);
+    return objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Adds the offline packs located at the given file path to offline storage.
+  ///
+  /// The file must be a valid offline pack database bundled with the application or
+  /// downloaded separately.
+  ///
+  /// The resulting packs are added or updated to the shared offline storage object’s
+  /// `packs` property, then the `completion` block is executed.
+  ///
+  /// @param filePath A string representation of the file path. The file path must be
+  /// writable as schema updates may be perfomed.
+  /// @param completion The completion handler to call once the contents of the given
+  /// file has been added to offline storage. This handler is executed
+  /// asynchronously on the main queue.
+  void addContentsOfFile_withCompletionHandler_(
+      objc.NSString filePath,
+      objc.ObjCBlock<
+              ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>?
+          completion) {
+    _objc_msgSend_14pxqbs(
+        this.ref.pointer,
+        _sel_addContentsOfFile_withCompletionHandler_,
+        filePath.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Adds the offline packs located at the given URL to offline storage.
+  ///
+  /// The file must be a valid offline pack database bundled with the application or
+  /// downloaded separately.
+  ///
+  /// The resulting packs are added or updated to the shared offline storage object’s
+  /// `packs` property, then the `completion` block is executed.
+  ///
+  /// @param fileURL A file URL specifying the file to add. The URL should be a valid
+  /// system path. The URL must be writable as schema updates may be performed.
+  /// @param completion The completion handler to call once the contents of the given
+  /// file has been added to offline storage. This handler is executed
+  /// asynchronously on the main queue.
+  void addContentsOfURL_withCompletionHandler_(
+      objc.NSURL fileURL,
+      objc.ObjCBlock<
+              ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)>?
+          completion) {
+    _objc_msgSend_14pxqbs(
+        this.ref.pointer,
+        _sel_addContentsOfURL_withCompletionHandler_,
+        fileURL.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// An array of all known offline packs, in the order in which they were created.
+  ///
+  /// This property is set to `nil`, indicating that the receiver does not yet know
+  /// the existing packs, for an undefined amount of time starting from the moment
+  /// the shared offline storage object is initialized until the packs are fetched
+  /// from the database. After that point, this property is always non-nil, but it
+  /// may be empty to indicate that no packs are present.
+  ///
+  /// To detect when the shared offline storage object has finished loading its
+  /// `packs` property, observe KVO change notifications on the `packs` key path.
+  /// The initial load results in an `NSKeyValueChangeSetting` change.
+  objc.NSArray? get packs {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_packs);
+    return _ret.address == 0
+        ? null
+        : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Creates and registers an offline pack that downloads the resources needed to
+  /// use the given region offline.
+  ///
+  /// The resulting pack is added to the shared offline storage object’s `packs`
+  /// property, then the `completion` block is executed with that pack passed in.
+  ///
+  /// The pack has an initial state of ``MLNOfflinePackState/MLNOfflinePackStateInactive``. To begin
+  /// downloading resources, call ``MLNOfflinePack/resume`` on the pack from within
+  /// the completion handler. To monitor download progress, add an observer for
+  /// ``MLNOfflinePackProgressChangedNotification``s about that pack.
+  ///
+  /// To detect when any call to this method results in a new pack, observe KVO
+  /// change notifications on the shared offline storage object’s `packs` key path.
+  /// Additions to that array result in an `NSKeyValueChangeInsertion` change.
+  ///
+  /// @param region A region to download.
+  /// @param context Arbitrary data to store alongside the downloaded resources.
+  /// @param completion The completion handler to call once the pack has been added.
+  /// This handler is executed asynchronously on the main queue.
+  void addPackForRegion_withContext_completionHandler_(
+      objc.ObjCObjectBase region,
+      objc.NSData context,
+      objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>?
+          completion) {
+    _objc_msgSend_91c9gi(
+        this.ref.pointer,
+        _sel_addPackForRegion_withContext_completionHandler_,
+        region.ref.pointer,
+        context.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Unregisters the given offline pack and allows resources that are no longer
+  /// required by any remaining packs to be potentially freed.
+  ///
+  /// As soon as this method is called on a pack, the pack becomes invalid; any
+  /// attempt to send it a message will result in an exception being thrown. If an
+  /// error occurs and the pack cannot be removed, do not attempt to reuse the pack
+  /// object. Instead, if you need continued access to the pack, suspend all packs
+  /// and use the ``MLNOfflineStorage/reloadPacks`` method to obtain valid pointers to all the packs.
+  ///
+  /// To detect when any call to this method results in a pack being removed, observe
+  /// KVO change notifications on the shared offline storage object’s `packs` key
+  /// path. Removals from that array result in an `NSKeyValueChangeRemoval` change.
+  ///
+  /// When you remove an offline pack, any resources that are required by that pack,
+  /// but not other packs, become eligible for deletion from offline storage. Because
+  /// the backing store used for offline storage is also used as a general purpose
+  /// cache for map resources, such resources may not be immediately removed if the
+  /// implementation determines that they remain useful for general performance of
+  /// the map.
+  ///
+  /// @param pack The offline pack to remove.
+  /// @param completion The completion handler to call once the pack has been
+  /// removed. This handler is executed asynchronously on the main queue.
+  void removePack_withCompletionHandler_(MLNOfflinePack pack,
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)>? completion) {
+    _objc_msgSend_14pxqbs(
+        this.ref.pointer,
+        _sel_removePack_withCompletionHandler_,
+        pack.ref.pointer,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// Invalidates the specified offline pack. This method checks that the tiles
+  /// in the specified offline pack match those from the server. Local tiles that
+  /// do not match the latest version on the server are updated.
+  ///
+  /// This is more efficient than deleting the offline pack and downloading it
+  /// again. If the data stored locally matches that on the server, new data will
+  /// not be downloaded.
+  ///
+  /// @param pack The offline pack to be invalidated.
+  /// @param completion The completion handler to call once the pack has been
+  /// removed. This handler is executed asynchronously on the main queue.
+  void invalidatePack_withCompletionHandler_(MLNOfflinePack pack,
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)> completion) {
+    _objc_msgSend_14pxqbs(
+        this.ref.pointer,
+        _sel_invalidatePack_withCompletionHandler_,
+        pack.ref.pointer,
+        completion.ref.pointer);
+  }
+
+  /// Forcibly, asynchronously reloads the `packs` property. At some point after this
+  /// method is called, the pointer values of the ``MLNOfflinePack`` objects in the
+  /// `packs` property change, even if the underlying data for these packs has not
+  /// changed. If this method is called while a pack is actively downloading, the
+  /// behavior is undefined.
+  ///
+  /// You typically do not need to call this method.
+  ///
+  /// To detect when the shared offline storage object has finished reloading its
+  /// `packs` property, observe KVO change notifications on the `packs` key path.
+  /// A reload results in an `NSKeyValueChangeSetting` change.
+  void reloadPacks() {
+    _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_reloadPacks);
+  }
+
+  /// Sets the maximum number of tiles that may be downloaded and
+  /// stored on the current device.
+  ///
+  /// Once this limit is reached, an
+  /// ``MLNOfflinePackMaximumMapboxTilesReachedNotification`` is posted for every
+  /// attempt to download additional tiles until already downloaded tiles are removed
+  /// by calling the ``MLNOfflineStorage/removePack:withCompletionHandler:`` method.
+  ///
+  /// @param maximumCount The maximum number of tiles allowed to be downloaded.
+  void setMaximumAllowedMapboxTiles_(int maximumCount) {
+    _objc_msgSend_1xsl7ae(
+        this.ref.pointer, _sel_setMaximumAllowedMapboxTiles_, maximumCount);
+  }
+
+  /// The cumulative size, measured in bytes, of all downloaded resources on disk.
+  ///
+  /// The returned value includes all resources, including tiles, whether downloaded
+  /// as part of an offline pack or due to caching during normal use of ``MLNMapView``.
+  int get countOfBytesCompleted {
+    return _objc_msgSend_1p4gbjy(this.ref.pointer, _sel_countOfBytesCompleted);
+  }
+
+  /// Sets the maximum ambient cache size in bytes. The default maximum cache
+  /// size is 50 MB. To disable ambient caching, set the maximum ambient cache size
+  /// to `0`. Setting the maximum ambient cache size does not impact the maximum size
+  /// of offline packs.
+  ///
+  /// This method does not limit the space available to offline packs, and data in
+  /// offline packs does not count towards this limit. If you set the maximum ambient
+  /// cache size to 30 MB then download 20 MB of offline packs, 30 MB will remain
+  /// available for the ambient cache.
+  ///
+  /// This method should be called before the map and map style have been loaded.
+  ///
+  /// This method is potentially expensive, as the database will trim cached data
+  /// in order to prevent the ambient cache from being larger than the
+  /// specified amount.
+  ///
+  /// @param cacheSize The maximum size in bytes for the ambient cache.
+  /// @param completion The completion handler to call once the maximum ambient cache
+  /// size has been set. This handler is executed synchronously on the main queue.
+  void setMaximumAmbientCacheSize_withCompletionHandler_(int cacheSize,
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)> completion) {
+    _objc_msgSend_1sq2aut(
+        this.ref.pointer,
+        _sel_setMaximumAmbientCacheSize_withCompletionHandler_,
+        cacheSize,
+        completion.ref.pointer);
+  }
+
+  /// Invalidates the ambient cache. This method checks that the tiles in the
+  /// ambient cache match those from the server. If the local tiles do not match
+  /// those on the server, they are re-downloaded.
+  ///
+  /// This is recommended over clearing the cache or resetting the database
+  /// because valid local tiles will not be downloaded again.
+  ///
+  /// Resources shared with offline packs will not be affected by this method.
+  ///
+  /// @param completion The completion handler to call once the ambient cache has
+  /// been revalidated. This handler is executed asynchronously on the main queue.
+  void invalidateAmbientCacheWithCompletionHandler_(
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)> completion) {
+    _objc_msgSend_f167m6(
+        this.ref.pointer,
+        _sel_invalidateAmbientCacheWithCompletionHandler_,
+        completion.ref.pointer);
+  }
+
+  /// Clears the ambient cache by deleting resources. This method does not affect
+  /// resources shared with offline regions.
+  ///
+  /// @param completion The completion handler to call once resources from the
+  /// ambient cache have been cleared. This handler is executed asynchronously on
+  /// the main queue.
+  void clearAmbientCacheWithCompletionHandler_(
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)> completion) {
+    _objc_msgSend_f167m6(this.ref.pointer,
+        _sel_clearAmbientCacheWithCompletionHandler_, completion.ref.pointer);
+  }
+
+  /// Deletes the existing database, which includes both the ambient cache and
+  /// offline packs, then reinitializes it.
+  ///
+  /// You typically do not need to call this method.
+  ///
+  /// @param completion The completion handler to call once the pack has database has
+  /// been reset. This handler is executed asynchronously on the main queue.
+  void resetDatabaseWithCompletionHandler_(
+      objc.ObjCBlock<ffi.Void Function(objc.NSError?)> completion) {
+    _objc_msgSend_f167m6(this.ref.pointer,
+        _sel_resetDatabaseWithCompletionHandler_, completion.ref.pointer);
+  }
+
+  /// Inserts the provided resource into the ambient cache.
+  ///
+  /// This method mimics the caching that would take place if the equivalent resource
+  /// were requested in the process of map rendering. Use this method to pre-warm the
+  /// cache with resources you know will be requested.
+  ///
+  /// This method is asynchronous; the data may not be immediately available for
+  /// in-progress requests, though subsequent requests should have access to the
+  /// cached data.
+  ///
+  /// To find out when the resource is ready to retrieve from the cache, use the
+  /// ``MLNOfflineStorage/preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:completionHandler:``
+  /// method.
+  ///
+  /// @param data Response data to store for this resource. The data is expected to
+  /// be uncompressed; internally, the cache will compress data as necessary.
+  /// @param url The URL at which the data can normally be found.
+  /// @param modified The date the resource was last modified.
+  /// @param expires The date after which the resource is no longer valid.
+  /// @param eTag An HTTP entity tag.
+  /// @param mustRevalidate A Boolean value indicating whether the data is still
+  /// usable past the expiration date.
+  void preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_(
+      objc.NSData data,
+      objc.NSURL url,
+      objc.NSDate? modified,
+      objc.NSDate? expires,
+      objc.NSString? eTag,
+      bool mustRevalidate) {
+    _objc_msgSend_1o4m53j(
+        this.ref.pointer,
+        _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_,
+        data.ref.pointer,
+        url.ref.pointer,
+        modified?.ref.pointer ?? ffi.nullptr,
+        expires?.ref.pointer ?? ffi.nullptr,
+        eTag?.ref.pointer ?? ffi.nullptr,
+        mustRevalidate);
+  }
+
+  /// putResourceWithUrl:data:modified:expires:etag:mustRevalidate:
+  void putResourceWithUrl_data_modified_expires_etag_mustRevalidate_(
+      objc.NSURL url,
+      objc.NSData data,
+      objc.NSDate? modified,
+      objc.NSDate? expires,
+      objc.NSString? etag,
+      bool mustRevalidate) {
+    _objc_msgSend_1o4m53j(
+        this.ref.pointer,
+        _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_,
+        url.ref.pointer,
+        data.ref.pointer,
+        modified?.ref.pointer ?? ffi.nullptr,
+        expires?.ref.pointer ?? ffi.nullptr,
+        etag?.ref.pointer ?? ffi.nullptr,
+        mustRevalidate);
+  }
+
+  /// Inserts the provided resource into the ambient cache, calling a completion
+  /// handler when finished.
+  ///
+  /// This method is asynchronous. The data is available for in-progress requests as
+  /// soon as the completion handler is called.
+  ///
+  /// This method is asynchronous; the data may not be immediately available for
+  /// in-progress requests, though subsequent requests should have access to the
+  /// cached data.
+  ///
+  /// @param data Response data to store for this resource. The data is expected to
+  /// be uncompressed; internally, the cache will compress data as necessary.
+  /// @param url The URL at which the data can normally be found.
+  /// @param modified The date the resource was last modified.
+  /// @param expires The date after which the resource is no longer valid.
+  /// @param eTag An HTTP entity tag.
+  /// @param mustRevalidate A Boolean value indicating whether the data is still
+  /// usable past the expiration date.
+  /// @param completion The completion handler to call once the data has been
+  /// preloaded. This handler is executed asynchronously on the main queue.
+  void
+      preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_completionHandler_(
+          objc.NSData data,
+          objc.NSURL url,
+          objc.NSDate? modified,
+          objc.NSDate? expires,
+          objc.NSString? eTag,
+          bool mustRevalidate,
+          objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>?
+              completion) {
+    _objc_msgSend_1iw4tec(
+        this.ref.pointer,
+        _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustRevalidate_completionHandler_,
+        data.ref.pointer,
+        url.ref.pointer,
+        modified?.ref.pointer ?? ffi.nullptr,
+        expires?.ref.pointer ?? ffi.nullptr,
+        eTag?.ref.pointer ?? ffi.nullptr,
+        mustRevalidate,
+        completion?.ref.pointer ?? ffi.nullptr);
+  }
+
+  /// init
+  MLNOfflineStorage init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNOfflineStorage.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNOfflineStorage new1() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNOfflineStorage, _sel_new);
+    return MLNOfflineStorage.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNOfflineStorage allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNOfflineStorage, _sel_allocWithZone_, zone);
+    return MLNOfflineStorage.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNOfflineStorage alloc() {
+    final _ret = _objc_msgSend_1x359cv(_class_MLNOfflineStorage, _sel_alloc);
+    return MLNOfflineStorage.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNOfflineStorage self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// retain
+  MLNOfflineStorage retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNOfflineStorage autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_MLNTilePyramidOfflineRegion =
+    objc.getClass("MLNTilePyramidOfflineRegion");
+late final _sel_bounds = objc.registerName("bounds");
+late final _sel_initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_ =
+    objc.registerName("initWithStyleURL:bounds:fromZoomLevel:toZoomLevel:");
+final _objc_msgSend_3ly4u6 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                MLNCoordinateBounds,
+                ffi.Double,
+                ffi.Double)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            MLNCoordinateBounds,
+            double,
+            double)>();
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSURL_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_NSURL_ffiVoid_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_NSURL_ffiVoid_fnPtrTrampoline)
+        .cast();
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSURL_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<ffi.Void>))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_NSURL_ffiVoid_closureCallable =
+    ffi.Pointer.fromFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)>(
+            _ObjCBlock_NSURL_ffiVoid_closureTrampoline)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_NSURL_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(pointer,
+              retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc
+      .ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(
+              ffi.Pointer<
+                      ffi.NativeFunction<
+                          ffi.Pointer<objc.ObjCObject> Function(
+                              ffi.Pointer<ffi.Void> arg0)>>
+                  ptr) =>
+          objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(
+              objc.newPointerBlock(_ObjCBlock_NSURL_ffiVoid_fnPtrCallable, ptr.cast()),
+              retain: false,
+              release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>
+      fromFunction(objc.NSURL Function(ffi.Pointer<ffi.Void>) fn) =>
+          objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(
+              objc.newClosureBlock(
+                  _ObjCBlock_NSURL_ffiVoid_closureCallable,
+                  (ffi.Pointer<ffi.Void> arg0) =>
+                      fn(arg0).ref.retainAndAutorelease()),
+              retain: false,
+              release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_NSURL_ffiVoid_CallExtension
+    on objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> {
+  objc.NSURL call(ffi.Pointer<ffi.Void> arg0) => objc.NSURL.castFromPointer(
+      ref.pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlockImpl> block,
+                      ffi.Pointer<ffi.Void> arg0)>>()
+          .asFunction<
+              ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>)>()(ref.pointer, arg0),
+      retain: true,
+      release: true);
+}
+
+late final _sel_includesIdeographicGlyphs =
+    objc.registerName("includesIdeographicGlyphs");
+late final _sel_setIncludesIdeographicGlyphs_ =
+    objc.registerName("setIncludesIdeographicGlyphs:");
+void _ObjCBlock_Void_ffiVoid_bool_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        bool arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Bool arg1)>>()
+        .asFunction<void Function(ffi.Pointer<ffi.Void>, bool)>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_Void_ffiVoid_bool_fnPtrCallable =
+    ffi.Pointer.fromFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<ffi.Void>,
+                ffi.Bool)>(_ObjCBlock_Void_ffiVoid_bool_fnPtrTrampoline)
+        .cast();
+void _ObjCBlock_Void_ffiVoid_bool_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlockImpl> block,
+        ffi.Pointer<ffi.Void> arg0,
+        bool arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void>, bool))(
+        arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_Void_ffiVoid_bool_closureCallable =
+    ffi.Pointer.fromFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl>,
+                ffi.Pointer<ffi.Void>,
+                ffi.Bool)>(_ObjCBlock_Void_ffiVoid_bool_closureTrampoline)
+        .cast();
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>`.
+abstract final class ObjCBlock_Void_ffiVoid_bool {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>
+      castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+              {bool retain = false, bool release = false}) =>
+          objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>(
+              pointer,
+              retain: retain,
+              release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>
+      fromFunctionPointer(
+              ffi.Pointer<
+                      ffi.NativeFunction<
+                          ffi.Void Function(
+                              ffi.Pointer<ffi.Void> arg0, ffi.Bool arg1)>>
+                  ptr) =>
+          objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>(
+              objc.newPointerBlock(_ObjCBlock_Void_ffiVoid_bool_fnPtrCallable, ptr.cast()),
+              retain: false,
+              release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>
+      fromFunction(void Function(ffi.Pointer<ffi.Void>, bool) fn) =>
+          objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>(
+              objc.newClosureBlock(_ObjCBlock_Void_ffiVoid_bool_closureCallable,
+                  (ffi.Pointer<ffi.Void> arg0, bool arg1) => fn(arg0, arg1)),
+              retain: false,
+              release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)>`.
+extension ObjCBlock_Void_ffiVoid_bool_CallExtension
+    on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Bool)> {
+  void call(ffi.Pointer<ffi.Void> arg0, bool arg1) => ref.pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block,
+                  ffi.Pointer<ffi.Void> arg0, ffi.Bool arg1)>>()
+      .asFunction<
+          void Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>,
+              bool)>()(ref.pointer, arg0, arg1);
+}
+
+/// An offline region defined by a style URL, geographic coordinate bounds, and
+/// range of zoom levels.
+///
+/// To minimize the resources required by an irregularly shaped offline region,
+/// use the MLNShapeOfflineRegion class instead.
+///
+/// ### Example
+/// ```swift
+/// let northeast = CLLocationCoordinate2D(latitude: 40.989329, longitude: -102.062592)
+/// let southwest = CLLocationCoordinate2D(latitude: 36.986207, longitude: -109.049896)
+/// let bbox = MLNCoordinateBounds(sw: southwest, ne: northeast)
+///
+/// let region = MLNTilePyramidOfflineRegion(styleURL: MLNStyle.lightStyleURL, bounds: bbox,
+/// fromZoomLevel: 11, toZoomLevel: 14) let context = "Tile Pyramid Region".data(using: .utf8)
+/// MLNOfflineStorage.shared.addPack(for: region, withContext: context!)
+/// ```
+///
+/// #### Related examples
+/// TODO: Download an offline map, learn how to define an offline region
+/// to be downloaded to a user's device.
+class MLNTilePyramidOfflineRegion extends objc.NSObject {
+  MLNTilePyramidOfflineRegion._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLNTilePyramidOfflineRegion] that points to the same underlying object as [other].
+  MLNTilePyramidOfflineRegion.castFrom(objc.ObjCObjectBase other)
+      : this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [MLNTilePyramidOfflineRegion] that wraps the given raw object pointer.
+  MLNTilePyramidOfflineRegion.castFromPointer(
+      ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false,
+      bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNTilePyramidOfflineRegion].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_69e0x1(obj.ref.pointer, _sel_isKindOfClass_,
+        _class_MLNTilePyramidOfflineRegion);
+  }
+
+  /// The coordinate bounds for the geographic region covered by the downloaded
+  /// tiles.
+  MLNCoordinateBounds get bounds {
+    final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
+    objc.useMsgSendVariants
+        ? _objc_msgSend_ygoa6aStret(_ptr, this.ref.pointer, _sel_bounds)
+        : _ptr.ref = _objc_msgSend_ygoa6a(this.ref.pointer, _sel_bounds);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<MLNCoordinateBounds>(),
+        finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<MLNCoordinateBounds>(_finalizable);
+  }
+
+  /// The minimum zoom level for which to download tiles and other resources.
+  ///
+  /// For more information about zoom levels, ``MLNMapView/zoomLevel``.
+  double get minimumZoomLevel {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_minimumZoomLevel)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_minimumZoomLevel);
+  }
+
+  /// The maximum zoom level for which to download tiles and other resources.
+  ///
+  /// For more information about zoom levels, ``MLNMapView/zoomLevel``.
+  double get maximumZoomLevel {
+    return objc.useMsgSendVariants
+        ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_maximumZoomLevel)
+        : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_maximumZoomLevel);
+  }
+
+  /// init
+  MLNTilePyramidOfflineRegion init() {
+    final _ret =
+        _objc_msgSend_1x359cv(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// Initializes a newly created offline region with the given style URL, geographic
+  /// coordinate bounds, and range of zoom levels.
+  ///
+  /// This is the designated initializer for ``MLNTilePyramidOfflineRegion``.
+  ///
+  /// @param styleURL URL of the map style for which to download resources. The URL
+  /// may be a full HTTP or HTTPS URL or a canonical style URL.
+  /// Specify `nil` for the default style.
+  /// Relative file URLs cannot be used as offline style URLs. To download the
+  /// online resources required by a local style, specify a URL to an online copy
+  /// of the style.
+  /// @param bounds The coordinate bounds for the geographic region to be covered by
+  /// the downloaded tiles.
+  /// @param minimumZoomLevel The minimum zoom level to be covered by the downloaded
+  /// tiles. This parameter should be set to at least 0 but no greater than the
+  /// value of the `maximumZoomLevel` parameter. For each required tile source, if
+  /// this parameter is set to a value less than the tile source’s minimum zoom
+  /// level, the download covers zoom levels down to the tile source’s minimum
+  /// zoom level.
+  /// @param maximumZoomLevel The maximum zoom level to be covered by the downloaded
+  /// tiles. This parameter should be set to at least the value of the
+  /// `minimumZoomLevel` parameter. For each required tile source, if this
+  /// parameter is set to a value greater than the tile source’s minimum zoom
+  /// level, the download covers zoom levels up to the tile source’s maximum zoom
+  /// level.
+  MLNTilePyramidOfflineRegion
+      initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_(
+          objc.NSURL? styleURL,
+          MLNCoordinateBounds bounds,
+          double minimumZoomLevel,
+          double maximumZoomLevel) {
+    final _ret = _objc_msgSend_3ly4u6(
+        this.ref.retainAndReturnPointer(),
+        _sel_initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_,
+        styleURL?.ref.pointer ?? ffi.nullptr,
+        bounds,
+        minimumZoomLevel,
+        maximumZoomLevel);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// new
+  static MLNTilePyramidOfflineRegion new1() {
+    final _ret =
+        _objc_msgSend_1x359cv(_class_MLNTilePyramidOfflineRegion, _sel_new);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLNTilePyramidOfflineRegion allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_hzlb60(
+        _class_MLNTilePyramidOfflineRegion, _sel_allocWithZone_, zone);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static MLNTilePyramidOfflineRegion alloc() {
+    final _ret =
+        _objc_msgSend_1x359cv(_class_MLNTilePyramidOfflineRegion, _sel_alloc);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// self
+  MLNTilePyramidOfflineRegion self() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_self);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// retain
+  MLNTilePyramidOfflineRegion retain() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_retain);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// autorelease
+  MLNTilePyramidOfflineRegion autorelease() {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_autorelease);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// URL of the style whose resources are required for offline viewing.
+  ///
+  /// In addition to the JSON stylesheet, different styles may require different font
+  /// glyphs, sprite sheets, and other resources.
+  ///
+  /// The URL may be a full HTTP or HTTPS URL or a canonical URL
+  objc.NSURL get styleURL {
+    final _ret = _objc_msgSend_1x359cv(this.ref.pointer, _sel_styleURL);
+    return objc.NSURL.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// Specifies whether to include ideographic glyphs in downloaded font data.
+  /// Ideographic glyphs make up the majority of downloaded font data, but
+  /// it is possible to configure the renderer to use locally installed fonts
+  /// instead of relying on fonts downloaded as part of the offline pack.
+  /// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
+  /// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
+  ///
+  /// By default, this property is set to `NO`, so that the offline pack will
+  /// include ideographic glyphs.
+  bool get includesIdeographicGlyphs {
+    return _objc_msgSend_91o635(
+        this.ref.pointer, _sel_includesIdeographicGlyphs);
+  }
+
+  /// Specifies whether to include ideographic glyphs in downloaded font data.
+  /// Ideographic glyphs make up the majority of downloaded font data, but
+  /// it is possible to configure the renderer to use locally installed fonts
+  /// instead of relying on fonts downloaded as part of the offline pack.
+  /// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
+  /// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
+  ///
+  /// By default, this property is set to `NO`, so that the offline pack will
+  /// include ideographic glyphs.
+  set includesIdeographicGlyphs(bool value) {
+    return _objc_msgSend_1s56lr9(
+        this.ref.pointer, _sel_setIncludesIdeographicGlyphs_, value);
+  }
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(
+        _class_MLNTilePyramidOfflineRegion, _sel_supportsSecureCoding);
+  }
+
+  /// encodeWithCoder:
+  void encodeWithCoder_(objc.NSCoder coder) {
+    _objc_msgSend_1jdvcbf(
+        this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+  }
+
+  /// initWithCoder:
+  MLNTilePyramidOfflineRegion? initWithCoder_(objc.NSCoder coder) {
+    final _ret = _objc_msgSend_62nh5j(this.ref.retainAndReturnPointer(),
+        _sel_initWithCoder_, coder.ref.pointer);
+    return _ret.address == 0
+        ? null
+        : MLNTilePyramidOfflineRegion.castFromPointer(_ret,
+            retain: false, release: true);
+  }
 }
