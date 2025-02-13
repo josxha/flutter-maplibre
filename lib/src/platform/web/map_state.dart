@@ -243,12 +243,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double? pitch,
   }) async {
     _nextGestureCausedByController = true;
+    final camera = getCamera();
     _map.jumpTo(
       interop.JumpToOptions(
         center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        zoom: zoom ?? camera.zoom,
+        bearing: bearing ?? camera.bearing,
+        pitch: pitch ?? camera.pitch,
       ),
     );
   }
@@ -265,12 +266,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }) async {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
+    final camera = getCamera();
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        zoom: zoom ?? camera.zoom,
+        bearing: bearing ?? camera.bearing,
+        pitch: pitch ?? camera.pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
       ),
@@ -313,20 +315,22 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) async =>
-      _map.fitBounds(
-        bounds.toJsLngLatBounds(),
-        interop.FitBoundsOptions(
-          offset: offset.toJsPoint(),
-          maxZoom: webMaxZoom,
-          linear: webLinear,
-          maxDuration: webMaxDuration?.inMilliseconds,
-          padding: padding.toPaddingOptions(),
-          speed: webSpeed,
-          pitch: pitch,
-          bearing: bearing,
-        ),
-      );
+  }) async {
+    final camera = getCamera();
+    _map.fitBounds(
+      bounds.toJsLngLatBounds(),
+      interop.FitBoundsOptions(
+        offset: offset.toJsPoint(),
+        maxZoom: webMaxZoom,
+        linear: webLinear,
+        maxDuration: webMaxDuration?.inMilliseconds,
+        padding: padding.toPaddingOptions(),
+        speed: webSpeed,
+        pitch: pitch ?? camera.pitch,
+        bearing: bearing ?? camera.bearing,
+      ),
+    );
+  }
 
   @override
   MapCamera getCamera() => MapCamera(
