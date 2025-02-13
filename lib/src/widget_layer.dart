@@ -75,7 +75,7 @@ class WidgetLayer extends StatelessWidget {
 
               return buildChild(offsets);
             }
-            
+
             if (snapshot.error case final Object error) {
               debugPrint(error.toString());
               debugPrintStack(stackTrace: snapshot.stackTrace);
