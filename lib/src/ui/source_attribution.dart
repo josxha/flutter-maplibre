@@ -59,6 +59,8 @@ class _SourceAttributionState extends State<SourceAttribution> {
     }
 
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
+
     return FutureBuilder<List<String>>(
       future: style.getAttributions(),
       initialData: const [],
@@ -67,7 +69,11 @@ class _SourceAttributionState extends State<SourceAttribution> {
           debugPrint('SourceAttribution error: ${snapshot.error}');
           debugPrintStack(stackTrace: snapshot.stackTrace);
         }
-        final attributions = snapshot.data ?? const [];
+        final attributions = [
+          if (widget.showMapLibre)
+            '<a href="https://maplibre.org/">MapLibre</a>',
+          ...?snapshot.data,
+        ];
         return Container(
           alignment: widget.alignment,
           padding: widget.padding,
@@ -77,45 +83,41 @@ class _SourceAttributionState extends State<SourceAttribution> {
                 color: theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (_expanded) ...[
-                      if (widget.showMapLibre) ...[
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 8,
-                            right: attributions.isEmpty ? 0 : 4,
-                          ),
-                          child: InkWell(
-                            child: Text(
-                              'MapLibre${attributions.isEmpty ? '' : ' |'}',
-                              style: theme.textTheme.bodySmall,
-                            ),
-                            onTap: () =>
-                                launchUrl(Uri.parse('https://maplibre.org/')),
-                          ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (_expanded)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 5,
+                        top: 5,
+                        left: 10,
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: size.width / 2),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 2,
+                          runSpacing: 2,
+                          children: attributions
+                              .map(_HtmlWidget.new)
+                              .toList(growable: false),
                         ),
-                      ],
-                      ...attributions.map(_HtmlWidget.new),
-                    ],
-                    // The SizedBox enforces the height on android (web works without it).
-                    SizedBox.square(
-                      dimension: 30,
-                      child: IconButton(
-                        onPressed: () => setState(() {
-                          _initMapCamera = null;
-                          _expanded = !_expanded;
-                        }),
-                        icon: const Icon(Icons.info, size: 18),
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(),
                       ),
                     ),
-                  ],
-                ),
+                  SizedBox.square(
+                    dimension: 30,
+                    child: IconButton(
+                      onPressed: () => setState(() {
+                        _initMapCamera = null;
+                        _expanded = !_expanded;
+                      }),
+                      icon: const Icon(Icons.info, size: 18),
+                      padding: const EdgeInsets.all(4),
+                      constraints: const BoxConstraints(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -125,16 +127,27 @@ class _SourceAttributionState extends State<SourceAttribution> {
   }
 }
 
-class _HtmlWidget extends StatelessWidget {
+class _HtmlWidget extends StatefulWidget {
   const _HtmlWidget(this.html);
 
   final String html;
 
   @override
+  State<StatefulWidget> createState() => _HtmlWidgetState();
+}
+
+class _HtmlWidgetState extends State<_HtmlWidget> {
+  bool _hovering = false;
+
+  @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.bodySmall;
+    var textStyle = Theme.of(context).textTheme.bodySmall;
+    if (_hovering) {
+      textStyle = textStyle?.copyWith(decoration: TextDecoration.underline);
+    }
     final textSpans = <TextSpan>[];
-    final document = html_parser.parse(html);
+    final document = html_parser.parse(widget.html);
+
     for (final node in document.body!.nodes) {
       if (node is dom.Text) {
         // pure text
@@ -143,6 +156,8 @@ class _HtmlWidget extends StatelessWidget {
         // link
         textSpans.add(
           TextSpan(
+            onEnter: (event) => setState(() => _hovering = true),
+            onExit: (event) => setState(() => _hovering = false),
             text: node.text,
             style: textStyle,
             recognizer: TapGestureRecognizer()

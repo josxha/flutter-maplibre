@@ -60,6 +60,23 @@ extension type FlyToOptions._(CameraOptions _) implements CameraOptions {
   });
 }
 
+/// Options to specify the map bounds.
+@anonymous
+@JS()
+extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
+  /// Create a new JS [FitBoundsOptions] object.
+  external FitBoundsOptions({
+    bool? linear,
+    Point? offset,
+    num? maxZoom,
+    num? maxDuration,
+    PaddingOptions? padding,
+    num? speed,
+    num? pitch,
+    num? bearing,
+  });
+}
+
 /// https://github.com/maplibre/maplibre-gl-js/blob/8a005bd7d4769b62db470ce7e8cf2b08255c1d36/src/geo/edge_insets.ts#L129
 @anonymous
 @JS()
