@@ -53,7 +53,8 @@ class MyApp extends StatelessWidget {
         StyledMapPage.location: (context) => const StyledMapPage(),
         UserLocationPage.location: (context) => const UserLocationPage(),
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
-        WidgetLayerInteractivePage.location: (context) => const WidgetLayerInteractivePage(),
+        WidgetLayerInteractivePage.location: (context) =>
+            const WidgetLayerInteractivePage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
         StyleLayersSymbolPage.location: (context) =>
