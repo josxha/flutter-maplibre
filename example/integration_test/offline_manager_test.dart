@@ -14,13 +14,13 @@ void main() {
       manager.setOfflineTileCountLimit(amount: 1000);
       manager.dispose();
     });
-    /* TODO fix app freeze testWidgets('setMaximumAmbientCacheSize', (tester) async {
+    testWidgets('setMaximumAmbientCacheSize', (tester) async {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.setMaximumAmbientCacheSize(bytes: 1000);
       manager.dispose();
-    });*/
+    });
     testWidgets('clearAmbientCache', (tester) async {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
