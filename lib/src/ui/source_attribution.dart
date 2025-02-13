@@ -142,8 +142,9 @@ class _HtmlWidgetState extends State<_HtmlWidget> {
   @override
   Widget build(BuildContext context) {
     var textStyle = Theme.of(context).textTheme.bodySmall;
-    if (_hovering)
+    if (_hovering) {
       textStyle = textStyle?.copyWith(decoration: TextDecoration.underline);
+    }
     final textSpans = <TextSpan>[];
     final document = html_parser.parse(widget.html);
 
