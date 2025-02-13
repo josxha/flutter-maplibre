@@ -25,6 +25,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   ];
 
   Position? _originalPosition;
+  MapGestures _mapGestures = MapGestures.all();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
               options: MapOptions(
                 initZoom: 3,
                 initCenter: Position(0, 0),
+                gestures: _mapGestures,
               ),
               onMapCreated: (controller) => _controller = controller,
               onEvent: (event) async {
@@ -159,14 +161,19 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
     _originalPosition = null;
 
-    setState(() {});
+    setState(() {
+      _mapGestures = MapGestures.all();
+    });
   }
 
   void _onPanStart(DragStartDetails details, int index) {
     // Keep original position in case of discarded move
     _originalPosition = _markerPositions[index].clone();
 
-    setState(() {});
+    setState(() {
+      // Disable camera panning while a marker gets moved.
+      _mapGestures = MapGestures.all(pan: false);
+    });
   }
 
   Future<void> _onPanUpdate(DragUpdateDetails details, int index) async {
