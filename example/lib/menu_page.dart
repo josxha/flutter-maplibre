@@ -22,7 +22,6 @@ import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
-import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
@@ -83,11 +82,6 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.gps_fixed,
                   location: UserLocationPage.location,
                 ),
-              ItemCard(
-                label: 'User interface',
-                iconData: Icons.control_camera,
-                location: UserInterfacePage.location,
-              ),
               if (!kIsWeb)
                 ItemCard(
                   label: 'Offline',
