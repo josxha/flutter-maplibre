@@ -24,6 +24,7 @@ import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
+import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
 void main() {
@@ -52,6 +53,8 @@ class MyApp extends StatelessWidget {
         StyledMapPage.location: (context) => const StyledMapPage(),
         UserLocationPage.location: (context) => const UserLocationPage(),
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
+        WidgetLayerInteractivePage.location: (context) =>
+            const WidgetLayerInteractivePage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
         StyleLayersSymbolPage.location: (context) =>
