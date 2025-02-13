@@ -77,6 +77,7 @@ class _MapControlButtonsState extends State<MapControlButtons> {
       padding: widget.padding,
       child: PointerInterceptor(
         child: Column(
+          spacing: 8,
           mainAxisSize: MainAxisSize.min,
           children: [
             FloatingActionButton(
@@ -87,7 +88,6 @@ class _MapControlButtonsState extends State<MapControlButtons> {
               ),
               child: const Icon(Icons.add),
             ),
-            const SizedBox(height: 8),
             FloatingActionButton(
               heroTag: 'MapLibreZoomOutButton',
               onPressed: () => controller.animateCamera(
@@ -97,7 +97,6 @@ class _MapControlButtonsState extends State<MapControlButtons> {
               child: const Icon(Icons.remove),
             ),
             if (!kIsWeb && widget.showTrackLocation) ...[
-              const SizedBox(height: 8),
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
                 onPressed: () async => _initializeLocation(controller),

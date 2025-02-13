@@ -23,7 +23,12 @@ class _StyledMapPageState extends State<StyledMapPage> {
           initZoom: 2,
           initStyle: MapStyles.maptilerStreets,
         ),
-        children: const [SourceAttribution()],
+        children: const [
+          MapScalebar(),
+          SourceAttribution(),
+          MapControlButtons(showTrackLocation: true),
+          MapCompass(),
+        ],
         onStyleLoaded: (style) {
           style.setProjection(MapProjection.globe);
         },
