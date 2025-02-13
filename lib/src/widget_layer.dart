@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/translucent_pointer.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// Use the [WidgetLayer] to display [Widget]s on the [MapLibreMap]
 /// by using it in [MapLibreMap.children].
@@ -74,7 +75,7 @@ class WidgetLayer extends StatelessWidget {
 
               return buildChild(offsets);
             }
-            
+
             if (snapshot.error case final Object error) {
               debugPrint(error.toString());
               debugPrintStack(stackTrace: snapshot.stackTrace);
@@ -85,9 +86,12 @@ class WidgetLayer extends StatelessWidget {
         );
 
     if (allowInteraction) {
-      return buildChildAsync(points);
+      // Web requires a PointerInterceptor to prevent the HtmlElementView from
+      // recieving gestures.
+      return PointerInterceptor(child: buildChildAsync(points));
     } else {
-      // Android needs a TranslucentPointer
+      // Android needs a TranslucentPointer so that the widgets don't prevent
+      // panning on the map.
       return TranslucentPointer(child: buildChildAsync(points));
     }
   }
