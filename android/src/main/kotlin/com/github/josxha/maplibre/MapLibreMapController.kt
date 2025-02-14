@@ -465,16 +465,14 @@ class MapLibreMapController(
         }
     }
 
-    private fun backupUiSettings(): UiSettingsBackup {
-        return UiSettingsBackup(
-            rotateGesturesEnabled = mapLibreMap.uiSettings.isRotateGesturesEnabled,
-            zoomGesturesEnabled = mapLibreMap.uiSettings.isZoomGesturesEnabled,
-            doubleTapGesturesEnabled = mapLibreMap.uiSettings.isDoubleTapGesturesEnabled,
-            scrollGesturesEnabled = mapLibreMap.uiSettings.isScrollGesturesEnabled,
-            quickZoomGesturesEnabled = mapLibreMap.uiSettings.isQuickZoomGesturesEnabled,
-            tiltGesturesEnabled = mapLibreMap.uiSettings.isTiltGesturesEnabled
-        )
-    }
+    private fun backupUiSettings(): UiSettingsBackup = UiSettingsBackup(
+        rotateGesturesEnabled = mapLibreMap.uiSettings.isRotateGesturesEnabled,
+        zoomGesturesEnabled = mapLibreMap.uiSettings.isZoomGesturesEnabled,
+        doubleTapGesturesEnabled = mapLibreMap.uiSettings.isDoubleTapGesturesEnabled,
+        scrollGesturesEnabled = mapLibreMap.uiSettings.isScrollGesturesEnabled,
+        quickZoomGesturesEnabled = mapLibreMap.uiSettings.isQuickZoomGesturesEnabled,
+        tiltGesturesEnabled = mapLibreMap.uiSettings.isTiltGesturesEnabled,
+    )
 
     private fun restoreUiSettings(settings: UiSettingsBackup) {
         mapLibreMap.uiSettings.apply {
@@ -493,6 +491,6 @@ class MapLibreMapController(
         val doubleTapGesturesEnabled: Boolean,
         val scrollGesturesEnabled: Boolean,
         val quickZoomGesturesEnabled: Boolean,
-        val tiltGesturesEnabled: Boolean
+        val tiltGesturesEnabled: Boolean,
     )
 }
