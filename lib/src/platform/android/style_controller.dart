@@ -181,7 +181,10 @@ class StyleControllerAndroid implements StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() async {
+  Future<List<String>> getAttributions() async => getAttributionsSync();
+
+  @override
+  List<String> getAttributionsSync() {
     final jSources = _jniStyle.getSources();
     final attributions = <String>[];
     for (final jSource in jSources) {
