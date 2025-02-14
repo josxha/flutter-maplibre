@@ -61,69 +61,54 @@ class _SourceAttributionState extends State<SourceAttribution> {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
 
-    return FutureBuilder<List<String>>(
-      future: style.getAttributions(),
-      initialData: const [],
-      builder: (context, snapshot) {
-        if (snapshot.error != null) {
-          debugPrint('SourceAttribution error: ${snapshot.error}');
-          debugPrintStack(stackTrace: snapshot.stackTrace);
-        }
-        final attributions = [
-          if (widget.showMapLibre)
-            '<a href="https://maplibre.org/">MapLibre</a>',
-          ...?snapshot.data,
-        ];
-        return Container(
-          alignment: widget.alignment,
-          padding: widget.padding,
-          child: PointerInterceptor(
-            child: Container(
-              decoration: BoxDecoration(
-                color: theme.scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (_expanded)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 5,
-                        top: 5,
-                        left: 10,
-                      ),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: size.width / 2),
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 2,
-                          runSpacing: 2,
-                          children: attributions
-                              .map(_HtmlWidget.new)
-                              .toList(growable: false),
-                        ),
-                      ),
-                    ),
-                  SizedBox.square(
-                    dimension: 30,
-                    child: IconButton(
-                      onPressed:
-                          () => setState(() {
-                            _initMapCamera = null;
-                            _expanded = !_expanded;
-                          }),
-                      icon: const Icon(Icons.info, size: 18),
-                      padding: const EdgeInsets.all(4),
-                      constraints: const BoxConstraints(),
+    final attributions = [
+      if (widget.showMapLibre) '<a href="https://maplibre.org/">MapLibre</a>',
+      ...style.getAttributionsSync(),
+    ];
+    return Container(
+      alignment: widget.alignment,
+      padding: widget.padding,
+      child: PointerInterceptor(
+        child: Container(
+          decoration: BoxDecoration(
+            color: theme.scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_expanded)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5, top: 5, left: 10),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: size.width / 2),
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 2,
+                      runSpacing: 2,
+                      children: attributions
+                          .map(_HtmlWidget.new)
+                          .toList(growable: false),
                     ),
                   ),
-                ],
+                ),
+              SizedBox.square(
+                dimension: 30,
+                child: IconButton(
+                  onPressed:
+                      () => setState(() {
+                        _initMapCamera = null;
+                        _expanded = !_expanded;
+                      }),
+                  icon: const Icon(Icons.info, size: 18),
+                  padding: const EdgeInsets.all(4),
+                  constraints: const BoxConstraints(),
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

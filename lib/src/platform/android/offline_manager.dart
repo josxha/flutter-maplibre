@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -16,9 +15,7 @@ class OfflineManagerAndroid implements OfflineManager {
   /// Create a new [OfflineManager].
   static Future<OfflineManager> createInstance() async {
     final jContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
-    await runOnPlatformThread(() {
-      jni.MapLibre.getInstance(jContext);
-    });
+    jni.MapLibre.getInstance(jContext);
     final jManager = jni.OfflineManager.getInstance(jContext);
     return OfflineManagerAndroid._(jManager);
   }

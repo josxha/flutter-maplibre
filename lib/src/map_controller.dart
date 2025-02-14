@@ -42,23 +42,15 @@ abstract interface class MapController {
   Future<List<Position>> toLngLats(List<Offset> screenLocations);
 
   /// Convert a latitude/longitude coordinate to a screen location.
-  ///
-  /// Only supported on web.
   Offset toScreenLocationSync(Position lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  ///
-  /// Only supported on web.
   Position toLngLatSync(Offset screenLocation);
 
   /// Convert a latitude/longitude coordinate to a screen location.
-  ///
-  /// Only supported on web.
   List<Offset> toScreenLocationsSync(List<Position> lngLats);
 
   /// Get the latitude/longitude coordinate for a screen location.
-  ///
-  /// Only supported on web.
   List<Position> toLngLatsSync(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
@@ -119,13 +111,9 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  ///
-  /// Only supported on web.
   double getMetersPerPixelAtLatitudeSync(double latitude);
 
   /// The smallest bounding box that includes the visible region.
-  ///
-  /// Only supported on web.
   LngLatBounds getVisibleRegionSync();
 
   /// Queries the map for rendered features.
