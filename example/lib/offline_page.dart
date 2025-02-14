@@ -41,126 +41,133 @@ class _OfflinePageState extends State<OfflinePage> {
               children: [
                 ListTile(
                   title: const Text('Download World Overview'),
-                  trailing: _downloadProgressWorld == null
-                      ? Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () async {
-                                final stream = manager.downloadRegion(
-                                  minZoom: 0,
-                                  maxZoom: 2,
-                                  bounds: _boundsWorld,
-                                  mapStyleUrl: MapStyles.protomapsLight,
-                                  pixelDensity: 1,
-                                );
-                                try {
-                                  await for (final update in stream) {
-                                    if (update.downloadCompleted) {
-                                      _print(
-                                        'region downloaded: ${update.region}',
-                                      );
-                                      setState(() {
-                                        _downloadProgressWorld = null;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        _downloadProgressWorld =
-                                            '${update.loadedTiles}/${update.totalTiles} '
-                                            '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
-                                      });
-                                    }
-                                  }
-                                } on Exception catch (error, stacktrace) {
-                                  _print(error.toString());
-                                  debugPrintStack(stackTrace: stacktrace);
-                                  setState(
-                                    () => _downloadProgressWorld = null,
+                  trailing:
+                      _downloadProgressWorld == null
+                          ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () async {
+                                  final stream = manager.downloadRegion(
+                                    minZoom: 0,
+                                    maxZoom: 2,
+                                    bounds: _boundsWorld,
+                                    mapStyleUrl: MapStyles.protomapsLight,
+                                    pixelDensity: 1,
                                   );
-                                }
-                              },
-                              icon: const Icon(Icons.download),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute<void>(
-                                    builder: (context) => _OfflineMapPage(
-                                      title: 'World',
-                                      bounds: _boundsWorld,
-                                      zoom: 1,
-                                      center: Position(0, 0),
-                                      maxZoom: 2,
+                                  try {
+                                    await for (final update in stream) {
+                                      if (update.downloadCompleted) {
+                                        _print(
+                                          'region downloaded: ${update.region}',
+                                        );
+                                        setState(() {
+                                          _downloadProgressWorld = null;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _downloadProgressWorld =
+                                              '${update.loadedTiles}/${update.totalTiles} '
+                                              '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
+                                        });
+                                      }
+                                    }
+                                  } on Exception catch (error, stacktrace) {
+                                    _print(error.toString());
+                                    debugPrintStack(stackTrace: stacktrace);
+                                    setState(
+                                      () => _downloadProgressWorld = null,
+                                    );
+                                  }
+                                },
+                                icon: const Icon(Icons.download),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder:
+                                          (context) => _OfflineMapPage(
+                                            title: 'World',
+                                            bounds: _boundsWorld,
+                                            zoom: 1,
+                                            center: Position(0, 0),
+                                            maxZoom: 2,
+                                          ),
                                     ),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.map),
-                            ),
-                          ],
-                        )
-                      : Text(_downloadProgressWorld!),
+                                  );
+                                },
+                                icon: const Icon(Icons.map),
+                              ),
+                            ],
+                          )
+                          : Text(_downloadProgressWorld!),
                 ),
                 ListTile(
                   title: const Text('Download Bregenz'),
-                  trailing: _downloadProgressBregenz == null
-                      ? Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () async {
-                                final stream = manager.downloadRegion(
-                                  minZoom: 10,
-                                  maxZoom: 14,
-                                  bounds: _boundsBregenz,
-                                  mapStyleUrl: MapStyles.protomapsLight,
-                                  pixelDensity: 1,
-                                );
-                                try {
-                                  await for (final update in stream) {
-                                    if (update.downloadCompleted) {
-                                      _print(
-                                        'region downloaded: ${update.region}',
-                                      );
-                                      setState(() {
-                                        _downloadProgressBregenz = null;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        _downloadProgressBregenz =
-                                            '${update.loadedTiles}/${update.totalTiles} '
-                                            '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
-                                      });
-                                    }
-                                  }
-                                } on Exception catch (error, stacktrace) {
-                                  _print(error.toString());
-                                  debugPrintStack(stackTrace: stacktrace);
-                                  setState(
-                                    () => _downloadProgressBregenz = null,
+                  trailing:
+                      _downloadProgressBregenz == null
+                          ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () async {
+                                  final stream = manager.downloadRegion(
+                                    minZoom: 10,
+                                    maxZoom: 14,
+                                    bounds: _boundsBregenz,
+                                    mapStyleUrl: MapStyles.protomapsLight,
+                                    pixelDensity: 1,
                                   );
-                                }
-                              },
-                              icon: const Icon(Icons.download),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute<void>(
-                                    builder: (context) => _OfflineMapPage(
-                                      title: 'Bregenz',
-                                      bounds: _boundsBregenz,
-                                      zoom: 12,
-                                      center: Position(9.717795, 47.504100),
+                                  try {
+                                    await for (final update in stream) {
+                                      if (update.downloadCompleted) {
+                                        _print(
+                                          'region downloaded: ${update.region}',
+                                        );
+                                        setState(() {
+                                          _downloadProgressBregenz = null;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _downloadProgressBregenz =
+                                              '${update.loadedTiles}/${update.totalTiles} '
+                                              '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)';
+                                        });
+                                      }
+                                    }
+                                  } on Exception catch (error, stacktrace) {
+                                    _print(error.toString());
+                                    debugPrintStack(stackTrace: stacktrace);
+                                    setState(
+                                      () => _downloadProgressBregenz = null,
+                                    );
+                                  }
+                                },
+                                icon: const Icon(Icons.download),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder:
+                                          (context) => _OfflineMapPage(
+                                            title: 'Bregenz',
+                                            bounds: _boundsBregenz,
+                                            zoom: 12,
+                                            center: Position(
+                                              9.717795,
+                                              47.504100,
+                                            ),
+                                          ),
                                     ),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.map),
-                            ),
-                          ],
-                        )
-                      : Text(_downloadProgressBregenz!),
+                                  );
+                                },
+                                icon: const Icon(Icons.map),
+                              ),
+                            ],
+                          )
+                          : Text(_downloadProgressBregenz!),
                 ),
                 ListTile(
                   title: const Text('Merge Offline Regions'),
@@ -169,9 +176,7 @@ class _OfflinePageState extends State<OfflinePage> {
                       final regions = await manager.mergeOfflineRegions(
                         path: 'region.mbtiles',
                       );
-                      _print(
-                        'offline regions merged:\n${regions.join('\n')}',
-                      );
+                      _print('offline regions merged:\n${regions.join('\n')}');
                     } on Exception catch (error, stacktrace) {
                       _print(error.toString());
                       debugPrintStack(stackTrace: stacktrace);
@@ -182,8 +187,9 @@ class _OfflinePageState extends State<OfflinePage> {
                   title: const Text('Get Offline Region'),
                   onTap: () async {
                     try {
-                      final region =
-                          await manager.getOfflineRegion(regionId: 1);
+                      final region = await manager.getOfflineRegion(
+                        regionId: 1,
+                      );
                       _print('offline region: $region');
                     } on Exception catch (error, stacktrace) {
                       _print(error.toString());

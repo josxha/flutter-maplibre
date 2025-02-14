@@ -226,8 +226,6 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(label, style: const TextStyle(fontSize: 18)),
-    );
+    return ListTile(title: Text(label, style: const TextStyle(fontSize: 18)));
   }
 }

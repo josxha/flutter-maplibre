@@ -53,23 +53,23 @@ class MyApp extends StatelessWidget {
         StyledMapPage.location: (context) => const StyledMapPage(),
         UserLocationPage.location: (context) => const UserLocationPage(),
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
-        WidgetLayerInteractivePage.location: (context) =>
-            const WidgetLayerInteractivePage(),
+        WidgetLayerInteractivePage.location:
+            (context) => const WidgetLayerInteractivePage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
-        StyleLayersSymbolPage.location: (context) =>
-            const StyleLayersSymbolPage(),
-        StyleLayersCirclePage.location: (context) =>
-            const StyleLayersCirclePage(),
-        StyleLayersHeatmapPage.location: (context) =>
-            const StyleLayersHeatmapPage(),
-        StyleLayersHillshadePage.location: (context) =>
-            const StyleLayersHillshadePage(),
+        StyleLayersSymbolPage.location:
+            (context) => const StyleLayersSymbolPage(),
+        StyleLayersCirclePage.location:
+            (context) => const StyleLayersCirclePage(),
+        StyleLayersHeatmapPage.location:
+            (context) => const StyleLayersHeatmapPage(),
+        StyleLayersHillshadePage.location:
+            (context) => const StyleLayersHillshadePage(),
         StyleLayersFillPage.location: (context) => const StyleLayersFillPage(),
-        StyleLayersFillExtrusionPage.location: (context) =>
-            const StyleLayersFillExtrusionPage(),
-        StyleLayersRasterPage.location: (context) =>
-            const StyleLayersRasterPage(),
+        StyleLayersFillExtrusionPage.location:
+            (context) => const StyleLayersFillExtrusionPage(),
+        StyleLayersRasterPage.location:
+            (context) => const StyleLayersRasterPage(),
         StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
         LayersMixedPage.location: (context) => const LayersMixedPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),

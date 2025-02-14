@@ -14,11 +14,7 @@ class LayersPolylinePage extends StatefulWidget {
 class _LayersPolylinePageState extends State<LayersPolylinePage> {
   final _polylines = <LineString>[
     LineString(
-      coordinates: [
-        Position(9.17, 47.68),
-        Position(9.5, 48),
-        Position(9, 48),
-      ],
+      coordinates: [Position(9.17, 47.68), Position(9.5, 48), Position(9, 48)],
     ),
   ];
 

@@ -33,8 +33,9 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
           switch (event) {
             case MapEventStyleLoaded():
               // add marker image to map
-              final response =
-                  await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
+              final response = await http.get(
+                Uri.parse(StyleLayersSymbolPage.imageUrl),
+              );
               final bytes = response.bodyBytes;
               await event.style.addImage('marker', bytes);
               setState(() {
