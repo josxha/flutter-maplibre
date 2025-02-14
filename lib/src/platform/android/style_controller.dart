@@ -182,7 +182,6 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   Future<List<String>> getAttributions() async {
-    // TODO: style can be null when the map hasn't finished initializing?
     final jSources = _jniStyle.getSources();
     final attributions = <String>[];
     for (final jSource in jSources) {
@@ -207,6 +206,6 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   void setProjection(MapProjection projection) {
-    // no implementation needed, globe is not supported on android.
+    // globe is not supported on android.
   }
 }

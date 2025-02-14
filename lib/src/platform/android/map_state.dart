@@ -502,11 +502,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   List<Position> toLngLatsSync(List<Offset> screenLocations) => screenLocations
-      .map(
-        (screenLocation) => _jniProjection
-            .fromScreenLocation(screenLocation.toPointF())
-            .toPosition(releaseOriginal: true),
-      )
+      .map((screenLocation) => toLngLatSync(screenLocation))
       .toList(growable: false);
 
   @override
@@ -516,11 +512,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   List<Offset> toScreenLocationsSync(List<Position> lngLats) => lngLats
-      .map(
-        (lngLat) => _jniProjection
-            .toScreenLocation(lngLat.toLatLng())
-            .toOffset(releaseOriginal: true),
-      )
+      .map((lngLat) => toScreenLocationSync(lngLat))
       .toList(growable: false);
 
   @override
