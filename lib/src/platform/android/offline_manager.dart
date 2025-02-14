@@ -84,19 +84,8 @@ class OfflineManagerAndroid implements OfflineManager {
       _jManager.setOfflineMapboxTileCountLimit(amount);
 
   @override
-  Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
-    final completer = Completer<void>();
-    _jManager.setMaximumAmbientCacheSize(
-      bytes,
-      jni.OfflineManager$FileSourceCallback.implement(
-        jni.$OfflineManager$FileSourceCallback(
-          onSuccess: completer.complete,
-          onError: (error) => completer.completeError(Exception(error)),
-        ),
-      ),
-    );
-    return completer.future;
-  }
+  Future<void> setMaximumAmbientCacheSize({required int bytes}) async =>
+      _jManager.setMaximumAmbientCacheSize(bytes, null);
 
   @override
   Future<void> clearAmbientCache() async {
