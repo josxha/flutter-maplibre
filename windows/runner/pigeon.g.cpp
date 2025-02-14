@@ -1546,12 +1546,12 @@ void MapLibreFlutterApi::OnLongClick(
   });
 }
 
-void MapLibreFlutterApi::OnLongPressMove(
+void MapLibreFlutterApi::OnLongPress(
   const LongPressEventType& event_arg,
   const LngLat& position_arg,
   std::function<void(void)>&& on_success,
   std::function<void(const FlutterError&)>&& on_error) {
-  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove" + message_channel_suffix_;
+  const std::string channel_name = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress" + message_channel_suffix_;
   BasicMessageChannel<> channel(binary_messenger_, channel_name, &GetCodec());
   EncodableValue encoded_api_arguments = EncodableValue(EncodableList{
     CustomEncodableValue(event_arg),

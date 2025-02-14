@@ -2630,76 +2630,76 @@ MaplibreMapLibreFlutterApiOnLongClickResponse* maplibre_map_libre_flutter_api_on
   return maplibre_map_libre_flutter_api_on_long_click_response_new(response);
 }
 
-struct _MaplibreMapLibreFlutterApiOnLongPressMoveResponse {
+struct _MaplibreMapLibreFlutterApiOnLongPressResponse {
   GObject parent_instance;
 
   FlValue* error;
 };
 
-G_DEFINE_TYPE(MaplibreMapLibreFlutterApiOnLongPressMoveResponse, maplibre_map_libre_flutter_api_on_long_press_move_response, G_TYPE_OBJECT)
+G_DEFINE_TYPE(MaplibreMapLibreFlutterApiOnLongPressResponse, maplibre_map_libre_flutter_api_on_long_press_response, G_TYPE_OBJECT)
 
-static void maplibre_map_libre_flutter_api_on_long_press_move_response_dispose(GObject* object) {
-  MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(object);
+static void maplibre_map_libre_flutter_api_on_long_press_response_dispose(GObject* object) {
+  MaplibreMapLibreFlutterApiOnLongPressResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(object);
   g_clear_pointer(&self->error, fl_value_unref);
-  G_OBJECT_CLASS(maplibre_map_libre_flutter_api_on_long_press_move_response_parent_class)->dispose(object);
+  G_OBJECT_CLASS(maplibre_map_libre_flutter_api_on_long_press_response_parent_class)->dispose(object);
 }
 
-static void maplibre_map_libre_flutter_api_on_long_press_move_response_init(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self) {
+static void maplibre_map_libre_flutter_api_on_long_press_response_init(MaplibreMapLibreFlutterApiOnLongPressResponse* self) {
 }
 
-static void maplibre_map_libre_flutter_api_on_long_press_move_response_class_init(MaplibreMapLibreFlutterApiOnLongPressMoveResponseClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_flutter_api_on_long_press_move_response_dispose;
+static void maplibre_map_libre_flutter_api_on_long_press_response_class_init(MaplibreMapLibreFlutterApiOnLongPressResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_map_libre_flutter_api_on_long_press_response_dispose;
 }
 
-static MaplibreMapLibreFlutterApiOnLongPressMoveResponse* maplibre_map_libre_flutter_api_on_long_press_move_response_new(FlValue* response) {
-  MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(g_object_new(maplibre_map_libre_flutter_api_on_long_press_move_response_get_type(), nullptr));
+static MaplibreMapLibreFlutterApiOnLongPressResponse* maplibre_map_libre_flutter_api_on_long_press_response_new(FlValue* response) {
+  MaplibreMapLibreFlutterApiOnLongPressResponse* self = MAPLIBRE_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(g_object_new(maplibre_map_libre_flutter_api_on_long_press_response_get_type(), nullptr));
   if (fl_value_get_length(response) > 1) {
     self->error = fl_value_ref(response);
   }
   return self;
 }
 
-gboolean maplibre_map_libre_flutter_api_on_long_press_move_response_is_error(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(self), FALSE);
+gboolean maplibre_map_libre_flutter_api_on_long_press_response_is_error(MaplibreMapLibreFlutterApiOnLongPressResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(self), FALSE);
   return self->error != nullptr;
 }
 
-const gchar* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_code(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(self), nullptr);
-  g_assert(maplibre_map_libre_flutter_api_on_long_press_move_response_is_error(self));
+const gchar* maplibre_map_libre_flutter_api_on_long_press_response_get_error_code(MaplibreMapLibreFlutterApiOnLongPressResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_long_press_response_is_error(self));
   return fl_value_get_string(fl_value_get_list_value(self->error, 0));
 }
 
-const gchar* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_message(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(self), nullptr);
-  g_assert(maplibre_map_libre_flutter_api_on_long_press_move_response_is_error(self));
+const gchar* maplibre_map_libre_flutter_api_on_long_press_response_get_error_message(MaplibreMapLibreFlutterApiOnLongPressResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_long_press_response_is_error(self));
   return fl_value_get_string(fl_value_get_list_value(self->error, 1));
 }
 
-FlValue* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_details(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* self) {
-  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE(self), nullptr);
-  g_assert(maplibre_map_libre_flutter_api_on_long_press_move_response_is_error(self));
+FlValue* maplibre_map_libre_flutter_api_on_long_press_response_get_error_details(MaplibreMapLibreFlutterApiOnLongPressResponse* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE(self), nullptr);
+  g_assert(maplibre_map_libre_flutter_api_on_long_press_response_is_error(self));
   return fl_value_get_list_value(self->error, 2);
 }
 
-static void maplibre_map_libre_flutter_api_on_long_press_move_cb(GObject* object, GAsyncResult* result, gpointer user_data) {
+static void maplibre_map_libre_flutter_api_on_long_press_cb(GObject* object, GAsyncResult* result, gpointer user_data) {
   GTask* task = G_TASK(user_data);
   g_task_return_pointer(task, result, g_object_unref);
 }
 
-void maplibre_map_libre_flutter_api_on_long_press_move(MaplibreMapLibreFlutterApi* self, MaplibreLongPressEventType event, MaplibreLngLat* position, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data) {
+void maplibre_map_libre_flutter_api_on_long_press(MaplibreMapLibreFlutterApi* self, MaplibreLongPressEventType event, MaplibreLngLat* position, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data) {
   g_autoptr(FlValue) args = fl_value_new_list();
   fl_value_append_take(args, fl_value_new_custom(132, fl_value_new_int(event), (GDestroyNotify)fl_value_unref));
   fl_value_append_take(args, fl_value_new_custom_object(135, G_OBJECT(position)));
-  g_autofree gchar* channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove%s", self->suffix);
+  g_autofree gchar* channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress%s", self->suffix);
   g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
   FlBasicMessageChannel* channel = fl_basic_message_channel_new(self->messenger, channel_name, FL_MESSAGE_CODEC(codec));
   GTask* task = g_task_new(self, cancellable, callback, user_data);
   g_task_set_task_data(task, channel, g_object_unref);
-  fl_basic_message_channel_send(channel, args, cancellable, maplibre_map_libre_flutter_api_on_long_press_move_cb, task);
+  fl_basic_message_channel_send(channel, args, cancellable, maplibre_map_libre_flutter_api_on_long_press_cb, task);
 }
 
-MaplibreMapLibreFlutterApiOnLongPressMoveResponse* maplibre_map_libre_flutter_api_on_long_press_move_finish(MaplibreMapLibreFlutterApi* self, GAsyncResult* result, GError** error) {
+MaplibreMapLibreFlutterApiOnLongPressResponse* maplibre_map_libre_flutter_api_on_long_press_finish(MaplibreMapLibreFlutterApi* self, GAsyncResult* result, GError** error) {
   g_autoptr(GTask) task = G_TASK(result);
   GAsyncResult* r = G_ASYNC_RESULT(g_task_propagate_pointer(task, nullptr));
   FlBasicMessageChannel* channel = FL_BASIC_MESSAGE_CHANNEL(g_task_get_task_data(task));
@@ -2707,7 +2707,7 @@ MaplibreMapLibreFlutterApiOnLongPressMoveResponse* maplibre_map_libre_flutter_ap
   if (response == nullptr) { 
     return nullptr;
   }
-  return maplibre_map_libre_flutter_api_on_long_press_move_response_new(response);
+  return maplibre_map_libre_flutter_api_on_long_press_response_new(response);
 }
 
 struct _MaplibreMapLibreFlutterApiOnMoveCameraResponse {

@@ -110,27 +110,26 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
   }
 
   @override
-  Future<void> onLongPressMove(
+  Future<void> onLongPress(
     pigeon.LongPressEventType event,
     pigeon.LngLat point,
   ) async {
-    final longPressEventType = event.toLongPressEventType();
     final position = point.toPosition();
-
     widget.onEvent?.call(
-      MapEventLongPressMove(
-        event: longPressEventType,
-        point: position,
-      ),
+      event.toMapEventLongPress(point: position),
     );
 
+    // ignore: no_leading_underscores_for_local_identifiers
+    final _layerManager = layerManager;
+
     // If the layer manager is null, we can't handle any feature drag events.
-    if (layerManager == null) return;
-    final isDragging = layerManager!.dragFeature != null;
+    if (_layerManager == null) return;
+
+    final isDragging = _layerManager.dragFeature != null;
     Feature? feature;
 
     if (event == pigeon.LongPressEventType.begin && !isDragging) {
-      final screenLoc = await toScreenLocation(point.toPosition());
+      final screenLoc = await toScreenLocation(position);
       final draggableLayers =
           style?.draggableLayers.map((layer) => layer.id).toList() ?? [];
       if (draggableLayers.isEmpty) return;
@@ -143,23 +142,21 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
       feature = features.first;
 
       final featureDragEvent = MapEventFeatureDrag(
-        event: event.toLongPressEventType(),
-        point: point.toPosition(),
+        event: event.toMapEventLongPress(point: position),
         feature: feature,
       );
 
-      await layerManager?.onFeatureDrag(featureDragEvent);
+      await _layerManager.onFeatureDrag(featureDragEvent);
       widget.onEvent?.call(featureDragEvent);
     }
 
     if (isDragging) {
       final featureDragEvent = MapEventFeatureDrag(
-        event: event.toLongPressEventType(),
-        point: point.toPosition(),
-        feature: layerManager!.dragFeature!,
+        event: event.toMapEventLongPress(point: position),
+        feature: _layerManager.dragFeature!,
       );
 
-      await layerManager?.onFeatureDrag(featureDragEvent);
+      await _layerManager.onFeatureDrag(featureDragEvent);
       widget.onEvent?.call(featureDragEvent);
     }
   }

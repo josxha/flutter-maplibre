@@ -798,8 +798,8 @@ protocol MapLibreFlutterApiProtocol {
   func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
   func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
-  /// Callback when the user performs a move event after a long lasting click.
-  func onLongPressMove(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  func onLongPress(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera changes.
   func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera starts changing.
@@ -990,9 +990,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
       }
     }
   }
-  /// Callback when the user performs a move event after a long lasting click.
-  func onLongPressMove(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove\(messageChannelSuffix)"
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  func onLongPress(event eventArg: LongPressEventType, position positionArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([eventArg, positionArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {

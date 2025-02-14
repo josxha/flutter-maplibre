@@ -31,7 +31,10 @@ class LayerManager {
   late List<Layer> _oldLayers;
 
   /// The feature that is currently being dragged by the user.
-  Feature? dragFeature;
+  Feature? _dragFeature;
+
+  /// Get the feature that is currently being dragged by the user.
+  Feature? get dragFeature => _dragFeature;
 
   /// Called when `setState()` gets called and the widget rebuilds. This method
   /// translates the declarative layer definition of [MapLibreMap.layers] to
@@ -75,12 +78,12 @@ class LayerManager {
   /// Called when the user interacts with the map in any way.
   Future<void> onFeatureDrag(MapEventFeatureDrag mapEvent) async {
     switch (mapEvent.event) {
-      case LongPressEventType.begin:
-        dragFeature = mapEvent.feature;
-      case LongPressEventType.move:
+      case MapEventLongPressBegin _:
+        _dragFeature = mapEvent.feature;
+      case MapEventLongPressMove _:
         break;
-      case LongPressEventType.end:
-        dragFeature = null;
+      case MapEventLongPressEnd _:
+        _dragFeature = null;
     }
   }
 }

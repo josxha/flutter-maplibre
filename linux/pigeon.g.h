@@ -1227,47 +1227,47 @@ const gchar* maplibre_map_libre_flutter_api_on_long_click_response_get_error_mes
  */
 FlValue* maplibre_map_libre_flutter_api_on_long_click_response_get_error_details(MaplibreMapLibreFlutterApiOnLongClickResponse* response);
 
-G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnLongPressMoveResponse, maplibre_map_libre_flutter_api_on_long_press_move_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_MOVE_RESPONSE, GObject)
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnLongPressResponse, maplibre_map_libre_flutter_api_on_long_press_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_LONG_PRESS_RESPONSE, GObject)
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move_response_is_error:
- * @response: a #MaplibreMapLibreFlutterApiOnLongPressMoveResponse.
+ * maplibre_map_libre_flutter_api_on_long_press_response_is_error:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongPressResponse.
  *
- * Checks if a response to MapLibreFlutterApi.onLongPressMove is an error.
+ * Checks if a response to MapLibreFlutterApi.onLongPress is an error.
  *
  * Returns: a %TRUE if this response is an error.
  */
-gboolean maplibre_map_libre_flutter_api_on_long_press_move_response_is_error(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* response);
+gboolean maplibre_map_libre_flutter_api_on_long_press_response_is_error(MaplibreMapLibreFlutterApiOnLongPressResponse* response);
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_code:
- * @response: a #MaplibreMapLibreFlutterApiOnLongPressMoveResponse.
+ * maplibre_map_libre_flutter_api_on_long_press_response_get_error_code:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongPressResponse.
  *
  * Get the error code for this response.
  *
  * Returns: an error code or %NULL if not an error.
  */
-const gchar* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_code(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* response);
+const gchar* maplibre_map_libre_flutter_api_on_long_press_response_get_error_code(MaplibreMapLibreFlutterApiOnLongPressResponse* response);
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_message:
- * @response: a #MaplibreMapLibreFlutterApiOnLongPressMoveResponse.
+ * maplibre_map_libre_flutter_api_on_long_press_response_get_error_message:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongPressResponse.
  *
  * Get the error message for this response.
  *
  * Returns: an error message.
  */
-const gchar* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_message(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* response);
+const gchar* maplibre_map_libre_flutter_api_on_long_press_response_get_error_message(MaplibreMapLibreFlutterApiOnLongPressResponse* response);
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_details:
- * @response: a #MaplibreMapLibreFlutterApiOnLongPressMoveResponse.
+ * maplibre_map_libre_flutter_api_on_long_press_response_get_error_details:
+ * @response: a #MaplibreMapLibreFlutterApiOnLongPressResponse.
  *
  * Get the error details for this response.
  *
  * Returns: (allow-none): an error details or %NULL.
  */
-FlValue* maplibre_map_libre_flutter_api_on_long_press_move_response_get_error_details(MaplibreMapLibreFlutterApiOnLongPressMoveResponse* response);
+FlValue* maplibre_map_libre_flutter_api_on_long_press_response_get_error_details(MaplibreMapLibreFlutterApiOnLongPressResponse* response);
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreFlutterApiOnMoveCameraResponse, maplibre_map_libre_flutter_api_on_move_camera_response, MAPLIBRE, MAP_LIBRE_FLUTTER_API_ON_MOVE_CAMERA_RESPONSE, GObject)
 
@@ -1584,7 +1584,7 @@ void maplibre_map_libre_flutter_api_on_long_click(MaplibreMapLibreFlutterApi* ap
 MaplibreMapLibreFlutterApiOnLongClickResponse* maplibre_map_libre_flutter_api_on_long_click_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move:
+ * maplibre_map_libre_flutter_api_on_long_press:
  * @api: a #MaplibreMapLibreFlutterApi.
  * @event: parameter for this method.
  * @position: parameter for this method.
@@ -1592,21 +1592,21 @@ MaplibreMapLibreFlutterApiOnLongClickResponse* maplibre_map_libre_flutter_api_on
  * @callback: (scope async): (allow-none): a #GAsyncReadyCallback to call when the call is complete or %NULL to ignore the response.
  * @user_data: (closure): user data to pass to @callback.
  *
- * Callback when the user performs a move event after a long lasting click.
+ * Callback when the user performs a long lasting click and moves the pointer.
  */
-void maplibre_map_libre_flutter_api_on_long_press_move(MaplibreMapLibreFlutterApi* api, MaplibreLongPressEventType event, MaplibreLngLat* position, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
+void maplibre_map_libre_flutter_api_on_long_press(MaplibreMapLibreFlutterApi* api, MaplibreLongPressEventType event, MaplibreLngLat* position, GCancellable* cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
 /**
- * maplibre_map_libre_flutter_api_on_long_press_move_finish:
+ * maplibre_map_libre_flutter_api_on_long_press_finish:
  * @api: a #MaplibreMapLibreFlutterApi.
  * @result: a #GAsyncResult.
  * @error: (allow-none): #GError location to store the error occurring, or %NULL to ignore.
  *
- * Completes a maplibre_map_libre_flutter_api_on_long_press_move() call.
+ * Completes a maplibre_map_libre_flutter_api_on_long_press() call.
  *
- * Returns: a #MaplibreMapLibreFlutterApiOnLongPressMoveResponse or %NULL on error.
+ * Returns: a #MaplibreMapLibreFlutterApiOnLongPressResponse or %NULL on error.
  */
-MaplibreMapLibreFlutterApiOnLongPressMoveResponse* maplibre_map_libre_flutter_api_on_long_press_move_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
+MaplibreMapLibreFlutterApiOnLongPressResponse* maplibre_map_libre_flutter_api_on_long_press_finish(MaplibreMapLibreFlutterApi* api, GAsyncResult* result, GError** error);
 
 /**
  * maplibre_map_libre_flutter_api_on_move_camera:

@@ -628,8 +628,8 @@ class MapLibreFlutterApi {
     const LngLat& point,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
-  // Callback when the user performs a move event after a long lasting click.
-  void OnLongPressMove(
+  // Callback when the user performs a long lasting click and moves the pointer.
+  void OnLongPress(
     const LongPressEventType& event,
     const LngLat& position,
     std::function<void(void)>&& on_success,

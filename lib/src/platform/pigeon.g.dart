@@ -871,8 +871,8 @@ abstract class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  /// Callback when the user performs a move event after a long lasting click.
-  void onLongPressMove(LongPressEventType event, LngLat position);
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  void onLongPress(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -1122,7 +1122,7 @@ abstract class MapLibreFlutterApi {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove$messageChannelSuffix',
+          'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress$messageChannelSuffix',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -1130,17 +1130,17 @@ abstract class MapLibreFlutterApi {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final LongPressEventType? arg_event =
               (args[0] as LongPressEventType?);
           assert(arg_event != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null, expected non-null LongPressEventType.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null, expected non-null LongPressEventType.');
           final LngLat? arg_position = (args[1] as LngLat?);
           assert(arg_position != null,
-              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove was null, expected non-null LngLat.');
+              'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null, expected non-null LngLat.');
           try {
-            api.onLongPressMove(arg_event!, arg_position!);
+            api.onLongPress(arg_event!, arg_position!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

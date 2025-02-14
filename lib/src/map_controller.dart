@@ -133,6 +133,8 @@ abstract interface class MapController {
 
   /// Queries the map for rendered features.
   /// Optionally filter the results by layer IDs.
+  ///
+  /// Only supported on Android.
   Future<List<Feature>> queryRenderedFeatures(
     Offset screenLocation, {
     List<String>? layerIdsFilter,

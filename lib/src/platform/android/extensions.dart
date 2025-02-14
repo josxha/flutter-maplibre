@@ -129,11 +129,11 @@ extension JniFeatureExt on jni.Feature {
 /// Extension methods for the [pigeon.LongPressEventType] class. Not exported publicly.
 extension LongPressEventTypeExt on pigeon.LongPressEventType {
   /// Convert a [pigeon.LongPressEventType] to a [LongPressEventType].
-  LongPressEventType toLongPressEventType() {
+  MapEventLongPress toMapEventLongPress({required Position point}) {
     return switch (this) {
-      pigeon.LongPressEventType.begin => LongPressEventType.begin,
-      pigeon.LongPressEventType.move => LongPressEventType.move,
-      pigeon.LongPressEventType.end => LongPressEventType.end,
+      pigeon.LongPressEventType.begin => MapEventLongPressBegin(point: point),
+      pigeon.LongPressEventType.move => MapEventLongPressMove(point: point),
+      pigeon.LongPressEventType.end => MapEventLongPressEnd(point: point),
     };
   }
 }

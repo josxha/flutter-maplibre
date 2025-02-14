@@ -78,12 +78,11 @@ class _EventsPageState extends State<EventsPage> {
           _print('secondary clicked: ${_formatPosition(mapEvent.point)}'),
         MapEventIdle() => _print('idle'),
         MapEventCameraIdle() => _print('camera idle'),
-        MapEventLongPressMove() => _print(
-            'long press ${mapEvent.event.name}: ${_formatPosition(mapEvent.point)}',
-          ),
         MapEventFeatureDrag() => _print(
-            '${mapEvent.event.name} feature ${mapEvent.feature.id} at: ${_formatPosition(mapEvent.point)}',
+            '${mapEvent.event.type} feature ${mapEvent.feature.id} at: ${_formatPosition(mapEvent.event.point)}',
           ),
+        MapEventLongPress() =>
+          _print('${mapEvent.type}: ${_formatPosition(mapEvent.point)}'),
       };
 
   void _print(String message) {

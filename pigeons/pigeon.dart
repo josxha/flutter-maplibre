@@ -155,8 +155,8 @@ abstract interface class MapLibreFlutterApi {
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
 
-  /// Callback when the user performs a move event after a long lasting click.
-  void onLongPressMove(LongPressEventType event, LngLat position);
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  void onLongPress(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);

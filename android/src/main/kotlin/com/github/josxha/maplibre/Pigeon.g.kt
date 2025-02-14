@@ -960,11 +960,11 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
       } 
     }
   }
-  /** Callback when the user performs a move event after a long lasting click. */
-  fun onLongPressMove(eventArg: LongPressEventType, positionArg: LngLat, callback: (Result<Unit>) -> Unit)
+  /** Callback when the user performs a long lasting click and moves the pointer. */
+  fun onLongPress(eventArg: LongPressEventType, positionArg: LngLat, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPressMove$separatedMessageChannelSuffix"
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(eventArg, positionArg)) {
       if (it is List<*>) {

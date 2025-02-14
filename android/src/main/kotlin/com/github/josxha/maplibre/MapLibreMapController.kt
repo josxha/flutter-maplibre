@@ -412,7 +412,7 @@ class MapLibreMapController(
     inner class LongPressMoveGestureListener : MoveGestureDetector.OnMoveGestureListener {
         override fun onMoveBegin(detector: MoveGestureDetector): Boolean {
             val pointLatLng = motionEventToLngLat(detector.currentEvent)
-            flutterApi.onLongPressMove(LongPressEventType.BEGIN, pointLatLng) {}
+            flutterApi.onLongPress(LongPressEventType.BEGIN, pointLatLng) {}
             return true
         }
 
@@ -427,7 +427,7 @@ class MapLibreMapController(
                 return true
             }
 
-            flutterApi.onLongPressMove(LongPressEventType.MOVE, pointLatLng) {}
+            flutterApi.onLongPress(LongPressEventType.MOVE, pointLatLng) {}
             return true
         }
 
@@ -441,7 +441,7 @@ class MapLibreMapController(
         }
 
         private fun stopDragging(point: LngLat) {
-            flutterApi.onLongPressMove(LongPressEventType.END, point) {}
+            flutterApi.onLongPress(LongPressEventType.END, point) {}
 
             // Reset the move gesture listener to the default one.
             mapLibreMap.setGesturesManager(defaultGesturesManager, true, true)
