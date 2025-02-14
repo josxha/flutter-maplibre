@@ -64,6 +64,7 @@ class MapLibreMapController(
     private var gesturesManager: AndroidGesturesManager? = null
     private lateinit var defaultGesturesManager: AndroidGesturesManager
     private var dragGesturesEnabled: Boolean = false
+    private var uiSettingsBackup: UiSettingsBackup? = null
 
     init {
         val channelSuffix = viewId.toString()
@@ -131,7 +132,6 @@ class MapLibreMapController(
             flutterApi.onLongClick(LngLat(latLng.longitude, latLng.latitude)) {}
             if (dragGesturesEnabled) {
                 gesturesManager?.setMoveGestureListener(LongPressMoveGestureListener())
-                mapLibreMap.uiSettings.setAllGesturesEnabled(false)
             }
             true
         }
@@ -413,6 +413,12 @@ class MapLibreMapController(
         override fun onMoveBegin(detector: MoveGestureDetector): Boolean {
             val pointLatLng = motionEventToLngLat(detector.currentEvent)
             flutterApi.onLongPress(LongPressEventType.BEGIN, pointLatLng) {}
+
+            // Save the current UI settings
+            uiSettingsBackup = backupUiSettings()
+
+            // Disable all gestures
+            mapLibreMap.uiSettings.setAllGesturesEnabled(false)
             return true
         }
 
@@ -445,7 +451,11 @@ class MapLibreMapController(
 
             // Reset the move gesture listener to the default one.
             mapLibreMap.setGesturesManager(defaultGesturesManager, true, true)
-            mapLibreMap.uiSettings.setAllGesturesEnabled(true)
+
+            // Restore the previous UI settings
+            uiSettingsBackup?.let { settings ->
+                restoreUiSettings(settings)
+            }
         }
 
         private fun motionEventToLngLat(event: MotionEvent): LngLat {
@@ -454,4 +464,35 @@ class MapLibreMapController(
             return LngLat(latLng.longitude, latLng.latitude)
         }
     }
+
+    private fun backupUiSettings(): UiSettingsBackup {
+        return UiSettingsBackup(
+            rotateGesturesEnabled = mapLibreMap.uiSettings.isRotateGesturesEnabled,
+            zoomGesturesEnabled = mapLibreMap.uiSettings.isZoomGesturesEnabled,
+            doubleTapGesturesEnabled = mapLibreMap.uiSettings.isDoubleTapGesturesEnabled,
+            scrollGesturesEnabled = mapLibreMap.uiSettings.isScrollGesturesEnabled,
+            quickZoomGesturesEnabled = mapLibreMap.uiSettings.isQuickZoomGesturesEnabled,
+            tiltGesturesEnabled = mapLibreMap.uiSettings.isTiltGesturesEnabled
+        )
+    }
+
+    private fun restoreUiSettings(settings: UiSettingsBackup) {
+        mapLibreMap.uiSettings.apply {
+            isRotateGesturesEnabled = settings.rotateGesturesEnabled
+            isZoomGesturesEnabled = settings.zoomGesturesEnabled
+            isDoubleTapGesturesEnabled = settings.doubleTapGesturesEnabled
+            isScrollGesturesEnabled = settings.scrollGesturesEnabled
+            isQuickZoomGesturesEnabled = settings.quickZoomGesturesEnabled
+            isTiltGesturesEnabled = settings.tiltGesturesEnabled
+        }
+    }
+
+    private data class UiSettingsBackup(
+        val rotateGesturesEnabled: Boolean,
+        val zoomGesturesEnabled: Boolean,
+        val doubleTapGesturesEnabled: Boolean,
+        val scrollGesturesEnabled: Boolean,
+        val quickZoomGesturesEnabled: Boolean,
+        val tiltGesturesEnabled: Boolean
+    )
 }
