@@ -84,8 +84,20 @@ class OfflineManagerAndroid implements OfflineManager {
       _jManager.setOfflineMapboxTileCountLimit(amount);
 
   @override
-  Future<void> setMaximumAmbientCacheSize({required int bytes}) async =>
-      _jManager.setMaximumAmbientCacheSize(bytes, null);
+  Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
+    final completer = Completer<void>();
+    _jManager.setMaximumAmbientCacheSize(
+      jni.OfflineManager$FileSourceCallback.implement(
+        jni.$OfflineManager$FileSourceCallback(
+          onSuccess: completer.complete,
+          onError: (error) => completer.completeError(Exception(error)),
+          onError$async: true,
+          onSuccess$async: true,
+        ),
+      ),
+    );
+    return completer.future;
+  }
 
   @override
   Future<void> clearAmbientCache() async {
@@ -95,6 +107,8 @@ class OfflineManagerAndroid implements OfflineManager {
         jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
+          onError$async: true,
+          onSuccess$async: true,
         ),
       ),
     );
@@ -109,6 +123,8 @@ class OfflineManagerAndroid implements OfflineManager {
         jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
+          onSuccess$async: true,
+          onError$async: true,
         ),
       ),
     );
@@ -123,6 +139,8 @@ class OfflineManagerAndroid implements OfflineManager {
         jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
+          onSuccess$async: true,
+          onError$async: true,
         ),
       ),
     );
@@ -137,6 +155,8 @@ class OfflineManagerAndroid implements OfflineManager {
         jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
           onError: (error) => completer.completeError(Exception(error)),
+          onSuccess$async: true,
+          onError$async: true,
         ),
       ),
     );
