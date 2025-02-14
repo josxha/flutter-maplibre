@@ -43,8 +43,7 @@ void main() {
 
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
-      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
-          .called(1);
+      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>()))).called(1);
       verifyNoMoreInteractions(style);
 
       manager.updateLayers([layer1]);
@@ -68,27 +67,27 @@ void main() {
         id: 'feature1',
         geometry: Point(coordinates: Position(0, 0)),
       );
-      final mapEvent = MapEventFeatureDrag(
-        event: LongPressEventType.begin,
-        feature: feature,
-        point: Position(0, 0),
-      );
 
-      await manager.onFeatureDrag(mapEvent);
+      // Test LongPressBegin event
+      final beginEvent = MapEventFeatureDrag(
+        event: MapEventLongPressBegin(point: Position(0, 0)),
+        feature: feature,
+      );
+      await manager.onFeatureDrag(beginEvent);
       expect(manager.dragFeature, feature);
 
+      // Test LongPressMove event
       final moveEvent = MapEventFeatureDrag(
-        event: LongPressEventType.move,
+        event: MapEventLongPressMove(point: Position(0, 0)),
         feature: feature,
-        point: Position(0, 0),
       );
       await manager.onFeatureDrag(moveEvent);
       expect(manager.dragFeature, feature);
 
+      // Test LongPressEnd event
       final endEvent = MapEventFeatureDrag(
-        event: LongPressEventType.end,
+        event: MapEventLongPressEnd(point: Position(0, 0)),
         feature: feature,
-        point: Position(0, 0),
       );
       await manager.onFeatureDrag(endEvent);
       expect(manager.dragFeature, isNull);

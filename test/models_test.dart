@@ -212,63 +212,45 @@ void main() {
       expect(longClick.point, equals(position));
       expect(longClick.toString(), contains('MapEventLongClick'));
 
-      final longPressBegin = MapEventLongPressMove(
-        event: LongPressEventType.begin,
-        point: position,
-      );
+      final longPressBegin = MapEventLongPressBegin(point: position);
       expect(longPressBegin, isA<MapEvent>());
-      expect(longPressBegin.event, equals(LongPressEventType.begin));
       expect(longPressBegin.point, equals(position));
-      expect(longPressBegin.toString(), contains('MapEventLongPressMove'));
+      expect(longPressBegin.toString(), contains('MapEventLongPressBegin'));
 
-      final longPressMove = MapEventLongPressMove(
-        event: LongPressEventType.move,
-        point: position,
-      );
+      final longPressMove = MapEventLongPressMove(point: position);
       expect(longPressMove, isA<MapEvent>());
-      expect(longPressMove.event, equals(LongPressEventType.move));
       expect(longPressMove.point, equals(position));
       expect(longPressMove.toString(), contains('MapEventLongPressMove'));
 
-      final longPressEnd = MapEventLongPressMove(
-        event: LongPressEventType.end,
-        point: position,
-      );
+      final longPressEnd = MapEventLongPressEnd(point: position);
       expect(longPressEnd, isA<MapEvent>());
-      expect(longPressEnd.event, equals(LongPressEventType.end));
       expect(longPressEnd.point, equals(position));
-      expect(longPressEnd.toString(), contains('MapEventLongPressMove'));
+      expect(longPressEnd.toString(), contains('MapEventLongPressEnd'));
 
       final dragStart = MapEventFeatureDrag(
-        event: LongPressEventType.begin,
-        point: position,
+        event: longPressBegin,
         feature: feature,
       );
       expect(dragStart, isA<MapEvent>());
-      expect(dragStart.event, equals(LongPressEventType.begin));
-      expect(dragStart.point, equals(position));
+      expect(dragStart.event, equals(longPressBegin));
       expect(dragStart.feature, equals(feature));
       expect(dragStart.toString(), contains('MapEventFeatureDragged'));
 
       final dragMove = MapEventFeatureDrag(
-        event: LongPressEventType.move,
-        point: position,
+        event: longPressMove,
         feature: feature,
       );
       expect(dragMove, isA<MapEvent>());
-      expect(dragMove.event, equals(LongPressEventType.move));
-      expect(dragMove.point, equals(position));
+      expect(dragMove.event, equals(longPressMove));
       expect(dragMove.feature, equals(feature));
       expect(dragMove.toString(), contains('MapEventFeatureDragged'));
 
       final dragEnd = MapEventFeatureDrag(
-        event: LongPressEventType.end,
-        point: position,
+        event: longPressEnd,
         feature: feature,
       );
       expect(dragEnd, isA<MapEvent>());
-      expect(dragEnd.event, equals(LongPressEventType.end));
-      expect(dragEnd.point, equals(position));
+      expect(dragEnd.event, equals(longPressEnd));
       expect(dragEnd.feature, equals(feature));
       expect(dragEnd.toString(), contains('MapEventFeatureDragged'));
 
