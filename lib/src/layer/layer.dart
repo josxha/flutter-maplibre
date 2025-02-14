@@ -15,9 +15,7 @@ part 'polyline_layer.dart';
 /// {@category Layers}
 @immutable
 sealed class Layer<G extends GeometryType<Object>> {
-  const Layer._({
-    required this.list,
-  });
+  const Layer._({required this.list});
 
   /// The [List] of layers.
   final List<G> list;

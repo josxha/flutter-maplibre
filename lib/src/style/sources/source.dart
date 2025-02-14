@@ -30,5 +30,5 @@ enum TileScheme {
   xyz,
 
   /// OSGeo spec scheme.
-  tms;
+  tms,
 }

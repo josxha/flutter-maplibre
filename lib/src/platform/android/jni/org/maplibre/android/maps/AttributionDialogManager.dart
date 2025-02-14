@@ -61,13 +61,13 @@ class AttributionDialogManager extends jni$_.JObject {
   final jni$_.JObjType<AttributionDialogManager> $type;
 
   @jni$_.internal
-  AttributionDialogManager.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  AttributionDialogManager.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/AttributionDialogManager');
+    r'org/maplibre/android/maps/AttributionDialogManager',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionDialogManager$NullableType();
@@ -76,22 +76,26 @@ class AttributionDialogManager extends jni$_.JObject {
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/MapLibreMap;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -101,12 +105,14 @@ class AttributionDialogManager extends jni$_.JObject {
   ) {
     final _$context = context.reference;
     final _$mapLibreMap = mapLibreMap.reference;
-    return AttributionDialogManager.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$mapLibreMap.pointer)
-        .reference);
+    return AttributionDialogManager.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+        _$mapLibreMap.pointer,
+      ).reference,
+    );
   }
 
   static final _id_onClick = _class.instanceMethodId(
@@ -114,25 +120,32 @@ class AttributionDialogManager extends jni$_.JObject {
     r'(Landroid/view/View;)V',
   );
 
-  static final _onClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onClick(android.view.View view)`
-  void onClick(
-    jni$_.JObject view,
-  ) {
+  void onClick(jni$_.JObject view) {
     final _$view = view.reference;
-    _onClick(reference.pointer, _id_onClick as jni$_.JMethodIDPtr,
-            _$view.pointer)
-        .check();
+    _onClick(
+      reference.pointer,
+      _id_onClick as jni$_.JMethodIDPtr,
+      _$view.pointer,
+    ).check();
   }
 
   static final _id_onClick$1 = _class.instanceMethodId(
@@ -140,46 +153,54 @@ class AttributionDialogManager extends jni$_.JObject {
     r'(Landroid/content/DialogInterface;I)V',
   );
 
-  static final _onClick$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
-
-  /// from: `public void onClick(android.content.DialogInterface dialogInterface, int i)`
-  void onClick$1(
-    jni$_.JObject? dialogInterface,
-    int i,
-  ) {
-    final _$dialogInterface =
-        dialogInterface?.reference ?? jni$_.jNullReference;
-    _onClick$1(reference.pointer, _id_onClick$1 as jni$_.JMethodIDPtr,
-            _$dialogInterface.pointer, i)
-        .check();
-  }
-
-  static final _id_onStop = _class.instanceMethodId(
-    r'onStop',
-    r'()V',
-  );
-
-  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onClick$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void onClick(android.content.DialogInterface dialogInterface, int i)`
+  void onClick$1(jni$_.JObject? dialogInterface, int i) {
+    final _$dialogInterface =
+        dialogInterface?.reference ?? jni$_.jNullReference;
+    _onClick$1(
+      reference.pointer,
+      _id_onClick$1 as jni$_.JMethodIDPtr,
+      _$dialogInterface.pointer,
+      i,
+    ).check();
+  }
+
+  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+
+  static final _onStop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStop()`
   void onStop() {
@@ -202,9 +223,7 @@ final class $AttributionDialogManager$NullableType
   AttributionDialogManager? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : AttributionDialogManager.fromReference(
-              reference,
-            );
+          : AttributionDialogManager.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -240,9 +259,7 @@ final class $AttributionDialogManager$Type
   @jni$_.internal
   @core$_.override
   AttributionDialogManager fromReference(jni$_.JReference reference) =>
-      AttributionDialogManager.fromReference(
-        reference,
-      );
+      AttributionDialogManager.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

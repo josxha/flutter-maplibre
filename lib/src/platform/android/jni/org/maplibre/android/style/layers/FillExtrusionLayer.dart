@@ -65,13 +65,13 @@ class FillExtrusionLayer extends layer$_.Layer {
   final jni$_.JObjType<FillExtrusionLayer> $type;
 
   @jni$_.internal
-  FillExtrusionLayer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  FillExtrusionLayer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/FillExtrusionLayer');
+    r'org/maplibre/android/style/layers/FillExtrusionLayer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FillExtrusionLayer$NullableType();
@@ -80,34 +80,40 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FillExtrusionLayer(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory FillExtrusionLayer(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return FillExtrusionLayer.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
-        .reference);
+    return FillExtrusionLayer.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setSourceLayer = _class.instanceMethodId(
@@ -115,25 +121,32 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(
-    jni$_.JString? string,
-  ) {
+  void setSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setSourceLayer(
+      reference.pointer,
+      _id_setSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_withSourceLayer = _class.instanceMethodId(
@@ -141,26 +154,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/FillExtrusionLayer;',
   );
 
-  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.FillExtrusionLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillExtrusionLayer withSourceLayer(
-    jni$_.JString? string,
-  ) {
+  FillExtrusionLayer withSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
+    return _withSourceLayer(
+      reference.pointer,
+      _id_withSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -168,24 +188,29 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getSourceLayer = _class.instanceMethodId(
@@ -193,24 +218,29 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceLayer() {
     return _getSourceLayer(
-            reference.pointer, _id_getSourceLayer as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceLayer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setFilter = _class.instanceMethodId(
@@ -218,25 +248,32 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)V',
   );
 
-  static final _setFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(
-    jni$_.JObject expression,
-  ) {
+  void setFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    _setFilter(reference.pointer, _id_setFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .check();
+    _setFilter(
+      reference.pointer,
+      _id_setFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).check();
   }
 
   static final _id_withFilter = _class.instanceMethodId(
@@ -244,26 +281,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/FillExtrusionLayer;',
   );
 
-  static final _withFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.FillExtrusionLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillExtrusionLayer withFilter(
-    jni$_.JObject expression,
-  ) {
+  FillExtrusionLayer withFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    return _withFilter(reference.pointer, _id_withFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
+    return _withFilter(
+      reference.pointer,
+      _id_withFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
   }
 
   static final _id_getFilter = _class.instanceMethodId(
@@ -271,23 +315,29 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getFilter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getFilter()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getFilter() {
-    return _getFilter(reference.pointer, _id_getFilter as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getFilter(
+      reference.pointer,
+      _id_getFilter as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -295,16 +345,23 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/FillExtrusionLayer;',
   );
 
-  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withProperties =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.FillExtrusionLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -312,9 +369,11 @@ class FillExtrusionLayer extends layer$_.Layer {
     jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?> propertyValues,
   ) {
     final _$propertyValues = propertyValues.reference;
-    return _withProperties(reference.pointer,
-            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
-        .object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
+    return _withProperties(
+      reference.pointer,
+      _id_withProperties as jni$_.JMethodIDPtr,
+      _$propertyValues.pointer,
+    ).object<FillExtrusionLayer>(const $FillExtrusionLayer$Type());
   }
 
   static final _id_getFillExtrusionOpacity = _class.instanceMethodId(
@@ -322,26 +381,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getFillExtrusionOpacity() {
-    return _getFillExtrusionOpacity(reference.pointer,
-            _id_getFillExtrusionOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+    return _getFillExtrusionOpacity(
+      reference.pointer,
+      _id_getFillExtrusionOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionOpacityTransition = _class.instanceMethodId(
@@ -351,24 +417,29 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionOpacityTransition() {
-    return _getFillExtrusionOpacityTransition(reference.pointer,
-            _id_getFillExtrusionOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionOpacityTransition(
+      reference.pointer,
+      _id_getFillExtrusionOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setFillExtrusionOpacityTransition = _class.instanceMethodId(
@@ -378,15 +449,21 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _setFillExtrusionOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionOpacityTransition(
@@ -394,10 +471,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionOpacityTransition(
-            reference.pointer,
-            _id_setFillExtrusionOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionColor = _class.instanceMethodId(
@@ -405,26 +482,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getFillExtrusionColor() {
     return _getFillExtrusionColor(
-            reference.pointer, _id_getFillExtrusionColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getFillExtrusionColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionColorAsInt = _class.instanceMethodId(
@@ -434,22 +518,26 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionColorAsInt =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallIntMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getFillExtrusionColorAsInt()`
   int getFillExtrusionColorAsInt() {
-    return _getFillExtrusionColorAsInt(reference.pointer,
-            _id_getFillExtrusionColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+    return _getFillExtrusionColorAsInt(
+      reference.pointer,
+      _id_getFillExtrusionColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getFillExtrusionColorTransition = _class.instanceMethodId(
@@ -459,24 +547,29 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionColorTransition() {
-    return _getFillExtrusionColorTransition(reference.pointer,
-            _id_getFillExtrusionColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionColorTransition(
+      reference.pointer,
+      _id_getFillExtrusionColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setFillExtrusionColorTransition = _class.instanceMethodId(
@@ -486,15 +579,21 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _setFillExtrusionColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionColorTransition(
@@ -502,10 +601,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionColorTransition(
-            reference.pointer,
-            _id_setFillExtrusionColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionTranslate = _class.instanceMethodId(
@@ -513,76 +612,92 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionTranslate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionTranslate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionTranslate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>
-      getFillExtrusionTranslate() {
-    return _getFillExtrusionTranslate(reference.pointer,
-            _id_getFillExtrusionTranslate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+  getFillExtrusionTranslate() {
+    return _getFillExtrusionTranslate(
+      reference.pointer,
+      _id_getFillExtrusionTranslate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
-  static final _id_getFillExtrusionTranslateTransition =
-      _class.instanceMethodId(
-    r'getFillExtrusionTranslateTransition',
-    r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
-  );
+  static final _id_getFillExtrusionTranslateTransition = _class
+      .instanceMethodId(
+        r'getFillExtrusionTranslateTransition',
+        r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
+      );
 
   static final _getFillExtrusionTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionTranslateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionTranslateTransition() {
-    return _getFillExtrusionTranslateTransition(reference.pointer,
-            _id_getFillExtrusionTranslateTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionTranslateTransition(
+      reference.pointer,
+      _id_getFillExtrusionTranslateTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
-  static final _id_setFillExtrusionTranslateTransition =
-      _class.instanceMethodId(
-    r'setFillExtrusionTranslateTransition',
-    r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
-  );
+  static final _id_setFillExtrusionTranslateTransition = _class
+      .instanceMethodId(
+        r'setFillExtrusionTranslateTransition',
+        r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
+      );
 
   static final _setFillExtrusionTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionTranslateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionTranslateTransition(
@@ -590,10 +705,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionTranslateTransition(
-            reference.pointer,
-            _id_setFillExtrusionTranslateTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionTranslateTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionTranslateAnchor = _class.instanceMethodId(
@@ -603,26 +718,32 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionTranslateAnchor =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionTranslateAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?>
-      getFillExtrusionTranslateAnchor() {
-    return _getFillExtrusionTranslateAnchor(reference.pointer,
-            _id_getFillExtrusionTranslateAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+  getFillExtrusionTranslateAnchor() {
+    return _getFillExtrusionTranslateAnchor(
+      reference.pointer,
+      _id_getFillExtrusionTranslateAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionPattern = _class.instanceMethodId(
@@ -630,26 +751,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionPattern = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionPattern =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionPattern()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getFillExtrusionPattern() {
-    return _getFillExtrusionPattern(reference.pointer,
-            _id_getFillExtrusionPattern as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getFillExtrusionPattern(
+      reference.pointer,
+      _id_getFillExtrusionPattern as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionPatternTransition = _class.instanceMethodId(
@@ -659,24 +787,29 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionPatternTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionPatternTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionPatternTransition() {
-    return _getFillExtrusionPatternTransition(reference.pointer,
-            _id_getFillExtrusionPatternTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionPatternTransition(
+      reference.pointer,
+      _id_getFillExtrusionPatternTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setFillExtrusionPatternTransition = _class.instanceMethodId(
@@ -686,15 +819,21 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _setFillExtrusionPatternTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionPatternTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionPatternTransition(
@@ -702,10 +841,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionPatternTransition(
-            reference.pointer,
-            _id_setFillExtrusionPatternTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionPatternTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionHeight = _class.instanceMethodId(
@@ -713,26 +852,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionHeight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionHeight()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getFillExtrusionHeight() {
     return _getFillExtrusionHeight(
-            reference.pointer, _id_getFillExtrusionHeight as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getFillExtrusionHeight as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionHeightTransition = _class.instanceMethodId(
@@ -742,24 +888,29 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionHeightTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionHeightTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionHeightTransition() {
-    return _getFillExtrusionHeightTransition(reference.pointer,
-            _id_getFillExtrusionHeightTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionHeightTransition(
+      reference.pointer,
+      _id_getFillExtrusionHeightTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setFillExtrusionHeightTransition = _class.instanceMethodId(
@@ -769,15 +920,21 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _setFillExtrusionHeightTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionHeightTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionHeightTransition(
@@ -785,10 +942,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionHeightTransition(
-            reference.pointer,
-            _id_setFillExtrusionHeightTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionHeightTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionBase = _class.instanceMethodId(
@@ -796,26 +953,33 @@ class FillExtrusionLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getFillExtrusionBase = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFillExtrusionBase =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionBase()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getFillExtrusionBase() {
     return _getFillExtrusionBase(
-            reference.pointer, _id_getFillExtrusionBase as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getFillExtrusionBase as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getFillExtrusionBaseTransition = _class.instanceMethodId(
@@ -825,24 +989,29 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionBaseTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getFillExtrusionBaseTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getFillExtrusionBaseTransition() {
-    return _getFillExtrusionBaseTransition(reference.pointer,
-            _id_getFillExtrusionBaseTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getFillExtrusionBaseTransition(
+      reference.pointer,
+      _id_getFillExtrusionBaseTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setFillExtrusionBaseTransition = _class.instanceMethodId(
@@ -852,15 +1021,21 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _setFillExtrusionBaseTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFillExtrusionBaseTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setFillExtrusionBaseTransition(
@@ -868,10 +1043,10 @@ class FillExtrusionLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setFillExtrusionBaseTransition(
-            reference.pointer,
-            _id_setFillExtrusionBaseTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setFillExtrusionBaseTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getFillExtrusionVerticalGradient = _class.instanceMethodId(
@@ -881,26 +1056,32 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   static final _getFillExtrusionVerticalGradient =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getFillExtrusionVerticalGradient()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?>
-      getFillExtrusionVerticalGradient() {
-    return _getFillExtrusionVerticalGradient(reference.pointer,
-            _id_getFillExtrusionVerticalGradient as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+  getFillExtrusionVerticalGradient() {
+    return _getFillExtrusionVerticalGradient(
+      reference.pointer,
+      _id_getFillExtrusionVerticalGradient as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 }
 
@@ -917,11 +1098,7 @@ final class $FillExtrusionLayer$NullableType
   @jni$_.internal
   @core$_.override
   FillExtrusionLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : FillExtrusionLayer.fromReference(
-              reference,
-            );
+      reference.isNull ? null : FillExtrusionLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -957,9 +1134,7 @@ final class $FillExtrusionLayer$Type
   @jni$_.internal
   @core$_.override
   FillExtrusionLayer fromReference(jni$_.JReference reference) =>
-      FillExtrusionLayer.fromReference(
-        reference,
-      );
+      FillExtrusionLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

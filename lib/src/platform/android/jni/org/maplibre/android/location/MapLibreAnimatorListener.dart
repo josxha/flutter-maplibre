@@ -61,13 +61,13 @@ class MapLibreAnimatorListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreAnimatorListener> $type;
 
   @jni$_.internal
-  MapLibreAnimatorListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreAnimatorListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/MapLibreAnimatorListener');
+    r'org/maplibre/android/location/MapLibreAnimatorListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreAnimatorListener$NullableType();
@@ -76,16 +76,23 @@ class MapLibreAnimatorListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -94,11 +101,13 @@ class MapLibreAnimatorListener extends jni$_.JObject {
   ) {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
-    return MapLibreAnimatorListener.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$cancelableCallback.pointer)
-        .reference);
+    return MapLibreAnimatorListener.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$cancelableCallback.pointer,
+      ).reference,
+    );
   }
 
   static final _id_onAnimationCancel = _class.instanceMethodId(
@@ -106,25 +115,32 @@ class MapLibreAnimatorListener extends jni$_.JObject {
     r'(Landroid/animation/Animator;)V',
   );
 
-  static final _onAnimationCancel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onAnimationCancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onAnimationCancel(android.animation.Animator animator)`
-  void onAnimationCancel(
-    jni$_.JObject animator,
-  ) {
+  void onAnimationCancel(jni$_.JObject animator) {
     final _$animator = animator.reference;
-    _onAnimationCancel(reference.pointer,
-            _id_onAnimationCancel as jni$_.JMethodIDPtr, _$animator.pointer)
-        .check();
+    _onAnimationCancel(
+      reference.pointer,
+      _id_onAnimationCancel as jni$_.JMethodIDPtr,
+      _$animator.pointer,
+    ).check();
   }
 
   static final _id_onAnimationEnd = _class.instanceMethodId(
@@ -132,25 +148,32 @@ class MapLibreAnimatorListener extends jni$_.JObject {
     r'(Landroid/animation/Animator;)V',
   );
 
-  static final _onAnimationEnd = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onAnimationEnd =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onAnimationEnd(android.animation.Animator animator)`
-  void onAnimationEnd(
-    jni$_.JObject animator,
-  ) {
+  void onAnimationEnd(jni$_.JObject animator) {
     final _$animator = animator.reference;
-    _onAnimationEnd(reference.pointer, _id_onAnimationEnd as jni$_.JMethodIDPtr,
-            _$animator.pointer)
-        .check();
+    _onAnimationEnd(
+      reference.pointer,
+      _id_onAnimationEnd as jni$_.JMethodIDPtr,
+      _$animator.pointer,
+    ).check();
   }
 }
 
@@ -169,9 +192,7 @@ final class $MapLibreAnimatorListener$NullableType
   MapLibreAnimatorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreAnimatorListener.fromReference(
-              reference,
-            );
+          : MapLibreAnimatorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -207,9 +228,7 @@ final class $MapLibreAnimatorListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreAnimatorListener fromReference(jni$_.JReference reference) =>
-      MapLibreAnimatorListener.fromReference(
-        reference,
-      );
+      MapLibreAnimatorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

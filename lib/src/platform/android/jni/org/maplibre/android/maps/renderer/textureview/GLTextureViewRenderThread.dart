@@ -61,13 +61,13 @@ class GLTextureViewRenderThread extends jni$_.JObject {
   final jni$_.JObjType<GLTextureViewRenderThread> $type;
 
   @jni$_.internal
-  GLTextureViewRenderThread.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  GLTextureViewRenderThread.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/textureview/GLTextureViewRenderThread');
+    r'org/maplibre/android/maps/renderer/textureview/GLTextureViewRenderThread',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GLTextureViewRenderThread$NullableType();
@@ -76,22 +76,26 @@ class GLTextureViewRenderThread extends jni$_.JObject {
     r'(Landroid/view/TextureView;Lorg/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.view.TextureView textureView, org.maplibre.android.maps.renderer.textureview.TextureViewMapRenderer textureViewMapRenderer)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -101,30 +105,33 @@ class GLTextureViewRenderThread extends jni$_.JObject {
   ) {
     final _$textureView = textureView.reference;
     final _$textureViewMapRenderer = textureViewMapRenderer.reference;
-    return GLTextureViewRenderThread.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$textureView.pointer,
-            _$textureViewMapRenderer.pointer)
-        .reference);
+    return GLTextureViewRenderThread.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$textureView.pointer,
+        _$textureViewMapRenderer.pointer,
+      ).reference,
+    );
   }
 
-  static final _id_run = _class.instanceMethodId(
-    r'run',
-    r'()V',
-  );
+  static final _id_run = _class.instanceMethodId(r'run', r'()V');
 
-  static final _run = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _run =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void run()`
   void run() {
@@ -147,9 +154,7 @@ final class $GLTextureViewRenderThread$NullableType
   GLTextureViewRenderThread? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : GLTextureViewRenderThread.fromReference(
-              reference,
-            );
+          : GLTextureViewRenderThread.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -185,9 +190,7 @@ final class $GLTextureViewRenderThread$Type
   @jni$_.internal
   @core$_.override
   GLTextureViewRenderThread fromReference(jni$_.JReference reference) =>
-      GLTextureViewRenderThread.fromReference(
-        reference,
-      );
+      GLTextureViewRenderThread.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

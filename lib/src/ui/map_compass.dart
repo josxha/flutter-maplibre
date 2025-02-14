@@ -91,7 +91,8 @@ class MapCompass extends StatelessWidget {
         child: PointerInterceptor(
           child: InkWell(
             onTap: () => _onTap(controller),
-            child: child ??
+            child:
+                child ??
                 CustomPaint(
                   painter: _CompassPainter(radius: radius),
                   child: SizedBox.square(dimension: radius * 2),
@@ -157,14 +158,11 @@ class _CompassPainter extends CustomPainter {
     );
     const halfStrokeWidth = needsStrokeWidth / 2;
     canvas.drawVertices(
-      Vertices(
-        VertexMode.triangles,
-        [
-          Offset(radius - needleWidth - halfStrokeWidth, radius),
-          Offset(radius, radius - needleHeight - halfStrokeWidth),
-          Offset(radius + needleWidth + halfStrokeWidth, radius),
-        ],
-      ),
+      Vertices(VertexMode.triangles, [
+        Offset(radius - needleWidth - halfStrokeWidth, radius),
+        Offset(radius, radius - needleHeight - halfStrokeWidth),
+        Offset(radius + needleWidth + halfStrokeWidth, radius),
+      ]),
       BlendMode.color,
       Paint()..color = Colors.red,
     );

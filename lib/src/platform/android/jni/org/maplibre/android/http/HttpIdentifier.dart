@@ -59,13 +59,13 @@ class HttpIdentifier extends jni$_.JObject {
   final jni$_.JObjType<HttpIdentifier> $type;
 
   @jni$_.internal
-  HttpIdentifier.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  HttpIdentifier.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/http/HttpIdentifier');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/http/HttpIdentifier',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $HttpIdentifier$NullableType();
@@ -75,24 +75,29 @@ class HttpIdentifier extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getIdentifier = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIdentifier =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public java.lang.String getIdentifier()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? getIdentifier() {
     return _getIdentifier(
-            _class.reference.pointer, _id_getIdentifier as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      _class.reference.pointer,
+      _id_getIdentifier as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -107,11 +112,8 @@ final class $HttpIdentifier$NullableType
 
   @jni$_.internal
   @core$_.override
-  HttpIdentifier? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : HttpIdentifier.fromReference(
-          reference,
-        );
+  HttpIdentifier? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : HttpIdentifier.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -145,9 +147,7 @@ final class $HttpIdentifier$Type extends jni$_.JObjType<HttpIdentifier> {
   @jni$_.internal
   @core$_.override
   HttpIdentifier fromReference(jni$_.JReference reference) =>
-      HttpIdentifier.fromReference(
-        reference,
-      );
+      HttpIdentifier.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

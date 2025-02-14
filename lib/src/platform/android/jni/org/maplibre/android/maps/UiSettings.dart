@@ -63,13 +63,13 @@ class UiSettings extends jni$_.JObject {
   final jni$_.JObjType<UiSettings> $type;
 
   @jni$_.internal
-  UiSettings.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  UiSettings.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/UiSettings');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/UiSettings',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $UiSettings$NullableType();
@@ -79,23 +79,28 @@ class UiSettings extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getFlingAnimationBaseTime = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFlingAnimationBaseTime =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public long getFlingAnimationBaseTime()`
   int getFlingAnimationBaseTime() {
-    return _getFlingAnimationBaseTime(reference.pointer,
-            _id_getFlingAnimationBaseTime as jni$_.JMethodIDPtr)
-        .long;
+    return _getFlingAnimationBaseTime(
+      reference.pointer,
+      _id_getFlingAnimationBaseTime as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_getFlingThreshold = _class.instanceMethodId(
@@ -103,23 +108,28 @@ class UiSettings extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getFlingThreshold = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFlingThreshold =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public long getFlingThreshold()`
   int getFlingThreshold() {
     return _getFlingThreshold(
-            reference.pointer, _id_getFlingThreshold as jni$_.JMethodIDPtr)
-        .long;
+      reference.pointer,
+      _id_getFlingThreshold as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_setFlingAnimationBaseTime = _class.instanceMethodId(
@@ -127,23 +137,31 @@ class UiSettings extends jni$_.JObject {
     r'(J)V',
   );
 
-  static final _setFlingAnimationBaseTime = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setFlingAnimationBaseTime =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setFlingAnimationBaseTime(long j)`
-  void setFlingAnimationBaseTime(
-    int j,
-  ) {
-    _setFlingAnimationBaseTime(reference.pointer,
-            _id_setFlingAnimationBaseTime as jni$_.JMethodIDPtr, j)
-        .check();
+  void setFlingAnimationBaseTime(int j) {
+    _setFlingAnimationBaseTime(
+      reference.pointer,
+      _id_setFlingAnimationBaseTime as jni$_.JMethodIDPtr,
+      j,
+    ).check();
   }
 
   static final _id_setFlingThreshold = _class.instanceMethodId(
@@ -151,23 +169,31 @@ class UiSettings extends jni$_.JObject {
     r'(J)V',
   );
 
-  static final _setFlingThreshold = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setFlingThreshold =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setFlingThreshold(long j)`
-  void setFlingThreshold(
-    int j,
-  ) {
+  void setFlingThreshold(int j) {
     _setFlingThreshold(
-            reference.pointer, _id_setFlingThreshold as jni$_.JMethodIDPtr, j)
-        .check();
+      reference.pointer,
+      _id_setFlingThreshold as jni$_.JMethodIDPtr,
+      j,
+    ).check();
   }
 
   static final _id_setCompassEnabled = _class.instanceMethodId(
@@ -175,23 +201,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setCompassEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCompassEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setCompassEnabled(boolean z)`
-  void setCompassEnabled(
-    bool z,
-  ) {
-    _setCompassEnabled(reference.pointer,
-            _id_setCompassEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setCompassEnabled(bool z) {
+    _setCompassEnabled(
+      reference.pointer,
+      _id_setCompassEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isCompassEnabled = _class.instanceMethodId(
@@ -199,23 +233,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isCompassEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isCompassEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isCompassEnabled()`
   bool isCompassEnabled() {
     return _isCompassEnabled(
-            reference.pointer, _id_isCompassEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isCompassEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setCompassGravity = _class.instanceMethodId(
@@ -223,23 +262,31 @@ class UiSettings extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setCompassGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCompassGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setCompassGravity(int i)`
-  void setCompassGravity(
-    int i,
-  ) {
+  void setCompassGravity(int i) {
     _setCompassGravity(
-            reference.pointer, _id_setCompassGravity as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setCompassGravity as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_setCompassFadeFacingNorth = _class.instanceMethodId(
@@ -247,23 +294,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setCompassFadeFacingNorth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCompassFadeFacingNorth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setCompassFadeFacingNorth(boolean z)`
-  void setCompassFadeFacingNorth(
-    bool z,
-  ) {
-    _setCompassFadeFacingNorth(reference.pointer,
-            _id_setCompassFadeFacingNorth as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setCompassFadeFacingNorth(bool z) {
+    _setCompassFadeFacingNorth(
+      reference.pointer,
+      _id_setCompassFadeFacingNorth as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setCompassImage = _class.instanceMethodId(
@@ -271,25 +326,32 @@ class UiSettings extends jni$_.JObject {
     r'(Landroid/graphics/drawable/Drawable;)V',
   );
 
-  static final _setCompassImage = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCompassImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCompassImage(android.graphics.drawable.Drawable drawable)`
-  void setCompassImage(
-    jni$_.JObject drawable,
-  ) {
+  void setCompassImage(jni$_.JObject drawable) {
     final _$drawable = drawable.reference;
-    _setCompassImage(reference.pointer,
-            _id_setCompassImage as jni$_.JMethodIDPtr, _$drawable.pointer)
-        .check();
+    _setCompassImage(
+      reference.pointer,
+      _id_setCompassImage as jni$_.JMethodIDPtr,
+      _$drawable.pointer,
+    ).check();
   }
 
   static final _id_isCompassFadeWhenFacingNorth = _class.instanceMethodId(
@@ -299,22 +361,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isCompassFadeWhenFacingNorth =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isCompassFadeWhenFacingNorth()`
   bool isCompassFadeWhenFacingNorth() {
-    return _isCompassFadeWhenFacingNorth(reference.pointer,
-            _id_isCompassFadeWhenFacingNorth as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isCompassFadeWhenFacingNorth(
+      reference.pointer,
+      _id_isCompassFadeWhenFacingNorth as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_getCompassGravity = _class.instanceMethodId(
@@ -322,23 +388,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCompassGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCompassGravity()`
   int getCompassGravity() {
     return _getCompassGravity(
-            reference.pointer, _id_getCompassGravity as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCompassGravity as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setCompassMargins = _class.instanceMethodId(
@@ -346,32 +417,39 @@ class UiSettings extends jni$_.JObject {
     r'(IIII)V',
   );
 
-  static final _setCompassMargins = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCompassMargins =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, int, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public void setCompassMargins(int i, int i1, int i2, int i3)`
-  void setCompassMargins(
-    int i,
-    int i1,
-    int i2,
-    int i3,
-  ) {
-    _setCompassMargins(reference.pointer,
-            _id_setCompassMargins as jni$_.JMethodIDPtr, i, i1, i2, i3)
-        .check();
+  void setCompassMargins(int i, int i1, int i2, int i3) {
+    _setCompassMargins(
+      reference.pointer,
+      _id_setCompassMargins as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+      i3,
+    ).check();
   }
 
   static final _id_getCompassMarginLeft = _class.instanceMethodId(
@@ -379,23 +457,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCompassMarginLeft = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassMarginLeft =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCompassMarginLeft()`
   int getCompassMarginLeft() {
     return _getCompassMarginLeft(
-            reference.pointer, _id_getCompassMarginLeft as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCompassMarginLeft as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCompassMarginTop = _class.instanceMethodId(
@@ -403,23 +486,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCompassMarginTop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassMarginTop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCompassMarginTop()`
   int getCompassMarginTop() {
     return _getCompassMarginTop(
-            reference.pointer, _id_getCompassMarginTop as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCompassMarginTop as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCompassMarginRight = _class.instanceMethodId(
@@ -427,23 +515,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCompassMarginRight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassMarginRight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCompassMarginRight()`
   int getCompassMarginRight() {
     return _getCompassMarginRight(
-            reference.pointer, _id_getCompassMarginRight as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCompassMarginRight as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCompassMarginBottom = _class.instanceMethodId(
@@ -451,23 +544,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCompassMarginBottom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassMarginBottom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCompassMarginBottom()`
   int getCompassMarginBottom() {
     return _getCompassMarginBottom(
-            reference.pointer, _id_getCompassMarginBottom as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCompassMarginBottom as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCompassImage = _class.instanceMethodId(
@@ -475,24 +573,29 @@ class UiSettings extends jni$_.JObject {
     r'()Landroid/graphics/drawable/Drawable;',
   );
 
-  static final _getCompassImage = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.graphics.drawable.Drawable getCompassImage()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getCompassImage() {
     return _getCompassImage(
-            reference.pointer, _id_getCompassImage as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getCompassImage as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_setLogoEnabled = _class.instanceMethodId(
@@ -500,23 +603,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setLogoEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setLogoEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setLogoEnabled(boolean z)`
-  void setLogoEnabled(
-    bool z,
-  ) {
-    _setLogoEnabled(reference.pointer, _id_setLogoEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+  void setLogoEnabled(bool z) {
+    _setLogoEnabled(
+      reference.pointer,
+      _id_setLogoEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isLogoEnabled = _class.instanceMethodId(
@@ -524,23 +635,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isLogoEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isLogoEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isLogoEnabled()`
   bool isLogoEnabled() {
     return _isLogoEnabled(
-            reference.pointer, _id_isLogoEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isLogoEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setLogoGravity = _class.instanceMethodId(
@@ -548,23 +664,31 @@ class UiSettings extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setLogoGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setLogoGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setLogoGravity(int i)`
-  void setLogoGravity(
-    int i,
-  ) {
+  void setLogoGravity(int i) {
     _setLogoGravity(
-            reference.pointer, _id_setLogoGravity as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setLogoGravity as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_getLogoGravity = _class.instanceMethodId(
@@ -572,23 +696,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getLogoGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLogoGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getLogoGravity()`
   int getLogoGravity() {
     return _getLogoGravity(
-            reference.pointer, _id_getLogoGravity as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getLogoGravity as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setLogoMargins = _class.instanceMethodId(
@@ -596,32 +725,39 @@ class UiSettings extends jni$_.JObject {
     r'(IIII)V',
   );
 
-  static final _setLogoMargins = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setLogoMargins =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, int, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public void setLogoMargins(int i, int i1, int i2, int i3)`
-  void setLogoMargins(
-    int i,
-    int i1,
-    int i2,
-    int i3,
-  ) {
-    _setLogoMargins(reference.pointer, _id_setLogoMargins as jni$_.JMethodIDPtr,
-            i, i1, i2, i3)
-        .check();
+  void setLogoMargins(int i, int i1, int i2, int i3) {
+    _setLogoMargins(
+      reference.pointer,
+      _id_setLogoMargins as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+      i3,
+    ).check();
   }
 
   static final _id_getLogoMarginLeft = _class.instanceMethodId(
@@ -629,23 +765,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getLogoMarginLeft = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLogoMarginLeft =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getLogoMarginLeft()`
   int getLogoMarginLeft() {
     return _getLogoMarginLeft(
-            reference.pointer, _id_getLogoMarginLeft as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getLogoMarginLeft as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getLogoMarginTop = _class.instanceMethodId(
@@ -653,23 +794,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getLogoMarginTop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLogoMarginTop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getLogoMarginTop()`
   int getLogoMarginTop() {
     return _getLogoMarginTop(
-            reference.pointer, _id_getLogoMarginTop as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getLogoMarginTop as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getLogoMarginRight = _class.instanceMethodId(
@@ -677,23 +823,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getLogoMarginRight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLogoMarginRight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getLogoMarginRight()`
   int getLogoMarginRight() {
     return _getLogoMarginRight(
-            reference.pointer, _id_getLogoMarginRight as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getLogoMarginRight as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getLogoMarginBottom = _class.instanceMethodId(
@@ -701,23 +852,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getLogoMarginBottom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLogoMarginBottom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getLogoMarginBottom()`
   int getLogoMarginBottom() {
     return _getLogoMarginBottom(
-            reference.pointer, _id_getLogoMarginBottom as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getLogoMarginBottom as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setAttributionEnabled = _class.instanceMethodId(
@@ -725,23 +881,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setAttributionEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setAttributionEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAttributionEnabled(boolean z)`
-  void setAttributionEnabled(
-    bool z,
-  ) {
-    _setAttributionEnabled(reference.pointer,
-            _id_setAttributionEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setAttributionEnabled(bool z) {
+    _setAttributionEnabled(
+      reference.pointer,
+      _id_setAttributionEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isAttributionEnabled = _class.instanceMethodId(
@@ -749,23 +913,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isAttributionEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isAttributionEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isAttributionEnabled()`
   bool isAttributionEnabled() {
     return _isAttributionEnabled(
-            reference.pointer, _id_isAttributionEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isAttributionEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setAttributionDialogManager = _class.instanceMethodId(
@@ -775,27 +944,33 @@ class UiSettings extends jni$_.JObject {
 
   static final _setAttributionDialogManager =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setAttributionDialogManager(org.maplibre.android.maps.AttributionDialogManager attributionDialogManager)`
   void setAttributionDialogManager(
     attributiondialogmanager$_.AttributionDialogManager
-        attributionDialogManager,
+    attributionDialogManager,
   ) {
     final _$attributionDialogManager = attributionDialogManager.reference;
     _setAttributionDialogManager(
-            reference.pointer,
-            _id_setAttributionDialogManager as jni$_.JMethodIDPtr,
-            _$attributionDialogManager.pointer)
-        .check();
+      reference.pointer,
+      _id_setAttributionDialogManager as jni$_.JMethodIDPtr,
+      _$attributionDialogManager.pointer,
+    ).check();
   }
 
   static final _id_getAttributionDialogManager = _class.instanceMethodId(
@@ -805,26 +980,30 @@ class UiSettings extends jni$_.JObject {
 
   static final _getAttributionDialogManager =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.AttributionDialogManager getAttributionDialogManager()`
   /// The returned object must be released after use, by calling the [release] method.
   attributiondialogmanager$_.AttributionDialogManager?
-      getAttributionDialogManager() {
-    return _getAttributionDialogManager(reference.pointer,
-            _id_getAttributionDialogManager as jni$_.JMethodIDPtr)
-        .object<attributiondialogmanager$_.AttributionDialogManager?>(
-            const attributiondialogmanager$_
-                .$AttributionDialogManager$NullableType());
+  getAttributionDialogManager() {
+    return _getAttributionDialogManager(
+      reference.pointer,
+      _id_getAttributionDialogManager as jni$_.JMethodIDPtr,
+    ).object<attributiondialogmanager$_.AttributionDialogManager?>(
+      const attributiondialogmanager$_.$AttributionDialogManager$NullableType(),
+    );
   }
 
   static final _id_setAttributionGravity = _class.instanceMethodId(
@@ -832,23 +1011,31 @@ class UiSettings extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setAttributionGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setAttributionGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAttributionGravity(int i)`
-  void setAttributionGravity(
-    int i,
-  ) {
-    _setAttributionGravity(reference.pointer,
-            _id_setAttributionGravity as jni$_.JMethodIDPtr, i)
-        .check();
+  void setAttributionGravity(int i) {
+    _setAttributionGravity(
+      reference.pointer,
+      _id_setAttributionGravity as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_getAttributionGravity = _class.instanceMethodId(
@@ -856,23 +1043,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getAttributionGravity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAttributionGravity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getAttributionGravity()`
   int getAttributionGravity() {
     return _getAttributionGravity(
-            reference.pointer, _id_getAttributionGravity as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getAttributionGravity as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setAttributionMargins = _class.instanceMethodId(
@@ -880,32 +1072,39 @@ class UiSettings extends jni$_.JObject {
     r'(IIII)V',
   );
 
-  static final _setAttributionMargins = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setAttributionMargins =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, int, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public void setAttributionMargins(int i, int i1, int i2, int i3)`
-  void setAttributionMargins(
-    int i,
-    int i1,
-    int i2,
-    int i3,
-  ) {
-    _setAttributionMargins(reference.pointer,
-            _id_setAttributionMargins as jni$_.JMethodIDPtr, i, i1, i2, i3)
-        .check();
+  void setAttributionMargins(int i, int i1, int i2, int i3) {
+    _setAttributionMargins(
+      reference.pointer,
+      _id_setAttributionMargins as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+      i3,
+    ).check();
   }
 
   static final _id_setAttributionTintColor = _class.instanceMethodId(
@@ -913,23 +1112,31 @@ class UiSettings extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setAttributionTintColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setAttributionTintColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAttributionTintColor(int i)`
-  void setAttributionTintColor(
-    int i,
-  ) {
-    _setAttributionTintColor(reference.pointer,
-            _id_setAttributionTintColor as jni$_.JMethodIDPtr, i)
-        .check();
+  void setAttributionTintColor(int i) {
+    _setAttributionTintColor(
+      reference.pointer,
+      _id_setAttributionTintColor as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_getAttributionMarginLeft = _class.instanceMethodId(
@@ -937,23 +1144,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getAttributionMarginLeft = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAttributionMarginLeft =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getAttributionMarginLeft()`
   int getAttributionMarginLeft() {
-    return _getAttributionMarginLeft(reference.pointer,
-            _id_getAttributionMarginLeft as jni$_.JMethodIDPtr)
-        .integer;
+    return _getAttributionMarginLeft(
+      reference.pointer,
+      _id_getAttributionMarginLeft as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getAttributionMarginTop = _class.instanceMethodId(
@@ -961,23 +1173,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getAttributionMarginTop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAttributionMarginTop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getAttributionMarginTop()`
   int getAttributionMarginTop() {
-    return _getAttributionMarginTop(reference.pointer,
-            _id_getAttributionMarginTop as jni$_.JMethodIDPtr)
-        .integer;
+    return _getAttributionMarginTop(
+      reference.pointer,
+      _id_getAttributionMarginTop as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getAttributionMarginRight = _class.instanceMethodId(
@@ -985,23 +1202,28 @@ class UiSettings extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getAttributionMarginRight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAttributionMarginRight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getAttributionMarginRight()`
   int getAttributionMarginRight() {
-    return _getAttributionMarginRight(reference.pointer,
-            _id_getAttributionMarginRight as jni$_.JMethodIDPtr)
-        .integer;
+    return _getAttributionMarginRight(
+      reference.pointer,
+      _id_getAttributionMarginRight as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getAttributionMarginBottom = _class.instanceMethodId(
@@ -1011,22 +1233,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _getAttributionMarginBottom =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallIntMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getAttributionMarginBottom()`
   int getAttributionMarginBottom() {
-    return _getAttributionMarginBottom(reference.pointer,
-            _id_getAttributionMarginBottom as jni$_.JMethodIDPtr)
-        .integer;
+    return _getAttributionMarginBottom(
+      reference.pointer,
+      _id_getAttributionMarginBottom as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setRotateGesturesEnabled = _class.instanceMethodId(
@@ -1034,23 +1260,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setRotateGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setRotateGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setRotateGesturesEnabled(boolean z)`
-  void setRotateGesturesEnabled(
-    bool z,
-  ) {
-    _setRotateGesturesEnabled(reference.pointer,
-            _id_setRotateGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setRotateGesturesEnabled(bool z) {
+    _setRotateGesturesEnabled(
+      reference.pointer,
+      _id_setRotateGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isRotateGesturesEnabled = _class.instanceMethodId(
@@ -1058,23 +1292,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isRotateGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isRotateGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isRotateGesturesEnabled()`
   bool isRotateGesturesEnabled() {
-    return _isRotateGesturesEnabled(reference.pointer,
-            _id_isRotateGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isRotateGesturesEnabled(
+      reference.pointer,
+      _id_isRotateGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setTiltGesturesEnabled = _class.instanceMethodId(
@@ -1082,23 +1321,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setTiltGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setTiltGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setTiltGesturesEnabled(boolean z)`
-  void setTiltGesturesEnabled(
-    bool z,
-  ) {
-    _setTiltGesturesEnabled(reference.pointer,
-            _id_setTiltGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setTiltGesturesEnabled(bool z) {
+    _setTiltGesturesEnabled(
+      reference.pointer,
+      _id_setTiltGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isTiltGesturesEnabled = _class.instanceMethodId(
@@ -1106,23 +1353,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isTiltGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isTiltGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isTiltGesturesEnabled()`
   bool isTiltGesturesEnabled() {
     return _isTiltGesturesEnabled(
-            reference.pointer, _id_isTiltGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isTiltGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setZoomGesturesEnabled = _class.instanceMethodId(
@@ -1130,23 +1382,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setZoomGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setZoomGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setZoomGesturesEnabled(boolean z)`
-  void setZoomGesturesEnabled(
-    bool z,
-  ) {
-    _setZoomGesturesEnabled(reference.pointer,
-            _id_setZoomGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setZoomGesturesEnabled(bool z) {
+    _setZoomGesturesEnabled(
+      reference.pointer,
+      _id_setZoomGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isZoomGesturesEnabled = _class.instanceMethodId(
@@ -1154,23 +1414,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isZoomGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isZoomGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isZoomGesturesEnabled()`
   bool isZoomGesturesEnabled() {
     return _isZoomGesturesEnabled(
-            reference.pointer, _id_isZoomGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isZoomGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setDoubleTapGesturesEnabled = _class.instanceMethodId(
@@ -1180,21 +1445,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setDoubleTapGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setDoubleTapGesturesEnabled(boolean z)`
-  void setDoubleTapGesturesEnabled(
-    bool z,
-  ) {
-    _setDoubleTapGesturesEnabled(reference.pointer,
-            _id_setDoubleTapGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setDoubleTapGesturesEnabled(bool z) {
+    _setDoubleTapGesturesEnabled(
+      reference.pointer,
+      _id_setDoubleTapGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isDoubleTapGesturesEnabled = _class.instanceMethodId(
@@ -1204,22 +1477,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isDoubleTapGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isDoubleTapGesturesEnabled()`
   bool isDoubleTapGesturesEnabled() {
-    return _isDoubleTapGesturesEnabled(reference.pointer,
-            _id_isDoubleTapGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isDoubleTapGesturesEnabled(
+      reference.pointer,
+      _id_isDoubleTapGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_isQuickZoomGesturesEnabled = _class.instanceMethodId(
@@ -1229,22 +1506,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isQuickZoomGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isQuickZoomGesturesEnabled()`
   bool isQuickZoomGesturesEnabled() {
-    return _isQuickZoomGesturesEnabled(reference.pointer,
-            _id_isQuickZoomGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isQuickZoomGesturesEnabled(
+      reference.pointer,
+      _id_isQuickZoomGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setQuickZoomGesturesEnabled = _class.instanceMethodId(
@@ -1254,21 +1535,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setQuickZoomGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setQuickZoomGesturesEnabled(boolean z)`
-  void setQuickZoomGesturesEnabled(
-    bool z,
-  ) {
-    _setQuickZoomGesturesEnabled(reference.pointer,
-            _id_setQuickZoomGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setQuickZoomGesturesEnabled(bool z) {
+    _setQuickZoomGesturesEnabled(
+      reference.pointer,
+      _id_setQuickZoomGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getZoomRate = _class.instanceMethodId(
@@ -1276,23 +1565,28 @@ class UiSettings extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getZoomRate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getZoomRate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getZoomRate()`
   double getZoomRate() {
     return _getZoomRate(
-            reference.pointer, _id_getZoomRate as jni$_.JMethodIDPtr)
-        .float;
+      reference.pointer,
+      _id_getZoomRate as jni$_.JMethodIDPtr,
+    ).float;
   }
 
   static final _id_setZoomRate = _class.instanceMethodId(
@@ -1300,22 +1594,31 @@ class UiSettings extends jni$_.JObject {
     r'(F)V',
   );
 
-  static final _setZoomRate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setZoomRate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setZoomRate(float f)`
-  void setZoomRate(
-    double f,
-  ) {
-    _setZoomRate(reference.pointer, _id_setZoomRate as jni$_.JMethodIDPtr, f)
-        .check();
+  void setZoomRate(double f) {
+    _setZoomRate(
+      reference.pointer,
+      _id_setZoomRate as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
   static final _id_isDeselectMarkersOnTap = _class.instanceMethodId(
@@ -1323,23 +1626,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isDeselectMarkersOnTap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isDeselectMarkersOnTap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isDeselectMarkersOnTap()`
   bool isDeselectMarkersOnTap() {
     return _isDeselectMarkersOnTap(
-            reference.pointer, _id_isDeselectMarkersOnTap as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isDeselectMarkersOnTap as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setDeselectMarkersOnTap = _class.instanceMethodId(
@@ -1347,23 +1655,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setDeselectMarkersOnTap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setDeselectMarkersOnTap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setDeselectMarkersOnTap(boolean z)`
-  void setDeselectMarkersOnTap(
-    bool z,
-  ) {
-    _setDeselectMarkersOnTap(reference.pointer,
-            _id_setDeselectMarkersOnTap as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setDeselectMarkersOnTap(bool z) {
+    _setDeselectMarkersOnTap(
+      reference.pointer,
+      _id_setDeselectMarkersOnTap as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setScrollGesturesEnabled = _class.instanceMethodId(
@@ -1371,23 +1687,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setScrollGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setScrollGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setScrollGesturesEnabled(boolean z)`
-  void setScrollGesturesEnabled(
-    bool z,
-  ) {
-    _setScrollGesturesEnabled(reference.pointer,
-            _id_setScrollGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setScrollGesturesEnabled(bool z) {
+    _setScrollGesturesEnabled(
+      reference.pointer,
+      _id_setScrollGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isScrollGesturesEnabled = _class.instanceMethodId(
@@ -1395,23 +1719,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isScrollGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isScrollGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isScrollGesturesEnabled()`
   bool isScrollGesturesEnabled() {
-    return _isScrollGesturesEnabled(reference.pointer,
-            _id_isScrollGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isScrollGesturesEnabled(
+      reference.pointer,
+      _id_isScrollGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setHorizontalScrollGesturesEnabled = _class.instanceMethodId(
@@ -1421,23 +1750,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setHorizontalScrollGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setHorizontalScrollGesturesEnabled(boolean z)`
-  void setHorizontalScrollGesturesEnabled(
-    bool z,
-  ) {
+  void setHorizontalScrollGesturesEnabled(bool z) {
     _setHorizontalScrollGesturesEnabled(
-            reference.pointer,
-            _id_setHorizontalScrollGesturesEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setHorizontalScrollGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isHorizontalScrollGesturesEnabled = _class.instanceMethodId(
@@ -1447,22 +1782,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isHorizontalScrollGesturesEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isHorizontalScrollGesturesEnabled()`
   bool isHorizontalScrollGesturesEnabled() {
-    return _isHorizontalScrollGesturesEnabled(reference.pointer,
-            _id_isHorizontalScrollGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isHorizontalScrollGesturesEnabled(
+      reference.pointer,
+      _id_isHorizontalScrollGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_isScaleVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1472,22 +1811,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isScaleVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isScaleVelocityAnimationEnabled()`
   bool isScaleVelocityAnimationEnabled() {
-    return _isScaleVelocityAnimationEnabled(reference.pointer,
-            _id_isScaleVelocityAnimationEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isScaleVelocityAnimationEnabled(
+      reference.pointer,
+      _id_isScaleVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setScaleVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1497,23 +1840,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setScaleVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setScaleVelocityAnimationEnabled(boolean z)`
-  void setScaleVelocityAnimationEnabled(
-    bool z,
-  ) {
+  void setScaleVelocityAnimationEnabled(bool z) {
     _setScaleVelocityAnimationEnabled(
-            reference.pointer,
-            _id_setScaleVelocityAnimationEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setScaleVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isRotateVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1523,22 +1872,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isRotateVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isRotateVelocityAnimationEnabled()`
   bool isRotateVelocityAnimationEnabled() {
-    return _isRotateVelocityAnimationEnabled(reference.pointer,
-            _id_isRotateVelocityAnimationEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isRotateVelocityAnimationEnabled(
+      reference.pointer,
+      _id_isRotateVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setRotateVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1548,23 +1901,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setRotateVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setRotateVelocityAnimationEnabled(boolean z)`
-  void setRotateVelocityAnimationEnabled(
-    bool z,
-  ) {
+  void setRotateVelocityAnimationEnabled(bool z) {
     _setRotateVelocityAnimationEnabled(
-            reference.pointer,
-            _id_setRotateVelocityAnimationEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setRotateVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isFlingVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1574,22 +1933,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isFlingVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isFlingVelocityAnimationEnabled()`
   bool isFlingVelocityAnimationEnabled() {
-    return _isFlingVelocityAnimationEnabled(reference.pointer,
-            _id_isFlingVelocityAnimationEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isFlingVelocityAnimationEnabled(
+      reference.pointer,
+      _id_isFlingVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setFlingVelocityAnimationEnabled = _class.instanceMethodId(
@@ -1599,23 +1962,29 @@ class UiSettings extends jni$_.JObject {
 
   static final _setFlingVelocityAnimationEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setFlingVelocityAnimationEnabled(boolean z)`
-  void setFlingVelocityAnimationEnabled(
-    bool z,
-  ) {
+  void setFlingVelocityAnimationEnabled(bool z) {
     _setFlingVelocityAnimationEnabled(
-            reference.pointer,
-            _id_setFlingVelocityAnimationEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setFlingVelocityAnimationEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setAllVelocityAnimationsEnabled = _class.instanceMethodId(
@@ -1625,76 +1994,86 @@ class UiSettings extends jni$_.JObject {
 
   static final _setAllVelocityAnimationsEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAllVelocityAnimationsEnabled(boolean z)`
-  void setAllVelocityAnimationsEnabled(
-    bool z,
-  ) {
+  void setAllVelocityAnimationsEnabled(bool z) {
     _setAllVelocityAnimationsEnabled(
-            reference.pointer,
-            _id_setAllVelocityAnimationsEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setAllVelocityAnimationsEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
-  static final _id_isIncreaseRotateThresholdWhenScaling =
-      _class.instanceMethodId(
-    r'isIncreaseRotateThresholdWhenScaling',
-    r'()Z',
-  );
+  static final _id_isIncreaseRotateThresholdWhenScaling = _class
+      .instanceMethodId(r'isIncreaseRotateThresholdWhenScaling', r'()Z');
 
   static final _isIncreaseRotateThresholdWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isIncreaseRotateThresholdWhenScaling()`
   bool isIncreaseRotateThresholdWhenScaling() {
-    return _isIncreaseRotateThresholdWhenScaling(reference.pointer,
-            _id_isIncreaseRotateThresholdWhenScaling as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isIncreaseRotateThresholdWhenScaling(
+      reference.pointer,
+      _id_isIncreaseRotateThresholdWhenScaling as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
-  static final _id_setIncreaseRotateThresholdWhenScaling =
-      _class.instanceMethodId(
-    r'setIncreaseRotateThresholdWhenScaling',
-    r'(Z)V',
-  );
+  static final _id_setIncreaseRotateThresholdWhenScaling = _class
+      .instanceMethodId(r'setIncreaseRotateThresholdWhenScaling', r'(Z)V');
 
   static final _setIncreaseRotateThresholdWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setIncreaseRotateThresholdWhenScaling(boolean z)`
-  void setIncreaseRotateThresholdWhenScaling(
-    bool z,
-  ) {
+  void setIncreaseRotateThresholdWhenScaling(bool z) {
     _setIncreaseRotateThresholdWhenScaling(
-            reference.pointer,
-            _id_setIncreaseRotateThresholdWhenScaling as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setIncreaseRotateThresholdWhenScaling as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isDisableRotateWhenScaling = _class.instanceMethodId(
@@ -1704,22 +2083,26 @@ class UiSettings extends jni$_.JObject {
 
   static final _isDisableRotateWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isDisableRotateWhenScaling()`
   bool isDisableRotateWhenScaling() {
-    return _isDisableRotateWhenScaling(reference.pointer,
-            _id_isDisableRotateWhenScaling as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isDisableRotateWhenScaling(
+      reference.pointer,
+      _id_isDisableRotateWhenScaling as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setDisableRotateWhenScaling = _class.instanceMethodId(
@@ -1729,74 +2112,86 @@ class UiSettings extends jni$_.JObject {
 
   static final _setDisableRotateWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setDisableRotateWhenScaling(boolean z)`
-  void setDisableRotateWhenScaling(
-    bool z,
-  ) {
-    _setDisableRotateWhenScaling(reference.pointer,
-            _id_setDisableRotateWhenScaling as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setDisableRotateWhenScaling(bool z) {
+    _setDisableRotateWhenScaling(
+      reference.pointer,
+      _id_setDisableRotateWhenScaling as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
-  static final _id_isIncreaseScaleThresholdWhenRotating =
-      _class.instanceMethodId(
-    r'isIncreaseScaleThresholdWhenRotating',
-    r'()Z',
-  );
+  static final _id_isIncreaseScaleThresholdWhenRotating = _class
+      .instanceMethodId(r'isIncreaseScaleThresholdWhenRotating', r'()Z');
 
   static final _isIncreaseScaleThresholdWhenRotating =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isIncreaseScaleThresholdWhenRotating()`
   bool isIncreaseScaleThresholdWhenRotating() {
-    return _isIncreaseScaleThresholdWhenRotating(reference.pointer,
-            _id_isIncreaseScaleThresholdWhenRotating as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isIncreaseScaleThresholdWhenRotating(
+      reference.pointer,
+      _id_isIncreaseScaleThresholdWhenRotating as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
-  static final _id_setIncreaseScaleThresholdWhenRotating =
-      _class.instanceMethodId(
-    r'setIncreaseScaleThresholdWhenRotating',
-    r'(Z)V',
-  );
+  static final _id_setIncreaseScaleThresholdWhenRotating = _class
+      .instanceMethodId(r'setIncreaseScaleThresholdWhenRotating', r'(Z)V');
 
   static final _setIncreaseScaleThresholdWhenRotating =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setIncreaseScaleThresholdWhenRotating(boolean z)`
-  void setIncreaseScaleThresholdWhenRotating(
-    bool z,
-  ) {
+  void setIncreaseScaleThresholdWhenRotating(bool z) {
     _setIncreaseScaleThresholdWhenRotating(
-            reference.pointer,
-            _id_setIncreaseScaleThresholdWhenRotating as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setIncreaseScaleThresholdWhenRotating as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setAllGesturesEnabled = _class.instanceMethodId(
@@ -1804,23 +2199,31 @@ class UiSettings extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setAllGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setAllGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAllGesturesEnabled(boolean z)`
-  void setAllGesturesEnabled(
-    bool z,
-  ) {
-    _setAllGesturesEnabled(reference.pointer,
-            _id_setAllGesturesEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setAllGesturesEnabled(bool z) {
+    _setAllGesturesEnabled(
+      reference.pointer,
+      _id_setAllGesturesEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_areAllGesturesEnabled = _class.instanceMethodId(
@@ -1828,23 +2231,28 @@ class UiSettings extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _areAllGesturesEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _areAllGesturesEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean areAllGesturesEnabled()`
   bool areAllGesturesEnabled() {
     return _areAllGesturesEnabled(
-            reference.pointer, _id_areAllGesturesEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_areAllGesturesEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setFocalPoint = _class.instanceMethodId(
@@ -1852,25 +2260,32 @@ class UiSettings extends jni$_.JObject {
     r'(Landroid/graphics/PointF;)V',
   );
 
-  static final _setFocalPoint = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setFocalPoint =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFocalPoint(android.graphics.PointF pointF)`
-  void setFocalPoint(
-    pointf$_.PointF? pointF,
-  ) {
+  void setFocalPoint(pointf$_.PointF? pointF) {
     final _$pointF = pointF?.reference ?? jni$_.jNullReference;
-    _setFocalPoint(reference.pointer, _id_setFocalPoint as jni$_.JMethodIDPtr,
-            _$pointF.pointer)
-        .check();
+    _setFocalPoint(
+      reference.pointer,
+      _id_setFocalPoint as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+    ).check();
   }
 
   static final _id_getFocalPoint = _class.instanceMethodId(
@@ -1878,93 +2293,107 @@ class UiSettings extends jni$_.JObject {
     r'()Landroid/graphics/PointF;',
   );
 
-  static final _getFocalPoint = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFocalPoint =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.graphics.PointF getFocalPoint()`
   /// The returned object must be released after use, by calling the [release] method.
   pointf$_.PointF? getFocalPoint() {
     return _getFocalPoint(
-            reference.pointer, _id_getFocalPoint as jni$_.JMethodIDPtr)
-        .object<pointf$_.PointF?>(const pointf$_.$PointF$NullableType());
+      reference.pointer,
+      _id_getFocalPoint as jni$_.JMethodIDPtr,
+    ).object<pointf$_.PointF?>(const pointf$_.$PointF$NullableType());
   }
 
-  static final _id_getHeight = _class.instanceMethodId(
-    r'getHeight',
-    r'()F',
-  );
+  static final _id_getHeight = _class.instanceMethodId(r'getHeight', r'()F');
 
-  static final _getHeight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getHeight()`
   double getHeight() {
-    return _getHeight(reference.pointer, _id_getHeight as jni$_.JMethodIDPtr)
-        .float;
+    return _getHeight(
+      reference.pointer,
+      _id_getHeight as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_getWidth = _class.instanceMethodId(
-    r'getWidth',
-    r'()F',
-  );
+  static final _id_getWidth = _class.instanceMethodId(r'getWidth', r'()F');
 
-  static final _getWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getWidth()`
   double getWidth() {
-    return _getWidth(reference.pointer, _id_getWidth as jni$_.JMethodIDPtr)
-        .float;
+    return _getWidth(
+      reference.pointer,
+      _id_getWidth as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_invalidate = _class.instanceMethodId(
-    r'invalidate',
-    r'()V',
-  );
+  static final _id_invalidate = _class.instanceMethodId(r'invalidate', r'()V');
 
-  static final _invalidate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _invalidate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void invalidate()`
   void invalidate() {
-    _invalidate(reference.pointer, _id_invalidate as jni$_.JMethodIDPtr)
-        .check();
+    _invalidate(
+      reference.pointer,
+      _id_invalidate as jni$_.JMethodIDPtr,
+    ).check();
   }
 }
 
@@ -1978,11 +2407,8 @@ final class $UiSettings$NullableType extends jni$_.JObjType<UiSettings?> {
 
   @jni$_.internal
   @core$_.override
-  UiSettings? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : UiSettings.fromReference(
-          reference,
-        );
+  UiSettings? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : UiSettings.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2016,9 +2442,7 @@ final class $UiSettings$Type extends jni$_.JObjType<UiSettings> {
   @jni$_.internal
   @core$_.override
   UiSettings fromReference(jni$_.JReference reference) =>
-      UiSettings.fromReference(
-        reference,
-      );
+      UiSettings.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

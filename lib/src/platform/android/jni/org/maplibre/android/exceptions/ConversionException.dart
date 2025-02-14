@@ -59,41 +59,48 @@ class ConversionException extends jni$_.JObject {
   final jni$_.JObjType<ConversionException> $type;
 
   @jni$_.internal
-  ConversionException.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ConversionException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/exceptions/ConversionException');
+    r'org/maplibre/android/exceptions/ConversionException',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ConversionException$NullableType();
   static const type = $ConversionException$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(Ljava/lang/String;)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ConversionException(
-    jni$_.JString? string,
-  ) {
+  factory ConversionException(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return ConversionException.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer)
-        .reference);
+    return ConversionException.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -110,11 +117,7 @@ final class $ConversionException$NullableType
   @jni$_.internal
   @core$_.override
   ConversionException? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : ConversionException.fromReference(
-              reference,
-            );
+      reference.isNull ? null : ConversionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -150,9 +153,7 @@ final class $ConversionException$Type
   @jni$_.internal
   @core$_.override
   ConversionException fromReference(jni$_.JReference reference) =>
-      ConversionException.fromReference(
-        reference,
-      );
+      ConversionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

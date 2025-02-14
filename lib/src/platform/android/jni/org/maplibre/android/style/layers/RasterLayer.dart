@@ -65,13 +65,13 @@ class RasterLayer extends layer$_.Layer {
   final jni$_.JObjType<RasterLayer> $type;
 
   @jni$_.internal
-  RasterLayer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  RasterLayer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/RasterLayer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/RasterLayer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $RasterLayer$NullableType();
@@ -80,34 +80,40 @@ class RasterLayer extends layer$_.Layer {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterLayer(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory RasterLayer(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return RasterLayer.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
-        .reference);
+    return RasterLayer.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setSourceLayer = _class.instanceMethodId(
@@ -115,25 +121,32 @@ class RasterLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(
-    jni$_.JString? string,
-  ) {
+  void setSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setSourceLayer(
+      reference.pointer,
+      _id_setSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_withSourceLayer = _class.instanceMethodId(
@@ -141,26 +154,33 @@ class RasterLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/RasterLayer;',
   );
 
-  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.RasterLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  RasterLayer withSourceLayer(
-    jni$_.JString? string,
-  ) {
+  RasterLayer withSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<RasterLayer>(const $RasterLayer$Type());
+    return _withSourceLayer(
+      reference.pointer,
+      _id_withSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<RasterLayer>(const $RasterLayer$Type());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -168,24 +188,29 @@ class RasterLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -193,16 +218,23 @@ class RasterLayer extends layer$_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/RasterLayer;',
   );
 
-  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withProperties =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.RasterLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -210,9 +242,11 @@ class RasterLayer extends layer$_.Layer {
     jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?> propertyValues,
   ) {
     final _$propertyValues = propertyValues.reference;
-    return _withProperties(reference.pointer,
-            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
-        .object<RasterLayer>(const $RasterLayer$Type());
+    return _withProperties(
+      reference.pointer,
+      _id_withProperties as jni$_.JMethodIDPtr,
+      _$propertyValues.pointer,
+    ).object<RasterLayer>(const $RasterLayer$Type());
   }
 
   static final _id_getRasterOpacity = _class.instanceMethodId(
@@ -220,26 +254,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterOpacity() {
     return _getRasterOpacity(
-            reference.pointer, _id_getRasterOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterOpacityTransition = _class.instanceMethodId(
@@ -249,24 +290,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterOpacityTransition() {
-    return _getRasterOpacityTransition(reference.pointer,
-            _id_getRasterOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterOpacityTransition(
+      reference.pointer,
+      _id_getRasterOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterOpacityTransition = _class.instanceMethodId(
@@ -276,15 +322,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterOpacityTransition(
@@ -292,10 +344,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterOpacityTransition(
-            reference.pointer,
-            _id_setRasterOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterHueRotate = _class.instanceMethodId(
@@ -303,26 +355,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterHueRotate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterHueRotate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterHueRotate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterHueRotate() {
     return _getRasterHueRotate(
-            reference.pointer, _id_getRasterHueRotate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterHueRotate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterHueRotateTransition = _class.instanceMethodId(
@@ -332,24 +391,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterHueRotateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterHueRotateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterHueRotateTransition() {
-    return _getRasterHueRotateTransition(reference.pointer,
-            _id_getRasterHueRotateTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterHueRotateTransition(
+      reference.pointer,
+      _id_getRasterHueRotateTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterHueRotateTransition = _class.instanceMethodId(
@@ -359,15 +423,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterHueRotateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterHueRotateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterHueRotateTransition(
@@ -375,10 +445,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterHueRotateTransition(
-            reference.pointer,
-            _id_setRasterHueRotateTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterHueRotateTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterBrightnessMin = _class.instanceMethodId(
@@ -386,26 +456,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterBrightnessMin = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterBrightnessMin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterBrightnessMin()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterBrightnessMin() {
     return _getRasterBrightnessMin(
-            reference.pointer, _id_getRasterBrightnessMin as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterBrightnessMin as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterBrightnessMinTransition = _class.instanceMethodId(
@@ -415,24 +492,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterBrightnessMinTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterBrightnessMinTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterBrightnessMinTransition() {
-    return _getRasterBrightnessMinTransition(reference.pointer,
-            _id_getRasterBrightnessMinTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterBrightnessMinTransition(
+      reference.pointer,
+      _id_getRasterBrightnessMinTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterBrightnessMinTransition = _class.instanceMethodId(
@@ -442,15 +524,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterBrightnessMinTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterBrightnessMinTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterBrightnessMinTransition(
@@ -458,10 +546,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterBrightnessMinTransition(
-            reference.pointer,
-            _id_setRasterBrightnessMinTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterBrightnessMinTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterBrightnessMax = _class.instanceMethodId(
@@ -469,26 +557,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterBrightnessMax = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterBrightnessMax =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterBrightnessMax()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterBrightnessMax() {
     return _getRasterBrightnessMax(
-            reference.pointer, _id_getRasterBrightnessMax as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterBrightnessMax as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterBrightnessMaxTransition = _class.instanceMethodId(
@@ -498,24 +593,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterBrightnessMaxTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterBrightnessMaxTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterBrightnessMaxTransition() {
-    return _getRasterBrightnessMaxTransition(reference.pointer,
-            _id_getRasterBrightnessMaxTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterBrightnessMaxTransition(
+      reference.pointer,
+      _id_getRasterBrightnessMaxTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterBrightnessMaxTransition = _class.instanceMethodId(
@@ -525,15 +625,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterBrightnessMaxTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterBrightnessMaxTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterBrightnessMaxTransition(
@@ -541,10 +647,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterBrightnessMaxTransition(
-            reference.pointer,
-            _id_setRasterBrightnessMaxTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterBrightnessMaxTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterSaturation = _class.instanceMethodId(
@@ -552,26 +658,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterSaturation = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterSaturation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterSaturation()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterSaturation() {
     return _getRasterSaturation(
-            reference.pointer, _id_getRasterSaturation as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterSaturation as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterSaturationTransition = _class.instanceMethodId(
@@ -581,24 +694,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterSaturationTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterSaturationTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterSaturationTransition() {
-    return _getRasterSaturationTransition(reference.pointer,
-            _id_getRasterSaturationTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterSaturationTransition(
+      reference.pointer,
+      _id_getRasterSaturationTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterSaturationTransition = _class.instanceMethodId(
@@ -608,15 +726,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterSaturationTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterSaturationTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterSaturationTransition(
@@ -624,10 +748,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterSaturationTransition(
-            reference.pointer,
-            _id_setRasterSaturationTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterSaturationTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterContrast = _class.instanceMethodId(
@@ -635,26 +759,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterContrast = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterContrast =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterContrast()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterContrast() {
     return _getRasterContrast(
-            reference.pointer, _id_getRasterContrast as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterContrast as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterContrastTransition = _class.instanceMethodId(
@@ -664,24 +795,29 @@ class RasterLayer extends layer$_.Layer {
 
   static final _getRasterContrastTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getRasterContrastTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getRasterContrastTransition() {
-    return _getRasterContrastTransition(reference.pointer,
-            _id_getRasterContrastTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getRasterContrastTransition(
+      reference.pointer,
+      _id_getRasterContrastTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setRasterContrastTransition = _class.instanceMethodId(
@@ -691,15 +827,21 @@ class RasterLayer extends layer$_.Layer {
 
   static final _setRasterContrastTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRasterContrastTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setRasterContrastTransition(
@@ -707,10 +849,10 @@ class RasterLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setRasterContrastTransition(
-            reference.pointer,
-            _id_setRasterContrastTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setRasterContrastTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getRasterResampling = _class.instanceMethodId(
@@ -718,26 +860,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterResampling = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterResampling =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterResampling()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getRasterResampling() {
     return _getRasterResampling(
-            reference.pointer, _id_getRasterResampling as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getRasterResampling as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getRasterFadeDuration = _class.instanceMethodId(
@@ -745,26 +894,33 @@ class RasterLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getRasterFadeDuration = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRasterFadeDuration =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getRasterFadeDuration()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getRasterFadeDuration() {
     return _getRasterFadeDuration(
-            reference.pointer, _id_getRasterFadeDuration as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getRasterFadeDuration as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 }
 
@@ -778,11 +934,8 @@ final class $RasterLayer$NullableType extends jni$_.JObjType<RasterLayer?> {
 
   @jni$_.internal
   @core$_.override
-  RasterLayer? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : RasterLayer.fromReference(
-          reference,
-        );
+  RasterLayer? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : RasterLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -816,9 +969,7 @@ final class $RasterLayer$Type extends jni$_.JObjType<RasterLayer> {
   @jni$_.internal
   @core$_.override
   RasterLayer fromReference(jni$_.JReference reference) =>
-      RasterLayer.fromReference(
-        reference,
-      );
+      RasterLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

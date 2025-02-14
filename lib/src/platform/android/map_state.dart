@@ -53,7 +53,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
           controller: controller as AndroidViewController,
-          gestureRecognizers: widget.gestureRecognizers ??
+          gestureRecognizers:
+              widget.gestureRecognizers ??
               const <Factory<OneSequenceGestureRecognizer>>{},
           hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         );
@@ -89,11 +90,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             ),
           // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
           AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
@@ -202,11 +203,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async {
     final jniProjection = _jniProjection;
     return runOnPlatformThread<List<Position>>(() {
-      return screenLocations.map((screenLocation) {
-        return jniProjection
-            .fromScreenLocation(screenLocation.toPointF())
-            .toPosition(releaseOriginal: true);
-      }).toList(growable: false);
+      return screenLocations
+          .map((screenLocation) {
+            return jniProjection
+                .fromScreenLocation(screenLocation.toPointF())
+                .toPosition(releaseOriginal: true);
+          })
+          .toList(growable: false);
     });
   }
 
@@ -214,11 +217,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async {
     final jniProjection = _jniProjection;
     return runOnPlatformThread<List<Offset>>(() {
-      return lngLats.map((lngLat) {
-        return jniProjection
-            .toScreenLocation(lngLat.toLatLng())
-            .toOffset(releaseOriginal: true);
-      }).toList(growable: false);
+      return lngLats
+          .map((lngLat) {
+            return jniProjection
+                .toScreenLocation(lngLat.toLatLng())
+                .toOffset(releaseOriginal: true);
+          })
+          .toList(growable: false);
     });
   }
 
@@ -238,8 +243,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final cameraPosition = cameraPositionBuilder.build();
     cameraPositionBuilder.release();
-    final cameraUpdate =
-        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+    final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
+      cameraPosition,
+    );
     await runOnPlatformThread(() {
       jniMap.moveCamera(cameraUpdate);
     });
@@ -265,8 +271,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final cameraPosition = cameraPositionBuilder.build();
     cameraPositionBuilder.release();
-    final cameraUpdate =
-        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+    final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
+      cameraPosition,
+    );
 
     await runOnPlatformThread(() async {
       final completer = Completer<void>();
@@ -488,14 +495,15 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             .setMaxWaitTime(maxWaitTime.inMilliseconds)!
             .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!;
     final locationEngineRequest = locationEngineRequestBuilder.build();
-    final activationOptions = jni.LocationComponentActivationOptions.builder(
-      jniContext,
-      style._jniStyle,
-    )
-        .locationComponentOptions(locationComponentOptions)!
-        .useDefaultLocationEngine(true)!
-        .locationEngineRequest(locationEngineRequest)!
-        .build()!;
+    final activationOptions =
+        jni.LocationComponentActivationOptions.builder(
+              jniContext,
+              style._jniStyle,
+            )
+            .locationComponentOptions(locationComponentOptions)!
+            .useDefaultLocationEngine(true)!
+            .locationEngineRequest(locationEngineRequest)!
+            .build()!;
 
     await runOnPlatformThread(() {
       locationComponent.activateLocationComponent(activationOptions);
@@ -518,15 +526,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }) async {
     final locationComponent = _locationComponent;
     final mode = switch (trackBearing) {
-      BearingTrackMode.none => trackLocation
-          ? jni.CameraMode.TRACKING // only location
-          : jni.CameraMode.NONE, // neither location nor bearing
-      BearingTrackMode.compass => trackLocation
-          ? jni.CameraMode.TRACKING_COMPASS // location with compass bearing
-          : jni.CameraMode.NONE_COMPASS, // only compass bearing
-      BearingTrackMode.gps => trackLocation
-          ? jni.CameraMode.TRACKING_GPS // location with gps bearing
-          : jni.CameraMode.NONE_GPS, // only gps bearing
+      BearingTrackMode.none =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING // only location
+            : jni.CameraMode.NONE, // neither location nor bearing
+      BearingTrackMode.compass =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING_COMPASS // location with compass bearing
+            : jni.CameraMode.NONE_COMPASS, // only compass bearing
+      BearingTrackMode.gps =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING_GPS // location with gps bearing
+            : jni.CameraMode.NONE_GPS, // only gps bearing
     };
     await runOnPlatformThread(() {
       locationComponent.setCameraMode(mode);

@@ -12,9 +12,9 @@ extension PositionExt on Position {
 extension LngLatBoundsExt on LngLatBounds {
   /// Convert a [Position] to an internal [interop.LngLat].
   interop.LngLatBounds toJsLngLatBounds() => interop.LngLatBounds(
-        interop.LngLat(lng: longitudeWest, lat: latitudeSouth),
-        interop.LngLat(lng: longitudeEast, lat: latitudeNorth),
-      );
+    interop.LngLat(lng: longitudeWest, lat: latitudeSouth),
+    interop.LngLat(lng: longitudeEast, lat: latitudeNorth),
+  );
 }
 
 /// Extension methods for the [Offset] class. Not exported publicly.
@@ -33,9 +33,9 @@ extension JsPointExt on interop.Point {
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert a [EdgeInsets] to an internal [interop.PaddingOptions].
   interop.PaddingOptions toPaddingOptions() => interop.PaddingOptions(
-        right: right,
-        left: left,
-        bottom: bottom,
-        top: top,
-      );
+    right: right,
+    left: left,
+    bottom: bottom,
+    top: top,
+  );
 }

@@ -61,13 +61,13 @@ class TileServerOptions extends jni$_.JObject {
   final jni$_.JObjType<TileServerOptions> $type;
 
   @jni$_.internal
-  TileServerOptions.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  TileServerOptions.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/util/TileServerOptions');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/util/TileServerOptions',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $TileServerOptions$NullableType();
@@ -86,37 +86,42 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;[Lorg/maplibre/android/util/DefaultStyle;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -139,7 +144,9 @@ class TileServerOptions extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               int,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, java.lang.String string6, java.lang.String string7, java.lang.String string8, java.lang.String string9, java.lang.String string10, java.lang.String string11, java.lang.String string12, java.lang.String string13, java.lang.String string14, java.lang.String string15, java.lang.String string16, java.lang.String string17, boolean z, java.lang.String string18, org.maplibre.android.util.DefaultStyle[] defaultStyles)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -186,31 +193,33 @@ class TileServerOptions extends jni$_.JObject {
     final _$string17 = string17?.reference ?? jni$_.jNullReference;
     final _$string18 = string18?.reference ?? jni$_.jNullReference;
     final _$defaultStyles = defaultStyles?.reference ?? jni$_.jNullReference;
-    return TileServerOptions.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer,
-            _$string2.pointer,
-            _$string3.pointer,
-            _$string4.pointer,
-            _$string5.pointer,
-            _$string6.pointer,
-            _$string7.pointer,
-            _$string8.pointer,
-            _$string9.pointer,
-            _$string10.pointer,
-            _$string11.pointer,
-            _$string12.pointer,
-            _$string13.pointer,
-            _$string14.pointer,
-            _$string15.pointer,
-            _$string16.pointer,
-            _$string17.pointer,
-            z ? 1 : 0,
-            _$string18.pointer,
-            _$defaultStyles.pointer)
-        .reference);
+    return TileServerOptions.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+        _$string2.pointer,
+        _$string3.pointer,
+        _$string4.pointer,
+        _$string5.pointer,
+        _$string6.pointer,
+        _$string7.pointer,
+        _$string8.pointer,
+        _$string9.pointer,
+        _$string10.pointer,
+        _$string11.pointer,
+        _$string12.pointer,
+        _$string13.pointer,
+        _$string14.pointer,
+        _$string15.pointer,
+        _$string16.pointer,
+        _$string17.pointer,
+        z ? 1 : 0,
+        _$string18.pointer,
+        _$defaultStyles.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setBaseURL = _class.instanceMethodId(
@@ -218,25 +227,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setBaseURL = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setBaseURL =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setBaseURL(java.lang.String string)`
-  void setBaseURL(
-    jni$_.JString? string,
-  ) {
+  void setBaseURL(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setBaseURL(reference.pointer, _id_setBaseURL as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setBaseURL(
+      reference.pointer,
+      _id_setBaseURL as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getBaseURL = _class.instanceMethodId(
@@ -244,23 +260,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getBaseURL = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBaseURL =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getBaseURL()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getBaseURL() {
-    return _getBaseURL(reference.pointer, _id_getBaseURL as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getBaseURL(
+      reference.pointer,
+      _id_getBaseURL as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setUriSchemeAlias = _class.instanceMethodId(
@@ -268,25 +290,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setUriSchemeAlias = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setUriSchemeAlias =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setUriSchemeAlias(java.lang.String string)`
-  void setUriSchemeAlias(
-    jni$_.JString? string,
-  ) {
+  void setUriSchemeAlias(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setUriSchemeAlias(reference.pointer,
-            _id_setUriSchemeAlias as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setUriSchemeAlias(
+      reference.pointer,
+      _id_setUriSchemeAlias as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getUriSchemeAlias = _class.instanceMethodId(
@@ -294,24 +323,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUriSchemeAlias = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUriSchemeAlias =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getUriSchemeAlias()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUriSchemeAlias() {
     return _getUriSchemeAlias(
-            reference.pointer, _id_getUriSchemeAlias as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getUriSchemeAlias as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSourceTemplate = _class.instanceMethodId(
@@ -319,25 +353,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceTemplate(java.lang.String string)`
-  void setSourceTemplate(
-    jni$_.JString? string,
-  ) {
+  void setSourceTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceTemplate(reference.pointer,
-            _id_setSourceTemplate as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSourceTemplate(
+      reference.pointer,
+      _id_setSourceTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSourceTemplate = _class.instanceMethodId(
@@ -345,24 +386,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSourceTemplate() {
     return _getSourceTemplate(
-            reference.pointer, _id_getSourceTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getSourceTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSourceDomainName = _class.instanceMethodId(
@@ -370,25 +416,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceDomainName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceDomainName(java.lang.String string)`
-  void setSourceDomainName(
-    jni$_.JString? string,
-  ) {
+  void setSourceDomainName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceDomainName(reference.pointer,
-            _id_setSourceDomainName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSourceDomainName(
+      reference.pointer,
+      _id_setSourceDomainName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSourceDomainName = _class.instanceMethodId(
@@ -396,24 +449,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceDomainName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceDomainName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSourceDomainName() {
     return _getSourceDomainName(
-            reference.pointer, _id_getSourceDomainName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getSourceDomainName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSourceVersionPrefix = _class.instanceMethodId(
@@ -421,25 +479,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceVersionPrefix(java.lang.String string)`
-  void setSourceVersionPrefix(
-    jni$_.JString? string,
-  ) {
+  void setSourceVersionPrefix(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceVersionPrefix(reference.pointer,
-            _id_setSourceVersionPrefix as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSourceVersionPrefix(
+      reference.pointer,
+      _id_setSourceVersionPrefix as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSourceVersionPrefix = _class.instanceMethodId(
@@ -447,24 +512,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceVersionPrefix()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSourceVersionPrefix() {
     return _getSourceVersionPrefix(
-            reference.pointer, _id_getSourceVersionPrefix as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getSourceVersionPrefix as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setStyleTemplate = _class.instanceMethodId(
@@ -472,25 +542,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setStyleTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setStyleTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyleTemplate(java.lang.String string)`
-  void setStyleTemplate(
-    jni$_.JString? string,
-  ) {
+  void setStyleTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setStyleTemplate(reference.pointer,
-            _id_setStyleTemplate as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setStyleTemplate(
+      reference.pointer,
+      _id_setStyleTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getStyleTemplate = _class.instanceMethodId(
@@ -498,24 +575,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getStyleTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStyleTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getStyleTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getStyleTemplate() {
     return _getStyleTemplate(
-            reference.pointer, _id_getStyleTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getStyleTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setStyleDomainName = _class.instanceMethodId(
@@ -523,25 +605,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setStyleDomainName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setStyleDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyleDomainName(java.lang.String string)`
-  void setStyleDomainName(
-    jni$_.JString? string,
-  ) {
+  void setStyleDomainName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setStyleDomainName(reference.pointer,
-            _id_setStyleDomainName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setStyleDomainName(
+      reference.pointer,
+      _id_setStyleDomainName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getStyleDomainName = _class.instanceMethodId(
@@ -549,24 +638,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getStyleDomainName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStyleDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getStyleDomainName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getStyleDomainName() {
     return _getStyleDomainName(
-            reference.pointer, _id_getStyleDomainName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getStyleDomainName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setStyleVersionPrefix = _class.instanceMethodId(
@@ -574,25 +668,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setStyleVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setStyleVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyleVersionPrefix(java.lang.String string)`
-  void setStyleVersionPrefix(
-    jni$_.JString? string,
-  ) {
+  void setStyleVersionPrefix(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setStyleVersionPrefix(reference.pointer,
-            _id_setStyleVersionPrefix as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setStyleVersionPrefix(
+      reference.pointer,
+      _id_setStyleVersionPrefix as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getStyleVersionPrefix = _class.instanceMethodId(
@@ -600,24 +701,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getStyleVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStyleVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getStyleVersionPrefix()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getStyleVersionPrefix() {
     return _getStyleVersionPrefix(
-            reference.pointer, _id_getStyleVersionPrefix as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getStyleVersionPrefix as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSpritesTemplate = _class.instanceMethodId(
@@ -625,25 +731,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSpritesTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSpritesTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSpritesTemplate(java.lang.String string)`
-  void setSpritesTemplate(
-    jni$_.JString? string,
-  ) {
+  void setSpritesTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSpritesTemplate(reference.pointer,
-            _id_setSpritesTemplate as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSpritesTemplate(
+      reference.pointer,
+      _id_setSpritesTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSpritesTemplate = _class.instanceMethodId(
@@ -651,24 +764,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSpritesTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSpritesTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSpritesTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSpritesTemplate() {
     return _getSpritesTemplate(
-            reference.pointer, _id_getSpritesTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getSpritesTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSpritesDomainName = _class.instanceMethodId(
@@ -676,25 +794,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSpritesDomainName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSpritesDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSpritesDomainName(java.lang.String string)`
-  void setSpritesDomainName(
-    jni$_.JString? string,
-  ) {
+  void setSpritesDomainName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSpritesDomainName(reference.pointer,
-            _id_setSpritesDomainName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSpritesDomainName(
+      reference.pointer,
+      _id_setSpritesDomainName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSpritesDomainName = _class.instanceMethodId(
@@ -702,24 +827,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSpritesDomainName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSpritesDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSpritesDomainName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSpritesDomainName() {
     return _getSpritesDomainName(
-            reference.pointer, _id_getSpritesDomainName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getSpritesDomainName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setSpritesVersionPrefix = _class.instanceMethodId(
@@ -727,25 +857,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSpritesVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSpritesVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSpritesVersionPrefix(java.lang.String string)`
-  void setSpritesVersionPrefix(
-    jni$_.JString? string,
-  ) {
+  void setSpritesVersionPrefix(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSpritesVersionPrefix(reference.pointer,
-            _id_setSpritesVersionPrefix as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setSpritesVersionPrefix(
+      reference.pointer,
+      _id_setSpritesVersionPrefix as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getSpritesVersionPrefix = _class.instanceMethodId(
@@ -753,24 +890,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSpritesVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSpritesVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSpritesVersionPrefix()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getSpritesVersionPrefix() {
-    return _getSpritesVersionPrefix(reference.pointer,
-            _id_getSpritesVersionPrefix as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getSpritesVersionPrefix(
+      reference.pointer,
+      _id_getSpritesVersionPrefix as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setGlyphsTemplate = _class.instanceMethodId(
@@ -778,25 +920,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setGlyphsTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGlyphsTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setGlyphsTemplate(java.lang.String string)`
-  void setGlyphsTemplate(
-    jni$_.JString? string,
-  ) {
+  void setGlyphsTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setGlyphsTemplate(reference.pointer,
-            _id_setGlyphsTemplate as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setGlyphsTemplate(
+      reference.pointer,
+      _id_setGlyphsTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getGlyphsTemplate = _class.instanceMethodId(
@@ -804,24 +953,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getGlyphsTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGlyphsTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getGlyphsTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getGlyphsTemplate() {
     return _getGlyphsTemplate(
-            reference.pointer, _id_getGlyphsTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getGlyphsTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setGlyphsDomainName = _class.instanceMethodId(
@@ -829,25 +983,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setGlyphsDomainName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGlyphsDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setGlyphsDomainName(java.lang.String string)`
-  void setGlyphsDomainName(
-    jni$_.JString? string,
-  ) {
+  void setGlyphsDomainName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setGlyphsDomainName(reference.pointer,
-            _id_setGlyphsDomainName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setGlyphsDomainName(
+      reference.pointer,
+      _id_setGlyphsDomainName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getGlyphsDomainName = _class.instanceMethodId(
@@ -855,24 +1016,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getGlyphsDomainName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGlyphsDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getGlyphsDomainName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getGlyphsDomainName() {
     return _getGlyphsDomainName(
-            reference.pointer, _id_getGlyphsDomainName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getGlyphsDomainName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setGlyphsVersionPrefix = _class.instanceMethodId(
@@ -880,25 +1046,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setGlyphsVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGlyphsVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setGlyphsVersionPrefix(java.lang.String string)`
-  void setGlyphsVersionPrefix(
-    jni$_.JString? string,
-  ) {
+  void setGlyphsVersionPrefix(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setGlyphsVersionPrefix(reference.pointer,
-            _id_setGlyphsVersionPrefix as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setGlyphsVersionPrefix(
+      reference.pointer,
+      _id_setGlyphsVersionPrefix as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getGlyphsVersionPrefix = _class.instanceMethodId(
@@ -906,24 +1079,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getGlyphsVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGlyphsVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getGlyphsVersionPrefix()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getGlyphsVersionPrefix() {
     return _getGlyphsVersionPrefix(
-            reference.pointer, _id_getGlyphsVersionPrefix as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getGlyphsVersionPrefix as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setTileTemplate = _class.instanceMethodId(
@@ -931,25 +1109,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setTileTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTileTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTileTemplate(java.lang.String string)`
-  void setTileTemplate(
-    jni$_.JString? string,
-  ) {
+  void setTileTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setTileTemplate(reference.pointer,
-            _id_setTileTemplate as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setTileTemplate(
+      reference.pointer,
+      _id_setTileTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTileTemplate = _class.instanceMethodId(
@@ -957,24 +1142,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getTileTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTileTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getTileTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getTileTemplate() {
     return _getTileTemplate(
-            reference.pointer, _id_getTileTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getTileTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setTileDomainName = _class.instanceMethodId(
@@ -982,25 +1172,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setTileDomainName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTileDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTileDomainName(java.lang.String string)`
-  void setTileDomainName(
-    jni$_.JString? string,
-  ) {
+  void setTileDomainName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setTileDomainName(reference.pointer,
-            _id_setTileDomainName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setTileDomainName(
+      reference.pointer,
+      _id_setTileDomainName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTileDomainName = _class.instanceMethodId(
@@ -1008,24 +1205,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getTileDomainName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTileDomainName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getTileDomainName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getTileDomainName() {
     return _getTileDomainName(
-            reference.pointer, _id_getTileDomainName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getTileDomainName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setTileVersionPrefix = _class.instanceMethodId(
@@ -1033,25 +1235,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setTileVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTileVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTileVersionPrefix(java.lang.String string)`
-  void setTileVersionPrefix(
-    jni$_.JString? string,
-  ) {
+  void setTileVersionPrefix(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setTileVersionPrefix(reference.pointer,
-            _id_setTileVersionPrefix as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setTileVersionPrefix(
+      reference.pointer,
+      _id_setTileVersionPrefix as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTileVersionPrefix = _class.instanceMethodId(
@@ -1059,24 +1268,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getTileVersionPrefix = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTileVersionPrefix =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getTileVersionPrefix()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getTileVersionPrefix() {
     return _getTileVersionPrefix(
-            reference.pointer, _id_getTileVersionPrefix as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getTileVersionPrefix as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setApiKeyParameterName = _class.instanceMethodId(
@@ -1084,25 +1298,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setApiKeyParameterName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setApiKeyParameterName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setApiKeyParameterName(java.lang.String string)`
-  void setApiKeyParameterName(
-    jni$_.JString? string,
-  ) {
+  void setApiKeyParameterName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setApiKeyParameterName(reference.pointer,
-            _id_setApiKeyParameterName as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setApiKeyParameterName(
+      reference.pointer,
+      _id_setApiKeyParameterName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getApiKeyParameterName = _class.instanceMethodId(
@@ -1110,24 +1331,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getApiKeyParameterName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApiKeyParameterName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getApiKeyParameterName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getApiKeyParameterName() {
     return _getApiKeyParameterName(
-            reference.pointer, _id_getApiKeyParameterName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getApiKeyParameterName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setApiKeyRequired = _class.instanceMethodId(
@@ -1135,23 +1361,31 @@ class TileServerOptions extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setApiKeyRequired = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setApiKeyRequired =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setApiKeyRequired(boolean z)`
-  void setApiKeyRequired(
-    bool z,
-  ) {
-    _setApiKeyRequired(reference.pointer,
-            _id_setApiKeyRequired as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setApiKeyRequired(bool z) {
+    _setApiKeyRequired(
+      reference.pointer,
+      _id_setApiKeyRequired as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getApiKeyRequired = _class.instanceMethodId(
@@ -1159,23 +1393,28 @@ class TileServerOptions extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _getApiKeyRequired = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApiKeyRequired =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean getApiKeyRequired()`
   bool getApiKeyRequired() {
     return _getApiKeyRequired(
-            reference.pointer, _id_getApiKeyRequired as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_getApiKeyRequired as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setDefaultStyles = _class.instanceMethodId(
@@ -1183,25 +1422,34 @@ class TileServerOptions extends jni$_.JObject {
     r'([Lorg/maplibre/android/util/DefaultStyle;)V',
   );
 
-  static final _setDefaultStyles = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setDefaultStyles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setDefaultStyles(org.maplibre.android.util.DefaultStyle[] defaultStyles)`
   void setDefaultStyles(
     jni$_.JArray<defaultstyle$_.DefaultStyle?>? defaultStyles,
   ) {
     final _$defaultStyles = defaultStyles?.reference ?? jni$_.jNullReference;
-    _setDefaultStyles(reference.pointer,
-            _id_setDefaultStyles as jni$_.JMethodIDPtr, _$defaultStyles.pointer)
-        .check();
+    _setDefaultStyles(
+      reference.pointer,
+      _id_setDefaultStyles as jni$_.JMethodIDPtr,
+      _$defaultStyles.pointer,
+    ).check();
   }
 
   static final _id_getDefaultStyles = _class.instanceMethodId(
@@ -1209,26 +1457,33 @@ class TileServerOptions extends jni$_.JObject {
     r'()[Lorg/maplibre/android/util/DefaultStyle;',
   );
 
-  static final _getDefaultStyles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDefaultStyles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.util.DefaultStyle[] getDefaultStyles()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<defaultstyle$_.DefaultStyle?>? getDefaultStyles() {
     return _getDefaultStyles(
-            reference.pointer, _id_getDefaultStyles as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
-            const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
-                defaultstyle$_.$DefaultStyle$NullableType()));
+      reference.pointer,
+      _id_getDefaultStyles as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
+      const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
+        defaultstyle$_.$DefaultStyle$NullableType(),
+      ),
+    );
   }
 
   static final _id_setDefaultStyle = _class.instanceMethodId(
@@ -1236,25 +1491,32 @@ class TileServerOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setDefaultStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setDefaultStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setDefaultStyle(java.lang.String string)`
-  void setDefaultStyle(
-    jni$_.JString? string,
-  ) {
+  void setDefaultStyle(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setDefaultStyle(reference.pointer,
-            _id_setDefaultStyle as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _setDefaultStyle(
+      reference.pointer,
+      _id_setDefaultStyle as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getDefaultStyle = _class.instanceMethodId(
@@ -1262,24 +1524,29 @@ class TileServerOptions extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getDefaultStyle = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDefaultStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getDefaultStyle()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getDefaultStyle() {
     return _getDefaultStyle(
-            reference.pointer, _id_getDefaultStyle as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getDefaultStyle as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -1287,23 +1554,28 @@ class TileServerOptions extends jni$_.JObject {
     r'()I',
   );
 
-  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -1311,27 +1583,34 @@ class TileServerOptions extends jni$_.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(
-    jni$_.JObject parcel,
-    int i,
-  ) {
+  void writeToParcel(jni$_.JObject parcel, int i) {
     final _$parcel = parcel.reference;
-    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
-            _$parcel.pointer, i)
-        .check();
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
   }
 
   static final _id_get = _class.staticMethodId(
@@ -1339,27 +1618,34 @@ class TileServerOptions extends jni$_.JObject {
     r'(Lorg/maplibre/android/WellKnownTileServer;)Lorg/maplibre/android/util/TileServerOptions;',
   );
 
-  static final _get = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _get =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.util.TileServerOptions get(org.maplibre.android.WellKnownTileServer wellKnownTileServer)`
   /// The returned object must be released after use, by calling the [release] method.
-  static TileServerOptions? get(
-    jni$_.JObject? wellKnownTileServer,
-  ) {
+  static TileServerOptions? get(jni$_.JObject? wellKnownTileServer) {
     final _$wellKnownTileServer =
         wellKnownTileServer?.reference ?? jni$_.jNullReference;
-    return _get(_class.reference.pointer, _id_get as jni$_.JMethodIDPtr,
-            _$wellKnownTileServer.pointer)
-        .object<TileServerOptions?>(const $TileServerOptions$NullableType());
+    return _get(
+      _class.reference.pointer,
+      _id_get as jni$_.JMethodIDPtr,
+      _$wellKnownTileServer.pointer,
+    ).object<TileServerOptions?>(const $TileServerOptions$NullableType());
   }
 }
 
@@ -1375,11 +1661,7 @@ final class $TileServerOptions$NullableType
   @jni$_.internal
   @core$_.override
   TileServerOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : TileServerOptions.fromReference(
-              reference,
-            );
+      reference.isNull ? null : TileServerOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1413,9 +1695,7 @@ final class $TileServerOptions$Type extends jni$_.JObjType<TileServerOptions> {
   @jni$_.internal
   @core$_.override
   TileServerOptions fromReference(jni$_.JReference reference) =>
-      TileServerOptions.fromReference(
-        reference,
-      );
+      TileServerOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

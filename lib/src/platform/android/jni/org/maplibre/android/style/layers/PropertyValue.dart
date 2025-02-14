@@ -62,31 +62,24 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  PropertyValue.fromReference(
-    this.T,
-    jni$_.JReference reference,
-  )   : $type = type<$T>(T),
-        super.fromReference(reference);
+  PropertyValue.fromReference(this.T, jni$_.JReference reference)
+    : $type = type<$T>(T),
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/PropertyValue');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/PropertyValue',
+  );
 
   /// The type which includes information such as the signature of this class.
   static $PropertyValue$NullableType<$T>
-      nullableType<$T extends jni$_.JObject?>(
-    jni$_.JObjType<$T> T,
-  ) {
-    return $PropertyValue$NullableType<$T>(
-      T,
-    );
+  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
+    return $PropertyValue$NullableType<$T>(T);
   }
 
   static $PropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $PropertyValue$Type<$T>(
-      T,
-    );
+    return $PropertyValue$Type<$T>(T);
   }
 
   static final _id_name = _class.instanceFieldId(
@@ -111,22 +104,26 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/Object;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, T object)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -138,33 +135,40 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     final _$string = string.reference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return PropertyValue<$T>.fromReference(
-        T,
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr,
-                _$string.pointer, _$object.pointer)
-            .reference);
+      T,
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$object.pointer,
+      ).reference,
+    );
   }
 
-  static final _id_isNull$1 = _class.instanceMethodId(
-    r'isNull',
-    r'()Z',
-  );
+  static final _id_isNull$1 = _class.instanceMethodId(r'isNull', r'()Z');
 
-  static final _isNull$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isNull$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isNull()`
   bool isNull$1() {
-    return _isNull$1(reference.pointer, _id_isNull$1 as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isNull$1(
+      reference.pointer,
+      _id_isNull$1 as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_isExpression = _class.instanceMethodId(
@@ -172,23 +176,28 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isExpression = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isExpression =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isExpression()`
   bool isExpression() {
     return _isExpression(
-            reference.pointer, _id_isExpression as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isExpression as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_getExpression = _class.instanceMethodId(
@@ -196,47 +205,55 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getExpression = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getExpression =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getExpression()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getExpression() {
     return _getExpression(
-            reference.pointer, _id_getExpression as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getExpression as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_isValue = _class.instanceMethodId(
-    r'isValue',
-    r'()Z',
-  );
+  static final _id_isValue = _class.instanceMethodId(r'isValue', r'()Z');
 
-  static final _isValue = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isValue =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isValue()`
   bool isValue() {
-    return _isValue(reference.pointer, _id_isValue as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isValue(
+      reference.pointer,
+      _id_isValue as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_getValue = _class.instanceMethodId(
@@ -244,23 +261,29 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'()Ljava/lang/Object;',
   );
 
-  static final _getValue = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getValue =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public T getValue()`
   /// The returned object must be released after use, by calling the [release] method.
   $T? getValue() {
-    return _getValue(reference.pointer, _id_getValue as jni$_.JMethodIDPtr)
-        .object<$T?>(T.nullableType);
+    return _getValue(
+      reference.pointer,
+      _id_getValue as jni$_.JMethodIDPtr,
+    ).object<$T?>(T.nullableType);
   }
 
   static final _id_getColorInt = _class.instanceMethodId(
@@ -268,24 +291,29 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'()Ljava/lang/Integer;',
   );
 
-  static final _getColorInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getColorInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.Integer getColorInt()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JInteger? getColorInt() {
     return _getColorInt(
-            reference.pointer, _id_getColorInt as jni$_.JMethodIDPtr)
-        .object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
+      reference.pointer,
+      _id_getColorInt as jni$_.JMethodIDPtr,
+    ).object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -293,23 +321,29 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -317,48 +351,58 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 }
 
@@ -368,9 +412,7 @@ final class $PropertyValue$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PropertyValue$NullableType(
-    this.T,
-  );
+  const $PropertyValue$NullableType(this.T);
 
   @jni$_.internal
   @core$_.override
@@ -379,12 +421,7 @@ final class $PropertyValue$NullableType<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   PropertyValue<$T>? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : PropertyValue<$T>.fromReference(
-              T,
-              reference,
-            );
+      reference.isNull ? null : PropertyValue<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -414,9 +451,7 @@ final class $PropertyValue$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PropertyValue$Type(
-    this.T,
-  );
+  const $PropertyValue$Type(this.T);
 
   @jni$_.internal
   @core$_.override
@@ -425,10 +460,7 @@ final class $PropertyValue$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   PropertyValue<$T> fromReference(jni$_.JReference reference) =>
-      PropertyValue<$T>.fromReference(
-        T,
-        reference,
-      );
+      PropertyValue<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

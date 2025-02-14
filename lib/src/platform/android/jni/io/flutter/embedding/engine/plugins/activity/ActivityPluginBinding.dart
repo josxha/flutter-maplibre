@@ -63,11 +63,12 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
   @jni$_.internal
   ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener');
+    r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -78,25 +79,32 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onSaveInstanceState = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onSaveInstanceState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onSaveInstanceState(android.os.Bundle bundle)`
-  void onSaveInstanceState(
-    jni$_.JObject bundle,
-  ) {
+  void onSaveInstanceState(jni$_.JObject bundle) {
     final _$bundle = bundle.reference;
-    _onSaveInstanceState(reference.pointer,
-            _id_onSaveInstanceState as jni$_.JMethodIDPtr, _$bundle.pointer)
-        .check();
+    _onSaveInstanceState(
+      reference.pointer,
+      _id_onSaveInstanceState as jni$_.JMethodIDPtr,
+      _$bundle.pointer,
+    ).check();
   }
 
   static final _id_onRestoreInstanceState = _class.instanceMethodId(
@@ -104,31 +112,40 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onRestoreInstanceState = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onRestoreInstanceState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onRestoreInstanceState(android.os.Bundle bundle)`
-  void onRestoreInstanceState(
-    jni$_.JObject? bundle,
-  ) {
+  void onRestoreInstanceState(jni$_.JObject? bundle) {
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
-    _onRestoreInstanceState(reference.pointer,
-            _id_onRestoreInstanceState as jni$_.JMethodIDPtr, _$bundle.pointer)
-        .check();
+    _onRestoreInstanceState(
+      reference.pointer,
+      _id_onRestoreInstanceState as jni$_.JMethodIDPtr,
+      _$bundle.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final core$_
-      .Map<int, $ActivityPluginBinding$OnSaveInstanceStateListener>
-      _$impls = {};
+  static final core$_.Map<
+    int,
+    $ActivityPluginBinding$OnSaveInstanceStateListener
+  >
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -136,19 +153,16 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -237,8 +251,8 @@ final class _$ActivityPluginBinding$OnSaveInstanceStateListener
     this.onSaveInstanceState$async = false,
     required void Function(jni$_.JObject? bundle) onRestoreInstanceState,
     this.onRestoreInstanceState$async = false,
-  })  : _onSaveInstanceState = onSaveInstanceState,
-        _onRestoreInstanceState = onRestoreInstanceState;
+  }) : _onSaveInstanceState = onSaveInstanceState,
+       _onRestoreInstanceState = onRestoreInstanceState;
 
   final void Function(jni$_.JObject bundle) _onSaveInstanceState;
   final bool onSaveInstanceState$async;
@@ -267,12 +281,13 @@ final class $ActivityPluginBinding$OnSaveInstanceStateListener$NullableType
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding$OnSaveInstanceStateListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
           : ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
-              reference,
-            );
+            reference,
+          );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -280,7 +295,7 @@ final class $ActivityPluginBinding$OnSaveInstanceStateListener$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<ActivityPluginBinding$OnSaveInstanceStateListener?>
-      get nullableType => this;
+  get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -313,10 +328,10 @@ final class $ActivityPluginBinding$OnSaveInstanceStateListener$Type
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding$OnSaveInstanceStateListener fromReference(
-          jni$_.JReference reference) =>
-      ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -324,8 +339,8 @@ final class $ActivityPluginBinding$OnSaveInstanceStateListener$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<ActivityPluginBinding$OnSaveInstanceStateListener?>
-      get nullableType =>
-          const $ActivityPluginBinding$OnSaveInstanceStateListener$NullableType();
+  get nullableType =>
+      const $ActivityPluginBinding$OnSaveInstanceStateListener$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -350,13 +365,13 @@ class ActivityPluginBinding extends jni$_.JObject {
   final jni$_.JObjType<ActivityPluginBinding> $type;
 
   @jni$_.internal
-  ActivityPluginBinding.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ActivityPluginBinding.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding');
+    r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ActivityPluginBinding$NullableType();
@@ -366,24 +381,29 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'()Landroid/app/Activity;',
   );
 
-  static final _getActivity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getActivity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.app.Activity getActivity()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject getActivity() {
     return _getActivity(
-            reference.pointer, _id_getActivity as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_getActivity as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_getLifecycle = _class.instanceMethodId(
@@ -391,88 +411,103 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'()Ljava/lang/Object;',
   );
 
-  static final _getLifecycle = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLifecycle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract java.lang.Object getLifecycle()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject getLifecycle() {
     return _getLifecycle(
-            reference.pointer, _id_getLifecycle as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_getLifecycle as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
-  static final _id_addRequestPermissionsResultListener =
-      _class.instanceMethodId(
+  static final _id_addRequestPermissionsResultListener = _class.instanceMethodId(
     r'addRequestPermissionsResultListener',
     r'(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
   );
 
   static final _addRequestPermissionsResultListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener requestPermissionsResultListener)`
   void addRequestPermissionsResultListener(
     pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-        requestPermissionsResultListener,
+    requestPermissionsResultListener,
   ) {
     final _$requestPermissionsResultListener =
         requestPermissionsResultListener.reference;
     _addRequestPermissionsResultListener(
-            reference.pointer,
-            _id_addRequestPermissionsResultListener as jni$_.JMethodIDPtr,
-            _$requestPermissionsResultListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addRequestPermissionsResultListener as jni$_.JMethodIDPtr,
+      _$requestPermissionsResultListener.pointer,
+    ).check();
   }
 
-  static final _id_removeRequestPermissionsResultListener =
-      _class.instanceMethodId(
+  static final _id_removeRequestPermissionsResultListener = _class.instanceMethodId(
     r'removeRequestPermissionsResultListener',
     r'(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
   );
 
   static final _removeRequestPermissionsResultListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener requestPermissionsResultListener)`
   void removeRequestPermissionsResultListener(
     pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-        requestPermissionsResultListener,
+    requestPermissionsResultListener,
   ) {
     final _$requestPermissionsResultListener =
         requestPermissionsResultListener.reference;
     _removeRequestPermissionsResultListener(
-            reference.pointer,
-            _id_removeRequestPermissionsResultListener as jni$_.JMethodIDPtr,
-            _$requestPermissionsResultListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeRequestPermissionsResultListener as jni$_.JMethodIDPtr,
+      _$requestPermissionsResultListener.pointer,
+    ).check();
   }
 
   static final _id_addActivityResultListener = _class.instanceMethodId(
@@ -480,28 +515,35 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V',
   );
 
-  static final _addActivityResultListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addActivityResultListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener activityResultListener)`
   void addActivityResultListener(
     pluginregistry$_.PluginRegistry$ActivityResultListener
-        activityResultListener,
+    activityResultListener,
   ) {
     final _$activityResultListener = activityResultListener.reference;
     _addActivityResultListener(
-            reference.pointer,
-            _id_addActivityResultListener as jni$_.JMethodIDPtr,
-            _$activityResultListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addActivityResultListener as jni$_.JMethodIDPtr,
+      _$activityResultListener.pointer,
+    ).check();
   }
 
   static final _id_removeActivityResultListener = _class.instanceMethodId(
@@ -511,27 +553,33 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   static final _removeActivityResultListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener activityResultListener)`
   void removeActivityResultListener(
     pluginregistry$_.PluginRegistry$ActivityResultListener
-        activityResultListener,
+    activityResultListener,
   ) {
     final _$activityResultListener = activityResultListener.reference;
     _removeActivityResultListener(
-            reference.pointer,
-            _id_removeActivityResultListener as jni$_.JMethodIDPtr,
-            _$activityResultListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeActivityResultListener as jni$_.JMethodIDPtr,
+      _$activityResultListener.pointer,
+    ).check();
   }
 
   static final _id_addOnNewIntentListener = _class.instanceMethodId(
@@ -539,16 +587,23 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
   );
 
-  static final _addOnNewIntentListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnNewIntentListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener newIntentListener)`
   void addOnNewIntentListener(
@@ -556,10 +611,10 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     final _$newIntentListener = newIntentListener.reference;
     _addOnNewIntentListener(
-            reference.pointer,
-            _id_addOnNewIntentListener as jni$_.JMethodIDPtr,
-            _$newIntentListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnNewIntentListener as jni$_.JMethodIDPtr,
+      _$newIntentListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnNewIntentListener = _class.instanceMethodId(
@@ -567,16 +622,23 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
   );
 
-  static final _removeOnNewIntentListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnNewIntentListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener newIntentListener)`
   void removeOnNewIntentListener(
@@ -584,10 +646,10 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     final _$newIntentListener = newIntentListener.reference;
     _removeOnNewIntentListener(
-            reference.pointer,
-            _id_removeOnNewIntentListener as jni$_.JMethodIDPtr,
-            _$newIntentListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnNewIntentListener as jni$_.JMethodIDPtr,
+      _$newIntentListener.pointer,
+    ).check();
   }
 
   static final _id_addOnUserLeaveHintListener = _class.instanceMethodId(
@@ -597,15 +659,21 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   static final _addOnUserLeaveHintListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener userLeaveHintListener)`
   void addOnUserLeaveHintListener(
@@ -613,10 +681,10 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     final _$userLeaveHintListener = userLeaveHintListener.reference;
     _addOnUserLeaveHintListener(
-            reference.pointer,
-            _id_addOnUserLeaveHintListener as jni$_.JMethodIDPtr,
-            _$userLeaveHintListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnUserLeaveHintListener as jni$_.JMethodIDPtr,
+      _$userLeaveHintListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnUserLeaveHintListener = _class.instanceMethodId(
@@ -626,15 +694,21 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   static final _removeOnUserLeaveHintListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener userLeaveHintListener)`
   void removeOnUserLeaveHintListener(
@@ -642,10 +716,10 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     final _$userLeaveHintListener = userLeaveHintListener.reference;
     _removeOnUserLeaveHintListener(
-            reference.pointer,
-            _id_removeOnUserLeaveHintListener as jni$_.JMethodIDPtr,
-            _$userLeaveHintListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnUserLeaveHintListener as jni$_.JMethodIDPtr,
+      _$userLeaveHintListener.pointer,
+    ).check();
   }
 
   static final _id_addOnWindowFocusChangedListener = _class.instanceMethodId(
@@ -655,27 +729,33 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   static final _addOnWindowFocusChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addOnWindowFocusChangedListener(io.flutter.plugin.common.PluginRegistry$WindowFocusChangedListener windowFocusChangedListener)`
   void addOnWindowFocusChangedListener(
     pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-        windowFocusChangedListener,
+    windowFocusChangedListener,
   ) {
     final _$windowFocusChangedListener = windowFocusChangedListener.reference;
     _addOnWindowFocusChangedListener(
-            reference.pointer,
-            _id_addOnWindowFocusChangedListener as jni$_.JMethodIDPtr,
-            _$windowFocusChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnWindowFocusChangedListener as jni$_.JMethodIDPtr,
+      _$windowFocusChangedListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnWindowFocusChangedListener = _class.instanceMethodId(
@@ -685,27 +765,33 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   static final _removeOnWindowFocusChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeOnWindowFocusChangedListener(io.flutter.plugin.common.PluginRegistry$WindowFocusChangedListener windowFocusChangedListener)`
   void removeOnWindowFocusChangedListener(
     pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-        windowFocusChangedListener,
+    windowFocusChangedListener,
   ) {
     final _$windowFocusChangedListener = windowFocusChangedListener.reference;
     _removeOnWindowFocusChangedListener(
-            reference.pointer,
-            _id_removeOnWindowFocusChangedListener as jni$_.JMethodIDPtr,
-            _$windowFocusChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnWindowFocusChangedListener as jni$_.JMethodIDPtr,
+      _$windowFocusChangedListener.pointer,
+    ).check();
   }
 
   static final _id_addOnSaveStateListener = _class.instanceMethodId(
@@ -713,28 +799,35 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
   );
 
-  static final _addOnSaveStateListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnSaveStateListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void addOnSaveStateListener(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener onSaveInstanceStateListener)`
   void addOnSaveStateListener(
     ActivityPluginBinding$OnSaveInstanceStateListener
-        onSaveInstanceStateListener,
+    onSaveInstanceStateListener,
   ) {
     final _$onSaveInstanceStateListener = onSaveInstanceStateListener.reference;
     _addOnSaveStateListener(
-            reference.pointer,
-            _id_addOnSaveStateListener as jni$_.JMethodIDPtr,
-            _$onSaveInstanceStateListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnSaveStateListener as jni$_.JMethodIDPtr,
+      _$onSaveInstanceStateListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnSaveStateListener = _class.instanceMethodId(
@@ -742,28 +835,35 @@ class ActivityPluginBinding extends jni$_.JObject {
     r'(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
   );
 
-  static final _removeOnSaveStateListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnSaveStateListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void removeOnSaveStateListener(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener onSaveInstanceStateListener)`
   void removeOnSaveStateListener(
     ActivityPluginBinding$OnSaveInstanceStateListener
-        onSaveInstanceStateListener,
+    onSaveInstanceStateListener,
   ) {
     final _$onSaveInstanceStateListener = onSaveInstanceStateListener.reference;
     _removeOnSaveStateListener(
-            reference.pointer,
-            _id_removeOnSaveStateListener as jni$_.JMethodIDPtr,
-            _$onSaveInstanceStateListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnSaveStateListener as jni$_.JMethodIDPtr,
+      _$onSaveInstanceStateListener.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -775,19 +875,16 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -816,9 +913,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V') {
         _$impls[$p]!.addRequestPermissionsResultListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$RequestPermissionsResultListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$RequestPermissionsResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -826,9 +923,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V') {
         _$impls[$p]!.removeRequestPermissionsResultListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$RequestPermissionsResultListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$RequestPermissionsResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -836,9 +933,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V') {
         _$impls[$p]!.addActivityResultListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$ActivityResultListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$ActivityResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -846,9 +943,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V') {
         _$impls[$p]!.removeActivityResultListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$ActivityResultListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$ActivityResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -856,8 +953,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V') {
         _$impls[$p]!.addOnNewIntentListener(
           $a![0]!.as(
-              const pluginregistry$_.$PluginRegistry$NewIntentListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$NewIntentListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -865,8 +963,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V') {
         _$impls[$p]!.removeOnNewIntentListener(
           $a![0]!.as(
-              const pluginregistry$_.$PluginRegistry$NewIntentListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$NewIntentListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -874,9 +973,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V') {
         _$impls[$p]!.addOnUserLeaveHintListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$UserLeaveHintListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$UserLeaveHintListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -884,9 +983,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V') {
         _$impls[$p]!.removeOnUserLeaveHintListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$UserLeaveHintListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$UserLeaveHintListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -894,9 +993,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V') {
         _$impls[$p]!.addOnWindowFocusChangedListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$WindowFocusChangedListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$WindowFocusChangedListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -904,9 +1003,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V') {
         _$impls[$p]!.removeOnWindowFocusChangedListener(
           $a![0]!.as(
-              const pluginregistry$_
-                  .$PluginRegistry$WindowFocusChangedListener$Type(),
-              releaseOriginal: true),
+            const pluginregistry$_.$PluginRegistry$WindowFocusChangedListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -914,8 +1013,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'addOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V') {
         _$impls[$p]!.addOnSaveStateListener(
           $a![0]!.as(
-              const $ActivityPluginBinding$OnSaveInstanceStateListener$Type(),
-              releaseOriginal: true),
+            const $ActivityPluginBinding$OnSaveInstanceStateListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -923,8 +1023,9 @@ class ActivityPluginBinding extends jni$_.JObject {
           r'removeOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V') {
         _$impls[$p]!.removeOnSaveStateListener(
           $a![0]!.as(
-              const $ActivityPluginBinding$OnSaveInstanceStateListener$Type(),
-              releaseOriginal: true),
+            const $ActivityPluginBinding$OnSaveInstanceStateListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -984,14 +1085,10 @@ class ActivityPluginBinding extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory ActivityPluginBinding.implement(
-    $ActivityPluginBinding $impl,
-  ) {
+  factory ActivityPluginBinding.implement($ActivityPluginBinding $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return ActivityPluginBinding.fromReference(
-      $i.implementReference(),
-    );
+    return ActivityPluginBinding.fromReference($i.implementReference());
   }
 }
 
@@ -1000,112 +1097,134 @@ abstract base mixin class $ActivityPluginBinding {
     required jni$_.JObject Function() getActivity,
     required jni$_.JObject Function() getLifecycle,
     required void Function(
-            pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        addRequestPermissionsResultListener,
+      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    addRequestPermissionsResultListener,
     bool addRequestPermissionsResultListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        removeRequestPermissionsResultListener,
+      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    removeRequestPermissionsResultListener,
     bool removeRequestPermissionsResultListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$ActivityResultListener
-                activityResultListener)
-        addActivityResultListener,
+      pluginregistry$_.PluginRegistry$ActivityResultListener
+      activityResultListener,
+    )
+    addActivityResultListener,
     bool addActivityResultListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$ActivityResultListener
-                activityResultListener)
-        removeActivityResultListener,
+      pluginregistry$_.PluginRegistry$ActivityResultListener
+      activityResultListener,
+    )
+    removeActivityResultListener,
     bool removeActivityResultListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-        addOnNewIntentListener,
+      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+    )
+    addOnNewIntentListener,
     bool addOnNewIntentListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-        removeOnNewIntentListener,
+      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+    )
+    removeOnNewIntentListener,
     bool removeOnNewIntentListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$UserLeaveHintListener
-                userLeaveHintListener)
-        addOnUserLeaveHintListener,
+      pluginregistry$_.PluginRegistry$UserLeaveHintListener
+      userLeaveHintListener,
+    )
+    addOnUserLeaveHintListener,
     bool addOnUserLeaveHintListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$UserLeaveHintListener
-                userLeaveHintListener)
-        removeOnUserLeaveHintListener,
+      pluginregistry$_.PluginRegistry$UserLeaveHintListener
+      userLeaveHintListener,
+    )
+    removeOnUserLeaveHintListener,
     bool removeOnUserLeaveHintListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        addOnWindowFocusChangedListener,
+      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+      windowFocusChangedListener,
+    )
+    addOnWindowFocusChangedListener,
     bool addOnWindowFocusChangedListener$async,
     required void Function(
-            pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        removeOnWindowFocusChangedListener,
+      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+      windowFocusChangedListener,
+    )
+    removeOnWindowFocusChangedListener,
     bool removeOnWindowFocusChangedListener$async,
     required void Function(
-            ActivityPluginBinding$OnSaveInstanceStateListener
-                onSaveInstanceStateListener)
-        addOnSaveStateListener,
+      ActivityPluginBinding$OnSaveInstanceStateListener
+      onSaveInstanceStateListener,
+    )
+    addOnSaveStateListener,
     bool addOnSaveStateListener$async,
     required void Function(
-            ActivityPluginBinding$OnSaveInstanceStateListener
-                onSaveInstanceStateListener)
-        removeOnSaveStateListener,
+      ActivityPluginBinding$OnSaveInstanceStateListener
+      onSaveInstanceStateListener,
+    )
+    removeOnSaveStateListener,
     bool removeOnSaveStateListener$async,
   }) = _$ActivityPluginBinding;
 
   jni$_.JObject getActivity();
   jni$_.JObject getLifecycle();
   void addRequestPermissionsResultListener(
-      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener);
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  );
   bool get addRequestPermissionsResultListener$async => false;
   void removeRequestPermissionsResultListener(
-      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener);
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  );
   bool get removeRequestPermissionsResultListener$async => false;
   void addActivityResultListener(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener);
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  );
   bool get addActivityResultListener$async => false;
   void removeActivityResultListener(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener);
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  );
   bool get removeActivityResultListener$async => false;
   void addOnNewIntentListener(
-      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener);
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  );
   bool get addOnNewIntentListener$async => false;
   void removeOnNewIntentListener(
-      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener);
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  );
   bool get removeOnNewIntentListener$async => false;
   void addOnUserLeaveHintListener(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener);
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  );
   bool get addOnUserLeaveHintListener$async => false;
   void removeOnUserLeaveHintListener(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener);
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  );
   bool get removeOnUserLeaveHintListener$async => false;
   void addOnWindowFocusChangedListener(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener);
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  );
   bool get addOnWindowFocusChangedListener$async => false;
   void removeOnWindowFocusChangedListener(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener);
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  );
   bool get removeOnWindowFocusChangedListener$async => false;
   void addOnSaveStateListener(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener);
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  );
   bool get addOnSaveStateListener$async => false;
   void removeOnSaveStateListener(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener);
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  );
   bool get removeOnSaveStateListener$async => false;
 }
 
@@ -1114,132 +1233,161 @@ final class _$ActivityPluginBinding with $ActivityPluginBinding {
     required jni$_.JObject Function() getActivity,
     required jni$_.JObject Function() getLifecycle,
     required void Function(
-            pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        addRequestPermissionsResultListener,
+      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    addRequestPermissionsResultListener,
     this.addRequestPermissionsResultListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        removeRequestPermissionsResultListener,
+      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    removeRequestPermissionsResultListener,
     this.removeRequestPermissionsResultListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$ActivityResultListener
-                activityResultListener)
-        addActivityResultListener,
+      pluginregistry$_.PluginRegistry$ActivityResultListener
+      activityResultListener,
+    )
+    addActivityResultListener,
     this.addActivityResultListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$ActivityResultListener
-                activityResultListener)
-        removeActivityResultListener,
+      pluginregistry$_.PluginRegistry$ActivityResultListener
+      activityResultListener,
+    )
+    removeActivityResultListener,
     this.removeActivityResultListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-        addOnNewIntentListener,
+      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+    )
+    addOnNewIntentListener,
     this.addOnNewIntentListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-        removeOnNewIntentListener,
+      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+    )
+    removeOnNewIntentListener,
     this.removeOnNewIntentListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$UserLeaveHintListener
-                userLeaveHintListener)
-        addOnUserLeaveHintListener,
+      pluginregistry$_.PluginRegistry$UserLeaveHintListener
+      userLeaveHintListener,
+    )
+    addOnUserLeaveHintListener,
     this.addOnUserLeaveHintListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$UserLeaveHintListener
-                userLeaveHintListener)
-        removeOnUserLeaveHintListener,
+      pluginregistry$_.PluginRegistry$UserLeaveHintListener
+      userLeaveHintListener,
+    )
+    removeOnUserLeaveHintListener,
     this.removeOnUserLeaveHintListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        addOnWindowFocusChangedListener,
+      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+      windowFocusChangedListener,
+    )
+    addOnWindowFocusChangedListener,
     this.addOnWindowFocusChangedListener$async = false,
     required void Function(
-            pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        removeOnWindowFocusChangedListener,
+      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+      windowFocusChangedListener,
+    )
+    removeOnWindowFocusChangedListener,
     this.removeOnWindowFocusChangedListener$async = false,
     required void Function(
-            ActivityPluginBinding$OnSaveInstanceStateListener
-                onSaveInstanceStateListener)
-        addOnSaveStateListener,
+      ActivityPluginBinding$OnSaveInstanceStateListener
+      onSaveInstanceStateListener,
+    )
+    addOnSaveStateListener,
     this.addOnSaveStateListener$async = false,
     required void Function(
-            ActivityPluginBinding$OnSaveInstanceStateListener
-                onSaveInstanceStateListener)
-        removeOnSaveStateListener,
+      ActivityPluginBinding$OnSaveInstanceStateListener
+      onSaveInstanceStateListener,
+    )
+    removeOnSaveStateListener,
     this.removeOnSaveStateListener$async = false,
-  })  : _getActivity = getActivity,
-        _getLifecycle = getLifecycle,
-        _addRequestPermissionsResultListener =
-            addRequestPermissionsResultListener,
-        _removeRequestPermissionsResultListener =
-            removeRequestPermissionsResultListener,
-        _addActivityResultListener = addActivityResultListener,
-        _removeActivityResultListener = removeActivityResultListener,
-        _addOnNewIntentListener = addOnNewIntentListener,
-        _removeOnNewIntentListener = removeOnNewIntentListener,
-        _addOnUserLeaveHintListener = addOnUserLeaveHintListener,
-        _removeOnUserLeaveHintListener = removeOnUserLeaveHintListener,
-        _addOnWindowFocusChangedListener = addOnWindowFocusChangedListener,
-        _removeOnWindowFocusChangedListener =
-            removeOnWindowFocusChangedListener,
-        _addOnSaveStateListener = addOnSaveStateListener,
-        _removeOnSaveStateListener = removeOnSaveStateListener;
+  }) : _getActivity = getActivity,
+       _getLifecycle = getLifecycle,
+       _addRequestPermissionsResultListener =
+           addRequestPermissionsResultListener,
+       _removeRequestPermissionsResultListener =
+           removeRequestPermissionsResultListener,
+       _addActivityResultListener = addActivityResultListener,
+       _removeActivityResultListener = removeActivityResultListener,
+       _addOnNewIntentListener = addOnNewIntentListener,
+       _removeOnNewIntentListener = removeOnNewIntentListener,
+       _addOnUserLeaveHintListener = addOnUserLeaveHintListener,
+       _removeOnUserLeaveHintListener = removeOnUserLeaveHintListener,
+       _addOnWindowFocusChangedListener = addOnWindowFocusChangedListener,
+       _removeOnWindowFocusChangedListener = removeOnWindowFocusChangedListener,
+       _addOnSaveStateListener = addOnSaveStateListener,
+       _removeOnSaveStateListener = removeOnSaveStateListener;
 
   final jni$_.JObject Function() _getActivity;
   final jni$_.JObject Function() _getLifecycle;
   final void Function(
-          pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-              requestPermissionsResultListener)
-      _addRequestPermissionsResultListener;
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  )
+  _addRequestPermissionsResultListener;
   final bool addRequestPermissionsResultListener$async;
   final void Function(
-          pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-              requestPermissionsResultListener)
-      _removeRequestPermissionsResultListener;
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  )
+  _removeRequestPermissionsResultListener;
   final bool removeRequestPermissionsResultListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener) _addActivityResultListener;
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  )
+  _addActivityResultListener;
   final bool addActivityResultListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener) _removeActivityResultListener;
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  )
+  _removeActivityResultListener;
   final bool removeActivityResultListener$async;
   final void Function(
-          pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-      _addOnNewIntentListener;
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  )
+  _addOnNewIntentListener;
   final bool addOnNewIntentListener$async;
   final void Function(
-          pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener)
-      _removeOnNewIntentListener;
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  )
+  _removeOnNewIntentListener;
   final bool removeOnNewIntentListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener) _addOnUserLeaveHintListener;
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  )
+  _addOnUserLeaveHintListener;
   final bool addOnUserLeaveHintListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener) _removeOnUserLeaveHintListener;
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  )
+  _removeOnUserLeaveHintListener;
   final bool removeOnUserLeaveHintListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener) _addOnWindowFocusChangedListener;
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  )
+  _addOnWindowFocusChangedListener;
   final bool addOnWindowFocusChangedListener$async;
   final void Function(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener) _removeOnWindowFocusChangedListener;
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  )
+  _removeOnWindowFocusChangedListener;
   final bool removeOnWindowFocusChangedListener$async;
   final void Function(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener) _addOnSaveStateListener;
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  )
+  _addOnSaveStateListener;
   final bool addOnSaveStateListener$async;
   final void Function(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener) _removeOnSaveStateListener;
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  )
+  _removeOnSaveStateListener;
   final bool removeOnSaveStateListener$async;
 
   jni$_.JObject getActivity() {
@@ -1251,74 +1399,86 @@ final class _$ActivityPluginBinding with $ActivityPluginBinding {
   }
 
   void addRequestPermissionsResultListener(
-      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener) {
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  ) {
     return _addRequestPermissionsResultListener(
-        requestPermissionsResultListener);
+      requestPermissionsResultListener,
+    );
   }
 
   void removeRequestPermissionsResultListener(
-      pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener) {
+    pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  ) {
     return _removeRequestPermissionsResultListener(
-        requestPermissionsResultListener);
+      requestPermissionsResultListener,
+    );
   }
 
   void addActivityResultListener(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener) {
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  ) {
     return _addActivityResultListener(activityResultListener);
   }
 
   void removeActivityResultListener(
-      pluginregistry$_.PluginRegistry$ActivityResultListener
-          activityResultListener) {
+    pluginregistry$_.PluginRegistry$ActivityResultListener
+    activityResultListener,
+  ) {
     return _removeActivityResultListener(activityResultListener);
   }
 
   void addOnNewIntentListener(
-      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener) {
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  ) {
     return _addOnNewIntentListener(newIntentListener);
   }
 
   void removeOnNewIntentListener(
-      pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener) {
+    pluginregistry$_.PluginRegistry$NewIntentListener newIntentListener,
+  ) {
     return _removeOnNewIntentListener(newIntentListener);
   }
 
   void addOnUserLeaveHintListener(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener) {
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  ) {
     return _addOnUserLeaveHintListener(userLeaveHintListener);
   }
 
   void removeOnUserLeaveHintListener(
-      pluginregistry$_.PluginRegistry$UserLeaveHintListener
-          userLeaveHintListener) {
+    pluginregistry$_.PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  ) {
     return _removeOnUserLeaveHintListener(userLeaveHintListener);
   }
 
   void addOnWindowFocusChangedListener(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener) {
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  ) {
     return _addOnWindowFocusChangedListener(windowFocusChangedListener);
   }
 
   void removeOnWindowFocusChangedListener(
-      pluginregistry$_.PluginRegistry$WindowFocusChangedListener
-          windowFocusChangedListener) {
+    pluginregistry$_.PluginRegistry$WindowFocusChangedListener
+    windowFocusChangedListener,
+  ) {
     return _removeOnWindowFocusChangedListener(windowFocusChangedListener);
   }
 
   void addOnSaveStateListener(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener) {
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  ) {
     return _addOnSaveStateListener(onSaveInstanceStateListener);
   }
 
   void removeOnSaveStateListener(
-      ActivityPluginBinding$OnSaveInstanceStateListener
-          onSaveInstanceStateListener) {
+    ActivityPluginBinding$OnSaveInstanceStateListener
+    onSaveInstanceStateListener,
+  ) {
     return _removeOnSaveStateListener(onSaveInstanceStateListener);
   }
 }
@@ -1336,11 +1496,7 @@ final class $ActivityPluginBinding$NullableType
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : ActivityPluginBinding.fromReference(
-              reference,
-            );
+      reference.isNull ? null : ActivityPluginBinding.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1376,9 +1532,7 @@ final class $ActivityPluginBinding$Type
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding fromReference(jni$_.JReference reference) =>
-      ActivityPluginBinding.fromReference(
-        reference,
-      );
+      ActivityPluginBinding.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
