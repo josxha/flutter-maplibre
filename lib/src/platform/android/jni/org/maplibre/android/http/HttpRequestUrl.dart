@@ -59,13 +59,13 @@ class HttpRequestUrl extends jni$_.JObject {
   final jni$_.JObjType<HttpRequestUrl> $type;
 
   @jni$_.internal
-  HttpRequestUrl.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  HttpRequestUrl.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/http/HttpRequestUrl');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/http/HttpRequestUrl',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $HttpRequestUrl$NullableType();
@@ -75,26 +75,33 @@ class HttpRequestUrl extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;IZ)Ljava/lang/String;',
   );
 
-  static final _buildResourceUrl = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _buildResourceUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `static public java.lang.String buildResourceUrl(java.lang.String string, java.lang.String string1, int i, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -107,13 +114,13 @@ class HttpRequestUrl extends jni$_.JObject {
     final _$string = string.reference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return _buildResourceUrl(
-            _class.reference.pointer,
-            _id_buildResourceUrl as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer,
-            i,
-            z ? 1 : 0)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      _class.reference.pointer,
+      _id_buildResourceUrl as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      i,
+      z ? 1 : 0,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -128,11 +135,8 @@ final class $HttpRequestUrl$NullableType
 
   @jni$_.internal
   @core$_.override
-  HttpRequestUrl? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : HttpRequestUrl.fromReference(
-          reference,
-        );
+  HttpRequestUrl? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : HttpRequestUrl.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -166,9 +170,7 @@ final class $HttpRequestUrl$Type extends jni$_.JObjType<HttpRequestUrl> {
   @jni$_.internal
   @core$_.override
   HttpRequestUrl fromReference(jni$_.JReference reference) =>
-      HttpRequestUrl.fromReference(
-        reference,
-      );
+      HttpRequestUrl.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

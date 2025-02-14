@@ -108,10 +108,11 @@ class _SourceAttributionState extends State<SourceAttribution> {
                   SizedBox.square(
                     dimension: 30,
                     child: IconButton(
-                      onPressed: () => setState(() {
-                        _initMapCamera = null;
-                        _expanded = !_expanded;
-                      }),
+                      onPressed:
+                          () => setState(() {
+                            _initMapCamera = null;
+                            _expanded = !_expanded;
+                          }),
                       icon: const Icon(Icons.info, size: 18),
                       padding: const EdgeInsets.all(4),
                       constraints: const BoxConstraints(),
@@ -160,12 +161,13 @@ class _HtmlWidgetState extends State<_HtmlWidget> {
             onExit: (event) => setState(() => _hovering = false),
             text: node.text,
             style: textStyle,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                if (node.attributes['href'] case final String href) {
-                  launchUrl(Uri.parse(href));
-                }
-              },
+            recognizer:
+                TapGestureRecognizer()
+                  ..onTap = () {
+                    if (node.attributes['href'] case final String href) {
+                      launchUrl(Uri.parse(href));
+                    }
+                  },
           ),
         );
       }

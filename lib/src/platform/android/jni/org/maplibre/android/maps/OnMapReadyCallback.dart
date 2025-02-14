@@ -61,13 +61,13 @@ class OnMapReadyCallback extends jni$_.JObject {
   final jni$_.JObjType<OnMapReadyCallback> $type;
 
   @jni$_.internal
-  OnMapReadyCallback.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OnMapReadyCallback.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/OnMapReadyCallback');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/OnMapReadyCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OnMapReadyCallback$NullableType();
@@ -77,25 +77,32 @@ class OnMapReadyCallback extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;)V',
   );
 
-  static final _onMapReady = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMapReady =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onMapReady(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void onMapReady(
-    maplibremap$_.MapLibreMap mapLibreMap,
-  ) {
+  void onMapReady(maplibremap$_.MapLibreMap mapLibreMap) {
     final _$mapLibreMap = mapLibreMap.reference;
-    _onMapReady(reference.pointer, _id_onMapReady as jni$_.JMethodIDPtr,
-            _$mapLibreMap.pointer)
-        .check();
+    _onMapReady(
+      reference.pointer,
+      _id_onMapReady as jni$_.JMethodIDPtr,
+      _$mapLibreMap.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -107,19 +114,16 @@ class OnMapReadyCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -130,8 +134,10 @@ class OnMapReadyCallback extends jni$_.JObject {
       final $a = $i.args;
       if ($d == r'onMapReady(Lorg/maplibre/android/maps/MapLibreMap;)V') {
         _$impls[$p]!.onMapReady(
-          $a![0]!.as(const maplibremap$_.$MapLibreMap$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const maplibremap$_.$MapLibreMap$Type(),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -169,14 +175,10 @@ class OnMapReadyCallback extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory OnMapReadyCallback.implement(
-    $OnMapReadyCallback $impl,
-  ) {
+  factory OnMapReadyCallback.implement($OnMapReadyCallback $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnMapReadyCallback.fromReference(
-      $i.implementReference(),
-    );
+    return OnMapReadyCallback.fromReference($i.implementReference());
   }
 }
 
@@ -216,11 +218,7 @@ final class $OnMapReadyCallback$NullableType
   @jni$_.internal
   @core$_.override
   OnMapReadyCallback? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : OnMapReadyCallback.fromReference(
-              reference,
-            );
+      reference.isNull ? null : OnMapReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -255,9 +253,7 @@ final class $OnMapReadyCallback$Type
   @jni$_.internal
   @core$_.override
   OnMapReadyCallback fromReference(jni$_.JReference reference) =>
-      OnMapReadyCallback.fromReference(
-        reference,
-      );
+      OnMapReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

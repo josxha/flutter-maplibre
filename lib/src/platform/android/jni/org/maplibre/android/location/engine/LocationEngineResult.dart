@@ -61,13 +61,13 @@ class LocationEngineResult extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineResult> $type;
 
   @jni$_.internal
-  LocationEngineResult.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LocationEngineResult.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/engine/LocationEngineResult');
+    r'org/maplibre/android/location/engine/LocationEngineResult',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocationEngineResult$NullableType();
@@ -77,26 +77,33 @@ class LocationEngineResult extends jni$_.JObject {
     r'(Landroid/location/Location;)Lorg/maplibre/android/location/engine/LocationEngineResult;',
   );
 
-  static final _create = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _create =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult create(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationEngineResult create(
-    location$_.Location? location,
-  ) {
+  static LocationEngineResult create(location$_.Location? location) {
     final _$location = location?.reference ?? jni$_.jNullReference;
-    return _create(_class.reference.pointer, _id_create as jni$_.JMethodIDPtr,
-            _$location.pointer)
-        .object<LocationEngineResult>(const $LocationEngineResult$Type());
+    return _create(
+      _class.reference.pointer,
+      _id_create as jni$_.JMethodIDPtr,
+      _$location.pointer,
+    ).object<LocationEngineResult>(const $LocationEngineResult$Type());
   }
 
   static final _id_create$1 = _class.staticMethodId(
@@ -104,16 +111,23 @@ class LocationEngineResult extends jni$_.JObject {
     r'(Ljava/util/List;)Lorg/maplibre/android/location/engine/LocationEngineResult;',
   );
 
-  static final _create$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _create$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult create(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -121,9 +135,11 @@ class LocationEngineResult extends jni$_.JObject {
     jni$_.JList<location$_.Location?>? list,
   ) {
     final _$list = list?.reference ?? jni$_.jNullReference;
-    return _create$1(_class.reference.pointer,
-            _id_create$1 as jni$_.JMethodIDPtr, _$list.pointer)
-        .object<LocationEngineResult>(const $LocationEngineResult$Type());
+    return _create$1(
+      _class.reference.pointer,
+      _id_create$1 as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<LocationEngineResult>(const $LocationEngineResult$Type());
   }
 
   static final _id_getLastLocation = _class.instanceMethodId(
@@ -131,25 +147,29 @@ class LocationEngineResult extends jni$_.JObject {
     r'()Landroid/location/Location;',
   );
 
-  static final _getLastLocation = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLastLocation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.location.Location getLastLocation()`
   /// The returned object must be released after use, by calling the [release] method.
   location$_.Location? getLastLocation() {
     return _getLastLocation(
-            reference.pointer, _id_getLastLocation as jni$_.JMethodIDPtr)
-        .object<location$_.Location?>(
-            const location$_.$Location$NullableType());
+      reference.pointer,
+      _id_getLastLocation as jni$_.JMethodIDPtr,
+    ).object<location$_.Location?>(const location$_.$Location$NullableType());
   }
 
   static final _id_getLocations = _class.instanceMethodId(
@@ -157,26 +177,33 @@ class LocationEngineResult extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getLocations = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLocations =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getLocations()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<location$_.Location?>? getLocations() {
     return _getLocations(
-            reference.pointer, _id_getLocations as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<location$_.Location?>?>(
-            const jni$_.JListNullableType<location$_.Location?>(
-                location$_.$Location$NullableType()));
+      reference.pointer,
+      _id_getLocations as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<location$_.Location?>?>(
+      const jni$_.JListNullableType<location$_.Location?>(
+        location$_.$Location$NullableType(),
+      ),
+    );
   }
 
   static final _id_extractResult = _class.staticMethodId(
@@ -184,27 +211,33 @@ class LocationEngineResult extends jni$_.JObject {
     r'(Landroid/content/Intent;)Lorg/maplibre/android/location/engine/LocationEngineResult;',
   );
 
-  static final _extractResult = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _extractResult =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult extractResult(android.content.Intent intent)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationEngineResult? extractResult(
-    jni$_.JObject? intent,
-  ) {
+  static LocationEngineResult? extractResult(jni$_.JObject? intent) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
-    return _extractResult(_class.reference.pointer,
-            _id_extractResult as jni$_.JMethodIDPtr, _$intent.pointer)
-        .object<LocationEngineResult?>(
-            const $LocationEngineResult$NullableType());
+    return _extractResult(
+      _class.reference.pointer,
+      _id_extractResult as jni$_.JMethodIDPtr,
+      _$intent.pointer,
+    ).object<LocationEngineResult?>(const $LocationEngineResult$NullableType());
   }
 }
 
@@ -221,11 +254,7 @@ final class $LocationEngineResult$NullableType
   @jni$_.internal
   @core$_.override
   LocationEngineResult? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LocationEngineResult.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LocationEngineResult.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -261,9 +290,7 @@ final class $LocationEngineResult$Type
   @jni$_.internal
   @core$_.override
   LocationEngineResult fromReference(jni$_.JReference reference) =>
-      LocationEngineResult.fromReference(
-        reference,
-      );
+      LocationEngineResult.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

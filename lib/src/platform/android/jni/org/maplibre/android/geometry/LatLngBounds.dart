@@ -63,39 +63,41 @@ class LatLngBounds$Builder extends jni$_.JObject {
   final jni$_.JObjType<LatLngBounds$Builder> $type;
 
   @jni$_.internal
-  LatLngBounds$Builder.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LatLngBounds$Builder.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/geometry/LatLngBounds$Builder');
+    r'org/maplibre/android/geometry/LatLngBounds$Builder',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLngBounds$Builder$NullableType();
   static const type = $LatLngBounds$Builder$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory LatLngBounds$Builder() {
     return LatLngBounds$Builder.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_build = _class.instanceMethodId(
@@ -103,23 +105,29 @@ class LatLngBounds$Builder extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _build = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _build =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds build()`
   /// The returned object must be released after use, by calling the [release] method.
   LatLngBounds build() {
-    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _build(
+      reference.pointer,
+      _id_build as jni$_.JMethodIDPtr,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_includes = _class.instanceMethodId(
@@ -127,26 +135,33 @@ class LatLngBounds$Builder extends jni$_.JObject {
     r'(Ljava/util/List;)Lorg/maplibre/android/geometry/LatLngBounds$Builder;',
   );
 
-  static final _includes = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _includes =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds$Builder includes(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds$Builder includes(
-    jni$_.JList<latlng$_.LatLng> list,
-  ) {
+  LatLngBounds$Builder includes(jni$_.JList<latlng$_.LatLng> list) {
     final _$list = list.reference;
-    return _includes(reference.pointer, _id_includes as jni$_.JMethodIDPtr,
-            _$list.pointer)
-        .object<LatLngBounds$Builder>(const $LatLngBounds$Builder$Type());
+    return _includes(
+      reference.pointer,
+      _id_includes as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<LatLngBounds$Builder>(const $LatLngBounds$Builder$Type());
   }
 
   static final _id_include = _class.instanceMethodId(
@@ -154,26 +169,33 @@ class LatLngBounds$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Lorg/maplibre/android/geometry/LatLngBounds$Builder;',
   );
 
-  static final _include = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _include =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds$Builder include(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds$Builder include(
-    latlng$_.LatLng latLng,
-  ) {
+  LatLngBounds$Builder include(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _include(reference.pointer, _id_include as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .object<LatLngBounds$Builder>(const $LatLngBounds$Builder$Type());
+    return _include(
+      reference.pointer,
+      _id_include as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).object<LatLngBounds$Builder>(const $LatLngBounds$Builder$Type());
   }
 }
 
@@ -190,11 +212,7 @@ final class $LatLngBounds$Builder$NullableType
   @jni$_.internal
   @core$_.override
   LatLngBounds$Builder? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LatLngBounds$Builder.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LatLngBounds$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -230,9 +248,7 @@ final class $LatLngBounds$Builder$Type
   @jni$_.internal
   @core$_.override
   LatLngBounds$Builder fromReference(jni$_.JReference reference) =>
-      LatLngBounds$Builder.fromReference(
-        reference,
-      );
+      LatLngBounds$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -263,13 +279,13 @@ class LatLngBounds$Companion extends jni$_.JObject {
   final jni$_.JObjType<LatLngBounds$Companion> $type;
 
   @jni$_.internal
-  LatLngBounds$Companion.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LatLngBounds$Companion.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/geometry/LatLngBounds$Companion');
+    r'org/maplibre/android/geometry/LatLngBounds$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLngBounds$Companion$NullableType();
@@ -279,23 +295,29 @@ class LatLngBounds$Companion extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _world = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _world =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds world()`
   /// The returned object must be released after use, by calling the [release] method.
   LatLngBounds world() {
-    return _world(reference.pointer, _id_world as jni$_.JMethodIDPtr)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _world(
+      reference.pointer,
+      _id_world as jni$_.JMethodIDPtr,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_fromLatLngs = _class.instanceMethodId(
@@ -303,26 +325,33 @@ class LatLngBounds$Companion extends jni$_.JObject {
     r'(Ljava/util/List;)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _fromLatLngs = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _fromLatLngs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds fromLatLngs(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds fromLatLngs(
-    jni$_.JList<latlng$_.LatLng> list,
-  ) {
+  LatLngBounds fromLatLngs(jni$_.JList<latlng$_.LatLng> list) {
     final _$list = list.reference;
-    return _fromLatLngs(reference.pointer,
-            _id_fromLatLngs as jni$_.JMethodIDPtr, _$list.pointer)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _fromLatLngs(
+      reference.pointer,
+      _id_fromLatLngs as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_from = _class.instanceMethodId(
@@ -330,33 +359,40 @@ class LatLngBounds$Companion extends jni$_.JObject {
     r'(DDDD)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _from = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _from =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds from(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds from(
-    double d,
-    double d1,
-    double d2,
-    double d3,
-  ) {
+  LatLngBounds from(double d, double d1, double d2, double d3) {
     return _from(
-            reference.pointer, _id_from as jni$_.JMethodIDPtr, d, d1, d2, d3)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+      reference.pointer,
+      _id_from as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_from$1 = _class.instanceMethodId(
@@ -364,54 +400,72 @@ class LatLngBounds$Companion extends jni$_.JObject {
     r'(III)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _from$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int, int)>();
+  static final _from$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds from(int i, int i1, int i2)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds from$1(
-    int i,
-    int i1,
-    int i2,
-  ) {
+  LatLngBounds from$1(int i, int i1, int i2) {
     return _from$1(
-            reference.pointer, _id_from$1 as jni$_.JMethodIDPtr, i, i1, i2)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+      reference.pointer,
+      _id_from$1 as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_new$ = _class.constructorId(
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngBounds$Companion(
-    jni$_.JObject? defaultConstructorMarker,
-  ) {
+  factory LatLngBounds$Companion(jni$_.JObject? defaultConstructorMarker) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return LatLngBounds$Companion.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$defaultConstructorMarker.pointer)
-        .reference);
+    return LatLngBounds$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -428,11 +482,7 @@ final class $LatLngBounds$Companion$NullableType
   @jni$_.internal
   @core$_.override
   LatLngBounds$Companion? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LatLngBounds$Companion.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LatLngBounds$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -468,9 +518,7 @@ final class $LatLngBounds$Companion$Type
   @jni$_.internal
   @core$_.override
   LatLngBounds$Companion fromReference(jni$_.JReference reference) =>
-      LatLngBounds$Companion.fromReference(
-        reference,
-      );
+      LatLngBounds$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -501,13 +549,13 @@ class LatLngBounds extends jni$_.JObject {
   final jni$_.JObjType<LatLngBounds> $type;
 
   @jni$_.internal
-  LatLngBounds.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LatLngBounds.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/geometry/LatLngBounds');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/geometry/LatLngBounds',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLngBounds$NullableType();
@@ -568,37 +616,44 @@ class LatLngBounds extends jni$_.JObject {
   static jni$_.JObject get CREATOR =>
       _id_CREATOR.get(_class, const jni$_.JObjectType());
 
-  static final _id_new$ = _class.constructorId(
-    r'(DDDD)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(DDDD)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngBounds(
-    double d,
-    double d1,
-    double d2,
-    double d3,
-  ) {
-    return LatLngBounds.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, d, d1, d2, d3)
-        .reference);
+  factory LatLngBounds(double d, double d1, double d2, double d3) {
+    return LatLngBounds.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        d,
+        d1,
+        d2,
+        d3,
+      ).reference,
+    );
   }
 
   static final _id_getCenter = _class.instanceMethodId(
@@ -606,23 +661,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getCenter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCenter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getCenter()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng getCenter() {
-    return _getCenter(reference.pointer, _id_getCenter as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+    return _getCenter(
+      reference.pointer,
+      _id_getCenter as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getLatNorth = _class.instanceMethodId(
@@ -630,23 +691,28 @@ class LatLngBounds extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLatNorth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLatNorth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLatNorth()`
   double getLatNorth() {
     return _getLatNorth(
-            reference.pointer, _id_getLatNorth as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLatNorth as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getLatSouth = _class.instanceMethodId(
@@ -654,69 +720,80 @@ class LatLngBounds extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLatSouth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLatSouth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLatSouth()`
   double getLatSouth() {
     return _getLatSouth(
-            reference.pointer, _id_getLatSouth as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLatSouth as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getLonEast = _class.instanceMethodId(
-    r'getLonEast',
-    r'()D',
-  );
+  static final _id_getLonEast = _class.instanceMethodId(r'getLonEast', r'()D');
 
-  static final _getLonEast = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLonEast =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLonEast()`
   double getLonEast() {
-    return _getLonEast(reference.pointer, _id_getLonEast as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getLonEast(
+      reference.pointer,
+      _id_getLonEast as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getLonWest = _class.instanceMethodId(
-    r'getLonWest',
-    r'()D',
-  );
+  static final _id_getLonWest = _class.instanceMethodId(r'getLonWest', r'()D');
 
-  static final _getLonWest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLonWest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLonWest()`
   double getLonWest() {
-    return _getLonWest(reference.pointer, _id_getLonWest as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getLonWest(
+      reference.pointer,
+      _id_getLonWest as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getSouthWest = _class.instanceMethodId(
@@ -724,24 +801,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getSouthWest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSouthWest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getSouthWest()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng getSouthWest() {
     return _getSouthWest(
-            reference.pointer, _id_getSouthWest as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+      reference.pointer,
+      _id_getSouthWest as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getNorthEast = _class.instanceMethodId(
@@ -749,24 +831,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getNorthEast = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getNorthEast =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getNorthEast()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng getNorthEast() {
     return _getNorthEast(
-            reference.pointer, _id_getNorthEast as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+      reference.pointer,
+      _id_getNorthEast as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getSouthEast = _class.instanceMethodId(
@@ -774,24 +861,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getSouthEast = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSouthEast =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getSouthEast()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng getSouthEast() {
     return _getSouthEast(
-            reference.pointer, _id_getSouthEast as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+      reference.pointer,
+      _id_getSouthEast as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getNorthWest = _class.instanceMethodId(
@@ -799,24 +891,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getNorthWest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getNorthWest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getNorthWest()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng getNorthWest() {
     return _getNorthWest(
-            reference.pointer, _id_getNorthWest as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+      reference.pointer,
+      _id_getNorthWest as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getSpan = _class.instanceMethodId(
@@ -824,23 +921,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngSpan;',
   );
 
-  static final _getSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngSpan getSpan()`
   /// The returned object must be released after use, by calling the [release] method.
   latlngspan$_.LatLngSpan getSpan() {
-    return _getSpan(reference.pointer, _id_getSpan as jni$_.JMethodIDPtr)
-        .object<latlngspan$_.LatLngSpan>(const latlngspan$_.$LatLngSpan$Type());
+    return _getSpan(
+      reference.pointer,
+      _id_getSpan as jni$_.JMethodIDPtr,
+    ).object<latlngspan$_.LatLngSpan>(const latlngspan$_.$LatLngSpan$Type());
   }
 
   static final _id_getLatitudeSpan = _class.instanceMethodId(
@@ -848,23 +951,28 @@ class LatLngBounds extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLatitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLatitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLatitudeSpan()`
   double getLatitudeSpan() {
     return _getLatitudeSpan(
-            reference.pointer, _id_getLatitudeSpan as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLatitudeSpan as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getLongitudeSpan = _class.instanceMethodId(
@@ -872,23 +980,28 @@ class LatLngBounds extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLongitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLongitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLongitudeSpan()`
   double getLongitudeSpan() {
     return _getLongitudeSpan(
-            reference.pointer, _id_getLongitudeSpan as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLongitudeSpan as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_isEmptySpan = _class.instanceMethodId(
@@ -896,23 +1009,28 @@ class LatLngBounds extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isEmptySpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isEmptySpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final boolean isEmptySpan()`
   bool isEmptySpan() {
     return _isEmptySpan(
-            reference.pointer, _id_isEmptySpan as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isEmptySpan as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -920,23 +1038,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_toLatLngs = _class.instanceMethodId(
@@ -944,24 +1068,31 @@ class LatLngBounds extends jni$_.JObject {
     r'()[Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _toLatLngs = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toLatLngs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng[] toLatLngs()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<latlng$_.LatLng> toLatLngs() {
-    return _toLatLngs(reference.pointer, _id_toLatLngs as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<latlng$_.LatLng>>(
-            const jni$_.JArrayType<latlng$_.LatLng>(latlng$_.$LatLng$Type()));
+    return _toLatLngs(
+      reference.pointer,
+      _id_toLatLngs as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<latlng$_.LatLng>>(
+      const jni$_.JArrayType<latlng$_.LatLng>(latlng$_.$LatLng$Type()),
+    );
   }
 
   static final _id_include = _class.instanceMethodId(
@@ -969,26 +1100,33 @@ class LatLngBounds extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _include = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _include =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds include(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds include(
-    latlng$_.LatLng latLng,
-  ) {
+  LatLngBounds include(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _include(reference.pointer, _id_include as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _include(
+      reference.pointer,
+      _id_include as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -996,25 +1134,32 @@ class LatLngBounds extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
+  bool equals(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_contains = _class.instanceMethodId(
@@ -1022,25 +1167,32 @@ class LatLngBounds extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Z',
   );
 
-  static final _contains = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _contains =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final boolean contains(org.maplibre.android.geometry.LatLng latLng)`
-  bool contains(
-    latlng$_.LatLng latLng,
-  ) {
+  bool contains(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _contains(reference.pointer, _id_contains as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .boolean;
+    return _contains(
+      reference.pointer,
+      _id_contains as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).boolean;
   }
 
   static final _id_contains$1 = _class.instanceMethodId(
@@ -1048,25 +1200,32 @@ class LatLngBounds extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;)Z',
   );
 
-  static final _contains$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _contains$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final boolean contains(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
-  bool contains$1(
-    LatLngBounds latLngBounds,
-  ) {
+  bool contains$1(LatLngBounds latLngBounds) {
     final _$latLngBounds = latLngBounds.reference;
-    return _contains$1(reference.pointer, _id_contains$1 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .boolean;
+    return _contains$1(
+      reference.pointer,
+      _id_contains$1 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).boolean;
   }
 
   static final _id_union = _class.instanceMethodId(
@@ -1074,26 +1233,33 @@ class LatLngBounds extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _union = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _union =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds union(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds union(
-    LatLngBounds latLngBounds,
-  ) {
+  LatLngBounds union(LatLngBounds latLngBounds) {
     final _$latLngBounds = latLngBounds.reference;
-    return _union(reference.pointer, _id_union as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _union(
+      reference.pointer,
+      _id_union as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_union$1 = _class.instanceMethodId(
@@ -1101,33 +1267,40 @@ class LatLngBounds extends jni$_.JObject {
     r'(DDDD)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _union$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _union$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds union(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds union$1(
-    double d,
-    double d1,
-    double d2,
-    double d3,
-  ) {
+  LatLngBounds union$1(double d, double d1, double d2, double d3) {
     return _union$1(
-            reference.pointer, _id_union$1 as jni$_.JMethodIDPtr, d, d1, d2, d3)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+      reference.pointer,
+      _id_union$1 as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_intersect = _class.instanceMethodId(
@@ -1135,26 +1308,33 @@ class LatLngBounds extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _intersect = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _intersect =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds intersect(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds? intersect(
-    LatLngBounds latLngBounds,
-  ) {
+  LatLngBounds? intersect(LatLngBounds latLngBounds) {
     final _$latLngBounds = latLngBounds.reference;
-    return _intersect(reference.pointer, _id_intersect as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .object<LatLngBounds?>(const $LatLngBounds$NullableType());
+    return _intersect(
+      reference.pointer,
+      _id_intersect as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).object<LatLngBounds?>(const $LatLngBounds$NullableType());
   }
 
   static final _id_intersect$1 = _class.instanceMethodId(
@@ -1162,56 +1342,66 @@ class LatLngBounds extends jni$_.JObject {
     r'(DDDD)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _intersect$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
-
-  /// from: `public final org.maplibre.android.geometry.LatLngBounds intersect(double d, double d1, double d2, double d3)`
-  /// The returned object must be released after use, by calling the [release] method.
-  LatLngBounds intersect$1(
-    double d,
-    double d1,
-    double d2,
-    double d3,
-  ) {
-    return _intersect$1(reference.pointer,
-            _id_intersect$1 as jni$_.JMethodIDPtr, d, d1, d2, d3)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _intersect$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
+
+  /// from: `public final org.maplibre.android.geometry.LatLngBounds intersect(double d, double d1, double d2, double d3)`
+  /// The returned object must be released after use, by calling the [release] method.
+  LatLngBounds intersect$1(double d, double d1, double d2, double d3) {
+    return _intersect$1(
+      reference.pointer,
+      _id_intersect$1 as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -1219,23 +1409,28 @@ class LatLngBounds extends jni$_.JObject {
     r'()I',
   );
 
-  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -1243,27 +1438,34 @@ class LatLngBounds extends jni$_.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(
-    jni$_.JObject parcel,
-    int i,
-  ) {
+  void writeToParcel(jni$_.JObject parcel, int i) {
     final _$parcel = parcel.reference;
-    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
-            _$parcel.pointer, i)
-        .check();
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
   }
 
   static final _id_world = _class.staticMethodId(
@@ -1271,23 +1473,29 @@ class LatLngBounds extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _world = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _world =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.geometry.LatLngBounds world()`
   /// The returned object must be released after use, by calling the [release] method.
   static LatLngBounds world() {
-    return _world(_class.reference.pointer, _id_world as jni$_.JMethodIDPtr)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+    return _world(
+      _class.reference.pointer,
+      _id_world as jni$_.JMethodIDPtr,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_from = _class.staticMethodId(
@@ -1295,33 +1503,40 @@ class LatLngBounds extends jni$_.JObject {
     r'(DDDD)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _from = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _from =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.geometry.LatLngBounds from(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LatLngBounds from(
-    double d,
-    double d1,
-    double d2,
-    double d3,
-  ) {
-    return _from(_class.reference.pointer, _id_from as jni$_.JMethodIDPtr, d,
-            d1, d2, d3)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+  static LatLngBounds from(double d, double d1, double d2, double d3) {
+    return _from(
+      _class.reference.pointer,
+      _id_from as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 
   static final _id_from$1 = _class.staticMethodId(
@@ -1329,27 +1544,36 @@ class LatLngBounds extends jni$_.JObject {
     r'(III)Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _from$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int, int)>();
+  static final _from$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.geometry.LatLngBounds from(int i, int i1, int i2)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LatLngBounds from$1(
-    int i,
-    int i1,
-    int i2,
-  ) {
-    return _from$1(_class.reference.pointer, _id_from$1 as jni$_.JMethodIDPtr,
-            i, i1, i2)
-        .object<LatLngBounds>(const $LatLngBounds$Type());
+  static LatLngBounds from$1(int i, int i1, int i2) {
+    return _from$1(
+      _class.reference.pointer,
+      _id_from$1 as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+    ).object<LatLngBounds>(const $LatLngBounds$Type());
   }
 }
 
@@ -1363,11 +1587,8 @@ final class $LatLngBounds$NullableType extends jni$_.JObjType<LatLngBounds?> {
 
   @jni$_.internal
   @core$_.override
-  LatLngBounds? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : LatLngBounds.fromReference(
-          reference,
-        );
+  LatLngBounds? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : LatLngBounds.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1401,9 +1622,7 @@ final class $LatLngBounds$Type extends jni$_.JObjType<LatLngBounds> {
   @jni$_.internal
   @core$_.override
   LatLngBounds fromReference(jni$_.JReference reference) =>
-      LatLngBounds.fromReference(
-        reference,
-      );
+      LatLngBounds.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

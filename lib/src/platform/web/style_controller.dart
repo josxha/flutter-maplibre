@@ -173,10 +173,7 @@ class StyleControllerWeb implements StyleController {
         }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(
-            type: 'geojson',
-            data: data,
-          ),
+          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
         );
       case RasterDemSource():
         _map.addSource(
@@ -201,10 +198,7 @@ class StyleControllerWeb implements StyleController {
       case VectorSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.vector(
-            type: 'vector',
-            url: source.url,
-          ),
+          interop.SourceSpecification.vector(type: 'vector', url: source.url),
         );
       case ImageSource():
         _map.addSource(
@@ -215,24 +209,25 @@ class StyleControllerWeb implements StyleController {
             // The coordinates start at the top left corner of the image and
             // proceed in clockwise order.
             // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
-            coordinates: [
-              [
-                source.coordinates.topLeft.lng,
-                source.coordinates.topLeft.lat,
-              ],
-              [
-                source.coordinates.topRight.lng,
-                source.coordinates.topRight.lat,
-              ],
-              [
-                source.coordinates.bottomRight.lng,
-                source.coordinates.bottomRight.lat,
-              ],
-              [
-                source.coordinates.bottomLeft.lng,
-                source.coordinates.bottomLeft.lat,
-              ],
-            ].jsify()!,
+            coordinates:
+                [
+                  [
+                    source.coordinates.topLeft.lng,
+                    source.coordinates.topLeft.lat,
+                  ],
+                  [
+                    source.coordinates.topRight.lng,
+                    source.coordinates.topRight.lat,
+                  ],
+                  [
+                    source.coordinates.bottomRight.lng,
+                    source.coordinates.bottomRight.lat,
+                  ],
+                  [
+                    source.coordinates.bottomLeft.lng,
+                    source.coordinates.bottomLeft.lat,
+                  ],
+                ].jsify()!,
           ),
         );
       case VideoSource():
@@ -241,12 +236,11 @@ class StyleControllerWeb implements StyleController {
           interop.SourceSpecification.video(
             type: 'video',
             urls: source.urls.jsify()!,
-            coordinates: source.coordinates
-                .map(
-                  (e) => [e.lng, e.lat],
-                )
-                .toList(growable: false)
-                .jsify()!,
+            coordinates:
+                source.coordinates
+                    .map((e) => [e.lng, e.lat])
+                    .toList(growable: false)
+                    .jsify()!,
           ),
         );
     }
@@ -256,6 +250,7 @@ class StyleControllerWeb implements StyleController {
   void dispose() {}
 
   @override
-  void setProjection(MapProjection projection) => _map
-      .setProjection(interop.ProjectionSpecification(type: projection.name));
+  void setProjection(MapProjection projection) => _map.setProjection(
+    interop.ProjectionSpecification(type: projection.name),
+  );
 }

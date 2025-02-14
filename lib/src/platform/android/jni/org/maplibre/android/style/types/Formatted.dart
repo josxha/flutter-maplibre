@@ -61,13 +61,13 @@ class Formatted extends jni$_.JObject {
   final jni$_.JObjType<Formatted> $type;
 
   @jni$_.internal
-  Formatted.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Formatted.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/types/Formatted');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/types/Formatted',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Formatted$NullableType();
@@ -76,16 +76,23 @@ class Formatted extends jni$_.JObject {
     r'([Lorg/maplibre/android/style/types/FormattedSection;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.style.types.FormattedSection[] formattedSections)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -93,9 +100,13 @@ class Formatted extends jni$_.JObject {
     jni$_.JArray<formattedsection$_.FormattedSection> formattedSections,
   ) {
     final _$formattedSections = formattedSections.reference;
-    return Formatted.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$formattedSections.pointer)
-        .reference);
+    return Formatted.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$formattedSections.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getFormattedSections = _class.instanceMethodId(
@@ -103,26 +114,33 @@ class Formatted extends jni$_.JObject {
     r'()[Lorg/maplibre/android/style/types/FormattedSection;',
   );
 
-  static final _getFormattedSections = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFormattedSections =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.types.FormattedSection[] getFormattedSections()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<formattedsection$_.FormattedSection> getFormattedSections() {
     return _getFormattedSections(
-            reference.pointer, _id_getFormattedSections as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<formattedsection$_.FormattedSection>>(
-            const jni$_.JArrayType<formattedsection$_.FormattedSection>(
-                formattedsection$_.$FormattedSection$Type()));
+      reference.pointer,
+      _id_getFormattedSections as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<formattedsection$_.FormattedSection>>(
+      const jni$_.JArrayType<formattedsection$_.FormattedSection>(
+        formattedsection$_.$FormattedSection$Type(),
+      ),
+    );
   }
 
   static final _id_toArray = _class.instanceMethodId(
@@ -130,25 +148,31 @@ class Formatted extends jni$_.JObject {
     r'()[Ljava/lang/Object;',
   );
 
-  static final _toArray = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.Object[] toArray()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JObject?> toArray() {
-    return _toArray(reference.pointer, _id_toArray as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JObject?>>(
-            const jni$_.JArrayType<jni$_.JObject?>(
-                jni$_.JObjectNullableType()));
+    return _toArray(
+      reference.pointer,
+      _id_toArray as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JObject?>>(
+      const jni$_.JArrayType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -156,48 +180,58 @@ class Formatted extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -205,23 +239,29 @@ class Formatted extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -235,11 +275,8 @@ final class $Formatted$NullableType extends jni$_.JObjType<Formatted?> {
 
   @jni$_.internal
   @core$_.override
-  Formatted? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Formatted.fromReference(
-          reference,
-        );
+  Formatted? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Formatted.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -273,9 +310,7 @@ final class $Formatted$Type extends jni$_.JObjType<Formatted> {
   @jni$_.internal
   @core$_.override
   Formatted fromReference(jni$_.JReference reference) =>
-      Formatted.fromReference(
-        reference,
-      );
+      Formatted.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

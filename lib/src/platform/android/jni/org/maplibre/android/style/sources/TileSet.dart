@@ -63,13 +63,13 @@ class TileSet extends jni$_.JObject {
   final jni$_.JObjType<TileSet> $type;
 
   @jni$_.internal
-  TileSet.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  TileSet.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/sources/TileSet');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/TileSet',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $TileSet$NullableType();
@@ -108,34 +108,40 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;[Ljava/lang/String;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory TileSet(
-    jni$_.JString string,
-    jni$_.JArray<jni$_.JString> strings,
-  ) {
+  factory TileSet(jni$_.JString string, jni$_.JArray<jni$_.JString> strings) {
     final _$string = string.reference;
     final _$strings = strings.reference;
-    return TileSet.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$strings.pointer)
-        .reference);
+    return TileSet.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$strings.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getTilejson = _class.instanceMethodId(
@@ -143,24 +149,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getTilejson = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTilejson =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getTilejson()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getTilejson() {
     return _getTilejson(
-            reference.pointer, _id_getTilejson as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getTilejson as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getName = _class.instanceMethodId(
@@ -168,23 +179,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getName = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getName()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getName() {
-    return _getName(reference.pointer, _id_getName as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getName(
+      reference.pointer,
+      _id_getName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setName = _class.instanceMethodId(
@@ -192,25 +209,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setName = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setName(java.lang.String string)`
-  void setName(
-    jni$_.JString? string,
-  ) {
+  void setName(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setName(reference.pointer, _id_setName as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setName(
+      reference.pointer,
+      _id_setName as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getDescription = _class.instanceMethodId(
@@ -218,24 +242,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getDescription = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDescription =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getDescription()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getDescription() {
     return _getDescription(
-            reference.pointer, _id_getDescription as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getDescription as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setDescription = _class.instanceMethodId(
@@ -243,25 +272,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setDescription = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setDescription =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setDescription(java.lang.String string)`
-  void setDescription(
-    jni$_.JString? string,
-  ) {
+  void setDescription(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setDescription(reference.pointer, _id_setDescription as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setDescription(
+      reference.pointer,
+      _id_setDescription as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getVersion = _class.instanceMethodId(
@@ -269,23 +305,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getVersion = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getVersion =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getVersion()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getVersion() {
-    return _getVersion(reference.pointer, _id_getVersion as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getVersion(
+      reference.pointer,
+      _id_getVersion as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setVersion = _class.instanceMethodId(
@@ -293,25 +335,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setVersion = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setVersion =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setVersion(java.lang.String string)`
-  void setVersion(
-    jni$_.JString? string,
-  ) {
+  void setVersion(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setVersion(reference.pointer, _id_setVersion as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setVersion(
+      reference.pointer,
+      _id_setVersion as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getAttribution = _class.instanceMethodId(
@@ -319,24 +368,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getAttribution = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAttribution =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getAttribution()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getAttribution() {
     return _getAttribution(
-            reference.pointer, _id_getAttribution as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getAttribution as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setAttribution = _class.instanceMethodId(
@@ -344,25 +398,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setAttribution = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setAttribution =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setAttribution(java.lang.String string)`
-  void setAttribution(
-    jni$_.JString? string,
-  ) {
+  void setAttribution(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setAttribution(reference.pointer, _id_setAttribution as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setAttribution(
+      reference.pointer,
+      _id_setAttribution as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTemplate = _class.instanceMethodId(
@@ -370,24 +431,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getTemplate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getTemplate()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getTemplate() {
     return _getTemplate(
-            reference.pointer, _id_getTemplate as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getTemplate as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setTemplate = _class.instanceMethodId(
@@ -395,25 +461,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setTemplate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTemplate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setTemplate(java.lang.String string)`
-  void setTemplate(
-    jni$_.JString? string,
-  ) {
+  void setTemplate(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setTemplate(reference.pointer, _id_setTemplate as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setTemplate(
+      reference.pointer,
+      _id_setTemplate as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getLegend = _class.instanceMethodId(
@@ -421,23 +494,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getLegend = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLegend =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getLegend()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getLegend() {
-    return _getLegend(reference.pointer, _id_getLegend as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getLegend(
+      reference.pointer,
+      _id_getLegend as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setLegend = _class.instanceMethodId(
@@ -445,25 +524,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setLegend = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLegend =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setLegend(java.lang.String string)`
-  void setLegend(
-    jni$_.JString? string,
-  ) {
+  void setLegend(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setLegend(reference.pointer, _id_setLegend as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setLegend(
+      reference.pointer,
+      _id_setLegend as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getScheme = _class.instanceMethodId(
@@ -471,23 +557,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getScheme = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getScheme =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getScheme()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getScheme() {
-    return _getScheme(reference.pointer, _id_getScheme as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getScheme(
+      reference.pointer,
+      _id_getScheme as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setScheme = _class.instanceMethodId(
@@ -495,25 +587,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setScheme = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setScheme =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setScheme(java.lang.String string)`
-  void setScheme(
-    jni$_.JString? string,
-  ) {
+  void setScheme(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setScheme(reference.pointer, _id_setScheme as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setScheme(
+      reference.pointer,
+      _id_setScheme as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTiles = _class.instanceMethodId(
@@ -521,24 +620,31 @@ class TileSet extends jni$_.JObject {
     r'()[Ljava/lang/String;',
   );
 
-  static final _getTiles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTiles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String[] getTiles()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JString> getTiles() {
-    return _getTiles(reference.pointer, _id_getTiles as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JString>>(
-            const jni$_.JArrayType<jni$_.JString>(jni$_.JStringType()));
+    return _getTiles(
+      reference.pointer,
+      _id_getTiles as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JString>>(
+      const jni$_.JArrayType<jni$_.JString>(jni$_.JStringType()),
+    );
   }
 
   static final _id_getGrids = _class.instanceMethodId(
@@ -546,24 +652,31 @@ class TileSet extends jni$_.JObject {
     r'()[Ljava/lang/String;',
   );
 
-  static final _getGrids = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGrids =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String[] getGrids()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JString>? getGrids() {
-    return _getGrids(reference.pointer, _id_getGrids as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JString>?>(
-            const jni$_.JArrayNullableType<jni$_.JString>(jni$_.JStringType()));
+    return _getGrids(
+      reference.pointer,
+      _id_getGrids as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JString>?>(
+      const jni$_.JArrayNullableType<jni$_.JString>(jni$_.JStringType()),
+    );
   }
 
   static final _id_getData = _class.instanceMethodId(
@@ -571,24 +684,31 @@ class TileSet extends jni$_.JObject {
     r'()[Ljava/lang/String;',
   );
 
-  static final _getData = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getData =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String[] getData()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JString>? getData() {
-    return _getData(reference.pointer, _id_getData as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JString>?>(
-            const jni$_.JArrayNullableType<jni$_.JString>(jni$_.JStringType()));
+    return _getData(
+      reference.pointer,
+      _id_getData as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JString>?>(
+      const jni$_.JArrayNullableType<jni$_.JString>(jni$_.JStringType()),
+    );
   }
 
   static final _id_getBounds = _class.instanceMethodId(
@@ -596,24 +716,31 @@ class TileSet extends jni$_.JObject {
     r'()[Ljava/lang/Float;',
   );
 
-  static final _getBounds = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.Float[] getBounds()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JFloat>? getBounds() {
-    return _getBounds(reference.pointer, _id_getBounds as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JFloat>?>(
-            const jni$_.JArrayNullableType<jni$_.JFloat>(jni$_.JFloatType()));
+    return _getBounds(
+      reference.pointer,
+      _id_getBounds as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JFloat>?>(
+      const jni$_.JArrayNullableType<jni$_.JFloat>(jni$_.JFloatType()),
+    );
   }
 
   static final _id_getCenter = _class.instanceMethodId(
@@ -621,24 +748,31 @@ class TileSet extends jni$_.JObject {
     r'()[Ljava/lang/Float;',
   );
 
-  static final _getCenter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCenter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.Float[] getCenter()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JArray<jni$_.JFloat>? getCenter() {
-    return _getCenter(reference.pointer, _id_getCenter as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<jni$_.JFloat>?>(
-            const jni$_.JArrayNullableType<jni$_.JFloat>(jni$_.JFloatType()));
+    return _getCenter(
+      reference.pointer,
+      _id_getCenter as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JFloat>?>(
+      const jni$_.JArrayNullableType<jni$_.JFloat>(jni$_.JFloatType()),
+    );
   }
 
   static final _id_getEncoding = _class.instanceMethodId(
@@ -646,24 +780,29 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getEncoding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getEncoding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getEncoding()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getEncoding() {
     return _getEncoding(
-            reference.pointer, _id_getEncoding as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getEncoding as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setEncoding = _class.instanceMethodId(
@@ -671,25 +810,32 @@ class TileSet extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setEncoding = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setEncoding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setEncoding(java.lang.String string)`
-  void setEncoding(
-    jni$_.JString? string,
-  ) {
+  void setEncoding(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setEncoding(reference.pointer, _id_setEncoding as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setEncoding(
+      reference.pointer,
+      _id_setEncoding as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_setGrids = _class.instanceMethodId(
@@ -697,25 +843,32 @@ class TileSet extends jni$_.JObject {
     r'([Ljava/lang/String;)V',
   );
 
-  static final _setGrids = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGrids =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setGrids(java.lang.String[] strings)`
-  void setGrids(
-    jni$_.JArray<jni$_.JString> strings,
-  ) {
+  void setGrids(jni$_.JArray<jni$_.JString> strings) {
     final _$strings = strings.reference;
-    _setGrids(reference.pointer, _id_setGrids as jni$_.JMethodIDPtr,
-            _$strings.pointer)
-        .check();
+    _setGrids(
+      reference.pointer,
+      _id_setGrids as jni$_.JMethodIDPtr,
+      _$strings.pointer,
+    ).check();
   }
 
   static final _id_setData = _class.instanceMethodId(
@@ -723,143 +876,172 @@ class TileSet extends jni$_.JObject {
     r'([Ljava/lang/String;)V',
   );
 
-  static final _setData = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setData =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setData(java.lang.String[] strings)`
-  void setData(
-    jni$_.JArray<jni$_.JString> strings,
-  ) {
+  void setData(jni$_.JArray<jni$_.JString> strings) {
     final _$strings = strings.reference;
-    _setData(reference.pointer, _id_setData as jni$_.JMethodIDPtr,
-            _$strings.pointer)
-        .check();
+    _setData(
+      reference.pointer,
+      _id_setData as jni$_.JMethodIDPtr,
+      _$strings.pointer,
+    ).check();
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(
-    r'getMinZoom',
-    r'()F',
-  );
+  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()F');
 
-  static final _getMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final float getMinZoom()`
   double getMinZoom() {
-    return _getMinZoom(reference.pointer, _id_getMinZoom as jni$_.JMethodIDPtr)
-        .float;
+    return _getMinZoom(
+      reference.pointer,
+      _id_getMinZoom as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_setMinZoom = _class.instanceMethodId(
-    r'setMinZoom',
-    r'(F)V',
-  );
+  static final _id_setMinZoom = _class.instanceMethodId(r'setMinZoom', r'(F)V');
 
-  static final _setMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public final void setMinZoom(float f)`
-  void setMinZoom(
-    double f,
-  ) {
-    _setMinZoom(reference.pointer, _id_setMinZoom as jni$_.JMethodIDPtr, f)
-        .check();
+  void setMinZoom(double f) {
+    _setMinZoom(
+      reference.pointer,
+      _id_setMinZoom as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(
-    r'getMaxZoom',
-    r'()F',
-  );
+  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()F');
 
-  static final _getMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final float getMaxZoom()`
   double getMaxZoom() {
-    return _getMaxZoom(reference.pointer, _id_getMaxZoom as jni$_.JMethodIDPtr)
-        .float;
+    return _getMaxZoom(
+      reference.pointer,
+      _id_getMaxZoom as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_setMaxZoom = _class.instanceMethodId(
-    r'setMaxZoom',
-    r'(F)V',
-  );
+  static final _id_setMaxZoom = _class.instanceMethodId(r'setMaxZoom', r'(F)V');
 
-  static final _setMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public final void setMaxZoom(float f)`
-  void setMaxZoom(
-    double f,
-  ) {
-    _setMaxZoom(reference.pointer, _id_setMaxZoom as jni$_.JMethodIDPtr, f)
-        .check();
+  void setMaxZoom(double f) {
+    _setMaxZoom(
+      reference.pointer,
+      _id_setMaxZoom as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
-  static final _id_setBounds = _class.instanceMethodId(
-    r'setBounds',
-    r'([F)V',
-  );
+  static final _id_setBounds = _class.instanceMethodId(r'setBounds', r'([F)V');
 
-  static final _setBounds = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setBounds(float[] fs)`
-  void setBounds(
-    jni$_.JFloatArray fs,
-  ) {
+  void setBounds(jni$_.JFloatArray fs) {
     final _$fs = fs.reference;
-    _setBounds(reference.pointer, _id_setBounds as jni$_.JMethodIDPtr,
-            _$fs.pointer)
-        .check();
+    _setBounds(
+      reference.pointer,
+      _id_setBounds as jni$_.JMethodIDPtr,
+      _$fs.pointer,
+    ).check();
   }
 
   static final _id_setBounds$1 = _class.instanceMethodId(
@@ -867,32 +1049,39 @@ class TileSet extends jni$_.JObject {
     r'(FFFF)V',
   );
 
-  static final _setBounds$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setBounds$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public final void setBounds(float f, float f1, float f2, float f3)`
-  void setBounds$1(
-    double f,
-    double f1,
-    double f2,
-    double f3,
-  ) {
-    _setBounds$1(reference.pointer, _id_setBounds$1 as jni$_.JMethodIDPtr, f,
-            f1, f2, f3)
-        .check();
+  void setBounds$1(double f, double f1, double f2, double f3) {
+    _setBounds$1(
+      reference.pointer,
+      _id_setBounds$1 as jni$_.JMethodIDPtr,
+      f,
+      f1,
+      f2,
+      f3,
+    ).check();
   }
 
   static final _id_setBounds$2 = _class.instanceMethodId(
@@ -900,25 +1089,32 @@ class TileSet extends jni$_.JObject {
     r'([Ljava/lang/Float;)V',
   );
 
-  static final _setBounds$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setBounds$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setBounds(java.lang.Float[] floats)`
-  void setBounds$2(
-    jni$_.JArray<jni$_.JFloat> floats,
-  ) {
+  void setBounds$2(jni$_.JArray<jni$_.JFloat> floats) {
     final _$floats = floats.reference;
-    _setBounds$2(reference.pointer, _id_setBounds$2 as jni$_.JMethodIDPtr,
-            _$floats.pointer)
-        .check();
+    _setBounds$2(
+      reference.pointer,
+      _id_setBounds$2 as jni$_.JMethodIDPtr,
+      _$floats.pointer,
+    ).check();
   }
 
   static final _id_setBounds$3 = _class.instanceMethodId(
@@ -926,51 +1122,62 @@ class TileSet extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;)V',
   );
 
-  static final _setBounds$3 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setBounds$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
-  void setBounds$3(
-    latlngbounds$_.LatLngBounds latLngBounds,
-  ) {
+  void setBounds$3(latlngbounds$_.LatLngBounds latLngBounds) {
     final _$latLngBounds = latLngBounds.reference;
-    _setBounds$3(reference.pointer, _id_setBounds$3 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .check();
+    _setBounds$3(
+      reference.pointer,
+      _id_setBounds$3 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).check();
   }
 
-  static final _id_setCenter = _class.instanceMethodId(
-    r'setCenter',
-    r'([F)V',
-  );
+  static final _id_setCenter = _class.instanceMethodId(r'setCenter', r'([F)V');
 
-  static final _setCenter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCenter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setCenter(float[] fs)`
-  void setCenter(
-    jni$_.JFloatArray fs,
-  ) {
+  void setCenter(jni$_.JFloatArray fs) {
     final _$fs = fs.reference;
-    _setCenter(reference.pointer, _id_setCenter as jni$_.JMethodIDPtr,
-            _$fs.pointer)
-        .check();
+    _setCenter(
+      reference.pointer,
+      _id_setCenter as jni$_.JMethodIDPtr,
+      _$fs.pointer,
+    ).check();
   }
 
   static final _id_setCenter$1 = _class.instanceMethodId(
@@ -978,25 +1185,32 @@ class TileSet extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)V',
   );
 
-  static final _setCenter$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCenter$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setCenter(org.maplibre.android.geometry.LatLng latLng)`
-  void setCenter$1(
-    latlng$_.LatLng latLng,
-  ) {
+  void setCenter$1(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    _setCenter$1(reference.pointer, _id_setCenter$1 as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .check();
+    _setCenter$1(
+      reference.pointer,
+      _id_setCenter$1 as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).check();
   }
 
   static final _id_toValueObject = _class.instanceMethodId(
@@ -1004,26 +1218,34 @@ class TileSet extends jni$_.JObject {
     r'()Ljava/util/Map;',
   );
 
-  static final _toValueObject = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toValueObject =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.util.Map toValueObject()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JMap<jni$_.JString, jni$_.JObject> toValueObject() {
     return _toValueObject(
-            reference.pointer, _id_toValueObject as jni$_.JMethodIDPtr)
-        .object<jni$_.JMap<jni$_.JString, jni$_.JObject>>(
-            const jni$_.JMapType<jni$_.JString, jni$_.JObject>(
-                jni$_.JStringType(), jni$_.JObjectType()));
+      reference.pointer,
+      _id_toValueObject as jni$_.JMethodIDPtr,
+    ).object<jni$_.JMap<jni$_.JString, jni$_.JObject>>(
+      const jni$_.JMapType<jni$_.JString, jni$_.JObject>(
+        jni$_.JStringType(),
+        jni$_.JObjectType(),
+      ),
+    );
   }
 }
 
@@ -1037,11 +1259,8 @@ final class $TileSet$NullableType extends jni$_.JObjType<TileSet?> {
 
   @jni$_.internal
   @core$_.override
-  TileSet? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : TileSet.fromReference(
-          reference,
-        );
+  TileSet? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : TileSet.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1074,9 +1293,8 @@ final class $TileSet$Type extends jni$_.JObjType<TileSet> {
 
   @jni$_.internal
   @core$_.override
-  TileSet fromReference(jni$_.JReference reference) => TileSet.fromReference(
-        reference,
-      );
+  TileSet fromReference(jni$_.JReference reference) =>
+      TileSet.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

@@ -61,39 +61,47 @@ class UnknownSource extends source$_.Source {
   final jni$_.JObjType<UnknownSource> $type;
 
   @jni$_.internal
-  UnknownSource.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  UnknownSource.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/sources/UnknownSource');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/UnknownSource',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $UnknownSource$NullableType();
   static const type = $UnknownSource$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(J)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(J)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory UnknownSource(
-    int j,
-  ) {
+  factory UnknownSource(int j) {
     return UnknownSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        j,
+      ).reference,
+    );
   }
 }
 
@@ -107,11 +115,8 @@ final class $UnknownSource$NullableType extends jni$_.JObjType<UnknownSource?> {
 
   @jni$_.internal
   @core$_.override
-  UnknownSource? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : UnknownSource.fromReference(
-          reference,
-        );
+  UnknownSource? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : UnknownSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -145,9 +150,7 @@ final class $UnknownSource$Type extends jni$_.JObjType<UnknownSource> {
   @jni$_.internal
   @core$_.override
   UnknownSource fromReference(jni$_.JReference reference) =>
-      UnknownSource.fromReference(
-        reference,
-      );
+      UnknownSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

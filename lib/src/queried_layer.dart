@@ -23,7 +23,8 @@ class QueriedLayer {
   final String? sourceLayer;
 
   @override
-  String toString() => 'QueriedLayer(layerId: $layerId, '
+  String toString() =>
+      'QueriedLayer(layerId: $layerId, '
       'sourceId: $sourceId, sourceLayer: $sourceLayer)';
 
   @override

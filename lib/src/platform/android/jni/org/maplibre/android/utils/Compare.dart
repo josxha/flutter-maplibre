@@ -59,91 +59,103 @@ class Compare extends jni$_.JObject {
   final jni$_.JObjType<Compare> $type;
 
   @jni$_.internal
-  Compare.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Compare.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/Compare');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/Compare',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Compare$NullableType();
   static const type = $Compare$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory Compare() {
     return Compare.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
-  static final _id_compare = _class.staticMethodId(
-    r'compare',
-    r'(II)I',
-  );
+  static final _id_compare = _class.staticMethodId(r'compare', r'(II)I');
 
-  static final _compare = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
+  static final _compare =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+            )
+          >();
 
   /// from: `static public int compare(int i, int i1)`
-  static int compare(
-    int i,
-    int i1,
-  ) {
+  static int compare(int i, int i1) {
     return _compare(
-            _class.reference.pointer, _id_compare as jni$_.JMethodIDPtr, i, i1)
-        .integer;
+      _class.reference.pointer,
+      _id_compare as jni$_.JMethodIDPtr,
+      i,
+      i1,
+    ).integer;
   }
 
-  static final _id_compare$1 = _class.staticMethodId(
-    r'compare',
-    r'(ZZ)I',
-  );
+  static final _id_compare$1 = _class.staticMethodId(r'compare', r'(ZZ)I');
 
-  static final _compare$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
+  static final _compare$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+            )
+          >();
 
   /// from: `static public int compare(boolean z, boolean z1)`
-  static int compare$1(
-    bool z,
-    bool z1,
-  ) {
-    return _compare$1(_class.reference.pointer,
-            _id_compare$1 as jni$_.JMethodIDPtr, z ? 1 : 0, z1 ? 1 : 0)
-        .integer;
+  static int compare$1(bool z, bool z1) {
+    return _compare$1(
+      _class.reference.pointer,
+      _id_compare$1 as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+      z1 ? 1 : 0,
+    ).integer;
   }
 }
 
@@ -157,11 +169,8 @@ final class $Compare$NullableType extends jni$_.JObjType<Compare?> {
 
   @jni$_.internal
   @core$_.override
-  Compare? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Compare.fromReference(
-          reference,
-        );
+  Compare? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Compare.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -194,9 +203,8 @@ final class $Compare$Type extends jni$_.JObjType<Compare> {
 
   @jni$_.internal
   @core$_.override
-  Compare fromReference(jni$_.JReference reference) => Compare.fromReference(
-        reference,
-      );
+  Compare fromReference(jni$_.JReference reference) =>
+      Compare.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -32,9 +32,10 @@ class _GesturesPageState extends State<GesturesPage> {
                     (e) => ChoiceChip(
                       label: Text(e.name),
                       selected: _selections[e]!,
-                      onSelected: (value) => setState(() {
-                        _selections[e] = !_selections[e]!;
-                      }),
+                      onSelected:
+                          (value) => setState(() {
+                            _selections[e] = !_selections[e]!;
+                          }),
                     ),
                   )
                   .toList(growable: false),
@@ -60,9 +61,4 @@ class _GesturesPageState extends State<GesturesPage> {
   }
 }
 
-enum Gestures {
-  rotate,
-  pan,
-  zoom,
-  tilt;
-}
+enum Gestures { rotate, pan, zoom, tilt }

@@ -59,13 +59,13 @@ class LocalGlyphRasterizer extends jni$_.JObject {
   final jni$_.JObjType<LocalGlyphRasterizer> $type;
 
   @jni$_.internal
-  LocalGlyphRasterizer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LocalGlyphRasterizer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/text/LocalGlyphRasterizer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/text/LocalGlyphRasterizer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocalGlyphRasterizer$NullableType();
@@ -84,11 +84,7 @@ final class $LocalGlyphRasterizer$NullableType
   @jni$_.internal
   @core$_.override
   LocalGlyphRasterizer? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LocalGlyphRasterizer.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LocalGlyphRasterizer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -123,9 +119,7 @@ final class $LocalGlyphRasterizer$Type
   @jni$_.internal
   @core$_.override
   LocalGlyphRasterizer fromReference(jni$_.JReference reference) =>
-      LocalGlyphRasterizer.fromReference(
-        reference,
-      );
+      LocalGlyphRasterizer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

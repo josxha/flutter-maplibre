@@ -51,7 +51,8 @@ class OfflineRegion {
       Object.hash(id, bounds, minZoom, maxZoom, pixelRatio, styleUrl);
 
   @override
-  String toString() => 'OfflineRegion(id: $id, bounds: $bounds, '
+  String toString() =>
+      'OfflineRegion(id: $id, bounds: $bounds, '
       'minZoom: $minZoom, maxZoom: $maxZoom, pixelRatio: $pixelRatio, '
       'styleUrl: $styleUrl)';
 }

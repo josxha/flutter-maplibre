@@ -61,13 +61,13 @@ class Logger$LogLevel extends jni$_.JObject {
   final jni$_.JObjType<Logger$LogLevel> $type;
 
   @jni$_.internal
-  Logger$LogLevel.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Logger$LogLevel.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/log/Logger$LogLevel');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/log/Logger$LogLevel',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Logger$LogLevel$NullableType();
@@ -82,19 +82,16 @@ class Logger$LogLevel extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -134,14 +131,10 @@ class Logger$LogLevel extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Logger$LogLevel.implement(
-    $Logger$LogLevel $impl,
-  ) {
+  factory Logger$LogLevel.implement($Logger$LogLevel $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Logger$LogLevel.fromReference(
-      $i.implementReference(),
-    );
+    return Logger$LogLevel.fromReference($i.implementReference());
   }
 }
 
@@ -164,11 +157,8 @@ final class $Logger$LogLevel$NullableType
 
   @jni$_.internal
   @core$_.override
-  Logger$LogLevel? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Logger$LogLevel.fromReference(
-          reference,
-        );
+  Logger$LogLevel? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Logger$LogLevel.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -202,9 +192,7 @@ final class $Logger$LogLevel$Type extends jni$_.JObjType<Logger$LogLevel> {
   @jni$_.internal
   @core$_.override
   Logger$LogLevel fromReference(jni$_.JReference reference) =>
-      Logger$LogLevel.fromReference(
-        reference,
-      );
+      Logger$LogLevel.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -235,13 +223,13 @@ class Logger extends jni$_.JObject {
   final jni$_.JObjType<Logger> $type;
 
   @jni$_.internal
-  Logger.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Logger.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/log/Logger');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/log/Logger',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Logger$NullableType();
@@ -264,28 +252,30 @@ class Logger extends jni$_.JObject {
 
   /// from: `static public final int NONE`
   static const NONE = 99;
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory Logger() {
     return Logger.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_setVerbosity = _class.staticMethodId(
@@ -293,22 +283,31 @@ class Logger extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setVerbosity = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _setVerbosity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public void setVerbosity(int i)`
-  static void setVerbosity(
-    int i,
-  ) {
+  static void setVerbosity(int i) {
     _setVerbosity(
-            _class.reference.pointer, _id_setVerbosity as jni$_.JMethodIDPtr, i)
-        .check();
+      _class.reference.pointer,
+      _id_setVerbosity as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_setLoggerDefinition = _class.staticMethodId(
@@ -316,16 +315,23 @@ class Logger extends jni$_.JObject {
     r'(Lorg/maplibre/android/log/LoggerDefinition;)V',
   );
 
-  static final _setLoggerDefinition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLoggerDefinition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setLoggerDefinition(org.maplibre.android.log.LoggerDefinition loggerDefinition)`
   static void setLoggerDefinition(
@@ -334,10 +340,10 @@ class Logger extends jni$_.JObject {
     final _$loggerDefinition =
         loggerDefinition?.reference ?? jni$_.jNullReference;
     _setLoggerDefinition(
-            _class.reference.pointer,
-            _id_setLoggerDefinition as jni$_.JMethodIDPtr,
-            _$loggerDefinition.pointer)
-        .check();
+      _class.reference.pointer,
+      _id_setLoggerDefinition as jni$_.JMethodIDPtr,
+      _$loggerDefinition.pointer,
+    ).check();
   }
 
   static final _id_v = _class.staticMethodId(
@@ -345,33 +351,37 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _v = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _v =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void v(java.lang.String string, java.lang.String string1)`
-  static void v(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void v(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _v(_class.reference.pointer, _id_v as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _v(
+      _class.reference.pointer,
+      _id_v as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_v$1 = _class.staticMethodId(
@@ -379,24 +389,31 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _v$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _v$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void v(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   static void v$1(
@@ -407,9 +424,13 @@ class Logger extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _v$1(_class.reference.pointer, _id_v$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$string1.pointer, _$throwable.pointer)
-        .check();
+    _v$1(
+      _class.reference.pointer,
+      _id_v$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_d = _class.staticMethodId(
@@ -417,33 +438,37 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _d = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _d =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void d(java.lang.String string, java.lang.String string1)`
-  static void d(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void d(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _d(_class.reference.pointer, _id_d as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _d(
+      _class.reference.pointer,
+      _id_d as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_d$1 = _class.staticMethodId(
@@ -451,24 +476,31 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _d$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _d$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void d(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   static void d$1(
@@ -479,9 +511,13 @@ class Logger extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _d$1(_class.reference.pointer, _id_d$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$string1.pointer, _$throwable.pointer)
-        .check();
+    _d$1(
+      _class.reference.pointer,
+      _id_d$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_i = _class.staticMethodId(
@@ -489,33 +525,37 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _i = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _i =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void i(java.lang.String string, java.lang.String string1)`
-  static void i(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void i(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _i(_class.reference.pointer, _id_i as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _i(
+      _class.reference.pointer,
+      _id_i as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_i$1 = _class.staticMethodId(
@@ -523,24 +563,31 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _i$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _i$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void i(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   static void i$1(
@@ -551,9 +598,13 @@ class Logger extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _i$1(_class.reference.pointer, _id_i$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$string1.pointer, _$throwable.pointer)
-        .check();
+    _i$1(
+      _class.reference.pointer,
+      _id_i$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_w = _class.staticMethodId(
@@ -561,33 +612,37 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _w = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _w =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void w(java.lang.String string, java.lang.String string1)`
-  static void w(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void w(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _w(_class.reference.pointer, _id_w as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _w(
+      _class.reference.pointer,
+      _id_w as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_w$1 = _class.staticMethodId(
@@ -595,24 +650,31 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _w$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _w$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void w(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   static void w$1(
@@ -623,9 +685,13 @@ class Logger extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _w$1(_class.reference.pointer, _id_w$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$string1.pointer, _$throwable.pointer)
-        .check();
+    _w$1(
+      _class.reference.pointer,
+      _id_w$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_e = _class.staticMethodId(
@@ -633,33 +699,37 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _e = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _e =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void e(java.lang.String string, java.lang.String string1)`
-  static void e(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void e(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _e(_class.reference.pointer, _id_e as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _e(
+      _class.reference.pointer,
+      _id_e as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_e$1 = _class.staticMethodId(
@@ -667,24 +737,31 @@ class Logger extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _e$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _e$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void e(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   static void e$1(
@@ -695,9 +772,13 @@ class Logger extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _e$1(_class.reference.pointer, _id_e$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$string1.pointer, _$throwable.pointer)
-        .check();
+    _e$1(
+      _class.reference.pointer,
+      _id_e$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_log = _class.staticMethodId(
@@ -705,36 +786,43 @@ class Logger extends jni$_.JObject {
     r'(ILjava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _log = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _log =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               int,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void log(int i, java.lang.String string, java.lang.String string1)`
-  static void log(
-    int i,
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  static void log(int i, jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _log(_class.reference.pointer, _id_log as jni$_.JMethodIDPtr, i,
-            _$string.pointer, _$string1.pointer)
-        .check();
+    _log(
+      _class.reference.pointer,
+      _id_log as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 }
 
@@ -748,11 +836,8 @@ final class $Logger$NullableType extends jni$_.JObjType<Logger?> {
 
   @jni$_.internal
   @core$_.override
-  Logger? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Logger.fromReference(
-          reference,
-        );
+  Logger? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Logger.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -785,9 +870,8 @@ final class $Logger$Type extends jni$_.JObjType<Logger> {
 
   @jni$_.internal
   @core$_.override
-  Logger fromReference(jni$_.JReference reference) => Logger.fromReference(
-        reference,
-      );
+  Logger fromReference(jni$_.JReference reference) =>
+      Logger.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -19,5 +19,5 @@ enum AndroidPlatformViewMode {
   hc,
 
   /// Always use [Virtual Display](https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md).
-  vd;
+  vd,
 }

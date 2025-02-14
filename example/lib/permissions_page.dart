@@ -29,9 +29,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
           ),
           ListTile(
             title: const Text('locationPermissionsGranted'),
-            subtitle: const Text(
-              'Weather location permissions are granted.',
-            ),
+            subtitle: const Text('Weather location permissions are granted.'),
             trailing: _manager.locationPermissionsGranted.toIcon(),
           ),
           ListTile(
@@ -67,7 +65,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
 
 extension BoolExt on bool {
   Widget toIcon() => Icon(
-        this ? Icons.check_box : Icons.cancel,
-        color: this ? Colors.green : Colors.red,
-      );
+    this ? Icons.check_box : Icons.cancel,
+    color: this ? Colors.green : Colors.red,
+  );
 }

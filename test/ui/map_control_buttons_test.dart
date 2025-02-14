@@ -25,10 +25,7 @@ void main() {
         camera: camera,
         controller: controller,
         children: const [
-          MapControlButtons(
-            alignment: alignment,
-            padding: padding,
-          ),
+          MapControlButtons(alignment: alignment, padding: padding),
         ],
       );
       await tester.pumpWidget(app);

@@ -49,8 +49,10 @@ class OfflineManagerAndroid implements OfflineManager {
             );
             completer.complete(regions);
           },
-          onError: (error) => completer
-              .completeError(error.toDartString(releaseOriginal: true)),
+          onError:
+              (error) => completer.completeError(
+                error.toDartString(releaseOriginal: true),
+              ),
         ),
       ),
     );
@@ -202,14 +204,14 @@ class OfflineManagerAndroid implements OfflineManager {
       maxZoom,
       pixelDensity,
     );*/
-    final jDefinition =
-        jni.Helpers.INSTANCE.createOfflineTilePyramidRegionDefinition(
-      jMapStyleUrl,
-      jBounds,
-      minZoom,
-      maxZoom,
-      pixelDensity,
-    );
+    final jDefinition = jni.Helpers.INSTANCE
+        .createOfflineTilePyramidRegionDefinition(
+          jMapStyleUrl,
+          jBounds,
+          minZoom,
+          maxZoom,
+          pixelDensity,
+        );
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);

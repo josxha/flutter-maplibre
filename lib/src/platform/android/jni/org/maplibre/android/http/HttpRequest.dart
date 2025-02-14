@@ -61,13 +61,13 @@ class HttpRequest extends jni$_.JObject {
   final jni$_.JObjType<HttpRequest> $type;
 
   @jni$_.internal
-  HttpRequest.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  HttpRequest.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/http/HttpRequest');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/http/HttpRequest',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $HttpRequest$NullableType();
@@ -86,23 +86,28 @@ class HttpRequest extends jni$_.JObject {
     r'(Lorg/maplibre/android/http/HttpResponder;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V',
   );
 
-  static final _executeRequest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _executeRequest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int64,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int64,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -111,7 +116,9 @@ class HttpRequest extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public abstract void executeRequest(org.maplibre.android.http.HttpResponder httpResponder, long j, java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, boolean z)`
   void executeRequest(
@@ -129,16 +136,16 @@ class HttpRequest extends jni$_.JObject {
     final _$string2 = string2?.reference ?? jni$_.jNullReference;
     final _$string3 = string3?.reference ?? jni$_.jNullReference;
     _executeRequest(
-            reference.pointer,
-            _id_executeRequest as jni$_.JMethodIDPtr,
-            _$httpResponder.pointer,
-            j,
-            _$string.pointer,
-            _$string1.pointer,
-            _$string2.pointer,
-            _$string3.pointer,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_executeRequest as jni$_.JMethodIDPtr,
+      _$httpResponder.pointer,
+      j,
+      _$string.pointer,
+      _$string1.pointer,
+      _$string2.pointer,
+      _$string3.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_cancelRequest = _class.instanceMethodId(
@@ -146,22 +153,28 @@ class HttpRequest extends jni$_.JObject {
     r'()V',
   );
 
-  static final _cancelRequest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _cancelRequest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void cancelRequest()`
   void cancelRequest() {
-    _cancelRequest(reference.pointer, _id_cancelRequest as jni$_.JMethodIDPtr)
-        .check();
+    _cancelRequest(
+      reference.pointer,
+      _id_cancelRequest as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -173,19 +186,16 @@ class HttpRequest extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -197,8 +207,10 @@ class HttpRequest extends jni$_.JObject {
       if ($d ==
           r'executeRequest(Lorg/maplibre/android/http/HttpResponder;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V') {
         _$impls[$p]!.executeRequest(
-          $a![0]?.as(const httpresponder$_.$HttpResponder$Type(),
-              releaseOriginal: true),
+          $a![0]?.as(
+            const httpresponder$_.$HttpResponder$Type(),
+            releaseOriginal: true,
+          ),
           $a![1]!
               .as(const jni$_.JLongType(), releaseOriginal: true)
               .longValue(releaseOriginal: true),
@@ -222,10 +234,7 @@ class HttpRequest extends jni$_.JObject {
     return jni$_.nullptr;
   }
 
-  static void implementIn(
-    jni$_.JImplementer implementer,
-    $HttpRequest $impl,
-  ) {
+  static void implementIn(jni$_.JImplementer implementer, $HttpRequest $impl) {
     late final jni$_.RawReceivePort $p;
     $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
@@ -251,41 +260,39 @@ class HttpRequest extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory HttpRequest.implement(
-    $HttpRequest $impl,
-  ) {
+  factory HttpRequest.implement($HttpRequest $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return HttpRequest.fromReference(
-      $i.implementReference(),
-    );
+    return HttpRequest.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $HttpRequest {
   factory $HttpRequest({
     required void Function(
-            httpresponder$_.HttpResponder? httpResponder,
-            int j,
-            jni$_.JString? string,
-            jni$_.JString? string1,
-            jni$_.JString? string2,
-            jni$_.JString? string3,
-            bool z)
-        executeRequest,
-    bool executeRequest$async,
-    required void Function() cancelRequest,
-    bool cancelRequest$async,
-  }) = _$HttpRequest;
-
-  void executeRequest(
       httpresponder$_.HttpResponder? httpResponder,
       int j,
       jni$_.JString? string,
       jni$_.JString? string1,
       jni$_.JString? string2,
       jni$_.JString? string3,
-      bool z);
+      bool z,
+    )
+    executeRequest,
+    bool executeRequest$async,
+    required void Function() cancelRequest,
+    bool cancelRequest$async,
+  }) = _$HttpRequest;
+
+  void executeRequest(
+    httpresponder$_.HttpResponder? httpResponder,
+    int j,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    bool z,
+  );
   bool get executeRequest$async => false;
   void cancelRequest();
   bool get cancelRequest$async => false;
@@ -294,42 +301,53 @@ abstract base mixin class $HttpRequest {
 final class _$HttpRequest with $HttpRequest {
   _$HttpRequest({
     required void Function(
-            httpresponder$_.HttpResponder? httpResponder,
-            int j,
-            jni$_.JString? string,
-            jni$_.JString? string1,
-            jni$_.JString? string2,
-            jni$_.JString? string3,
-            bool z)
-        executeRequest,
-    this.executeRequest$async = false,
-    required void Function() cancelRequest,
-    this.cancelRequest$async = false,
-  })  : _executeRequest = executeRequest,
-        _cancelRequest = cancelRequest;
-
-  final void Function(
       httpresponder$_.HttpResponder? httpResponder,
       int j,
       jni$_.JString? string,
       jni$_.JString? string1,
       jni$_.JString? string2,
       jni$_.JString? string3,
-      bool z) _executeRequest;
+      bool z,
+    )
+    executeRequest,
+    this.executeRequest$async = false,
+    required void Function() cancelRequest,
+    this.cancelRequest$async = false,
+  }) : _executeRequest = executeRequest,
+       _cancelRequest = cancelRequest;
+
+  final void Function(
+    httpresponder$_.HttpResponder? httpResponder,
+    int j,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    bool z,
+  )
+  _executeRequest;
   final bool executeRequest$async;
   final void Function() _cancelRequest;
   final bool cancelRequest$async;
 
   void executeRequest(
-      httpresponder$_.HttpResponder? httpResponder,
-      int j,
-      jni$_.JString? string,
-      jni$_.JString? string1,
-      jni$_.JString? string2,
-      jni$_.JString? string3,
-      bool z) {
+    httpresponder$_.HttpResponder? httpResponder,
+    int j,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    bool z,
+  ) {
     return _executeRequest(
-        httpResponder, j, string, string1, string2, string3, z);
+      httpResponder,
+      j,
+      string,
+      string1,
+      string2,
+      string3,
+      z,
+    );
   }
 
   void cancelRequest() {
@@ -347,11 +365,8 @@ final class $HttpRequest$NullableType extends jni$_.JObjType<HttpRequest?> {
 
   @jni$_.internal
   @core$_.override
-  HttpRequest? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : HttpRequest.fromReference(
-          reference,
-        );
+  HttpRequest? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : HttpRequest.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -385,9 +400,7 @@ final class $HttpRequest$Type extends jni$_.JObjType<HttpRequest> {
   @jni$_.internal
   @core$_.override
   HttpRequest fromReference(jni$_.JReference reference) =>
-      HttpRequest.fromReference(
-        reference,
-      );
+      HttpRequest.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

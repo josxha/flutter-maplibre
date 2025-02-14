@@ -61,13 +61,13 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
   final jni$_.JObjType<FileSource$ResourceTransformCallback> $type;
 
   @jni$_.internal
-  FileSource$ResourceTransformCallback.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  FileSource$ResourceTransformCallback.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/storage/FileSource$ResourceTransformCallback');
+    r'org/maplibre/android/storage/FileSource$ResourceTransformCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -78,28 +78,35 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
     r'(ILjava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _onURL = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _onURL =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract java.lang.String onURL(int i, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? onURL(
-    int i,
-    jni$_.JString? string,
-  ) {
+  jni$_.JString? onURL(int i, jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _onURL(reference.pointer, _id_onURL as jni$_.JMethodIDPtr, i,
-            _$string.pointer)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _onURL(
+      reference.pointer,
+      _id_onURL as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   /// Maps a specific port to the implemented interface.
@@ -112,19 +119,16 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -222,12 +226,11 @@ final class $FileSource$ResourceTransformCallback$NullableType
   @jni$_.internal
   @core$_.override
   FileSource$ResourceTransformCallback? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : FileSource$ResourceTransformCallback.fromReference(
-              reference,
-            );
+          : FileSource$ResourceTransformCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -266,10 +269,8 @@ final class $FileSource$ResourceTransformCallback$Type
   @jni$_.internal
   @core$_.override
   FileSource$ResourceTransformCallback fromReference(
-          jni$_.JReference reference) =>
-      FileSource$ResourceTransformCallback.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => FileSource$ResourceTransformCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -302,11 +303,12 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
   @jni$_.internal
   FileSource$ResourcesCachePathChangeCallback.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/storage/FileSource$ResourcesCachePathChangeCallback');
+    r'org/maplibre/android/storage/FileSource$ResourcesCachePathChangeCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -317,25 +319,32 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onSuccess = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onSuccess =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onSuccess(java.lang.String string)`
-  void onSuccess(
-    jni$_.JString string,
-  ) {
+  void onSuccess(jni$_.JString string) {
     final _$string = string.reference;
-    _onSuccess(reference.pointer, _id_onSuccess as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _onSuccess(
+      reference.pointer,
+      _id_onSuccess as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_onError = _class.instanceMethodId(
@@ -343,30 +352,37 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onError = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onError =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(
-    jni$_.JString string,
-  ) {
+  void onError(jni$_.JString string) {
     final _$string = string.reference;
-    _onError(reference.pointer, _id_onError as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _onError(
+      reference.pointer,
+      _id_onError as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $FileSource$ResourcesCachePathChangeCallback>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -374,19 +390,16 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -473,8 +486,8 @@ final class _$FileSource$ResourcesCachePathChangeCallback
     this.onSuccess$async = false,
     required void Function(jni$_.JString string) onError,
     this.onError$async = false,
-  })  : _onSuccess = onSuccess,
-        _onError = onError;
+  }) : _onSuccess = onSuccess,
+       _onError = onError;
 
   final void Function(jni$_.JString string) _onSuccess;
   final bool onSuccess$async;
@@ -503,12 +516,13 @@ final class $FileSource$ResourcesCachePathChangeCallback$NullableType
   @jni$_.internal
   @core$_.override
   FileSource$ResourcesCachePathChangeCallback? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
           : FileSource$ResourcesCachePathChangeCallback.fromReference(
-              reference,
-            );
+            reference,
+          );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -516,7 +530,7 @@ final class $FileSource$ResourcesCachePathChangeCallback$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<FileSource$ResourcesCachePathChangeCallback?>
-      get nullableType => this;
+  get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -547,10 +561,8 @@ final class $FileSource$ResourcesCachePathChangeCallback$Type
   @jni$_.internal
   @core$_.override
   FileSource$ResourcesCachePathChangeCallback fromReference(
-          jni$_.JReference reference) =>
-      FileSource$ResourcesCachePathChangeCallback.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => FileSource$ResourcesCachePathChangeCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -558,8 +570,8 @@ final class $FileSource$ResourcesCachePathChangeCallback$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<FileSource$ResourcesCachePathChangeCallback?>
-      get nullableType =>
-          const $FileSource$ResourcesCachePathChangeCallback$NullableType();
+  get nullableType =>
+      const $FileSource$ResourcesCachePathChangeCallback$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -584,13 +596,13 @@ class FileSource extends jni$_.JObject {
   final jni$_.JObjType<FileSource> $type;
 
   @jni$_.internal
-  FileSource.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  FileSource.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/storage/FileSource');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/storage/FileSource',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FileSource$NullableType();
@@ -600,26 +612,33 @@ class FileSource extends jni$_.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/storage/FileSource;',
   );
 
-  static final _getInstance = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getInstance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.storage.FileSource getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static FileSource? getInstance(
-    jni$_.JObject context,
-  ) {
+  static FileSource? getInstance(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getInstance(_class.reference.pointer,
-            _id_getInstance as jni$_.JMethodIDPtr, _$context.pointer)
-        .object<FileSource?>(const $FileSource$NullableType());
+    return _getInstance(
+      _class.reference.pointer,
+      _id_getInstance as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<FileSource?>(const $FileSource$NullableType());
   }
 
   static final _id_isExternalStorageReadable = _class.staticMethodId(
@@ -627,23 +646,28 @@ class FileSource extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isExternalStorageReadable = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isExternalStorageReadable =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public boolean isExternalStorageReadable()`
   static bool isExternalStorageReadable() {
-    return _isExternalStorageReadable(_class.reference.pointer,
-            _id_isExternalStorageReadable as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isExternalStorageReadable(
+      _class.reference.pointer,
+      _id_isExternalStorageReadable as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_initializeFileDirsPaths = _class.staticMethodId(
@@ -651,27 +675,32 @@ class FileSource extends jni$_.JObject {
     r'(Landroid/content/Context;)V',
   );
 
-  static final _initializeFileDirsPaths = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _initializeFileDirsPaths =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void initializeFileDirsPaths(android.content.Context context)`
-  static void initializeFileDirsPaths(
-    jni$_.JObject? context,
-  ) {
+  static void initializeFileDirsPaths(jni$_.JObject? context) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _initializeFileDirsPaths(
-            _class.reference.pointer,
-            _id_initializeFileDirsPaths as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .check();
+      _class.reference.pointer,
+      _id_initializeFileDirsPaths as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).check();
   }
 
   static final _id_getResourcesCachePath = _class.staticMethodId(
@@ -679,26 +708,33 @@ class FileSource extends jni$_.JObject {
     r'(Landroid/content/Context;)Ljava/lang/String;',
   );
 
-  static final _getResourcesCachePath = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getResourcesCachePath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public java.lang.String getResourcesCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString getResourcesCachePath(
-    jni$_.JObject context,
-  ) {
+  static jni$_.JString getResourcesCachePath(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getResourcesCachePath(_class.reference.pointer,
-            _id_getResourcesCachePath as jni$_.JMethodIDPtr, _$context.pointer)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getResourcesCachePath(
+      _class.reference.pointer,
+      _id_getResourcesCachePath as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getInternalCachePath = _class.staticMethodId(
@@ -706,26 +742,33 @@ class FileSource extends jni$_.JObject {
     r'(Landroid/content/Context;)Ljava/lang/String;',
   );
 
-  static final _getInternalCachePath = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getInternalCachePath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public java.lang.String getInternalCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? getInternalCachePath(
-    jni$_.JObject context,
-  ) {
+  static jni$_.JString? getInternalCachePath(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getInternalCachePath(_class.reference.pointer,
-            _id_getInternalCachePath as jni$_.JMethodIDPtr, _$context.pointer)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getInternalCachePath(
+      _class.reference.pointer,
+      _id_getInternalCachePath as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setResourcesCachePath = _class.staticMethodId(
@@ -733,43 +776,50 @@ class FileSource extends jni$_.JObject {
     r'(Landroid/content/Context;Ljava/lang/String;Lorg/maplibre/android/storage/FileSource$ResourcesCachePathChangeCallback;)V',
   );
 
-  static final _setResourcesCachePath = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setResourcesCachePath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setResourcesCachePath(android.content.Context context, java.lang.String string, org.maplibre.android.storage.FileSource$ResourcesCachePathChangeCallback resourcesCachePathChangeCallback)`
   static void setResourcesCachePath(
     jni$_.JObject context,
     jni$_.JString string,
     FileSource$ResourcesCachePathChangeCallback
-        resourcesCachePathChangeCallback,
+    resourcesCachePathChangeCallback,
   ) {
     final _$context = context.reference;
     final _$string = string.reference;
     final _$resourcesCachePathChangeCallback =
         resourcesCachePathChangeCallback.reference;
     _setResourcesCachePath(
-            _class.reference.pointer,
-            _id_setResourcesCachePath as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$string.pointer,
-            _$resourcesCachePathChangeCallback.pointer)
-        .check();
+      _class.reference.pointer,
+      _id_setResourcesCachePath as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      _$string.pointer,
+      _$resourcesCachePathChangeCallback.pointer,
+    ).check();
   }
 
   static final _id_setResourcesCachePath$1 = _class.staticMethodId(
@@ -777,38 +827,42 @@ class FileSource extends jni$_.JObject {
     r'(Ljava/lang/String;Lorg/maplibre/android/storage/FileSource$ResourcesCachePathChangeCallback;)V',
   );
 
-  static final _setResourcesCachePath$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setResourcesCachePath$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setResourcesCachePath(java.lang.String string, org.maplibre.android.storage.FileSource$ResourcesCachePathChangeCallback resourcesCachePathChangeCallback)`
   static void setResourcesCachePath$1(
     jni$_.JString string,
     FileSource$ResourcesCachePathChangeCallback
-        resourcesCachePathChangeCallback,
+    resourcesCachePathChangeCallback,
   ) {
     final _$string = string.reference;
     final _$resourcesCachePathChangeCallback =
         resourcesCachePathChangeCallback.reference;
     _setResourcesCachePath$1(
-            _class.reference.pointer,
-            _id_setResourcesCachePath$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$resourcesCachePathChangeCallback.pointer)
-        .check();
+      _class.reference.pointer,
+      _id_setResourcesCachePath$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$resourcesCachePathChangeCallback.pointer,
+    ).check();
   }
 
   static final _id_setTileServerOptions = _class.instanceMethodId(
@@ -816,16 +870,23 @@ class FileSource extends jni$_.JObject {
     r'(Lorg/maplibre/android/util/TileServerOptions;)V',
   );
 
-  static final _setTileServerOptions = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTileServerOptions =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public native void setTileServerOptions(org.maplibre.android.util.TileServerOptions tileServerOptions)`
   void setTileServerOptions(
@@ -834,10 +895,10 @@ class FileSource extends jni$_.JObject {
     final _$tileServerOptions =
         tileServerOptions?.reference ?? jni$_.jNullReference;
     _setTileServerOptions(
-            reference.pointer,
-            _id_setTileServerOptions as jni$_.JMethodIDPtr,
-            _$tileServerOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTileServerOptions as jni$_.JMethodIDPtr,
+      _$tileServerOptions.pointer,
+    ).check();
   }
 
   static final _id_isActivated = _class.instanceMethodId(
@@ -845,68 +906,77 @@ class FileSource extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isActivated = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isActivated =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public native boolean isActivated()`
   bool isActivated() {
     return _isActivated(
-            reference.pointer, _id_isActivated as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isActivated as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
-  static final _id_activate = _class.instanceMethodId(
-    r'activate',
-    r'()V',
-  );
+  static final _id_activate = _class.instanceMethodId(r'activate', r'()V');
 
-  static final _activate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _activate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public native void activate()`
   void activate() {
     _activate(reference.pointer, _id_activate as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_deactivate = _class.instanceMethodId(
-    r'deactivate',
-    r'()V',
-  );
+  static final _id_deactivate = _class.instanceMethodId(r'deactivate', r'()V');
 
-  static final _deactivate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _deactivate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public native void deactivate()`
   void deactivate() {
-    _deactivate(reference.pointer, _id_deactivate as jni$_.JMethodIDPtr)
-        .check();
+    _deactivate(
+      reference.pointer,
+      _id_deactivate as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_setApiKey = _class.instanceMethodId(
@@ -914,25 +984,32 @@ class FileSource extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setApiKey = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setApiKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public native void setApiKey(java.lang.String string)`
-  void setApiKey(
-    jni$_.JString? string,
-  ) {
+  void setApiKey(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setApiKey(reference.pointer, _id_setApiKey as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setApiKey(
+      reference.pointer,
+      _id_setApiKey as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getApiKey = _class.instanceMethodId(
@@ -940,23 +1017,29 @@ class FileSource extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getApiKey = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApiKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public native java.lang.String getApiKey()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getApiKey() {
-    return _getApiKey(reference.pointer, _id_getApiKey as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getApiKey(
+      reference.pointer,
+      _id_getApiKey as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setApiBaseUrl = _class.instanceMethodId(
@@ -964,25 +1047,32 @@ class FileSource extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setApiBaseUrl = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setApiBaseUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public native void setApiBaseUrl(java.lang.String string)`
-  void setApiBaseUrl(
-    jni$_.JString? string,
-  ) {
+  void setApiBaseUrl(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setApiBaseUrl(reference.pointer, _id_setApiBaseUrl as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setApiBaseUrl(
+      reference.pointer,
+      _id_setApiBaseUrl as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getApiBaseUrl = _class.instanceMethodId(
@@ -990,24 +1080,29 @@ class FileSource extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getApiBaseUrl = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApiBaseUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public native java.lang.String getApiBaseUrl()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getApiBaseUrl() {
     return _getApiBaseUrl(
-            reference.pointer, _id_getApiBaseUrl as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getApiBaseUrl as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setResourceTransform = _class.instanceMethodId(
@@ -1015,16 +1110,23 @@ class FileSource extends jni$_.JObject {
     r'(Lorg/maplibre/android/storage/FileSource$ResourceTransformCallback;)V',
   );
 
-  static final _setResourceTransform = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setResourceTransform =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public native void setResourceTransform(org.maplibre.android.storage.FileSource$ResourceTransformCallback resourceTransformCallback)`
   void setResourceTransform(
@@ -1033,10 +1135,10 @@ class FileSource extends jni$_.JObject {
     final _$resourceTransformCallback =
         resourceTransformCallback?.reference ?? jni$_.jNullReference;
     _setResourceTransform(
-            reference.pointer,
-            _id_setResourceTransform as jni$_.JMethodIDPtr,
-            _$resourceTransformCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_setResourceTransform as jni$_.JMethodIDPtr,
+      _$resourceTransformCallback.pointer,
+    ).check();
   }
 }
 
@@ -1050,11 +1152,8 @@ final class $FileSource$NullableType extends jni$_.JObjType<FileSource?> {
 
   @jni$_.internal
   @core$_.override
-  FileSource? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : FileSource.fromReference(
-          reference,
-        );
+  FileSource? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : FileSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1088,9 +1187,7 @@ final class $FileSource$Type extends jni$_.JObjType<FileSource> {
   @jni$_.internal
   @core$_.override
   FileSource fromReference(jni$_.JReference reference) =>
-      FileSource.fromReference(
-        reference,
-      );
+      FileSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

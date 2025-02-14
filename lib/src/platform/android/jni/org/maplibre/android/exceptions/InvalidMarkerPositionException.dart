@@ -59,39 +59,41 @@ class InvalidMarkerPositionException extends jni$_.JObject {
   final jni$_.JObjType<InvalidMarkerPositionException> $type;
 
   @jni$_.internal
-  InvalidMarkerPositionException.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  InvalidMarkerPositionException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/exceptions/InvalidMarkerPositionException');
+    r'org/maplibre/android/exceptions/InvalidMarkerPositionException',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $InvalidMarkerPositionException$NullableType();
   static const type = $InvalidMarkerPositionException$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory InvalidMarkerPositionException() {
     return InvalidMarkerPositionException.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 }
 
@@ -110,9 +112,7 @@ final class $InvalidMarkerPositionException$NullableType
   InvalidMarkerPositionException? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : InvalidMarkerPositionException.fromReference(
-              reference,
-            );
+          : InvalidMarkerPositionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -149,9 +149,7 @@ final class $InvalidMarkerPositionException$Type
   @jni$_.internal
   @core$_.override
   InvalidMarkerPositionException fromReference(jni$_.JReference reference) =>
-      InvalidMarkerPositionException.fromReference(
-        reference,
-      );
+      InvalidMarkerPositionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

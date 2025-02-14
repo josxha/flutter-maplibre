@@ -59,13 +59,13 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
   final jni$_.JObjType<PulsingLocationCircleAnimator> $type;
 
   @jni$_.internal
-  PulsingLocationCircleAnimator.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PulsingLocationCircleAnimator.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/PulsingLocationCircleAnimator');
+    r'org/maplibre/android/location/PulsingLocationCircleAnimator',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PulsingLocationCircleAnimator$NullableType();
@@ -74,20 +74,27 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/MapLibreAnimator$AnimationsValueChangeListener;IF)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Double
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.location.MapLibreAnimator$AnimationsValueChangeListener animationsValueChangeListener, int i, float f)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -98,13 +105,15 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
   ) {
     final _$animationsValueChangeListener =
         animationsValueChangeListener?.reference ?? jni$_.jNullReference;
-    return PulsingLocationCircleAnimator.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$animationsValueChangeListener.pointer,
-            i,
-            f)
-        .reference);
+    return PulsingLocationCircleAnimator.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$animationsValueChangeListener.pointer,
+        i,
+        f,
+      ).reference,
+    );
   }
 }
 
@@ -123,9 +132,7 @@ final class $PulsingLocationCircleAnimator$NullableType
   PulsingLocationCircleAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : PulsingLocationCircleAnimator.fromReference(
-              reference,
-            );
+          : PulsingLocationCircleAnimator.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -161,9 +168,7 @@ final class $PulsingLocationCircleAnimator$Type
   @jni$_.internal
   @core$_.override
   PulsingLocationCircleAnimator fromReference(jni$_.JReference reference) =>
-      PulsingLocationCircleAnimator.fromReference(
-        reference,
-      );
+      PulsingLocationCircleAnimator.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
