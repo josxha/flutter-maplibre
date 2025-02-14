@@ -166,7 +166,7 @@ enum BearingTrackMode {
   compass,
 
   /// Use the bearing provided by the GPS location (normalized).
-  gps;
+  gps,
 }
 
 /// The mode how render the location on the map.
@@ -181,5 +181,5 @@ enum BearingRenderMode {
   compass,
 
   /// Use the GPS location data to render the bearing.
-  gps;
+  gps,
 }

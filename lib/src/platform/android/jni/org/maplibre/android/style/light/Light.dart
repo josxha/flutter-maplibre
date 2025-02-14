@@ -63,13 +63,13 @@ class Light extends jni$_.JObject {
   final jni$_.JObjType<Light> $type;
 
   @jni$_.internal
-  Light.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Light.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/light/Light');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/light/Light',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Light$NullableType();
@@ -79,25 +79,32 @@ class Light extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setAnchor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setAnchor(java.lang.String string)`
-  void setAnchor(
-    jni$_.JString? string,
-  ) {
+  void setAnchor(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setAnchor(reference.pointer, _id_setAnchor as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setAnchor(
+      reference.pointer,
+      _id_setAnchor as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getAnchor = _class.instanceMethodId(
@@ -105,23 +112,29 @@ class Light extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getAnchor() {
-    return _getAnchor(reference.pointer, _id_getAnchor as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getAnchor(
+      reference.pointer,
+      _id_getAnchor as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setPosition = _class.instanceMethodId(
@@ -129,25 +142,32 @@ class Light extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/light/Position;)V',
   );
 
-  static final _setPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setPosition(org.maplibre.android.style.light.Position position)`
-  void setPosition(
-    position$_.Position position,
-  ) {
+  void setPosition(position$_.Position position) {
     final _$position = position.reference;
-    _setPosition(reference.pointer, _id_setPosition as jni$_.JMethodIDPtr,
-            _$position.pointer)
-        .check();
+    _setPosition(
+      reference.pointer,
+      _id_setPosition as jni$_.JMethodIDPtr,
+      _$position.pointer,
+    ).check();
   }
 
   static final _id_getPosition = _class.instanceMethodId(
@@ -155,24 +175,29 @@ class Light extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/light/Position;',
   );
 
-  static final _getPosition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.light.Position getPosition()`
   /// The returned object must be released after use, by calling the [release] method.
   position$_.Position getPosition() {
     return _getPosition(
-            reference.pointer, _id_getPosition as jni$_.JMethodIDPtr)
-        .object<position$_.Position>(const position$_.$Position$Type());
+      reference.pointer,
+      _id_getPosition as jni$_.JMethodIDPtr,
+    ).object<position$_.Position>(const position$_.$Position$Type());
   }
 
   static final _id_getPositionTransition = _class.instanceMethodId(
@@ -180,25 +205,31 @@ class Light extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getPositionTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPositionTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getPositionTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getPositionTransition() {
     return _getPositionTransition(
-            reference.pointer, _id_getPositionTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getPositionTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setPositionTransition = _class.instanceMethodId(
@@ -206,16 +237,23 @@ class Light extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setPositionTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setPositionTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setPositionTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setPositionTransition(
@@ -223,31 +261,34 @@ class Light extends jni$_.JObject {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setPositionTransition(
-            reference.pointer,
-            _id_setPositionTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setPositionTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
-  static final _id_setColor = _class.instanceMethodId(
-    r'setColor',
-    r'(I)V',
-  );
+  static final _id_setColor = _class.instanceMethodId(r'setColor', r'(I)V');
 
-  static final _setColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setColor(int i)`
-  void setColor(
-    int i,
-  ) {
+  void setColor(int i) {
     _setColor(reference.pointer, _id_setColor as jni$_.JMethodIDPtr, i).check();
   }
 
@@ -256,25 +297,32 @@ class Light extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setColor$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setColor$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setColor(java.lang.String string)`
-  void setColor$1(
-    jni$_.JString? string,
-  ) {
+  void setColor$1(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setColor$1(reference.pointer, _id_setColor$1 as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setColor$1(
+      reference.pointer,
+      _id_setColor$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getColor = _class.instanceMethodId(
@@ -282,23 +330,29 @@ class Light extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getColor()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getColor() {
-    return _getColor(reference.pointer, _id_getColor as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getColor(
+      reference.pointer,
+      _id_getColor as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getColorTransition = _class.instanceMethodId(
@@ -306,25 +360,31 @@ class Light extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getColorTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getColorTransition() {
     return _getColorTransition(
-            reference.pointer, _id_getColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setColorTransition = _class.instanceMethodId(
@@ -332,16 +392,23 @@ class Light extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setColorTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setColorTransition(
@@ -349,10 +416,10 @@ class Light extends jni$_.JObject {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setColorTransition(
-            reference.pointer,
-            _id_setColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_setIntensity = _class.instanceMethodId(
@@ -360,22 +427,31 @@ class Light extends jni$_.JObject {
     r'(F)V',
   );
 
-  static final _setIntensity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setIntensity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setIntensity(float f)`
-  void setIntensity(
-    double f,
-  ) {
-    _setIntensity(reference.pointer, _id_setIntensity as jni$_.JMethodIDPtr, f)
-        .check();
+  void setIntensity(double f) {
+    _setIntensity(
+      reference.pointer,
+      _id_setIntensity as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
   static final _id_getIntensity = _class.instanceMethodId(
@@ -383,23 +459,28 @@ class Light extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getIntensity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIntensity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getIntensity()`
   double getIntensity() {
     return _getIntensity(
-            reference.pointer, _id_getIntensity as jni$_.JMethodIDPtr)
-        .float;
+      reference.pointer,
+      _id_getIntensity as jni$_.JMethodIDPtr,
+    ).float;
   }
 
   static final _id_getIntensityTransition = _class.instanceMethodId(
@@ -407,25 +488,31 @@ class Light extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getIntensityTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIntensityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIntensityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIntensityTransition() {
     return _getIntensityTransition(
-            reference.pointer, _id_getIntensityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getIntensityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIntensityTransition = _class.instanceMethodId(
@@ -433,16 +520,23 @@ class Light extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setIntensityTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setIntensityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIntensityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIntensityTransition(
@@ -450,10 +544,10 @@ class Light extends jni$_.JObject {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIntensityTransition(
-            reference.pointer,
-            _id_setIntensityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIntensityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 }
 
@@ -467,11 +561,8 @@ final class $Light$NullableType extends jni$_.JObjType<Light?> {
 
   @jni$_.internal
   @core$_.override
-  Light? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Light.fromReference(
-          reference,
-        );
+  Light? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Light.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -504,9 +595,8 @@ final class $Light$Type extends jni$_.JObjType<Light> {
 
   @jni$_.internal
   @core$_.override
-  Light fromReference(jni$_.JReference reference) => Light.fromReference(
-        reference,
-      );
+  Light fromReference(jni$_.JReference reference) =>
+      Light.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

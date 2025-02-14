@@ -54,5 +54,5 @@ enum MapProjection {
   mercator,
 
   /// Globe projection. Only supported on web.
-  globe;
+  globe,
 }

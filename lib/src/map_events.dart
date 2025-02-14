@@ -63,7 +63,7 @@ enum CameraChangeReason {
   apiAnimation,
 
   /// The user caused the camera change by a gesture input.
-  apiGesture;
+  apiGesture,
 }
 
 /// Emitted when the user interacts with the map in any way. Use this class if

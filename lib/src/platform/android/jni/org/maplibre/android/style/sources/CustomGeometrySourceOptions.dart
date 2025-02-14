@@ -59,39 +59,41 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
   final jni$_.JObjType<CustomGeometrySourceOptions> $type;
 
   @jni$_.internal
-  CustomGeometrySourceOptions.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CustomGeometrySourceOptions.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/sources/CustomGeometrySourceOptions');
+    r'org/maplibre/android/style/sources/CustomGeometrySourceOptions',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CustomGeometrySourceOptions$NullableType();
   static const type = $CustomGeometrySourceOptions$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory CustomGeometrySourceOptions() {
     return CustomGeometrySourceOptions.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_withWrap = _class.instanceMethodId(
@@ -99,25 +101,34 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Z)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withWrap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withWrap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withWrap(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withWrap(
-    bool z,
-  ) {
+  CustomGeometrySourceOptions withWrap(bool z) {
     return _withWrap(
-            reference.pointer, _id_withWrap as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withWrap as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
   static final _id_withClip = _class.instanceMethodId(
@@ -125,25 +136,34 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Z)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withClip = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withClip =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withClip(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withClip(
-    bool z,
-  ) {
+  CustomGeometrySourceOptions withClip(bool z) {
     return _withClip(
-            reference.pointer, _id_withClip as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withClip as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
   static final _id_withMinZoom = _class.instanceMethodId(
@@ -151,25 +171,34 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(I)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withMinZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withMinZoom(
-    int i,
-  ) {
+  CustomGeometrySourceOptions withMinZoom(int i) {
     return _withMinZoom(
-            reference.pointer, _id_withMinZoom as jni$_.JMethodIDPtr, i)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withMinZoom as jni$_.JMethodIDPtr,
+      i,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
   static final _id_withMaxZoom = _class.instanceMethodId(
@@ -177,25 +206,34 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(I)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withMaxZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withMaxZoom(
-    int i,
-  ) {
+  CustomGeometrySourceOptions withMaxZoom(int i) {
     return _withMaxZoom(
-            reference.pointer, _id_withMaxZoom as jni$_.JMethodIDPtr, i)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withMaxZoom as jni$_.JMethodIDPtr,
+      i,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
   static final _id_withBuffer = _class.instanceMethodId(
@@ -203,25 +241,34 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(I)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withBuffer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withBuffer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withBuffer(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withBuffer(
-    int i,
-  ) {
+  CustomGeometrySourceOptions withBuffer(int i) {
     return _withBuffer(
-            reference.pointer, _id_withBuffer as jni$_.JMethodIDPtr, i)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withBuffer as jni$_.JMethodIDPtr,
+      i,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
   static final _id_withTolerance = _class.instanceMethodId(
@@ -229,67 +276,79 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(F)Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;',
   );
 
-  static final _withTolerance = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withTolerance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_
-                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withTolerance(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withTolerance(
-    double f,
-  ) {
+  CustomGeometrySourceOptions withTolerance(double f) {
     return _withTolerance(
-            reference.pointer, _id_withTolerance as jni$_.JMethodIDPtr, f)
-        .object<CustomGeometrySourceOptions>(
-            const $CustomGeometrySourceOptions$Type());
+      reference.pointer,
+      _id_withTolerance as jni$_.JMethodIDPtr,
+      f,
+    ).object<CustomGeometrySourceOptions>(
+      const $CustomGeometrySourceOptions$Type(),
+    );
   }
 
-  static final _id_getSize = _class.instanceMethodId(
-    r'getSize',
-    r'()I',
-  );
+  static final _id_getSize = _class.instanceMethodId(r'getSize', r'()I');
 
-  static final _getSize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public bridge int getSize()`
   int getSize() {
-    return _getSize(reference.pointer, _id_getSize as jni$_.JMethodIDPtr)
-        .integer;
+    return _getSize(
+      reference.pointer,
+      _id_getSize as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
-  static final _id_size = _class.instanceMethodId(
-    r'size',
-    r'()I',
-  );
+  static final _id_size = _class.instanceMethodId(r'size', r'()I');
 
-  static final _size = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _size =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final bridge int size()`
   int size() {
@@ -301,26 +360,33 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
-  static final _get = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _get =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public bridge java.lang.Object get(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get(
-    jni$_.JString? string,
-  ) {
+  jni$_.JObject? get(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _get(
-            reference.pointer, _id_get as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_get as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_get$1 = _class.instanceMethodId(
@@ -328,26 +394,33 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
-  static final _get$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _get$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get$1(
-    jni$_.JObject? object,
-  ) {
+  jni$_.JObject? get$1(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _get$1(reference.pointer, _id_get$1 as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _get$1(
+      reference.pointer,
+      _id_get$1 as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_containsKey = _class.instanceMethodId(
@@ -355,25 +428,32 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)Z',
   );
 
-  static final _containsKey = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _containsKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public bridge boolean containsKey(java.lang.String string)`
-  bool containsKey(
-    jni$_.JString? string,
-  ) {
+  bool containsKey(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _containsKey(reference.pointer,
-            _id_containsKey as jni$_.JMethodIDPtr, _$string.pointer)
-        .boolean;
+    return _containsKey(
+      reference.pointer,
+      _id_containsKey as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).boolean;
   }
 
   static final _id_containsKey$1 = _class.instanceMethodId(
@@ -381,25 +461,32 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _containsKey$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _containsKey$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final bridge boolean containsKey(java.lang.Object object)`
-  bool containsKey$1(
-    jni$_.JObject? object,
-  ) {
+  bool containsKey$1(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _containsKey$1(reference.pointer,
-            _id_containsKey$1 as jni$_.JMethodIDPtr, _$object.pointer)
-        .boolean;
+    return _containsKey$1(
+      reference.pointer,
+      _id_containsKey$1 as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_remove = _class.instanceMethodId(
@@ -407,26 +494,33 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
-  static final _remove = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _remove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public bridge java.lang.Object remove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove(
-    jni$_.JString? string,
-  ) {
+  jni$_.JObject? remove(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _remove(reference.pointer, _id_remove as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _remove(
+      reference.pointer,
+      _id_remove as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_remove$1 = _class.instanceMethodId(
@@ -434,26 +528,33 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
-  static final _remove$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _remove$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove$1(
-    jni$_.JObject? object,
-  ) {
+  jni$_.JObject? remove$1(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _remove$1(reference.pointer, _id_remove$1 as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _remove$1(
+      reference.pointer,
+      _id_remove$1 as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_remove$2 = _class.instanceMethodId(
@@ -461,33 +562,37 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/Object;)Z',
   );
 
-  static final _remove$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _remove$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
-  bool remove$2(
-    jni$_.JString? string,
-    jni$_.JObject? object,
-  ) {
+  bool remove$2(jni$_.JString? string, jni$_.JObject? object) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _remove$2(reference.pointer, _id_remove$2 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$object.pointer)
-        .boolean;
+    return _remove$2(
+      reference.pointer,
+      _id_remove$2 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_remove$3 = _class.instanceMethodId(
@@ -495,33 +600,37 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/Object;Ljava/lang/Object;)Z',
   );
 
-  static final _remove$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _remove$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final bridge boolean remove(java.lang.Object object, java.lang.Object object1)`
-  bool remove$3(
-    jni$_.JObject? object,
-    jni$_.JObject? object1,
-  ) {
+  bool remove$3(jni$_.JObject? object, jni$_.JObject? object1) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _remove$3(reference.pointer, _id_remove$3 as jni$_.JMethodIDPtr,
-            _$object.pointer, _$object1.pointer)
-        .boolean;
+    return _remove$3(
+      reference.pointer,
+      _id_remove$3 as jni$_.JMethodIDPtr,
+      _$object.pointer,
+      _$object1.pointer,
+    ).boolean;
   }
 
   static final _id_getValues = _class.instanceMethodId(
@@ -529,23 +638,29 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Collection;',
   );
 
-  static final _getValues = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getValues =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public bridge java.util.Collection getValues()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getValues() {
-    return _getValues(reference.pointer, _id_getValues as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getValues(
+      reference.pointer,
+      _id_getValues as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_values = _class.instanceMethodId(
@@ -553,23 +668,29 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Collection;',
   );
 
-  static final _values = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _values =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final bridge java.util.Collection values()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? values() {
-    return _values(reference.pointer, _id_values as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _values(
+      reference.pointer,
+      _id_values as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getOrDefault = _class.instanceMethodId(
@@ -577,37 +698,38 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
-  static final _getOrDefault = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getOrDefault =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault(
-    jni$_.JString? string,
-    jni$_.JObject? object,
-  ) {
+  jni$_.JObject? getOrDefault(jni$_.JString? string, jni$_.JObject? object) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _getOrDefault(
-            reference.pointer,
-            _id_getOrDefault as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$object.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getOrDefault as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$object.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getOrDefault$1 = _class.instanceMethodId(
@@ -615,37 +737,38 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
-  static final _getOrDefault$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getOrDefault$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault$1(
-    jni$_.JObject? object,
-    jni$_.JObject? object1,
-  ) {
+  jni$_.JObject? getOrDefault$1(jni$_.JObject? object, jni$_.JObject? object1) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _getOrDefault$1(
-            reference.pointer,
-            _id_getOrDefault$1 as jni$_.JMethodIDPtr,
-            _$object.pointer,
-            _$object1.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getOrDefault$1 as jni$_.JMethodIDPtr,
+      _$object.pointer,
+      _$object1.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getEntries = _class.instanceMethodId(
@@ -653,25 +776,31 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Set;',
   );
 
-  static final _getEntries = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getEntries =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public bridge java.util.Set getEntries()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JSet<jni$_.JObject?>? getEntries() {
-    return _getEntries(reference.pointer, _id_getEntries as jni$_.JMethodIDPtr)
-        .object<jni$_.JSet<jni$_.JObject?>?>(
-            const jni$_.JSetNullableType<jni$_.JObject?>(
-                jni$_.JObjectNullableType()));
+    return _getEntries(
+      reference.pointer,
+      _id_getEntries as jni$_.JMethodIDPtr,
+    ).object<jni$_.JSet<jni$_.JObject?>?>(
+      const jni$_.JSetNullableType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_entrySet = _class.instanceMethodId(
@@ -679,25 +808,31 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Set;',
   );
 
-  static final _entrySet = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _entrySet =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final bridge java.util.Set entrySet()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JSet<jni$_.JObject?>? entrySet() {
-    return _entrySet(reference.pointer, _id_entrySet as jni$_.JMethodIDPtr)
-        .object<jni$_.JSet<jni$_.JObject?>?>(
-            const jni$_.JSetNullableType<jni$_.JObject?>(
-                jni$_.JObjectNullableType()));
+    return _entrySet(
+      reference.pointer,
+      _id_entrySet as jni$_.JMethodIDPtr,
+    ).object<jni$_.JSet<jni$_.JObject?>?>(
+      const jni$_.JSetNullableType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_getKeys = _class.instanceMethodId(
@@ -705,25 +840,31 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Set;',
   );
 
-  static final _getKeys = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getKeys =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public bridge java.util.Set getKeys()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JSet<jni$_.JString?>? getKeys() {
-    return _getKeys(reference.pointer, _id_getKeys as jni$_.JMethodIDPtr)
-        .object<jni$_.JSet<jni$_.JString?>?>(
-            const jni$_.JSetNullableType<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getKeys(
+      reference.pointer,
+      _id_getKeys as jni$_.JMethodIDPtr,
+    ).object<jni$_.JSet<jni$_.JString?>?>(
+      const jni$_.JSetNullableType<jni$_.JString?>(jni$_.JStringNullableType()),
+    );
   }
 
   static final _id_keySet = _class.instanceMethodId(
@@ -731,25 +872,31 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     r'()Ljava/util/Set;',
   );
 
-  static final _keySet = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _keySet =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final bridge java.util.Set keySet()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JSet<jni$_.JString?>? keySet() {
-    return _keySet(reference.pointer, _id_keySet as jni$_.JMethodIDPtr)
-        .object<jni$_.JSet<jni$_.JString?>?>(
-            const jni$_.JSetNullableType<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _keySet(
+      reference.pointer,
+      _id_keySet as jni$_.JMethodIDPtr,
+    ).object<jni$_.JSet<jni$_.JString?>?>(
+      const jni$_.JSetNullableType<jni$_.JString?>(jni$_.JStringNullableType()),
+    );
   }
 }
 
@@ -768,9 +915,7 @@ final class $CustomGeometrySourceOptions$NullableType
   CustomGeometrySourceOptions? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : CustomGeometrySourceOptions.fromReference(
-              reference,
-            );
+          : CustomGeometrySourceOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -806,9 +951,7 @@ final class $CustomGeometrySourceOptions$Type
   @jni$_.internal
   @core$_.override
   CustomGeometrySourceOptions fromReference(jni$_.JReference reference) =>
-      CustomGeometrySourceOptions.fromReference(
-        reference,
-      );
+      CustomGeometrySourceOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

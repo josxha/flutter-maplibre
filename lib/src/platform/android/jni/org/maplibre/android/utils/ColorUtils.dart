@@ -59,39 +59,41 @@ class ColorUtils extends jni$_.JObject {
   final jni$_.JObjType<ColorUtils> $type;
 
   @jni$_.internal
-  ColorUtils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ColorUtils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/ColorUtils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/ColorUtils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ColorUtils$NullableType();
   static const type = $ColorUtils$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory ColorUtils() {
     return ColorUtils.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_getPrimaryColor = _class.staticMethodId(
@@ -99,25 +101,32 @@ class ColorUtils extends jni$_.JObject {
     r'(Landroid/content/Context;)I',
   );
 
-  static final _getPrimaryColor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getPrimaryColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public int getPrimaryColor(android.content.Context context)`
-  static int getPrimaryColor(
-    jni$_.JObject context,
-  ) {
+  static int getPrimaryColor(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getPrimaryColor(_class.reference.pointer,
-            _id_getPrimaryColor as jni$_.JMethodIDPtr, _$context.pointer)
-        .integer;
+    return _getPrimaryColor(
+      _class.reference.pointer,
+      _id_getPrimaryColor as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).integer;
   }
 
   static final _id_getPrimaryDarkColor = _class.staticMethodId(
@@ -125,25 +134,32 @@ class ColorUtils extends jni$_.JObject {
     r'(Landroid/content/Context;)I',
   );
 
-  static final _getPrimaryDarkColor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getPrimaryDarkColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public int getPrimaryDarkColor(android.content.Context context)`
-  static int getPrimaryDarkColor(
-    jni$_.JObject context,
-  ) {
+  static int getPrimaryDarkColor(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getPrimaryDarkColor(_class.reference.pointer,
-            _id_getPrimaryDarkColor as jni$_.JMethodIDPtr, _$context.pointer)
-        .integer;
+    return _getPrimaryDarkColor(
+      _class.reference.pointer,
+      _id_getPrimaryDarkColor as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).integer;
   }
 
   static final _id_getAccentColor = _class.staticMethodId(
@@ -151,25 +167,32 @@ class ColorUtils extends jni$_.JObject {
     r'(Landroid/content/Context;)I',
   );
 
-  static final _getAccentColor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getAccentColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public int getAccentColor(android.content.Context context)`
-  static int getAccentColor(
-    jni$_.JObject context,
-  ) {
+  static int getAccentColor(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getAccentColor(_class.reference.pointer,
-            _id_getAccentColor as jni$_.JMethodIDPtr, _$context.pointer)
-        .integer;
+    return _getAccentColor(
+      _class.reference.pointer,
+      _id_getAccentColor as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).integer;
   }
 
   static final _id_getSelector = _class.staticMethodId(
@@ -177,23 +200,32 @@ class ColorUtils extends jni$_.JObject {
     r'(I)Landroid/content/res/ColorStateList;',
   );
 
-  static final _getSelector = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _getSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public android.content.res.ColorStateList getSelector(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject getSelector(
-    int i,
-  ) {
+  static jni$_.JObject getSelector(int i) {
     return _getSelector(
-            _class.reference.pointer, _id_getSelector as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      _class.reference.pointer,
+      _id_getSelector as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_setTintList = _class.staticMethodId(
@@ -201,27 +233,34 @@ class ColorUtils extends jni$_.JObject {
     r'(Landroid/widget/ImageView;I)V',
   );
 
-  static final _setTintList = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _setTintList =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `static public void setTintList(android.widget.ImageView imageView, int i)`
-  static void setTintList(
-    jni$_.JObject imageView,
-    int i,
-  ) {
+  static void setTintList(jni$_.JObject imageView, int i) {
     final _$imageView = imageView.reference;
-    _setTintList(_class.reference.pointer,
-            _id_setTintList as jni$_.JMethodIDPtr, _$imageView.pointer, i)
-        .check();
+    _setTintList(
+      _class.reference.pointer,
+      _id_setTintList as jni$_.JMethodIDPtr,
+      _$imageView.pointer,
+      i,
+    ).check();
   }
 
   static final _id_rgbaToColor = _class.staticMethodId(
@@ -229,25 +268,32 @@ class ColorUtils extends jni$_.JObject {
     r'(Ljava/lang/String;)I',
   );
 
-  static final _rgbaToColor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _rgbaToColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public int rgbaToColor(java.lang.String string)`
-  static int rgbaToColor(
-    jni$_.JString string,
-  ) {
+  static int rgbaToColor(jni$_.JString string) {
     final _$string = string.reference;
-    return _rgbaToColor(_class.reference.pointer,
-            _id_rgbaToColor as jni$_.JMethodIDPtr, _$string.pointer)
-        .integer;
+    return _rgbaToColor(
+      _class.reference.pointer,
+      _id_rgbaToColor as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).integer;
   }
 
   static final _id_colorToRgbaString = _class.staticMethodId(
@@ -255,23 +301,32 @@ class ColorUtils extends jni$_.JObject {
     r'(I)Ljava/lang/String;',
   );
 
-  static final _colorToRgbaString = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _colorToRgbaString =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public java.lang.String colorToRgbaString(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? colorToRgbaString(
-    int i,
-  ) {
-    return _colorToRgbaString(_class.reference.pointer,
-            _id_colorToRgbaString as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+  static jni$_.JString? colorToRgbaString(int i) {
+    return _colorToRgbaString(
+      _class.reference.pointer,
+      _id_colorToRgbaString as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_colorToRgbaArray = _class.staticMethodId(
@@ -279,23 +334,32 @@ class ColorUtils extends jni$_.JObject {
     r'(I)[F',
   );
 
-  static final _colorToRgbaArray = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _colorToRgbaArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public float[] colorToRgbaArray(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JFloatArray? colorToRgbaArray(
-    int i,
-  ) {
-    return _colorToRgbaArray(_class.reference.pointer,
-            _id_colorToRgbaArray as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JFloatArray?>(const jni$_.JFloatArrayNullableType());
+  static jni$_.JFloatArray? colorToRgbaArray(int i) {
+    return _colorToRgbaArray(
+      _class.reference.pointer,
+      _id_colorToRgbaArray as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JFloatArray?>(const jni$_.JFloatArrayNullableType());
   }
 
   static final _id_colorToGlRgbaArray = _class.staticMethodId(
@@ -303,23 +367,32 @@ class ColorUtils extends jni$_.JObject {
     r'(I)[F',
   );
 
-  static final _colorToGlRgbaArray = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _colorToGlRgbaArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public float[] colorToGlRgbaArray(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JFloatArray? colorToGlRgbaArray(
-    int i,
-  ) {
-    return _colorToGlRgbaArray(_class.reference.pointer,
-            _id_colorToGlRgbaArray as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JFloatArray?>(const jni$_.JFloatArrayNullableType());
+  static jni$_.JFloatArray? colorToGlRgbaArray(int i) {
+    return _colorToGlRgbaArray(
+      _class.reference.pointer,
+      _id_colorToGlRgbaArray as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JFloatArray?>(const jni$_.JFloatArrayNullableType());
   }
 }
 
@@ -333,11 +406,8 @@ final class $ColorUtils$NullableType extends jni$_.JObjType<ColorUtils?> {
 
   @jni$_.internal
   @core$_.override
-  ColorUtils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : ColorUtils.fromReference(
-          reference,
-        );
+  ColorUtils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : ColorUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -371,9 +441,7 @@ final class $ColorUtils$Type extends jni$_.JObjType<ColorUtils> {
   @jni$_.internal
   @core$_.override
   ColorUtils fromReference(jni$_.JReference reference) =>
-      ColorUtils.fromReference(
-        reference,
-      );
+      ColorUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -7,22 +7,13 @@ extension type Camera._(JSObject _) implements JSObject {
   external Camera(CameraOptions options);
 
   /// Move the viewport of the map to a new location without animation.
-  external void jumpTo(
-    JumpToOptions options, [
-    JSAny? eventData,
-  ]);
+  external void jumpTo(JumpToOptions options, [JSAny? eventData]);
 
   /// Animate the viewport of the map to a new location.
-  external void flyTo(
-    FlyToOptions options, [
-    JSAny? eventData,
-  ]);
+  external void flyTo(FlyToOptions options, [JSAny? eventData]);
 
   /// Animate the viewport of the map to fit [LngLatBounds].
-  external void fitBounds(
-    LngLatBounds bounds, [
-    FitBoundsOptions? options,
-  ]);
+  external void fitBounds(LngLatBounds bounds, [FitBoundsOptions? options]);
 }
 
 /// Options used for [Camera.jumpTo].

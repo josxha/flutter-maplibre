@@ -46,12 +46,8 @@ void main() {
         textAllowOverlap: true,
         textSize: 23,
       );
-      const o2 = MarkerLayer(
-        points: [],
-      );
-      const o3 = MarkerLayer(
-        points: [],
-      );
+      const o2 = MarkerLayer(points: []);
+      const o3 = MarkerLayer(points: []);
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
@@ -110,12 +106,7 @@ void main() {
     test('PolylineAnnotationLayer', () {
       final o = PolylineLayer(
         polylines: [
-          LineString(
-            coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-            ],
-          ),
+          LineString(coordinates: [Position(2, 23.4), Position(5.2, 32)]),
         ],
       );
       final o2 = PolylineLayer(

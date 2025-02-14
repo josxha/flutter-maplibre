@@ -59,33 +59,34 @@ class NativeHttpRequest extends jni$_.JObject {
   final jni$_.JObjType<NativeHttpRequest> $type;
 
   @jni$_.internal
-  NativeHttpRequest.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  NativeHttpRequest.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/http/NativeHttpRequest');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/http/NativeHttpRequest',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $NativeHttpRequest$NullableType();
   static const type = $NativeHttpRequest$Type();
-  static final _id_cancel = _class.instanceMethodId(
-    r'cancel',
-    r'()V',
-  );
+  static final _id_cancel = _class.instanceMethodId(r'cancel', r'()V');
 
-  static final _cancel = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _cancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancel()`
   void cancel() {
@@ -97,24 +98,29 @@ class NativeHttpRequest extends jni$_.JObject {
     r'(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)V',
   );
 
-  static final _onResponse = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onResponse =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               int,
@@ -124,7 +130,9 @@ class NativeHttpRequest extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onResponse(int i, java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, byte[] bs)`
   void onResponse(
@@ -145,17 +153,17 @@ class NativeHttpRequest extends jni$_.JObject {
     final _$string5 = string5?.reference ?? jni$_.jNullReference;
     final _$bs = bs?.reference ?? jni$_.jNullReference;
     _onResponse(
-            reference.pointer,
-            _id_onResponse as jni$_.JMethodIDPtr,
-            i,
-            _$string.pointer,
-            _$string1.pointer,
-            _$string2.pointer,
-            _$string3.pointer,
-            _$string4.pointer,
-            _$string5.pointer,
-            _$bs.pointer)
-        .check();
+      reference.pointer,
+      _id_onResponse as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+      _$string1.pointer,
+      _$string2.pointer,
+      _$string3.pointer,
+      _$string4.pointer,
+      _$string5.pointer,
+      _$bs.pointer,
+    ).check();
   }
 
   static final _id_handleFailure = _class.instanceMethodId(
@@ -163,27 +171,34 @@ class NativeHttpRequest extends jni$_.JObject {
     r'(ILjava/lang/String;)V',
   );
 
-  static final _handleFailure = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _handleFailure =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void handleFailure(int i, java.lang.String string)`
-  void handleFailure(
-    int i,
-    jni$_.JString? string,
-  ) {
+  void handleFailure(int i, jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _handleFailure(reference.pointer, _id_handleFailure as jni$_.JMethodIDPtr,
-            i, _$string.pointer)
-        .check();
+    _handleFailure(
+      reference.pointer,
+      _id_handleFailure as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+    ).check();
   }
 }
 
@@ -199,11 +214,7 @@ final class $NativeHttpRequest$NullableType
   @jni$_.internal
   @core$_.override
   NativeHttpRequest? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : NativeHttpRequest.fromReference(
-              reference,
-            );
+      reference.isNull ? null : NativeHttpRequest.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -237,9 +248,7 @@ final class $NativeHttpRequest$Type extends jni$_.JObjType<NativeHttpRequest> {
   @jni$_.internal
   @core$_.override
   NativeHttpRequest fromReference(jni$_.JReference reference) =>
-      NativeHttpRequest.fromReference(
-        reference,
-      );
+      NativeHttpRequest.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

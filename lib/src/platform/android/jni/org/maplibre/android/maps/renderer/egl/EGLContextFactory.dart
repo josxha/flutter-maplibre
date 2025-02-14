@@ -59,39 +59,41 @@ class EGLContextFactory extends jni$_.JObject {
   final jni$_.JObjType<EGLContextFactory> $type;
 
   @jni$_.internal
-  EGLContextFactory.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  EGLContextFactory.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/egl/EGLContextFactory');
+    r'org/maplibre/android/maps/renderer/egl/EGLContextFactory',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $EGLContextFactory$NullableType();
   static const type = $EGLContextFactory$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory EGLContextFactory() {
     return EGLContextFactory.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_createContext = _class.instanceMethodId(
@@ -99,24 +101,31 @@ class EGLContextFactory extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;)Ljavax/microedition/khronos/egl/EGLContext;',
   );
 
-  static final _createContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _createContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLContext createContext(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -129,12 +138,12 @@ class EGLContextFactory extends jni$_.JObject {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLConfig = eGLConfig?.reference ?? jni$_.jNullReference;
     return _createContext(
-            reference.pointer,
-            _id_createContext as jni$_.JMethodIDPtr,
-            _$eGL10.pointer,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_createContext as jni$_.JMethodIDPtr,
+      _$eGL10.pointer,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_destroyContext = _class.instanceMethodId(
@@ -142,24 +151,31 @@ class EGLContextFactory extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLContext;)V',
   );
 
-  static final _destroyContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _destroyContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void destroyContext(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLContext eGLContext)`
   void destroyContext(
@@ -170,9 +186,13 @@ class EGLContextFactory extends jni$_.JObject {
     final _$eGL10 = eGL10?.reference ?? jni$_.jNullReference;
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
-    _destroyContext(reference.pointer, _id_destroyContext as jni$_.JMethodIDPtr,
-            _$eGL10.pointer, _$eGLDisplay.pointer, _$eGLContext.pointer)
-        .check();
+    _destroyContext(
+      reference.pointer,
+      _id_destroyContext as jni$_.JMethodIDPtr,
+      _$eGL10.pointer,
+      _$eGLDisplay.pointer,
+      _$eGLContext.pointer,
+    ).check();
   }
 }
 
@@ -189,11 +209,7 @@ final class $EGLContextFactory$NullableType
   @jni$_.internal
   @core$_.override
   EGLContextFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : EGLContextFactory.fromReference(
-              reference,
-            );
+      reference.isNull ? null : EGLContextFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -228,9 +244,7 @@ final class $EGLContextFactory$Type extends jni$_.JObjType<EGLContextFactory> {
   @jni$_.internal
   @core$_.override
   EGLContextFactory fromReference(jni$_.JReference reference) =>
-      EGLContextFactory.fromReference(
-        reference,
-      );
+      EGLContextFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

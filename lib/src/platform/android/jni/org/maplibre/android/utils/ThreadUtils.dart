@@ -59,39 +59,41 @@ class ThreadUtils extends jni$_.JObject {
   final jni$_.JObjType<ThreadUtils> $type;
 
   @jni$_.internal
-  ThreadUtils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ThreadUtils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/ThreadUtils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/ThreadUtils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ThreadUtils$NullableType();
   static const type = $ThreadUtils$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory ThreadUtils() {
     return ThreadUtils.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_init = _class.staticMethodId(
@@ -99,26 +101,33 @@ class ThreadUtils extends jni$_.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/utils/ThreadUtils;',
   );
 
-  static final _init = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _init =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.utils.ThreadUtils init(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static ThreadUtils? init(
-    jni$_.JObject context,
-  ) {
+  static ThreadUtils? init(jni$_.JObject context) {
     final _$context = context.reference;
-    return _init(_class.reference.pointer, _id_init as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .object<ThreadUtils?>(const $ThreadUtils$NullableType());
+    return _init(
+      _class.reference.pointer,
+      _id_init as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<ThreadUtils?>(const $ThreadUtils$NullableType());
   }
 
   static final _id_checkThread = _class.staticMethodId(
@@ -126,25 +135,32 @@ class ThreadUtils extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _checkThread = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _checkThread =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void checkThread(java.lang.String string)`
-  static void checkThread(
-    jni$_.JString string,
-  ) {
+  static void checkThread(jni$_.JString string) {
     final _$string = string.reference;
-    _checkThread(_class.reference.pointer,
-            _id_checkThread as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _checkThread(
+      _class.reference.pointer,
+      _id_checkThread as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 }
 
@@ -158,11 +174,8 @@ final class $ThreadUtils$NullableType extends jni$_.JObjType<ThreadUtils?> {
 
   @jni$_.internal
   @core$_.override
-  ThreadUtils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : ThreadUtils.fromReference(
-          reference,
-        );
+  ThreadUtils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : ThreadUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -196,9 +209,7 @@ final class $ThreadUtils$Type extends jni$_.JObjType<ThreadUtils> {
   @jni$_.internal
   @core$_.override
   ThreadUtils fromReference(jni$_.JReference reference) =>
-      ThreadUtils.fromReference(
-        reference,
-      );
+      ThreadUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

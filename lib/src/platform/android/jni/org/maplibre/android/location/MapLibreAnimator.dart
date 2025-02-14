@@ -62,31 +62,24 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  MapLibreAnimator.fromReference(
-    this.K,
-    jni$_.JReference reference,
-  )   : $type = type<$K>(K),
-        super.fromReference(reference);
+  MapLibreAnimator.fromReference(this.K, jni$_.JReference reference)
+    : $type = type<$K>(K),
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/location/MapLibreAnimator');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/location/MapLibreAnimator',
+  );
 
   /// The type which includes information such as the signature of this class.
   static $MapLibreAnimator$NullableType<$K>
-      nullableType<$K extends jni$_.JObject?>(
-    jni$_.JObjType<$K> K,
-  ) {
-    return $MapLibreAnimator$NullableType<$K>(
-      K,
-    );
+  nullableType<$K extends jni$_.JObject?>(jni$_.JObjType<$K> K) {
+    return $MapLibreAnimator$NullableType<$K>(K);
   }
 
   static $MapLibreAnimator$Type<$K> type<$K extends jni$_.JObject?>(
     jni$_.JObjType<$K> K,
   ) {
-    return $MapLibreAnimator$Type<$K>(
-      K,
-    );
+    return $MapLibreAnimator$Type<$K>(K);
   }
 
   static final _id_onAnimationUpdate = _class.instanceMethodId(
@@ -94,27 +87,32 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
     r'(Landroid/animation/ValueAnimator;)V',
   );
 
-  static final _onAnimationUpdate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onAnimationUpdate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onAnimationUpdate(android.animation.ValueAnimator valueAnimator)`
-  void onAnimationUpdate(
-    jni$_.JObject? valueAnimator,
-  ) {
+  void onAnimationUpdate(jni$_.JObject? valueAnimator) {
     final _$valueAnimator = valueAnimator?.reference ?? jni$_.jNullReference;
     _onAnimationUpdate(
-            reference.pointer,
-            _id_onAnimationUpdate as jni$_.JMethodIDPtr,
-            _$valueAnimator.pointer)
-        .check();
+      reference.pointer,
+      _id_onAnimationUpdate as jni$_.JMethodIDPtr,
+      _$valueAnimator.pointer,
+    ).check();
   }
 
   static final _id_makeInvalid = _class.instanceMethodId(
@@ -122,22 +120,28 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
     r'()V',
   );
 
-  static final _makeInvalid = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _makeInvalid =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void makeInvalid()`
   void makeInvalid() {
-    _makeInvalid(reference.pointer, _id_makeInvalid as jni$_.JMethodIDPtr)
-        .check();
+    _makeInvalid(
+      reference.pointer,
+      _id_makeInvalid as jni$_.JMethodIDPtr,
+    ).check();
   }
 }
 
@@ -147,9 +151,7 @@ final class $MapLibreAnimator$NullableType<$K extends jni$_.JObject?>
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  const $MapLibreAnimator$NullableType(
-    this.K,
-  );
+  const $MapLibreAnimator$NullableType(this.K);
 
   @jni$_.internal
   @core$_.override
@@ -160,10 +162,7 @@ final class $MapLibreAnimator$NullableType<$K extends jni$_.JObject?>
   MapLibreAnimator<$K>? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreAnimator<$K>.fromReference(
-              K,
-              reference,
-            );
+          : MapLibreAnimator<$K>.fromReference(K, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -193,9 +192,7 @@ final class $MapLibreAnimator$Type<$K extends jni$_.JObject?>
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  const $MapLibreAnimator$Type(
-    this.K,
-  );
+  const $MapLibreAnimator$Type(this.K);
 
   @jni$_.internal
   @core$_.override
@@ -204,10 +201,7 @@ final class $MapLibreAnimator$Type<$K extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   MapLibreAnimator<$K> fromReference(jni$_.JReference reference) =>
-      MapLibreAnimator<$K>.fromReference(
-        K,
-        reference,
-      );
+      MapLibreAnimator<$K>.fromReference(K, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -39,22 +39,22 @@ class CircleLayer extends Layer<Point> {
 
   @override
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+  );
 
   @override
   Map<String, Object> getPaint() => {
-        'circle-radius': radius,
-        'circle-color': color.toHexString(alpha: false),
-        'circle-blur': blur,
-        'circle-opacity': opacity,
-        'circle-stroke-width': strokeWidth,
-        'circle-stroke-color': strokeColor.toHexString(alpha: false),
-        'circle-stroke-opacity': strokeOpacity,
-      };
+    'circle-radius': radius,
+    'circle-color': color.toHexString(alpha: false),
+    'circle-blur': blur,
+    'circle-opacity': opacity,
+    'circle-stroke-width': strokeWidth,
+    'circle-stroke-color': strokeColor.toHexString(alpha: false),
+    'circle-stroke-opacity': strokeOpacity,
+  };
 
   @override
   Map<String, Object> getLayout() => {};
@@ -73,11 +73,11 @@ class CircleLayer extends Layer<Point> {
 
   @override
   int get hashCode => Object.hash(
-        super.hashCode,
-        radius,
-        color,
-        blur,
-        strokeWidth,
-        strokeColor,
-      );
+    super.hashCode,
+    radius,
+    color,
+    blur,
+    strokeWidth,
+    strokeColor,
+  );
 }

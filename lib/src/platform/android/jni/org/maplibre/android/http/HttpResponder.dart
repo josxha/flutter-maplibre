@@ -59,13 +59,13 @@ class HttpResponder extends jni$_.JObject {
   final jni$_.JObjType<HttpResponder> $type;
 
   @jni$_.internal
-  HttpResponder.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  HttpResponder.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/http/HttpResponder');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/http/HttpResponder',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $HttpResponder$NullableType();
@@ -75,24 +75,29 @@ class HttpResponder extends jni$_.JObject {
     r'(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)V',
   );
 
-  static final _onResponse = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onResponse =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               int,
@@ -102,7 +107,9 @@ class HttpResponder extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onResponse(int i, java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, byte[] bs)`
   void onResponse(
@@ -123,17 +130,17 @@ class HttpResponder extends jni$_.JObject {
     final _$string5 = string5?.reference ?? jni$_.jNullReference;
     final _$bs = bs?.reference ?? jni$_.jNullReference;
     _onResponse(
-            reference.pointer,
-            _id_onResponse as jni$_.JMethodIDPtr,
-            i,
-            _$string.pointer,
-            _$string1.pointer,
-            _$string2.pointer,
-            _$string3.pointer,
-            _$string4.pointer,
-            _$string5.pointer,
-            _$bs.pointer)
-        .check();
+      reference.pointer,
+      _id_onResponse as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+      _$string1.pointer,
+      _$string2.pointer,
+      _$string3.pointer,
+      _$string4.pointer,
+      _$string5.pointer,
+      _$bs.pointer,
+    ).check();
   }
 
   static final _id_handleFailure = _class.instanceMethodId(
@@ -141,27 +148,34 @@ class HttpResponder extends jni$_.JObject {
     r'(ILjava/lang/String;)V',
   );
 
-  static final _handleFailure = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _handleFailure =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void handleFailure(int i, java.lang.String string)`
-  void handleFailure(
-    int i,
-    jni$_.JString? string,
-  ) {
+  void handleFailure(int i, jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _handleFailure(reference.pointer, _id_handleFailure as jni$_.JMethodIDPtr,
-            i, _$string.pointer)
-        .check();
+    _handleFailure(
+      reference.pointer,
+      _id_handleFailure as jni$_.JMethodIDPtr,
+      i,
+      _$string.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -173,19 +187,16 @@ class HttpResponder extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -254,35 +265,16 @@ class HttpResponder extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory HttpResponder.implement(
-    $HttpResponder $impl,
-  ) {
+  factory HttpResponder.implement($HttpResponder $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return HttpResponder.fromReference(
-      $i.implementReference(),
-    );
+    return HttpResponder.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $HttpResponder {
   factory $HttpResponder({
     required void Function(
-            int i,
-            jni$_.JString? string,
-            jni$_.JString? string1,
-            jni$_.JString? string2,
-            jni$_.JString? string3,
-            jni$_.JString? string4,
-            jni$_.JString? string5,
-            jni$_.JByteArray? bs)
-        onResponse,
-    bool onResponse$async,
-    required void Function(int i, jni$_.JString? string) handleFailure,
-    bool handleFailure$async,
-  }) = _$HttpResponder;
-
-  void onResponse(
       int i,
       jni$_.JString? string,
       jni$_.JString? string1,
@@ -290,7 +282,24 @@ abstract base mixin class $HttpResponder {
       jni$_.JString? string3,
       jni$_.JString? string4,
       jni$_.JString? string5,
-      jni$_.JByteArray? bs);
+      jni$_.JByteArray? bs,
+    )
+    onResponse,
+    bool onResponse$async,
+    required void Function(int i, jni$_.JString? string) handleFailure,
+    bool handleFailure$async,
+  }) = _$HttpResponder;
+
+  void onResponse(
+    int i,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    jni$_.JString? string4,
+    jni$_.JString? string5,
+    jni$_.JByteArray? bs,
+  );
   bool get onResponse$async => false;
   void handleFailure(int i, jni$_.JString? string);
   bool get handleFailure$async => false;
@@ -299,22 +308,6 @@ abstract base mixin class $HttpResponder {
 final class _$HttpResponder with $HttpResponder {
   _$HttpResponder({
     required void Function(
-            int i,
-            jni$_.JString? string,
-            jni$_.JString? string1,
-            jni$_.JString? string2,
-            jni$_.JString? string3,
-            jni$_.JString? string4,
-            jni$_.JString? string5,
-            jni$_.JByteArray? bs)
-        onResponse,
-    this.onResponse$async = false,
-    required void Function(int i, jni$_.JString? string) handleFailure,
-    this.handleFailure$async = false,
-  })  : _onResponse = onResponse,
-        _handleFailure = handleFailure;
-
-  final void Function(
       int i,
       jni$_.JString? string,
       jni$_.JString? string1,
@@ -322,22 +315,50 @@ final class _$HttpResponder with $HttpResponder {
       jni$_.JString? string3,
       jni$_.JString? string4,
       jni$_.JString? string5,
-      jni$_.JByteArray? bs) _onResponse;
+      jni$_.JByteArray? bs,
+    )
+    onResponse,
+    this.onResponse$async = false,
+    required void Function(int i, jni$_.JString? string) handleFailure,
+    this.handleFailure$async = false,
+  }) : _onResponse = onResponse,
+       _handleFailure = handleFailure;
+
+  final void Function(
+    int i,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    jni$_.JString? string4,
+    jni$_.JString? string5,
+    jni$_.JByteArray? bs,
+  )
+  _onResponse;
   final bool onResponse$async;
   final void Function(int i, jni$_.JString? string) _handleFailure;
   final bool handleFailure$async;
 
   void onResponse(
-      int i,
-      jni$_.JString? string,
-      jni$_.JString? string1,
-      jni$_.JString? string2,
-      jni$_.JString? string3,
-      jni$_.JString? string4,
-      jni$_.JString? string5,
-      jni$_.JByteArray? bs) {
+    int i,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+    jni$_.JString? string3,
+    jni$_.JString? string4,
+    jni$_.JString? string5,
+    jni$_.JByteArray? bs,
+  ) {
     return _onResponse(
-        i, string, string1, string2, string3, string4, string5, bs);
+      i,
+      string,
+      string1,
+      string2,
+      string3,
+      string4,
+      string5,
+      bs,
+    );
   }
 
   void handleFailure(int i, jni$_.JString? string) {
@@ -355,11 +376,8 @@ final class $HttpResponder$NullableType extends jni$_.JObjType<HttpResponder?> {
 
   @jni$_.internal
   @core$_.override
-  HttpResponder? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : HttpResponder.fromReference(
-          reference,
-        );
+  HttpResponder? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : HttpResponder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -393,9 +411,7 @@ final class $HttpResponder$Type extends jni$_.JObjType<HttpResponder> {
   @jni$_.internal
   @core$_.override
   HttpResponder fromReference(jni$_.JReference reference) =>
-      HttpResponder.fromReference(
-        reference,
-      );
+      HttpResponder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

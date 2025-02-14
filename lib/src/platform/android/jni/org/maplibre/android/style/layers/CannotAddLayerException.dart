@@ -59,41 +59,48 @@ class CannotAddLayerException extends jni$_.JObject {
   final jni$_.JObjType<CannotAddLayerException> $type;
 
   @jni$_.internal
-  CannotAddLayerException.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CannotAddLayerException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/CannotAddLayerException');
+    r'org/maplibre/android/style/layers/CannotAddLayerException',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CannotAddLayerException$NullableType();
   static const type = $CannotAddLayerException$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(Ljava/lang/String;)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CannotAddLayerException(
-    jni$_.JString? string,
-  ) {
+  factory CannotAddLayerException(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return CannotAddLayerException.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer)
-        .reference);
+    return CannotAddLayerException.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -112,9 +119,7 @@ final class $CannotAddLayerException$NullableType
   CannotAddLayerException? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : CannotAddLayerException.fromReference(
-              reference,
-            );
+          : CannotAddLayerException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -150,9 +155,7 @@ final class $CannotAddLayerException$Type
   @jni$_.internal
   @core$_.override
   CannotAddLayerException fromReference(jni$_.JReference reference) =>
-      CannotAddLayerException.fromReference(
-        reference,
-      );
+      CannotAddLayerException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

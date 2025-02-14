@@ -62,13 +62,13 @@ class Helpers extends jni$_.JObject {
   final jni$_.JObjType<Helpers> $type;
 
   @jni$_.internal
-  Helpers.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Helpers.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'com/github/josxha/maplibre/Helpers');
+  static final _class = jni$_.JClass.forName(
+    r'com/github/josxha/maplibre/Helpers',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Helpers$NullableType();
@@ -83,35 +83,41 @@ class Helpers extends jni$_.JObject {
   static Helpers get INSTANCE =>
       _id_INSTANCE.get(_class, const $Helpers$Type());
 
-  static final _id_createOfflineTilePyramidRegionDefinition =
-      _class.instanceMethodId(
-    r'createOfflineTilePyramidRegionDefinition',
-    r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngBounds;DDF)Lorg/maplibre/android/offline/OfflineTilePyramidRegionDefinition;',
-  );
+  static final _id_createOfflineTilePyramidRegionDefinition = _class
+      .instanceMethodId(
+        r'createOfflineTilePyramidRegionDefinition',
+        r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngBounds;DDF)Lorg/maplibre/android/offline/OfflineTilePyramidRegionDefinition;',
+      );
 
   static final _createOfflineTilePyramidRegionDefinition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Double,
-                            jni$_.Double,
-                            jni$_.Double
-                          )>)>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>,
-                  double,
-                  double,
-                  double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.offline.OfflineTilePyramidRegionDefinition createOfflineTilePyramidRegionDefinition(java.lang.String string, org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1, float f)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -125,14 +131,14 @@ class Helpers extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$latLngBounds = latLngBounds.reference;
     return _createOfflineTilePyramidRegionDefinition(
-            reference.pointer,
-            _id_createOfflineTilePyramidRegionDefinition as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$latLngBounds.pointer,
-            d,
-            d1,
-            f)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_createOfflineTilePyramidRegionDefinition as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$latLngBounds.pointer,
+      d,
+      d1,
+      f,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 }
 
@@ -146,11 +152,8 @@ final class $Helpers$NullableType extends jni$_.JObjType<Helpers?> {
 
   @jni$_.internal
   @core$_.override
-  Helpers? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Helpers.fromReference(
-          reference,
-        );
+  Helpers? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Helpers.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -183,9 +186,8 @@ final class $Helpers$Type extends jni$_.JObjType<Helpers> {
 
   @jni$_.internal
   @core$_.override
-  Helpers fromReference(jni$_.JReference reference) => Helpers.fromReference(
-        reference,
-      );
+  Helpers fromReference(jni$_.JReference reference) =>
+      Helpers.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

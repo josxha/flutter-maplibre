@@ -59,37 +59,40 @@ class Image extends jni$_.JObject {
   final jni$_.JObjType<Image> $type;
 
   @jni$_.internal
-  Image.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Image.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/Image');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/Image',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Image$NullableType();
   static const type = $Image$Type();
-  static final _id_new$ = _class.constructorId(
-    r'([BFLjava/lang/String;IIZ)V',
-  );
+  static final _id_new$ = _class.constructorId(r'([BFLjava/lang/String;IIZ)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -97,7 +100,9 @@ class Image extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               int,
               int,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(byte[] bs, float f, java.lang.String string, int i, int i1, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -111,41 +116,48 @@ class Image extends jni$_.JObject {
   ) {
     final _$bs = bs?.reference ?? jni$_.jNullReference;
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return Image.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$bs.pointer,
-            f,
-            _$string.pointer,
-            i,
-            i1,
-            z ? 1 : 0)
-        .reference);
+    return Image.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$bs.pointer,
+        f,
+        _$string.pointer,
+        i,
+        i1,
+        z ? 1 : 0,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'([BFLjava/lang/String;IIZ[F[F[F)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -156,7 +168,9 @@ class Image extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(byte[] bs, float f, java.lang.String string, int i, int i1, boolean z, float[] fs, float[] fs1, float[] fs2)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -176,19 +190,21 @@ class Image extends jni$_.JObject {
     final _$fs = fs?.reference ?? jni$_.jNullReference;
     final _$fs1 = fs1?.reference ?? jni$_.jNullReference;
     final _$fs2 = fs2?.reference ?? jni$_.jNullReference;
-    return Image.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$bs.pointer,
-            f,
-            _$string.pointer,
-            i,
-            i1,
-            z ? 1 : 0,
-            _$fs.pointer,
-            _$fs1.pointer,
-            _$fs2.pointer)
-        .reference);
+    return Image.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$bs.pointer,
+        f,
+        _$string.pointer,
+        i,
+        i1,
+        z ? 1 : 0,
+        _$fs.pointer,
+        _$fs1.pointer,
+        _$fs2.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -202,11 +218,8 @@ final class $Image$NullableType extends jni$_.JObjType<Image?> {
 
   @jni$_.internal
   @core$_.override
-  Image? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Image.fromReference(
-          reference,
-        );
+  Image? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Image.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -239,9 +252,8 @@ final class $Image$Type extends jni$_.JObjType<Image> {
 
   @jni$_.internal
   @core$_.override
-  Image fromReference(jni$_.JReference reference) => Image.fromReference(
-        reference,
-      );
+  Image fromReference(jni$_.JReference reference) =>
+      Image.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

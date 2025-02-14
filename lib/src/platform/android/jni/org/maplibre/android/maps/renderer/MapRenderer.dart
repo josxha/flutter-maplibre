@@ -63,13 +63,13 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
   final jni$_.JObjType<MapRenderer$RenderingRefreshMode> $type;
 
   @jni$_.internal
-  MapRenderer$RenderingRefreshMode.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapRenderer$RenderingRefreshMode.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode');
+    r'org/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapRenderer$RenderingRefreshMode$NullableType();
@@ -82,7 +82,9 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
   /// from: `static public final org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode WHEN_DIRTY`
   /// The returned object must be released after use, by calling the [release] method.
   static MapRenderer$RenderingRefreshMode get WHEN_DIRTY => _id_WHEN_DIRTY.get(
-      _class, const $MapRenderer$RenderingRefreshMode$Type());
+    _class,
+    const $MapRenderer$RenderingRefreshMode$Type(),
+  );
 
   static final _id_CONTINUOUS = _class.staticFieldId(
     r'CONTINUOUS',
@@ -92,32 +94,42 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
   /// from: `static public final org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode CONTINUOUS`
   /// The returned object must be released after use, by calling the [release] method.
   static MapRenderer$RenderingRefreshMode get CONTINUOUS => _id_CONTINUOUS.get(
-      _class, const $MapRenderer$RenderingRefreshMode$Type());
+    _class,
+    const $MapRenderer$RenderingRefreshMode$Type(),
+  );
 
   static final _id_values = _class.staticMethodId(
     r'values',
     r'()[Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _values = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _values =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode[] values()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JArray<MapRenderer$RenderingRefreshMode?>? values() {
-    return _values(_class.reference.pointer, _id_values as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<MapRenderer$RenderingRefreshMode?>?>(
-            const jni$_.JArrayNullableType<MapRenderer$RenderingRefreshMode?>(
-                $MapRenderer$RenderingRefreshMode$NullableType()));
+    return _values(
+      _class.reference.pointer,
+      _id_values as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<MapRenderer$RenderingRefreshMode?>?>(
+      const jni$_.JArrayNullableType<MapRenderer$RenderingRefreshMode?>(
+        $MapRenderer$RenderingRefreshMode$NullableType(),
+      ),
+    );
   }
 
   static final _id_valueOf = _class.staticMethodId(
@@ -125,27 +137,35 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _valueOf = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _valueOf =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode valueOf(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapRenderer$RenderingRefreshMode? valueOf(
-    jni$_.JString? string,
-  ) {
+  static MapRenderer$RenderingRefreshMode? valueOf(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _valueOf(_class.reference.pointer, _id_valueOf as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<MapRenderer$RenderingRefreshMode?>(
-            const $MapRenderer$RenderingRefreshMode$NullableType());
+    return _valueOf(
+      _class.reference.pointer,
+      _id_valueOf as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<MapRenderer$RenderingRefreshMode?>(
+      const $MapRenderer$RenderingRefreshMode$NullableType(),
+    );
   }
 }
 
@@ -164,9 +184,7 @@ final class $MapRenderer$RenderingRefreshMode$NullableType
   MapRenderer$RenderingRefreshMode? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapRenderer$RenderingRefreshMode.fromReference(
-              reference,
-            );
+          : MapRenderer$RenderingRefreshMode.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -203,9 +221,7 @@ final class $MapRenderer$RenderingRefreshMode$Type
   @jni$_.internal
   @core$_.override
   MapRenderer$RenderingRefreshMode fromReference(jni$_.JReference reference) =>
-      MapRenderer$RenderingRefreshMode.fromReference(
-        reference,
-      );
+      MapRenderer$RenderingRefreshMode.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -236,13 +252,13 @@ class MapRenderer extends jni$_.JObject {
   final jni$_.JObjType<MapRenderer> $type;
 
   @jni$_.internal
-  MapRenderer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapRenderer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/renderer/MapRenderer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/renderer/MapRenderer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapRenderer$NullableType();
@@ -252,24 +268,31 @@ class MapRenderer extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMapOptions;Landroid/content/Context;Ljava/lang/Runnable;)Lorg/maplibre/android/maps/renderer/MapRenderer;',
   );
 
-  static final _create = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _create =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.renderer.MapRenderer create(org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions, android.content.Context context, java.lang.Runnable runnable)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -282,9 +305,13 @@ class MapRenderer extends jni$_.JObject {
         mapLibreMapOptions?.reference ?? jni$_.jNullReference;
     final _$context = context.reference;
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
-    return _create(_class.reference.pointer, _id_create as jni$_.JMethodIDPtr,
-            _$mapLibreMapOptions.pointer, _$context.pointer, _$runnable.pointer)
-        .object<MapRenderer?>(const $MapRenderer$NullableType());
+    return _create(
+      _class.reference.pointer,
+      _id_create as jni$_.JMethodIDPtr,
+      _$mapLibreMapOptions.pointer,
+      _$context.pointer,
+      _$runnable.pointer,
+    ).object<MapRenderer?>(const $MapRenderer$NullableType());
   }
 
   static final _id_getView = _class.instanceMethodId(
@@ -292,129 +319,140 @@ class MapRenderer extends jni$_.JObject {
     r'()Landroid/view/View;',
   );
 
-  static final _getView = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getView =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.view.View getView()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getView() {
-    return _getView(reference.pointer, _id_getView as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getView(
+      reference.pointer,
+      _id_getView as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_onStart = _class.instanceMethodId(
-    r'onStart',
-    r'()V',
-  );
+  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
 
-  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onStart =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStart()`
   void onStart() {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(
-    r'onPause',
-    r'()V',
-  );
+  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
 
-  static final _onPause = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onPause =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onPause()`
   void onPause() {
     _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(
-    r'onResume',
-    r'()V',
-  );
+  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
 
-  static final _onResume = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onResume =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onResume()`
   void onResume() {
     _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(
-    r'onStop',
-    r'()V',
-  );
+  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
 
-  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onStop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStop()`
   void onStop() {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(
-    r'onDestroy',
-    r'()V',
-  );
+  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
 
-  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onDestroy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
@@ -426,16 +464,23 @@ class MapRenderer extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
   );
 
-  static final _setRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setRenderingRefreshMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void setRenderingRefreshMode(org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode renderingRefreshMode)`
   void setRenderingRefreshMode(
@@ -444,10 +489,10 @@ class MapRenderer extends jni$_.JObject {
     final _$renderingRefreshMode =
         renderingRefreshMode?.reference ?? jni$_.jNullReference;
     _setRenderingRefreshMode(
-            reference.pointer,
-            _id_setRenderingRefreshMode as jni$_.JMethodIDPtr,
-            _$renderingRefreshMode.pointer)
-        .check();
+      reference.pointer,
+      _id_setRenderingRefreshMode as jni$_.JMethodIDPtr,
+      _$renderingRefreshMode.pointer,
+    ).check();
   }
 
   static final _id_getRenderingRefreshMode = _class.instanceMethodId(
@@ -455,25 +500,31 @@ class MapRenderer extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _getRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRenderingRefreshMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode getRenderingRefreshMode()`
   /// The returned object must be released after use, by calling the [release] method.
   MapRenderer$RenderingRefreshMode? getRenderingRefreshMode() {
-    return _getRenderingRefreshMode(reference.pointer,
-            _id_getRenderingRefreshMode as jni$_.JMethodIDPtr)
-        .object<MapRenderer$RenderingRefreshMode?>(
-            const $MapRenderer$RenderingRefreshMode$NullableType());
+    return _getRenderingRefreshMode(
+      reference.pointer,
+      _id_getRenderingRefreshMode as jni$_.JMethodIDPtr,
+    ).object<MapRenderer$RenderingRefreshMode?>(
+      const $MapRenderer$RenderingRefreshMode$NullableType(),
+    );
   }
 
   static final _id_setOnFpsChangedListener = _class.instanceMethodId(
@@ -481,16 +532,23 @@ class MapRenderer extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnFpsChangedListener;)V',
   );
 
-  static final _setOnFpsChangedListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setOnFpsChangedListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnFpsChangedListener(org.maplibre.android.maps.MapLibreMap$OnFpsChangedListener onFpsChangedListener)`
   void setOnFpsChangedListener(
@@ -499,10 +557,10 @@ class MapRenderer extends jni$_.JObject {
     final _$onFpsChangedListener =
         onFpsChangedListener?.reference ?? jni$_.jNullReference;
     _setOnFpsChangedListener(
-            reference.pointer,
-            _id_setOnFpsChangedListener as jni$_.JMethodIDPtr,
-            _$onFpsChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnFpsChangedListener as jni$_.JMethodIDPtr,
+      _$onFpsChangedListener.pointer,
+    ).check();
   }
 
   static final _id_setSwapBehaviorFlush = _class.instanceMethodId(
@@ -510,23 +568,31 @@ class MapRenderer extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setSwapBehaviorFlush = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setSwapBehaviorFlush =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setSwapBehaviorFlush(boolean z)`
-  void setSwapBehaviorFlush(
-    bool z,
-  ) {
-    _setSwapBehaviorFlush(reference.pointer,
-            _id_setSwapBehaviorFlush as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setSwapBehaviorFlush(bool z) {
+    _setSwapBehaviorFlush(
+      reference.pointer,
+      _id_setSwapBehaviorFlush as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setMaximumFps = _class.instanceMethodId(
@@ -534,23 +600,31 @@ class MapRenderer extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setMaximumFps = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaximumFps =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setMaximumFps(int i)`
-  void setMaximumFps(
-    int i,
-  ) {
+  void setMaximumFps(int i) {
     _setMaximumFps(
-            reference.pointer, _id_setMaximumFps as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setMaximumFps as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 }
 
@@ -564,11 +638,8 @@ final class $MapRenderer$NullableType extends jni$_.JObjType<MapRenderer?> {
 
   @jni$_.internal
   @core$_.override
-  MapRenderer? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : MapRenderer.fromReference(
-          reference,
-        );
+  MapRenderer? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : MapRenderer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -602,9 +673,7 @@ final class $MapRenderer$Type extends jni$_.JObjType<MapRenderer> {
   @jni$_.internal
   @core$_.override
   MapRenderer fromReference(jni$_.JReference reference) =>
-      MapRenderer.fromReference(
-        reference,
-      );
+      MapRenderer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
