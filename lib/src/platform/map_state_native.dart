@@ -131,7 +131,7 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
     if (event == pigeon.LongPressEventType.begin && !isDragging) {
       final screenLoc = await toScreenLocation(position);
       final draggableLayers =
-          style?.draggableLayers.map((layer) => layer.id).toList() ?? [];
+          style?.getDraggableLayers().map((layer) => layer.id).toList() ?? [];
       if (draggableLayers.isEmpty) return;
 
       final features = await queryRenderedFeatures(

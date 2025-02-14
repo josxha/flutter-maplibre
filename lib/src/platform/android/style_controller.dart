@@ -10,13 +10,7 @@ class StyleControllerAndroid implements StyleController {
   final List<StyleLayer> _draggableLayers = [];
 
   @override
-  List<StyleLayer> get draggableLayers => _draggableLayers;
-
-  @override
-  set draggableLayers(List<StyleLayer> layers) {
-    _draggableLayers.clear();
-    _draggableLayers.addAll(layers);
-  }
+  List<StyleLayer> getDraggableLayers() => _draggableLayers;
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
@@ -30,7 +24,7 @@ class StyleControllerAndroid implements StyleController {
           layout: layer.layout,
           paint: layer.paint,
         );
-        if (layer.draggable) draggableLayers.add(layer);
+        if (layer.draggable) _draggableLayers.add(layer);
       case CircleStyleLayer():
         await _hostApi.addCircleLayer(
           id: layer.id,
@@ -39,7 +33,7 @@ class StyleControllerAndroid implements StyleController {
           layout: layer.layout,
           paint: layer.paint,
         );
-        if (layer.draggable) draggableLayers.add(layer);
+        if (layer.draggable) _draggableLayers.add(layer);
       case BackgroundStyleLayer():
         await _hostApi.addBackgroundLayer(
           id: layer.id,
@@ -79,7 +73,7 @@ class StyleControllerAndroid implements StyleController {
           layout: layer.layout,
           paint: layer.paint,
         );
-        if (layer.draggable) draggableLayers.add(layer);
+        if (layer.draggable) _draggableLayers.add(layer);
       case RasterStyleLayer():
         await _hostApi.addRasterLayer(
           id: layer.id,
@@ -96,7 +90,7 @@ class StyleControllerAndroid implements StyleController {
           layout: layer.layout,
           paint: layer.paint,
         );
-        if (layer.draggable) draggableLayers.add(layer);
+        if (layer.draggable) _draggableLayers.add(layer);
       default:
         throw UnimplementedError(
           'The Layer is not supported: ${layer.runtimeType}',
@@ -132,8 +126,7 @@ class StyleControllerAndroid implements StyleController {
           jniSource.setVolatile(source.volatile.toJBoolean());
         case RasterSource():
           if (source.url case final String url) {
-            jniSource =
-                jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+            jniSource = jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
           } else {
             final tilesArray = JArray(JString.type, source.tiles!.length);
             for (var i = 0; i < source.tiles!.length; i++) {
@@ -212,8 +205,7 @@ class StyleControllerAndroid implements StyleController {
   }) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      final source =
-          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
+      final source = jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
       source.setGeoJson$3(data.toJString());
     });
   }
@@ -286,8 +278,7 @@ class StyleControllerAndroid implements StyleController {
       }
     }
 
-    final resultArray =
-        JArray<JString?>(JString.nullableType, queryLayerIds.length);
+    final resultArray = JArray<JString?>(JString.nullableType, queryLayerIds.length);
     for (var i = 0; i < queryLayerIds.length; i++) {
       if (queryLayerIds[i] != null) resultArray[i] = queryLayerIds[i];
     }

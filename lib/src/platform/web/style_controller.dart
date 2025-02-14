@@ -10,13 +10,7 @@ class StyleControllerWeb implements StyleController {
   final List<StyleLayer> _draggableLayers = [];
 
   @override
-  List<StyleLayer> get draggableLayers => _draggableLayers;
-
-  @override
-  set draggableLayers(List<StyleLayer> layers) {
-    _draggableLayers.clear();
-    _draggableLayers.addAll(layers);
-  }
+  List<StyleLayer> getDraggableLayers() => _draggableLayers;
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
@@ -267,6 +261,5 @@ class StyleControllerWeb implements StyleController {
   void dispose() {}
 
   @override
-  void setProjection(MapProjection projection) => _map
-      .setProjection(interop.ProjectionSpecification(type: projection.name));
+  void setProjection(MapProjection projection) => _map.setProjection(interop.ProjectionSpecification(type: projection.name));
 }

@@ -25,45 +25,45 @@ void main() {
     late StyleController style;
     setUp(() {
       style = MockStyleController();
-      when(() => style.draggableLayers).thenReturn([]);
-      when(() => style.addLayer(any())).thenAnswer((invocation) async {
+      when(() => style.getDraggableLayers()).thenReturn([]);
+      when(() => style.addLayer(any(), belowLayerId: any(named: 'belowLayerId'))).thenAnswer((invocation) async {
         final layer = invocation.positionalArguments[0] as StyleLayer;
         if (layer.draggable) {
-          style.draggableLayers.add(layer);
+          style.getDraggableLayers().add(layer);
         }
       });
     });
 
-    test('add and remove draggable layers', () {
+    test('add and remove draggable layers', () async {
       final draggableLayer = DraggableStyleLayer();
       final nonDraggableLayer = NonDraggableStyleLayer();
       final layers = <StyleLayer>[];
-      when(() => style.draggableLayers).thenReturn(layers);
+      when(() => style.getDraggableLayers()).thenReturn(layers);
 
-      style.addLayer(draggableLayer);
-      style.addLayer(nonDraggableLayer);
-      expect(style.draggableLayers, contains(draggableLayer));
-      expect(style.draggableLayers, isNot(contains(nonDraggableLayer)));
+      await style.addLayer(draggableLayer);
+      await style.addLayer(nonDraggableLayer);
+      expect(style.getDraggableLayers(), contains(draggableLayer));
+      expect(style.getDraggableLayers(), isNot(contains(nonDraggableLayer)));
 
       layers.remove(draggableLayer);
-      expect(style.draggableLayers, isNot(contains(draggableLayer)));
+      expect(style.getDraggableLayers(), isNot(contains(draggableLayer)));
     });
 
-    test('clear draggable layers', () {
+    test('clear draggable layers', () async {
       final draggableLayer1 = DraggableStyleLayer();
       final draggableLayer2 = DraggableStyleLayer();
       final nonDraggableLayer = NonDraggableStyleLayer();
       final layers = <StyleLayer>[];
-      when(() => style.draggableLayers).thenReturn(layers);
+      when(() => style.getDraggableLayers()).thenReturn(layers);
 
-      style.addLayer(draggableLayer1);
-      style.addLayer(draggableLayer2);
-      style.addLayer(nonDraggableLayer);
-      expect(style.draggableLayers.length, 2);
-      expect(style.draggableLayers, isNot(contains(nonDraggableLayer)));
+      await style.addLayer(draggableLayer1);
+      await style.addLayer(draggableLayer2);
+      await style.addLayer(nonDraggableLayer);
+      expect(style.getDraggableLayers().length, 2);
+      expect(style.getDraggableLayers(), isNot(contains(nonDraggableLayer)));
 
       layers.clear();
-      expect(style.draggableLayers, isEmpty);
+      expect(style.getDraggableLayers(), isEmpty);
     });
   });
 }

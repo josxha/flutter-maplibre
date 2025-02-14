@@ -48,7 +48,8 @@ abstract interface class StyleController {
   /// The [StyleLayer]s that are draggable.
   ///
   /// These layers can be queried via the [MapEventFeatureDrag] after an [MapEventLongPressMove] event.
-  List<StyleLayer> draggableLayers = [];
+  List<StyleLayer> getDraggableLayers();
+  // List<StyleLayer> get draggableLayers;
 }
 
 /// The map projections.
