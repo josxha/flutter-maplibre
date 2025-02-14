@@ -18,17 +18,35 @@ part 'polyline_layer.dart';
 sealed class Layer<G extends GeometryObject> {
   const Layer._({
     required this.list,
+    this.sourceId,
+    this.layerId,
     this.draggable = false,
   });
 
   /// The [List] of layers.
   final List<Feature<G>> list;
 
-  /// Get a unique source id.
-  String getSourceId(int index) => 'maplibre-source-$index';
+  /// The source id of the layer.
+  ///
+  /// Overrides the [getSourceId] method to return a custom source id.
+  final String? sourceId;
 
-  /// Get a unique layer id.
-  String getLayerId(int index) => 'maplibre-layer-$index';
+  /// The layer id of the layer.
+  ///
+  /// Overrides the [getLayerId] method to return a custom layer id.
+  final String? layerId;
+
+  /// Whether the layer is draggable.
+  /// Default is `false` to prevent accidental dragging and performance issues.
+  final bool draggable;
+
+  /// Get the source id.
+  /// If [sourceId] is not set, it will return a default source id.
+  String getSourceId(int index) => sourceId ?? 'maplibre-source-$index';
+
+  /// Get the layer id.
+  /// If [layerId] is not set, it will return a default layer id.
+  String getLayerId(int index) => layerId ?? 'maplibre-layer-$index';
 
   /// Build the paint properties.
   Map<String, Object> getPaint();
@@ -38,10 +56,6 @@ sealed class Layer<G extends GeometryObject> {
 
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
-
-  /// Whether the layer is draggable.
-  /// Default is `false` to prevent accidental dragging and performance issues.
-  final bool draggable;
 
   /// Create a [Feature] list from a list of [G]s.
   static List<Feature<G>> generateFeatureList<G extends GeometryObject>(

@@ -11,6 +11,8 @@ class PolygonLayer extends Layer<Polygon> {
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
     super.draggable = false,
+    super.sourceId,
+    super.layerId,
   }) : super._(list: polygons);
 
   /// The color of the polygon. Defaults to black.

@@ -14,6 +14,8 @@ class PolylineLayer extends Layer<LineString> {
     this.blur = 0,
     this.dashArray,
     super.draggable = false,
+    super.sourceId,
+    super.layerId,
   }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
