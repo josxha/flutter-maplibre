@@ -19,8 +19,8 @@ void main() {
       final style = MockStyleController();
       when(controller.getCamera).thenReturn(camera);
       when(() => controller.style).thenReturn(style);
-      when(style.getAttributions).thenAnswer(
-        (_) async => [
+      when(style.getAttributionsSync).thenAnswer(
+        (_) => [
           'Source 1',
           '<a href="https://maplibre.org">Source 2</a>',
         ],
