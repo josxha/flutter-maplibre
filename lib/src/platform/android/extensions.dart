@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
-import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
-    as jni_geojson;
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 /// Extension methods for the [Position] class. Not exported publicly.
@@ -118,9 +116,9 @@ extension OfflineRegionExt on jni.OfflineRegion {
   }
 }
 
-/// Extension method for the [jni_geojson.Feature] class. Not exported publicly.
-extension JniFeatureExt on jni_geojson.Feature {
-  /// Convert a [jni_geojson.Feature] to a [Feature].
+/// Extension method for the [jni.Feature] class. Not exported publicly.
+extension JniFeatureExt on jni.Feature {
+  /// Convert a [jni.Feature] to a [Feature].
   Feature toFeature() {
     final json = toJson()!.toDartString();
     final feature = Feature.fromJson(jsonDecode(json) as Map<String, dynamic>);
