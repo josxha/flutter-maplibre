@@ -26,7 +26,9 @@ void main() {
     setUp(() {
       style = MockStyleController();
       when(() => style.getDraggableLayers()).thenReturn([]);
-      when(() => style.addLayer(any(), belowLayerId: any(named: 'belowLayerId'))).thenAnswer((invocation) async {
+      when(
+        () => style.addLayer(any(), belowLayerId: any(named: 'belowLayerId')),
+      ).thenAnswer((invocation) async {
         final layer = invocation.positionalArguments[0] as StyleLayer;
         if (layer.draggable) {
           style.getDraggableLayers().add(layer);

@@ -126,7 +126,8 @@ class StyleControllerAndroid implements StyleController {
           jniSource.setVolatile(source.volatile.toJBoolean());
         case RasterSource():
           if (source.url case final String url) {
-            jniSource = jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
+            jniSource =
+                jni.RasterSource.new$4(jniId, url.toJString(), source.tileSize);
           } else {
             final tilesArray = JArray(JString.type, source.tiles!.length);
             for (var i = 0; i < source.tiles!.length; i++) {
@@ -205,7 +206,8 @@ class StyleControllerAndroid implements StyleController {
   }) async {
     final jniStyle = _jniStyle;
     await runOnPlatformThread(() {
-      final source = jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
+      final source =
+          jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
       source.setGeoJson$3(data.toJString());
     });
   }
@@ -278,7 +280,8 @@ class StyleControllerAndroid implements StyleController {
       }
     }
 
-    final resultArray = JArray<JString?>(JString.nullableType, queryLayerIds.length);
+    final resultArray =
+        JArray<JString?>(JString.nullableType, queryLayerIds.length);
     for (var i = 0; i < queryLayerIds.length; i++) {
       if (queryLayerIds[i] != null) resultArray[i] = queryLayerIds[i];
     }
