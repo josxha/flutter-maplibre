@@ -178,34 +178,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async => _jniProjection
-      .fromScreenLocation(screenLocation.toPointF())
-      .toPosition(releaseOriginal: true);
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      toLngLatSync(screenLocation);
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async => _jniProjection
-      .toScreenLocation(lngLat.toLatLng())
-      .toOffset(releaseOriginal: true);
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      toScreenLocationSync(lngLat);
 
   @override
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      screenLocations
-          .map(
-            (screenLocation) => _jniProjection
-                .fromScreenLocation(screenLocation.toPointF())
-                .toPosition(releaseOriginal: true),
-          )
-          .toList(growable: false);
+      toLngLatsSync(screenLocations);
 
   @override
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      lngLats
-          .map(
-            (lngLat) => _jniProjection
-                .toScreenLocation(lngLat.toLatLng())
-                .toOffset(releaseOriginal: true),
-          )
-          .toList(growable: false);
+      toScreenLocationsSync(lngLats);
 
   @override
   Future<void> moveCamera({
@@ -358,16 +344,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+      getMetersPerPixelAtLatitudeSync(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
-    final region = _jniProjection.getVisibleRegion();
-    final jniBounds = region.latLngBounds;
-    region.release();
-    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
-    return bounds;
-  }
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
 
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
@@ -513,5 +493,46 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             : jni.CameraMode.NONE_GPS, // only gps bearing
     };
     _locationComponent.setCameraMode(mode);
+  }
+
+  @override
+  Position toLngLatSync(Offset screenLocation) => _jniProjection
+      .fromScreenLocation(screenLocation.toPointF())
+      .toPosition(releaseOriginal: true);
+
+  @override
+  List<Position> toLngLatsSync(List<Offset> screenLocations) => screenLocations
+      .map(
+        (screenLocation) => _jniProjection
+            .fromScreenLocation(screenLocation.toPointF())
+            .toPosition(releaseOriginal: true),
+      )
+      .toList(growable: false);
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) => _jniProjection
+      .toScreenLocation(lngLat.toLatLng())
+      .toOffset(releaseOriginal: true);
+
+  @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) => lngLats
+      .map(
+        (lngLat) => _jniProjection
+            .toScreenLocation(lngLat.toLatLng())
+            .toOffset(releaseOriginal: true),
+      )
+      .toList(growable: false);
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+
+  @override
+  LngLatBounds getVisibleRegionSync() {
+    final region = _jniProjection.getVisibleRegion();
+    final jniBounds = region.latLngBounds;
+    region.release();
+    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
+    return bounds;
   }
 }
