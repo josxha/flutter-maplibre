@@ -20,10 +20,7 @@ void main() {
       when(controller.getCamera).thenReturn(camera);
       when(() => controller.style).thenReturn(style);
       when(style.getAttributionsSync).thenAnswer(
-        (_) => [
-          'Source 1',
-          '<a href="https://maplibre.org">Source 2</a>',
-        ],
+        (_) => ['Source 1', '<a href="https://maplibre.org">Source 2</a>'],
       );
       const padding = EdgeInsets.all(2);
       const alignment = Alignment.center;
