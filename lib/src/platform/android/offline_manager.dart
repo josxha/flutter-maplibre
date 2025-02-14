@@ -87,6 +87,7 @@ class OfflineManagerAndroid implements OfflineManager {
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
     _jManager.setMaximumAmbientCacheSize(
+      bytes,
       jni.OfflineManager$FileSourceCallback.implement(
         jni.$OfflineManager$FileSourceCallback(
           onSuccess: completer.complete,
