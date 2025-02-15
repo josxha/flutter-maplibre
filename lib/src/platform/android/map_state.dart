@@ -212,7 +212,17 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
       cameraPosition,
     );
-    _jniMapLibreMap?.moveCamera(cameraUpdate);
+    final completer = Completer<void>();
+    _jniMapLibreMap?.moveCamera$1(
+      cameraUpdate,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+        ),
+      ),
+    );
     cameraUpdate.release();
   }
 
@@ -240,22 +250,19 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     );
 
     final completer = Completer<void>();
-    jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
-    // TODO: jni causes sometimes a deadlock, complete immediately for now
-    completer.complete();
-    /*jniMap.animateCamera$3(
-        cameraUpdate,
-        nativeDuration.inMilliseconds,
-        jni.MapLibreMap_CancelableCallback.implement(
-          jni.$MapLibreMap_CancelableCallback(
-            onCancel: () =>
-                completer.completeError(Exception('Animation cancelled.')),
-            onFinish: completer.complete,
-            onFinish$async: true,
-            onCancel$async: true,
-          ),
+    jniMap.animateCamera$3(
+      cameraUpdate,
+      nativeDuration.inMilliseconds,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+          onFinish$async: true,
+          onCancel$async: true,
         ),
-      );*/
+      ),
+    );
     final result = await completer.future;
     cameraUpdate.release();
     return result;
@@ -288,22 +295,19 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     latLngBounds.release();
 
     final completer = Completer<void>();
-    jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
-    // TODO: jni causes sometimes a deadlock, complete immediately for now
-    completer.complete();
-    /*jniMap.animateCamera$3(
-        cameraUpdate,
-        nativeDuration.inMilliseconds,
-        jni.MapLibreMap_CancelableCallback.implement(
-          jni.$MapLibreMap_CancelableCallback(
-            onCancel: () =>
-                completer.completeError(Exception('Animation cancelled.')),
-            onFinish: completer.complete,
-            onCancel$async: true,
-            onFinish$async: true,
-          ),
+    jniMap.animateCamera$3(
+      cameraUpdate,
+      nativeDuration.inMilliseconds,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+          onCancel$async: true,
+          onFinish$async: true,
         ),
-      );*/
+      ),
+    );
     final result = await completer.future;
     cameraUpdate.release();
     return result;
