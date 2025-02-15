@@ -50,6 +50,8 @@ class OfflineManagerAndroid implements OfflineManager {
               (error) => completer.completeError(
                 error.toDartString(releaseOriginal: true),
               ),
+          onError$async: true,
+          onMerge$async: true,
         ),
       ),
     );
@@ -73,6 +75,9 @@ class OfflineManagerAndroid implements OfflineManager {
               Exception(error.toDartString(releaseOriginal: true)),
             );
           },
+          onError$async: true,
+          onRegion$async: true,
+          onRegionNotFound$async: true,
         ),
       ),
     );
@@ -186,6 +191,8 @@ class OfflineManagerAndroid implements OfflineManager {
             completer.complete(list);
           },
           onError: (error) => completer.completeError(Exception(error)),
+          onError$async: true,
+          onList$async: true,
         ),
       ),
     );
@@ -276,12 +283,17 @@ class OfflineManagerAndroid implements OfflineManager {
                     Exception('Tile count limit exceeded: $limit'),
                   );
                 },
+                onError$async: true,
+                mapboxTileCountLimitExceeded$async: true,
+                onStatusChanged$async: true,
               ),
             );
             jRegion.setObserver(jObserver);
             jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
           },
           onError: (error) => stream.addError(Exception(error)),
+          onError$async: true,
+          onCreate$async: true,
         ),
       ),
     );
