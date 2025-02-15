@@ -220,6 +220,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
           onCancel:
               () => completer.completeError(Exception('Animation cancelled.')),
           onFinish: completer.complete,
+          onCancel$async: true,
+          onFinish$async: true,
         ),
       ),
     );
