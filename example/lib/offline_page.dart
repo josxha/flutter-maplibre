@@ -104,7 +104,7 @@ class _OfflinePageState extends State<OfflinePage> {
                           : Text(_downloadProgressWorld!),
                 ),
                 ListTile(
-                  title: const Text('Download Bregenz'),
+                  title: const Text('Download Region'),
                   trailing:
                       _downloadProgressBregenz == null
                           ? Row(
