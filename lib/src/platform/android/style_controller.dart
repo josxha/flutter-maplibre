@@ -112,12 +112,15 @@ class StyleControllerAndroid implements StyleController {
             source.tileSize,
           );
         } else {
-          final tilesArray = JArray(JString.type, source.tiles!.length);
+          final tilesArray = JArray(JString.nullableType, source.tiles!.length);
           for (var i = 0; i < source.tiles!.length; i++) {
             tilesArray[i] = source.tiles![i].toJString();
           }
           final tileSet =
-              jni.TileSet('{}'.toJString(), tilesArray)
+              jni.TileSet(
+                  '{}'.toJString(),
+                  tilesArray.as(JArray.type(JString.type)),
+                )
                 ..setMaxZoom(source.maxZoom)
                 ..setMinZoom(source.minZoom);
           jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
