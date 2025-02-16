@@ -4,4 +4,3 @@ linter:
   rules:
     public_member_api_docs: false
     document_ignores: true
-    avoid_catches_without_on_clauses: true
