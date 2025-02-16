@@ -40,10 +40,10 @@ class MapScalebar extends StatelessWidget {
     // with rounded edges like iOS.
     return SafeArea(
       child: Container(
-      alignment: alignment,
-      padding: padding,
-      child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
-    ),
+        alignment: alignment,
+        padding: padding,
+        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+      ),
     );
   }
 }

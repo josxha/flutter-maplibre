@@ -129,18 +129,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _mapView.metersPerPointAtLatitude_(latitude);
+      getMetersPerPixelAtLatitudeSync(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
-    final bounds = _mapView.visibleCoordinateBounds;
-    return LngLatBounds(
-      longitudeWest: bounds.sw.longitude,
-      longitudeEast: bounds.ne.longitude,
-      latitudeSouth: bounds.sw.latitude,
-      latitudeNorth: bounds.ne.latitude,
-    );
-  }
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
 
   @override
   Future<void> moveCamera({
@@ -248,47 +240,20 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async {
-    final coords = _mapView.convertPoint_toCoordinateFromView_(
-      screenLocation.toCGPoint(),
-      _mapView,
-    );
-    return coords.toPosition();
-  }
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      toLngLatSync(screenLocation);
 
   @override
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      screenLocations
-          .map(
-            (e) =>
-                _mapView
-                    .convertPoint_toCoordinateFromView_(e.toCGPoint(), _mapView)
-                    .toPosition(),
-          )
-          .toList(growable: false);
+      toLngLatsSync(screenLocations);
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    final coords = _mapView.convertCoordinate_toPointToView_(
-      lngLat.toCLLocationCoordinate2D(),
-      _mapView,
-    );
-    return coords.toOffset();
-  }
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      toScreenLocation(lngLat);
 
   @override
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      lngLats
-          .map(
-            (e) =>
-                _mapView
-                    .convertCoordinate_toPointToView_(
-                      e.toCLLocationCoordinate2D(),
-                      _mapView,
-                    )
-                    .toOffset(),
-          )
-          .toList(growable: false);
+      toScreenLocationsSync(lngLats);
 
   @override
   Future<void> trackLocation({
@@ -309,38 +274,43 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) {
-    // TODO: implement getMetersPerPixelAtLatitudeSync
-    throw UnimplementedError();
-  }
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+      _mapView.metersPerPointAtLatitude_(latitude);
 
   @override
   LngLatBounds getVisibleRegionSync() {
-    // TODO: implement getVisibleRegionSync
-    throw UnimplementedError();
+    final bounds = _mapView.visibleCoordinateBounds;
+    return LngLatBounds(
+      longitudeWest: bounds.sw.longitude,
+      longitudeEast: bounds.ne.longitude,
+      latitudeSouth: bounds.sw.latitude,
+      latitudeNorth: bounds.ne.latitude,
+    );
   }
 
   @override
-  Position toLngLatSync(Offset screenLocation) {
-    // TODO: implement toLngLatSync
-    throw UnimplementedError();
-  }
+  Position toLngLatSync(Offset screenLocation) =>
+      _mapView
+          .convertPoint_toCoordinateFromView_(
+            screenLocation.toCGPoint(),
+            _mapView,
+          )
+          .toPosition();
 
   @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) {
-    // TODO: implement toLngLatsSync
-    throw UnimplementedError();
-  }
+  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLatSync).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) {
-    // TODO: implement toScreenLocationSync
-    throw UnimplementedError();
-  }
+  Offset toScreenLocationSync(Position lngLat) =>
+      _mapView
+          .convertCoordinate_toPointToView_(
+            lngLat.toCLLocationCoordinate2D(),
+            _mapView,
+          )
+          .toOffset();
 
   @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) {
-    // TODO: implement toScreenLocationsSync
-    throw UnimplementedError();
-  }
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
+      lngLats.map(toScreenLocationSync).toList(growable: false);
 }
