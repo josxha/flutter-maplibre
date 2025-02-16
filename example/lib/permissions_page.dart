@@ -49,10 +49,12 @@ class _PermissionsPageState extends State<PermissionsPage> {
                   final granted = await _manager.requestLocationPermissions(
                     explanation: 'Show the user location on the map.',
                   );
-                  if (granted) {
-                    context.showSnackBox('Permission granted.');
-                  } else {
-                    context.showSnackBox('Permission not granted.');
+                  if (context.mounted) {
+                    if (granted) {
+                      context.showSnackBox('Permission granted.');
+                    } else {
+                      context.showSnackBox('Permission not granted.');
+                    }
                   }
                   setState(() {}); // refresh the screen
                 } catch (error, stacktrace) {

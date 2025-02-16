@@ -36,9 +36,11 @@ class _UserLocationPageState extends State<UserLocationPage> {
                         .requestLocationPermissions(
                           explanation: 'Show the user location on the map.',
                         );
-                    context.showSnackBox(
-                      'Permission ${granted ? 'granted' : 'not granted'}.',
-                    );
+                    if (context.mounted) {
+                      context.showSnackBox(
+                        'Permission ${granted ? 'granted' : 'not granted'}.',
+                      );
+                    }
                   },
                   child: const Text(
                     'Get permission',
@@ -49,8 +51,9 @@ class _UserLocationPageState extends State<UserLocationPage> {
                   onPressed: () async {
                     try {
                       await _controller.enableLocation();
-                      if (context.mounted)
+                      if (context.mounted) {
                         context.showSnackBox('Location enabled.');
+                      }
                     } catch (error) {
                       if (context.mounted) {
                         context.showSnackBox(error.toString());
@@ -66,11 +69,13 @@ class _UserLocationPageState extends State<UserLocationPage> {
                   onPressed: () async {
                     try {
                       await _controller.trackLocation();
-                      if (context.mounted)
+                      if (context.mounted) {
                         context.showSnackBox('Tracking location.');
+                      }
                     } catch (error) {
-                      if (context.mounted)
+                      if (context.mounted) {
                         context.showSnackBox(error.toString());
+                      }
                     }
                   },
                   child: const Text(
