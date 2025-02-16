@@ -117,24 +117,6 @@ class _MapControlButtonsState extends State<MapControlButtons> {
                                 : Icons.gps_not_fixed,
                           ),
                 ),
-                if (!kIsWeb && widget.showTrackLocation) ...[
-                  const SizedBox(height: 8),
-                  FloatingActionButton(
-                    heroTag: 'MapLibreTrackLocationButton',
-                    onPressed: () async => _initializeLocation(controller),
-                    child:
-                        _trackState == _TrackLocationState.loading
-                            ? const SizedBox.square(
-                              dimension: kDefaultFontSize,
-                              child: CircularProgressIndicator(),
-                            )
-                            : Icon(
-                              _trackState == _TrackLocationState.gpsFixed
-                                  ? Icons.gps_fixed
-                                  : Icons.gps_not_fixed,
-                            ),
-                  ),
-                ],
               ],
             ],
           ),
