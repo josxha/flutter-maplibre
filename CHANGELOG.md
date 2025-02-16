@@ -1,3 +1,40 @@
+## 0.2.1
+
+### New Features
+
+- Upgrade MapLibre Native on Android
+  to [11.8.0](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1180)
+  which introduces support for PMTiles.
+- Add `removePinchOnPressed` and `webRotationSpeed` as parameters to the
+  `MapCompass` widget.
+- Allow the `SourceAttribution` widget to use multiple lines for its
+  attributions.
+- Underline an attribution link for a `SourceAttribution` widget when hovered
+  with a cursor.
+- Add the parameter `allowInteraction` to the `WidgetLayer` that allows widgets
+  to detect gestures on these widgets.
+- Reintroduce awaitable `moveCamera()`, `animateCamera()` and `fitCamera()` on
+  Android.
+- Use synchronous JNI calls on Android to prevent thread hopping.
+
+### Bug Fixes
+
+- Fix exceptions when the map widget rebuilds a lot in a short amount of time.
+- Fix `moveCamera()`, `animateCamera()` and `fitCamera()` does not ignore null
+  parameters.
+- Fix app freeze on Android using Flutter 3.29.0 caused by the merged Platform
+  and UI thread.
+
+### Misc
+
+- Update examples and documentation.
+- Set minimum Flutter version
+  to [3.29.0](https://discord.com/channels/951867686378409984/951879268227485707/1339719764574081148)
+  and minimum Dart version
+  to [3.7.0](https://discord.com/channels/951867686378409984/951879268227485707/1339719747981545485).
+- Use the new Dart 3.7 code formatting.
+- Upgrade pigeon to 24.
+
 ## 0.2.0
 
 This release is a collection of user affecting changes along a couple of new
