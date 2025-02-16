@@ -22,8 +22,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
-  MLNMapView get _mapView => _cachedMapView ??=
-      MLNMapView.castFrom(MapLibreRegistry.getMapWithViewId_(_viewId)!);
+  MLNMapView get _mapView =>
+      _cachedMapView ??= MLNMapView.castFrom(
+        MapLibreRegistry.getMapWithViewId_(_viewId)!,
+      );
 
   @override
   StyleControllerIos? style;
@@ -98,15 +100,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final sw = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeWest
-      ..latitude = bounds.latitudeSouth;
-    final ne = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeEast
-      ..latitude = bounds.latitudeNorth;
-    final ffiBounds = Struct.create<MLNCoordinateBounds>()
-      ..sw = sw
-      ..ne = ne;
+    final sw =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = bounds.longitudeWest
+          ..latitude = bounds.latitudeSouth;
+    final ne =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = bounds.longitudeEast
+          ..latitude = bounds.latitudeNorth;
+    final ffiBounds =
+        Struct.create<MLNCoordinateBounds>()
+          ..sw = sw
+          ..ne = ne;
     // TODO support padding with Struct UIEdgeInsets
     _mapView.setVisibleCoordinateBounds_animated_(ffiBounds, true);
   }
@@ -226,11 +231,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers.objectAtIndex_(i);
       print(layer.ref.runtimeType);
-      final features =
-          _mapView.visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
-        point,
-        NSSet.setWithObject_(layer), // TODO use layer.id
-      );
+      final features = _mapView
+          .visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
+            point,
+            NSSet.setWithObject_(layer), // TODO use layer.id
+          );
       if (features.count == 0) continue;
       /* TODO final queriedLayer = QueriedLayer(
         layerId: jLayerId.toDartString(releaseOriginal: true),
@@ -255,9 +260,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
       screenLocations
           .map(
-            (e) => _mapView
-                .convertPoint_toCoordinateFromView_(e.toCGPoint(), _mapView)
-                .toPosition(),
+            (e) =>
+                _mapView
+                    .convertPoint_toCoordinateFromView_(e.toCGPoint(), _mapView)
+                    .toPosition(),
           )
           .toList(growable: false);
 
@@ -274,12 +280,13 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
       lngLats
           .map(
-            (e) => _mapView
-                .convertCoordinate_toPointToView_(
-                  e.toCLLocationCoordinate2D(),
-                  _mapView,
-                )
-                .toOffset(),
+            (e) =>
+                _mapView
+                    .convertCoordinate_toPointToView_(
+                      e.toCLLocationCoordinate2D(),
+                      _mapView,
+                    )
+                    .toOffset(),
           )
           .toList(growable: false);
 
@@ -299,5 +306,41 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       BearingTrackMode.gps =>
         MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
+  }
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) {
+    // TODO: implement getMetersPerPixelAtLatitudeSync
+    throw UnimplementedError();
+  }
+
+  @override
+  LngLatBounds getVisibleRegionSync() {
+    // TODO: implement getVisibleRegionSync
+    throw UnimplementedError();
+  }
+
+  @override
+  Position toLngLatSync(Offset screenLocation) {
+    // TODO: implement toLngLatSync
+    throw UnimplementedError();
+  }
+
+  @override
+  List<Position> toLngLatsSync(List<Offset> screenLocations) {
+    // TODO: implement toLngLatsSync
+    throw UnimplementedError();
+  }
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) {
+    // TODO: implement toScreenLocationSync
+    throw UnimplementedError();
+  }
+
+  @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) {
+    // TODO: implement toScreenLocationsSync
+    throw UnimplementedError();
   }
 }
