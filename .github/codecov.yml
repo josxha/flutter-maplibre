@@ -18,5 +18,7 @@ coverage:
     project:
       # default is the status check's name, not default settings
       default:
-        target: 0
-        threshold: 0
+        enabled: false
+    patch:
+      default:
+        enabled: false
