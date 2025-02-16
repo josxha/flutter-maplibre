@@ -81,55 +81,57 @@ class MapLibreMap$CancelableCallback extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$CancelableCallback> $type;
 
   @jni$_.internal
-  MapLibreMap$CancelableCallback.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$CancelableCallback.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$CancelableCallback');
+    r'org/maplibre/android/maps/MapLibreMap$CancelableCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$CancelableCallback$NullableType();
   static const type = $MapLibreMap$CancelableCallback$Type();
-  static final _id_onCancel = _class.instanceMethodId(
-    r'onCancel',
-    r'()V',
-  );
+  static final _id_onCancel = _class.instanceMethodId(r'onCancel', r'()V');
 
-  static final _onCancel = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCancel()`
   void onCancel() {
     _onCancel(reference.pointer, _id_onCancel as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onFinish = _class.instanceMethodId(
-    r'onFinish',
-    r'()V',
-  );
+  static final _id_onFinish = _class.instanceMethodId(r'onFinish', r'()V');
 
-  static final _onFinish = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onFinish =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onFinish()`
   void onFinish() {
@@ -145,19 +147,16 @@ class MapLibreMap$CancelableCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -240,8 +239,8 @@ final class _$MapLibreMap$CancelableCallback
     this.onCancel$async = false,
     required void Function() onFinish,
     this.onFinish$async = false,
-  })  : _onCancel = onCancel,
-        _onFinish = onFinish;
+  }) : _onCancel = onCancel,
+       _onFinish = onFinish;
 
   final void Function() _onCancel;
   final bool onCancel$async;
@@ -272,9 +271,7 @@ final class $MapLibreMap$CancelableCallback$NullableType
   MapLibreMap$CancelableCallback? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$CancelableCallback.fromReference(
-              reference,
-            );
+          : MapLibreMap$CancelableCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -311,9 +308,7 @@ final class $MapLibreMap$CancelableCallback$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$CancelableCallback fromReference(jni$_.JReference reference) =>
-      MapLibreMap$CancelableCallback.fromReference(
-        reference,
-      );
+      MapLibreMap$CancelableCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -344,13 +339,13 @@ class MapLibreMap$InfoWindowAdapter extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$InfoWindowAdapter> $type;
 
   @jni$_.internal
-  MapLibreMap$InfoWindowAdapter.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$InfoWindowAdapter.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$InfoWindowAdapter');
+    r'org/maplibre/android/maps/MapLibreMap$InfoWindowAdapter',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$InfoWindowAdapter$NullableType();
@@ -360,26 +355,33 @@ class MapLibreMap$InfoWindowAdapter extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)Landroid/view/View;',
   );
 
-  static final _getInfoWindow = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getInfoWindow =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract android.view.View getInfoWindow(org.maplibre.android.annotations.Marker marker)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getInfoWindow(
-    jni$_.JObject marker,
-  ) {
+  jni$_.JObject? getInfoWindow(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    return _getInfoWindow(reference.pointer,
-            _id_getInfoWindow as jni$_.JMethodIDPtr, _$marker.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getInfoWindow(
+      reference.pointer,
+      _id_getInfoWindow as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   /// Maps a specific port to the implemented interface.
@@ -391,19 +393,16 @@ class MapLibreMap$InfoWindowAdapter extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -459,9 +458,7 @@ class MapLibreMap$InfoWindowAdapter extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$InfoWindowAdapter.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$InfoWindowAdapter.fromReference($i.implementReference());
   }
 }
 
@@ -501,9 +498,7 @@ final class $MapLibreMap$InfoWindowAdapter$NullableType
   MapLibreMap$InfoWindowAdapter? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$InfoWindowAdapter.fromReference(
-              reference,
-            );
+          : MapLibreMap$InfoWindowAdapter.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -539,9 +534,7 @@ final class $MapLibreMap$InfoWindowAdapter$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$InfoWindowAdapter fromReference(jni$_.JReference reference) =>
-      MapLibreMap$InfoWindowAdapter.fromReference(
-        reference,
-      );
+      MapLibreMap$InfoWindowAdapter.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -572,13 +565,13 @@ class MapLibreMap$OnCameraIdleListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnCameraIdleListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnCameraIdleListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnCameraIdleListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnCameraIdleListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnCameraIdleListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnCameraIdleListener$NullableType();
@@ -588,22 +581,28 @@ class MapLibreMap$OnCameraIdleListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCameraIdle = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraIdle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCameraIdle()`
   void onCameraIdle() {
-    _onCameraIdle(reference.pointer, _id_onCameraIdle as jni$_.JMethodIDPtr)
-        .check();
+    _onCameraIdle(
+      reference.pointer,
+      _id_onCameraIdle as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -615,19 +614,16 @@ class MapLibreMap$OnCameraIdleListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -665,9 +661,7 @@ class MapLibreMap$OnCameraIdleListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnCameraIdleListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onCameraIdle$async) r'onCameraIdle()V',
-      ],
+      [if ($impl.onCameraIdle$async) r'onCameraIdle()V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -724,9 +718,7 @@ final class $MapLibreMap$OnCameraIdleListener$NullableType
   MapLibreMap$OnCameraIdleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnCameraIdleListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnCameraIdleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -763,9 +755,7 @@ final class $MapLibreMap$OnCameraIdleListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraIdleListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnCameraIdleListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnCameraIdleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -798,11 +788,12 @@ class MapLibreMap$OnCameraMoveCanceledListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnCameraMoveCanceledListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveCanceledListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveCanceledListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -813,28 +804,33 @@ class MapLibreMap$OnCameraMoveCanceledListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCameraMoveCanceled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraMoveCanceled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCameraMoveCanceled()`
   void onCameraMoveCanceled() {
     _onCameraMoveCanceled(
-            reference.pointer, _id_onCameraMoveCanceled as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_onCameraMoveCanceled as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapLibreMap$OnCameraMoveCanceledListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -842,19 +838,16 @@ class MapLibreMap$OnCameraMoveCanceledListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -892,9 +885,7 @@ class MapLibreMap$OnCameraMoveCanceledListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveCanceledListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onCameraMoveCanceled$async) r'onCameraMoveCanceled()V',
-      ],
+      [if ($impl.onCameraMoveCanceled$async) r'onCameraMoveCanceled()V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -949,12 +940,11 @@ final class $MapLibreMap$OnCameraMoveCanceledListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraMoveCanceledListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnCameraMoveCanceledListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnCameraMoveCanceledListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -993,10 +983,8 @@ final class $MapLibreMap$OnCameraMoveCanceledListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraMoveCanceledListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnCameraMoveCanceledListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnCameraMoveCanceledListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1028,13 +1016,13 @@ class MapLibreMap$OnCameraMoveListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnCameraMoveListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnCameraMoveListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnCameraMoveListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnCameraMoveListener$NullableType();
@@ -1044,22 +1032,28 @@ class MapLibreMap$OnCameraMoveListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCameraMove = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraMove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCameraMove()`
   void onCameraMove() {
-    _onCameraMove(reference.pointer, _id_onCameraMove as jni$_.JMethodIDPtr)
-        .check();
+    _onCameraMove(
+      reference.pointer,
+      _id_onCameraMove as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -1071,19 +1065,16 @@ class MapLibreMap$OnCameraMoveListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1121,9 +1112,7 @@ class MapLibreMap$OnCameraMoveListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onCameraMove$async) r'onCameraMove()V',
-      ],
+      [if ($impl.onCameraMove$async) r'onCameraMove()V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1180,9 +1169,7 @@ final class $MapLibreMap$OnCameraMoveListener$NullableType
   MapLibreMap$OnCameraMoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnCameraMoveListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnCameraMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1219,9 +1206,7 @@ final class $MapLibreMap$OnCameraMoveListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraMoveListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnCameraMoveListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnCameraMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1254,11 +1239,12 @@ class MapLibreMap$OnCameraMoveStartedListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnCameraMoveStartedListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveStartedListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnCameraMoveStartedListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -1278,28 +1264,36 @@ class MapLibreMap$OnCameraMoveStartedListener extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _onCameraMoveStarted = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraMoveStarted =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onCameraMoveStarted(int i)`
-  void onCameraMoveStarted(
-    int i,
-  ) {
+  void onCameraMoveStarted(int i) {
     _onCameraMoveStarted(
-            reference.pointer, _id_onCameraMoveStarted as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_onCameraMoveStarted as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapLibreMap$OnCameraMoveStartedListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1307,19 +1301,16 @@ class MapLibreMap$OnCameraMoveStartedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1361,9 +1352,7 @@ class MapLibreMap$OnCameraMoveStartedListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnCameraMoveStartedListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onCameraMoveStarted$async) r'onCameraMoveStarted(I)V',
-      ],
+      [if ($impl.onCameraMoveStarted$async) r'onCameraMoveStarted(I)V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1418,12 +1407,11 @@ final class $MapLibreMap$OnCameraMoveStartedListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraMoveStartedListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnCameraMoveStartedListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnCameraMoveStartedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1462,10 +1450,8 @@ final class $MapLibreMap$OnCameraMoveStartedListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCameraMoveStartedListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnCameraMoveStartedListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnCameraMoveStartedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1499,11 +1485,12 @@ class MapLibreMap$OnCompassAnimationListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnCompassAnimationListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnCompassAnimationListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnCompassAnimationListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -1514,23 +1501,28 @@ class MapLibreMap$OnCompassAnimationListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCompassAnimation = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCompassAnimation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCompassAnimation()`
   void onCompassAnimation() {
     _onCompassAnimation(
-            reference.pointer, _id_onCompassAnimation as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_onCompassAnimation as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_onCompassAnimationFinished = _class.instanceMethodId(
@@ -1540,27 +1532,31 @@ class MapLibreMap$OnCompassAnimationListener extends jni$_.JObject {
 
   static final _onCompassAnimationFinished =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCompassAnimationFinished()`
   void onCompassAnimationFinished() {
-    _onCompassAnimationFinished(reference.pointer,
-            _id_onCompassAnimationFinished as jni$_.JMethodIDPtr)
-        .check();
+    _onCompassAnimationFinished(
+      reference.pointer,
+      _id_onCompassAnimationFinished as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapLibreMap$OnCompassAnimationListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1568,19 +1564,16 @@ class MapLibreMap$OnCompassAnimationListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1664,8 +1657,8 @@ final class _$MapLibreMap$OnCompassAnimationListener
     this.onCompassAnimation$async = false,
     required void Function() onCompassAnimationFinished,
     this.onCompassAnimationFinished$async = false,
-  })  : _onCompassAnimation = onCompassAnimation,
-        _onCompassAnimationFinished = onCompassAnimationFinished;
+  }) : _onCompassAnimation = onCompassAnimation,
+       _onCompassAnimationFinished = onCompassAnimationFinished;
 
   final void Function() _onCompassAnimation;
   final bool onCompassAnimation$async;
@@ -1694,12 +1687,11 @@ final class $MapLibreMap$OnCompassAnimationListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCompassAnimationListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnCompassAnimationListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnCompassAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1738,10 +1730,8 @@ final class $MapLibreMap$OnCompassAnimationListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnCompassAnimationListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnCompassAnimationListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnCompassAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1775,11 +1765,12 @@ class MapLibreMap$OnDeveloperAnimationListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnDeveloperAnimationListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnDeveloperAnimationListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnDeveloperAnimationListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -1792,27 +1783,31 @@ class MapLibreMap$OnDeveloperAnimationListener extends jni$_.JObject {
 
   static final _onDeveloperAnimationStarted =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onDeveloperAnimationStarted()`
   void onDeveloperAnimationStarted() {
-    _onDeveloperAnimationStarted(reference.pointer,
-            _id_onDeveloperAnimationStarted as jni$_.JMethodIDPtr)
-        .check();
+    _onDeveloperAnimationStarted(
+      reference.pointer,
+      _id_onDeveloperAnimationStarted as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapLibreMap$OnDeveloperAnimationListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1820,19 +1815,16 @@ class MapLibreMap$OnDeveloperAnimationListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1928,12 +1920,11 @@ final class $MapLibreMap$OnDeveloperAnimationListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnDeveloperAnimationListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnDeveloperAnimationListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnDeveloperAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1972,10 +1963,8 @@ final class $MapLibreMap$OnDeveloperAnimationListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnDeveloperAnimationListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnDeveloperAnimationListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnDeveloperAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2007,33 +1996,34 @@ class MapLibreMap$OnFlingListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnFlingListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnFlingListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnFlingListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnFlingListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnFlingListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnFlingListener$NullableType();
   static const type = $MapLibreMap$OnFlingListener$Type();
-  static final _id_onFling = _class.instanceMethodId(
-    r'onFling',
-    r'()V',
-  );
+  static final _id_onFling = _class.instanceMethodId(r'onFling', r'()V');
 
-  static final _onFling = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onFling =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onFling()`
   void onFling() {
@@ -2049,19 +2039,16 @@ class MapLibreMap$OnFlingListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2099,9 +2086,7 @@ class MapLibreMap$OnFlingListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnFlingListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onFling$async) r'onFling()V',
-      ],
+      [if ($impl.onFling$async) r'onFling()V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2112,9 +2097,7 @@ class MapLibreMap$OnFlingListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$OnFlingListener.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$OnFlingListener.fromReference($i.implementReference());
   }
 }
 
@@ -2157,9 +2140,7 @@ final class $MapLibreMap$OnFlingListener$NullableType
   MapLibreMap$OnFlingListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnFlingListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnFlingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2195,9 +2176,7 @@ final class $MapLibreMap$OnFlingListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnFlingListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnFlingListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnFlingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2228,13 +2207,13 @@ class MapLibreMap$OnFpsChangedListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnFpsChangedListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnFpsChangedListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnFpsChangedListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnFpsChangedListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnFpsChangedListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnFpsChangedListener$NullableType();
@@ -2244,22 +2223,31 @@ class MapLibreMap$OnFpsChangedListener extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _onFpsChanged = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onFpsChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public abstract void onFpsChanged(double d)`
-  void onFpsChanged(
-    double d,
-  ) {
-    _onFpsChanged(reference.pointer, _id_onFpsChanged as jni$_.JMethodIDPtr, d)
-        .check();
+  void onFpsChanged(double d) {
+    _onFpsChanged(
+      reference.pointer,
+      _id_onFpsChanged as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2271,19 +2259,16 @@ class MapLibreMap$OnFpsChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2325,9 +2310,7 @@ class MapLibreMap$OnFpsChangedListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapLibreMap$OnFpsChangedListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onFpsChanged$async) r'onFpsChanged(D)V',
-      ],
+      [if ($impl.onFpsChanged$async) r'onFpsChanged(D)V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2384,9 +2367,7 @@ final class $MapLibreMap$OnFpsChangedListener$NullableType
   MapLibreMap$OnFpsChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnFpsChangedListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnFpsChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2423,9 +2404,7 @@ final class $MapLibreMap$OnFpsChangedListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnFpsChangedListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnFpsChangedListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnFpsChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2458,11 +2437,12 @@ class MapLibreMap$OnInfoWindowClickListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnInfoWindowClickListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2473,25 +2453,32 @@ class MapLibreMap$OnInfoWindowClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)Z',
   );
 
-  static final _onInfoWindowClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onInfoWindowClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onInfoWindowClick(org.maplibre.android.annotations.Marker marker)`
-  bool onInfoWindowClick(
-    jni$_.JObject marker,
-  ) {
+  bool onInfoWindowClick(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    return _onInfoWindowClick(reference.pointer,
-            _id_onInfoWindowClick as jni$_.JMethodIDPtr, _$marker.pointer)
-        .boolean;
+    return _onInfoWindowClick(
+      reference.pointer,
+      _id_onInfoWindowClick as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2504,19 +2491,16 @@ class MapLibreMap$OnInfoWindowClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2608,12 +2592,11 @@ final class $MapLibreMap$OnInfoWindowClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnInfoWindowClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnInfoWindowClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2652,10 +2635,8 @@ final class $MapLibreMap$OnInfoWindowClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowClickListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnInfoWindowClickListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnInfoWindowClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2688,11 +2669,12 @@ class MapLibreMap$OnInfoWindowCloseListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnInfoWindowCloseListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowCloseListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowCloseListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2703,25 +2685,32 @@ class MapLibreMap$OnInfoWindowCloseListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _onInfoWindowClose = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onInfoWindowClose =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onInfoWindowClose(org.maplibre.android.annotations.Marker marker)`
-  void onInfoWindowClose(
-    jni$_.JObject marker,
-  ) {
+  void onInfoWindowClose(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _onInfoWindowClose(reference.pointer,
-            _id_onInfoWindowClose as jni$_.JMethodIDPtr, _$marker.pointer)
-        .check();
+    _onInfoWindowClose(
+      reference.pointer,
+      _id_onInfoWindowClose as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2734,19 +2723,16 @@ class MapLibreMap$OnInfoWindowCloseListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2845,12 +2831,11 @@ final class $MapLibreMap$OnInfoWindowCloseListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowCloseListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnInfoWindowCloseListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnInfoWindowCloseListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2889,10 +2874,8 @@ final class $MapLibreMap$OnInfoWindowCloseListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowCloseListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnInfoWindowCloseListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnInfoWindowCloseListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2925,11 +2908,12 @@ class MapLibreMap$OnInfoWindowLongClickListener extends jni$_.JObject {
   @jni$_.internal
   MapLibreMap$OnInfoWindowLongClickListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowLongClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnInfoWindowLongClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2940,30 +2924,37 @@ class MapLibreMap$OnInfoWindowLongClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _onInfoWindowLongClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onInfoWindowLongClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onInfoWindowLongClick(org.maplibre.android.annotations.Marker marker)`
-  void onInfoWindowLongClick(
-    jni$_.JObject marker,
-  ) {
+  void onInfoWindowLongClick(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _onInfoWindowLongClick(reference.pointer,
-            _id_onInfoWindowLongClick as jni$_.JMethodIDPtr, _$marker.pointer)
-        .check();
+    _onInfoWindowLongClick(
+      reference.pointer,
+      _id_onInfoWindowLongClick as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapLibreMap$OnInfoWindowLongClickListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -2971,19 +2962,16 @@ class MapLibreMap$OnInfoWindowLongClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3082,12 +3070,11 @@ final class $MapLibreMap$OnInfoWindowLongClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowLongClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnInfoWindowLongClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnInfoWindowLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3126,10 +3113,8 @@ final class $MapLibreMap$OnInfoWindowLongClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnInfoWindowLongClickListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnInfoWindowLongClickListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnInfoWindowLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3162,13 +3147,13 @@ class MapLibreMap$OnMapClickListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnMapClickListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnMapClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnMapClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnMapClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnMapClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnMapClickListener$NullableType();
@@ -3178,25 +3163,32 @@ class MapLibreMap$OnMapClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Z',
   );
 
-  static final _onMapClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMapClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onMapClick(org.maplibre.android.geometry.LatLng latLng)`
-  bool onMapClick(
-    latlng$_.LatLng latLng,
-  ) {
+  bool onMapClick(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _onMapClick(reference.pointer, _id_onMapClick as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .boolean;
+    return _onMapClick(
+      reference.pointer,
+      _id_onMapClick as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -3208,19 +3200,16 @@ class MapLibreMap$OnMapClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3313,9 +3302,7 @@ final class $MapLibreMap$OnMapClickListener$NullableType
   MapLibreMap$OnMapClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnMapClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnMapClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3352,9 +3339,7 @@ final class $MapLibreMap$OnMapClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMapClickListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnMapClickListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnMapClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3385,13 +3370,13 @@ class MapLibreMap$OnMapLongClickListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnMapLongClickListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnMapLongClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnMapLongClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnMapLongClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnMapLongClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -3402,25 +3387,32 @@ class MapLibreMap$OnMapLongClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Z',
   );
 
-  static final _onMapLongClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMapLongClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onMapLongClick(org.maplibre.android.geometry.LatLng latLng)`
-  bool onMapLongClick(
-    latlng$_.LatLng latLng,
-  ) {
+  bool onMapLongClick(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _onMapLongClick(reference.pointer,
-            _id_onMapLongClick as jni$_.JMethodIDPtr, _$latLng.pointer)
-        .boolean;
+    return _onMapLongClick(
+      reference.pointer,
+      _id_onMapLongClick as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -3433,19 +3425,16 @@ class MapLibreMap$OnMapLongClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3536,12 +3525,11 @@ final class $MapLibreMap$OnMapLongClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMapLongClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnMapLongClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnMapLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3579,10 +3567,8 @@ final class $MapLibreMap$OnMapLongClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMapLongClickListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnMapLongClickListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnMapLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3613,13 +3599,13 @@ class MapLibreMap$OnMarkerClickListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnMarkerClickListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnMarkerClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnMarkerClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnMarkerClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnMarkerClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnMarkerClickListener$NullableType();
@@ -3629,25 +3615,32 @@ class MapLibreMap$OnMarkerClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)Z',
   );
 
-  static final _onMarkerClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMarkerClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onMarkerClick(org.maplibre.android.annotations.Marker marker)`
-  bool onMarkerClick(
-    jni$_.JObject marker,
-  ) {
+  bool onMarkerClick(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    return _onMarkerClick(reference.pointer,
-            _id_onMarkerClick as jni$_.JMethodIDPtr, _$marker.pointer)
-        .boolean;
+    return _onMarkerClick(
+      reference.pointer,
+      _id_onMarkerClick as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -3659,19 +3652,16 @@ class MapLibreMap$OnMarkerClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3762,12 +3752,11 @@ final class $MapLibreMap$OnMarkerClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMarkerClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnMarkerClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnMarkerClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3805,9 +3794,7 @@ final class $MapLibreMap$OnMarkerClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMarkerClickListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnMarkerClickListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnMarkerClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3838,13 +3825,13 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnMoveListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnMoveListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnMoveListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnMoveListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnMoveListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnMoveListener$NullableType();
@@ -3854,25 +3841,32 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/MoveGestureDetector;)V',
   );
 
-  static final _onMoveBegin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMoveBegin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onMoveBegin(org.maplibre.android.gestures.MoveGestureDetector moveGestureDetector)`
-  void onMoveBegin(
-    jni$_.JObject moveGestureDetector,
-  ) {
+  void onMoveBegin(jni$_.JObject moveGestureDetector) {
     final _$moveGestureDetector = moveGestureDetector.reference;
-    _onMoveBegin(reference.pointer, _id_onMoveBegin as jni$_.JMethodIDPtr,
-            _$moveGestureDetector.pointer)
-        .check();
+    _onMoveBegin(
+      reference.pointer,
+      _id_onMoveBegin as jni$_.JMethodIDPtr,
+      _$moveGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onMove = _class.instanceMethodId(
@@ -3880,25 +3874,32 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/MoveGestureDetector;)V',
   );
 
-  static final _onMove = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onMove(org.maplibre.android.gestures.MoveGestureDetector moveGestureDetector)`
-  void onMove(
-    jni$_.JObject moveGestureDetector,
-  ) {
+  void onMove(jni$_.JObject moveGestureDetector) {
     final _$moveGestureDetector = moveGestureDetector.reference;
-    _onMove(reference.pointer, _id_onMove as jni$_.JMethodIDPtr,
-            _$moveGestureDetector.pointer)
-        .check();
+    _onMove(
+      reference.pointer,
+      _id_onMove as jni$_.JMethodIDPtr,
+      _$moveGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onMoveEnd = _class.instanceMethodId(
@@ -3906,25 +3907,32 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/MoveGestureDetector;)V',
   );
 
-  static final _onMoveEnd = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onMoveEnd =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onMoveEnd(org.maplibre.android.gestures.MoveGestureDetector moveGestureDetector)`
-  void onMoveEnd(
-    jni$_.JObject moveGestureDetector,
-  ) {
+  void onMoveEnd(jni$_.JObject moveGestureDetector) {
     final _$moveGestureDetector = moveGestureDetector.reference;
-    _onMoveEnd(reference.pointer, _id_onMoveEnd as jni$_.JMethodIDPtr,
-            _$moveGestureDetector.pointer)
-        .check();
+    _onMoveEnd(
+      reference.pointer,
+      _id_onMoveEnd as jni$_.JMethodIDPtr,
+      _$moveGestureDetector.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -3936,19 +3944,16 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4021,9 +4026,7 @@ class MapLibreMap$OnMoveListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$OnMoveListener.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$OnMoveListener.fromReference($i.implementReference());
   }
 }
 
@@ -4053,9 +4056,9 @@ final class _$MapLibreMap$OnMoveListener with $MapLibreMap$OnMoveListener {
     this.onMove$async = false,
     required void Function(jni$_.JObject moveGestureDetector) onMoveEnd,
     this.onMoveEnd$async = false,
-  })  : _onMoveBegin = onMoveBegin,
-        _onMove = onMove,
-        _onMoveEnd = onMoveEnd;
+  }) : _onMoveBegin = onMoveBegin,
+       _onMove = onMove,
+       _onMoveEnd = onMoveEnd;
 
   final void Function(jni$_.JObject moveGestureDetector) _onMoveBegin;
   final bool onMoveBegin$async;
@@ -4092,9 +4095,7 @@ final class $MapLibreMap$OnMoveListener$NullableType
   MapLibreMap$OnMoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnMoveListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4130,9 +4131,7 @@ final class $MapLibreMap$OnMoveListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnMoveListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnMoveListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4163,13 +4162,13 @@ class MapLibreMap$OnPolygonClickListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnPolygonClickListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnPolygonClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnPolygonClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnPolygonClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnPolygonClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -4180,25 +4179,32 @@ class MapLibreMap$OnPolygonClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polygon;)V',
   );
 
-  static final _onPolygonClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onPolygonClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onPolygonClick(org.maplibre.android.annotations.Polygon polygon)`
-  void onPolygonClick(
-    jni$_.JObject polygon,
-  ) {
+  void onPolygonClick(jni$_.JObject polygon) {
     final _$polygon = polygon.reference;
-    _onPolygonClick(reference.pointer, _id_onPolygonClick as jni$_.JMethodIDPtr,
-            _$polygon.pointer)
-        .check();
+    _onPolygonClick(
+      reference.pointer,
+      _id_onPolygonClick as jni$_.JMethodIDPtr,
+      _$polygon.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -4211,19 +4217,16 @@ class MapLibreMap$OnPolygonClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4322,12 +4325,11 @@ final class $MapLibreMap$OnPolygonClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnPolygonClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnPolygonClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnPolygonClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4365,10 +4367,8 @@ final class $MapLibreMap$OnPolygonClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnPolygonClickListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnPolygonClickListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnPolygonClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4399,13 +4399,13 @@ class MapLibreMap$OnPolylineClickListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnPolylineClickListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnPolylineClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnPolylineClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnPolylineClickListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnPolylineClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -4416,25 +4416,32 @@ class MapLibreMap$OnPolylineClickListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polyline;)V',
   );
 
-  static final _onPolylineClick = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onPolylineClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onPolylineClick(org.maplibre.android.annotations.Polyline polyline)`
-  void onPolylineClick(
-    jni$_.JObject polyline,
-  ) {
+  void onPolylineClick(jni$_.JObject polyline) {
     final _$polyline = polyline.reference;
-    _onPolylineClick(reference.pointer,
-            _id_onPolylineClick as jni$_.JMethodIDPtr, _$polyline.pointer)
-        .check();
+    _onPolylineClick(
+      reference.pointer,
+      _id_onPolylineClick as jni$_.JMethodIDPtr,
+      _$polyline.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -4447,19 +4454,16 @@ class MapLibreMap$OnPolylineClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4558,12 +4562,11 @@ final class $MapLibreMap$OnPolylineClickListener$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnPolylineClickListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnPolylineClickListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnPolylineClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4601,10 +4604,8 @@ final class $MapLibreMap$OnPolylineClickListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnPolylineClickListener fromReference(
-          jni$_.JReference reference) =>
-      MapLibreMap$OnPolylineClickListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => MapLibreMap$OnPolylineClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4635,13 +4636,13 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnRotateListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnRotateListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnRotateListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnRotateListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnRotateListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnRotateListener$NullableType();
@@ -4651,25 +4652,32 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
   );
 
-  static final _onRotateBegin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onRotateBegin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onRotateBegin(org.maplibre.android.gestures.RotateGestureDetector rotateGestureDetector)`
-  void onRotateBegin(
-    jni$_.JObject rotateGestureDetector,
-  ) {
+  void onRotateBegin(jni$_.JObject rotateGestureDetector) {
     final _$rotateGestureDetector = rotateGestureDetector.reference;
-    _onRotateBegin(reference.pointer, _id_onRotateBegin as jni$_.JMethodIDPtr,
-            _$rotateGestureDetector.pointer)
-        .check();
+    _onRotateBegin(
+      reference.pointer,
+      _id_onRotateBegin as jni$_.JMethodIDPtr,
+      _$rotateGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onRotate = _class.instanceMethodId(
@@ -4677,25 +4685,32 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
   );
 
-  static final _onRotate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onRotate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onRotate(org.maplibre.android.gestures.RotateGestureDetector rotateGestureDetector)`
-  void onRotate(
-    jni$_.JObject rotateGestureDetector,
-  ) {
+  void onRotate(jni$_.JObject rotateGestureDetector) {
     final _$rotateGestureDetector = rotateGestureDetector.reference;
-    _onRotate(reference.pointer, _id_onRotate as jni$_.JMethodIDPtr,
-            _$rotateGestureDetector.pointer)
-        .check();
+    _onRotate(
+      reference.pointer,
+      _id_onRotate as jni$_.JMethodIDPtr,
+      _$rotateGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onRotateEnd = _class.instanceMethodId(
@@ -4703,25 +4718,32 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
   );
 
-  static final _onRotateEnd = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onRotateEnd =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onRotateEnd(org.maplibre.android.gestures.RotateGestureDetector rotateGestureDetector)`
-  void onRotateEnd(
-    jni$_.JObject rotateGestureDetector,
-  ) {
+  void onRotateEnd(jni$_.JObject rotateGestureDetector) {
     final _$rotateGestureDetector = rotateGestureDetector.reference;
-    _onRotateEnd(reference.pointer, _id_onRotateEnd as jni$_.JMethodIDPtr,
-            _$rotateGestureDetector.pointer)
-        .check();
+    _onRotateEnd(
+      reference.pointer,
+      _id_onRotateEnd as jni$_.JMethodIDPtr,
+      _$rotateGestureDetector.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -4733,19 +4755,16 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4818,9 +4837,7 @@ class MapLibreMap$OnRotateListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$OnRotateListener.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$OnRotateListener.fromReference($i.implementReference());
   }
 }
 
@@ -4850,9 +4867,9 @@ final class _$MapLibreMap$OnRotateListener with $MapLibreMap$OnRotateListener {
     this.onRotate$async = false,
     required void Function(jni$_.JObject rotateGestureDetector) onRotateEnd,
     this.onRotateEnd$async = false,
-  })  : _onRotateBegin = onRotateBegin,
-        _onRotate = onRotate,
-        _onRotateEnd = onRotateEnd;
+  }) : _onRotateBegin = onRotateBegin,
+       _onRotate = onRotate,
+       _onRotateEnd = onRotateEnd;
 
   final void Function(jni$_.JObject rotateGestureDetector) _onRotateBegin;
   final bool onRotateBegin$async;
@@ -4889,9 +4906,7 @@ final class $MapLibreMap$OnRotateListener$NullableType
   MapLibreMap$OnRotateListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnRotateListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnRotateListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4927,9 +4942,7 @@ final class $MapLibreMap$OnRotateListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnRotateListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnRotateListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnRotateListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4960,13 +4973,13 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnScaleListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnScaleListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnScaleListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnScaleListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnScaleListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnScaleListener$NullableType();
@@ -4976,26 +4989,33 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
   );
 
-  static final _onScaleBegin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onScaleBegin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onScaleBegin(org.maplibre.android.gestures.StandardScaleGestureDetector standardScaleGestureDetector)`
-  void onScaleBegin(
-    jni$_.JObject standardScaleGestureDetector,
-  ) {
+  void onScaleBegin(jni$_.JObject standardScaleGestureDetector) {
     final _$standardScaleGestureDetector =
         standardScaleGestureDetector.reference;
-    _onScaleBegin(reference.pointer, _id_onScaleBegin as jni$_.JMethodIDPtr,
-            _$standardScaleGestureDetector.pointer)
-        .check();
+    _onScaleBegin(
+      reference.pointer,
+      _id_onScaleBegin as jni$_.JMethodIDPtr,
+      _$standardScaleGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onScale = _class.instanceMethodId(
@@ -5003,26 +5023,33 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
   );
 
-  static final _onScale = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onScale(org.maplibre.android.gestures.StandardScaleGestureDetector standardScaleGestureDetector)`
-  void onScale(
-    jni$_.JObject standardScaleGestureDetector,
-  ) {
+  void onScale(jni$_.JObject standardScaleGestureDetector) {
     final _$standardScaleGestureDetector =
         standardScaleGestureDetector.reference;
-    _onScale(reference.pointer, _id_onScale as jni$_.JMethodIDPtr,
-            _$standardScaleGestureDetector.pointer)
-        .check();
+    _onScale(
+      reference.pointer,
+      _id_onScale as jni$_.JMethodIDPtr,
+      _$standardScaleGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onScaleEnd = _class.instanceMethodId(
@@ -5030,26 +5057,33 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
   );
 
-  static final _onScaleEnd = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onScaleEnd =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onScaleEnd(org.maplibre.android.gestures.StandardScaleGestureDetector standardScaleGestureDetector)`
-  void onScaleEnd(
-    jni$_.JObject standardScaleGestureDetector,
-  ) {
+  void onScaleEnd(jni$_.JObject standardScaleGestureDetector) {
     final _$standardScaleGestureDetector =
         standardScaleGestureDetector.reference;
-    _onScaleEnd(reference.pointer, _id_onScaleEnd as jni$_.JMethodIDPtr,
-            _$standardScaleGestureDetector.pointer)
-        .check();
+    _onScaleEnd(
+      reference.pointer,
+      _id_onScaleEnd as jni$_.JMethodIDPtr,
+      _$standardScaleGestureDetector.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -5061,19 +5095,16 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5146,21 +5177,19 @@ class MapLibreMap$OnScaleListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$OnScaleListener.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$OnScaleListener.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $MapLibreMap$OnScaleListener {
   factory $MapLibreMap$OnScaleListener({
     required void Function(jni$_.JObject standardScaleGestureDetector)
-        onScaleBegin,
+    onScaleBegin,
     bool onScaleBegin$async,
     required void Function(jni$_.JObject standardScaleGestureDetector) onScale,
     bool onScale$async,
     required void Function(jni$_.JObject standardScaleGestureDetector)
-        onScaleEnd,
+    onScaleEnd,
     bool onScaleEnd$async,
   }) = _$MapLibreMap$OnScaleListener;
 
@@ -5175,16 +5204,16 @@ abstract base mixin class $MapLibreMap$OnScaleListener {
 final class _$MapLibreMap$OnScaleListener with $MapLibreMap$OnScaleListener {
   _$MapLibreMap$OnScaleListener({
     required void Function(jni$_.JObject standardScaleGestureDetector)
-        onScaleBegin,
+    onScaleBegin,
     this.onScaleBegin$async = false,
     required void Function(jni$_.JObject standardScaleGestureDetector) onScale,
     this.onScale$async = false,
     required void Function(jni$_.JObject standardScaleGestureDetector)
-        onScaleEnd,
+    onScaleEnd,
     this.onScaleEnd$async = false,
-  })  : _onScaleBegin = onScaleBegin,
-        _onScale = onScale,
-        _onScaleEnd = onScaleEnd;
+  }) : _onScaleBegin = onScaleBegin,
+       _onScale = onScale,
+       _onScaleEnd = onScaleEnd;
 
   final void Function(jni$_.JObject standardScaleGestureDetector) _onScaleBegin;
   final bool onScaleBegin$async;
@@ -5221,9 +5250,7 @@ final class $MapLibreMap$OnScaleListener$NullableType
   MapLibreMap$OnScaleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnScaleListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnScaleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5259,9 +5286,7 @@ final class $MapLibreMap$OnScaleListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnScaleListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnScaleListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnScaleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5292,13 +5317,13 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$OnShoveListener> $type;
 
   @jni$_.internal
-  MapLibreMap$OnShoveListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$OnShoveListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$OnShoveListener');
+    r'org/maplibre/android/maps/MapLibreMap$OnShoveListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$OnShoveListener$NullableType();
@@ -5308,25 +5333,32 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
   );
 
-  static final _onShoveBegin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onShoveBegin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onShoveBegin(org.maplibre.android.gestures.ShoveGestureDetector shoveGestureDetector)`
-  void onShoveBegin(
-    jni$_.JObject shoveGestureDetector,
-  ) {
+  void onShoveBegin(jni$_.JObject shoveGestureDetector) {
     final _$shoveGestureDetector = shoveGestureDetector.reference;
-    _onShoveBegin(reference.pointer, _id_onShoveBegin as jni$_.JMethodIDPtr,
-            _$shoveGestureDetector.pointer)
-        .check();
+    _onShoveBegin(
+      reference.pointer,
+      _id_onShoveBegin as jni$_.JMethodIDPtr,
+      _$shoveGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onShove = _class.instanceMethodId(
@@ -5334,25 +5366,32 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
   );
 
-  static final _onShove = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onShove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onShove(org.maplibre.android.gestures.ShoveGestureDetector shoveGestureDetector)`
-  void onShove(
-    jni$_.JObject shoveGestureDetector,
-  ) {
+  void onShove(jni$_.JObject shoveGestureDetector) {
     final _$shoveGestureDetector = shoveGestureDetector.reference;
-    _onShove(reference.pointer, _id_onShove as jni$_.JMethodIDPtr,
-            _$shoveGestureDetector.pointer)
-        .check();
+    _onShove(
+      reference.pointer,
+      _id_onShove as jni$_.JMethodIDPtr,
+      _$shoveGestureDetector.pointer,
+    ).check();
   }
 
   static final _id_onShoveEnd = _class.instanceMethodId(
@@ -5360,25 +5399,32 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
   );
 
-  static final _onShoveEnd = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onShoveEnd =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onShoveEnd(org.maplibre.android.gestures.ShoveGestureDetector shoveGestureDetector)`
-  void onShoveEnd(
-    jni$_.JObject shoveGestureDetector,
-  ) {
+  void onShoveEnd(jni$_.JObject shoveGestureDetector) {
     final _$shoveGestureDetector = shoveGestureDetector.reference;
-    _onShoveEnd(reference.pointer, _id_onShoveEnd as jni$_.JMethodIDPtr,
-            _$shoveGestureDetector.pointer)
-        .check();
+    _onShoveEnd(
+      reference.pointer,
+      _id_onShoveEnd as jni$_.JMethodIDPtr,
+      _$shoveGestureDetector.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -5390,19 +5436,16 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5475,9 +5518,7 @@ class MapLibreMap$OnShoveListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapLibreMap$OnShoveListener.fromReference(
-      $i.implementReference(),
-    );
+    return MapLibreMap$OnShoveListener.fromReference($i.implementReference());
   }
 }
 
@@ -5507,9 +5548,9 @@ final class _$MapLibreMap$OnShoveListener with $MapLibreMap$OnShoveListener {
     this.onShove$async = false,
     required void Function(jni$_.JObject shoveGestureDetector) onShoveEnd,
     this.onShoveEnd$async = false,
-  })  : _onShoveBegin = onShoveBegin,
-        _onShove = onShove,
-        _onShoveEnd = onShoveEnd;
+  }) : _onShoveBegin = onShoveBegin,
+       _onShove = onShove,
+       _onShoveEnd = onShoveEnd;
 
   final void Function(jni$_.JObject shoveGestureDetector) _onShoveBegin;
   final bool onShoveBegin$async;
@@ -5546,9 +5587,7 @@ final class $MapLibreMap$OnShoveListener$NullableType
   MapLibreMap$OnShoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreMap$OnShoveListener.fromReference(
-              reference,
-            );
+          : MapLibreMap$OnShoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5584,9 +5623,7 @@ final class $MapLibreMap$OnShoveListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$OnShoveListener fromReference(jni$_.JReference reference) =>
-      MapLibreMap$OnShoveListener.fromReference(
-        reference,
-      );
+      MapLibreMap$OnShoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5617,13 +5654,13 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap$SnapshotReadyCallback> $type;
 
   @jni$_.internal
-  MapLibreMap$SnapshotReadyCallback.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap$SnapshotReadyCallback.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/MapLibreMap$SnapshotReadyCallback');
+    r'org/maplibre/android/maps/MapLibreMap$SnapshotReadyCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$SnapshotReadyCallback$NullableType();
@@ -5633,25 +5670,32 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;)V',
   );
 
-  static final _onSnapshotReady = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onSnapshotReady =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onSnapshotReady(android.graphics.Bitmap bitmap)`
-  void onSnapshotReady(
-    jni$_.JObject bitmap,
-  ) {
+  void onSnapshotReady(jni$_.JObject bitmap) {
     final _$bitmap = bitmap.reference;
-    _onSnapshotReady(reference.pointer,
-            _id_onSnapshotReady as jni$_.JMethodIDPtr, _$bitmap.pointer)
-        .check();
+    _onSnapshotReady(
+      reference.pointer,
+      _id_onSnapshotReady as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -5663,19 +5707,16 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5773,12 +5814,11 @@ final class $MapLibreMap$SnapshotReadyCallback$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMap$SnapshotReadyCallback? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : MapLibreMap$SnapshotReadyCallback.fromReference(
-              reference,
-            );
+          : MapLibreMap$SnapshotReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5816,9 +5856,7 @@ final class $MapLibreMap$SnapshotReadyCallback$Type
   @jni$_.internal
   @core$_.override
   MapLibreMap$SnapshotReadyCallback fromReference(jni$_.JReference reference) =>
-      MapLibreMap$SnapshotReadyCallback.fromReference(
-        reference,
-      );
+      MapLibreMap$SnapshotReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5849,13 +5887,13 @@ class MapLibreMap extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMap> $type;
 
   @jni$_.internal
-  MapLibreMap.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreMap.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/MapLibreMap');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/MapLibreMap',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreMap$NullableType();
@@ -5865,22 +5903,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()V',
   );
 
-  static final _triggerRepaint = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _triggerRepaint =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void triggerRepaint()`
   void triggerRepaint() {
-    _triggerRepaint(reference.pointer, _id_triggerRepaint as jni$_.JMethodIDPtr)
-        .check();
+    _triggerRepaint(
+      reference.pointer,
+      _id_triggerRepaint as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_setSwapBehaviorFlush = _class.instanceMethodId(
@@ -5888,23 +5932,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setSwapBehaviorFlush = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setSwapBehaviorFlush =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setSwapBehaviorFlush(boolean z)`
-  void setSwapBehaviorFlush(
-    bool z,
-  ) {
-    _setSwapBehaviorFlush(reference.pointer,
-            _id_setSwapBehaviorFlush as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setSwapBehaviorFlush(bool z) {
+    _setSwapBehaviorFlush(
+      reference.pointer,
+      _id_setSwapBehaviorFlush as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getStyle = _class.instanceMethodId(
@@ -5912,25 +5964,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/Style$OnStyleLoaded;)V',
   );
 
-  static final _getStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void getStyle(org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
-  void getStyle(
-    style$_.Style$OnStyleLoaded onStyleLoaded,
-  ) {
+  void getStyle(style$_.Style$OnStyleLoaded onStyleLoaded) {
     final _$onStyleLoaded = onStyleLoaded.reference;
-    _getStyle(reference.pointer, _id_getStyle as jni$_.JMethodIDPtr,
-            _$onStyleLoaded.pointer)
-        .check();
+    _getStyle(
+      reference.pointer,
+      _id_getStyle as jni$_.JMethodIDPtr,
+      _$onStyleLoaded.pointer,
+    ).check();
   }
 
   static final _id_getStyle$1 = _class.instanceMethodId(
@@ -5938,23 +5997,29 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/Style;',
   );
 
-  static final _getStyle$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStyle$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style getStyle()`
   /// The returned object must be released after use, by calling the [release] method.
   style$_.Style? getStyle$1() {
-    return _getStyle$1(reference.pointer, _id_getStyle$1 as jni$_.JMethodIDPtr)
-        .object<style$_.Style?>(const style$_.$Style$NullableType());
+    return _getStyle$1(
+      reference.pointer,
+      _id_getStyle$1 as jni$_.JMethodIDPtr,
+    ).object<style$_.Style?>(const style$_.$Style$NullableType());
   }
 
   static final _id_setPrefetchesTiles = _class.instanceMethodId(
@@ -5962,23 +6027,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setPrefetchesTiles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setPrefetchesTiles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setPrefetchesTiles(boolean z)`
-  void setPrefetchesTiles(
-    bool z,
-  ) {
-    _setPrefetchesTiles(reference.pointer,
-            _id_setPrefetchesTiles as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setPrefetchesTiles(bool z) {
+    _setPrefetchesTiles(
+      reference.pointer,
+      _id_setPrefetchesTiles as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getPrefetchesTiles = _class.instanceMethodId(
@@ -5986,23 +6059,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _getPrefetchesTiles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPrefetchesTiles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean getPrefetchesTiles()`
   bool getPrefetchesTiles() {
     return _getPrefetchesTiles(
-            reference.pointer, _id_getPrefetchesTiles as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_getPrefetchesTiles as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setPrefetchZoomDelta = _class.instanceMethodId(
@@ -6010,23 +6088,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setPrefetchZoomDelta = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setPrefetchZoomDelta =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setPrefetchZoomDelta(int i)`
-  void setPrefetchZoomDelta(
-    int i,
-  ) {
-    _setPrefetchZoomDelta(reference.pointer,
-            _id_setPrefetchZoomDelta as jni$_.JMethodIDPtr, i)
-        .check();
+  void setPrefetchZoomDelta(int i) {
+    _setPrefetchZoomDelta(
+      reference.pointer,
+      _id_setPrefetchZoomDelta as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_getPrefetchZoomDelta = _class.instanceMethodId(
@@ -6034,23 +6120,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getPrefetchZoomDelta = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPrefetchZoomDelta =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getPrefetchZoomDelta()`
   int getPrefetchZoomDelta() {
     return _getPrefetchZoomDelta(
-            reference.pointer, _id_getPrefetchZoomDelta as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getPrefetchZoomDelta as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setTileCacheEnabled = _class.instanceMethodId(
@@ -6058,23 +6149,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setTileCacheEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setTileCacheEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setTileCacheEnabled(boolean z)`
-  void setTileCacheEnabled(
-    bool z,
-  ) {
-    _setTileCacheEnabled(reference.pointer,
-            _id_setTileCacheEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setTileCacheEnabled(bool z) {
+    _setTileCacheEnabled(
+      reference.pointer,
+      _id_setTileCacheEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getTileCacheEnabled = _class.instanceMethodId(
@@ -6082,23 +6181,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _getTileCacheEnabled = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTileCacheEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean getTileCacheEnabled()`
   bool getTileCacheEnabled() {
     return _getTileCacheEnabled(
-            reference.pointer, _id_getTileCacheEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_getTileCacheEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setMinZoomPreference = _class.instanceMethodId(
@@ -6106,23 +6210,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setMinZoomPreference = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMinZoomPreference =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMinZoomPreference(double d)`
-  void setMinZoomPreference(
-    double d,
-  ) {
-    _setMinZoomPreference(reference.pointer,
-            _id_setMinZoomPreference as jni$_.JMethodIDPtr, d)
-        .check();
+  void setMinZoomPreference(double d) {
+    _setMinZoomPreference(
+      reference.pointer,
+      _id_setMinZoomPreference as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_getMinZoomLevel = _class.instanceMethodId(
@@ -6130,23 +6242,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getMinZoomLevel = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMinZoomLevel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMinZoomLevel()`
   double getMinZoomLevel() {
     return _getMinZoomLevel(
-            reference.pointer, _id_getMinZoomLevel as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getMinZoomLevel as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setMaxZoomPreference = _class.instanceMethodId(
@@ -6154,23 +6271,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setMaxZoomPreference = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaxZoomPreference =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMaxZoomPreference(double d)`
-  void setMaxZoomPreference(
-    double d,
-  ) {
-    _setMaxZoomPreference(reference.pointer,
-            _id_setMaxZoomPreference as jni$_.JMethodIDPtr, d)
-        .check();
+  void setMaxZoomPreference(double d) {
+    _setMaxZoomPreference(
+      reference.pointer,
+      _id_setMaxZoomPreference as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_getMaxZoomLevel = _class.instanceMethodId(
@@ -6178,23 +6303,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getMaxZoomLevel = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMaxZoomLevel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMaxZoomLevel()`
   double getMaxZoomLevel() {
     return _getMaxZoomLevel(
-            reference.pointer, _id_getMaxZoomLevel as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getMaxZoomLevel as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setMinPitchPreference = _class.instanceMethodId(
@@ -6202,23 +6332,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setMinPitchPreference = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMinPitchPreference =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMinPitchPreference(double d)`
-  void setMinPitchPreference(
-    double d,
-  ) {
-    _setMinPitchPreference(reference.pointer,
-            _id_setMinPitchPreference as jni$_.JMethodIDPtr, d)
-        .check();
+  void setMinPitchPreference(double d) {
+    _setMinPitchPreference(
+      reference.pointer,
+      _id_setMinPitchPreference as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_getMinPitch = _class.instanceMethodId(
@@ -6226,23 +6364,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getMinPitch = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMinPitch =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMinPitch()`
   double getMinPitch() {
     return _getMinPitch(
-            reference.pointer, _id_getMinPitch as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getMinPitch as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setMaxPitchPreference = _class.instanceMethodId(
@@ -6250,23 +6393,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setMaxPitchPreference = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaxPitchPreference =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMaxPitchPreference(double d)`
-  void setMaxPitchPreference(
-    double d,
-  ) {
-    _setMaxPitchPreference(reference.pointer,
-            _id_setMaxPitchPreference as jni$_.JMethodIDPtr, d)
-        .check();
+  void setMaxPitchPreference(double d) {
+    _setMaxPitchPreference(
+      reference.pointer,
+      _id_setMaxPitchPreference as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_getMaxPitch = _class.instanceMethodId(
@@ -6274,23 +6425,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getMaxPitch = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMaxPitch =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMaxPitch()`
   double getMaxPitch() {
     return _getMaxPitch(
-            reference.pointer, _id_getMaxPitch as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getMaxPitch as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getUiSettings = _class.instanceMethodId(
@@ -6298,24 +6454,29 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/UiSettings;',
   );
 
-  static final _getUiSettings = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUiSettings =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.UiSettings getUiSettings()`
   /// The returned object must be released after use, by calling the [release] method.
   uisettings$_.UiSettings getUiSettings() {
     return _getUiSettings(
-            reference.pointer, _id_getUiSettings as jni$_.JMethodIDPtr)
-        .object<uisettings$_.UiSettings>(const uisettings$_.$UiSettings$Type());
+      reference.pointer,
+      _id_getUiSettings as jni$_.JMethodIDPtr,
+    ).object<uisettings$_.UiSettings>(const uisettings$_.$UiSettings$Type());
   }
 
   static final _id_getProjection = _class.instanceMethodId(
@@ -6323,24 +6484,29 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/Projection;',
   );
 
-  static final _getProjection = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getProjection =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Projection getProjection()`
   /// The returned object must be released after use, by calling the [release] method.
   projection$_.Projection getProjection() {
     return _getProjection(
-            reference.pointer, _id_getProjection as jni$_.JMethodIDPtr)
-        .object<projection$_.Projection>(const projection$_.$Projection$Type());
+      reference.pointer,
+      _id_getProjection as jni$_.JMethodIDPtr,
+    ).object<projection$_.Projection>(const projection$_.$Projection$Type());
   }
 
   static final _id_cancelTransitions = _class.instanceMethodId(
@@ -6348,23 +6514,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()V',
   );
 
-  static final _cancelTransitions = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _cancelTransitions =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancelTransitions()`
   void cancelTransitions() {
     _cancelTransitions(
-            reference.pointer, _id_cancelTransitions as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_cancelTransitions as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_getCameraPosition = _class.instanceMethodId(
@@ -6372,25 +6543,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.camera.CameraPosition getCameraPosition()`
   /// The returned object must be released after use, by calling the [release] method.
   cameraposition$_.CameraPosition getCameraPosition() {
     return _getCameraPosition(
-            reference.pointer, _id_getCameraPosition as jni$_.JMethodIDPtr)
-        .object<cameraposition$_.CameraPosition>(
-            const cameraposition$_.$CameraPosition$Type());
+      reference.pointer,
+      _id_getCameraPosition as jni$_.JMethodIDPtr,
+    ).object<cameraposition$_.CameraPosition>(
+      const cameraposition$_.$CameraPosition$Type(),
+    );
   }
 
   static final _id_setCameraPosition = _class.instanceMethodId(
@@ -6398,27 +6575,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraPosition;)V',
   );
 
-  static final _setCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCameraPosition(org.maplibre.android.camera.CameraPosition cameraPosition)`
-  void setCameraPosition(
-    cameraposition$_.CameraPosition cameraPosition,
-  ) {
+  void setCameraPosition(cameraposition$_.CameraPosition cameraPosition) {
     final _$cameraPosition = cameraPosition.reference;
     _setCameraPosition(
-            reference.pointer,
-            _id_setCameraPosition as jni$_.JMethodIDPtr,
-            _$cameraPosition.pointer)
-        .check();
+      reference.pointer,
+      _id_setCameraPosition as jni$_.JMethodIDPtr,
+      _$cameraPosition.pointer,
+    ).check();
   }
 
   static final _id_moveCamera = _class.instanceMethodId(
@@ -6426,25 +6608,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;)V',
   );
 
-  static final _moveCamera = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _moveCamera =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void moveCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
-  void moveCamera(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-  ) {
+  void moveCamera(cameraupdate$_.CameraUpdate cameraUpdate) {
     final _$cameraUpdate = cameraUpdate.reference;
-    _moveCamera(reference.pointer, _id_moveCamera as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer)
-        .check();
+    _moveCamera(
+      reference.pointer,
+      _id_moveCamera as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+    ).check();
   }
 
   static final _id_moveCamera$1 = _class.instanceMethodId(
@@ -6452,22 +6641,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _moveCamera$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _moveCamera$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void moveCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void moveCamera$1(
@@ -6477,9 +6670,12 @@ class MapLibreMap extends jni$_.JObject {
     final _$cameraUpdate = cameraUpdate.reference;
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
-    _moveCamera$1(reference.pointer, _id_moveCamera$1 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, _$cancelableCallback.pointer)
-        .check();
+    _moveCamera$1(
+      reference.pointer,
+      _id_moveCamera$1 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_easeCamera = _class.instanceMethodId(
@@ -6487,25 +6683,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;)V',
   );
 
-  static final _easeCamera = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _easeCamera =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
-  void easeCamera(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-  ) {
+  void easeCamera(cameraupdate$_.CameraUpdate cameraUpdate) {
     final _$cameraUpdate = cameraUpdate.reference;
-    _easeCamera(reference.pointer, _id_easeCamera as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer)
-        .check();
+    _easeCamera(
+      reference.pointer,
+      _id_easeCamera as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+    ).check();
   }
 
   static final _id_easeCamera$1 = _class.instanceMethodId(
@@ -6513,22 +6716,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _easeCamera$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _easeCamera$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera$1(
@@ -6538,9 +6745,12 @@ class MapLibreMap extends jni$_.JObject {
     final _$cameraUpdate = cameraUpdate.reference;
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
-    _easeCamera$1(reference.pointer, _id_easeCamera$1 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, _$cancelableCallback.pointer)
-        .check();
+    _easeCamera$1(
+      reference.pointer,
+      _id_easeCamera$1 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_easeCamera$2 = _class.instanceMethodId(
@@ -6548,27 +6758,34 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;I)V',
   );
 
-  static final _easeCamera$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _easeCamera$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i)`
-  void easeCamera$2(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-    int i,
-  ) {
+  void easeCamera$2(cameraupdate$_.CameraUpdate cameraUpdate, int i) {
     final _$cameraUpdate = cameraUpdate.reference;
-    _easeCamera$2(reference.pointer, _id_easeCamera$2 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, i)
-        .check();
+    _easeCamera$2(
+      reference.pointer,
+      _id_easeCamera$2 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+    ).check();
   }
 
   static final _id_easeCamera$3 = _class.instanceMethodId(
@@ -6576,24 +6793,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;ILorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _easeCamera$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _easeCamera$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera$3(
@@ -6604,9 +6828,13 @@ class MapLibreMap extends jni$_.JObject {
     final _$cameraUpdate = cameraUpdate.reference;
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
-    _easeCamera$3(reference.pointer, _id_easeCamera$3 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, i, _$cancelableCallback.pointer)
-        .check();
+    _easeCamera$3(
+      reference.pointer,
+      _id_easeCamera$3 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_easeCamera$4 = _class.instanceMethodId(
@@ -6614,31 +6842,38 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;IZ)V',
   );
 
-  static final _easeCamera$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _easeCamera$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, boolean z)`
-  void easeCamera$4(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-    int i,
-    bool z,
-  ) {
+  void easeCamera$4(cameraupdate$_.CameraUpdate cameraUpdate, int i, bool z) {
     final _$cameraUpdate = cameraUpdate.reference;
-    _easeCamera$4(reference.pointer, _id_easeCamera$4 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, i, z ? 1 : 0)
-        .check();
+    _easeCamera$4(
+      reference.pointer,
+      _id_easeCamera$4 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_easeCamera$5 = _class.instanceMethodId(
@@ -6646,26 +6881,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;IZLorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _easeCamera$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _easeCamera$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void easeCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, boolean z, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void easeCamera$5(
@@ -6677,9 +6919,14 @@ class MapLibreMap extends jni$_.JObject {
     final _$cameraUpdate = cameraUpdate.reference;
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
-    _easeCamera$5(reference.pointer, _id_easeCamera$5 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer, i, z ? 1 : 0, _$cancelableCallback.pointer)
-        .check();
+    _easeCamera$5(
+      reference.pointer,
+      _id_easeCamera$5 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+      z ? 1 : 0,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_animateCamera = _class.instanceMethodId(
@@ -6687,25 +6934,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;)V',
   );
 
-  static final _animateCamera = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _animateCamera =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate)`
-  void animateCamera(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-  ) {
+  void animateCamera(cameraupdate$_.CameraUpdate cameraUpdate) {
     final _$cameraUpdate = cameraUpdate.reference;
-    _animateCamera(reference.pointer, _id_animateCamera as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer)
-        .check();
+    _animateCamera(
+      reference.pointer,
+      _id_animateCamera as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+    ).check();
   }
 
   static final _id_animateCamera$1 = _class.instanceMethodId(
@@ -6713,22 +6967,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;Lorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _animateCamera$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _animateCamera$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera$1(
@@ -6739,11 +6997,11 @@ class MapLibreMap extends jni$_.JObject {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
     _animateCamera$1(
-            reference.pointer,
-            _id_animateCamera$1 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer,
-            _$cancelableCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_animateCamera$1 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_animateCamera$2 = _class.instanceMethodId(
@@ -6751,30 +7009,34 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;I)V',
   );
 
-  static final _animateCamera$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _animateCamera$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i)`
-  void animateCamera$2(
-    cameraupdate$_.CameraUpdate cameraUpdate,
-    int i,
-  ) {
+  void animateCamera$2(cameraupdate$_.CameraUpdate cameraUpdate, int i) {
     final _$cameraUpdate = cameraUpdate.reference;
     _animateCamera$2(
-            reference.pointer,
-            _id_animateCamera$2 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer,
-            i)
-        .check();
+      reference.pointer,
+      _id_animateCamera$2 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+    ).check();
   }
 
   static final _id_animateCamera$3 = _class.instanceMethodId(
@@ -6782,24 +7044,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraUpdate;ILorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _animateCamera$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _animateCamera$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void animateCamera(org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera$3(
@@ -6811,91 +7080,102 @@ class MapLibreMap extends jni$_.JObject {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
     _animateCamera$3(
-            reference.pointer,
-            _id_animateCamera$3 as jni$_.JMethodIDPtr,
-            _$cameraUpdate.pointer,
-            i,
-            _$cancelableCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_animateCamera$3 as jni$_.JMethodIDPtr,
+      _$cameraUpdate.pointer,
+      i,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
-  static final _id_scrollBy = _class.instanceMethodId(
-    r'scrollBy',
-    r'(FF)V',
-  );
+  static final _id_scrollBy = _class.instanceMethodId(r'scrollBy', r'(FF)V');
 
-  static final _scrollBy = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
+  static final _scrollBy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void scrollBy(float f, float f1)`
-  void scrollBy(
-    double f,
-    double f1,
-  ) {
-    _scrollBy(reference.pointer, _id_scrollBy as jni$_.JMethodIDPtr, f, f1)
-        .check();
+  void scrollBy(double f, double f1) {
+    _scrollBy(
+      reference.pointer,
+      _id_scrollBy as jni$_.JMethodIDPtr,
+      f,
+      f1,
+    ).check();
   }
 
-  static final _id_scrollBy$1 = _class.instanceMethodId(
-    r'scrollBy',
-    r'(FFJ)V',
-  );
+  static final _id_scrollBy$1 = _class.instanceMethodId(r'scrollBy', r'(FFJ)V');
 
-  static final _scrollBy$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _scrollBy$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Int64
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double, jni$_.Int64)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              int,
+            )
+          >();
 
   /// from: `public void scrollBy(float f, float f1, long j)`
-  void scrollBy$1(
-    double f,
-    double f1,
-    int j,
-  ) {
+  void scrollBy$1(double f, double f1, int j) {
     _scrollBy$1(
-            reference.pointer, _id_scrollBy$1 as jni$_.JMethodIDPtr, f, f1, j)
-        .check();
+      reference.pointer,
+      _id_scrollBy$1 as jni$_.JMethodIDPtr,
+      f,
+      f1,
+      j,
+    ).check();
   }
 
-  static final _id_getZoom = _class.instanceMethodId(
-    r'getZoom',
-    r'()D',
-  );
+  static final _id_getZoom = _class.instanceMethodId(r'getZoom', r'()D');
 
-  static final _getZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getZoom()`
   double getZoom() {
-    return _getZoom(reference.pointer, _id_getZoom as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getZoom(
+      reference.pointer,
+      _id_getZoom as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setZoom = _class.instanceMethodId(
@@ -6903,54 +7183,64 @@ class MapLibreMap extends jni$_.JObject {
     r'(DLandroid/graphics/PointF;J)V',
   );
 
-  static final _setZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int64
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>, int)>();
-
-  /// from: `public void setZoom(double d, android.graphics.PointF pointF, long j)`
-  void setZoom(
-    double d,
-    pointf$_.PointF pointF,
-    int j,
-  ) {
-    final _$pointF = pointF.reference;
-    _setZoom(reference.pointer, _id_setZoom as jni$_.JMethodIDPtr, d,
-            _$pointF.pointer, j)
-        .check();
-  }
-
-  static final _id_resetNorth = _class.instanceMethodId(
-    r'resetNorth',
-    r'()V',
-  );
-
-  static final _resetNorth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Pointer<jni$_.Void>, jni$_.Int64)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void setZoom(double d, android.graphics.PointF pointF, long j)`
+  void setZoom(double d, pointf$_.PointF pointF, int j) {
+    final _$pointF = pointF.reference;
+    _setZoom(
+      reference.pointer,
+      _id_setZoom as jni$_.JMethodIDPtr,
+      d,
+      _$pointF.pointer,
+      j,
+    ).check();
+  }
+
+  static final _id_resetNorth = _class.instanceMethodId(r'resetNorth', r'()V');
+
+  static final _resetNorth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void resetNorth()`
   void resetNorth() {
-    _resetNorth(reference.pointer, _id_resetNorth as jni$_.JMethodIDPtr)
-        .check();
+    _resetNorth(
+      reference.pointer,
+      _id_resetNorth as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_setFocalBearing = _class.instanceMethodId(
@@ -6958,78 +7248,91 @@ class MapLibreMap extends jni$_.JObject {
     r'(DFFJ)V',
   );
 
-  static final _setFocalBearing = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setFocalBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Int64
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Int64)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              int,
+            )
+          >();
 
   /// from: `public void setFocalBearing(double d, float f, float f1, long j)`
-  void setFocalBearing(
-    double d,
-    double f,
-    double f1,
-    int j,
-  ) {
-    _setFocalBearing(reference.pointer,
-            _id_setFocalBearing as jni$_.JMethodIDPtr, d, f, f1, j)
-        .check();
+  void setFocalBearing(double d, double f, double f1, int j) {
+    _setFocalBearing(
+      reference.pointer,
+      _id_setFocalBearing as jni$_.JMethodIDPtr,
+      d,
+      f,
+      f1,
+      j,
+    ).check();
   }
 
-  static final _id_getHeight = _class.instanceMethodId(
-    r'getHeight',
-    r'()F',
-  );
+  static final _id_getHeight = _class.instanceMethodId(r'getHeight', r'()F');
 
-  static final _getHeight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getHeight()`
   double getHeight() {
-    return _getHeight(reference.pointer, _id_getHeight as jni$_.JMethodIDPtr)
-        .float;
+    return _getHeight(
+      reference.pointer,
+      _id_getHeight as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_getWidth = _class.instanceMethodId(
-    r'getWidth',
-    r'()F',
-  );
+  static final _id_getWidth = _class.instanceMethodId(r'getWidth', r'()F');
 
-  static final _getWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getWidth()`
   double getWidth() {
-    return _getWidth(reference.pointer, _id_getWidth as jni$_.JMethodIDPtr)
-        .float;
+    return _getWidth(
+      reference.pointer,
+      _id_getWidth as jni$_.JMethodIDPtr,
+    ).float;
   }
 
   static final _id_setOfflineRegionDefinition = _class.instanceMethodId(
@@ -7039,15 +7342,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOfflineRegionDefinition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOfflineRegionDefinition(org.maplibre.android.offline.OfflineRegionDefinition offlineRegionDefinition)`
   void setOfflineRegionDefinition(
@@ -7055,10 +7364,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$offlineRegionDefinition = offlineRegionDefinition.reference;
     _setOfflineRegionDefinition(
-            reference.pointer,
-            _id_setOfflineRegionDefinition as jni$_.JMethodIDPtr,
-            _$offlineRegionDefinition.pointer)
-        .check();
+      reference.pointer,
+      _id_setOfflineRegionDefinition as jni$_.JMethodIDPtr,
+      _$offlineRegionDefinition.pointer,
+    ).check();
   }
 
   static final _id_setOfflineRegionDefinition$1 = _class.instanceMethodId(
@@ -7068,21 +7377,24 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOfflineRegionDefinition$1 =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>
-                          )>)>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOfflineRegionDefinition(org.maplibre.android.offline.OfflineRegionDefinition offlineRegionDefinition, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setOfflineRegionDefinition$1(
@@ -7092,11 +7404,11 @@ class MapLibreMap extends jni$_.JObject {
     final _$offlineRegionDefinition = offlineRegionDefinition.reference;
     final _$onStyleLoaded = onStyleLoaded?.reference ?? jni$_.jNullReference;
     _setOfflineRegionDefinition$1(
-            reference.pointer,
-            _id_setOfflineRegionDefinition$1 as jni$_.JMethodIDPtr,
-            _$offlineRegionDefinition.pointer,
-            _$onStyleLoaded.pointer)
-        .check();
+      reference.pointer,
+      _id_setOfflineRegionDefinition$1 as jni$_.JMethodIDPtr,
+      _$offlineRegionDefinition.pointer,
+      _$onStyleLoaded.pointer,
+    ).check();
   }
 
   static final _id_isDebugActive = _class.instanceMethodId(
@@ -7104,23 +7416,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isDebugActive = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isDebugActive =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isDebugActive()`
   bool isDebugActive() {
     return _isDebugActive(
-            reference.pointer, _id_isDebugActive as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isDebugActive as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setDebugActive = _class.instanceMethodId(
@@ -7128,23 +7445,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setDebugActive = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setDebugActive =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setDebugActive(boolean z)`
-  void setDebugActive(
-    bool z,
-  ) {
-    _setDebugActive(reference.pointer, _id_setDebugActive as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+  void setDebugActive(bool z) {
+    _setDebugActive(
+      reference.pointer,
+      _id_setDebugActive as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_cycleDebugOptions = _class.instanceMethodId(
@@ -7152,23 +7477,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()V',
   );
 
-  static final _cycleDebugOptions = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _cycleDebugOptions =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cycleDebugOptions()`
   void cycleDebugOptions() {
     _cycleDebugOptions(
-            reference.pointer, _id_cycleDebugOptions as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_cycleDebugOptions as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_setStyle = _class.instanceMethodId(
@@ -7176,25 +7506,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyle(java.lang.String string)`
-  void setStyle(
-    jni$_.JString? string,
-  ) {
+  void setStyle(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setStyle(reference.pointer, _id_setStyle as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setStyle(
+      reference.pointer,
+      _id_setStyle as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_setStyle$1 = _class.instanceMethodId(
@@ -7202,22 +7539,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/lang/String;Lorg/maplibre/android/maps/Style$OnStyleLoaded;)V',
   );
 
-  static final _setStyle$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setStyle$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyle(java.lang.String string, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setStyle$1(
@@ -7226,9 +7567,12 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$onStyleLoaded = onStyleLoaded?.reference ?? jni$_.jNullReference;
-    _setStyle$1(reference.pointer, _id_setStyle$1 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$onStyleLoaded.pointer)
-        .check();
+    _setStyle$1(
+      reference.pointer,
+      _id_setStyle$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$onStyleLoaded.pointer,
+    ).check();
   }
 
   static final _id_setStyle$2 = _class.instanceMethodId(
@@ -7236,25 +7580,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/Style$Builder;)V',
   );
 
-  static final _setStyle$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setStyle$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyle(org.maplibre.android.maps.Style$Builder builder)`
-  void setStyle$2(
-    style$_.Style$Builder? builder,
-  ) {
+  void setStyle$2(style$_.Style$Builder? builder) {
     final _$builder = builder?.reference ?? jni$_.jNullReference;
-    _setStyle$2(reference.pointer, _id_setStyle$2 as jni$_.JMethodIDPtr,
-            _$builder.pointer)
-        .check();
+    _setStyle$2(
+      reference.pointer,
+      _id_setStyle$2 as jni$_.JMethodIDPtr,
+      _$builder.pointer,
+    ).check();
   }
 
   static final _id_setStyle$3 = _class.instanceMethodId(
@@ -7262,22 +7613,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/Style$Builder;Lorg/maplibre/android/maps/Style$OnStyleLoaded;)V',
   );
 
-  static final _setStyle$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setStyle$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setStyle(org.maplibre.android.maps.Style$Builder builder, org.maplibre.android.maps.Style$OnStyleLoaded onStyleLoaded)`
   void setStyle$3(
@@ -7286,9 +7641,12 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$builder = builder?.reference ?? jni$_.jNullReference;
     final _$onStyleLoaded = onStyleLoaded?.reference ?? jni$_.jNullReference;
-    _setStyle$3(reference.pointer, _id_setStyle$3 as jni$_.JMethodIDPtr,
-            _$builder.pointer, _$onStyleLoaded.pointer)
-        .check();
+    _setStyle$3(
+      reference.pointer,
+      _id_setStyle$3 as jni$_.JMethodIDPtr,
+      _$builder.pointer,
+      _$onStyleLoaded.pointer,
+    ).check();
   }
 
   static final _id_addMarker = _class.instanceMethodId(
@@ -7296,26 +7654,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/MarkerOptions;)Lorg/maplibre/android/annotations/Marker;',
   );
 
-  static final _addMarker = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addMarker =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.annotations.Marker addMarker(org.maplibre.android.annotations.MarkerOptions markerOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject addMarker(
-    jni$_.JObject markerOptions,
-  ) {
+  jni$_.JObject addMarker(jni$_.JObject markerOptions) {
     final _$markerOptions = markerOptions.reference;
-    return _addMarker(reference.pointer, _id_addMarker as jni$_.JMethodIDPtr,
-            _$markerOptions.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _addMarker(
+      reference.pointer,
+      _id_addMarker as jni$_.JMethodIDPtr,
+      _$markerOptions.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_addMarker$1 = _class.instanceMethodId(
@@ -7323,26 +7688,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/BaseMarkerOptions;)Lorg/maplibre/android/annotations/Marker;',
   );
 
-  static final _addMarker$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addMarker$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.annotations.Marker addMarker(org.maplibre.android.annotations.BaseMarkerOptions baseMarkerOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject addMarker$1(
-    jni$_.JObject baseMarkerOptions,
-  ) {
+  jni$_.JObject addMarker$1(jni$_.JObject baseMarkerOptions) {
     final _$baseMarkerOptions = baseMarkerOptions.reference;
-    return _addMarker$1(reference.pointer,
-            _id_addMarker$1 as jni$_.JMethodIDPtr, _$baseMarkerOptions.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _addMarker$1(
+      reference.pointer,
+      _id_addMarker$1 as jni$_.JMethodIDPtr,
+      _$baseMarkerOptions.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_addMarkers = _class.instanceMethodId(
@@ -7350,27 +7722,35 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/util/List;)Ljava/util/List;',
   );
 
-  static final _addMarkers = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addMarkers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List addMarkers(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JList<jni$_.JObject?> addMarkers(
-    jni$_.JList<jni$_.JObject?> list,
-  ) {
+  jni$_.JList<jni$_.JObject?> addMarkers(jni$_.JList<jni$_.JObject?> list) {
     final _$list = list.reference;
-    return _addMarkers(reference.pointer, _id_addMarkers as jni$_.JMethodIDPtr,
-            _$list.pointer)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+    return _addMarkers(
+      reference.pointer,
+      _id_addMarkers as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_updateMarker = _class.instanceMethodId(
@@ -7378,25 +7758,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _updateMarker = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _updateMarker =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void updateMarker(org.maplibre.android.annotations.Marker marker)`
-  void updateMarker(
-    jni$_.JObject marker,
-  ) {
+  void updateMarker(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _updateMarker(reference.pointer, _id_updateMarker as jni$_.JMethodIDPtr,
-            _$marker.pointer)
-        .check();
+    _updateMarker(
+      reference.pointer,
+      _id_updateMarker as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   static final _id_addPolyline = _class.instanceMethodId(
@@ -7404,26 +7791,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/PolylineOptions;)Lorg/maplibre/android/annotations/Polyline;',
   );
 
-  static final _addPolyline = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addPolyline =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.annotations.Polyline addPolyline(org.maplibre.android.annotations.PolylineOptions polylineOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject addPolyline(
-    jni$_.JObject polylineOptions,
-  ) {
+  jni$_.JObject addPolyline(jni$_.JObject polylineOptions) {
     final _$polylineOptions = polylineOptions.reference;
-    return _addPolyline(reference.pointer,
-            _id_addPolyline as jni$_.JMethodIDPtr, _$polylineOptions.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _addPolyline(
+      reference.pointer,
+      _id_addPolyline as jni$_.JMethodIDPtr,
+      _$polylineOptions.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_addPolylines = _class.instanceMethodId(
@@ -7431,27 +7825,35 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/util/List;)Ljava/util/List;',
   );
 
-  static final _addPolylines = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addPolylines =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List addPolylines(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JList<jni$_.JObject?> addPolylines(
-    jni$_.JList<jni$_.JObject?> list,
-  ) {
+  jni$_.JList<jni$_.JObject?> addPolylines(jni$_.JList<jni$_.JObject?> list) {
     final _$list = list.reference;
-    return _addPolylines(reference.pointer,
-            _id_addPolylines as jni$_.JMethodIDPtr, _$list.pointer)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+    return _addPolylines(
+      reference.pointer,
+      _id_addPolylines as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_updatePolyline = _class.instanceMethodId(
@@ -7459,25 +7861,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polyline;)V',
   );
 
-  static final _updatePolyline = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _updatePolyline =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void updatePolyline(org.maplibre.android.annotations.Polyline polyline)`
-  void updatePolyline(
-    jni$_.JObject polyline,
-  ) {
+  void updatePolyline(jni$_.JObject polyline) {
     final _$polyline = polyline.reference;
-    _updatePolyline(reference.pointer, _id_updatePolyline as jni$_.JMethodIDPtr,
-            _$polyline.pointer)
-        .check();
+    _updatePolyline(
+      reference.pointer,
+      _id_updatePolyline as jni$_.JMethodIDPtr,
+      _$polyline.pointer,
+    ).check();
   }
 
   static final _id_addPolygon = _class.instanceMethodId(
@@ -7485,26 +7894,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/PolygonOptions;)Lorg/maplibre/android/annotations/Polygon;',
   );
 
-  static final _addPolygon = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addPolygon =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.annotations.Polygon addPolygon(org.maplibre.android.annotations.PolygonOptions polygonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject addPolygon(
-    jni$_.JObject polygonOptions,
-  ) {
+  jni$_.JObject addPolygon(jni$_.JObject polygonOptions) {
     final _$polygonOptions = polygonOptions.reference;
-    return _addPolygon(reference.pointer, _id_addPolygon as jni$_.JMethodIDPtr,
-            _$polygonOptions.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _addPolygon(
+      reference.pointer,
+      _id_addPolygon as jni$_.JMethodIDPtr,
+      _$polygonOptions.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_addPolygons = _class.instanceMethodId(
@@ -7512,27 +7928,35 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/util/List;)Ljava/util/List;',
   );
 
-  static final _addPolygons = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addPolygons =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List addPolygons(java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JList<jni$_.JObject?> addPolygons(
-    jni$_.JList<jni$_.JObject?> list,
-  ) {
+  jni$_.JList<jni$_.JObject?> addPolygons(jni$_.JList<jni$_.JObject?> list) {
     final _$list = list.reference;
-    return _addPolygons(reference.pointer,
-            _id_addPolygons as jni$_.JMethodIDPtr, _$list.pointer)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+    return _addPolygons(
+      reference.pointer,
+      _id_addPolygons as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_updatePolygon = _class.instanceMethodId(
@@ -7540,25 +7964,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polygon;)V',
   );
 
-  static final _updatePolygon = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _updatePolygon =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void updatePolygon(org.maplibre.android.annotations.Polygon polygon)`
-  void updatePolygon(
-    jni$_.JObject polygon,
-  ) {
+  void updatePolygon(jni$_.JObject polygon) {
     final _$polygon = polygon.reference;
-    _updatePolygon(reference.pointer, _id_updatePolygon as jni$_.JMethodIDPtr,
-            _$polygon.pointer)
-        .check();
+    _updatePolygon(
+      reference.pointer,
+      _id_updatePolygon as jni$_.JMethodIDPtr,
+      _$polygon.pointer,
+    ).check();
   }
 
   static final _id_removeMarker = _class.instanceMethodId(
@@ -7566,25 +7997,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _removeMarker = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeMarker =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeMarker(org.maplibre.android.annotations.Marker marker)`
-  void removeMarker(
-    jni$_.JObject marker,
-  ) {
+  void removeMarker(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _removeMarker(reference.pointer, _id_removeMarker as jni$_.JMethodIDPtr,
-            _$marker.pointer)
-        .check();
+    _removeMarker(
+      reference.pointer,
+      _id_removeMarker as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   static final _id_removePolyline = _class.instanceMethodId(
@@ -7592,25 +8030,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polyline;)V',
   );
 
-  static final _removePolyline = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removePolyline =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removePolyline(org.maplibre.android.annotations.Polyline polyline)`
-  void removePolyline(
-    jni$_.JObject polyline,
-  ) {
+  void removePolyline(jni$_.JObject polyline) {
     final _$polyline = polyline.reference;
-    _removePolyline(reference.pointer, _id_removePolyline as jni$_.JMethodIDPtr,
-            _$polyline.pointer)
-        .check();
+    _removePolyline(
+      reference.pointer,
+      _id_removePolyline as jni$_.JMethodIDPtr,
+      _$polyline.pointer,
+    ).check();
   }
 
   static final _id_removePolygon = _class.instanceMethodId(
@@ -7618,25 +8063,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Polygon;)V',
   );
 
-  static final _removePolygon = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removePolygon =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removePolygon(org.maplibre.android.annotations.Polygon polygon)`
-  void removePolygon(
-    jni$_.JObject polygon,
-  ) {
+  void removePolygon(jni$_.JObject polygon) {
     final _$polygon = polygon.reference;
-    _removePolygon(reference.pointer, _id_removePolygon as jni$_.JMethodIDPtr,
-            _$polygon.pointer)
-        .check();
+    _removePolygon(
+      reference.pointer,
+      _id_removePolygon as jni$_.JMethodIDPtr,
+      _$polygon.pointer,
+    ).check();
   }
 
   static final _id_removeAnnotation = _class.instanceMethodId(
@@ -7644,25 +8096,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Annotation;)V',
   );
 
-  static final _removeAnnotation = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeAnnotation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeAnnotation(org.maplibre.android.annotations.Annotation annotation)`
-  void removeAnnotation(
-    jni$_.JObject annotation,
-  ) {
+  void removeAnnotation(jni$_.JObject annotation) {
     final _$annotation = annotation.reference;
-    _removeAnnotation(reference.pointer,
-            _id_removeAnnotation as jni$_.JMethodIDPtr, _$annotation.pointer)
-        .check();
+    _removeAnnotation(
+      reference.pointer,
+      _id_removeAnnotation as jni$_.JMethodIDPtr,
+      _$annotation.pointer,
+    ).check();
   }
 
   static final _id_removeAnnotation$1 = _class.instanceMethodId(
@@ -7670,23 +8129,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(J)V',
   );
 
-  static final _removeAnnotation$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _removeAnnotation$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void removeAnnotation(long j)`
-  void removeAnnotation$1(
-    int j,
-  ) {
+  void removeAnnotation$1(int j) {
     _removeAnnotation$1(
-            reference.pointer, _id_removeAnnotation$1 as jni$_.JMethodIDPtr, j)
-        .check();
+      reference.pointer,
+      _id_removeAnnotation$1 as jni$_.JMethodIDPtr,
+      j,
+    ).check();
   }
 
   static final _id_removeAnnotations = _class.instanceMethodId(
@@ -7694,25 +8161,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Ljava/util/List;)V',
   );
 
-  static final _removeAnnotations = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeAnnotations =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeAnnotations(java.util.List list)`
-  void removeAnnotations(
-    jni$_.JList<jni$_.JObject?> list,
-  ) {
+  void removeAnnotations(jni$_.JList<jni$_.JObject?> list) {
     final _$list = list.reference;
-    _removeAnnotations(reference.pointer,
-            _id_removeAnnotations as jni$_.JMethodIDPtr, _$list.pointer)
-        .check();
+    _removeAnnotations(
+      reference.pointer,
+      _id_removeAnnotations as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).check();
   }
 
   static final _id_removeAnnotations$1 = _class.instanceMethodId(
@@ -7720,41 +8194,47 @@ class MapLibreMap extends jni$_.JObject {
     r'()V',
   );
 
-  static final _removeAnnotations$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _removeAnnotations$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void removeAnnotations()`
   void removeAnnotations$1() {
     _removeAnnotations$1(
-            reference.pointer, _id_removeAnnotations$1 as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_removeAnnotations$1 as jni$_.JMethodIDPtr,
+    ).check();
   }
 
-  static final _id_clear = _class.instanceMethodId(
-    r'clear',
-    r'()V',
-  );
+  static final _id_clear = _class.instanceMethodId(r'clear', r'()V');
 
-  static final _clear = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _clear =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void clear()`
   void clear() {
@@ -7766,24 +8246,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(J)Lorg/maplibre/android/annotations/Annotation;',
   );
 
-  static final _getAnnotation = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAnnotation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public org.maplibre.android.annotations.Annotation getAnnotation(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getAnnotation(
-    int j,
-  ) {
+  jni$_.JObject? getAnnotation(int j) {
     return _getAnnotation(
-            reference.pointer, _id_getAnnotation as jni$_.JMethodIDPtr, j)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getAnnotation as jni$_.JMethodIDPtr,
+      j,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getAnnotations = _class.instanceMethodId(
@@ -7791,25 +8279,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getAnnotations = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAnnotations =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getAnnotations()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<jni$_.JObject?> getAnnotations() {
     return _getAnnotations(
-            reference.pointer, _id_getAnnotations as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+      reference.pointer,
+      _id_getAnnotations as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_getMarkers = _class.instanceMethodId(
@@ -7817,24 +8311,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getMarkers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMarkers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getMarkers()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<jni$_.JObject?> getMarkers() {
-    return _getMarkers(reference.pointer, _id_getMarkers as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+    return _getMarkers(
+      reference.pointer,
+      _id_getMarkers as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_getPolygons = _class.instanceMethodId(
@@ -7842,25 +8343,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getPolygons = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPolygons =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getPolygons()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<jni$_.JObject?> getPolygons() {
     return _getPolygons(
-            reference.pointer, _id_getPolygons as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+      reference.pointer,
+      _id_getPolygons as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_getPolylines = _class.instanceMethodId(
@@ -7868,25 +8375,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getPolylines = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPolylines =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getPolylines()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<jni$_.JObject?> getPolylines() {
     return _getPolylines(
-            reference.pointer, _id_getPolylines as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+      reference.pointer,
+      _id_getPolylines as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_setOnMarkerClickListener = _class.instanceMethodId(
@@ -7894,16 +8407,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMarkerClickListener;)V',
   );
 
-  static final _setOnMarkerClickListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setOnMarkerClickListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnMarkerClickListener(org.maplibre.android.maps.MapLibreMap$OnMarkerClickListener onMarkerClickListener)`
   void setOnMarkerClickListener(
@@ -7912,10 +8432,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onMarkerClickListener =
         onMarkerClickListener?.reference ?? jni$_.jNullReference;
     _setOnMarkerClickListener(
-            reference.pointer,
-            _id_setOnMarkerClickListener as jni$_.JMethodIDPtr,
-            _$onMarkerClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnMarkerClickListener as jni$_.JMethodIDPtr,
+      _$onMarkerClickListener.pointer,
+    ).check();
   }
 
   static final _id_setOnPolygonClickListener = _class.instanceMethodId(
@@ -7923,16 +8443,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnPolygonClickListener;)V',
   );
 
-  static final _setOnPolygonClickListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setOnPolygonClickListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnPolygonClickListener(org.maplibre.android.maps.MapLibreMap$OnPolygonClickListener onPolygonClickListener)`
   void setOnPolygonClickListener(
@@ -7941,10 +8468,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onPolygonClickListener =
         onPolygonClickListener?.reference ?? jni$_.jNullReference;
     _setOnPolygonClickListener(
-            reference.pointer,
-            _id_setOnPolygonClickListener as jni$_.JMethodIDPtr,
-            _$onPolygonClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnPolygonClickListener as jni$_.JMethodIDPtr,
+      _$onPolygonClickListener.pointer,
+    ).check();
   }
 
   static final _id_setOnPolylineClickListener = _class.instanceMethodId(
@@ -7954,15 +8481,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOnPolylineClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnPolylineClickListener(org.maplibre.android.maps.MapLibreMap$OnPolylineClickListener onPolylineClickListener)`
   void setOnPolylineClickListener(
@@ -7971,10 +8504,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onPolylineClickListener =
         onPolylineClickListener?.reference ?? jni$_.jNullReference;
     _setOnPolylineClickListener(
-            reference.pointer,
-            _id_setOnPolylineClickListener as jni$_.JMethodIDPtr,
-            _$onPolylineClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnPolylineClickListener as jni$_.JMethodIDPtr,
+      _$onPolylineClickListener.pointer,
+    ).check();
   }
 
   static final _id_selectMarker = _class.instanceMethodId(
@@ -7982,25 +8515,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _selectMarker = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _selectMarker =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void selectMarker(org.maplibre.android.annotations.Marker marker)`
-  void selectMarker(
-    jni$_.JObject marker,
-  ) {
+  void selectMarker(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _selectMarker(reference.pointer, _id_selectMarker as jni$_.JMethodIDPtr,
-            _$marker.pointer)
-        .check();
+    _selectMarker(
+      reference.pointer,
+      _id_selectMarker as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   static final _id_deselectMarkers = _class.instanceMethodId(
@@ -8008,23 +8548,28 @@ class MapLibreMap extends jni$_.JObject {
     r'()V',
   );
 
-  static final _deselectMarkers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _deselectMarkers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void deselectMarkers()`
   void deselectMarkers() {
     _deselectMarkers(
-            reference.pointer, _id_deselectMarkers as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_deselectMarkers as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_deselectMarker = _class.instanceMethodId(
@@ -8032,25 +8577,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/annotations/Marker;)V',
   );
 
-  static final _deselectMarker = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _deselectMarker =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void deselectMarker(org.maplibre.android.annotations.Marker marker)`
-  void deselectMarker(
-    jni$_.JObject marker,
-  ) {
+  void deselectMarker(jni$_.JObject marker) {
     final _$marker = marker.reference;
-    _deselectMarker(reference.pointer, _id_deselectMarker as jni$_.JMethodIDPtr,
-            _$marker.pointer)
-        .check();
+    _deselectMarker(
+      reference.pointer,
+      _id_deselectMarker as jni$_.JMethodIDPtr,
+      _$marker.pointer,
+    ).check();
   }
 
   static final _id_getSelectedMarkers = _class.instanceMethodId(
@@ -8058,25 +8610,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getSelectedMarkers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSelectedMarkers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getSelectedMarkers()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<jni$_.JObject?> getSelectedMarkers() {
     return _getSelectedMarkers(
-            reference.pointer, _id_getSelectedMarkers as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<jni$_.JObject?>>(
-            const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()));
+      reference.pointer,
+      _id_getSelectedMarkers as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<jni$_.JObject?>>(
+      const jni$_.JListType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+    );
   }
 
   static final _id_setInfoWindowAdapter = _class.instanceMethodId(
@@ -8084,28 +8642,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$InfoWindowAdapter;)V',
   );
 
-  static final _setInfoWindowAdapter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setInfoWindowAdapter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setInfoWindowAdapter(org.maplibre.android.maps.MapLibreMap$InfoWindowAdapter infoWindowAdapter)`
-  void setInfoWindowAdapter(
-    MapLibreMap$InfoWindowAdapter? infoWindowAdapter,
-  ) {
+  void setInfoWindowAdapter(MapLibreMap$InfoWindowAdapter? infoWindowAdapter) {
     final _$infoWindowAdapter =
         infoWindowAdapter?.reference ?? jni$_.jNullReference;
     _setInfoWindowAdapter(
-            reference.pointer,
-            _id_setInfoWindowAdapter as jni$_.JMethodIDPtr,
-            _$infoWindowAdapter.pointer)
-        .check();
+      reference.pointer,
+      _id_setInfoWindowAdapter as jni$_.JMethodIDPtr,
+      _$infoWindowAdapter.pointer,
+    ).check();
   }
 
   static final _id_getInfoWindowAdapter = _class.instanceMethodId(
@@ -8113,78 +8676,88 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/MapLibreMap$InfoWindowAdapter;',
   );
 
-  static final _getInfoWindowAdapter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getInfoWindowAdapter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.MapLibreMap$InfoWindowAdapter getInfoWindowAdapter()`
   /// The returned object must be released after use, by calling the [release] method.
   MapLibreMap$InfoWindowAdapter? getInfoWindowAdapter() {
     return _getInfoWindowAdapter(
-            reference.pointer, _id_getInfoWindowAdapter as jni$_.JMethodIDPtr)
-        .object<MapLibreMap$InfoWindowAdapter?>(
-            const $MapLibreMap$InfoWindowAdapter$NullableType());
+      reference.pointer,
+      _id_getInfoWindowAdapter as jni$_.JMethodIDPtr,
+    ).object<MapLibreMap$InfoWindowAdapter?>(
+      const $MapLibreMap$InfoWindowAdapter$NullableType(),
+    );
   }
 
-  static final _id_setAllowConcurrentMultipleOpenInfoWindows =
-      _class.instanceMethodId(
-    r'setAllowConcurrentMultipleOpenInfoWindows',
-    r'(Z)V',
-  );
+  static final _id_setAllowConcurrentMultipleOpenInfoWindows = _class
+      .instanceMethodId(r'setAllowConcurrentMultipleOpenInfoWindows', r'(Z)V');
 
   static final _setAllowConcurrentMultipleOpenInfoWindows =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setAllowConcurrentMultipleOpenInfoWindows(boolean z)`
-  void setAllowConcurrentMultipleOpenInfoWindows(
-    bool z,
-  ) {
+  void setAllowConcurrentMultipleOpenInfoWindows(bool z) {
     _setAllowConcurrentMultipleOpenInfoWindows(
-            reference.pointer,
-            _id_setAllowConcurrentMultipleOpenInfoWindows as jni$_.JMethodIDPtr,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setAllowConcurrentMultipleOpenInfoWindows as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
-  static final _id_isAllowConcurrentMultipleOpenInfoWindows =
-      _class.instanceMethodId(
-    r'isAllowConcurrentMultipleOpenInfoWindows',
-    r'()Z',
-  );
+  static final _id_isAllowConcurrentMultipleOpenInfoWindows = _class
+      .instanceMethodId(r'isAllowConcurrentMultipleOpenInfoWindows', r'()Z');
 
   static final _isAllowConcurrentMultipleOpenInfoWindows =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isAllowConcurrentMultipleOpenInfoWindows()`
   bool isAllowConcurrentMultipleOpenInfoWindows() {
-    return _isAllowConcurrentMultipleOpenInfoWindows(reference.pointer,
-            _id_isAllowConcurrentMultipleOpenInfoWindows as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isAllowConcurrentMultipleOpenInfoWindows(
+      reference.pointer,
+      _id_isAllowConcurrentMultipleOpenInfoWindows as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setLatLngBoundsForCameraTarget = _class.instanceMethodId(
@@ -8194,15 +8767,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setLatLngBoundsForCameraTarget =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setLatLngBoundsForCameraTarget(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   void setLatLngBoundsForCameraTarget(
@@ -8210,10 +8789,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds?.reference ?? jni$_.jNullReference;
     _setLatLngBoundsForCameraTarget(
-            reference.pointer,
-            _id_setLatLngBoundsForCameraTarget as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .check();
+      reference.pointer,
+      _id_setLatLngBoundsForCameraTarget as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).check();
   }
 
   static final _id_getCameraForLatLngBounds = _class.instanceMethodId(
@@ -8221,16 +8800,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraForLatLngBounds = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getCameraForLatLngBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8239,11 +8825,12 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _getCameraForLatLngBounds(
-            reference.pointer,
-            _id_getCameraForLatLngBounds as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForLatLngBounds as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForLatLngBounds$1 = _class.instanceMethodId(
@@ -8253,21 +8840,24 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getCameraForLatLngBounds$1 =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>
-                          )>)>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8278,12 +8868,13 @@ class MapLibreMap extends jni$_.JObject {
     final _$latLngBounds = latLngBounds.reference;
     final _$is$ = is$.reference;
     return _getCameraForLatLngBounds$1(
-            reference.pointer,
-            _id_getCameraForLatLngBounds$1 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            _$is$.pointer)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForLatLngBounds$1 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      _$is$.pointer,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForLatLngBounds$2 = _class.instanceMethodId(
@@ -8293,23 +8884,25 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getCameraForLatLngBounds$2 =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Double,
-                            jni$_.Double
-                          )>)>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.Pointer<jni$_.Void>,
-                  double,
-                  double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8320,13 +8913,14 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _getCameraForLatLngBounds$2(
-            reference.pointer,
-            _id_getCameraForLatLngBounds$2 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            d,
-            d1)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForLatLngBounds$2 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      d,
+      d1,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForLatLngBounds$3 = _class.instanceMethodId(
@@ -8336,25 +8930,31 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getCameraForLatLngBounds$3 =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Double,
-                            jni$_.Double
-                          )>)>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>,
-                  double,
-                  double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int[] is, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8367,14 +8967,15 @@ class MapLibreMap extends jni$_.JObject {
     final _$latLngBounds = latLngBounds.reference;
     final _$is$ = is$.reference;
     return _getCameraForLatLngBounds$3(
-            reference.pointer,
-            _id_getCameraForLatLngBounds$3 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            _$is$.pointer,
-            d,
-            d1)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForLatLngBounds$3 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      _$is$.pointer,
+      d,
+      d1,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForGeometry = _class.instanceMethodId(
@@ -8382,16 +8983,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/geojson/Geometry;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraForGeometry = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getCameraForGeometry =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8399,10 +9007,13 @@ class MapLibreMap extends jni$_.JObject {
     jni$_.JObject geometry,
   ) {
     final _$geometry = geometry.reference;
-    return _getCameraForGeometry(reference.pointer,
-            _id_getCameraForGeometry as jni$_.JMethodIDPtr, _$geometry.pointer)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+    return _getCameraForGeometry(
+      reference.pointer,
+      _id_getCameraForGeometry as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForGeometry$1 = _class.instanceMethodId(
@@ -8410,22 +9021,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/geojson/Geometry;[I)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraForGeometry$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCameraForGeometry$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8436,12 +9051,13 @@ class MapLibreMap extends jni$_.JObject {
     final _$geometry = geometry.reference;
     final _$is$ = is$.reference;
     return _getCameraForGeometry$1(
-            reference.pointer,
-            _id_getCameraForGeometry$1 as jni$_.JMethodIDPtr,
-            _$geometry.pointer,
-            _$is$.pointer)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForGeometry$1 as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+      _$is$.pointer,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForGeometry$2 = _class.instanceMethodId(
@@ -8449,20 +9065,27 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/geojson/Geometry;DD)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraForGeometry$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCameraForGeometry$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8473,13 +9096,14 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$geometry = geometry.reference;
     return _getCameraForGeometry$2(
-            reference.pointer,
-            _id_getCameraForGeometry$2 as jni$_.JMethodIDPtr,
-            _$geometry.pointer,
-            d,
-            d1)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForGeometry$2 as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+      d,
+      d1,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_getCameraForGeometry$3 = _class.instanceMethodId(
@@ -8487,26 +9111,33 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/geojson/Geometry;[IDD)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraForGeometry$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCameraForGeometry$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               double,
-              double)>();
+              double,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraForGeometry(org.maplibre.geojson.Geometry geometry, int[] is, double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -8519,14 +9150,15 @@ class MapLibreMap extends jni$_.JObject {
     final _$geometry = geometry.reference;
     final _$is$ = is$.reference;
     return _getCameraForGeometry$3(
-            reference.pointer,
-            _id_getCameraForGeometry$3 as jni$_.JMethodIDPtr,
-            _$geometry.pointer,
-            _$is$.pointer,
-            d,
-            d1)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+      reference.pointer,
+      _id_getCameraForGeometry$3 as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+      _$is$.pointer,
+      d,
+      d1,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_setPadding = _class.instanceMethodId(
@@ -8534,56 +9166,66 @@ class MapLibreMap extends jni$_.JObject {
     r'(IIII)V',
   );
 
-  static final _setPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, int, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public void setPadding(int i, int i1, int i2, int i3)`
-  void setPadding(
-    int i,
-    int i1,
-    int i2,
-    int i3,
-  ) {
-    _setPadding(reference.pointer, _id_setPadding as jni$_.JMethodIDPtr, i, i1,
-            i2, i3)
-        .check();
+  void setPadding(int i, int i1, int i2, int i3) {
+    _setPadding(
+      reference.pointer,
+      _id_setPadding as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      i2,
+      i3,
+    ).check();
   }
 
-  static final _id_getPadding = _class.instanceMethodId(
-    r'getPadding',
-    r'()[I',
-  );
+  static final _id_getPadding = _class.instanceMethodId(r'getPadding', r'()[I');
 
-  static final _getPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int[] getPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JIntArray getPadding() {
-    return _getPadding(reference.pointer, _id_getPadding as jni$_.JMethodIDPtr)
-        .object<jni$_.JIntArray>(const jni$_.JIntArrayType());
+    return _getPadding(
+      reference.pointer,
+      _id_getPadding as jni$_.JMethodIDPtr,
+    ).object<jni$_.JIntArray>(const jni$_.JIntArrayType());
   }
 
   static final _id_addOnCameraIdleListener = _class.instanceMethodId(
@@ -8591,16 +9233,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnCameraIdleListener;)V',
   );
 
-  static final _addOnCameraIdleListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnCameraIdleListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnCameraIdleListener(org.maplibre.android.maps.MapLibreMap$OnCameraIdleListener onCameraIdleListener)`
   void addOnCameraIdleListener(
@@ -8608,10 +9257,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraIdleListener = onCameraIdleListener.reference;
     _addOnCameraIdleListener(
-            reference.pointer,
-            _id_addOnCameraIdleListener as jni$_.JMethodIDPtr,
-            _$onCameraIdleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnCameraIdleListener as jni$_.JMethodIDPtr,
+      _$onCameraIdleListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnCameraIdleListener = _class.instanceMethodId(
@@ -8621,15 +9270,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _removeOnCameraIdleListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnCameraIdleListener(org.maplibre.android.maps.MapLibreMap$OnCameraIdleListener onCameraIdleListener)`
   void removeOnCameraIdleListener(
@@ -8637,10 +9292,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraIdleListener = onCameraIdleListener.reference;
     _removeOnCameraIdleListener(
-            reference.pointer,
-            _id_removeOnCameraIdleListener as jni$_.JMethodIDPtr,
-            _$onCameraIdleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnCameraIdleListener as jni$_.JMethodIDPtr,
+      _$onCameraIdleListener.pointer,
+    ).check();
   }
 
   static final _id_addOnCameraMoveCancelListener = _class.instanceMethodId(
@@ -8650,15 +9305,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _addOnCameraMoveCancelListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnCameraMoveCancelListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveCanceledListener onCameraMoveCanceledListener)`
   void addOnCameraMoveCancelListener(
@@ -8667,10 +9328,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onCameraMoveCanceledListener =
         onCameraMoveCanceledListener.reference;
     _addOnCameraMoveCancelListener(
-            reference.pointer,
-            _id_addOnCameraMoveCancelListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveCanceledListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnCameraMoveCancelListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveCanceledListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnCameraMoveCancelListener = _class.instanceMethodId(
@@ -8680,15 +9341,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _removeOnCameraMoveCancelListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnCameraMoveCancelListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveCanceledListener onCameraMoveCanceledListener)`
   void removeOnCameraMoveCancelListener(
@@ -8697,10 +9364,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onCameraMoveCanceledListener =
         onCameraMoveCanceledListener.reference;
     _removeOnCameraMoveCancelListener(
-            reference.pointer,
-            _id_removeOnCameraMoveCancelListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveCanceledListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnCameraMoveCancelListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveCanceledListener.pointer,
+    ).check();
   }
 
   static final _id_addOnCameraMoveStartedListener = _class.instanceMethodId(
@@ -8710,15 +9377,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _addOnCameraMoveStartedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnCameraMoveStartedListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveStartedListener onCameraMoveStartedListener)`
   void addOnCameraMoveStartedListener(
@@ -8726,10 +9399,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraMoveStartedListener = onCameraMoveStartedListener.reference;
     _addOnCameraMoveStartedListener(
-            reference.pointer,
-            _id_addOnCameraMoveStartedListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveStartedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnCameraMoveStartedListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveStartedListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnCameraMoveStartedListener = _class.instanceMethodId(
@@ -8739,15 +9412,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _removeOnCameraMoveStartedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnCameraMoveStartedListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveStartedListener onCameraMoveStartedListener)`
   void removeOnCameraMoveStartedListener(
@@ -8755,10 +9434,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraMoveStartedListener = onCameraMoveStartedListener.reference;
     _removeOnCameraMoveStartedListener(
-            reference.pointer,
-            _id_removeOnCameraMoveStartedListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveStartedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnCameraMoveStartedListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveStartedListener.pointer,
+    ).check();
   }
 
   static final _id_addOnCameraMoveListener = _class.instanceMethodId(
@@ -8766,16 +9445,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnCameraMoveListener;)V',
   );
 
-  static final _addOnCameraMoveListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnCameraMoveListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnCameraMoveListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveListener onCameraMoveListener)`
   void addOnCameraMoveListener(
@@ -8783,10 +9469,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraMoveListener = onCameraMoveListener.reference;
     _addOnCameraMoveListener(
-            reference.pointer,
-            _id_addOnCameraMoveListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnCameraMoveListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnCameraMoveListener = _class.instanceMethodId(
@@ -8796,15 +9482,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _removeOnCameraMoveListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnCameraMoveListener(org.maplibre.android.maps.MapLibreMap$OnCameraMoveListener onCameraMoveListener)`
   void removeOnCameraMoveListener(
@@ -8812,10 +9504,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onCameraMoveListener = onCameraMoveListener.reference;
     _removeOnCameraMoveListener(
-            reference.pointer,
-            _id_removeOnCameraMoveListener as jni$_.JMethodIDPtr,
-            _$onCameraMoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnCameraMoveListener as jni$_.JMethodIDPtr,
+      _$onCameraMoveListener.pointer,
+    ).check();
   }
 
   static final _id_setOnFpsChangedListener = _class.instanceMethodId(
@@ -8823,16 +9515,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnFpsChangedListener;)V',
   );
 
-  static final _setOnFpsChangedListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setOnFpsChangedListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnFpsChangedListener(org.maplibre.android.maps.MapLibreMap$OnFpsChangedListener onFpsChangedListener)`
   void setOnFpsChangedListener(
@@ -8841,10 +9540,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onFpsChangedListener =
         onFpsChangedListener?.reference ?? jni$_.jNullReference;
     _setOnFpsChangedListener(
-            reference.pointer,
-            _id_setOnFpsChangedListener as jni$_.JMethodIDPtr,
-            _$onFpsChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnFpsChangedListener as jni$_.JMethodIDPtr,
+      _$onFpsChangedListener.pointer,
+    ).check();
   }
 
   static final _id_addOnFlingListener = _class.instanceMethodId(
@@ -8852,27 +9551,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnFlingListener;)V',
   );
 
-  static final _addOnFlingListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnFlingListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnFlingListener(org.maplibre.android.maps.MapLibreMap$OnFlingListener onFlingListener)`
-  void addOnFlingListener(
-    MapLibreMap$OnFlingListener onFlingListener,
-  ) {
+  void addOnFlingListener(MapLibreMap$OnFlingListener onFlingListener) {
     final _$onFlingListener = onFlingListener.reference;
     _addOnFlingListener(
-            reference.pointer,
-            _id_addOnFlingListener as jni$_.JMethodIDPtr,
-            _$onFlingListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnFlingListener as jni$_.JMethodIDPtr,
+      _$onFlingListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnFlingListener = _class.instanceMethodId(
@@ -8880,27 +9584,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnFlingListener;)V',
   );
 
-  static final _removeOnFlingListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnFlingListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnFlingListener(org.maplibre.android.maps.MapLibreMap$OnFlingListener onFlingListener)`
-  void removeOnFlingListener(
-    MapLibreMap$OnFlingListener onFlingListener,
-  ) {
+  void removeOnFlingListener(MapLibreMap$OnFlingListener onFlingListener) {
     final _$onFlingListener = onFlingListener.reference;
     _removeOnFlingListener(
-            reference.pointer,
-            _id_removeOnFlingListener as jni$_.JMethodIDPtr,
-            _$onFlingListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnFlingListener as jni$_.JMethodIDPtr,
+      _$onFlingListener.pointer,
+    ).check();
   }
 
   static final _id_addOnMoveListener = _class.instanceMethodId(
@@ -8908,27 +9617,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMoveListener;)V',
   );
 
-  static final _addOnMoveListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnMoveListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnMoveListener(org.maplibre.android.maps.MapLibreMap$OnMoveListener onMoveListener)`
-  void addOnMoveListener(
-    MapLibreMap$OnMoveListener onMoveListener,
-  ) {
+  void addOnMoveListener(MapLibreMap$OnMoveListener onMoveListener) {
     final _$onMoveListener = onMoveListener.reference;
     _addOnMoveListener(
-            reference.pointer,
-            _id_addOnMoveListener as jni$_.JMethodIDPtr,
-            _$onMoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnMoveListener as jni$_.JMethodIDPtr,
+      _$onMoveListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnMoveListener = _class.instanceMethodId(
@@ -8936,27 +9650,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMoveListener;)V',
   );
 
-  static final _removeOnMoveListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnMoveListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnMoveListener(org.maplibre.android.maps.MapLibreMap$OnMoveListener onMoveListener)`
-  void removeOnMoveListener(
-    MapLibreMap$OnMoveListener onMoveListener,
-  ) {
+  void removeOnMoveListener(MapLibreMap$OnMoveListener onMoveListener) {
     final _$onMoveListener = onMoveListener.reference;
     _removeOnMoveListener(
-            reference.pointer,
-            _id_removeOnMoveListener as jni$_.JMethodIDPtr,
-            _$onMoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnMoveListener as jni$_.JMethodIDPtr,
+      _$onMoveListener.pointer,
+    ).check();
   }
 
   static final _id_addOnRotateListener = _class.instanceMethodId(
@@ -8964,27 +9683,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnRotateListener;)V',
   );
 
-  static final _addOnRotateListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnRotateListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnRotateListener(org.maplibre.android.maps.MapLibreMap$OnRotateListener onRotateListener)`
-  void addOnRotateListener(
-    MapLibreMap$OnRotateListener onRotateListener,
-  ) {
+  void addOnRotateListener(MapLibreMap$OnRotateListener onRotateListener) {
     final _$onRotateListener = onRotateListener.reference;
     _addOnRotateListener(
-            reference.pointer,
-            _id_addOnRotateListener as jni$_.JMethodIDPtr,
-            _$onRotateListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnRotateListener as jni$_.JMethodIDPtr,
+      _$onRotateListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnRotateListener = _class.instanceMethodId(
@@ -8992,27 +9716,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnRotateListener;)V',
   );
 
-  static final _removeOnRotateListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnRotateListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnRotateListener(org.maplibre.android.maps.MapLibreMap$OnRotateListener onRotateListener)`
-  void removeOnRotateListener(
-    MapLibreMap$OnRotateListener onRotateListener,
-  ) {
+  void removeOnRotateListener(MapLibreMap$OnRotateListener onRotateListener) {
     final _$onRotateListener = onRotateListener.reference;
     _removeOnRotateListener(
-            reference.pointer,
-            _id_removeOnRotateListener as jni$_.JMethodIDPtr,
-            _$onRotateListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnRotateListener as jni$_.JMethodIDPtr,
+      _$onRotateListener.pointer,
+    ).check();
   }
 
   static final _id_addOnScaleListener = _class.instanceMethodId(
@@ -9020,27 +9749,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnScaleListener;)V',
   );
 
-  static final _addOnScaleListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnScaleListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnScaleListener(org.maplibre.android.maps.MapLibreMap$OnScaleListener onScaleListener)`
-  void addOnScaleListener(
-    MapLibreMap$OnScaleListener onScaleListener,
-  ) {
+  void addOnScaleListener(MapLibreMap$OnScaleListener onScaleListener) {
     final _$onScaleListener = onScaleListener.reference;
     _addOnScaleListener(
-            reference.pointer,
-            _id_addOnScaleListener as jni$_.JMethodIDPtr,
-            _$onScaleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnScaleListener as jni$_.JMethodIDPtr,
+      _$onScaleListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnScaleListener = _class.instanceMethodId(
@@ -9048,27 +9782,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnScaleListener;)V',
   );
 
-  static final _removeOnScaleListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnScaleListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnScaleListener(org.maplibre.android.maps.MapLibreMap$OnScaleListener onScaleListener)`
-  void removeOnScaleListener(
-    MapLibreMap$OnScaleListener onScaleListener,
-  ) {
+  void removeOnScaleListener(MapLibreMap$OnScaleListener onScaleListener) {
     final _$onScaleListener = onScaleListener.reference;
     _removeOnScaleListener(
-            reference.pointer,
-            _id_removeOnScaleListener as jni$_.JMethodIDPtr,
-            _$onScaleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnScaleListener as jni$_.JMethodIDPtr,
+      _$onScaleListener.pointer,
+    ).check();
   }
 
   static final _id_addOnShoveListener = _class.instanceMethodId(
@@ -9076,27 +9815,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnShoveListener;)V',
   );
 
-  static final _addOnShoveListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnShoveListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnShoveListener(org.maplibre.android.maps.MapLibreMap$OnShoveListener onShoveListener)`
-  void addOnShoveListener(
-    MapLibreMap$OnShoveListener onShoveListener,
-  ) {
+  void addOnShoveListener(MapLibreMap$OnShoveListener onShoveListener) {
     final _$onShoveListener = onShoveListener.reference;
     _addOnShoveListener(
-            reference.pointer,
-            _id_addOnShoveListener as jni$_.JMethodIDPtr,
-            _$onShoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnShoveListener as jni$_.JMethodIDPtr,
+      _$onShoveListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnShoveListener = _class.instanceMethodId(
@@ -9104,27 +9848,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnShoveListener;)V',
   );
 
-  static final _removeOnShoveListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnShoveListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnShoveListener(org.maplibre.android.maps.MapLibreMap$OnShoveListener onShoveListener)`
-  void removeOnShoveListener(
-    MapLibreMap$OnShoveListener onShoveListener,
-  ) {
+  void removeOnShoveListener(MapLibreMap$OnShoveListener onShoveListener) {
     final _$onShoveListener = onShoveListener.reference;
     _removeOnShoveListener(
-            reference.pointer,
-            _id_removeOnShoveListener as jni$_.JMethodIDPtr,
-            _$onShoveListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnShoveListener as jni$_.JMethodIDPtr,
+      _$onShoveListener.pointer,
+    ).check();
   }
 
   static final _id_setGesturesManager = _class.instanceMethodId(
@@ -9132,20 +9881,27 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/gestures/AndroidGesturesManager;ZZ)V',
   );
 
-  static final _setGesturesManager = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setGesturesManager =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public void setGesturesManager(org.maplibre.android.gestures.AndroidGesturesManager androidGesturesManager, boolean z, boolean z1)`
   void setGesturesManager(
@@ -9155,12 +9911,12 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$androidGesturesManager = androidGesturesManager.reference;
     _setGesturesManager(
-            reference.pointer,
-            _id_setGesturesManager as jni$_.JMethodIDPtr,
-            _$androidGesturesManager.pointer,
-            z ? 1 : 0,
-            z1 ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_setGesturesManager as jni$_.JMethodIDPtr,
+      _$androidGesturesManager.pointer,
+      z ? 1 : 0,
+      z1 ? 1 : 0,
+    ).check();
   }
 
   static final _id_getGesturesManager = _class.instanceMethodId(
@@ -9168,24 +9924,29 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/gestures/AndroidGesturesManager;',
   );
 
-  static final _getGesturesManager = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGesturesManager =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.gestures.AndroidGesturesManager getGesturesManager()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject getGesturesManager() {
     return _getGesturesManager(
-            reference.pointer, _id_getGesturesManager as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_getGesturesManager as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_cancelAllVelocityAnimations = _class.instanceMethodId(
@@ -9195,22 +9956,26 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _cancelAllVelocityAnimations =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancelAllVelocityAnimations()`
   void cancelAllVelocityAnimations() {
-    _cancelAllVelocityAnimations(reference.pointer,
-            _id_cancelAllVelocityAnimations as jni$_.JMethodIDPtr)
-        .check();
+    _cancelAllVelocityAnimations(
+      reference.pointer,
+      _id_cancelAllVelocityAnimations as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_addOnMapClickListener = _class.instanceMethodId(
@@ -9218,16 +9983,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMapClickListener;)V',
   );
 
-  static final _addOnMapClickListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnMapClickListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnMapClickListener(org.maplibre.android.maps.MapLibreMap$OnMapClickListener onMapClickListener)`
   void addOnMapClickListener(
@@ -9235,10 +10007,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onMapClickListener = onMapClickListener.reference;
     _addOnMapClickListener(
-            reference.pointer,
-            _id_addOnMapClickListener as jni$_.JMethodIDPtr,
-            _$onMapClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnMapClickListener as jni$_.JMethodIDPtr,
+      _$onMapClickListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnMapClickListener = _class.instanceMethodId(
@@ -9246,16 +10018,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMapClickListener;)V',
   );
 
-  static final _removeOnMapClickListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeOnMapClickListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnMapClickListener(org.maplibre.android.maps.MapLibreMap$OnMapClickListener onMapClickListener)`
   void removeOnMapClickListener(
@@ -9263,10 +10042,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onMapClickListener = onMapClickListener.reference;
     _removeOnMapClickListener(
-            reference.pointer,
-            _id_removeOnMapClickListener as jni$_.JMethodIDPtr,
-            _$onMapClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnMapClickListener as jni$_.JMethodIDPtr,
+      _$onMapClickListener.pointer,
+    ).check();
   }
 
   static final _id_addOnMapLongClickListener = _class.instanceMethodId(
@@ -9274,16 +10053,23 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$OnMapLongClickListener;)V',
   );
 
-  static final _addOnMapLongClickListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addOnMapLongClickListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnMapLongClickListener(org.maplibre.android.maps.MapLibreMap$OnMapLongClickListener onMapLongClickListener)`
   void addOnMapLongClickListener(
@@ -9291,10 +10077,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onMapLongClickListener = onMapLongClickListener.reference;
     _addOnMapLongClickListener(
-            reference.pointer,
-            _id_addOnMapLongClickListener as jni$_.JMethodIDPtr,
-            _$onMapLongClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnMapLongClickListener as jni$_.JMethodIDPtr,
+      _$onMapLongClickListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnMapLongClickListener = _class.instanceMethodId(
@@ -9304,15 +10090,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _removeOnMapLongClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnMapLongClickListener(org.maplibre.android.maps.MapLibreMap$OnMapLongClickListener onMapLongClickListener)`
   void removeOnMapLongClickListener(
@@ -9320,10 +10112,10 @@ class MapLibreMap extends jni$_.JObject {
   ) {
     final _$onMapLongClickListener = onMapLongClickListener.reference;
     _removeOnMapLongClickListener(
-            reference.pointer,
-            _id_removeOnMapLongClickListener as jni$_.JMethodIDPtr,
-            _$onMapLongClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnMapLongClickListener as jni$_.JMethodIDPtr,
+      _$onMapLongClickListener.pointer,
+    ).check();
   }
 
   static final _id_setOnInfoWindowClickListener = _class.instanceMethodId(
@@ -9333,15 +10125,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOnInfoWindowClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnInfoWindowClickListener(org.maplibre.android.maps.MapLibreMap$OnInfoWindowClickListener onInfoWindowClickListener)`
   void setOnInfoWindowClickListener(
@@ -9350,10 +10148,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onInfoWindowClickListener =
         onInfoWindowClickListener?.reference ?? jni$_.jNullReference;
     _setOnInfoWindowClickListener(
-            reference.pointer,
-            _id_setOnInfoWindowClickListener as jni$_.JMethodIDPtr,
-            _$onInfoWindowClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnInfoWindowClickListener as jni$_.JMethodIDPtr,
+      _$onInfoWindowClickListener.pointer,
+    ).check();
   }
 
   static final _id_getOnInfoWindowClickListener = _class.instanceMethodId(
@@ -9363,24 +10161,29 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getOnInfoWindowClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.MapLibreMap$OnInfoWindowClickListener getOnInfoWindowClickListener()`
   /// The returned object must be released after use, by calling the [release] method.
   MapLibreMap$OnInfoWindowClickListener? getOnInfoWindowClickListener() {
-    return _getOnInfoWindowClickListener(reference.pointer,
-            _id_getOnInfoWindowClickListener as jni$_.JMethodIDPtr)
-        .object<MapLibreMap$OnInfoWindowClickListener?>(
-            const $MapLibreMap$OnInfoWindowClickListener$NullableType());
+    return _getOnInfoWindowClickListener(
+      reference.pointer,
+      _id_getOnInfoWindowClickListener as jni$_.JMethodIDPtr,
+    ).object<MapLibreMap$OnInfoWindowClickListener?>(
+      const $MapLibreMap$OnInfoWindowClickListener$NullableType(),
+    );
   }
 
   static final _id_setOnInfoWindowLongClickListener = _class.instanceMethodId(
@@ -9390,15 +10193,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOnInfoWindowLongClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnInfoWindowLongClickListener(org.maplibre.android.maps.MapLibreMap$OnInfoWindowLongClickListener onInfoWindowLongClickListener)`
   void setOnInfoWindowLongClickListener(
@@ -9407,10 +10216,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onInfoWindowLongClickListener =
         onInfoWindowLongClickListener?.reference ?? jni$_.jNullReference;
     _setOnInfoWindowLongClickListener(
-            reference.pointer,
-            _id_setOnInfoWindowLongClickListener as jni$_.JMethodIDPtr,
-            _$onInfoWindowLongClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnInfoWindowLongClickListener as jni$_.JMethodIDPtr,
+      _$onInfoWindowLongClickListener.pointer,
+    ).check();
   }
 
   static final _id_getOnInfoWindowLongClickListener = _class.instanceMethodId(
@@ -9420,25 +10229,30 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getOnInfoWindowLongClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.MapLibreMap$OnInfoWindowLongClickListener getOnInfoWindowLongClickListener()`
   /// The returned object must be released after use, by calling the [release] method.
   MapLibreMap$OnInfoWindowLongClickListener?
-      getOnInfoWindowLongClickListener() {
-    return _getOnInfoWindowLongClickListener(reference.pointer,
-            _id_getOnInfoWindowLongClickListener as jni$_.JMethodIDPtr)
-        .object<MapLibreMap$OnInfoWindowLongClickListener?>(
-            const $MapLibreMap$OnInfoWindowLongClickListener$NullableType());
+  getOnInfoWindowLongClickListener() {
+    return _getOnInfoWindowLongClickListener(
+      reference.pointer,
+      _id_getOnInfoWindowLongClickListener as jni$_.JMethodIDPtr,
+    ).object<MapLibreMap$OnInfoWindowLongClickListener?>(
+      const $MapLibreMap$OnInfoWindowLongClickListener$NullableType(),
+    );
   }
 
   static final _id_setOnInfoWindowCloseListener = _class.instanceMethodId(
@@ -9448,15 +10262,21 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _setOnInfoWindowCloseListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setOnInfoWindowCloseListener(org.maplibre.android.maps.MapLibreMap$OnInfoWindowCloseListener onInfoWindowCloseListener)`
   void setOnInfoWindowCloseListener(
@@ -9465,10 +10285,10 @@ class MapLibreMap extends jni$_.JObject {
     final _$onInfoWindowCloseListener =
         onInfoWindowCloseListener?.reference ?? jni$_.jNullReference;
     _setOnInfoWindowCloseListener(
-            reference.pointer,
-            _id_setOnInfoWindowCloseListener as jni$_.JMethodIDPtr,
-            _$onInfoWindowCloseListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setOnInfoWindowCloseListener as jni$_.JMethodIDPtr,
+      _$onInfoWindowCloseListener.pointer,
+    ).check();
   }
 
   static final _id_getOnInfoWindowCloseListener = _class.instanceMethodId(
@@ -9478,24 +10298,29 @@ class MapLibreMap extends jni$_.JObject {
 
   static final _getOnInfoWindowCloseListener =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.MapLibreMap$OnInfoWindowCloseListener getOnInfoWindowCloseListener()`
   /// The returned object must be released after use, by calling the [release] method.
   MapLibreMap$OnInfoWindowCloseListener? getOnInfoWindowCloseListener() {
-    return _getOnInfoWindowCloseListener(reference.pointer,
-            _id_getOnInfoWindowCloseListener as jni$_.JMethodIDPtr)
-        .object<MapLibreMap$OnInfoWindowCloseListener?>(
-            const $MapLibreMap$OnInfoWindowCloseListener$NullableType());
+    return _getOnInfoWindowCloseListener(
+      reference.pointer,
+      _id_getOnInfoWindowCloseListener as jni$_.JMethodIDPtr,
+    ).object<MapLibreMap$OnInfoWindowCloseListener?>(
+      const $MapLibreMap$OnInfoWindowCloseListener$NullableType(),
+    );
   }
 
   static final _id_snapshot = _class.instanceMethodId(
@@ -9503,25 +10328,32 @@ class MapLibreMap extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap$SnapshotReadyCallback;)V',
   );
 
-  static final _snapshot = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _snapshot =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void snapshot(org.maplibre.android.maps.MapLibreMap$SnapshotReadyCallback snapshotReadyCallback)`
-  void snapshot(
-    MapLibreMap$SnapshotReadyCallback snapshotReadyCallback,
-  ) {
+  void snapshot(MapLibreMap$SnapshotReadyCallback snapshotReadyCallback) {
     final _$snapshotReadyCallback = snapshotReadyCallback.reference;
-    _snapshot(reference.pointer, _id_snapshot as jni$_.JMethodIDPtr,
-            _$snapshotReadyCallback.pointer)
-        .check();
+    _snapshot(
+      reference.pointer,
+      _id_snapshot as jni$_.JMethodIDPtr,
+      _$snapshotReadyCallback.pointer,
+    ).check();
   }
 
   static final _id_queryRenderedFeatures = _class.instanceMethodId(
@@ -9529,22 +10361,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Landroid/graphics/PointF;[Ljava/lang/String;)Ljava/util/List;',
   );
 
-  static final _queryRenderedFeatures = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _queryRenderedFeatures =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -9555,13 +10391,15 @@ class MapLibreMap extends jni$_.JObject {
     final _$pointF = pointF.reference;
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryRenderedFeatures(
-            reference.pointer,
-            _id_queryRenderedFeatures as jni$_.JMethodIDPtr,
-            _$pointF.pointer,
-            _$strings.pointer)
-        .object<jni$_.JList<feature$_.Feature?>>(
-            const jni$_.JListType<feature$_.Feature?>(
-                feature$_.$Feature$NullableType()));
+      reference.pointer,
+      _id_queryRenderedFeatures as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+      _$strings.pointer,
+    ).object<jni$_.JList<feature$_.Feature?>>(
+      const jni$_.JListType<feature$_.Feature?>(
+        feature$_.$Feature$NullableType(),
+      ),
+    );
   }
 
   static final _id_queryRenderedFeatures$1 = _class.instanceMethodId(
@@ -9569,24 +10407,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Landroid/graphics/PointF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
   );
 
-  static final _queryRenderedFeatures$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _queryRenderedFeatures$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.PointF pointF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -9599,14 +10444,16 @@ class MapLibreMap extends jni$_.JObject {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryRenderedFeatures$1(
-            reference.pointer,
-            _id_queryRenderedFeatures$1 as jni$_.JMethodIDPtr,
-            _$pointF.pointer,
-            _$expression.pointer,
-            _$strings.pointer)
-        .object<jni$_.JList<feature$_.Feature?>>(
-            const jni$_.JListType<feature$_.Feature?>(
-                feature$_.$Feature$NullableType()));
+      reference.pointer,
+      _id_queryRenderedFeatures$1 as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+      _$expression.pointer,
+      _$strings.pointer,
+    ).object<jni$_.JList<feature$_.Feature?>>(
+      const jni$_.JListType<feature$_.Feature?>(
+        feature$_.$Feature$NullableType(),
+      ),
+    );
   }
 
   static final _id_queryRenderedFeatures$2 = _class.instanceMethodId(
@@ -9614,22 +10461,26 @@ class MapLibreMap extends jni$_.JObject {
     r'(Landroid/graphics/RectF;[Ljava/lang/String;)Ljava/util/List;',
   );
 
-  static final _queryRenderedFeatures$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _queryRenderedFeatures$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -9640,13 +10491,15 @@ class MapLibreMap extends jni$_.JObject {
     final _$rectF = rectF.reference;
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryRenderedFeatures$2(
-            reference.pointer,
-            _id_queryRenderedFeatures$2 as jni$_.JMethodIDPtr,
-            _$rectF.pointer,
-            _$strings.pointer)
-        .object<jni$_.JList<feature$_.Feature?>>(
-            const jni$_.JListType<feature$_.Feature?>(
-                feature$_.$Feature$NullableType()));
+      reference.pointer,
+      _id_queryRenderedFeatures$2 as jni$_.JMethodIDPtr,
+      _$rectF.pointer,
+      _$strings.pointer,
+    ).object<jni$_.JList<feature$_.Feature?>>(
+      const jni$_.JListType<feature$_.Feature?>(
+        feature$_.$Feature$NullableType(),
+      ),
+    );
   }
 
   static final _id_queryRenderedFeatures$3 = _class.instanceMethodId(
@@ -9654,24 +10507,31 @@ class MapLibreMap extends jni$_.JObject {
     r'(Landroid/graphics/RectF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
   );
 
-  static final _queryRenderedFeatures$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _queryRenderedFeatures$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public java.util.List queryRenderedFeatures(android.graphics.RectF rectF, org.maplibre.android.style.expressions.Expression expression, java.lang.Object[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -9684,14 +10544,16 @@ class MapLibreMap extends jni$_.JObject {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryRenderedFeatures$3(
-            reference.pointer,
-            _id_queryRenderedFeatures$3 as jni$_.JMethodIDPtr,
-            _$rectF.pointer,
-            _$expression.pointer,
-            _$strings.pointer)
-        .object<jni$_.JList<feature$_.Feature?>>(
-            const jni$_.JListType<feature$_.Feature?>(
-                feature$_.$Feature$NullableType()));
+      reference.pointer,
+      _id_queryRenderedFeatures$3 as jni$_.JMethodIDPtr,
+      _$rectF.pointer,
+      _$expression.pointer,
+      _$strings.pointer,
+    ).object<jni$_.JList<feature$_.Feature?>>(
+      const jni$_.JListType<feature$_.Feature?>(
+        feature$_.$Feature$NullableType(),
+      ),
+    );
   }
 
   static final _id_getLocationComponent = _class.instanceMethodId(
@@ -9699,25 +10561,31 @@ class MapLibreMap extends jni$_.JObject {
     r'()Lorg/maplibre/android/location/LocationComponent;',
   );
 
-  static final _getLocationComponent = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLocationComponent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.LocationComponent getLocationComponent()`
   /// The returned object must be released after use, by calling the [release] method.
   locationcomponent$_.LocationComponent getLocationComponent() {
     return _getLocationComponent(
-            reference.pointer, _id_getLocationComponent as jni$_.JMethodIDPtr)
-        .object<locationcomponent$_.LocationComponent>(
-            const locationcomponent$_.$LocationComponent$Type());
+      reference.pointer,
+      _id_getLocationComponent as jni$_.JMethodIDPtr,
+    ).object<locationcomponent$_.LocationComponent>(
+      const locationcomponent$_.$LocationComponent$Type(),
+    );
   }
 }
 
@@ -9731,11 +10599,8 @@ final class $MapLibreMap$NullableType extends jni$_.JObjType<MapLibreMap?> {
 
   @jni$_.internal
   @core$_.override
-  MapLibreMap? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : MapLibreMap.fromReference(
-          reference,
-        );
+  MapLibreMap? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : MapLibreMap.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -9769,9 +10634,7 @@ final class $MapLibreMap$Type extends jni$_.JObjType<MapLibreMap> {
   @jni$_.internal
   @core$_.override
   MapLibreMap fromReference(jni$_.JReference reference) =>
-      MapLibreMap.fromReference(
-        reference,
-      );
+      MapLibreMap.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

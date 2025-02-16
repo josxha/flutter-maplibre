@@ -70,10 +70,7 @@ void main() {
       await tester.pumpWidget(const App());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
-      expect(
-        await manager.listOfflineRegions(),
-        isEmpty,
-      );
+      expect(await manager.listOfflineRegions(), isEmpty);
       manager.dispose();
     });
     /*testWidgets('downloadRegion', (tester) async {

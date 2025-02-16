@@ -32,127 +32,128 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void initState() {
-    platformViewRegistry.registerViewFactory(
-      viewName,
-      (int viewId, [dynamic params]) {
-        _htmlElement = HTMLDivElement()
-          ..style.padding = '0'
-          ..style.margin = '0'
-          ..style.height = '100%'
-          ..style.width = '100%';
+    platformViewRegistry.registerViewFactory(viewName, (
+      int viewId, [
+      dynamic params,
+    ]) {
+      _htmlElement =
+          HTMLDivElement()
+            ..style.padding = '0'
+            ..style.margin = '0'
+            ..style.height = '100%'
+            ..style.width = '100%';
 
-        _map = interop.JsMap(
-          interop.MapOptions(
-            container: _htmlElement,
-            style: options.initStyle,
-            zoom: options.initZoom,
-            center: options.initCenter?.toLngLat(),
-            bearing: options.initBearing,
-            pitch: options.initPitch,
-            attributionControl: false,
-          ),
-        );
+      _map = interop.JsMap(
+        interop.MapOptions(
+          container: _htmlElement,
+          style: options.initStyle,
+          zoom: options.initZoom,
+          center: options.initCenter?.toLngLat(),
+          bearing: options.initBearing,
+          pitch: options.initPitch,
+          attributionControl: false,
+        ),
+      );
 
-        document.body?.appendChild(_htmlElement);
-        // Invoke the onMapCreated callback async to avoid getting it called
-        // during the widget build.
-        Future.delayed(Duration.zero, () {
-          widget.onEvent?.call(MapEventMapCreated(mapController: this));
-          widget.onMapCreated?.call(this);
-          setState(() => isInitialized = true);
-        });
-        _resizeMap();
+      document.body?.appendChild(_htmlElement);
+      // Invoke the onMapCreated callback async to avoid getting it called
+      // during the widget build.
+      Future.delayed(Duration.zero, () {
+        widget.onEvent?.call(MapEventMapCreated(mapController: this));
+        widget.onMapCreated?.call(this);
+        setState(() => isInitialized = true);
+      });
+      _resizeMap();
 
-        // set options
-        _map.setMinZoom(options.minZoom);
-        _map.setMaxZoom(options.maxZoom);
-        _map.setMinPitch(options.minPitch);
-        _map.setMaxPitch(options.maxPitch);
-        _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-        _updateGestures(options.gestures);
+      // set options
+      _map.setMinZoom(options.minZoom);
+      _map.setMaxZoom(options.maxZoom);
+      _map.setMinPitch(options.minPitch);
+      _map.setMaxPitch(options.maxPitch);
+      _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+      _updateGestures(options.gestures);
 
-        // add callbacks
-        _map.on(
-          interop.MapEventType.load,
-          (interop.MapMouseEvent event) {
-            style?.dispose();
-            final styleCtrl = StyleControllerWeb(_map);
-            style = styleCtrl;
-            widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
-            widget.onStyleLoaded?.call(styleCtrl);
-            _layerManager = LayerManager(styleCtrl, widget.layers);
-            // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
-            setState(() {});
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.click,
-          (interop.MapMouseEvent event) {
-            final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventClick(point: point));
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.dblclick,
-          (interop.MapMouseEvent event) {
-            final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventDoubleClick(point: point));
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.contextmenu,
-          (interop.MapMouseEvent event) {
-            final point = event.lngLat.toPosition();
-            widget.onEvent?.call(MapEventSecondaryClick(point: point));
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.idle,
-          (interop.MapMouseEvent event) {
-            widget.onEvent?.call(const MapEventIdle());
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.moveStart,
-          (interop.MapLibreEvent event) {
-            final CameraChangeReason reason;
-            if (_nextGestureCausedByController) {
-              _nextGestureCausedByController = false;
-              reason = CameraChangeReason.developerAnimation;
-            } else if (event.originalEvent != null) {
-              reason = CameraChangeReason.apiGesture;
-            } else {
-              reason = CameraChangeReason.apiAnimation;
-            }
-            widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.move,
-          (interop.MapLibreEvent event) {
-            final mapCamera = MapCamera(
-              center: _map.getCenter().toPosition(),
-              zoom: _map.getZoom().toDouble(),
-              pitch: _map.getPitch().toDouble(),
-              bearing: _map.getBearing().toDouble(),
-            );
-            setState(() => camera = mapCamera);
-            widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
-          }.toJS,
-        );
-        _map.on(
-          interop.MapEventType.moveEnd,
-          (interop.MapLibreEvent event) {
-            widget.onEvent?.call(const MapEventCameraIdle());
-            if (!(_movementCompleter?.isCompleted ?? true)) {
-              _movementCompleter?.complete(event);
-            }
-          }.toJS,
-        );
+      // add callbacks
+      _map.on(
+        interop.MapEventType.load,
+        (interop.MapMouseEvent event) {
+          style?.dispose();
+          final styleCtrl = StyleControllerWeb(_map);
+          style = styleCtrl;
+          widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
+          widget.onStyleLoaded?.call(styleCtrl);
+          _layerManager = LayerManager(styleCtrl, widget.layers);
+          // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+          setState(() {});
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.click,
+        (interop.MapMouseEvent event) {
+          final point = event.lngLat.toPosition();
+          widget.onEvent?.call(MapEventClick(point: point));
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.dblclick,
+        (interop.MapMouseEvent event) {
+          final point = event.lngLat.toPosition();
+          widget.onEvent?.call(MapEventDoubleClick(point: point));
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.contextmenu,
+        (interop.MapMouseEvent event) {
+          final point = event.lngLat.toPosition();
+          widget.onEvent?.call(MapEventSecondaryClick(point: point));
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.idle,
+        (interop.MapMouseEvent event) {
+          widget.onEvent?.call(const MapEventIdle());
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.moveStart,
+        (interop.MapLibreEvent event) {
+          final CameraChangeReason reason;
+          if (_nextGestureCausedByController) {
+            _nextGestureCausedByController = false;
+            reason = CameraChangeReason.developerAnimation;
+          } else if (event.originalEvent != null) {
+            reason = CameraChangeReason.apiGesture;
+          } else {
+            reason = CameraChangeReason.apiAnimation;
+          }
+          widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.move,
+        (interop.MapLibreEvent event) {
+          final mapCamera = MapCamera(
+            center: _map.getCenter().toPosition(),
+            zoom: _map.getZoom().toDouble(),
+            pitch: _map.getPitch().toDouble(),
+            bearing: _map.getBearing().toDouble(),
+          );
+          setState(() => camera = mapCamera);
+          widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.moveEnd,
+        (interop.MapLibreEvent event) {
+          widget.onEvent?.call(const MapEventCameraIdle());
+          if (!(_movementCompleter?.isCompleted ?? true)) {
+            _movementCompleter?.complete(event);
+          }
+        }.toJS,
+      );
 
-        return _htmlElement;
-      },
-    );
+      return _htmlElement;
+    });
     super.initState();
   }
 
@@ -243,12 +244,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double? pitch,
   }) async {
     _nextGestureCausedByController = true;
+    final camera = getCamera();
     _map.jumpTo(
       interop.JumpToOptions(
         center: center?.toLngLat(),
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        zoom: zoom ?? camera.zoom,
+        bearing: bearing ?? camera.bearing,
+        pitch: pitch ?? camera.pitch,
       ),
     );
   }
@@ -265,12 +267,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }) async {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
+    final camera = getCamera();
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
-        zoom: zoom,
-        bearing: bearing,
-        pitch: pitch,
+        zoom: zoom ?? camera.zoom,
+        bearing: bearing ?? camera.bearing,
+        pitch: pitch ?? camera.pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
       ),
@@ -313,28 +316,30 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) async =>
-      _map.fitBounds(
-        bounds.toJsLngLatBounds(),
-        interop.FitBoundsOptions(
-          offset: offset.toJsPoint(),
-          maxZoom: webMaxZoom,
-          linear: webLinear,
-          maxDuration: webMaxDuration?.inMilliseconds,
-          padding: padding.toPaddingOptions(),
-          speed: webSpeed,
-          pitch: pitch,
-          bearing: bearing,
-        ),
-      );
+  }) async {
+    final camera = getCamera();
+    _map.fitBounds(
+      bounds.toJsLngLatBounds(),
+      interop.FitBoundsOptions(
+        offset: offset.toJsPoint(),
+        maxZoom: webMaxZoom,
+        linear: webLinear,
+        maxDuration: webMaxDuration?.inMilliseconds,
+        padding: padding.toPaddingOptions(),
+        speed: webSpeed,
+        pitch: pitch ?? camera.pitch,
+        bearing: bearing ?? camera.bearing,
+      ),
+    );
+  }
 
   @override
   MapCamera getCamera() => MapCamera(
-        center: _map.getCenter().toPosition(),
-        zoom: _map.getZoom().toDouble(),
-        pitch: _map.getPitch().toDouble(),
-        bearing: _map.getBearing().toDouble(),
-      );
+    center: _map.getCenter().toPosition(),
+    zoom: _map.getZoom().toDouble(),
+    pitch: _map.getPitch().toDouble(),
+    bearing: _map.getBearing().toDouble(),
+  );
 
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
@@ -421,11 +426,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(
-    Offset screenLocation,
-  ) async {
-    final features =
-        _map.queryRenderedFeatures(screenLocation.toJsPoint(), null);
+  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+    final features = _map.queryRenderedFeatures(
+      screenLocation.toJsPoint(),
+      null,
+    );
     return features.toDart
         .map(
           (e) => QueriedLayer(

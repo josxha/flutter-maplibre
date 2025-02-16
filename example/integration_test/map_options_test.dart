@@ -20,10 +20,7 @@ void main() {
       );
       final completer = Completer<MapController>();
       await tester.pumpWidget(
-        App(
-          options: options,
-          onMapCreated: completer.complete,
-        ),
+        App(options: options, onMapCreated: completer.complete),
       );
       await tester.pumpAndSettle();
       final ctrl = await completer.future;

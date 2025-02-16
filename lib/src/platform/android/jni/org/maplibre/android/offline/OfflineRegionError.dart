@@ -59,13 +59,13 @@ class OfflineRegionError$Companion extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError$Companion> $type;
 
   @jni$_.internal
-  OfflineRegionError$Companion.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OfflineRegionError$Companion.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/offline/OfflineRegionError$Companion');
+    r'org/maplibre/android/offline/OfflineRegionError$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OfflineRegionError$Companion$NullableType();
@@ -74,16 +74,23 @@ class OfflineRegionError$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -92,11 +99,13 @@ class OfflineRegionError$Companion extends jni$_.JObject {
   ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return OfflineRegionError$Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return OfflineRegionError$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -115,9 +124,7 @@ final class $OfflineRegionError$Companion$NullableType
   OfflineRegionError$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OfflineRegionError$Companion.fromReference(
-              reference,
-            );
+          : OfflineRegionError$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -153,9 +160,7 @@ final class $OfflineRegionError$Companion$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError$Companion fromReference(jni$_.JReference reference) =>
-      OfflineRegionError$Companion.fromReference(
-        reference,
-      );
+      OfflineRegionError$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -186,13 +191,13 @@ class OfflineRegionError$ErrorReason extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError$ErrorReason> $type;
 
   @jni$_.internal
-  OfflineRegionError$ErrorReason.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OfflineRegionError$ErrorReason.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/offline/OfflineRegionError$ErrorReason');
+    r'org/maplibre/android/offline/OfflineRegionError$ErrorReason',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OfflineRegionError$ErrorReason$NullableType();
@@ -207,19 +212,16 @@ class OfflineRegionError$ErrorReason extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -294,9 +296,7 @@ final class $OfflineRegionError$ErrorReason$NullableType
   OfflineRegionError$ErrorReason? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OfflineRegionError$ErrorReason.fromReference(
-              reference,
-            );
+          : OfflineRegionError$ErrorReason.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -333,9 +333,7 @@ final class $OfflineRegionError$ErrorReason$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError$ErrorReason fromReference(jni$_.JReference reference) =>
-      OfflineRegionError$ErrorReason.fromReference(
-        reference,
-      );
+      OfflineRegionError$ErrorReason.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -366,13 +364,13 @@ class OfflineRegionError extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError> $type;
 
   @jni$_.internal
-  OfflineRegionError.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OfflineRegionError.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/offline/OfflineRegionError');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/offline/OfflineRegionError',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OfflineRegionError$NullableType();
@@ -442,23 +440,29 @@ class OfflineRegionError extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getReason = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getReason =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getReason()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getReason() {
-    return _getReason(reference.pointer, _id_getReason as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getReason(
+      reference.pointer,
+      _id_getReason as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getMessage = _class.instanceMethodId(
@@ -466,23 +470,29 @@ class OfflineRegionError extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getMessage = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMessage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getMessage()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getMessage() {
-    return _getMessage(reference.pointer, _id_getMessage as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getMessage(
+      reference.pointer,
+      _id_getMessage as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -490,48 +500,58 @@ class OfflineRegionError extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -539,23 +559,29 @@ class OfflineRegionError extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -571,11 +597,7 @@ final class $OfflineRegionError$NullableType
   @jni$_.internal
   @core$_.override
   OfflineRegionError? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : OfflineRegionError.fromReference(
-              reference,
-            );
+      reference.isNull ? null : OfflineRegionError.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -610,9 +632,7 @@ final class $OfflineRegionError$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError fromReference(jni$_.JReference reference) =>
-      OfflineRegionError.fromReference(
-        reference,
-      );
+      OfflineRegionError.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

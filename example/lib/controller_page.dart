@@ -99,21 +99,22 @@ class _ControllerPageState extends State<ControllerPage> {
                     if (context.mounted) {
                       await showDialog<void>(
                         context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('MapCenter'),
-                          content: Text('''
+                        builder:
+                            (context) => AlertDialog(
+                              title: const Text('MapCenter'),
+                              content: Text('''
 center.lng: ${camera.center.lng}
 center.lat: ${camera.center.lat}
 zoom: ${camera.zoom}
 bearing: ${camera.bearing}
 pitch: ${camera.pitch}'''),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: const Text('OK'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: const Text('OK'),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
                       );
                     }
                   },
@@ -126,17 +127,15 @@ pitch: ${camera.pitch}'''),
                   onPressed: () async {
                     final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
-                    final meters =
-                        await _controller.getMetersPerPixelAtLatitude(lat);
+                    final meters = await _controller
+                        .getMetersPerPixelAtLatitude(lat);
                     debugPrint('latitude: $lat: $meters m/px');
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
                           SnackBar(
-                            content: Text(
-                              'latitude: $lat: $meters m/px',
-                            ),
+                            content: Text('latitude: $lat: $meters m/px'),
                           ),
                         );
                     }
@@ -184,16 +183,15 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final offset =
-                        await _controller.toScreenLocation(Position(0, 0));
+                    final offset = await _controller.toScreenLocation(
+                      Position(0, 0),
+                    );
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
                           SnackBar(
-                            content: Text(
-                              'Offset(${offset.dx}, ${offset.dy})',
-                            ),
+                            content: Text('Offset(${offset.dx}, ${offset.dy})'),
                           ),
                         );
                     }
@@ -209,8 +207,10 @@ pitch: ${camera.pitch}'''),
           Expanded(
             child: MapLibreMap(
               acceptLicense: true,
-              options:
-                  MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
+              options: MapOptions(
+                initCenter: Position(9.17, 47.68),
+                initZoom: 3,
+              ),
               onMapCreated: (controller) => _controller = controller,
             ),
           ),

@@ -59,13 +59,13 @@ class JObject$ViewCallback extends jni$_.JObject {
   final jni$_.JObjType<JObject$ViewCallback> $type;
 
   @jni$_.internal
-  JObject$ViewCallback.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  JObject$ViewCallback.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/NativeMapView$ViewCallback');
+    r'org/maplibre/android/maps/NativeMapView$ViewCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $JObject$ViewCallback$NullableType();
@@ -75,24 +75,29 @@ class JObject$ViewCallback extends jni$_.JObject {
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getViewContent = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getViewContent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getViewContent() {
     return _getViewContent(
-            reference.pointer, _id_getViewContent as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getViewContent as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   /// Maps a specific port to the implemented interface.
@@ -104,19 +109,16 @@ class JObject$ViewCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -164,14 +166,10 @@ class JObject$ViewCallback extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory JObject$ViewCallback.implement(
-    $JObject$ViewCallback $impl,
-  ) {
+  factory JObject$ViewCallback.implement($JObject$ViewCallback $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return JObject$ViewCallback.fromReference(
-      $i.implementReference(),
-    );
+    return JObject$ViewCallback.fromReference($i.implementReference());
   }
 }
 
@@ -184,9 +182,8 @@ abstract base mixin class $JObject$ViewCallback {
 }
 
 final class _$JObject$ViewCallback with $JObject$ViewCallback {
-  _$JObject$ViewCallback({
-    required jni$_.JObject? Function() getViewContent,
-  }) : _getViewContent = getViewContent;
+  _$JObject$ViewCallback({required jni$_.JObject? Function() getViewContent})
+    : _getViewContent = getViewContent;
 
   final jni$_.JObject? Function() _getViewContent;
 
@@ -208,11 +205,7 @@ final class $JObject$ViewCallback$NullableType
   @jni$_.internal
   @core$_.override
   JObject$ViewCallback? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : JObject$ViewCallback.fromReference(
-              reference,
-            );
+      reference.isNull ? null : JObject$ViewCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -248,9 +241,7 @@ final class $JObject$ViewCallback$Type
   @jni$_.internal
   @core$_.override
   JObject$ViewCallback fromReference(jni$_.JReference reference) =>
-      JObject$ViewCallback.fromReference(
-        reference,
-      );
+      JObject$ViewCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

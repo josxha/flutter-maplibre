@@ -27,9 +27,7 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
 
   Future<void> _onStyleLoaded(StyleController style) async {
     final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
-    await style.addSource(
-      GeoJsonSource(id: 'Path', data: geojsonLine),
-    );
+    await style.addSource(GeoJsonSource(id: 'Path', data: geojsonLine));
     await style.addLayer(
       const LineStyleLayer(
         id: 'geojson-line',

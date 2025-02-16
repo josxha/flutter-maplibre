@@ -59,39 +59,47 @@ class InvalidLatLngBoundsException extends jni$_.JObject {
   final jni$_.JObjType<InvalidLatLngBoundsException> $type;
 
   @jni$_.internal
-  InvalidLatLngBoundsException.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  InvalidLatLngBoundsException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/exceptions/InvalidLatLngBoundsException');
+    r'org/maplibre/android/exceptions/InvalidLatLngBoundsException',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $InvalidLatLngBoundsException$NullableType();
   static const type = $InvalidLatLngBoundsException$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(I)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(I)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void <init>(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory InvalidLatLngBoundsException(
-    int i,
-  ) {
+  factory InvalidLatLngBoundsException(int i) {
     return InvalidLatLngBoundsException.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, i)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        i,
+      ).reference,
+    );
   }
 }
 
@@ -110,9 +118,7 @@ final class $InvalidLatLngBoundsException$NullableType
   InvalidLatLngBoundsException? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : InvalidLatLngBoundsException.fromReference(
-              reference,
-            );
+          : InvalidLatLngBoundsException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -148,9 +154,7 @@ final class $InvalidLatLngBoundsException$Type
   @jni$_.internal
   @core$_.override
   InvalidLatLngBoundsException fromReference(jni$_.JReference reference) =>
-      InvalidLatLngBoundsException.fromReference(
-        reference,
-      );
+      InvalidLatLngBoundsException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

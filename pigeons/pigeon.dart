@@ -166,9 +166,7 @@ abstract interface class MapLibreFlutterApi {
 abstract interface class PermissionManagerHostApi {
   /// Request location permissions.
   @async
-  bool requestLocationPermissions({
-    required String explanation,
-  });
+  bool requestLocationPermissions({required String explanation});
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -321,7 +319,7 @@ enum TileScheme {
   xyz,
 
   /// OSGeo spec scheme.
-  tms;
+  tms,
 }
 
 /// The encoding used by this source. Mapbox Terrain RGB is used by default.
@@ -334,7 +332,7 @@ enum RasterDemEncoding {
 
   /// Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift
   /// parameters.
-  custom;
+  custom,
 }
 
 /// The reason the camera is changing.
@@ -346,5 +344,5 @@ enum CameraChangeReason {
   apiAnimation,
 
   /// API gesture
-  apiGesture;
+  apiGesture,
 }

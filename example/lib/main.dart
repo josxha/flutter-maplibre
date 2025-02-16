@@ -23,8 +23,8 @@ import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
-import 'package:maplibre_example/user_interface_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
+import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
 void main() {
@@ -52,23 +52,24 @@ class MyApp extends StatelessWidget {
         EventsPage.location: (context) => const EventsPage(),
         StyledMapPage.location: (context) => const StyledMapPage(),
         UserLocationPage.location: (context) => const UserLocationPage(),
-        UserInterfacePage.location: (context) => const UserInterfacePage(),
         WidgetLayerPage.location: (context) => const WidgetLayerPage(),
+        WidgetLayerInteractivePage.location:
+            (context) => const WidgetLayerInteractivePage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
-        StyleLayersSymbolPage.location: (context) =>
-            const StyleLayersSymbolPage(),
-        StyleLayersCirclePage.location: (context) =>
-            const StyleLayersCirclePage(),
-        StyleLayersHeatmapPage.location: (context) =>
-            const StyleLayersHeatmapPage(),
-        StyleLayersHillshadePage.location: (context) =>
-            const StyleLayersHillshadePage(),
+        StyleLayersSymbolPage.location:
+            (context) => const StyleLayersSymbolPage(),
+        StyleLayersCirclePage.location:
+            (context) => const StyleLayersCirclePage(),
+        StyleLayersHeatmapPage.location:
+            (context) => const StyleLayersHeatmapPage(),
+        StyleLayersHillshadePage.location:
+            (context) => const StyleLayersHillshadePage(),
         StyleLayersFillPage.location: (context) => const StyleLayersFillPage(),
-        StyleLayersFillExtrusionPage.location: (context) =>
-            const StyleLayersFillExtrusionPage(),
-        StyleLayersRasterPage.location: (context) =>
-            const StyleLayersRasterPage(),
+        StyleLayersFillExtrusionPage.location:
+            (context) => const StyleLayersFillExtrusionPage(),
+        StyleLayersRasterPage.location:
+            (context) => const StyleLayersRasterPage(),
         StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
         LayersMixedPage.location: (context) => const LayersMixedPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),

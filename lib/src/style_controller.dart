@@ -31,6 +31,9 @@ abstract interface class StyleController {
   /// Get a list of all attributions from the map style.
   Future<List<String>> getAttributions();
 
+  /// Get a list of all attributions from the map style.
+  List<String> getAttributionsSync();
+
   /// Add an image to the map.
   Future<void> addImage(String id, Uint8List bytes);
 
@@ -54,5 +57,5 @@ enum MapProjection {
   mercator,
 
   /// Globe projection. Only supported on web.
-  globe;
+  globe,
 }

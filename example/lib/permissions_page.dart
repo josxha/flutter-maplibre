@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/extensions.dart';
 
 @immutable
 class PermissionsPage extends StatefulWidget {
@@ -29,9 +30,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
           ),
           ListTile(
             title: const Text('locationPermissionsGranted'),
-            subtitle: const Text(
-              'Weather location permissions are granted.',
-            ),
+            subtitle: const Text('Weather location permissions are granted.'),
             trailing: _manager.locationPermissionsGranted.toIcon(),
           ),
           ListTile(
@@ -44,16 +43,24 @@ class _PermissionsPageState extends State<PermissionsPage> {
           ),
           ListTile(
             title: OutlinedButton(
-              child: const Text('requestLocationPermissions'),
+              child: const Text('Request Location Permissions'),
               onPressed: () async {
                 try {
                   final granted = await _manager.requestLocationPermissions(
                     explanation: 'Show the user location on the map.',
                   );
-                  debugPrint('requestLocationPermissions granted: $granted');
+                  if (context.mounted) {
+                    if (granted) {
+                      context.showSnackBox('Permission granted.');
+                    } else {
+                      context.showSnackBox('Permission not granted.');
+                    }
+                  }
                   setState(() {}); // refresh the screen
-                } on Exception catch (error, stacktrace) {
-                  debugPrint(error.toString());
+                } catch (error, stacktrace) {
+                  if (context.mounted) {
+                    context.showSnackBox(error.toString());
+                  }
                   debugPrintStack(stackTrace: stacktrace);
                 }
               },
@@ -67,7 +74,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
 
 extension BoolExt on bool {
   Widget toIcon() => Icon(
-        this ? Icons.check_box : Icons.cancel,
-        color: this ? Colors.green : Colors.red,
-      );
+    this ? Icons.check_box : Icons.cancel,
+    color: this ? Colors.green : Colors.red,
+  );
 }

@@ -63,11 +63,12 @@ class OfflineGeometryRegionDefinition$Companion extends jni$_.JObject {
   @jni$_.internal
   OfflineGeometryRegionDefinition$Companion.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/offline/OfflineGeometryRegionDefinition$Companion');
+    r'org/maplibre/android/offline/OfflineGeometryRegionDefinition$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -77,16 +78,23 @@ class OfflineGeometryRegionDefinition$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -95,11 +103,13 @@ class OfflineGeometryRegionDefinition$Companion extends jni$_.JObject {
   ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return OfflineGeometryRegionDefinition$Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return OfflineGeometryRegionDefinition$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -116,12 +126,11 @@ final class $OfflineGeometryRegionDefinition$Companion$NullableType
   @jni$_.internal
   @core$_.override
   OfflineGeometryRegionDefinition$Companion? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : OfflineGeometryRegionDefinition$Companion.fromReference(
-              reference,
-            );
+          : OfflineGeometryRegionDefinition$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -160,10 +169,8 @@ final class $OfflineGeometryRegionDefinition$Companion$Type
   @jni$_.internal
   @core$_.override
   OfflineGeometryRegionDefinition$Companion fromReference(
-          jni$_.JReference reference) =>
-      OfflineGeometryRegionDefinition$Companion.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => OfflineGeometryRegionDefinition$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -196,13 +203,13 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
   final jni$_.JObjType<OfflineGeometryRegionDefinition> $type;
 
   @jni$_.internal
-  OfflineGeometryRegionDefinition.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OfflineGeometryRegionDefinition.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/offline/OfflineGeometryRegionDefinition');
+    r'org/maplibre/android/offline/OfflineGeometryRegionDefinition',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OfflineGeometryRegionDefinition$NullableType();
@@ -216,7 +223,9 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static OfflineGeometryRegionDefinition$Companion get Companion =>
       _id_Companion.get(
-          _class, const $OfflineGeometryRegionDefinition$Companion$Type());
+        _class,
+        const $OfflineGeometryRegionDefinition$Companion$Type(),
+      );
 
   static final _id_CREATOR = _class.staticFieldId(
     r'CREATOR',
@@ -233,24 +242,29 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getStyleURL = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStyleURL =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getStyleURL()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getStyleURL() {
     return _getStyleURL(
-            reference.pointer, _id_getStyleURL as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getStyleURL as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getGeometry = _class.instanceMethodId(
@@ -258,70 +272,81 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()Lorg/maplibre/geojson/Geometry;',
   );
 
-  static final _getGeometry = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getGeometry =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.geojson.Geometry getGeometry()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getGeometry() {
     return _getGeometry(
-            reference.pointer, _id_getGeometry as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getGeometry as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(
-    r'getMinZoom',
-    r'()D',
-  );
+  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()D');
 
-  static final _getMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMinZoom()`
   double getMinZoom() {
-    return _getMinZoom(reference.pointer, _id_getMinZoom as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getMinZoom(
+      reference.pointer,
+      _id_getMinZoom as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(
-    r'getMaxZoom',
-    r'()D',
-  );
+  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()D');
 
-  static final _getMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public double getMaxZoom()`
   double getMaxZoom() {
-    return _getMaxZoom(reference.pointer, _id_getMaxZoom as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getMaxZoom(
+      reference.pointer,
+      _id_getMaxZoom as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getPixelRatio = _class.instanceMethodId(
@@ -329,23 +354,28 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getPixelRatio = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPixelRatio =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getPixelRatio()`
   double getPixelRatio() {
     return _getPixelRatio(
-            reference.pointer, _id_getPixelRatio as jni$_.JMethodIDPtr)
-        .float;
+      reference.pointer,
+      _id_getPixelRatio as jni$_.JMethodIDPtr,
+    ).float;
   }
 
   static final _id_getIncludeIdeographs = _class.instanceMethodId(
@@ -353,51 +383,63 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _getIncludeIdeographs = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIncludeIdeographs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean getIncludeIdeographs()`
   bool getIncludeIdeographs() {
     return _getIncludeIdeographs(
-            reference.pointer, _id_getIncludeIdeographs as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_getIncludeIdeographs as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Geometry;DDF)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               double,
               double,
-              double)>();
+              double,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Geometry geometry, double d, double d1, float f)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -410,37 +452,44 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
-    return OfflineGeometryRegionDefinition.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$geometry.pointer,
-            d,
-            d1,
-            f)
-        .reference);
+    return OfflineGeometryRegionDefinition.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$geometry.pointer,
+        d,
+        d1,
+        f,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Geometry;DDFZ)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -448,7 +497,9 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
               double,
               double,
               double,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Geometry geometry, double d, double d1, float f, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -462,44 +513,51 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
-    return OfflineGeometryRegionDefinition.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$geometry.pointer,
-            d,
-            d1,
-            f,
-            z ? 1 : 0)
-        .reference);
+    return OfflineGeometryRegionDefinition.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$geometry.pointer,
+        d,
+        d1,
+        f,
+        z ? 1 : 0,
+      ).reference,
+    );
   }
 
-  static final _id_new$2 = _class.constructorId(
-    r'(Landroid/os/Parcel;)V',
-  );
+  static final _id_new$2 = _class.constructorId(r'(Landroid/os/Parcel;)V');
 
-  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.os.Parcel parcel)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory OfflineGeometryRegionDefinition.new$2(
-    jni$_.JObject parcel,
-  ) {
+  factory OfflineGeometryRegionDefinition.new$2(jni$_.JObject parcel) {
     final _$parcel = parcel.reference;
-    return OfflineGeometryRegionDefinition.fromReference(_new$2(
-            _class.reference.pointer,
-            _id_new$2 as jni$_.JMethodIDPtr,
-            _$parcel.pointer)
-        .reference);
+    return OfflineGeometryRegionDefinition.fromReference(
+      _new$2(
+        _class.reference.pointer,
+        _id_new$2 as jni$_.JMethodIDPtr,
+        _$parcel.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getBounds = _class.instanceMethodId(
@@ -507,24 +565,31 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _getBounds = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.LatLngBounds getBounds()`
   /// The returned object must be released after use, by calling the [release] method.
   latlngbounds$_.LatLngBounds? getBounds() {
-    return _getBounds(reference.pointer, _id_getBounds as jni$_.JMethodIDPtr)
-        .object<latlngbounds$_.LatLngBounds?>(
-            const latlngbounds$_.$LatLngBounds$NullableType());
+    return _getBounds(
+      reference.pointer,
+      _id_getBounds as jni$_.JMethodIDPtr,
+    ).object<latlngbounds$_.LatLngBounds?>(
+      const latlngbounds$_.$LatLngBounds$NullableType(),
+    );
   }
 
   static final _id_getType = _class.instanceMethodId(
@@ -532,23 +597,29 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getType = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getType =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getType()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getType() {
-    return _getType(reference.pointer, _id_getType as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getType(
+      reference.pointer,
+      _id_getType as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -556,23 +627,28 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'()I',
   );
 
-  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -580,27 +656,34 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(
-    jni$_.JObject parcel,
-    int i,
-  ) {
+  void writeToParcel(jni$_.JObject parcel, int i) {
     final _$parcel = parcel.reference;
-    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
-            _$parcel.pointer, i)
-        .check();
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
   }
 }
 
@@ -619,9 +702,7 @@ final class $OfflineGeometryRegionDefinition$NullableType
   OfflineGeometryRegionDefinition? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OfflineGeometryRegionDefinition.fromReference(
-              reference,
-            );
+          : OfflineGeometryRegionDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -658,9 +739,7 @@ final class $OfflineGeometryRegionDefinition$Type
   @jni$_.internal
   @core$_.override
   OfflineGeometryRegionDefinition fromReference(jni$_.JReference reference) =>
-      OfflineGeometryRegionDefinition.fromReference(
-        reference,
-      );
+      OfflineGeometryRegionDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

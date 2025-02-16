@@ -61,13 +61,13 @@ class LocationEngineDefault extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineDefault> $type;
 
   @jni$_.internal
-  LocationEngineDefault.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LocationEngineDefault.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/engine/LocationEngineDefault');
+    r'org/maplibre/android/location/engine/LocationEngineDefault',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocationEngineDefault$NullableType();
@@ -87,16 +87,23 @@ class LocationEngineDefault extends jni$_.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/location/engine/LocationEngine;',
   );
 
-  static final _getDefaultLocationEngine = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getDefaultLocationEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.location.engine.LocationEngine getDefaultLocationEngine(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -105,11 +112,12 @@ class LocationEngineDefault extends jni$_.JObject {
   ) {
     final _$context = context.reference;
     return _getDefaultLocationEngine(
-            reference.pointer,
-            _id_getDefaultLocationEngine as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .object<locationengine$_.LocationEngine>(
-            const locationengine$_.$LocationEngine$Type());
+      reference.pointer,
+      _id_getDefaultLocationEngine as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<locationengine$_.LocationEngine>(
+      const locationengine$_.$LocationEngine$Type(),
+    );
   }
 }
 
@@ -126,11 +134,7 @@ final class $LocationEngineDefault$NullableType
   @jni$_.internal
   @core$_.override
   LocationEngineDefault? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LocationEngineDefault.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LocationEngineDefault.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -166,9 +170,7 @@ final class $LocationEngineDefault$Type
   @jni$_.internal
   @core$_.override
   LocationEngineDefault fromReference(jni$_.JReference reference) =>
-      LocationEngineDefault.fromReference(
-        reference,
-      );
+      LocationEngineDefault.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

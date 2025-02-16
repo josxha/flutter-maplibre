@@ -17,8 +17,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.getMetersPerPixelAtLatitude(any()))
-          .thenAnswer((_) async => 100.0);
+      when(
+        () => controller.getMetersPerPixelAtLatitude(any()),
+      ).thenAnswer((_) async => 100.0);
       when(
         () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(100);
@@ -27,9 +28,7 @@ void main() {
       final app = App(
         camera: camera,
         controller: controller,
-        children: const [
-          MapScalebar(alignment: alignment, padding: padding),
-        ],
+        children: const [MapScalebar(alignment: alignment, padding: padding)],
       );
       await tester.pumpWidget(app);
       // give some time for getMetersPerPixelAtLatitude
@@ -66,8 +65,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.getMetersPerPixelAtLatitude(any()))
-          .thenAnswer((_) async => 0.001);
+      when(
+        () => controller.getMetersPerPixelAtLatitude(any()),
+      ).thenAnswer((_) async => 0.001);
       when(
         () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(0.001);

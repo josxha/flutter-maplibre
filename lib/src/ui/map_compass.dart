@@ -16,6 +16,8 @@ class MapCompass extends StatelessWidget {
     super.key,
     this.rotationOffset = 0,
     this.rotationDuration = const Duration(milliseconds: 200),
+    this.webRotationSpeed = 1.2,
+    this.removePinchOnPressed = false,
     this.rotateNorthOnPressed = true,
     this.onPressed,
     this.hideIfRotatedNorth = false,
@@ -40,6 +42,11 @@ class MapCompass extends StatelessWidget {
   /// Defaults to true.
   final bool rotateNorthOnPressed;
 
+  /// Reset the camera pinch / tilt back to 0 when clicked.
+  ///
+  /// Defaults to false.
+  final bool removePinchOnPressed;
+
   /// Set to true to hide the compass while the map is not rotated.
   ///
   /// Defaults to false (always visible).
@@ -59,6 +66,9 @@ class MapCompass extends StatelessWidget {
   ///
   /// Default to 200 ms.
   final Duration rotationDuration;
+
+  /// The speed of the rotation animation on web.
+  final double webRotationSpeed;
 
   /// The compass radius.
   final double radius;
@@ -80,16 +90,9 @@ class MapCompass extends StatelessWidget {
         angle: (-camera.bearing + rotationOffset) * degree2Radian,
         child: PointerInterceptor(
           child: InkWell(
-            onTap: () {
-              if (rotateNorthOnPressed) {
-                controller.animateCamera(
-                  bearing: 0,
-                  nativeDuration: rotationDuration,
-                );
-              }
-              onPressed?.call();
-            },
-            child: child ??
+            onTap: () => _onTap(controller),
+            child:
+                child ??
                 CustomPaint(
                   painter: _CompassPainter(radius: radius),
                   child: SizedBox.square(dimension: radius * 2),
@@ -98,6 +101,18 @@ class MapCompass extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onTap(MapController controller) {
+    if (rotateNorthOnPressed || removePinchOnPressed) {
+      controller.animateCamera(
+        bearing: rotateNorthOnPressed ? 0 : null,
+        pitch: removePinchOnPressed ? 0 : null,
+        nativeDuration: rotationDuration,
+        webSpeed: webRotationSpeed,
+      );
+    }
+    onPressed?.call();
   }
 }
 
@@ -143,14 +158,11 @@ class _CompassPainter extends CustomPainter {
     );
     const halfStrokeWidth = needsStrokeWidth / 2;
     canvas.drawVertices(
-      Vertices(
-        VertexMode.triangles,
-        [
-          Offset(radius - needleWidth - halfStrokeWidth, radius),
-          Offset(radius, radius - needleHeight - halfStrokeWidth),
-          Offset(radius + needleWidth + halfStrokeWidth, radius),
-        ],
-      ),
+      Vertices(VertexMode.triangles, [
+        Offset(radius - needleWidth - halfStrokeWidth, radius),
+        Offset(radius, radius - needleHeight - halfStrokeWidth),
+        Offset(radius + needleWidth + halfStrokeWidth, radius),
+      ]),
       BlendMode.color,
       Paint()..color = Colors.red,
     );

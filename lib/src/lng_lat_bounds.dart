@@ -26,7 +26,8 @@ class LngLatBounds {
   final double latitudeNorth;
 
   @override
-  String toString() => 'LngLatBounds('
+  String toString() =>
+      'LngLatBounds('
       'longitudeWest: $longitudeWest, '
       'longitudeEast: $longitudeEast, '
       'latitudeSouth: $latitudeSouth, '
@@ -38,13 +39,12 @@ class LngLatBounds {
     double? longitudeEast,
     double? latitudeSouth,
     double? latitudeNorth,
-  }) =>
-      LngLatBounds(
-        longitudeWest: longitudeWest ?? this.longitudeWest,
-        longitudeEast: longitudeEast ?? this.longitudeEast,
-        latitudeSouth: latitudeSouth ?? this.latitudeSouth,
-        latitudeNorth: latitudeNorth ?? this.latitudeNorth,
-      );
+  }) => LngLatBounds(
+    longitudeWest: longitudeWest ?? this.longitudeWest,
+    longitudeEast: longitudeEast ?? this.longitudeEast,
+    latitudeSouth: latitudeSouth ?? this.latitudeSouth,
+    latitudeNorth: latitudeNorth ?? this.latitudeNorth,
+  );
 
   @override
   bool operator ==(Object other) =>

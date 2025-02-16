@@ -62,13 +62,13 @@ class MapLibreRegistry extends jni$_.JObject {
   final jni$_.JObjType<MapLibreRegistry> $type;
 
   @jni$_.internal
-  MapLibreRegistry.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreRegistry.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'com/github/josxha/maplibre/MapLibreRegistry');
+  static final _class = jni$_.JClass.forName(
+    r'com/github/josxha/maplibre/MapLibreRegistry',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreRegistry$NullableType();
@@ -88,24 +88,34 @@ class MapLibreRegistry extends jni$_.JObject {
     r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
   );
 
-  static final _getMap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.maps.MapLibreMap getMap(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  maplibremap$_.MapLibreMap? getMap(
-    int i,
-  ) {
-    return _getMap(reference.pointer, _id_getMap as jni$_.JMethodIDPtr, i)
-        .object<maplibremap$_.MapLibreMap?>(
-            const maplibremap$_.$MapLibreMap$NullableType());
+  maplibremap$_.MapLibreMap? getMap(int i) {
+    return _getMap(
+      reference.pointer,
+      _id_getMap as jni$_.JMethodIDPtr,
+      i,
+    ).object<maplibremap$_.MapLibreMap?>(
+      const maplibremap$_.$MapLibreMap$NullableType(),
+    );
   }
 
   static final _id_addMap = _class.instanceMethodId(
@@ -113,27 +123,34 @@ class MapLibreRegistry extends jni$_.JObject {
     r'(ILorg/maplibre/android/maps/MapLibreMap;)V',
   );
 
-  static final _addMap = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _addMap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void addMap(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void addMap(
-    int i,
-    maplibremap$_.MapLibreMap mapLibreMap,
-  ) {
+  void addMap(int i, maplibremap$_.MapLibreMap mapLibreMap) {
     final _$mapLibreMap = mapLibreMap.reference;
-    _addMap(reference.pointer, _id_addMap as jni$_.JMethodIDPtr, i,
-            _$mapLibreMap.pointer)
-        .check();
+    _addMap(
+      reference.pointer,
+      _id_addMap as jni$_.JMethodIDPtr,
+      i,
+      _$mapLibreMap.pointer,
+    ).check();
   }
 
   static final _id_getActivity = _class.instanceMethodId(
@@ -141,24 +158,29 @@ class MapLibreRegistry extends jni$_.JObject {
     r'()Landroid/app/Activity;',
   );
 
-  static final _getActivity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getActivity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final android.app.Activity getActivity()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getActivity() {
     return _getActivity(
-            reference.pointer, _id_getActivity as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getActivity as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_setActivity = _class.instanceMethodId(
@@ -166,25 +188,32 @@ class MapLibreRegistry extends jni$_.JObject {
     r'(Landroid/app/Activity;)V',
   );
 
-  static final _setActivity = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setActivity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setActivity(android.app.Activity activity)`
-  void setActivity(
-    jni$_.JObject? activity,
-  ) {
+  void setActivity(jni$_.JObject? activity) {
     final _$activity = activity?.reference ?? jni$_.jNullReference;
-    _setActivity(reference.pointer, _id_setActivity as jni$_.JMethodIDPtr,
-            _$activity.pointer)
-        .check();
+    _setActivity(
+      reference.pointer,
+      _id_setActivity as jni$_.JMethodIDPtr,
+      _$activity.pointer,
+    ).check();
   }
 
   static final _id_getContext = _class.instanceMethodId(
@@ -192,23 +221,29 @@ class MapLibreRegistry extends jni$_.JObject {
     r'()Landroid/content/Context;',
   );
 
-  static final _getContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final android.content.Context getContext()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getContext() {
-    return _getContext(reference.pointer, _id_getContext as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getContext(
+      reference.pointer,
+      _id_getContext as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_setContext = _class.instanceMethodId(
@@ -216,25 +251,32 @@ class MapLibreRegistry extends jni$_.JObject {
     r'(Landroid/content/Context;)V',
   );
 
-  static final _setContext = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setContext(android.content.Context context)`
-  void setContext(
-    jni$_.JObject? context,
-  ) {
+  void setContext(jni$_.JObject? context) {
     final _$context = context?.reference ?? jni$_.jNullReference;
-    _setContext(reference.pointer, _id_setContext as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .check();
+    _setContext(
+      reference.pointer,
+      _id_setContext as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).check();
   }
 }
 
@@ -250,11 +292,7 @@ final class $MapLibreRegistry$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreRegistry? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : MapLibreRegistry.fromReference(
-              reference,
-            );
+      reference.isNull ? null : MapLibreRegistry.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -288,9 +326,7 @@ final class $MapLibreRegistry$Type extends jni$_.JObjType<MapLibreRegistry> {
   @jni$_.internal
   @core$_.override
   MapLibreRegistry fromReference(jni$_.JReference reference) =>
-      MapLibreRegistry.fromReference(
-        reference,
-      );
+      MapLibreRegistry.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

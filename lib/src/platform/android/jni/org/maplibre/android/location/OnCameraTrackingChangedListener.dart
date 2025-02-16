@@ -59,13 +59,13 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
   final jni$_.JObjType<OnCameraTrackingChangedListener> $type;
 
   @jni$_.internal
-  OnCameraTrackingChangedListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OnCameraTrackingChangedListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/OnCameraTrackingChangedListener');
+    r'org/maplibre/android/location/OnCameraTrackingChangedListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OnCameraTrackingChangedListener$NullableType();
@@ -75,23 +75,28 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCameraTrackingDismissed = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraTrackingDismissed =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onCameraTrackingDismissed()`
   void onCameraTrackingDismissed() {
-    _onCameraTrackingDismissed(reference.pointer,
-            _id_onCameraTrackingDismissed as jni$_.JMethodIDPtr)
-        .check();
+    _onCameraTrackingDismissed(
+      reference.pointer,
+      _id_onCameraTrackingDismissed as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_onCameraTrackingChanged = _class.instanceMethodId(
@@ -99,23 +104,31 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _onCameraTrackingChanged = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onCameraTrackingChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onCameraTrackingChanged(int i)`
-  void onCameraTrackingChanged(
-    int i,
-  ) {
-    _onCameraTrackingChanged(reference.pointer,
-            _id_onCameraTrackingChanged as jni$_.JMethodIDPtr, i)
-        .check();
+  void onCameraTrackingChanged(int i) {
+    _onCameraTrackingChanged(
+      reference.pointer,
+      _id_onCameraTrackingChanged as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -127,19 +140,16 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -227,8 +237,8 @@ final class _$OnCameraTrackingChangedListener
     this.onCameraTrackingDismissed$async = false,
     required void Function(int i) onCameraTrackingChanged,
     this.onCameraTrackingChanged$async = false,
-  })  : _onCameraTrackingDismissed = onCameraTrackingDismissed,
-        _onCameraTrackingChanged = onCameraTrackingChanged;
+  }) : _onCameraTrackingDismissed = onCameraTrackingDismissed,
+       _onCameraTrackingChanged = onCameraTrackingChanged;
 
   final void Function() _onCameraTrackingDismissed;
   final bool onCameraTrackingDismissed$async;
@@ -259,9 +269,7 @@ final class $OnCameraTrackingChangedListener$NullableType
   OnCameraTrackingChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OnCameraTrackingChangedListener.fromReference(
-              reference,
-            );
+          : OnCameraTrackingChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -298,9 +306,7 @@ final class $OnCameraTrackingChangedListener$Type
   @jni$_.internal
   @core$_.override
   OnCameraTrackingChangedListener fromReference(jni$_.JReference reference) =>
-      OnCameraTrackingChangedListener.fromReference(
-        reference,
-      );
+      OnCameraTrackingChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

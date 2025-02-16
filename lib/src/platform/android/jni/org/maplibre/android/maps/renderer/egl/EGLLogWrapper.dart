@@ -59,13 +59,13 @@ class EGLLogWrapper extends jni$_.JObject {
   final jni$_.JObjType<EGLLogWrapper> $type;
 
   @jni$_.internal
-  EGLLogWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  EGLLogWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/egl/EGLLogWrapper');
+    r'org/maplibre/android/maps/renderer/egl/EGLLogWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $EGLLogWrapper$NullableType();
@@ -74,37 +74,46 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGL;ILjava/io/Writer;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(javax.microedition.khronos.egl.EGL eGL, int i, java.io.Writer writer)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory EGLLogWrapper(
-    jni$_.JObject? eGL,
-    int i,
-    jni$_.JObject? writer,
-  ) {
+  factory EGLLogWrapper(jni$_.JObject? eGL, int i, jni$_.JObject? writer) {
     final _$eGL = eGL?.reference ?? jni$_.jNullReference;
     final _$writer = writer?.reference ?? jni$_.jNullReference;
-    return EGLLogWrapper.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$eGL.pointer, i, _$writer.pointer)
-        .reference);
+    return EGLLogWrapper.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$eGL.pointer,
+        i,
+        _$writer.pointer,
+      ).reference,
+    );
   }
 
   static final _id_eglChooseConfig = _class.instanceMethodId(
@@ -112,28 +121,35 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;[I[Ljavax/microedition/khronos/egl/EGLConfig;I[I)Z',
   );
 
-  static final _eglChooseConfig = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglChooseConfig =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglChooseConfig(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, int[] is, javax.microedition.khronos.egl.EGLConfig[] eGLConfigs, int i, int[] is1)`
   bool eglChooseConfig(
@@ -148,14 +164,14 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLConfigs = eGLConfigs?.reference ?? jni$_.jNullReference;
     final _$is1 = is1?.reference ?? jni$_.jNullReference;
     return _eglChooseConfig(
-            reference.pointer,
-            _id_eglChooseConfig as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$is$.pointer,
-            _$eGLConfigs.pointer,
-            i,
-            _$is1.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglChooseConfig as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$is$.pointer,
+      _$eGLConfigs.pointer,
+      i,
+      _$is1.pointer,
+    ).boolean;
   }
 
   static final _id_eglCopyBuffers = _class.instanceMethodId(
@@ -163,24 +179,31 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;Ljava/lang/Object;)Z',
   );
 
-  static final _eglCopyBuffers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglCopyBuffers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglCopyBuffers(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface, java.lang.Object object)`
   bool eglCopyBuffers(
@@ -192,12 +215,12 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _eglCopyBuffers(
-            reference.pointer,
-            _id_eglCopyBuffers as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLSurface.pointer,
-            _$object.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglCopyBuffers as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLSurface.pointer,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_eglCreateContext = _class.instanceMethodId(
@@ -205,26 +228,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljavax/microedition/khronos/egl/EGLContext;[I)Ljavax/microedition/khronos/egl/EGLContext;',
   );
 
-  static final _eglCreateContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglCreateContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLContext eglCreateContext(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, javax.microedition.khronos.egl.EGLContext eGLContext, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -239,13 +269,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglCreateContext(
-            reference.pointer,
-            _id_eglCreateContext as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer,
-            _$eGLContext.pointer,
-            _$is$.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglCreateContext as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+      _$eGLContext.pointer,
+      _$is$.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglCreatePbufferSurface = _class.instanceMethodId(
@@ -253,24 +283,31 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
   );
 
-  static final _eglCreatePbufferSurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglCreatePbufferSurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface eglCreatePbufferSurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -283,12 +320,12 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLConfig = eGLConfig?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglCreatePbufferSurface(
-            reference.pointer,
-            _id_eglCreatePbufferSurface as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer,
-            _$is$.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglCreatePbufferSurface as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+      _$is$.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglCreatePixmapSurface = _class.instanceMethodId(
@@ -296,26 +333,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
   );
 
-  static final _eglCreatePixmapSurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglCreatePixmapSurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface eglCreatePixmapSurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, java.lang.Object object, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -330,13 +374,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglCreatePixmapSurface(
-            reference.pointer,
-            _id_eglCreatePixmapSurface as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer,
-            _$object.pointer,
-            _$is$.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglCreatePixmapSurface as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+      _$object.pointer,
+      _$is$.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglCreateWindowSurface = _class.instanceMethodId(
@@ -344,26 +388,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
   );
 
-  static final _eglCreateWindowSurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglCreateWindowSurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface eglCreateWindowSurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, java.lang.Object object, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -378,13 +429,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglCreateWindowSurface(
-            reference.pointer,
-            _id_eglCreateWindowSurface as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer,
-            _$object.pointer,
-            _$is$.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglCreateWindowSurface as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+      _$object.pointer,
+      _$is$.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglDestroyContext = _class.instanceMethodId(
@@ -392,36 +443,37 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLContext;)Z',
   );
 
-  static final _eglDestroyContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglDestroyContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglDestroyContext(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLContext eGLContext)`
-  bool eglDestroyContext(
-    jni$_.JObject? eGLDisplay,
-    jni$_.JObject? eGLContext,
-  ) {
+  bool eglDestroyContext(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLContext) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
     return _eglDestroyContext(
-            reference.pointer,
-            _id_eglDestroyContext as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLContext.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglDestroyContext as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLContext.pointer,
+    ).boolean;
   }
 
   static final _id_eglDestroySurface = _class.instanceMethodId(
@@ -429,36 +481,37 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;)Z',
   );
 
-  static final _eglDestroySurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglDestroySurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglDestroySurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface)`
-  bool eglDestroySurface(
-    jni$_.JObject? eGLDisplay,
-    jni$_.JObject? eGLSurface,
-  ) {
+  bool eglDestroySurface(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLSurface) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     return _eglDestroySurface(
-            reference.pointer,
-            _id_eglDestroySurface as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLSurface.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglDestroySurface as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLSurface.pointer,
+    ).boolean;
   }
 
   static final _id_eglGetConfigAttrib = _class.instanceMethodId(
@@ -466,26 +519,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;I[I)Z',
   );
 
-  static final _eglGetConfigAttrib = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetConfigAttrib =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglGetConfigAttrib(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig eGLConfig, int i, int[] is)`
   bool eglGetConfigAttrib(
@@ -498,13 +558,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLConfig = eGLConfig?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglGetConfigAttrib(
-            reference.pointer,
-            _id_eglGetConfigAttrib as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfig.pointer,
-            i,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglGetConfigAttrib as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfig.pointer,
+      i,
+      _$is$.pointer,
+    ).boolean;
   }
 
   static final _id_eglGetConfigs = _class.instanceMethodId(
@@ -512,26 +572,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;[Ljavax/microedition/khronos/egl/EGLConfig;I[I)Z',
   );
 
-  static final _eglGetConfigs = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetConfigs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglGetConfigs(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLConfig[] eGLConfigs, int i, int[] is)`
   bool eglGetConfigs(
@@ -544,13 +611,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLConfigs = eGLConfigs?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglGetConfigs(
-            reference.pointer,
-            _id_eglGetConfigs as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLConfigs.pointer,
-            i,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglGetConfigs as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLConfigs.pointer,
+      i,
+      _$is$.pointer,
+    ).boolean;
   }
 
   static final _id_eglGetCurrentContext = _class.instanceMethodId(
@@ -558,24 +625,29 @@ class EGLLogWrapper extends jni$_.JObject {
     r'()Ljavax/microedition/khronos/egl/EGLContext;',
   );
 
-  static final _eglGetCurrentContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetCurrentContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLContext eglGetCurrentContext()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? eglGetCurrentContext() {
     return _eglGetCurrentContext(
-            reference.pointer, _id_eglGetCurrentContext as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglGetCurrentContext as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglGetCurrentDisplay = _class.instanceMethodId(
@@ -583,24 +655,29 @@ class EGLLogWrapper extends jni$_.JObject {
     r'()Ljavax/microedition/khronos/egl/EGLDisplay;',
   );
 
-  static final _eglGetCurrentDisplay = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetCurrentDisplay =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLDisplay eglGetCurrentDisplay()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? eglGetCurrentDisplay() {
     return _eglGetCurrentDisplay(
-            reference.pointer, _id_eglGetCurrentDisplay as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_eglGetCurrentDisplay as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglGetCurrentSurface = _class.instanceMethodId(
@@ -608,24 +685,32 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(I)Ljavax/microedition/khronos/egl/EGLSurface;',
   );
 
-  static final _eglGetCurrentSurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetCurrentSurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface eglGetCurrentSurface(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? eglGetCurrentSurface(
-    int i,
-  ) {
-    return _eglGetCurrentSurface(reference.pointer,
-            _id_eglGetCurrentSurface as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  jni$_.JObject? eglGetCurrentSurface(int i) {
+    return _eglGetCurrentSurface(
+      reference.pointer,
+      _id_eglGetCurrentSurface as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglGetDisplay = _class.instanceMethodId(
@@ -633,26 +718,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljava/lang/Object;)Ljavax/microedition/khronos/egl/EGLDisplay;',
   );
 
-  static final _eglGetDisplay = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _eglGetDisplay =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public javax.microedition.khronos.egl.EGLDisplay eglGetDisplay(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? eglGetDisplay(
-    jni$_.JObject? object,
-  ) {
+  jni$_.JObject? eglGetDisplay(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _eglGetDisplay(reference.pointer,
-            _id_eglGetDisplay as jni$_.JMethodIDPtr, _$object.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _eglGetDisplay(
+      reference.pointer,
+      _id_eglGetDisplay as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_eglGetError = _class.instanceMethodId(
@@ -660,23 +752,28 @@ class EGLLogWrapper extends jni$_.JObject {
     r'()I',
   );
 
-  static final _eglGetError = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglGetError =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int eglGetError()`
   int eglGetError() {
     return _eglGetError(
-            reference.pointer, _id_eglGetError as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_eglGetError as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_eglInitialize = _class.instanceMethodId(
@@ -684,36 +781,37 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;[I)Z',
   );
 
-  static final _eglInitialize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglInitialize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglInitialize(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, int[] is)`
-  bool eglInitialize(
-    jni$_.JObject? eGLDisplay,
-    jni$_.JIntArray? is$,
-  ) {
+  bool eglInitialize(jni$_.JObject? eGLDisplay, jni$_.JIntArray? is$) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglInitialize(
-            reference.pointer,
-            _id_eglInitialize as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglInitialize as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$is$.pointer,
+    ).boolean;
   }
 
   static final _id_eglMakeCurrent = _class.instanceMethodId(
@@ -721,26 +819,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;Ljavax/microedition/khronos/egl/EGLSurface;Ljavax/microedition/khronos/egl/EGLContext;)Z',
   );
 
-  static final _eglMakeCurrent = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglMakeCurrent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglMakeCurrent(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface, javax.microedition.khronos.egl.EGLSurface eGLSurface1, javax.microedition.khronos.egl.EGLContext eGLContext)`
   bool eglMakeCurrent(
@@ -754,13 +859,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLSurface1 = eGLSurface1?.reference ?? jni$_.jNullReference;
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
     return _eglMakeCurrent(
-            reference.pointer,
-            _id_eglMakeCurrent as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLSurface.pointer,
-            _$eGLSurface1.pointer,
-            _$eGLContext.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglMakeCurrent as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLSurface.pointer,
+      _$eGLSurface1.pointer,
+      _$eGLContext.pointer,
+    ).boolean;
   }
 
   static final _id_eglQueryContext = _class.instanceMethodId(
@@ -768,26 +873,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLContext;I[I)Z',
   );
 
-  static final _eglQueryContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglQueryContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglQueryContext(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLContext eGLContext, int i, int[] is)`
   bool eglQueryContext(
@@ -800,13 +912,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglQueryContext(
-            reference.pointer,
-            _id_eglQueryContext as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLContext.pointer,
-            i,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglQueryContext as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLContext.pointer,
+      i,
+      _$is$.pointer,
+    ).boolean;
   }
 
   static final _id_eglQueryString = _class.instanceMethodId(
@@ -814,28 +926,35 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;I)Ljava/lang/String;',
   );
 
-  static final _eglQueryString = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _eglQueryString =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public java.lang.String eglQueryString(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? eglQueryString(
-    jni$_.JObject? eGLDisplay,
-    int i,
-  ) {
+  jni$_.JString? eglQueryString(jni$_.JObject? eGLDisplay, int i) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
-    return _eglQueryString(reference.pointer,
-            _id_eglQueryString as jni$_.JMethodIDPtr, _$eGLDisplay.pointer, i)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _eglQueryString(
+      reference.pointer,
+      _id_eglQueryString as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      i,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_eglQuerySurface = _class.instanceMethodId(
@@ -843,26 +962,33 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;I[I)Z',
   );
 
-  static final _eglQuerySurface = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglQuerySurface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglQuerySurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface, int i, int[] is)`
   bool eglQuerySurface(
@@ -875,13 +1001,13 @@ class EGLLogWrapper extends jni$_.JObject {
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglQuerySurface(
-            reference.pointer,
-            _id_eglQuerySurface as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLSurface.pointer,
-            i,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglQuerySurface as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLSurface.pointer,
+      i,
+      _$is$.pointer,
+    ).boolean;
   }
 
   static final _id_eglSwapBuffers = _class.instanceMethodId(
@@ -889,36 +1015,37 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;)Z',
   );
 
-  static final _eglSwapBuffers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglSwapBuffers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglSwapBuffers(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface)`
-  bool eglSwapBuffers(
-    jni$_.JObject? eGLDisplay,
-    jni$_.JObject? eGLSurface,
-  ) {
+  bool eglSwapBuffers(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLSurface) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     return _eglSwapBuffers(
-            reference.pointer,
-            _id_eglSwapBuffers as jni$_.JMethodIDPtr,
-            _$eGLDisplay.pointer,
-            _$eGLSurface.pointer)
-        .boolean;
+      reference.pointer,
+      _id_eglSwapBuffers as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+      _$eGLSurface.pointer,
+    ).boolean;
   }
 
   static final _id_eglTerminate = _class.instanceMethodId(
@@ -926,48 +1053,58 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(Ljavax/microedition/khronos/egl/EGLDisplay;)Z',
   );
 
-  static final _eglTerminate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean eglTerminate(javax.microedition.khronos.egl.EGLDisplay eGLDisplay)`
-  bool eglTerminate(
-    jni$_.JObject? eGLDisplay,
-  ) {
-    final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
-    return _eglTerminate(reference.pointer,
-            _id_eglTerminate as jni$_.JMethodIDPtr, _$eGLDisplay.pointer)
-        .boolean;
-  }
-
-  static final _id_eglWaitGL = _class.instanceMethodId(
-    r'eglWaitGL',
-    r'()Z',
-  );
-
-  static final _eglWaitGL = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _eglTerminate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean eglTerminate(javax.microedition.khronos.egl.EGLDisplay eGLDisplay)`
+  bool eglTerminate(jni$_.JObject? eGLDisplay) {
+    final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
+    return _eglTerminate(
+      reference.pointer,
+      _id_eglTerminate as jni$_.JMethodIDPtr,
+      _$eGLDisplay.pointer,
+    ).boolean;
+  }
+
+  static final _id_eglWaitGL = _class.instanceMethodId(r'eglWaitGL', r'()Z');
+
+  static final _eglWaitGL =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean eglWaitGL()`
   bool eglWaitGL() {
-    return _eglWaitGL(reference.pointer, _id_eglWaitGL as jni$_.JMethodIDPtr)
-        .boolean;
+    return _eglWaitGL(
+      reference.pointer,
+      _id_eglWaitGL as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_eglWaitNative = _class.instanceMethodId(
@@ -975,27 +1112,34 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(ILjava/lang/Object;)Z',
   );
 
-  static final _eglWaitNative = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _eglWaitNative =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean eglWaitNative(int i, java.lang.Object object)`
-  bool eglWaitNative(
-    int i,
-    jni$_.JObject? object,
-  ) {
+  bool eglWaitNative(int i, jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _eglWaitNative(reference.pointer,
-            _id_eglWaitNative as jni$_.JMethodIDPtr, i, _$object.pointer)
-        .boolean;
+    return _eglWaitNative(
+      reference.pointer,
+      _id_eglWaitNative as jni$_.JMethodIDPtr,
+      i,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_getErrorString = _class.staticMethodId(
@@ -1003,23 +1147,32 @@ class EGLLogWrapper extends jni$_.JObject {
     r'(I)Ljava/lang/String;',
   );
 
-  static final _getErrorString = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+  static final _getErrorString =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `static public java.lang.String getErrorString(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? getErrorString(
-    int i,
-  ) {
-    return _getErrorString(_class.reference.pointer,
-            _id_getErrorString as jni$_.JMethodIDPtr, i)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+  static jni$_.JString? getErrorString(int i) {
+    return _getErrorString(
+      _class.reference.pointer,
+      _id_getErrorString as jni$_.JMethodIDPtr,
+      i,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -1034,11 +1187,8 @@ final class $EGLLogWrapper$NullableType extends jni$_.JObjType<EGLLogWrapper?> {
 
   @jni$_.internal
   @core$_.override
-  EGLLogWrapper? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : EGLLogWrapper.fromReference(
-          reference,
-        );
+  EGLLogWrapper? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : EGLLogWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1073,9 +1223,7 @@ final class $EGLLogWrapper$Type extends jni$_.JObjType<EGLLogWrapper> {
   @jni$_.internal
   @core$_.override
   EGLLogWrapper fromReference(jni$_.JReference reference) =>
-      EGLLogWrapper.fromReference(
-        reference,
-      );
+      EGLLogWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

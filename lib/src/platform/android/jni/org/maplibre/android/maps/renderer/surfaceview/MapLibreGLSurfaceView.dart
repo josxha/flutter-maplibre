@@ -63,63 +63,74 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   final jni$_.JObjType<MapLibreGLSurfaceView> $type;
 
   @jni$_.internal
-  MapLibreGLSurfaceView.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreGLSurfaceView.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/surfaceview/MapLibreGLSurfaceView');
+    r'org/maplibre/android/maps/renderer/surfaceview/MapLibreGLSurfaceView',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreGLSurfaceView$NullableType();
   static const type = $MapLibreGLSurfaceView$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(Landroid/content/Context;)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreGLSurfaceView(
-    jni$_.JObject? context,
-  ) {
+  factory MapLibreGLSurfaceView(jni$_.JObject? context) {
     final _$context = context?.reference ?? jni$_.jNullReference;
-    return MapLibreGLSurfaceView.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$context.pointer)
-        .reference);
+    return MapLibreGLSurfaceView.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -129,12 +140,14 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
-    return MapLibreGLSurfaceView.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$attributeSet.pointer)
-        .reference);
+    return MapLibreGLSurfaceView.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$context.pointer,
+        _$attributeSet.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setPreserveEGLContextOnPause = _class.instanceMethodId(
@@ -144,21 +157,29 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
 
   static final _setPreserveEGLContextOnPause =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setPreserveEGLContextOnPause(boolean z)`
-  void setPreserveEGLContextOnPause(
-    bool z,
-  ) {
-    _setPreserveEGLContextOnPause(reference.pointer,
-            _id_setPreserveEGLContextOnPause as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setPreserveEGLContextOnPause(bool z) {
+    _setPreserveEGLContextOnPause(
+      reference.pointer,
+      _id_setPreserveEGLContextOnPause as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_getPreserveEGLContextOnPause = _class.instanceMethodId(
@@ -168,22 +189,26 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
 
   static final _getPreserveEGLContextOnPause =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean getPreserveEGLContextOnPause()`
   bool getPreserveEGLContextOnPause() {
-    return _getPreserveEGLContextOnPause(reference.pointer,
-            _id_getPreserveEGLContextOnPause as jni$_.JMethodIDPtr)
-        .boolean;
+    return _getPreserveEGLContextOnPause(
+      reference.pointer,
+      _id_getPreserveEGLContextOnPause as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setRenderer = _class.instanceMethodId(
@@ -191,16 +216,23 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
     r'(Lorg/maplibre/android/maps/renderer/surfaceview/SurfaceViewMapRenderer;)V',
   );
 
-  static final _setRenderer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setRenderer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setRenderer(org.maplibre.android.maps.renderer.surfaceview.SurfaceViewMapRenderer surfaceViewMapRenderer)`
   void setRenderer(
@@ -208,9 +240,11 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   ) {
     final _$surfaceViewMapRenderer =
         surfaceViewMapRenderer?.reference ?? jni$_.jNullReference;
-    _setRenderer(reference.pointer, _id_setRenderer as jni$_.JMethodIDPtr,
-            _$surfaceViewMapRenderer.pointer)
-        .check();
+    _setRenderer(
+      reference.pointer,
+      _id_setRenderer as jni$_.JMethodIDPtr,
+      _$surfaceViewMapRenderer.pointer,
+    ).check();
   }
 
   static final _id_setEGLContextFactory = _class.instanceMethodId(
@@ -218,28 +252,33 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
     r'(Landroid/opengl/GLSurfaceView$EGLContextFactory;)V',
   );
 
-  static final _setEGLContextFactory = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setEGLContextFactory =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setEGLContextFactory(android.opengl.GLSurfaceView$EGLContextFactory eGLContextFactory)`
-  void setEGLContextFactory(
-    jni$_.JObject? eGLContextFactory,
-  ) {
+  void setEGLContextFactory(jni$_.JObject? eGLContextFactory) {
     final _$eGLContextFactory =
         eGLContextFactory?.reference ?? jni$_.jNullReference;
     _setEGLContextFactory(
-            reference.pointer,
-            _id_setEGLContextFactory as jni$_.JMethodIDPtr,
-            _$eGLContextFactory.pointer)
-        .check();
+      reference.pointer,
+      _id_setEGLContextFactory as jni$_.JMethodIDPtr,
+      _$eGLContextFactory.pointer,
+    ).check();
   }
 
   static final _id_setEGLWindowSurfaceFactory = _class.instanceMethodId(
@@ -249,27 +288,31 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
 
   static final _setEGLWindowSurfaceFactory =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setEGLWindowSurfaceFactory(android.opengl.GLSurfaceView$EGLWindowSurfaceFactory eGLWindowSurfaceFactory)`
-  void setEGLWindowSurfaceFactory(
-    jni$_.JObject? eGLWindowSurfaceFactory,
-  ) {
+  void setEGLWindowSurfaceFactory(jni$_.JObject? eGLWindowSurfaceFactory) {
     final _$eGLWindowSurfaceFactory =
         eGLWindowSurfaceFactory?.reference ?? jni$_.jNullReference;
     _setEGLWindowSurfaceFactory(
-            reference.pointer,
-            _id_setEGLWindowSurfaceFactory as jni$_.JMethodIDPtr,
-            _$eGLWindowSurfaceFactory.pointer)
-        .check();
+      reference.pointer,
+      _id_setEGLWindowSurfaceFactory as jni$_.JMethodIDPtr,
+      _$eGLWindowSurfaceFactory.pointer,
+    ).check();
   }
 
   static final _id_setEGLConfigChooser = _class.instanceMethodId(
@@ -277,28 +320,33 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
     r'(Landroid/opengl/GLSurfaceView$EGLConfigChooser;)V',
   );
 
-  static final _setEGLConfigChooser = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setEGLConfigChooser =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setEGLConfigChooser(android.opengl.GLSurfaceView$EGLConfigChooser eGLConfigChooser)`
-  void setEGLConfigChooser(
-    jni$_.JObject? eGLConfigChooser,
-  ) {
+  void setEGLConfigChooser(jni$_.JObject? eGLConfigChooser) {
     final _$eGLConfigChooser =
         eGLConfigChooser?.reference ?? jni$_.jNullReference;
     _setEGLConfigChooser(
-            reference.pointer,
-            _id_setEGLConfigChooser as jni$_.JMethodIDPtr,
-            _$eGLConfigChooser.pointer)
-        .check();
+      reference.pointer,
+      _id_setEGLConfigChooser as jni$_.JMethodIDPtr,
+      _$eGLConfigChooser.pointer,
+    ).check();
   }
 }
 
@@ -315,11 +363,7 @@ final class $MapLibreGLSurfaceView$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreGLSurfaceView? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : MapLibreGLSurfaceView.fromReference(
-              reference,
-            );
+      reference.isNull ? null : MapLibreGLSurfaceView.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -356,9 +400,7 @@ final class $MapLibreGLSurfaceView$Type
   @jni$_.internal
   @core$_.override
   MapLibreGLSurfaceView fromReference(jni$_.JReference reference) =>
-      MapLibreGLSurfaceView.fromReference(
-        reference,
-      );
+      MapLibreGLSurfaceView.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
