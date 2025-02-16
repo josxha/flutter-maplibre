@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/extensions.dart';
 import 'package:maplibre_example/map_styles.dart';
 
 @immutable
@@ -35,7 +36,11 @@ class _UserLocationPageState extends State<UserLocationPage> {
                         .requestLocationPermissions(
                           explanation: 'Show the user location on the map.',
                         );
-                    debugPrint(granted.toString());
+                    if (context.mounted) {
+                      context.showSnackBox(
+                        'Permission ${granted ? 'granted' : 'not granted'}.',
+                      );
+                    }
                   },
                   child: const Text(
                     'Get permission',
@@ -44,7 +49,16 @@ class _UserLocationPageState extends State<UserLocationPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    await _controller.enableLocation();
+                    try {
+                      await _controller.enableLocation();
+                      if (context.mounted) {
+                        context.showSnackBox('Location enabled.');
+                      }
+                    } catch (error) {
+                      if (context.mounted) {
+                        context.showSnackBox(error.toString());
+                      }
+                    }
                   },
                   child: const Text(
                     'Enable location',
@@ -53,7 +67,16 @@ class _UserLocationPageState extends State<UserLocationPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    await _controller.trackLocation();
+                    try {
+                      await _controller.trackLocation();
+                      if (context.mounted) {
+                        context.showSnackBox('Tracking location.');
+                      }
+                    } catch (error) {
+                      if (context.mounted) {
+                        context.showSnackBox(error.toString());
+                      }
+                    }
                   },
                   child: const Text(
                     'Track location',
