@@ -29,6 +29,7 @@ Thanks for your contributions for this release, @felix-larsen and @pamtbaau!
 - Fix `moveCamera()`, `animateCamera()` and `fitCamera()` does not ignore null
   parameters.
 - Fix app freeze on Android using Flutter 3.29.0 caused by the merged threads.
+- Fix exception when adding a RasterSource programatically.
 
 ### Misc
 
