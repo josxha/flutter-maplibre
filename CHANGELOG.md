@@ -1,5 +1,11 @@
 ## 0.2.1
 
+This release builds upon the long anticipated merged threads in Flutter 3.29.0
+which removes the need of switching threads. Furthermore, the release contains a
+couple of features and new fixes.
+
+Thanks for your contributions for this release, @felix-larsen and @pamtbaau!
+
 ### New Features
 
 - Upgrade MapLibre Native on Android
@@ -22,8 +28,7 @@
 - Fix exceptions when the map widget rebuilds a lot in a short amount of time.
 - Fix `moveCamera()`, `animateCamera()` and `fitCamera()` does not ignore null
   parameters.
-- Fix app freeze on Android using Flutter 3.29.0 caused by the merged Platform
-  and UI thread.
+- Fix app freeze on Android using Flutter 3.29.0 caused by the merged threads.
 
 ### Misc
 
@@ -32,7 +37,7 @@
   to [3.29.0](https://discord.com/channels/951867686378409984/951879268227485707/1339719764574081148)
   and minimum Dart version
   to [3.7.0](https://discord.com/channels/951867686378409984/951879268227485707/1339719747981545485).
-- Use the new Dart 3.7 code formatting.
+- Use the new code formatting.
 - Upgrade pigeon to 24.
 
 ## 0.2.0
