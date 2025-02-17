@@ -240,7 +240,5 @@ extension type ProjectionSpecification._(JSObject _) implements JSObject {
 @JS()
 extension type FilterSpecification._(JSObject _) implements JSObject {
   /// Create a new [FilterSpecification] object.
-  external FilterSpecification({
-    required JSArray filter,
-  });
+  external FilterSpecification({required JSArray filter});
 }

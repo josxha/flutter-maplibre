@@ -42,12 +42,12 @@ class CircleLayer extends Layer<Point> {
 
   @override
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-        draggable: draggable,
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+    draggable: draggable,
+  );
 
   @override
   Map<String, Object> getPaint() => {

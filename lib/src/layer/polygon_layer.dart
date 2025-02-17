@@ -36,12 +36,12 @@ class PolygonLayer extends Layer<Polygon> {
 
   @override
   StyleLayer createStyleLayer(int index) => FillStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-        draggable: draggable,
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+    draggable: draggable,
+  );
 
   @override
   bool operator ==(covariant PolygonLayer other) {
@@ -59,7 +59,8 @@ class PolygonLayer extends Layer<Polygon> {
   int get hashCode {
     return color.hashCode ^
         outlineColor.hashCode ^
-        const DeepCollectionEquality()
-            .hash(list.map((e) => e.geometry?.coordinates).toList());
+        const DeepCollectionEquality().hash(
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
   }
 }

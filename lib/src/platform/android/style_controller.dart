@@ -267,8 +267,10 @@ class StyleControllerAndroid implements StyleController {
       }
     }
 
-    final resultArray =
-        JArray<JString?>(JString.nullableType, queryLayerIds.length);
+    final resultArray = JArray<JString?>(
+      JString.nullableType,
+      queryLayerIds.length,
+    );
     for (var i = 0; i < queryLayerIds.length; i++) {
       if (queryLayerIds[i] != null) resultArray[i] = queryLayerIds[i];
     }

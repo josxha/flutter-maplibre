@@ -55,17 +55,15 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                     setState(() {
                       if (_polylineLayer == null) {
                         _polylineLayer = PolylineLayer(
-                          polylines: Layer.generateFeatureList(
-                            [
-                              LineString(
-                                coordinates: [
-                                  Position(9.17, 47.68),
-                                  Position(9.5, 48),
-                                  Position(9, 48),
-                                ],
-                              ),
-                            ],
-                          ),
+                          polylines: Layer.generateFeatureList([
+                            LineString(
+                              coordinates: [
+                                Position(9.17, 47.68),
+                                Position(9.5, 48),
+                                Position(9, 48),
+                              ],
+                            ),
+                          ]),
                         );
                       } else {
                         _polylineLayer = null;

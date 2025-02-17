@@ -59,16 +59,16 @@ class MyApp extends StatelessWidget {
             (context) => const WidgetLayerInteractivePage(),
         OfflinePage.location: (context) => const OfflinePage(),
         PermissionsPage.location: (context) => const PermissionsPage(),
-        StyleLayersInteractivePage.location: (context) =>
-            const StyleLayersInteractivePage(),
-        StyleLayersSymbolPage.location: (context) =>
-            const StyleLayersSymbolPage(),
-        StyleLayersCirclePage.location: (context) =>
-            const StyleLayersCirclePage(),
-        StyleLayersHeatmapPage.location: (context) =>
-            const StyleLayersHeatmapPage(),
-        StyleLayersHillshadePage.location: (context) =>
-            const StyleLayersHillshadePage(),
+        StyleLayersInteractivePage.location:
+            (context) => const StyleLayersInteractivePage(),
+        StyleLayersSymbolPage.location:
+            (context) => const StyleLayersSymbolPage(),
+        StyleLayersCirclePage.location:
+            (context) => const StyleLayersCirclePage(),
+        StyleLayersHeatmapPage.location:
+            (context) => const StyleLayersHeatmapPage(),
+        StyleLayersHillshadePage.location:
+            (context) => const StyleLayersHillshadePage(),
         StyleLayersFillPage.location: (context) => const StyleLayersFillPage(),
         StyleLayersFillExtrusionPage.location:
             (context) => const StyleLayersFillExtrusionPage(),
@@ -78,8 +78,8 @@ class MyApp extends StatelessWidget {
         LayersMixedPage.location: (context) => const LayersMixedPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersMarkerPage.location: (context) => const LayersMarkerPage(),
-        LayersInteractivePage.location: (context) =>
-            const LayersInteractivePage(),
+        LayersInteractivePage.location:
+            (context) => const LayersInteractivePage(),
         LayersPolylinePage.location: (context) => const LayersPolylinePage(),
         LayersPolygonPage.location: (context) => const LayersPolygonPage(),
         ParametersPage.location: (context) => const ParametersPage(),

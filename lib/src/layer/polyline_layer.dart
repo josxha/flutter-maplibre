@@ -51,12 +51,12 @@ class PolylineLayer extends Layer<LineString> {
 
   @override
   StyleLayer createStyleLayer(int index) => LineStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-        draggable: draggable,
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+    draggable: draggable,
+  );
 
   @override
   bool operator ==(covariant PolylineLayer other) {
@@ -80,7 +80,8 @@ class PolylineLayer extends Layer<LineString> {
         gapWidth.hashCode ^
         blur.hashCode ^
         dashArray.hashCode ^
-        const DeepCollectionEquality()
-            .hash(list.map((e) => e.geometry?.coordinates).toList());
+        const DeepCollectionEquality().hash(
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
   }
 }

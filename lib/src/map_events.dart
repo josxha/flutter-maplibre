@@ -120,10 +120,7 @@ final class MapEventLongPressEnd extends MapEventLongPress {
 /// Emitted when the user is dragging a feature on the map.
 final class MapEventFeatureDrag extends MapEvent {
   /// Create a new [MapEventFeatureDrag] object.
-  const MapEventFeatureDrag({
-    required this.feature,
-    required this.event,
-  });
+  const MapEventFeatureDrag({required this.feature, required this.event});
 
   /// The feature that has been dragged.
   final Feature feature;

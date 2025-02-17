@@ -140,9 +140,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     if (this.options == oldOptions) return;
 
     if (options.gestures.drag != oldOptions.gestures.drag) {
-      await _hostApi.toggleLongPressMove(
-        enabled: options.gestures.drag,
-      );
+      await _hostApi.toggleLongPressMove(enabled: options.gestures.drag);
     }
 
     jniMap.setMinZoomPreference(options.minZoom);
@@ -436,10 +434,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       final JArray<JString?> queryLayerIds;
 
       if (layerIdsFilter != null) {
-        queryLayerIds = JArray(
-          JString.nullableType,
-          layerIdsFilter.length,
-        );
+        queryLayerIds = JArray(JString.nullableType, layerIdsFilter.length);
 
         for (final (i, layer) in layerIdsFilter.indexed) {
           queryLayerIds[i] = layer.toJString();

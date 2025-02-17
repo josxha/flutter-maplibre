@@ -230,8 +230,9 @@ void main() {
       await styleCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
 
-      var features =
-          await ctrl.queryRenderedFeatures(Offset(size.width, size.height));
+      var features = await ctrl.queryRenderedFeatures(
+        Offset(size.width, size.height),
+      );
       expect(features, hasLength(0));
 
       features = await ctrl.queryRenderedFeatures(Offset.zero);

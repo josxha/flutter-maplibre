@@ -60,16 +60,18 @@ class _StyleLayersInteractivePageState
               _styleController = event.style;
 
               // add marker image to map
-              final response =
-                  await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
+              final response = await http.get(
+                Uri.parse(StyleLayersSymbolPage.imageUrl),
+              );
               final bytes = response.bodyBytes;
               await event.style.addImage('marker', bytes);
 
               await _styleController.addSource(
                 GeoJsonSource(
                   id: 'draggable-source',
-                  data:
-                      jsonEncode(FeatureCollection(features: _points).toJson()),
+                  data: jsonEncode(
+                    FeatureCollection(features: _points).toJson(),
+                  ),
                 ),
               );
 
@@ -96,7 +98,9 @@ class _StyleLayersInteractivePageState
             // case MapEventLongPress():
             // log('Long ${event.type} at ${event.point.lat}, ${event.point.lng}');
             case MapEventFeatureDrag():
-              log('${event.event.type} feature ${event.feature.id} at ${event.event.point.lat}, ${event.event.point.lng}');
+              log(
+                '${event.event.type} feature ${event.feature.id} at ${event.event.point.lat}, ${event.event.point.lng}',
+              );
 
               if (event.event is MapEventLongPressMove) {
                 await _updatePoint(

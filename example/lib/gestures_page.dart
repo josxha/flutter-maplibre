@@ -62,10 +62,4 @@ class _GesturesPageState extends State<GesturesPage> {
   }
 }
 
-enum Gestures {
-  rotate,
-  pan,
-  zoom,
-  tilt,
-  drag;
-}
+enum Gestures { rotate, pan, zoom, tilt, drag }

@@ -31,11 +31,7 @@ void main() {
 
     testWidgets('default gestures in map', (tester) async {
       final completer = Completer<MapController>();
-      await tester.pumpWidget(
-        App(
-          onMapCreated: completer.complete,
-        ),
-      );
+      await tester.pumpWidget(App(onMapCreated: completer.complete));
       await tester.pumpAndSettle();
       final ctrl = await completer.future;
       final options = ctrl.options;

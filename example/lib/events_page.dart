@@ -26,9 +26,10 @@ class _EventsPageState extends State<EventsPage> {
             child: ChoiceChip(
               label: const Text('Drag'),
               selected: dragEnabled,
-              onSelected: (value) => setState(() {
-                dragEnabled = !dragEnabled;
-              }),
+              onSelected:
+                  (value) => setState(() {
+                    dragEnabled = !dragEnabled;
+                  }),
             ),
           ),
         ],
@@ -58,32 +59,36 @@ class _EventsPageState extends State<EventsPage> {
   }
 
   void _onEvent(MapEvent mapEvent) => switch (mapEvent) {
-        MapEventMapCreated() => _print('map created'),
-        MapEventStyleLoaded() => _print('style loaded'),
-        MapEventMoveCamera() => _print(
-            'move camera: center ${_formatPosition(mapEvent.camera.center)}, '
-            'zoom ${mapEvent.camera.zoom.toStringAsFixed(2)}, '
-            'pitch ${mapEvent.camera.pitch.toStringAsFixed(2)}, '
-            'bearing ${mapEvent.camera.bearing.toStringAsFixed(2)}',
-          ),
-        MapEventStartMoveCamera() =>
-          _print('start move camera, reason: ${mapEvent.reason.name}'),
-        MapEventClick() =>
-          _print('clicked: ${_formatPosition(mapEvent.point)}'),
-        MapEventDoubleClick() =>
-          _print('double clicked: ${_formatPosition(mapEvent.point)}'),
-        MapEventLongClick() =>
-          _print('long clicked: ${_formatPosition(mapEvent.point)}'),
-        MapEventSecondaryClick() =>
-          _print('secondary clicked: ${_formatPosition(mapEvent.point)}'),
-        MapEventIdle() => _print('idle'),
-        MapEventCameraIdle() => _print('camera idle'),
-        MapEventFeatureDrag() => _print(
-            '${mapEvent.event.type} feature ${mapEvent.feature.id} at: ${_formatPosition(mapEvent.event.point)}',
-          ),
-        MapEventLongPress() =>
-          _print('${mapEvent.type}: ${_formatPosition(mapEvent.point)}'),
-      };
+    MapEventMapCreated() => _print('map created'),
+    MapEventStyleLoaded() => _print('style loaded'),
+    MapEventMoveCamera() => _print(
+      'move camera: center ${_formatPosition(mapEvent.camera.center)}, '
+      'zoom ${mapEvent.camera.zoom.toStringAsFixed(2)}, '
+      'pitch ${mapEvent.camera.pitch.toStringAsFixed(2)}, '
+      'bearing ${mapEvent.camera.bearing.toStringAsFixed(2)}',
+    ),
+    MapEventStartMoveCamera() => _print(
+      'start move camera, reason: ${mapEvent.reason.name}',
+    ),
+    MapEventClick() => _print('clicked: ${_formatPosition(mapEvent.point)}'),
+    MapEventDoubleClick() => _print(
+      'double clicked: ${_formatPosition(mapEvent.point)}',
+    ),
+    MapEventLongClick() => _print(
+      'long clicked: ${_formatPosition(mapEvent.point)}',
+    ),
+    MapEventSecondaryClick() => _print(
+      'secondary clicked: ${_formatPosition(mapEvent.point)}',
+    ),
+    MapEventIdle() => _print('idle'),
+    MapEventCameraIdle() => _print('camera idle'),
+    MapEventFeatureDrag() => _print(
+      '${mapEvent.event.type} feature ${mapEvent.feature.id} at: ${_formatPosition(mapEvent.event.point)}',
+    ),
+    MapEventLongPress() => _print(
+      '${mapEvent.type}: ${_formatPosition(mapEvent.point)}',
+    ),
+  };
 
   void _print(String message) {
     debugPrint('[MapLibreMap] $message');

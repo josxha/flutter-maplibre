@@ -235,12 +235,12 @@ class MarkerLayer extends Layer<Point> {
 
   @override
   StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-        draggable: draggable,
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+    draggable: draggable,
+  );
 
   @override
   bool operator ==(covariant MarkerLayer other) {

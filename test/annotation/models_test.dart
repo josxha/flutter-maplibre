@@ -6,12 +6,10 @@ void main() {
   group('Annotation Model Classes', () {
     test('CircleLayer', () {
       final o = CircleLayer(
-        circles: Layer.generateFeatureList(
-          [
-            Point(coordinates: Position(0, 0)),
-            Point(coordinates: Position(12.4, -4)),
-          ],
-        ),
+        circles: Layer.generateFeatureList([
+          Point(coordinates: Position(0, 0)),
+          Point(coordinates: Position(12.4, -4)),
+        ]),
         color: Colors.purple,
         strokeWidth: 5,
         blur: 2.4,
@@ -35,12 +33,10 @@ void main() {
     });
     test('MarkerLayer', () {
       final o = MarkerLayer(
-        markers: Layer.generateFeatureList(
-          [
-            Point(coordinates: Position(0, 0)),
-            Point(coordinates: Position(12.4, -4)),
-          ],
-        ),
+        markers: Layer.generateFeatureList([
+          Point(coordinates: Position(0, 0)),
+          Point(coordinates: Position(12.4, -4)),
+        ]),
         textColor: Colors.purple,
         textHaloColor: Colors.greenAccent,
         iconHaloColor: Colors.amber,
@@ -50,12 +46,8 @@ void main() {
         textAllowOverlap: true,
         textSize: 23,
       );
-      final o2 = MarkerLayer(
-        markers: Layer.generateFeatureList([]),
-      );
-      final o3 = MarkerLayer(
-        markers: Layer.generateFeatureList([]),
-      );
+      final o2 = MarkerLayer(markers: Layer.generateFeatureList([]));
+      final o3 = MarkerLayer(markers: Layer.generateFeatureList([]));
       expect(o, equals(o));
       expect(o2, equals(o3));
       expect(o2.hashCode, equals(o3.hashCode));
@@ -71,38 +63,32 @@ void main() {
     });
     test('PolygonLayer', () {
       final o = PolygonLayer(
-        polygons: Layer.generateFeatureList(
-          [
-            Polygon(
-              coordinates: [
-                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-                [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
-              ],
-            ),
-          ],
-        ),
+        polygons: Layer.generateFeatureList([
+          Polygon(
+            coordinates: [
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
+            ],
+          ),
+        ]),
       );
       final o2 = PolygonLayer(
-        polygons: Layer.generateFeatureList(
-          [
-            Polygon(
-              coordinates: [
-                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-              ],
-            ),
-          ],
-        ),
+        polygons: Layer.generateFeatureList([
+          Polygon(
+            coordinates: [
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+            ],
+          ),
+        ]),
       );
       final o3 = PolygonLayer(
-        polygons: Layer.generateFeatureList(
-          [
-            Polygon(
-              coordinates: [
-                [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-              ],
-            ),
-          ],
-        ),
+        polygons: Layer.generateFeatureList([
+          Polygon(
+            coordinates: [
+              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+            ],
+          ),
+        ]),
       );
       expect(o, equals(o));
       expect(o2, equals(o3));
@@ -119,42 +105,31 @@ void main() {
     });
     test('PolylineLayer', () {
       final o = PolylineLayer(
-        polylines: Layer.generateFeatureList(
-          [
-            LineString(
-              coordinates: [
-                Position(2, 23.4),
-                Position(5.2, 32),
-              ],
-            ),
-          ],
-        ),
+        polylines: Layer.generateFeatureList([
+          LineString(coordinates: [Position(2, 23.4), Position(5.2, 32)]),
+        ]),
       );
       final o2 = PolylineLayer(
-        polylines: Layer.generateFeatureList(
-          [
-            LineString(
-              coordinates: [
-                Position(2, 23.4),
-                Position(5.2, 32),
-                Position(53, 2),
-              ],
-            ),
-          ],
-        ),
+        polylines: Layer.generateFeatureList([
+          LineString(
+            coordinates: [
+              Position(2, 23.4),
+              Position(5.2, 32),
+              Position(53, 2),
+            ],
+          ),
+        ]),
       );
       final o3 = PolylineLayer(
-        polylines: Layer.generateFeatureList(
-          [
-            LineString(
-              coordinates: [
-                Position(2, 23.4),
-                Position(5.2, 32),
-                Position(53, 2),
-              ],
-            ),
-          ],
-        ),
+        polylines: Layer.generateFeatureList([
+          LineString(
+            coordinates: [
+              Position(2, 23.4),
+              Position(5.2, 32),
+              Position(53, 2),
+            ],
+          ),
+        ]),
       );
       expect(o, equals(o));
       expect(o2, equals(o3));

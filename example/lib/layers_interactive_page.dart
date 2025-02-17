@@ -56,8 +56,9 @@ class _LayersInteractivePageState extends State<LayersInteractivePage> {
             case MapEventStyleLoaded():
 
               // add marker image to map
-              final response =
-                  await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
+              final response = await http.get(
+                Uri.parse(StyleLayersSymbolPage.imageUrl),
+              );
               final bytes = response.bodyBytes;
               await event.style.addImage('marker', bytes);
               setState(() => _imageLoaded = true);
@@ -68,7 +69,9 @@ class _LayersInteractivePageState extends State<LayersInteractivePage> {
             // case MapEventLongPress():
             // log('Long ${event.type} at ${event.point.lat}, ${event.point.lng}');
             case MapEventFeatureDrag():
-              log('${event.event.type} feature ${event.feature.id} at ${event.event.point.lat}, ${event.event.point.lng}');
+              log(
+                '${event.event.type} feature ${event.feature.id} at ${event.event.point.lat}, ${event.event.point.lng}',
+              );
 
               if (event.event is MapEventLongPressMove) {
                 await _updatePoint(
