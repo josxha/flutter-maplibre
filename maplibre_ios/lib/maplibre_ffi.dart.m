@@ -57,19 +57,47 @@ _ListenerTrampoline _MapLibreFFi_wrapBlockingBlock_1pl9qdv(
   };
 }
 
-typedef void  (^_ListenerTrampoline1)(void * arg0, id arg1);
+typedef void  (^_ListenerTrampoline1)(id arg0, struct _NSRange arg1, BOOL * arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline1 _MapLibreFFi_wrapListenerBlock_18v1jvf(_ListenerTrampoline1 block) NS_RETURNS_RETAINED {
+_ListenerTrampoline1 _MapLibreFFi_wrapListenerBlock_1a22wz(_ListenerTrampoline1 block) NS_RETURNS_RETAINED {
+  return ^void(id arg0, struct _NSRange arg1, BOOL * arg2) {
+    objc_retainBlock(block);
+    block((__bridge id)(__bridge_retained void*)(arg0), arg1, arg2);
+  };
+}
+
+typedef void  (^_BlockingTrampoline1)(void * waiter, id arg0, struct _NSRange arg1, BOOL * arg2);
+__attribute__((visibility("default"))) __attribute__((used))
+_ListenerTrampoline1 _MapLibreFFi_wrapBlockingBlock_1a22wz(
+    _BlockingTrampoline1 block, _BlockingTrampoline1 listenerBlock,
+    void* (*newWaiter)(), void (*awaitWaiter)(void*)) NS_RETURNS_RETAINED {
+  NSThread *targetThread = [NSThread currentThread];
+  return ^void(id arg0, struct _NSRange arg1, BOOL * arg2) {
+    if ([NSThread currentThread] == targetThread) {
+      objc_retainBlock(block);
+      block(nil, (__bridge id)(__bridge_retained void*)(arg0), arg1, arg2);
+    } else {
+      void* waiter = newWaiter();
+      objc_retainBlock(listenerBlock);
+      listenerBlock(waiter, (__bridge id)(__bridge_retained void*)(arg0), arg1, arg2);
+      awaitWaiter(waiter);
+    }
+  };
+}
+
+typedef void  (^_ListenerTrampoline2)(void * arg0, id arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+_ListenerTrampoline2 _MapLibreFFi_wrapListenerBlock_18v1jvf(_ListenerTrampoline2 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0, id arg1) {
     objc_retainBlock(block);
     block(arg0, (__bridge id)(__bridge_retained void*)(arg1));
   };
 }
 
-typedef void  (^_BlockingTrampoline1)(void * waiter, void * arg0, id arg1);
+typedef void  (^_BlockingTrampoline2)(void * waiter, void * arg0, id arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline1 _MapLibreFFi_wrapBlockingBlock_18v1jvf(
-    _BlockingTrampoline1 block, _BlockingTrampoline1 listenerBlock,
+_ListenerTrampoline2 _MapLibreFFi_wrapBlockingBlock_18v1jvf(
+    _BlockingTrampoline2 block, _BlockingTrampoline2 listenerBlock,
     void* (*newWaiter)(), void (*awaitWaiter)(void*)) NS_RETURNS_RETAINED {
   NSThread *targetThread = [NSThread currentThread];
   return ^void(void * arg0, id arg1) {
@@ -85,19 +113,19 @@ _ListenerTrampoline1 _MapLibreFFi_wrapBlockingBlock_18v1jvf(
   };
 }
 
-typedef void  (^_ListenerTrampoline2)(id arg0, id arg1);
+typedef void  (^_ListenerTrampoline3)(id arg0, id arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline2 _MapLibreFFi_wrapListenerBlock_pfv6jd(_ListenerTrampoline2 block) NS_RETURNS_RETAINED {
+_ListenerTrampoline3 _MapLibreFFi_wrapListenerBlock_pfv6jd(_ListenerTrampoline3 block) NS_RETURNS_RETAINED {
   return ^void(id arg0, id arg1) {
     objc_retainBlock(block);
     block((__bridge id)(__bridge_retained void*)(arg0), (__bridge id)(__bridge_retained void*)(arg1));
   };
 }
 
-typedef void  (^_BlockingTrampoline2)(void * waiter, id arg0, id arg1);
+typedef void  (^_BlockingTrampoline3)(void * waiter, id arg0, id arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline2 _MapLibreFFi_wrapBlockingBlock_pfv6jd(
-    _BlockingTrampoline2 block, _BlockingTrampoline2 listenerBlock,
+_ListenerTrampoline3 _MapLibreFFi_wrapBlockingBlock_pfv6jd(
+    _BlockingTrampoline3 block, _BlockingTrampoline3 listenerBlock,
     void* (*newWaiter)(), void (*awaitWaiter)(void*)) NS_RETURNS_RETAINED {
   NSThread *targetThread = [NSThread currentThread];
   return ^void(id arg0, id arg1) {

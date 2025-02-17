@@ -54,6 +54,8 @@ ffigen:
       - 'MLNRasterStyleLayer'
       - 'MLNSymbolStyleLayer'
       - 'MLNVectorStyleLayer'
+      - 'MLNAttributionInfo'
+      - 'NSAttributedString'
       - 'MLNShapeSource'
       - 'MLNImageSource'
       - 'MLNShape'

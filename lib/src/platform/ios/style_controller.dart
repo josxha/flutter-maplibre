@@ -270,25 +270,19 @@ class StyleControllerIos implements StyleController {
   @override
   List<String> getAttributionsSync() {
     final attributions = <String>[];
-    /*final sources = NSArray.arrayWithObject_(_ffiStyle.sources);
-    print(sources.count);
+    final sources = _ffiStyle.sources.allObjects;
     for (var i = 0; i < sources.count; i++) {
-      final source = MLNSource.castFrom(sources.objectAtIndex_(i));
-      print(source.debugDescription1);
-      print(source.runtimeType);
-      final tileSource = MLNVectorTileSource.castFrom(source);
-      print(tileSource.debugDescription1);
-      print(tileSource.runtimeType);
-      // TODO fix app crash when accessing attributionInfos:
+      final source = sources.objectAtIndex_(i);
+      if (!MLNTileSource.isInstance(source)) continue;
+      final tileSource = MLNTileSource.castFrom(source);
       final attrInfos = tileSource.attributionInfos;
-      print(attrInfos.debugDescription1);
       for (var j = 0; j < attrInfos.count; j++) {
-        print(j);
-        final attribution = tileSource.attributionInfos.objectAtIndex_(j);
-        final attributionString = NSString.castFrom(attribution).toString();
-        attributions.add('attributionString: $attributionString');
-       }
-    }*/
+        final attr = MLNAttributionInfo.castFrom(attrInfos.objectAtIndex_(j));
+        attributions.add(
+          '<a href="${attr.URL?.absoluteString?.toDartString()}">${attr.title.string.toDartString()}</a>',
+        );
+      }
+    }
     return attributions;
   }
 }
