@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi' as ffi;
 
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
@@ -20,12 +20,14 @@ class OfflineManagerIos implements OfflineManager {
 
   @override
   Future<void> clearAmbientCache() async {
-    final completion = objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
-      ffi.nullptr,
-      retain: false,
-      release: true,
+    final completer = Completer<void>();
+    _storage.clearAmbientCacheWithCompletionHandler_(
+      ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) completer.completeError(error);
+        completer.complete();
+      }),
     );
-    _storage.clearAmbientCacheWithCompletionHandler_(completion);
+    return completer.future;
   }
 
   @override
@@ -42,18 +44,27 @@ class OfflineManagerIos implements OfflineManager {
   }) async* {
     final region = MLNTilePyramidOfflineRegion.new1()
         .initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_(
-      mapStyleUrl.toNSURL(),
-      bounds.toMLNCoordinateBounds(),
-      minZoom,
-      maxZoom,
-    );
+          mapStyleUrl.toNSURL(),
+          bounds.toMLNCoordinateBounds(),
+          minZoom,
+          maxZoom,
+        );
     final context = utf8.encode(jsonEncode(metadata)).toNSData();
-    //final completion = objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>(ffi.nullptr, retain: false, release: true);
+
+    final completer = Completer<MLNOfflinePack>();
     _storage.addPackForRegion_withContext_completionHandler_(
       region,
       context,
-      null,
+      ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((pack, error) {
+        if (pack != null) {
+          completer.complete(pack);
+          pack.resume(); // start downloading
+        }
+        completer.completeError(error!);
+      }),
     );
+    final _ = await completer.future;
+    // TODO: use the NotificationCenter to track the download process: https://maplibre.org/maplibre-native/ios/latest/documentation/maplibre-native-for-ios/offlinepackexample/
   }
 
   @override
@@ -82,24 +93,25 @@ class OfflineManagerIos implements OfflineManager {
 
   @override
   Future<void> invalidateAmbientCache() async {
-    final completion = objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
-      ffi.nullptr,
-      retain: false,
-      release: true,
+    final completer = Completer<void>();
+    _storage.invalidateAmbientCacheWithCompletionHandler_(
+      ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) completer.completeError(error);
+        return completer.complete();
+      }),
     );
-    _storage.invalidateAmbientCacheWithCompletionHandler_(completion);
+    return completer.future;
   }
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
     final packs = _storage.packs;
-    final regions = <OfflineRegion>[];
-    for (var i = 0; i < packs!.count; i++) {
+    return List<OfflineRegion>.generate(packs!.count, (i) {
       final ffiPack = MLNOfflinePack.castFrom(packs.objectAtIndex_(i));
       final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
-      final region = OfflineRegion(
+      return OfflineRegion(
         id: (json['id'] ?? -1) as int,
         bounds: ffiRegion.bounds.toLngLatBounds(),
         minZoom: ffiRegion.minimumZoomLevel,
@@ -108,9 +120,7 @@ class OfflineManagerIos implements OfflineManager {
         pixelRatio: 1,
         styleUrl: ffiRegion.styleURL.toString(),
       );
-      regions.add(region);
-    }
-    return regions;
+    }, growable: false);
   }
 
   @override
@@ -129,29 +139,30 @@ class OfflineManagerIos implements OfflineManager {
 
   @override
   Future<void> resetDatabase() async {
-    final completion = objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
-      ffi.nullptr,
-      retain: false,
-      release: true,
+    final completer = Completer<void>();
+    _storage.resetDatabaseWithCompletionHandler_(
+      ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) completer.completeError(error);
+        completer.complete();
+      }),
     );
-    _storage.resetDatabaseWithCompletionHandler_(completion);
   }
 
   @override
-  void runPackDatabaseAutomatically({required bool enabled}) async {
+  void runPackDatabaseAutomatically({required bool enabled}) {
     // TODO: implement runPackDatabaseAutomatically
+    throw UnimplementedError();
   }
 
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
-    final completion = objc.ObjCBlock<ffi.Void Function(objc.NSError?)>(
-      ffi.nullptr,
-      retain: false,
-      release: true,
-    );
+    final completer = Completer<void>();
     _storage.setMaximumAmbientCacheSize_withCompletionHandler_(
       bytes,
-      completion,
+      ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) completer.completeError(error);
+        completer.complete();
+      }),
     );
   }
 

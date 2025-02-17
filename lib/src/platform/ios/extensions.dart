@@ -55,11 +55,11 @@ extension LngLatBoundsExt on LngLatBounds {
 extension MLNCoordinateBoundsExt on MLNCoordinateBounds {
   /// Convert a [MLNCoordinateBounds] to a [LngLatBounds].
   LngLatBounds toLngLatBounds() => LngLatBounds(
-        longitudeWest: sw.longitude,
-        longitudeEast: ne.longitude,
-        latitudeSouth: sw.latitude,
-        latitudeNorth: ne.latitude,
-      );
+    longitudeWest: sw.longitude,
+    longitudeEast: ne.longitude,
+    latitudeSouth: sw.latitude,
+    latitudeNorth: ne.latitude,
+  );
 }
 
 /// Internal extensions on [CGPoint].
