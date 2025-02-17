@@ -15,5 +15,5 @@ final class LineStyleLayer extends StyleLayerWithSource {
     super.paint,
   });
 
-// TODO add properties
+  // TODO add properties
 }

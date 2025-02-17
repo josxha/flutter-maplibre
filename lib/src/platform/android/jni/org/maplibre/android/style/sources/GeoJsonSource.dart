@@ -69,87 +69,106 @@ class GeoJsonSource extends source$_.Source {
   final jni$_.JObjType<GeoJsonSource> $type;
 
   @jni$_.internal
-  GeoJsonSource.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  GeoJsonSource.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/sources/GeoJsonSource');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/GeoJsonSource',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GeoJsonSource$NullableType();
   static const type = $GeoJsonSource$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(J)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(J)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource(
-    int j,
-  ) {
+  factory GeoJsonSource(int j) {
     return GeoJsonSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        j,
+      ).reference,
+    );
   }
 
-  static final _id_new$1 = _class.constructorId(
-    r'(Ljava/lang/String;)V',
-  );
+  static final _id_new$1 = _class.constructorId(r'(Ljava/lang/String;)V');
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$1(
-    jni$_.JString? string,
-  ) {
+  factory GeoJsonSource.new$1(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$1(_class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr, _$string.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$2 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -159,73 +178,85 @@ class GeoJsonSource extends source$_.Source {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$2(
-            _class.reference.pointer,
-            _id_new$2 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$2(
+        _class.reference.pointer,
+        _id_new$2 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$3 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$3(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory GeoJsonSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$3(
-            _class.reference.pointer,
-            _id_new$3 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$3(
+        _class.reference.pointer,
+        _id_new$3 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$4 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -237,71 +268,86 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$4(
-            _class.reference.pointer,
-            _id_new$4 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$4(
+        _class.reference.pointer,
+        _id_new$4 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$5 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URL;)V',
   );
 
-  static final _new$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$5(
-    jni$_.JString? string,
-    url$_.URL uRL,
-  ) {
+  factory GeoJsonSource.new$5(jni$_.JString? string, url$_.URL uRL) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
-    return GeoJsonSource.fromReference(_new$5(_class.reference.pointer,
-            _id_new$5 as jni$_.JMethodIDPtr, _$string.pointer, _$uRL.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$5(
+        _class.reference.pointer,
+        _id_new$5 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRL.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$6 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URL;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$6 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$6 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -313,71 +359,86 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$6(
-            _class.reference.pointer,
-            _id_new$6 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$uRL.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$6(
+        _class.reference.pointer,
+        _id_new$6 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRL.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$7 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URI;)V',
   );
 
-  static final _new$7 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$7 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$7(
-    jni$_.JString? string,
-    uri$_.URI uRI,
-  ) {
+  factory GeoJsonSource.new$7(jni$_.JString? string, uri$_.URI uRI) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
-    return GeoJsonSource.fromReference(_new$7(_class.reference.pointer,
-            _id_new$7 as jni$_.JMethodIDPtr, _$string.pointer, _$uRI.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$7(
+        _class.reference.pointer,
+        _id_new$7 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRI.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$8 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URI;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$8 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$8 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -389,35 +450,41 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$8(
-            _class.reference.pointer,
-            _id_new$8 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$uRI.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$8(
+        _class.reference.pointer,
+        _id_new$8 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRI.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$9 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/FeatureCollection;)V',
   );
 
-  static final _new$9 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$9 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.FeatureCollection featureCollection)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -428,36 +495,45 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$featureCollection =
         featureCollection?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$9(
-            _class.reference.pointer,
-            _id_new$9 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$featureCollection.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$9(
+        _class.reference.pointer,
+        _id_new$9 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$featureCollection.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$10 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/FeatureCollection;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$10 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$10 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.FeatureCollection featureCollection, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -470,35 +546,41 @@ class GeoJsonSource extends source$_.Source {
     final _$featureCollection =
         featureCollection?.reference ?? jni$_.jNullReference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$10(
-            _class.reference.pointer,
-            _id_new$10 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$featureCollection.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$10(
+        _class.reference.pointer,
+        _id_new$10 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$featureCollection.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$11 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Feature;)V',
   );
 
-  static final _new$11 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$11 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Feature feature)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -508,36 +590,45 @@ class GeoJsonSource extends source$_.Source {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$feature = feature?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$11(
-            _class.reference.pointer,
-            _id_new$11 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$feature.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$11(
+        _class.reference.pointer,
+        _id_new$11 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$feature.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$12 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Feature;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$12 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$12 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Feature feature, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -549,74 +640,86 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$feature = feature?.reference ?? jni$_.jNullReference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$12(
-            _class.reference.pointer,
-            _id_new$12 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$feature.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$12(
+        _class.reference.pointer,
+        _id_new$12 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$feature.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$13 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Geometry;)V',
   );
 
-  static final _new$13 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$13 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Geometry geometry)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$13(
-    jni$_.JString? string,
-    jni$_.JObject? geometry,
-  ) {
+  factory GeoJsonSource.new$13(jni$_.JString? string, jni$_.JObject? geometry) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$13(
-            _class.reference.pointer,
-            _id_new$13 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$geometry.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$13(
+        _class.reference.pointer,
+        _id_new$13 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$geometry.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$14 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/geojson/Geometry;Lorg/maplibre/android/style/sources/GeoJsonOptions;)V',
   );
 
-  static final _new$14 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$14 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Geometry geometry, org.maplibre.android.style.sources.GeoJsonOptions geoJsonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -628,13 +731,15 @@ class GeoJsonSource extends source$_.Source {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     final _$geoJsonOptions = geoJsonOptions?.reference ?? jni$_.jNullReference;
-    return GeoJsonSource.fromReference(_new$14(
-            _class.reference.pointer,
-            _id_new$14 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$geometry.pointer,
-            _$geoJsonOptions.pointer)
-        .reference);
+    return GeoJsonSource.fromReference(
+      _new$14(
+        _class.reference.pointer,
+        _id_new$14 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$geometry.pointer,
+        _$geoJsonOptions.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setGeoJson = _class.instanceMethodId(
@@ -642,25 +747,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/Feature;)V',
   );
 
-  static final _setGeoJson = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGeoJson =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.Feature feature)`
-  void setGeoJson(
-    feature$_.Feature? feature,
-  ) {
+  void setGeoJson(feature$_.Feature? feature) {
     final _$feature = feature?.reference ?? jni$_.jNullReference;
-    _setGeoJson(reference.pointer, _id_setGeoJson as jni$_.JMethodIDPtr,
-            _$feature.pointer)
-        .check();
+    _setGeoJson(
+      reference.pointer,
+      _id_setGeoJson as jni$_.JMethodIDPtr,
+      _$feature.pointer,
+    ).check();
   }
 
   static final _id_setGeoJson$1 = _class.instanceMethodId(
@@ -668,25 +780,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/Geometry;)V',
   );
 
-  static final _setGeoJson$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGeoJson$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.Geometry geometry)`
-  void setGeoJson$1(
-    jni$_.JObject? geometry,
-  ) {
+  void setGeoJson$1(jni$_.JObject? geometry) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
-    _setGeoJson$1(reference.pointer, _id_setGeoJson$1 as jni$_.JMethodIDPtr,
-            _$geometry.pointer)
-        .check();
+    _setGeoJson$1(
+      reference.pointer,
+      _id_setGeoJson$1 as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+    ).check();
   }
 
   static final _id_setGeoJson$2 = _class.instanceMethodId(
@@ -694,26 +813,33 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/FeatureCollection;)V',
   );
 
-  static final _setGeoJson$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGeoJson$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.FeatureCollection featureCollection)`
-  void setGeoJson$2(
-    jni$_.JObject? featureCollection,
-  ) {
+  void setGeoJson$2(jni$_.JObject? featureCollection) {
     final _$featureCollection =
         featureCollection?.reference ?? jni$_.jNullReference;
-    _setGeoJson$2(reference.pointer, _id_setGeoJson$2 as jni$_.JMethodIDPtr,
-            _$featureCollection.pointer)
-        .check();
+    _setGeoJson$2(
+      reference.pointer,
+      _id_setGeoJson$2 as jni$_.JMethodIDPtr,
+      _$featureCollection.pointer,
+    ).check();
   }
 
   static final _id_setGeoJson$3 = _class.instanceMethodId(
@@ -721,25 +847,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setGeoJson$3 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setGeoJson$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setGeoJson(java.lang.String string)`
-  void setGeoJson$3(
-    jni$_.JString string,
-  ) {
+  void setGeoJson$3(jni$_.JString string) {
     final _$string = string.reference;
-    _setGeoJson$3(reference.pointer, _id_setGeoJson$3 as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setGeoJson$3(
+      reference.pointer,
+      _id_setGeoJson$3 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_setUrl = _class.instanceMethodId(
@@ -747,24 +880,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Ljava/net/URL;)V',
   );
 
-  static final _setUrl = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setUrl(java.net.URL uRL)`
-  void setUrl(
-    url$_.URL uRL,
-  ) {
+  void setUrl(url$_.URL uRL) {
     final _$uRL = uRL.reference;
-    _setUrl(reference.pointer, _id_setUrl as jni$_.JMethodIDPtr, _$uRL.pointer)
-        .check();
+    _setUrl(
+      reference.pointer,
+      _id_setUrl as jni$_.JMethodIDPtr,
+      _$uRL.pointer,
+    ).check();
   }
 
   static final _id_setUri = _class.instanceMethodId(
@@ -772,24 +913,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Ljava/net/URI;)V',
   );
 
-  static final _setUri = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setUri(java.net.URI uRI)`
-  void setUri(
-    uri$_.URI uRI,
-  ) {
+  void setUri(uri$_.URI uRI) {
     final _$uRI = uRI.reference;
-    _setUri(reference.pointer, _id_setUri as jni$_.JMethodIDPtr, _$uRI.pointer)
-        .check();
+    _setUri(
+      reference.pointer,
+      _id_setUri as jni$_.JMethodIDPtr,
+      _$uRI.pointer,
+    ).check();
   }
 
   static final _id_setUri$1 = _class.instanceMethodId(
@@ -797,25 +946,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setUri$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setUri$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setUri(java.lang.String string)`
-  void setUri$1(
-    jni$_.JString? string,
-  ) {
+  void setUri$1(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setUri$1(reference.pointer, _id_setUri$1 as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setUri$1(
+      reference.pointer,
+      _id_setUri$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getUrl = _class.instanceMethodId(
@@ -823,23 +979,29 @@ class GeoJsonSource extends source$_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getUrl(
+      reference.pointer,
+      _id_getUrl as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setUrl$1 = _class.instanceMethodId(
@@ -847,25 +1009,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setUrl$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setUrl$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final void setUrl(java.lang.String string)`
-  void setUrl$1(
-    jni$_.JString? string,
-  ) {
+  void setUrl$1(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setUrl$1(reference.pointer, _id_setUrl$1 as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setUrl$1(
+      reference.pointer,
+      _id_setUrl$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -873,23 +1042,29 @@ class GeoJsonSource extends source$_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUri() {
-    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getUri(
+      reference.pointer,
+      _id_getUri as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_querySourceFeatures = _class.instanceMethodId(
@@ -897,16 +1072,23 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Ljava/util/List;',
   );
 
-  static final _querySourceFeatures = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _querySourceFeatures =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final java.util.List querySourceFeatures(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -914,11 +1096,13 @@ class GeoJsonSource extends source$_.Source {
     jni$_.JObject? expression,
   ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
-    return _querySourceFeatures(reference.pointer,
-            _id_querySourceFeatures as jni$_.JMethodIDPtr, _$expression.pointer)
-        .object<jni$_.JList<feature$_.Feature>>(
-            const jni$_.JListType<feature$_.Feature>(
-                feature$_.$Feature$Type()));
+    return _querySourceFeatures(
+      reference.pointer,
+      _id_querySourceFeatures as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).object<jni$_.JList<feature$_.Feature>>(
+      const jni$_.JListType<feature$_.Feature>(feature$_.$Feature$Type()),
+    );
   }
 
   static final _id_getClusterChildren = _class.instanceMethodId(
@@ -926,26 +1110,33 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/Feature;)Lorg/maplibre/geojson/FeatureCollection;',
   );
 
-  static final _getClusterChildren = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getClusterChildren =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterChildren(org.maplibre.geojson.Feature feature)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject getClusterChildren(
-    feature$_.Feature feature,
-  ) {
+  jni$_.JObject getClusterChildren(feature$_.Feature feature) {
     final _$feature = feature.reference;
-    return _getClusterChildren(reference.pointer,
-            _id_getClusterChildren as jni$_.JMethodIDPtr, _$feature.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _getClusterChildren(
+      reference.pointer,
+      _id_getClusterChildren as jni$_.JMethodIDPtr,
+      _$feature.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_getClusterLeaves = _class.instanceMethodId(
@@ -953,36 +1144,39 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/Feature;JJ)Lorg/maplibre/geojson/FeatureCollection;',
   );
 
-  static final _getClusterLeaves = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getClusterLeaves =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int64,
-                        jni$_.Int64
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Int64, jni$_.Int64)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+            )
+          >();
 
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterLeaves(org.maplibre.geojson.Feature feature, long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject getClusterLeaves(
-    feature$_.Feature feature,
-    int j,
-    int j1,
-  ) {
+  jni$_.JObject getClusterLeaves(feature$_.Feature feature, int j, int j1) {
     final _$feature = feature.reference;
     return _getClusterLeaves(
-            reference.pointer,
-            _id_getClusterLeaves as jni$_.JMethodIDPtr,
-            _$feature.pointer,
-            j,
-            j1)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_getClusterLeaves as jni$_.JMethodIDPtr,
+      _$feature.pointer,
+      j,
+      j1,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_getClusterExpansionZoom = _class.instanceMethodId(
@@ -990,27 +1184,32 @@ class GeoJsonSource extends source$_.Source {
     r'(Lorg/maplibre/geojson/Feature;)I',
   );
 
-  static final _getClusterExpansionZoom = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getClusterExpansionZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public final int getClusterExpansionZoom(org.maplibre.geojson.Feature feature)`
-  int getClusterExpansionZoom(
-    feature$_.Feature feature,
-  ) {
+  int getClusterExpansionZoom(feature$_.Feature feature) {
     final _$feature = feature.reference;
     return _getClusterExpansionZoom(
-            reference.pointer,
-            _id_getClusterExpansionZoom as jni$_.JMethodIDPtr,
-            _$feature.pointer)
-        .integer;
+      reference.pointer,
+      _id_getClusterExpansionZoom as jni$_.JMethodIDPtr,
+      _$feature.pointer,
+    ).integer;
   }
 }
 
@@ -1024,11 +1223,8 @@ final class $GeoJsonSource$NullableType extends jni$_.JObjType<GeoJsonSource?> {
 
   @jni$_.internal
   @core$_.override
-  GeoJsonSource? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : GeoJsonSource.fromReference(
-          reference,
-        );
+  GeoJsonSource? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : GeoJsonSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -1062,9 +1258,7 @@ final class $GeoJsonSource$Type extends jni$_.JObjType<GeoJsonSource> {
   @jni$_.internal
   @core$_.override
   GeoJsonSource fromReference(jni$_.JReference reference) =>
-      GeoJsonSource.fromReference(
-        reference,
-      );
+      GeoJsonSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

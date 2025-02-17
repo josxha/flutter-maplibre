@@ -59,13 +59,13 @@ class OnLocationLongClickListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationLongClickListener> $type;
 
   @jni$_.internal
-  OnLocationLongClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OnLocationLongClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/OnLocationLongClickListener');
+    r'org/maplibre/android/location/OnLocationLongClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OnLocationLongClickListener$NullableType();
@@ -77,22 +77,26 @@ class OnLocationLongClickListener extends jni$_.JObject {
 
   static final _onLocationComponentLongClick =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onLocationComponentLongClick()`
   void onLocationComponentLongClick() {
-    _onLocationComponentLongClick(reference.pointer,
-            _id_onLocationComponentLongClick as jni$_.JMethodIDPtr)
-        .check();
+    _onLocationComponentLongClick(
+      reference.pointer,
+      _id_onLocationComponentLongClick as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -104,19 +108,16 @@ class OnLocationLongClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -168,9 +169,7 @@ class OnLocationLongClickListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnLocationLongClickListener.fromReference(
-      $i.implementReference(),
-    );
+    return OnLocationLongClickListener.fromReference($i.implementReference());
   }
 }
 
@@ -213,9 +212,7 @@ final class $OnLocationLongClickListener$NullableType
   OnLocationLongClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OnLocationLongClickListener.fromReference(
-              reference,
-            );
+          : OnLocationLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -251,9 +248,7 @@ final class $OnLocationLongClickListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationLongClickListener fromReference(jni$_.JReference reference) =>
-      OnLocationLongClickListener.fromReference(
-        reference,
-      );
+      OnLocationLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

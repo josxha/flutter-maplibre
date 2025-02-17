@@ -61,39 +61,41 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure$Builder> $type;
 
   @jni$_.internal
-  AttributionMeasure$Builder.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  AttributionMeasure$Builder.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/attribution/AttributionMeasure$Builder');
+    r'org/maplibre/android/attribution/AttributionMeasure$Builder',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionMeasure$Builder$NullableType();
   static const type = $AttributionMeasure$Builder$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory AttributionMeasure$Builder() {
     return AttributionMeasure$Builder.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_setSnapshot = _class.instanceMethodId(
@@ -101,27 +103,35 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setSnapshot = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSnapshot =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setSnapshot(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setSnapshot(
-    jni$_.JObject? bitmap,
-  ) {
+  AttributionMeasure$Builder setSnapshot(jni$_.JObject? bitmap) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return _setSnapshot(reference.pointer,
-            _id_setSnapshot as jni$_.JMethodIDPtr, _$bitmap.pointer)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+    return _setSnapshot(
+      reference.pointer,
+      _id_setSnapshot as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_setLogo = _class.instanceMethodId(
@@ -129,27 +139,35 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setLogo = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLogo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogo(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setLogo(
-    jni$_.JObject? bitmap,
-  ) {
+  AttributionMeasure$Builder setLogo(jni$_.JObject? bitmap) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return _setLogo(reference.pointer, _id_setLogo as jni$_.JMethodIDPtr,
-            _$bitmap.pointer)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+    return _setLogo(
+      reference.pointer,
+      _id_setLogo as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_setLogoSmall = _class.instanceMethodId(
@@ -157,27 +175,35 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setLogoSmall = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLogoSmall =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogoSmall(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setLogoSmall(
-    jni$_.JObject? bitmap,
-  ) {
+  AttributionMeasure$Builder setLogoSmall(jni$_.JObject? bitmap) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return _setLogoSmall(reference.pointer,
-            _id_setLogoSmall as jni$_.JMethodIDPtr, _$bitmap.pointer)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+    return _setLogoSmall(
+      reference.pointer,
+      _id_setLogoSmall as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_setTextView = _class.instanceMethodId(
@@ -185,27 +211,35 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(Landroid/widget/TextView;)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setTextView = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTextView =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setTextView(android.widget.TextView textView)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setTextView(
-    jni$_.JObject? textView,
-  ) {
+  AttributionMeasure$Builder setTextView(jni$_.JObject? textView) {
     final _$textView = textView?.reference ?? jni$_.jNullReference;
-    return _setTextView(reference.pointer,
-            _id_setTextView as jni$_.JMethodIDPtr, _$textView.pointer)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+    return _setTextView(
+      reference.pointer,
+      _id_setTextView as jni$_.JMethodIDPtr,
+      _$textView.pointer,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_setTextViewShort = _class.instanceMethodId(
@@ -213,27 +247,35 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(Landroid/widget/TextView;)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setTextViewShort = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTextViewShort =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setTextViewShort(android.widget.TextView textView)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setTextViewShort(
-    jni$_.JObject? textView,
-  ) {
+  AttributionMeasure$Builder setTextViewShort(jni$_.JObject? textView) {
     final _$textView = textView?.reference ?? jni$_.jNullReference;
-    return _setTextViewShort(reference.pointer,
-            _id_setTextViewShort as jni$_.JMethodIDPtr, _$textView.pointer)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+    return _setTextViewShort(
+      reference.pointer,
+      _id_setTextViewShort as jni$_.JMethodIDPtr,
+      _$textView.pointer,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_setMarginPadding = _class.instanceMethodId(
@@ -241,26 +283,34 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'(F)Lorg/maplibre/android/attribution/AttributionMeasure$Builder;',
   );
 
-  static final _setMarginPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMarginPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_
-                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setMarginPadding(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setMarginPadding(
-    double f,
-  ) {
+  AttributionMeasure$Builder setMarginPadding(double f) {
     return _setMarginPadding(
-            reference.pointer, _id_setMarginPadding as jni$_.JMethodIDPtr, f)
-        .object<AttributionMeasure$Builder>(
-            const $AttributionMeasure$Builder$Type());
+      reference.pointer,
+      _id_setMarginPadding as jni$_.JMethodIDPtr,
+      f,
+    ).object<AttributionMeasure$Builder>(
+      const $AttributionMeasure$Builder$Type(),
+    );
   }
 
   static final _id_build = _class.instanceMethodId(
@@ -268,23 +318,29 @@ class AttributionMeasure$Builder extends jni$_.JObject {
     r'()Lorg/maplibre/android/attribution/AttributionMeasure;',
   );
 
-  static final _build = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _build =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure build()`
   /// The returned object must be released after use, by calling the [release] method.
   AttributionMeasure build() {
-    return _build(reference.pointer, _id_build as jni$_.JMethodIDPtr)
-        .object<AttributionMeasure>(const $AttributionMeasure$Type());
+    return _build(
+      reference.pointer,
+      _id_build as jni$_.JMethodIDPtr,
+    ).object<AttributionMeasure>(const $AttributionMeasure$Type());
   }
 }
 
@@ -303,9 +359,7 @@ final class $AttributionMeasure$Builder$NullableType
   AttributionMeasure$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : AttributionMeasure$Builder.fromReference(
-              reference,
-            );
+          : AttributionMeasure$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -341,9 +395,7 @@ final class $AttributionMeasure$Builder$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure$Builder fromReference(jni$_.JReference reference) =>
-      AttributionMeasure$Builder.fromReference(
-        reference,
-      );
+      AttributionMeasure$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -374,13 +426,13 @@ class AttributionMeasure$Command extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure$Command> $type;
 
   @jni$_.internal
-  AttributionMeasure$Command.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  AttributionMeasure$Command.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/attribution/AttributionMeasure$Command');
+    r'org/maplibre/android/attribution/AttributionMeasure$Command',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionMeasure$Command$NullableType();
@@ -390,16 +442,23 @@ class AttributionMeasure$Command extends jni$_.JObject {
     r'(Lorg/maplibre/android/attribution/AttributionMeasure;)Lorg/maplibre/android/attribution/AttributionLayout;',
   );
 
-  static final _execute = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _execute =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract org.maplibre.android.attribution.AttributionLayout execute(org.maplibre.android.attribution.AttributionMeasure attributionMeasure)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -408,10 +467,13 @@ class AttributionMeasure$Command extends jni$_.JObject {
   ) {
     final _$attributionMeasure =
         attributionMeasure?.reference ?? jni$_.jNullReference;
-    return _execute(reference.pointer, _id_execute as jni$_.JMethodIDPtr,
-            _$attributionMeasure.pointer)
-        .object<attributionlayout$_.AttributionLayout?>(
-            const attributionlayout$_.$AttributionLayout$NullableType());
+    return _execute(
+      reference.pointer,
+      _id_execute as jni$_.JMethodIDPtr,
+      _$attributionMeasure.pointer,
+    ).object<attributionlayout$_.AttributionLayout?>(
+      const attributionlayout$_.$AttributionLayout$NullableType(),
+    );
   }
 
   /// Maps a specific port to the implemented interface.
@@ -423,19 +485,16 @@ class AttributionMeasure$Command extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -491,35 +550,39 @@ class AttributionMeasure$Command extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return AttributionMeasure$Command.fromReference(
-      $i.implementReference(),
-    );
+    return AttributionMeasure$Command.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $AttributionMeasure$Command {
   factory $AttributionMeasure$Command({
     required attributionlayout$_.AttributionLayout? Function(
-            AttributionMeasure? attributionMeasure)
-        execute,
+      AttributionMeasure? attributionMeasure,
+    )
+    execute,
   }) = _$AttributionMeasure$Command;
 
   attributionlayout$_.AttributionLayout? execute(
-      AttributionMeasure? attributionMeasure);
+    AttributionMeasure? attributionMeasure,
+  );
 }
 
 final class _$AttributionMeasure$Command with $AttributionMeasure$Command {
   _$AttributionMeasure$Command({
     required attributionlayout$_.AttributionLayout? Function(
-            AttributionMeasure? attributionMeasure)
-        execute,
+      AttributionMeasure? attributionMeasure,
+    )
+    execute,
   }) : _execute = execute;
 
   final attributionlayout$_.AttributionLayout? Function(
-      AttributionMeasure? attributionMeasure) _execute;
+    AttributionMeasure? attributionMeasure,
+  )
+  _execute;
 
   attributionlayout$_.AttributionLayout? execute(
-      AttributionMeasure? attributionMeasure) {
+    AttributionMeasure? attributionMeasure,
+  ) {
     return _execute(attributionMeasure);
   }
 }
@@ -539,9 +602,7 @@ final class $AttributionMeasure$Command$NullableType
   AttributionMeasure$Command? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : AttributionMeasure$Command.fromReference(
-              reference,
-            );
+          : AttributionMeasure$Command.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -577,9 +638,7 @@ final class $AttributionMeasure$Command$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure$Command fromReference(jni$_.JReference reference) =>
-      AttributionMeasure$Command.fromReference(
-        reference,
-      );
+      AttributionMeasure$Command.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -610,13 +669,13 @@ class AttributionMeasure extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure> $type;
 
   @jni$_.internal
-  AttributionMeasure.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  AttributionMeasure.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/attribution/AttributionMeasure');
+    r'org/maplibre/android/attribution/AttributionMeasure',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionMeasure$NullableType();
@@ -626,24 +685,31 @@ class AttributionMeasure extends jni$_.JObject {
     r'()Lorg/maplibre/android/attribution/AttributionLayout;',
   );
 
-  static final _measure = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _measure =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.attribution.AttributionLayout measure()`
   /// The returned object must be released after use, by calling the [release] method.
   attributionlayout$_.AttributionLayout? measure() {
-    return _measure(reference.pointer, _id_measure as jni$_.JMethodIDPtr)
-        .object<attributionlayout$_.AttributionLayout?>(
-            const attributionlayout$_.$AttributionLayout$NullableType());
+    return _measure(
+      reference.pointer,
+      _id_measure as jni$_.JMethodIDPtr,
+    ).object<attributionlayout$_.AttributionLayout?>(
+      const attributionlayout$_.$AttributionLayout$NullableType(),
+    );
   }
 
   static final _id_getTextView = _class.instanceMethodId(
@@ -651,24 +717,29 @@ class AttributionMeasure extends jni$_.JObject {
     r'()Landroid/widget/TextView;',
   );
 
-  static final _getTextView = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextView =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.widget.TextView getTextView()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getTextView() {
     return _getTextView(
-            reference.pointer, _id_getTextView as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      reference.pointer,
+      _id_getTextView as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 }
 
@@ -685,11 +756,7 @@ final class $AttributionMeasure$NullableType
   @jni$_.internal
   @core$_.override
   AttributionMeasure? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : AttributionMeasure.fromReference(
-              reference,
-            );
+      reference.isNull ? null : AttributionMeasure.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -725,9 +792,7 @@ final class $AttributionMeasure$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure fromReference(jni$_.JReference reference) =>
-      AttributionMeasure.fromReference(
-        reference,
-      );
+      AttributionMeasure.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

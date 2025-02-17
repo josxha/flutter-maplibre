@@ -59,155 +59,173 @@ class MathUtils extends jni$_.JObject {
   final jni$_.JObjType<MathUtils> $type;
 
   @jni$_.internal
-  MathUtils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MathUtils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/MathUtils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/MathUtils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MathUtils$NullableType();
   static const type = $MathUtils$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory MathUtils() {
     return MathUtils.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
-  static final _id_clamp = _class.staticMethodId(
-    r'clamp',
-    r'(DDD)D',
-  );
+  static final _id_clamp = _class.staticMethodId(r'clamp', r'(DDD)D');
 
-  static final _clamp = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _clamp =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallStaticDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public double clamp(double d, double d1, double d2)`
-  static double clamp(
-    double d,
-    double d1,
-    double d2,
-  ) {
-    return _clamp(_class.reference.pointer, _id_clamp as jni$_.JMethodIDPtr, d,
-            d1, d2)
-        .doubleFloat;
+  static double clamp(double d, double d1, double d2) {
+    return _clamp(
+      _class.reference.pointer,
+      _id_clamp as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+    ).doubleFloat;
   }
 
-  static final _id_clamp$1 = _class.staticMethodId(
-    r'clamp',
-    r'(FFF)F',
-  );
+  static final _id_clamp$1 = _class.staticMethodId(r'clamp', r'(FFF)F');
 
-  static final _clamp$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _clamp$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallStaticFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public float clamp(float f, float f1, float f2)`
-  static double clamp$1(
-    double f,
-    double f1,
-    double f2,
-  ) {
-    return _clamp$1(_class.reference.pointer, _id_clamp$1 as jni$_.JMethodIDPtr,
-            f, f1, f2)
-        .float;
+  static double clamp$1(double f, double f1, double f2) {
+    return _clamp$1(
+      _class.reference.pointer,
+      _id_clamp$1 as jni$_.JMethodIDPtr,
+      f,
+      f1,
+      f2,
+    ).float;
   }
 
-  static final _id_wrap = _class.staticMethodId(
-    r'wrap',
-    r'(DDD)D',
-  );
+  static final _id_wrap = _class.staticMethodId(r'wrap', r'(DDD)D');
 
-  static final _wrap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _wrap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallStaticDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public double wrap(double d, double d1, double d2)`
-  static double wrap(
-    double d,
-    double d1,
-    double d2,
-  ) {
+  static double wrap(double d, double d1, double d2) {
     return _wrap(
-            _class.reference.pointer, _id_wrap as jni$_.JMethodIDPtr, d, d1, d2)
-        .doubleFloat;
+      _class.reference.pointer,
+      _id_wrap as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+    ).doubleFloat;
   }
 
-  static final _id_normalize = _class.staticMethodId(
-    r'normalize',
-    r'(DDDDD)D',
-  );
+  static final _id_normalize = _class.staticMethodId(r'normalize', r'(DDDDD)D');
 
-  static final _normalize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _normalize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public double normalize(double d, double d1, double d2, double d3, double d4)`
   static double normalize(
@@ -217,9 +235,15 @@ class MathUtils extends jni$_.JObject {
     double d3,
     double d4,
   ) {
-    return _normalize(_class.reference.pointer,
-            _id_normalize as jni$_.JMethodIDPtr, d, d1, d2, d3, d4)
-        .doubleFloat;
+    return _normalize(
+      _class.reference.pointer,
+      _id_normalize as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+      d4,
+    ).doubleFloat;
   }
 }
 
@@ -233,11 +257,8 @@ final class $MathUtils$NullableType extends jni$_.JObjType<MathUtils?> {
 
   @jni$_.internal
   @core$_.override
-  MathUtils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : MathUtils.fromReference(
-          reference,
-        );
+  MathUtils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : MathUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -271,9 +292,7 @@ final class $MathUtils$Type extends jni$_.JObjType<MathUtils> {
   @jni$_.internal
   @core$_.override
   MathUtils fromReference(jni$_.JReference reference) =>
-      MathUtils.fromReference(
-        reference,
-      );
+      MathUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

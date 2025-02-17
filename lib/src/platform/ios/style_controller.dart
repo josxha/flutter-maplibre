@@ -28,66 +28,68 @@ class StyleControllerIos implements StyleController {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        ffiStyleLayer = MLNBackgroundStyleLayer.new1()
-          ..initWithIdentifier_(layer.id.toNSString())
-          ..backgroundColor = NSExpression.expressionWithFormat_(
-            layer.color.toHexString(alpha: false).toNSString(),
-          );
+        ffiStyleLayer =
+            MLNBackgroundStyleLayer.new1()
+              ..initWithIdentifier_(layer.id.toNSString())
+              ..backgroundColor = NSExpression.expressionWithFormat_(
+                layer.color.toHexString(alpha: false).toNSString(),
+              );
       case StyleLayerWithSource():
-        final ffiSource =
-            _ffiStyle.sourceWithIdentifier_(layer.sourceId.toNSString());
+        final ffiSource = _ffiStyle.sourceWithIdentifier_(
+          layer.sourceId.toNSString(),
+        );
         if (ffiSource == null) {
           throw Exception('Source "${layer.sourceId}" does not exist.');
         }
         switch (layer) {
           case FillStyleLayer():
-            ffiStyleLayer = MLNFillStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNFillStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case CircleStyleLayer():
-            ffiStyleLayer = MLNCircleStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNCircleStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case FillExtrusionStyleLayer():
-            ffiStyleLayer = MLNFillExtrusionStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNFillExtrusionStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case HeatmapStyleLayer():
-            ffiStyleLayer = MLNHeatmapStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNHeatmapStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case HillshadeStyleLayer():
-            ffiStyleLayer = MLNHillshadeStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNHillshadeStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case LineStyleLayer():
-            ffiStyleLayer = MLNLineStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNLineStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case RasterStyleLayer():
-            ffiStyleLayer = MLNRasterStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNRasterStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
           case SymbolStyleLayer():
-            ffiStyleLayer = MLNSymbolStyleLayer.new1()
-              ..initWithIdentifier_source_(
-                layer.id.toNSString(),
-                ffiSource,
-              );
+            ffiStyleLayer =
+                MLNSymbolStyleLayer.new1()..initWithIdentifier_source_(
+                  layer.id.toNSString(),
+                  ffiSource,
+                );
         }
     }
 
@@ -188,13 +190,15 @@ class StyleControllerIos implements StyleController {
           );
         }
       case ImageSource():
-        final coordinates = Struct.create<MLNCoordinateQuad>()
-          ..bottomLeft =
-              source.coordinates.bottomLeft.toCLLocationCoordinate2D()
-          ..bottomRight =
-              source.coordinates.bottomRight.toCLLocationCoordinate2D()
-          ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
-          ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
+        final coordinates =
+            Struct.create<MLNCoordinateQuad>()
+              ..bottomLeft =
+                  source.coordinates.bottomLeft.toCLLocationCoordinate2D()
+              ..bottomRight =
+                  source.coordinates.bottomRight.toCLLocationCoordinate2D()
+              ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
+              ..topRight =
+                  source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new1();
         imageSource.initWithIdentifier_coordinateQuad_URL_(
           source.id.toNSString(),
@@ -215,29 +219,7 @@ class StyleControllerIos implements StyleController {
   Future<void> dispose() async {}
 
   @override
-  Future<List<String>> getAttributions() async {
-    final attributions = <String>[];
-    /*final sources = NSArray.arrayWithObject_(_ffiStyle.sources);
-    print(sources.count);
-    for (var i = 0; i < sources.count; i++) {
-      final source = MLNSource.castFrom(sources.objectAtIndex_(i));
-      print(source.debugDescription1);
-      print(source.runtimeType);
-      final tileSource = MLNVectorTileSource.castFrom(source);
-      print(tileSource.debugDescription1);
-      print(tileSource.runtimeType);
-      // TODO fix app crash when accessing attributionInfos:
-      final attrInfos = tileSource.attributionInfos;
-      print(attrInfos.debugDescription1);
-      for (var j = 0; j < attrInfos.count; j++) {
-        print(j);
-        final attribution = tileSource.attributionInfos.objectAtIndex_(j);
-        final attributionString = NSString.castFrom(attribution).toString();
-        attributions.add('attributionString: $attributionString');
-       }
-    }*/
-    return attributions;
-  }
+  Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
   Future<void> removeImage(String id) async {
@@ -283,5 +265,24 @@ class StyleControllerIos implements StyleController {
   @override
   void setProjection(MapProjection projection) {
     // no implementation needed, globe is not supported on web.
+  }
+
+  @override
+  List<String> getAttributionsSync() {
+    final attributions = <String>[];
+    final sources = _ffiStyle.sources.allObjects;
+    for (var i = 0; i < sources.count; i++) {
+      final source = sources.objectAtIndex_(i);
+      if (!MLNTileSource.isInstance(source)) continue;
+      final tileSource = MLNTileSource.castFrom(source);
+      final attrInfos = tileSource.attributionInfos;
+      for (var j = 0; j < attrInfos.count; j++) {
+        final attr = MLNAttributionInfo.castFrom(attrInfos.objectAtIndex_(j));
+        attributions.add(
+          '<a href="${attr.URL?.absoluteString?.toDartString()}">${attr.title.string.toDartString()}</a>',
+        );
+      }
+    }
+    return attributions;
   }
 }

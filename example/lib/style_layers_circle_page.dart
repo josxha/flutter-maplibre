@@ -59,7 +59,7 @@ const _circleStyleLayer = CircleStyleLayer(
         1,
         6,
         50,
-      ]
+      ],
     ],
     // Color circle by earthquake magnitude
     'circle-color': [

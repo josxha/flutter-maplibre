@@ -37,8 +37,9 @@ void main() {
 
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
-      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
-          .called(1);
+      verify(
+        () => style.addLayer(any(that: isA<CircleStyleLayer>())),
+      ).called(1);
       verifyNoMoreInteractions(style);
 
       manager.updateLayers([layer1]);

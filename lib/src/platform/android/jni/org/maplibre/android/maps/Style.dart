@@ -75,13 +75,13 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder$ImageWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$ImageWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder$ImageWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/Style$Builder$ImageWrapper');
+    r'org/maplibre/android/maps/Style$Builder$ImageWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$ImageWrapper$NullableType();
@@ -90,24 +90,31 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Z)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -118,35 +125,42 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return Style$Builder$ImageWrapper.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0)
-        .reference);
+    return Style$Builder$ImageWrapper.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$bitmap.pointer,
+        z ? 1 : 0,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -154,7 +168,9 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -171,16 +187,18 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     final _$list = list?.reference ?? jni$_.jNullReference;
     final _$list1 = list1?.reference ?? jni$_.jNullReference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
-    return Style$Builder$ImageWrapper.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .reference);
+    return Style$Builder$ImageWrapper.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$bitmap.pointer,
+        z ? 1 : 0,
+        _$list.pointer,
+        _$list1.pointer,
+        _$imageContent.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getBitmap = _class.instanceMethodId(
@@ -188,23 +206,29 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getBitmap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBitmap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.graphics.Bitmap getBitmap()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getBitmap() {
-    return _getBitmap(reference.pointer, _id_getBitmap as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getBitmap(
+      reference.pointer,
+      _id_getBitmap as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getId = _class.instanceMethodId(
@@ -212,41 +236,48 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getId() {
-    return _getId(reference.pointer, _id_getId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getId(
+      reference.pointer,
+      _id_getId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_isSdf = _class.instanceMethodId(
-    r'isSdf',
-    r'()Z',
-  );
+  static final _id_isSdf = _class.instanceMethodId(r'isSdf', r'()Z');
 
-  static final _isSdf = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isSdf =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isSdf()`
   bool isSdf() {
@@ -258,26 +289,33 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getStretchX = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStretchX =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getStretchX()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<imagestretches$_.ImageStretches?>? getStretchX() {
     return _getStretchX(
-            reference.pointer, _id_getStretchX as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<imagestretches$_.ImageStretches?>?>(
-            const jni$_.JListNullableType<imagestretches$_.ImageStretches?>(
-                imagestretches$_.$ImageStretches$NullableType()));
+      reference.pointer,
+      _id_getStretchX as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<imagestretches$_.ImageStretches?>?>(
+      const jni$_.JListNullableType<imagestretches$_.ImageStretches?>(
+        imagestretches$_.$ImageStretches$NullableType(),
+      ),
+    );
   }
 
   static final _id_getStretchY = _class.instanceMethodId(
@@ -285,26 +323,33 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getStretchY = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getStretchY =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getStretchY()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<imagestretches$_.ImageStretches?>? getStretchY() {
     return _getStretchY(
-            reference.pointer, _id_getStretchY as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<imagestretches$_.ImageStretches?>?>(
-            const jni$_.JListNullableType<imagestretches$_.ImageStretches?>(
-                imagestretches$_.$ImageStretches$NullableType()));
+      reference.pointer,
+      _id_getStretchY as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<imagestretches$_.ImageStretches?>?>(
+      const jni$_.JListNullableType<imagestretches$_.ImageStretches?>(
+        imagestretches$_.$ImageStretches$NullableType(),
+      ),
+    );
   }
 
   static final _id_getContent = _class.instanceMethodId(
@@ -312,24 +357,31 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/ImageContent;',
   );
 
-  static final _getContent = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getContent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.ImageContent getContent()`
   /// The returned object must be released after use, by calling the [release] method.
   imagecontent$_.ImageContent? getContent() {
-    return _getContent(reference.pointer, _id_getContent as jni$_.JMethodIDPtr)
-        .object<imagecontent$_.ImageContent?>(
-            const imagecontent$_.$ImageContent$NullableType());
+    return _getContent(
+      reference.pointer,
+      _id_getContent as jni$_.JMethodIDPtr,
+    ).object<imagecontent$_.ImageContent?>(
+      const imagecontent$_.$ImageContent$NullableType(),
+    );
   }
 
   static final _id_convertToImageArray = _class.staticMethodId(
@@ -337,17 +389,24 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'(Ljava/util/HashMap;Z)[Lorg/maplibre/android/maps/Style$Builder$ImageWrapper;',
   );
 
-  static final _convertToImageArray = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _convertToImageArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `static public java.lang.Object[] convertToImageArray(java.util.HashMap hashMap, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -357,13 +416,15 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   ) {
     final _$hashMap = hashMap?.reference ?? jni$_.jNullReference;
     return _convertToImageArray(
-            _class.reference.pointer,
-            _id_convertToImageArray as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            z ? 1 : 0)
-        .object<jni$_.JArray<Style$Builder$ImageWrapper?>?>(
-            const jni$_.JArrayNullableType<Style$Builder$ImageWrapper?>(
-                $Style$Builder$ImageWrapper$NullableType()));
+      _class.reference.pointer,
+      _id_convertToImageArray as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+    ).object<jni$_.JArray<Style$Builder$ImageWrapper?>?>(
+      const jni$_.JArrayNullableType<Style$Builder$ImageWrapper?>(
+        $Style$Builder$ImageWrapper$NullableType(),
+      ),
+    );
   }
 
   static final _id_convertToImageArray$1 = _class.staticMethodId(
@@ -371,28 +432,35 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     r'(Ljava/util/HashMap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)[Lorg/maplibre/android/maps/Style$Builder$ImageWrapper;',
   );
 
-  static final _convertToImageArray$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _convertToImageArray$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public java.lang.Object[] convertToImageArray(java.util.HashMap hashMap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -408,16 +476,18 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     final _$list1 = list1?.reference ?? jni$_.jNullReference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     return _convertToImageArray$1(
-            _class.reference.pointer,
-            _id_convertToImageArray$1 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .object<jni$_.JArray<Style$Builder$ImageWrapper?>?>(
-            const jni$_.JArrayNullableType<Style$Builder$ImageWrapper?>(
-                $Style$Builder$ImageWrapper$NullableType()));
+      _class.reference.pointer,
+      _id_convertToImageArray$1 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).object<jni$_.JArray<Style$Builder$ImageWrapper?>?>(
+      const jni$_.JArrayNullableType<Style$Builder$ImageWrapper?>(
+        $Style$Builder$ImageWrapper$NullableType(),
+      ),
+    );
   }
 }
 
@@ -436,9 +506,7 @@ final class $Style$Builder$ImageWrapper$NullableType
   Style$Builder$ImageWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Style$Builder$ImageWrapper.fromReference(
-              reference,
-            );
+          : Style$Builder$ImageWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -474,9 +542,7 @@ final class $Style$Builder$ImageWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$ImageWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$ImageWrapper.fromReference(
-        reference,
-      );
+      Style$Builder$ImageWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -507,13 +573,13 @@ class Style$Builder$LayerAboveWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerAboveWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerAboveWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder$LayerAboveWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/Style$Builder$LayerAboveWrapper');
+    r'org/maplibre/android/maps/Style$Builder$LayerAboveWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$LayerAboveWrapper$NullableType();
@@ -523,24 +589,29 @@ class Style$Builder$LayerAboveWrapper extends Style$Builder$LayerWrapper {
     r'()Ljava/lang/String;',
   );
 
-  static final _getAboveLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getAboveLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getAboveLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getAboveLayer() {
     return _getAboveLayer(
-            reference.pointer, _id_getAboveLayer as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getAboveLayer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -559,9 +630,7 @@ final class $Style$Builder$LayerAboveWrapper$NullableType
   Style$Builder$LayerAboveWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Style$Builder$LayerAboveWrapper.fromReference(
-              reference,
-            );
+          : Style$Builder$LayerAboveWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -599,9 +668,7 @@ final class $Style$Builder$LayerAboveWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerAboveWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerAboveWrapper.fromReference(
-        reference,
-      );
+      Style$Builder$LayerAboveWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -633,38 +700,41 @@ class Style$Builder$LayerAtWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerAtWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerAtWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder$LayerAtWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/Style$Builder$LayerAtWrapper');
+    r'org/maplibre/android/maps/Style$Builder$LayerAtWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$LayerAtWrapper$NullableType();
   static const type = $Style$Builder$LayerAtWrapper$Type();
-  static final _id_getIndex = _class.instanceMethodId(
-    r'getIndex',
-    r'()I',
-  );
+  static final _id_getIndex = _class.instanceMethodId(r'getIndex', r'()I');
 
-  static final _getIndex = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIndex =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getIndex()`
   int getIndex() {
-    return _getIndex(reference.pointer, _id_getIndex as jni$_.JMethodIDPtr)
-        .integer;
+    return _getIndex(
+      reference.pointer,
+      _id_getIndex as jni$_.JMethodIDPtr,
+    ).integer;
   }
 }
 
@@ -683,9 +753,7 @@ final class $Style$Builder$LayerAtWrapper$NullableType
   Style$Builder$LayerAtWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Style$Builder$LayerAtWrapper.fromReference(
-              reference,
-            );
+          : Style$Builder$LayerAtWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -722,9 +790,7 @@ final class $Style$Builder$LayerAtWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerAtWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerAtWrapper.fromReference(
-        reference,
-      );
+      Style$Builder$LayerAtWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -756,13 +822,13 @@ class Style$Builder$LayerBelowWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerBelowWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerBelowWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder$LayerBelowWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/Style$Builder$LayerBelowWrapper');
+    r'org/maplibre/android/maps/Style$Builder$LayerBelowWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$LayerBelowWrapper$NullableType();
@@ -772,24 +838,29 @@ class Style$Builder$LayerBelowWrapper extends Style$Builder$LayerWrapper {
     r'()Ljava/lang/String;',
   );
 
-  static final _getBelowLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBelowLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getBelowLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getBelowLayer() {
     return _getBelowLayer(
-            reference.pointer, _id_getBelowLayer as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      reference.pointer,
+      _id_getBelowLayer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -808,9 +879,7 @@ final class $Style$Builder$LayerBelowWrapper$NullableType
   Style$Builder$LayerBelowWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Style$Builder$LayerBelowWrapper.fromReference(
-              reference,
-            );
+          : Style$Builder$LayerBelowWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -848,9 +917,7 @@ final class $Style$Builder$LayerBelowWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerBelowWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerBelowWrapper.fromReference(
-        reference,
-      );
+      Style$Builder$LayerBelowWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -882,13 +949,13 @@ class Style$Builder$LayerWrapper extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder$LayerWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerWrapper.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder$LayerWrapper.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/Style$Builder$LayerWrapper');
+    r'org/maplibre/android/maps/Style$Builder$LayerWrapper',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$LayerWrapper$NullableType();
@@ -898,23 +965,29 @@ class Style$Builder$LayerWrapper extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/Layer;',
   );
 
-  static final _getLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.Layer getLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   layer$_.Layer? getLayer() {
-    return _getLayer(reference.pointer, _id_getLayer as jni$_.JMethodIDPtr)
-        .object<layer$_.Layer?>(const layer$_.$Layer$NullableType());
+    return _getLayer(
+      reference.pointer,
+      _id_getLayer as jni$_.JMethodIDPtr,
+    ).object<layer$_.Layer?>(const layer$_.$Layer$NullableType());
   }
 }
 
@@ -933,9 +1006,7 @@ final class $Style$Builder$LayerWrapper$NullableType
   Style$Builder$LayerWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Style$Builder$LayerWrapper.fromReference(
-              reference,
-            );
+          : Style$Builder$LayerWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -971,9 +1042,7 @@ final class $Style$Builder$LayerWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerWrapper.fromReference(
-        reference,
-      );
+      Style$Builder$LayerWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1004,39 +1073,41 @@ class Style$Builder extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder> $type;
 
   @jni$_.internal
-  Style$Builder.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$Builder.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/Style$Builder');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/Style$Builder',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$NullableType();
   static const type = $Style$Builder$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory Style$Builder() {
     return Style$Builder.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_fromUrl = _class.instanceMethodId(
@@ -1044,26 +1115,33 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _fromUrl = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _fromUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromUrl(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromUrl(
-    jni$_.JString string,
-  ) {
+  Style$Builder fromUrl(jni$_.JString string) {
     final _$string = string.reference;
-    return _fromUrl(reference.pointer, _id_fromUrl as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _fromUrl(
+      reference.pointer,
+      _id_fromUrl as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_fromUri = _class.instanceMethodId(
@@ -1071,26 +1149,33 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _fromUri = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _fromUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromUri(
-    jni$_.JString string,
-  ) {
+  Style$Builder fromUri(jni$_.JString string) {
     final _$string = string.reference;
-    return _fromUri(reference.pointer, _id_fromUri as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _fromUri(
+      reference.pointer,
+      _id_fromUri as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_fromJson = _class.instanceMethodId(
@@ -1098,26 +1183,33 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _fromJson = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _fromJson =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromJson(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromJson(
-    jni$_.JString string,
-  ) {
+  Style$Builder fromJson(jni$_.JString string) {
     final _$string = string.reference;
-    return _fromJson(reference.pointer, _id_fromJson as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _fromJson(
+      reference.pointer,
+      _id_fromJson as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withSource = _class.instanceMethodId(
@@ -1125,26 +1217,33 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/sources/Source;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withSource = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSource =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withSource(org.maplibre.android.style.sources.Source source)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withSource(
-    source$_.Source source,
-  ) {
+  Style$Builder withSource(source$_.Source source) {
     final _$source = source.reference;
-    return _withSource(reference.pointer, _id_withSource as jni$_.JMethodIDPtr,
-            _$source.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withSource(
+      reference.pointer,
+      _id_withSource as jni$_.JMethodIDPtr,
+      _$source.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withSources = _class.instanceMethodId(
@@ -1152,26 +1251,33 @@ class Style$Builder extends jni$_.JObject {
     r'([Lorg/maplibre/android/style/sources/Source;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withSources = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSources =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withSources(org.maplibre.android.style.sources.Source[] sources)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withSources(
-    jni$_.JArray<source$_.Source?> sources,
-  ) {
+  Style$Builder withSources(jni$_.JArray<source$_.Source?> sources) {
     final _$sources = sources.reference;
-    return _withSources(reference.pointer,
-            _id_withSources as jni$_.JMethodIDPtr, _$sources.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withSources(
+      reference.pointer,
+      _id_withSources as jni$_.JMethodIDPtr,
+      _$sources.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withLayer = _class.instanceMethodId(
@@ -1179,26 +1285,33 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayer(org.maplibre.android.style.layers.Layer layer)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayer(
-    layer$_.Layer layer,
-  ) {
+  Style$Builder withLayer(layer$_.Layer layer) {
     final _$layer = layer.reference;
-    return _withLayer(reference.pointer, _id_withLayer as jni$_.JMethodIDPtr,
-            _$layer.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withLayer(
+      reference.pointer,
+      _id_withLayer as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withLayers = _class.instanceMethodId(
@@ -1206,26 +1319,33 @@ class Style$Builder extends jni$_.JObject {
     r'([Lorg/maplibre/android/style/layers/Layer;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withLayers = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withLayers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayers(org.maplibre.android.style.layers.Layer[] layers)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayers(
-    jni$_.JArray<layer$_.Layer?> layers,
-  ) {
+  Style$Builder withLayers(jni$_.JArray<layer$_.Layer?> layers) {
     final _$layers = layers.reference;
-    return _withLayers(reference.pointer, _id_withLayers as jni$_.JMethodIDPtr,
-            _$layers.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withLayers(
+      reference.pointer,
+      _id_withLayers as jni$_.JMethodIDPtr,
+      _$layers.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withLayerAt = _class.instanceMethodId(
@@ -1233,28 +1353,35 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;I)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withLayerAt = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _withLayerAt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerAt(org.maplibre.android.style.layers.Layer layer, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerAt(
-    layer$_.Layer layer,
-    int i,
-  ) {
+  Style$Builder withLayerAt(layer$_.Layer layer, int i) {
     final _$layer = layer.reference;
-    return _withLayerAt(reference.pointer,
-            _id_withLayerAt as jni$_.JMethodIDPtr, _$layer.pointer, i)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withLayerAt(
+      reference.pointer,
+      _id_withLayerAt as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      i,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withLayerAbove = _class.instanceMethodId(
@@ -1262,37 +1389,38 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;Ljava/lang/String;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withLayerAbove = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withLayerAbove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerAbove(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerAbove(
-    layer$_.Layer layer,
-    jni$_.JString string,
-  ) {
+  Style$Builder withLayerAbove(layer$_.Layer layer, jni$_.JString string) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     return _withLayerAbove(
-            reference.pointer,
-            _id_withLayerAbove as jni$_.JMethodIDPtr,
-            _$layer.pointer,
-            _$string.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withLayerAbove as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      _$string.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withLayerBelow = _class.instanceMethodId(
@@ -1300,37 +1428,38 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;Ljava/lang/String;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withLayerBelow = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withLayerBelow =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerBelow(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerBelow(
-    layer$_.Layer layer,
-    jni$_.JString string,
-  ) {
+  Style$Builder withLayerBelow(layer$_.Layer layer, jni$_.JString string) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     return _withLayerBelow(
-            reference.pointer,
-            _id_withLayerBelow as jni$_.JMethodIDPtr,
-            _$layer.pointer,
-            _$string.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withLayerBelow as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      _$string.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withTransition = _class.instanceMethodId(
@@ -1338,16 +1467,23 @@ class Style$Builder extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1356,10 +1492,10 @@ class Style$Builder extends jni$_.JObject {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     return _withTransition(
-            reference.pointer,
-            _id_withTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage = _class.instanceMethodId(
@@ -1367,34 +1503,38 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withImage(
-    jni$_.JString string,
-    jni$_.JObject drawable,
-  ) {
+  Style$Builder withImage(jni$_.JString string, jni$_.JObject drawable) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
-    return _withImage(reference.pointer, _id_withImage as jni$_.JMethodIDPtr,
-            _$string.pointer, _$drawable.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withImage(
+      reference.pointer,
+      _id_withImage as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$1 = _class.instanceMethodId(
@@ -1402,28 +1542,35 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.drawable.Drawable drawable, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1440,14 +1587,14 @@ class Style$Builder extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     return _withImage$1(
-            reference.pointer,
-            _id_withImage$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withDrawableImages = _class.instanceMethodId(
@@ -1455,26 +1602,33 @@ class Style$Builder extends jni$_.JObject {
     r'([Landroid/util/Pair;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withDrawableImages = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withDrawableImages =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withDrawableImages(java.lang.Object[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withDrawableImages(
-    jni$_.JArray<jni$_.JObject?> pairs,
-  ) {
+  Style$Builder withDrawableImages(jni$_.JArray<jni$_.JObject?> pairs) {
     final _$pairs = pairs.reference;
-    return _withDrawableImages(reference.pointer,
-            _id_withDrawableImages as jni$_.JMethodIDPtr, _$pairs.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withDrawableImages(
+      reference.pointer,
+      _id_withDrawableImages as jni$_.JMethodIDPtr,
+      _$pairs.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$2 = _class.instanceMethodId(
@@ -1482,37 +1636,38 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withImage$2(
-    jni$_.JString string,
-    jni$_.JObject bitmap,
-  ) {
+  Style$Builder withImage$2(jni$_.JString string, jni$_.JObject bitmap) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     return _withImage$2(
-            reference.pointer,
-            _id_withImage$2 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$2 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$3 = _class.instanceMethodId(
@@ -1520,28 +1675,35 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.Bitmap bitmap, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1558,14 +1720,14 @@ class Style$Builder extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     return _withImage$3(
-            reference.pointer,
-            _id_withImage$3 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$3 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withBitmapImages = _class.instanceMethodId(
@@ -1573,26 +1735,33 @@ class Style$Builder extends jni$_.JObject {
     r'([Landroid/util/Pair;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withBitmapImages = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withBitmapImages =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withBitmapImages(java.lang.Object[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withBitmapImages(
-    jni$_.JArray<jni$_.JObject?> pairs,
-  ) {
+  Style$Builder withBitmapImages(jni$_.JArray<jni$_.JObject?> pairs) {
     final _$pairs = pairs.reference;
-    return _withBitmapImages(reference.pointer,
-            _id_withBitmapImages as jni$_.JMethodIDPtr, _$pairs.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+    return _withBitmapImages(
+      reference.pointer,
+      _id_withBitmapImages as jni$_.JMethodIDPtr,
+      _$pairs.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$4 = _class.instanceMethodId(
@@ -1600,24 +1769,31 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;Z)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.drawable.Drawable drawable, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1629,12 +1805,12 @@ class Style$Builder extends jni$_.JObject {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
     return _withImage$4(
-            reference.pointer,
-            _id_withImage$4 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer,
-            z ? 1 : 0)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$4 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+      z ? 1 : 0,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$5 = _class.instanceMethodId(
@@ -1642,22 +1818,27 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -1665,7 +1846,9 @@ class Style$Builder extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.drawable.Drawable drawable, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1683,15 +1866,15 @@ class Style$Builder extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     return _withImage$5(
-            reference.pointer,
-            _id_withImage$5 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$5 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withDrawableImages$1 = _class.instanceMethodId(
@@ -1699,17 +1882,24 @@ class Style$Builder extends jni$_.JObject {
     r'(Z[Landroid/util/Pair;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withDrawableImages$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _withDrawableImages$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withDrawableImages(boolean z, java.lang.Object[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1719,11 +1909,11 @@ class Style$Builder extends jni$_.JObject {
   ) {
     final _$pairs = pairs.reference;
     return _withDrawableImages$1(
-            reference.pointer,
-            _id_withDrawableImages$1 as jni$_.JMethodIDPtr,
-            z ? 1 : 0,
-            _$pairs.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withDrawableImages$1 as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+      _$pairs.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$6 = _class.instanceMethodId(
@@ -1731,24 +1921,31 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Z)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$6 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$6 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1760,12 +1957,12 @@ class Style$Builder extends jni$_.JObject {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     return _withImage$6(
-            reference.pointer,
-            _id_withImage$6 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$6 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withImage$7 = _class.instanceMethodId(
@@ -1773,22 +1970,27 @@ class Style$Builder extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withImage$7 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _withImage$7 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -1796,7 +1998,9 @@ class Style$Builder extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1814,15 +2018,15 @@ class Style$Builder extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     return _withImage$7(
-            reference.pointer,
-            _id_withImage$7 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withImage$7 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_withBitmapImages$1 = _class.instanceMethodId(
@@ -1830,31 +2034,35 @@ class Style$Builder extends jni$_.JObject {
     r'(Z[Landroid/util/Pair;)Lorg/maplibre/android/maps/Style$Builder;',
   );
 
-  static final _withBitmapImages$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _withBitmapImages$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.maps.Style$Builder withBitmapImages(boolean z, java.lang.Object[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withBitmapImages$1(
-    bool z,
-    jni$_.JArray<jni$_.JObject?> pairs,
-  ) {
+  Style$Builder withBitmapImages$1(bool z, jni$_.JArray<jni$_.JObject?> pairs) {
     final _$pairs = pairs.reference;
     return _withBitmapImages$1(
-            reference.pointer,
-            _id_withBitmapImages$1 as jni$_.JMethodIDPtr,
-            z ? 1 : 0,
-            _$pairs.pointer)
-        .object<Style$Builder>(const $Style$Builder$Type());
+      reference.pointer,
+      _id_withBitmapImages$1 as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+      _$pairs.pointer,
+    ).object<Style$Builder>(const $Style$Builder$Type());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -1862,23 +2070,29 @@ class Style$Builder extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUri() {
-    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getUri(
+      reference.pointer,
+      _id_getUri as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getJson = _class.instanceMethodId(
@@ -1886,23 +2100,29 @@ class Style$Builder extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getJson = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getJson =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getJson()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getJson() {
-    return _getJson(reference.pointer, _id_getJson as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getJson(
+      reference.pointer,
+      _id_getJson as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getSources = _class.instanceMethodId(
@@ -1910,25 +2130,33 @@ class Style$Builder extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getSources = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSources =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getSources()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<source$_.Source?>? getSources() {
-    return _getSources(reference.pointer, _id_getSources as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<source$_.Source?>?>(
-            const jni$_.JListNullableType<source$_.Source?>(
-                source$_.$Source$NullableType()));
+    return _getSources(
+      reference.pointer,
+      _id_getSources as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<source$_.Source?>?>(
+      const jni$_.JListNullableType<source$_.Source?>(
+        source$_.$Source$NullableType(),
+      ),
+    );
   }
 
   static final _id_getLayers = _class.instanceMethodId(
@@ -1936,25 +2164,33 @@ class Style$Builder extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getLayers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLayers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getLayers()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<Style$Builder$LayerWrapper?>? getLayers() {
-    return _getLayers(reference.pointer, _id_getLayers as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<Style$Builder$LayerWrapper?>?>(
-            const jni$_.JListNullableType<Style$Builder$LayerWrapper?>(
-                $Style$Builder$LayerWrapper$NullableType()));
+    return _getLayers(
+      reference.pointer,
+      _id_getLayers as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<Style$Builder$LayerWrapper?>?>(
+      const jni$_.JListNullableType<Style$Builder$LayerWrapper?>(
+        $Style$Builder$LayerWrapper$NullableType(),
+      ),
+    );
   }
 
   static final _id_getImages = _class.instanceMethodId(
@@ -1962,25 +2198,33 @@ class Style$Builder extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getImages = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getImages =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getImages()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<Style$Builder$ImageWrapper?>? getImages() {
-    return _getImages(reference.pointer, _id_getImages as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<Style$Builder$ImageWrapper?>?>(
-            const jni$_.JListNullableType<Style$Builder$ImageWrapper?>(
-                $Style$Builder$ImageWrapper$NullableType()));
+    return _getImages(
+      reference.pointer,
+      _id_getImages as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<Style$Builder$ImageWrapper?>?>(
+      const jni$_.JListNullableType<Style$Builder$ImageWrapper?>(
+        $Style$Builder$ImageWrapper$NullableType(),
+      ),
+    );
   }
 }
 
@@ -1994,11 +2238,8 @@ final class $Style$Builder$NullableType extends jni$_.JObjType<Style$Builder?> {
 
   @jni$_.internal
   @core$_.override
-  Style$Builder? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Style$Builder.fromReference(
-          reference,
-        );
+  Style$Builder? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Style$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2032,9 +2273,7 @@ final class $Style$Builder$Type extends jni$_.JObjType<Style$Builder> {
   @jni$_.internal
   @core$_.override
   Style$Builder fromReference(jni$_.JReference reference) =>
-      Style$Builder.fromReference(
-        reference,
-      );
+      Style$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2065,13 +2304,13 @@ class Style$OnStyleLoaded extends jni$_.JObject {
   final jni$_.JObjType<Style$OnStyleLoaded> $type;
 
   @jni$_.internal
-  Style$OnStyleLoaded.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style$OnStyleLoaded.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/Style$OnStyleLoaded');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/Style$OnStyleLoaded',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$OnStyleLoaded$NullableType();
@@ -2081,25 +2320,32 @@ class Style$OnStyleLoaded extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/Style;)V',
   );
 
-  static final _onStyleLoaded = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onStyleLoaded =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onStyleLoaded(org.maplibre.android.maps.Style style)`
-  void onStyleLoaded(
-    Style style,
-  ) {
+  void onStyleLoaded(Style style) {
     final _$style = style.reference;
-    _onStyleLoaded(reference.pointer, _id_onStyleLoaded as jni$_.JMethodIDPtr,
-            _$style.pointer)
-        .check();
+    _onStyleLoaded(
+      reference.pointer,
+      _id_onStyleLoaded as jni$_.JMethodIDPtr,
+      _$style.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2111,19 +2357,16 @@ class Style$OnStyleLoaded extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2172,14 +2415,10 @@ class Style$OnStyleLoaded extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Style$OnStyleLoaded.implement(
-    $Style$OnStyleLoaded $impl,
-  ) {
+  factory Style$OnStyleLoaded.implement($Style$OnStyleLoaded $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Style$OnStyleLoaded.fromReference(
-      $i.implementReference(),
-    );
+    return Style$OnStyleLoaded.fromReference($i.implementReference());
   }
 }
 
@@ -2219,11 +2458,7 @@ final class $Style$OnStyleLoaded$NullableType
   @jni$_.internal
   @core$_.override
   Style$OnStyleLoaded? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Style$OnStyleLoaded.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Style$OnStyleLoaded.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2258,9 +2493,7 @@ final class $Style$OnStyleLoaded$Type
   @jni$_.internal
   @core$_.override
   Style$OnStyleLoaded fromReference(jni$_.JReference reference) =>
-      Style$OnStyleLoaded.fromReference(
-        reference,
-      );
+      Style$OnStyleLoaded.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2291,13 +2524,13 @@ class Style extends jni$_.JObject {
   final jni$_.JObjType<Style> $type;
 
   @jni$_.internal
-  Style.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Style.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/Style');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/Style',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$NullableType();
@@ -2307,23 +2540,29 @@ class Style extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getUrl(
+      reference.pointer,
+      _id_getUrl as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -2331,23 +2570,29 @@ class Style extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getUri() {
-    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getUri(
+      reference.pointer,
+      _id_getUri as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getJson = _class.instanceMethodId(
@@ -2355,23 +2600,29 @@ class Style extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getJson = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getJson =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getJson()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getJson() {
-    return _getJson(reference.pointer, _id_getJson as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getJson(
+      reference.pointer,
+      _id_getJson as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getSources = _class.instanceMethodId(
@@ -2379,25 +2630,31 @@ class Style extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getSources = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSources =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getSources()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<source$_.Source?> getSources() {
-    return _getSources(reference.pointer, _id_getSources as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<source$_.Source?>>(
-            const jni$_.JListType<source$_.Source?>(
-                source$_.$Source$NullableType()));
+    return _getSources(
+      reference.pointer,
+      _id_getSources as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<source$_.Source?>>(
+      const jni$_.JListType<source$_.Source?>(source$_.$Source$NullableType()),
+    );
   }
 
   static final _id_addSource = _class.instanceMethodId(
@@ -2405,25 +2662,32 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/sources/Source;)V',
   );
 
-  static final _addSource = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addSource =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addSource(org.maplibre.android.style.sources.Source source)`
-  void addSource(
-    source$_.Source source,
-  ) {
+  void addSource(source$_.Source source) {
     final _$source = source.reference;
-    _addSource(reference.pointer, _id_addSource as jni$_.JMethodIDPtr,
-            _$source.pointer)
-        .check();
+    _addSource(
+      reference.pointer,
+      _id_addSource as jni$_.JMethodIDPtr,
+      _$source.pointer,
+    ).check();
   }
 
   static final _id_getSource = _class.instanceMethodId(
@@ -2431,26 +2695,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/sources/Source;',
   );
 
-  static final _getSource = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getSource =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.sources.Source getSource(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  source$_.Source? getSource(
-    jni$_.JString? string,
-  ) {
+  source$_.Source? getSource(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _getSource(reference.pointer, _id_getSource as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<source$_.Source?>(const source$_.$Source$NullableType());
+    return _getSource(
+      reference.pointer,
+      _id_getSource as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<source$_.Source?>(const source$_.$Source$NullableType());
   }
 
   static final _id_getSourceAs = _class.instanceMethodId(
@@ -2458,16 +2729,23 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/sources/Source;',
   );
 
-  static final _getSourceAs = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getSourceAs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public T getSourceAs(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -2476,9 +2754,11 @@ class Style extends jni$_.JObject {
     required jni$_.JObjType<$T> T,
   }) {
     final _$string = string.reference;
-    return _getSourceAs(reference.pointer,
-            _id_getSourceAs as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<$T?>(T.nullableType);
+    return _getSourceAs(
+      reference.pointer,
+      _id_getSourceAs as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<$T?>(T.nullableType);
   }
 
   static final _id_removeSource = _class.instanceMethodId(
@@ -2486,25 +2766,32 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Z',
   );
 
-  static final _removeSource = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeSource =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean removeSource(java.lang.String string)`
-  bool removeSource(
-    jni$_.JString string,
-  ) {
+  bool removeSource(jni$_.JString string) {
     final _$string = string.reference;
-    return _removeSource(reference.pointer,
-            _id_removeSource as jni$_.JMethodIDPtr, _$string.pointer)
-        .boolean;
+    return _removeSource(
+      reference.pointer,
+      _id_removeSource as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).boolean;
   }
 
   static final _id_removeSource$1 = _class.instanceMethodId(
@@ -2512,25 +2799,32 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/sources/Source;)Z',
   );
 
-  static final _removeSource$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeSource$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean removeSource(org.maplibre.android.style.sources.Source source)`
-  bool removeSource$1(
-    source$_.Source source,
-  ) {
+  bool removeSource$1(source$_.Source source) {
     final _$source = source.reference;
-    return _removeSource$1(reference.pointer,
-            _id_removeSource$1 as jni$_.JMethodIDPtr, _$source.pointer)
-        .boolean;
+    return _removeSource$1(
+      reference.pointer,
+      _id_removeSource$1 as jni$_.JMethodIDPtr,
+      _$source.pointer,
+    ).boolean;
   }
 
   static final _id_addLayer = _class.instanceMethodId(
@@ -2538,25 +2832,32 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;)V',
   );
 
-  static final _addLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addLayer(org.maplibre.android.style.layers.Layer layer)`
-  void addLayer(
-    layer$_.Layer layer,
-  ) {
+  void addLayer(layer$_.Layer layer) {
     final _$layer = layer.reference;
-    _addLayer(reference.pointer, _id_addLayer as jni$_.JMethodIDPtr,
-            _$layer.pointer)
-        .check();
+    _addLayer(
+      reference.pointer,
+      _id_addLayer as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+    ).check();
   }
 
   static final _id_addLayerBelow = _class.instanceMethodId(
@@ -2564,33 +2865,37 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;Ljava/lang/String;)V',
   );
 
-  static final _addLayerBelow = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addLayerBelow =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addLayerBelow(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
-  void addLayerBelow(
-    layer$_.Layer layer,
-    jni$_.JString string,
-  ) {
+  void addLayerBelow(layer$_.Layer layer, jni$_.JString string) {
     final _$layer = layer.reference;
     final _$string = string.reference;
-    _addLayerBelow(reference.pointer, _id_addLayerBelow as jni$_.JMethodIDPtr,
-            _$layer.pointer, _$string.pointer)
-        .check();
+    _addLayerBelow(
+      reference.pointer,
+      _id_addLayerBelow as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_addLayerAbove = _class.instanceMethodId(
@@ -2598,33 +2903,37 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;Ljava/lang/String;)V',
   );
 
-  static final _addLayerAbove = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addLayerAbove =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addLayerAbove(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
-  void addLayerAbove(
-    layer$_.Layer layer,
-    jni$_.JString string,
-  ) {
+  void addLayerAbove(layer$_.Layer layer, jni$_.JString string) {
     final _$layer = layer.reference;
     final _$string = string.reference;
-    _addLayerAbove(reference.pointer, _id_addLayerAbove as jni$_.JMethodIDPtr,
-            _$layer.pointer, _$string.pointer)
-        .check();
+    _addLayerAbove(
+      reference.pointer,
+      _id_addLayerAbove as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_addLayerAt = _class.instanceMethodId(
@@ -2632,27 +2941,34 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;I)V',
   );
 
-  static final _addLayerAt = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _addLayerAt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void addLayerAt(org.maplibre.android.style.layers.Layer layer, int i)`
-  void addLayerAt(
-    layer$_.Layer layer,
-    int i,
-  ) {
+  void addLayerAt(layer$_.Layer layer, int i) {
     final _$layer = layer.reference;
-    _addLayerAt(reference.pointer, _id_addLayerAt as jni$_.JMethodIDPtr,
-            _$layer.pointer, i)
-        .check();
+    _addLayerAt(
+      reference.pointer,
+      _id_addLayerAt as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+      i,
+    ).check();
   }
 
   static final _id_getLayer = _class.instanceMethodId(
@@ -2660,26 +2976,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/Layer;',
   );
 
-  static final _getLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.Layer getLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  layer$_.Layer? getLayer(
-    jni$_.JString string,
-  ) {
+  layer$_.Layer? getLayer(jni$_.JString string) {
     final _$string = string.reference;
-    return _getLayer(reference.pointer, _id_getLayer as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<layer$_.Layer?>(const layer$_.$Layer$NullableType());
+    return _getLayer(
+      reference.pointer,
+      _id_getLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<layer$_.Layer?>(const layer$_.$Layer$NullableType());
   }
 
   static final _id_getLayerAs = _class.instanceMethodId(
@@ -2687,16 +3010,23 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/Layer;',
   );
 
-  static final _getLayerAs = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getLayerAs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public T getLayerAs(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -2705,9 +3035,11 @@ class Style extends jni$_.JObject {
     required jni$_.JObjType<$T> T,
   }) {
     final _$string = string.reference;
-    return _getLayerAs(reference.pointer, _id_getLayerAs as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<$T?>(T.nullableType);
+    return _getLayerAs(
+      reference.pointer,
+      _id_getLayerAs as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<$T?>(T.nullableType);
   }
 
   static final _id_getLayers = _class.instanceMethodId(
@@ -2715,25 +3047,31 @@ class Style extends jni$_.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getLayers = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLayers =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.util.List getLayers()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<layer$_.Layer?> getLayers() {
-    return _getLayers(reference.pointer, _id_getLayers as jni$_.JMethodIDPtr)
-        .object<jni$_.JList<layer$_.Layer?>>(
-            const jni$_.JListType<layer$_.Layer?>(
-                layer$_.$Layer$NullableType()));
+    return _getLayers(
+      reference.pointer,
+      _id_getLayers as jni$_.JMethodIDPtr,
+    ).object<jni$_.JList<layer$_.Layer?>>(
+      const jni$_.JListType<layer$_.Layer?>(layer$_.$Layer$NullableType()),
+    );
   }
 
   static final _id_removeLayer = _class.instanceMethodId(
@@ -2741,25 +3079,32 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Z',
   );
 
-  static final _removeLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean removeLayer(java.lang.String string)`
-  bool removeLayer(
-    jni$_.JString string,
-  ) {
+  bool removeLayer(jni$_.JString string) {
     final _$string = string.reference;
-    return _removeLayer(reference.pointer,
-            _id_removeLayer as jni$_.JMethodIDPtr, _$string.pointer)
-        .boolean;
+    return _removeLayer(
+      reference.pointer,
+      _id_removeLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).boolean;
   }
 
   static final _id_removeLayer$1 = _class.instanceMethodId(
@@ -2767,25 +3112,32 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/Layer;)Z',
   );
 
-  static final _removeLayer$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeLayer$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean removeLayer(org.maplibre.android.style.layers.Layer layer)`
-  bool removeLayer$1(
-    layer$_.Layer layer,
-  ) {
+  bool removeLayer$1(layer$_.Layer layer) {
     final _$layer = layer.reference;
-    return _removeLayer$1(reference.pointer,
-            _id_removeLayer$1 as jni$_.JMethodIDPtr, _$layer.pointer)
-        .boolean;
+    return _removeLayer$1(
+      reference.pointer,
+      _id_removeLayer$1 as jni$_.JMethodIDPtr,
+      _$layer.pointer,
+    ).boolean;
   }
 
   static final _id_removeLayerAt = _class.instanceMethodId(
@@ -2793,24 +3145,31 @@ class Style extends jni$_.JObject {
     r'(I)Z',
   );
 
-  static final _removeLayerAt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _removeLayerAt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_
-                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public boolean removeLayerAt(int i)`
-  bool removeLayerAt(
-    int i,
-  ) {
+  bool removeLayerAt(int i) {
     return _removeLayerAt(
-            reference.pointer, _id_removeLayerAt as jni$_.JMethodIDPtr, i)
-        .boolean;
+      reference.pointer,
+      _id_removeLayerAt as jni$_.JMethodIDPtr,
+      i,
+    ).boolean;
   }
 
   static final _id_addImage = _class.instanceMethodId(
@@ -2818,33 +3177,37 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;)V',
   );
 
-  static final _addImage = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap)`
-  void addImage(
-    jni$_.JString string,
-    jni$_.JObject bitmap,
-  ) {
+  void addImage(jni$_.JString string, jni$_.JObject bitmap) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
-    _addImage(reference.pointer, _id_addImage as jni$_.JMethodIDPtr,
-            _$string.pointer, _$bitmap.pointer)
-        .check();
+    _addImage(
+      reference.pointer,
+      _id_addImage as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+    ).check();
   }
 
   static final _id_addImage$1 = _class.instanceMethodId(
@@ -2852,28 +3215,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImage$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImage$1(
@@ -2889,14 +3259,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImage$1(
-            reference.pointer,
-            _id_addImage$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImage$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImage$2 = _class.instanceMethodId(
@@ -2904,33 +3274,37 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;)V',
   );
 
-  static final _addImage$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.drawable.Drawable drawable)`
-  void addImage$2(
-    jni$_.JString string,
-    jni$_.JObject drawable,
-  ) {
+  void addImage$2(jni$_.JString string, jni$_.JObject drawable) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
-    _addImage$2(reference.pointer, _id_addImage$2 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$drawable.pointer)
-        .check();
+    _addImage$2(
+      reference.pointer,
+      _id_addImage$2 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+    ).check();
   }
 
   static final _id_addImage$3 = _class.instanceMethodId(
@@ -2938,28 +3312,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImage$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.drawable.Drawable drawable, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImage$3(
@@ -2975,14 +3356,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImage$3(
-            reference.pointer,
-            _id_addImage$3 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImage$3 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImage$4 = _class.instanceMethodId(
@@ -2990,36 +3371,43 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Z)V',
   );
 
-  static final _addImage$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
-  void addImage$4(
-    jni$_.JString string,
-    jni$_.JObject bitmap,
-    bool z,
-  ) {
+  void addImage$4(jni$_.JString string, jni$_.JObject bitmap, bool z) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
-    _addImage$4(reference.pointer, _id_addImage$4 as jni$_.JMethodIDPtr,
-            _$string.pointer, _$bitmap.pointer, z ? 1 : 0)
-        .check();
+    _addImage$4(
+      reference.pointer,
+      _id_addImage$4 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_addImage$5 = _class.instanceMethodId(
@@ -3027,22 +3415,27 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImage$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImage$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -3050,7 +3443,9 @@ class Style extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImage$5(
@@ -3067,15 +3462,15 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImage$5(
-            reference.pointer,
-            _id_addImage$5 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImage$5 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImageAsync = _class.instanceMethodId(
@@ -3083,33 +3478,37 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;)V',
   );
 
-  static final _addImageAsync = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap)`
-  void addImageAsync(
-    jni$_.JString string,
-    jni$_.JObject bitmap,
-  ) {
+  void addImageAsync(jni$_.JString string, jni$_.JObject bitmap) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
-    _addImageAsync(reference.pointer, _id_addImageAsync as jni$_.JMethodIDPtr,
-            _$string.pointer, _$bitmap.pointer)
-        .check();
+    _addImageAsync(
+      reference.pointer,
+      _id_addImageAsync as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+    ).check();
   }
 
   static final _id_addImageAsync$1 = _class.instanceMethodId(
@@ -3117,28 +3516,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImageAsync$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImageAsync$1(
@@ -3154,14 +3560,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImageAsync$1(
-            reference.pointer,
-            _id_addImageAsync$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImageAsync$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImageAsync$2 = _class.instanceMethodId(
@@ -3169,36 +3575,37 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;)V',
   );
 
-  static final _addImageAsync$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.drawable.Drawable drawable)`
-  void addImageAsync$2(
-    jni$_.JString string,
-    jni$_.JObject drawable,
-  ) {
+  void addImageAsync$2(jni$_.JString string, jni$_.JObject drawable) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
     _addImageAsync$2(
-            reference.pointer,
-            _id_addImageAsync$2 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer)
-        .check();
+      reference.pointer,
+      _id_addImageAsync$2 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+    ).check();
   }
 
   static final _id_addImageAsync$3 = _class.instanceMethodId(
@@ -3206,28 +3613,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/drawable/Drawable;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImageAsync$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.drawable.Drawable drawable, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImageAsync$3(
@@ -3243,14 +3657,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImageAsync$3(
-            reference.pointer,
-            _id_addImageAsync$3 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$drawable.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImageAsync$3 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$drawable.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImageAsync$4 = _class.instanceMethodId(
@@ -3258,40 +3672,43 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;Z)V',
   );
 
-  static final _addImageAsync$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
-  void addImageAsync$4(
-    jni$_.JString string,
-    jni$_.JObject bitmap,
-    bool z,
-  ) {
+  void addImageAsync$4(jni$_.JString string, jni$_.JObject bitmap, bool z) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     _addImageAsync$4(
-            reference.pointer,
-            _id_addImageAsync$4 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_addImageAsync$4 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_addImageAsync$5 = _class.instanceMethodId(
@@ -3299,22 +3716,27 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;Landroid/graphics/Bitmap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImageAsync$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImageAsync$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -3322,7 +3744,9 @@ class Style extends jni$_.JObject {
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImageAsync$5(
@@ -3339,15 +3763,15 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImageAsync$5(
-            reference.pointer,
-            _id_addImageAsync$5 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$bitmap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImageAsync$5 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$bitmap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImages = _class.instanceMethodId(
@@ -3355,25 +3779,32 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;)V',
   );
 
-  static final _addImages = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addImages =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImages(java.util.HashMap hashMap)`
-  void addImages(
-    jni$_.JObject hashMap,
-  ) {
+  void addImages(jni$_.JObject hashMap) {
     final _$hashMap = hashMap.reference;
-    _addImages(reference.pointer, _id_addImages as jni$_.JMethodIDPtr,
-            _$hashMap.pointer)
-        .check();
+    _addImages(
+      reference.pointer,
+      _id_addImages as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+    ).check();
   }
 
   static final _id_addImages$1 = _class.instanceMethodId(
@@ -3381,26 +3812,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImages$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImages$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImages(java.util.HashMap hashMap, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImages$1(
@@ -3414,13 +3852,13 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImages$1(
-            reference.pointer,
-            _id_addImages$1 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImages$1 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImages$2 = _class.instanceMethodId(
@@ -3428,27 +3866,34 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;Z)V',
   );
 
-  static final _addImages$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _addImages$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void addImages(java.util.HashMap hashMap, boolean z)`
-  void addImages$2(
-    jni$_.JObject hashMap,
-    bool z,
-  ) {
+  void addImages$2(jni$_.JObject hashMap, bool z) {
     final _$hashMap = hashMap.reference;
-    _addImages$2(reference.pointer, _id_addImages$2 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer, z ? 1 : 0)
-        .check();
+    _addImages$2(
+      reference.pointer,
+      _id_addImages$2 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_addImages$3 = _class.instanceMethodId(
@@ -3456,28 +3901,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImages$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImages$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImages(java.util.HashMap hashMap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImages$3(
@@ -3492,14 +3944,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImages$3(
-            reference.pointer,
-            _id_addImages$3 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImages$3 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImagesAsync = _class.instanceMethodId(
@@ -3507,25 +3959,32 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;)V',
   );
 
-  static final _addImagesAsync = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addImagesAsync =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImagesAsync(java.util.HashMap hashMap)`
-  void addImagesAsync(
-    jni$_.JObject hashMap,
-  ) {
+  void addImagesAsync(jni$_.JObject hashMap) {
     final _$hashMap = hashMap.reference;
-    _addImagesAsync(reference.pointer, _id_addImagesAsync as jni$_.JMethodIDPtr,
-            _$hashMap.pointer)
-        .check();
+    _addImagesAsync(
+      reference.pointer,
+      _id_addImagesAsync as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+    ).check();
   }
 
   static final _id_addImagesAsync$1 = _class.instanceMethodId(
@@ -3533,26 +3992,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;Ljava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImagesAsync$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImagesAsync$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImagesAsync(java.util.HashMap hashMap, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImagesAsync$1(
@@ -3566,13 +4032,13 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImagesAsync$1(
-            reference.pointer,
-            _id_addImagesAsync$1 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImagesAsync$1 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_addImagesAsync$2 = _class.instanceMethodId(
@@ -3580,30 +4046,34 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;Z)V',
   );
 
-  static final _addImagesAsync$2 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _addImagesAsync$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void addImagesAsync(java.util.HashMap hashMap, boolean z)`
-  void addImagesAsync$2(
-    jni$_.JObject hashMap,
-    bool z,
-  ) {
+  void addImagesAsync$2(jni$_.JObject hashMap, bool z) {
     final _$hashMap = hashMap.reference;
     _addImagesAsync$2(
-            reference.pointer,
-            _id_addImagesAsync$2 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_addImagesAsync$2 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_addImagesAsync$3 = _class.instanceMethodId(
@@ -3611,28 +4081,35 @@ class Style extends jni$_.JObject {
     r'(Ljava/util/HashMap;ZLjava/util/List;Ljava/util/List;Lorg/maplibre/android/maps/ImageContent;)V',
   );
 
-  static final _addImagesAsync$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _addImagesAsync$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addImagesAsync(java.util.HashMap hashMap, boolean z, java.util.List list, java.util.List list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImagesAsync$3(
@@ -3647,14 +4124,14 @@ class Style extends jni$_.JObject {
     final _$list1 = list1.reference;
     final _$imageContent = imageContent?.reference ?? jni$_.jNullReference;
     _addImagesAsync$3(
-            reference.pointer,
-            _id_addImagesAsync$3 as jni$_.JMethodIDPtr,
-            _$hashMap.pointer,
-            z ? 1 : 0,
-            _$list.pointer,
-            _$list1.pointer,
-            _$imageContent.pointer)
-        .check();
+      reference.pointer,
+      _id_addImagesAsync$3 as jni$_.JMethodIDPtr,
+      _$hashMap.pointer,
+      z ? 1 : 0,
+      _$list.pointer,
+      _$list1.pointer,
+      _$imageContent.pointer,
+    ).check();
   }
 
   static final _id_removeImage = _class.instanceMethodId(
@@ -3662,25 +4139,32 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _removeImage = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _removeImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeImage(java.lang.String string)`
-  void removeImage(
-    jni$_.JString string,
-  ) {
+  void removeImage(jni$_.JString string) {
     final _$string = string.reference;
-    _removeImage(reference.pointer, _id_removeImage as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _removeImage(
+      reference.pointer,
+      _id_removeImage as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getImage = _class.instanceMethodId(
@@ -3688,26 +4172,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getImage = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public android.graphics.Bitmap getImage(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getImage(
-    jni$_.JString string,
-  ) {
+  jni$_.JObject? getImage(jni$_.JString string) {
     final _$string = string.reference;
-    return _getImage(reference.pointer, _id_getImage as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getImage(
+      reference.pointer,
+      _id_getImage as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_setTransition = _class.instanceMethodId(
@@ -3715,25 +4206,32 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
-  void setTransition(
-    transitionoptions$_.TransitionOptions transitionOptions,
-  ) {
+  void setTransition(transitionoptions$_.TransitionOptions transitionOptions) {
     final _$transitionOptions = transitionOptions.reference;
-    _setTransition(reference.pointer, _id_setTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+    _setTransition(
+      reference.pointer,
+      _id_setTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTransition = _class.instanceMethodId(
@@ -3741,25 +4239,31 @@ class Style extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTransition() {
     return _getTransition(
-            reference.pointer, _id_getTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_getLight = _class.instanceMethodId(
@@ -3767,23 +4271,29 @@ class Style extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/light/Light;',
   );
 
-  static final _getLight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.light.Light getLight()`
   /// The returned object must be released after use, by calling the [release] method.
   light$_.Light? getLight() {
-    return _getLight(reference.pointer, _id_getLight as jni$_.JMethodIDPtr)
-        .object<light$_.Light?>(const light$_.$Light$NullableType());
+    return _getLight(
+      reference.pointer,
+      _id_getLight as jni$_.JMethodIDPtr,
+    ).object<light$_.Light?>(const light$_.$Light$NullableType());
   }
 
   static final _id_isFullyLoaded = _class.instanceMethodId(
@@ -3791,23 +4301,28 @@ class Style extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isFullyLoaded = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isFullyLoaded =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isFullyLoaded()`
   bool isFullyLoaded() {
     return _isFullyLoaded(
-            reference.pointer, _id_isFullyLoaded as jni$_.JMethodIDPtr)
-        .boolean;
+      reference.pointer,
+      _id_isFullyLoaded as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_toImage = _class.staticMethodId(
@@ -3815,26 +4330,33 @@ class Style extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/Style$Builder$ImageWrapper;)Lorg/maplibre/android/maps/Image;',
   );
 
-  static final _toImage = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _toImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.Image toImage(org.maplibre.android.maps.Style$Builder$ImageWrapper imageWrapper)`
   /// The returned object must be released after use, by calling the [release] method.
-  static image$_.Image? toImage(
-    Style$Builder$ImageWrapper? imageWrapper,
-  ) {
+  static image$_.Image? toImage(Style$Builder$ImageWrapper? imageWrapper) {
     final _$imageWrapper = imageWrapper?.reference ?? jni$_.jNullReference;
-    return _toImage(_class.reference.pointer, _id_toImage as jni$_.JMethodIDPtr,
-            _$imageWrapper.pointer)
-        .object<image$_.Image?>(const image$_.$Image$NullableType());
+    return _toImage(
+      _class.reference.pointer,
+      _id_toImage as jni$_.JMethodIDPtr,
+      _$imageWrapper.pointer,
+    ).object<image$_.Image?>(const image$_.$Image$NullableType());
   }
 
   static final _id_getPredefinedStyles = _class.staticMethodId(
@@ -3842,26 +4364,33 @@ class Style extends jni$_.JObject {
     r'()[Lorg/maplibre/android/util/DefaultStyle;',
   );
 
-  static final _getPredefinedStyles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPredefinedStyles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.util.DefaultStyle[] getPredefinedStyles()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JArray<defaultstyle$_.DefaultStyle?>? getPredefinedStyles() {
-    return _getPredefinedStyles(_class.reference.pointer,
-            _id_getPredefinedStyles as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
-            const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
-                defaultstyle$_.$DefaultStyle$NullableType()));
+    return _getPredefinedStyles(
+      _class.reference.pointer,
+      _id_getPredefinedStyles as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
+      const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
+        defaultstyle$_.$DefaultStyle$NullableType(),
+      ),
+    );
   }
 
   static final _id_getPredefinedStyle = _class.staticMethodId(
@@ -3869,26 +4398,33 @@ class Style extends jni$_.JObject {
     r'(Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _getPredefinedStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getPredefinedStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public java.lang.String getPredefinedStyle(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString getPredefinedStyle(
-    jni$_.JString? string,
-  ) {
+  static jni$_.JString getPredefinedStyle(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _getPredefinedStyle(_class.reference.pointer,
-            _id_getPredefinedStyle as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getPredefinedStyle(
+      _class.reference.pointer,
+      _id_getPredefinedStyle as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -3902,11 +4438,8 @@ final class $Style$NullableType extends jni$_.JObjType<Style?> {
 
   @jni$_.internal
   @core$_.override
-  Style? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Style.fromReference(
-          reference,
-        );
+  Style? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Style.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3939,9 +4472,8 @@ final class $Style$Type extends jni$_.JObjType<Style> {
 
   @jni$_.internal
   @core$_.override
-  Style fromReference(jni$_.JReference reference) => Style.fromReference(
-        reference,
-      );
+  Style fromReference(jni$_.JReference reference) =>
+      Style.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

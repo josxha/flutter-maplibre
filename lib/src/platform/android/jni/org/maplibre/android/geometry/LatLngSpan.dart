@@ -59,13 +59,13 @@ class LatLngSpan$Companion extends jni$_.JObject {
   final jni$_.JObjType<LatLngSpan$Companion> $type;
 
   @jni$_.internal
-  LatLngSpan$Companion.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LatLngSpan$Companion.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/geometry/LatLngSpan$Companion');
+    r'org/maplibre/android/geometry/LatLngSpan$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLngSpan$Companion$NullableType();
@@ -74,27 +74,36 @@ class LatLngSpan$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngSpan$Companion(
-    jni$_.JObject? defaultConstructorMarker,
-  ) {
+  factory LatLngSpan$Companion(jni$_.JObject? defaultConstructorMarker) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return LatLngSpan$Companion.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$defaultConstructorMarker.pointer)
-        .reference);
+    return LatLngSpan$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -111,11 +120,7 @@ final class $LatLngSpan$Companion$NullableType
   @jni$_.internal
   @core$_.override
   LatLngSpan$Companion? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LatLngSpan$Companion.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LatLngSpan$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -151,9 +156,7 @@ final class $LatLngSpan$Companion$Type
   @jni$_.internal
   @core$_.override
   LatLngSpan$Companion fromReference(jni$_.JReference reference) =>
-      LatLngSpan$Companion.fromReference(
-        reference,
-      );
+      LatLngSpan$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -184,13 +187,13 @@ class LatLngSpan extends jni$_.JObject {
   final jni$_.JObjType<LatLngSpan> $type;
 
   @jni$_.internal
-  LatLngSpan.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LatLngSpan.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/geometry/LatLngSpan');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/geometry/LatLngSpan',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLngSpan$NullableType();
@@ -220,23 +223,28 @@ class LatLngSpan extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLatitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLatitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLatitudeSpan()`
   double getLatitudeSpan() {
     return _getLatitudeSpan(
-            reference.pointer, _id_getLatitudeSpan as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLatitudeSpan as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setLatitudeSpan = _class.instanceMethodId(
@@ -244,23 +252,31 @@ class LatLngSpan extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setLatitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setLatitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public final void setLatitudeSpan(double d)`
-  void setLatitudeSpan(
-    double d,
-  ) {
+  void setLatitudeSpan(double d) {
     _setLatitudeSpan(
-            reference.pointer, _id_setLatitudeSpan as jni$_.JMethodIDPtr, d)
-        .check();
+      reference.pointer,
+      _id_setLatitudeSpan as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_getLongitudeSpan = _class.instanceMethodId(
@@ -268,23 +284,28 @@ class LatLngSpan extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getLongitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLongitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getLongitudeSpan()`
   double getLongitudeSpan() {
     return _getLongitudeSpan(
-            reference.pointer, _id_getLongitudeSpan as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getLongitudeSpan as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setLongitudeSpan = _class.instanceMethodId(
@@ -292,49 +313,65 @@ class LatLngSpan extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _setLongitudeSpan = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setLongitudeSpan =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public final void setLongitudeSpan(double d)`
-  void setLongitudeSpan(
-    double d,
-  ) {
+  void setLongitudeSpan(double d) {
     _setLongitudeSpan(
-            reference.pointer, _id_setLongitudeSpan as jni$_.JMethodIDPtr, d)
-        .check();
+      reference.pointer,
+      _id_setLongitudeSpan as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
-  static final _id_new$ = _class.constructorId(
-    r'(DD)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(DD)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngSpan(
-    double d,
-    double d1,
-  ) {
+  factory LatLngSpan(double d, double d1) {
     return LatLngSpan.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, d, d1)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        d,
+        d1,
+      ).reference,
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -342,25 +379,32 @@ class LatLngSpan extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
+  bool equals(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -368,23 +412,28 @@ class LatLngSpan extends jni$_.JObject {
     r'()I',
   );
 
-  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -392,72 +441,86 @@ class LatLngSpan extends jni$_.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(
-    jni$_.JObject parcel,
-    int i,
-  ) {
+  void writeToParcel(jni$_.JObject parcel, int i) {
     final _$parcel = parcel.reference;
-    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
-            _$parcel.pointer, i)
-        .check();
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
 
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Landroid/os/Parcel;Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(android.os.Parcel parcel, kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -468,12 +531,14 @@ class LatLngSpan extends jni$_.JObject {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return LatLngSpan.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$parcel.pointer,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return LatLngSpan.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$parcel.pointer,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -487,11 +552,8 @@ final class $LatLngSpan$NullableType extends jni$_.JObjType<LatLngSpan?> {
 
   @jni$_.internal
   @core$_.override
-  LatLngSpan? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : LatLngSpan.fromReference(
-          reference,
-        );
+  LatLngSpan? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : LatLngSpan.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -525,9 +587,7 @@ final class $LatLngSpan$Type extends jni$_.JObjType<LatLngSpan> {
   @jni$_.internal
   @core$_.override
   LatLngSpan fromReference(jni$_.JReference reference) =>
-      LatLngSpan.fromReference(
-        reference,
-      );
+      LatLngSpan.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

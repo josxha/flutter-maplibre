@@ -59,87 +59,101 @@ class ImageStretches extends jni$_.JObject {
   final jni$_.JObjType<ImageStretches> $type;
 
   @jni$_.internal
-  ImageStretches.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ImageStretches.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/ImageStretches');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/ImageStretches',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ImageStretches$NullableType();
   static const type = $ImageStretches$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(FF)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(FF)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ImageStretches(
-    double f,
-    double f1,
-  ) {
+  factory ImageStretches(double f, double f1) {
     return ImageStretches.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, f, f1)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        f,
+        f1,
+      ).reference,
+    );
   }
 
-  static final _id_getFirst = _class.instanceMethodId(
-    r'getFirst',
-    r'()F',
-  );
+  static final _id_getFirst = _class.instanceMethodId(r'getFirst', r'()F');
 
-  static final _getFirst = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFirst =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getFirst()`
   double getFirst() {
-    return _getFirst(reference.pointer, _id_getFirst as jni$_.JMethodIDPtr)
-        .float;
+    return _getFirst(
+      reference.pointer,
+      _id_getFirst as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_getSecond = _class.instanceMethodId(
-    r'getSecond',
-    r'()F',
-  );
+  static final _id_getSecond = _class.instanceMethodId(r'getSecond', r'()F');
 
-  static final _getSecond = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSecond =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getSecond()`
   double getSecond() {
-    return _getSecond(reference.pointer, _id_getSecond as jni$_.JMethodIDPtr)
-        .float;
+    return _getSecond(
+      reference.pointer,
+      _id_getSecond as jni$_.JMethodIDPtr,
+    ).float;
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -147,48 +161,58 @@ class ImageStretches extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -196,23 +220,29 @@ class ImageStretches extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -227,11 +257,8 @@ final class $ImageStretches$NullableType
 
   @jni$_.internal
   @core$_.override
-  ImageStretches? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : ImageStretches.fromReference(
-          reference,
-        );
+  ImageStretches? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : ImageStretches.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -265,9 +292,7 @@ final class $ImageStretches$Type extends jni$_.JObjType<ImageStretches> {
   @jni$_.internal
   @core$_.override
   ImageStretches fromReference(jni$_.JReference reference) =>
-      ImageStretches.fromReference(
-        reference,
-      );
+      ImageStretches.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

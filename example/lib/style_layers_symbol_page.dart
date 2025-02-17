@@ -25,8 +25,9 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
         onStyleLoaded: (style) async {
           try {
             // load the image data
-            final response =
-            await http.get(Uri.parse(StyleLayersSymbolPage.imageUrl));
+            final response = await http.get(
+              Uri.parse(StyleLayersSymbolPage.imageUrl),
+            );
             final bytes = response.bodyBytes;
 
             // add the image to the map
@@ -34,10 +35,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
 
             // add some points as GeoJSON source to the map
             await style.addSource(
-              const GeoJsonSource(
-                id: 'points',
-                data: _geoJsonString,
-              ),
+              const GeoJsonSource(id: 'points', data: _geoJsonString),
             );
 
             // display the image on the map

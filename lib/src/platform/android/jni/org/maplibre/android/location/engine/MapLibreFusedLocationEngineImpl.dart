@@ -68,43 +68,48 @@ class MapLibreFusedLocationEngineImpl
   final jni$_.JObjType<MapLibreFusedLocationEngineImpl> $type;
 
   @jni$_.internal
-  MapLibreFusedLocationEngineImpl.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreFusedLocationEngineImpl.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/engine/MapLibreFusedLocationEngineImpl');
+    r'org/maplibre/android/location/engine/MapLibreFusedLocationEngineImpl',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreFusedLocationEngineImpl$NullableType();
   static const type = $MapLibreFusedLocationEngineImpl$Type();
-  static final _id_new$ = _class.constructorId(
-    r'(Landroid/content/Context;)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreFusedLocationEngineImpl(
-    jni$_.JObject context,
-  ) {
+  factory MapLibreFusedLocationEngineImpl(jni$_.JObject context) {
     final _$context = context.reference;
-    return MapLibreFusedLocationEngineImpl.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .reference);
+    return MapLibreFusedLocationEngineImpl.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+      ).reference,
+    );
   }
 
   static final _id_createListener = _class.instanceMethodId(
@@ -112,31 +117,39 @@ class MapLibreFusedLocationEngineImpl
     r'(Lorg/maplibre/android/location/engine/LocationEngineCallback;)Landroid/location/LocationListener;',
   );
 
-  static final _createListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _createListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public android.location.LocationListener createListener(org.maplibre.android.location.engine.LocationEngineCallback locationEngineCallback)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject createListener(
-    locationenginecallback$_
-        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>?
-        locationEngineCallback,
+    locationenginecallback$_.LocationEngineCallback<
+      locationengineresult$_.LocationEngineResult?
+    >?
+    locationEngineCallback,
   ) {
     final _$locationEngineCallback =
         locationEngineCallback?.reference ?? jni$_.jNullReference;
     return _createListener(
-            reference.pointer,
-            _id_createListener as jni$_.JMethodIDPtr,
-            _$locationEngineCallback.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_createListener as jni$_.JMethodIDPtr,
+      _$locationEngineCallback.pointer,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_getLastLocation = _class.instanceMethodId(
@@ -144,29 +157,37 @@ class MapLibreFusedLocationEngineImpl
     r'(Lorg/maplibre/android/location/engine/LocationEngineCallback;)V',
   );
 
-  static final _getLastLocation = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getLastLocation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void getLastLocation(org.maplibre.android.location.engine.LocationEngineCallback locationEngineCallback)`
   void getLastLocation(
-    locationenginecallback$_
-        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
-        locationEngineCallback,
+    locationenginecallback$_.LocationEngineCallback<
+      locationengineresult$_.LocationEngineResult?
+    >
+    locationEngineCallback,
   ) {
     final _$locationEngineCallback = locationEngineCallback.reference;
     _getLastLocation(
-            reference.pointer,
-            _id_getLastLocation as jni$_.JMethodIDPtr,
-            _$locationEngineCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_getLastLocation as jni$_.JMethodIDPtr,
+      _$locationEngineCallback.pointer,
+    ).check();
   }
 
   static final _id_requestLocationUpdates = _class.instanceMethodId(
@@ -174,24 +195,31 @@ class MapLibreFusedLocationEngineImpl
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;Landroid/location/LocationListener;Landroid/os/Looper;)V',
   );
 
-  static final _requestLocationUpdates = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _requestLocationUpdates =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void requestLocationUpdates(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest, android.location.LocationListener locationListener, android.os.Looper looper)`
   void requestLocationUpdates(
@@ -203,12 +231,12 @@ class MapLibreFusedLocationEngineImpl
     final _$locationListener = locationListener.reference;
     final _$looper = looper?.reference ?? jni$_.jNullReference;
     _requestLocationUpdates(
-            reference.pointer,
-            _id_requestLocationUpdates as jni$_.JMethodIDPtr,
-            _$locationEngineRequest.pointer,
-            _$locationListener.pointer,
-            _$looper.pointer)
-        .check();
+      reference.pointer,
+      _id_requestLocationUpdates as jni$_.JMethodIDPtr,
+      _$locationEngineRequest.pointer,
+      _$locationListener.pointer,
+      _$looper.pointer,
+    ).check();
   }
 
   static final _id_requestLocationUpdates1 = _class.instanceMethodId(
@@ -216,22 +244,26 @@ class MapLibreFusedLocationEngineImpl
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;Landroid/app/PendingIntent;)V',
   );
 
-  static final _requestLocationUpdates1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _requestLocationUpdates1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void requestLocationUpdates(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest, android.app.PendingIntent pendingIntent)`
   void requestLocationUpdates1(
@@ -241,11 +273,11 @@ class MapLibreFusedLocationEngineImpl
     final _$locationEngineRequest = locationEngineRequest.reference;
     final _$pendingIntent = pendingIntent.reference;
     _requestLocationUpdates1(
-            reference.pointer,
-            _id_requestLocationUpdates1 as jni$_.JMethodIDPtr,
-            _$locationEngineRequest.pointer,
-            _$pendingIntent.pointer)
-        .check();
+      reference.pointer,
+      _id_requestLocationUpdates1 as jni$_.JMethodIDPtr,
+      _$locationEngineRequest.pointer,
+      _$pendingIntent.pointer,
+    ).check();
   }
 }
 
@@ -264,13 +296,11 @@ final class $MapLibreFusedLocationEngineImpl$NullableType
   MapLibreFusedLocationEngineImpl? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : MapLibreFusedLocationEngineImpl.fromReference(
-              reference,
-            );
+          : MapLibreFusedLocationEngineImpl.fromReference(reference);
   @jni$_.internal
   @core$_.override
-  jni$_.JObjType get superType => const androidlocationengineimpl$_
-      .$AndroidLocationEngineImpl$NullableType();
+  jni$_.JObjType get superType =>
+      const androidlocationengineimpl$_.$AndroidLocationEngineImpl$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -304,13 +334,11 @@ final class $MapLibreFusedLocationEngineImpl$Type
   @jni$_.internal
   @core$_.override
   MapLibreFusedLocationEngineImpl fromReference(jni$_.JReference reference) =>
-      MapLibreFusedLocationEngineImpl.fromReference(
-        reference,
-      );
+      MapLibreFusedLocationEngineImpl.fromReference(reference);
   @jni$_.internal
   @core$_.override
-  jni$_.JObjType get superType => const androidlocationengineimpl$_
-      .$AndroidLocationEngineImpl$NullableType();
+  jni$_.JObjType get superType =>
+      const androidlocationengineimpl$_.$AndroidLocationEngineImpl$NullableType();
 
   @jni$_.internal
   @core$_.override

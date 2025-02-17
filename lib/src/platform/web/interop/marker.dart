@@ -20,8 +20,5 @@ extension type Marker._(JSObject _) implements JSObject {
 @JS()
 extension type MarkerOptions._(JSObject _) implements JSObject {
   /// Create a new JS [MarkerOptions] object.
-  external factory MarkerOptions({
-    String? color,
-    bool? draggable,
-  });
+  external factory MarkerOptions({String? color, bool? draggable});
 }

@@ -1,8 +1,14 @@
 blank_issues_enabled: false
 contact_links:
-  - name: "Q&A - GitHub Discussions"
-    url: https://github.com/josxha/flutter-maplibre/discussions/categories/q-a
+  - name: "Ask a Question"
+    url: https://github.com/josxha/flutter-maplibre/discussions/new?category=q-a
     about: "If you have a question about using MapLibre on Flutter"
+  - name: "Start a Discussion"
+    url: https://github.com/josxha/flutter-maplibre/discussions/new?category=general
+    about: "Start a discussion on some topic"
+  - name: "Share some Idea"
+    url: https://github.com/josxha/flutter-maplibre/discussions/new?category=ideas
+    about: "Share an idea, that isn't quite ready for a feature request"
   - name: "Join on Slack"
     url: https://slack.openstreetmap.us/
     about: "Join #maplibre-flutter on the OpenStreetMap Slack"

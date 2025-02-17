@@ -22,15 +22,15 @@ lack of platform views of these platforms.
 
 ### General Functionality
 
-| Feature             | web | android | iOS | windows | macOS | linux |
-|---------------------|-----|---------|-----|---------|-------|-------|
-| Map                 | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| MapController       | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| UI Controls for web | ✅   | ✅       | ➖   | ➖       | ➖     | ➖     |
-| Offline             | ➖   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| Events              | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
-| Snapshotter         | ➖   | ❌       | ❌   | ➖       | ➖     | ➖     |
-| Annotations         | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Feature       | web | android | iOS | windows | macOS | linux |
+|---------------|-----|---------|-----|---------|-------|-------|
+| Map           | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| MapController | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Offline       | ➖   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Events        | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| Annotations   | ✅   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| MBTiles       | ➖   | ✅       | ❌   | ➖       | ➖     | ➖     |
+| PMTiles       | ❌   | ✅       | ❌   | ➖       | ➖     | ➖     |
 
 ### Style Layers
 

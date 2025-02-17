@@ -61,13 +61,13 @@ class PermissionsManager extends jni$_.JObject {
   final jni$_.JObjType<PermissionsManager> $type;
 
   @jni$_.internal
-  PermissionsManager.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PermissionsManager.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/permissions/PermissionsManager');
+    r'org/maplibre/android/location/permissions/PermissionsManager',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PermissionsManager$NullableType();
@@ -76,16 +76,23 @@ class PermissionsManager extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/permissions/PermissionsListener;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.location.permissions.PermissionsListener permissionsListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -94,9 +101,13 @@ class PermissionsManager extends jni$_.JObject {
   ) {
     final _$permissionsListener =
         permissionsListener?.reference ?? jni$_.jNullReference;
-    return PermissionsManager.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$permissionsListener.pointer)
-        .reference);
+    return PermissionsManager.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$permissionsListener.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getListener = _class.instanceMethodId(
@@ -104,25 +115,31 @@ class PermissionsManager extends jni$_.JObject {
     r'()Lorg/maplibre/android/location/permissions/PermissionsListener;',
   );
 
-  static final _getListener = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.permissions.PermissionsListener getListener()`
   /// The returned object must be released after use, by calling the [release] method.
   permissionslistener$_.PermissionsListener? getListener() {
     return _getListener(
-            reference.pointer, _id_getListener as jni$_.JMethodIDPtr)
-        .object<permissionslistener$_.PermissionsListener?>(
-            const permissionslistener$_.$PermissionsListener$NullableType());
+      reference.pointer,
+      _id_getListener as jni$_.JMethodIDPtr,
+    ).object<permissionslistener$_.PermissionsListener?>(
+      const permissionslistener$_.$PermissionsListener$NullableType(),
+    );
   }
 
   static final _id_setListener = _class.instanceMethodId(
@@ -130,16 +147,23 @@ class PermissionsManager extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/permissions/PermissionsListener;)V',
   );
 
-  static final _setListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setListener(org.maplibre.android.location.permissions.PermissionsListener permissionsListener)`
   void setListener(
@@ -147,39 +171,45 @@ class PermissionsManager extends jni$_.JObject {
   ) {
     final _$permissionsListener =
         permissionsListener?.reference ?? jni$_.jNullReference;
-    _setListener(reference.pointer, _id_setListener as jni$_.JMethodIDPtr,
-            _$permissionsListener.pointer)
-        .check();
+    _setListener(
+      reference.pointer,
+      _id_setListener as jni$_.JMethodIDPtr,
+      _$permissionsListener.pointer,
+    ).check();
   }
 
-  static final _id_isBackgroundLocationPermissionGranted =
-      _class.staticMethodId(
-    r'isBackgroundLocationPermissionGranted',
-    r'(Landroid/content/Context;)Z',
-  );
+  static final _id_isBackgroundLocationPermissionGranted = _class
+      .staticMethodId(
+        r'isBackgroundLocationPermissionGranted',
+        r'(Landroid/content/Context;)Z',
+      );
 
   static final _isBackgroundLocationPermissionGranted =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallStaticBooleanMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public boolean isBackgroundLocationPermissionGranted(android.content.Context context)`
-  static bool isBackgroundLocationPermissionGranted(
-    jni$_.JObject? context,
-  ) {
+  static bool isBackgroundLocationPermissionGranted(jni$_.JObject? context) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _isBackgroundLocationPermissionGranted(
-            _class.reference.pointer,
-            _id_isBackgroundLocationPermissionGranted as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .boolean;
+      _class.reference.pointer,
+      _id_isBackgroundLocationPermissionGranted as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).boolean;
   }
 
   static final _id_areLocationPermissionsGranted = _class.staticMethodId(
@@ -189,26 +219,30 @@ class PermissionsManager extends jni$_.JObject {
 
   static final _areLocationPermissionsGranted =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallStaticBooleanMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public boolean areLocationPermissionsGranted(android.content.Context context)`
-  static bool areLocationPermissionsGranted(
-    jni$_.JObject? context,
-  ) {
+  static bool areLocationPermissionsGranted(jni$_.JObject? context) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _areLocationPermissionsGranted(
-            _class.reference.pointer,
-            _id_areLocationPermissionsGranted as jni$_.JMethodIDPtr,
-            _$context.pointer)
-        .boolean;
+      _class.reference.pointer,
+      _id_areLocationPermissionsGranted as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).boolean;
   }
 
   static final _id_areRuntimePermissionsRequired = _class.staticMethodId(
@@ -218,22 +252,26 @@ class PermissionsManager extends jni$_.JObject {
 
   static final _areRuntimePermissionsRequired =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallStaticBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public boolean areRuntimePermissionsRequired()`
   static bool areRuntimePermissionsRequired() {
-    return _areRuntimePermissionsRequired(_class.reference.pointer,
-            _id_areRuntimePermissionsRequired as jni$_.JMethodIDPtr)
-        .boolean;
+    return _areRuntimePermissionsRequired(
+      _class.reference.pointer,
+      _id_areRuntimePermissionsRequired as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_requestLocationPermissions = _class.instanceMethodId(
@@ -243,26 +281,30 @@ class PermissionsManager extends jni$_.JObject {
 
   static final _requestLocationPermissions =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void requestLocationPermissions(android.app.Activity activity)`
-  void requestLocationPermissions(
-    jni$_.JObject? activity,
-  ) {
+  void requestLocationPermissions(jni$_.JObject? activity) {
     final _$activity = activity?.reference ?? jni$_.jNullReference;
     _requestLocationPermissions(
-            reference.pointer,
-            _id_requestLocationPermissions as jni$_.JMethodIDPtr,
-            _$activity.pointer)
-        .check();
+      reference.pointer,
+      _id_requestLocationPermissions as jni$_.JMethodIDPtr,
+      _$activity.pointer,
+    ).check();
   }
 
   static final _id_onRequestPermissionsResult = _class.instanceMethodId(
@@ -272,23 +314,29 @@ class PermissionsManager extends jni$_.JObject {
 
   static final _onRequestPermissionsResult =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Int32,
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>
-                          )>)>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  int,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void onRequestPermissionsResult(int i, java.lang.String[] strings, int[] is)`
   void onRequestPermissionsResult(
@@ -299,12 +347,12 @@ class PermissionsManager extends jni$_.JObject {
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     _onRequestPermissionsResult(
-            reference.pointer,
-            _id_onRequestPermissionsResult as jni$_.JMethodIDPtr,
-            i,
-            _$strings.pointer,
-            _$is$.pointer)
-        .check();
+      reference.pointer,
+      _id_onRequestPermissionsResult as jni$_.JMethodIDPtr,
+      i,
+      _$strings.pointer,
+      _$is$.pointer,
+    ).check();
   }
 }
 
@@ -321,11 +369,7 @@ final class $PermissionsManager$NullableType
   @jni$_.internal
   @core$_.override
   PermissionsManager? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : PermissionsManager.fromReference(
-              reference,
-            );
+      reference.isNull ? null : PermissionsManager.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -361,9 +405,7 @@ final class $PermissionsManager$Type
   @jni$_.internal
   @core$_.override
   PermissionsManager fromReference(jni$_.JReference reference) =>
-      PermissionsManager.fromReference(
-        reference,
-      );
+      PermissionsManager.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

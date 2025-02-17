@@ -36,24 +36,23 @@ class PolylineLayer extends Layer<LineString> {
 
   @override
   Map<String, Object> getPaint() => {
-        'line-color': color.toHexString(alpha: false),
-        'line-opacity': opacity,
-        'line-width': width,
-        'line-gap-width': gapWidth,
-        if (dashArray case final List<int> dashArray)
-          'line-dasharray': dashArray,
-      };
+    'line-color': color.toHexString(alpha: false),
+    'line-opacity': opacity,
+    'line-width': width,
+    'line-gap-width': gapWidth,
+    if (dashArray case final List<int> dashArray) 'line-dasharray': dashArray,
+  };
 
   @override
   Map<String, Object> getLayout() => {};
 
   @override
   StyleLayer createStyleLayer(int index) => LineStyleLayer(
-        id: getLayerId(index),
-        sourceId: getSourceId(index),
-        paint: getPaint(),
-        layout: getLayout(),
-      );
+    id: getLayerId(index),
+    sourceId: getSourceId(index),
+    paint: getPaint(),
+    layout: getLayout(),
+  );
 
   @override
   bool operator ==(Object other) =>

@@ -8,10 +8,7 @@ import 'package:flutter/widgets.dart';
 /// [transparent_pointer](https://pub.dev/packages/transparent_pointer) package.
 class TranslucentPointer extends SingleChildRenderObjectWidget {
   /// Create a new [TranslucentPointer] widget.
-  const TranslucentPointer({
-    required super.child,
-    super.key,
-  });
+  const TranslucentPointer({required super.child, super.key});
 
   @override
   RenderProxyBox createRenderObject(BuildContext context) =>

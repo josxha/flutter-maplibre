@@ -71,11 +71,12 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
   @jni$_.internal
   CameraUpdateFactory$CameraBoundsUpdate.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/camera/CameraUpdateFactory$CameraBoundsUpdate');
+    r'org/maplibre/android/camera/CameraUpdateFactory$CameraBoundsUpdate',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -85,26 +86,33 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;Ljava/lang/Double;Ljava/lang/Double;[I)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.geometry.LatLngBounds latLngBounds, java.lang.Double double, java.lang.Double double1, int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -118,14 +126,16 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     final _$double = double?.reference ?? jni$_.jNullReference;
     final _$double1 = double1?.reference ?? jni$_.jNullReference;
     final _$is$ = is$.reference;
-    return CameraUpdateFactory$CameraBoundsUpdate.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            _$double.pointer,
-            _$double1.pointer,
-            _$is$.pointer)
-        .reference);
+    return CameraUpdateFactory$CameraBoundsUpdate.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$latLngBounds.pointer,
+        _$double.pointer,
+        _$double1.pointer,
+        _$is$.pointer,
+      ).reference,
+    );
   }
 
   static final _id_getBounds = _class.instanceMethodId(
@@ -133,71 +143,86 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _getBounds = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLngBounds getBounds()`
   /// The returned object must be released after use, by calling the [release] method.
   latlngbounds$_.LatLngBounds getBounds() {
-    return _getBounds(reference.pointer, _id_getBounds as jni$_.JMethodIDPtr)
-        .object<latlngbounds$_.LatLngBounds>(
-            const latlngbounds$_.$LatLngBounds$Type());
+    return _getBounds(
+      reference.pointer,
+      _id_getBounds as jni$_.JMethodIDPtr,
+    ).object<latlngbounds$_.LatLngBounds>(
+      const latlngbounds$_.$LatLngBounds$Type(),
+    );
   }
 
-  static final _id_getPadding = _class.instanceMethodId(
-    r'getPadding',
-    r'()[I',
-  );
+  static final _id_getPadding = _class.instanceMethodId(r'getPadding', r'()[I');
 
-  static final _getPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final int[] getPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JIntArray getPadding() {
-    return _getPadding(reference.pointer, _id_getPadding as jni$_.JMethodIDPtr)
-        .object<jni$_.JIntArray>(const jni$_.JIntArrayType());
+    return _getPadding(
+      reference.pointer,
+      _id_getPadding as jni$_.JMethodIDPtr,
+    ).object<jni$_.JIntArray>(const jni$_.JIntArrayType());
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Lorg/maplibre/android/geometry/LatLngBounds;Ljava/lang/Double;Ljava/lang/Double;IIII)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -206,7 +231,9 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
               int,
               int,
               int,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.geometry.LatLngBounds latLngBounds, java.lang.Double double, java.lang.Double double1, int i, int i1, int i2, int i3)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -222,17 +249,19 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     final _$latLngBounds = latLngBounds.reference;
     final _$double = double?.reference ?? jni$_.jNullReference;
     final _$double1 = double1?.reference ?? jni$_.jNullReference;
-    return CameraUpdateFactory$CameraBoundsUpdate.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            _$double.pointer,
-            _$double1.pointer,
-            i,
-            i1,
-            i2,
-            i3)
-        .reference);
+    return CameraUpdateFactory$CameraBoundsUpdate.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$latLngBounds.pointer,
+        _$double.pointer,
+        _$double1.pointer,
+        i,
+        i1,
+        i2,
+        i3,
+      ).reference,
+    );
   }
 
   static final _id_getCameraPosition = _class.instanceMethodId(
@@ -240,16 +269,23 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraPosition(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -257,10 +293,13 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     maplibremap$_.MapLibreMap mapLibreMap,
   ) {
     final _$mapLibreMap = mapLibreMap.reference;
-    return _getCameraPosition(reference.pointer,
-            _id_getCameraPosition as jni$_.JMethodIDPtr, _$mapLibreMap.pointer)
-        .object<cameraposition$_.CameraPosition?>(
-            const cameraposition$_.$CameraPosition$NullableType());
+    return _getCameraPosition(
+      reference.pointer,
+      _id_getCameraPosition as jni$_.JMethodIDPtr,
+      _$mapLibreMap.pointer,
+    ).object<cameraposition$_.CameraPosition?>(
+      const cameraposition$_.$CameraPosition$NullableType(),
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -268,48 +307,58 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -317,23 +366,29 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -350,12 +405,11 @@ final class $CameraUpdateFactory$CameraBoundsUpdate$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$CameraBoundsUpdate? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : CameraUpdateFactory$CameraBoundsUpdate.fromReference(
-              reference,
-            );
+          : CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -394,10 +448,8 @@ final class $CameraUpdateFactory$CameraBoundsUpdate$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$CameraBoundsUpdate fromReference(
-          jni$_.JReference reference) =>
-      CameraUpdateFactory$CameraBoundsUpdate.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -431,11 +483,12 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
   @jni$_.internal
   CameraUpdateFactory$CameraPositionUpdate.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/camera/CameraUpdateFactory$CameraPositionUpdate');
+    r'org/maplibre/android/camera/CameraUpdateFactory$CameraPositionUpdate',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -445,28 +498,35 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     r'(DLorg/maplibre/android/geometry/LatLng;DD[D)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Double,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               double,
               jni$_.Pointer<jni$_.Void>,
               double,
               double,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(double d, org.maplibre.android.geometry.LatLng latLng, double d1, double d2, double[] ds)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -479,38 +539,43 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
   ) {
     final _$latLng = latLng?.reference ?? jni$_.jNullReference;
     final _$ds = ds?.reference ?? jni$_.jNullReference;
-    return CameraUpdateFactory$CameraPositionUpdate.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            d,
-            _$latLng.pointer,
-            d1,
-            d2,
-            _$ds.pointer)
-        .reference);
+    return CameraUpdateFactory$CameraPositionUpdate.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        d,
+        _$latLng.pointer,
+        d1,
+        d2,
+        _$ds.pointer,
+      ).reference,
+    );
   }
 
-  static final _id_getBearing = _class.instanceMethodId(
-    r'getBearing',
-    r'()D',
-  );
+  static final _id_getBearing = _class.instanceMethodId(r'getBearing', r'()D');
 
-  static final _getBearing = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getBearing()`
   double getBearing() {
-    return _getBearing(reference.pointer, _id_getBearing as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getBearing(
+      reference.pointer,
+      _id_getBearing as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_getTarget = _class.instanceMethodId(
@@ -518,93 +583,108 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _getTarget = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTarget =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final org.maplibre.android.geometry.LatLng getTarget()`
   /// The returned object must be released after use, by calling the [release] method.
   latlng$_.LatLng? getTarget() {
-    return _getTarget(reference.pointer, _id_getTarget as jni$_.JMethodIDPtr)
-        .object<latlng$_.LatLng?>(const latlng$_.$LatLng$NullableType());
+    return _getTarget(
+      reference.pointer,
+      _id_getTarget as jni$_.JMethodIDPtr,
+    ).object<latlng$_.LatLng?>(const latlng$_.$LatLng$NullableType());
   }
 
-  static final _id_getTilt = _class.instanceMethodId(
-    r'getTilt',
-    r'()D',
-  );
+  static final _id_getTilt = _class.instanceMethodId(r'getTilt', r'()D');
 
-  static final _getTilt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTilt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getTilt()`
   double getTilt() {
-    return _getTilt(reference.pointer, _id_getTilt as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getTilt(
+      reference.pointer,
+      _id_getTilt as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getZoom = _class.instanceMethodId(
-    r'getZoom',
-    r'()D',
-  );
+  static final _id_getZoom = _class.instanceMethodId(r'getZoom', r'()D');
 
-  static final _getZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getZoom()`
   double getZoom() {
-    return _getZoom(reference.pointer, _id_getZoom as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getZoom(
+      reference.pointer,
+      _id_getZoom as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getPadding = _class.instanceMethodId(
-    r'getPadding',
-    r'()[D',
-  );
+  static final _id_getPadding = _class.instanceMethodId(r'getPadding', r'()[D');
 
-  static final _getPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double[] getPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JDoubleArray? getPadding() {
-    return _getPadding(reference.pointer, _id_getPadding as jni$_.JMethodIDPtr)
-        .object<jni$_.JDoubleArray?>(const jni$_.JDoubleArrayNullableType());
+    return _getPadding(
+      reference.pointer,
+      _id_getPadding as jni$_.JMethodIDPtr,
+    ).object<jni$_.JDoubleArray?>(const jni$_.JDoubleArrayNullableType());
   }
 
   static final _id_getCameraPosition = _class.instanceMethodId(
@@ -612,16 +692,23 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraPosition(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -629,10 +716,13 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     maplibremap$_.MapLibreMap mapLibreMap,
   ) {
     final _$mapLibreMap = mapLibreMap.reference;
-    return _getCameraPosition(reference.pointer,
-            _id_getCameraPosition as jni$_.JMethodIDPtr, _$mapLibreMap.pointer)
-        .object<cameraposition$_.CameraPosition>(
-            const cameraposition$_.$CameraPosition$Type());
+    return _getCameraPosition(
+      reference.pointer,
+      _id_getCameraPosition as jni$_.JMethodIDPtr,
+      _$mapLibreMap.pointer,
+    ).object<cameraposition$_.CameraPosition>(
+      const cameraposition$_.$CameraPosition$Type(),
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -640,48 +730,58 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -689,23 +789,29 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -722,12 +828,11 @@ final class $CameraUpdateFactory$CameraPositionUpdate$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$CameraPositionUpdate? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : CameraUpdateFactory$CameraPositionUpdate.fromReference(
-              reference,
-            );
+          : CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -766,10 +871,8 @@ final class $CameraUpdateFactory$CameraPositionUpdate$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$CameraPositionUpdate fromReference(
-          jni$_.JReference reference) =>
-      CameraUpdateFactory$CameraPositionUpdate.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -803,11 +906,12 @@ class CameraUpdateFactory$ZoomUpdate$Companion extends jni$_.JObject {
   @jni$_.internal
   CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate$Companion');
+    r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -817,16 +921,23 @@ class CameraUpdateFactory$ZoomUpdate$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -835,11 +946,13 @@ class CameraUpdateFactory$ZoomUpdate$Companion extends jni$_.JObject {
   ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return CameraUpdateFactory$ZoomUpdate$Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -856,12 +969,11 @@ final class $CameraUpdateFactory$ZoomUpdate$Companion$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Companion? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
-              reference,
-            );
+          : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -900,10 +1012,8 @@ final class $CameraUpdateFactory$ZoomUpdate$Companion$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Companion fromReference(
-          jni$_.JReference reference) =>
-      CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -935,13 +1045,13 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory$ZoomUpdate$Type> $type;
 
   @jni$_.internal
-  CameraUpdateFactory$ZoomUpdate$Type.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CameraUpdateFactory$ZoomUpdate$Type.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate$Type');
+    r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate$Type',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -958,19 +1068,16 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1034,12 +1141,11 @@ final class $CameraUpdateFactory$ZoomUpdate$Type$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Type? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : CameraUpdateFactory$ZoomUpdate$Type.fromReference(
-              reference,
-            );
+          : CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1077,10 +1183,8 @@ final class $CameraUpdateFactory$ZoomUpdate$Type$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Type fromReference(
-          jni$_.JReference reference) =>
-      CameraUpdateFactory$ZoomUpdate$Type.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1111,13 +1215,13 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory$ZoomUpdate> $type;
 
   @jni$_.internal
-  CameraUpdateFactory$ZoomUpdate.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CameraUpdateFactory$ZoomUpdate.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate');
+    r'org/maplibre/android/camera/CameraUpdateFactory$ZoomUpdate',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CameraUpdateFactory$ZoomUpdate$NullableType();
@@ -1146,175 +1250,204 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
 
   /// from: `static public final int ZOOM_TO_POINT`
   static const ZOOM_TO_POINT = 4;
-  static final _id_getType = _class.instanceMethodId(
-    r'getType',
-    r'()I',
-  );
+  static final _id_getType = _class.instanceMethodId(r'getType', r'()I');
 
-  static final _getType = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getType =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final int getType()`
   int getType() {
-    return _getType(reference.pointer, _id_getType as jni$_.JMethodIDPtr)
-        .integer;
+    return _getType(
+      reference.pointer,
+      _id_getType as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
-  static final _id_getZoom = _class.instanceMethodId(
-    r'getZoom',
-    r'()D',
-  );
+  static final _id_getZoom = _class.instanceMethodId(r'getZoom', r'()D');
 
-  static final _getZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getZoom()`
   double getZoom() {
-    return _getZoom(reference.pointer, _id_getZoom as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getZoom(
+      reference.pointer,
+      _id_getZoom as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getX = _class.instanceMethodId(
-    r'getX',
-    r'()F',
-  );
+  static final _id_getX = _class.instanceMethodId(r'getX', r'()F');
 
-  static final _getX = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getX =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final float getX()`
   double getX() {
     return _getX(reference.pointer, _id_getX as jni$_.JMethodIDPtr).float;
   }
 
-  static final _id_getY = _class.instanceMethodId(
-    r'getY',
-    r'()F',
-  );
+  static final _id_getY = _class.instanceMethodId(r'getY', r'()F');
 
-  static final _getY = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getY =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final float getY()`
   double getY() {
     return _getY(reference.pointer, _id_getY as jni$_.JMethodIDPtr).float;
   }
 
-  static final _id_new$ = _class.constructorId(
-    r'(I)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(I)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void <init>(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate(
-    int i,
-  ) {
+  factory CameraUpdateFactory$ZoomUpdate(int i) {
     return CameraUpdateFactory$ZoomUpdate.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, i)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        i,
+      ).reference,
+    );
   }
 
-  static final _id_new$1 = _class.constructorId(
-    r'(ID)V',
-  );
+  static final _id_new$1 = _class.constructorId(r'(ID)V');
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Int32, jni$_.Double)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, double)>();
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(int i, double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate.new$1(
-    int i,
-    double d,
-  ) {
+  factory CameraUpdateFactory$ZoomUpdate.new$1(int i, double d) {
     return CameraUpdateFactory$ZoomUpdate.fromReference(
-        _new$1(_class.reference.pointer, _id_new$1 as jni$_.JMethodIDPtr, i, d)
-            .reference);
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        i,
+        d,
+      ).reference,
+    );
   }
 
-  static final _id_new$2 = _class.constructorId(
-    r'(DFF)V',
-  );
+  static final _id_new$2 = _class.constructorId(r'(DFF)V');
 
-  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(double d, float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate.new$2(
-    double d,
-    double f,
-    double f1,
-  ) {
-    return CameraUpdateFactory$ZoomUpdate.fromReference(_new$2(
-            _class.reference.pointer, _id_new$2 as jni$_.JMethodIDPtr, d, f, f1)
-        .reference);
+  factory CameraUpdateFactory$ZoomUpdate.new$2(double d, double f, double f1) {
+    return CameraUpdateFactory$ZoomUpdate.fromReference(
+      _new$2(
+        _class.reference.pointer,
+        _id_new$2 as jni$_.JMethodIDPtr,
+        d,
+        f,
+        f1,
+      ).reference,
+    );
   }
 
   static final _id_getCameraPosition = _class.instanceMethodId(
@@ -1322,16 +1455,23 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.camera.CameraPosition getCameraPosition(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1339,10 +1479,13 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     maplibremap$_.MapLibreMap mapLibreMap,
   ) {
     final _$mapLibreMap = mapLibreMap.reference;
-    return _getCameraPosition(reference.pointer,
-            _id_getCameraPosition as jni$_.JMethodIDPtr, _$mapLibreMap.pointer)
-        .object<cameraposition$_.CameraPosition>(
-            const cameraposition$_.$CameraPosition$Type());
+    return _getCameraPosition(
+      reference.pointer,
+      _id_getCameraPosition as jni$_.JMethodIDPtr,
+      _$mapLibreMap.pointer,
+    ).object<cameraposition$_.CameraPosition>(
+      const cameraposition$_.$CameraPosition$Type(),
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -1350,48 +1493,58 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -1399,23 +1552,29 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 }
 
@@ -1434,9 +1593,7 @@ final class $CameraUpdateFactory$ZoomUpdate$NullableType
   CameraUpdateFactory$ZoomUpdate? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : CameraUpdateFactory$ZoomUpdate.fromReference(
-              reference,
-            );
+          : CameraUpdateFactory$ZoomUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1473,9 +1630,7 @@ final class $CameraUpdateFactory$ZoomUpdate$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate fromReference(jni$_.JReference reference) =>
-      CameraUpdateFactory$ZoomUpdate.fromReference(
-        reference,
-      );
+      CameraUpdateFactory$ZoomUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1506,13 +1661,13 @@ class CameraUpdateFactory extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory> $type;
 
   @jni$_.internal
-  CameraUpdateFactory.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CameraUpdateFactory.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/camera/CameraUpdateFactory');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/camera/CameraUpdateFactory',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CameraUpdateFactory$NullableType();
@@ -1532,16 +1687,23 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/camera/CameraPosition;)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newCameraPosition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _newCameraPosition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newCameraPosition(org.maplibre.android.camera.CameraPosition cameraPosition)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1550,11 +1712,12 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$cameraPosition = cameraPosition.reference;
     return _newCameraPosition(
-            _class.reference.pointer,
-            _id_newCameraPosition as jni$_.JMethodIDPtr,
-            _$cameraPosition.pointer)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newCameraPosition as jni$_.JMethodIDPtr,
+      _$cameraPosition.pointer,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLng = _class.staticMethodId(
@@ -1562,27 +1725,35 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLng = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _newLatLng =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLng(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate newLatLng(
-    latlng$_.LatLng latLng,
-  ) {
+  static cameraupdate$_.CameraUpdate newLatLng(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _newLatLng(_class.reference.pointer,
-            _id_newLatLng as jni$_.JMethodIDPtr, _$latLng.pointer)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _newLatLng(
+      _class.reference.pointer,
+      _id_newLatLng as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngBounds = _class.staticMethodId(
@@ -1590,17 +1761,24 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;I)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngBounds = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _newLatLngBounds =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1610,12 +1788,13 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _newLatLngBounds(
-            _class.reference.pointer,
-            _id_newLatLngBounds as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            i)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newLatLngBounds as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      i,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngBounds$1 = _class.staticMethodId(
@@ -1623,26 +1802,33 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;DDI)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngBounds$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newLatLngBounds$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               double,
               double,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1654,14 +1840,15 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _newLatLngBounds$1(
-            _class.reference.pointer,
-            _id_newLatLngBounds$1 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            d,
-            d1,
-            i)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newLatLngBounds$1 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      d,
+      d1,
+      i,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngBounds$2 = _class.staticMethodId(
@@ -1669,28 +1856,35 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;IIII)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngBounds$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newLatLngBounds$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
               int,
               int,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int i, int i1, int i2, int i3)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1703,15 +1897,16 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _newLatLngBounds$2(
-            _class.reference.pointer,
-            _id_newLatLngBounds$2 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            i,
-            i1,
-            i2,
-            i3)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newLatLngBounds$2 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      i,
+      i1,
+      i2,
+      i3,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngBounds$3 = _class.staticMethodId(
@@ -1719,23 +1914,28 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;DDIIII)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngBounds$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newLatLngBounds$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Int32
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
@@ -1744,7 +1944,9 @@ class CameraUpdateFactory extends jni$_.JObject {
               int,
               int,
               int,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1, int i, int i1, int i2, int i3)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1759,17 +1961,18 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$latLngBounds = latLngBounds.reference;
     return _newLatLngBounds$3(
-            _class.reference.pointer,
-            _id_newLatLngBounds$3 as jni$_.JMethodIDPtr,
-            _$latLngBounds.pointer,
-            d,
-            d1,
-            i,
-            i1,
-            i2,
-            i3)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newLatLngBounds$3 as jni$_.JMethodIDPtr,
+      _$latLngBounds.pointer,
+      d,
+      d1,
+      i,
+      i1,
+      i2,
+      i3,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngZoom = _class.staticMethodId(
@@ -1777,19 +1980,24 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newLatLngZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngZoom(org.maplibre.android.geometry.LatLng latLng, double d)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1798,10 +2006,14 @@ class CameraUpdateFactory extends jni$_.JObject {
     double d,
   ) {
     final _$latLng = latLng.reference;
-    return _newLatLngZoom(_class.reference.pointer,
-            _id_newLatLngZoom as jni$_.JMethodIDPtr, _$latLng.pointer, d)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _newLatLngZoom(
+      _class.reference.pointer,
+      _id_newLatLngZoom as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+      d,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_newLatLngPadding = _class.staticMethodId(
@@ -1809,28 +2021,35 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;DDDD)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _newLatLngPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newLatLngPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               double,
               double,
               double,
-              double)>();
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLngPadding(org.maplibre.android.geometry.LatLng latLng, double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1843,15 +2062,16 @@ class CameraUpdateFactory extends jni$_.JObject {
   ) {
     final _$latLng = latLng.reference;
     return _newLatLngPadding(
-            _class.reference.pointer,
-            _id_newLatLngPadding as jni$_.JMethodIDPtr,
-            _$latLng.pointer,
-            d,
-            d1,
-            d2,
-            d3)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_newLatLngPadding as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_zoomBy = _class.staticMethodId(
@@ -1859,31 +2079,37 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(DLandroid/graphics/Point;)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _zoomBy = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _zoomBy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomBy(double d, android.graphics.Point point)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomBy(
-    double d,
-    jni$_.JObject point,
-  ) {
+  static cameraupdate$_.CameraUpdate zoomBy(double d, jni$_.JObject point) {
     final _$point = point.reference;
-    return _zoomBy(_class.reference.pointer, _id_zoomBy as jni$_.JMethodIDPtr,
-            d, _$point.pointer)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _zoomBy(
+      _class.reference.pointer,
+      _id_zoomBy as jni$_.JMethodIDPtr,
+      d,
+      _$point.pointer,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_zoomBy$1 = _class.staticMethodId(
@@ -1891,24 +2117,34 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _zoomBy$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+  static final _zoomBy$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomBy(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomBy$1(
-    double d,
-  ) {
+  static cameraupdate$_.CameraUpdate zoomBy$1(double d) {
     return _zoomBy$1(
-            _class.reference.pointer, _id_zoomBy$1 as jni$_.JMethodIDPtr, d)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_zoomBy$1 as jni$_.JMethodIDPtr,
+      d,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_zoomIn = _class.staticMethodId(
@@ -1916,24 +2152,31 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'()Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _zoomIn = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _zoomIn =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomIn()`
   /// The returned object must be released after use, by calling the [release] method.
   static cameraupdate$_.CameraUpdate zoomIn() {
-    return _zoomIn(_class.reference.pointer, _id_zoomIn as jni$_.JMethodIDPtr)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _zoomIn(
+      _class.reference.pointer,
+      _id_zoomIn as jni$_.JMethodIDPtr,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_zoomOut = _class.staticMethodId(
@@ -1941,24 +2184,31 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'()Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _zoomOut = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _zoomOut =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomOut()`
   /// The returned object must be released after use, by calling the [release] method.
   static cameraupdate$_.CameraUpdate zoomOut() {
-    return _zoomOut(_class.reference.pointer, _id_zoomOut as jni$_.JMethodIDPtr)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _zoomOut(
+      _class.reference.pointer,
+      _id_zoomOut as jni$_.JMethodIDPtr,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_zoomTo = _class.staticMethodId(
@@ -1966,24 +2216,34 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _zoomTo = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+  static final _zoomTo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomTo(
-    double d,
-  ) {
+  static cameraupdate$_.CameraUpdate zoomTo(double d) {
     return _zoomTo(
-            _class.reference.pointer, _id_zoomTo as jni$_.JMethodIDPtr, d)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_zoomTo as jni$_.JMethodIDPtr,
+      d,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_bearingTo = _class.staticMethodId(
@@ -1991,24 +2251,34 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _bearingTo = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+  static final _bearingTo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate bearingTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate bearingTo(
-    double d,
-  ) {
+  static cameraupdate$_.CameraUpdate bearingTo(double d) {
     return _bearingTo(
-            _class.reference.pointer, _id_bearingTo as jni$_.JMethodIDPtr, d)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_bearingTo as jni$_.JMethodIDPtr,
+      d,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_tiltTo = _class.staticMethodId(
@@ -2016,24 +2286,34 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _tiltTo = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+  static final _tiltTo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate tiltTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate tiltTo(
-    double d,
-  ) {
+  static cameraupdate$_.CameraUpdate tiltTo(double d) {
     return _tiltTo(
-            _class.reference.pointer, _id_tiltTo as jni$_.JMethodIDPtr, d)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+      _class.reference.pointer,
+      _id_tiltTo as jni$_.JMethodIDPtr,
+      d,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_paddingTo = _class.staticMethodId(
@@ -2041,27 +2321,35 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'([D)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _paddingTo = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _paddingTo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate paddingTo(double[] ds)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate paddingTo(
-    jni$_.JDoubleArray? ds,
-  ) {
+  static cameraupdate$_.CameraUpdate paddingTo(jni$_.JDoubleArray? ds) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
-    return _paddingTo(_class.reference.pointer,
-            _id_paddingTo as jni$_.JMethodIDPtr, _$ds.pointer)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _paddingTo(
+      _class.reference.pointer,
+      _id_paddingTo as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 
   static final _id_paddingTo$1 = _class.staticMethodId(
@@ -2069,21 +2357,28 @@ class CameraUpdateFactory extends jni$_.JObject {
     r'(DDDD)Lorg/maplibre/android/camera/CameraUpdate;',
   );
 
-  static final _paddingTo$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _paddingTo$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, double, double, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Double, jni$_.Double, jni$_.Double)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate paddingTo(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -2093,10 +2388,16 @@ class CameraUpdateFactory extends jni$_.JObject {
     double d2,
     double d3,
   ) {
-    return _paddingTo$1(_class.reference.pointer,
-            _id_paddingTo$1 as jni$_.JMethodIDPtr, d, d1, d2, d3)
-        .object<cameraupdate$_.CameraUpdate>(
-            const cameraupdate$_.$CameraUpdate$Type());
+    return _paddingTo$1(
+      _class.reference.pointer,
+      _id_paddingTo$1 as jni$_.JMethodIDPtr,
+      d,
+      d1,
+      d2,
+      d3,
+    ).object<cameraupdate$_.CameraUpdate>(
+      const cameraupdate$_.$CameraUpdate$Type(),
+    );
   }
 }
 
@@ -2112,11 +2413,7 @@ final class $CameraUpdateFactory$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : CameraUpdateFactory.fromReference(
-              reference,
-            );
+      reference.isNull ? null : CameraUpdateFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -2151,9 +2448,7 @@ final class $CameraUpdateFactory$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory fromReference(jni$_.JReference reference) =>
-      CameraUpdateFactory.fromReference(
-        reference,
-      );
+      CameraUpdateFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

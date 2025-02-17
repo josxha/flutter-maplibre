@@ -63,10 +63,9 @@ class MapLibre extends jni$_.JObject {
   final jni$_.JObjType<MapLibre> $type;
 
   @jni$_.internal
-  MapLibre.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibre.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'org/maplibre/android/MapLibre');
 
@@ -78,26 +77,33 @@ class MapLibre extends jni$_.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/MapLibre;',
   );
 
-  static final _getInstance = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getInstance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapLibre getInstance(
-    jni$_.JObject context,
-  ) {
+  static MapLibre getInstance(jni$_.JObject context) {
     final _$context = context.reference;
-    return _getInstance(_class.reference.pointer,
-            _id_getInstance as jni$_.JMethodIDPtr, _$context.pointer)
-        .object<MapLibre>(const $MapLibre$Type());
+    return _getInstance(
+      _class.reference.pointer,
+      _id_getInstance as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).object<MapLibre>(const $MapLibre$Type());
   }
 
   static final _id_getInstance$1 = _class.staticMethodId(
@@ -105,24 +111,31 @@ class MapLibre extends jni$_.JObject {
     r'(Landroid/content/Context;Ljava/lang/String;Lorg/maplibre/android/WellKnownTileServer;)Lorg/maplibre/android/MapLibre;',
   );
 
-  static final _getInstance$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getInstance$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context, java.lang.String string, org.maplibre.android.WellKnownTileServer wellKnownTileServer)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -136,12 +149,12 @@ class MapLibre extends jni$_.JObject {
     final _$wellKnownTileServer =
         wellKnownTileServer?.reference ?? jni$_.jNullReference;
     return _getInstance$1(
-            _class.reference.pointer,
-            _id_getInstance$1 as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$string.pointer,
-            _$wellKnownTileServer.pointer)
-        .object<MapLibre>(const $MapLibre$Type());
+      _class.reference.pointer,
+      _id_getInstance$1 as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      _$string.pointer,
+      _$wellKnownTileServer.pointer,
+    ).object<MapLibre>(const $MapLibre$Type());
   }
 
   static final _id_getApiKey = _class.staticMethodId(
@@ -149,24 +162,29 @@ class MapLibre extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getApiKey = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApiKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public java.lang.String getApiKey()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? getApiKey() {
     return _getApiKey(
-            _class.reference.pointer, _id_getApiKey as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+      _class.reference.pointer,
+      _id_getApiKey as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_setApiKey = _class.staticMethodId(
@@ -174,25 +192,32 @@ class MapLibre extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setApiKey = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setApiKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setApiKey(java.lang.String string)`
-  static void setApiKey(
-    jni$_.JString? string,
-  ) {
+  static void setApiKey(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setApiKey(_class.reference.pointer, _id_setApiKey as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setApiKey(
+      _class.reference.pointer,
+      _id_setApiKey as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_getTileServerOptions = _class.staticMethodId(
@@ -200,25 +225,31 @@ class MapLibre extends jni$_.JObject {
     r'()Lorg/maplibre/android/util/TileServerOptions;',
   );
 
-  static final _getTileServerOptions = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTileServerOptions =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.util.TileServerOptions getTileServerOptions()`
   /// The returned object must be released after use, by calling the [release] method.
   static tileserveroptions$_.TileServerOptions? getTileServerOptions() {
-    return _getTileServerOptions(_class.reference.pointer,
-            _id_getTileServerOptions as jni$_.JMethodIDPtr)
-        .object<tileserveroptions$_.TileServerOptions?>(
-            const tileserveroptions$_.$TileServerOptions$NullableType());
+    return _getTileServerOptions(
+      _class.reference.pointer,
+      _id_getTileServerOptions as jni$_.JMethodIDPtr,
+    ).object<tileserveroptions$_.TileServerOptions?>(
+      const tileserveroptions$_.$TileServerOptions$NullableType(),
+    );
   }
 
   static final _id_getPredefinedStyles = _class.staticMethodId(
@@ -226,26 +257,33 @@ class MapLibre extends jni$_.JObject {
     r'()[Lorg/maplibre/android/util/DefaultStyle;',
   );
 
-  static final _getPredefinedStyles = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getPredefinedStyles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.util.DefaultStyle[] getPredefinedStyles()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JArray<defaultstyle$_.DefaultStyle?>? getPredefinedStyles() {
-    return _getPredefinedStyles(_class.reference.pointer,
-            _id_getPredefinedStyles as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
-            const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
-                defaultstyle$_.$DefaultStyle$NullableType()));
+    return _getPredefinedStyles(
+      _class.reference.pointer,
+      _id_getPredefinedStyles as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
+      const jni$_.JArrayNullableType<defaultstyle$_.DefaultStyle?>(
+        defaultstyle$_.$DefaultStyle$NullableType(),
+      ),
+    );
   }
 
   static final _id_getPredefinedStyle = _class.staticMethodId(
@@ -253,16 +291,23 @@ class MapLibre extends jni$_.JObject {
     r'(Ljava/lang/String;)Lorg/maplibre/android/util/DefaultStyle;',
   );
 
-  static final _getPredefinedStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getPredefinedStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.util.DefaultStyle getPredefinedStyle(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -270,10 +315,13 @@ class MapLibre extends jni$_.JObject {
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _getPredefinedStyle(_class.reference.pointer,
-            _id_getPredefinedStyle as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<defaultstyle$_.DefaultStyle?>(
-            const defaultstyle$_.$DefaultStyle$NullableType());
+    return _getPredefinedStyle(
+      _class.reference.pointer,
+      _id_getPredefinedStyle as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<defaultstyle$_.DefaultStyle?>(
+      const defaultstyle$_.$DefaultStyle$NullableType(),
+    );
   }
 
   static final _id_getApplicationContext = _class.staticMethodId(
@@ -281,24 +329,29 @@ class MapLibre extends jni$_.JObject {
     r'()Landroid/content/Context;',
   );
 
-  static final _getApplicationContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getApplicationContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public android.content.Context getApplicationContext()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JObject getApplicationContext() {
-    return _getApplicationContext(_class.reference.pointer,
-            _id_getApplicationContext as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _getApplicationContext(
+      _class.reference.pointer,
+      _id_getApplicationContext as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_setConnected = _class.staticMethodId(
@@ -306,25 +359,32 @@ class MapLibre extends jni$_.JObject {
     r'(Ljava/lang/Boolean;)V',
   );
 
-  static final _setConnected = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setConnected =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setConnected(java.lang.Boolean boolean)`
-  static void setConnected(
-    jni$_.JBoolean? boolean,
-  ) {
+  static void setConnected(jni$_.JBoolean? boolean) {
     final _$boolean = boolean?.reference ?? jni$_.jNullReference;
-    _setConnected(_class.reference.pointer,
-            _id_setConnected as jni$_.JMethodIDPtr, _$boolean.pointer)
-        .check();
+    _setConnected(
+      _class.reference.pointer,
+      _id_setConnected as jni$_.JMethodIDPtr,
+      _$boolean.pointer,
+    ).check();
   }
 
   static final _id_isConnected = _class.staticMethodId(
@@ -332,24 +392,29 @@ class MapLibre extends jni$_.JObject {
     r'()Ljava/lang/Boolean;',
   );
 
-  static final _isConnected = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isConnected =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public java.lang.Boolean isConnected()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JBoolean? isConnected() {
     return _isConnected(
-            _class.reference.pointer, _id_isConnected as jni$_.JMethodIDPtr)
-        .object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
+      _class.reference.pointer,
+      _id_isConnected as jni$_.JMethodIDPtr,
+    ).object<jni$_.JBoolean?>(const jni$_.JBooleanNullableType());
   }
 
   static final _id_getModuleProvider = _class.staticMethodId(
@@ -357,24 +422,29 @@ class MapLibre extends jni$_.JObject {
     r'()Lorg/maplibre/android/ModuleProvider;',
   );
 
-  static final _getModuleProvider = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getModuleProvider =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.ModuleProvider getModuleProvider()`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JObject getModuleProvider() {
-    return _getModuleProvider(_class.reference.pointer,
-            _id_getModuleProvider as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _getModuleProvider(
+      _class.reference.pointer,
+      _id_getModuleProvider as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_setModuleProvider = _class.staticMethodId(
@@ -382,27 +452,32 @@ class MapLibre extends jni$_.JObject {
     r'(Lorg/maplibre/android/ModuleProvider;)V',
   );
 
-  static final _setModuleProvider = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setModuleProvider =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void setModuleProvider(org.maplibre.android.ModuleProvider moduleProvider)`
-  static void setModuleProvider(
-    jni$_.JObject? moduleProvider,
-  ) {
+  static void setModuleProvider(jni$_.JObject? moduleProvider) {
     final _$moduleProvider = moduleProvider?.reference ?? jni$_.jNullReference;
     _setModuleProvider(
-            _class.reference.pointer,
-            _id_setModuleProvider as jni$_.JMethodIDPtr,
-            _$moduleProvider.pointer)
-        .check();
+      _class.reference.pointer,
+      _id_setModuleProvider as jni$_.JMethodIDPtr,
+      _$moduleProvider.pointer,
+    ).check();
   }
 
   static final _id_throwIfApiKeyInvalid = _class.staticMethodId(
@@ -410,49 +485,58 @@ class MapLibre extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _throwIfApiKeyInvalid = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _throwIfApiKeyInvalid =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public void throwIfApiKeyInvalid(java.lang.String string)`
-  static void throwIfApiKeyInvalid(
-    jni$_.JString? string,
-  ) {
+  static void throwIfApiKeyInvalid(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _throwIfApiKeyInvalid(_class.reference.pointer,
-            _id_throwIfApiKeyInvalid as jni$_.JMethodIDPtr, _$string.pointer)
-        .check();
+    _throwIfApiKeyInvalid(
+      _class.reference.pointer,
+      _id_throwIfApiKeyInvalid as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
-  static final _id_hasInstance = _class.staticMethodId(
-    r'hasInstance',
-    r'()Z',
-  );
+  static final _id_hasInstance = _class.staticMethodId(r'hasInstance', r'()Z');
 
-  static final _hasInstance = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _hasInstance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallStaticBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `static public boolean hasInstance()`
   static bool hasInstance() {
     return _hasInstance(
-            _class.reference.pointer, _id_hasInstance as jni$_.JMethodIDPtr)
-        .boolean;
+      _class.reference.pointer,
+      _id_hasInstance as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 }
 
@@ -466,11 +550,8 @@ final class $MapLibre$NullableType extends jni$_.JObjType<MapLibre?> {
 
   @jni$_.internal
   @core$_.override
-  MapLibre? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : MapLibre.fromReference(
-          reference,
-        );
+  MapLibre? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : MapLibre.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -503,9 +584,8 @@ final class $MapLibre$Type extends jni$_.JObjType<MapLibre> {
 
   @jni$_.internal
   @core$_.override
-  MapLibre fromReference(jni$_.JReference reference) => MapLibre.fromReference(
-        reference,
-      );
+  MapLibre fromReference(jni$_.JReference reference) =>
+      MapLibre.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

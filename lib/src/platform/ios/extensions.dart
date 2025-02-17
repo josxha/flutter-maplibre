@@ -39,12 +39,14 @@ extension LngLatBoundsExt on LngLatBounds {
   /// Convert a [LngLatBounds] to a [CGPoint].
   MLNCoordinateBounds toMLNCoordinateBounds() {
     final bounds = Struct.create<MLNCoordinateBounds>();
-    bounds.sw = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = longitudeWest
-      ..latitude = latitudeSouth;
-    bounds.ne = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = longitudeEast
-      ..latitude = latitudeNorth;
+    bounds.sw =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = longitudeWest
+          ..latitude = latitudeSouth;
+    bounds.ne =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = longitudeEast
+          ..latitude = latitudeNorth;
     return bounds;
   }
 }
@@ -72,12 +74,12 @@ extension StringExt on String {
   NSURL? toNSURL() => NSURL.URLWithString_(toNSString());
 
   /// Convert to a [NSURL].
-  NSData? toNSDataUTF8() => toNSString().dataUsingEncoding_(
-        nsUTF8StringEncoding,
-      );
+  NSData? toNSDataUTF8() =>
+      toNSString().dataUsingEncoding_(nsUTF8StringEncoding);
 
   /// Convert a dashed separated name to camel case.
-  String dashedToCamelCase() => split('-').indexed.map((entry) {
+  String dashedToCamelCase() =>
+      split('-').indexed.map((entry) {
         final index = entry.$1;
         final word = entry.$2;
         // Keep the first word in lowercase

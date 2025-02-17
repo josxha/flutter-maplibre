@@ -67,13 +67,13 @@ class RasterDemSource$Companion extends jni$_.JObject {
   final jni$_.JObjType<RasterDemSource$Companion> $type;
 
   @jni$_.internal
-  RasterDemSource$Companion.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  RasterDemSource$Companion.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/sources/RasterDemSource$Companion');
+    r'org/maplibre/android/style/sources/RasterDemSource$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $RasterDemSource$Companion$NullableType();
@@ -82,29 +82,36 @@ class RasterDemSource$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource$Companion(
-    jni$_.JObject? defaultConstructorMarker,
-  ) {
+  factory RasterDemSource$Companion(jni$_.JObject? defaultConstructorMarker) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return RasterDemSource$Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return RasterDemSource$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -123,9 +130,7 @@ final class $RasterDemSource$Companion$NullableType
   RasterDemSource$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : RasterDemSource$Companion.fromReference(
-              reference,
-            );
+          : RasterDemSource$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -161,9 +166,7 @@ final class $RasterDemSource$Companion$Type
   @jni$_.internal
   @core$_.override
   RasterDemSource$Companion fromReference(jni$_.JReference reference) =>
-      RasterDemSource$Companion.fromReference(
-        reference,
-      );
+      RasterDemSource$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -194,13 +197,13 @@ class RasterDemSource extends source$_.Source {
   final jni$_.JObjType<RasterDemSource> $type;
 
   @jni$_.internal
-  RasterDemSource.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  RasterDemSource.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/sources/RasterDemSource');
+    r'org/maplibre/android/style/sources/RasterDemSource',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $RasterDemSource$NullableType();
@@ -217,157 +220,187 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `static public final int DEFAULT_TILE_SIZE`
   static const DEFAULT_TILE_SIZE = 512;
-  static final _id_new$ = _class.constructorId(
-    r'(J)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(J)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource(
-    int j,
-  ) {
+  factory RasterDemSource(int j) {
     return RasterDemSource.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, j)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        j,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URL;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$1(
-    jni$_.JString? string,
-    url$_.URL uRL,
-  ) {
+  factory RasterDemSource.new$1(jni$_.JString? string, url$_.URL uRL) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
-    return RasterDemSource.fromReference(_new$1(_class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr, _$string.pointer, _$uRL.pointer)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRL.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$2 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/net/URI;)V',
   );
 
-  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$2(
-    jni$_.JString? string,
-    uri$_.URI uRI,
-  ) {
+  factory RasterDemSource.new$2(jni$_.JString? string, uri$_.URI uRI) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
-    return RasterDemSource.fromReference(_new$2(_class.reference.pointer,
-            _id_new$2 as jni$_.JMethodIDPtr, _$string.pointer, _$uRI.pointer)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$2(
+        _class.reference.pointer,
+        _id_new$2 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$uRI.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$3 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$3(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory RasterDemSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return RasterDemSource.fromReference(_new$3(
-            _class.reference.pointer,
-            _id_new$3 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$3(
+        _class.reference.pointer,
+        _id_new$3 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$4 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;I)V',
   );
 
-  static final _new$4 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -378,35 +411,41 @@ class RasterDemSource extends source$_.Source {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return RasterDemSource.fromReference(_new$4(
-            _class.reference.pointer,
-            _id_new$4 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer,
-            i)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$4(
+        _class.reference.pointer,
+        _id_new$4 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+        i,
+      ).reference,
+    );
   }
 
   static final _id_new$5 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/TileSet;)V',
   );
 
-  static final _new$5 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$5 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -416,36 +455,45 @@ class RasterDemSource extends source$_.Source {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$tileSet = tileSet.reference;
-    return RasterDemSource.fromReference(_new$5(
-            _class.reference.pointer,
-            _id_new$5 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$tileSet.pointer)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$5(
+        _class.reference.pointer,
+        _id_new$5 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$tileSet.pointer,
+      ).reference,
+    );
   }
 
   static final _id_new$6 = _class.constructorId(
     r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/TileSet;I)V',
   );
 
-  static final _new$6 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$6 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -456,13 +504,15 @@ class RasterDemSource extends source$_.Source {
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$tileSet = tileSet.reference;
-    return RasterDemSource.fromReference(_new$6(
-            _class.reference.pointer,
-            _id_new$6 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$tileSet.pointer,
-            i)
-        .reference);
+    return RasterDemSource.fromReference(
+      _new$6(
+        _class.reference.pointer,
+        _id_new$6 as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$tileSet.pointer,
+        i,
+      ).reference,
+    );
   }
 
   static final _id_getUrl = _class.instanceMethodId(
@@ -470,23 +520,29 @@ class RasterDemSource extends source$_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUrl = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUrl =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUrl() {
-    return _getUrl(reference.pointer, _id_getUrl as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getUrl(
+      reference.pointer,
+      _id_getUrl as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getUri = _class.instanceMethodId(
@@ -494,23 +550,29 @@ class RasterDemSource extends source$_.Source {
     r'()Ljava/lang/String;',
   );
 
-  static final _getUri = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getUri =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final java.lang.String getUri()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString? getUri() {
-    return _getUri(reference.pointer, _id_getUri as jni$_.JMethodIDPtr)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _getUri(
+      reference.pointer,
+      _id_getUri as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -526,11 +588,8 @@ final class $RasterDemSource$NullableType
 
   @jni$_.internal
   @core$_.override
-  RasterDemSource? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : RasterDemSource.fromReference(
-          reference,
-        );
+  RasterDemSource? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : RasterDemSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -565,9 +624,7 @@ final class $RasterDemSource$Type extends jni$_.JObjType<RasterDemSource> {
   @jni$_.internal
   @core$_.override
   RasterDemSource fromReference(jni$_.JReference reference) =>
-      RasterDemSource.fromReference(
-        reference,
-      );
+      RasterDemSource.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

@@ -67,13 +67,13 @@ class Projection extends jni$_.JObject {
   final jni$_.JObjType<Projection> $type;
 
   @jni$_.internal
-  Projection.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Projection.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/maps/Projection');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/Projection',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Projection$NullableType();
@@ -83,23 +83,28 @@ class Projection extends jni$_.JObject {
     r'()V',
   );
 
-  static final _invalidateContentPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _invalidateContentPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void invalidateContentPadding()`
   void invalidateContentPadding() {
-    _invalidateContentPadding(reference.pointer,
-            _id_invalidateContentPadding as jni$_.JMethodIDPtr)
-        .check();
+    _invalidateContentPadding(
+      reference.pointer,
+      _id_invalidateContentPadding as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_getProjectedMetersForLatLng = _class.instanceMethodId(
@@ -109,15 +114,21 @@ class Projection extends jni$_.JObject {
 
   static final _getProjectedMetersForLatLng =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.ProjectedMeters getProjectedMetersForLatLng(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -126,11 +137,12 @@ class Projection extends jni$_.JObject {
   ) {
     final _$latLng = latLng.reference;
     return _getProjectedMetersForLatLng(
-            reference.pointer,
-            _id_getProjectedMetersForLatLng as jni$_.JMethodIDPtr,
-            _$latLng.pointer)
-        .object<projectedmeters$_.ProjectedMeters>(
-            const projectedmeters$_.$ProjectedMeters$Type());
+      reference.pointer,
+      _id_getProjectedMetersForLatLng as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).object<projectedmeters$_.ProjectedMeters>(
+      const projectedmeters$_.$ProjectedMeters$Type(),
+    );
   }
 
   static final _id_getLatLngForProjectedMeters = _class.instanceMethodId(
@@ -140,15 +152,21 @@ class Projection extends jni$_.JObject {
 
   static final _getLatLngForProjectedMeters =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.LatLng getLatLngForProjectedMeters(org.maplibre.android.geometry.ProjectedMeters projectedMeters)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -157,10 +175,10 @@ class Projection extends jni$_.JObject {
   ) {
     final _$projectedMeters = projectedMeters.reference;
     return _getLatLngForProjectedMeters(
-            reference.pointer,
-            _id_getLatLngForProjectedMeters as jni$_.JMethodIDPtr,
-            _$projectedMeters.pointer)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+      reference.pointer,
+      _id_getLatLngForProjectedMeters as jni$_.JMethodIDPtr,
+      _$projectedMeters.pointer,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_getMetersPerPixelAtLatitude = _class.instanceMethodId(
@@ -170,21 +188,29 @@ class Projection extends jni$_.JObject {
 
   static final _getMetersPerPixelAtLatitude =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-              'globalEnv_CallDoubleMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public double getMetersPerPixelAtLatitude(double d)`
-  double getMetersPerPixelAtLatitude(
-    double d,
-  ) {
-    return _getMetersPerPixelAtLatitude(reference.pointer,
-            _id_getMetersPerPixelAtLatitude as jni$_.JMethodIDPtr, d)
-        .doubleFloat;
+  double getMetersPerPixelAtLatitude(double d) {
+    return _getMetersPerPixelAtLatitude(
+      reference.pointer,
+      _id_getMetersPerPixelAtLatitude as jni$_.JMethodIDPtr,
+      d,
+    ).doubleFloat;
   }
 
   static final _id_fromScreenLocation = _class.instanceMethodId(
@@ -192,26 +218,33 @@ class Projection extends jni$_.JObject {
     r'(Landroid/graphics/PointF;)Lorg/maplibre/android/geometry/LatLng;',
   );
 
-  static final _fromScreenLocation = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _fromScreenLocation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.LatLng fromScreenLocation(android.graphics.PointF pointF)`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng$_.LatLng fromScreenLocation(
-    pointf$_.PointF pointF,
-  ) {
+  latlng$_.LatLng fromScreenLocation(pointf$_.PointF pointF) {
     final _$pointF = pointF.reference;
-    return _fromScreenLocation(reference.pointer,
-            _id_fromScreenLocation as jni$_.JMethodIDPtr, _$pointF.pointer)
-        .object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
+    return _fromScreenLocation(
+      reference.pointer,
+      _id_fromScreenLocation as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+    ).object<latlng$_.LatLng>(const latlng$_.$LatLng$Type());
   }
 
   static final _id_fromScreenLocations = _class.instanceMethodId(
@@ -219,36 +252,37 @@ class Projection extends jni$_.JObject {
     r'([D[D)V',
   );
 
-  static final _fromScreenLocations = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _fromScreenLocations =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void fromScreenLocations(double[] ds, double[] ds1)`
-  void fromScreenLocations(
-    jni$_.JDoubleArray ds,
-    jni$_.JDoubleArray ds1,
-  ) {
+  void fromScreenLocations(jni$_.JDoubleArray ds, jni$_.JDoubleArray ds1) {
     final _$ds = ds.reference;
     final _$ds1 = ds1.reference;
     _fromScreenLocations(
-            reference.pointer,
-            _id_fromScreenLocations as jni$_.JMethodIDPtr,
-            _$ds.pointer,
-            _$ds1.pointer)
-        .check();
+      reference.pointer,
+      _id_fromScreenLocations as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+      _$ds1.pointer,
+    ).check();
   }
 
   static final _id_getVisibleRegion = _class.instanceMethodId(
@@ -256,25 +290,31 @@ class Projection extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/VisibleRegion;',
   );
 
-  static final _getVisibleRegion = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getVisibleRegion =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.VisibleRegion getVisibleRegion()`
   /// The returned object must be released after use, by calling the [release] method.
   visibleregion$_.VisibleRegion getVisibleRegion() {
     return _getVisibleRegion(
-            reference.pointer, _id_getVisibleRegion as jni$_.JMethodIDPtr)
-        .object<visibleregion$_.VisibleRegion>(
-            const visibleregion$_.$VisibleRegion$Type());
+      reference.pointer,
+      _id_getVisibleRegion as jni$_.JMethodIDPtr,
+    ).object<visibleregion$_.VisibleRegion>(
+      const visibleregion$_.$VisibleRegion$Type(),
+    );
   }
 
   static final _id_getVisibleRegion$1 = _class.instanceMethodId(
@@ -282,25 +322,34 @@ class Projection extends jni$_.JObject {
     r'(Z)Lorg/maplibre/android/geometry/VisibleRegion;',
   );
 
-  static final _getVisibleRegion$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getVisibleRegion$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public org.maplibre.android.geometry.VisibleRegion getVisibleRegion(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  visibleregion$_.VisibleRegion getVisibleRegion$1(
-    bool z,
-  ) {
-    return _getVisibleRegion$1(reference.pointer,
-            _id_getVisibleRegion$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .object<visibleregion$_.VisibleRegion>(
-            const visibleregion$_.$VisibleRegion$Type());
+  visibleregion$_.VisibleRegion getVisibleRegion$1(bool z) {
+    return _getVisibleRegion$1(
+      reference.pointer,
+      _id_getVisibleRegion$1 as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).object<visibleregion$_.VisibleRegion>(
+      const visibleregion$_.$VisibleRegion$Type(),
+    );
   }
 
   static final _id_getVisibleCoordinateBounds = _class.instanceMethodId(
@@ -310,24 +359,30 @@ class Projection extends jni$_.JObject {
 
   static final _getVisibleCoordinateBounds =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void getVisibleCoordinateBounds(double[] ds)`
-  void getVisibleCoordinateBounds(
-    jni$_.JDoubleArray ds,
-  ) {
+  void getVisibleCoordinateBounds(jni$_.JDoubleArray ds) {
     final _$ds = ds.reference;
-    _getVisibleCoordinateBounds(reference.pointer,
-            _id_getVisibleCoordinateBounds as jni$_.JMethodIDPtr, _$ds.pointer)
-        .check();
+    _getVisibleCoordinateBounds(
+      reference.pointer,
+      _id_getVisibleCoordinateBounds as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+    ).check();
   }
 
   static final _id_toScreenLocation = _class.instanceMethodId(
@@ -335,26 +390,33 @@ class Projection extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLng;)Landroid/graphics/PointF;',
   );
 
-  static final _toScreenLocation = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _toScreenLocation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public android.graphics.PointF toScreenLocation(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  pointf$_.PointF toScreenLocation(
-    latlng$_.LatLng latLng,
-  ) {
+  pointf$_.PointF toScreenLocation(latlng$_.LatLng latLng) {
     final _$latLng = latLng.reference;
-    return _toScreenLocation(reference.pointer,
-            _id_toScreenLocation as jni$_.JMethodIDPtr, _$latLng.pointer)
-        .object<pointf$_.PointF>(const pointf$_.$PointF$Type());
+    return _toScreenLocation(
+      reference.pointer,
+      _id_toScreenLocation as jni$_.JMethodIDPtr,
+      _$latLng.pointer,
+    ).object<pointf$_.PointF>(const pointf$_.$PointF$Type());
   }
 
   static final _id_toScreenLocations = _class.instanceMethodId(
@@ -362,36 +424,37 @@ class Projection extends jni$_.JObject {
     r'([D[D)V',
   );
 
-  static final _toScreenLocations = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toScreenLocations =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void toScreenLocations(double[] ds, double[] ds1)`
-  void toScreenLocations(
-    jni$_.JDoubleArray ds,
-    jni$_.JDoubleArray ds1,
-  ) {
+  void toScreenLocations(jni$_.JDoubleArray ds, jni$_.JDoubleArray ds1) {
     final _$ds = ds.reference;
     final _$ds1 = ds1.reference;
     _toScreenLocations(
-            reference.pointer,
-            _id_toScreenLocations as jni$_.JMethodIDPtr,
-            _$ds.pointer,
-            _$ds1.pointer)
-        .check();
+      reference.pointer,
+      _id_toScreenLocations as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+      _$ds1.pointer,
+    ).check();
   }
 
   static final _id_calculateZoom = _class.instanceMethodId(
@@ -399,24 +462,31 @@ class Projection extends jni$_.JObject {
     r'(F)D',
   );
 
-  static final _calculateZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _calculateZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_
-                      .VarArgs<(jni$_.Double,)>)>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public double calculateZoom(float f)`
-  double calculateZoom(
-    double f,
-  ) {
+  double calculateZoom(double f) {
     return _calculateZoom(
-            reference.pointer, _id_calculateZoom as jni$_.JMethodIDPtr, f)
-        .doubleFloat;
+      reference.pointer,
+      _id_calculateZoom as jni$_.JMethodIDPtr,
+      f,
+    ).doubleFloat;
   }
 }
 
@@ -430,11 +500,8 @@ final class $Projection$NullableType extends jni$_.JObjType<Projection?> {
 
   @jni$_.internal
   @core$_.override
-  Projection? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Projection.fromReference(
-          reference,
-        );
+  Projection? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Projection.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -468,9 +535,7 @@ final class $Projection$Type extends jni$_.JObjType<Projection> {
   @jni$_.internal
   @core$_.override
   Projection fromReference(jni$_.JReference reference) =>
-      Projection.fromReference(
-        reference,
-      );
+      Projection.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

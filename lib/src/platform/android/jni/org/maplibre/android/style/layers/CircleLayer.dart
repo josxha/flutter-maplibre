@@ -65,13 +65,13 @@ class CircleLayer extends layer$_.Layer {
   final jni$_.JObjType<CircleLayer> $type;
 
   @jni$_.internal
-  CircleLayer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  CircleLayer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/CircleLayer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/CircleLayer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CircleLayer$NullableType();
@@ -80,34 +80,40 @@ class CircleLayer extends layer$_.Layer {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CircleLayer(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory CircleLayer(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return CircleLayer.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
-        .reference);
+    return CircleLayer.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setSourceLayer = _class.instanceMethodId(
@@ -115,25 +121,32 @@ class CircleLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(
-    jni$_.JString? string,
-  ) {
+  void setSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setSourceLayer(
+      reference.pointer,
+      _id_setSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_withSourceLayer = _class.instanceMethodId(
@@ -141,26 +154,33 @@ class CircleLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/CircleLayer;',
   );
 
-  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.CircleLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  CircleLayer withSourceLayer(
-    jni$_.JString? string,
-  ) {
+  CircleLayer withSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<CircleLayer>(const $CircleLayer$Type());
+    return _withSourceLayer(
+      reference.pointer,
+      _id_withSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<CircleLayer>(const $CircleLayer$Type());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -168,24 +188,29 @@ class CircleLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getSourceLayer = _class.instanceMethodId(
@@ -193,24 +218,29 @@ class CircleLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceLayer() {
     return _getSourceLayer(
-            reference.pointer, _id_getSourceLayer as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceLayer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setFilter = _class.instanceMethodId(
@@ -218,25 +248,32 @@ class CircleLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)V',
   );
 
-  static final _setFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(
-    jni$_.JObject expression,
-  ) {
+  void setFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    _setFilter(reference.pointer, _id_setFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .check();
+    _setFilter(
+      reference.pointer,
+      _id_setFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).check();
   }
 
   static final _id_withFilter = _class.instanceMethodId(
@@ -244,26 +281,33 @@ class CircleLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/CircleLayer;',
   );
 
-  static final _withFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.CircleLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  CircleLayer withFilter(
-    jni$_.JObject expression,
-  ) {
+  CircleLayer withFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    return _withFilter(reference.pointer, _id_withFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .object<CircleLayer>(const $CircleLayer$Type());
+    return _withFilter(
+      reference.pointer,
+      _id_withFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).object<CircleLayer>(const $CircleLayer$Type());
   }
 
   static final _id_getFilter = _class.instanceMethodId(
@@ -271,23 +315,29 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getFilter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getFilter()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getFilter() {
-    return _getFilter(reference.pointer, _id_getFilter as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getFilter(
+      reference.pointer,
+      _id_getFilter as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -295,16 +345,23 @@ class CircleLayer extends layer$_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/CircleLayer;',
   );
 
-  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withProperties =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.CircleLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -312,9 +369,11 @@ class CircleLayer extends layer$_.Layer {
     jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?> propertyValues,
   ) {
     final _$propertyValues = propertyValues.reference;
-    return _withProperties(reference.pointer,
-            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
-        .object<CircleLayer>(const $CircleLayer$Type());
+    return _withProperties(
+      reference.pointer,
+      _id_withProperties as jni$_.JMethodIDPtr,
+      _$propertyValues.pointer,
+    ).object<CircleLayer>(const $CircleLayer$Type());
   }
 
   static final _id_getCircleSortKey = _class.instanceMethodId(
@@ -322,26 +381,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleSortKey = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleSortKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleSortKey()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleSortKey() {
     return _getCircleSortKey(
-            reference.pointer, _id_getCircleSortKey as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleSortKey as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleRadius = _class.instanceMethodId(
@@ -349,26 +415,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleRadius = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleRadius =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleRadius()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleRadius() {
     return _getCircleRadius(
-            reference.pointer, _id_getCircleRadius as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleRadius as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleRadiusTransition = _class.instanceMethodId(
@@ -376,25 +449,31 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getCircleRadiusTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleRadiusTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleRadiusTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleRadiusTransition() {
-    return _getCircleRadiusTransition(reference.pointer,
-            _id_getCircleRadiusTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleRadiusTransition(
+      reference.pointer,
+      _id_getCircleRadiusTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleRadiusTransition = _class.instanceMethodId(
@@ -402,16 +481,23 @@ class CircleLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setCircleRadiusTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCircleRadiusTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleRadiusTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleRadiusTransition(
@@ -419,10 +505,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleRadiusTransition(
-            reference.pointer,
-            _id_setCircleRadiusTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleRadiusTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleColor = _class.instanceMethodId(
@@ -430,26 +516,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getCircleColor() {
     return _getCircleColor(
-            reference.pointer, _id_getCircleColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getCircleColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleColorAsInt = _class.instanceMethodId(
@@ -457,23 +550,28 @@ class CircleLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getCircleColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCircleColorAsInt()`
   int getCircleColorAsInt() {
     return _getCircleColorAsInt(
-            reference.pointer, _id_getCircleColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCircleColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCircleColorTransition = _class.instanceMethodId(
@@ -481,25 +579,31 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getCircleColorTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleColorTransition() {
-    return _getCircleColorTransition(reference.pointer,
-            _id_getCircleColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleColorTransition(
+      reference.pointer,
+      _id_getCircleColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleColorTransition = _class.instanceMethodId(
@@ -507,16 +611,23 @@ class CircleLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setCircleColorTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCircleColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleColorTransition(
@@ -524,10 +635,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleColorTransition(
-            reference.pointer,
-            _id_setCircleColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleBlur = _class.instanceMethodId(
@@ -535,26 +646,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleBlur = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleBlur =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleBlur()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleBlur() {
     return _getCircleBlur(
-            reference.pointer, _id_getCircleBlur as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleBlur as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleBlurTransition = _class.instanceMethodId(
@@ -562,25 +680,31 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getCircleBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleBlurTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleBlurTransition() {
-    return _getCircleBlurTransition(reference.pointer,
-            _id_getCircleBlurTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleBlurTransition(
+      reference.pointer,
+      _id_getCircleBlurTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleBlurTransition = _class.instanceMethodId(
@@ -588,16 +712,23 @@ class CircleLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setCircleBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCircleBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleBlurTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleBlurTransition(
@@ -605,10 +736,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleBlurTransition(
-            reference.pointer,
-            _id_setCircleBlurTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleBlurTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleOpacity = _class.instanceMethodId(
@@ -616,26 +747,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleOpacity() {
     return _getCircleOpacity(
-            reference.pointer, _id_getCircleOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleOpacityTransition = _class.instanceMethodId(
@@ -645,24 +783,29 @@ class CircleLayer extends layer$_.Layer {
 
   static final _getCircleOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleOpacityTransition() {
-    return _getCircleOpacityTransition(reference.pointer,
-            _id_getCircleOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleOpacityTransition(
+      reference.pointer,
+      _id_getCircleOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleOpacityTransition = _class.instanceMethodId(
@@ -672,15 +815,21 @@ class CircleLayer extends layer$_.Layer {
 
   static final _setCircleOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleOpacityTransition(
@@ -688,10 +837,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleOpacityTransition(
-            reference.pointer,
-            _id_setCircleOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleTranslate = _class.instanceMethodId(
@@ -699,29 +848,34 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleTranslate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleTranslate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleTranslate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>
-      getCircleTranslate() {
+  getCircleTranslate() {
     return _getCircleTranslate(
-            reference.pointer, _id_getCircleTranslate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getCircleTranslate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getCircleTranslateTransition = _class.instanceMethodId(
@@ -731,24 +885,29 @@ class CircleLayer extends layer$_.Layer {
 
   static final _getCircleTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleTranslateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleTranslateTransition() {
-    return _getCircleTranslateTransition(reference.pointer,
-            _id_getCircleTranslateTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleTranslateTransition(
+      reference.pointer,
+      _id_getCircleTranslateTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleTranslateTransition = _class.instanceMethodId(
@@ -758,15 +917,21 @@ class CircleLayer extends layer$_.Layer {
 
   static final _setCircleTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleTranslateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleTranslateTransition(
@@ -774,10 +939,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleTranslateTransition(
-            reference.pointer,
-            _id_setCircleTranslateTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleTranslateTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleTranslateAnchor = _class.instanceMethodId(
@@ -785,26 +950,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleTranslateAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleTranslateAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getCircleTranslateAnchor() {
-    return _getCircleTranslateAnchor(reference.pointer,
-            _id_getCircleTranslateAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getCircleTranslateAnchor(
+      reference.pointer,
+      _id_getCircleTranslateAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getCirclePitchScale = _class.instanceMethodId(
@@ -812,26 +984,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCirclePitchScale = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCirclePitchScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCirclePitchScale()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getCirclePitchScale() {
     return _getCirclePitchScale(
-            reference.pointer, _id_getCirclePitchScale as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getCirclePitchScale as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getCirclePitchAlignment = _class.instanceMethodId(
@@ -839,26 +1018,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCirclePitchAlignment = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCirclePitchAlignment =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCirclePitchAlignment()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getCirclePitchAlignment() {
-    return _getCirclePitchAlignment(reference.pointer,
-            _id_getCirclePitchAlignment as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getCirclePitchAlignment(
+      reference.pointer,
+      _id_getCirclePitchAlignment as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleStrokeWidth = _class.instanceMethodId(
@@ -866,26 +1052,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleStrokeWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleStrokeWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleStrokeWidth()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleStrokeWidth() {
     return _getCircleStrokeWidth(
-            reference.pointer, _id_getCircleStrokeWidth as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleStrokeWidth as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleStrokeWidthTransition = _class.instanceMethodId(
@@ -895,24 +1088,29 @@ class CircleLayer extends layer$_.Layer {
 
   static final _getCircleStrokeWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleStrokeWidthTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleStrokeWidthTransition() {
-    return _getCircleStrokeWidthTransition(reference.pointer,
-            _id_getCircleStrokeWidthTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleStrokeWidthTransition(
+      reference.pointer,
+      _id_getCircleStrokeWidthTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleStrokeWidthTransition = _class.instanceMethodId(
@@ -922,15 +1120,21 @@ class CircleLayer extends layer$_.Layer {
 
   static final _setCircleStrokeWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleStrokeWidthTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleStrokeWidthTransition(
@@ -938,10 +1142,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleStrokeWidthTransition(
-            reference.pointer,
-            _id_setCircleStrokeWidthTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleStrokeWidthTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleStrokeColor = _class.instanceMethodId(
@@ -949,26 +1153,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleStrokeColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleStrokeColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleStrokeColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getCircleStrokeColor() {
     return _getCircleStrokeColor(
-            reference.pointer, _id_getCircleStrokeColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getCircleStrokeColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleStrokeColorAsInt = _class.instanceMethodId(
@@ -976,23 +1187,28 @@ class CircleLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getCircleStrokeColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleStrokeColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCircleStrokeColorAsInt()`
   int getCircleStrokeColorAsInt() {
-    return _getCircleStrokeColorAsInt(reference.pointer,
-            _id_getCircleStrokeColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+    return _getCircleStrokeColorAsInt(
+      reference.pointer,
+      _id_getCircleStrokeColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCircleStrokeColorTransition = _class.instanceMethodId(
@@ -1002,24 +1218,29 @@ class CircleLayer extends layer$_.Layer {
 
   static final _getCircleStrokeColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleStrokeColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleStrokeColorTransition() {
-    return _getCircleStrokeColorTransition(reference.pointer,
-            _id_getCircleStrokeColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleStrokeColorTransition(
+      reference.pointer,
+      _id_getCircleStrokeColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleStrokeColorTransition = _class.instanceMethodId(
@@ -1029,15 +1250,21 @@ class CircleLayer extends layer$_.Layer {
 
   static final _setCircleStrokeColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleStrokeColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleStrokeColorTransition(
@@ -1045,10 +1272,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleStrokeColorTransition(
-            reference.pointer,
-            _id_setCircleStrokeColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleStrokeColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getCircleStrokeOpacity = _class.instanceMethodId(
@@ -1056,26 +1283,33 @@ class CircleLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getCircleStrokeOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCircleStrokeOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getCircleStrokeOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getCircleStrokeOpacity() {
     return _getCircleStrokeOpacity(
-            reference.pointer, _id_getCircleStrokeOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getCircleStrokeOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getCircleStrokeOpacityTransition = _class.instanceMethodId(
@@ -1085,24 +1319,29 @@ class CircleLayer extends layer$_.Layer {
 
   static final _getCircleStrokeOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getCircleStrokeOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getCircleStrokeOpacityTransition() {
-    return _getCircleStrokeOpacityTransition(reference.pointer,
-            _id_getCircleStrokeOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getCircleStrokeOpacityTransition(
+      reference.pointer,
+      _id_getCircleStrokeOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setCircleStrokeOpacityTransition = _class.instanceMethodId(
@@ -1112,15 +1351,21 @@ class CircleLayer extends layer$_.Layer {
 
   static final _setCircleStrokeOpacityTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCircleStrokeOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setCircleStrokeOpacityTransition(
@@ -1128,10 +1373,10 @@ class CircleLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setCircleStrokeOpacityTransition(
-            reference.pointer,
-            _id_setCircleStrokeOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setCircleStrokeOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 }
 
@@ -1145,11 +1390,8 @@ final class $CircleLayer$NullableType extends jni$_.JObjType<CircleLayer?> {
 
   @jni$_.internal
   @core$_.override
-  CircleLayer? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : CircleLayer.fromReference(
-          reference,
-        );
+  CircleLayer? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : CircleLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -1183,9 +1425,7 @@ final class $CircleLayer$Type extends jni$_.JObjType<CircleLayer> {
   @jni$_.internal
   @core$_.override
   CircleLayer fromReference(jni$_.JReference reference) =>
-      CircleLayer.fromReference(
-        reference,
-      );
+      CircleLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

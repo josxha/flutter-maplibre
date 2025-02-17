@@ -59,13 +59,13 @@ class ProjectedMeters$Companion extends jni$_.JObject {
   final jni$_.JObjType<ProjectedMeters$Companion> $type;
 
   @jni$_.internal
-  ProjectedMeters$Companion.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ProjectedMeters$Companion.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/geometry/ProjectedMeters$Companion');
+    r'org/maplibre/android/geometry/ProjectedMeters$Companion',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ProjectedMeters$Companion$NullableType();
@@ -74,29 +74,36 @@ class ProjectedMeters$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters$Companion(
-    jni$_.JObject? defaultConstructorMarker,
-  ) {
+  factory ProjectedMeters$Companion(jni$_.JObject? defaultConstructorMarker) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return ProjectedMeters$Companion.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return ProjectedMeters$Companion.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -115,9 +122,7 @@ final class $ProjectedMeters$Companion$NullableType
   ProjectedMeters$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : ProjectedMeters$Companion.fromReference(
-              reference,
-            );
+          : ProjectedMeters$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -153,9 +158,7 @@ final class $ProjectedMeters$Companion$Type
   @jni$_.internal
   @core$_.override
   ProjectedMeters$Companion fromReference(jni$_.JReference reference) =>
-      ProjectedMeters$Companion.fromReference(
-        reference,
-      );
+      ProjectedMeters$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -186,13 +189,13 @@ class ProjectedMeters extends jni$_.JObject {
   final jni$_.JObjType<ProjectedMeters> $type;
 
   @jni$_.internal
-  ProjectedMeters.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ProjectedMeters.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/geometry/ProjectedMeters');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/geometry/ProjectedMeters',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ProjectedMeters$NullableType();
@@ -222,98 +225,123 @@ class ProjectedMeters extends jni$_.JObject {
     r'()D',
   );
 
-  static final _getNorthing = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getNorthing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getNorthing()`
   double getNorthing() {
     return _getNorthing(
-            reference.pointer, _id_getNorthing as jni$_.JMethodIDPtr)
-        .doubleFloat;
+      reference.pointer,
+      _id_getNorthing as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_getEasting = _class.instanceMethodId(
-    r'getEasting',
-    r'()D',
-  );
+  static final _id_getEasting = _class.instanceMethodId(r'getEasting', r'()D');
 
-  static final _getEasting = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getEasting =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallDoubleMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final double getEasting()`
   double getEasting() {
-    return _getEasting(reference.pointer, _id_getEasting as jni$_.JMethodIDPtr)
-        .doubleFloat;
+    return _getEasting(
+      reference.pointer,
+      _id_getEasting as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
-  static final _id_new$ = _class.constructorId(
-    r'(DD)V',
-  );
+  static final _id_new$ = _class.constructorId(r'(DD)V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
 
   /// from: `public void <init>(double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters(
-    double d,
-    double d1,
-  ) {
+  factory ProjectedMeters(double d, double d1) {
     return ProjectedMeters.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr, d, d1)
-            .reference);
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        d,
+        d1,
+      ).reference,
+    );
   }
 
   static final _id_new$1 = _class.constructorId(
     r'(Lorg/maplibre/android/geometry/ProjectedMeters;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.geometry.ProjectedMeters projectedMeters)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters.new$1(
-    ProjectedMeters projectedMeters,
-  ) {
+  factory ProjectedMeters.new$1(ProjectedMeters projectedMeters) {
     final _$projectedMeters = projectedMeters.reference;
-    return ProjectedMeters.fromReference(_new$1(_class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr, _$projectedMeters.pointer)
-        .reference);
+    return ProjectedMeters.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$projectedMeters.pointer,
+      ).reference,
+    );
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -321,48 +349,58 @@ class ProjectedMeters extends jni$_.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(
-    jni$_.JObject? object,
-  ) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(
-    r'hashCode',
-    r'()I',
-  );
-
-  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(jni$_.JObject? object) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int hashCode()`
   int hashCode$1() {
-    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
-        .integer;
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_toString$1 = _class.instanceMethodId(
@@ -370,23 +408,29 @@ class ProjectedMeters extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString toString$1() {
-    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_describeContents = _class.instanceMethodId(
@@ -394,23 +438,28 @@ class ProjectedMeters extends jni$_.JObject {
     r'()I',
   );
 
-  static final _describeContents = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int describeContents()`
   int describeContents() {
     return _describeContents(
-            reference.pointer, _id_describeContents as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -418,49 +467,60 @@ class ProjectedMeters extends jni$_.JObject {
     r'(Landroid/os/Parcel;I)V',
   );
 
-  static final _writeToParcel = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(
-    jni$_.JObject parcel,
-    int i,
-  ) {
+  void writeToParcel(jni$_.JObject parcel, int i) {
     final _$parcel = parcel.reference;
-    _writeToParcel(reference.pointer, _id_writeToParcel as jni$_.JMethodIDPtr,
-            _$parcel.pointer, i)
-        .check();
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
   }
 
   static final _id_new$2 = _class.constructorId(
     r'(Landroid/os/Parcel;Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `synthetic public void <init>(android.os.Parcel parcel, kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -471,12 +531,14 @@ class ProjectedMeters extends jni$_.JObject {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
-    return ProjectedMeters.fromReference(_new$2(
-            _class.reference.pointer,
-            _id_new$2 as jni$_.JMethodIDPtr,
-            _$parcel.pointer,
-            _$defaultConstructorMarker.pointer)
-        .reference);
+    return ProjectedMeters.fromReference(
+      _new$2(
+        _class.reference.pointer,
+        _id_new$2 as jni$_.JMethodIDPtr,
+        _$parcel.pointer,
+        _$defaultConstructorMarker.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -491,11 +553,8 @@ final class $ProjectedMeters$NullableType
 
   @jni$_.internal
   @core$_.override
-  ProjectedMeters? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : ProjectedMeters.fromReference(
-          reference,
-        );
+  ProjectedMeters? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : ProjectedMeters.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -529,9 +588,7 @@ final class $ProjectedMeters$Type extends jni$_.JObjType<ProjectedMeters> {
   @jni$_.internal
   @core$_.override
   ProjectedMeters fromReference(jni$_.JReference reference) =>
-      ProjectedMeters.fromReference(
-        reference,
-      );
+      ProjectedMeters.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

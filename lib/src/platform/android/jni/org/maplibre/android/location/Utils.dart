@@ -59,13 +59,13 @@ class Utils extends jni$_.JObject {
   final jni$_.JObjType<Utils> $type;
 
   @jni$_.internal
-  Utils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Utils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/location/Utils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/location/Utils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Utils$NullableType();
@@ -75,48 +75,62 @@ class Utils extends jni$_.JObject {
     r'(FF)F',
   );
 
-  static final _shortestRotation = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Double)>)>>(
-          'globalEnv_CallStaticFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, double)>();
+  static final _shortestRotation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallStaticFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
 
   /// from: `static public float shortestRotation(float f, float f1)`
-  static double shortestRotation(
-    double f,
-    double f1,
-  ) {
-    return _shortestRotation(_class.reference.pointer,
-            _id_shortestRotation as jni$_.JMethodIDPtr, f, f1)
-        .float;
+  static double shortestRotation(double f, double f1) {
+    return _shortestRotation(
+      _class.reference.pointer,
+      _id_shortestRotation as jni$_.JMethodIDPtr,
+      f,
+      f1,
+    ).float;
   }
 
-  static final _id_normalize = _class.staticMethodId(
-    r'normalize',
-    r'(F)F',
-  );
+  static final _id_normalize = _class.staticMethodId(r'normalize', r'(F)F');
 
-  static final _normalize = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Double,)>)>>(
-          'globalEnv_CallStaticFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+  static final _normalize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallStaticFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `static public float normalize(float f)`
-  static double normalize(
-    double f,
-  ) {
+  static double normalize(double f) {
     return _normalize(
-            _class.reference.pointer, _id_normalize as jni$_.JMethodIDPtr, f)
-        .float;
+      _class.reference.pointer,
+      _id_normalize as jni$_.JMethodIDPtr,
+      f,
+    ).float;
   }
 }
 
@@ -130,11 +144,8 @@ final class $Utils$NullableType extends jni$_.JObjType<Utils?> {
 
   @jni$_.internal
   @core$_.override
-  Utils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Utils.fromReference(
-          reference,
-        );
+  Utils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Utils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -167,9 +178,8 @@ final class $Utils$Type extends jni$_.JObjType<Utils> {
 
   @jni$_.internal
   @core$_.override
-  Utils fromReference(jni$_.JReference reference) => Utils.fromReference(
-        reference,
-      );
+  Utils fromReference(jni$_.JReference reference) =>
+      Utils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

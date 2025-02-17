@@ -59,13 +59,13 @@ class OnLocationClickListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationClickListener> $type;
 
   @jni$_.internal
-  OnLocationClickListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OnLocationClickListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/OnLocationClickListener');
+    r'org/maplibre/android/location/OnLocationClickListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OnLocationClickListener$NullableType();
@@ -75,23 +75,28 @@ class OnLocationClickListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onLocationComponentClick = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onLocationComponentClick =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onLocationComponentClick()`
   void onLocationComponentClick() {
-    _onLocationComponentClick(reference.pointer,
-            _id_onLocationComponentClick as jni$_.JMethodIDPtr)
-        .check();
+    _onLocationComponentClick(
+      reference.pointer,
+      _id_onLocationComponentClick as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -103,19 +108,16 @@ class OnLocationClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -162,14 +164,10 @@ class OnLocationClickListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory OnLocationClickListener.implement(
-    $OnLocationClickListener $impl,
-  ) {
+  factory OnLocationClickListener.implement($OnLocationClickListener $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnLocationClickListener.fromReference(
-      $i.implementReference(),
-    );
+    return OnLocationClickListener.fromReference($i.implementReference());
   }
 }
 
@@ -212,9 +210,7 @@ final class $OnLocationClickListener$NullableType
   OnLocationClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : OnLocationClickListener.fromReference(
-              reference,
-            );
+          : OnLocationClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -250,9 +246,7 @@ final class $OnLocationClickListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationClickListener fromReference(jni$_.JReference reference) =>
-      OnLocationClickListener.fromReference(
-        reference,
-      );
+      OnLocationClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

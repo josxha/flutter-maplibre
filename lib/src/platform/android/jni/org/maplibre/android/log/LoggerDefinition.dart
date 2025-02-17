@@ -59,13 +59,13 @@ class LoggerDefinition extends jni$_.JObject {
   final jni$_.JObjType<LoggerDefinition> $type;
 
   @jni$_.internal
-  LoggerDefinition.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LoggerDefinition.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/log/LoggerDefinition');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/log/LoggerDefinition',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LoggerDefinition$NullableType();
@@ -75,33 +75,37 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _v = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _v =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void v(java.lang.String string, java.lang.String string1)`
-  void v(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  void v(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _v(reference.pointer, _id_v as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _v(
+      reference.pointer,
+      _id_v as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_v$1 = _class.instanceMethodId(
@@ -109,24 +113,31 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _v$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _v$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void v(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   void v$1(
@@ -137,9 +148,13 @@ class LoggerDefinition extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _v$1(reference.pointer, _id_v$1 as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer, _$throwable.pointer)
-        .check();
+    _v$1(
+      reference.pointer,
+      _id_v$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_d = _class.instanceMethodId(
@@ -147,33 +162,37 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _d = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _d =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void d(java.lang.String string, java.lang.String string1)`
-  void d(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  void d(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _d(reference.pointer, _id_d as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _d(
+      reference.pointer,
+      _id_d as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_d$1 = _class.instanceMethodId(
@@ -181,24 +200,31 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _d$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _d$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void d(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   void d$1(
@@ -209,9 +235,13 @@ class LoggerDefinition extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _d$1(reference.pointer, _id_d$1 as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer, _$throwable.pointer)
-        .check();
+    _d$1(
+      reference.pointer,
+      _id_d$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_i = _class.instanceMethodId(
@@ -219,33 +249,37 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _i = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _i =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void i(java.lang.String string, java.lang.String string1)`
-  void i(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  void i(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _i(reference.pointer, _id_i as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _i(
+      reference.pointer,
+      _id_i as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_i$1 = _class.instanceMethodId(
@@ -253,24 +287,31 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _i$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _i$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void i(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   void i$1(
@@ -281,9 +322,13 @@ class LoggerDefinition extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _i$1(reference.pointer, _id_i$1 as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer, _$throwable.pointer)
-        .check();
+    _i$1(
+      reference.pointer,
+      _id_i$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_w = _class.instanceMethodId(
@@ -291,33 +336,37 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _w = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _w =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void w(java.lang.String string, java.lang.String string1)`
-  void w(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  void w(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _w(reference.pointer, _id_w as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _w(
+      reference.pointer,
+      _id_w as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_w$1 = _class.instanceMethodId(
@@ -325,24 +374,31 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _w$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _w$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void w(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   void w$1(
@@ -353,9 +409,13 @@ class LoggerDefinition extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _w$1(reference.pointer, _id_w$1 as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer, _$throwable.pointer)
-        .check();
+    _w$1(
+      reference.pointer,
+      _id_w$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   static final _id_e = _class.instanceMethodId(
@@ -363,33 +423,37 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _e = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _e =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void e(java.lang.String string, java.lang.String string1)`
-  void e(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  void e(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    _e(reference.pointer, _id_e as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer)
-        .check();
+    _e(
+      reference.pointer,
+      _id_e as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).check();
   }
 
   static final _id_e$1 = _class.instanceMethodId(
@@ -397,24 +461,31 @@ class LoggerDefinition extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V',
   );
 
-  static final _e$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _e$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void e(java.lang.String string, java.lang.String string1, java.lang.Throwable throwable)`
   void e$1(
@@ -425,9 +496,13 @@ class LoggerDefinition extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     final _$throwable = throwable?.reference ?? jni$_.jNullReference;
-    _e$1(reference.pointer, _id_e$1 as jni$_.JMethodIDPtr, _$string.pointer,
-            _$string1.pointer, _$throwable.pointer)
-        .check();
+    _e$1(
+      reference.pointer,
+      _id_e$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+      _$throwable.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -439,19 +514,16 @@ class LoggerDefinition extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -587,14 +659,10 @@ class LoggerDefinition extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LoggerDefinition.implement(
-    $LoggerDefinition $impl,
-  ) {
+  factory LoggerDefinition.implement($LoggerDefinition $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return LoggerDefinition.fromReference(
-      $i.implementReference(),
-    );
+    return LoggerDefinition.fromReference($i.implementReference());
   }
 }
 
@@ -602,60 +670,90 @@ abstract base mixin class $LoggerDefinition {
   factory $LoggerDefinition({
     required void Function(jni$_.JString? string, jni$_.JString? string1) v,
     bool v$async,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        v$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    v$1,
     bool v$1$async,
     required void Function(jni$_.JString? string, jni$_.JString? string1) d,
     bool d$async,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        d$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    d$1,
     bool d$1$async,
     required void Function(jni$_.JString? string, jni$_.JString? string1) i,
     bool i$async,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        i$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    i$1,
     bool i$1$async,
     required void Function(jni$_.JString? string, jni$_.JString? string1) w,
     bool w$async,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        w$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    w$1,
     bool w$1$async,
     required void Function(jni$_.JString? string, jni$_.JString? string1) e,
     bool e$async,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        e$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    e$1,
     bool e$1$async,
   }) = _$LoggerDefinition;
 
   void v(jni$_.JString? string, jni$_.JString? string1);
   bool get v$async => false;
   void v$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable);
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  );
   bool get v$1$async => false;
   void d(jni$_.JString? string, jni$_.JString? string1);
   bool get d$async => false;
   void d$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable);
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  );
   bool get d$1$async => false;
   void i(jni$_.JString? string, jni$_.JString? string1);
   bool get i$async => false;
   void i$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable);
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  );
   bool get i$1$async => false;
   void w(jni$_.JString? string, jni$_.JString? string1);
   bool get w$async => false;
   void w$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable);
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  );
   bool get w$1$async => false;
   void e(jni$_.JString? string, jni$_.JString? string1);
   bool get e$async => false;
   void e$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable);
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  );
   bool get e$1$async => false;
 }
 
@@ -663,69 +761,104 @@ final class _$LoggerDefinition with $LoggerDefinition {
   _$LoggerDefinition({
     required void Function(jni$_.JString? string, jni$_.JString? string1) v,
     this.v$async = false,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        v$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    v$1,
     this.v$1$async = false,
     required void Function(jni$_.JString? string, jni$_.JString? string1) d,
     this.d$async = false,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        d$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    d$1,
     this.d$1$async = false,
     required void Function(jni$_.JString? string, jni$_.JString? string1) i,
     this.i$async = false,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        i$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    i$1,
     this.i$1$async = false,
     required void Function(jni$_.JString? string, jni$_.JString? string1) w,
     this.w$async = false,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        w$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    w$1,
     this.w$1$async = false,
     required void Function(jni$_.JString? string, jni$_.JString? string1) e,
     this.e$async = false,
-    required void Function(jni$_.JString? string, jni$_.JString? string1,
-            jni$_.JObject? throwable)
-        e$1,
+    required void Function(
+      jni$_.JString? string,
+      jni$_.JString? string1,
+      jni$_.JObject? throwable,
+    )
+    e$1,
     this.e$1$async = false,
-  })  : _v = v,
-        _v$1 = v$1,
-        _d = d,
-        _d$1 = d$1,
-        _i = i,
-        _i$1 = i$1,
-        _w = w,
-        _w$1 = w$1,
-        _e = e,
-        _e$1 = e$1;
+  }) : _v = v,
+       _v$1 = v$1,
+       _d = d,
+       _d$1 = d$1,
+       _i = i,
+       _i$1 = i$1,
+       _w = w,
+       _w$1 = w$1,
+       _e = e,
+       _e$1 = e$1;
 
   final void Function(jni$_.JString? string, jni$_.JString? string1) _v;
   final bool v$async;
-  final void Function(jni$_.JString? string, jni$_.JString? string1,
-      jni$_.JObject? throwable) _v$1;
+  final void Function(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  )
+  _v$1;
   final bool v$1$async;
   final void Function(jni$_.JString? string, jni$_.JString? string1) _d;
   final bool d$async;
-  final void Function(jni$_.JString? string, jni$_.JString? string1,
-      jni$_.JObject? throwable) _d$1;
+  final void Function(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  )
+  _d$1;
   final bool d$1$async;
   final void Function(jni$_.JString? string, jni$_.JString? string1) _i;
   final bool i$async;
-  final void Function(jni$_.JString? string, jni$_.JString? string1,
-      jni$_.JObject? throwable) _i$1;
+  final void Function(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  )
+  _i$1;
   final bool i$1$async;
   final void Function(jni$_.JString? string, jni$_.JString? string1) _w;
   final bool w$async;
-  final void Function(jni$_.JString? string, jni$_.JString? string1,
-      jni$_.JObject? throwable) _w$1;
+  final void Function(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  )
+  _w$1;
   final bool w$1$async;
   final void Function(jni$_.JString? string, jni$_.JString? string1) _e;
   final bool e$async;
-  final void Function(jni$_.JString? string, jni$_.JString? string1,
-      jni$_.JObject? throwable) _e$1;
+  final void Function(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  )
+  _e$1;
   final bool e$1$async;
 
   void v(jni$_.JString? string, jni$_.JString? string1) {
@@ -733,7 +866,10 @@ final class _$LoggerDefinition with $LoggerDefinition {
   }
 
   void v$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable) {
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  ) {
     return _v$1(string, string1, throwable);
   }
 
@@ -742,7 +878,10 @@ final class _$LoggerDefinition with $LoggerDefinition {
   }
 
   void d$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable) {
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  ) {
     return _d$1(string, string1, throwable);
   }
 
@@ -751,7 +890,10 @@ final class _$LoggerDefinition with $LoggerDefinition {
   }
 
   void i$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable) {
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  ) {
     return _i$1(string, string1, throwable);
   }
 
@@ -760,7 +902,10 @@ final class _$LoggerDefinition with $LoggerDefinition {
   }
 
   void w$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable) {
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  ) {
     return _w$1(string, string1, throwable);
   }
 
@@ -769,7 +914,10 @@ final class _$LoggerDefinition with $LoggerDefinition {
   }
 
   void e$1(
-      jni$_.JString? string, jni$_.JString? string1, jni$_.JObject? throwable) {
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JObject? throwable,
+  ) {
     return _e$1(string, string1, throwable);
   }
 }
@@ -786,11 +934,7 @@ final class $LoggerDefinition$NullableType
   @jni$_.internal
   @core$_.override
   LoggerDefinition? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LoggerDefinition.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LoggerDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -824,9 +968,7 @@ final class $LoggerDefinition$Type extends jni$_.JObjType<LoggerDefinition> {
   @jni$_.internal
   @core$_.override
   LoggerDefinition fromReference(jni$_.JReference reference) =>
-      LoggerDefinition.fromReference(
-        reference,
-      );
+      LoggerDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

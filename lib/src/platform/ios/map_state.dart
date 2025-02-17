@@ -22,8 +22,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
-  MLNMapView get _mapView => _cachedMapView ??=
-      MLNMapView.castFrom(MapLibreRegistry.getMapWithViewId_(_viewId)!);
+  MLNMapView get _mapView =>
+      _cachedMapView ??= MLNMapView.castFrom(
+        MapLibreRegistry.getMapWithViewId_(_viewId)!,
+      );
 
   @override
   StyleControllerIos? style;
@@ -98,15 +100,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final sw = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeWest
-      ..latitude = bounds.latitudeSouth;
-    final ne = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeEast
-      ..latitude = bounds.latitudeNorth;
-    final ffiBounds = Struct.create<MLNCoordinateBounds>()
-      ..sw = sw
-      ..ne = ne;
+    final sw =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = bounds.longitudeWest
+          ..latitude = bounds.latitudeSouth;
+    final ne =
+        Struct.create<CLLocationCoordinate2D>()
+          ..longitude = bounds.longitudeEast
+          ..latitude = bounds.latitudeNorth;
+    final ffiBounds =
+        Struct.create<MLNCoordinateBounds>()
+          ..sw = sw
+          ..ne = ne;
     // TODO support padding with Struct UIEdgeInsets
     _mapView.setVisibleCoordinateBounds_animated_(ffiBounds, true);
   }
@@ -124,18 +129,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      _mapView.metersPerPointAtLatitude_(latitude);
+      getMetersPerPixelAtLatitudeSync(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
-    final bounds = _mapView.visibleCoordinateBounds;
-    return LngLatBounds(
-      longitudeWest: bounds.sw.longitude,
-      longitudeEast: bounds.ne.longitude,
-      latitudeSouth: bounds.sw.latitude,
-      latitudeNorth: bounds.ne.latitude,
-    );
-  }
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
 
   @override
   Future<void> moveCamera({
@@ -226,11 +223,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers.objectAtIndex_(i);
       print(layer.ref.runtimeType);
-      final features =
-          _mapView.visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
-        point,
-        NSSet.setWithObject_(layer), // TODO use layer.id
-      );
+      final features = _mapView
+          .visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
+            point,
+            NSSet.setWithObject_(layer), // TODO use layer.id
+          );
       if (features.count == 0) continue;
       /* TODO final queriedLayer = QueriedLayer(
         layerId: jLayerId.toDartString(releaseOriginal: true),
@@ -243,45 +240,20 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async {
-    final coords = _mapView.convertPoint_toCoordinateFromView_(
-      screenLocation.toCGPoint(),
-      _mapView,
-    );
-    return coords.toPosition();
-  }
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      toLngLatSync(screenLocation);
 
   @override
   Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      screenLocations
-          .map(
-            (e) => _mapView
-                .convertPoint_toCoordinateFromView_(e.toCGPoint(), _mapView)
-                .toPosition(),
-          )
-          .toList(growable: false);
+      toLngLatsSync(screenLocations);
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    final coords = _mapView.convertCoordinate_toPointToView_(
-      lngLat.toCLLocationCoordinate2D(),
-      _mapView,
-    );
-    return coords.toOffset();
-  }
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      toScreenLocationSync(lngLat);
 
   @override
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      lngLats
-          .map(
-            (e) => _mapView
-                .convertCoordinate_toPointToView_(
-                  e.toCLLocationCoordinate2D(),
-                  _mapView,
-                )
-                .toOffset(),
-          )
-          .toList(growable: false);
+      toScreenLocationsSync(lngLats);
 
   @override
   Future<void> trackLocation({
@@ -300,4 +272,45 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
         MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
   }
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+      _mapView.metersPerPointAtLatitude_(latitude);
+
+  @override
+  LngLatBounds getVisibleRegionSync() {
+    final bounds = _mapView.visibleCoordinateBounds;
+    return LngLatBounds(
+      longitudeWest: bounds.sw.longitude,
+      longitudeEast: bounds.ne.longitude,
+      latitudeSouth: bounds.sw.latitude,
+      latitudeNorth: bounds.ne.latitude,
+    );
+  }
+
+  @override
+  Position toLngLatSync(Offset screenLocation) =>
+      _mapView
+          .convertPoint_toCoordinateFromView_(
+            screenLocation.toCGPoint(),
+            _mapView,
+          )
+          .toPosition();
+
+  @override
+  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLatSync).toList(growable: false);
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) =>
+      _mapView
+          .convertCoordinate_toPointToView_(
+            lngLat.toCLLocationCoordinate2D(),
+            _mapView,
+          )
+          .toOffset();
+
+  @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
+      lngLats.map(toScreenLocationSync).toList(growable: false);
 }

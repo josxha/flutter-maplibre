@@ -46,7 +46,4 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
   }
 }
 
-const _rasterStyleLayer = RasterStyleLayer(
-  id: _layerId,
-  sourceId: _sourceId,
-);
+const _rasterStyleLayer = RasterStyleLayer(id: _layerId, sourceId: _sourceId);

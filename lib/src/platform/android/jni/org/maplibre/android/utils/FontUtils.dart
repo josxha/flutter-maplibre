@@ -59,13 +59,13 @@ class FontUtils extends jni$_.JObject {
   final jni$_.JObjType<FontUtils> $type;
 
   @jni$_.internal
-  FontUtils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  FontUtils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/FontUtils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/FontUtils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FontUtils$NullableType();
@@ -75,16 +75,23 @@ class FontUtils extends jni$_.JObject {
     r'([Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _extractValidFont = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _extractValidFont =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public java.lang.String extractValidFont(java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -92,9 +99,11 @@ class FontUtils extends jni$_.JObject {
     jni$_.JArray<jni$_.JString?>? strings,
   ) {
     final _$strings = strings?.reference ?? jni$_.jNullReference;
-    return _extractValidFont(_class.reference.pointer,
-            _id_extractValidFont as jni$_.JMethodIDPtr, _$strings.pointer)
-        .object<jni$_.JString?>(const jni$_.JStringNullableType());
+    return _extractValidFont(
+      _class.reference.pointer,
+      _id_extractValidFont as jni$_.JMethodIDPtr,
+      _$strings.pointer,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
@@ -108,11 +117,8 @@ final class $FontUtils$NullableType extends jni$_.JObjType<FontUtils?> {
 
   @jni$_.internal
   @core$_.override
-  FontUtils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : FontUtils.fromReference(
-          reference,
-        );
+  FontUtils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : FontUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -146,9 +152,7 @@ final class $FontUtils$Type extends jni$_.JObjType<FontUtils> {
   @jni$_.internal
   @core$_.override
   FontUtils fromReference(jni$_.JReference reference) =>
-      FontUtils.fromReference(
-        reference,
-      );
+      FontUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

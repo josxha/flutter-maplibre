@@ -136,23 +136,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
   });
 }
 
-/// Options to specify the map bounds.
-@anonymous
-@JS()
-extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
-  /// Create a new JS [FitBoundsOptions] object.
-  external FitBoundsOptions({
-    bool? linear,
-    Point? offset,
-    num? maxZoom,
-    num? maxDuration,
-    PaddingOptions? padding,
-    num? speed,
-    num? pitch,
-    num? bearing,
-  });
-}
-
 /// The specifications of map sources.
 @anonymous
 @JS()

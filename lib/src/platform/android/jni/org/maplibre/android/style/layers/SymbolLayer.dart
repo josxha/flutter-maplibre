@@ -67,13 +67,13 @@ class SymbolLayer extends layer$_.Layer {
   final jni$_.JObjType<SymbolLayer> $type;
 
   @jni$_.internal
-  SymbolLayer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  SymbolLayer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/SymbolLayer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/SymbolLayer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $SymbolLayer$NullableType();
@@ -82,34 +82,40 @@ class SymbolLayer extends layer$_.Layer {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory SymbolLayer(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-  ) {
+  factory SymbolLayer(jni$_.JString? string, jni$_.JString? string1) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    return SymbolLayer.fromReference(_new$(_class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer, _$string1.pointer)
-        .reference);
+    return SymbolLayer.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+        _$string1.pointer,
+      ).reference,
+    );
   }
 
   static final _id_setSourceLayer = _class.instanceMethodId(
@@ -117,25 +123,32 @@ class SymbolLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _setSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(
-    jni$_.JString? string,
-  ) {
+  void setSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    _setSourceLayer(reference.pointer, _id_setSourceLayer as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .check();
+    _setSourceLayer(
+      reference.pointer,
+      _id_setSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
   }
 
   static final _id_withSourceLayer = _class.instanceMethodId(
@@ -143,26 +156,33 @@ class SymbolLayer extends layer$_.Layer {
     r'(Ljava/lang/String;)Lorg/maplibre/android/style/layers/SymbolLayer;',
   );
 
-  static final _withSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.SymbolLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  SymbolLayer withSourceLayer(
-    jni$_.JString? string,
-  ) {
+  SymbolLayer withSourceLayer(jni$_.JString? string) {
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return _withSourceLayer(reference.pointer,
-            _id_withSourceLayer as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<SymbolLayer>(const $SymbolLayer$Type());
+    return _withSourceLayer(
+      reference.pointer,
+      _id_withSourceLayer as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<SymbolLayer>(const $SymbolLayer$Type());
   }
 
   static final _id_getSourceId = _class.instanceMethodId(
@@ -170,24 +190,29 @@ class SymbolLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceId() {
     return _getSourceId(
-            reference.pointer, _id_getSourceId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getSourceLayer = _class.instanceMethodId(
@@ -195,24 +220,29 @@ class SymbolLayer extends layer$_.Layer {
     r'()Ljava/lang/String;',
   );
 
-  static final _getSourceLayer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSourceLayer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getSourceLayer()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getSourceLayer() {
     return _getSourceLayer(
-            reference.pointer, _id_getSourceLayer as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_getSourceLayer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_setFilter = _class.instanceMethodId(
@@ -220,25 +250,32 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)V',
   );
 
-  static final _setFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(
-    jni$_.JObject expression,
-  ) {
+  void setFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    _setFilter(reference.pointer, _id_setFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .check();
+    _setFilter(
+      reference.pointer,
+      _id_setFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).check();
   }
 
   static final _id_withFilter = _class.instanceMethodId(
@@ -246,26 +283,33 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/SymbolLayer;',
   );
 
-  static final _withFilter = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.SymbolLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  SymbolLayer withFilter(
-    jni$_.JObject expression,
-  ) {
+  SymbolLayer withFilter(jni$_.JObject expression) {
     final _$expression = expression.reference;
-    return _withFilter(reference.pointer, _id_withFilter as jni$_.JMethodIDPtr,
-            _$expression.pointer)
-        .object<SymbolLayer>(const $SymbolLayer$Type());
+    return _withFilter(
+      reference.pointer,
+      _id_withFilter as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).object<SymbolLayer>(const $SymbolLayer$Type());
   }
 
   static final _id_getFilter = _class.instanceMethodId(
@@ -273,23 +317,29 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/expressions/Expression;',
   );
 
-  static final _getFilter = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getFilter =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.expressions.Expression getFilter()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? getFilter() {
-    return _getFilter(reference.pointer, _id_getFilter as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getFilter(
+      reference.pointer,
+      _id_getFilter as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_withProperties = _class.instanceMethodId(
@@ -297,16 +347,23 @@ class SymbolLayer extends layer$_.Layer {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)Lorg/maplibre/android/style/layers/SymbolLayer;',
   );
 
-  static final _withProperties = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _withProperties =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.SymbolLayer withProperties(java.lang.Object[] propertyValues)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -314,9 +371,11 @@ class SymbolLayer extends layer$_.Layer {
     jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?> propertyValues,
   ) {
     final _$propertyValues = propertyValues.reference;
-    return _withProperties(reference.pointer,
-            _id_withProperties as jni$_.JMethodIDPtr, _$propertyValues.pointer)
-        .object<SymbolLayer>(const $SymbolLayer$Type());
+    return _withProperties(
+      reference.pointer,
+      _id_withProperties as jni$_.JMethodIDPtr,
+      _$propertyValues.pointer,
+    ).object<SymbolLayer>(const $SymbolLayer$Type());
   }
 
   static final _id_getSymbolPlacement = _class.instanceMethodId(
@@ -324,26 +383,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getSymbolPlacement = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSymbolPlacement =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getSymbolPlacement()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getSymbolPlacement() {
     return _getSymbolPlacement(
-            reference.pointer, _id_getSymbolPlacement as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getSymbolPlacement as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getSymbolSpacing = _class.instanceMethodId(
@@ -351,26 +417,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getSymbolSpacing = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSymbolSpacing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getSymbolSpacing()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getSymbolSpacing() {
     return _getSymbolSpacing(
-            reference.pointer, _id_getSymbolSpacing as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getSymbolSpacing as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getSymbolAvoidEdges = _class.instanceMethodId(
@@ -378,26 +451,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getSymbolAvoidEdges = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSymbolAvoidEdges =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getSymbolAvoidEdges()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getSymbolAvoidEdges() {
     return _getSymbolAvoidEdges(
-            reference.pointer, _id_getSymbolAvoidEdges as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getSymbolAvoidEdges as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getSymbolSortKey = _class.instanceMethodId(
@@ -405,26 +485,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getSymbolSortKey = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSymbolSortKey =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getSymbolSortKey()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getSymbolSortKey() {
     return _getSymbolSortKey(
-            reference.pointer, _id_getSymbolSortKey as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getSymbolSortKey as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getSymbolZOrder = _class.instanceMethodId(
@@ -432,26 +519,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getSymbolZOrder = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getSymbolZOrder =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getSymbolZOrder()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getSymbolZOrder() {
     return _getSymbolZOrder(
-            reference.pointer, _id_getSymbolZOrder as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getSymbolZOrder as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconAllowOverlap = _class.instanceMethodId(
@@ -459,26 +553,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconAllowOverlap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconAllowOverlap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconAllowOverlap()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getIconAllowOverlap() {
     return _getIconAllowOverlap(
-            reference.pointer, _id_getIconAllowOverlap as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getIconAllowOverlap as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconIgnorePlacement = _class.instanceMethodId(
@@ -486,26 +587,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconIgnorePlacement = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconIgnorePlacement =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconIgnorePlacement()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getIconIgnorePlacement() {
     return _getIconIgnorePlacement(
-            reference.pointer, _id_getIconIgnorePlacement as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getIconIgnorePlacement as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconOptional = _class.instanceMethodId(
@@ -513,26 +621,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconOptional = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconOptional =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconOptional()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getIconOptional() {
     return _getIconOptional(
-            reference.pointer, _id_getIconOptional as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getIconOptional as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconRotationAlignment = _class.instanceMethodId(
@@ -540,26 +655,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconRotationAlignment = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconRotationAlignment =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconRotationAlignment()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconRotationAlignment() {
-    return _getIconRotationAlignment(reference.pointer,
-            _id_getIconRotationAlignment as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getIconRotationAlignment(
+      reference.pointer,
+      _id_getIconRotationAlignment as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconSize = _class.instanceMethodId(
@@ -567,26 +689,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconSize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconSize()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getIconSize() {
     return _getIconSize(
-            reference.pointer, _id_getIconSize as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getIconSize as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconTextFit = _class.instanceMethodId(
@@ -594,26 +723,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconTextFit = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconTextFit =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconTextFit()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconTextFit() {
     return _getIconTextFit(
-            reference.pointer, _id_getIconTextFit as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconTextFit as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconTextFitPadding = _class.instanceMethodId(
@@ -621,29 +757,34 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconTextFitPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconTextFitPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconTextFitPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>
-      getIconTextFitPadding() {
+  getIconTextFitPadding() {
     return _getIconTextFitPadding(
-            reference.pointer, _id_getIconTextFitPadding as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getIconTextFitPadding as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getIconImage = _class.instanceMethodId(
@@ -651,26 +792,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconImage = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconImage =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconImage()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconImage() {
     return _getIconImage(
-            reference.pointer, _id_getIconImage as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconImage as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconRotate = _class.instanceMethodId(
@@ -678,26 +826,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconRotate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconRotate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconRotate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getIconRotate() {
     return _getIconRotate(
-            reference.pointer, _id_getIconRotate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getIconRotate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconPadding = _class.instanceMethodId(
@@ -705,28 +860,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?> getIconPadding() {
     return _getIconPadding(
-            reference.pointer, _id_getIconPadding as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getIconPadding as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getIconKeepUpright = _class.instanceMethodId(
@@ -734,26 +894,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconKeepUpright = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconKeepUpright =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconKeepUpright()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getIconKeepUpright() {
     return _getIconKeepUpright(
-            reference.pointer, _id_getIconKeepUpright as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getIconKeepUpright as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconOffset = _class.instanceMethodId(
@@ -761,28 +928,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconOffset = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconOffset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconOffset()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?> getIconOffset() {
     return _getIconOffset(
-            reference.pointer, _id_getIconOffset as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getIconOffset as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getIconAnchor = _class.instanceMethodId(
@@ -790,26 +962,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconAnchor() {
     return _getIconAnchor(
-            reference.pointer, _id_getIconAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconPitchAlignment = _class.instanceMethodId(
@@ -817,26 +996,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconPitchAlignment = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconPitchAlignment =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconPitchAlignment()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconPitchAlignment() {
     return _getIconPitchAlignment(
-            reference.pointer, _id_getIconPitchAlignment as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconPitchAlignment as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextPitchAlignment = _class.instanceMethodId(
@@ -844,26 +1030,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextPitchAlignment = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextPitchAlignment =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextPitchAlignment()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextPitchAlignment() {
     return _getTextPitchAlignment(
-            reference.pointer, _id_getTextPitchAlignment as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextPitchAlignment as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextRotationAlignment = _class.instanceMethodId(
@@ -871,26 +1064,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextRotationAlignment = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextRotationAlignment =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextRotationAlignment()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextRotationAlignment() {
-    return _getTextRotationAlignment(reference.pointer,
-            _id_getTextRotationAlignment as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+    return _getTextRotationAlignment(
+      reference.pointer,
+      _id_getTextRotationAlignment as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextField = _class.instanceMethodId(
@@ -898,26 +1098,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextField = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextField =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextField()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<formatted$_.Formatted?> getTextField() {
     return _getTextField(
-            reference.pointer, _id_getTextField as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<formatted$_.Formatted?>>(
-            const propertyvalue$_.$PropertyValue$Type<formatted$_.Formatted?>(
-                formatted$_.$Formatted$NullableType()));
+      reference.pointer,
+      _id_getTextField as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<formatted$_.Formatted?>>(
+      const propertyvalue$_.$PropertyValue$Type<formatted$_.Formatted?>(
+        formatted$_.$Formatted$NullableType(),
+      ),
+    );
   }
 
   static final _id_getTextFont = _class.instanceMethodId(
@@ -925,28 +1132,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextFont = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextFont =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextFont()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?> getTextFont() {
     return _getTextFont(
-            reference.pointer, _id_getTextFont as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
-                jni$_.JArrayNullableType<jni$_.JString?>(
-                    jni$_.JStringNullableType())));
+      reference.pointer,
+      _id_getTextFont as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
+        jni$_.JArrayNullableType<jni$_.JString?>(jni$_.JStringNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextSize = _class.instanceMethodId(
@@ -954,26 +1166,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextSize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextSize()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextSize() {
     return _getTextSize(
-            reference.pointer, _id_getTextSize as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextSize as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextMaxWidth = _class.instanceMethodId(
@@ -981,26 +1200,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextMaxWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextMaxWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextMaxWidth()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextMaxWidth() {
     return _getTextMaxWidth(
-            reference.pointer, _id_getTextMaxWidth as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextMaxWidth as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextLineHeight = _class.instanceMethodId(
@@ -1008,26 +1234,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextLineHeight = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextLineHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextLineHeight()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextLineHeight() {
     return _getTextLineHeight(
-            reference.pointer, _id_getTextLineHeight as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextLineHeight as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextLetterSpacing = _class.instanceMethodId(
@@ -1035,26 +1268,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextLetterSpacing = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextLetterSpacing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextLetterSpacing()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextLetterSpacing() {
     return _getTextLetterSpacing(
-            reference.pointer, _id_getTextLetterSpacing as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextLetterSpacing as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextJustify = _class.instanceMethodId(
@@ -1062,26 +1302,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextJustify = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextJustify =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextJustify()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextJustify() {
     return _getTextJustify(
-            reference.pointer, _id_getTextJustify as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextJustify as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextRadialOffset = _class.instanceMethodId(
@@ -1089,26 +1336,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextRadialOffset = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextRadialOffset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextRadialOffset()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextRadialOffset() {
     return _getTextRadialOffset(
-            reference.pointer, _id_getTextRadialOffset as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextRadialOffset as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextVariableAnchor = _class.instanceMethodId(
@@ -1116,29 +1370,34 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextVariableAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextVariableAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextVariableAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>
-      getTextVariableAnchor() {
+  getTextVariableAnchor() {
     return _getTextVariableAnchor(
-            reference.pointer, _id_getTextVariableAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
-                jni$_.JArrayNullableType<jni$_.JString?>(
-                    jni$_.JStringNullableType())));
+      reference.pointer,
+      _id_getTextVariableAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
+        jni$_.JArrayNullableType<jni$_.JString?>(jni$_.JStringNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextVariableAnchorOffset = _class.instanceMethodId(
@@ -1148,28 +1407,32 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getTextVariableAnchorOffset =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextVariableAnchorOffset()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>
-      getTextVariableAnchorOffset() {
-    return _getTextVariableAnchorOffset(reference.pointer,
-            _id_getTextVariableAnchorOffset as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JObject?>?>(
-                jni$_.JArrayNullableType<jni$_.JObject?>(
-                    jni$_.JObjectNullableType())));
+  getTextVariableAnchorOffset() {
+    return _getTextVariableAnchorOffset(
+      reference.pointer,
+      _id_getTextVariableAnchorOffset as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JObject?>?>(
+        jni$_.JArrayNullableType<jni$_.JObject?>(jni$_.JObjectNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextAnchor = _class.instanceMethodId(
@@ -1177,26 +1440,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextAnchor() {
     return _getTextAnchor(
-            reference.pointer, _id_getTextAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextMaxAngle = _class.instanceMethodId(
@@ -1204,26 +1474,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextMaxAngle = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextMaxAngle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextMaxAngle()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextMaxAngle() {
     return _getTextMaxAngle(
-            reference.pointer, _id_getTextMaxAngle as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextMaxAngle as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextWritingMode = _class.instanceMethodId(
@@ -1231,29 +1508,34 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextWritingMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextWritingMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextWritingMode()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>
-      getTextWritingMode() {
+  getTextWritingMode() {
     return _getTextWritingMode(
-            reference.pointer, _id_getTextWritingMode as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
-                jni$_.JArrayNullableType<jni$_.JString?>(
-                    jni$_.JStringNullableType())));
+      reference.pointer,
+      _id_getTextWritingMode as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JString?>?>(
+        jni$_.JArrayNullableType<jni$_.JString?>(jni$_.JStringNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextRotate = _class.instanceMethodId(
@@ -1261,26 +1543,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextRotate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextRotate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextRotate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextRotate() {
     return _getTextRotate(
-            reference.pointer, _id_getTextRotate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextRotate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextPadding = _class.instanceMethodId(
@@ -1288,26 +1577,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextPadding = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextPadding =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextPadding()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextPadding() {
     return _getTextPadding(
-            reference.pointer, _id_getTextPadding as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextPadding as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextKeepUpright = _class.instanceMethodId(
@@ -1315,26 +1611,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextKeepUpright = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextKeepUpright =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextKeepUpright()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getTextKeepUpright() {
     return _getTextKeepUpright(
-            reference.pointer, _id_getTextKeepUpright as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getTextKeepUpright as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextTransform = _class.instanceMethodId(
@@ -1342,26 +1645,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextTransform = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextTransform =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextTransform()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextTransform() {
     return _getTextTransform(
-            reference.pointer, _id_getTextTransform as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextTransform as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextOffset = _class.instanceMethodId(
@@ -1369,28 +1679,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextOffset = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextOffset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextOffset()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?> getTextOffset() {
     return _getTextOffset(
-            reference.pointer, _id_getTextOffset as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getTextOffset as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextAllowOverlap = _class.instanceMethodId(
@@ -1398,26 +1713,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextAllowOverlap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextAllowOverlap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextAllowOverlap()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getTextAllowOverlap() {
     return _getTextAllowOverlap(
-            reference.pointer, _id_getTextAllowOverlap as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getTextAllowOverlap as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextIgnorePlacement = _class.instanceMethodId(
@@ -1425,26 +1747,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextIgnorePlacement = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextIgnorePlacement =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextIgnorePlacement()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getTextIgnorePlacement() {
     return _getTextIgnorePlacement(
-            reference.pointer, _id_getTextIgnorePlacement as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getTextIgnorePlacement as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextOptional = _class.instanceMethodId(
@@ -1452,26 +1781,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextOptional = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextOptional =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextOptional()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JBoolean?> getTextOptional() {
     return _getTextOptional(
-            reference.pointer, _id_getTextOptional as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
-                jni$_.JBooleanNullableType()));
+      reference.pointer,
+      _id_getTextOptional as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconOpacity = _class.instanceMethodId(
@@ -1479,26 +1815,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getIconOpacity() {
     return _getIconOpacity(
-            reference.pointer, _id_getIconOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getIconOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconOpacityTransition = _class.instanceMethodId(
@@ -1506,25 +1849,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getIconOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconOpacityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconOpacityTransition() {
-    return _getIconOpacityTransition(reference.pointer,
-            _id_getIconOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getIconOpacityTransition(
+      reference.pointer,
+      _id_getIconOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconOpacityTransition = _class.instanceMethodId(
@@ -1532,16 +1881,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setIconOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setIconOpacityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconOpacityTransition(
@@ -1549,10 +1905,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconOpacityTransition(
-            reference.pointer,
-            _id_setIconOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconColor = _class.instanceMethodId(
@@ -1560,26 +1916,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconColor() {
     return _getIconColor(
-            reference.pointer, _id_getIconColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconColorAsInt = _class.instanceMethodId(
@@ -1587,23 +1950,28 @@ class SymbolLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getIconColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getIconColorAsInt()`
   int getIconColorAsInt() {
     return _getIconColorAsInt(
-            reference.pointer, _id_getIconColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getIconColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getIconColorTransition = _class.instanceMethodId(
@@ -1611,25 +1979,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getIconColorTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconColorTransition() {
     return _getIconColorTransition(
-            reference.pointer, _id_getIconColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getIconColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconColorTransition = _class.instanceMethodId(
@@ -1637,16 +2011,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setIconColorTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setIconColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconColorTransition(
@@ -1654,10 +2035,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconColorTransition(
-            reference.pointer,
-            _id_setIconColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconHaloColor = _class.instanceMethodId(
@@ -1665,26 +2046,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconHaloColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconHaloColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconHaloColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconHaloColor() {
     return _getIconHaloColor(
-            reference.pointer, _id_getIconHaloColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconHaloColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconHaloColorAsInt = _class.instanceMethodId(
@@ -1692,23 +2080,28 @@ class SymbolLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getIconHaloColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconHaloColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getIconHaloColorAsInt()`
   int getIconHaloColorAsInt() {
     return _getIconHaloColorAsInt(
-            reference.pointer, _id_getIconHaloColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getIconHaloColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getIconHaloColorTransition = _class.instanceMethodId(
@@ -1718,24 +2111,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getIconHaloColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconHaloColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconHaloColorTransition() {
-    return _getIconHaloColorTransition(reference.pointer,
-            _id_getIconHaloColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getIconHaloColorTransition(
+      reference.pointer,
+      _id_getIconHaloColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconHaloColorTransition = _class.instanceMethodId(
@@ -1745,15 +2143,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setIconHaloColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconHaloColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconHaloColorTransition(
@@ -1761,10 +2165,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconHaloColorTransition(
-            reference.pointer,
-            _id_setIconHaloColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconHaloColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconHaloWidth = _class.instanceMethodId(
@@ -1772,26 +2176,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconHaloWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconHaloWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconHaloWidth()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getIconHaloWidth() {
     return _getIconHaloWidth(
-            reference.pointer, _id_getIconHaloWidth as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getIconHaloWidth as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconHaloWidthTransition = _class.instanceMethodId(
@@ -1801,24 +2212,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getIconHaloWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconHaloWidthTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconHaloWidthTransition() {
-    return _getIconHaloWidthTransition(reference.pointer,
-            _id_getIconHaloWidthTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getIconHaloWidthTransition(
+      reference.pointer,
+      _id_getIconHaloWidthTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconHaloWidthTransition = _class.instanceMethodId(
@@ -1828,15 +2244,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setIconHaloWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconHaloWidthTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconHaloWidthTransition(
@@ -1844,10 +2266,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconHaloWidthTransition(
-            reference.pointer,
-            _id_setIconHaloWidthTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconHaloWidthTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconHaloBlur = _class.instanceMethodId(
@@ -1855,26 +2277,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconHaloBlur = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconHaloBlur =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconHaloBlur()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getIconHaloBlur() {
     return _getIconHaloBlur(
-            reference.pointer, _id_getIconHaloBlur as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getIconHaloBlur as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getIconHaloBlurTransition = _class.instanceMethodId(
@@ -1882,25 +2311,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getIconHaloBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconHaloBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconHaloBlurTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconHaloBlurTransition() {
-    return _getIconHaloBlurTransition(reference.pointer,
-            _id_getIconHaloBlurTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getIconHaloBlurTransition(
+      reference.pointer,
+      _id_getIconHaloBlurTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconHaloBlurTransition = _class.instanceMethodId(
@@ -1908,16 +2343,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setIconHaloBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setIconHaloBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconHaloBlurTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconHaloBlurTransition(
@@ -1925,10 +2367,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconHaloBlurTransition(
-            reference.pointer,
-            _id_setIconHaloBlurTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconHaloBlurTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconTranslate = _class.instanceMethodId(
@@ -1936,29 +2378,34 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconTranslate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconTranslate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconTranslate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>
-      getIconTranslate() {
+  getIconTranslate() {
     return _getIconTranslate(
-            reference.pointer, _id_getIconTranslate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getIconTranslate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getIconTranslateTransition = _class.instanceMethodId(
@@ -1968,24 +2415,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getIconTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getIconTranslateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getIconTranslateTransition() {
-    return _getIconTranslateTransition(reference.pointer,
-            _id_getIconTranslateTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getIconTranslateTransition(
+      reference.pointer,
+      _id_getIconTranslateTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setIconTranslateTransition = _class.instanceMethodId(
@@ -1995,15 +2447,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setIconTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setIconTranslateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setIconTranslateTransition(
@@ -2011,10 +2469,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setIconTranslateTransition(
-            reference.pointer,
-            _id_setIconTranslateTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setIconTranslateTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getIconTranslateAnchor = _class.instanceMethodId(
@@ -2022,26 +2480,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getIconTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getIconTranslateAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getIconTranslateAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getIconTranslateAnchor() {
     return _getIconTranslateAnchor(
-            reference.pointer, _id_getIconTranslateAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getIconTranslateAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextOpacity = _class.instanceMethodId(
@@ -2049,26 +2514,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextOpacity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextOpacity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextOpacity()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextOpacity() {
     return _getTextOpacity(
-            reference.pointer, _id_getTextOpacity as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextOpacity as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextOpacityTransition = _class.instanceMethodId(
@@ -2076,25 +2548,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getTextOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextOpacityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextOpacityTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextOpacityTransition() {
-    return _getTextOpacityTransition(reference.pointer,
-            _id_getTextOpacityTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getTextOpacityTransition(
+      reference.pointer,
+      _id_getTextOpacityTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextOpacityTransition = _class.instanceMethodId(
@@ -2102,16 +2580,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setTextOpacityTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTextOpacityTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextOpacityTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextOpacityTransition(
@@ -2119,10 +2604,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextOpacityTransition(
-            reference.pointer,
-            _id_setTextOpacityTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextOpacityTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextColor = _class.instanceMethodId(
@@ -2130,26 +2615,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextColor() {
     return _getTextColor(
-            reference.pointer, _id_getTextColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextColorAsInt = _class.instanceMethodId(
@@ -2157,23 +2649,28 @@ class SymbolLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getTextColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getTextColorAsInt()`
   int getTextColorAsInt() {
     return _getTextColorAsInt(
-            reference.pointer, _id_getTextColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getTextColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getTextColorTransition = _class.instanceMethodId(
@@ -2181,25 +2678,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getTextColorTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextColorTransition() {
     return _getTextColorTransition(
-            reference.pointer, _id_getTextColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+      reference.pointer,
+      _id_getTextColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextColorTransition = _class.instanceMethodId(
@@ -2207,16 +2710,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setTextColorTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTextColorTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextColorTransition(
@@ -2224,10 +2734,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextColorTransition(
-            reference.pointer,
-            _id_setTextColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextHaloColor = _class.instanceMethodId(
@@ -2235,26 +2745,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextHaloColor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextHaloColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextHaloColor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextHaloColor() {
     return _getTextHaloColor(
-            reference.pointer, _id_getTextHaloColor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextHaloColor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextHaloColorAsInt = _class.instanceMethodId(
@@ -2262,23 +2779,28 @@ class SymbolLayer extends layer$_.Layer {
     r'()I',
   );
 
-  static final _getTextHaloColorAsInt = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextHaloColorAsInt =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getTextHaloColorAsInt()`
   int getTextHaloColorAsInt() {
     return _getTextHaloColorAsInt(
-            reference.pointer, _id_getTextHaloColorAsInt as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getTextHaloColorAsInt as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getTextHaloColorTransition = _class.instanceMethodId(
@@ -2288,24 +2810,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getTextHaloColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextHaloColorTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextHaloColorTransition() {
-    return _getTextHaloColorTransition(reference.pointer,
-            _id_getTextHaloColorTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getTextHaloColorTransition(
+      reference.pointer,
+      _id_getTextHaloColorTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextHaloColorTransition = _class.instanceMethodId(
@@ -2315,15 +2842,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setTextHaloColorTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextHaloColorTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextHaloColorTransition(
@@ -2331,10 +2864,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextHaloColorTransition(
-            reference.pointer,
-            _id_setTextHaloColorTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextHaloColorTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextHaloWidth = _class.instanceMethodId(
@@ -2342,26 +2875,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextHaloWidth = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextHaloWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextHaloWidth()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextHaloWidth() {
     return _getTextHaloWidth(
-            reference.pointer, _id_getTextHaloWidth as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextHaloWidth as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextHaloWidthTransition = _class.instanceMethodId(
@@ -2371,24 +2911,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getTextHaloWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextHaloWidthTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextHaloWidthTransition() {
-    return _getTextHaloWidthTransition(reference.pointer,
-            _id_getTextHaloWidthTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getTextHaloWidthTransition(
+      reference.pointer,
+      _id_getTextHaloWidthTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextHaloWidthTransition = _class.instanceMethodId(
@@ -2398,15 +2943,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setTextHaloWidthTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextHaloWidthTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextHaloWidthTransition(
@@ -2414,10 +2965,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextHaloWidthTransition(
-            reference.pointer,
-            _id_setTextHaloWidthTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextHaloWidthTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextHaloBlur = _class.instanceMethodId(
@@ -2425,26 +2976,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextHaloBlur = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextHaloBlur =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextHaloBlur()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JFloat?> getTextHaloBlur() {
     return _getTextHaloBlur(
-            reference.pointer, _id_getTextHaloBlur as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
-                jni$_.JFloatNullableType()));
+      reference.pointer,
+      _id_getTextHaloBlur as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JFloat?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JFloat?>(
+        jni$_.JFloatNullableType(),
+      ),
+    );
   }
 
   static final _id_getTextHaloBlurTransition = _class.instanceMethodId(
@@ -2452,25 +3010,31 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/TransitionOptions;',
   );
 
-  static final _getTextHaloBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextHaloBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextHaloBlurTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextHaloBlurTransition() {
-    return _getTextHaloBlurTransition(reference.pointer,
-            _id_getTextHaloBlurTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getTextHaloBlurTransition(
+      reference.pointer,
+      _id_getTextHaloBlurTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextHaloBlurTransition = _class.instanceMethodId(
@@ -2478,16 +3042,23 @@ class SymbolLayer extends layer$_.Layer {
     r'(Lorg/maplibre/android/style/layers/TransitionOptions;)V',
   );
 
-  static final _setTextHaloBlurTransition = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setTextHaloBlurTransition =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextHaloBlurTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextHaloBlurTransition(
@@ -2495,10 +3066,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextHaloBlurTransition(
-            reference.pointer,
-            _id_setTextHaloBlurTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextHaloBlurTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextTranslate = _class.instanceMethodId(
@@ -2506,29 +3077,34 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextTranslate = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextTranslate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextTranslate()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>
-      getTextTranslate() {
+  getTextTranslate() {
     return _getTextTranslate(
-            reference.pointer, _id_getTextTranslate as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
-            const propertyvalue$_
-                .$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
-                jni$_.JArrayNullableType<jni$_.JFloat?>(
-                    jni$_.JFloatNullableType())));
+      reference.pointer,
+      _id_getTextTranslate as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JArray<jni$_.JFloat?>?>(
+        jni$_.JArrayNullableType<jni$_.JFloat?>(jni$_.JFloatNullableType()),
+      ),
+    );
   }
 
   static final _id_getTextTranslateTransition = _class.instanceMethodId(
@@ -2538,24 +3114,29 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _getTextTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.TransitionOptions getTextTranslateTransition()`
   /// The returned object must be released after use, by calling the [release] method.
   transitionoptions$_.TransitionOptions getTextTranslateTransition() {
-    return _getTextTranslateTransition(reference.pointer,
-            _id_getTextTranslateTransition as jni$_.JMethodIDPtr)
-        .object<transitionoptions$_.TransitionOptions>(
-            const transitionoptions$_.$TransitionOptions$Type());
+    return _getTextTranslateTransition(
+      reference.pointer,
+      _id_getTextTranslateTransition as jni$_.JMethodIDPtr,
+    ).object<transitionoptions$_.TransitionOptions>(
+      const transitionoptions$_.$TransitionOptions$Type(),
+    );
   }
 
   static final _id_setTextTranslateTransition = _class.instanceMethodId(
@@ -2565,15 +3146,21 @@ class SymbolLayer extends layer$_.Layer {
 
   static final _setTextTranslateTransition =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setTextTranslateTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
   void setTextTranslateTransition(
@@ -2581,10 +3168,10 @@ class SymbolLayer extends layer$_.Layer {
   ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTextTranslateTransition(
-            reference.pointer,
-            _id_setTextTranslateTransition as jni$_.JMethodIDPtr,
-            _$transitionOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_setTextTranslateTransition as jni$_.JMethodIDPtr,
+      _$transitionOptions.pointer,
+    ).check();
   }
 
   static final _id_getTextTranslateAnchor = _class.instanceMethodId(
@@ -2592,26 +3179,33 @@ class SymbolLayer extends layer$_.Layer {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getTextTranslateAnchor = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getTextTranslateAnchor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getTextTranslateAnchor()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getTextTranslateAnchor() {
     return _getTextTranslateAnchor(
-            reference.pointer, _id_getTextTranslateAnchor as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getTextTranslateAnchor as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 }
 
@@ -2625,11 +3219,8 @@ final class $SymbolLayer$NullableType extends jni$_.JObjType<SymbolLayer?> {
 
   @jni$_.internal
   @core$_.override
-  SymbolLayer? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : SymbolLayer.fromReference(
-          reference,
-        );
+  SymbolLayer? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : SymbolLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -2663,9 +3254,7 @@ final class $SymbolLayer$Type extends jni$_.JObjType<SymbolLayer> {
   @jni$_.internal
   @core$_.override
   SymbolLayer fromReference(jni$_.JReference reference) =>
-      SymbolLayer.fromReference(
-        reference,
-      );
+      SymbolLayer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

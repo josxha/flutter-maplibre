@@ -40,8 +40,9 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                 OutlinedButton(
                   onPressed: () {
                     setState(() {
-                      _circleColor =
-                          Color(_random.nextInt(0xFFFFFF) + 0x7F000000);
+                      _circleColor = Color(
+                        _random.nextInt(0xFFFFFF) + 0x7F000000,
+                      );
                     });
                   },
                   child: const Text(
@@ -80,8 +81,10 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
           Expanded(
             child: MapLibreMap(
               acceptLicense: true,
-              options:
-                  MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+              options: MapOptions(
+                initZoom: 7,
+                initCenter: Position(9.17, 47.68),
+              ),
               onEvent: (event) {
                 if (event case MapEventClick()) {
                   setState(() {

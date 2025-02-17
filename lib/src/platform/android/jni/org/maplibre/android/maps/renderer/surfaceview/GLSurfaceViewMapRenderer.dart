@@ -64,13 +64,13 @@ class GLSurfaceViewMapRenderer
   final jni$_.JObjType<GLSurfaceViewMapRenderer> $type;
 
   @jni$_.internal
-  GLSurfaceViewMapRenderer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  GLSurfaceViewMapRenderer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/surfaceview/GLSurfaceViewMapRenderer');
+    r'org/maplibre/android/maps/renderer/surfaceview/GLSurfaceViewMapRenderer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GLSurfaceViewMapRenderer$NullableType();
@@ -79,24 +79,31 @@ class GLSurfaceViewMapRenderer
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/renderer/surfaceview/MapLibreGLSurfaceView;Ljava/lang/String;)V',
   );
 
-  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.renderer.surfaceview.MapLibreGLSurfaceView mapLibreGLSurfaceView, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -108,13 +115,15 @@ class GLSurfaceViewMapRenderer
     final _$context = context?.reference ?? jni$_.jNullReference;
     final _$mapLibreGLSurfaceView = mapLibreGLSurfaceView.reference;
     final _$string = string?.reference ?? jni$_.jNullReference;
-    return GLSurfaceViewMapRenderer.fromReference(_new$1(
-            _class.reference.pointer,
-            _id_new$1 as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$mapLibreGLSurfaceView.pointer,
-            _$string.pointer)
-        .reference);
+    return GLSurfaceViewMapRenderer.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        _$context.pointer,
+        _$mapLibreGLSurfaceView.pointer,
+        _$string.pointer,
+      ).reference,
+    );
   }
 }
 
@@ -133,9 +142,7 @@ final class $GLSurfaceViewMapRenderer$NullableType
   GLSurfaceViewMapRenderer? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : GLSurfaceViewMapRenderer.fromReference(
-              reference,
-            );
+          : GLSurfaceViewMapRenderer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -172,9 +179,7 @@ final class $GLSurfaceViewMapRenderer$Type
   @jni$_.internal
   @core$_.override
   GLSurfaceViewMapRenderer fromReference(jni$_.JReference reference) =>
-      GLSurfaceViewMapRenderer.fromReference(
-        reference,
-      );
+      GLSurfaceViewMapRenderer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
