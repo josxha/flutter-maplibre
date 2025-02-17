@@ -59,13 +59,13 @@ class PermissionsListener extends jni$_.JObject {
   final jni$_.JObjType<PermissionsListener> $type;
 
   @jni$_.internal
-  PermissionsListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PermissionsListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/permissions/PermissionsListener');
+    r'org/maplibre/android/location/permissions/PermissionsListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PermissionsListener$NullableType();
@@ -75,25 +75,32 @@ class PermissionsListener extends jni$_.JObject {
     r'(Ljava/util/List;)V',
   );
 
-  static final _onExplanationNeeded = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onExplanationNeeded =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onExplanationNeeded(java.util.List list)`
-  void onExplanationNeeded(
-    jni$_.JList<jni$_.JString?>? list,
-  ) {
+  void onExplanationNeeded(jni$_.JList<jni$_.JString?>? list) {
     final _$list = list?.reference ?? jni$_.jNullReference;
-    _onExplanationNeeded(reference.pointer,
-            _id_onExplanationNeeded as jni$_.JMethodIDPtr, _$list.pointer)
-        .check();
+    _onExplanationNeeded(
+      reference.pointer,
+      _id_onExplanationNeeded as jni$_.JMethodIDPtr,
+      _$list.pointer,
+    ).check();
   }
 
   static final _id_onPermissionResult = _class.instanceMethodId(
@@ -101,23 +108,31 @@ class PermissionsListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onPermissionResult = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onPermissionResult =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onPermissionResult(boolean z)`
-  void onPermissionResult(
-    bool z,
-  ) {
-    _onPermissionResult(reference.pointer,
-            _id_onPermissionResult as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void onPermissionResult(bool z) {
+    _onPermissionResult(
+      reference.pointer,
+      _id_onPermissionResult as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -129,19 +144,16 @@ class PermissionsListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -153,9 +165,9 @@ class PermissionsListener extends jni$_.JObject {
       if ($d == r'onExplanationNeeded(Ljava/util/List;)V') {
         _$impls[$p]!.onExplanationNeeded(
           $a![0]?.as(
-              const jni$_.JListType<jni$_.JString?>(
-                  jni$_.JStringNullableType()),
-              releaseOriginal: true),
+            const jni$_.JListType<jni$_.JString?>(jni$_.JStringNullableType()),
+            releaseOriginal: true,
+          ),
         );
         return jni$_.nullptr;
       }
@@ -202,21 +214,17 @@ class PermissionsListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory PermissionsListener.implement(
-    $PermissionsListener $impl,
-  ) {
+  factory PermissionsListener.implement($PermissionsListener $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return PermissionsListener.fromReference(
-      $i.implementReference(),
-    );
+    return PermissionsListener.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $PermissionsListener {
   factory $PermissionsListener({
     required void Function(jni$_.JList<jni$_.JString?>? list)
-        onExplanationNeeded,
+    onExplanationNeeded,
     bool onExplanationNeeded$async,
     required void Function(bool z) onPermissionResult,
     bool onPermissionResult$async,
@@ -231,12 +239,12 @@ abstract base mixin class $PermissionsListener {
 final class _$PermissionsListener with $PermissionsListener {
   _$PermissionsListener({
     required void Function(jni$_.JList<jni$_.JString?>? list)
-        onExplanationNeeded,
+    onExplanationNeeded,
     this.onExplanationNeeded$async = false,
     required void Function(bool z) onPermissionResult,
     this.onPermissionResult$async = false,
-  })  : _onExplanationNeeded = onExplanationNeeded,
-        _onPermissionResult = onPermissionResult;
+  }) : _onExplanationNeeded = onExplanationNeeded,
+       _onPermissionResult = onPermissionResult;
 
   final void Function(jni$_.JList<jni$_.JString?>? list) _onExplanationNeeded;
   final bool onExplanationNeeded$async;
@@ -265,11 +273,7 @@ final class $PermissionsListener$NullableType
   @jni$_.internal
   @core$_.override
   PermissionsListener? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : PermissionsListener.fromReference(
-              reference,
-            );
+      reference.isNull ? null : PermissionsListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -305,9 +309,7 @@ final class $PermissionsListener$Type
   @jni$_.internal
   @core$_.override
   PermissionsListener fromReference(jni$_.JReference reference) =>
-      PermissionsListener.fromReference(
-        reference,
-      );
+      PermissionsListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

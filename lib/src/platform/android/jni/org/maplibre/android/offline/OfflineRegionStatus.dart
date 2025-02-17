@@ -59,13 +59,13 @@ class OfflineRegionStatus extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionStatus> $type;
 
   @jni$_.internal
-  OfflineRegionStatus.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OfflineRegionStatus.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/offline/OfflineRegionStatus');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/offline/OfflineRegionStatus',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $OfflineRegionStatus$NullableType();
@@ -75,23 +75,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getDownloadState = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDownloadState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final int getDownloadState()`
   int getDownloadState() {
     return _getDownloadState(
-            reference.pointer, _id_getDownloadState as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getDownloadState as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getCompletedResourceCount = _class.instanceMethodId(
@@ -99,23 +104,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getCompletedResourceCount = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompletedResourceCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final long getCompletedResourceCount()`
   int getCompletedResourceCount() {
-    return _getCompletedResourceCount(reference.pointer,
-            _id_getCompletedResourceCount as jni$_.JMethodIDPtr)
-        .long;
+    return _getCompletedResourceCount(
+      reference.pointer,
+      _id_getCompletedResourceCount as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_getCompletedResourceSize = _class.instanceMethodId(
@@ -123,23 +133,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getCompletedResourceSize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompletedResourceSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final long getCompletedResourceSize()`
   int getCompletedResourceSize() {
-    return _getCompletedResourceSize(reference.pointer,
-            _id_getCompletedResourceSize as jni$_.JMethodIDPtr)
-        .long;
+    return _getCompletedResourceSize(
+      reference.pointer,
+      _id_getCompletedResourceSize as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_getCompletedTileCount = _class.instanceMethodId(
@@ -147,23 +162,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getCompletedTileCount = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompletedTileCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final long getCompletedTileCount()`
   int getCompletedTileCount() {
     return _getCompletedTileCount(
-            reference.pointer, _id_getCompletedTileCount as jni$_.JMethodIDPtr)
-        .long;
+      reference.pointer,
+      _id_getCompletedTileCount as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_getCompletedTileSize = _class.instanceMethodId(
@@ -171,23 +191,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getCompletedTileSize = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompletedTileSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final long getCompletedTileSize()`
   int getCompletedTileSize() {
     return _getCompletedTileSize(
-            reference.pointer, _id_getCompletedTileSize as jni$_.JMethodIDPtr)
-        .long;
+      reference.pointer,
+      _id_getCompletedTileSize as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_getRequiredResourceCount = _class.instanceMethodId(
@@ -195,23 +220,28 @@ class OfflineRegionStatus extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getRequiredResourceCount = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRequiredResourceCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final long getRequiredResourceCount()`
   int getRequiredResourceCount() {
-    return _getRequiredResourceCount(reference.pointer,
-            _id_getRequiredResourceCount as jni$_.JMethodIDPtr)
-        .long;
+    return _getRequiredResourceCount(
+      reference.pointer,
+      _id_getRequiredResourceCount as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_isRequiredResourceCountPrecise = _class.instanceMethodId(
@@ -221,45 +251,52 @@ class OfflineRegionStatus extends jni$_.JObject {
 
   static final _isRequiredResourceCountPrecise =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final boolean isRequiredResourceCountPrecise()`
   bool isRequiredResourceCountPrecise() {
-    return _isRequiredResourceCountPrecise(reference.pointer,
-            _id_isRequiredResourceCountPrecise as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isRequiredResourceCountPrecise(
+      reference.pointer,
+      _id_isRequiredResourceCountPrecise as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
-  static final _id_isComplete = _class.instanceMethodId(
-    r'isComplete',
-    r'()Z',
-  );
+  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
 
-  static final _isComplete = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isComplete =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public final boolean isComplete()`
   bool isComplete() {
-    return _isComplete(reference.pointer, _id_isComplete as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isComplete(
+      reference.pointer,
+      _id_isComplete as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 }
 
@@ -275,11 +312,7 @@ final class $OfflineRegionStatus$NullableType
   @jni$_.internal
   @core$_.override
   OfflineRegionStatus? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : OfflineRegionStatus.fromReference(
-              reference,
-            );
+      reference.isNull ? null : OfflineRegionStatus.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -314,9 +347,7 @@ final class $OfflineRegionStatus$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionStatus fromReference(jni$_.JReference reference) =>
-      OfflineRegionStatus.fromReference(
-        reference,
-      );
+      OfflineRegionStatus.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -53,7 +52,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
           controller: controller as AndroidViewController,
-          gestureRecognizers: widget.gestureRecognizers ??
+          gestureRecognizers:
+              widget.gestureRecognizers ??
               const <Factory<OneSequenceGestureRecognizer>>{},
           hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         );
@@ -89,11 +89,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             ),
           // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
           AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
@@ -145,89 +145,59 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       );
     }
 
-    await runOnPlatformThread(() {
-      jniMap.setMinZoomPreference(options.minZoom);
-      jniMap.setMaxZoomPreference(options.maxZoom);
-      jniMap.setMinPitchPreference(options.minPitch);
-      jniMap.setMaxPitchPreference(options.maxPitch);
+    jniMap.setMinZoomPreference(options.minZoom);
+    jniMap.setMaxZoomPreference(options.maxZoom);
+    jniMap.setMinPitchPreference(options.minPitch);
+    jniMap.setMaxPitchPreference(options.maxPitch);
 
-      // map bounds
-      final oldBounds = oldOptions.maxBounds;
-      final newBounds = options.maxBounds;
-      if (oldBounds != null && newBounds == null) {
-        // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
-        // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
-      } else if ((oldBounds == null && newBounds != null) ||
-          (newBounds != null && oldBounds != newBounds)) {
-        final bounds = newBounds.toLatLngBounds();
-        jniMap.setLatLngBoundsForCameraTarget(bounds);
-      }
+    // map bounds
+    final oldBounds = oldOptions.maxBounds;
+    final newBounds = options.maxBounds;
+    if (oldBounds != null && newBounds == null) {
+      // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
+      // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
+    } else if ((oldBounds == null && newBounds != null) ||
+        (newBounds != null && oldBounds != newBounds)) {
+      final bounds = newBounds.toLatLngBounds();
+      jniMap.setLatLngBoundsForCameraTarget(bounds);
+    }
 
-      // gestures
-      final uiSettings = jniMap.getUiSettings();
-      if (options.gestures.rotate != oldOptions.gestures.rotate) {
-        uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
-      }
-      // TODO: pan is not handled, there is no setPanGestureEnabled on Android.
-      /*if (options.gestures.pan != oldOptions.gestures.pan) {
+    // gestures
+    final uiSettings = jniMap.getUiSettings();
+    if (options.gestures.rotate != oldOptions.gestures.rotate) {
+      uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
+    }
+    // TODO: pan is not handled, there is no setPanGestureEnabled on Android.
+    /*if (options.gestures.pan != oldOptions.gestures.pan) {
         uiSettings.setRotateGesturesEnabled(options.gestures.pan);
       }*/
-      if (options.gestures.zoom != oldOptions.gestures.zoom) {
-        uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
-        uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);
-        uiSettings.setScrollGesturesEnabled(options.gestures.zoom);
-        uiSettings.setQuickZoomGesturesEnabled(options.gestures.zoom);
-      }
-      if (options.gestures.pitch != oldOptions.gestures.pitch) {
-        uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
-      }
-      uiSettings.release();
-    });
+    if (options.gestures.zoom != oldOptions.gestures.zoom) {
+      uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
+      uiSettings.setDoubleTapGesturesEnabled(options.gestures.zoom);
+      uiSettings.setScrollGesturesEnabled(options.gestures.zoom);
+      uiSettings.setQuickZoomGesturesEnabled(options.gestures.zoom);
+    }
+    if (options.gestures.pitch != oldOptions.gestures.pitch) {
+      uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
+    }
+    uiSettings.release();
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread<Position>(() {
-      return jniProjection
-          .fromScreenLocation(screenLocation.toPointF())
-          .toPosition(releaseOriginal: true);
-    });
-  }
+  Future<Position> toLngLat(Offset screenLocation) async =>
+      toLngLatSync(screenLocation);
 
   @override
-  Future<Offset> toScreenLocation(Position lngLat) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread<Offset>(() {
-      return jniProjection
-          .toScreenLocation(lngLat.toLatLng())
-          .toOffset(releaseOriginal: true);
-    });
-  }
+  Future<Offset> toScreenLocation(Position lngLat) async =>
+      toScreenLocationSync(lngLat);
 
   @override
-  Future<List<Position>> toLngLats(List<Offset> screenLocations) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread<List<Position>>(() {
-      return screenLocations.map((screenLocation) {
-        return jniProjection
-            .fromScreenLocation(screenLocation.toPointF())
-            .toPosition(releaseOriginal: true);
-      }).toList(growable: false);
-    });
-  }
+  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
+      toLngLatsSync(screenLocations);
 
   @override
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread<List<Offset>>(() {
-      return lngLats.map((lngLat) {
-        return jniProjection
-            .toScreenLocation(lngLat.toLatLng())
-            .toOffset(releaseOriginal: true);
-      }).toList(growable: false);
-    });
-  }
+  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
+      toScreenLocationsSync(lngLats);
 
   @override
   Future<void> moveCamera({
@@ -236,7 +206,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double? bearing,
     double? pitch,
   }) async {
-    final jniMap = _jniMapLibreMap!;
+    assert(_jniMapLibreMap != null, '_jniMapLibreMap needs to be not null.');
     final cameraPositionBuilder = jni.CameraPosition$Builder();
     if (center != null) cameraPositionBuilder.target(center.toLatLng());
     if (zoom != null) cameraPositionBuilder.zoom(zoom);
@@ -245,11 +215,22 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final cameraPosition = cameraPositionBuilder.build();
     cameraPositionBuilder.release();
-    final cameraUpdate =
-        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
-    await runOnPlatformThread(() {
-      jniMap.moveCamera(cameraUpdate);
-    });
+    final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
+      cameraPosition,
+    );
+    final completer = Completer<void>();
+    _jniMapLibreMap?.moveCamera$1(
+      cameraUpdate,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+          onCancel$async: true,
+          onFinish$async: true,
+        ),
+      ),
+    );
     cameraUpdate.release();
   }
 
@@ -272,30 +253,27 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
     final cameraPosition = cameraPositionBuilder.build();
     cameraPositionBuilder.release();
-    final cameraUpdate =
-        jni.CameraUpdateFactory.newCameraPosition(cameraPosition);
+    final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
+      cameraPosition,
+    );
 
-    await runOnPlatformThread(() async {
-      final completer = Completer<void>();
-      jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
-      // TODO: jni causes sometimes a deadlock, complete immediately for now
-      completer.complete();
-      /*jniMap.animateCamera$3(
-        cameraUpdate,
-        nativeDuration.inMilliseconds,
-        jni.MapLibreMap_CancelableCallback.implement(
-          jni.$MapLibreMap_CancelableCallback(
-            onCancel: () =>
-                completer.completeError(Exception('Animation cancelled.')),
-            onFinish: completer.complete,
-            onFinish$async: true,
-            onCancel$async: true,
-          ),
+    final completer = Completer<void>();
+    jniMap.animateCamera$3(
+      cameraUpdate,
+      nativeDuration.inMilliseconds,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+          onFinish$async: true,
+          onCancel$async: true,
         ),
-      );*/
-      return completer.future;
-    });
+      ),
+    );
+    final result = await completer.future;
     cameraUpdate.release();
+    return result;
   }
 
   @override
@@ -324,27 +302,23 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     );
     latLngBounds.release();
 
-    await runOnPlatformThread(() {
-      final completer = Completer<void>();
-      jniMap.animateCamera$2(cameraUpdate, nativeDuration.inMilliseconds);
-      // TODO: jni causes sometimes a deadlock, complete immediately for now
-      completer.complete();
-      /*jniMap.animateCamera$3(
-        cameraUpdate,
-        nativeDuration.inMilliseconds,
-        jni.MapLibreMap_CancelableCallback.implement(
-          jni.$MapLibreMap_CancelableCallback(
-            onCancel: () =>
-                completer.completeError(Exception('Animation cancelled.')),
-            onFinish: completer.complete,
-            onCancel$async: true,
-            onFinish$async: true,
-          ),
+    final completer = Completer<void>();
+    jniMap.animateCamera$3(
+      cameraUpdate,
+      nativeDuration.inMilliseconds,
+      jni.MapLibreMap$CancelableCallback.implement(
+        jni.$MapLibreMap$CancelableCallback(
+          onCancel:
+              () => completer.completeError(Exception('Animation cancelled.')),
+          onFinish: completer.complete,
+          onCancel$async: true,
+          onFinish$async: true,
         ),
-      );*/
-      return completer.future;
-    });
+      ),
+    );
+    final result = await completer.future;
     cameraUpdate.release();
+    return result;
   }
 
   @override
@@ -381,84 +355,72 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async {
-    final jniProjection = _jniProjection;
-    return runOnPlatformThread(() {
-      return jniProjection.getMetersPerPixelAtLatitude(latitude);
-    });
-  }
+  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
+      getMetersPerPixelAtLatitudeSync(latitude);
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async {
-    final projection = _jniProjection; // necessary to use it in platform thread
-    final jniBounds = await runOnPlatformThread<jni.LatLngBounds>(() {
-      final region = projection.getVisibleRegion();
-      final bounds = region.latLngBounds;
-      region.release();
-      return bounds;
-    });
-    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
-    return bounds;
-  }
+  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
 
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
-    // https://maplibre.org/maplibre-gl-js/docs/examples/queryQueriedLayers/
-    final jniMapLibreMap = _jniMapLibreMap!;
+    if (_jniMapLibreMap == null) {
+      throw Exception(
+        "queryLayers can't be called before the map is initialized.",
+      );
+    }
     final style = this.style;
+    // there are no sources without a loaded style.
     if (style == null) return [];
 
-    final result = await runOnPlatformThread<List<QueriedLayer>>(() {
-      final jniLayers = style._getLayers();
-      final queriedLayers = <QueriedLayer>[];
-      for (var i = jniLayers.length - 1; i >= 0; i--) {
-        final jniLayer = jniLayers[i]!;
-        JString? jLayerId;
-        late final JString jSourceId;
-        late final JString jSourceLayer;
-        switch (jniLayer.jClass.toString()) {
-          case 'class org.maplibre.android.style.layers.LineLayer':
-            final layer = jniLayer.as(jni.LineLayer.type);
-            jLayerId = layer.getId();
-            jSourceId = layer.getSourceId();
-            jSourceLayer = layer.getSourceLayer();
-            layer.release();
-          case 'class org.maplibre.android.style.layers.FillLayer':
-            final layer = jniLayer.as(jni.FillLayer.type);
-            jLayerId = layer.getId();
-            jSourceId = layer.getSourceId();
-            jSourceLayer = layer.getSourceLayer();
-            layer.release();
-          case 'class org.maplibre.android.style.layers.SymbolLayer':
-            final layer = jniLayer.as(jni.SymbolLayer.type);
-            jLayerId = layer.getId();
-            jSourceId = layer.getSourceId();
-            jSourceLayer = layer.getSourceLayer();
-            layer.release();
-        }
-        jniLayer.release();
-        if (jLayerId == null) continue; // ignore all other layers
-
-        final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
-          ..[0] = jLayerId;
-        final jniFeatures = jniMapLibreMap.queryRenderedFeatures(
-          jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
-          queryLayerIds, // query one layer at a time
-        );
-        queryLayerIds.release();
-        if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
-        jniFeatures.release();
-        final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
-        final queriedLayer = QueriedLayer(
-          layerId: jLayerId.toDartString(releaseOriginal: true),
-          sourceId: jSourceId.toDartString(releaseOriginal: true),
-          sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
-        );
-        queriedLayers.add(queriedLayer);
+    final jniLayers = style._getLayers();
+    final queriedLayers = <QueriedLayer>[];
+    for (var i = jniLayers.length - 1; i >= 0; i--) {
+      final jniLayer = jniLayers[i]!;
+      JString? jLayerId;
+      late final JString jSourceId;
+      late final JString jSourceLayer;
+      switch (jniLayer.jClass.toString()) {
+        case 'class org.maplibre.android.style.layers.LineLayer':
+          final layer = jniLayer.as(jni.LineLayer.type);
+          jLayerId = layer.getId();
+          jSourceId = layer.getSourceId();
+          jSourceLayer = layer.getSourceLayer();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.FillLayer':
+          final layer = jniLayer.as(jni.FillLayer.type);
+          jLayerId = layer.getId();
+          jSourceId = layer.getSourceId();
+          jSourceLayer = layer.getSourceLayer();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.SymbolLayer':
+          final layer = jniLayer.as(jni.SymbolLayer.type);
+          jLayerId = layer.getId();
+          jSourceId = layer.getSourceId();
+          jSourceLayer = layer.getSourceLayer();
+          layer.release();
       }
-      return queriedLayers;
-    });
-    return result;
+      jniLayer.release();
+      if (jLayerId == null) continue; // ignore all other layers
+
+      final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
+        ..[0] = jLayerId;
+      // query one layer at a time
+      final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
+        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+        queryLayerIds,
+      );
+      queryLayerIds.release();
+      if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
+      jniFeatures.release();
+      final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+      final queriedLayer = QueriedLayer(
+        layerId: jLayerId.toDartString(releaseOriginal: true),
+        sourceId: jSourceId.toDartString(releaseOriginal: true),
+        sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
+      );
+      queriedLayers.add(queriedLayer);
+    }
+    return queriedLayers;
   }
 
   @override
@@ -512,7 +474,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
-    final locationComponent = _locationComponent;
     final style = this.style;
     if (style == null) return;
 
@@ -522,36 +483,36 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       BearingRenderMode.gps => jni.RenderMode.GPS,
     };
     final jniContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
-    final locationComponentOptionsBuilder =
+    final locOptionsBuilder =
         jni.LocationComponentOptions.builder(jniContext)
             .pulseFadeEnabled(pulseFade)!
             .accuracyAnimationEnabled(accuracyAnimation)!
             .compassAnimationEnabled(compassAnimation.toJBoolean())!
             .pulseEnabled(pulse)!;
-    final locationComponentOptions = locationComponentOptionsBuilder.build();
+    final locOptions = locOptionsBuilder.build();
     final locationEngineRequestBuilder =
         jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
             .setFastestInterval(fastestInterval.inMilliseconds)!
             .setMaxWaitTime(maxWaitTime.inMilliseconds)!
             .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!;
     final locationEngineRequest = locationEngineRequestBuilder.build();
-    final activationOptions = jni.LocationComponentActivationOptions.builder(
-      jniContext,
-      style._jniStyle,
-    )
-        .locationComponentOptions(locationComponentOptions)!
-        .useDefaultLocationEngine(true)!
-        .locationEngineRequest(locationEngineRequest)!
-        .build()!;
+    final activationOptionsBuilder =
+        jni.LocationComponentActivationOptions.builder(
+              jniContext,
+              style._jniStyle,
+            )
+            .locationComponentOptions(locOptions)!
+            .useDefaultLocationEngine(true)!
+            .locationEngineRequest(locationEngineRequest)!;
+    final activationOptions = activationOptionsBuilder.build()!;
 
-    await runOnPlatformThread(() {
-      locationComponent.activateLocationComponent(activationOptions);
-      locationComponent.setRenderMode(bearing);
-      locationComponent.setLocationComponentEnabled(true);
-    });
+    _locationComponent.activateLocationComponent(activationOptions);
+    _locationComponent.setRenderMode(bearing);
+    _locationComponent.setLocationComponentEnabled(true);
 
-    locationComponentOptionsBuilder.release();
-    locationComponentOptions.release();
+    activationOptionsBuilder.release();
+    locOptionsBuilder.release();
+    locOptions.release();
     locationEngineRequestBuilder.release();
     locationEngineRequest?.release();
     activationOptions.release();
@@ -563,20 +524,57 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
-    final locationComponent = _locationComponent;
     final mode = switch (trackBearing) {
-      BearingTrackMode.none => trackLocation
-          ? jni.CameraMode.TRACKING // only location
-          : jni.CameraMode.NONE, // neither location nor bearing
-      BearingTrackMode.compass => trackLocation
-          ? jni.CameraMode.TRACKING_COMPASS // location with compass bearing
-          : jni.CameraMode.NONE_COMPASS, // only compass bearing
-      BearingTrackMode.gps => trackLocation
-          ? jni.CameraMode.TRACKING_GPS // location with gps bearing
-          : jni.CameraMode.NONE_GPS, // only gps bearing
+      BearingTrackMode.none =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING // only location
+            : jni.CameraMode.NONE, // neither location nor bearing
+      BearingTrackMode.compass =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING_COMPASS // location with compass bearing
+            : jni.CameraMode.NONE_COMPASS, // only compass bearing
+      BearingTrackMode.gps =>
+        trackLocation
+            ? jni
+                .CameraMode
+                .TRACKING_GPS // location with gps bearing
+            : jni.CameraMode.NONE_GPS, // only gps bearing
     };
-    await runOnPlatformThread(() {
-      locationComponent.setCameraMode(mode);
-    });
+    _locationComponent.setCameraMode(mode);
+  }
+
+  @override
+  Position toLngLatSync(Offset screenLocation) => _jniProjection
+      .fromScreenLocation(screenLocation.toPointF())
+      .toPosition(releaseOriginal: true);
+
+  @override
+  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLatSync).toList(growable: false);
+
+  @override
+  Offset toScreenLocationSync(Position lngLat) => _jniProjection
+      .toScreenLocation(lngLat.toLatLng())
+      .toOffset(releaseOriginal: true);
+
+  @override
+  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
+      lngLats.map(toScreenLocationSync).toList(growable: false);
+
+  @override
+  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+
+  @override
+  LngLatBounds getVisibleRegionSync() {
+    final region = _jniProjection.getVisibleRegion();
+    final jniBounds = region.latLngBounds;
+    region.release();
+    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
+    return bounds;
   }
 }

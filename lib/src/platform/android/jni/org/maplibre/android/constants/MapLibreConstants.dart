@@ -59,13 +59,13 @@ class MapLibreConstants extends jni$_.JObject {
   final jni$_.JObjType<MapLibreConstants> $type;
 
   @jni$_.internal
-  MapLibreConstants.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapLibreConstants.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/constants/MapLibreConstants');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/constants/MapLibreConstants',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreConstants$NullableType();
@@ -89,7 +89,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get MAPLIBRE_SHARED_PREFERENCES =>
       _id_MAPLIBRE_SHARED_PREFERENCES.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_KEY_META_DATA_SET_STORAGE_EXTERNAL = _class.staticFieldId(
     r'KEY_META_DATA_SET_STORAGE_EXTERNAL',
@@ -100,21 +102,25 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get KEY_META_DATA_SET_STORAGE_EXTERNAL =>
       _id_KEY_META_DATA_SET_STORAGE_EXTERNAL.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   /// from: `static public final boolean DEFAULT_SET_STORAGE_EXTERNAL`
   static const DEFAULT_SET_STORAGE_EXTERNAL = 0;
-  static final _id_KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON =
-      _class.staticFieldId(
-    r'KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON',
-    r'Ljava/lang/String;',
-  );
+  static final _id_KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON = _class
+      .staticFieldId(
+        r'KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON',
+        r'Ljava/lang/String;',
+      );
 
   /// from: `static public final java.lang.String KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON =>
       _id_KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   /// from: `static public final boolean DEFAULT_MEASURE_TILE_DOWNLOAD_ON`
   static const DEFAULT_MEASURE_TILE_DOWNLOAD_ON = 0;
@@ -217,7 +223,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FRAG_ARG_MAPLIBREMAPOPTIONS =>
       _id_FRAG_ARG_MAPLIBREMAPOPTIONS.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_LAYER_ID_ANNOTATIONS = _class.staticFieldId(
     r'LAYER_ID_ANNOTATIONS',
@@ -278,7 +286,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_HORIZONAL_SCROLL_ENABLED =>
       _id_STATE_HORIZONAL_SCROLL_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ROTATE_ENABLED = _class.staticFieldId(
     r'STATE_ROTATE_ENABLED',
@@ -309,7 +319,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_DOUBLE_TAP_ENABLED =>
       _id_STATE_DOUBLE_TAP_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_QUICK_ZOOM_ENABLED = _class.staticFieldId(
     r'STATE_QUICK_ZOOM_ENABLED',
@@ -320,7 +332,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_QUICK_ZOOM_ENABLED =>
       _id_STATE_QUICK_ZOOM_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ZOOM_RATE = _class.staticFieldId(
     r'STATE_ZOOM_RATE',
@@ -371,7 +385,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_MARGIN_LEFT =>
       _id_STATE_COMPASS_MARGIN_LEFT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_COMPASS_MARGIN_TOP = _class.staticFieldId(
     r'STATE_COMPASS_MARGIN_TOP',
@@ -382,7 +398,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_MARGIN_TOP =>
       _id_STATE_COMPASS_MARGIN_TOP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_COMPASS_MARGIN_RIGHT = _class.staticFieldId(
     r'STATE_COMPASS_MARGIN_RIGHT',
@@ -393,7 +411,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_MARGIN_RIGHT =>
       _id_STATE_COMPASS_MARGIN_RIGHT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_COMPASS_MARGIN_BOTTOM = _class.staticFieldId(
     r'STATE_COMPASS_MARGIN_BOTTOM',
@@ -404,7 +424,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_MARGIN_BOTTOM =>
       _id_STATE_COMPASS_MARGIN_BOTTOM.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_COMPASS_FADE_WHEN_FACING_NORTH = _class.staticFieldId(
     r'STATE_COMPASS_FADE_WHEN_FACING_NORTH',
@@ -415,7 +437,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_FADE_WHEN_FACING_NORTH =>
       _id_STATE_COMPASS_FADE_WHEN_FACING_NORTH.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_COMPASS_IMAGE_BITMAP = _class.staticFieldId(
     r'STATE_COMPASS_IMAGE_BITMAP',
@@ -426,7 +450,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_COMPASS_IMAGE_BITMAP =>
       _id_STATE_COMPASS_IMAGE_BITMAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_LOGO_GRAVITY = _class.staticFieldId(
     r'STATE_LOGO_GRAVITY',
@@ -467,7 +493,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_LOGO_MARGIN_RIGHT =>
       _id_STATE_LOGO_MARGIN_RIGHT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_LOGO_MARGIN_BOTTOM = _class.staticFieldId(
     r'STATE_LOGO_MARGIN_BOTTOM',
@@ -478,7 +506,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_LOGO_MARGIN_BOTTOM =>
       _id_STATE_LOGO_MARGIN_BOTTOM.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_LOGO_ENABLED = _class.staticFieldId(
     r'STATE_LOGO_ENABLED',
@@ -499,7 +529,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_GRAVITY =>
       _id_STATE_ATTRIBUTION_GRAVITY.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ATTRIBUTION_MARGIN_LEFT = _class.staticFieldId(
     r'STATE_ATTRIBUTION_MARGIN_LEFT',
@@ -510,7 +542,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_MARGIN_LEFT =>
       _id_STATE_ATTRIBUTION_MARGIN_LEFT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ATTRIBUTION_MARGIN_TOP = _class.staticFieldId(
     r'STATE_ATTRIBUTION_MARGIN_TOP',
@@ -521,7 +555,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_MARGIN_TOP =>
       _id_STATE_ATTRIBUTION_MARGIN_TOP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ATTRIBUTION_MARGIN_RIGHT = _class.staticFieldId(
     r'STATE_ATTRIBUTION_MARGIN_RIGHT',
@@ -532,7 +568,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_MARGIN_RIGHT =>
       _id_STATE_ATTRIBUTION_MARGIN_RIGHT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ATTRIBUTION_MARGIN_BOTTOM = _class.staticFieldId(
     r'STATE_ATTRIBUTION_MARGIN_BOTTOM',
@@ -543,7 +581,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_MARGIN_BOTTOM =>
       _id_STATE_ATTRIBUTION_MARGIN_BOTTOM.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ATTRIBUTION_ENABLED = _class.staticFieldId(
     r'STATE_ATTRIBUTION_ENABLED',
@@ -554,7 +594,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ATTRIBUTION_ENABLED =>
       _id_STATE_ATTRIBUTION_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_DESELECT_MARKER_ON_TAP = _class.staticFieldId(
     r'STATE_DESELECT_MARKER_ON_TAP',
@@ -565,7 +607,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_DESELECT_MARKER_ON_TAP =>
       _id_STATE_DESELECT_MARKER_ON_TAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_USER_FOCAL_POINT = _class.staticFieldId(
     r'STATE_USER_FOCAL_POINT',
@@ -586,7 +630,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_SCALE_ANIMATION_ENABLED =>
       _id_STATE_SCALE_ANIMATION_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_ROTATE_ANIMATION_ENABLED = _class.staticFieldId(
     r'STATE_ROTATE_ANIMATION_ENABLED',
@@ -597,7 +643,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_ROTATE_ANIMATION_ENABLED =>
       _id_STATE_ROTATE_ANIMATION_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_FLING_ANIMATION_ENABLED = _class.staticFieldId(
     r'STATE_FLING_ANIMATION_ENABLED',
@@ -608,7 +656,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_FLING_ANIMATION_ENABLED =>
       _id_STATE_FLING_ANIMATION_ENABLED.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_INCREASE_ROTATE_THRESHOLD = _class.staticFieldId(
     r'STATE_INCREASE_ROTATE_THRESHOLD',
@@ -619,7 +669,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_INCREASE_ROTATE_THRESHOLD =>
       _id_STATE_INCREASE_ROTATE_THRESHOLD.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_DISABLE_ROTATE_WHEN_SCALING = _class.staticFieldId(
     r'STATE_DISABLE_ROTATE_WHEN_SCALING',
@@ -630,7 +682,9 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_DISABLE_ROTATE_WHEN_SCALING =>
       _id_STATE_DISABLE_ROTATE_WHEN_SCALING.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_STATE_INCREASE_SCALE_THRESHOLD = _class.staticFieldId(
     r'STATE_INCREASE_SCALE_THRESHOLD',
@@ -641,30 +695,34 @@ class MapLibreConstants extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get STATE_INCREASE_SCALE_THRESHOLD =>
       _id_STATE_INCREASE_SCALE_THRESHOLD.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreConstants() {
     return MapLibreConstants.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 }
 
@@ -680,11 +738,7 @@ final class $MapLibreConstants$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreConstants? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : MapLibreConstants.fromReference(
-              reference,
-            );
+      reference.isNull ? null : MapLibreConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -718,9 +772,7 @@ final class $MapLibreConstants$Type extends jni$_.JObjType<MapLibreConstants> {
   @jni$_.internal
   @core$_.override
   MapLibreConstants fromReference(jni$_.JReference reference) =>
-      MapLibreConstants.fromReference(
-        reference,
-      );
+      MapLibreConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

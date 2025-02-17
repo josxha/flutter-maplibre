@@ -82,34 +82,37 @@ class _MapControlButtonsState extends State<MapControlButtons> {
           children: [
             FloatingActionButton(
               heroTag: 'MapLibreZoomInButton',
-              onPressed: () => controller.animateCamera(
-                zoom: controller.getCamera().zoom + 1,
-                nativeDuration: const Duration(milliseconds: 200),
-              ),
+              onPressed:
+                  () => controller.animateCamera(
+                    zoom: controller.getCamera().zoom + 1,
+                    nativeDuration: const Duration(milliseconds: 200),
+                  ),
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
               heroTag: 'MapLibreZoomOutButton',
-              onPressed: () => controller.animateCamera(
-                zoom: controller.getCamera().zoom - 1,
-                nativeDuration: const Duration(milliseconds: 200),
-              ),
+              onPressed:
+                  () => controller.animateCamera(
+                    zoom: controller.getCamera().zoom - 1,
+                    nativeDuration: const Duration(milliseconds: 200),
+                  ),
               child: const Icon(Icons.remove),
             ),
             if (!kIsWeb && widget.showTrackLocation) ...[
               FloatingActionButton(
                 heroTag: 'MapLibreTrackLocationButton',
                 onPressed: () async => _initializeLocation(controller),
-                child: _trackState == _TrackLocationState.loading
-                    ? const SizedBox.square(
-                        dimension: kDefaultFontSize,
-                        child: CircularProgressIndicator(),
-                      )
-                    : Icon(
-                        _trackState == _TrackLocationState.gpsFixed
-                            ? Icons.gps_fixed
-                            : Icons.gps_not_fixed,
-                      ),
+                child:
+                    _trackState == _TrackLocationState.loading
+                        ? const SizedBox.square(
+                          dimension: kDefaultFontSize,
+                          child: CircularProgressIndicator(),
+                        )
+                        : Icon(
+                          _trackState == _TrackLocationState.gpsFixed
+                              ? Icons.gps_fixed
+                              : Icons.gps_not_fixed,
+                        ),
               ),
             ],
           ],

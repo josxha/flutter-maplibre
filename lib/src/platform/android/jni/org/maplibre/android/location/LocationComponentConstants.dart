@@ -59,13 +59,13 @@ class LocationComponentConstants extends jni$_.JObject {
   final jni$_.JObjType<LocationComponentConstants> $type;
 
   @jni$_.internal
-  LocationComponentConstants.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LocationComponentConstants.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/LocationComponentConstants');
+    r'org/maplibre/android/location/LocationComponentConstants',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocationComponentConstants$NullableType();
@@ -156,9 +156,7 @@ final class $LocationComponentConstants$NullableType
   LocationComponentConstants? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : LocationComponentConstants.fromReference(
-              reference,
-            );
+          : LocationComponentConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -194,9 +192,7 @@ final class $LocationComponentConstants$Type
   @jni$_.internal
   @core$_.override
   LocationComponentConstants fromReference(jni$_.JReference reference) =>
-      LocationComponentConstants.fromReference(
-        reference,
-      );
+      LocationComponentConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

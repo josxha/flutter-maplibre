@@ -8,10 +8,8 @@ import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 /// Extension methods for the [Position] class. Not exported publicly.
 extension PositionExt on Position {
   /// Convert a [Position] to an internal [pigeon.LngLat].
-  pigeon.LngLat toLngLat() => pigeon.LngLat(
-        lng: lng.toDouble(),
-        lat: lat.toDouble(),
-      );
+  pigeon.LngLat toLngLat() =>
+      pigeon.LngLat(lng: lng.toDouble(), lat: lat.toDouble());
 
   /// Convert a [Position] to an [jni.LatLng].
   jni.LatLng toLatLng() => jni.LatLng.new$1(lat.toDouble(), lng.toDouble());
@@ -56,19 +54,19 @@ extension OffsetExt on Offset {
 extension LngLatBoundsExt on LngLatBounds {
   /// Convert an [LngLatBounds] to an internal [pigeon.LngLatBounds].
   pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
-        longitudeEast: longitudeEast,
-        longitudeWest: longitudeWest,
-        latitudeNorth: latitudeNorth,
-        latitudeSouth: latitudeSouth,
-      );
+    longitudeEast: longitudeEast,
+    longitudeWest: longitudeWest,
+    latitudeNorth: latitudeNorth,
+    latitudeSouth: latitudeSouth,
+  );
 
   /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
   jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
-        latitudeNorth,
-        longitudeEast,
-        latitudeSouth,
-        longitudeWest,
-      );
+    latitudeNorth,
+    longitudeEast,
+    latitudeSouth,
+    longitudeWest,
+  );
 }
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
@@ -90,11 +88,11 @@ extension LatLngBounds on jni.LatLngBounds {
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
   pigeon.Padding toPadding() => pigeon.Padding(
-        top: top.toInt(),
-        bottom: bottom.toInt(),
-        left: left.toInt(),
-        right: right.toInt(),
-      );
+    top: top.toInt(),
+    bottom: bottom.toInt(),
+    left: left.toInt(),
+    right: right.toInt(),
+  );
 }
 
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.

@@ -17,10 +17,7 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Widget Layer')),
       body: MapLibreMap(
-        options: MapOptions(
-          initZoom: 3,
-          initCenter: Position(0, 0),
-        ),
+        options: MapOptions(initZoom: 3, initCenter: Position(0, 0)),
         children: [
           WidgetLayer(
             markers: [
@@ -28,31 +25,43 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
               Marker(
                 size: const Size.square(50),
                 point: Position(-10, 0),
-                child:
-                    const Icon(Icons.location_on, color: Colors.red, size: 50),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.red,
+                  size: 50,
+                ),
                 alignment: Alignment.bottomCenter,
               ),
               Marker(
                 size: const Size.square(50),
                 point: Position(-5, 0),
-                child:
-                    const Icon(Icons.location_on, color: Colors.red, size: 50),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.red,
+                  size: 50,
+                ),
                 alignment: Alignment.bottomCenter,
                 rotate: true,
               ),
               Marker(
                 size: const Size.square(50),
                 point: Position(0, 0),
-                child:
-                    const Icon(Icons.location_on, color: Colors.red, size: 50),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.red,
+                  size: 50,
+                ),
                 alignment: Alignment.bottomCenter,
                 flat: true,
               ),
               Marker(
                 size: const Size.square(50),
                 point: Position(5, 0),
-                child:
-                    const Icon(Icons.location_on, color: Colors.red, size: 50),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.red,
+                  size: 50,
+                ),
                 alignment: Alignment.bottomCenter,
                 flat: true,
                 rotate: true,

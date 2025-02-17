@@ -31,10 +31,7 @@ extension type Point._(JSObject _) implements JSObject {
 @JS()
 extension type LngLat._(JSObject _) implements JSObject {
   /// Create a new [LngLat] coordinates object.
-  external factory LngLat({
-    required num lng,
-    required num lat,
-  });
+  external factory LngLat({required num lng, required num lat});
 
   /// Create a new JS [LngLat] object from a [Position].
   factory LngLat.fromPosition(Position p) => LngLat(lng: p.lng, lat: p.lat);

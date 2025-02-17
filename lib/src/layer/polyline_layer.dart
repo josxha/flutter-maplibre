@@ -39,13 +39,12 @@ class PolylineLayer extends Layer<LineString> {
 
   @override
   Map<String, Object> getPaint() => {
-        'line-color': color.toHexString(alpha: false),
-        'line-opacity': opacity,
-        'line-width': width,
-        'line-gap-width': gapWidth,
-        if (dashArray case final List<int> dashArray)
-          'line-dasharray': dashArray,
-      };
+    'line-color': color.toHexString(alpha: false),
+    'line-opacity': opacity,
+    'line-width': width,
+    'line-gap-width': gapWidth,
+    if (dashArray case final List<int> dashArray) 'line-dasharray': dashArray,
+  };
 
   @override
   Map<String, Object> getLayout() => {};

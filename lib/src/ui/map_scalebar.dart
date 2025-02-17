@@ -34,31 +34,12 @@ class MapScalebar extends StatelessWidget {
     final latitude = camera.center.lat.toDouble();
     final theme = Theme.of(context);
 
-    Widget buildChild(double metersPerPixel) {
-      final painter = _ScaleBarPainter(metersPerPixel, theme);
-      return Container(
-        alignment: alignment,
-        padding: padding,
-        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
-      );
-    }
-
-    if (kIsWeb) {
-      final metersPerPixel =
-          controller.getMetersPerPixelAtLatitudeSync(latitude);
-      return buildChild(metersPerPixel);
-    }
-
-    final futureMetersPerPixel =
-        controller.getMetersPerPixelAtLatitude(latitude);
-    return FutureBuilder<double>(
-      future: futureMetersPerPixel,
-      builder: (context, snapshot) {
-        if (snapshot.data case final double data) {
-          return buildChild(data);
-        }
-        return const SizedBox.shrink();
-      },
+    final metersPerPixel = controller.getMetersPerPixelAtLatitudeSync(latitude);
+    final painter = _ScaleBarPainter(metersPerPixel, theme);
+    return Container(
+      alignment: alignment,
+      padding: padding,
+      child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
     );
   }
 }
@@ -105,9 +86,10 @@ class _ScaleBarPainter extends CustomPainter {
   };
   late final double width = meters / metersPerPixel;
 
-  late final _linePaint = Paint()
-    ..color = Colors.black
-    ..strokeWidth = 1.5;
+  late final _linePaint =
+      Paint()
+        ..color = Colors.black
+        ..strokeWidth = 1.5;
 
   late final _backgroundPaint = Paint()..color = Colors.white60;
 
@@ -117,18 +99,40 @@ class _ScaleBarPainter extends CustomPainter {
     canvas.drawVertices(
       Vertices.raw(
         VertexMode.triangles,
-        Float32List.fromList(
-          [0, 22, 0, 0, width, 22, 0, 0, width, 0, width, 22],
-        ),
+        Float32List.fromList([
+          0,
+          22,
+          0,
+          0,
+          width,
+          22,
+          0,
+          0,
+          width,
+          0,
+          width,
+          22,
+        ]),
       ),
       BlendMode.color,
       _backgroundPaint,
     );
     canvas.drawRawPoints(
       PointMode.lines,
-      Float32List.fromList(
-        [0, 22, 0, 0, 0, 22, width, 22, width, 0, width, 22],
-      ),
+      Float32List.fromList([
+        0,
+        22,
+        0,
+        0,
+        0,
+        22,
+        width,
+        22,
+        width,
+        0,
+        width,
+        22,
+      ]),
       _linePaint,
     );
 

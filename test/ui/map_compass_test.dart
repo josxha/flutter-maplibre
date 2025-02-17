@@ -56,10 +56,7 @@ void main() {
         camera: camera,
         controller: controller,
         children: const [
-          MapCompass(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.zero,
-          ),
+          MapCompass(alignment: Alignment.topLeft, padding: EdgeInsets.zero),
         ],
       );
       await tester.pumpWidget(app);

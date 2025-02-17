@@ -59,13 +59,13 @@ class MapRendererScheduler extends jni$_.JObject {
   final jni$_.JObjType<MapRendererScheduler> $type;
 
   @jni$_.internal
-  MapRendererScheduler.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapRendererScheduler.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/MapRendererScheduler');
+    r'org/maplibre/android/maps/renderer/MapRendererScheduler',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapRendererScheduler$NullableType();
@@ -75,22 +75,28 @@ class MapRendererScheduler extends jni$_.JObject {
     r'()V',
   );
 
-  static final _requestRender = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _requestRender =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void requestRender()`
   void requestRender() {
-    _requestRender(reference.pointer, _id_requestRender as jni$_.JMethodIDPtr)
-        .check();
+    _requestRender(
+      reference.pointer,
+      _id_requestRender as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_queueEvent = _class.instanceMethodId(
@@ -98,25 +104,32 @@ class MapRendererScheduler extends jni$_.JObject {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _queueEvent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(
-    jni$_.JObject? runnable,
-  ) {
+  void queueEvent(jni$_.JObject? runnable) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
-    _queueEvent(reference.pointer, _id_queueEvent as jni$_.JMethodIDPtr,
-            _$runnable.pointer)
-        .check();
+    _queueEvent(
+      reference.pointer,
+      _id_queueEvent as jni$_.JMethodIDPtr,
+      _$runnable.pointer,
+    ).check();
   }
 
   static final _id_waitForEmpty = _class.instanceMethodId(
@@ -124,22 +137,28 @@ class MapRendererScheduler extends jni$_.JObject {
     r'()V',
   );
 
-  static final _waitForEmpty = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _waitForEmpty =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void waitForEmpty()`
   void waitForEmpty() {
-    _waitForEmpty(reference.pointer, _id_waitForEmpty as jni$_.JMethodIDPtr)
-        .check();
+    _waitForEmpty(
+      reference.pointer,
+      _id_waitForEmpty as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -151,19 +170,16 @@ class MapRendererScheduler extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -221,14 +237,10 @@ class MapRendererScheduler extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapRendererScheduler.implement(
-    $MapRendererScheduler $impl,
-  ) {
+  factory MapRendererScheduler.implement($MapRendererScheduler $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapRendererScheduler.fromReference(
-      $i.implementReference(),
-    );
+    return MapRendererScheduler.fromReference($i.implementReference());
   }
 }
 
@@ -258,9 +270,9 @@ final class _$MapRendererScheduler with $MapRendererScheduler {
     this.queueEvent$async = false,
     required void Function() waitForEmpty,
     this.waitForEmpty$async = false,
-  })  : _requestRender = requestRender,
-        _queueEvent = queueEvent,
-        _waitForEmpty = waitForEmpty;
+  }) : _requestRender = requestRender,
+       _queueEvent = queueEvent,
+       _waitForEmpty = waitForEmpty;
 
   final void Function() _requestRender;
   final bool requestRender$async;
@@ -295,11 +307,7 @@ final class $MapRendererScheduler$NullableType
   @jni$_.internal
   @core$_.override
   MapRendererScheduler? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : MapRendererScheduler.fromReference(
-              reference,
-            );
+      reference.isNull ? null : MapRendererScheduler.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -335,9 +343,7 @@ final class $MapRendererScheduler$Type
   @jni$_.internal
   @core$_.override
   MapRendererScheduler fromReference(jni$_.JReference reference) =>
-      MapRendererScheduler.fromReference(
-        reference,
-      );
+      MapRendererScheduler.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

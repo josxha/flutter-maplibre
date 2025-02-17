@@ -62,31 +62,24 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  LocationEngineCallback.fromReference(
-    this.T,
-    jni$_.JReference reference,
-  )   : $type = type<$T>(T),
-        super.fromReference(reference);
+  LocationEngineCallback.fromReference(this.T, jni$_.JReference reference)
+    : $type = type<$T>(T),
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/engine/LocationEngineCallback');
+    r'org/maplibre/android/location/engine/LocationEngineCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static $LocationEngineCallback$NullableType<$T>
-      nullableType<$T extends jni$_.JObject?>(
-    jni$_.JObjType<$T> T,
-  ) {
-    return $LocationEngineCallback$NullableType<$T>(
-      T,
-    );
+  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
+    return $LocationEngineCallback$NullableType<$T>(T);
   }
 
   static $LocationEngineCallback$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $LocationEngineCallback$Type<$T>(
-      T,
-    );
+    return $LocationEngineCallback$Type<$T>(T);
   }
 
   static final _id_onSuccess = _class.instanceMethodId(
@@ -94,25 +87,32 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'(Ljava/lang/Object;)V',
   );
 
-  static final _onSuccess = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onSuccess =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onSuccess(T object)`
-  void onSuccess(
-    $T? object,
-  ) {
+  void onSuccess($T? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    _onSuccess(reference.pointer, _id_onSuccess as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .check();
+    _onSuccess(
+      reference.pointer,
+      _id_onSuccess as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).check();
   }
 
   static final _id_onFailure = _class.instanceMethodId(
@@ -120,25 +120,32 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
     r'(Ljava/lang/Exception;)V',
   );
 
-  static final _onFailure = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onFailure =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onFailure(java.lang.Exception exception)`
-  void onFailure(
-    jni$_.JObject exception,
-  ) {
+  void onFailure(jni$_.JObject exception) {
     final _$exception = exception.reference;
-    _onFailure(reference.pointer, _id_onFailure as jni$_.JMethodIDPtr,
-            _$exception.pointer)
-        .check();
+    _onFailure(
+      reference.pointer,
+      _id_onFailure as jni$_.JMethodIDPtr,
+      _$exception.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -150,19 +157,16 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -217,9 +221,7 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LocationEngineCallback.implement(
-    $LocationEngineCallback<$T> $impl,
-  ) {
+  factory LocationEngineCallback.implement($LocationEngineCallback<$T> $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return LocationEngineCallback<$T>.fromReference(
@@ -254,8 +256,8 @@ final class _$LocationEngineCallback<$T extends jni$_.JObject?>
     this.onSuccess$async = false,
     required void Function(jni$_.JObject exception) onFailure,
     this.onFailure$async = false,
-  })  : _onSuccess = onSuccess,
-        _onFailure = onFailure;
+  }) : _onSuccess = onSuccess,
+       _onFailure = onFailure;
 
   @core$_.override
   final jni$_.JObjType<$T> T;
@@ -280,9 +282,7 @@ final class $LocationEngineCallback$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineCallback$NullableType(
-    this.T,
-  );
+  const $LocationEngineCallback$NullableType(this.T);
 
   @jni$_.internal
   @core$_.override
@@ -294,10 +294,7 @@ final class $LocationEngineCallback$NullableType<$T extends jni$_.JObject?>
   LocationEngineCallback<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : LocationEngineCallback<$T>.fromReference(
-              T,
-              reference,
-            );
+          : LocationEngineCallback<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -327,9 +324,7 @@ final class $LocationEngineCallback$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineCallback$Type(
-    this.T,
-  );
+  const $LocationEngineCallback$Type(this.T);
 
   @jni$_.internal
   @core$_.override
@@ -339,10 +334,7 @@ final class $LocationEngineCallback$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   LocationEngineCallback<$T> fromReference(jni$_.JReference reference) =>
-      LocationEngineCallback<$T>.fromReference(
-        T,
-        reference,
-      );
+      LocationEngineCallback<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

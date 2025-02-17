@@ -59,13 +59,13 @@ class GeometryConstants extends jni$_.JObject {
   final jni$_.JObjType<GeometryConstants> $type;
 
   @jni$_.internal
-  GeometryConstants.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  GeometryConstants.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/constants/GeometryConstants');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/constants/GeometryConstants',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GeometryConstants$NullableType();
@@ -117,11 +117,7 @@ final class $GeometryConstants$NullableType
   @jni$_.internal
   @core$_.override
   GeometryConstants? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : GeometryConstants.fromReference(
-              reference,
-            );
+      reference.isNull ? null : GeometryConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -155,9 +151,7 @@ final class $GeometryConstants$Type extends jni$_.JObjType<GeometryConstants> {
   @jni$_.internal
   @core$_.override
   GeometryConstants fromReference(jni$_.JReference reference) =>
-      GeometryConstants.fromReference(
-        reference,
-      );
+      GeometryConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -90,13 +90,13 @@ class LocationComponent extends jni$_.JObject {
   final jni$_.JObjType<LocationComponent> $type;
 
   @jni$_.internal
-  LocationComponent.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  LocationComponent.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/location/LocationComponent');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/location/LocationComponent',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocationComponent$NullableType();
@@ -105,24 +105,31 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;Lorg/maplibre/android/maps/Transform;Ljava/util/List;)V',
   );
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void <init>(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.maps.Transform transform, java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -134,13 +141,15 @@ class LocationComponent extends jni$_.JObject {
     final _$mapLibreMap = mapLibreMap.reference;
     final _$transform = transform.reference;
     final _$list = list.reference;
-    return LocationComponent.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$mapLibreMap.pointer,
-            _$transform.pointer,
-            _$list.pointer)
-        .reference);
+    return LocationComponent.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$mapLibreMap.pointer,
+        _$transform.pointer,
+        _$list.pointer,
+      ).reference,
+    );
   }
 
   static final _id_activateLocationComponent = _class.instanceMethodId(
@@ -148,29 +157,36 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/LocationComponentActivationOptions;)V',
   );
 
-  static final _activateLocationComponent = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _activateLocationComponent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void activateLocationComponent(org.maplibre.android.location.LocationComponentActivationOptions locationComponentActivationOptions)`
   void activateLocationComponent(
     locationcomponentactivationoptions$_.LocationComponentActivationOptions
-        locationComponentActivationOptions,
+    locationComponentActivationOptions,
   ) {
     final _$locationComponentActivationOptions =
         locationComponentActivationOptions.reference;
     _activateLocationComponent(
-            reference.pointer,
-            _id_activateLocationComponent as jni$_.JMethodIDPtr,
-            _$locationComponentActivationOptions.pointer)
-        .check();
+      reference.pointer,
+      _id_activateLocationComponent as jni$_.JMethodIDPtr,
+      _$locationComponentActivationOptions.pointer,
+    ).check();
   }
 
   static final _id_setLocationComponentEnabled = _class.instanceMethodId(
@@ -180,21 +196,29 @@ class LocationComponent extends jni$_.JObject {
 
   static final _setLocationComponentEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setLocationComponentEnabled(boolean z)`
-  void setLocationComponentEnabled(
-    bool z,
-  ) {
-    _setLocationComponentEnabled(reference.pointer,
-            _id_setLocationComponentEnabled as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void setLocationComponentEnabled(bool z) {
+    _setLocationComponentEnabled(
+      reference.pointer,
+      _id_setLocationComponentEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_isLocationComponentEnabled = _class.instanceMethodId(
@@ -204,22 +228,26 @@ class LocationComponent extends jni$_.JObject {
 
   static final _isLocationComponentEnabled =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isLocationComponentEnabled()`
   bool isLocationComponentEnabled() {
-    return _isLocationComponentEnabled(reference.pointer,
-            _id_isLocationComponentEnabled as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isLocationComponentEnabled(
+      reference.pointer,
+      _id_isLocationComponentEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 
   static final _id_setCameraMode = _class.instanceMethodId(
@@ -227,23 +255,31 @@ class LocationComponent extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setCameraMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCameraMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setCameraMode(int i)`
-  void setCameraMode(
-    int i,
-  ) {
+  void setCameraMode(int i) {
     _setCameraMode(
-            reference.pointer, _id_setCameraMode as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setCameraMode as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_setCameraMode$1 = _class.instanceMethodId(
@@ -251,32 +287,39 @@ class LocationComponent extends jni$_.JObject {
     r'(ILorg/maplibre/android/location/OnLocationCameraTransitionListener;)V',
   );
 
-  static final _setCameraMode$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCameraMode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCameraMode(int i, org.maplibre.android.location.OnLocationCameraTransitionListener onLocationCameraTransitionListener)`
   void setCameraMode$1(
     int i,
     onlocationcameratransitionlistener$_.OnLocationCameraTransitionListener?
-        onLocationCameraTransitionListener,
+    onLocationCameraTransitionListener,
   ) {
     final _$onLocationCameraTransitionListener =
         onLocationCameraTransitionListener?.reference ?? jni$_.jNullReference;
     _setCameraMode$1(
-            reference.pointer,
-            _id_setCameraMode$1 as jni$_.JMethodIDPtr,
-            i,
-            _$onLocationCameraTransitionListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setCameraMode$1 as jni$_.JMethodIDPtr,
+      i,
+      _$onLocationCameraTransitionListener.pointer,
+    ).check();
   }
 
   static final _id_setCameraMode$2 = _class.instanceMethodId(
@@ -284,22 +327,27 @@ class LocationComponent extends jni$_.JObject {
     r'(IJLjava/lang/Double;Ljava/lang/Double;Ljava/lang/Double;Lorg/maplibre/android/location/OnLocationCameraTransitionListener;)V',
   );
 
-  static final _setCameraMode$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setCameraMode$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int64,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Int64,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               int,
@@ -307,7 +355,9 @@ class LocationComponent extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCameraMode(int i, long j, java.lang.Double double, java.lang.Double double1, java.lang.Double double2, org.maplibre.android.location.OnLocationCameraTransitionListener onLocationCameraTransitionListener)`
   void setCameraMode$2(
@@ -317,7 +367,7 @@ class LocationComponent extends jni$_.JObject {
     jni$_.JDouble? double1,
     jni$_.JDouble? double2,
     onlocationcameratransitionlistener$_.OnLocationCameraTransitionListener?
-        onLocationCameraTransitionListener,
+    onLocationCameraTransitionListener,
   ) {
     final _$double = double?.reference ?? jni$_.jNullReference;
     final _$double1 = double1?.reference ?? jni$_.jNullReference;
@@ -325,15 +375,15 @@ class LocationComponent extends jni$_.JObject {
     final _$onLocationCameraTransitionListener =
         onLocationCameraTransitionListener?.reference ?? jni$_.jNullReference;
     _setCameraMode$2(
-            reference.pointer,
-            _id_setCameraMode$2 as jni$_.JMethodIDPtr,
-            i,
-            j,
-            _$double.pointer,
-            _$double1.pointer,
-            _$double2.pointer,
-            _$onLocationCameraTransitionListener.pointer)
-        .check();
+      reference.pointer,
+      _id_setCameraMode$2 as jni$_.JMethodIDPtr,
+      i,
+      j,
+      _$double.pointer,
+      _$double1.pointer,
+      _$double2.pointer,
+      _$onLocationCameraTransitionListener.pointer,
+    ).check();
   }
 
   static final _id_getCameraMode = _class.instanceMethodId(
@@ -341,23 +391,28 @@ class LocationComponent extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getCameraMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCameraMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getCameraMode()`
   int getCameraMode() {
     return _getCameraMode(
-            reference.pointer, _id_getCameraMode as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getCameraMode as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_setRenderMode = _class.instanceMethodId(
@@ -365,23 +420,31 @@ class LocationComponent extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setRenderMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setRenderMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setRenderMode(int i)`
-  void setRenderMode(
-    int i,
-  ) {
+  void setRenderMode(int i) {
     _setRenderMode(
-            reference.pointer, _id_setRenderMode as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setRenderMode as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_getRenderMode = _class.instanceMethodId(
@@ -389,23 +452,28 @@ class LocationComponent extends jni$_.JObject {
     r'()I',
   );
 
-  static final _getRenderMode = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getRenderMode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public int getRenderMode()`
   int getRenderMode() {
     return _getRenderMode(
-            reference.pointer, _id_getRenderMode as jni$_.JMethodIDPtr)
-        .integer;
+      reference.pointer,
+      _id_getRenderMode as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_getLocationComponentOptions = _class.instanceMethodId(
@@ -415,26 +483,30 @@ class LocationComponent extends jni$_.JObject {
 
   static final _getLocationComponentOptions =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions getLocationComponentOptions()`
   /// The returned object must be released after use, by calling the [release] method.
   locationcomponentoptions$_.LocationComponentOptions?
-      getLocationComponentOptions() {
-    return _getLocationComponentOptions(reference.pointer,
-            _id_getLocationComponentOptions as jni$_.JMethodIDPtr)
-        .object<locationcomponentoptions$_.LocationComponentOptions?>(
-            const locationcomponentoptions$_
-                .$LocationComponentOptions$NullableType());
+  getLocationComponentOptions() {
+    return _getLocationComponentOptions(
+      reference.pointer,
+      _id_getLocationComponentOptions as jni$_.JMethodIDPtr,
+    ).object<locationcomponentoptions$_.LocationComponentOptions?>(
+      const locationcomponentoptions$_.$LocationComponentOptions$NullableType(),
+    );
   }
 
   static final _id_applyStyle = _class.instanceMethodId(
@@ -442,27 +514,34 @@ class LocationComponent extends jni$_.JObject {
     r'(Landroid/content/Context;I)V',
   );
 
-  static final _applyStyle = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _applyStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void applyStyle(android.content.Context context, int i)`
-  void applyStyle(
-    jni$_.JObject context,
-    int i,
-  ) {
+  void applyStyle(jni$_.JObject context, int i) {
     final _$context = context.reference;
-    _applyStyle(reference.pointer, _id_applyStyle as jni$_.JMethodIDPtr,
-            _$context.pointer, i)
-        .check();
+    _applyStyle(
+      reference.pointer,
+      _id_applyStyle as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      i,
+    ).check();
   }
 
   static final _id_applyStyle$1 = _class.instanceMethodId(
@@ -470,26 +549,35 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/LocationComponentOptions;)V',
   );
 
-  static final _applyStyle$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _applyStyle$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void applyStyle(org.maplibre.android.location.LocationComponentOptions locationComponentOptions)`
   void applyStyle$1(
     locationcomponentoptions$_.LocationComponentOptions
-        locationComponentOptions,
+    locationComponentOptions,
   ) {
     final _$locationComponentOptions = locationComponentOptions.reference;
-    _applyStyle$1(reference.pointer, _id_applyStyle$1 as jni$_.JMethodIDPtr,
-            _$locationComponentOptions.pointer)
-        .check();
+    _applyStyle$1(
+      reference.pointer,
+      _id_applyStyle$1 as jni$_.JMethodIDPtr,
+      _$locationComponentOptions.pointer,
+    ).check();
   }
 
   static final _id_zoomWhileTracking = _class.instanceMethodId(
@@ -497,20 +585,27 @@ class LocationComponent extends jni$_.JObject {
     r'(DJLorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _zoomWhileTracking = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _zoomWhileTracking =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Int64,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, int, jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Int64, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void zoomWhileTracking(double d, long j, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void zoomWhileTracking(
@@ -521,12 +616,12 @@ class LocationComponent extends jni$_.JObject {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
     _zoomWhileTracking(
-            reference.pointer,
-            _id_zoomWhileTracking as jni$_.JMethodIDPtr,
-            d,
-            j,
-            _$cancelableCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_zoomWhileTracking as jni$_.JMethodIDPtr,
+      d,
+      j,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_zoomWhileTracking$1 = _class.instanceMethodId(
@@ -534,25 +629,33 @@ class LocationComponent extends jni$_.JObject {
     r'(DJ)V',
   );
 
-  static final _zoomWhileTracking$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Int64)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, int)>();
+  static final _zoomWhileTracking$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Int64)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              int,
+            )
+          >();
 
   /// from: `public void zoomWhileTracking(double d, long j)`
-  void zoomWhileTracking$1(
-    double d,
-    int j,
-  ) {
-    _zoomWhileTracking$1(reference.pointer,
-            _id_zoomWhileTracking$1 as jni$_.JMethodIDPtr, d, j)
-        .check();
+  void zoomWhileTracking$1(double d, int j) {
+    _zoomWhileTracking$1(
+      reference.pointer,
+      _id_zoomWhileTracking$1 as jni$_.JMethodIDPtr,
+      d,
+      j,
+    ).check();
   }
 
   static final _id_zoomWhileTracking$2 = _class.instanceMethodId(
@@ -560,23 +663,31 @@ class LocationComponent extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _zoomWhileTracking$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _zoomWhileTracking$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void zoomWhileTracking(double d)`
-  void zoomWhileTracking$2(
-    double d,
-  ) {
+  void zoomWhileTracking$2(double d) {
     _zoomWhileTracking$2(
-            reference.pointer, _id_zoomWhileTracking$2 as jni$_.JMethodIDPtr, d)
-        .check();
+      reference.pointer,
+      _id_zoomWhileTracking$2 as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_cancelZoomWhileTrackingAnimation = _class.instanceMethodId(
@@ -586,22 +697,26 @@ class LocationComponent extends jni$_.JObject {
 
   static final _cancelZoomWhileTrackingAnimation =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancelZoomWhileTrackingAnimation()`
   void cancelZoomWhileTrackingAnimation() {
-    _cancelZoomWhileTrackingAnimation(reference.pointer,
-            _id_cancelZoomWhileTrackingAnimation as jni$_.JMethodIDPtr)
-        .check();
+    _cancelZoomWhileTrackingAnimation(
+      reference.pointer,
+      _id_cancelZoomWhileTrackingAnimation as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_paddingWhileTracking = _class.instanceMethodId(
@@ -609,25 +724,32 @@ class LocationComponent extends jni$_.JObject {
     r'([D)V',
   );
 
-  static final _paddingWhileTracking = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _paddingWhileTracking =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void paddingWhileTracking(double[] ds)`
-  void paddingWhileTracking(
-    jni$_.JDoubleArray? ds,
-  ) {
+  void paddingWhileTracking(jni$_.JDoubleArray? ds) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
-    _paddingWhileTracking(reference.pointer,
-            _id_paddingWhileTracking as jni$_.JMethodIDPtr, _$ds.pointer)
-        .check();
+    _paddingWhileTracking(
+      reference.pointer,
+      _id_paddingWhileTracking as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+    ).check();
   }
 
   static final _id_paddingWhileTracking$1 = _class.instanceMethodId(
@@ -635,27 +757,34 @@ class LocationComponent extends jni$_.JObject {
     r'([DJ)V',
   );
 
-  static final _paddingWhileTracking$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _paddingWhileTracking$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void paddingWhileTracking(double[] ds, long j)`
-  void paddingWhileTracking$1(
-    jni$_.JDoubleArray? ds,
-    int j,
-  ) {
+  void paddingWhileTracking$1(jni$_.JDoubleArray? ds, int j) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
-    _paddingWhileTracking$1(reference.pointer,
-            _id_paddingWhileTracking$1 as jni$_.JMethodIDPtr, _$ds.pointer, j)
-        .check();
+    _paddingWhileTracking$1(
+      reference.pointer,
+      _id_paddingWhileTracking$1 as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+      j,
+    ).check();
   }
 
   static final _id_paddingWhileTracking$2 = _class.instanceMethodId(
@@ -663,24 +792,31 @@ class LocationComponent extends jni$_.JObject {
     r'([DJLorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _paddingWhileTracking$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _paddingWhileTracking$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int64,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int64,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void paddingWhileTracking(double[] ds, long j, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void paddingWhileTracking$2(
@@ -692,38 +828,39 @@ class LocationComponent extends jni$_.JObject {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
     _paddingWhileTracking$2(
-            reference.pointer,
-            _id_paddingWhileTracking$2 as jni$_.JMethodIDPtr,
-            _$ds.pointer,
-            j,
-            _$cancelableCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_paddingWhileTracking$2 as jni$_.JMethodIDPtr,
+      _$ds.pointer,
+      j,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
-  static final _id_cancelPaddingWhileTrackingAnimation =
-      _class.instanceMethodId(
-    r'cancelPaddingWhileTrackingAnimation',
-    r'()V',
-  );
+  static final _id_cancelPaddingWhileTrackingAnimation = _class
+      .instanceMethodId(r'cancelPaddingWhileTrackingAnimation', r'()V');
 
   static final _cancelPaddingWhileTrackingAnimation =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancelPaddingWhileTrackingAnimation()`
   void cancelPaddingWhileTrackingAnimation() {
-    _cancelPaddingWhileTrackingAnimation(reference.pointer,
-            _id_cancelPaddingWhileTrackingAnimation as jni$_.JMethodIDPtr)
-        .check();
+    _cancelPaddingWhileTrackingAnimation(
+      reference.pointer,
+      _id_cancelPaddingWhileTrackingAnimation as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_tiltWhileTracking = _class.instanceMethodId(
@@ -731,20 +868,27 @@ class LocationComponent extends jni$_.JObject {
     r'(DJLorg/maplibre/android/maps/MapLibreMap$CancelableCallback;)V',
   );
 
-  static final _tiltWhileTracking = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _tiltWhileTracking =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Int64,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, int, jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Double, jni$_.Int64, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void tiltWhileTracking(double d, long j, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void tiltWhileTracking(
@@ -755,12 +899,12 @@ class LocationComponent extends jni$_.JObject {
     final _$cancelableCallback =
         cancelableCallback?.reference ?? jni$_.jNullReference;
     _tiltWhileTracking(
-            reference.pointer,
-            _id_tiltWhileTracking as jni$_.JMethodIDPtr,
-            d,
-            j,
-            _$cancelableCallback.pointer)
-        .check();
+      reference.pointer,
+      _id_tiltWhileTracking as jni$_.JMethodIDPtr,
+      d,
+      j,
+      _$cancelableCallback.pointer,
+    ).check();
   }
 
   static final _id_tiltWhileTracking$1 = _class.instanceMethodId(
@@ -768,25 +912,33 @@ class LocationComponent extends jni$_.JObject {
     r'(DJ)V',
   );
 
-  static final _tiltWhileTracking$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Double, jni$_.Int64)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double, int)>();
+  static final _tiltWhileTracking$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Int64)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              int,
+            )
+          >();
 
   /// from: `public void tiltWhileTracking(double d, long j)`
-  void tiltWhileTracking$1(
-    double d,
-    int j,
-  ) {
-    _tiltWhileTracking$1(reference.pointer,
-            _id_tiltWhileTracking$1 as jni$_.JMethodIDPtr, d, j)
-        .check();
+  void tiltWhileTracking$1(double d, int j) {
+    _tiltWhileTracking$1(
+      reference.pointer,
+      _id_tiltWhileTracking$1 as jni$_.JMethodIDPtr,
+      d,
+      j,
+    ).check();
   }
 
   static final _id_tiltWhileTracking$2 = _class.instanceMethodId(
@@ -794,23 +946,31 @@ class LocationComponent extends jni$_.JObject {
     r'(D)V',
   );
 
-  static final _tiltWhileTracking$2 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _tiltWhileTracking$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void tiltWhileTracking(double d)`
-  void tiltWhileTracking$2(
-    double d,
-  ) {
+  void tiltWhileTracking$2(double d) {
     _tiltWhileTracking$2(
-            reference.pointer, _id_tiltWhileTracking$2 as jni$_.JMethodIDPtr, d)
-        .check();
+      reference.pointer,
+      _id_tiltWhileTracking$2 as jni$_.JMethodIDPtr,
+      d,
+    ).check();
   }
 
   static final _id_cancelTiltWhileTrackingAnimation = _class.instanceMethodId(
@@ -820,22 +980,26 @@ class LocationComponent extends jni$_.JObject {
 
   static final _cancelTiltWhileTrackingAnimation =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void cancelTiltWhileTrackingAnimation()`
   void cancelTiltWhileTrackingAnimation() {
-    _cancelTiltWhileTrackingAnimation(reference.pointer,
-            _id_cancelTiltWhileTrackingAnimation as jni$_.JMethodIDPtr)
-        .check();
+    _cancelTiltWhileTrackingAnimation(
+      reference.pointer,
+      _id_cancelTiltWhileTrackingAnimation as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_forceLocationUpdate = _class.instanceMethodId(
@@ -843,25 +1007,32 @@ class LocationComponent extends jni$_.JObject {
     r'(Landroid/location/Location;)V',
   );
 
-  static final _forceLocationUpdate = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _forceLocationUpdate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void forceLocationUpdate(android.location.Location location)`
-  void forceLocationUpdate(
-    location$_.Location? location,
-  ) {
+  void forceLocationUpdate(location$_.Location? location) {
     final _$location = location?.reference ?? jni$_.jNullReference;
-    _forceLocationUpdate(reference.pointer,
-            _id_forceLocationUpdate as jni$_.JMethodIDPtr, _$location.pointer)
-        .check();
+    _forceLocationUpdate(
+      reference.pointer,
+      _id_forceLocationUpdate as jni$_.JMethodIDPtr,
+      _$location.pointer,
+    ).check();
   }
 
   static final _id_forceLocationUpdate$1 = _class.instanceMethodId(
@@ -869,30 +1040,34 @@ class LocationComponent extends jni$_.JObject {
     r'(Ljava/util/List;Z)V',
   );
 
-  static final _forceLocationUpdate$1 = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _forceLocationUpdate$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `public void forceLocationUpdate(java.util.List list, boolean z)`
-  void forceLocationUpdate$1(
-    jni$_.JList<location$_.Location?>? list,
-    bool z,
-  ) {
+  void forceLocationUpdate$1(jni$_.JList<location$_.Location?>? list, bool z) {
     final _$list = list?.reference ?? jni$_.jNullReference;
     _forceLocationUpdate$1(
-            reference.pointer,
-            _id_forceLocationUpdate$1 as jni$_.JMethodIDPtr,
-            _$list.pointer,
-            z ? 1 : 0)
-        .check();
+      reference.pointer,
+      _id_forceLocationUpdate$1 as jni$_.JMethodIDPtr,
+      _$list.pointer,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_setMaxAnimationFps = _class.instanceMethodId(
@@ -900,23 +1075,31 @@ class LocationComponent extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setMaxAnimationFps = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaxAnimationFps =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public void setMaxAnimationFps(int i)`
-  void setMaxAnimationFps(
-    int i,
-  ) {
+  void setMaxAnimationFps(int i) {
     _setMaxAnimationFps(
-            reference.pointer, _id_setMaxAnimationFps as jni$_.JMethodIDPtr, i)
-        .check();
+      reference.pointer,
+      _id_setMaxAnimationFps as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_setLocationEngine = _class.instanceMethodId(
@@ -924,27 +1107,32 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngine;)V',
   );
 
-  static final _setLocationEngine = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLocationEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setLocationEngine(org.maplibre.android.location.engine.LocationEngine locationEngine)`
-  void setLocationEngine(
-    locationengine$_.LocationEngine? locationEngine,
-  ) {
+  void setLocationEngine(locationengine$_.LocationEngine? locationEngine) {
     final _$locationEngine = locationEngine?.reference ?? jni$_.jNullReference;
     _setLocationEngine(
-            reference.pointer,
-            _id_setLocationEngine as jni$_.JMethodIDPtr,
-            _$locationEngine.pointer)
-        .check();
+      reference.pointer,
+      _id_setLocationEngine as jni$_.JMethodIDPtr,
+      _$locationEngine.pointer,
+    ).check();
   }
 
   static final _id_setLocationEngineRequest = _class.instanceMethodId(
@@ -952,16 +1140,23 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;)V',
   );
 
-  static final _setLocationEngineRequest = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setLocationEngineRequest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setLocationEngineRequest(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest)`
   void setLocationEngineRequest(
@@ -969,10 +1164,10 @@ class LocationComponent extends jni$_.JObject {
   ) {
     final _$locationEngineRequest = locationEngineRequest.reference;
     _setLocationEngineRequest(
-            reference.pointer,
-            _id_setLocationEngineRequest as jni$_.JMethodIDPtr,
-            _$locationEngineRequest.pointer)
-        .check();
+      reference.pointer,
+      _id_setLocationEngineRequest as jni$_.JMethodIDPtr,
+      _$locationEngineRequest.pointer,
+    ).check();
   }
 
   static final _id_getLocationEngineRequest = _class.instanceMethodId(
@@ -980,25 +1175,31 @@ class LocationComponent extends jni$_.JObject {
     r'()Lorg/maplibre/android/location/engine/LocationEngineRequest;',
   );
 
-  static final _getLocationEngineRequest = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLocationEngineRequest =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest getLocationEngineRequest()`
   /// The returned object must be released after use, by calling the [release] method.
   locationenginerequest$_.LocationEngineRequest getLocationEngineRequest() {
-    return _getLocationEngineRequest(reference.pointer,
-            _id_getLocationEngineRequest as jni$_.JMethodIDPtr)
-        .object<locationenginerequest$_.LocationEngineRequest>(
-            const locationenginerequest$_.$LocationEngineRequest$Type());
+    return _getLocationEngineRequest(
+      reference.pointer,
+      _id_getLocationEngineRequest as jni$_.JMethodIDPtr,
+    ).object<locationenginerequest$_.LocationEngineRequest>(
+      const locationenginerequest$_.$LocationEngineRequest$Type(),
+    );
   }
 
   static final _id_getLocationEngine = _class.instanceMethodId(
@@ -1006,25 +1207,31 @@ class LocationComponent extends jni$_.JObject {
     r'()Lorg/maplibre/android/location/engine/LocationEngine;',
   );
 
-  static final _getLocationEngine = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLocationEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.engine.LocationEngine getLocationEngine()`
   /// The returned object must be released after use, by calling the [release] method.
   locationengine$_.LocationEngine? getLocationEngine() {
     return _getLocationEngine(
-            reference.pointer, _id_getLocationEngine as jni$_.JMethodIDPtr)
-        .object<locationengine$_.LocationEngine?>(
-            const locationengine$_.$LocationEngine$NullableType());
+      reference.pointer,
+      _id_getLocationEngine as jni$_.JMethodIDPtr,
+    ).object<locationengine$_.LocationEngine?>(
+      const locationengine$_.$LocationEngine$NullableType(),
+    );
   }
 
   static final _id_setCompassEngine = _class.instanceMethodId(
@@ -1032,25 +1239,32 @@ class LocationComponent extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/CompassEngine;)V',
   );
 
-  static final _setCompassEngine = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setCompassEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setCompassEngine(org.maplibre.android.location.CompassEngine compassEngine)`
-  void setCompassEngine(
-    compassengine$_.CompassEngine? compassEngine,
-  ) {
+  void setCompassEngine(compassengine$_.CompassEngine? compassEngine) {
     final _$compassEngine = compassEngine?.reference ?? jni$_.jNullReference;
-    _setCompassEngine(reference.pointer,
-            _id_setCompassEngine as jni$_.JMethodIDPtr, _$compassEngine.pointer)
-        .check();
+    _setCompassEngine(
+      reference.pointer,
+      _id_setCompassEngine as jni$_.JMethodIDPtr,
+      _$compassEngine.pointer,
+    ).check();
   }
 
   static final _id_getCompassEngine = _class.instanceMethodId(
@@ -1058,25 +1272,31 @@ class LocationComponent extends jni$_.JObject {
     r'()Lorg/maplibre/android/location/CompassEngine;',
   );
 
-  static final _getCompassEngine = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getCompassEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.location.CompassEngine getCompassEngine()`
   /// The returned object must be released after use, by calling the [release] method.
   compassengine$_.CompassEngine? getCompassEngine() {
     return _getCompassEngine(
-            reference.pointer, _id_getCompassEngine as jni$_.JMethodIDPtr)
-        .object<compassengine$_.CompassEngine?>(
-            const compassengine$_.$CompassEngine$NullableType());
+      reference.pointer,
+      _id_getCompassEngine as jni$_.JMethodIDPtr,
+    ).object<compassengine$_.CompassEngine?>(
+      const compassengine$_.$CompassEngine$NullableType(),
+    );
   }
 
   static final _id_getLastKnownLocation = _class.instanceMethodId(
@@ -1084,25 +1304,29 @@ class LocationComponent extends jni$_.JObject {
     r'()Landroid/location/Location;',
   );
 
-  static final _getLastKnownLocation = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getLastKnownLocation =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public android.location.Location getLastKnownLocation()`
   /// The returned object must be released after use, by calling the [release] method.
   location$_.Location? getLastKnownLocation() {
     return _getLastKnownLocation(
-            reference.pointer, _id_getLastKnownLocation as jni$_.JMethodIDPtr)
-        .object<location$_.Location?>(
-            const location$_.$Location$NullableType());
+      reference.pointer,
+      _id_getLastKnownLocation as jni$_.JMethodIDPtr,
+    ).object<location$_.Location?>(const location$_.$Location$NullableType());
   }
 
   static final _id_addOnLocationClickListener = _class.instanceMethodId(
@@ -1112,15 +1336,21 @@ class LocationComponent extends jni$_.JObject {
 
   static final _addOnLocationClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnLocationClickListener(org.maplibre.android.location.OnLocationClickListener onLocationClickListener)`
   void addOnLocationClickListener(
@@ -1128,10 +1358,10 @@ class LocationComponent extends jni$_.JObject {
   ) {
     final _$onLocationClickListener = onLocationClickListener.reference;
     _addOnLocationClickListener(
-            reference.pointer,
-            _id_addOnLocationClickListener as jni$_.JMethodIDPtr,
-            _$onLocationClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnLocationClickListener as jni$_.JMethodIDPtr,
+      _$onLocationClickListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnLocationClickListener = _class.instanceMethodId(
@@ -1141,15 +1371,21 @@ class LocationComponent extends jni$_.JObject {
 
   static final _removeOnLocationClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnLocationClickListener(org.maplibre.android.location.OnLocationClickListener onLocationClickListener)`
   void removeOnLocationClickListener(
@@ -1157,10 +1393,10 @@ class LocationComponent extends jni$_.JObject {
   ) {
     final _$onLocationClickListener = onLocationClickListener.reference;
     _removeOnLocationClickListener(
-            reference.pointer,
-            _id_removeOnLocationClickListener as jni$_.JMethodIDPtr,
-            _$onLocationClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnLocationClickListener as jni$_.JMethodIDPtr,
+      _$onLocationClickListener.pointer,
+    ).check();
   }
 
   static final _id_addOnLocationLongClickListener = _class.instanceMethodId(
@@ -1170,27 +1406,33 @@ class LocationComponent extends jni$_.JObject {
 
   static final _addOnLocationLongClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnLocationLongClickListener(org.maplibre.android.location.OnLocationLongClickListener onLocationLongClickListener)`
   void addOnLocationLongClickListener(
     onlocationlongclicklistener$_.OnLocationLongClickListener
-        onLocationLongClickListener,
+    onLocationLongClickListener,
   ) {
     final _$onLocationLongClickListener = onLocationLongClickListener.reference;
     _addOnLocationLongClickListener(
-            reference.pointer,
-            _id_addOnLocationLongClickListener as jni$_.JMethodIDPtr,
-            _$onLocationLongClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnLocationLongClickListener as jni$_.JMethodIDPtr,
+      _$onLocationLongClickListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnLocationLongClickListener = _class.instanceMethodId(
@@ -1200,27 +1442,33 @@ class LocationComponent extends jni$_.JObject {
 
   static final _removeOnLocationLongClickListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnLocationLongClickListener(org.maplibre.android.location.OnLocationLongClickListener onLocationLongClickListener)`
   void removeOnLocationLongClickListener(
     onlocationlongclicklistener$_.OnLocationLongClickListener
-        onLocationLongClickListener,
+    onLocationLongClickListener,
   ) {
     final _$onLocationLongClickListener = onLocationLongClickListener.reference;
     _removeOnLocationLongClickListener(
-            reference.pointer,
-            _id_removeOnLocationLongClickListener as jni$_.JMethodIDPtr,
-            _$onLocationLongClickListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnLocationLongClickListener as jni$_.JMethodIDPtr,
+      _$onLocationLongClickListener.pointer,
+    ).check();
   }
 
   static final _id_addOnCameraTrackingChangedListener = _class.instanceMethodId(
@@ -1230,60 +1478,72 @@ class LocationComponent extends jni$_.JObject {
 
   static final _addOnCameraTrackingChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnCameraTrackingChangedListener(org.maplibre.android.location.OnCameraTrackingChangedListener onCameraTrackingChangedListener)`
   void addOnCameraTrackingChangedListener(
     oncameratrackingchangedlistener$_.OnCameraTrackingChangedListener
-        onCameraTrackingChangedListener,
+    onCameraTrackingChangedListener,
   ) {
     final _$onCameraTrackingChangedListener =
         onCameraTrackingChangedListener.reference;
     _addOnCameraTrackingChangedListener(
-            reference.pointer,
-            _id_addOnCameraTrackingChangedListener as jni$_.JMethodIDPtr,
-            _$onCameraTrackingChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnCameraTrackingChangedListener as jni$_.JMethodIDPtr,
+      _$onCameraTrackingChangedListener.pointer,
+    ).check();
   }
 
-  static final _id_removeOnCameraTrackingChangedListener =
-      _class.instanceMethodId(
-    r'removeOnCameraTrackingChangedListener',
-    r'(Lorg/maplibre/android/location/OnCameraTrackingChangedListener;)V',
-  );
+  static final _id_removeOnCameraTrackingChangedListener = _class
+      .instanceMethodId(
+        r'removeOnCameraTrackingChangedListener',
+        r'(Lorg/maplibre/android/location/OnCameraTrackingChangedListener;)V',
+      );
 
   static final _removeOnCameraTrackingChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnCameraTrackingChangedListener(org.maplibre.android.location.OnCameraTrackingChangedListener onCameraTrackingChangedListener)`
   void removeOnCameraTrackingChangedListener(
     oncameratrackingchangedlistener$_.OnCameraTrackingChangedListener
-        onCameraTrackingChangedListener,
+    onCameraTrackingChangedListener,
   ) {
     final _$onCameraTrackingChangedListener =
         onCameraTrackingChangedListener.reference;
     _removeOnCameraTrackingChangedListener(
-            reference.pointer,
-            _id_removeOnCameraTrackingChangedListener as jni$_.JMethodIDPtr,
-            _$onCameraTrackingChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnCameraTrackingChangedListener as jni$_.JMethodIDPtr,
+      _$onCameraTrackingChangedListener.pointer,
+    ).check();
   }
 
   static final _id_addOnRenderModeChangedListener = _class.instanceMethodId(
@@ -1293,27 +1553,33 @@ class LocationComponent extends jni$_.JObject {
 
   static final _addOnRenderModeChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnRenderModeChangedListener(org.maplibre.android.location.OnRenderModeChangedListener onRenderModeChangedListener)`
   void addOnRenderModeChangedListener(
     onrendermodechangedlistener$_.OnRenderModeChangedListener
-        onRenderModeChangedListener,
+    onRenderModeChangedListener,
   ) {
     final _$onRenderModeChangedListener = onRenderModeChangedListener.reference;
     _addOnRenderModeChangedListener(
-            reference.pointer,
-            _id_addOnRenderModeChangedListener as jni$_.JMethodIDPtr,
-            _$onRenderModeChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnRenderModeChangedListener as jni$_.JMethodIDPtr,
+      _$onRenderModeChangedListener.pointer,
+    ).check();
   }
 
   static final _id_removeRenderModeChangedListener = _class.instanceMethodId(
@@ -1323,27 +1589,33 @@ class LocationComponent extends jni$_.JObject {
 
   static final _removeRenderModeChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeRenderModeChangedListener(org.maplibre.android.location.OnRenderModeChangedListener onRenderModeChangedListener)`
   void removeRenderModeChangedListener(
     onrendermodechangedlistener$_.OnRenderModeChangedListener
-        onRenderModeChangedListener,
+    onRenderModeChangedListener,
   ) {
     final _$onRenderModeChangedListener = onRenderModeChangedListener.reference;
     _removeRenderModeChangedListener(
-            reference.pointer,
-            _id_removeRenderModeChangedListener as jni$_.JMethodIDPtr,
-            _$onRenderModeChangedListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeRenderModeChangedListener as jni$_.JMethodIDPtr,
+      _$onRenderModeChangedListener.pointer,
+    ).check();
   }
 
   static final _id_addOnLocationStaleListener = _class.instanceMethodId(
@@ -1353,15 +1625,21 @@ class LocationComponent extends jni$_.JObject {
 
   static final _addOnLocationStaleListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void addOnLocationStaleListener(org.maplibre.android.location.OnLocationStaleListener onLocationStaleListener)`
   void addOnLocationStaleListener(
@@ -1369,10 +1647,10 @@ class LocationComponent extends jni$_.JObject {
   ) {
     final _$onLocationStaleListener = onLocationStaleListener.reference;
     _addOnLocationStaleListener(
-            reference.pointer,
-            _id_addOnLocationStaleListener as jni$_.JMethodIDPtr,
-            _$onLocationStaleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_addOnLocationStaleListener as jni$_.JMethodIDPtr,
+      _$onLocationStaleListener.pointer,
+    ).check();
   }
 
   static final _id_removeOnLocationStaleListener = _class.instanceMethodId(
@@ -1382,15 +1660,21 @@ class LocationComponent extends jni$_.JObject {
 
   static final _removeOnLocationStaleListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-              jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void removeOnLocationStaleListener(org.maplibre.android.location.OnLocationStaleListener onLocationStaleListener)`
   void removeOnLocationStaleListener(
@@ -1398,72 +1682,75 @@ class LocationComponent extends jni$_.JObject {
   ) {
     final _$onLocationStaleListener = onLocationStaleListener.reference;
     _removeOnLocationStaleListener(
-            reference.pointer,
-            _id_removeOnLocationStaleListener as jni$_.JMethodIDPtr,
-            _$onLocationStaleListener.pointer)
-        .check();
+      reference.pointer,
+      _id_removeOnLocationStaleListener as jni$_.JMethodIDPtr,
+      _$onLocationStaleListener.pointer,
+    ).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(
-    r'onStart',
-    r'()V',
-  );
+  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
 
-  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onStart =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStart()`
   void onStart() {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(
-    r'onStop',
-    r'()V',
-  );
+  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
 
-  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onStop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStop()`
   void onStop() {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(
-    r'onDestroy',
-    r'()V',
-  );
+  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
 
-  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onDestroy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
@@ -1475,23 +1762,28 @@ class LocationComponent extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onStartLoadingMap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onStartLoadingMap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onStartLoadingMap()`
   void onStartLoadingMap() {
     _onStartLoadingMap(
-            reference.pointer, _id_onStartLoadingMap as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_onStartLoadingMap as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_onFinishLoadingStyle = _class.instanceMethodId(
@@ -1499,23 +1791,28 @@ class LocationComponent extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onFinishLoadingStyle = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onFinishLoadingStyle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void onFinishLoadingStyle()`
   void onFinishLoadingStyle() {
     _onFinishLoadingStyle(
-            reference.pointer, _id_onFinishLoadingStyle as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_onFinishLoadingStyle as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   static final _id_isLocationComponentActivated = _class.instanceMethodId(
@@ -1525,22 +1822,26 @@ class LocationComponent extends jni$_.JObject {
 
   static final _isLocationComponentActivated =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.JMethodIDPtr,
-                  )>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isLocationComponentActivated()`
   bool isLocationComponentActivated() {
-    return _isLocationComponentActivated(reference.pointer,
-            _id_isLocationComponentActivated as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isLocationComponentActivated(
+      reference.pointer,
+      _id_isLocationComponentActivated as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 }
 
@@ -1556,11 +1857,7 @@ final class $LocationComponent$NullableType
   @jni$_.internal
   @core$_.override
   LocationComponent? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : LocationComponent.fromReference(
-              reference,
-            );
+      reference.isNull ? null : LocationComponent.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1594,9 +1891,7 @@ final class $LocationComponent$Type extends jni$_.JObjType<LocationComponent> {
   @jni$_.internal
   @core$_.override
   LocationComponent fromReference(jni$_.JReference reference) =>
-      LocationComponent.fromReference(
-        reference,
-      );
+      LocationComponent.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

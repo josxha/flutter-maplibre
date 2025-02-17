@@ -61,11 +61,12 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$ActivityResultListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$ActivityResultListener');
+    r'io/flutter/plugin/common/PluginRegistry$ActivityResultListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -76,31 +77,38 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
     r'(IILandroid/content/Intent;)Z',
   );
 
-  static final _onActivityResult = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onActivityResult =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Int32,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, int, jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onActivityResult(int i, int i1, android.content.Intent intent)`
-  bool onActivityResult(
-    int i,
-    int i1,
-    jni$_.JObject? intent,
-  ) {
+  bool onActivityResult(int i, int i1, jni$_.JObject? intent) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
-    return _onActivityResult(reference.pointer,
-            _id_onActivityResult as jni$_.JMethodIDPtr, i, i1, _$intent.pointer)
-        .boolean;
+    return _onActivityResult(
+      reference.pointer,
+      _id_onActivityResult as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      _$intent.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -113,19 +121,16 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -191,7 +196,7 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
 abstract base mixin class $PluginRegistry$ActivityResultListener {
   factory $PluginRegistry$ActivityResultListener({
     required bool Function(int i, int i1, jni$_.JObject? intent)
-        onActivityResult,
+    onActivityResult,
   }) = _$PluginRegistry$ActivityResultListener;
 
   bool onActivityResult(int i, int i1, jni$_.JObject? intent);
@@ -201,7 +206,7 @@ final class _$PluginRegistry$ActivityResultListener
     with $PluginRegistry$ActivityResultListener {
   _$PluginRegistry$ActivityResultListener({
     required bool Function(int i, int i1, jni$_.JObject? intent)
-        onActivityResult,
+    onActivityResult,
   }) : _onActivityResult = onActivityResult;
 
   final bool Function(int i, int i1, jni$_.JObject? intent) _onActivityResult;
@@ -224,12 +229,11 @@ final class $PluginRegistry$ActivityResultListener$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$ActivityResultListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : PluginRegistry$ActivityResultListener.fromReference(
-              reference,
-            );
+          : PluginRegistry$ActivityResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -268,10 +272,8 @@ final class $PluginRegistry$ActivityResultListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$ActivityResultListener fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$ActivityResultListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$ActivityResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -302,13 +304,13 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$NewIntentListener> $type;
 
   @jni$_.internal
-  PluginRegistry$NewIntentListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PluginRegistry$NewIntentListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$NewIntentListener');
+    r'io/flutter/plugin/common/PluginRegistry$NewIntentListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PluginRegistry$NewIntentListener$NullableType();
@@ -318,25 +320,32 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
     r'(Landroid/content/Intent;)Z',
   );
 
-  static final _onNewIntent = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onNewIntent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onNewIntent(android.content.Intent intent)`
-  bool onNewIntent(
-    jni$_.JObject intent,
-  ) {
+  bool onNewIntent(jni$_.JObject intent) {
     final _$intent = intent.reference;
-    return _onNewIntent(reference.pointer,
-            _id_onNewIntent as jni$_.JMethodIDPtr, _$intent.pointer)
-        .boolean;
+    return _onNewIntent(
+      reference.pointer,
+      _id_onNewIntent as jni$_.JMethodIDPtr,
+      _$intent.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -348,19 +357,16 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -453,9 +459,7 @@ final class $PluginRegistry$NewIntentListener$NullableType
   PluginRegistry$NewIntentListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : PluginRegistry$NewIntentListener.fromReference(
-              reference,
-            );
+          : PluginRegistry$NewIntentListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -492,9 +496,7 @@ final class $PluginRegistry$NewIntentListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$NewIntentListener fromReference(jni$_.JReference reference) =>
-      PluginRegistry$NewIntentListener.fromReference(
-        reference,
-      );
+      PluginRegistry$NewIntentListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -527,11 +529,12 @@ class PluginRegistry$PluginRegistrantCallback extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$PluginRegistrantCallback.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$PluginRegistrantCallback');
+    r'io/flutter/plugin/common/PluginRegistry$PluginRegistrantCallback',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -542,30 +545,37 @@ class PluginRegistry$PluginRegistrantCallback extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry;)V',
   );
 
-  static final _registerWith = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _registerWith =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void registerWith(io.flutter.plugin.common.PluginRegistry pluginRegistry)`
-  void registerWith(
-    PluginRegistry pluginRegistry,
-  ) {
+  void registerWith(PluginRegistry pluginRegistry) {
     final _$pluginRegistry = pluginRegistry.reference;
-    _registerWith(reference.pointer, _id_registerWith as jni$_.JMethodIDPtr,
-            _$pluginRegistry.pointer)
-        .check();
+    _registerWith(
+      reference.pointer,
+      _id_registerWith as jni$_.JMethodIDPtr,
+      _$pluginRegistry.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $PluginRegistry$PluginRegistrantCallback>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -573,19 +583,16 @@ class PluginRegistry$PluginRegistrantCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -683,12 +690,11 @@ final class $PluginRegistry$PluginRegistrantCallback$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$PluginRegistrantCallback? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : PluginRegistry$PluginRegistrantCallback.fromReference(
-              reference,
-            );
+          : PluginRegistry$PluginRegistrantCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -727,10 +733,8 @@ final class $PluginRegistry$PluginRegistrantCallback$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$PluginRegistrantCallback fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$PluginRegistrantCallback.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$PluginRegistrantCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -762,13 +766,13 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$Registrar> $type;
 
   @jni$_.internal
-  PluginRegistry$Registrar.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PluginRegistry$Registrar.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$Registrar');
+    r'io/flutter/plugin/common/PluginRegistry$Registrar',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PluginRegistry$Registrar$NullableType();
@@ -778,23 +782,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Landroid/app/Activity;',
   );
 
-  static final _activity = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _activity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.app.Activity activity()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? activity() {
-    return _activity(reference.pointer, _id_activity as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _activity(
+      reference.pointer,
+      _id_activity as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_context = _class.instanceMethodId(
@@ -802,23 +812,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Landroid/content/Context;',
   );
 
-  static final _context = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _context =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.content.Context context()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject context() {
-    return _context(reference.pointer, _id_context as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _context(
+      reference.pointer,
+      _id_context as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_activeContext = _class.instanceMethodId(
@@ -826,24 +842,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Landroid/content/Context;',
   );
 
-  static final _activeContext = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _activeContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract android.content.Context activeContext()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject activeContext() {
     return _activeContext(
-            reference.pointer, _id_activeContext as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_activeContext as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_messenger = _class.instanceMethodId(
@@ -851,23 +872,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Lio/flutter/plugin/common/BinaryMessenger;',
   );
 
-  static final _messenger = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _messenger =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.BinaryMessenger messenger()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject messenger() {
-    return _messenger(reference.pointer, _id_messenger as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _messenger(
+      reference.pointer,
+      _id_messenger as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_textures = _class.instanceMethodId(
@@ -875,23 +902,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Lio/flutter/view/TextureRegistry;',
   );
 
-  static final _textures = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _textures =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract io.flutter.view.TextureRegistry textures()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject textures() {
-    return _textures(reference.pointer, _id_textures as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _textures(
+      reference.pointer,
+      _id_textures as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_platformViewRegistry = _class.instanceMethodId(
@@ -899,24 +932,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Lio/flutter/plugin/platform/PlatformViewRegistry;',
   );
 
-  static final _platformViewRegistry = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _platformViewRegistry =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.platform.PlatformViewRegistry platformViewRegistry()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject platformViewRegistry() {
     return _platformViewRegistry(
-            reference.pointer, _id_platformViewRegistry as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+      reference.pointer,
+      _id_platformViewRegistry as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_view = _class.instanceMethodId(
@@ -924,23 +962,29 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'()Lio/flutter/view/FlutterView;',
   );
 
-  static final _view = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _view =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract io.flutter.view.FlutterView view()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject view() {
-    return _view(reference.pointer, _id_view as jni$_.JMethodIDPtr)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
+    return _view(
+      reference.pointer,
+      _id_view as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject>(const jni$_.JObjectType());
   }
 
   static final _id_lookupKeyForAsset = _class.instanceMethodId(
@@ -948,26 +992,33 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _lookupKeyForAsset = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _lookupKeyForAsset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract java.lang.String lookupKeyForAsset(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString lookupKeyForAsset(
-    jni$_.JString string,
-  ) {
+  jni$_.JString lookupKeyForAsset(jni$_.JString string) {
     final _$string = string.reference;
-    return _lookupKeyForAsset(reference.pointer,
-            _id_lookupKeyForAsset as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _lookupKeyForAsset(
+      reference.pointer,
+      _id_lookupKeyForAsset as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_lookupKeyForAsset$1 = _class.instanceMethodId(
@@ -975,22 +1026,26 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _lookupKeyForAsset$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _lookupKeyForAsset$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract java.lang.String lookupKeyForAsset(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1001,11 +1056,11 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     final _$string = string.reference;
     final _$string1 = string1.reference;
     return _lookupKeyForAsset$1(
-            reference.pointer,
-            _id_lookupKeyForAsset$1 as jni$_.JMethodIDPtr,
-            _$string.pointer,
-            _$string1.pointer)
-        .object<jni$_.JString>(const jni$_.JStringType());
+      reference.pointer,
+      _id_lookupKeyForAsset$1 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+      _$string1.pointer,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_publish = _class.instanceMethodId(
@@ -1013,61 +1068,71 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Ljava/lang/Object;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _publish = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _publish =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar publish(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  PluginRegistry$Registrar publish(
-    jni$_.JObject? object,
-  ) {
+  PluginRegistry$Registrar publish(jni$_.JObject? object) {
     final _$object = object?.reference ?? jni$_.jNullReference;
-    return _publish(reference.pointer, _id_publish as jni$_.JMethodIDPtr,
-            _$object.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+    return _publish(
+      reference.pointer,
+      _id_publish as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
-  static final _id_addRequestPermissionsResultListener =
-      _class.instanceMethodId(
+  static final _id_addRequestPermissionsResultListener = _class.instanceMethodId(
     r'addRequestPermissionsResultListener',
     r'(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
   static final _addRequestPermissionsResultListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener requestPermissionsResultListener)`
   /// The returned object must be released after use, by calling the [release] method.
   PluginRegistry$Registrar addRequestPermissionsResultListener(
     PluginRegistry$RequestPermissionsResultListener
-        requestPermissionsResultListener,
+    requestPermissionsResultListener,
   ) {
     final _$requestPermissionsResultListener =
         requestPermissionsResultListener.reference;
     return _addRequestPermissionsResultListener(
-            reference.pointer,
-            _id_addRequestPermissionsResultListener as jni$_.JMethodIDPtr,
-            _$requestPermissionsResultListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addRequestPermissionsResultListener as jni$_.JMethodIDPtr,
+      _$requestPermissionsResultListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_addActivityResultListener = _class.instanceMethodId(
@@ -1075,16 +1140,23 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _addActivityResultListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addActivityResultListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener activityResultListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1093,11 +1165,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     final _$activityResultListener = activityResultListener.reference;
     return _addActivityResultListener(
-            reference.pointer,
-            _id_addActivityResultListener as jni$_.JMethodIDPtr,
-            _$activityResultListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addActivityResultListener as jni$_.JMethodIDPtr,
+      _$activityResultListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_addNewIntentListener = _class.instanceMethodId(
@@ -1105,16 +1176,23 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _addNewIntentListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addNewIntentListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener newIntentListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1123,11 +1201,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     final _$newIntentListener = newIntentListener.reference;
     return _addNewIntentListener(
-            reference.pointer,
-            _id_addNewIntentListener as jni$_.JMethodIDPtr,
-            _$newIntentListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addNewIntentListener as jni$_.JMethodIDPtr,
+      _$newIntentListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_addUserLeaveHintListener = _class.instanceMethodId(
@@ -1135,16 +1212,23 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _addUserLeaveHintListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addUserLeaveHintListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener userLeaveHintListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1153,11 +1237,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     final _$userLeaveHintListener = userLeaveHintListener.reference;
     return _addUserLeaveHintListener(
-            reference.pointer,
-            _id_addUserLeaveHintListener as jni$_.JMethodIDPtr,
-            _$userLeaveHintListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addUserLeaveHintListener as jni$_.JMethodIDPtr,
+      _$userLeaveHintListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_addWindowFocusChangedListener = _class.instanceMethodId(
@@ -1167,15 +1250,21 @@ class PluginRegistry$Registrar extends jni$_.JObject {
 
   static final _addWindowFocusChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JniResult Function(
-                          jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr,
-                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
           .asFunction<
-              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addWindowFocusChangedListener(io.flutter.plugin.common.PluginRegistry$WindowFocusChangedListener windowFocusChangedListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1184,11 +1273,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     final _$windowFocusChangedListener = windowFocusChangedListener.reference;
     return _addWindowFocusChangedListener(
-            reference.pointer,
-            _id_addWindowFocusChangedListener as jni$_.JMethodIDPtr,
-            _$windowFocusChangedListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addWindowFocusChangedListener as jni$_.JMethodIDPtr,
+      _$windowFocusChangedListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_addViewDestroyListener = _class.instanceMethodId(
@@ -1196,16 +1284,23 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     r'(Lio/flutter/plugin/common/PluginRegistry$ViewDestroyListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _addViewDestroyListener = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _addViewDestroyListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar addViewDestroyListener(io.flutter.plugin.common.PluginRegistry$ViewDestroyListener viewDestroyListener)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1214,11 +1309,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     final _$viewDestroyListener = viewDestroyListener.reference;
     return _addViewDestroyListener(
-            reference.pointer,
-            _id_addViewDestroyListener as jni$_.JMethodIDPtr,
-            _$viewDestroyListener.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+      reference.pointer,
+      _id_addViewDestroyListener as jni$_.JMethodIDPtr,
+      _$viewDestroyListener.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   /// Maps a specific port to the implemented interface.
@@ -1230,19 +1324,16 @@ class PluginRegistry$Registrar extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1345,8 +1436,9 @@ class PluginRegistry$Registrar extends jni$_.JObject {
           r'addRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addRequestPermissionsResultListener(
           $a![0]!.as(
-              const $PluginRegistry$RequestPermissionsResultListener$Type(),
-              releaseOriginal: true),
+            const $PluginRegistry$RequestPermissionsResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1357,8 +1449,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
       if ($d ==
           r'addActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addActivityResultListener(
-          $a![0]!.as(const $PluginRegistry$ActivityResultListener$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const $PluginRegistry$ActivityResultListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1369,8 +1463,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
       if ($d ==
           r'addNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addNewIntentListener(
-          $a![0]!.as(const $PluginRegistry$NewIntentListener$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const $PluginRegistry$NewIntentListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1381,8 +1477,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
       if ($d ==
           r'addUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addUserLeaveHintListener(
-          $a![0]!.as(const $PluginRegistry$UserLeaveHintListener$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const $PluginRegistry$UserLeaveHintListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1393,8 +1491,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
       if ($d ==
           r'addWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addWindowFocusChangedListener(
-          $a![0]!.as(const $PluginRegistry$WindowFocusChangedListener$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const $PluginRegistry$WindowFocusChangedListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1405,8 +1505,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
       if ($d ==
           r'addViewDestroyListener(Lio/flutter/plugin/common/PluginRegistry$ViewDestroyListener;)Lio/flutter/plugin/common/PluginRegistry$Registrar;') {
         final $r = _$impls[$p]!.addViewDestroyListener(
-          $a![0]!.as(const $PluginRegistry$ViewDestroyListener$Type(),
-              releaseOriginal: true),
+          $a![0]!.as(
+            const $PluginRegistry$ViewDestroyListener$Type(),
+            releaseOriginal: true,
+          ),
         );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
@@ -1445,14 +1547,10 @@ class PluginRegistry$Registrar extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory PluginRegistry$Registrar.implement(
-    $PluginRegistry$Registrar $impl,
-  ) {
+  factory PluginRegistry$Registrar.implement($PluginRegistry$Registrar $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return PluginRegistry$Registrar.fromReference(
-      $i.implementReference(),
-    );
+    return PluginRegistry$Registrar.fromReference($i.implementReference());
   }
 }
 
@@ -1467,28 +1565,33 @@ abstract base mixin class $PluginRegistry$Registrar {
     required jni$_.JObject Function() view,
     required jni$_.JString Function(jni$_.JString string) lookupKeyForAsset,
     required jni$_.JString Function(jni$_.JString string, jni$_.JString string1)
-        lookupKeyForAsset$1,
+    lookupKeyForAsset$1,
     required PluginRegistry$Registrar Function(jni$_.JObject? object) publish,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        addRequestPermissionsResultListener,
+      PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    addRequestPermissionsResultListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$ActivityResultListener activityResultListener)
-        addActivityResultListener,
+      PluginRegistry$ActivityResultListener activityResultListener,
+    )
+    addActivityResultListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$NewIntentListener newIntentListener)
-        addNewIntentListener,
+      PluginRegistry$NewIntentListener newIntentListener,
+    )
+    addNewIntentListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$UserLeaveHintListener userLeaveHintListener)
-        addUserLeaveHintListener,
+      PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+    )
+    addUserLeaveHintListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        addWindowFocusChangedListener,
+      PluginRegistry$WindowFocusChangedListener windowFocusChangedListener,
+    )
+    addWindowFocusChangedListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$ViewDestroyListener viewDestroyListener)
-        addViewDestroyListener,
+      PluginRegistry$ViewDestroyListener viewDestroyListener,
+    )
+    addViewDestroyListener,
   }) = _$PluginRegistry$Registrar;
 
   jni$_.JObject? activity();
@@ -1500,21 +1603,29 @@ abstract base mixin class $PluginRegistry$Registrar {
   jni$_.JObject view();
   jni$_.JString lookupKeyForAsset(jni$_.JString string);
   jni$_.JString lookupKeyForAsset$1(
-      jni$_.JString string, jni$_.JString string1);
+    jni$_.JString string,
+    jni$_.JString string1,
+  );
   PluginRegistry$Registrar publish(jni$_.JObject? object);
   PluginRegistry$Registrar addRequestPermissionsResultListener(
-      PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener);
+    PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  );
   PluginRegistry$Registrar addActivityResultListener(
-      PluginRegistry$ActivityResultListener activityResultListener);
+    PluginRegistry$ActivityResultListener activityResultListener,
+  );
   PluginRegistry$Registrar addNewIntentListener(
-      PluginRegistry$NewIntentListener newIntentListener);
+    PluginRegistry$NewIntentListener newIntentListener,
+  );
   PluginRegistry$Registrar addUserLeaveHintListener(
-      PluginRegistry$UserLeaveHintListener userLeaveHintListener);
+    PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  );
   PluginRegistry$Registrar addWindowFocusChangedListener(
-      PluginRegistry$WindowFocusChangedListener windowFocusChangedListener);
+    PluginRegistry$WindowFocusChangedListener windowFocusChangedListener,
+  );
   PluginRegistry$Registrar addViewDestroyListener(
-      PluginRegistry$ViewDestroyListener viewDestroyListener);
+    PluginRegistry$ViewDestroyListener viewDestroyListener,
+  );
 }
 
 final class _$PluginRegistry$Registrar with $PluginRegistry$Registrar {
@@ -1528,45 +1639,50 @@ final class _$PluginRegistry$Registrar with $PluginRegistry$Registrar {
     required jni$_.JObject Function() view,
     required jni$_.JString Function(jni$_.JString string) lookupKeyForAsset,
     required jni$_.JString Function(jni$_.JString string, jni$_.JString string1)
-        lookupKeyForAsset$1,
+    lookupKeyForAsset$1,
     required PluginRegistry$Registrar Function(jni$_.JObject? object) publish,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$RequestPermissionsResultListener
-                requestPermissionsResultListener)
-        addRequestPermissionsResultListener,
+      PluginRegistry$RequestPermissionsResultListener
+      requestPermissionsResultListener,
+    )
+    addRequestPermissionsResultListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$ActivityResultListener activityResultListener)
-        addActivityResultListener,
+      PluginRegistry$ActivityResultListener activityResultListener,
+    )
+    addActivityResultListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$NewIntentListener newIntentListener)
-        addNewIntentListener,
+      PluginRegistry$NewIntentListener newIntentListener,
+    )
+    addNewIntentListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$UserLeaveHintListener userLeaveHintListener)
-        addUserLeaveHintListener,
+      PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+    )
+    addUserLeaveHintListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$WindowFocusChangedListener
-                windowFocusChangedListener)
-        addWindowFocusChangedListener,
+      PluginRegistry$WindowFocusChangedListener windowFocusChangedListener,
+    )
+    addWindowFocusChangedListener,
     required PluginRegistry$Registrar Function(
-            PluginRegistry$ViewDestroyListener viewDestroyListener)
-        addViewDestroyListener,
-  })  : _activity = activity,
-        _context = context,
-        _activeContext = activeContext,
-        _messenger = messenger,
-        _textures = textures,
-        _platformViewRegistry = platformViewRegistry,
-        _view = view,
-        _lookupKeyForAsset = lookupKeyForAsset,
-        _lookupKeyForAsset$1 = lookupKeyForAsset$1,
-        _publish = publish,
-        _addRequestPermissionsResultListener =
-            addRequestPermissionsResultListener,
-        _addActivityResultListener = addActivityResultListener,
-        _addNewIntentListener = addNewIntentListener,
-        _addUserLeaveHintListener = addUserLeaveHintListener,
-        _addWindowFocusChangedListener = addWindowFocusChangedListener,
-        _addViewDestroyListener = addViewDestroyListener;
+      PluginRegistry$ViewDestroyListener viewDestroyListener,
+    )
+    addViewDestroyListener,
+  }) : _activity = activity,
+       _context = context,
+       _activeContext = activeContext,
+       _messenger = messenger,
+       _textures = textures,
+       _platformViewRegistry = platformViewRegistry,
+       _view = view,
+       _lookupKeyForAsset = lookupKeyForAsset,
+       _lookupKeyForAsset$1 = lookupKeyForAsset$1,
+       _publish = publish,
+       _addRequestPermissionsResultListener =
+           addRequestPermissionsResultListener,
+       _addActivityResultListener = addActivityResultListener,
+       _addNewIntentListener = addNewIntentListener,
+       _addUserLeaveHintListener = addUserLeaveHintListener,
+       _addWindowFocusChangedListener = addWindowFocusChangedListener,
+       _addViewDestroyListener = addViewDestroyListener;
 
   final jni$_.JObject? Function() _activity;
   final jni$_.JObject Function() _context;
@@ -1577,26 +1693,33 @@ final class _$PluginRegistry$Registrar with $PluginRegistry$Registrar {
   final jni$_.JObject Function() _view;
   final jni$_.JString Function(jni$_.JString string) _lookupKeyForAsset;
   final jni$_.JString Function(jni$_.JString string, jni$_.JString string1)
-      _lookupKeyForAsset$1;
+  _lookupKeyForAsset$1;
   final PluginRegistry$Registrar Function(jni$_.JObject? object) _publish;
   final PluginRegistry$Registrar Function(
-          PluginRegistry$RequestPermissionsResultListener
-              requestPermissionsResultListener)
-      _addRequestPermissionsResultListener;
+    PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  )
+  _addRequestPermissionsResultListener;
   final PluginRegistry$Registrar Function(
-          PluginRegistry$ActivityResultListener activityResultListener)
-      _addActivityResultListener;
+    PluginRegistry$ActivityResultListener activityResultListener,
+  )
+  _addActivityResultListener;
   final PluginRegistry$Registrar Function(
-      PluginRegistry$NewIntentListener newIntentListener) _addNewIntentListener;
+    PluginRegistry$NewIntentListener newIntentListener,
+  )
+  _addNewIntentListener;
   final PluginRegistry$Registrar Function(
-          PluginRegistry$UserLeaveHintListener userLeaveHintListener)
-      _addUserLeaveHintListener;
+    PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  )
+  _addUserLeaveHintListener;
   final PluginRegistry$Registrar Function(
-          PluginRegistry$WindowFocusChangedListener windowFocusChangedListener)
-      _addWindowFocusChangedListener;
+    PluginRegistry$WindowFocusChangedListener windowFocusChangedListener,
+  )
+  _addWindowFocusChangedListener;
   final PluginRegistry$Registrar Function(
-          PluginRegistry$ViewDestroyListener viewDestroyListener)
-      _addViewDestroyListener;
+    PluginRegistry$ViewDestroyListener viewDestroyListener,
+  )
+  _addViewDestroyListener;
 
   jni$_.JObject? activity() {
     return _activity();
@@ -1631,7 +1754,9 @@ final class _$PluginRegistry$Registrar with $PluginRegistry$Registrar {
   }
 
   jni$_.JString lookupKeyForAsset$1(
-      jni$_.JString string, jni$_.JString string1) {
+    jni$_.JString string,
+    jni$_.JString string1,
+  ) {
     return _lookupKeyForAsset$1(string, string1);
   }
 
@@ -1640,34 +1765,41 @@ final class _$PluginRegistry$Registrar with $PluginRegistry$Registrar {
   }
 
   PluginRegistry$Registrar addRequestPermissionsResultListener(
-      PluginRegistry$RequestPermissionsResultListener
-          requestPermissionsResultListener) {
+    PluginRegistry$RequestPermissionsResultListener
+    requestPermissionsResultListener,
+  ) {
     return _addRequestPermissionsResultListener(
-        requestPermissionsResultListener);
+      requestPermissionsResultListener,
+    );
   }
 
   PluginRegistry$Registrar addActivityResultListener(
-      PluginRegistry$ActivityResultListener activityResultListener) {
+    PluginRegistry$ActivityResultListener activityResultListener,
+  ) {
     return _addActivityResultListener(activityResultListener);
   }
 
   PluginRegistry$Registrar addNewIntentListener(
-      PluginRegistry$NewIntentListener newIntentListener) {
+    PluginRegistry$NewIntentListener newIntentListener,
+  ) {
     return _addNewIntentListener(newIntentListener);
   }
 
   PluginRegistry$Registrar addUserLeaveHintListener(
-      PluginRegistry$UserLeaveHintListener userLeaveHintListener) {
+    PluginRegistry$UserLeaveHintListener userLeaveHintListener,
+  ) {
     return _addUserLeaveHintListener(userLeaveHintListener);
   }
 
   PluginRegistry$Registrar addWindowFocusChangedListener(
-      PluginRegistry$WindowFocusChangedListener windowFocusChangedListener) {
+    PluginRegistry$WindowFocusChangedListener windowFocusChangedListener,
+  ) {
     return _addWindowFocusChangedListener(windowFocusChangedListener);
   }
 
   PluginRegistry$Registrar addViewDestroyListener(
-      PluginRegistry$ViewDestroyListener viewDestroyListener) {
+    PluginRegistry$ViewDestroyListener viewDestroyListener,
+  ) {
     return _addViewDestroyListener(viewDestroyListener);
   }
 }
@@ -1687,9 +1819,7 @@ final class $PluginRegistry$Registrar$NullableType
   PluginRegistry$Registrar? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : PluginRegistry$Registrar.fromReference(
-              reference,
-            );
+          : PluginRegistry$Registrar.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1725,9 +1855,7 @@ final class $PluginRegistry$Registrar$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$Registrar fromReference(jni$_.JReference reference) =>
-      PluginRegistry$Registrar.fromReference(
-        reference,
-      );
+      PluginRegistry$Registrar.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1760,11 +1888,12 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$RequestPermissionsResultListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener');
+    r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -1777,23 +1906,29 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
 
   static final _onRequestPermissionsResult =
       jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<
-                          (
-                            jni$_.Int32,
-                            jni$_.Pointer<jni$_.Void>,
-                            jni$_.Pointer<jni$_.Void>
-                          )>)>>('globalEnv_CallBooleanMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  int,
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.Pointer<jni$_.Void>)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onRequestPermissionsResult(int i, java.lang.String[] strings, int[] is)`
   bool onRequestPermissionsResult(
@@ -1804,17 +1939,17 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
     final _$strings = strings.reference;
     final _$is$ = is$.reference;
     return _onRequestPermissionsResult(
-            reference.pointer,
-            _id_onRequestPermissionsResult as jni$_.JMethodIDPtr,
-            i,
-            _$strings.pointer,
-            _$is$.pointer)
-        .boolean;
+      reference.pointer,
+      _id_onRequestPermissionsResult as jni$_.JMethodIDPtr,
+      i,
+      _$strings.pointer,
+      _$is$.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $PluginRegistry$RequestPermissionsResultListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1822,19 +1957,16 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1849,9 +1981,9 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
               .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
           $a![1]!.as(
-              const jni$_.JArrayType<jni$_.JString?>(
-                  jni$_.JStringNullableType()),
-              releaseOriginal: true),
+            const jni$_.JArrayType<jni$_.JString?>(jni$_.JStringNullableType()),
+            releaseOriginal: true,
+          ),
           $a![2]!.as(const jni$_.JIntArrayType(), releaseOriginal: true),
         );
         return jni$_.JBoolean($r).reference.toPointer();
@@ -1901,28 +2033,43 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
 abstract base mixin class $PluginRegistry$RequestPermissionsResultListener {
   factory $PluginRegistry$RequestPermissionsResultListener({
     required bool Function(
-            int i, jni$_.JArray<jni$_.JString?> strings, jni$_.JIntArray is$)
-        onRequestPermissionsResult,
+      int i,
+      jni$_.JArray<jni$_.JString?> strings,
+      jni$_.JIntArray is$,
+    )
+    onRequestPermissionsResult,
   }) = _$PluginRegistry$RequestPermissionsResultListener;
 
   bool onRequestPermissionsResult(
-      int i, jni$_.JArray<jni$_.JString?> strings, jni$_.JIntArray is$);
+    int i,
+    jni$_.JArray<jni$_.JString?> strings,
+    jni$_.JIntArray is$,
+  );
 }
 
 final class _$PluginRegistry$RequestPermissionsResultListener
     with $PluginRegistry$RequestPermissionsResultListener {
   _$PluginRegistry$RequestPermissionsResultListener({
     required bool Function(
-            int i, jni$_.JArray<jni$_.JString?> strings, jni$_.JIntArray is$)
-        onRequestPermissionsResult,
+      int i,
+      jni$_.JArray<jni$_.JString?> strings,
+      jni$_.JIntArray is$,
+    )
+    onRequestPermissionsResult,
   }) : _onRequestPermissionsResult = onRequestPermissionsResult;
 
   final bool Function(
-          int i, jni$_.JArray<jni$_.JString?> strings, jni$_.JIntArray is$)
-      _onRequestPermissionsResult;
+    int i,
+    jni$_.JArray<jni$_.JString?> strings,
+    jni$_.JIntArray is$,
+  )
+  _onRequestPermissionsResult;
 
   bool onRequestPermissionsResult(
-      int i, jni$_.JArray<jni$_.JString?> strings, jni$_.JIntArray is$) {
+    int i,
+    jni$_.JArray<jni$_.JString?> strings,
+    jni$_.JIntArray is$,
+  ) {
     return _onRequestPermissionsResult(i, strings, is$);
   }
 }
@@ -1940,12 +2087,13 @@ final class $PluginRegistry$RequestPermissionsResultListener$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
           : PluginRegistry$RequestPermissionsResultListener.fromReference(
-              reference,
-            );
+            reference,
+          );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1953,7 +2101,7 @@ final class $PluginRegistry$RequestPermissionsResultListener$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<PluginRegistry$RequestPermissionsResultListener?>
-      get nullableType => this;
+  get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -1984,10 +2132,8 @@ final class $PluginRegistry$RequestPermissionsResultListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$RequestPermissionsResultListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$RequestPermissionsResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1995,8 +2141,8 @@ final class $PluginRegistry$RequestPermissionsResultListener$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<PluginRegistry$RequestPermissionsResultListener?>
-      get nullableType =>
-          const $PluginRegistry$RequestPermissionsResultListener$NullableType();
+  get nullableType =>
+      const $PluginRegistry$RequestPermissionsResultListener$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -2021,13 +2167,13 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$UserLeaveHintListener> $type;
 
   @jni$_.internal
-  PluginRegistry$UserLeaveHintListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PluginRegistry$UserLeaveHintListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$UserLeaveHintListener');
+    r'io/flutter/plugin/common/PluginRegistry$UserLeaveHintListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2038,23 +2184,28 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onUserLeaveHint = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onUserLeaveHint =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public abstract void onUserLeaveHint()`
   void onUserLeaveHint() {
     _onUserLeaveHint(
-            reference.pointer, _id_onUserLeaveHint as jni$_.JMethodIDPtr)
-        .check();
+      reference.pointer,
+      _id_onUserLeaveHint as jni$_.JMethodIDPtr,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2067,19 +2218,16 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2117,9 +2265,7 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
       r'io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onUserLeaveHint$async) r'onUserLeaveHint()V',
-      ],
+      [if ($impl.onUserLeaveHint$async) r'onUserLeaveHint()V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2174,12 +2320,11 @@ final class $PluginRegistry$UserLeaveHintListener$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$UserLeaveHintListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : PluginRegistry$UserLeaveHintListener.fromReference(
-              reference,
-            );
+          : PluginRegistry$UserLeaveHintListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2218,10 +2363,8 @@ final class $PluginRegistry$UserLeaveHintListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$UserLeaveHintListener fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$UserLeaveHintListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$UserLeaveHintListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2252,13 +2395,13 @@ class PluginRegistry$ViewDestroyListener extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$ViewDestroyListener> $type;
 
   @jni$_.internal
-  PluginRegistry$ViewDestroyListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PluginRegistry$ViewDestroyListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$ViewDestroyListener');
+    r'io/flutter/plugin/common/PluginRegistry$ViewDestroyListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2269,27 +2412,32 @@ class PluginRegistry$ViewDestroyListener extends jni$_.JObject {
     r'(Lio/flutter/view/FlutterNativeView;)Z',
   );
 
-  static final _onViewDestroy = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onViewDestroy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean onViewDestroy(io.flutter.view.FlutterNativeView flutterNativeView)`
-  bool onViewDestroy(
-    jni$_.JObject flutterNativeView,
-  ) {
+  bool onViewDestroy(jni$_.JObject flutterNativeView) {
     final _$flutterNativeView = flutterNativeView.reference;
     return _onViewDestroy(
-            reference.pointer,
-            _id_onViewDestroy as jni$_.JMethodIDPtr,
-            _$flutterNativeView.pointer)
-        .boolean;
+      reference.pointer,
+      _id_onViewDestroy as jni$_.JMethodIDPtr,
+      _$flutterNativeView.pointer,
+    ).boolean;
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2302,19 +2450,16 @@ class PluginRegistry$ViewDestroyListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2405,12 +2550,11 @@ final class $PluginRegistry$ViewDestroyListener$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$ViewDestroyListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : PluginRegistry$ViewDestroyListener.fromReference(
-              reference,
-            );
+          : PluginRegistry$ViewDestroyListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2448,10 +2592,8 @@ final class $PluginRegistry$ViewDestroyListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$ViewDestroyListener fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$ViewDestroyListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$ViewDestroyListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2484,11 +2626,12 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$WindowFocusChangedListener.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'io/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener');
+    r'io/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -2499,28 +2642,36 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onWindowFocusChanged = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _onWindowFocusChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onWindowFocusChanged(boolean z)`
-  void onWindowFocusChanged(
-    bool z,
-  ) {
-    _onWindowFocusChanged(reference.pointer,
-            _id_onWindowFocusChanged as jni$_.JMethodIDPtr, z ? 1 : 0)
-        .check();
+  void onWindowFocusChanged(bool z) {
+    _onWindowFocusChanged(
+      reference.pointer,
+      _id_onWindowFocusChanged as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $PluginRegistry$WindowFocusChangedListener>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -2528,19 +2679,16 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2582,9 +2730,7 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
       r'io.flutter.plugin.common.PluginRegistry$WindowFocusChangedListener',
       $p,
       _$invokePointer,
-      [
-        if ($impl.onWindowFocusChanged$async) r'onWindowFocusChanged(Z)V',
-      ],
+      [if ($impl.onWindowFocusChanged$async) r'onWindowFocusChanged(Z)V'],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2639,12 +2785,11 @@ final class $PluginRegistry$WindowFocusChangedListener$NullableType
   @jni$_.internal
   @core$_.override
   PluginRegistry$WindowFocusChangedListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : PluginRegistry$WindowFocusChangedListener.fromReference(
-              reference,
-            );
+          : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2683,10 +2828,8 @@ final class $PluginRegistry$WindowFocusChangedListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$WindowFocusChangedListener fromReference(
-          jni$_.JReference reference) =>
-      PluginRegistry$WindowFocusChangedListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => PluginRegistry$WindowFocusChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2719,13 +2862,13 @@ class PluginRegistry extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry> $type;
 
   @jni$_.internal
-  PluginRegistry.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  PluginRegistry.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'io/flutter/plugin/common/PluginRegistry');
+  static final _class = jni$_.JClass.forName(
+    r'io/flutter/plugin/common/PluginRegistry',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PluginRegistry$NullableType();
@@ -2735,27 +2878,33 @@ class PluginRegistry extends jni$_.JObject {
     r'(Ljava/lang/String;)Lio/flutter/plugin/common/PluginRegistry$Registrar;',
   );
 
-  static final _registrarFor = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _registrarFor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract io.flutter.plugin.common.PluginRegistry$Registrar registrarFor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  PluginRegistry$Registrar registrarFor(
-    jni$_.JString string,
-  ) {
+  PluginRegistry$Registrar registrarFor(jni$_.JString string) {
     final _$string = string.reference;
-    return _registrarFor(reference.pointer,
-            _id_registrarFor as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<PluginRegistry$Registrar>(
-            const $PluginRegistry$Registrar$Type());
+    return _registrarFor(
+      reference.pointer,
+      _id_registrarFor as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<PluginRegistry$Registrar>(const $PluginRegistry$Registrar$Type());
   }
 
   static final _id_hasPlugin = _class.instanceMethodId(
@@ -2763,25 +2912,32 @@ class PluginRegistry extends jni$_.JObject {
     r'(Ljava/lang/String;)Z',
   );
 
-  static final _hasPlugin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _hasPlugin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract boolean hasPlugin(java.lang.String string)`
-  bool hasPlugin(
-    jni$_.JString string,
-  ) {
+  bool hasPlugin(jni$_.JString string) {
     final _$string = string.reference;
-    return _hasPlugin(reference.pointer, _id_hasPlugin as jni$_.JMethodIDPtr,
-            _$string.pointer)
-        .boolean;
+    return _hasPlugin(
+      reference.pointer,
+      _id_hasPlugin as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).boolean;
   }
 
   static final _id_valuePublishedByPlugin = _class.instanceMethodId(
@@ -2789,16 +2945,23 @@ class PluginRegistry extends jni$_.JObject {
     r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
-  static final _valuePublishedByPlugin = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _valuePublishedByPlugin =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract T valuePublishedByPlugin(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -2807,9 +2970,11 @@ class PluginRegistry extends jni$_.JObject {
     required jni$_.JObjType<$T> T,
   }) {
     final _$string = string.reference;
-    return _valuePublishedByPlugin(reference.pointer,
-            _id_valuePublishedByPlugin as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<$T?>(T.nullableType);
+    return _valuePublishedByPlugin(
+      reference.pointer,
+      _id_valuePublishedByPlugin as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<$T?>(T.nullableType);
   }
 
   /// Maps a specific port to the implemented interface.
@@ -2821,19 +2986,16 @@ class PluginRegistry extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2901,24 +3063,20 @@ class PluginRegistry extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory PluginRegistry.implement(
-    $PluginRegistry $impl,
-  ) {
+  factory PluginRegistry.implement($PluginRegistry $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return PluginRegistry.fromReference(
-      $i.implementReference(),
-    );
+    return PluginRegistry.fromReference($i.implementReference());
   }
 }
 
 abstract base mixin class $PluginRegistry {
   factory $PluginRegistry({
     required PluginRegistry$Registrar Function(jni$_.JString string)
-        registrarFor,
+    registrarFor,
     required bool Function(jni$_.JString string) hasPlugin,
     required jni$_.JObject? Function(jni$_.JString string)
-        valuePublishedByPlugin,
+    valuePublishedByPlugin,
   }) = _$PluginRegistry;
 
   PluginRegistry$Registrar registrarFor(jni$_.JString string);
@@ -2929,13 +3087,13 @@ abstract base mixin class $PluginRegistry {
 final class _$PluginRegistry with $PluginRegistry {
   _$PluginRegistry({
     required PluginRegistry$Registrar Function(jni$_.JString string)
-        registrarFor,
+    registrarFor,
     required bool Function(jni$_.JString string) hasPlugin,
     required jni$_.JObject? Function(jni$_.JString string)
-        valuePublishedByPlugin,
-  })  : _registrarFor = registrarFor,
-        _hasPlugin = hasPlugin,
-        _valuePublishedByPlugin = valuePublishedByPlugin;
+    valuePublishedByPlugin,
+  }) : _registrarFor = registrarFor,
+       _hasPlugin = hasPlugin,
+       _valuePublishedByPlugin = valuePublishedByPlugin;
 
   final PluginRegistry$Registrar Function(jni$_.JString string) _registrarFor;
   final bool Function(jni$_.JString string) _hasPlugin;
@@ -2965,11 +3123,8 @@ final class $PluginRegistry$NullableType
 
   @jni$_.internal
   @core$_.override
-  PluginRegistry? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : PluginRegistry.fromReference(
-          reference,
-        );
+  PluginRegistry? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : PluginRegistry.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3003,9 +3158,7 @@ final class $PluginRegistry$Type extends jni$_.JObjType<PluginRegistry> {
   @jni$_.internal
   @core$_.override
   PluginRegistry fromReference(jni$_.JReference reference) =>
-      PluginRegistry.fromReference(
-        reference,
-      );
+      PluginRegistry.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

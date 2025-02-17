@@ -59,13 +59,13 @@ class Property$ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ANCHOR> $type;
 
   @jni$_.internal
-  Property$ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ANCHOR');
+    r'org/maplibre/android/style/layers/Property$ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ANCHOR$NullableType();
@@ -80,19 +80,16 @@ class Property$ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -132,14 +129,10 @@ class Property$ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ANCHOR.implement(
-    $Property$ANCHOR $impl,
-  ) {
+  factory Property$ANCHOR.implement($Property$ANCHOR $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ANCHOR.fromReference(
-      $i.implementReference(),
-    );
+    return Property$ANCHOR.fromReference($i.implementReference());
   }
 }
 
@@ -163,11 +156,8 @@ final class $Property$ANCHOR$NullableType
 
   @jni$_.internal
   @core$_.override
-  Property$ANCHOR? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Property$ANCHOR.fromReference(
-          reference,
-        );
+  Property$ANCHOR? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Property$ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -202,9 +192,7 @@ final class $Property$ANCHOR$Type extends jni$_.JObjType<Property$ANCHOR> {
   @jni$_.internal
   @core$_.override
   Property$ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ANCHOR.fromReference(
-        reference,
-      );
+      Property$ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -235,13 +223,13 @@ class Property$CIRCLE_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$CIRCLE_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_ALIGNMENT');
+    r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_ALIGNMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$CIRCLE_PITCH_ALIGNMENT$NullableType();
@@ -256,19 +244,16 @@ class Property$CIRCLE_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -344,9 +329,7 @@ final class $Property$CIRCLE_PITCH_ALIGNMENT$NullableType
   Property$CIRCLE_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
-              reference,
-            );
+          : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -383,9 +366,7 @@ final class $Property$CIRCLE_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
-        reference,
-      );
+      Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -416,13 +397,13 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_PITCH_SCALE> $type;
 
   @jni$_.internal
-  Property$CIRCLE_PITCH_SCALE.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$CIRCLE_PITCH_SCALE.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_SCALE');
+    r'org/maplibre/android/style/layers/Property$CIRCLE_PITCH_SCALE',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$CIRCLE_PITCH_SCALE$NullableType();
@@ -437,19 +418,16 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -494,9 +472,7 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$CIRCLE_PITCH_SCALE.fromReference(
-      $i.implementReference(),
-    );
+    return Property$CIRCLE_PITCH_SCALE.fromReference($i.implementReference());
   }
 }
 
@@ -523,9 +499,7 @@ final class $Property$CIRCLE_PITCH_SCALE$NullableType
   Property$CIRCLE_PITCH_SCALE? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$CIRCLE_PITCH_SCALE.fromReference(
-              reference,
-            );
+          : Property$CIRCLE_PITCH_SCALE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -561,9 +535,7 @@ final class $Property$CIRCLE_PITCH_SCALE$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_PITCH_SCALE fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_PITCH_SCALE.fromReference(
-        reference,
-      );
+      Property$CIRCLE_PITCH_SCALE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -594,13 +566,13 @@ class Property$CIRCLE_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$CIRCLE_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$CIRCLE_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType();
@@ -615,19 +587,16 @@ class Property$CIRCLE_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -703,9 +672,7 @@ final class $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType
   Property$CIRCLE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -742,9 +709,7 @@ final class $Property$CIRCLE_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+      Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -777,11 +742,12 @@ class Property$FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni$_.JObject {
   @jni$_.internal
   Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$FILL_EXTRUSION_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$FILL_EXTRUSION_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -790,7 +756,7 @@ class Property$FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -798,19 +764,16 @@ class Property$FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -884,12 +847,11 @@ final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$FILL_EXTRUSION_TRANSLATE_ANCHOR? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -928,10 +890,8 @@ final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$FILL_EXTRUSION_TRANSLATE_ANCHOR fromReference(
-          jni$_.JReference reference) =>
-      Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -963,13 +923,13 @@ class Property$FILL_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$FILL_TRANSLATE_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$FILL_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$FILL_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$FILL_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$FILL_TRANSLATE_ANCHOR$NullableType();
@@ -984,19 +944,16 @@ class Property$FILL_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1071,9 +1028,7 @@ final class $Property$FILL_TRANSLATE_ANCHOR$NullableType
   Property$FILL_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$FILL_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1110,9 +1065,7 @@ final class $Property$FILL_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$FILL_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$FILL_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+      Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1145,11 +1098,12 @@ class Property$HILLSHADE_ILLUMINATION_ANCHOR extends jni$_.JObject {
   @jni$_.internal
   Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
     jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  ) : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$HILLSHADE_ILLUMINATION_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$HILLSHADE_ILLUMINATION_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -1158,7 +1112,7 @@ class Property$HILLSHADE_ILLUMINATION_ANCHOR extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $Property$HILLSHADE_ILLUMINATION_ANCHOR>
-      _$impls = {};
+  _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1166,19 +1120,16 @@ class Property$HILLSHADE_ILLUMINATION_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1252,12 +1203,11 @@ final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$HILLSHADE_ILLUMINATION_ANCHOR? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1296,10 +1246,8 @@ final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$HILLSHADE_ILLUMINATION_ANCHOR fromReference(
-          jni$_.JReference reference) =>
-      Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1331,13 +1279,13 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_ANCHOR> $type;
 
   @jni$_.internal
-  Property$ICON_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ICON_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ICON_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$ICON_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ICON_ANCHOR$NullableType();
@@ -1352,19 +1300,16 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1404,14 +1349,10 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ICON_ANCHOR.implement(
-    $Property$ICON_ANCHOR $impl,
-  ) {
+  factory Property$ICON_ANCHOR.implement($Property$ICON_ANCHOR $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_ANCHOR.fromReference(
-      $i.implementReference(),
-    );
+    return Property$ICON_ANCHOR.fromReference($i.implementReference());
   }
 }
 
@@ -1436,11 +1377,7 @@ final class $Property$ICON_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$ICON_ANCHOR? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$ICON_ANCHOR.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$ICON_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1476,9 +1413,7 @@ final class $Property$ICON_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ICON_ANCHOR.fromReference(
-        reference,
-      );
+      Property$ICON_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1509,13 +1444,13 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$ICON_PITCH_ALIGNMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ICON_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ICON_PITCH_ALIGNMENT');
+    r'org/maplibre/android/style/layers/Property$ICON_PITCH_ALIGNMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ICON_PITCH_ALIGNMENT$NullableType();
@@ -1530,19 +1465,16 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1587,9 +1519,7 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_PITCH_ALIGNMENT.fromReference(
-      $i.implementReference(),
-    );
+    return Property$ICON_PITCH_ALIGNMENT.fromReference($i.implementReference());
   }
 }
 
@@ -1617,9 +1547,7 @@ final class $Property$ICON_PITCH_ALIGNMENT$NullableType
   Property$ICON_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$ICON_PITCH_ALIGNMENT.fromReference(
-              reference,
-            );
+          : Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1655,9 +1583,7 @@ final class $Property$ICON_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$ICON_PITCH_ALIGNMENT.fromReference(
-        reference,
-      );
+      Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1688,13 +1614,13 @@ class Property$ICON_ROTATION_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$ICON_ROTATION_ALIGNMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ICON_ROTATION_ALIGNMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ICON_ROTATION_ALIGNMENT');
+    r'org/maplibre/android/style/layers/Property$ICON_ROTATION_ALIGNMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ICON_ROTATION_ALIGNMENT$NullableType();
@@ -1709,19 +1635,16 @@ class Property$ICON_ROTATION_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1797,9 +1720,7 @@ final class $Property$ICON_ROTATION_ALIGNMENT$NullableType
   Property$ICON_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$ICON_ROTATION_ALIGNMENT.fromReference(
-              reference,
-            );
+          : Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1836,9 +1757,7 @@ final class $Property$ICON_ROTATION_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$ICON_ROTATION_ALIGNMENT.fromReference(
-        reference,
-      );
+      Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1869,13 +1788,13 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_TEXT_FIT> $type;
 
   @jni$_.internal
-  Property$ICON_TEXT_FIT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ICON_TEXT_FIT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ICON_TEXT_FIT');
+    r'org/maplibre/android/style/layers/Property$ICON_TEXT_FIT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ICON_TEXT_FIT$NullableType();
@@ -1890,19 +1809,16 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1942,14 +1858,10 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ICON_TEXT_FIT.implement(
-    $Property$ICON_TEXT_FIT $impl,
-  ) {
+  factory Property$ICON_TEXT_FIT.implement($Property$ICON_TEXT_FIT $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_TEXT_FIT.fromReference(
-      $i.implementReference(),
-    );
+    return Property$ICON_TEXT_FIT.fromReference($i.implementReference());
   }
 }
 
@@ -1974,11 +1886,7 @@ final class $Property$ICON_TEXT_FIT$NullableType
   @jni$_.internal
   @core$_.override
   Property$ICON_TEXT_FIT? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$ICON_TEXT_FIT.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$ICON_TEXT_FIT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2014,9 +1922,7 @@ final class $Property$ICON_TEXT_FIT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_TEXT_FIT fromReference(jni$_.JReference reference) =>
-      Property$ICON_TEXT_FIT.fromReference(
-        reference,
-      );
+      Property$ICON_TEXT_FIT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2047,13 +1953,13 @@ class Property$ICON_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$ICON_TRANSLATE_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$ICON_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$ICON_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$ICON_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$ICON_TRANSLATE_ANCHOR$NullableType();
@@ -2068,19 +1974,16 @@ class Property$ICON_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2155,9 +2058,7 @@ final class $Property$ICON_TRANSLATE_ANCHOR$NullableType
   Property$ICON_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$ICON_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2194,9 +2095,7 @@ final class $Property$ICON_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ICON_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+      Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2227,13 +2126,13 @@ class Property$LINE_CAP extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_CAP> $type;
 
   @jni$_.internal
-  Property$LINE_CAP.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$LINE_CAP.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$LINE_CAP');
+    r'org/maplibre/android/style/layers/Property$LINE_CAP',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$LINE_CAP$NullableType();
@@ -2248,19 +2147,16 @@ class Property$LINE_CAP extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2300,14 +2196,10 @@ class Property$LINE_CAP extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$LINE_CAP.implement(
-    $Property$LINE_CAP $impl,
-  ) {
+  factory Property$LINE_CAP.implement($Property$LINE_CAP $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$LINE_CAP.fromReference(
-      $i.implementReference(),
-    );
+    return Property$LINE_CAP.fromReference($i.implementReference());
   }
 }
 
@@ -2332,11 +2224,7 @@ final class $Property$LINE_CAP$NullableType
   @jni$_.internal
   @core$_.override
   Property$LINE_CAP? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$LINE_CAP.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$LINE_CAP.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2371,9 +2259,7 @@ final class $Property$LINE_CAP$Type extends jni$_.JObjType<Property$LINE_CAP> {
   @jni$_.internal
   @core$_.override
   Property$LINE_CAP fromReference(jni$_.JReference reference) =>
-      Property$LINE_CAP.fromReference(
-        reference,
-      );
+      Property$LINE_CAP.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2404,13 +2290,13 @@ class Property$LINE_JOIN extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_JOIN> $type;
 
   @jni$_.internal
-  Property$LINE_JOIN.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$LINE_JOIN.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$LINE_JOIN');
+    r'org/maplibre/android/style/layers/Property$LINE_JOIN',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$LINE_JOIN$NullableType();
@@ -2425,19 +2311,16 @@ class Property$LINE_JOIN extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2477,14 +2360,10 @@ class Property$LINE_JOIN extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$LINE_JOIN.implement(
-    $Property$LINE_JOIN $impl,
-  ) {
+  factory Property$LINE_JOIN.implement($Property$LINE_JOIN $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$LINE_JOIN.fromReference(
-      $i.implementReference(),
-    );
+    return Property$LINE_JOIN.fromReference($i.implementReference());
   }
 }
 
@@ -2509,11 +2388,7 @@ final class $Property$LINE_JOIN$NullableType
   @jni$_.internal
   @core$_.override
   Property$LINE_JOIN? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$LINE_JOIN.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$LINE_JOIN.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2549,9 +2424,7 @@ final class $Property$LINE_JOIN$Type
   @jni$_.internal
   @core$_.override
   Property$LINE_JOIN fromReference(jni$_.JReference reference) =>
-      Property$LINE_JOIN.fromReference(
-        reference,
-      );
+      Property$LINE_JOIN.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2582,13 +2455,13 @@ class Property$LINE_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$LINE_TRANSLATE_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$LINE_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$LINE_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$LINE_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$LINE_TRANSLATE_ANCHOR$NullableType();
@@ -2603,19 +2476,16 @@ class Property$LINE_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2690,9 +2560,7 @@ final class $Property$LINE_TRANSLATE_ANCHOR$NullableType
   Property$LINE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$LINE_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2729,9 +2597,7 @@ final class $Property$LINE_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$LINE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$LINE_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+      Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2762,13 +2628,13 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   final jni$_.JObjType<Property$RASTER_RESAMPLING> $type;
 
   @jni$_.internal
-  Property$RASTER_RESAMPLING.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$RASTER_RESAMPLING.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$RASTER_RESAMPLING');
+    r'org/maplibre/android/style/layers/Property$RASTER_RESAMPLING',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$RASTER_RESAMPLING$NullableType();
@@ -2783,19 +2649,16 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2840,9 +2703,7 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$RASTER_RESAMPLING.fromReference(
-      $i.implementReference(),
-    );
+    return Property$RASTER_RESAMPLING.fromReference($i.implementReference());
   }
 }
 
@@ -2869,9 +2730,7 @@ final class $Property$RASTER_RESAMPLING$NullableType
   Property$RASTER_RESAMPLING? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$RASTER_RESAMPLING.fromReference(
-              reference,
-            );
+          : Property$RASTER_RESAMPLING.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2907,9 +2766,7 @@ final class $Property$RASTER_RESAMPLING$Type
   @jni$_.internal
   @core$_.override
   Property$RASTER_RESAMPLING fromReference(jni$_.JReference reference) =>
-      Property$RASTER_RESAMPLING.fromReference(
-        reference,
-      );
+      Property$RASTER_RESAMPLING.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2940,13 +2797,13 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$SYMBOL_PLACEMENT> $type;
 
   @jni$_.internal
-  Property$SYMBOL_PLACEMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$SYMBOL_PLACEMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$SYMBOL_PLACEMENT');
+    r'org/maplibre/android/style/layers/Property$SYMBOL_PLACEMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$SYMBOL_PLACEMENT$NullableType();
@@ -2961,19 +2818,16 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3018,9 +2872,7 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$SYMBOL_PLACEMENT.fromReference(
-      $i.implementReference(),
-    );
+    return Property$SYMBOL_PLACEMENT.fromReference($i.implementReference());
   }
 }
 
@@ -3047,9 +2899,7 @@ final class $Property$SYMBOL_PLACEMENT$NullableType
   Property$SYMBOL_PLACEMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$SYMBOL_PLACEMENT.fromReference(
-              reference,
-            );
+          : Property$SYMBOL_PLACEMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3085,9 +2935,7 @@ final class $Property$SYMBOL_PLACEMENT$Type
   @jni$_.internal
   @core$_.override
   Property$SYMBOL_PLACEMENT fromReference(jni$_.JReference reference) =>
-      Property$SYMBOL_PLACEMENT.fromReference(
-        reference,
-      );
+      Property$SYMBOL_PLACEMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3118,13 +2966,13 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
   final jni$_.JObjType<Property$SYMBOL_Z_ORDER> $type;
 
   @jni$_.internal
-  Property$SYMBOL_Z_ORDER.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$SYMBOL_Z_ORDER.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$SYMBOL_Z_ORDER');
+    r'org/maplibre/android/style/layers/Property$SYMBOL_Z_ORDER',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$SYMBOL_Z_ORDER$NullableType();
@@ -3139,19 +2987,16 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3191,14 +3036,10 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$SYMBOL_Z_ORDER.implement(
-    $Property$SYMBOL_Z_ORDER $impl,
-  ) {
+  factory Property$SYMBOL_Z_ORDER.implement($Property$SYMBOL_Z_ORDER $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$SYMBOL_Z_ORDER.fromReference(
-      $i.implementReference(),
-    );
+    return Property$SYMBOL_Z_ORDER.fromReference($i.implementReference());
   }
 }
 
@@ -3225,9 +3066,7 @@ final class $Property$SYMBOL_Z_ORDER$NullableType
   Property$SYMBOL_Z_ORDER? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$SYMBOL_Z_ORDER.fromReference(
-              reference,
-            );
+          : Property$SYMBOL_Z_ORDER.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3263,9 +3102,7 @@ final class $Property$SYMBOL_Z_ORDER$Type
   @jni$_.internal
   @core$_.override
   Property$SYMBOL_Z_ORDER fromReference(jni$_.JReference reference) =>
-      Property$SYMBOL_Z_ORDER.fromReference(
-        reference,
-      );
+      Property$SYMBOL_Z_ORDER.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3296,13 +3133,13 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_ANCHOR> $type;
 
   @jni$_.internal
-  Property$TEXT_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$TEXT_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_ANCHOR$NullableType();
@@ -3317,19 +3154,16 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3369,14 +3203,10 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_ANCHOR.implement(
-    $Property$TEXT_ANCHOR $impl,
-  ) {
+  factory Property$TEXT_ANCHOR.implement($Property$TEXT_ANCHOR $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_ANCHOR.fromReference(
-      $i.implementReference(),
-    );
+    return Property$TEXT_ANCHOR.fromReference($i.implementReference());
   }
 }
 
@@ -3401,11 +3231,7 @@ final class $Property$TEXT_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$TEXT_ANCHOR? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$TEXT_ANCHOR.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$TEXT_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3441,9 +3267,7 @@ final class $Property$TEXT_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$TEXT_ANCHOR.fromReference(
-        reference,
-      );
+      Property$TEXT_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3474,13 +3298,13 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_JUSTIFY> $type;
 
   @jni$_.internal
-  Property$TEXT_JUSTIFY.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_JUSTIFY.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_JUSTIFY');
+    r'org/maplibre/android/style/layers/Property$TEXT_JUSTIFY',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_JUSTIFY$NullableType();
@@ -3495,19 +3319,16 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3547,14 +3368,10 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_JUSTIFY.implement(
-    $Property$TEXT_JUSTIFY $impl,
-  ) {
+  factory Property$TEXT_JUSTIFY.implement($Property$TEXT_JUSTIFY $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_JUSTIFY.fromReference(
-      $i.implementReference(),
-    );
+    return Property$TEXT_JUSTIFY.fromReference($i.implementReference());
   }
 }
 
@@ -3579,11 +3396,7 @@ final class $Property$TEXT_JUSTIFY$NullableType
   @jni$_.internal
   @core$_.override
   Property$TEXT_JUSTIFY? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$TEXT_JUSTIFY.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$TEXT_JUSTIFY.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3619,9 +3432,7 @@ final class $Property$TEXT_JUSTIFY$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_JUSTIFY fromReference(jni$_.JReference reference) =>
-      Property$TEXT_JUSTIFY.fromReference(
-        reference,
-      );
+      Property$TEXT_JUSTIFY.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3652,13 +3463,13 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$TEXT_PITCH_ALIGNMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_PITCH_ALIGNMENT');
+    r'org/maplibre/android/style/layers/Property$TEXT_PITCH_ALIGNMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_PITCH_ALIGNMENT$NullableType();
@@ -3673,19 +3484,16 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3730,9 +3538,7 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_PITCH_ALIGNMENT.fromReference(
-      $i.implementReference(),
-    );
+    return Property$TEXT_PITCH_ALIGNMENT.fromReference($i.implementReference());
   }
 }
 
@@ -3760,9 +3566,7 @@ final class $Property$TEXT_PITCH_ALIGNMENT$NullableType
   Property$TEXT_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$TEXT_PITCH_ALIGNMENT.fromReference(
-              reference,
-            );
+          : Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3798,9 +3602,7 @@ final class $Property$TEXT_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$TEXT_PITCH_ALIGNMENT.fromReference(
-        reference,
-      );
+      Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3831,13 +3633,13 @@ class Property$TEXT_ROTATION_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$TEXT_ROTATION_ALIGNMENT.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_ROTATION_ALIGNMENT.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_ROTATION_ALIGNMENT');
+    r'org/maplibre/android/style/layers/Property$TEXT_ROTATION_ALIGNMENT',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_ROTATION_ALIGNMENT$NullableType();
@@ -3852,19 +3654,16 @@ class Property$TEXT_ROTATION_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3940,9 +3739,7 @@ final class $Property$TEXT_ROTATION_ALIGNMENT$NullableType
   Property$TEXT_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$TEXT_ROTATION_ALIGNMENT.fromReference(
-              reference,
-            );
+          : Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3979,9 +3776,7 @@ final class $Property$TEXT_ROTATION_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$TEXT_ROTATION_ALIGNMENT.fromReference(
-        reference,
-      );
+      Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4012,13 +3807,13 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_TRANSFORM> $type;
 
   @jni$_.internal
-  Property$TEXT_TRANSFORM.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_TRANSFORM.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_TRANSFORM');
+    r'org/maplibre/android/style/layers/Property$TEXT_TRANSFORM',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_TRANSFORM$NullableType();
@@ -4033,19 +3828,16 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4085,14 +3877,10 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_TRANSFORM.implement(
-    $Property$TEXT_TRANSFORM $impl,
-  ) {
+  factory Property$TEXT_TRANSFORM.implement($Property$TEXT_TRANSFORM $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_TRANSFORM.fromReference(
-      $i.implementReference(),
-    );
+    return Property$TEXT_TRANSFORM.fromReference($i.implementReference());
   }
 }
 
@@ -4119,9 +3907,7 @@ final class $Property$TEXT_TRANSFORM$NullableType
   Property$TEXT_TRANSFORM? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$TEXT_TRANSFORM.fromReference(
-              reference,
-            );
+          : Property$TEXT_TRANSFORM.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4157,9 +3943,7 @@ final class $Property$TEXT_TRANSFORM$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_TRANSFORM fromReference(jni$_.JReference reference) =>
-      Property$TEXT_TRANSFORM.fromReference(
-        reference,
-      );
+      Property$TEXT_TRANSFORM.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4190,13 +3974,13 @@ class Property$TEXT_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$TEXT_TRANSLATE_ANCHOR.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_TRANSLATE_ANCHOR');
+    r'org/maplibre/android/style/layers/Property$TEXT_TRANSLATE_ANCHOR',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_TRANSLATE_ANCHOR$NullableType();
@@ -4211,19 +3995,16 @@ class Property$TEXT_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4298,9 +4079,7 @@ final class $Property$TEXT_TRANSLATE_ANCHOR$NullableType
   Property$TEXT_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$TEXT_TRANSLATE_ANCHOR.fromReference(
-              reference,
-            );
+          : Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4337,9 +4116,7 @@ final class $Property$TEXT_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$TEXT_TRANSLATE_ANCHOR.fromReference(
-        reference,
-      );
+      Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4370,13 +4147,13 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_WRITING_MODE> $type;
 
   @jni$_.internal
-  Property$TEXT_WRITING_MODE.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$TEXT_WRITING_MODE.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$TEXT_WRITING_MODE');
+    r'org/maplibre/android/style/layers/Property$TEXT_WRITING_MODE',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$TEXT_WRITING_MODE$NullableType();
@@ -4391,19 +4168,16 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4448,9 +4222,7 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_WRITING_MODE.fromReference(
-      $i.implementReference(),
-    );
+    return Property$TEXT_WRITING_MODE.fromReference($i.implementReference());
   }
 }
 
@@ -4477,9 +4249,7 @@ final class $Property$TEXT_WRITING_MODE$NullableType
   Property$TEXT_WRITING_MODE? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : Property$TEXT_WRITING_MODE.fromReference(
-              reference,
-            );
+          : Property$TEXT_WRITING_MODE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4515,9 +4285,7 @@ final class $Property$TEXT_WRITING_MODE$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_WRITING_MODE fromReference(jni$_.JReference reference) =>
-      Property$TEXT_WRITING_MODE.fromReference(
-        reference,
-      );
+      Property$TEXT_WRITING_MODE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4548,13 +4316,13 @@ class Property$VISIBILITY extends jni$_.JObject {
   final jni$_.JObjType<Property$VISIBILITY> $type;
 
   @jni$_.internal
-  Property$VISIBILITY.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property$VISIBILITY.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/style/layers/Property$VISIBILITY');
+    r'org/maplibre/android/style/layers/Property$VISIBILITY',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$VISIBILITY$NullableType();
@@ -4569,19 +4337,16 @@ class Property$VISIBILITY extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4621,14 +4386,10 @@ class Property$VISIBILITY extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$VISIBILITY.implement(
-    $Property$VISIBILITY $impl,
-  ) {
+  factory Property$VISIBILITY.implement($Property$VISIBILITY $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$VISIBILITY.fromReference(
-      $i.implementReference(),
-    );
+    return Property$VISIBILITY.fromReference($i.implementReference());
   }
 }
 
@@ -4653,11 +4414,7 @@ final class $Property$VISIBILITY$NullableType
   @jni$_.internal
   @core$_.override
   Property$VISIBILITY? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : Property$VISIBILITY.fromReference(
-              reference,
-            );
+      reference.isNull ? null : Property$VISIBILITY.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4693,9 +4450,7 @@ final class $Property$VISIBILITY$Type
   @jni$_.internal
   @core$_.override
   Property$VISIBILITY fromReference(jni$_.JReference reference) =>
-      Property$VISIBILITY.fromReference(
-        reference,
-      );
+      Property$VISIBILITY.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4726,13 +4481,13 @@ class Property extends jni$_.JObject {
   final jni$_.JObjType<Property> $type;
 
   @jni$_.internal
-  Property.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Property.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/Property');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/Property',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Property$NullableType();
@@ -4747,10 +4502,7 @@ class Property extends jni$_.JObject {
   static jni$_.JString? get VISIBLE =>
       _id_VISIBLE.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_NONE = _class.staticFieldId(
-    r'NONE',
-    r'Ljava/lang/String;',
-  );
+  static final _id_NONE = _class.staticFieldId(r'NONE', r'Ljava/lang/String;');
 
   /// from: `static public final java.lang.String NONE`
   /// The returned object must be released after use, by calling the [release] method.
@@ -4846,7 +4598,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get SYMBOL_PLACEMENT_LINE_CENTER =>
       _id_SYMBOL_PLACEMENT_LINE_CENTER.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_SYMBOL_Z_ORDER_AUTO = _class.staticFieldId(
     r'SYMBOL_Z_ORDER_AUTO',
@@ -4867,7 +4621,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get SYMBOL_Z_ORDER_VIEWPORT_Y =>
       _id_SYMBOL_Z_ORDER_VIEWPORT_Y.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_SYMBOL_Z_ORDER_SOURCE = _class.staticFieldId(
     r'SYMBOL_Z_ORDER_SOURCE',
@@ -4888,7 +4644,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ROTATION_ALIGNMENT_MAP =>
       _id_ICON_ROTATION_ALIGNMENT_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_ROTATION_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_VIEWPORT',
@@ -4899,7 +4657,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_ICON_ROTATION_ALIGNMENT_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_AUTO',
@@ -4910,7 +4670,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ROTATION_ALIGNMENT_AUTO =>
       _id_ICON_ROTATION_ALIGNMENT_AUTO.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_TEXT_FIT_NONE = _class.staticFieldId(
     r'ICON_TEXT_FIT_NONE',
@@ -5031,7 +4793,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ANCHOR_BOTTOM_LEFT =>
       _id_ICON_ANCHOR_BOTTOM_LEFT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_ANCHOR_BOTTOM_RIGHT = _class.staticFieldId(
     r'ICON_ANCHOR_BOTTOM_RIGHT',
@@ -5042,7 +4806,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ANCHOR_BOTTOM_RIGHT =>
       _id_ICON_ANCHOR_BOTTOM_RIGHT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_MAP',
@@ -5053,7 +4819,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_PITCH_ALIGNMENT_MAP =>
       _id_ICON_PITCH_ALIGNMENT_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_VIEWPORT',
@@ -5064,7 +4832,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_PITCH_ALIGNMENT_VIEWPORT =>
       _id_ICON_PITCH_ALIGNMENT_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_PITCH_ALIGNMENT_AUTO = _class.staticFieldId(
     r'ICON_PITCH_ALIGNMENT_AUTO',
@@ -5075,7 +4845,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_PITCH_ALIGNMENT_AUTO =>
       _id_ICON_PITCH_ALIGNMENT_AUTO.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_MAP',
@@ -5086,7 +4858,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_PITCH_ALIGNMENT_MAP =>
       _id_TEXT_PITCH_ALIGNMENT_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_VIEWPORT',
@@ -5097,7 +4871,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_PITCH_ALIGNMENT_VIEWPORT =>
       _id_TEXT_PITCH_ALIGNMENT_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_PITCH_ALIGNMENT_AUTO = _class.staticFieldId(
     r'TEXT_PITCH_ALIGNMENT_AUTO',
@@ -5108,7 +4884,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_PITCH_ALIGNMENT_AUTO =>
       _id_TEXT_PITCH_ALIGNMENT_AUTO.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_ROTATION_ALIGNMENT_MAP = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_MAP',
@@ -5119,7 +4897,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_MAP =>
       _id_TEXT_ROTATION_ALIGNMENT_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_ROTATION_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_VIEWPORT',
@@ -5130,7 +4910,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_TEXT_ROTATION_ALIGNMENT_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_AUTO',
@@ -5141,7 +4923,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_AUTO =>
       _id_TEXT_ROTATION_ALIGNMENT_AUTO.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_JUSTIFY_AUTO = _class.staticFieldId(
     r'TEXT_JUSTIFY_AUTO',
@@ -5262,7 +5046,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ANCHOR_BOTTOM_LEFT =>
       _id_TEXT_ANCHOR_BOTTOM_LEFT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_ANCHOR_BOTTOM_RIGHT = _class.staticFieldId(
     r'TEXT_ANCHOR_BOTTOM_RIGHT',
@@ -5273,7 +5059,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ANCHOR_BOTTOM_RIGHT =>
       _id_TEXT_ANCHOR_BOTTOM_RIGHT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_TRANSFORM_NONE = _class.staticFieldId(
     r'TEXT_TRANSFORM_NONE',
@@ -5294,7 +5082,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_TRANSFORM_UPPERCASE =>
       _id_TEXT_TRANSFORM_UPPERCASE.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_TRANSFORM_LOWERCASE = _class.staticFieldId(
     r'TEXT_TRANSFORM_LOWERCASE',
@@ -5305,7 +5095,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_TRANSFORM_LOWERCASE =>
       _id_TEXT_TRANSFORM_LOWERCASE.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_FILL_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'FILL_TRANSLATE_ANCHOR_MAP',
@@ -5316,7 +5108,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_TRANSLATE_ANCHOR_MAP =>
       _id_FILL_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_FILL_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'FILL_TRANSLATE_ANCHOR_VIEWPORT',
@@ -5327,7 +5121,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_FILL_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_LINE_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'LINE_TRANSLATE_ANCHOR_MAP',
@@ -5338,7 +5134,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get LINE_TRANSLATE_ANCHOR_MAP =>
       _id_LINE_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_LINE_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'LINE_TRANSLATE_ANCHOR_VIEWPORT',
@@ -5349,7 +5147,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get LINE_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_LINE_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'ICON_TRANSLATE_ANCHOR_MAP',
@@ -5360,7 +5160,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_TRANSLATE_ANCHOR_MAP =>
       _id_ICON_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ICON_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'ICON_TRANSLATE_ANCHOR_VIEWPORT',
@@ -5371,7 +5173,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_ICON_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'TEXT_TRANSLATE_ANCHOR_MAP',
@@ -5382,7 +5186,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_TRANSLATE_ANCHOR_MAP =>
       _id_TEXT_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'TEXT_TRANSLATE_ANCHOR_VIEWPORT',
@@ -5393,7 +5199,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_TEXT_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_CIRCLE_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'CIRCLE_TRANSLATE_ANCHOR_MAP',
@@ -5404,7 +5212,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_TRANSLATE_ANCHOR_MAP =>
       _id_CIRCLE_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_CIRCLE_TRANSLATE_ANCHOR_VIEWPORT = _class.staticFieldId(
     r'CIRCLE_TRANSLATE_ANCHOR_VIEWPORT',
@@ -5415,7 +5225,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_CIRCLE_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_CIRCLE_PITCH_SCALE_MAP = _class.staticFieldId(
     r'CIRCLE_PITCH_SCALE_MAP',
@@ -5436,7 +5248,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_PITCH_SCALE_VIEWPORT =>
       _id_CIRCLE_PITCH_SCALE_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_CIRCLE_PITCH_ALIGNMENT_MAP = _class.staticFieldId(
     r'CIRCLE_PITCH_ALIGNMENT_MAP',
@@ -5447,7 +5261,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_PITCH_ALIGNMENT_MAP =>
       _id_CIRCLE_PITCH_ALIGNMENT_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_CIRCLE_PITCH_ALIGNMENT_VIEWPORT = _class.staticFieldId(
     r'CIRCLE_PITCH_ALIGNMENT_VIEWPORT',
@@ -5458,7 +5274,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_PITCH_ALIGNMENT_VIEWPORT =>
       _id_CIRCLE_PITCH_ALIGNMENT_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP',
@@ -5469,19 +5287,23 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
-  static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =
-      _class.staticFieldId(
-    r'FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT',
-    r'Ljava/lang/String;',
-  );
+  static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT = _class
+      .staticFieldId(
+        r'FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT',
+        r'Ljava/lang/String;',
+      );
 
   /// from: `static public final java.lang.String FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_RASTER_RESAMPLING_LINEAR = _class.staticFieldId(
     r'RASTER_RESAMPLING_LINEAR',
@@ -5492,7 +5314,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get RASTER_RESAMPLING_LINEAR =>
       _id_RASTER_RESAMPLING_LINEAR.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_RASTER_RESAMPLING_NEAREST = _class.staticFieldId(
     r'RASTER_RESAMPLING_NEAREST',
@@ -5503,7 +5327,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get RASTER_RESAMPLING_NEAREST =>
       _id_RASTER_RESAMPLING_NEAREST.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_HILLSHADE_ILLUMINATION_ANCHOR_MAP = _class.staticFieldId(
     r'HILLSHADE_ILLUMINATION_ANCHOR_MAP',
@@ -5514,19 +5340,23 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_MAP =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_MAP.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
-  static final _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =
-      _class.staticFieldId(
-    r'HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT',
-    r'Ljava/lang/String;',
-  );
+  static final _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT = _class
+      .staticFieldId(
+        r'HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT',
+        r'Ljava/lang/String;',
+      );
 
   /// from: `static public final java.lang.String HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_ANCHOR_MAP = _class.staticFieldId(
     r'ANCHOR_MAP',
@@ -5557,7 +5387,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_WRITING_MODE_HORIZONTAL =>
       _id_TEXT_WRITING_MODE_HORIZONTAL.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 
   static final _id_TEXT_WRITING_MODE_VERTICAL = _class.staticFieldId(
     r'TEXT_WRITING_MODE_VERTICAL',
@@ -5568,7 +5400,9 @@ class Property extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_WRITING_MODE_VERTICAL =>
       _id_TEXT_WRITING_MODE_VERTICAL.get(
-          _class, const jni$_.JStringNullableType());
+        _class,
+        const jni$_.JStringNullableType(),
+      );
 }
 
 final class $Property$NullableType extends jni$_.JObjType<Property?> {
@@ -5581,11 +5415,8 @@ final class $Property$NullableType extends jni$_.JObjType<Property?> {
 
   @jni$_.internal
   @core$_.override
-  Property? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Property.fromReference(
-          reference,
-        );
+  Property? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Property.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5618,9 +5449,8 @@ final class $Property$Type extends jni$_.JObjType<Property> {
 
   @jni$_.internal
   @core$_.override
-  Property fromReference(jni$_.JReference reference) => Property.fromReference(
-        reference,
-      );
+  Property fromReference(jni$_.JReference reference) =>
+      Property.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

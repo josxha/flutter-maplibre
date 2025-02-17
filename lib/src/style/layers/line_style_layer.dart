@@ -16,5 +16,5 @@ final class LineStyleLayer extends StyleLayerWithSource {
     super.draggable,
   });
 
-// TODO add properties
+  // TODO add properties
 }

@@ -32,9 +32,10 @@ class _GesturesPageState extends State<GesturesPage> {
                     (e) => ChoiceChip(
                       label: Text(e.name),
                       selected: _selections[e]!,
-                      onSelected: (value) => setState(() {
-                        _selections[e] = !_selections[e]!;
-                      }),
+                      onSelected:
+                          (value) => setState(() {
+                            _selections[e] = !_selections[e]!;
+                          }),
                     ),
                   )
                   .toList(growable: false),

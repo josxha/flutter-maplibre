@@ -59,39 +59,41 @@ class TooManyIconsException extends jni$_.JObject {
   final jni$_.JObjType<TooManyIconsException> $type;
 
   @jni$_.internal
-  TooManyIconsException.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  TooManyIconsException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/exceptions/TooManyIconsException');
+    r'org/maplibre/android/exceptions/TooManyIconsException',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $TooManyIconsException$NullableType();
   static const type = $TooManyIconsException$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory TooManyIconsException() {
     return TooManyIconsException.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 }
 
@@ -108,11 +110,7 @@ final class $TooManyIconsException$NullableType
   @jni$_.internal
   @core$_.override
   TooManyIconsException? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : TooManyIconsException.fromReference(
-              reference,
-            );
+      reference.isNull ? null : TooManyIconsException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -148,9 +146,7 @@ final class $TooManyIconsException$Type
   @jni$_.internal
   @core$_.override
   TooManyIconsException fromReference(jni$_.JReference reference) =>
-      TooManyIconsException.fromReference(
-        reference,
-      );
+      TooManyIconsException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -61,13 +61,13 @@ class Layer extends jni$_.JObject {
   final jni$_.JObjType<Layer> $type;
 
   @jni$_.internal
-  Layer.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  Layer.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/style/layers/Layer');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/layers/Layer',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Layer$NullableType();
@@ -77,25 +77,34 @@ class Layer extends jni$_.JObject {
     r'([Lorg/maplibre/android/style/layers/PropertyValue;)V',
   );
 
-  static final _setProperties = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _setProperties =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public void setProperties(java.lang.Object[] propertyValues)`
   void setProperties(
     jni$_.JArray<propertyvalue$_.PropertyValue<jni$_.JObject?>?> propertyValues,
   ) {
     final _$propertyValues = propertyValues.reference;
-    _setProperties(reference.pointer, _id_setProperties as jni$_.JMethodIDPtr,
-            _$propertyValues.pointer)
-        .check();
+    _setProperties(
+      reference.pointer,
+      _id_setProperties as jni$_.JMethodIDPtr,
+      _$propertyValues.pointer,
+    ).check();
   }
 
   static final _id_getId = _class.instanceMethodId(
@@ -103,23 +112,29 @@ class Layer extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getId = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public java.lang.String getId()`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JString getId() {
-    return _getId(reference.pointer, _id_getId as jni$_.JMethodIDPtr)
-        .object<jni$_.JString>(const jni$_.JStringType());
+    return _getId(
+      reference.pointer,
+      _id_getId as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
   static final _id_getVisibility = _class.instanceMethodId(
@@ -127,118 +142,143 @@ class Layer extends jni$_.JObject {
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
   );
 
-  static final _getVisibility = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getVisibility =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue getVisibility()`
   /// The returned object must be released after use, by calling the [release] method.
   propertyvalue$_.PropertyValue<jni$_.JString?> getVisibility() {
     return _getVisibility(
-            reference.pointer, _id_getVisibility as jni$_.JMethodIDPtr)
-        .object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
-            const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
-                jni$_.JStringNullableType()));
+      reference.pointer,
+      _id_getVisibility as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JString?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(
-    r'getMinZoom',
-    r'()F',
-  );
+  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()F');
 
-  static final _getMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getMinZoom()`
   double getMinZoom() {
-    return _getMinZoom(reference.pointer, _id_getMinZoom as jni$_.JMethodIDPtr)
-        .float;
+    return _getMinZoom(
+      reference.pointer,
+      _id_getMinZoom as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(
-    r'getMaxZoom',
-    r'()F',
-  );
+  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()F');
 
-  static final _getMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallFloatMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public float getMaxZoom()`
   double getMaxZoom() {
-    return _getMaxZoom(reference.pointer, _id_getMaxZoom as jni$_.JMethodIDPtr)
-        .float;
+    return _getMaxZoom(
+      reference.pointer,
+      _id_getMaxZoom as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_setMinZoom = _class.instanceMethodId(
-    r'setMinZoom',
-    r'(F)V',
-  );
+  static final _id_setMinZoom = _class.instanceMethodId(r'setMinZoom', r'(F)V');
 
-  static final _setMinZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMinZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMinZoom(float f)`
-  void setMinZoom(
-    double f,
-  ) {
-    _setMinZoom(reference.pointer, _id_setMinZoom as jni$_.JMethodIDPtr, f)
-        .check();
+  void setMinZoom(double f) {
+    _setMinZoom(
+      reference.pointer,
+      _id_setMinZoom as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
-  static final _id_setMaxZoom = _class.instanceMethodId(
-    r'setMaxZoom',
-    r'(F)V',
-  );
+  static final _id_setMaxZoom = _class.instanceMethodId(r'setMaxZoom', r'(F)V');
 
-  static final _setMaxZoom = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setMaxZoom =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Double,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, double)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
 
   /// from: `public void setMaxZoom(float f)`
-  void setMaxZoom(
-    double f,
-  ) {
-    _setMaxZoom(reference.pointer, _id_setMaxZoom as jni$_.JMethodIDPtr, f)
-        .check();
+  void setMaxZoom(double f) {
+    _setMaxZoom(
+      reference.pointer,
+      _id_setMaxZoom as jni$_.JMethodIDPtr,
+      f,
+    ).check();
   }
 
   static final _id_getNativePtr = _class.instanceMethodId(
@@ -246,23 +286,28 @@ class Layer extends jni$_.JObject {
     r'()J',
   );
 
-  static final _getNativePtr = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getNativePtr =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallLongMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public long getNativePtr()`
   int getNativePtr() {
     return _getNativePtr(
-            reference.pointer, _id_getNativePtr as jni$_.JMethodIDPtr)
-        .long;
+      reference.pointer,
+      _id_getNativePtr as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_setDetached = _class.instanceMethodId(
@@ -270,45 +315,54 @@ class Layer extends jni$_.JObject {
     r'()V',
   );
 
-  static final _setDetached = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _setDetached =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void setDetached()`
   void setDetached() {
-    _setDetached(reference.pointer, _id_setDetached as jni$_.JMethodIDPtr)
-        .check();
+    _setDetached(
+      reference.pointer,
+      _id_setDetached as jni$_.JMethodIDPtr,
+    ).check();
   }
 
-  static final _id_isDetached = _class.instanceMethodId(
-    r'isDetached',
-    r'()Z',
-  );
+  static final _id_isDetached = _class.instanceMethodId(r'isDetached', r'()Z');
 
-  static final _isDetached = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _isDetached =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public boolean isDetached()`
   bool isDetached() {
-    return _isDetached(reference.pointer, _id_isDetached as jni$_.JMethodIDPtr)
-        .boolean;
+    return _isDetached(
+      reference.pointer,
+      _id_isDetached as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 }
 
@@ -322,11 +376,8 @@ final class $Layer$NullableType extends jni$_.JObjType<Layer?> {
 
   @jni$_.internal
   @core$_.override
-  Layer? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : Layer.fromReference(
-          reference,
-        );
+  Layer? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : Layer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -359,9 +410,8 @@ final class $Layer$Type extends jni$_.JObjType<Layer> {
 
   @jni$_.internal
   @core$_.override
-  Layer fromReference(jni$_.JReference reference) => Layer.fromReference(
-        reference,
-      );
+  Layer fromReference(jni$_.JReference reference) =>
+      Layer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

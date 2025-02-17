@@ -61,13 +61,13 @@ class FocalPointChangeListener extends jni$_.JObject {
   final jni$_.JObjType<FocalPointChangeListener> $type;
 
   @jni$_.internal
-  FocalPointChangeListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  FocalPointChangeListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/FocalPointChangeListener');
+    r'org/maplibre/android/maps/FocalPointChangeListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FocalPointChangeListener$NullableType();
@@ -77,25 +77,32 @@ class FocalPointChangeListener extends jni$_.JObject {
     r'(Landroid/graphics/PointF;)V',
   );
 
-  static final _onFocalPointChanged = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _onFocalPointChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `public abstract void onFocalPointChanged(android.graphics.PointF pointF)`
-  void onFocalPointChanged(
-    pointf$_.PointF? pointF,
-  ) {
+  void onFocalPointChanged(pointf$_.PointF? pointF) {
     final _$pointF = pointF?.reference ?? jni$_.jNullReference;
-    _onFocalPointChanged(reference.pointer,
-            _id_onFocalPointChanged as jni$_.JMethodIDPtr, _$pointF.pointer)
-        .check();
+    _onFocalPointChanged(
+      reference.pointer,
+      _id_onFocalPointChanged as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -107,19 +114,16 @@ class FocalPointChangeListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -168,14 +172,10 @@ class FocalPointChangeListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory FocalPointChangeListener.implement(
-    $FocalPointChangeListener $impl,
-  ) {
+  factory FocalPointChangeListener.implement($FocalPointChangeListener $impl) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return FocalPointChangeListener.fromReference(
-      $i.implementReference(),
-    );
+    return FocalPointChangeListener.fromReference($i.implementReference());
   }
 }
 
@@ -218,9 +218,7 @@ final class $FocalPointChangeListener$NullableType
   FocalPointChangeListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
           ? null
-          : FocalPointChangeListener.fromReference(
-              reference,
-            );
+          : FocalPointChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -256,9 +254,7 @@ final class $FocalPointChangeListener$Type
   @jni$_.internal
   @core$_.override
   FocalPointChangeListener fromReference(jni$_.JReference reference) =>
-      FocalPointChangeListener.fromReference(
-        reference,
-      );
+      FocalPointChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

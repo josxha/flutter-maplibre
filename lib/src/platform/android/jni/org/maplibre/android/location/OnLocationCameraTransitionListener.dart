@@ -59,13 +59,13 @@ class OnLocationCameraTransitionListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationCameraTransitionListener> $type;
 
   @jni$_.internal
-  OnLocationCameraTransitionListener.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  OnLocationCameraTransitionListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/location/OnLocationCameraTransitionListener');
+    r'org/maplibre/android/location/OnLocationCameraTransitionListener',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType =
@@ -78,21 +78,29 @@ class OnLocationCameraTransitionListener extends jni$_.JObject {
 
   static final _onLocationCameraTransitionFinished =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onLocationCameraTransitionFinished(int i)`
-  void onLocationCameraTransitionFinished(
-    int i,
-  ) {
-    _onLocationCameraTransitionFinished(reference.pointer,
-            _id_onLocationCameraTransitionFinished as jni$_.JMethodIDPtr, i)
-        .check();
+  void onLocationCameraTransitionFinished(int i) {
+    _onLocationCameraTransitionFinished(
+      reference.pointer,
+      _id_onLocationCameraTransitionFinished as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   static final _id_onLocationCameraTransitionCanceled = _class.instanceMethodId(
@@ -102,21 +110,29 @@ class OnLocationCameraTransitionListener extends jni$_.JObject {
 
   static final _onLocationCameraTransitionCanceled =
       jni$_.ProtectedJniExtensions.lookup<
-                  jni$_.NativeFunction<
-                      jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-                          jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
+            jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
-                  jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
 
   /// from: `public abstract void onLocationCameraTransitionCanceled(int i)`
-  void onLocationCameraTransitionCanceled(
-    int i,
-  ) {
-    _onLocationCameraTransitionCanceled(reference.pointer,
-            _id_onLocationCameraTransitionCanceled as jni$_.JMethodIDPtr, i)
-        .check();
+  void onLocationCameraTransitionCanceled(int i) {
+    _onLocationCameraTransitionCanceled(
+      reference.pointer,
+      _id_onLocationCameraTransitionCanceled as jni$_.JMethodIDPtr,
+      i,
+    ).check();
   }
 
   /// Maps a specific port to the implemented interface.
@@ -129,19 +145,16 @@ class OnLocationCameraTransitionListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
     );
   }
 
   static final jni$_.Pointer<
-          jni$_.NativeFunction<
-              jni$_.JObjectPtr Function(
-                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
-      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -234,10 +247,8 @@ final class _$OnLocationCameraTransitionListener
     this.onLocationCameraTransitionFinished$async = false,
     required void Function(int i) onLocationCameraTransitionCanceled,
     this.onLocationCameraTransitionCanceled$async = false,
-  })  : _onLocationCameraTransitionFinished =
-            onLocationCameraTransitionFinished,
-        _onLocationCameraTransitionCanceled =
-            onLocationCameraTransitionCanceled;
+  }) : _onLocationCameraTransitionFinished = onLocationCameraTransitionFinished,
+       _onLocationCameraTransitionCanceled = onLocationCameraTransitionCanceled;
 
   final void Function(int i) _onLocationCameraTransitionFinished;
   final bool onLocationCameraTransitionFinished$async;
@@ -266,12 +277,11 @@ final class $OnLocationCameraTransitionListener$NullableType
   @jni$_.internal
   @core$_.override
   OnLocationCameraTransitionListener? fromReference(
-          jni$_.JReference reference) =>
+    jni$_.JReference reference,
+  ) =>
       reference.isNull
           ? null
-          : OnLocationCameraTransitionListener.fromReference(
-              reference,
-            );
+          : OnLocationCameraTransitionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -309,10 +319,8 @@ final class $OnLocationCameraTransitionListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationCameraTransitionListener fromReference(
-          jni$_.JReference reference) =>
-      OnLocationCameraTransitionListener.fromReference(
-        reference,
-      );
+    jni$_.JReference reference,
+  ) => OnLocationCameraTransitionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

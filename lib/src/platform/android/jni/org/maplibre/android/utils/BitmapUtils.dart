@@ -59,39 +59,41 @@ class BitmapUtils extends jni$_.JObject {
   final jni$_.JObjType<BitmapUtils> $type;
 
   @jni$_.internal
-  BitmapUtils.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  BitmapUtils.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
-  static final _class =
-      jni$_.JClass.forName(r'org/maplibre/android/utils/BitmapUtils');
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/utils/BitmapUtils',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $BitmapUtils$NullableType();
   static const type = $BitmapUtils$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory BitmapUtils() {
     return BitmapUtils.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_createBitmapFromView = _class.staticMethodId(
@@ -99,26 +101,33 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/view/View;)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmapFromView = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _createBitmapFromView =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.Bitmap createBitmapFromView(android.view.View view)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? createBitmapFromView(
-    jni$_.JObject view,
-  ) {
+  static jni$_.JObject? createBitmapFromView(jni$_.JObject view) {
     final _$view = view.reference;
-    return _createBitmapFromView(_class.reference.pointer,
-            _id_createBitmapFromView as jni$_.JMethodIDPtr, _$view.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _createBitmapFromView(
+      _class.reference.pointer,
+      _id_createBitmapFromView as jni$_.JMethodIDPtr,
+      _$view.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_mergeBitmap = _class.staticMethodId(
@@ -126,22 +135,26 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;',
   );
 
-  static final _mergeBitmap = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _mergeBitmap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.Bitmap mergeBitmap(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -152,11 +165,11 @@ class BitmapUtils extends jni$_.JObject {
     final _$bitmap = bitmap.reference;
     final _$bitmap1 = bitmap1.reference;
     return _mergeBitmap(
-            _class.reference.pointer,
-            _id_mergeBitmap as jni$_.JMethodIDPtr,
-            _$bitmap.pointer,
-            _$bitmap1.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _class.reference.pointer,
+      _id_mergeBitmap as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+      _$bitmap1.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_mergeBitmaps = _class.staticMethodId(
@@ -164,22 +177,26 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;',
   );
 
-  static final _mergeBitmaps = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _mergeBitmaps =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.Bitmap mergeBitmaps(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -190,11 +207,11 @@ class BitmapUtils extends jni$_.JObject {
     final _$bitmap = bitmap.reference;
     final _$bitmap1 = bitmap1.reference;
     return _mergeBitmaps(
-            _class.reference.pointer,
-            _id_mergeBitmaps as jni$_.JMethodIDPtr,
-            _$bitmap.pointer,
-            _$bitmap1.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _class.reference.pointer,
+      _id_mergeBitmaps as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+      _$bitmap1.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_mergeBitmap$1 = _class.staticMethodId(
@@ -202,26 +219,33 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;FF)Landroid/graphics/Bitmap;',
   );
 
-  static final _mergeBitmap$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _mergeBitmap$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Double,
-                        jni$_.Double
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Double,
+                    jni$_.Double,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               double,
-              double)>();
+              double,
+            )
+          >();
 
   /// from: `static public android.graphics.Bitmap mergeBitmap(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1, float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -234,13 +258,13 @@ class BitmapUtils extends jni$_.JObject {
     final _$bitmap = bitmap.reference;
     final _$bitmap1 = bitmap1.reference;
     return _mergeBitmap$1(
-            _class.reference.pointer,
-            _id_mergeBitmap$1 as jni$_.JMethodIDPtr,
-            _$bitmap.pointer,
-            _$bitmap1.pointer,
-            f,
-            f1)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _class.reference.pointer,
+      _id_mergeBitmap$1 as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+      _$bitmap1.pointer,
+      f,
+      f1,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getBitmapFromDrawable = _class.staticMethodId(
@@ -248,26 +272,33 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/drawable/Drawable;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getBitmapFromDrawable = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getBitmapFromDrawable =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.Bitmap getBitmapFromDrawable(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? getBitmapFromDrawable(
-    jni$_.JObject? drawable,
-  ) {
+  static jni$_.JObject? getBitmapFromDrawable(jni$_.JObject? drawable) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
-    return _getBitmapFromDrawable(_class.reference.pointer,
-            _id_getBitmapFromDrawable as jni$_.JMethodIDPtr, _$drawable.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getBitmapFromDrawable(
+      _class.reference.pointer,
+      _id_getBitmapFromDrawable as jni$_.JMethodIDPtr,
+      _$drawable.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getByteArrayFromDrawable = _class.staticMethodId(
@@ -275,28 +306,33 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/drawable/Drawable;)[B',
   );
 
-  static final _getByteArrayFromDrawable = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+  static final _getByteArrayFromDrawable =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public byte[] getByteArrayFromDrawable(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JByteArray? getByteArrayFromDrawable(
-    jni$_.JObject? drawable,
-  ) {
+  static jni$_.JByteArray? getByteArrayFromDrawable(jni$_.JObject? drawable) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
     return _getByteArrayFromDrawable(
-            _class.reference.pointer,
-            _id_getByteArrayFromDrawable as jni$_.JMethodIDPtr,
-            _$drawable.pointer)
-        .object<jni$_.JByteArray?>(const jni$_.JByteArrayNullableType());
+      _class.reference.pointer,
+      _id_getByteArrayFromDrawable as jni$_.JMethodIDPtr,
+      _$drawable.pointer,
+    ).object<jni$_.JByteArray?>(const jni$_.JByteArrayNullableType());
   }
 
   static final _id_getDrawableFromByteArray = _class.staticMethodId(
@@ -304,22 +340,26 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/content/Context;[B)Landroid/graphics/drawable/Drawable;',
   );
 
-  static final _getDrawableFromByteArray = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDrawableFromByteArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromByteArray(android.content.Context context, byte[] bs)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -330,11 +370,11 @@ class BitmapUtils extends jni$_.JObject {
     final _$context = context.reference;
     final _$bs = bs?.reference ?? jni$_.jNullReference;
     return _getDrawableFromByteArray(
-            _class.reference.pointer,
-            _id_getDrawableFromByteArray as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$bs.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _class.reference.pointer,
+      _id_getDrawableFromByteArray as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      _$bs.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getDrawableFromRes = _class.staticMethodId(
@@ -342,28 +382,35 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;',
   );
 
-  static final _getDrawableFromRes = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JniResult Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
+  static final _getDrawableFromRes =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
 
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromRes(android.content.Context context, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? getDrawableFromRes(
-    jni$_.JObject context,
-    int i,
-  ) {
+  static jni$_.JObject? getDrawableFromRes(jni$_.JObject context, int i) {
     final _$context = context.reference;
-    return _getDrawableFromRes(_class.reference.pointer,
-            _id_getDrawableFromRes as jni$_.JMethodIDPtr, _$context.pointer, i)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    return _getDrawableFromRes(
+      _class.reference.pointer,
+      _id_getDrawableFromRes as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      i,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getDrawableFromRes$1 = _class.staticMethodId(
@@ -371,24 +418,31 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/content/Context;ILjava/lang/Integer;)Landroid/graphics/drawable/Drawable;',
   );
 
-  static final _getDrawableFromRes$1 = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _getDrawableFromRes$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromRes(android.content.Context context, int i, java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -400,12 +454,12 @@ class BitmapUtils extends jni$_.JObject {
     final _$context = context.reference;
     final _$integer = integer?.reference ?? jni$_.jNullReference;
     return _getDrawableFromRes$1(
-            _class.reference.pointer,
-            _id_getDrawableFromRes$1 as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            i,
-            _$integer.pointer)
-        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _class.reference.pointer,
+      _id_getDrawableFromRes$1 as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      i,
+      _$integer.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_equals = _class.staticMethodId(
@@ -413,33 +467,37 @@ class BitmapUtils extends jni$_.JObject {
     r'(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Z',
   );
 
-  static final _equals = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticBooleanMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public boolean equals(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
-  static bool equals(
-    jni$_.JObject? bitmap,
-    jni$_.JObject? bitmap1,
-  ) {
+  static bool equals(jni$_.JObject? bitmap, jni$_.JObject? bitmap1) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     final _$bitmap1 = bitmap1?.reference ?? jni$_.jNullReference;
-    return _equals(_class.reference.pointer, _id_equals as jni$_.JMethodIDPtr,
-            _$bitmap.pointer, _$bitmap1.pointer)
-        .boolean;
+    return _equals(
+      _class.reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+      _$bitmap1.pointer,
+    ).boolean;
   }
 }
 
@@ -453,11 +511,8 @@ final class $BitmapUtils$NullableType extends jni$_.JObjType<BitmapUtils?> {
 
   @jni$_.internal
   @core$_.override
-  BitmapUtils? fromReference(jni$_.JReference reference) => reference.isNull
-      ? null
-      : BitmapUtils.fromReference(
-          reference,
-        );
+  BitmapUtils? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : BitmapUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -491,9 +546,7 @@ final class $BitmapUtils$Type extends jni$_.JObjType<BitmapUtils> {
   @jni$_.internal
   @core$_.override
   BitmapUtils fromReference(jni$_.JReference reference) =>
-      BitmapUtils.fromReference(
-        reference,
-      );
+      BitmapUtils.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

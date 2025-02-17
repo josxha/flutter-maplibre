@@ -63,39 +63,41 @@ class MapRendererFactory extends jni$_.JObject {
   final jni$_.JObjType<MapRendererFactory> $type;
 
   @jni$_.internal
-  MapRendererFactory.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
+  MapRendererFactory.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-      r'org/maplibre/android/maps/renderer/MapRendererFactory');
+    r'org/maplibre/android/maps/renderer/MapRendererFactory',
+  );
 
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapRendererFactory$NullableType();
   static const type = $MapRendererFactory$Type();
-  static final _id_new$ = _class.constructorId(
-    r'()V',
-  );
+  static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni$_.JniResult Function(
-            jni$_.Pointer<jni$_.Void>,
-            jni$_.JMethodIDPtr,
-          )>();
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapRendererFactory() {
     return MapRendererFactory.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
-            .reference);
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
   }
 
   static final _id_newTextureViewMapRenderer = _class.staticMethodId(
@@ -103,33 +105,40 @@ class MapRendererFactory extends jni$_.JObject {
     r'(Landroid/content/Context;Landroid/view/TextureView;Ljava/lang/String;ZLjava/lang/Runnable;)Lorg/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer;',
   );
 
-  static final _newTextureViewMapRenderer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newTextureViewMapRenderer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.renderer.textureview.TextureViewMapRenderer newTextureViewMapRenderer(android.content.Context context, android.view.TextureView textureView, java.lang.String string, boolean z, java.lang.Runnable runnable)`
   /// The returned object must be released after use, by calling the [release] method.
   static textureviewmaprenderer$_.TextureViewMapRenderer?
-      newTextureViewMapRenderer(
+  newTextureViewMapRenderer(
     jni$_.JObject context,
     jni$_.JObject? textureView,
     jni$_.JString? string,
@@ -141,16 +150,16 @@ class MapRendererFactory extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     return _newTextureViewMapRenderer(
-            _class.reference.pointer,
-            _id_newTextureViewMapRenderer as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$textureView.pointer,
-            _$string.pointer,
-            z ? 1 : 0,
-            _$runnable.pointer)
-        .object<textureviewmaprenderer$_.TextureViewMapRenderer?>(
-            const textureviewmaprenderer$_
-                .$TextureViewMapRenderer$NullableType());
+      _class.reference.pointer,
+      _id_newTextureViewMapRenderer as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      _$textureView.pointer,
+      _$string.pointer,
+      z ? 1 : 0,
+      _$runnable.pointer,
+    ).object<textureviewmaprenderer$_.TextureViewMapRenderer?>(
+      const textureviewmaprenderer$_.$TextureViewMapRenderer$NullableType(),
+    );
   }
 
   static final _id_newSurfaceViewMapRenderer = _class.staticMethodId(
@@ -158,31 +167,38 @@ class MapRendererFactory extends jni$_.JObject {
     r'(Landroid/content/Context;Ljava/lang/String;ZLjava/lang/Runnable;)Lorg/maplibre/android/maps/renderer/surfaceview/SurfaceViewMapRenderer;',
   );
 
-  static final _newSurfaceViewMapRenderer = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
+  static final _newSurfaceViewMapRenderer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
               jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>)>();
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
 
   /// from: `static public org.maplibre.android.maps.renderer.surfaceview.SurfaceViewMapRenderer newSurfaceViewMapRenderer(android.content.Context context, java.lang.String string, boolean z, java.lang.Runnable runnable)`
   /// The returned object must be released after use, by calling the [release] method.
   static surfaceviewmaprenderer$_.SurfaceViewMapRenderer?
-      newSurfaceViewMapRenderer(
+  newSurfaceViewMapRenderer(
     jni$_.JObject context,
     jni$_.JString? string,
     bool z,
@@ -192,15 +208,15 @@ class MapRendererFactory extends jni$_.JObject {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     return _newSurfaceViewMapRenderer(
-            _class.reference.pointer,
-            _id_newSurfaceViewMapRenderer as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            _$string.pointer,
-            z ? 1 : 0,
-            _$runnable.pointer)
-        .object<surfaceviewmaprenderer$_.SurfaceViewMapRenderer?>(
-            const surfaceviewmaprenderer$_
-                .$SurfaceViewMapRenderer$NullableType());
+      _class.reference.pointer,
+      _id_newSurfaceViewMapRenderer as jni$_.JMethodIDPtr,
+      _$context.pointer,
+      _$string.pointer,
+      z ? 1 : 0,
+      _$runnable.pointer,
+    ).object<surfaceviewmaprenderer$_.SurfaceViewMapRenderer?>(
+      const surfaceviewmaprenderer$_.$SurfaceViewMapRenderer$NullableType(),
+    );
   }
 }
 
@@ -217,11 +233,7 @@ final class $MapRendererFactory$NullableType
   @jni$_.internal
   @core$_.override
   MapRendererFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : MapRendererFactory.fromReference(
-              reference,
-            );
+      reference.isNull ? null : MapRendererFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -257,9 +269,7 @@ final class $MapRendererFactory$Type
   @jni$_.internal
   @core$_.override
   MapRendererFactory fromReference(jni$_.JReference reference) =>
-      MapRendererFactory.fromReference(
-        reference,
-      );
+      MapRendererFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

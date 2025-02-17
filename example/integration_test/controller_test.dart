@@ -190,8 +190,9 @@ void main() {
       await ctrl.style?.updateGeoJsonSource(
         id: source.id,
         data: jsonEncode(
-          GeometryCollection(geometries: [Point(coordinates: Position(0, 0))])
-              .toJson(),
+          GeometryCollection(
+            geometries: [Point(coordinates: Position(0, 0))],
+          ).toJson(),
         ),
       );
     });

@@ -26,10 +26,10 @@ class PolygonLayer extends Layer<Polygon> {
 
   @override
   Map<String, Object> getPaint() => {
-        'fill-color': color.toHexString(alpha: false),
-        'fill-opacity': opacity,
-        'fill-outline-color': outlineColor.toHexString(alpha: false),
-      };
+    'fill-color': color.toHexString(alpha: false),
+    'fill-opacity': opacity,
+    'fill-outline-color': outlineColor.toHexString(alpha: false),
+  };
 
   @override
   Map<String, Object> getLayout() => {};

@@ -15,8 +15,5 @@ github_checks:
 
 coverage:
   status:
-    project:
-      # default is the status check's name, not default settings
-      default:
-        target: 0
-        threshold: 0
+    project: off
+    patch: off
