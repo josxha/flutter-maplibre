@@ -28,5 +28,18 @@ void main() {
       expect(options2, equals(options));
       expect(options2.hashCode, equals(options.hashCode));
     });
+
+    testWidgets('default gestures in map', (tester) async {
+      final completer = Completer<MapController>();
+      await tester.pumpWidget(App(onMapCreated: completer.complete));
+      await tester.pumpAndSettle();
+      final ctrl = await completer.future;
+      final options = ctrl.options;
+      expect(options.gestures.drag, isFalse);
+      expect(options.gestures.zoom, isTrue);
+      expect(options.gestures.rotate, isTrue);
+      expect(options.gestures.pitch, isTrue);
+      expect(options.gestures.pan, isTrue);
+    });
   });
 }

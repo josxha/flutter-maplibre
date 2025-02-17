@@ -97,6 +97,22 @@ enum class CameraChangeReason(val raw: Int) {
   }
 }
 
+/** The pointer events that can be performed by a user after a long press. */
+enum class LongPressEventType(val raw: Int) {
+  /** The user pressed down on the screen and started to move the pointer. */
+  BEGIN(0),
+  /** The user is moving the pointer. */
+  MOVE(1),
+  /** The user released the pointer. */
+  END(2);
+
+  companion object {
+    fun ofRaw(raw: Int): LongPressEventType? {
+      return values().firstOrNull { it.raw == raw }
+    }
+  }
+}
+
 /**
  * The map options define initial values for the MapLibre map.
  *
@@ -177,7 +193,9 @@ data class MapGestures (
   /** Zoom the map in and out. */
   val zoom: Boolean,
   /** Tilt (pitch) the map camera. */
-  val tilt: Boolean
+  val tilt: Boolean,
+  /** Toggle the drag gestures. */
+  val drag: Boolean
 )
  {
   companion object {
@@ -186,7 +204,8 @@ data class MapGestures (
       val pan = pigeonVar_list[1] as Boolean
       val zoom = pigeonVar_list[2] as Boolean
       val tilt = pigeonVar_list[3] as Boolean
-      return MapGestures(rotate, pan, zoom, tilt)
+      val drag = pigeonVar_list[4] as Boolean
+      return MapGestures(rotate, pan, zoom, tilt, drag)
     }
   }
   fun toList(): List<Any?> {
@@ -195,6 +214,7 @@ data class MapGestures (
       pan,
       zoom,
       tilt,
+      drag,
     )
   }
 }
@@ -364,36 +384,41 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         }
       }
       132.toByte() -> {
-        return (readValue(buffer) as? List<Any?>)?.let {
-          MapOptions.fromList(it)
+        return (readValue(buffer) as Long?)?.let {
+          LongPressEventType.ofRaw(it.toInt())
         }
       }
       133.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapGestures.fromList(it)
+          MapOptions.fromList(it)
         }
       }
       134.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          LngLat.fromList(it)
+          MapGestures.fromList(it)
         }
       }
       135.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          Offset.fromList(it)
+          LngLat.fromList(it)
         }
       }
       136.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          Padding.fromList(it)
+          Offset.fromList(it)
         }
       }
       137.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          MapCamera.fromList(it)
+          Padding.fromList(it)
         }
       }
       138.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          MapCamera.fromList(it)
+        }
+      }
+      139.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
           LngLatBounds.fromList(it)
         }
@@ -415,32 +440,36 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(131)
         writeValue(stream, value.raw)
       }
-      is MapOptions -> {
+      is LongPressEventType -> {
         stream.write(132)
-        writeValue(stream, value.toList())
+        writeValue(stream, value.raw)
       }
-      is MapGestures -> {
+      is MapOptions -> {
         stream.write(133)
         writeValue(stream, value.toList())
       }
-      is LngLat -> {
+      is MapGestures -> {
         stream.write(134)
         writeValue(stream, value.toList())
       }
-      is Offset -> {
+      is LngLat -> {
         stream.write(135)
         writeValue(stream, value.toList())
       }
-      is Padding -> {
+      is Offset -> {
         stream.write(136)
         writeValue(stream, value.toList())
       }
-      is MapCamera -> {
+      is Padding -> {
         stream.write(137)
         writeValue(stream, value.toList())
       }
-      is LngLatBounds -> {
+      is MapCamera -> {
         stream.write(138)
+        writeValue(stream, value.toList())
+      }
+      is LngLatBounds -> {
+        stream.write(139)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -476,6 +505,8 @@ interface MapLibreHostApi {
   fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
   /** Add an image to the map. */
   fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
+  /** Enable or disable the move gestures after a long press. */
+  fun toggleLongPressMove(enabled: Boolean)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -732,6 +763,24 @@ interface MapLibreHostApi {
           channel.setMessageHandler(null)
         }
       }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val enabledArg = args[0] as Boolean
+            val wrapped: List<Any?> = try {
+              api.toggleLongPressMove(enabledArg)
+              listOf(null)
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
     }
   }
 }
@@ -900,6 +949,24 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(pointArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+  /** Callback when the user performs a long lasting click and moves the pointer. */
+  fun onLongPress(eventArg: LongPressEventType, positionArg: LngLat, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(eventArg, positionArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))

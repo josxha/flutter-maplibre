@@ -5,6 +5,7 @@ import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
+import 'package:maplibre_example/layers_interactive_page.dart';
 import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
@@ -17,6 +18,7 @@ import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/style_layers_fill_page.dart';
 import 'package:maplibre_example/style_layers_heatmap_page.dart';
 import 'package:maplibre_example/style_layers_hillshade_page.dart';
+import 'package:maplibre_example/style_layers_interactive_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
@@ -103,11 +105,6 @@ class MenuPage extends StatelessWidget {
             childAspectRatio: 1.5,
             children: const [
               ItemCard(
-                label: 'Mixed Layers',
-                iconData: Icons.control_point_duplicate_outlined,
-                location: LayersMixedPage.location,
-              ),
-              ItemCard(
                 label: 'Widgets',
                 iconData: Icons.location_on,
                 location: WidgetLayerPage.location,
@@ -116,6 +113,16 @@ class MenuPage extends StatelessWidget {
                 label: 'Interactive Widgets',
                 iconData: Icons.location_on,
                 location: WidgetLayerInteractivePage.location,
+              ),
+              ItemCard(
+                label: 'Interactive Layers',
+                iconData: Icons.touch_app,
+                location: LayersInteractivePage.location,
+              ),
+              ItemCard(
+                label: 'Mixed Layers',
+                iconData: Icons.control_point_duplicate_outlined,
+                location: LayersMixedPage.location,
               ),
               ItemCard(
                 label: 'Circles',
@@ -144,6 +151,11 @@ class MenuPage extends StatelessWidget {
             maxCrossAxisExtent: 150,
             childAspectRatio: 1.5,
             children: const [
+              ItemCard(
+                label: 'Interactive Style Layers',
+                iconData: Icons.touch_app,
+                location: StyleLayersInteractivePage.location,
+              ),
               ItemCard(
                 label: 'Circle',
                 iconData: Icons.circle,

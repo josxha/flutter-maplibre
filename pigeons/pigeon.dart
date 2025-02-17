@@ -120,6 +120,9 @@ abstract interface class MapLibreHostApi {
   /// Add an image to the map.
   @async
   void addImage(String id, Uint8List bytes);
+
+  /// Enable or disable the move gestures after a long press.
+  void toggleLongPressMove({required bool enabled});
 }
 
 @FlutterApi()
@@ -151,6 +154,9 @@ abstract interface class MapLibreFlutterApi {
 
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
+
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  void onLongPress(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -229,6 +235,7 @@ class MapGestures {
     required this.pan,
     required this.zoom,
     required this.tilt,
+    required this.drag,
   });
 
   /// Rotate the map bearing.
@@ -242,6 +249,9 @@ class MapGestures {
 
   /// Tilt (pitch) the map camera.
   final bool tilt;
+
+  /// Toggle the drag gestures.
+  final bool drag;
 }
 
 /// A longitude/latitude coordinate object.
@@ -343,4 +353,16 @@ enum CameraChangeReason {
 
   /// API gesture
   apiGesture,
+}
+
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType {
+  /// The user pressed down on the screen and started to move the pointer.
+  begin,
+
+  /// The user is moving the pointer.
+  move,
+
+  /// The user released the pointer.
+  end,
 }

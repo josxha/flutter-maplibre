@@ -13,6 +13,7 @@ final class CircleStyleLayer extends StyleLayerWithSource {
     required super.sourceId,
     super.layout,
     super.paint,
+    super.draggable,
   });
 
   // TODO add properties

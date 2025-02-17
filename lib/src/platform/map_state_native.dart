@@ -46,6 +46,7 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
       pan: options.gestures.pan,
       zoom: options.gestures.zoom,
       tilt: options.gestures.pitch,
+      drag: options.gestures.drag,
     ),
     androidTextureMode: options.androidTextureMode,
   );
@@ -101,5 +102,55 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
   void onLongClick(pigeon.LngLat point) {
     final position = point.toPosition();
     widget.onEvent?.call(MapEventLongClick(point: position));
+  }
+
+  @override
+  Future<void> onLongPress(
+    pigeon.LongPressEventType event,
+    pigeon.LngLat point,
+  ) async {
+    final position = point.toPosition();
+    widget.onEvent?.call(event.toMapEventLongPress(point: position));
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    final _layerManager = layerManager;
+
+    // If the layer manager is null, we can't handle any feature drag events.
+    if (_layerManager == null) return;
+
+    final isDragging = _layerManager.dragFeature != null;
+    Feature? feature;
+
+    if (event == pigeon.LongPressEventType.begin && !isDragging) {
+      final screenLoc = await toScreenLocation(position);
+      final draggableLayers =
+          style?.getDraggableLayers().map((layer) => layer.id).toList() ?? [];
+      if (draggableLayers.isEmpty) return;
+
+      final features = await queryRenderedFeatures(
+        screenLoc,
+        layerIdsFilter: draggableLayers,
+      );
+      if (features.isEmpty) return;
+      feature = features.first;
+
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toMapEventLongPress(point: position),
+        feature: feature,
+      );
+
+      await _layerManager.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
+
+    if (isDragging) {
+      final featureDragEvent = MapEventFeatureDrag(
+        event: event.toMapEventLongPress(point: position),
+        feature: _layerManager.dragFeature!,
+      );
+
+      await _layerManager.onFeatureDrag(featureDragEvent);
+      widget.onEvent?.call(featureDragEvent);
+    }
   }
 }

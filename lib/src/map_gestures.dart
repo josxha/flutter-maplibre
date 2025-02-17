@@ -11,6 +11,7 @@ class MapGestures {
     required this.pan,
     required this.zoom,
     required this.pitch,
+    required this.drag,
   });
 
   /// Create a new [MapGestures] object by enabling all gestures or disabling
@@ -20,6 +21,7 @@ class MapGestures {
     this.pan = true,
     this.zoom = true,
     this.pitch = true,
+    this.drag = true,
   });
 
   /// Create a new [MapGestures] object by disable all gestures or enabling just
@@ -29,6 +31,7 @@ class MapGestures {
     this.pan = false,
     this.zoom = false,
     this.pitch = false,
+    this.drag = false,
   });
 
   /// Rotate the map bearing.
@@ -43,8 +46,13 @@ class MapGestures {
   /// Tilt (pitch) the map camera.
   final bool pitch;
 
+  /// Intercepts the drag gestures.
+  ///
+  /// This setting can impact the performance of the map. Disable to avoid performance issues.
+  final bool drag;
+
   /// Returns true if all gestures are active
-  bool get allEnabled => rotate && pan && zoom && pitch;
+  bool get allEnabled => rotate && pan && zoom && pitch && drag;
 
   @override
   bool operator ==(Object other) =>
@@ -54,8 +62,9 @@ class MapGestures {
           rotate == other.rotate &&
           pan == other.pan &&
           zoom == other.zoom &&
-          pitch == other.pitch;
+          pitch == other.pitch &&
+          drag == other.drag;
 
   @override
-  int get hashCode => Object.hash(rotate, pan, zoom, pitch);
+  int get hashCode => Object.hash(rotate, pan, zoom, pitch, drag);
 }

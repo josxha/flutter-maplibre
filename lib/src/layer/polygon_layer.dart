@@ -7,9 +7,12 @@ part of 'layer.dart';
 class PolygonLayer extends Layer<Polygon> {
   /// Create a new [PolygonLayer] instance.
   const PolygonLayer({
-    required List<Polygon> polygons,
+    required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
+    super.draggable = false,
+    super.sourceId,
+    super.layerId,
   }) : super._(list: polygons);
 
   /// The color of the polygon. Defaults to black.
@@ -37,17 +40,27 @@ class PolygonLayer extends Layer<Polygon> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    draggable: draggable,
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is PolygonLayer &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          outlineColor == other.outlineColor;
+  bool operator ==(covariant PolygonLayer other) {
+    if (identical(this, other)) return true;
+
+    return other.color == color &&
+        other.outlineColor == outlineColor &&
+        const DeepCollectionEquality().equals(
+          other.list.map((e) => e.geometry?.coordinates).toList(),
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
+  }
 
   @override
-  int get hashCode => Object.hash(super.hashCode, color, outlineColor);
+  int get hashCode {
+    return color.hashCode ^
+        outlineColor.hashCode ^
+        const DeepCollectionEquality().hash(
+          list.map((e) => e.geometry?.coordinates).toList(),
+        );
+  }
 }

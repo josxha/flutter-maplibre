@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/extensions.dart';
@@ -14,17 +15,38 @@ part 'polyline_layer.dart';
 ///
 /// {@category Layers}
 @immutable
-sealed class Layer<G extends GeometryType<Object>> {
-  const Layer._({required this.list});
+sealed class Layer<G extends GeometryObject> {
+  const Layer._({
+    required this.list,
+    this.sourceId,
+    this.layerId,
+    this.draggable = false,
+  });
 
   /// The [List] of layers.
-  final List<G> list;
+  final List<Feature<G>> list;
 
-  /// Get a unique source id.
-  String getSourceId(int index) => 'maplibre-source-$index';
+  /// The source id of the layer.
+  ///
+  /// Overrides the [getSourceId] method to return a custom source id.
+  final String? sourceId;
 
-  /// Get a unique layer id.
-  String getLayerId(int index) => 'maplibre-layer-$index';
+  /// The layer id of the layer.
+  ///
+  /// Overrides the [getLayerId] method to return a custom layer id.
+  final String? layerId;
+
+  /// Whether the layer is draggable.
+  /// Default is `false` to prevent accidental dragging and performance issues.
+  final bool draggable;
+
+  /// Get the source id.
+  /// If [sourceId] is not set, it will return a default source id.
+  String getSourceId(int index) => sourceId ?? 'maplibre-source-$index';
+
+  /// Get the layer id.
+  /// If [layerId] is not set, it will return a default layer id.
+  String getLayerId(int index) => layerId ?? 'maplibre-layer-$index';
 
   /// Build the paint properties.
   Map<String, Object> getPaint();
@@ -35,11 +57,24 @@ sealed class Layer<G extends GeometryType<Object>> {
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
 
+  /// Create a [Feature] list from a list of [G]s.
+  static List<Feature<G>> generateFeatureList<G extends GeometryObject>(
+    List<G> geometries,
+  ) {
+    final list = <Feature<G>>[];
+    for (final (index, point) in geometries.indexed) {
+      list.add(Feature(id: index, geometry: point));
+    }
+    return list;
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Layer && runtimeType == other.runtimeType && list == other.list;
+      other is Layer &&
+          runtimeType == other.runtimeType &&
+          const DeepCollectionEquality().equals(list, other.list);
 
   @override
-  int get hashCode => list.hashCode;
+  int get hashCode => const DeepCollectionEquality().hash(list);
 }

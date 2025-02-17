@@ -7,7 +7,7 @@ part of 'layer.dart';
 class MarkerLayer extends Layer<Point> {
   /// Create a new [MarkerLayer] instance.
   const MarkerLayer({
-    required List<Point> points,
+    required List<Feature<Point>> markers,
     this.iconAllowOverlap = false,
     this.iconIgnorePlacement = false,
     this.iconOptional = false,
@@ -45,7 +45,10 @@ class MarkerLayer extends Layer<Point> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
-  }) : super._(list: points);
+    super.draggable = false,
+    super.sourceId,
+    super.layerId,
+  }) : super._(list: markers);
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -236,93 +239,94 @@ class MarkerLayer extends Layer<Point> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    draggable: draggable,
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is MarkerLayer &&
-          runtimeType == other.runtimeType &&
-          iconAllowOverlap == other.iconAllowOverlap &&
-          iconIgnorePlacement == other.iconIgnorePlacement &&
-          iconOptional == other.iconOptional &&
-          iconSize == other.iconSize &&
-          iconImage == other.iconImage &&
-          iconRotate == other.iconRotate &&
-          iconPadding == other.iconPadding &&
-          iconKeepUpright == other.iconKeepUpright &&
-          iconOffset == other.iconOffset &&
-          textField == other.textField &&
-          textFont == other.textFont &&
-          textSize == other.textSize &&
-          textMaxWidth == other.textMaxWidth &&
-          textLineHeight == other.textLineHeight &&
-          textLetterSpacing == other.textLetterSpacing &&
-          textRadialOffset == other.textRadialOffset &&
-          textMaxAngle == other.textMaxAngle &&
-          textRotate == other.textRotate &&
-          textPadding == other.textPadding &&
-          textKeepUpright == other.textKeepUpright &&
-          textOffset == other.textOffset &&
-          textAllowOverlap == other.textAllowOverlap &&
-          textIgnorePlacement == other.textIgnorePlacement &&
-          textOptional == other.textOptional &&
-          iconOpacity == other.iconOpacity &&
-          iconColor == other.iconColor &&
-          iconHaloColor == other.iconHaloColor &&
-          iconHaloWidth == other.iconHaloWidth &&
-          iconHaloBlur == other.iconHaloBlur &&
-          iconTranslate == other.iconTranslate &&
-          textOpacity == other.textOpacity &&
-          textColor == other.textColor &&
-          textHaloColor == other.textHaloColor &&
-          textHaloWidth == other.textHaloWidth &&
-          textHaloBlur == other.textHaloBlur &&
-          textTranslate == other.textTranslate &&
-          iconAnchor == other.iconAnchor;
+  bool operator ==(covariant MarkerLayer other) {
+    if (identical(this, other)) return true;
+
+    return other.iconAllowOverlap == iconAllowOverlap &&
+        other.iconIgnorePlacement == iconIgnorePlacement &&
+        other.iconOptional == iconOptional &&
+        other.iconSize == iconSize &&
+        other.iconImage == iconImage &&
+        other.iconRotate == iconRotate &&
+        other.iconPadding == iconPadding &&
+        other.iconKeepUpright == iconKeepUpright &&
+        listEquals(other.iconOffset, iconOffset) &&
+        other.textField == textField &&
+        listEquals(other.textFont, textFont) &&
+        other.textSize == textSize &&
+        other.textMaxWidth == textMaxWidth &&
+        other.textLineHeight == textLineHeight &&
+        other.textLetterSpacing == textLetterSpacing &&
+        other.textRadialOffset == textRadialOffset &&
+        other.textMaxAngle == textMaxAngle &&
+        other.textRotate == textRotate &&
+        other.textPadding == textPadding &&
+        other.textKeepUpright == textKeepUpright &&
+        listEquals(other.textOffset, textOffset) &&
+        other.textAllowOverlap == textAllowOverlap &&
+        other.textIgnorePlacement == textIgnorePlacement &&
+        other.textOptional == textOptional &&
+        other.iconOpacity == iconOpacity &&
+        other.iconColor == iconColor &&
+        other.iconHaloColor == iconHaloColor &&
+        other.iconHaloWidth == iconHaloWidth &&
+        other.iconHaloBlur == iconHaloBlur &&
+        listEquals(other.iconTranslate, iconTranslate) &&
+        other.textOpacity == textOpacity &&
+        other.textColor == textColor &&
+        other.textHaloColor == textHaloColor &&
+        other.textHaloWidth == textHaloWidth &&
+        other.textHaloBlur == textHaloBlur &&
+        listEquals(other.textTranslate, textTranslate) &&
+        other.iconAnchor == iconAnchor &&
+        const DeepCollectionEquality().equals(other.list, list);
+  }
 
   @override
-  int get hashCode => Object.hashAll([
-    super.hashCode,
-    iconAllowOverlap,
-    iconIgnorePlacement,
-    iconOptional,
-    iconSize,
-    iconImage,
-    iconRotate,
-    iconPadding,
-    iconKeepUpright,
-    iconOffset,
-    textField,
-    textFont,
-    textSize,
-    textMaxWidth,
-    textLineHeight,
-    textLetterSpacing,
-    textRadialOffset,
-    textMaxAngle,
-    textRotate,
-    textPadding,
-    textKeepUpright,
-    textOffset,
-    textAllowOverlap,
-    textIgnorePlacement,
-    textOptional,
-    iconOpacity,
-    iconColor,
-    iconHaloColor,
-    iconHaloWidth,
-    iconHaloBlur,
-    iconTranslate,
-    textOpacity,
-    textColor,
-    textHaloColor,
-    textHaloWidth,
-    textHaloBlur,
-    textTranslate,
-    iconAnchor,
-  ]);
+  int get hashCode {
+    return iconAllowOverlap.hashCode ^
+        iconIgnorePlacement.hashCode ^
+        iconOptional.hashCode ^
+        iconSize.hashCode ^
+        iconImage.hashCode ^
+        iconRotate.hashCode ^
+        iconPadding.hashCode ^
+        iconKeepUpright.hashCode ^
+        iconOffset.hashCode ^
+        textField.hashCode ^
+        textFont.hashCode ^
+        textSize.hashCode ^
+        textMaxWidth.hashCode ^
+        textLineHeight.hashCode ^
+        textLetterSpacing.hashCode ^
+        textRadialOffset.hashCode ^
+        textMaxAngle.hashCode ^
+        textRotate.hashCode ^
+        textPadding.hashCode ^
+        textKeepUpright.hashCode ^
+        textOffset.hashCode ^
+        textAllowOverlap.hashCode ^
+        textIgnorePlacement.hashCode ^
+        textOptional.hashCode ^
+        iconOpacity.hashCode ^
+        iconColor.hashCode ^
+        iconHaloColor.hashCode ^
+        iconHaloWidth.hashCode ^
+        iconHaloBlur.hashCode ^
+        iconTranslate.hashCode ^
+        textOpacity.hashCode ^
+        textColor.hashCode ^
+        textHaloColor.hashCode ^
+        textHaloWidth.hashCode ^
+        textHaloBlur.hashCode ^
+        textTranslate.hashCode ^
+        iconAnchor.hashCode ^
+        const DeepCollectionEquality().hash(list);
+  }
 }
 
 /// Part of the icon placed closest to the anchor.

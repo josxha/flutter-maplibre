@@ -441,4 +441,20 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         )
         .toList(growable: false);
   }
+
+  @override
+  Future<List<Feature<GeometryObject>>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  }) async {
+    // TODO: implement queryRenderedFeatures
+    // final features = _map.queryRenderedFeatures(
+    //   screenLocation.toJsPoint(),
+    //   interop.QueryRenderedFeaturesOptions(
+    //     layers: layerIdsFilter,
+    //   ),
+    // );
+    // return features.toDart.map((interop.MapGeoJSONFeature e) => e.).toList(growable: false);
+    throw UnimplementedError();
+  }
 }

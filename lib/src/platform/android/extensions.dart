@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/rendering.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
@@ -109,5 +111,27 @@ extension OfflineRegionExt on jni.OfflineRegion {
     );
     jDefinition.release();
     return region;
+  }
+}
+
+/// Extension method for the [jni.Feature] class. Not exported publicly.
+extension JniFeatureExt on jni.Feature {
+  /// Convert a [jni.Feature] to a [Feature].
+  Feature toFeature() {
+    final json = toJson()!.toDartString();
+    final feature = Feature.fromJson(jsonDecode(json) as Map<String, dynamic>);
+    return feature;
+  }
+}
+
+/// Extension methods for the [pigeon.LongPressEventType] class. Not exported publicly.
+extension LongPressEventTypeExt on pigeon.LongPressEventType {
+  /// Convert a [pigeon.LongPressEventType] to a [MapEventLongPress].
+  MapEventLongPress toMapEventLongPress({required Position point}) {
+    return switch (this) {
+      pigeon.LongPressEventType.begin => MapEventLongPressBegin(point: point),
+      pigeon.LongPressEventType.move => MapEventLongPressMove(point: point),
+      pigeon.LongPressEventType.end => MapEventLongPressEnd(point: point),
+    };
   }
 }

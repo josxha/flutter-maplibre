@@ -32,6 +32,7 @@ void main() {
         zoom: true,
         pitch: true,
         pan: true,
+        drag: true,
       );
       const none = MapGestures.none();
 
@@ -175,6 +176,7 @@ void main() {
       final controller = MockMapController();
       final camera = MockMapCamera();
       final position = MockPosition();
+      final feature = MockFeature();
 
       final mapCreated = MapEventMapCreated(mapController: controller);
       expect(mapCreated, isA<MapEvent>());
@@ -209,6 +211,48 @@ void main() {
       expect(longClick, isA<MapEvent>());
       expect(longClick.point, equals(position));
       expect(longClick.toString(), contains('MapEventLongClick'));
+
+      final longPressBegin = MapEventLongPressBegin(point: position);
+      expect(longPressBegin, isA<MapEvent>());
+      expect(longPressBegin.point, equals(position));
+      expect(longPressBegin.toString(), contains('MapEventLongPressBegin'));
+
+      final longPressMove = MapEventLongPressMove(point: position);
+      expect(longPressMove, isA<MapEvent>());
+      expect(longPressMove.point, equals(position));
+      expect(longPressMove.toString(), contains('MapEventLongPressMove'));
+
+      final longPressEnd = MapEventLongPressEnd(point: position);
+      expect(longPressEnd, isA<MapEvent>());
+      expect(longPressEnd.point, equals(position));
+      expect(longPressEnd.toString(), contains('MapEventLongPressEnd'));
+
+      final dragStart = MapEventFeatureDrag(
+        event: longPressBegin,
+        feature: feature,
+      );
+      expect(dragStart, isA<MapEvent>());
+      expect(dragStart.event, equals(longPressBegin));
+      expect(dragStart.feature, equals(feature));
+      expect(dragStart.toString(), contains('MapEventFeatureDragged'));
+
+      final dragMove = MapEventFeatureDrag(
+        event: longPressMove,
+        feature: feature,
+      );
+      expect(dragMove, isA<MapEvent>());
+      expect(dragMove.event, equals(longPressMove));
+      expect(dragMove.feature, equals(feature));
+      expect(dragMove.toString(), contains('MapEventFeatureDragged'));
+
+      final dragEnd = MapEventFeatureDrag(
+        event: longPressEnd,
+        feature: feature,
+      );
+      expect(dragEnd, isA<MapEvent>());
+      expect(dragEnd.event, equals(longPressEnd));
+      expect(dragEnd.feature, equals(feature));
+      expect(dragEnd.toString(), contains('MapEventFeatureDragged'));
 
       const idle = MapEventIdle();
       expect(idle, isA<MapEvent>());

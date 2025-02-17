@@ -66,6 +66,73 @@ enum CameraChangeReason {
   apiGesture,
 }
 
+/// Emitted when the user interacts with the map in any way after a long press.
+sealed class MapEventLongPress extends MapEvent {
+  /// Create a new [MapEventLongPress] object.
+  const MapEventLongPress({required this.point});
+
+  /// The [Position] of where the user is pressing at.
+  final Position point;
+
+  /// The type of the long press event.
+  String get type => 'LongPress';
+
+  @override
+  String toString() => 'MapEventLongPress(point: $point)';
+}
+
+/// Emitted when the user starts a long press.
+final class MapEventLongPressBegin extends MapEventLongPress {
+  /// Create a new [MapEventLongPressBegin] object.
+  const MapEventLongPressBegin({required super.point});
+
+  @override
+  String get type => 'LongPressBegin';
+
+  @override
+  String toString() => 'MapEventLongPressBegin(point: $point)';
+}
+
+/// Emitted when the user moves the pointer after a long press.
+final class MapEventLongPressMove extends MapEventLongPress {
+  /// Create a new [MapEventLongPressMove] object.
+  const MapEventLongPressMove({required super.point});
+
+  @override
+  String get type => 'LongPressMove';
+
+  @override
+  String toString() => 'MapEventLongPressMove(point: $point)';
+}
+
+/// Emitted when the user ends a long press.
+final class MapEventLongPressEnd extends MapEventLongPress {
+  /// Create a new [MapEventLongPressEnd] object.
+  const MapEventLongPressEnd({required super.point});
+
+  @override
+  String get type => 'LongPressEnd';
+
+  @override
+  String toString() => 'MapEventLongPressEnd(point: $point)';
+}
+
+/// Emitted when the user is dragging a feature on the map.
+final class MapEventFeatureDrag extends MapEvent {
+  /// Create a new [MapEventFeatureDrag] object.
+  const MapEventFeatureDrag({required this.feature, required this.event});
+
+  /// The feature that has been dragged.
+  final Feature feature;
+
+  /// The type of the long press event.
+  final MapEventLongPress event;
+
+  @override
+  String toString() =>
+      'MapEventFeatureDragged(event: ${event.type}, feature: $feature, point: ${event.point})';
+}
+
 /// Emitted when the user interacts with the map in any way. Use this class if
 /// you don't care about the type of gesture.
 ///

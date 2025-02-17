@@ -116,7 +116,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// features that satisfy the query parameters.
   external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
     Point jsPoint,
-    JSAny? options,
+    QueryRenderedFeaturesOptions? options,
   );
 }
 
@@ -233,4 +233,12 @@ extension type ProjectionSpecification._(JSObject _) implements JSObject {
     /// transition state, or an expression.
     required String type,
   });
+}
+
+/// The specification of filter options.
+@anonymous
+@JS()
+extension type FilterSpecification._(JSObject _) implements JSObject {
+  /// Create a new [FilterSpecification] object.
+  external FilterSpecification({required JSArray filter});
 }
