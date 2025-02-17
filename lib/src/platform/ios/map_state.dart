@@ -249,7 +249,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<Offset> toScreenLocation(Position lngLat) async =>
-      toScreenLocation(lngLat);
+      toScreenLocationSync(lngLat);
 
   @override
   Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
