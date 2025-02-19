@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="maplibre_example"
-        android:name="${applicationName}"
+        android:name="MapLibre"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
