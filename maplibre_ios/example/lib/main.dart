@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:maplibre_ios/maplibre_ios.dart';
