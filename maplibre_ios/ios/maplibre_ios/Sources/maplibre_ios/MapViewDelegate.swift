@@ -13,7 +13,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         viewId: Int64,
         binaryMessenger: FlutterBinaryMessenger
     ) {
-        print("### init new MapViewDelegate ###")
+        print("### init new MapViewDelegate ### \(viewId) ###")
         var channelSuffix = String(viewId)
         _viewId = viewId
         _flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
@@ -63,6 +63,15 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 print(error)
             }
         }
+    }
+    
+    func dispose() throws {
+        print("### dispose MapLibre view ### \(_viewId) ###")
+        MapLibreRegistry.removeMap(viewId: _viewId)
+        _mapView.removeFromSuperview()
+        _mapView.delegate = nil
+        _mapView = nil
+        _view.removeFromSuperview()
     }
 
     @objc func onTap(sender: UITapGestureRecognizer) {

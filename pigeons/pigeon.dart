@@ -25,6 +25,8 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
+  void dispose();
+
   /// Add a fill layer to the map style.
   @async
   void addFillLayer({

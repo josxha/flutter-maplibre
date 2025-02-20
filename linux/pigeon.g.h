@@ -618,12 +618,36 @@ G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApi, maplibre_map_libre_host_api, MAPLI
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiResponseHandle, maplibre_map_libre_host_api_response_handle, MAPLIBRE, MAP_LIBRE_HOST_API_RESPONSE_HANDLE, GObject)
 
+G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApiDisposeResponse, maplibre_map_libre_host_api_dispose_response, MAPLIBRE, MAP_LIBRE_HOST_API_DISPOSE_RESPONSE, GObject)
+
+/**
+ * maplibre_map_libre_host_api_dispose_response_new:
+ *
+ * Creates a new response to MapLibreHostApi.dispose.
+ *
+ * Returns: a new #MaplibreMapLibreHostApiDisposeResponse
+ */
+MaplibreMapLibreHostApiDisposeResponse* maplibre_map_libre_host_api_dispose_response_new();
+
+/**
+ * maplibre_map_libre_host_api_dispose_response_new_error:
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Creates a new error response to MapLibreHostApi.dispose.
+ *
+ * Returns: a new #MaplibreMapLibreHostApiDisposeResponse
+ */
+MaplibreMapLibreHostApiDisposeResponse* maplibre_map_libre_host_api_dispose_response_new_error(const gchar* code, const gchar* message, FlValue* details);
+
 /**
  * MaplibreMapLibreHostApiVTable:
  *
  * Table of functions exposed by MapLibreHostApi to be implemented by the API provider.
  */
 typedef struct {
+  MaplibreMapLibreHostApiDisposeResponse* (*dispose)(gpointer user_data);
   void (*add_fill_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_circle_layer)(const gchar* id, const gchar* source_id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);
   void (*add_background_layer)(const gchar* id, FlValue* layout, FlValue* paint, const gchar* below_layer_id, MaplibreMapLibreHostApiResponseHandle* response_handle, gpointer user_data);

@@ -528,6 +528,7 @@ class MapLibreHostApi {
   MapLibreHostApi(const MapLibreHostApi&) = delete;
   MapLibreHostApi& operator=(const MapLibreHostApi&) = delete;
   virtual ~MapLibreHostApi() {}
+  virtual std::optional<FlutterError> Dispose() = 0;
   // Add a fill layer to the map style.
   virtual void AddFillLayer(
     const std::string& id,
