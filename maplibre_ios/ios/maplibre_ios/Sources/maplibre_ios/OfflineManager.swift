@@ -62,6 +62,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
         maxZoom: Double, pixelDensity: Double, metadata: String,
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
+        // TODO encode all information into the metadata for parity with android
         let mlnBounds = MLNCoordinateBounds(
             sw: CLLocationCoordinate2D(
                 latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),

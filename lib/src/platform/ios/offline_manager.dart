@@ -122,7 +122,7 @@ class OfflineManagerIos extends OfflineManagerNative {
         maxZoom: ffiRegion.maximumZoomLevel,
         // TODO ffiPack.pixelRatio,
         pixelRatio: 1,
-        styleUrl: ffiRegion.styleURL.toString(),
+        styleUrl: ffiRegion.styleURL.absoluteString!.toDartString(),
       );
     }, growable: false);
   }
