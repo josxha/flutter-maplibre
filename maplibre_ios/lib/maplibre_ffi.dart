@@ -36295,6 +36295,46 @@ enum NSTextLayoutManagerSegmentOptions {
       };
 }
 
+enum NSWritingToolsCoordinatorTextUpdateReason {
+  NSWritingToolsCoordinatorTextUpdateReasonTyping(0),
+  NSWritingToolsCoordinatorTextUpdateReasonUndoRedo(1);
+
+  final int value;
+  const NSWritingToolsCoordinatorTextUpdateReason(this.value);
+
+  static NSWritingToolsCoordinatorTextUpdateReason fromValue(
+    int value,
+  ) => switch (value) {
+    0 => NSWritingToolsCoordinatorTextUpdateReasonTyping,
+    1 => NSWritingToolsCoordinatorTextUpdateReasonUndoRedo,
+    _ =>
+      throw ArgumentError(
+        "Unknown value for NSWritingToolsCoordinatorTextUpdateReason: $value",
+      ),
+  };
+}
+
+enum NSWritingToolsCoordinatorState {
+  NSWritingToolsCoordinatorStateInactive(0),
+  NSWritingToolsCoordinatorStateNoninteractive(1),
+  NSWritingToolsCoordinatorStateInteractiveResting(2),
+  NSWritingToolsCoordinatorStateInteractiveStreaming(3);
+
+  final int value;
+  const NSWritingToolsCoordinatorState(this.value);
+
+  static NSWritingToolsCoordinatorState fromValue(int value) => switch (value) {
+    0 => NSWritingToolsCoordinatorStateInactive,
+    1 => NSWritingToolsCoordinatorStateNoninteractive,
+    2 => NSWritingToolsCoordinatorStateInteractiveResting,
+    3 => NSWritingToolsCoordinatorStateInteractiveStreaming,
+    _ =>
+      throw ArgumentError(
+        "Unknown value for NSWritingToolsCoordinatorState: $value",
+      ),
+  };
+}
+
 late final _class_MLNOfflinePack = objc.getClass("MapLibre.MLNOfflinePack");
 late final _sel_region = objc.registerName("region");
 void _ObjCBlock_ffiVoid_NSError_fnPtrTrampoline(
