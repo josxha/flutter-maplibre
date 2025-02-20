@@ -3,22 +3,26 @@ import 'dart:convert';
 
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
+import 'package:maplibre/src/platform/offline_manager_native.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart' as objc;
 
 /// iOS specific implementation of the [OfflineManager].
-class OfflineManagerIos implements OfflineManager {
-  const OfflineManagerIos._(this._storage);
+class OfflineManagerIos extends OfflineManagerNative {
+  /// Create a new iOS specific [OfflineManager] instance.
+  OfflineManagerIos(this._storage);
 
   final MLNOfflineStorage _storage;
 
   /// Create a new [OfflineManagerIos] instance.
   static Future<OfflineManagerIos> createInstance() async {
     final storage = MLNOfflineStorage.getSharedOfflineStorage();
-    return OfflineManagerIos._(storage);
+    return OfflineManagerIos(storage);
   }
 
-  @override
+  // TODO: It is currently not possible to use callbacks via ObjectiveC bindings. See https://github.com/dart-lang/native/issues/1475
+
+  /*@override
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
     _storage.clearAmbientCacheWithCompletionHandler_(
@@ -28,12 +32,12 @@ class OfflineManagerIos implements OfflineManager {
       }),
     );
     return completer.future;
-  }
+  }*/
 
   @override
   void dispose() {}
 
-  @override
+  /*@override
   Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
@@ -65,7 +69,7 @@ class OfflineManagerIos implements OfflineManager {
     );
     final _ = await completer.future;
     // TODO: use the NotificationCenter to track the download process: https://maplibre.org/maplibre-native/ios/latest/documentation/maplibre-native-for-ios/offlinepackexample/
-  }
+  }*/
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
@@ -91,7 +95,7 @@ class OfflineManagerIos implements OfflineManager {
     throw Exception('Region not found');
   }
 
-  @override
+  /*@override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
     _storage.invalidateAmbientCacheWithCompletionHandler_(
@@ -101,7 +105,7 @@ class OfflineManagerIos implements OfflineManager {
       }),
     );
     return completer.future;
-  }
+  }*/
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
@@ -123,21 +127,7 @@ class OfflineManagerIos implements OfflineManager {
     }, growable: false);
   }
 
-  @override
-  Future<List<OfflineRegion>> mergeOfflineRegions({
-    required String path,
-  }) async {
-    // TODO: implement mergeOfflineRegions
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> packDatabase() async {
-    // TODO: implement packDatabase
-    throw UnimplementedError();
-  }
-
-  @override
+  /*@override
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
     _storage.resetDatabaseWithCompletionHandler_(
@@ -146,15 +136,9 @@ class OfflineManagerIos implements OfflineManager {
         completer.complete();
       }),
     );
-  }
+  }*/
 
-  @override
-  void runPackDatabaseAutomatically({required bool enabled}) {
-    // TODO: implement runPackDatabaseAutomatically
-    throw UnimplementedError();
-  }
-
-  @override
+  /*@override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
     _storage.setMaximumAmbientCacheSize_withCompletionHandler_(
@@ -164,7 +148,7 @@ class OfflineManagerIos implements OfflineManager {
         completer.complete();
       }),
     );
-  }
+  }*/
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>

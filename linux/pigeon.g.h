@@ -529,6 +529,89 @@ double maplibre_lng_lat_bounds_get_latitude_south(MaplibreLngLatBounds* object);
  */
 double maplibre_lng_lat_bounds_get_latitude_north(MaplibreLngLatBounds* object);
 
+/**
+ * MaplibreOfflineRegion:
+ *
+ * Model that describes an offline map region.
+ */
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineRegion, maplibre_offline_region, MAPLIBRE, OFFLINE_REGION, GObject)
+
+/**
+ * maplibre_offline_region_new:
+ * id: field in this object.
+ * bounds: field in this object.
+ * min_zoom: field in this object.
+ * max_zoom: field in this object.
+ * pixel_ratio: field in this object.
+ * style_url: field in this object.
+ *
+ * Creates a new #OfflineRegion object.
+ *
+ * Returns: a new #MaplibreOfflineRegion
+ */
+MaplibreOfflineRegion* maplibre_offline_region_new(int64_t id, MaplibreLngLatBounds* bounds, double min_zoom, double max_zoom, double pixel_ratio, const gchar* style_url);
+
+/**
+ * maplibre_offline_region_get_id
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the id field of @object.
+ *
+ * Returns: the field value.
+ */
+int64_t maplibre_offline_region_get_id(MaplibreOfflineRegion* object);
+
+/**
+ * maplibre_offline_region_get_bounds
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the bounds field of @object.
+ *
+ * Returns: the field value.
+ */
+MaplibreLngLatBounds* maplibre_offline_region_get_bounds(MaplibreOfflineRegion* object);
+
+/**
+ * maplibre_offline_region_get_min_zoom
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the minZoom field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_offline_region_get_min_zoom(MaplibreOfflineRegion* object);
+
+/**
+ * maplibre_offline_region_get_max_zoom
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the maxZoom field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_offline_region_get_max_zoom(MaplibreOfflineRegion* object);
+
+/**
+ * maplibre_offline_region_get_pixel_ratio
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the pixelRatio field of @object.
+ *
+ * Returns: the field value.
+ */
+double maplibre_offline_region_get_pixel_ratio(MaplibreOfflineRegion* object);
+
+/**
+ * maplibre_offline_region_get_style_url
+ * @object: a #MaplibreOfflineRegion.
+ *
+ * Gets the value of the styleUrl field of @object.
+ *
+ * Returns: the field value.
+ */
+const gchar* maplibre_offline_region_get_style_url(MaplibreOfflineRegion* object);
+
 G_DECLARE_FINAL_TYPE(MaplibreMessageCodec, maplibre_message_codec, MAPLIBRE, MESSAGE_CODEC, FlStandardMessageCodec)
 
 G_DECLARE_FINAL_TYPE(MaplibreMapLibreHostApi, maplibre_map_libre_host_api, MAPLIBRE, MAP_LIBRE_HOST_API, GObject)
@@ -1593,6 +1676,182 @@ void maplibre_permission_manager_host_api_respond_request_location_permissions(M
  * Responds with an error to PermissionManagerHostApi.requestLocationPermissions. 
  */
 void maplibre_permission_manager_host_api_respond_error_request_location_permissions(MaplibrePermissionManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApi, maplibre_offline_manager_host_api, MAPLIBRE, OFFLINE_MANAGER_HOST_API, GObject)
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiResponseHandle, maplibre_offline_manager_host_api_response_handle, MAPLIBRE, OFFLINE_MANAGER_HOST_API_RESPONSE_HANDLE, GObject)
+
+/**
+ * MaplibreOfflineManagerHostApiVTable:
+ *
+ * Table of functions exposed by OfflineManagerHostApi to be implemented by the API provider.
+ */
+typedef struct {
+  void (*clear_ambient_cache)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*invalidate_ambient_cache)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*merge_offline_regions)(const gchar* path, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*pack_database)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*reset_database)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*set_maximum_ambient_cache_size)(int64_t bytes, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+  void (*download_region)(const gchar* map_style_url, MaplibreLngLatBounds* bounds, double min_zoom, double max_zoom, double pixel_density, FlValue* metadata, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
+} MaplibreOfflineManagerHostApiVTable;
+
+/**
+ * maplibre_offline_manager_host_api_set_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ * @vtable: implementations of the methods in this API.
+ * @user_data: (closure): user data to pass to the functions in @vtable.
+ * @user_data_free_func: (allow-none): a function which gets called to free @user_data, or %NULL.
+ *
+ * Connects the method handlers in the OfflineManagerHostApi API.
+ */
+void maplibre_offline_manager_host_api_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreOfflineManagerHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func);
+
+/**
+ * maplibre_offline_manager_host_api_clear_method_handlers:
+ *
+ * @messenger: an #FlBinaryMessenger.
+ * @suffix: (allow-none): a suffix to add to the API or %NULL for none.
+ *
+ * Clears the method handlers in the OfflineManagerHostApi API.
+ */
+void maplibre_offline_manager_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix);
+
+/**
+ * maplibre_offline_manager_host_api_respond_clear_ambient_cache:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.clearAmbientCache. 
+ */
+void maplibre_offline_manager_host_api_respond_clear_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_clear_ambient_cache:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.clearAmbientCache. 
+ */
+void maplibre_offline_manager_host_api_respond_error_clear_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_invalidate_ambient_cache:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.invalidateAmbientCache. 
+ */
+void maplibre_offline_manager_host_api_respond_invalidate_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_invalidate_ambient_cache:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.invalidateAmbientCache. 
+ */
+void maplibre_offline_manager_host_api_respond_error_invalidate_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_merge_offline_regions:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @return_value: location to write the value returned by this method.
+ *
+ * Responds to OfflineManagerHostApi.mergeOfflineRegions. 
+ */
+void maplibre_offline_manager_host_api_respond_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, FlValue* return_value);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_merge_offline_regions:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.mergeOfflineRegions. 
+ */
+void maplibre_offline_manager_host_api_respond_error_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_pack_database:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.packDatabase. 
+ */
+void maplibre_offline_manager_host_api_respond_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_pack_database:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.packDatabase. 
+ */
+void maplibre_offline_manager_host_api_respond_error_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_reset_database:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.resetDatabase. 
+ */
+void maplibre_offline_manager_host_api_respond_reset_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_reset_database:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.resetDatabase. 
+ */
+void maplibre_offline_manager_host_api_respond_error_reset_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_set_maximum_ambient_cache_size:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.setMaximumAmbientCacheSize. 
+ */
+void maplibre_offline_manager_host_api_respond_set_maximum_ambient_cache_size(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_set_maximum_ambient_cache_size:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.setMaximumAmbientCacheSize. 
+ */
+void maplibre_offline_manager_host_api_respond_error_set_maximum_ambient_cache_size(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
+
+/**
+ * maplibre_offline_manager_host_api_respond_download_region:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ *
+ * Responds to OfflineManagerHostApi.downloadRegion. 
+ */
+void maplibre_offline_manager_host_api_respond_download_region(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
+
+/**
+ * maplibre_offline_manager_host_api_respond_error_download_region:
+ * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
+ * @code: error code.
+ * @message: error message.
+ * @details: (allow-none): error details or %NULL.
+ *
+ * Responds with an error to OfflineManagerHostApi.downloadRegion. 
+ */
+void maplibre_offline_manager_host_api_respond_error_download_region(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 G_END_DECLS
 

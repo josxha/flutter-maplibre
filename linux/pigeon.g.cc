@@ -571,6 +571,101 @@ static MaplibreLngLatBounds* maplibre_lng_lat_bounds_new_from_list(FlValue* valu
   return maplibre_lng_lat_bounds_new(longitude_west, longitude_east, latitude_south, latitude_north);
 }
 
+struct _MaplibreOfflineRegion {
+  GObject parent_instance;
+
+  int64_t id;
+  MaplibreLngLatBounds* bounds;
+  double min_zoom;
+  double max_zoom;
+  double pixel_ratio;
+  gchar* style_url;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineRegion, maplibre_offline_region, G_TYPE_OBJECT)
+
+static void maplibre_offline_region_dispose(GObject* object) {
+  MaplibreOfflineRegion* self = MAPLIBRE_OFFLINE_REGION(object);
+  g_clear_object(&self->bounds);
+  g_clear_pointer(&self->style_url, g_free);
+  G_OBJECT_CLASS(maplibre_offline_region_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_region_init(MaplibreOfflineRegion* self) {
+}
+
+static void maplibre_offline_region_class_init(MaplibreOfflineRegionClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_region_dispose;
+}
+
+MaplibreOfflineRegion* maplibre_offline_region_new(int64_t id, MaplibreLngLatBounds* bounds, double min_zoom, double max_zoom, double pixel_ratio, const gchar* style_url) {
+  MaplibreOfflineRegion* self = MAPLIBRE_OFFLINE_REGION(g_object_new(maplibre_offline_region_get_type(), nullptr));
+  self->id = id;
+  self->bounds = MAPLIBRE_LNG_LAT_BOUNDS(g_object_ref(bounds));
+  self->min_zoom = min_zoom;
+  self->max_zoom = max_zoom;
+  self->pixel_ratio = pixel_ratio;
+  self->style_url = g_strdup(style_url);
+  return self;
+}
+
+int64_t maplibre_offline_region_get_id(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), 0);
+  return self->id;
+}
+
+MaplibreLngLatBounds* maplibre_offline_region_get_bounds(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), nullptr);
+  return self->bounds;
+}
+
+double maplibre_offline_region_get_min_zoom(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), 0.0);
+  return self->min_zoom;
+}
+
+double maplibre_offline_region_get_max_zoom(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), 0.0);
+  return self->max_zoom;
+}
+
+double maplibre_offline_region_get_pixel_ratio(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), 0.0);
+  return self->pixel_ratio;
+}
+
+const gchar* maplibre_offline_region_get_style_url(MaplibreOfflineRegion* self) {
+  g_return_val_if_fail(MAPLIBRE_IS_OFFLINE_REGION(self), nullptr);
+  return self->style_url;
+}
+
+static FlValue* maplibre_offline_region_to_list(MaplibreOfflineRegion* self) {
+  FlValue* values = fl_value_new_list();
+  fl_value_append_take(values, fl_value_new_int(self->id));
+  fl_value_append_take(values, fl_value_new_custom_object(138, G_OBJECT(self->bounds)));
+  fl_value_append_take(values, fl_value_new_float(self->min_zoom));
+  fl_value_append_take(values, fl_value_new_float(self->max_zoom));
+  fl_value_append_take(values, fl_value_new_float(self->pixel_ratio));
+  fl_value_append_take(values, fl_value_new_string(self->style_url));
+  return values;
+}
+
+static MaplibreOfflineRegion* maplibre_offline_region_new_from_list(FlValue* values) {
+  FlValue* value0 = fl_value_get_list_value(values, 0);
+  int64_t id = fl_value_get_int(value0);
+  FlValue* value1 = fl_value_get_list_value(values, 1);
+  MaplibreLngLatBounds* bounds = MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value1));
+  FlValue* value2 = fl_value_get_list_value(values, 2);
+  double min_zoom = fl_value_get_float(value2);
+  FlValue* value3 = fl_value_get_list_value(values, 3);
+  double max_zoom = fl_value_get_float(value3);
+  FlValue* value4 = fl_value_get_list_value(values, 4);
+  double pixel_ratio = fl_value_get_float(value4);
+  FlValue* value5 = fl_value_get_list_value(values, 5);
+  const gchar* style_url = fl_value_get_string(value5);
+  return maplibre_offline_region_new(id, bounds, min_zoom, max_zoom, pixel_ratio, style_url);
+}
+
 struct _MaplibreMessageCodec {
   FlStandardMessageCodec parent_instance;
 
@@ -645,6 +740,13 @@ static gboolean maplibre_message_codec_write_maplibre_lng_lat_bounds(FlStandardM
   return fl_standard_message_codec_write_value(codec, buffer, values, error);
 }
 
+static gboolean maplibre_message_codec_write_maplibre_offline_region(FlStandardMessageCodec* codec, GByteArray* buffer, MaplibreOfflineRegion* value, GError** error) {
+  uint8_t type = 139;
+  g_byte_array_append(buffer, &type, sizeof(uint8_t));
+  g_autoptr(FlValue) values = maplibre_offline_region_to_list(value);
+  return fl_standard_message_codec_write_value(codec, buffer, values, error);
+}
+
 static gboolean maplibre_message_codec_write_value(FlStandardMessageCodec* codec, GByteArray* buffer, FlValue* value, GError** error) {
   if (fl_value_get_type(value) == FL_VALUE_TYPE_CUSTOM) {
     switch (fl_value_get_custom_type(value)) {
@@ -668,6 +770,8 @@ static gboolean maplibre_message_codec_write_value(FlStandardMessageCodec* codec
         return maplibre_message_codec_write_maplibre_map_camera(codec, buffer, MAPLIBRE_MAP_CAMERA(fl_value_get_custom_value_object(value)), error);
       case 138:
         return maplibre_message_codec_write_maplibre_lng_lat_bounds(codec, buffer, MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value)), error);
+      case 139:
+        return maplibre_message_codec_write_maplibre_offline_region(codec, buffer, MAPLIBRE_OFFLINE_REGION(fl_value_get_custom_value_object(value)), error);
     }
   }
 
@@ -791,6 +895,21 @@ static FlValue* maplibre_message_codec_read_maplibre_lng_lat_bounds(FlStandardMe
   return fl_value_new_custom_object(138, G_OBJECT(value));
 }
 
+static FlValue* maplibre_message_codec_read_maplibre_offline_region(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, GError** error) {
+  g_autoptr(FlValue) values = fl_standard_message_codec_read_value(codec, buffer, offset, error);
+  if (values == nullptr) {
+    return nullptr;
+  }
+
+  g_autoptr(MaplibreOfflineRegion) value = maplibre_offline_region_new_from_list(values);
+  if (value == nullptr) {
+    g_set_error(error, FL_MESSAGE_CODEC_ERROR, FL_MESSAGE_CODEC_ERROR_FAILED, "Invalid data received for MessageData");
+    return nullptr;
+  }
+
+  return fl_value_new_custom_object(139, G_OBJECT(value));
+}
+
 static FlValue* maplibre_message_codec_read_value_of_type(FlStandardMessageCodec* codec, GBytes* buffer, size_t* offset, int type, GError** error) {
   switch (type) {
     case 129:
@@ -813,6 +932,8 @@ static FlValue* maplibre_message_codec_read_value_of_type(FlStandardMessageCodec
       return maplibre_message_codec_read_maplibre_map_camera(codec, buffer, offset, error);
     case 138:
       return maplibre_message_codec_read_maplibre_lng_lat_bounds(codec, buffer, offset, error);
+    case 139:
+      return maplibre_message_codec_read_maplibre_offline_region(codec, buffer, offset, error);
     default:
       return FL_STANDARD_MESSAGE_CODEC_CLASS(maplibre_message_codec_parent_class)->read_value_of_type(codec, buffer, offset, type, error);
   }
@@ -2849,5 +2970,602 @@ void maplibre_permission_manager_host_api_respond_error_request_location_permiss
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
     g_warning("Failed to send response to %s.%s: %s", "PermissionManagerHostApi", "requestLocationPermissions", error->message);
+  }
+}
+
+struct _MaplibreOfflineManagerHostApiResponseHandle {
+  GObject parent_instance;
+
+  FlBasicMessageChannel* channel;
+  FlBasicMessageChannelResponseHandle* response_handle;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiResponseHandle, maplibre_offline_manager_host_api_response_handle, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_response_handle_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiResponseHandle* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_RESPONSE_HANDLE(object);
+  g_clear_object(&self->channel);
+  g_clear_object(&self->response_handle);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_response_handle_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_response_handle_init(MaplibreOfflineManagerHostApiResponseHandle* self) {
+}
+
+static void maplibre_offline_manager_host_api_response_handle_class_init(MaplibreOfflineManagerHostApiResponseHandleClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_response_handle_dispose;
+}
+
+static MaplibreOfflineManagerHostApiResponseHandle* maplibre_offline_manager_host_api_response_handle_new(FlBasicMessageChannel* channel, FlBasicMessageChannelResponseHandle* response_handle) {
+  MaplibreOfflineManagerHostApiResponseHandle* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_RESPONSE_HANDLE(g_object_new(maplibre_offline_manager_host_api_response_handle_get_type(), nullptr));
+  self->channel = FL_BASIC_MESSAGE_CHANNEL(g_object_ref(channel));
+  self->response_handle = FL_BASIC_MESSAGE_CHANNEL_RESPONSE_HANDLE(g_object_ref(response_handle));
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiClearAmbientCacheResponse, maplibre_offline_manager_host_api_clear_ambient_cache_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_CLEAR_AMBIENT_CACHE_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiClearAmbientCacheResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiClearAmbientCacheResponse, maplibre_offline_manager_host_api_clear_ambient_cache_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_clear_ambient_cache_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiClearAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_CLEAR_AMBIENT_CACHE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_clear_ambient_cache_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_clear_ambient_cache_response_init(MaplibreOfflineManagerHostApiClearAmbientCacheResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_clear_ambient_cache_response_class_init(MaplibreOfflineManagerHostApiClearAmbientCacheResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_clear_ambient_cache_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiClearAmbientCacheResponse* maplibre_offline_manager_host_api_clear_ambient_cache_response_new() {
+  MaplibreOfflineManagerHostApiClearAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_CLEAR_AMBIENT_CACHE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_clear_ambient_cache_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiClearAmbientCacheResponse* maplibre_offline_manager_host_api_clear_ambient_cache_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiClearAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_CLEAR_AMBIENT_CACHE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_clear_ambient_cache_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse, maplibre_offline_manager_host_api_invalidate_ambient_cache_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_INVALIDATE_AMBIENT_CACHE_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse, maplibre_offline_manager_host_api_invalidate_ambient_cache_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_invalidate_ambient_cache_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_INVALIDATE_AMBIENT_CACHE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_invalidate_ambient_cache_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_invalidate_ambient_cache_response_init(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_invalidate_ambient_cache_response_class_init(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_invalidate_ambient_cache_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* maplibre_offline_manager_host_api_invalidate_ambient_cache_response_new() {
+  MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_INVALIDATE_AMBIENT_CACHE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_invalidate_ambient_cache_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* maplibre_offline_manager_host_api_invalidate_ambient_cache_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_INVALIDATE_AMBIENT_CACHE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_invalidate_ambient_cache_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse, maplibre_offline_manager_host_api_merge_offline_regions_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse, maplibre_offline_manager_host_api_merge_offline_regions_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_merge_offline_regions_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_merge_offline_regions_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_merge_offline_regions_response_init(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_merge_offline_regions_response_class_init(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_merge_offline_regions_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* maplibre_offline_manager_host_api_merge_offline_regions_response_new(FlValue* return_value) {
+  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(g_object_new(maplibre_offline_manager_host_api_merge_offline_regions_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_ref(return_value));
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* maplibre_offline_manager_host_api_merge_offline_regions_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(g_object_new(maplibre_offline_manager_host_api_merge_offline_regions_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiPackDatabaseResponse, maplibre_offline_manager_host_api_pack_database_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_PACK_DATABASE_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiPackDatabaseResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiPackDatabaseResponse, maplibre_offline_manager_host_api_pack_database_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_pack_database_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiPackDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_PACK_DATABASE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_pack_database_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_pack_database_response_init(MaplibreOfflineManagerHostApiPackDatabaseResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_pack_database_response_class_init(MaplibreOfflineManagerHostApiPackDatabaseResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_pack_database_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiPackDatabaseResponse* maplibre_offline_manager_host_api_pack_database_response_new() {
+  MaplibreOfflineManagerHostApiPackDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_PACK_DATABASE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_pack_database_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiPackDatabaseResponse* maplibre_offline_manager_host_api_pack_database_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiPackDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_PACK_DATABASE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_pack_database_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiResetDatabaseResponse, maplibre_offline_manager_host_api_reset_database_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_RESET_DATABASE_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiResetDatabaseResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiResetDatabaseResponse, maplibre_offline_manager_host_api_reset_database_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_reset_database_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiResetDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_RESET_DATABASE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_reset_database_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_reset_database_response_init(MaplibreOfflineManagerHostApiResetDatabaseResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_reset_database_response_class_init(MaplibreOfflineManagerHostApiResetDatabaseResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_reset_database_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiResetDatabaseResponse* maplibre_offline_manager_host_api_reset_database_response_new() {
+  MaplibreOfflineManagerHostApiResetDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_RESET_DATABASE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_reset_database_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiResetDatabaseResponse* maplibre_offline_manager_host_api_reset_database_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiResetDatabaseResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_RESET_DATABASE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_reset_database_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse, maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_SET_MAXIMUM_AMBIENT_CACHE_SIZE_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse, maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_SET_MAXIMUM_AMBIENT_CACHE_SIZE_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_init(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_class_init(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_new() {
+  MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_SET_MAXIMUM_AMBIENT_CACHE_SIZE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_SET_MAXIMUM_AMBIENT_CACHE_SIZE_RESPONSE(g_object_new(maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiDownloadRegionResponse, maplibre_offline_manager_host_api_download_region_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_DOWNLOAD_REGION_RESPONSE, GObject)
+
+struct _MaplibreOfflineManagerHostApiDownloadRegionResponse {
+  GObject parent_instance;
+
+  FlValue* value;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApiDownloadRegionResponse, maplibre_offline_manager_host_api_download_region_response, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_download_region_response_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApiDownloadRegionResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_DOWNLOAD_REGION_RESPONSE(object);
+  g_clear_pointer(&self->value, fl_value_unref);
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_download_region_response_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_download_region_response_init(MaplibreOfflineManagerHostApiDownloadRegionResponse* self) {
+}
+
+static void maplibre_offline_manager_host_api_download_region_response_class_init(MaplibreOfflineManagerHostApiDownloadRegionResponseClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_download_region_response_dispose;
+}
+
+static MaplibreOfflineManagerHostApiDownloadRegionResponse* maplibre_offline_manager_host_api_download_region_response_new() {
+  MaplibreOfflineManagerHostApiDownloadRegionResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_DOWNLOAD_REGION_RESPONSE(g_object_new(maplibre_offline_manager_host_api_download_region_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_null());
+  return self;
+}
+
+static MaplibreOfflineManagerHostApiDownloadRegionResponse* maplibre_offline_manager_host_api_download_region_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
+  MaplibreOfflineManagerHostApiDownloadRegionResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_DOWNLOAD_REGION_RESPONSE(g_object_new(maplibre_offline_manager_host_api_download_region_response_get_type(), nullptr));
+  self->value = fl_value_new_list();
+  fl_value_append_take(self->value, fl_value_new_string(code));
+  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
+  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
+  return self;
+}
+
+struct _MaplibreOfflineManagerHostApi {
+  GObject parent_instance;
+
+  const MaplibreOfflineManagerHostApiVTable* vtable;
+  gpointer user_data;
+  GDestroyNotify user_data_free_func;
+};
+
+G_DEFINE_TYPE(MaplibreOfflineManagerHostApi, maplibre_offline_manager_host_api, G_TYPE_OBJECT)
+
+static void maplibre_offline_manager_host_api_dispose(GObject* object) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(object);
+  if (self->user_data != nullptr) {
+    self->user_data_free_func(self->user_data);
+  }
+  self->user_data = nullptr;
+  G_OBJECT_CLASS(maplibre_offline_manager_host_api_parent_class)->dispose(object);
+}
+
+static void maplibre_offline_manager_host_api_init(MaplibreOfflineManagerHostApi* self) {
+}
+
+static void maplibre_offline_manager_host_api_class_init(MaplibreOfflineManagerHostApiClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_dispose;
+}
+
+static MaplibreOfflineManagerHostApi* maplibre_offline_manager_host_api_new(const MaplibreOfflineManagerHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(g_object_new(maplibre_offline_manager_host_api_get_type(), nullptr));
+  self->vtable = vtable;
+  self->user_data = user_data;
+  self->user_data_free_func = user_data_free_func;
+  return self;
+}
+
+static void maplibre_offline_manager_host_api_clear_ambient_cache_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->clear_ambient_cache == nullptr) {
+    return;
+  }
+
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->clear_ambient_cache(handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_invalidate_ambient_cache_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->invalidate_ambient_cache == nullptr) {
+    return;
+  }
+
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->invalidate_ambient_cache(handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_merge_offline_regions_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->merge_offline_regions == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  const gchar* path = fl_value_get_string(value0);
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->merge_offline_regions(path, handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_pack_database_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->pack_database == nullptr) {
+    return;
+  }
+
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->pack_database(handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_reset_database_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->reset_database == nullptr) {
+    return;
+  }
+
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->reset_database(handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->set_maximum_ambient_cache_size == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  int64_t bytes = fl_value_get_int(value0);
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->set_maximum_ambient_cache_size(bytes, handle, self->user_data);
+}
+
+static void maplibre_offline_manager_host_api_download_region_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
+  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
+
+  if (self->vtable == nullptr || self->vtable->download_region == nullptr) {
+    return;
+  }
+
+  FlValue* value0 = fl_value_get_list_value(message_, 0);
+  const gchar* map_style_url = fl_value_get_string(value0);
+  FlValue* value1 = fl_value_get_list_value(message_, 1);
+  MaplibreLngLatBounds* bounds = MAPLIBRE_LNG_LAT_BOUNDS(fl_value_get_custom_value_object(value1));
+  FlValue* value2 = fl_value_get_list_value(message_, 2);
+  double min_zoom = fl_value_get_float(value2);
+  FlValue* value3 = fl_value_get_list_value(message_, 3);
+  double max_zoom = fl_value_get_float(value3);
+  FlValue* value4 = fl_value_get_list_value(message_, 4);
+  double pixel_density = fl_value_get_float(value4);
+  FlValue* value5 = fl_value_get_list_value(message_, 5);
+  FlValue* metadata = value5;
+  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
+  self->vtable->download_region(map_style_url, bounds, min_zoom, max_zoom, pixel_density, metadata, handle, self->user_data);
+}
+
+void maplibre_offline_manager_host_api_set_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix, const MaplibreOfflineManagerHostApiVTable* vtable, gpointer user_data, GDestroyNotify user_data_free_func) {
+  g_autofree gchar* dot_suffix = suffix != nullptr ? g_strdup_printf(".%s", suffix) : g_strdup("");
+  g_autoptr(MaplibreOfflineManagerHostApi) api_data = maplibre_offline_manager_host_api_new(vtable, user_data, user_data_free_func);
+
+  g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
+  g_autofree gchar* clear_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) clear_ambient_cache_channel = fl_basic_message_channel_new(messenger, clear_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(clear_ambient_cache_channel, maplibre_offline_manager_host_api_clear_ambient_cache_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* invalidate_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) invalidate_ambient_cache_channel = fl_basic_message_channel_new(messenger, invalidate_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(invalidate_ambient_cache_channel, maplibre_offline_manager_host_api_invalidate_ambient_cache_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* merge_offline_regions_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) merge_offline_regions_channel = fl_basic_message_channel_new(messenger, merge_offline_regions_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(merge_offline_regions_channel, maplibre_offline_manager_host_api_merge_offline_regions_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* pack_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) pack_database_channel = fl_basic_message_channel_new(messenger, pack_database_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(pack_database_channel, maplibre_offline_manager_host_api_pack_database_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* reset_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) reset_database_channel = fl_basic_message_channel_new(messenger, reset_database_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(reset_database_channel, maplibre_offline_manager_host_api_reset_database_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* set_maximum_ambient_cache_size_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) set_maximum_ambient_cache_size_channel = fl_basic_message_channel_new(messenger, set_maximum_ambient_cache_size_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(set_maximum_ambient_cache_size_channel, maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_cb, g_object_ref(api_data), g_object_unref);
+  g_autofree gchar* download_region_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) download_region_channel = fl_basic_message_channel_new(messenger, download_region_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(download_region_channel, maplibre_offline_manager_host_api_download_region_cb, g_object_ref(api_data), g_object_unref);
+}
+
+void maplibre_offline_manager_host_api_clear_method_handlers(FlBinaryMessenger* messenger, const gchar* suffix) {
+  g_autofree gchar* dot_suffix = suffix != nullptr ? g_strdup_printf(".%s", suffix) : g_strdup("");
+
+  g_autoptr(MaplibreMessageCodec) codec = maplibre_message_codec_new();
+  g_autofree gchar* clear_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) clear_ambient_cache_channel = fl_basic_message_channel_new(messenger, clear_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(clear_ambient_cache_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* invalidate_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) invalidate_ambient_cache_channel = fl_basic_message_channel_new(messenger, invalidate_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(invalidate_ambient_cache_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* merge_offline_regions_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) merge_offline_regions_channel = fl_basic_message_channel_new(messenger, merge_offline_regions_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(merge_offline_regions_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* pack_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) pack_database_channel = fl_basic_message_channel_new(messenger, pack_database_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(pack_database_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* reset_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) reset_database_channel = fl_basic_message_channel_new(messenger, reset_database_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(reset_database_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* set_maximum_ambient_cache_size_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) set_maximum_ambient_cache_size_channel = fl_basic_message_channel_new(messenger, set_maximum_ambient_cache_size_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(set_maximum_ambient_cache_size_channel, nullptr, nullptr, nullptr);
+  g_autofree gchar* download_region_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion%s", dot_suffix);
+  g_autoptr(FlBasicMessageChannel) download_region_channel = fl_basic_message_channel_new(messenger, download_region_channel_name, FL_MESSAGE_CODEC(codec));
+  fl_basic_message_channel_set_message_handler(download_region_channel, nullptr, nullptr, nullptr);
+}
+
+void maplibre_offline_manager_host_api_respond_clear_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiClearAmbientCacheResponse) response = maplibre_offline_manager_host_api_clear_ambient_cache_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "clearAmbientCache", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_clear_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiClearAmbientCacheResponse) response = maplibre_offline_manager_host_api_clear_ambient_cache_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "clearAmbientCache", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_invalidate_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse) response = maplibre_offline_manager_host_api_invalidate_ambient_cache_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "invalidateAmbientCache", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_invalidate_ambient_cache(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse) response = maplibre_offline_manager_host_api_invalidate_ambient_cache_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "invalidateAmbientCache", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, FlValue* return_value) {
+  g_autoptr(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse) response = maplibre_offline_manager_host_api_merge_offline_regions_response_new(return_value);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "mergeOfflineRegions", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse) response = maplibre_offline_manager_host_api_merge_offline_regions_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "mergeOfflineRegions", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiPackDatabaseResponse) response = maplibre_offline_manager_host_api_pack_database_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "packDatabase", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiPackDatabaseResponse) response = maplibre_offline_manager_host_api_pack_database_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "packDatabase", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_reset_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiResetDatabaseResponse) response = maplibre_offline_manager_host_api_reset_database_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "resetDatabase", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_reset_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiResetDatabaseResponse) response = maplibre_offline_manager_host_api_reset_database_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "resetDatabase", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_set_maximum_ambient_cache_size(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse) response = maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "setMaximumAmbientCacheSize", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_set_maximum_ambient_cache_size(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiSetMaximumAmbientCacheSizeResponse) response = maplibre_offline_manager_host_api_set_maximum_ambient_cache_size_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "setMaximumAmbientCacheSize", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_download_region(MaplibreOfflineManagerHostApiResponseHandle* response_handle) {
+  g_autoptr(MaplibreOfflineManagerHostApiDownloadRegionResponse) response = maplibre_offline_manager_host_api_download_region_response_new();
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "downloadRegion", error->message);
+  }
+}
+
+void maplibre_offline_manager_host_api_respond_error_download_region(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
+  g_autoptr(MaplibreOfflineManagerHostApiDownloadRegionResponse) response = maplibre_offline_manager_host_api_download_region_response_new_error(code, message, details);
+  g_autoptr(GError) error = nullptr;
+  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
+    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "downloadRegion", error->message);
   }
 }

@@ -52,6 +52,7 @@ template<class T> class ErrorOr {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   ErrorOr() = default;
   T TakeValue() && { return std::get<T>(std::move(v_)); }
 
@@ -184,6 +185,7 @@ class MapOptions {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   std::string style_;
   double zoom_;
@@ -237,6 +239,7 @@ class MapGestures {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   bool rotate_;
   bool pan_;
@@ -273,6 +276,7 @@ class LngLat {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double lng_;
   double lat_;
@@ -305,6 +309,7 @@ class Offset {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double x_;
   double y_;
@@ -343,6 +348,7 @@ class Padding {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   int64_t top_;
   int64_t bottom_;
@@ -388,6 +394,7 @@ class MapCamera {
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   std::unique_ptr<LngLat> center_;
   double zoom_;
@@ -426,14 +433,72 @@ class LngLatBounds {
   static LngLatBounds FromEncodableList(const flutter::EncodableList& list);
   flutter::EncodableList ToEncodableList() const;
   friend class MapOptions;
+  friend class OfflineRegion;
   friend class MapLibreHostApi;
   friend class MapLibreFlutterApi;
   friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
   friend class PigeonInternalCodecSerializer;
   double longitude_west_;
   double longitude_east_;
   double latitude_south_;
   double latitude_north_;
+
+};
+
+
+// Model that describes an offline map region.
+//
+// Generated class from Pigeon that represents data sent in messages.
+class OfflineRegion {
+ public:
+  // Constructs an object setting all fields.
+  explicit OfflineRegion(
+    int64_t id,
+    const LngLatBounds& bounds,
+    double min_zoom,
+    double max_zoom,
+    double pixel_ratio,
+    const std::string& style_url);
+
+  ~OfflineRegion() = default;
+  OfflineRegion(const OfflineRegion& other);
+  OfflineRegion& operator=(const OfflineRegion& other);
+  OfflineRegion(OfflineRegion&& other) = default;
+  OfflineRegion& operator=(OfflineRegion&& other) noexcept = default;
+  int64_t id() const;
+  void set_id(int64_t value_arg);
+
+  const LngLatBounds& bounds() const;
+  void set_bounds(const LngLatBounds& value_arg);
+
+  double min_zoom() const;
+  void set_min_zoom(double value_arg);
+
+  double max_zoom() const;
+  void set_max_zoom(double value_arg);
+
+  double pixel_ratio() const;
+  void set_pixel_ratio(double value_arg);
+
+  const std::string& style_url() const;
+  void set_style_url(std::string_view value_arg);
+
+
+ private:
+  static OfflineRegion FromEncodableList(const flutter::EncodableList& list);
+  flutter::EncodableList ToEncodableList() const;
+  friend class MapLibreHostApi;
+  friend class MapLibreFlutterApi;
+  friend class PermissionManagerHostApi;
+  friend class OfflineManagerHostApi;
+  friend class PigeonInternalCodecSerializer;
+  int64_t id_;
+  std::unique_ptr<LngLatBounds> bounds_;
+  double min_zoom_;
+  double max_zoom_;
+  double pixel_ratio_;
+  std::string style_url_;
 
 };
 
@@ -653,6 +718,55 @@ class PermissionManagerHostApi {
 
  protected:
   PermissionManagerHostApi() = default;
+
+};
+// Generated interface from Pigeon that represents a handler of messages from Flutter.
+class OfflineManagerHostApi {
+ public:
+  OfflineManagerHostApi(const OfflineManagerHostApi&) = delete;
+  OfflineManagerHostApi& operator=(const OfflineManagerHostApi&) = delete;
+  virtual ~OfflineManagerHostApi() {}
+  // Clear the ambient cache.
+  virtual void ClearAmbientCache(std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Invalidate the ambient cache.
+  virtual void InvalidateAmbientCache(std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Merge an offline region into the database.
+  virtual void MergeOfflineRegions(
+    const std::string& path,
+    std::function<void(ErrorOr<flutter::EncodableList> reply)> result) = 0;
+  // Pack database.
+  virtual void PackDatabase(std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Reset database.
+  virtual void ResetDatabase(std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Set maximum ambient cache size.
+  virtual void SetMaximumAmbientCacheSize(
+    int64_t bytes,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Download a map region.
+  virtual void DownloadRegion(
+    const std::string& map_style_url,
+    const LngLatBounds& bounds,
+    double min_zoom,
+    double max_zoom,
+    double pixel_density,
+    const flutter::EncodableMap& metadata,
+    std::function<void(std::optional<FlutterError> reply)> result) = 0;
+
+  // The codec used by OfflineManagerHostApi.
+  static const flutter::StandardMessageCodec& GetCodec();
+  // Sets up an instance of `OfflineManagerHostApi` to handle messages through the `binary_messenger`.
+  static void SetUp(
+    flutter::BinaryMessenger* binary_messenger,
+    OfflineManagerHostApi* api);
+  static void SetUp(
+    flutter::BinaryMessenger* binary_messenger,
+    OfflineManagerHostApi* api,
+    const std::string& message_channel_suffix);
+  static flutter::EncodableValue WrapError(std::string_view error_message);
+  static flutter::EncodableValue WrapError(const FlutterError& error);
+
+ protected:
+  OfflineManagerHostApi() = default;
 
 };
 }  // namespace pigeon_maplibre

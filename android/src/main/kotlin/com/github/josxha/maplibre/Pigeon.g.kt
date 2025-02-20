@@ -346,6 +346,43 @@ data class LngLatBounds (
     )
   }
 }
+
+/**
+ * Model that describes an offline map region.
+ *
+ * Generated class from Pigeon that represents data sent in messages.
+ */
+data class OfflineRegion (
+  val id: Long,
+  val bounds: LngLatBounds,
+  val minZoom: Double,
+  val maxZoom: Double,
+  val pixelRatio: Double,
+  val styleUrl: String
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): OfflineRegion {
+      val id = pigeonVar_list[0] as Long
+      val bounds = pigeonVar_list[1] as LngLatBounds
+      val minZoom = pigeonVar_list[2] as Double
+      val maxZoom = pigeonVar_list[3] as Double
+      val pixelRatio = pigeonVar_list[4] as Double
+      val styleUrl = pigeonVar_list[5] as String
+      return OfflineRegion(id, bounds, minZoom, maxZoom, pixelRatio, styleUrl)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      id,
+      bounds,
+      minZoom,
+      maxZoom,
+      pixelRatio,
+      styleUrl,
+    )
+  }
+}
 private open class PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
@@ -399,6 +436,11 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
           LngLatBounds.fromList(it)
         }
       }
+      139.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          OfflineRegion.fromList(it)
+        }
+      }
       else -> super.readValueOfType(type, buffer)
     }
   }
@@ -442,6 +484,10 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
       }
       is LngLatBounds -> {
         stream.write(138)
+        writeValue(stream, value.toList())
+      }
+      is OfflineRegion -> {
+        stream.write(139)
         writeValue(stream, value.toList())
       }
       else -> super.writeValue(stream, value)
@@ -976,6 +1022,166 @@ interface PermissionManagerHostApi {
               } else {
                 val data = result.getOrNull()
                 reply.reply(wrapResult(data))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+    }
+  }
+}
+/** Generated interface from Pigeon that represents a handler of messages from Flutter. */
+interface OfflineManagerHostApi {
+  /** Clear the ambient cache. */
+  fun clearAmbientCache(callback: (Result<Unit>) -> Unit)
+  /** Invalidate the ambient cache. */
+  fun invalidateAmbientCache(callback: (Result<Unit>) -> Unit)
+  /** Merge an offline region into the database. */
+  fun mergeOfflineRegions(path: String, callback: (Result<List<OfflineRegion>>) -> Unit)
+  /** Pack database. */
+  fun packDatabase(callback: (Result<Unit>) -> Unit)
+  /** Reset database. */
+  fun resetDatabase(callback: (Result<Unit>) -> Unit)
+  /** Set maximum ambient cache size. */
+  fun setMaximumAmbientCacheSize(bytes: Long, callback: (Result<Unit>) -> Unit)
+  /** Download a map region. */
+  fun downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: Map<String, Any?>, callback: (Result<Unit>) -> Unit)
+
+  companion object {
+    /** The codec used by OfflineManagerHostApi. */
+    val codec: MessageCodec<Any?> by lazy {
+      PigeonPigeonCodec()
+    }
+    /** Sets up an instance of `OfflineManagerHostApi` to handle messages through the `binaryMessenger`. */
+    @JvmOverloads
+    fun setUp(binaryMessenger: BinaryMessenger, api: OfflineManagerHostApi?, messageChannelSuffix: String = "") {
+      val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.clearAmbientCache{ result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.invalidateAmbientCache{ result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val pathArg = args[0] as String
+            api.mergeOfflineRegions(pathArg) { result: Result<List<OfflineRegion>> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(wrapResult(data))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.packDatabase{ result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            api.resetDatabase{ result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val bytesArg = args[0] as Long
+            api.setMaximumAmbientCacheSize(bytesArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val mapStyleUrlArg = args[0] as String
+            val boundsArg = args[1] as LngLatBounds
+            val minZoomArg = args[2] as Double
+            val maxZoomArg = args[3] as Double
+            val pixelDensityArg = args[4] as Double
+            val metadataArg = args[5] as Map<String, Any?>
+            api.downloadRegion(mapStyleUrlArg, boundsArg, minZoomArg, maxZoomArg, pixelDensityArg, metadataArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(wrapError(error))
+              } else {
+                reply.reply(wrapResult(null))
               }
             }
           }

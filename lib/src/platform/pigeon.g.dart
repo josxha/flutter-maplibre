@@ -330,6 +330,46 @@ class LngLatBounds {
   }
 }
 
+/// Model that describes an offline map region.
+class OfflineRegion {
+  OfflineRegion({
+    required this.id,
+    required this.bounds,
+    required this.minZoom,
+    required this.maxZoom,
+    required this.pixelRatio,
+    required this.styleUrl,
+  });
+
+  int id;
+
+  LngLatBounds bounds;
+
+  double minZoom;
+
+  double maxZoom;
+
+  double pixelRatio;
+
+  String styleUrl;
+
+  Object encode() {
+    return <Object?>[id, bounds, minZoom, maxZoom, pixelRatio, styleUrl];
+  }
+
+  static OfflineRegion decode(Object result) {
+    result as List<Object?>;
+    return OfflineRegion(
+      id: result[0]! as int,
+      bounds: result[1]! as LngLatBounds,
+      minZoom: result[2]! as double,
+      maxZoom: result[3]! as double,
+      pixelRatio: result[4]! as double,
+      styleUrl: result[5]! as String,
+    );
+  }
+}
+
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
   @override
@@ -367,6 +407,9 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is LngLatBounds) {
       buffer.putUint8(138);
       writeValue(buffer, value.encode());
+    } else if (value is OfflineRegion) {
+      buffer.putUint8(139);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -398,6 +441,8 @@ class _PigeonCodec extends StandardMessageCodec {
         return MapCamera.decode(readValue(buffer)!);
       case 138:
         return LngLatBounds.decode(readValue(buffer)!);
+      case 139:
+        return OfflineRegion.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -1227,6 +1272,220 @@ class PermissionManagerHostApi {
       );
     } else {
       return (pigeonVar_replyList[0] as bool?)!;
+    }
+  }
+}
+
+class OfflineManagerHostApi {
+  /// Constructor for [OfflineManagerHostApi].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  OfflineManagerHostApi({
+    BinaryMessenger? binaryMessenger,
+    String messageChannelSuffix = '',
+  }) : pigeonVar_binaryMessenger = binaryMessenger,
+       pigeonVar_messageChannelSuffix =
+           messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+  final BinaryMessenger? pigeonVar_binaryMessenger;
+
+  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
+
+  final String pigeonVar_messageChannelSuffix;
+
+  /// Clear the ambient cache.
+  Future<void> clearAmbientCache() async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Invalidate the ambient cache.
+  Future<void> invalidateAmbientCache() async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Merge an offline region into the database.
+  Future<List<OfflineRegion>> mergeOfflineRegions({
+    required String path,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[path]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as List<Object?>?)!.cast<OfflineRegion>();
+    }
+  }
+
+  /// Pack database.
+  Future<void> packDatabase() async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Reset database.
+  Future<void> resetDatabase() async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(null) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Set maximum ambient cache size.
+  Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[bytes]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Download a map region.
+  Future<void> downloadRegion({
+    required String mapStyleUrl,
+    required LngLatBounds bounds,
+    required double minZoom,
+    required double maxZoom,
+    required double pixelDensity,
+    Map<String, Object?> metadata = const {},
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[
+              mapStyleUrl,
+              bounds,
+              minZoom,
+              maxZoom,
+              pixelDensity,
+              metadata,
+            ])
+            as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
     }
   }
 }
