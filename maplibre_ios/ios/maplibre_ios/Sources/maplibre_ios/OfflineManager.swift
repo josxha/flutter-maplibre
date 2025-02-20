@@ -8,6 +8,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
             binaryMessenger: messenger, api: self, messageChannelSuffix: "")
     }
 
+
     func clearAmbientCache(
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
@@ -49,17 +50,6 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
                 completion(.success((regions)))
             }
         }
-    }
-
-    func packDatabase(completion: @escaping (Result<Void, any Error>) -> Void) {
-        // TODO implement
-        MLNOfflineStorage.shared.packDatabase(completionHandler: { error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        })
     }
 
     func resetDatabase(completion: @escaping (Result<Void, any Error>) -> Void)

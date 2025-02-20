@@ -1040,8 +1040,6 @@ interface OfflineManagerHostApi {
   fun invalidateAmbientCache(callback: (Result<Unit>) -> Unit)
   /** Merge an offline region into the database. */
   fun mergeOfflineRegions(path: String, callback: (Result<List<OfflineRegion>>) -> Unit)
-  /** Pack database. */
-  fun packDatabase(callback: (Result<Unit>) -> Unit)
   /** Reset database. */
   fun resetDatabase(callback: (Result<Unit>) -> Unit)
   /** Set maximum ambient cache size. */
@@ -1105,23 +1103,6 @@ interface OfflineManagerHostApi {
               } else {
                 val data = result.getOrNull()
                 reply.reply(wrapResult(data))
-              }
-            }
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { _, reply ->
-            api.packDatabase{ result: Result<Unit> ->
-              val error = result.exceptionOrNull()
-              if (error != null) {
-                reply.reply(wrapError(error))
-              } else {
-                reply.reply(wrapResult(null))
               }
             }
           }

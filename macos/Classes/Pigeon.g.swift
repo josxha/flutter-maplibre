@@ -1073,8 +1073,6 @@ protocol OfflineManagerHostApi {
   func invalidateAmbientCache(completion: @escaping (Result<Void, Error>) -> Void)
   /// Merge an offline region into the database.
   func mergeOfflineRegions(path: String, completion: @escaping (Result<[OfflineRegion], Error>) -> Void)
-  /// Pack database.
-  func packDatabase(completion: @escaping (Result<Void, Error>) -> Void)
   /// Reset database.
   func resetDatabase(completion: @escaping (Result<Void, Error>) -> Void)
   /// Set maximum ambient cache size.
@@ -1138,22 +1136,6 @@ class OfflineManagerHostApiSetup {
       }
     } else {
       mergeOfflineRegionsChannel.setMessageHandler(nil)
-    }
-    /// Pack database.
-    let packDatabaseChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.packDatabase\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      packDatabaseChannel.setMessageHandler { _, reply in
-        api.packDatabase { result in
-          switch result {
-          case .success:
-            reply(wrapResult(nil))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
-        }
-      }
-    } else {
-      packDatabaseChannel.setMessageHandler(nil)
     }
     /// Reset database.
     let resetDatabaseChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)

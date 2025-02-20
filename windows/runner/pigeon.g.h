@@ -734,8 +734,6 @@ class OfflineManagerHostApi {
   virtual void MergeOfflineRegions(
     const std::string& path,
     std::function<void(ErrorOr<flutter::EncodableList> reply)> result) = 0;
-  // Pack database.
-  virtual void PackDatabase(std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Reset database.
   virtual void ResetDatabase(std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Set maximum ambient cache size.

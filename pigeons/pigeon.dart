@@ -183,10 +183,6 @@ abstract interface class OfflineManagerHostApi {
   @async
   List<OfflineRegion> mergeOfflineRegions({required String path});
 
-  /// Pack database.
-  @async
-  void packDatabase();
-
   /// Reset database.
   @async
   void resetDatabase();

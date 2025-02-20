@@ -1690,7 +1690,6 @@ typedef struct {
   void (*clear_ambient_cache)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
   void (*invalidate_ambient_cache)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
   void (*merge_offline_regions)(const gchar* path, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
-  void (*pack_database)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
   void (*reset_database)(MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
   void (*set_maximum_ambient_cache_size)(int64_t bytes, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
   void (*download_region)(const gchar* map_style_url, MaplibreLngLatBounds* bounds, double min_zoom, double max_zoom, double pixel_density, FlValue* metadata, MaplibreOfflineManagerHostApiResponseHandle* response_handle, gpointer user_data);
@@ -1776,25 +1775,6 @@ void maplibre_offline_manager_host_api_respond_merge_offline_regions(MaplibreOff
  * Responds with an error to OfflineManagerHostApi.mergeOfflineRegions. 
  */
 void maplibre_offline_manager_host_api_respond_error_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
-
-/**
- * maplibre_offline_manager_host_api_respond_pack_database:
- * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
- *
- * Responds to OfflineManagerHostApi.packDatabase. 
- */
-void maplibre_offline_manager_host_api_respond_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle);
-
-/**
- * maplibre_offline_manager_host_api_respond_error_pack_database:
- * @response_handle: a #MaplibreOfflineManagerHostApiResponseHandle.
- * @code: error code.
- * @message: error message.
- * @details: (allow-none): error details or %NULL.
- *
- * Responds with an error to OfflineManagerHostApi.packDatabase. 
- */
-void maplibre_offline_manager_host_api_respond_error_pack_database(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details);
 
 /**
  * maplibre_offline_manager_host_api_respond_reset_database:

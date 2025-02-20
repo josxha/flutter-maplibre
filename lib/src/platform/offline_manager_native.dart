@@ -74,7 +74,8 @@ abstract class OfflineManagerNative implements OfflineManager {
   }
 
   @override
-  Future<void> packDatabase() async => _hostApi.packDatabase();
+  Future<void> packDatabase() async =>
+      throw UnimplementedError('The database cannot be packed on iOS.');
 
   @override
   Future<void> resetDatabase() async => _hostApi.resetDatabase();
