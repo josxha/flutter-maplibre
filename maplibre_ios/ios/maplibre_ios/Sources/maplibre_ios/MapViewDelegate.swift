@@ -1,7 +1,9 @@
 import Flutter
 import MapLibre
 
-class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreHostApi, UIGestureRecognizerDelegate {
+class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
+    MapLibreHostApi, UIGestureRecognizerDelegate
+{
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
     private var _viewId: Int64
@@ -16,9 +18,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
         print("### init new MapViewDelegate ### \(viewId) ###")
         var channelSuffix = String(viewId)
         _viewId = viewId
-        _flutterApi = MapLibreFlutterApi(binaryMessenger: binaryMessenger, messageChannelSuffix: channelSuffix)
-        super.init() // self can be used after calling super.init()
-        MapLibreHostApiSetup.setUp(binaryMessenger: binaryMessenger, api: self, messageChannelSuffix: channelSuffix)
+        _flutterApi = MapLibreFlutterApi(
+            binaryMessenger: binaryMessenger,
+            messageChannelSuffix: channelSuffix)
+        super.init()  // self can be used after calling super.init()
+        MapLibreHostApiSetup.setUp(
+            binaryMessenger: binaryMessenger, api: self,
+            messageChannelSuffix: channelSuffix)
         // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
@@ -27,7 +33,9 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 // init map view
                 self._mapView = MLNMapView(frame: self._view.bounds)
                 MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
-                self._mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                self._mapView.autoresizingMask = [
+                    .flexibleWidth, .flexibleHeight,
+                ]
                 self._view.addSubview(self._mapView)
                 self._mapView.delegate = self
                 // disable the default UI because they are rebuilt in Flutter
@@ -37,10 +45,16 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
                 // set options
                 DispatchQueue.main.async {
                     var currentCenter = self._mapView.camera.centerCoordinate
-                    var center = CLLocationCoordinate2D(latitude: mapOptions.center?.lat ?? currentCenter.latitude, longitude: mapOptions.center?.lng ?? currentCenter.longitude)
-                    self._mapView.setCenter(center, zoomLevel: mapOptions.zoom, direction: mapOptions.bearing, animated: false)
+                    var center = CLLocationCoordinate2D(
+                        latitude: mapOptions.center?.lat
+                            ?? currentCenter.latitude,
+                        longitude: mapOptions.center?.lng
+                            ?? currentCenter.longitude)
+                    self._mapView.setCenter(
+                        center, zoomLevel: mapOptions.zoom,
+                        direction: mapOptions.bearing, animated: false)
                 }
-                
+
                 self._mapView.showAttribution(false)
 
                 self._mapView.minimumZoomLevel = mapOptions.minZoom
@@ -57,14 +71,19 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
                 self._flutterApi.onMapReady { _ in }
                 // tap gestures
-                self._mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:))))
-                self._mapView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.onLongPress(sender:))))
+                self._mapView.addGestureRecognizer(
+                    UITapGestureRecognizer(
+                        target: self, action: #selector(self.onTap(sender:))))
+                self._mapView.addGestureRecognizer(
+                    UILongPressGestureRecognizer(
+                        target: self,
+                        action: #selector(self.onLongPress(sender:))))
             case let .failure(error):
                 print(error)
             }
         }
     }
-    
+
     func dispose() throws {
         print("### dispose MapLibre view ### \(_viewId) ###")
         MapLibreRegistry.removeMap(viewId: _viewId)
@@ -77,20 +96,27 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     @objc func onTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        _flutterApi.onClick(point: LngLat(lng: point.longitude, lat: point.latitude)) { _ in }
+        _flutterApi.onClick(
+            point: LngLat(lng: point.longitude, lat: point.latitude)
+        ) { _ in }
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        _flutterApi.onLongClick(point: LngLat(lng: point.longitude, lat: point.latitude)) { _ in }
+        _flutterApi.onLongClick(
+            point: LngLat(lng: point.longitude, lat: point.latitude)
+        ) { _ in }
     }
 
     func view() -> UIView {
         return _view
     }
 
-    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(
+        _: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer
+    ) -> Bool {
         // Do not override the default behavior
         return true
     }
@@ -98,10 +124,10 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
     // MLNMapViewDelegate method called when map has finished loading
     func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
         // setCamera() can only be used after the map did finish loading
-        var camera = self._mapView.camera;
+        var camera = self._mapView.camera
         camera.pitch = _mapOptions!.pitch
         self._mapView.setCamera(camera, animated: false)
-        
+
         _mapView = mapView
         print("mapView didFinishLoading, call onStyleLoaded")
         _flutterApi.onStyleLoaded { _ in }
@@ -117,52 +143,99 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate, MapLibreH
 
     func onCameraMoved() {
         var mlnCamera = _mapView.camera
-        var center = LngLat(lng: mlnCamera.centerCoordinate.longitude, lat: mlnCamera.centerCoordinate.latitude)
-        var pigeonCamera = MapCamera(center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch, bearing: mlnCamera.heading)
+        var center = LngLat(
+            lng: mlnCamera.centerCoordinate.longitude,
+            lat: mlnCamera.centerCoordinate.latitude)
+        var pigeonCamera = MapCamera(
+            center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch,
+            bearing: mlnCamera.heading)
         _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 
-    func addFillLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addFillLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addCircleLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addCircleLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addBackgroundLayer(id _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addBackgroundLayer(
+        id _: String, layout _: [String: Any], paint _: [String: Any],
+        belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addFillExtrusionLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addFillExtrusionLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addHeatmapLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addHeatmapLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addHillshadeLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addHillshadeLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addLineLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addLineLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addRasterLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addRasterLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func addSymbolLayer(id _: String, sourceId _: String, layout _: [String: Any], paint _: [String: Any], belowLayerId _: String?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addSymbolLayer(
+        id _: String, sourceId _: String, layout _: [String: Any],
+        paint _: [String: Any], belowLayerId _: String?,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         completion(.success(()))
     }
 
-    func loadImage(url _: String, completion _: @escaping (Result<FlutterStandardTypedData, Error>) -> Void) {
+    func loadImage(
+        url _: String,
+        completion _: @escaping (Result<FlutterStandardTypedData, Error>) ->
+            Void
+    ) {
         // completion(.success((bytes)))
     }
 
-    func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addImage(
+        id: String, bytes: FlutterStandardTypedData,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         // Main Thread Checker: UI API called on a background thread: -[UIView frame]
         // DispatchQueue.main.async {
         print("addImage before")
