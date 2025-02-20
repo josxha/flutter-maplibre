@@ -8,7 +8,6 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
             binaryMessenger: messenger, api: self, messageChannelSuffix: "")
     }
 
-
     func clearAmbientCache(
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
@@ -32,24 +31,6 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
                 completion(.success(()))
             }
         })
-    }
-
-    func mergeOfflineRegions(
-        path: String,
-        completion: @escaping (Result<[OfflineRegion], any Error>) -> Void
-    ) {
-        MLNOfflineStorage.shared.addContents(ofFile: path) {
-            url, packs, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                let regions = packs?.map({ pack in
-                    // TODO implement
-                    return OfflineRegion(pack: pack)
-                })
-                completion(.success((regions)))
-            }
-        }
     }
 
     func resetDatabase(completion: @escaping (Result<Void, any Error>) -> Void)
@@ -78,7 +59,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
 
     func downloadRegion(
         mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double,
-        maxZoom: Double, pixelDensity: Double, metadata: [String: Any?],
+        maxZoom: Double, pixelDensity: Double, metadata: String,
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
         let mlnBounds = MLNCoordinateBounds(
@@ -91,10 +72,20 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
             styleURL: URL(string: mapStyleUrl), bounds: mlnBounds,
             fromZoomLevel: minZoom, toZoomLevel: maxZoom)
         // TODO implement
-        let context = NSData(data: metadata)
-        MLNOfflineStorage.shared.addPack(for: region, withContext: context) {
+        let context = metadata.data(using: .utf8)
+        if context == nil {
+            let error = PigeonError(
+                code: "INVALID_METADATA",
+                message: "The metadata could not be converted to NSData.",
+                details: nil)
+            completion(.failure(error))
+            return
+        }
+        MLNOfflineStorage.shared.addPack(for: region, withContext: context!) {
             pack, error in
             pack?.resume()
+            // TODO listen to updates
+            completion(.success(()))
         }
     }
 }

@@ -730,10 +730,6 @@ class OfflineManagerHostApi {
   virtual void ClearAmbientCache(std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Invalidate the ambient cache.
   virtual void InvalidateAmbientCache(std::function<void(std::optional<FlutterError> reply)> result) = 0;
-  // Merge an offline region into the database.
-  virtual void MergeOfflineRegions(
-    const std::string& path,
-    std::function<void(ErrorOr<flutter::EncodableList> reply)> result) = 0;
   // Reset database.
   virtual void ResetDatabase(std::function<void(std::optional<FlutterError> reply)> result) = 0;
   // Set maximum ambient cache size.
@@ -747,7 +743,7 @@ class OfflineManagerHostApi {
     double min_zoom,
     double max_zoom,
     double pixel_density,
-    const flutter::EncodableMap& metadata,
+    const std::string& metadata,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
 
   // The codec used by OfflineManagerHostApi.

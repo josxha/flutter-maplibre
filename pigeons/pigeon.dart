@@ -179,10 +179,6 @@ abstract interface class OfflineManagerHostApi {
   @async
   void invalidateAmbientCache();
 
-  /// Merge an offline region into the database.
-  @async
-  List<OfflineRegion> mergeOfflineRegions({required String path});
-
   /// Reset database.
   @async
   void resetDatabase();
@@ -199,7 +195,7 @@ abstract interface class OfflineManagerHostApi {
     required double minZoom,
     required double maxZoom,
     required double pixelDensity,
-    Map<String, Object?> metadata = const {},
+    required String metadata,
   });
 }
 

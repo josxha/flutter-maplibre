@@ -1071,14 +1071,12 @@ protocol OfflineManagerHostApi {
   func clearAmbientCache(completion: @escaping (Result<Void, Error>) -> Void)
   /// Invalidate the ambient cache.
   func invalidateAmbientCache(completion: @escaping (Result<Void, Error>) -> Void)
-  /// Merge an offline region into the database.
-  func mergeOfflineRegions(path: String, completion: @escaping (Result<[OfflineRegion], Error>) -> Void)
   /// Reset database.
   func resetDatabase(completion: @escaping (Result<Void, Error>) -> Void)
   /// Set maximum ambient cache size.
   func setMaximumAmbientCacheSize(bytes: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Download a map region.
-  func downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: [String: Any?], completion: @escaping (Result<Void, Error>) -> Void)
+  func downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -1118,24 +1116,6 @@ class OfflineManagerHostApiSetup {
       }
     } else {
       invalidateAmbientCacheChannel.setMessageHandler(nil)
-    }
-    /// Merge an offline region into the database.
-    let mergeOfflineRegionsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      mergeOfflineRegionsChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pathArg = args[0] as! String
-        api.mergeOfflineRegions(path: pathArg) { result in
-          switch result {
-          case .success(let res):
-            reply(wrapResult(res))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
-        }
-      }
-    } else {
-      mergeOfflineRegionsChannel.setMessageHandler(nil)
     }
     /// Reset database.
     let resetDatabaseChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
@@ -1181,7 +1161,7 @@ class OfflineManagerHostApiSetup {
         let minZoomArg = args[2] as! Double
         let maxZoomArg = args[3] as! Double
         let pixelDensityArg = args[4] as! Double
-        let metadataArg = args[5] as! [String: Any?]
+        let metadataArg = args[5] as! String
         api.downloadRegion(mapStyleUrl: mapStyleUrlArg, bounds: boundsArg, minZoom: minZoomArg, maxZoom: maxZoomArg, pixelDensity: pixelDensityArg, metadata: metadataArg) { result in
           switch result {
           case .success:

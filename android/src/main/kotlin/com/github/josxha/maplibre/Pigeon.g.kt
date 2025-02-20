@@ -1038,14 +1038,12 @@ interface OfflineManagerHostApi {
   fun clearAmbientCache(callback: (Result<Unit>) -> Unit)
   /** Invalidate the ambient cache. */
   fun invalidateAmbientCache(callback: (Result<Unit>) -> Unit)
-  /** Merge an offline region into the database. */
-  fun mergeOfflineRegions(path: String, callback: (Result<List<OfflineRegion>>) -> Unit)
   /** Reset database. */
   fun resetDatabase(callback: (Result<Unit>) -> Unit)
   /** Set maximum ambient cache size. */
   fun setMaximumAmbientCacheSize(bytes: Long, callback: (Result<Unit>) -> Unit)
   /** Download a map region. */
-  fun downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: Map<String, Any?>, callback: (Result<Unit>) -> Unit)
+  fun downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: String, callback: (Result<Unit>) -> Unit)
 
   companion object {
     /** The codec used by OfflineManagerHostApi. */
@@ -1083,26 +1081,6 @@ interface OfflineManagerHostApi {
                 reply.reply(wrapError(error))
               } else {
                 reply.reply(wrapResult(null))
-              }
-            }
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pathArg = args[0] as String
-            api.mergeOfflineRegions(pathArg) { result: Result<List<OfflineRegion>> ->
-              val error = result.exceptionOrNull()
-              if (error != null) {
-                reply.reply(wrapError(error))
-              } else {
-                val data = result.getOrNull()
-                reply.reply(wrapResult(data))
               }
             }
           }
@@ -1156,7 +1134,7 @@ interface OfflineManagerHostApi {
             val minZoomArg = args[2] as Double
             val maxZoomArg = args[3] as Double
             val pixelDensityArg = args[4] as Double
-            val metadataArg = args[5] as Map<String, Any?>
+            val metadataArg = args[5] as String
             api.downloadRegion(mapStyleUrlArg, boundsArg, minZoomArg, maxZoomArg, pixelDensityArg, metadataArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {

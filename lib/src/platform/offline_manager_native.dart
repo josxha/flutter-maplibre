@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
@@ -26,6 +27,7 @@ abstract class OfflineManagerNative implements OfflineManager {
       minZoom: minZoom,
       maxZoom: maxZoom,
       pixelDensity: pixelDensity,
+      metadata: jsonEncode(metadata),
     );
     // TODO implement
     yield DownloadProgress(
@@ -52,39 +54,19 @@ abstract class OfflineManagerNative implements OfflineManager {
   @override
   Future<List<OfflineRegion>> mergeOfflineRegions({
     required String path,
-  }) async {
-    final result = await _hostApi.mergeOfflineRegions(path: path);
-    return result
-        .map(
-          (e) => OfflineRegion(
-            id: e.id,
-            bounds: LngLatBounds(
-              longitudeWest: e.bounds.longitudeWest,
-              longitudeEast: e.bounds.longitudeEast,
-              latitudeSouth: e.bounds.latitudeSouth,
-              latitudeNorth: e.bounds.latitudeNorth,
-            ),
-            minZoom: e.minZoom,
-            maxZoom: e.maxZoom,
-            pixelRatio: e.pixelRatio,
-            styleUrl: e.styleUrl,
-          ),
-        )
-        .toList(growable: false);
-  }
+  }) async =>
+      throw UnimplementedError('Importing Offline Regions is not available.');
 
   @override
   Future<void> packDatabase() async =>
-      throw UnimplementedError('The database cannot be packed on iOS.');
+      throw UnimplementedError('The database cannot be packed.');
 
   @override
   Future<void> resetDatabase() async => _hostApi.resetDatabase();
 
   @override
-  void runPackDatabaseAutomatically({required bool enabled}) {
-    // TODO: implement runPackDatabaseAutomatically
-    throw UnimplementedError();
-  }
+  void runPackDatabaseAutomatically({required bool enabled}) =>
+      throw UnimplementedError('The database cannot be packed.');
 
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async =>

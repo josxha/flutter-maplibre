@@ -3081,45 +3081,6 @@ static MaplibreOfflineManagerHostApiInvalidateAmbientCacheResponse* maplibre_off
   return self;
 }
 
-G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse, maplibre_offline_manager_host_api_merge_offline_regions_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE, GObject)
-
-struct _MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse {
-  GObject parent_instance;
-
-  FlValue* value;
-};
-
-G_DEFINE_TYPE(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse, maplibre_offline_manager_host_api_merge_offline_regions_response, G_TYPE_OBJECT)
-
-static void maplibre_offline_manager_host_api_merge_offline_regions_response_dispose(GObject* object) {
-  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(object);
-  g_clear_pointer(&self->value, fl_value_unref);
-  G_OBJECT_CLASS(maplibre_offline_manager_host_api_merge_offline_regions_response_parent_class)->dispose(object);
-}
-
-static void maplibre_offline_manager_host_api_merge_offline_regions_response_init(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self) {
-}
-
-static void maplibre_offline_manager_host_api_merge_offline_regions_response_class_init(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponseClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = maplibre_offline_manager_host_api_merge_offline_regions_response_dispose;
-}
-
-static MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* maplibre_offline_manager_host_api_merge_offline_regions_response_new(FlValue* return_value) {
-  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(g_object_new(maplibre_offline_manager_host_api_merge_offline_regions_response_get_type(), nullptr));
-  self->value = fl_value_new_list();
-  fl_value_append_take(self->value, fl_value_ref(return_value));
-  return self;
-}
-
-static MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* maplibre_offline_manager_host_api_merge_offline_regions_response_new_error(const gchar* code, const gchar* message, FlValue* details) {
-  MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API_MERGE_OFFLINE_REGIONS_RESPONSE(g_object_new(maplibre_offline_manager_host_api_merge_offline_regions_response_get_type(), nullptr));
-  self->value = fl_value_new_list();
-  fl_value_append_take(self->value, fl_value_new_string(code));
-  fl_value_append_take(self->value, fl_value_new_string(message != nullptr ? message : ""));
-  fl_value_append_take(self->value, details != nullptr ? fl_value_ref(details) : fl_value_new_null());
-  return self;
-}
-
 G_DECLARE_FINAL_TYPE(MaplibreOfflineManagerHostApiResetDatabaseResponse, maplibre_offline_manager_host_api_reset_database_response, MAPLIBRE, OFFLINE_MANAGER_HOST_API_RESET_DATABASE_RESPONSE, GObject)
 
 struct _MaplibreOfflineManagerHostApiResetDatabaseResponse {
@@ -3293,19 +3254,6 @@ static void maplibre_offline_manager_host_api_invalidate_ambient_cache_cb(FlBasi
   self->vtable->invalidate_ambient_cache(handle, self->user_data);
 }
 
-static void maplibre_offline_manager_host_api_merge_offline_regions_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
-  MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
-
-  if (self->vtable == nullptr || self->vtable->merge_offline_regions == nullptr) {
-    return;
-  }
-
-  FlValue* value0 = fl_value_get_list_value(message_, 0);
-  const gchar* path = fl_value_get_string(value0);
-  g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
-  self->vtable->merge_offline_regions(path, handle, self->user_data);
-}
-
 static void maplibre_offline_manager_host_api_reset_database_cb(FlBasicMessageChannel* channel, FlValue* message_, FlBasicMessageChannelResponseHandle* response_handle, gpointer user_data) {
   MaplibreOfflineManagerHostApi* self = MAPLIBRE_OFFLINE_MANAGER_HOST_API(user_data);
 
@@ -3348,7 +3296,7 @@ static void maplibre_offline_manager_host_api_download_region_cb(FlBasicMessageC
   FlValue* value4 = fl_value_get_list_value(message_, 4);
   double pixel_density = fl_value_get_float(value4);
   FlValue* value5 = fl_value_get_list_value(message_, 5);
-  FlValue* metadata = value5;
+  const gchar* metadata = fl_value_get_string(value5);
   g_autoptr(MaplibreOfflineManagerHostApiResponseHandle) handle = maplibre_offline_manager_host_api_response_handle_new(channel, response_handle);
   self->vtable->download_region(map_style_url, bounds, min_zoom, max_zoom, pixel_density, metadata, handle, self->user_data);
 }
@@ -3364,9 +3312,6 @@ void maplibre_offline_manager_host_api_set_method_handlers(FlBinaryMessenger* me
   g_autofree gchar* invalidate_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) invalidate_ambient_cache_channel = fl_basic_message_channel_new(messenger, invalidate_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(invalidate_ambient_cache_channel, maplibre_offline_manager_host_api_invalidate_ambient_cache_cb, g_object_ref(api_data), g_object_unref);
-  g_autofree gchar* merge_offline_regions_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) merge_offline_regions_channel = fl_basic_message_channel_new(messenger, merge_offline_regions_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(merge_offline_regions_channel, maplibre_offline_manager_host_api_merge_offline_regions_cb, g_object_ref(api_data), g_object_unref);
   g_autofree gchar* reset_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) reset_database_channel = fl_basic_message_channel_new(messenger, reset_database_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(reset_database_channel, maplibre_offline_manager_host_api_reset_database_cb, g_object_ref(api_data), g_object_unref);
@@ -3388,9 +3333,6 @@ void maplibre_offline_manager_host_api_clear_method_handlers(FlBinaryMessenger* 
   g_autofree gchar* invalidate_ambient_cache_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) invalidate_ambient_cache_channel = fl_basic_message_channel_new(messenger, invalidate_ambient_cache_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(invalidate_ambient_cache_channel, nullptr, nullptr, nullptr);
-  g_autofree gchar* merge_offline_regions_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions%s", dot_suffix);
-  g_autoptr(FlBasicMessageChannel) merge_offline_regions_channel = fl_basic_message_channel_new(messenger, merge_offline_regions_channel_name, FL_MESSAGE_CODEC(codec));
-  fl_basic_message_channel_set_message_handler(merge_offline_regions_channel, nullptr, nullptr, nullptr);
   g_autofree gchar* reset_database_channel_name = g_strdup_printf("dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase%s", dot_suffix);
   g_autoptr(FlBasicMessageChannel) reset_database_channel = fl_basic_message_channel_new(messenger, reset_database_channel_name, FL_MESSAGE_CODEC(codec));
   fl_basic_message_channel_set_message_handler(reset_database_channel, nullptr, nullptr, nullptr);
@@ -3431,22 +3373,6 @@ void maplibre_offline_manager_host_api_respond_error_invalidate_ambient_cache(Ma
   g_autoptr(GError) error = nullptr;
   if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
     g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "invalidateAmbientCache", error->message);
-  }
-}
-
-void maplibre_offline_manager_host_api_respond_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, FlValue* return_value) {
-  g_autoptr(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse) response = maplibre_offline_manager_host_api_merge_offline_regions_response_new(return_value);
-  g_autoptr(GError) error = nullptr;
-  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "mergeOfflineRegions", error->message);
-  }
-}
-
-void maplibre_offline_manager_host_api_respond_error_merge_offline_regions(MaplibreOfflineManagerHostApiResponseHandle* response_handle, const gchar* code, const gchar* message, FlValue* details) {
-  g_autoptr(MaplibreOfflineManagerHostApiMergeOfflineRegionsResponse) response = maplibre_offline_manager_host_api_merge_offline_regions_response_new_error(code, message, details);
-  g_autoptr(GError) error = nullptr;
-  if (!fl_basic_message_channel_respond(response_handle->channel, response_handle->response_handle, response->value, &error)) {
-    g_warning("Failed to send response to %s.%s: %s", "OfflineManagerHostApi", "mergeOfflineRegions", error->message);
   }
 }
 

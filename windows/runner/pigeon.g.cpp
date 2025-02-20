@@ -1791,35 +1791,6 @@ void OfflineManagerHostApi::SetUp(
     }
   }
   {
-    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.mergeOfflineRegions" + prepended_suffix, &GetCodec());
-    if (api != nullptr) {
-      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
-        try {
-          const auto& args = std::get<EncodableList>(message);
-          const auto& encodable_path_arg = args.at(0);
-          if (encodable_path_arg.IsNull()) {
-            reply(WrapError("path_arg unexpectedly null."));
-            return;
-          }
-          const auto& path_arg = std::get<std::string>(encodable_path_arg);
-          api->MergeOfflineRegions(path_arg, [reply](ErrorOr<EncodableList>&& output) {
-            if (output.has_error()) {
-              reply(WrapError(output.error()));
-              return;
-            }
-            EncodableList wrapped;
-            wrapped.push_back(EncodableValue(std::move(output).TakeValue()));
-            reply(EncodableValue(std::move(wrapped)));
-          });
-        } catch (const std::exception& exception) {
-          reply(WrapError(exception.what()));
-        }
-      });
-    } else {
-      channel.SetMessageHandler(nullptr);
-    }
-  }
-  {
     BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase" + prepended_suffix, &GetCodec());
     if (api != nullptr) {
       channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
@@ -1911,7 +1882,7 @@ void OfflineManagerHostApi::SetUp(
             reply(WrapError("metadata_arg unexpectedly null."));
             return;
           }
-          const auto& metadata_arg = std::get<EncodableMap>(encodable_metadata_arg);
+          const auto& metadata_arg = std::get<std::string>(encodable_metadata_arg);
           api->DownloadRegion(map_style_url_arg, bounds_arg, min_zoom_arg, max_zoom_arg, pixel_density_arg, metadata_arg, [reply](std::optional<FlutterError>&& output) {
             if (output.has_value()) {
               reply(WrapError(output.value()));
