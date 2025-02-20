@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/map_styles.dart';
@@ -169,20 +171,23 @@ class _OfflinePageState extends State<OfflinePage> {
                           )
                           : Text(_downloadProgressBregenz!),
                 ),
-                ListTile(
-                  title: const Text('Merge Offline Regions'),
-                  onTap: () async {
-                    try {
-                      final regions = await manager.mergeOfflineRegions(
-                        path: 'region.mbtiles',
-                      );
-                      _print('offline regions merged:\n${regions.join('\n')}');
-                    } on Exception catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
-                ),
+                if (!Platform.isIOS)
+                  ListTile(
+                    title: const Text('Merge Offline Regions'),
+                    onTap: () async {
+                      try {
+                        final regions = await manager.mergeOfflineRegions(
+                          path: 'region.mbtiles',
+                        );
+                        _print(
+                          'offline regions merged:\n${regions.join('\n')}',
+                        );
+                      } on Exception catch (error, stacktrace) {
+                        _print(error.toString());
+                        debugPrintStack(stackTrace: stacktrace);
+                      }
+                    },
+                  ),
                 ListTile(
                   title: const Text('Get Offline Region'),
                   onTap: () async {
@@ -257,18 +262,19 @@ class _OfflinePageState extends State<OfflinePage> {
                     }
                   },
                 ),
-                ListTile(
-                  title: const Text('Pack Database'),
-                  onTap: () async {
-                    try {
-                      await manager.packDatabase();
-                      _print('database optimized');
-                    } on Exception catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
-                ),
+                if (!Platform.isIOS)
+                  ListTile(
+                    title: const Text('Pack Database'),
+                    onTap: () async {
+                      try {
+                        await manager.packDatabase();
+                        _print('database optimized');
+                      } on Exception catch (error, stacktrace) {
+                        _print(error.toString());
+                        debugPrintStack(stackTrace: stacktrace);
+                      }
+                    },
+                  ),
                 ListTile(
                   title: const Text('Reset Database'),
                   onTap: () async {
@@ -281,18 +287,19 @@ class _OfflinePageState extends State<OfflinePage> {
                     }
                   },
                 ),
-                ListTile(
-                  title: const Text('Run Pack Database Automatically'),
-                  onTap: () async {
-                    try {
-                      manager.runPackDatabaseAutomatically(enabled: true);
-                      _print('enable automatic database optimization');
-                    } on Exception catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
-                ),
+                if (!Platform.isIOS)
+                  ListTile(
+                    title: const Text('Run Pack Database Automatically'),
+                    onTap: () async {
+                      try {
+                        manager.runPackDatabaseAutomatically(enabled: true);
+                        _print('enable automatic database optimization');
+                      } on Exception catch (error, stacktrace) {
+                        _print(error.toString());
+                        debugPrintStack(stackTrace: stacktrace);
+                      }
+                    },
+                  ),
               ],
             );
           }

@@ -169,6 +169,36 @@ abstract interface class PermissionManagerHostApi {
   bool requestLocationPermissions({required String explanation});
 }
 
+@HostApi()
+abstract interface class OfflineManagerHostApi {
+  /// Clear the ambient cache.
+  @async
+  void clearAmbientCache();
+
+  /// Invalidate the ambient cache.
+  @async
+  void invalidateAmbientCache();
+
+  /// Reset database.
+  @async
+  void resetDatabase();
+
+  /// Set maximum ambient cache size.
+  @async
+  void setMaximumAmbientCacheSize({required int bytes});
+
+  /// Download a map region.
+  @async
+  void downloadRegion({
+    required String mapStyleUrl,
+    required LngLatBounds bounds,
+    required double minZoom,
+    required double maxZoom,
+    required double pixelDensity,
+    required String metadata,
+  });
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   const MapOptions({
@@ -311,6 +341,25 @@ class LngLatBounds {
   final double longitudeEast;
   final double latitudeSouth;
   final double latitudeNorth;
+}
+
+/// Model that describes an offline map region.
+class OfflineRegion {
+  const OfflineRegion({
+    required this.id,
+    required this.bounds,
+    required this.minZoom,
+    required this.maxZoom,
+    required this.pixelRatio,
+    required this.styleUrl,
+  });
+
+  final int id;
+  final LngLatBounds bounds;
+  final double minZoom;
+  final double maxZoom;
+  final double pixelRatio;
+  final String styleUrl;
 }
 
 /// Influences the y direction of the tile coordinates.
