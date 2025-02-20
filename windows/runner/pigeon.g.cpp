@@ -630,6 +630,117 @@ LngLatBounds LngLatBounds::FromEncodableList(const EncodableList& list) {
   return decoded;
 }
 
+// OfflineRegion
+
+OfflineRegion::OfflineRegion(
+  int64_t id,
+  const LngLatBounds& bounds,
+  double min_zoom,
+  double max_zoom,
+  double pixel_ratio,
+  const std::string& style_url)
+ : id_(id),
+    bounds_(std::make_unique<LngLatBounds>(bounds)),
+    min_zoom_(min_zoom),
+    max_zoom_(max_zoom),
+    pixel_ratio_(pixel_ratio),
+    style_url_(style_url) {}
+
+OfflineRegion::OfflineRegion(const OfflineRegion& other)
+ : id_(other.id_),
+    bounds_(std::make_unique<LngLatBounds>(*other.bounds_)),
+    min_zoom_(other.min_zoom_),
+    max_zoom_(other.max_zoom_),
+    pixel_ratio_(other.pixel_ratio_),
+    style_url_(other.style_url_) {}
+
+OfflineRegion& OfflineRegion::operator=(const OfflineRegion& other) {
+  id_ = other.id_;
+  bounds_ = std::make_unique<LngLatBounds>(*other.bounds_);
+  min_zoom_ = other.min_zoom_;
+  max_zoom_ = other.max_zoom_;
+  pixel_ratio_ = other.pixel_ratio_;
+  style_url_ = other.style_url_;
+  return *this;
+}
+
+int64_t OfflineRegion::id() const {
+  return id_;
+}
+
+void OfflineRegion::set_id(int64_t value_arg) {
+  id_ = value_arg;
+}
+
+
+const LngLatBounds& OfflineRegion::bounds() const {
+  return *bounds_;
+}
+
+void OfflineRegion::set_bounds(const LngLatBounds& value_arg) {
+  bounds_ = std::make_unique<LngLatBounds>(value_arg);
+}
+
+
+double OfflineRegion::min_zoom() const {
+  return min_zoom_;
+}
+
+void OfflineRegion::set_min_zoom(double value_arg) {
+  min_zoom_ = value_arg;
+}
+
+
+double OfflineRegion::max_zoom() const {
+  return max_zoom_;
+}
+
+void OfflineRegion::set_max_zoom(double value_arg) {
+  max_zoom_ = value_arg;
+}
+
+
+double OfflineRegion::pixel_ratio() const {
+  return pixel_ratio_;
+}
+
+void OfflineRegion::set_pixel_ratio(double value_arg) {
+  pixel_ratio_ = value_arg;
+}
+
+
+const std::string& OfflineRegion::style_url() const {
+  return style_url_;
+}
+
+void OfflineRegion::set_style_url(std::string_view value_arg) {
+  style_url_ = value_arg;
+}
+
+
+EncodableList OfflineRegion::ToEncodableList() const {
+  EncodableList list;
+  list.reserve(6);
+  list.push_back(EncodableValue(id_));
+  list.push_back(CustomEncodableValue(*bounds_));
+  list.push_back(EncodableValue(min_zoom_));
+  list.push_back(EncodableValue(max_zoom_));
+  list.push_back(EncodableValue(pixel_ratio_));
+  list.push_back(EncodableValue(style_url_));
+  return list;
+}
+
+OfflineRegion OfflineRegion::FromEncodableList(const EncodableList& list) {
+  OfflineRegion decoded(
+    std::get<int64_t>(list[0]),
+    std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(list[1])),
+    std::get<double>(list[2]),
+    std::get<double>(list[3]),
+    std::get<double>(list[4]),
+    std::get<std::string>(list[5]));
+  return decoded;
+}
+
 
 PigeonInternalCodecSerializer::PigeonInternalCodecSerializer() {}
 
@@ -672,6 +783,9 @@ EncodableValue PigeonInternalCodecSerializer::ReadValueOfType(
       }
     case 138: {
         return CustomEncodableValue(LngLatBounds::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
+      }
+    case 139: {
+        return CustomEncodableValue(OfflineRegion::FromEncodableList(std::get<EncodableList>(ReadValue(stream))));
       }
     default:
       return flutter::StandardCodecSerializer::ReadValueOfType(type, stream);
@@ -730,6 +844,11 @@ void PigeonInternalCodecSerializer::WriteValue(
     if (custom_value->type() == typeid(LngLatBounds)) {
       stream->WriteByte(138);
       WriteValue(EncodableValue(std::any_cast<LngLatBounds>(*custom_value).ToEncodableList()), stream);
+      return;
+    }
+    if (custom_value->type() == typeid(OfflineRegion)) {
+      stream->WriteByte(139);
+      WriteValue(EncodableValue(std::any_cast<OfflineRegion>(*custom_value).ToEncodableList()), stream);
       return;
     }
   }
@@ -1603,6 +1722,195 @@ EncodableValue PermissionManagerHostApi::WrapError(std::string_view error_messag
 }
 
 EncodableValue PermissionManagerHostApi::WrapError(const FlutterError& error) {
+  return EncodableValue(EncodableList{
+    EncodableValue(error.code()),
+    EncodableValue(error.message()),
+    error.details()
+  });
+}
+
+/// The codec used by OfflineManagerHostApi.
+const flutter::StandardMessageCodec& OfflineManagerHostApi::GetCodec() {
+  return flutter::StandardMessageCodec::GetInstance(&PigeonInternalCodecSerializer::GetInstance());
+}
+
+// Sets up an instance of `OfflineManagerHostApi` to handle messages through the `binary_messenger`.
+void OfflineManagerHostApi::SetUp(
+  flutter::BinaryMessenger* binary_messenger,
+  OfflineManagerHostApi* api) {
+  OfflineManagerHostApi::SetUp(binary_messenger, api, "");
+}
+
+void OfflineManagerHostApi::SetUp(
+  flutter::BinaryMessenger* binary_messenger,
+  OfflineManagerHostApi* api,
+  const std::string& message_channel_suffix) {
+  const std::string prepended_suffix = message_channel_suffix.length() > 0 ? std::string(".") + message_channel_suffix : "";
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          api->ClearAmbientCache([reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          api->InvalidateAmbientCache([reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          api->ResetDatabase([reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_bytes_arg = args.at(0);
+          if (encodable_bytes_arg.IsNull()) {
+            reply(WrapError("bytes_arg unexpectedly null."));
+            return;
+          }
+          const int64_t bytes_arg = encodable_bytes_arg.LongValue();
+          api->SetMaximumAmbientCacheSize(bytes_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+  {
+    BasicMessageChannel<> channel(binary_messenger, "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion" + prepended_suffix, &GetCodec());
+    if (api != nullptr) {
+      channel.SetMessageHandler([api](const EncodableValue& message, const flutter::MessageReply<EncodableValue>& reply) {
+        try {
+          const auto& args = std::get<EncodableList>(message);
+          const auto& encodable_map_style_url_arg = args.at(0);
+          if (encodable_map_style_url_arg.IsNull()) {
+            reply(WrapError("map_style_url_arg unexpectedly null."));
+            return;
+          }
+          const auto& map_style_url_arg = std::get<std::string>(encodable_map_style_url_arg);
+          const auto& encodable_bounds_arg = args.at(1);
+          if (encodable_bounds_arg.IsNull()) {
+            reply(WrapError("bounds_arg unexpectedly null."));
+            return;
+          }
+          const auto& bounds_arg = std::any_cast<const LngLatBounds&>(std::get<CustomEncodableValue>(encodable_bounds_arg));
+          const auto& encodable_min_zoom_arg = args.at(2);
+          if (encodable_min_zoom_arg.IsNull()) {
+            reply(WrapError("min_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& min_zoom_arg = std::get<double>(encodable_min_zoom_arg);
+          const auto& encodable_max_zoom_arg = args.at(3);
+          if (encodable_max_zoom_arg.IsNull()) {
+            reply(WrapError("max_zoom_arg unexpectedly null."));
+            return;
+          }
+          const auto& max_zoom_arg = std::get<double>(encodable_max_zoom_arg);
+          const auto& encodable_pixel_density_arg = args.at(4);
+          if (encodable_pixel_density_arg.IsNull()) {
+            reply(WrapError("pixel_density_arg unexpectedly null."));
+            return;
+          }
+          const auto& pixel_density_arg = std::get<double>(encodable_pixel_density_arg);
+          const auto& encodable_metadata_arg = args.at(5);
+          if (encodable_metadata_arg.IsNull()) {
+            reply(WrapError("metadata_arg unexpectedly null."));
+            return;
+          }
+          const auto& metadata_arg = std::get<std::string>(encodable_metadata_arg);
+          api->DownloadRegion(map_style_url_arg, bounds_arg, min_zoom_arg, max_zoom_arg, pixel_density_arg, metadata_arg, [reply](std::optional<FlutterError>&& output) {
+            if (output.has_value()) {
+              reply(WrapError(output.value()));
+              return;
+            }
+            EncodableList wrapped;
+            wrapped.push_back(EncodableValue());
+            reply(EncodableValue(std::move(wrapped)));
+          });
+        } catch (const std::exception& exception) {
+          reply(WrapError(exception.what()));
+        }
+      });
+    } else {
+      channel.SetMessageHandler(nullptr);
+    }
+  }
+}
+
+EncodableValue OfflineManagerHostApi::WrapError(std::string_view error_message) {
+  return EncodableValue(EncodableList{
+    EncodableValue(std::string(error_message)),
+    EncodableValue("Error"),
+    EncodableValue()
+  });
+}
+
+EncodableValue OfflineManagerHostApi::WrapError(const FlutterError& error) {
   return EncodableValue(EncodableList{
     EncodableValue(error.code()),
     EncodableValue(error.message()),

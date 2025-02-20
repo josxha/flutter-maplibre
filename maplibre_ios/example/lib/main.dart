@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:maplibre_ios/maplibre_ios.dart';
 
 void main() {
@@ -54,8 +55,20 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            Text('Running on: $_platformVersion\n'),
+            OutlinedButton(
+              onPressed: () {
+                final store = MLNOfflineStorage.getSharedOfflineStorage();
+                store.invalidateAmbientCacheWithCompletionHandler_(
+                    ObjCBlock_ffiVoid_NSError.listener((error) {
+                  print('invalidate ambient cache finished, $error');
+                }));
+              },
+              child: Text('Test Callback'),
+            ),
+          ],
         ),
       ),
     );

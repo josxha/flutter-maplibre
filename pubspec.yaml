@@ -33,7 +33,7 @@ dependencies:
   jni: ^0.13.0
   maplibre_ios:
     path: maplibre_ios
-  objective_c: ^5.0.0
+  objective_c: ^6.0.0
   pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
   web: ^1.0.0

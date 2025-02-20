@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   ffi: ^2.1.3
-  objective_c: ^5.0.0
+  objective_c: ^6.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -60,6 +60,11 @@ ffigen:
       - 'MLNImageSource'
       - 'MLNShape'
       - 'MLNRasterDEMSource'
+      - 'MLNOfflineStorage'
+      - 'MLNTilePyramidOfflineRegion'
+      - 'MLNOfflinePack'
+      - 'MLNOfflineRegion'
+      - 'MLNTilePyramidOfflineRegion'
       - 'NSImage'
       - 'NSExpression'
       - 'Helpers'
@@ -69,6 +74,8 @@ ffigen:
       'MLNMapView': 'MapLibre'
       'MLNMapCamera': 'MapLibre'
       'MLNVectorTileSource': 'MapLibre'
+      'MLNOfflinePack': 'MapLibre'
+      'MLNOfflineRegion': 'MapLibre'
   headers:
     entry-points:
       - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
@@ -97,6 +104,10 @@ ffigen:
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h'
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h'
       - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h'
     #include-directives:
       #- '~/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.11.0-9ff4b/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers'
   preamble: |
