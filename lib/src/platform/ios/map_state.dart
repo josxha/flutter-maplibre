@@ -222,7 +222,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers.objectAtIndex_(i);
-      print(layer.ref.runtimeType);
       final features = _mapView
           .visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
             point,

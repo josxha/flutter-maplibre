@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
@@ -63,10 +63,10 @@ class _MyAppState extends State<MyApp> {
                 final store = MLNOfflineStorage.getSharedOfflineStorage();
                 store.invalidateAmbientCacheWithCompletionHandler_(
                     ObjCBlock_ffiVoid_NSError.listener((error) {
-                  print('invalidate ambient cache finished, $error');
+                  debugPrint('invalidate ambient cache finished, $error');
                 }));
               },
-              child: Text('Test Callback'),
+              child: const Text('Test Callback'),
             ),
           ],
         ),

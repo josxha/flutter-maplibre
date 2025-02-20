@@ -100,7 +100,7 @@ extension MLNStyleLayerExt on MLNStyleLayer {
   /// Apply all paint or layout properties on the [MLNStyleLayer].
   void setProperties(Map<String, Object> properties) {
     for (final property in properties.entries) {
-      print('${property.key}   ${jsonEncode(property.value)}');
+      // print('${property.key}   ${jsonEncode(property.value)}');
       switch (property.key) {
         case 'visibility':
           visible = property.value == 'none';
@@ -130,7 +130,7 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       debugPrintStack(stackTrace: stacktrace);
       return;
     }
-    print('${expression?.description1 ?? 'no expression!'}');
+    // print('${expression?.description1 ?? 'no expression!'}');
     if (expression == null) return;
 
     // some variables have a different name in ios than in the style spec
