@@ -88,6 +88,7 @@ class _ParametersPageState extends State<ParametersPage> {
           ),
           Expanded(
             child: MapLibreMap(
+              acceptLicense: true,
               options: MapOptions(
                 initCenter: Position(0, 0),
                 initZoom: 3,

@@ -5,6 +5,7 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/src/platform/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
+    copyrightHeader: 'pigeons/header.txt',
     // linux
     gobjectHeaderOut: 'linux/pigeon.g.h',
     gobjectSourceOut: 'linux/pigeon.g.cc',
@@ -17,7 +18,8 @@ import 'package:pigeon/pigeon.dart';
     kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
     kotlinOptions: KotlinOptions(),
     // ios
-    swiftOut: 'ios/Classes/Pigeon.g.swift',
+    swiftOut:
+        'maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
     swiftOptions: SwiftOptions(),
   ),
 )
