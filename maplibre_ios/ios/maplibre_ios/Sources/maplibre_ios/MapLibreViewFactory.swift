@@ -15,7 +15,7 @@ class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments _: Any?
     ) -> FlutterPlatformView {
-        return MapLibreView(
+        MapLibreView(
             frame: frame,
             viewId: viewId,
             binaryMessenger: messenger

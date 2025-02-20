@@ -5,14 +5,15 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
     init(messenger: FlutterBinaryMessenger) {
         super.init()
         OfflineManagerHostApiSetup.setUp(
-            binaryMessenger: messenger, api: self, messageChannelSuffix: "")
+            binaryMessenger: messenger, api: self, messageChannelSuffix: ""
+        )
     }
 
     func clearAmbientCache(
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
         MLNOfflineStorage.shared.clearAmbientCache(completionHandler: { error in
-            if let error = error {
+            if let error {
                 completion(.failure(error))
             } else {
                 completion(.success(()))
@@ -25,7 +26,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
     ) {
         MLNOfflineStorage.shared.invalidateAmbientCache(completionHandler: {
             error in
-            if let error = error {
+            if let error {
                 completion(.failure(error))
             } else {
                 completion(.success(()))
@@ -33,10 +34,9 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
         })
     }
 
-    func resetDatabase(completion: @escaping (Result<Void, any Error>) -> Void)
-    {
+    func resetDatabase(completion: @escaping (Result<Void, any Error>) -> Void) {
         MLNOfflineStorage.shared.resetDatabase(completionHandler: { error in
-            if let error = error {
+            if let error {
                 completion(.failure(error))
             } else {
                 completion(.success(()))
@@ -49,7 +49,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
     ) {
         MLNOfflineStorage.shared.setMaximumAmbientCacheSize(UInt(bytes)) {
             error in
-            if let error = error {
+            if let error {
                 completion(.failure(error))
             } else {
                 completion(.success(()))
@@ -59,33 +59,37 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
 
     func downloadRegion(
         mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double,
-        maxZoom: Double, pixelDensity: Double, metadata: String,
+        maxZoom: Double, pixelDensity _: Double, metadata: String,
         completion: @escaping (Result<Void, any Error>) -> Void
     ) {
-        // TODO encode all information into the metadata for parity with android
+        // TODO: encode all information into the metadata for parity with android
         let mlnBounds = MLNCoordinateBounds(
             sw: CLLocationCoordinate2D(
-                latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
+                latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest
+            ),
             ne: CLLocationCoordinate2D(
-                latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast)
+                latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast
+            )
         )
         let region = MLNTilePyramidOfflineRegion(
             styleURL: URL(string: mapStyleUrl), bounds: mlnBounds,
-            fromZoomLevel: minZoom, toZoomLevel: maxZoom)
-        // TODO implement
+            fromZoomLevel: minZoom, toZoomLevel: maxZoom
+        )
+        // TODO: implement
         let context = metadata.data(using: .utf8)
         if context == nil {
             let error = PigeonError(
                 code: "INVALID_METADATA",
                 message: "The metadata could not be converted to NSData.",
-                details: nil)
+                details: nil
+            )
             completion(.failure(error))
             return
         }
         MLNOfflineStorage.shared.addPack(for: region, withContext: context!) {
-            pack, error in
+            pack, _ in
             pack?.resume()
-            // TODO listen to updates
+            // TODO: listen to updates
             completion(.success(()))
         }
     }

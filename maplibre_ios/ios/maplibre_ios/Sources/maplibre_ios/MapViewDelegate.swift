@@ -20,11 +20,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         _viewId = viewId
         _flutterApi = MapLibreFlutterApi(
             binaryMessenger: binaryMessenger,
-            messageChannelSuffix: channelSuffix)
-        super.init()  // self can be used after calling super.init()
+            messageChannelSuffix: channelSuffix
+        )
+        super.init() // self can be used after calling super.init()
         MapLibreHostApiSetup.setUp(
             binaryMessenger: binaryMessenger, api: self,
-            messageChannelSuffix: channelSuffix)
+            messageChannelSuffix: channelSuffix
+        )
         // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
@@ -49,10 +51,12 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
                         latitude: mapOptions.center?.lat
                             ?? currentCenter.latitude,
                         longitude: mapOptions.center?.lng
-                            ?? currentCenter.longitude)
+                            ?? currentCenter.longitude
+                    )
                     self._mapView.setCenter(
                         center, zoomLevel: mapOptions.zoom,
-                        direction: mapOptions.bearing, animated: false)
+                        direction: mapOptions.bearing, animated: false
+                    )
                 }
 
                 self._mapView.showAttribution(false)
@@ -73,11 +77,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
                 // tap gestures
                 self._mapView.addGestureRecognizer(
                     UITapGestureRecognizer(
-                        target: self, action: #selector(self.onTap(sender:))))
+                        target: self, action: #selector(self.onTap(sender:))
+                    ))
                 self._mapView.addGestureRecognizer(
                     UILongPressGestureRecognizer(
                         target: self,
-                        action: #selector(self.onLongPress(sender:))))
+                        action: #selector(self.onLongPress(sender:))
+                    ))
             case let .failure(error):
                 print(error)
             }
@@ -110,7 +116,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     }
 
     func view() -> UIView {
-        return _view
+        _view
     }
 
     func gestureRecognizer(
@@ -118,15 +124,15 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer
     ) -> Bool {
         // Do not override the default behavior
-        return true
+        true
     }
 
     // MLNMapViewDelegate method called when map has finished loading
     func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
         // setCamera() can only be used after the map did finish loading
-        var camera = self._mapView.camera
+        var camera = _mapView.camera
         camera.pitch = _mapOptions!.pitch
-        self._mapView.setCamera(camera, animated: false)
+        _mapView.setCamera(camera, animated: false)
 
         _mapView = mapView
         print("mapView didFinishLoading, call onStyleLoaded")
@@ -145,10 +151,12 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         var mlnCamera = _mapView.camera
         var center = LngLat(
             lng: mlnCamera.centerCoordinate.longitude,
-            lat: mlnCamera.centerCoordinate.latitude)
+            lat: mlnCamera.centerCoordinate.latitude
+        )
         var pigeonCamera = MapCamera(
             center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch,
-            bearing: mlnCamera.heading)
+            bearing: mlnCamera.heading
+        )
         _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
     }
 

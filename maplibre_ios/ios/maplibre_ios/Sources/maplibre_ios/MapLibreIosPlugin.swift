@@ -5,7 +5,8 @@ import UIKit
 public class MapLibreIosPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(
-            name: "maplibre_ios", binaryMessenger: registrar.messenger())
+            name: "maplibre_ios", binaryMessenger: registrar.messenger()
+        )
         let instance = MapLibreIosPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
 

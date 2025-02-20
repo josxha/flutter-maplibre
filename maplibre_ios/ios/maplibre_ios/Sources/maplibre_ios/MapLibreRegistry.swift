@@ -11,7 +11,7 @@ import UIKit
 
     // Method to get the map for a given viewId
     @objc public static func getMap(viewId: Int64) -> AnyObject? {
-        return mapRegistry[viewId]
+        mapRegistry[viewId]
     }
 
     // Method to add a map to the registry
@@ -59,7 +59,7 @@ import UIKit
         print("\(propertyName): \(expression)")
         do {
             // can't create an Expression using the default method if the data is a hex string
-            if propertyName.contains("color") && expression.first == "#" {
+            if propertyName.contains("color"), expression.first == "#" {
                 var color = UIColor(hexString: expression)
                 return NSExpression(forConstantValue: color)
             }
@@ -67,16 +67,17 @@ import UIKit
                 // can't create an Expression if the data of a literal is an array
                 let json = try JSONSerialization.jsonObject(
                     with: expression.data(using: .utf8)!,
-                    options: .fragmentsAllowed)
+                    options: .fragmentsAllowed
+                )
                 // print("json: \(json)")
                 if let offset = json as? [Any] {
-                    if offset.count == 2 && offset.first is String
-                        && offset.first as? String == "literal"
+                    if offset.count == 2, offset.first is String,
+                       offset.first as? String == "literal"
                     {
                         if let vector = offset.last as? [Any] {
                             if vector.count == 2 {
                                 if let x = vector.first as? Double,
-                                    let y = vector.last as? Double
+                                   let y = vector.last as? Double
                                 {
                                     return NSExpression(
                                         forConstantValue: NSValue(
