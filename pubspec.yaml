@@ -30,10 +30,10 @@ dependencies:
     sdk: flutter
   geotypes: ^0.0.2
   html: ^0.15.4
+  jni: ^0.14.0
   maplibre_ios:
     path: maplibre_ios
   objective_c: ^6.0.0
-  jni: ^0.14.0
   pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
   web: ^1.0.0
