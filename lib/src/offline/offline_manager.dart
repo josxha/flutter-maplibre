@@ -40,6 +40,8 @@ abstract interface class OfflineManager {
   Future<List<OfflineRegion>> listOfflineRegions();
 
   /// Packs the existing database file into a minimal amount of disk space.
+  ///
+  /// Only available on Android.
   Future<void> packDatabase();
 
   /// Delete existing database and re-initialize.
@@ -47,6 +49,8 @@ abstract interface class OfflineManager {
 
   /// Sets whether database file packing occurs automatically.
   /// By default, the automatic database file packing is enabled.
+  ///
+  /// Only available on Android.
   void runPackDatabaseAutomatically({required bool enabled});
 
   /// Downloads a map region.
