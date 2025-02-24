@@ -55,7 +55,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                     setState(() {
                       if (_polylineLayer == null) {
                         _polylineLayer = PolylineLayer(
-                          polylines: [
+                          polylines: Layer.generateFeatureList([
                             LineString(
                               coordinates: [
                                 Position(9.17, 47.68),
@@ -63,7 +63,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                                 Position(9, 48),
                               ],
                             ),
-                          ],
+                          ]),
                         );
                       } else {
                         _polylineLayer = null;
@@ -93,7 +93,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
               },
               layers: [
                 CircleLayer(
-                  points: _circlePoints,
+                  circles: Layer.generateFeatureList(_circlePoints),
                   color: _circleColor,
                   radius: 20,
                   strokeColor: Colors.red,

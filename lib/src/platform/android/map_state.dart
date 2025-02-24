@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -138,6 +139,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final oldOptions = oldWidget.options;
     final options = this.options;
     if (this.options == oldOptions) return;
+
+    if (options.gestures.drag != oldOptions.gestures.drag) {
+      await _hostApi.toggleLongPressMove(enabled: options.gestures.drag);
+    }
 
     jniMap.setMinZoomPreference(options.minZoom);
     jniMap.setMaxZoomPreference(options.maxZoom);
@@ -414,6 +419,43 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       queriedLayers.add(queriedLayer);
     }
     return queriedLayers;
+  }
+
+  @override
+  Future<List<Feature>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  }) async {
+    final jniMapLibreMap = _jniMapLibreMap!;
+    final style = this.style;
+    if (style == null) return [];
+
+    final result = await runOnPlatformThread<List<Feature>>(() {
+      final JArray<JString?> queryLayerIds;
+
+      if (layerIdsFilter != null) {
+        queryLayerIds = JArray(JString.nullableType, layerIdsFilter.length);
+
+        for (final (i, layer) in layerIdsFilter.indexed) {
+          queryLayerIds[i] = layer.toJString();
+        }
+      } else {
+        queryLayerIds = style._getLayersIds();
+      }
+
+      final queryResultsFeatures = jniMapLibreMap.queryRenderedFeatures(
+        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+        queryLayerIds,
+      );
+      queryLayerIds.release();
+
+      final features =
+          queryResultsFeatures.nonNulls.map((f) => f.toFeature()).toList();
+      queryResultsFeatures.release();
+
+      return features;
+    });
+    return result;
   }
 
   @override

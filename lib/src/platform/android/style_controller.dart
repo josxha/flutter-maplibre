@@ -2,82 +2,100 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle, this._hostApi);
+  StyleControllerAndroid._(this._jniStyle, this._hostApi);
 
   final jni.Style _jniStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
+  final List<StyleLayer> _draggableLayers = [];
+
+  @override
+  List<StyleLayer> getDraggableLayers() => _draggableLayers;
+
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     // TODO: use JNI for this method
-    await switch (layer) {
-      FillStyleLayer() => _hostApi.addFillLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      CircleStyleLayer() => _hostApi.addCircleLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-        id: layer.id,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      LineStyleLayer() => _hostApi.addLineLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      RasterStyleLayer() => _hostApi.addRasterLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      SymbolStyleLayer() => _hostApi.addSymbolLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      _ =>
+    switch (layer) {
+      case FillStyleLayer():
+        await _hostApi.addFillLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+        if (layer.draggable) _draggableLayers.add(layer);
+      case CircleStyleLayer():
+        await _hostApi.addCircleLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+        if (layer.draggable) _draggableLayers.add(layer);
+      case BackgroundStyleLayer():
+        await _hostApi.addBackgroundLayer(
+          id: layer.id,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+      case FillExtrusionStyleLayer():
+        await _hostApi.addFillExtrusionLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+      case HeatmapStyleLayer():
+        await _hostApi.addHeatmapLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+      case HillshadeStyleLayer():
+        await _hostApi.addHillshadeLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+      case LineStyleLayer():
+        await _hostApi.addLineLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+        if (layer.draggable) _draggableLayers.add(layer);
+      case RasterStyleLayer():
+        await _hostApi.addRasterLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+      case SymbolStyleLayer():
+        await _hostApi.addSymbolLayer(
+          id: layer.id,
+          sourceId: layer.sourceId,
+          belowLayerId: belowLayerId,
+          layout: layer.layout,
+          paint: layer.paint,
+        );
+        if (layer.draggable) _draggableLayers.add(layer);
+      default:
         throw UnimplementedError(
           'The Layer is not supported: ${layer.runtimeType}',
-        ),
-    };
+        );
+    }
   }
 
   @override
@@ -211,5 +229,51 @@ class StyleControllerAndroid implements StyleController {
   @override
   void setProjection(MapProjection projection) {
     // globe is not supported on android.
+  }
+
+  JArray<JString?> _getLayersIds() => _getQueryLayerIds(_getLayers());
+
+  JArray<JString?> _getQueryLayerIds(JList jniLayers) {
+    // Use a list to temporary store the layer ids and avoid null values.
+    final queryLayerIds = JList.array(JString.nullableType);
+
+    for (var i = jniLayers.length - 1; i >= 0; i--) {
+      final jniLayer = jniLayers[i]!;
+      JString? jLayerId;
+
+      switch (jniLayer.jClass.toString()) {
+        case 'class org.maplibre.android.style.layers.LineLayer':
+          final layer = jniLayer.as(jni.LineLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.FillLayer':
+          final layer = jniLayer.as(jni.FillLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.SymbolLayer':
+          final layer = jniLayer.as(jni.SymbolLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+        case 'class org.maplibre.android.style.layers.CircleLayer':
+          final layer = jniLayer.as(jni.CircleLayer.type);
+          jLayerId = layer.getId();
+          layer.release();
+      }
+      jniLayer.release();
+      if (jLayerId != null) {
+        queryLayerIds.add(jLayerId);
+      }
+    }
+
+    final resultArray = JArray<JString?>(
+      JString.nullableType,
+      queryLayerIds.length,
+    );
+    for (var i = 0; i < queryLayerIds.length; i++) {
+      if (queryLayerIds[i] != null) resultArray[i] = queryLayerIds[i];
+    }
+    queryLayerIds.release();
+
+    return resultArray;
   }
 }

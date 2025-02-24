@@ -63,6 +63,18 @@ enum CameraChangeReason {
   apiGesture,
 }
 
+/// The pointer events that can be performed by a user after a long press.
+enum LongPressEventType {
+  /// The user pressed down on the screen and started to move the pointer.
+  begin,
+
+  /// The user is moving the pointer.
+  move,
+
+  /// The user released the pointer.
+  end,
+}
+
 /// The map options define initial values for the MapLibre map.
 class MapOptions {
   MapOptions({
@@ -159,6 +171,7 @@ class MapGestures {
     required this.pan,
     required this.zoom,
     required this.tilt,
+    required this.drag,
   });
 
   /// Rotate the map bearing.
@@ -173,8 +186,11 @@ class MapGestures {
   /// Tilt (pitch) the map camera.
   bool tilt;
 
+  /// Toggle the drag gestures.
+  bool drag;
+
   Object encode() {
-    return <Object?>[rotate, pan, zoom, tilt];
+    return <Object?>[rotate, pan, zoom, tilt, drag];
   }
 
   static MapGestures decode(Object result) {
@@ -184,6 +200,7 @@ class MapGestures {
       pan: result[1]! as bool,
       zoom: result[2]! as bool,
       tilt: result[3]! as bool,
+      drag: result[4]! as bool,
     );
   }
 }
@@ -345,26 +362,29 @@ class _PigeonCodec extends StandardMessageCodec {
     } else if (value is CameraChangeReason) {
       buffer.putUint8(131);
       writeValue(buffer, value.index);
-    } else if (value is MapOptions) {
+    } else if (value is LongPressEventType) {
       buffer.putUint8(132);
-      writeValue(buffer, value.encode());
-    } else if (value is MapGestures) {
+      writeValue(buffer, value.index);
+    } else if (value is MapOptions) {
       buffer.putUint8(133);
       writeValue(buffer, value.encode());
-    } else if (value is LngLat) {
+    } else if (value is MapGestures) {
       buffer.putUint8(134);
       writeValue(buffer, value.encode());
-    } else if (value is Offset) {
+    } else if (value is LngLat) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
-    } else if (value is Padding) {
+    } else if (value is Offset) {
       buffer.putUint8(136);
       writeValue(buffer, value.encode());
-    } else if (value is MapCamera) {
+    } else if (value is Padding) {
       buffer.putUint8(137);
       writeValue(buffer, value.encode());
-    } else if (value is LngLatBounds) {
+    } else if (value is MapCamera) {
       buffer.putUint8(138);
+      writeValue(buffer, value.encode());
+    } else if (value is LngLatBounds) {
+      buffer.putUint8(139);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -384,18 +404,21 @@ class _PigeonCodec extends StandardMessageCodec {
         final int? value = readValue(buffer) as int?;
         return value == null ? null : CameraChangeReason.values[value];
       case 132:
-        return MapOptions.decode(readValue(buffer)!);
+        final int? value = readValue(buffer) as int?;
+        return value == null ? null : LongPressEventType.values[value];
       case 133:
-        return MapGestures.decode(readValue(buffer)!);
+        return MapOptions.decode(readValue(buffer)!);
       case 134:
-        return LngLat.decode(readValue(buffer)!);
+        return MapGestures.decode(readValue(buffer)!);
       case 135:
-        return Offset.decode(readValue(buffer)!);
+        return LngLat.decode(readValue(buffer)!);
       case 136:
-        return Padding.decode(readValue(buffer)!);
+        return Offset.decode(readValue(buffer)!);
       case 137:
-        return MapCamera.decode(readValue(buffer)!);
+        return Padding.decode(readValue(buffer)!);
       case 138:
+        return MapCamera.decode(readValue(buffer)!);
+      case 139:
         return LngLatBounds.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -809,6 +832,31 @@ class MapLibreHostApi {
       return;
     }
   }
+
+  /// Enable or disable the move gestures after a long press.
+  Future<void> toggleLongPressMove({required bool enabled}) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.toggleLongPressMove$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_channel.send(<Object?>[enabled]) as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
 }
 
 abstract class MapLibreFlutterApi {
@@ -841,6 +889,9 @@ abstract class MapLibreFlutterApi {
 
   /// Callback when the user performs a long lasting click on the map.
   void onLongClick(LngLat point);
+
+  /// Callback when the user performs a long lasting click and moves the pointer.
+  void onLongPress(LongPressEventType event, LngLat position);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -1100,6 +1151,46 @@ abstract class MapLibreFlutterApi {
           );
           try {
             api.onLongClick(arg_point!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+              error: PlatformException(code: 'error', message: e.toString()),
+            );
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?>
+      pigeonVar_channel = BasicMessageChannel<Object?>(
+        'dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress$messageChannelSuffix',
+        pigeonChannelCodec,
+        binaryMessenger: binaryMessenger,
+      );
+      if (api == null) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(
+            message != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null.',
+          );
+          final List<Object?> args = (message as List<Object?>?)!;
+          final LongPressEventType? arg_event =
+              (args[0] as LongPressEventType?);
+          assert(
+            arg_event != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null, expected non-null LongPressEventType.',
+          );
+          final LngLat? arg_position = (args[1] as LngLat?);
+          assert(
+            arg_position != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongPress was null, expected non-null LngLat.',
+          );
+          try {
+            api.onLongPress(arg_event!, arg_position!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

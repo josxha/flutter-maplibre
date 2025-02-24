@@ -350,7 +350,7 @@ class _OfflineMapPage extends StatelessWidget {
           PolylineLayer(
             color: Colors.red,
             width: 3,
-            polylines: [
+            polylines: Layer.generateFeatureList([
               LineString(
                 coordinates: [
                   Position(bounds.longitudeWest, bounds.latitudeSouth),
@@ -360,7 +360,7 @@ class _OfflineMapPage extends StatelessWidget {
                   Position(bounds.longitudeWest, bounds.latitudeSouth),
                 ],
               ),
-            ],
+            ]),
           ),
         ],
       ),

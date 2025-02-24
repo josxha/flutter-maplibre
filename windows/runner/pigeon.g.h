@@ -87,6 +87,16 @@ enum class CameraChangeReason {
   kApiGesture = 2
 };
 
+// The pointer events that can be performed by a user after a long press.
+enum class LongPressEventType {
+  // The user pressed down on the screen and started to move the pointer.
+  kBegin = 0,
+  // The user is moving the pointer.
+  kMove = 1,
+  // The user released the pointer.
+  kEnd = 2
+};
+
 
 // The map options define initial values for the MapLibre map.
 //
@@ -210,7 +220,8 @@ class MapGestures {
     bool rotate,
     bool pan,
     bool zoom,
-    bool tilt);
+    bool tilt,
+    bool drag);
 
   // Rotate the map bearing.
   bool rotate() const;
@@ -228,6 +239,10 @@ class MapGestures {
   bool tilt() const;
   void set_tilt(bool value_arg);
 
+  // Toggle the drag gestures.
+  bool drag() const;
+  void set_drag(bool value_arg);
+
 
  private:
   static MapGestures FromEncodableList(const flutter::EncodableList& list);
@@ -241,6 +256,7 @@ class MapGestures {
   bool pan_;
   bool zoom_;
   bool tilt_;
+  bool drag_;
 
 };
 
@@ -543,6 +559,8 @@ class MapLibreHostApi {
     const std::string& id,
     const std::vector<uint8_t>& bytes,
     std::function<void(std::optional<FlutterError> reply)> result) = 0;
+  // Enable or disable the move gestures after a long press.
+  virtual std::optional<FlutterError> ToggleLongPressMove(bool enabled) = 0;
 
   // The codec used by MapLibreHostApi.
   static const flutter::StandardMessageCodec& GetCodec();
@@ -608,6 +626,12 @@ class MapLibreFlutterApi {
   // Callback when the user performs a long lasting click on the map.
   void OnLongClick(
     const LngLat& point,
+    std::function<void(void)>&& on_success,
+    std::function<void(const FlutterError&)>&& on_error);
+  // Callback when the user performs a long lasting click and moves the pointer.
+  void OnLongPress(
+    const LongPressEventType& event,
+    const LngLat& position,
     std::function<void(void)>&& on_success,
     std::function<void(const FlutterError&)>&& on_error);
   // Callback when the map camera changes.

@@ -116,8 +116,17 @@ abstract interface class MapController {
   /// The smallest bounding box that includes the visible region.
   LngLatBounds getVisibleRegionSync();
 
-  /// Queries the map for rendered features.
+  /// Queries the map for rendered layers.
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+
+  /// Queries the map for rendered features.
+  /// Optionally filter the results by layer IDs.
+  ///
+  /// Only supported on Android.
+  Future<List<Feature>> queryRenderedFeatures(
+    Offset screenLocation, {
+    List<String>? layerIdsFilter,
+  });
 
   /// Show the user location on the map
   Future<void> enableLocation({

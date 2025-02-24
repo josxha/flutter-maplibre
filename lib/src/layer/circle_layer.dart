@@ -7,13 +7,16 @@ part of 'layer.dart';
 class CircleLayer extends Layer<Point> {
   /// Create a new [CircleLayer] instance.
   const CircleLayer({
-    required List<Point> points,
+    required List<Feature<Point>> circles,
     this.radius = 5,
     this.color = const Color(0xFF000000),
     this.blur = 0,
     this.strokeWidth = 0,
     this.strokeColor = const Color(0xFF000000),
-  }) : super._(list: points);
+    super.draggable = false,
+    super.sourceId,
+    super.layerId,
+  }) : super._(list: circles);
 
   /// Circle radius in pixels. Defaults to 5px.
   final int radius;
@@ -43,6 +46,7 @@ class CircleLayer extends Layer<Point> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    draggable: draggable,
   );
 
   @override
@@ -60,24 +64,24 @@ class CircleLayer extends Layer<Point> {
   Map<String, Object> getLayout() => {};
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is CircleLayer &&
-          runtimeType == other.runtimeType &&
-          radius == other.radius &&
-          color == other.color &&
-          blur == other.blur &&
-          strokeWidth == other.strokeWidth &&
-          strokeColor == other.strokeColor;
+  bool operator ==(covariant CircleLayer other) {
+    if (identical(this, other)) return true;
+
+    return other.radius == radius &&
+        other.color == color &&
+        other.blur == blur &&
+        other.strokeWidth == strokeWidth &&
+        other.strokeColor == strokeColor &&
+        const DeepCollectionEquality().equals(other.list, list);
+  }
 
   @override
-  int get hashCode => Object.hash(
-    super.hashCode,
-    radius,
-    color,
-    blur,
-    strokeWidth,
-    strokeColor,
-  );
+  int get hashCode {
+    return radius.hashCode ^
+        color.hashCode ^
+        blur.hashCode ^
+        strokeWidth.hashCode ^
+        strokeColor.hashCode ^
+        const DeepCollectionEquality().hash(list);
+  }
 }
