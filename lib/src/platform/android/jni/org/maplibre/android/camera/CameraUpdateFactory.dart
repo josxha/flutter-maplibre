@@ -1128,11 +1128,6 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   }
 }
 
-abstract base mixin class $CameraUpdateFactory$ZoomUpdate$Type {
-  factory $CameraUpdateFactory$ZoomUpdate$Type() =
-      _$CameraUpdateFactory$ZoomUpdate$Type;
-}
-
 final class _$CameraUpdateFactory$ZoomUpdate$Type
     with $CameraUpdateFactory$ZoomUpdate$Type {
   _$CameraUpdateFactory$ZoomUpdate$Type();

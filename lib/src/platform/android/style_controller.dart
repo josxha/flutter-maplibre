@@ -112,10 +112,8 @@ class StyleControllerAndroid implements StyleController {
             source.tileSize,
           );
         } else {
-          final tilesArray = JArray(JString.nullableType, source.tiles!.length);
-          for (var i = 0; i < source.tiles!.length; i++) {
-            tilesArray[i] = source.tiles![i].toJString();
-          }
+          final tiles = source.tiles!.map((e) => e.toJString());
+          final tilesArray = JArray.of(JString.nullableType, tiles);
           final tileSet =
               jni.TileSet(
                   '{}'.toJString(),

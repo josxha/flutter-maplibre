@@ -229,11 +229,7 @@ class OfflineManagerAndroid implements OfflineManager {
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);
-    final metadataBytes = utf8.encode(metadataJson);
-    final jMetadata = JByteArray(metadataBytes.length);
-    for (var i = 0; i < metadataBytes.length; i++) {
-      jMetadata[i] = metadataBytes[i];
-    }
+    final jMetadata = JByteArray.from(utf8.encode(metadataJson));
 
     _jManager.createOfflineRegion(
       jDefinition.as(jni.OfflineRegionDefinition.type),
