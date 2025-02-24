@@ -378,25 +378,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       JString? jLayerId;
       late final JString jSourceId;
       late final JString jSourceLayer;
-      switch (jniLayer.jClass.toString()) {
-        case 'class org.maplibre.android.style.layers.LineLayer':
-          final layer = jniLayer.as(jni.LineLayer.type);
-          jLayerId = layer.getId();
-          jSourceId = layer.getSourceId();
-          jSourceLayer = layer.getSourceLayer();
-          layer.release();
-        case 'class org.maplibre.android.style.layers.FillLayer':
-          final layer = jniLayer.as(jni.FillLayer.type);
-          jLayerId = layer.getId();
-          jSourceId = layer.getSourceId();
-          jSourceLayer = layer.getSourceLayer();
-          layer.release();
-        case 'class org.maplibre.android.style.layers.SymbolLayer':
-          final layer = jniLayer.as(jni.SymbolLayer.type);
-          jLayerId = layer.getId();
-          jSourceId = layer.getSourceId();
-          jSourceLayer = layer.getSourceLayer();
-          layer.release();
+      if (jniLayer.isA(jni.LineLayer.type)) {
+        final layer = jniLayer.as(jni.LineLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
+      } else if (jniLayer.isA(jni.FillLayer.type)) {
+        final layer = jniLayer.as(jni.FillLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
+      } else if (jniLayer.isA(jni.SymbolLayer.type)) {
+        final layer = jniLayer.as(jni.SymbolLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
       }
       jniLayer.release();
       if (jLayerId == null) continue; // ignore all other layers
