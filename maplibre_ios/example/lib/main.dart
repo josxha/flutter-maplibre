@@ -29,7 +29,8 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     try {
-      platformVersion = await _maplibreIosPlugin.getPlatformVersion() ??
+      platformVersion =
+          await _maplibreIosPlugin.getPlatformVersion() ??
           'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
@@ -53,9 +54,10 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 final store = MLNOfflineStorage.getSharedOfflineStorage();
                 store.invalidateAmbientCacheWithCompletionHandler_(
-                    ObjCBlock_ffiVoid_NSError.listener((error) {
-                  debugPrint('invalidate ambient cache finished, $error');
-                }));
+                  ObjCBlock_ffiVoid_NSError.listener((error) {
+                    debugPrint('invalidate ambient cache finished, $error');
+                  }),
+                );
               },
               child: const Text('Test Callback'),
             ),
