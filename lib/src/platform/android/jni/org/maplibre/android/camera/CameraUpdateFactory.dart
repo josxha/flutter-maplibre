@@ -1128,11 +1128,6 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   }
 }
 
-final class _$CameraUpdateFactory$ZoomUpdate$Type
-    with $CameraUpdateFactory$ZoomUpdate$Type {
-  _$CameraUpdateFactory$ZoomUpdate$Type();
-}
-
 final class $CameraUpdateFactory$ZoomUpdate$Type$NullableType
     extends jni$_.JObjType<CameraUpdateFactory$ZoomUpdate$Type?> {
   @jni$_.internal
