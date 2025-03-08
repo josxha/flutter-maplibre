@@ -1,4 +1,5 @@
 import 'package:flutter/rendering.dart';
+import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
@@ -109,5 +110,24 @@ extension OfflineRegionExt on jni.OfflineRegion {
     );
     jDefinition.release();
     return region;
+  }
+}
+
+/// Extension methods on [Object].
+extension ObjectExt on Object {
+  /// Convert a [Object] to a [JObject].
+  JObject toJObject(Arena arena) {
+    return switch (this) {
+      final List<Object?> value => JArray.of(
+        JObject.nullableType,
+        value.map((e) => e?.toJObject(arena)).toList(growable: false),
+      )..releasedBy(arena),
+      final String value => value.toJString()..releasedBy(arena),
+      final double value => value.toJDouble()..releasedBy(arena),
+      // a dart int equals a java long
+      final int value => value.toJLong()..releasedBy(arena),
+      final bool value => value.toJBoolean()..releasedBy(arena),
+      _ => throw Exception('Unsupported property type: $runtimeType, $this'),
+    };
   }
 }
