@@ -116,16 +116,19 @@ extension OfflineRegionExt on jni.OfflineRegion {
 /// Extension methods on [Object].
 extension ObjectExt on Object {
   /// Convert a [Object] to a [JObject].
-  JObject toJObject() {
+  JObject toJObject(Arena arena) {
     return switch (this) {
       final List<Object?> value => JArray.of(
         JObject.nullableType,
-        value.map((e) => e?.toJObject()).toList(growable: false),
-      ),
-      final String value => value.toJString(),
-      final double value => value.toJDouble(),
-      final int value => value.toJLong(), // a dart int equals a java long,
-      final bool value => value.toJBoolean(),
+        value
+            .map((e) => e?.toJObject(arena))
+            .toList(growable: false),
+      )..releasedBy(arena),
+      final String value => value.toJString()..releasedBy(arena),
+      final double value => value.toJDouble()..releasedBy(arena),
+      // a dart int equals a java long
+      final int value => value.toJLong()..releasedBy(arena),
+      final bool value => value.toJBoolean()..releasedBy(arena),
       _ => throw Exception('Unsupported property type: $runtimeType, $this'),
     };
   }
