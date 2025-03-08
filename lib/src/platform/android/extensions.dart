@@ -120,9 +120,7 @@ extension ObjectExt on Object {
     return switch (this) {
       final List<Object?> value => JArray.of(
         JObject.nullableType,
-        value
-            .map((e) => e?.toJObject(arena))
-            .toList(growable: false),
+        value.map((e) => e?.toJObject(arena)).toList(growable: false),
       )..releasedBy(arena),
       final String value => value.toJString()..releasedBy(arena),
       final double value => value.toJDouble()..releasedBy(arena),
