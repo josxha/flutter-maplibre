@@ -9,75 +9,77 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
-    // TODO: use JNI for this method
-    await switch (layer) {
-      FillStyleLayer() => _hostApi.addFillLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+    final jLayer = switch (layer) {
+      FillStyleLayer() => jni.FillLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      CircleStyleLayer() => _hostApi.addCircleLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      CircleStyleLayer() => jni.CircleLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      BackgroundStyleLayer() => _hostApi.addBackgroundLayer(
-        id: layer.id,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
+      FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      FillExtrusionStyleLayer() => _hostApi.addFillExtrusionLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      HeatmapStyleLayer() => jni.HeatmapLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      HeatmapStyleLayer() => _hostApi.addHeatmapLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      HillshadeStyleLayer() => jni.HillshadeLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      HillshadeStyleLayer() => _hostApi.addHillshadeLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      LineStyleLayer() => jni.LineLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      LineStyleLayer() => _hostApi.addLineLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      RasterStyleLayer() => jni.RasterLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
-      RasterStyleLayer() => _hostApi.addRasterLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
-      ),
-      SymbolStyleLayer() => _hostApi.addSymbolLayer(
-        id: layer.id,
-        sourceId: layer.sourceId,
-        belowLayerId: belowLayerId,
-        layout: layer.layout,
-        paint: layer.paint,
+      SymbolStyleLayer() => jni.SymbolLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
       ),
       _ =>
         throw UnimplementedError(
           'The Layer is not supported: ${layer.runtimeType}',
         ),
     };
+
+    // paint and layout properties
+    final layoutEntries = layer.layout.entries.toList(growable: false);
+    final paintEntries = layer.paint.entries.toList(growable: false);
+    final props = JArray(
+      jni.PropertyValue.nullableType(JObject.nullableType),
+      layoutEntries.length + paintEntries.length,
+    );
+    for (var i = 0; i < paintEntries.length; i++) {
+      final entry = paintEntries[i];
+      props[i] = jni.PaintPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(),
+        T: JObject.type,
+      );
+    }
+    for (var i = 0; i < layoutEntries.length; i++) {
+      final entry = layoutEntries[i];
+      props[paintEntries.length + i] = jni.LayoutPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(),
+        T: JObject.type,
+      );
+    }
+    jLayer.setProperties(props);
+
+    // add to style
+    if (belowLayerId == null) {
+      _jniStyle.addLayer(jLayer);
+    } else {
+      _jniStyle.addLayerBelow(jLayer, belowLayerId.toJString());
+    }
   }
 
   @override
