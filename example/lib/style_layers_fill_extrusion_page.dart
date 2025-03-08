@@ -22,6 +22,7 @@ class _StyleLayersFillExtrusionPageState
     return Scaffold(
       appBar: AppBar(title: const Text('Fill Extrusion Style Layer')),
       body: MapLibreMap(
+        acceptLicense: true,
         options: MapOptions(
           initCenter: Position(-87.61694, 41.86625),
           initZoom: 15.99,

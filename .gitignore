@@ -34,3 +34,7 @@ build/
 # jnigen
 /mvn_jar/
 /mvn_java/
+
+# Swift Package Manager
+Package.resolved
+.swiftpm
