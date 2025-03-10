@@ -215,7 +215,7 @@ jobs:
     timeout-minutes: 30
     defaults:
       run:
-        working-directory: example
+        working-directory: maplibre_ios/example
     strategy:
       fail-fast: false
       matrix:
@@ -229,14 +229,14 @@ jobs:
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: "Get Flutter dependencies"
-        working-directory: ./
+        working-directory: ./maplibre_ios/
         run: dart pub get
       - name: "Get Flutter dependencies"
         working-directory: maplibre_ios
         run: dart pub get
       - uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: example/ios/Podfile.lock
+          podfile-path: maplibre_ios/example/ios/Podfile.lock
       - name: "Build iOS package"
         run: flutter build ios --simulator
       - name: Upload Runner.app as artifact
@@ -244,7 +244,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maplibre-flutter-demo.app
-          path: example/build/ios/iphonesimulator
+          path: maplibre_ios/example/build/ios/iphonesimulator
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
