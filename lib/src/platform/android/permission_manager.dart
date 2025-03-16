@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
-import 'package:maplibre/src/platform/pigeon.g.dart';
 
 /// MapLibre Android specific implementation of the [PermissionManager].
 ///
@@ -10,9 +11,9 @@ class PermissionManagerAndroid implements PermissionManager {
   /// Create a new [PermissionManagerAndroid] instance.
   PermissionManagerAndroid();
 
-  final _api = PermissionManagerHostApi();
-
   static JObject? get _jContext => jni.MapLibreRegistry.INSTANCE.getContext();
+
+  static JObject? get _jActivity => jni.MapLibreRegistry.INSTANCE.getActivity();
 
   @override
   bool get locationPermissionsGranted =>
@@ -28,6 +29,21 @@ class PermissionManagerAndroid implements PermissionManager {
 
   @override
   Future<bool> requestLocationPermissions({required String explanation}) async {
-    return _api.requestLocationPermissions(explanation: explanation);
+    final completer = Completer<bool>();
+    final listener = jni.PermissionsListener.implement(
+      jni.$PermissionsListener(
+        onExplanationNeeded: (permissionsToExplain) {
+          // This method fires when the user gets prompted to accept the permissions.
+          // No not handle the return here, onPermissionResult will still be called.
+        },
+        onPermissionResult: completer.complete,
+      ),
+    );
+    final manager = jni.PermissionsManager(listener);
+    manager.requestLocationPermissions(_jActivity);
+    final result = await completer.future;
+    listener.release();
+    manager.release();
+    return result;
   }
 }
