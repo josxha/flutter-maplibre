@@ -226,6 +226,7 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - run: flutter pub get
       - name: "Install CocoaPods dependencies"
         run: |
           cd ios
