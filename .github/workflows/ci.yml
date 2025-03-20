@@ -226,11 +226,12 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - run: flutter config --enable-swift-package-manager
       - run: flutter pub get
       - name: "Install CocoaPods dependencies"
         run: |
           cd ios
-          pod install --verbose
+          pod install
           cd ..
       - name: "Build iOS package"
         run: flutter build ios --release --no-codesign
