@@ -227,12 +227,8 @@ jobs:
           flutter-version: ${{ matrix.sdk }}
           cache: true
       - run: flutter config --enable-swift-package-manager
-      - run: flutter pub get
-      - name: "Install CocoaPods dependencies"
-        run: |
-          cd ios
-          pod install
-          cd ..
+      - name: "Get Flutter dependencies"
+        run: dart pub get
       - name: "Build iOS package"
         run: flutter build ios --release --no-codesign
       - name: Upload Runner.app as artifact
