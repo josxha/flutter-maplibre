@@ -226,19 +226,8 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: "Get Flutter dependencies"
-        working-directory: ./maplibre_ios/
-        run: dart pub get
-      - name: "Get Flutter dependencies"
-        working-directory: maplibre_ios
-        run: dart pub get
-      - uses: maxim-lobanov/setup-cocoapods@v1
-        with:
-          podfile-path: maplibre_ios/example/ios/Podfile.lock
       - name: "Build iOS package"
-        run: flutter build ios --simulator
+        run: flutter build ios --release --no-codesign
       - name: Upload Runner.app as artifact
         if: ${{ matrix.sdk == '' }}
         uses: actions/upload-artifact@v4
