@@ -226,6 +226,11 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Install CocoaPods dependencies"
+        run: |
+          cd ios
+          pod install --verbose
+          cd ..
       - name: "Build iOS package"
         run: flutter build ios --release --no-codesign
       - name: Upload Runner.app as artifact
