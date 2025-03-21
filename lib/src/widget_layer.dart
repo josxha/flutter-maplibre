@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +48,9 @@ class WidgetLayer extends StatelessWidget {
 
                 final matrix = Matrix4.identity();
                 if (marker.flat) matrix.rotateX(camera.pitch * degree2Radian);
-                if (marker.rotate)
+                if (marker.rotate) {
                   matrix.rotateZ(-camera.bearing * degree2Radian);
+                }
 
                 final left =
                     markerOffset.dx / pixelRatio -
