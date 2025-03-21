@@ -17,18 +17,17 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   late final MapController _controller;
   final _mapKey = GlobalKey();
 
-  final _markerPositions = [
-    Position(-10, 0),
-    Position(-5, 0),
-    Position(0, 0),
-    Position(5, 0),
-  ];
+  List<MarkerData> _markerData = [];
 
   Position? _originalPosition;
   MapGestures _mapGestures = const MapGestures.all();
 
   @override
   Widget build(BuildContext context) {
+    if (_markerData.isEmpty) {
+      _createMarkerData();
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Interactive Widget Layer')),
       body: Column(
@@ -53,7 +52,17 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
               onEvent: (event) async {
                 if (event is MapEventLongClick) {
                   final position = event.point;
-                  _markerPositions.add(position);
+                  _markerData.add(
+                    MarkerData(
+                      position: position,
+                      annotations: const [
+                        Annotation(
+                          child: Text('topRight'),
+                          alignment: Alignment.topRight,
+                        ),
+                      ],
+                    ),
+                  );
 
                   setState(() {});
                 }
@@ -61,28 +70,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
               children: [
                 WidgetLayer(
                   allowInteraction: true,
-                  markers: List.generate(
-                    _markerPositions.length,
-                    (index) => Marker(
-                      size: const Size.square(50),
-                      point: _markerPositions[index],
-                      child: GestureDetector(
-                        onTap: () => _onTap(index),
-                        onLongPressStart:
-                            (details) => _onLongPress(index, details),
-                        onPanStart: (details) => _onPanStart(details, index),
-                        onPanUpdate:
-                            (details) async => _onPanUpdate(details, index),
-                        onPanEnd: (details) async => _onPanEnd(details, index),
-                        child: const Icon(
-                          Icons.location_on,
-                          color: Colors.red,
-                          size: 50,
-                        ),
-                      ),
-                      alignment: Alignment.bottomCenter,
-                    ),
-                  ),
+                  markers: List.generate(_markerData.length, _createMarker),
                 ),
                 // display the UI widgets above the widget markers.
                 const MapScalebar(),
@@ -97,26 +85,127 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
     );
   }
 
-  Future<Position> _toLngLat(Offset eventOffset) async {
-    // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio =
-        (!kIsWeb && Platform.isAndroid)
-            ? MediaQuery.devicePixelRatioOf(context)
-            : 1.0;
-
-    final mapRenderBox =
-        _mapKey.currentContext?.findRenderObject() as RenderBox?;
-
-    assert(mapRenderBox != null, 'RenderBox of Map should never be null');
-
-    final mapOffset = mapRenderBox!.localToGlobal(Offset.zero);
-
-    final offset = Offset(
-      eventOffset.dx - mapOffset.dx,
-      eventOffset.dy - mapOffset.dy,
+  Size _calculateTextSize(Text textWidget) {
+    final textSpan = TextSpan(text: textWidget.data, style: textWidget.style);
+    final media = MediaQuery.of(context);
+    final painter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      textScaler: media.textScaler,
     );
 
-    return _controller.toLngLat(offset.scale(pixelRatio, pixelRatio));
+    painter.layout();
+
+    return painter.size;
+  }
+
+  Marker _createMarker(int index) {
+    final position = _markerData[index].position;
+    final annotations = _markerData[index].annotations;
+
+    return Marker(
+      size: const Size.square(50),
+      point: position,
+      child: GestureDetector(
+        onTap: () => _onTap(index),
+        onLongPressStart: (details) => _onLongPress(index, details),
+        onPanStart: (details) => _onPanStart(details, index),
+        onPanUpdate: (details) async => _onPanUpdate(details, index),
+        onPanEnd: (details) async => _onPanEnd(details, index),
+        child: const Icon(Icons.location_on, color: Colors.red, size: 50),
+      ),
+      alignment: Alignment.bottomCenter,
+      annotations: annotations,
+    );
+  }
+
+  void _createMarkerData() {
+    _markerData = <MarkerData>[
+      MarkerData(
+        position: Position(0, 0),
+        annotations: const [
+          Annotation(alignment: Alignment.topLeft, child: Text('topLeft-')),
+          Annotation(alignment: Alignment.topRight, child: Text('-topRight')),
+          Annotation(
+            alignment: Alignment.bottomLeft,
+            child: Text('bottomLeft-'),
+          ),
+          Annotation(
+            alignment: Alignment.bottomRight,
+            child: Text('-bottomRight'),
+          ),
+        ],
+      ),
+      MarkerData(
+        position: Position(0, -10),
+        annotations: [
+          () {
+            const textWidget = Text('centerLeft-');
+            final height = _calculateTextSize(textWidget).height;
+
+            return Annotation(
+              alignment: Alignment.centerLeft,
+              child: textWidget,
+              offset: Offset(0, -height / 2),
+            );
+          }(),
+          () {
+            const textWidget = Text('-centerRight');
+            final height = _calculateTextSize(textWidget).height;
+
+            return Annotation(
+              alignment: Alignment.centerRight,
+              child: textWidget,
+              offset: Offset(0, -height / 2),
+            );
+          }(),
+        ],
+      ),
+      MarkerData(
+        position: Position(0, -20),
+        annotations: [
+          () {
+            const text = Text('topCenter');
+
+            return Annotation(
+              alignment: Alignment.topCenter,
+              child: text,
+              offset: Offset(-_calculateTextSize(text).width / 2, 0),
+            );
+          }(),
+          () {
+            const text = Text(
+              'bottomCenter',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            );
+
+            return Annotation(
+              alignment: Alignment.bottomCenter,
+              child: text,
+              offset: Offset(-_calculateTextSize(text).width / 2, 0),
+            );
+          }(),
+        ],
+      ),
+      MarkerData(
+        position: Position(0, -30),
+        annotations: [
+          Annotation(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: _showInfoDialog,
+              icon: const Icon(Icons.help, size: 16),
+            ),
+            offset: const Offset(-12, -12),
+          ),
+        ],
+      ),
+      MarkerData(position: Position(0, -40), annotations: const []),
+    ];
   }
 
   void _onLongPress(int index, LongPressStartDetails details) {
@@ -137,7 +226,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
             final isConfirmed = await _showConfirmationDialogDelete(index);
 
             if (isConfirmed) {
-              _markerPositions.removeAt(index);
+              _markerData.removeAt(index);
 
               setState(() {});
             }
@@ -152,10 +241,17 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
     final isAccepted = await _showConfirmationDialogMove();
 
     if (!isAccepted) {
-      _markerPositions[index] = _originalPosition!;
+      _markerData[index] = MarkerData(
+        position: _originalPosition!,
+        annotations: _markerData[index].annotations,
+      );
     } else {
       final newPosition = await _toLngLat(details.globalPosition);
-      _markerPositions[index] = newPosition;
+      _markerData[index] =
+          _markerData[index] = MarkerData(
+            position: newPosition,
+            annotations: _markerData[index].annotations,
+          );
     }
 
     _originalPosition = null;
@@ -167,7 +263,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
   void _onPanStart(DragStartDetails details, int index) {
     // Keep original position in case of discarded move
-    _originalPosition = _markerPositions[index].clone();
+    _originalPosition = _markerData[index].position.clone();
 
     setState(() {
       // Disable camera panning while a marker gets moved.
@@ -177,7 +273,10 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
   Future<void> _onPanUpdate(DragUpdateDetails details, int index) async {
     final newPosition = await _toLngLat(details.globalPosition);
-    _markerPositions[index] = newPosition;
+    _markerData[index] = MarkerData(
+      position: newPosition,
+      annotations: _markerData[index].annotations,
+    );
 
     setState(() {});
   }
@@ -250,6 +349,27 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
     return isConfirmed ?? false;
   }
 
+  Future<void> _showInfoDialog() async {
+    await showDialog<void>(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Information on Marker'),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelMedium,
+                ),
+                child: const Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+    );
+  }
+
   Future<void> _showMarkerDetails(int index) async {
     await showDialog<void>(
       context: context,
@@ -273,4 +393,38 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
     return;
   }
+
+  Future<Position> _toLngLat(Offset eventOffset) async {
+    // Only Android returns screen pixel, other platforms return logical pixels.
+    final pixelRatio =
+        (!kIsWeb && Platform.isAndroid)
+            ? MediaQuery.devicePixelRatioOf(context)
+            : 1.0;
+
+    final mapRenderBox =
+        _mapKey.currentContext?.findRenderObject() as RenderBox?;
+
+    assert(mapRenderBox != null, 'RenderBox of Map should never be null');
+
+    final mapOffset = mapRenderBox!.localToGlobal(Offset.zero);
+
+    final offset = Offset(
+      eventOffset.dx - mapOffset.dx,
+      eventOffset.dy - mapOffset.dy,
+    );
+
+    return _controller.toLngLat(offset.scale(pixelRatio, pixelRatio));
+  }
+}
+
+/// Contains Position and list of Annotations of Marker
+@immutable
+class MarkerData {
+  const MarkerData({required this.position, required this.annotations});
+
+  /// Position of marker on Map
+  final Position position;
+
+  /// List of Annotations for Marker
+  final List<Annotation> annotations;
 }
