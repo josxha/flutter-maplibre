@@ -46,7 +46,7 @@ class OfflineManagerIos extends OfflineManagerNative {
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
   }) async* {
-    final region = MLNTilePyramidOfflineRegion.new1()
+    final region = MLNTilePyramidOfflineRegion.new$()
         .initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_(
           mapStyleUrl.toNSURL(),
           bounds.toMLNCoordinateBounds(),
@@ -88,7 +88,7 @@ class OfflineManagerIos extends OfflineManagerNative {
           maxZoom: ffiRegion.maximumZoomLevel,
           pixelRatio: 1,
           // TODO
-          styleUrl: ffiRegion.styleURL.toString(),
+          styleUrl: 'ffiRegion.styleURL.toString()',
         );
       }
     }
@@ -122,7 +122,7 @@ class OfflineManagerIos extends OfflineManagerNative {
         maxZoom: ffiRegion.maximumZoomLevel,
         // TODO ffiPack.pixelRatio,
         pixelRatio: 1,
-        styleUrl: ffiRegion.styleURL.absoluteString!.toDartString(),
+        styleUrl: 'ffiRegion.styleURL.absoluteString!.toDartString()',
       );
     }, growable: false);
   }
