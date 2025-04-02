@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
@@ -42,56 +43,56 @@ class MenuPage extends StatelessWidget {
             SliverGrid.extent(
               maxCrossAxisExtent: 150,
               childAspectRatio: 1.5,
-              children: const [
-                ItemCard(
+              children: [
+                const ItemCard(
                   label: 'Styled Map',
                   iconData: Icons.map,
                   location: StyledMapPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Parameters',
                   iconData: Icons.build,
                   location: ParametersPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Gestures',
                   iconData: Icons.back_hand,
                   location: GesturesPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Events',
                   iconData: Icons.notifications,
                   location: EventsPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Controller',
                   iconData: Icons.api,
                   location: ControllerPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Two Maps',
                   iconData: Icons.looks_two,
                   location: TwoMapsPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Animation',
                   iconData: Icons.animation,
                   location: AnimationPage.location,
                 ),
                 if (!kIsWeb)
-                  ItemCard(
+                  const ItemCard(
                     label: 'User Location',
                     iconData: Icons.gps_fixed,
                     location: UserLocationPage.location,
                   ),
                 if (!kIsWeb)
-                  ItemCard(
+                  const ItemCard(
                     label: 'Offline',
                     iconData: Icons.wifi_off,
                     location: OfflinePage.location,
                   ),
-                if (!kIsWeb)
-                  ItemCard(
+                if (!kIsWeb && !Platform.isIOS)
+                  const ItemCard(
                     label: 'Permissions',
                     iconData: Icons.key,
                     location: PermissionsPage.location,

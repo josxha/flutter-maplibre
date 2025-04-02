@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
@@ -129,6 +131,11 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     MapController controller, {
     bool trackLocation = true,
   }) async {
+    // Permission manager not available on iOS
+    if (Platform.isIOS) {
+      await _enableLocationServices(controller, trackLocation: trackLocation);
+      return;
+    }
     try {
       if (!_permissionManager!.locationPermissionsGranted) {
         setState(() => _trackState = _TrackLocationState.loading);
