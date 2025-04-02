@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
@@ -72,50 +74,54 @@ class _MapControlButtonsState extends State<MapControlButtons> {
       }
     }
 
-    return Container(
-      alignment: widget.alignment,
-      padding: widget.padding,
-      child: PointerInterceptor(
-        child: Column(
-          spacing: 8,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomInButton',
-              onPressed:
-                  () => controller.animateCamera(
-                    zoom: controller.getCamera().zoom + 1,
-                    nativeDuration: const Duration(milliseconds: 200),
-                  ),
-              child: const Icon(Icons.add),
-            ),
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomOutButton',
-              onPressed:
-                  () => controller.animateCamera(
-                    zoom: controller.getCamera().zoom - 1,
-                    nativeDuration: const Duration(milliseconds: 200),
-                  ),
-              child: const Icon(Icons.remove),
-            ),
-            if (!kIsWeb && widget.showTrackLocation) ...[
+    // Use a SafeArea to ensure the widget is completely visible on devices
+    // with rounded edges like iOS.
+    return SafeArea(
+      child: Container(
+        alignment: widget.alignment,
+        padding: widget.padding,
+        child: PointerInterceptor(
+          child: Column(
+            spacing: 8,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               FloatingActionButton(
-                heroTag: 'MapLibreTrackLocationButton',
-                onPressed: () async => _initializeLocation(controller),
-                child:
-                    _trackState == _TrackLocationState.loading
-                        ? const SizedBox.square(
-                          dimension: kDefaultFontSize,
-                          child: CircularProgressIndicator(),
-                        )
-                        : Icon(
-                          _trackState == _TrackLocationState.gpsFixed
-                              ? Icons.gps_fixed
-                              : Icons.gps_not_fixed,
-                        ),
+                heroTag: 'MapLibreZoomInButton',
+                onPressed:
+                    () => controller.animateCamera(
+                      zoom: controller.getCamera().zoom + 1,
+                      nativeDuration: const Duration(milliseconds: 200),
+                    ),
+                child: const Icon(Icons.add),
               ),
+              FloatingActionButton(
+                heroTag: 'MapLibreZoomOutButton',
+                onPressed:
+                    () => controller.animateCamera(
+                      zoom: controller.getCamera().zoom - 1,
+                      nativeDuration: const Duration(milliseconds: 200),
+                    ),
+                child: const Icon(Icons.remove),
+              ),
+              if (!kIsWeb && widget.showTrackLocation) ...[
+                FloatingActionButton(
+                  heroTag: 'MapLibreTrackLocationButton',
+                  onPressed: () async => _initializeLocation(controller),
+                  child:
+                      _trackState == _TrackLocationState.loading
+                          ? const SizedBox.square(
+                            dimension: kDefaultFontSize,
+                            child: CircularProgressIndicator(),
+                          )
+                          : Icon(
+                            _trackState == _TrackLocationState.gpsFixed
+                                ? Icons.gps_fixed
+                                : Icons.gps_not_fixed,
+                          ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -125,6 +131,11 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     MapController controller, {
     bool trackLocation = true,
   }) async {
+    // Permission manager not available on iOS
+    if (Platform.isIOS) {
+      await _enableLocationServices(controller, trackLocation: trackLocation);
+      return;
+    }
     try {
       if (!_permissionManager!.locationPermissionsGranted) {
         setState(() => _trackState = _TrackLocationState.loading);

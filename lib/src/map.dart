@@ -12,6 +12,7 @@ class MapLibreMap extends StatefulWidget {
   /// Default constructor to create a new [MapLibreMap] widget with its
   /// properties.
   const MapLibreMap({
+    required this.acceptLicense,
     this.options = const MapOptions(),
     this.gestureRecognizers,
     this.onMapCreated,
@@ -21,6 +22,12 @@ class MapLibreMap extends StatefulWidget {
     this.children = const [],
     super.key,
   });
+
+  /// The iOS implementation is during the funding phase provided under
+  /// the [Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/license/osl-3-0-php).
+  /// After funding is completed, it will get released under the permissive 3-Clause BSD License.
+  /// For more information, see: https://github.com/josxha/flutter-maplibre/pull/169#issuecomment-2601023222
+  final bool acceptLicense;
 
   /// Use the [options] field to customize the map and set default values.
   final MapOptions options;
