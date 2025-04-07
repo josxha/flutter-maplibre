@@ -25,6 +25,7 @@ class App extends StatelessWidget {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreMap(
+          acceptLicense: true,
           options: options ?? MapOptions(initCenter: Position(0, 0)),
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
