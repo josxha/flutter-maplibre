@@ -21,7 +21,7 @@ plugins {
     id("com.android.application") version "8.6.+" apply false
     // Use a Kotlin version that is compatible with MapLibre
     id("org.jetbrains.kotlin.android") version "2.1.+" apply false
-    id("org.jlleitschuh.gradle.ktlint") version "12.2.+" apply false
+    id("org.jlleitschuh.gradle.ktlint") version "12.2.+" apply true
 }
 
 include(":app")
