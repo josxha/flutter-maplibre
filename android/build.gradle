@@ -74,7 +74,7 @@ android {
 // JNIGEN        implementation 'org.maplibre.gl:android-sdk-turf:6.0.1'
 // JNIGEN        implementation 'com.jakewharton.timber:timber:5.0.1'
 // JNIGEN        implementation 'androidx.annotation:annotation:1.9.0'
-       implementation 'org.maplibre.gl:android-sdk:11.8.+' // JNIGEN
+        implementation 'org.maplibre.gl:android-sdk:11.8.+' // JNIGEN
 //        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
 // JNIGEN        implementation 'com.squareup.okhttp3:okhttp:4.12.0'
         testImplementation("org.jetbrains.kotlin:kotlin-test")
@@ -86,9 +86,9 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
             }
         }
     }

@@ -20,7 +20,7 @@ tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 
-apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply plugin : "org.jlleitschuh.gradle.ktlint"
 
 ktlint {
     version = "0.43.2"
