@@ -45,7 +45,7 @@ android {
         namespace = "com.github.josxha.maplibre"
     }
 
-    compileSdk = 34
+    compileSdk = 35
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -86,9 +86,9 @@ android {
             useJUnitPlatform()
 
             testLogging {
-                events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen { false }
-                showStandardStreams = true
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
             }
         }
     }
