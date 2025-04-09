@@ -24,17 +24,14 @@ tasks.register<Delete>("clean") {
 apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
 ktlint {
-    version = "0.43.2"
-    android = true
-    ignoreFailures = false
+    android.set(true)
+    ignoreFailures.set(false)
+
     reporters {
-        reporter("plain")
-        reporter("checkstyle")
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
-    dependencies {
-        // noinspection GradleDynamicVersion
-        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.+")
-    }
+
     filter {
         exclude("**/*.g.kt")
     }
