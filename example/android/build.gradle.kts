@@ -22,9 +22,9 @@ tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 
-apply(plugin = "org.jlleitschuh.gradle.ktlint")
+plugins.apply("org.jlleitschuh.gradle.ktlint")
 
-ktlint {
+configure<KtlintExtension> {
     android.set(true)
     ignoreFailures.set(false)
 
