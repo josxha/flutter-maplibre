@@ -1,4 +1,4 @@
-file:Suppress("ktlint:standard:package-name")
+@file:Suppress("ktlint:standard:package-name")
 
 package com.github.josxha.maplibre_example
 
