@@ -3,6 +3,7 @@
 #import <objc/message.h>
 #import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNGeometry.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h"
@@ -27,10 +28,14 @@
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNGeometry.h"
 
 #if !__has_feature(objc_arc)
 #error "This file must be compiled with ARC enabled"
 #endif
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 
 typedef struct {
   int64_t version;
@@ -322,3 +327,5 @@ ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_r8gdi7(
 
 Protocol* _MapLibreFFi_MLNOfflineStorageDelegate(void) { return @protocol(MLNOfflineStorageDelegate); }
 #undef BLOCKING_BLOCK_IMPL
+
+#pragma clang diagnostic pop
