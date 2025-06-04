@@ -13,7 +13,8 @@ class OfflinePage extends StatefulWidget {
 }
 
 class _OfflinePageState extends State<OfflinePage> {
-  final _futureOfflineManager = OfflineManager.createInstance();
+  final Future<OfflineManager> _futureOfflineManager =
+      OfflineManager.createInstance();
   String? _downloadProgressWorld;
   String? _downloadProgressBregenz;
   final _boundsWorld = const LngLatBounds(

@@ -49,7 +49,7 @@ class _ScaleBarPainter extends CustomPainter {
 
   final double metersPerPixel;
   final ThemeData theme;
-  late final meters = switch (metersPerPixel) {
+  late final double meters = switch (metersPerPixel) {
     >= 300000 => 50000000,
     >= 200000 => 30000000,
     >= 100000 => 20000000,

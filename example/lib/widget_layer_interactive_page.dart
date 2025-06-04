@@ -15,7 +15,7 @@ class WidgetLayerInteractivePage extends StatefulWidget {
 
 class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   late final MapController _controller;
-  final _mapKey = GlobalKey();
+  final GlobalKey _mapKey = GlobalKey();
 
   final _markerPositions = [
     Position(-10, 0),
