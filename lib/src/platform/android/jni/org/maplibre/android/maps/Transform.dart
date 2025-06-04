@@ -83,7 +83,7 @@ class Transform extends jni$_.JObject {
             )
           >();
 
-  /// from: `public final org.maplibre.android.camera.CameraPosition getCameraPosition()`
+  /// from: `public org.maplibre.android.camera.CameraPosition getCameraPosition()`
   /// The returned object must be released after use, by calling the [release] method.
   cameraposition$_.CameraPosition? getCameraPosition() {
     return _getCameraPosition(
@@ -157,7 +157,7 @@ class Transform extends jni$_.JObject {
             )
           >();
 
-  /// from: `public final void moveCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
+  /// from: `public void moveCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void moveCamera(
     maplibremap$_.MapLibreMap mapLibreMap,
     cameraupdate$_.CameraUpdate? cameraUpdate,
@@ -209,7 +209,7 @@ class Transform extends jni$_.JObject {
             )
           >();
 
-  /// from: `public final void animateCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
+  /// from: `public void animateCamera(org.maplibre.android.maps.MapLibreMap mapLibreMap, org.maplibre.android.camera.CameraUpdate cameraUpdate, int i, org.maplibre.android.maps.MapLibreMap$CancelableCallback cancelableCallback)`
   void animateCamera(
     maplibremap$_.MapLibreMap mapLibreMap,
     cameraupdate$_.CameraUpdate? cameraUpdate,
