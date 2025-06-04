@@ -12,7 +12,7 @@ class GesturesPage extends StatefulWidget {
 }
 
 class _GesturesPageState extends State<GesturesPage> {
-  final _selections = Map.fromEntries(
+  final Map<Gestures, bool> _selections = Map.fromEntries(
     Gestures.values.map((e) => MapEntry(e, false)),
   );
 
@@ -32,10 +32,9 @@ class _GesturesPageState extends State<GesturesPage> {
                     (e) => ChoiceChip(
                       label: Text(e.name),
                       selected: _selections[e]!,
-                      onSelected:
-                          (value) => setState(() {
-                            _selections[e] = !_selections[e]!;
-                          }),
+                      onSelected: (value) => setState(() {
+                        _selections[e] = !_selections[e]!;
+                      }),
                     ),
                   )
                   .toList(growable: false),

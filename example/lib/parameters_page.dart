@@ -38,22 +38,20 @@ class _ParametersPageState extends State<ParametersPage> {
                   start: _minZoom,
                   end: _maxZoom,
                   max: 22,
-                  onChanged:
-                      (range) => setState(() {
-                        _minZoom = range.start;
-                        _maxZoom = range.end;
-                      }),
+                  onChanged: (range) => setState(() {
+                    _minZoom = range.start;
+                    _maxZoom = range.end;
+                  }),
                 ),
                 _SliderWidget(
                   label: 'Pitch',
                   start: _minPitch,
                   end: _maxPitch,
                   max: 85,
-                  onChanged:
-                      (range) => setState(() {
-                        _minPitch = range.start;
-                        _maxPitch = range.end;
-                      }),
+                  onChanged: (range) => setState(() {
+                    _minPitch = range.start;
+                    _maxPitch = range.end;
+                  }),
                 ),
                 _SliderWidget(
                   label: 'Longitude',
@@ -61,13 +59,12 @@ class _ParametersPageState extends State<ParametersPage> {
                   end: _lngLatBounds.longitudeEast,
                   min: -180,
                   max: 179,
-                  onChanged:
-                      (range) => setState(() {
-                        _lngLatBounds = _lngLatBounds.copyWith(
-                          longitudeWest: range.start,
-                          longitudeEast: range.end,
-                        );
-                      }),
+                  onChanged: (range) => setState(() {
+                    _lngLatBounds = _lngLatBounds.copyWith(
+                      longitudeWest: range.start,
+                      longitudeEast: range.end,
+                    );
+                  }),
                 ),
                 _SliderWidget(
                   label: 'Latitude',
@@ -75,13 +72,12 @@ class _ParametersPageState extends State<ParametersPage> {
                   end: _lngLatBounds.latitudeNorth,
                   min: -90,
                   max: 90,
-                  onChanged:
-                      (range) => setState(() {
-                        _lngLatBounds = _lngLatBounds.copyWith(
-                          latitudeSouth: range.start,
-                          latitudeNorth: range.end,
-                        );
-                      }),
+                  onChanged: (range) => setState(() {
+                    _lngLatBounds = _lngLatBounds.copyWith(
+                      latitudeSouth: range.start,
+                      latitudeNorth: range.end,
+                    );
+                  }),
                 ),
               ],
             ),
